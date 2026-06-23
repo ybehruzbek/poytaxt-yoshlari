@@ -1,78 +1,102 @@
 .hero {
   position: relative;
-  overflow: hidden;
-  background: var(--bg);
-}
-
-/* Mobile Background - Hidden on Desktop */
-.mobileBg {
-  display: none;
-}
-
-/* Desktop Wrapper */
-.desktopWrapper {
-  position: relative;
-  width: 100%;
-  padding: 160px 0 100px;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  padding: 120px 0 60px;
 }
 
-/* Big Image on the Right */
-.imageWrapper {
+.globalOverlay {
   position: absolute;
-  top: 40px;
-  bottom: 40px;
-  right: 0;
-  width: 60%;
-  border-radius: 40px 0 0 40px;
-  overflow: hidden;
-  box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.1);
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(13, 59, 102, 0.4) 0%,
+    rgba(13, 59, 102, 0.1) 100%
+  );
+  z-index: 2;
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
-/* Content Card Overlapping the Image */
-.contentCard {
+.bgImage img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.containerWrap {
   position: relative;
-  z-index: 2;
-  width: 55%;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding: 64px;
+  z-index: 3;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Dark Glass Panel */
+.glassPanel {
+  max-width: 650px;
+  background: rgba(10, 20, 35, 0.75); /* Dark cinematic blue */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 60px;
   border-radius: 32px;
-  box-shadow: 0 30px 60px rgba(13, 59, 102, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  position: relative;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slideUp 0.8s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .label {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--blue-pale);
-  color: var(--blue);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
   padding: 8px 18px;
   border-radius: 50px;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 24px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .label i {
-  color: var(--blue-light);
-  font-size: 10px;
+  color: var(--green-light);
+  font-size: 11px;
 }
 
 .title {
-  font-size: clamp(44px, 5vw, 72px);
+  font-size: clamp(48px, 5.5vw, 76px);
   font-weight: 900;
-  color: var(--text);
-  line-height: 1.08;
+  line-height: 1.05;
   margin-bottom: 24px;
   letter-spacing: -1.5px;
+  color: var(--white);
 }
 
 .title span {
@@ -80,17 +104,17 @@
 }
 
 .accent {
-  color: var(--green);
+  color: var(--green-light);
 }
 
 .desc {
-  font-size: 17px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 40px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin-bottom: 48px;
+  font-weight: 400;
 }
 
-/* Buttons */
 .actions {
   display: flex;
   gap: 16px;
@@ -101,10 +125,11 @@
 .btnPrimary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  background: var(--text);
+  background: var(--green);
   color: var(--white);
-  padding: 16px 36px;
+  padding: 16px 40px;
   border-radius: 50px;
   font-weight: 700;
   font-size: 15px;
@@ -113,102 +138,83 @@
 }
 
 .btnPrimary:hover {
-  background: var(--blue);
+  background: var(--green-light);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(13, 59, 102, 0.3);
+  box-shadow: 0 10px 25px rgba(46, 139, 87, 0.4);
 }
 
 .btnSecondary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  background: transparent;
-  color: var(--text);
-  padding: 16px 36px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  padding: 16px 40px;
   border-radius: 50px;
   font-weight: 700;
   font-size: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s var(--ease);
-  border: 1px solid var(--border);
 }
 
 .btnSecondary:hover {
-  border-color: var(--text);
-  background: var(--bg);
+  background: var(--white);
+  color: var(--text);
+  border-color: var(--white);
 }
 
+/* Mobile Adjustments */
 @media (max-width: 1024px) {
-  .imageWrapper {
-    width: 50%;
-  }
-  .contentCard {
-    width: 65%;
-    padding: 40px;
+  .glassPanel {
+    max-width: 550px;
+    padding: 48px;
   }
 }
 
-/* Mobile - Dark Full Background Design */
 @media (max-width: 768px) {
   .hero {
     min-height: 100vh;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    background: transparent;
-  }
-  .desktopWrapper {
-    width: 100%;
     padding: 160px 0 100px;
     display: flex;
     align-items: center;
   }
-  .imageWrapper {
-    display: none;
-  }
 
-  .mobileBg {
-    display: block;
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 0;
-  }
-
-  .overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+  .globalOverlay {
     background: linear-gradient(
       to bottom,
-      rgba(9, 40, 71, 0.8) 0%,
-      rgba(9, 40, 71, 0.9) 100%
+      rgba(13, 59, 102, 0.75) 0%,
+      rgba(13, 59, 102, 0.95) 100%
     );
-    z-index: 1;
   }
 
-  .contentCard {
-    width: 100%;
+  .containerWrap {
+    padding: 0 20px;
+  }
+
+  .glassPanel {
+    max-width: 100%;
+    padding: 0;
+    text-align: center;
+    border-radius: 0;
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     box-shadow: none;
     border: none;
-    padding: 0;
-    text-align: center;
+    animation: none;
+    transform: none;
+    opacity: 1;
   }
 
   .label {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--white);
     margin: 0 auto 24px;
   }
 
-  .label i {
-    color: var(--green-light);
-  }
-
   .title {
-    color: var(--white);
     font-size: 44px;
     letter-spacing: -1px;
   }
@@ -222,41 +228,12 @@
     content: " ";
   }
 
-  .accent {
-    color: var(--green-light);
-  }
-
   .desc {
-    color: rgba(255, 255, 255, 0.85);
     margin: 0 auto 40px;
   }
 
   .actions {
     flex-direction: column;
-    justify-content: center;
-  }
-
-  .actions a {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .btnPrimary {
-    background: var(--green);
-  }
-  .btnPrimary:hover {
-    background: var(--green-light);
-  }
-
-  .btnSecondary {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: var(--white);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-  .btnSecondary:hover {
-    background: var(--white);
-    color: var(--text);
-    border-color: var(--white);
+    align-items: stretch;
   }
 }
