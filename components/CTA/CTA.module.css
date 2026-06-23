@@ -1,0 +1,37 @@
+.cta { padding: 100px 0; background: var(--bg); }
+.card {
+  background: var(--text); border-radius: 20px; padding: 64px;
+  display: grid; grid-template-columns: 1fr auto; gap: 48px;
+  align-items: center; position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: -50%; right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(46,139,87,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.content { position: relative; z-index: 2; }
+.content h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; color: var(--white); margin-bottom: 14px; }
+.content p { color: rgba(255,255,255,0.5); font-size: 15px; margin-bottom: 28px; line-height: 1.7; max-width: 500px; }
+.benefits { list-style: none; margin-bottom: 32px; }
+.benefits li { display: flex; align-items: center; gap: 12px; padding: 8px 0; color: rgba(255,255,255,0.75); font-size: 14px; }
+.check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: rgba(46,139,87,0.2); display: flex; align-items: center;
+  justify-content: center; color: var(--green-light); font-size: 10px; flex-shrink: 0;
+}
+.action { position: relative; z-index: 2; }
+.btnCta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--green); color: var(--white);
+  padding: 16px 36px; border-radius: var(--radius-xs);
+  font-weight: 700; font-size: 15px;
+  transition: all 0.2s ease; white-space: nowrap;
+}
+.btnCta:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(46,139,87,0.3); }
+.btnCta:active { transform: scale(0.97); }
+.labelLight { color: var(--green-light); }
+.labelLight::before { background: var(--green-light); }
+
+@media (max-width: 1024px) { .card { grid-template-columns: 1fr; padding: 48px; gap: 32px; } }
+@media (max-width: 768px) { .cta { padding: 60px 0; } .card { padding: 36px 28px; border-radius: 14px; } }

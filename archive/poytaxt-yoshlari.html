@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O'zbekiston Yoshlar Ittifoqi</title>
+    <meta name="description" content="O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi yirik jamoat tashkiloti.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --blue: #0D3B66;
+            --blue-light: #1A5276;
+            --green: #2E8B57;
+            --green-light: #3DA868;
+            --green-pale: #E8F5EE;
+            --blue-pale: #EBF2FA;
+            --white: #FFFFFF;
+            --bg: #F8FAFB;
+            --text: #1A1A2E;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --border: #E2E8F0;
+            --border-light: #F1F5F9;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.06), 0 2px 4px -2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+            --shadow-xl: 0 20px 50px -12px rgba(0,0,0,0.12);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        button { cursor: pointer; border: none; font-family: inherit; }
+
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+        /* ===== SECTION LABEL (floating) ===== */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            margin-bottom: 16px;
+        }
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 2px;
+            background: var(--green);
+            border-radius: 1px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 3.5vw, 40px);
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .section-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            max-width: 520px;
+            line-height: 1.7;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.82);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .navbar.scrolled {
+            border-bottom-color: var(--border);
+            box-shadow: 0 1px 0 var(--border);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 1001;
+        }
+        .nav-logo img {
+            height: 38px;
+            width: auto;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 13.5px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--border-light);
+        }
+        .nav-cta {
+            background: var(--green) !important;
+            color: var(--white) !important;
+            padding: 8px 22px !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            font-size: 13.5px !important;
+            transition: all 0.2s ease !important;
+            margin-left: 8px;
+        }
+        .nav-cta:hover {
+            background: var(--green-light) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(46,139,87,0.25);
+        }
+        .nav-cta:active { transform: scale(0.97); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            padding: 8px;
+            z-index: 1001;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .hamburger:hover { background: var(--border-light); }
+        .hamburger span {
+            width: 20px;
+            height: 1.5px;
+            background: var(--text);
+            border-radius: 1px;
+            transition: all 0.3s var(--ease);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4.5px, 4.5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4.5px, -4.5px); }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: all; }
+        .mobile-menu a {
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .mobile-menu a:hover { background: var(--border-light); color: var(--green); }
+        .mobile-menu .nav-cta { margin-top: 16px; font-size: 17px !important; padding: 14px 36px !important; }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 0 100px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--green-pale) 0%, transparent 70%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--blue-pale) 0%, transparent 70%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content {}
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green-pale);
+            color: var(--green);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 28px;
+        }
+        .hero-label i { font-size: 10px; }
+        .hero h1 {
+            font-size: clamp(36px, 4.5vw, 56px);
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.08;
+        }
+        .hero h1 .accent { color: var(--blue); }
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 36px;
+            max-width: 460px;
+        }
+        .hero-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--green);
+            color: var(--white);
+            padding: 13px 28px;
+            border-radius: var(--radius-xs);
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(46,139,87,0.2); }
+        .btn-primary:active { transform: scale(0.97); }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text);
+            padding: 13px 28px;
+            border-radius: var(--radius-xs);
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover { border-color: var(--text-muted); background: var(--bg); }
+        .btn-secondary:active { transform: scale(0.97); }
+
+        .hero-image {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            aspect-ratio: 4/3;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-image-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            border-radius: var(--radius-xs);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-md);
+        }
+        .hero-image-badge img { height: 28px; width: auto; }
+        .hero-image-badge span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--blue);
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== MINI STATS BAR ===== */
+        .mini-stats {
+            padding: 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+        .mini-stats-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        .mini-stat {
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+        }
+        .mini-stat:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: var(--border);
+        }
+        .mini-stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .mini-stat-number .plus { color: var(--green); font-weight: 700; }
+        .mini-stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .about-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 56px;
+            gap: 40px;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .about-card {
+            padding: 32px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: all 0.3s var(--ease);
+            background: var(--white);
+        }
+        .about-card:hover {
+            border-color: transparent;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        .about-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .icon-blue { background: var(--blue-pale); color: var(--blue); }
+        .icon-green { background: var(--green-pale); color: var(--green); }
+        .about-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .about-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .about-timeline-card {
+            grid-column: span 2;
+            padding: 36px 40px;
+            display: flex;
+            gap: 48px;
+            align-items: flex-start;
+        }
+        .timeline-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .timeline-item-v {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding-bottom: 24px;
+            position: relative;
+        }
+        .timeline-item-v:last-child { padding-bottom: 0; }
+        .timeline-item-v:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 16px;
+            bottom: 0;
+            width: 1px;
+            background: var(--border);
+        }
+        .timeline-dot-v {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--border);
+            border: 2px solid var(--white);
+            flex-shrink: 0;
+            margin-top: 3px;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .timeline-item-v:first-child .timeline-dot-v {
+            background: var(--green);
+            box-shadow: 0 0 0 3px var(--green-pale);
+        }
+        .timeline-year-v {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            min-width: 36px;
+        }
+        .timeline-text-v {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .timeline-content-v {
+            flex: 1;
+            padding-top: 0;
+        }
+
+        /* ===== NEWS ===== */
+        .news {
+            padding: 100px 0;
+            background: var(--bg);
+        }
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+        }
+        .news-featured {
+            grid-row: span 2;
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s var(--ease);
+            cursor: pointer;
+        }
+        .news-featured:hover {
+            border-color: transparent;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        .news-featured-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        .news-featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--ease);
+        }
+        .news-featured:hover .news-featured-img img { transform: scale(1.03); }
+        .news-body { padding: 28px; }
+        .news-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            margin-bottom: 12px;
+        }
+        .tag-blue { background: var(--blue-pale); color: var(--blue); }
+        .tag-green { background: var(--green-pale); color: var(--green); }
+        .tag-orange { background: #FFF7ED; color: #C2410C; }
+        .tag-purple { background: #FAF5FF; color: #7C3AED; }
+        .news-date { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+        .news-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.35;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .news-featured .news-title { font-size: 20px; -webkit-line-clamp: 3; margin-bottom: 12px; }
+        .news-excerpt {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .news-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--blue);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s ease;
+        }
+        .news-link:hover { gap: 10px; }
+        .news-link i { font-size: 11px; transition: transform 0.2s ease; }
+
+        .news-small {
+            display: flex;
+            gap: 16px;
+            padding: 20px;
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: all 0.3s var(--ease);
+            cursor: pointer;
+            align-items: flex-start;
+        }
+        .news-small:hover {
+            border-color: transparent;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        .news-small-img {
+            width: 120px;
+            height: 88px;
+            border-radius: var(--radius-xs);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .news-small-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s var(--ease);
+        }
+        .news-small:hover .news-small-img img { transform: scale(1.05); }
+        .news-small-body { flex: 1; min-width: 0; }
+        .news-small .news-title { font-size: 14px; -webkit-line-clamp: 2; margin-bottom: 6px; }
+
+        /* ===== PROJECTS ===== */
+        .projects {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .project-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s var(--ease);
+        }
+        .project-card:hover {
+            border-color: transparent;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+        .project-img {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--ease);
+        }
+        .project-card:hover .project-img img { transform: scale(1.05); }
+        .project-status {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(8px);
+            color: var(--green);
+        }
+        .project-body { padding: 24px; }
+        .project-body h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .project-body p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .progress-wrap { margin-bottom: 20px; }
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .progress-top span { font-size: 11px; font-weight: 600; }
+        .progress-top .p-label { color: var(--text-muted); }
+        .progress-top .p-value { color: var(--green); }
+        .progress-track {
+            height: 4px;
+            background: var(--border-light);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--green);
+            border-radius: 2px;
+            width: 0;
+            transition: width 1s var(--ease);
+        }
+        .btn-join {
+            width: 100%;
+            padding: 10px;
+            border-radius: var(--radius-xs);
+            background: var(--blue);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-join:hover { background: var(--blue-light); }
+        .btn-join:active { transform: scale(0.97); }
+
+        /* ===== STATS ===== */
+        .stats {
+            padding: 80px 0;
+            background: var(--text);
+            position: relative;
+            overflow: hidden;
+        }
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(46,139,87,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-number .accent-green { color: var(--green-light); }
+        .stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            font-weight: 500;
+        }
+
+        /* ===== MAP ===== */
+        .map-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            gap: 40px;
+        }
+        .map-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+            align-items: start;
+        }
+        .map-svg-wrap {
+            background: var(--bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 32px;
+            position: relative;
+        }
+        .map-svg-wrap svg { width: 100%; height: auto; display: block; }
+        .map-region {
+            fill: #E2E8F0;
+            stroke: var(--white);
+            stroke-width: 1.5;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .map-region:hover { fill: var(--green-light); filter: drop-shadow(0 2px 6px rgba(46,139,87,0.3)); }
+        .map-region:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+        .map-tooltip {
+            position: absolute;
+            background: var(--text);
+            color: var(--white);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            white-space: nowrap;
+            z-index: 50;
+        }
+        .map-tooltip.visible { opacity: 1; }
+
+        .map-sidebar {
+            position: sticky;
+            top: 84px;
+        }
+        .map-info-card {
+            background: var(--bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 28px;
+            transition: all 0.3s ease;
+        }
+        .map-info-card.active { border-color: var(--green); }
+        .map-info-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--blue);
+        }
+        .map-info-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+        .map-info-meta-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        .map-info-meta-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            padding: 100px 0;
+            background: var(--bg);
+        }
+        .cta-card {
+            background: var(--text);
+            border-radius: 20px;
+            padding: 64px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 48px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(46,139,87,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta-content { position: relative; z-index: 2; }
+        .cta-content .section-label { color: var(--green-light); }
+        .cta-content .section-label::before { background: var(--green-light); }
+        .cta-content h2 {
+            font-size: clamp(24px, 3vw, 36px);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 14px;
+        }
+        .cta-content p {
+            color: rgba(255,255,255,0.5);
+            font-size: 15px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+            max-width: 500px;
+        }
+        .cta-benefits { list-style: none; margin-bottom: 32px; }
+        .cta-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            color: rgba(255,255,255,0.75);
+            font-size: 14px;
+        }
+        .cta-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(46,139,87,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green-light);
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        .cta-action { position: relative; z-index: 2; }
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--green);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: var(--radius-xs);
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .btn-cta:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(46,139,87,0.3); }
+        .btn-cta:active { transform: scale(0.97); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--text);
+            padding: 64px 0 0;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-brand img { height: 34px; margin-bottom: 16px; opacity: 0.9; }
+        .footer-brand p {
+            color: rgba(255,255,255,0.35);
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .footer-social { display: flex; gap: 8px; }
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-xs);
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+        .footer-social a:hover { background: var(--green); color: var(--white); }
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a {
+            color: rgba(255,255,255,0.35);
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+        .footer-col a:hover { color: var(--green-light); }
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: rgba(255,255,255,0.35);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .footer-contact li i {
+            color: var(--green-light);
+            margin-top: 3px;
+            width: 14px;
+            flex-shrink: 0;
+            font-size: 12px;
+        }
+        .footer-bottom {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-bottom p { color: rgba(255,255,255,0.2); font-size: 12px; }
+        .footer-bottom a { color: rgba(255,255,255,0.2); transition: color 0.2s; }
+        .footer-bottom a:hover { color: var(--green-light); }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-d1 { transition-delay: 0.08s; }
+        .reveal-d2 { transition-delay: 0.16s; }
+        .reveal-d3 { transition-delay: 0.24s; }
+        .reveal-d4 { transition-delay: 0.32s; }
+        .reveal-d5 { transition-delay: 0.40s; }
+        .reveal-d6 { transition-delay: 0.48s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal { opacity: 1; transform: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-grid { gap: 40px; }
+            .about-grid { grid-template-columns: 1fr 1fr; }
+            .about-timeline-card { grid-column: span 2; }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .map-layout { grid-template-columns: 1fr; }
+            .map-sidebar { position: static; }
+            .cta-card { grid-template-columns: 1fr; padding: 48px; gap: 32px; }
+            .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero { padding: 120px 0 80px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+            .hero-image { order: -1; max-height: 300px; }
+            .mini-stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .mini-stat:nth-child(2)::after { display: none; }
+            .about { padding: 60px 0; }
+            .about-header { flex-direction: column; align-items: flex-start; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-timeline-card { grid-column: span 1; flex-direction: column; gap: 32px; }
+            .news { padding: 60px 0; }
+            .news-header { flex-direction: column; align-items: flex-start; }
+            .news-grid { grid-template-columns: 1fr; }
+            .news-featured { grid-row: auto; }
+            .news-featured-img { height: 200px; }
+            .projects { padding: 60px 0; }
+            .projects-header { flex-direction: column; align-items: flex-start; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .stats { padding: 50px 0; }
+            .map-section { padding: 60px 0; }
+            .map-header { flex-direction: column; align-items: flex-start; }
+            .cta { padding: 60px 0; }
+            .cta-card { padding: 36px 28px; border-radius: 14px; }
+            .footer-top { grid-template-columns: 1fr; gap: 28px; }
+            .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 30px; }
+            .hero-actions { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+            .mini-stats-inner { grid-template-columns: 1fr 1fr; }
+            .news-small { flex-direction: column; }
+            .news-small-img { width: 100%; height: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Asosiy navigatsiya">
+        <div class="container">
+            <a href="#bosh-sahifa" class="nav-logo" aria-label="Bosh sahifa">
+                <img src="https://z-cdn-media.chatglm.cn/files/89608bf4-ed8c-4d34-bf6f-1a7f1b961d43.png?auth_key=1882060155-858fedeb65314438b0374480ec4a2081-0-3da8c2fc57b77403bb3ab6b1ec1b87ae" alt="O'zbekiston Yoshlar Ittifoqi logotipi">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#bosh-sahifa">Bosh sahifa</a></li>
+                <li><a href="#tashkilot">Tashkilot</a></li>
+                <li><a href="#yangiliklar">Yangiliklar</a></li>
+                <li><a href="#loyihalar">Loyihalar</a></li>
+                <li><a href="#hududlar">Hududlar</a></li>
+                <li><a href="#azo-bo-lish" class="nav-cta">A'zo bo'lish</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menyu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Mobil menyu">
+        <a href="#bosh-sahifa" class="mob-link">Bosh sahifa</a>
+        <a href="#tashkilot" class="mob-link">Tashkilot</a>
+        <a href="#yangiliklar" class="mob-link">Yangiliklar</a>
+        <a href="#loyihalar" class="mob-link">Loyihalar</a>
+        <a href="#hududlar" class="mob-link">Hududlar</a>
+        <a href="#azo-bo-lish" class="nav-cta mob-link">A'zo bo'lish</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" id="bosh-sahifa">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-label">
+                        <i class="fas fa-circle"></i>
+                        1991-yildan beri faoliyatda
+                    </div>
+                    <h1>Kelajakni <span class="accent">yoshlar</span> quradi</h1>
+                    <p class="hero-desc">
+                        O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi, ularning salohiyatini to'liq ochib berishga ko'maklashuvchi mamlakatimizdagi eng yirik jamoat tashkiloti.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#tashkilot" class="btn-primary">
+                            Batafsil
+                            <i class="fas fa-arrow-right" style="font-size:12px"></i>
+                        </a>
+                        <a href="#loyihalar" class="btn-secondary">
+                            <i class="fas fa-grid-2" style="font-size:13px"></i>
+                            Loyihalar
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://z-cdn-media.chatglm.cn/files/423c8f28-b68f-4792-a60d-843fbd63c220.jpg?auth_key=1882060155-d5eb8c91d5d94c18ad10ce5a7d366de0-0-dd5be4354504454a493769a305d8a7" alt="Yoshlar Ijod Saroyi">
+                    <div class="hero-image-badge">
+                        <img src="https://z-cdn-media.chatglm.cn/files/89608bf4-ed8c-4d34-bf6f-1a7f1b961d43.png?auth_key=1882060155-858fedeb65314438b0374480ec4a2081-0-3da8c2fc57b77403bb3ab6b1ec1b87ae" alt="YI logotip">
+                        <span>Yoshlar Ijod<br>Saroyi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MINI STATS -->
+    <div class="mini-stats">
+        <div class="container">
+            <div class="mini-stats-inner reveal">
+                <div class="mini-stat">
+                    <div class="mini-stat-number" data-target="500000">0<span class="plus">+</span></div>
+                    <div class="mini-stat-label">A'zolar soni</div>
+                </div>
+                <div class="mini-stat">
+                    <div class="mini-stat-number" data-target="14">0</div>
+                    <div class="mini-stat-label">Viloyat filiallari</div>
+                </div>
+                <div class="mini-stat">
+                    <div class="mini-stat-number" data-target="1200">0<span class="plus">+</span></div>
+                    <div class="mini-stat-label">Amalga oshirilgan loyihalar</div>
+                </div>
+                <div class="mini-stat">
+                    <div class="mini-stat-number" data-target="33">0<span class="plus">+</span></div>
+                    <div class="mini-stat-label">Faoliyat yillari</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about" id="tashkilot">
+        <div class="container">
+            <div class="about-header reveal">
+                <div>
+                    <div class="section-label">Tashkilot haqida</div>
+                    <h2 class="section-title">Yoshlar manfaati —<br>bizning ustuvor yo'nalishimiz</h2>
+                </div>
+                <p class="section-desc" style="text-align:right">
+                    O'zbekiston Respublikasi Konstitutsiyasi va «Yoshlar siyosati to'g'risida»gi qonun asosida faoliyat yurituvchi yirik jamoat tashkiloti.
+                </p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card reveal reveal-d1">
+                    <div class="about-card-icon icon-blue"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Huquqlarni himoya qilish</h3>
+                    <p>Yoshlarning ijtimoiy-iqtisodiy, siyosiy va ma'naviy huquqlarini faol himoya qilish, qonuniy manfaatlarini ta'minlash.</p>
+                </div>
+                <div class="about-card reveal reveal-d2">
+                    <div class="about-card-icon icon-green"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Ta'lim va rivojlanish</h3>
+                    <p>Bilim va ko'nikmalarni oshirish, kasbiy maslahat berish, zamonaviy ta'lim dasturlarini tashkil etish.</p>
+                </div>
+                <div class="about-card reveal reveal-d3">
+                    <div class="about-card-icon icon-green"><i class="fas fa-rocket"></i></div>
+                    <h3>Innovatsiyalar va texnologiyalar</h3>
+                    <p>Yosh innovatorlar, dasturchilar va tadbirkorlarni qo'llab-quvvatlash, startap ekotizimini rivojlantirish.</p>
+                </div>
+                <div class="about-card reveal reveal-d4">
+                    <div class="about-card-icon icon-blue"><i class="fas fa-handshake"></i></div>
+                    <h3>Jamiyatda ishtirok</h3>
+                    <p>Faol fuqarolik pozitsiyasini shakllantirish, volontyorlik va ijtimoiy loyihalarni tashkil etish.</p>
+                </div>
+                <div class="about-card about-timeline-card reveal reveal-d5">
+                    <div>
+                        <div class="section-label" style="margin-bottom:20px">Tarixiy yo'l</div>
+                    </div>
+                    <div class="timeline-visual" style="width:100%">
+                        <div class="timeline-item-v">
+                            <div class="timeline-dot-v"></div>
+                            <div class="timeline-year-v">1991</div>
+                            <div class="timeline-content-v"><div class="timeline-text-v">Mustaqillik yilida tashkilotga asos solingan</div></div>
+                        </div>
+                        <div class="timeline-item-v">
+                            <div class="timeline-dot-v"></div>
+                            <div class="timeline-year-v">1995</div>
+                            <div class="timeline-content-v"><div class="timeline-text-v">Birinchi qurultoy o'tkazilib, Nizom tasdiqlangan</div></div>
+                        </div>
+                        <div class="timeline-item-v">
+                            <div class="timeline-dot-v"></div>
+                            <div class="timeline-year-v">2017</div>
+                            <div class="timeline-content-v"><div class="timeline-text-v">«Kelajak bunyodkori» loyihasi ishga tushirilgan</div></div>
+                        </div>
+                        <div class="timeline-item-v">
+                            <div class="timeline-dot-v"></div>
+                            <div class="timeline-year-v">2021</div>
+                            <div class="timeline-content-v"><div class="timeline-text-v">Tashkilot tizimi isloh qilingan, yangi struktura joriy etilgan</div></div>
+                        </div>
+                        <div class="timeline-item-v">
+                            <div class="timeline-dot-v"></div>
+                            <div class="timeline-year-v">2024</div>
+                            <div class="timeline-content-v"><div class="timeline-text-v">«Yoshlar — kelajak kafolati» davlat dasturi doirasida keng ko'lamli ishlar boshlangan</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWS -->
+    <section class="news" id="yangiliklar">
+        <div class="container">
+            <div class="news-header reveal">
+                <div>
+                    <div class="section-label">Yangiliklar</div>
+                    <h2 class="section-title">So'nggi voqealar</h2>
+                </div>
+                <a href="#" class="btn-secondary" style="padding:9px 20px; font-size:13px;">
+                    Barchasi
+                    <i class="fas fa-arrow-right" style="font-size:11px"></i>
+                </a>
+            </div>
+            <div class="news-grid">
+                <div class="news-featured reveal reveal-d1">
+                    <div class="news-featured-img">
+                        <img src="https://picsum.photos/seed/youth-strategy-uzb/800/500.jpg" alt="Strategiya majlisi" loading="lazy">
+                    </div>
+                    <div class="news-body">
+                        <span class="news-tag tag-blue">Strategiya</span>
+                        <div class="news-date">15 Noyabr 2024</div>
+                        <h3 class="news-title">Yoshlar Ittifoqi 2025-yil uchun yangi strategiya dasturini tasdiqladi</h3>
+                        <p class="news-excerpt">Markaziy Kengashning navbatdagi yig'ilishida 2025-yilga mo'ljallangan keng qamrovli strategiya dasturi muhokama qilindi va tasdiqlandi. Raqamlash, ijtimoiy himoya va ta'lim sohalaridagi ustuvor yo'nalishlar belgilab olindi.</p>
+                        <a href="#" class="news-link">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-small reveal reveal-d2">
+                    <div class="news-small-img">
+                        <img src="https://picsum.photos/seed/kelajak-bunyodkori-uz/400/300.jpg" alt="Kelajak bunyodkori" loading="lazy">
+                    </div>
+                    <div class="news-small-body">
+                        <span class="news-tag tag-green">Ta'lim</span>
+                        <div class="news-date">12 Noyabr 2024</div>
+                        <h3 class="news-title">«Kelajak bunyodkori» tanlovining final bosqichi bo'lib o'tdi</h3>
+                        <a href="#" class="news-link">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-small reveal reveal-d3">
+                    <div class="news-small-img">
+                        <img src="https://picsum.photos/seed/youth-sport-medals-uz/400/300.jpg" alt="Sport musobaqasi" loading="lazy">
+                    </div>
+                    <div class="news-small-body">
+                        <span class="news-tag tag-orange">Sport</span>
+                        <div class="news-date">8 Noyabr 2024</div>
+                        <h3 class="news-title">Yosh sportchilarimiz xalqaro musobaqada 15 medal qo'lga kiritdi</h3>
+                        <a href="#" class="news-link">Batafsil <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="loyihalar">
+        <div class="container">
+            <div class="projects-header reveal">
+                <div>
+                    <div class="section-label">Faol loyihalar</div>
+                    <h2 class="section-title">Hozirda amalga oshirilayotgan dasturlar</h2>
+                </div>
+                <a href="#" class="btn-secondary" style="padding:9px 20px; font-size:13px;">
+                    Barcha loyihalar
+                    <i class="fas fa-arrow-right" style="font-size:11px"></i>
+                </a>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card reveal reveal-d1">
+                    <div class="project-img">
+                        <img src="https://picsum.photos/seed/technopark-youth-uz/600/400.jpg" alt="Yoshlar Texnoparki" loading="lazy">
+                        <span class="project-status">Faol</span>
+                    </div>
+                    <div class="project-body">
+                        <h3>Yoshlar Texnoparki</h3>
+                        <p>Yosh innovatorlar uchun zamonaviy texnoparklar tarmog'ini yaratish va IT sohasiga yo'naltirish dasturi.</p>
+                        <div class="progress-wrap">
+                            <div class="progress-top">
+                                <span class="p-label">Jadval</span>
+                                <span class="p-value">75%</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-bar" data-width="75"></div></div>
+                        </div>
+                        <button class="btn-join">Qatnashish <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+                    </div>
+                </div>
+                <div class="project-card reveal reveal-d2">
+                    <div class="project-img">
+                        <img src="https://picsum.photos/seed/digital-youth-uz/600/400.jpg" alt="Digital Yoshlar" loading="lazy">
+                        <span class="project-status">Faol</span>
+                    </div>
+                    <div class="project-body">
+                        <h3>Digital Yoshlar</h3>
+                        <p>Raqamli savodxonlikni oshirish, dasturlash va sun'iy intellekt sohalarida bepul ta'lim berish.</p>
+                        <div class="progress-wrap">
+                            <div class="progress-top">
+                                <span class="p-label">Jadval</span>
+                                <span class="p-value">85%</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-bar" data-width="85"></div></div>
+                        </div>
+                        <button class="btn-join">Qatnashish <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+                    </div>
+                </div>
+                <div class="project-card reveal reveal-d3">
+                    <div class="project-img">
+                        <img src="https://picsum.photos/seed/future-teachers-uz/600/400.jpg" alt="Kelajak O'qituvchilari" loading="lazy">
+                        <span class="project-status">Faol</span>
+                    </div>
+                    <div class="project-body">
+                        <h3>Kelajak O'qituvchilari</h3>
+                        <p>Ta'lim sohasida kadrlar tayyorlash, malaka oshirish va pedagogik kasbga jalb qilish dasturi.</p>
+                        <div class="progress-wrap">
+                            <div class="progress-top">
+                                <span class="p-label">Jadval</span>
+                                <span class="p-value">60%</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-bar" data-width="60"></div></div>
+                        </div>
+                        <button class="btn-join">Qatnashish <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+                    </div>
+                </div>
+                <div class="project-card reveal reveal-d4">
+                    <div class="project-img">
+                        <img src="https://picsum.photos/seed/sport-potential-uz/600/400.jpg" alt="Sport Salohiyati" loading="lazy">
+                        <span class="project-status">Faol</span>
+                    </div>
+                    <div class="project-body">
+                        <h3>Sport Salohiyati</h3>
+                        <p>Ommaviy sport va sog'lom turmush tarzini targ'ib qilish, yosh sportchilarni qo'llab-quvvatlash.</p>
+                        <div class="progress-wrap">
+                            <div class="progress-top">
+                                <span class="p-label">Jadval</span>
+                                <span class="p-value">70%</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-bar" data-width="70"></div></div>
+                        </div>
+                        <button class="btn-join">Qatnashish <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+                    </div>
+                </div>
+                <div class="project-card reveal reveal-d5">
+                    <div class="project-img">
+                        <img src="https://picsum.photos/seed/green-space-eco-uz/600/400.jpg" alt="Yashil Makon" loading="lazy">
+                        <span class="project-status">Faol</span>
+                    </div>
+                    <div class="project-body">
+                        <h3>Yashil Makon</h3>
+                        <p>Ekologik mas'uliyatni oshirish, yashil hududlarni kengaytirish va atrof-muhitni muhofaza qilish.</p>
+                        <div class="progress-wrap">
+                            <div class="progress-top">
+                                <span class="p-label">Jadval</span>
+                                <span class="p-value">45%</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-bar" data-width="45"></div></div>
+                        </div>
+                        <button class="btn-join">Qatnashish <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+                    </div>
+                </div>
+                <div class="project-card reveal reveal-d6">
+                    <div class="project-img">
+                        <img src="https://picsum.photos/seed/employment-youth-uz/600/400.jpg" alt="Ishga joylashtirish" loading="lazy">
+                        <span class="project-status">Faol</span>
+                    </div>
+                    <div class="project-body">
+                        <h3>Ishga Joylashtirish</h3>
+                        <p>Yoshlarni mehnat bozorida qo'llab-quvvatlash, kasbiy yo'nalish bo'yicha maslahat berish dasturi.</p>
+                        <div class="progress-wrap">
+                            <div class="progress-top">
+                                <span class="p-label">Jadval</span>
+                                <span class="p-value">55%</span>
+                            </div>
+                            <div class="progress-track"><div class="progress-bar" data-width="55"></div></div>
+                        </div>
+                        <button class="btn-join">Qatnashish <i class="fas fa-arrow-right" style="font-size:11px"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats" id="statistika">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal reveal-d1">
+                    <div class="stat-number" data-target="500000" data-suffix="+">0</div>
+                    <div class="stat-label">A'zolar soni</div>
+                </div>
+                <div class="stat-item reveal reveal-d2">
+                    <div class="stat-number" data-target="14" data-suffix="">0</div>
+                    <div class="stat-label">Viloyat filiallari</div>
+                </div>
+                <div class="stat-item reveal reveal-d3">
+                    <div class="stat-number" data-target="33" data-suffix="+">0</div>
+                    <div class="stat-label">Yillik faoliyat</div>
+                </div>
+                <div class="stat-item reveal reveal-d4">
+                    <div class="stat-number" data-target="1200" data-suffix="+">0</div>
+                    <div class="stat-label">Loyihalar amalga oshirildi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="map-section" id="hududlar">
+        <div class="container">
+            <div class="map-header reveal">
+                <div>
+                    <div class="section-label">Hududiy tuzilma</div>
+                    <h2 class="section-title">Barcha viloyatlarda<br>filiallar faoliyatda</h2>
+                </div>
+                <p class="section-desc" style="text-align:right">Xaritadagi viloyatga sichqonchani oling. Har bir viloyatda Yoshlar Ittifoqining faol filiali mavjud.</p>
+            </div>
+            <div class="map-layout reveal">
+                <div class="map-svg-wrap" id="mapWrap">
+                    <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="O'zbekiston xaritasi">
+                        <polygon class="map-region" data-name="Qoraqalpog'iston Respublikasi" data-head="A. Qo'chqorov" data-desc="12 ta tuman va 1 ta shahar bo'yicha faol ish olib boradi. Ekologiya va yoshlar masalalari ustuvor yo'nalishlar." points="18,95 55,55 115,60 130,105 125,170 82,195 35,175 18,140"/>
+                        <polygon class="map-region" data-name="Xorazm viloyati" data-head="D. Yo'ldoshev" data-desc="10 ta tuman filiali faoliyat yuritadi. Tarixiy meros va turizm sohasida yoshlarni jalb qilish loyihalari." points="55,55 118,22 168,32 152,60 115,60"/>
+                        <polygon class="map-region" data-name="Buxoro viloyati" data-head="Sh. Rahimov" data-desc="11 ta tuman filiali mavjud. Hunarmandchilik va madaniyat dasturlari orqali yoshlarni qo'llab-quvvatlash." points="130,105 165,88 210,98 222,148 178,178 125,170 132,135"/>
+                        <polygon class="map-region" data-name="Navoiy viloyati" data-head="B. Tursunov" data-desc="8 ta tuman filiali ishlaydi. Sanoat va texnologik ta'limga alohida e'tibor qaratilmoqda." points="168,32 222,42 260,72 248,122 222,148 210,98 165,88 152,60"/>
+                        <polygon class="map-region" data-name="Jizzax viloyati" data-head="M. Azimov" data-desc="12 ta tuman bo'yicha filiallar faol. Qishloq yoshlarini qo'llab-quvvatlash dasturlari amalga oshirilmoqda." points="260,72 308,55 338,88 322,135 248,122"/>
+                        <polygon class="map-region" data-name="Sirdaryo viloyati" data-head="K. Nazarov" data-desc="9 ta tuman filiali mavjud. Qishloq xo'jaligi va tadbirkorlik yo'nalishlarida yoshlarni qo'llab-quvvatlash." points="338,88 372,65 402,88 392,125 322,135"/>
+                        <polygon class="map-region" data-name="Toshkent viloyati" data-head="S. Karimov" data-desc="15 ta tuman filiali keng ko'lamli faoliyat olib boradi. Poytaxt atrofida yoshlar uchun zamonaviy imkoniyatlar." points="372,65 420,38 458,55 448,105 402,88"/>
+                        <polygon class="map-region" data-name="Toshkent shahri" data-head="J. Xolmatov" data-desc="11 ta tuman bo'yicha filiallar faol. IT, ta'lim va madaniyat sohalarida eng ko'p loyihalar shu yerda." points="425,65 445,58 452,72 448,88 435,85 425,78"/>
+                        <polygon class="map-region" data-name="Samarqand viloyati" data-head="R. Mirzayev" data-desc="14 ta tuman filiali ishlaydi. Turizm, ta'lim va xalqaro aloqalar yo'nalishlarida faol." points="222,148 260,72 248,122 322,135 302,178 242,190 222,168"/>
+                        <polygon class="map-region" data-name="Qashqadaryo viloyati" data-head="F. Bozorov" data-desc="13 ta tuman filiali mavjud. Madaniy meros va sport dasturlari rivojlanmoqda." points="222,168 242,190 302,178 322,215 272,252 208,238 155,210 125,170 178,178"/>
+                        <polygon class="map-region" data-name="Surxondaryo viloyati" data-head="H. Oripov" data-desc="13 ta tuman filiali faoliyat yuritadi. Ekoturizm va yoshlar tadbirkorligi yo'nalishlarida ishlar." points="302,178 322,215 382,242 415,268 395,298 332,292 272,252"/>
+                        <polygon class="map-region" data-name="Namangan viloyati" data-head="I. Toshmatov" data-desc="11 ta tuman filiali mavjud. Hunarmandchilik va kichik tadbirkorlikni rivojlantirish dasturlari." points="420,38 458,55 468,72 462,112 448,105"/>
+                        <polygon class="map-region" data-name="Andijon viloyati" data-head="N. Madaminov" data-desc="14 ta tuman filiali faol. San'at va madaniyat sohasida yoshlar salohiyatini ochish loyihalari." points="458,55 492,42 502,62 468,72"/>
+                        <polygon class="map-region" data-name="Farg'ona viloyati" data-head="Y. Qodirov" data-desc="15 ta tuman filiali keng ko'lamli ish olib boradi. Tadbirkorlik, ta'lim va sport sohalarida faol loyihalar." points="468,72 502,62 515,90 502,128 480,132 462,112"/>
+                    </svg>
+                    <div class="map-tooltip" id="mapTooltip"></div>
+                </div>
+                <div class="map-sidebar">
+                    <div class="map-info-card" id="mapCard">
+                        <div class="map-info-meta-label">Viloyat</div>
+                        <h3 id="mapName">O'zbekiston</h3>
+                        <p id="mapDesc">Xaritadagi viloyatni tanlang. Har bir viloyatda Yoshlar Ittifoqining faol filiali faoliyat yuritadi va o'z hududida maxsus dasturlarni amalga oshiradi.</p>
+                        <div class="map-info-meta-label" style="margin-top:16px">Filial rahbari</div>
+                        <div class="map-info-meta-value" id="mapHead">Tanlang</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="azo-bo-lish">
+        <div class="container">
+            <div class="cta-card reveal">
+                <div class="cta-content">
+                    <div class="section-label">A'zolik</div>
+                    <h2>Yoshlar Ittifoqiga<br>qo'shiling</h2>
+                    <p>A'zolik sizga professional rivojlanish, ijtimoiy faollik va yirik loyihalarda ishtirok etish imkoniyatini beradi.</p>
+                    <ul class="cta-benefits">
+                        <li>
+                            <span class="cta-check"><i class="fas fa-check"></i></span>
+                            Bepul ta'lim kurslari, seminarlar va master-klasslar
+                        </li>
+                        <li>
+                            <span class="cta-check"><i class="fas fa-check"></i></span>
+                            Grant dasturlari va yirik loyihalarda ishtirok
+                        </li>
+                        <li>
+                            <span class="cta-check"><i class="fas fa-check"></i></span>
+                            Butun mamlakat bo'yicha professional tarmoq
+                        </li>
+                    </ul>
+                </div>
+                <div class="cta-action">
+                    <a href="#" class="btn-cta">
+                        Ariza topshirish
+                        <i class="fas fa-arrow-right" style="font-size:13px"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <img src="https://z-cdn-media.chatglm.cn/files/89608bf4-ed8c-4d34-bf6f-1a7f1b961d43.png?auth_key=1882060155-858fedeb65314438b0374480ec4a2081-0-3da8c2fc57b77403bb3ab6b1ec1b87ae" alt="YI logotip">
+                    <p>O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi, ularning salohiyatini ro'yobga chiqarishga ko'maklashuvchi eng yirik jamoat tashkiloti.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigatsiya</h4>
+                    <ul>
+                        <li><a href="#bosh-sahifa">Bosh sahifa</a></li>
+                        <li><a href="#tashkilot">Tashkilot haqida</a></li>
+                        <li><a href="#yangiliklar">Yangiliklar</a></li>
+                        <li><a href="#loyihalar">Loyihalar</a></li>
+                        <li><a href="#hududlar">Hududlar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Resurslar</h4>
+                    <ul>
+                        <li><a href="#">Yoshlar siyosati</a></li>
+                        <li><a href="#">Grant dasturlari</a></li>
+                        <li><a href="#">Ta'lim markazlari</a></li>
+                        <li><a href="#">Me'yoriy hujjatlar</a></li>
+                        <li><a href="#">Ochiq ma'lumotlar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Aloqa</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i><span>Toshkent sh., Shayxontohur t., Zarqaynar ko'chasi, 3-uy</span></li>
+                        <li><i class="fas fa-phone"></i><span>+998 71 232-44-88</span></li>
+                        <li><i class="fas fa-envelope"></i><span>info@yoshlarittifoqi.uz</span></li>
+                        <li><i class="fas fa-clock"></i><span>Dush — Shan: 09:00 — 18:00</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 O'zbekiston Yoshlar Ittifoqi</p>
+                <p><a href="#">Maxfiylik siyosati</a> &middot; <a href="#">Foydalanish shartlari</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        'use strict';
+        var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // === NAVBAR SCROLL ===
+        var navbar = document.getElementById('navbar');
+        function onScroll() {
+            navbar.classList.toggle('scrolled', window.scrollY > 20);
+        }
+        if (!reducedMotion) {
+            window.addEventListener('scroll', onScroll, { passive: true });
+        } else {
+            navbar.classList.add('scrolled');
+        }
+
+        // === HAMBURGER ===
+        var hamburger = document.getElementById('hamburger');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobLinks = mobileMenu.querySelectorAll('.mob-link');
+
+        function toggleMenu() {
+            var open = mobileMenu.classList.toggle('open');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        mobLinks.forEach(function(l) {
+            l.addEventListener('click', function() {
+                if (mobileMenu.classList.contains('open')) toggleMenu();
+            });
+        });
+
+        // === SCROLL REVEAL ===
+        var reveals = document.querySelectorAll('.reveal');
+        if (!reducedMotion) {
+            var rObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        rObs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+            reveals.forEach(function(el) { rObs.observe(el); });
+        } else {
+            reveals.forEach(function(el) { el.classList.add('visible'); });
+        }
+
+        // === COUNTER ANIMATION ===
+        function animateNum(el, target, suffix, dur) {
+            var start = 0, t0 = null;
+            function fmt(n) { return n >= 1000 ? n.toLocaleString('en-US').replace(/,/g, ' ') : String(n); }
+            function step(ts) {
+                if (!t0) t0 = ts;
+                var p = Math.min((ts - t0) / dur, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                var cur = Math.floor(eased * target);
+                el.innerHTML = fmt(cur) + '<span class="' + (suffix ? 'plus' : '') + '">' + suffix + '</span>';
+                if (p < 1) requestAnimationFrame(step);
+                else el.innerHTML = fmt(target) + '<span class="' + (suffix ? 'plus' : '') + '">' + suffix + '</span>';
+            }
+            requestAnimationFrame(step);
+        }
+
+        // Mini stats counters
+        var miniNums = document.querySelectorAll('.mini-stat-number[data-target]');
+        var miniDone = false;
+        var miniObs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && !miniDone) {
+                miniDone = true;
+                miniNums.forEach(function(el) {
+                    var t = parseInt(el.dataset.target, 10);
+                    var s = t >= 100 ? '+' : '';
+                    if (reducedMotion) {
+                        el.innerHTML = (t >= 1000 ? t.toLocaleString('en-US').replace(/,/g,' ') : t) + '<span class="'+(s?'plus':'')+'">' + s + '</span>';
+                    } else {
+                        animateNum(el, t, s, 2000);
+                    }
+                });
+                miniObs.disconnect();
+            }
+        }, { threshold: 0.5 });
+        if (miniNums.length) miniObs.observe(miniNums[0].closest('.mini-stats-inner'));
+
+        // Stats section counters
+        var statNums = document.querySelectorAll('.stat-number[data-target]');
+        var statDone = false;
+        var statObs = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting && !statDone) {
+                statDone = true;
+                statNums.forEach(function(el) {
+                    var t = parseInt(el.dataset.target, 10);
+                    var s = el.dataset.suffix || '';
+                    if (reducedMotion) {
+                        el.textContent = (t >= 1000 ? t.toLocaleString('en-US').replace(/,/g,' ') : t) + s;
+                    } else {
+                        var start = 0, t0 = null;
+                        function fmt(n) { return n >= 1000 ? n.toLocaleString('en-US').replace(/,/g,' ') : String(n); }
+                        function step(ts) {
+                            if (!t0) t0 = ts;
+                            var p = Math.min((ts - t0) / 2200, 1);
+                            var eased = 1 - Math.pow(1 - p, 3);
+                            el.textContent = fmt(Math.floor(eased * t)) + s;
+                            if (p < 1) requestAnimationFrame(step);
+                            else el.textContent = fmt(t) + s;
+                        }
+                        requestAnimationFrame(step);
+                    }
+                });
+                statObs.disconnect();
+            }
+        }, { threshold: 0.3 });
+        if (statNums.length) statObs.observe(statNums[0].closest('.stats'));
+
+        // === PROGRESS BARS ===
+        var pBars = document.querySelectorAll('.progress-bar[data-width]');
+        var pObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.style.width = e.target.dataset.width + '%';
+                    pObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        pBars.forEach(function(b) { pObs.observe(b); });
+
+        // === MAP ===
+        var regions = document.querySelectorAll('.map-region');
+        var tooltip = document.getElementById('mapTooltip');
+        var mapWrap = document.getElementById('mapWrap');
+        var mapCard = document.getElementById('mapCard');
+        var mapName = document.getElementById('mapName');
+        var mapDesc = document.getElementById('mapDesc');
+        var mapHead = document.getElementById('mapHead');
+
+        function selectRegion(r) {
+            var name = r.dataset.name;
+            mapName.textContent = name;
+            mapHead.textContent = r.dataset.head;
+            mapDesc.textContent = r.dataset.desc || '';
+            mapCard.classList.add('active');
+        }
+
+        regions.forEach(function(r) {
+            r.setAttribute('tabindex', '0');
+            r.setAttribute('role', 'button');
+            r.setAttribute('aria-label', r.dataset.name);
+            r.addEventListener('mouseenter', function() {
+                tooltip.textContent = r.dataset.name;
+                tooltip.classList.add('visible');
+                selectRegion(r);
+            });
+            r.addEventListener('mousemove', function(e) {
+                var rect = mapWrap.getBoundingClientRect();
+                tooltip.style.left = (e.clientX - rect.left) + 'px';
+                tooltip.style.top = (e.clientY - rect.top - 40) + 'px';
+                tooltip.style.transform = 'translateX(-50%)';
+            });
+            r.addEventListener('mouseleave', function() {
+                tooltip.classList.remove('visible');
+            });
+            r.addEventListener('click', function() { selectRegion(r); });
+            r.addEventListener('focus', function() { selectRegion(r); });
+        });
+
+        // === SMOOTH SCROLL ===
+        document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+                var href = this.getAttribute('href');
+                if (href === '#') return;
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: target.getBoundingClientRect().top + window.scrollY - 72,
+                        behavior: reducedMotion ? 'auto' : 'smooth'
+                    });
+                }
+            });
+        });
+
+    })();
+    </script>
+</body>
+</html>

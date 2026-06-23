@@ -1,0 +1,53 @@
+.about { padding: 100px 0; background: var(--white); }
+.header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; gap: 40px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.card {
+  padding: 32px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all 0.3s var(--ease);
+  background: var(--white);
+}
+.card:hover { border-color: transparent; box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.cardIcon {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-xs);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 18px;
+}
+.iconBlue { background: var(--blue-pale); color: var(--blue); }
+.iconGreen { background: var(--green-pale); color: var(--green); }
+.card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+/* Timeline Card */
+.timelineCard {
+  composes: card;
+  grid-column: span 2;
+  padding: 36px 40px;
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+.timelineVisual { display: flex; flex-direction: column; flex-shrink: 0; width: 100%; }
+.timelineItem { display: flex; align-items: flex-start; gap: 16px; padding-bottom: 24px; position: relative; }
+.timelineItem:last-child { padding-bottom: 0; }
+.timelineItem:not(:last-child)::after {
+  content: ''; position: absolute; left: 5px; top: 16px; bottom: 0; width: 1px; background: var(--border);
+}
+.dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--border); border: 2px solid var(--white);
+  flex-shrink: 0; margin-top: 3px; position: relative; z-index: 2;
+  transition: all 0.3s ease;
+}
+.dotFirst { background: var(--green); box-shadow: 0 0 0 3px var(--green-pale); }
+.year { font-size: 13px; font-weight: 700; color: var(--text); min-width: 36px; }
+.timelineText { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+@media (max-width: 768px) {
+  .about { padding: 60px 0; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .grid { grid-template-columns: 1fr; }
+  .timelineCard { grid-column: span 1; flex-direction: column; gap: 32px; }
+}
