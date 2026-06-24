@@ -5,8 +5,8 @@ import { HERO_IMAGE_URL } from "@/lib/data";
 export default function Hero() {
   return (
     <section className={styles.hero} id="bosh-sahifa">
-      {/* Full Background Image */}
-      <div className={styles.bgImage}>
+      {/* 1. Mobile Only Background Elements */}
+      <div className={styles.mobileBg}>
         <Image
           src={HERO_IMAGE_URL}
           alt="Yoshlar Ittifoqi fon"
@@ -15,13 +15,23 @@ export default function Hero() {
           sizes="100vw"
         />
       </div>
-      
-      {/* Very light global overlay just for safety */}
-      <div className={styles.globalOverlay} />
+      <div className={styles.mobileOverlay} />
 
+      {/* 2. Desktop Full Screen Cinematic Background */}
+      <div className={styles.desktopBg}>
+        <Image
+          src={HERO_IMAGE_URL}
+          alt="Yoshlar Ittifoqi fon"
+          fill
+          priority
+          sizes="100vw"
+        />
+        <div className={styles.desktopOverlay} />
+      </div>
+
+      {/* 3. Content */}
       <div className={styles.containerWrap}>
-        {/* Glassmorphism Panel on the Left */}
-        <div className={styles.glassPanel}>
+        <div className={styles.content}>
           <div className={styles.label}>
             <i className="fas fa-star" />
             Toshkent shahar Yoshlar Ittifoqi

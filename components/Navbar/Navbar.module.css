@@ -198,8 +198,26 @@
 @media (max-width: 768px) {
   .inner {
     padding: 0 20px;
+    height: 60px;
+  }
+  .logoIconImage {
+    height: 42px;
   }
   .langSwitch {
     display: none;
+  }
+  .rightActions {
+    gap: 12px;
+  }
+  .navCta {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .hamburger {
+    padding: 6px;
+  }
+  .hamburger span {
+    width: 18px;
+    height: 1.5px;
   }
 }

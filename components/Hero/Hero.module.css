@@ -1,239 +1,154 @@
+/* Base Mobile-First Layout */
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 120px 0 60px;
+  padding: 160px 0 100px;
+  background: var(--bg);
 }
 
-.globalOverlay {
+.mobileBg {
   position: absolute;
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+.mobileBg img { object-fit: cover; }
+
+.mobileOverlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%; z-index: 2;
   background: linear-gradient(
-    to right,
-    rgba(13, 59, 102, 0.4) 0%,
-    rgba(13, 59, 102, 0.1) 100%
+    to bottom,
+    rgba(13, 59, 102, 0.75) 0%,
+    rgba(13, 59, 102, 0.95) 100%
   );
-  z-index: 2;
 }
 
-.bgImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.bgImage img {
-  object-fit: cover;
-  object-position: center;
-}
+.desktopBg { display: none; }
 
 .containerWrap {
   position: relative;
   z-index: 3;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 20px;
 }
 
-/* Dark Glass Panel */
-.glassPanel {
-  max-width: 650px;
-  background: rgba(10, 20, 35, 0.75); /* Dark cinematic blue */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 60px;
-  border-radius: 32px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+.content {
+  text-align: center;
   color: var(--white);
-  position: relative;
-  transform: translateY(30px);
-  opacity: 0;
-  animation: slideUp 0.8s forwards cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* Mobile Typography */
 .label {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--white);
-  padding: 8px 18px;
-  border-radius: 50px;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.label i {
-  color: var(--green-light);
-  font-size: 11px;
-}
-
-.title {
-  font-size: clamp(48px, 5.5vw, 76px);
-  font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 24px;
-  letter-spacing: -1.5px;
-  color: var(--white);
-}
-
-.title span {
-  display: block;
-}
-
-.accent {
-  color: var(--green-light);
-}
-
-.desc {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.8;
-  margin-bottom: 48px;
-  font-weight: 400;
-}
-
-.actions {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.btnPrimary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--green);
-  color: var(--white);
-  padding: 16px 40px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 15px;
-  transition: all 0.3s var(--ease);
-  border: none;
-}
-
-.btnPrimary:hover {
-  background: var(--green-light);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(46, 139, 87, 0.4);
-}
-
-.btnSecondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--white);
-  padding: 16px 40px;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 15px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s var(--ease);
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: 600;
+  margin: 0 auto 16px;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.5px;
 }
+.label i { color: var(--green-light); font-size: 8px; }
 
-.btnSecondary:hover {
-  background: var(--white);
-  color: var(--text);
-  border-color: var(--white);
-}
+.title { color: var(--white); font-size: 38px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+.title span { display: block; }
+.title span.accent { color: var(--green); }
+.title span.accent::before, .title span.accent::after { content: none; }
 
-/* Mobile Adjustments */
-@media (max-width: 1024px) {
-  .glassPanel {
-    max-width: 550px;
-    padding: 48px;
-  }
-}
+.desc { font-size: 15px; color: rgba(255, 255, 255, 0.85); line-height: 1.6; margin: 0 auto 32px; }
 
-@media (max-width: 768px) {
+.actions { display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+.btnPrimary { display: flex; justify-content: center; align-items: center; gap: 10px; background: var(--green); color: var(--white); padding: 14px; border-radius: 50px; font-size: 14px; font-weight: 700; transition: background 0.3s; }
+.btnPrimary:hover { background: var(--green-light); }
+.btnSecondary { display: flex; justify-content: center; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.1); color: var(--white); border: 1px solid rgba(255, 255, 255, 0.3); padding: 14px; border-radius: 50px; font-size: 14px; font-weight: 700; transition: background 0.3s; }
+.btnSecondary:hover { background: var(--white); color: var(--text); border-color: var(--white); }
+
+
+/* Desktop Full Screen Cinematic Layout */
+@media (min-width: 1024px) {
   .hero {
-    min-height: 100vh;
     padding: 160px 0 100px;
-    display: flex;
-    align-items: center;
+  }
+  
+  .mobileBg, .mobileOverlay { display: none; }
+  
+  .desktopBg {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+  }
+  .desktopBg img {
+    object-fit: cover;
+    object-position: center;
+    transition: transform 3s ease-out;
+  }
+  .hero:hover .desktopBg img {
+    transform: scale(1.03);
   }
 
-  .globalOverlay {
+  .desktopOverlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(
-      to bottom,
-      rgba(13, 59, 102, 0.75) 0%,
-      rgba(13, 59, 102, 0.95) 100%
+      90deg, 
+      rgba(9, 40, 71, 0.98) 0%, 
+      rgba(13, 59, 102, 0.85) 45%, 
+      rgba(13, 59, 102, 0) 100%
     );
+    z-index: 2;
   }
 
   .containerWrap {
-    padding: 0 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: floatUp 0.8s forwards cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .glassPanel {
-    max-width: 100%;
-    padding: 0;
-    text-align: center;
-    border-radius: 0;
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-    border: none;
-    animation: none;
-    transform: none;
-    opacity: 1;
+  @keyframes floatUp {
+    to { opacity: 1; transform: translateY(0); }
   }
 
+  .content {
+    max-width: 650px;
+    text-align: left;
+  }
+
+  /* Desktop Typography overrides */
   .label {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    margin: 0 auto 24px;
-  }
-
-  .title {
-    font-size: 44px;
-    letter-spacing: -1px;
+    margin: 0 0 32px 0;
   }
   
-  .title span {
-    display: inline;
-  }
+  .title { font-size: clamp(52px, 5vw, 84px); color: var(--white); margin-bottom: 24px; line-height: 1.05; letter-spacing: -2px; }
+  .title span { display: block; }
+  .title span.accent { color: var(--green-light); }
+  .title span.accent::before, .title span.accent::after { content: none; }
+  
+  .desc { color: rgba(255, 255, 255, 0.85); margin: 0 0 48px 0; max-width: 600px; font-size: 19px; }
+  
+  .actions { flex-direction: row; }
+  .btnPrimary { background: var(--green); color: var(--white); padding: 16px 40px; font-size: 16px; border-radius: 50px; }
+  .btnPrimary:hover { background: var(--green-light); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(46, 139, 87, 0.4); }
+  
+  .btnSecondary { background: rgba(255, 255, 255, 0.1); color: var(--white); border-color: rgba(255, 255, 255, 0.3); padding: 16px 40px; font-size: 16px; border-radius: 50px; }
+  .btnSecondary:hover { background: var(--white); color: var(--text); border-color: var(--white); }
+}
 
-  .title span.accent::before,
-  .title span.accent::after {
-    content: " ";
-  }
-
-  .desc {
-    margin: 0 auto 40px;
-  }
-
-  .actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
+@media (min-width: 769px) and (max-width: 1023px) {
+  .containerWrap { padding: 0 40px; }
 }
