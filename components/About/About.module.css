@@ -1,4 +1,4 @@
-.about { padding: 120px 0; background: transparent; }
+.about { padding: 80px 0; background: transparent; }
 .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; gap: 40px; }
 .grid {
   display: grid;

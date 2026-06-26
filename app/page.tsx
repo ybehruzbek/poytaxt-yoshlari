@@ -34,8 +34,11 @@ export default function Home() {
         <Projects />
       </SectionTheme>
 
-      <SectionTheme theme="default">
+      <SectionTheme theme="news">
         <News />
+      </SectionTheme>
+
+      <SectionTheme theme="default">
         <Stats />
         <Districts />
         <Leadership />

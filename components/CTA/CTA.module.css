@@ -1,4 +1,4 @@
-.cta { padding: 100px 0; background: var(--bg); }
+.cta { padding: 80px 0; background: var(--bg); }
 .card {
   background: var(--text); border-radius: 20px; padding: 64px;
   display: grid; grid-template-columns: 1fr auto; gap: 48px;

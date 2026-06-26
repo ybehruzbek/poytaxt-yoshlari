@@ -98,6 +98,30 @@ export const newsItems: NewsItem[] = [
     tagClass: "tag-orange",
     image: "https://picsum.photos/seed/youth-sport-medals-uz/400/300",
   },
+  {
+    id: "4",
+    title: "Toshkentda 'Raqamli Avlod' yosh dasturchilar xakatoni boshlandi",
+    date: "5 Noyabr 2024",
+    tag: "Texnologiya",
+    tagClass: "tag-blue",
+    image: "https://picsum.photos/seed/hackathon-uzb/400/300",
+  },
+  {
+    id: "5",
+    title: "Yashil Makon: Poytaxt yoshlari 10 mingta daraxt ekishdi",
+    date: "1 Noyabr 2024",
+    tag: "Ekologiya",
+    tagClass: "tag-green",
+    image: "https://picsum.photos/seed/green-space-uzb/400/300",
+  },
+  {
+    id: "6",
+    title: "Xalqaro ta'lim ko'rgazmasida yoshlarimizning faol ishtiroki",
+    date: "28 Oktyabr 2024",
+    tag: "Ta'lim",
+    tagClass: "tag-blue",
+    image: "https://picsum.photos/seed/edu-exhibition-uzb/400/300",
+  }
 ];
 
 // ===== PROJECTS =====

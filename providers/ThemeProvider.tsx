@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-type Theme = "hero" | "about" | "directions" | "projects" | "default";
+type Theme = "hero" | "about" | "directions" | "projects" | "news" | "default";
 
 interface ThemeContextType {
   theme: Theme;
