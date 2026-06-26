@@ -1,5 +1,10 @@
+interface TashkentMapSVGProps {
+  activeDistrict: string | null;
+  onDistrictHover: (district: string | null) => void;
+  onDistrictClick: (district: string) => void;
+}
 
-export default function TashkentMapSVG({ activeDistrict, onDistrictHover, onDistrictClick }: any) {
+export default function TashkentMapSVG({ activeDistrict, onDistrictHover, onDistrictClick }: TashkentMapSVGProps) {
   return (
     <svg width="100%" height="100%" version="1.0" viewBox="0 0 4960 4760" preserveAspectRatio="xMidYMid meet">
 

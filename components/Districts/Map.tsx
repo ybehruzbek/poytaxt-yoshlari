@@ -50,7 +50,7 @@ export default function Map() {
               </div>
               <h3 className={styles.emptyTitle}>Toshkent xaritasi</h3>
               <p className={styles.emptyDesc}>
-                Ma'lumot olish uchun xaritadagi tumanlardan birini bosing.
+                Ma&apos;lumot olish uchun xaritadagi tumanlardan birini bosing.
               </p>
             </div>
           )}

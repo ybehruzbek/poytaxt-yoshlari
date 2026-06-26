@@ -26,6 +26,7 @@ export default function CountUp({ target, duration = 2000, suffix = "", classNam
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setValue(target);
       return;
     }
