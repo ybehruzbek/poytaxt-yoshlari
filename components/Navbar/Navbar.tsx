@@ -10,8 +10,10 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight - 80);
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Trigger once on mount to set initial state
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
