@@ -4,7 +4,7 @@ import { useTheme } from "@/providers/ThemeProvider";
 import { useEffect, useRef, ReactNode } from "react";
 
 interface SectionThemeProps {
-  theme: "hero" | "about" | "directions" | "projects" | "default";
+  theme: "hero" | "about" | "directions" | "projects" | "news" | "default";
   children: ReactNode;
   className?: string;
 }
