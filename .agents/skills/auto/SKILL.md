@@ -11,15 +11,47 @@ Foydalanuvchi so'rov yozganda kerakli skill'larni **avtomatik aniqla**, o'qi va 
 
 ---
 
-## 📁 Skill joylashuvlari
+## 📁 Skill joylashuvi
 
-Skill'lar **3 ta** papkada joylashgan:
+Barcha skill'lar **bitta joyda** — loyiha papkasida:
 
-| Papka | Joylashuv | Tavsif |
-|-------|-----------|--------|
-| **Loyiha (.agents)** | `.agents/skills/` | Loyihaga tegishli skill'lar |
-| **Loyiha (.agent)** | `.agent/skills/` | Qo'shimcha loyiha skill'lari |
-| **Global (~)** | `~/.agents/skills/` | Barcha loyihalar uchun umumiy skill'lar |
+```
+.agents/skills/   ← 25 ta skill
+```
+
+Boshqa joyda skill yo'q. Quyidagi yo'llardan foydalaning.
+
+---
+
+## 📦 To'liq Skill'lar Ro'yxati (25 ta)
+
+| # | Skill nomi | Yo'l |
+|---|---|---|
+| 1 | `auto` | `.agents/skills/auto/SKILL.md` |
+| 2 | `brainstorming` | `.agents/skills/brainstorming/SKILL.md` |
+| 3 | `brand-identity` | `.agents/skills/brand-identity/SKILL.md` |
+| 4 | `conventional-commits` | `.agents/skills/conventional-commits/SKILL.md` |
+| 5 | `copywriting` | `.agents/skills/copywriting/SKILL.md` |
+| 6 | `data-encryption` | `.agents/skills/data-encryption/SKILL.md` |
+| 7 | `error-handling-patterns` | `.agents/skills/error-handling-patterns/SKILL.md` |
+| 8 | `executing-plans` | `.agents/skills/executing-plans/SKILL.md` |
+| 9 | `find-skills` | `.agents/skills/find-skills/SKILL.md` |
+| 10 | `frontend-design` | `.agents/skills/frontend-design/SKILL.md` |
+| 11 | `harden` | `.agents/skills/harden/SKILL.md` |
+| 12 | `marketing-psychology` | `.agents/skills/marketing-psychology/SKILL.md` |
+| 13 | `next-best-practices` | `.agents/skills/next-best-practices/SKILL.md` |
+| 14 | `programmatic-seo` | `.agents/skills/programmatic-seo/SKILL.md` |
+| 15 | `requesting-code-review` | `.agents/skills/requesting-code-review/SKILL.md` |
+| 16 | `seo-audit` | `.agents/skills/seo-audit/SKILL.md` |
+| 17 | `subagent-driven-development` | `.agents/skills/subagent-driven-development/SKILL.md` |
+| 18 | `systematic-debugging` | `.agents/skills/systematic-debugging/SKILL.md` |
+| 19 | `technical-specification` | `.agents/skills/technical-specification/SKILL.md` |
+| 20 | `test-driven-development` | `.agents/skills/test-driven-development/SKILL.md` |
+| 21 | `vercel-react-best-practices` | `.agents/skills/vercel-react-best-practices/SKILL.md` |
+| 22 | `verification-before-completion` | `.agents/skills/verification-before-completion/SKILL.md` |
+| 23 | `web-design-guidelines` | `.agents/skills/web-design-guidelines/SKILL.md` |
+| 24 | `web-security-testing` | `.agents/skills/web-security-testing/SKILL.md` |
+| 25 | `writing-plans` | `.agents/skills/writing-plans/SKILL.md` |
 
 ---
 
@@ -27,13 +59,13 @@ Skill'lar **3 ta** papkada joylashgan:
 
 ### 1-qadam: Kontekstni tushun
 
-1. `.agents/instructions.md` faylini o'qi — loyiha haqida umumiy ma'lumot.
-2. Foydalanuvchi so'rovini **to'liq o'qi va tahlil qil**.
-3. Ochiq fayllar va cursor pozitsiyasini hisobga ol.
+1. Foydalanuvchi so'rovini **to'liq o'qi va tahlil qil**
+2. Ochiq fayllar va cursor pozitsiyasini hisobga ol
+3. So'rov qaysi kategoriyaga tegishli ekanini aniqla
 
 ### 2-qadam: Skill'larni aniqla
 
-So'rovni quyidagi **kategoriyalar** bo'yicha tekshir. Bir nechta kategoriya mos kelishi mumkin — **barchasini** tanla.
+So'rovni quyidagi kategoriyalar bo'yicha tekshir. Bir nechta mos kelsa — **barchasini** tanla.
 
 ---
 
@@ -43,7 +75,7 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 
 | Trigger | Skill | Yo'l |
 |---------|-------|------|
-| Kodni tugataman / yakunlayman deyilganda | `verification-before-completion` | `.agent/skills/verification-before-completion/SKILL.md` |
+| Kodni tugataman / yakunlayman deyilganda | `verification-before-completion` | `.agents/skills/verification-before-completion/SKILL.md` |
 | `git commit` qilishdan oldin | `conventional-commits` | `.agents/skills/conventional-commits/SKILL.md` |
 
 ---
@@ -52,9 +84,9 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 
 | Kalit so'zlar | Skill | Yo'l |
 |---------------|-------|------|
-| bug, xato, tuzat, ishlamayapti, error, crash, noto'g'ri, buzilgan, qizil xato | `systematic-debugging` | `.agent/skills/systematic-debugging/SKILL.md` |
-| error handling, try-catch, xatolik boshqarish, graceful degradation | `error-handling-patterns` | `.agent/skills/error-handling-patterns/SKILL.md` |
-| barcha sahifani tekshir, hamma page, umumiy test | `systematic-debugging` + `verification-before-completion` | `.agent/skills/systematic-debugging/SKILL.md` |
+| bug, xato, tuzat, ishlamayapti, error, crash, noto'g'ri, buzilgan, qizil xato | `systematic-debugging` | `.agents/skills/systematic-debugging/SKILL.md` |
+| error handling, try-catch, xatolik boshqarish, graceful degradation | `error-handling-patterns` | `.agents/skills/error-handling-patterns/SKILL.md` |
+| barcha sahifani tekshir, hamma page, umumiy test | `systematic-debugging` + `verification-before-completion` | Ikkalasini o'qi |
 
 ---
 
@@ -65,8 +97,9 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 | yangi feature, funksiya, qo'sh, yaratish, g'oya, loyiha | `brainstorming` → keyin `writing-plans` | `.agents/skills/brainstorming/SKILL.md` |
 | reja, plan, katta vazifa, bosqichma-bosqich, roadmap | `writing-plans` → keyin `executing-plans` | `.agents/skills/writing-plans/SKILL.md` |
 | parallel ish, subagent, mustaqil vazifalar, tez bajarish | `subagent-driven-development` | `.agents/skills/subagent-driven-development/SKILL.md` |
-| review, tekshir, PR, code review, merge oldin | `requesting-code-review` | `.agent/skills/requesting-code-review/SKILL.md` |
-| test, testing, sinov, TDD, unit test, e2e | `test-driven-development` | `.agent/skills/test-driven-development/SKILL.md` |
+| review, tekshir, PR, code review, merge oldin | `requesting-code-review` | `.agents/skills/requesting-code-review/SKILL.md` |
+| test, testing, sinov, TDD, unit test, e2e | `test-driven-development` | `.agents/skills/test-driven-development/SKILL.md` |
+| TZ, texnik topshiriq, spec, spetsifikatsiya, hujjat, PRD | `technical-specification` | `.agents/skills/technical-specification/SKILL.md` |
 
 ---
 
@@ -75,19 +108,11 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 | Kalit so'zlar | Skill | Yo'l |
 |---------------|-------|------|
 | next.js, sahifa, route, API route, middleware, layout, SSR, RSC | `next-best-practices` | `.agents/skills/next-best-practices/SKILL.md` |
-| react, komponent, component, hook, state, props, context | `vercel-react-best-practices` | `.agents/skills/vercel-react-best-practices/SKILL.md` |
+| react, komponent, component, hook, state, props, context, performance | `vercel-react-best-practices` | `.agents/skills/vercel-react-best-practices/SKILL.md` |
 | UI, dizayn, interfeys, frontend, stil, responsive, mobile, chiroyli | `frontend-design` | `.agents/skills/frontend-design/SKILL.md` |
 | UI tekshirish, audit, accessibility, UX, a11y, contrast | `web-design-guidelines` | `.agents/skills/web-design-guidelines/SKILL.md` |
-| brand, brend, logo, rang, dizayn tizimi, tipografiya, palette | `brand-identity` | `.agent/skills/brand-identity/SKILL.md` |
-
----
-
-#### 🗄️ BACKEND & DATABASE
-
-| Kalit so'zlar | Skill | Yo'l |
-|---------------|-------|------|
-| prisma, database, model, migration, schema, DB, jadval, ustun | `prisma-database-setup` + `prisma-cli` | `~/.agents/skills/prisma-database-setup/SKILL.md` |
-| auth, login, session, NextAuth, ro'yxatdan o'tish, himoya, parol | `nextauth-authentication` | `~/.agents/skills/nextauth-authentication/SKILL.md` |
+| brand, brend, logo, rang, dizayn tizimi, tipografiya, palette | `brand-identity` | `.agents/skills/brand-identity/SKILL.md` |
+| harden, production-ready, edge case, overflow, i18n, mustahkamlash | `harden` | `.agents/skills/harden/SKILL.md` |
 
 ---
 
@@ -95,18 +120,8 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 
 | Kalit so'zlar | Skill | Yo'l |
 |---------------|-------|------|
-| xavfsizlik, security, himoya, zaiflik, vulnerability | `security-best-practices` + `owasp-top-10` | `~/.agents/skills/security-best-practices/SKILL.md` |
-| XSS, CSRF, injection, SQL injection, hujum, exploit | `web-security-testing` + `owasp-top-10` | `~/.agents/skills/web-security-testing/SKILL.md` |
-| input, validatsiya, sanitizatsiya, tozalash, foydalanuvchi kiritishi | `input-validation-sanitization-auditor` | `~/.agents/skills/input-validation-sanitization-auditor/SKILL.md` |
-| OWASP, zaiflik auditi, penetration, xavfsizlik auditi | `owasp-top-10` | `~/.agents/skills/owasp-top-10/SKILL.md` |
-
----
-
-#### 🚀 DEPLOY & INFRA
-
-| Kalit so'zlar | Skill | Yo'l |
-|---------------|-------|------|
-| deploy, Docker, server, production, CI/CD, hosting, container | `docker-deployment` | `~/.agents/skills/docker-deployment/SKILL.md` |
+| xavfsizlik, security, himoya, zaiflik, vulnerability, OWASP, penetration | `web-security-testing` | `.agents/skills/web-security-testing/SKILL.md` |
+| shifrlash, encryption, AES, RSA, TLS, kalit, key management | `data-encryption` | `.agents/skills/data-encryption/SKILL.md` |
 
 ---
 
@@ -115,7 +130,6 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 | Kalit so'zlar | Skill | Yo'l |
 |---------------|-------|------|
 | matn yozish, kopy, marketing, landing page, CTA, headline | `copywriting` | `.agents/skills/copywriting/SKILL.md` |
-| matn tuzatish, grammatika, tahrir, editing, imlo, xato | `copy-editing` | `~/.agents/skills/copy-editing/SKILL.md` |
 | psixologiya, mental model, persuasion, konversiya, nudge | `marketing-psychology` | `.agents/skills/marketing-psychology/SKILL.md` |
 | SEO, meta, Google, qidiruv, indexing, sitemap, robots | `seo-audit` | `.agents/skills/seo-audit/SKILL.md` |
 | programmatic SEO, template sahifalar, pSEO, ko'p sahifa | `programmatic-seo` | `.agents/skills/programmatic-seo/SKILL.md` |
@@ -127,7 +141,7 @@ Bu skill'lar ma'lum harakatlardan **OLDIN** har doim o'qilishi kerak:
 | Kalit so'zlar | Skill | Yo'l |
 |---------------|-------|------|
 | commit, git, versiya, push | `conventional-commits` | `.agents/skills/conventional-commits/SKILL.md` |
-| skill izla, topish, qanday qilaman, yangi skill | `find-skills` | `.agents/skills/find-skills/SKILL.md` |
+| skill izla, topish, qanday qilaman, yangi skill, o'rnatish | `find-skills` | `.agents/skills/find-skills/SKILL.md` |
 
 ---
 
@@ -150,8 +164,8 @@ Ish boshlashdan **OLDIN** quyidagi formatda yoz:
 
 ```
 🔧 Skill'lar aniqlandi va o'qildi:
-  ✅ skill-nomi — sabab (loyiha / global)
-  ✅ skill-nomi — sabab (loyiha / global)
+  ✅ skill-nomi — sabab
+  ✅ skill-nomi — sabab
 
 📋 Ish rejasi:
   1. Birinchi qadam
@@ -177,10 +191,11 @@ Ba'zi vazifalar ketma-ket bir nechta skill talab qiladi:
 |-------------|---------------|
 | Yangi feature yaratish | `brainstorming` → `writing-plans` → `executing-plans` → `verification-before-completion` |
 | Bug tuzatish | `systematic-debugging` → `test-driven-development` → `verification-before-completion` |
-| Xavfsizlik auditi | `owasp-top-10` → `security-best-practices` → `web-security-testing` → `input-validation-sanitization-auditor` |
-| Deploy qilish | `docker-deployment` → `verification-before-completion` |
-| Database o'zgarishi | `prisma-database-setup` → `prisma-cli` → `verification-before-completion` |
+| TZ/Spec yozish | `brainstorming` → `technical-specification` → `writing-plans` |
+| Xavfsizlik auditi | `web-security-testing` → `data-encryption` → `harden` |
+| UI yaratish | `brand-identity` → `frontend-design` → `web-design-guidelines` → `harden` |
 | PR yaratish | `requesting-code-review` → `conventional-commits` |
+| Production tayyorlash | `harden` → `verification-before-completion` |
 
 ---
 
@@ -192,3 +207,4 @@ Ba'zi vazifalar ketma-ket bir nechta skill talab qiladi:
 4. **Ishni tugatishdan oldin** — `verification-before-completion` skill'ini **har doim** o'qi
 5. **O'zbek tilida** muloqot qil — foydalanuvchi o'zbek tilida yozadi
 6. **Skill yo'l topilmasa** — xato berma, log qoldir va davom et
+7. **Barcha skill'lar** `.agents/skills/` papkasida — boshqa joyda qidirma

@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O'zbekiston Yoshlar Ittifoqi — Toshkent shahar Kengashi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uz-blue': '#0055B8',
+                        'uz-navy': '#0A1628',
+                        'uz-dark': '#060E1A',
+                        'uz-green': '#009B48',
+                        'uz-gold': '#D4A843',
+                        'uz-cyan': '#E8F4FD',
+                        'uz-lgreen': '#E8F8EF',
+                        'uz-lgold': '#FDF8ED',
+                    },
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #0055B8; border-radius: 3px; }
+        html { scroll-behavior: smooth; }
+        .pattern-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 8L46 20L40 32L34 20Z' fill='%230055B8' fill-opacity='0.025'/%3E%3Cpath d='M8 40L20 34L32 40L20 46Z' fill='%23009B48' fill-opacity='0.025'/%3E%3Cpath d='M48 48L60 42L72 48L60 54Z' fill='%23D4A843' fill-opacity='0.02'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%230055B8' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+        .hero-gradient { background: linear-gradient(135deg, #060E1A 0%, #0A1628 30%, #0055B8 100%); }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 50%; width: 0; height: 2px; background: #0055B8; transition: all 0.3s ease; transform: translateX(-50%); }
+        .nav-link:hover::after { width: 100%; }
+        .card-hover { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 60px -15px rgba(0, 85, 184, 0.2); }
+        .direction-card { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .direction-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px -10px rgba(0, 85, 184, 0.15); }
+        .direction-card:hover .dir-icon { transform: scale(1.1); background: #0055B8; color: white; }
+        .dir-icon { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .district-card { transition: all 0.3s ease; cursor: pointer; }
+        .district-card:hover { background: #0055B8; color: white; }
+        .district-card:hover .d-name { color: white; }
+        .district-card:hover .d-count { color: rgba(255,255,255,0.8); }
+        .district-card:hover .d-arrow { color: white; transform: translateX(4px); }
+        .d-arrow { transition: all 0.3s ease; }
+        .gallery-item { overflow: hidden; cursor: pointer; }
+        .gallery-item img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-overlay { opacity: 0; transition: opacity 0.4s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .mobile-menu.open { transform: translateX(0); }
+        .lang-drop { opacity: 0; visibility: hidden; transform: translateY(-5px); transition: all 0.3s ease; }
+        .lang-wrap:hover .lang-drop { opacity: 1; visibility: visible; transform: translateY(0); }
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active { background: #0055B8; color: white; }
+        .stat-bar { width: 0; transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s; }
+        .toast { transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .float-anim { animation: float 5s ease-in-out infinite; }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,85,184,0.3); } 50% { box-shadow: 0 0 0 12px rgba(0,85,184,0); } }
+        .pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .marquee { animation: marquee 40s linear infinite; }
+        .lightbox { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .lightbox.open { opacity: 1; visibility: visible; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 overflow-x-hidden">
+
+<!-- Toast Notification -->
+<div id="toast" class="toast fixed bottom-6 right-6 z-[200] bg-uz-green text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
+    <span class="iconify text-xl" data-icon="lucide:check-circle"></span>
+    <span id="toastMsg">Murojaatingiz muvaffaqiyatli yuborildi!</span>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox fixed inset-0 z-[150] bg-black/90 flex items-center justify-center p-4" onclick="closeLightbox()">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white transition">
+        <span class="iconify text-3xl" data-icon="lucide:x"></span>
+    </button>
+    <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[85vh] rounded-lg object-contain">
+</div>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+            <!-- Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-uz-blue rounded-xl flex items-center justify-center shadow-lg shadow-uz-blue/30 group-hover:scale-105 transition-transform">
+                    <span class="text-white font-black text-sm lg:text-base">YI</span>
+                </div>
+                <div class="hidden sm:block">
+                    <div class="text-sm lg:text-base font-bold text-white leading-tight">Yoshlar Ittifoqi</div>
+                    <div class="text-[10px] lg:text-xs text-white/60 leading-tight">Toshkent shahar Kengashi</div>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden xl:flex items-center gap-1">
+                <a href="#about" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Biz haqimizda</a>
+                <a href="#directions" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Yo'nalishlar</a>
+                <a href="#projects" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Loyihalar</a>
+                <a href="#news" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Yangiliklar</a>
+                <a href="#districts" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Tumanlar</a>
+                <a href="#leadership" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Rahbariyat</a>
+                <a href="#documents" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Hujjatlar</a>
+                <a href="#gallery" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Galeriya</a>
+                <a href="#appeals" class="nav-link text-sm text-white/80 hover:text-white px-3 py-2 transition">Murojaat</a>
+            </div>
+
+            <!-- Right -->
+            <div class="flex items-center gap-3">
+                <!-- Language -->
+                <div class="lang-wrap relative hidden md:block">
+                    <button class="flex items-center gap-1.5 text-sm text-white/80 hover:text-white bg-white/10 px-3 py-1.5 rounded-lg backdrop-blur transition">
+                        <span class="iconify text-base" data-icon="lucide:globe"></span>
+                        <span id="currentLang">UZ</span>
+                        <span class="iconify text-xs" data-icon="lucide:chevron-down"></span>
+                    </button>
+                    <div class="lang-drop absolute top-full right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 py-2 min-w-[120px]">
+                        <button onclick="setLang('uz')" class="w-full text-left px-4 py-2 text-sm hover:bg-uz-cyan transition flex items-center gap-2">
+                            <span>🇺🇿</span> O'zbekcha
+                        </button>
+                        <button onclick="setLang('ru')" class="w-full text-left px-4 py-2 text-sm hover:bg-uz-cyan transition flex items-center gap-2">
+                            <span>🇷🇺</span> Русский
+                        </button>
+                        <button onclick="setLang('en')" class="w-full text-left px-4 py-2 text-sm hover:bg-uz-cyan transition flex items-center gap-2">
+                            <span>🇬🇧</span> English
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <a href="#appeals" class="hidden lg:flex items-center gap-2 bg-uz-green hover:bg-green-700 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all shadow-lg shadow-uz-green/30 hover:shadow-uz-green/50">
+                    <span class="iconify text-base" data-icon="lucide:send"></span>
+                    Murojaat
+                </a>
+
+                <!-- Mobile Toggle -->
+                <button id="menuToggle" onclick="toggleMenu()" class="xl:hidden w-10 h-10 flex items-center justify-center text-white bg-white/10 rounded-lg backdrop-blur">
+                    <span class="iconify text-xl" data-icon="lucide:menu" id="menuIcon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-uz-navy z-[110] overflow-y-auto">
+    <div class="p-6">
+        <div class="flex items-center justify-between mb-8">
+            <div class="text-white font-bold">Menyu</div>
+            <button onclick="toggleMenu()" class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white bg-white/10 rounded-lg">
+                <span class="iconify text-xl" data-icon="lucide:x"></span>
+            </button>
+        </div>
+        <div class="flex flex-col gap-1">
+            <a href="#about" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Biz haqimizda</a>
+            <a href="#directions" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Yo'nalishlar</a>
+            <a href="#projects" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Loyihalar</a>
+            <a href="#news" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Yangiliklar</a>
+            <a href="#districts" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Tumanlar</a>
+            <a href="#leadership" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Rahbariyat</a>
+            <a href="#documents" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Hujjatlar</a>
+            <a href="#gallery" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Galeriya</a>
+            <a href="#appeals" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Murojaat</a>
+            <a href="#contact" onclick="toggleMenu()" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition">Aloqa</a>
+        </div>
+        <div class="mt-8 pt-6 border-t border-white/10">
+            <div class="text-white/50 text-xs mb-3">Tilni tanlang</div>
+            <div class="flex gap-2">
+                <button onclick="setLang('uz');toggleMenu()" class="px-4 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-uz-blue transition">UZ</button>
+                <button onclick="setLang('ru');toggleMenu()" class="px-4 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-uz-blue transition">RU</button>
+                <button onclick="setLang('en');toggleMenu()" class="px-4 py-2 text-sm rounded-lg bg-white/10 text-white hover:bg-uz-blue transition">EN</button>
+            </div>
+        </div>
+        <a href="#appeals" onclick="toggleMenu()" class="mt-6 flex items-center justify-center gap-2 bg-uz-green text-white font-semibold px-6 py-3.5 rounded-xl">
+            <span class="iconify" data-icon="lucide:send"></span> Murojaat yuborish
+        </a>
+    </div>
+</div>
+<div id="menuOverlay" class="fixed inset-0 bg-black/50 z-[105] hidden" onclick="toggleMenu()"></div>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero" class="hero-gradient relative min-h-screen flex items-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+        <img src="https://picsum.photos/seed/tashkent-youth-2024/1920/1080.jpg" alt="Toshkent yoshlari" class="w-full h-full object-cover opacity-20">
+        <div class="absolute inset-0 bg-gradient-to-r from-uz-dark via-uz-dark/90 to-uz-blue/60"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-uz-dark via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-20 right-10 w-72 h-72 bg-uz-blue/20 rounded-full blur-[100px] float-anim"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-uz-green/10 rounded-full blur-[120px] float-anim" style="animation-delay:-2s"></div>
+    
+    <!-- Flag Stripe -->
+    <div class="absolute top-0 left-0 right-0 h-1 flex">
+        <div class="flex-1 bg-uz-blue flag-stripe"></div>
+        <div class="flex-1 bg-white flag-stripe" style="animation-delay:0.5s"></div>
+        <div class="flex-1 bg-uz-green flag-stripe" style="animation-delay:1s"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-32 pb-20 w-full">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-xs font-medium px-4 py-2 rounded-full mb-8">
+                    <span class="w-2 h-2 bg-uz-green rounded-full pulse-glow"></span>
+                    Toshkent shahar Yoshlar Ittifoqi
+                </div>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+                    Kelajakni <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-emerald-300">yoshlar</span><br>
+                    quradi
+                </h1>
+
+                <p class="text-base sm:text-lg text-white/60 max-w-lg mb-10 leading-relaxed" data-lang-uz="Toshkent shahridagi yoshlar harakatining rasmiy markazi — rahbarlik, ta'lim, volontyorlik va ijtimoiy faollik uchun platforma." data-lang-ru="Официальный центр молодёжного движения в городе Ташкент — платформа для лидерства, образования, волонтёрства и социальной активности." data-lang-en="The official center of the youth movement in Tashkent city — a platform for leadership, education, volunteering, and social activity.">
+                    Toshkent shahridagi yoshlar harakatining rasmiy markazi — rahbarlik, ta'lim, volontyorlik va ijtimoiy faollik uchun platforma.
+                </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="#directions" class="group flex items-center gap-2.5 bg-white text-uz-navy font-bold px-7 py-4 rounded-xl hover:bg-gray-100 transition-all shadow-xl shadow-black/20">
+                        <span data-lang-uz="Yo'nalishlar" data-lang-ru="Направления" data-lang-en="Directions">Yo'nalishlar</span>
+                        <span class="iconify text-lg group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right"></span>
+                    </a>
+                    <a href="#appeals" class="flex items-center gap-2.5 bg-uz-green hover:bg-green-700 text-white font-bold px-7 py-4 rounded-xl transition-all shadow-lg shadow-uz-green/30">
+                        <span class="iconify text-lg" data-icon="lucide:send"></span>
+                        <span data-lang-uz="Murojaat yuborish" data-lang-ru="Отправить обращение" data-lang-en="Submit Appeal">Murojaat yuborish</span>
+                    </a>
+                </div>
+
+                <!-- Mini Stats -->
+                <div class="flex flex-wrap gap-8 mt-12 pt-8 border-t border-white/10">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-black text-white" data-count="850000">0</div>
+                        <div class="text-xs text-white/50 mt-1" data-lang-uz="yoshlar" data-lang-ru="молодёжь" data-lang-en="youth">yoshlar</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-black text-white" data-count="11">0</div>
+                        <div class="text-xs text-white/50 mt-1" data-lang-uz="tuman kengashi" data-lang-ru="районных советов" data-lang-en="district councils">tuman kengashi</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-black text-white" data-count="500">0</div>
+                        <div class="text-xs text-white/50 mt-1" data-lang-uz="loyihalar" data-lang-ru="проектов" data-lang-en="projects">loyihalar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Right: Image Collage -->
+            <div class="hidden lg:block relative">
+                <div class="relative w-full aspect-square max-w-lg ml-auto">
+                    <div class="absolute top-0 right-0 w-72 h-80 rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10 rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://picsum.photos/seed/youth-leadership-uz/600/700.jpg" alt="Yoshlar rahbarligi" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-uz-navy/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <div class="text-white text-sm font-semibold">Rahbarlik dasturlari</div>
+                            <div class="text-white/60 text-xs">2024 yil natijalari</div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-8 left-0 w-60 h-64 rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10 -rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://picsum.photos/seed/volunteer-tashkent/500/600.jpg" alt="Volontyorlar" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-uz-navy/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <div class="text-white text-sm font-semibold">Volontyorlik harakati</div>
+                            <div class="text-white/60 text-xs">15,000+ volontyor</div>
+                        </div>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-uz-green/90 rounded-2xl flex items-center justify-center shadow-xl float-anim backdrop-blur">
+                        <span class="iconify text-white text-3xl" data-icon="lucide:play"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+        <span class="text-xs tracking-widest uppercase">Pastga aylantiring</span>
+        <div class="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center pt-1.5">
+            <div class="w-1 h-2 bg-white/60 rounded-full animate-bounce"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about" class="py-20 lg:py-28 bg-white pattern-bg relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center fade-in">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                    <span class="iconify" data-icon="lucide:info"></span>
+                    Biz haqimizda
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy leading-tight tracking-tight mb-6">
+                    Yoshlarga ishonch, <br><span class="text-uz-blue">kelajakka tayyorgarlik</span>
+                </h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    O'zbekiston Yoshlar Ittifoqi Toshkent shahar Kengashi — poytaxt yoshlarini birlashtirgan, ularning qobiliyatlarini rivojlantirish va jamiyatda faol ishtirok etishlarini ta'minlaydigan yetakchi tashkilotdir.
+                </p>
+                <p class="text-gray-600 leading-relaxed mb-8">
+                    Biz har bir yoshning o'z salohiyatini ochib berishiga, yetakchi bo'lishiga va Vatan oldidagi burchini bajarishiga yordam beramiz. Ta'lim, rahbarlik, volontyorlik, madaniyat va sport sohalarida keng imkoniyatlar yaratamiz.
+                </p>
+
+                <!-- Values -->
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-uz-blue/10 text-uz-blue rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:shield-check"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Vatanga sadoqat</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Milliy qadriyatlarga hurmat</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-uz-green/10 text-uz-green rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:users"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Jamiyat birdamligi</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Yoshlarni birlashtirish</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-uz-gold/20 text-uz-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:lightbulb"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Innovatsiya</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Zamonaviy yondashishlar</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-cyan-100 text-cyan-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:trophy"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Rahbarlik</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Yosh yetakchilarni tarbiyalash</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Image -->
+            <div class="relative">
+                <div class="rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="https://picsum.photos/seed/tashkent-meeting-youth/800/900.jpg" alt="Yoshlar kengashi" class="w-full h-[500px] object-cover">
+                </div>
+                <!-- Floating card -->
+                <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-5 border border-gray-100 max-w-[220px]">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-uz-green/10 rounded-lg flex items-center justify-center">
+                            <span class="iconify text-uz-green text-xl" data-icon="lucide:trending-up"></span>
+                        </div>
+                        <div class="text-2xl font-black text-uz-navy">2024</div>
+                    </div>
+                    <div class="text-sm font-semibold text-uz-navy">Yoshlar siyosatining yangi bosqichi</div>
+                    <div class="text-xs text-gray-500 mt-1">500+ loyiha amalga oshirildi</div>
+                </div>
+                <!-- Decorative -->
+                <div class="absolute -top-4 -right-4 w-24 h-24 border-2 border-uz-blue/20 rounded-2xl"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DIRECTIONS ==================== -->
+<section id="directions" class="py-20 lg:py-28 bg-gray-50 pattern-bg relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:compass"></span>
+                Asosiy yo'nalishlar
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                Faoliyat <span class="text-uz-blue">yo'nalishlari</span>
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Yoshlar rivojlanishining barcha sohalarini qamrab olgan 8 ta asosiy yo'nalish bo'yicha izchil ish olib boramiz.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 fade-in">
+            <!-- Direction 1 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-uz-blue/10 text-uz-blue rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:graduation-cap"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Ta'lim</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Yoshlar bilim va ko'nikmalarini oshirish, xorijiy tillarni o'rganish va kasbiy rivojlanish dasturlari.</p>
+            </div>
+            <!-- Direction 2 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-uz-green/10 text-uz-green rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:crown"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Rahbarlik</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Yosh yetakchilarni aniqlash, ularni tayyorlash va qo'llab-quvvatlash bo'yicha maxsus dasturlar.</p>
+            </div>
+            <!-- Direction 3 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-red-100 text-red-500 rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:heart-handshake"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Volontyorlik</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Jamiyatga foyda keltiradigan volontyorlik loyihalari va aksiyalarni tashkil etish.</p>
+            </div>
+            <!-- Direction 4 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-uz-gold/20 text-uz-gold rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:rocket"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Tadbirkorlik</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Yosh tadbirkorlarni qo'llab-quvvatlash, startup loyihalar va biznes treninglar.</p>
+            </div>
+            <!-- Direction 5 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:school"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Talaba yoshlari</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Oliy o'quv yurtlari talabalarining faolligini oshirish va qo'llab-quvvatlash.</p>
+            </div>
+            <!-- Direction 6 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:palette"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Madaniyat</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Milliy madaniyat, san'at va ijodiy loyihalar orqali yoshlarni rivojlantirish.</p>
+            </div>
+            <!-- Direction 7 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:dumbbell"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Sport</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Sog'lom turmush tarzini targ'ib qilish va sport musobaqalarini tashkil etish.</p>
+            </div>
+            <!-- Direction 8 -->
+            <div class="direction-card bg-white rounded-2xl p-6 border border-gray-100 cursor-pointer">
+                <div class="dir-icon w-14 h-14 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-5">
+                    <span class="iconify text-2xl" data-icon="lucide:hand-helping"></span>
+                </div>
+                <h3 class="font-bold text-uz-navy text-lg mb-2">Ijtimoiy loyihalar</h3>
+                <p class="text-sm text-gray-500 leading-relaxed">Ijtimoiy ahamiyatga molik grant loyihalar va jamoat tashabbuslari.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== PROJECTS & EVENTS ==================== -->
+<section id="projects" class="py-20 lg:py-28 bg-white pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-lgold text-uz-gold text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:star"></span>
+                Loyihalar va tadbirlar
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                Taniqli <span class="text-uz-blue">loyihalarimiz</span>
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Toshkent shahar yoshlari hayotida iz qoldirgan eng muhim loyihalar va tadbirlar.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+            <!-- Project 1 -->
+            <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://picsum.photos/seed/youth-month-uz/700/400.jpg" alt="Yoshlar oyi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4 bg-uz-blue text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Yillik</div>
+                    <div class="absolute bottom-4 left-4 text-white text-lg font-bold">Yoshlar Oyi</div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-500 mb-4">Har yili fevral oyida o'tkaziladigan yoshlar kunlari doirasidagi keng qamrovli tadbirlar majmui.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <span class="iconify" data-icon="lucide:calendar"></span>
+                            Fevral 2025
+                        </div>
+                        <button class="text-uz-blue text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                            Batafsil <span class="iconify" data-icon="lucide:arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://picsum.photos/seed/munozara-debate/700/400.jpg" alt="Munozara" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4 bg-uz-green text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Muntazam</div>
+                    <div class="absolute bottom-4 left-4 text-white text-lg font-bold">Munozara</div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-500 mb-4">Yoshlar o'rtasida muhokama madaniyatini rivojlantirish maqsadida o'tkaziladigan debat turnirlari.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <span class="iconify" data-icon="lucide:calendar"></span>
+                            Yil bo'yi
+                        </div>
+                        <button class="text-uz-blue text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                            Batafsil <span class="iconify" data-icon="lucide:arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://picsum.photos/seed/zakovat-intellect/700/400.jpg" alt="Zakovat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4 bg-uz-gold text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Intellektual</div>
+                    <div class="absolute bottom-4 left-4 text-white text-lg font-bold">Zakovat</div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-500 mb-4">Yosh olimlar va ziyolilar uchun bilim bellashuvi — mantiq, tarix va madaniyat sohalarida.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <span class="iconify" data-icon="lucide:calendar"></span>
+                            Mart-May 2025
+                        </div>
+                        <button class="text-uz-blue text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                            Batafsil <span class="iconify" data-icon="lucide:arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 4 -->
+            <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://picsum.photos/seed/milliy-fashion-uz/700/400.jpg" alt="Milliy Fashion Show" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4 bg-pink-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Madaniyat</div>
+                    <div class="absolute bottom-4 left-4 text-white text-lg font-bold">Milliy Fashion Show</div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-500 mb-4">Milliy kiyim-kechaklar va zamonaviy dizayn uchrashuvi — yosh dizaynerlar uchun platforma.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <span class="iconify" data-icon="lucide:calendar"></span>
+                            Aprel 2025
+                        </div>
+                        <button class="text-uz-blue text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                            Batafsil <span class="iconify" data-icon="lucide:arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 5 -->
+            <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://picsum.photos/seed/dolzarb-90-kun/700/400.jpg" alt="Dolzarb 90 kun" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Aksiya</div>
+                    <div class="absolute bottom-4 left-4 text-white text-lg font-bold">Dolzarb 90 kun</div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-500 mb-4">Yoshlarning dolzarb muammolarini 90 kunda hal qilishga qaratilgan maxsus aksiya dasturi.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <span class="iconify" data-icon="lucide:calendar"></span>
+                        </div>
+                        <button class="text-uz-blue text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                            Batafsil <span class="iconify" data-icon="lucide:arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Project 6 -->
+            <div class="card-hover group bg-white rounded-2xl overflow-hidden border border-gray-100">
+                <div class="relative h-52 overflow-hidden">
+                    <img src="https://picsum.photos/seed/leader-meeting-youth/700/400.jpg" alt="Yetakchi-yoshlar uchrashuvi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute top-4 left-4 bg-uz-navy text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Uchrashuv</div>
+                    <div class="absolute bottom-4 left-4 text-white text-lg font-bold">Yetakchi–Yoshlar uchrashuvi</div>
+                </div>
+                <div class="p-5">
+                    <p class="text-sm text-gray-500 mb-4">Davlat rahbariyati va faol yoshlar o'rtasidagi ochiq muloqot platformasi.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2 text-xs text-gray-400">
+                            <span class="iconify" data-icon="lucide:calendar"></span>
+                            Har chorak
+                        </div>
+                        <button class="text-uz-blue text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all">
+                            Batafsil <span class="iconify" data-icon="lucide:arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== NEWS ==================== -->
+<section id="news" class="py-20 lg:py-28 bg-gray-50 pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 fade-in">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                    <span class="iconify" data-icon="lucide:newspaper"></span>
+                    Yangiliklar
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight">
+                    So'nggi <span class="text-uz-blue">yangiliklar</span>
+                </h2>
+            </div>
+            <div class="flex gap-2">
+                <button onclick="switchTab('all')" class="tab-btn active text-sm px-5 py-2.5 rounded-xl border border-gray-200 font-medium" data-tab="all">Hammasi</button>
+                <button onclick="switchTab('press')" class="tab-btn text-sm px-5 py-2.5 rounded-xl border border-gray-200 font-medium text-gray-600" data-tab="press">Matbuot</button>
+                <button onclick="switchTab('events')" class="tab-btn text-sm px-5 py-2.5 rounded-xl border border-gray-200 font-medium text-gray-600" data-tab="events">Tadbirlar</button>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in" id="newsGrid">
+            <!-- News 1 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 news-item" data-category="all press">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/youth-forum-2025/700/400.jpg" alt="Forum" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-uz-blue text-white text-[10px] font-bold px-3 py-1 rounded-full">Matbuot</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                        <span class="iconify" data-icon="lucide:clock"></span>
+                        15 Yanvar 2025
+                    </div>
+                    <h3 class="font-bold text-uz-navy mb-2 leading-snug">Toshkent shahar yoshlar forumi muvaffaqiyatli o'tkazildi</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2">Forumda 2000 dan ortiq yosh ishtirok etdi, 50 ta loyiha taqdim etildi va eng yaxshilari mukofotlandi.</p>
+                </div>
+            </div>
+            <!-- News 2 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 news-item" data-category="all events">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/volunteer-action-uz/700/400.jpg" alt="Volontyorlar" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-uz-green text-white text-[10px] font-bold px-3 py-1 rounded-full">Tadbir</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                        <span class="iconify" data-icon="lucide:clock"></span>
+                        12 Yanvar 2025
+                    </div>
+                    <h3 class="font-bold text-uz-navy mb-2 leading-snug">«Birlashgan volontyorlar» aksiyasi boshlandi</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2">Shahar bo'ylab 5000 dan ortiq volontyor ishtirokida keng qamrovli aksiya start oldi.</p>
+                </div>
+            </div>
+            <!-- News 3 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 news-item" data-category="all press">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/grant-winners-youth/700/400.jpg" alt="Grant" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-uz-gold text-white text-[10px] font-bold px-3 py-1 rounded-full">Matbuot</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                        <span class="iconify" data-icon="lucide:clock"></span>
+                        8 Yanvar 2025
+                    </div>
+                    <h3 class="font-bold text-uz-navy mb-2 leading-snug">Yoshlar grant loyihalari g'oliblari e'lon qilindi</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2">30 ta eng yaxshi yoshlar loyihasi grant bilan taqdirlandi, jami mablag' 2 mlrd so'm.</p>
+                </div>
+            </div>
+            <!-- News 4 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 news-item" data-category="all events">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/sports-youth-tash/700/400.jpg" alt="Sport" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full">Tadbir</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                        <span class="iconify" data-icon="lucide:clock"></span>
+                        5 Yanvar 2025
+                    </div>
+                    <h3 class="font-bold text-uz-navy mb-2 leading-snug">Shaharlararo yoshlar sport musobaqalari</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2">Toshkent yoshlari terma jamoasi 7 ta sport turi bo'yicha ishtirok etadi.</p>
+                </div>
+            </div>
+            <!-- News 5 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 news-item" data-category="all press">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/it-startup-youth/700/400.jpg" alt="IT Startup" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-uz-blue text-white text-[10px] font-bold px-3 py-1 rounded-full">Matbuot</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                        <span class="iconify" data-icon="lucide:clock"></span>
+                        2 Yanvar 2025
+                    </div>
+                    <h3 class="font-bold text-uz-navy mb-2 leading-snug">IT-startuplar uchun yoshlar inkubatori ochildi</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2">Yosh IT-mutaxassislarni qo'llab-quvvatlash maqsadida zamonaviy inkubator markazi foydalanishga topshirildi.</p>
+                </div>
+            </div>
+            <!-- News 6 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 news-item" data-category="all events">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://picsum.photos/seed/culture-festival-uz/700/400.jpg" alt="Madaniyat" class="w-full h-full object-cover">
+                    <div class="absolute top-4 left-4 bg-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-full">Tadbir</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                        <span class="iconify" data-icon="lucide:clock"></span>
+                        28 Dekabr 2024
+                    </div>
+                    <h3 class="font-bold text-uz-navy mb-2 leading-snug">«Yoshlar — madaniyat elchilari» festivali</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2">Milliy madaniyat va san'atni keng targ'ib qilish maqsadida bayram festivali o'tkazildi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== STATISTICS ==================== -->
+<section id="stats" class="py-20 lg:py-28 bg-uz-navy relative overflow-hidden">
+    <div class="absolute inset-0 pattern-bg opacity-30"></div>
+    <div class="absolute top-0 left-0 right-0 h-1 flex">
+        <div class="flex-1 bg-uz-blue"></div>
+        <div class="flex-1 bg-white"></div>
+        <div class="flex-1 bg-uz-green"></div>
+    </div>
+    <!-- Decorative -->
+    <div class="absolute top-20 right-20 w-80 h-80 bg-uz-blue/10 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-10 left-20 w-60 h-60 bg-uz-green/10 rounded-full blur-[80px]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-white/10 text-white/80 text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:bar-chart-3"></span>
+                Natijalar va ko'rsatkichlar
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
+                Raqamlar <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-emerald-300">gapiradi</span>
+            </h2>
+            <p class="text-white/50 max-w-2xl mx-auto">2024 yil davomida erishilgan muhim natijalar va qisqartirilgan ko'rsatkichlar.</p>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 fade-in">
+            <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur">
+                <div class="w-14 h-14 bg-uz-blue/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="iconify text-uz-blue text-2xl" data-icon="lucide:users"></span>
+                </div>
+                <div class="text-3xl sm:text-4xl font-black text-white mb-1" data-count="850000" data-suffix="+">0</div>
+                <div class="text-sm text-white/50">Qamrab olingan yoshlar</div>
+                <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div class="stat-bar h-full bg-uz-blue rounded-full" data-width="92%"></div>
+                </div>
+            </div>
+            <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur">
+                <div class="w-14 h-14 bg-uz-green/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="iconify text-uz-green text-2xl" data-icon="lucide:calendar-check"></span>
+                </div>
+                <div class="text-3xl sm:text-4xl font-black text-white mb-1" data-count="1200" data-suffix="+">0</div>
+                <div class="text-sm text-white/50">O'tkazilgan tadbirlar</div>
+                <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div class="stat-bar h-full bg-uz-green rounded-full" data-width="85%"></div>
+                </div>
+            </div>
+            <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur">
+                <div class="w-14 h-14 bg-uz-gold/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="iconify text-uz-gold text-2xl" data-icon="lucide:folder-open"></span>
+                </div>
+                <div class="text-3xl sm:text-4xl font-black text-white mb-1" data-count="500" data-suffix="+">0</div>
+                <div class="text-sm text-white/50">Amalga oshirilgan loyihalar</div>
+                <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div class="stat-bar h-full bg-uz-gold rounded-full" data-width="78%"></div>
+                </div>
+            </div>
+            <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur">
+                <div class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <span class="iconify text-cyan-400 text-2xl" data-icon="lucide:heart-handshake"></span>
+                </div>
+                <div class="text-3xl sm:text-4xl font-black text-white mb-1" data-count="15000" data-suffix="+">0</div>
+                <div class="text-sm text-white/50">Volontyorlar</div>
+                <div class="mt-3 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div class="stat-bar h-full bg-cyan-400 rounded-full" data-width="88%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Stats Row -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 fade-in">
+            <div class="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
+                <span class="iconify text-uz-blue text-xl" data-icon="lucide:building-2"></span>
+                <div>
+                    <div class="text-white font-bold">120+</div>
+                    <div class="text-white/40 text-xs">Hamkor tashkilotlar</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
+                <span class="iconify text-uz-green text-xl" data-icon="lucide:award"></span>
+                <div>
+                    <div class="text-white font-bold">45</div>
+                    <div class="text-white/40 text-xs">Xalqaro mukofotlar</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
+                <span class="iconify text-uz-gold text-xl" data-icon="lucide:book-open"></span>
+                <div>
+                    <div class="text-white font-bold">80+</div>
+                    <div class="text-white/40 text-xs">Ta'lim dasturlari</div>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 p-4 bg-white/5 rounded-xl border border-white/5">
+                <span class="iconify text-cyan-400 text-xl" data-icon="lucide:map-pin"></span>
+                <div>
+                    <div class="text-white font-bold">11</div>
+                    <div class="text-white/40 text-xs">Tuman kengashi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DISTRICTS ==================== -->
+<section id="districts" class="py-20 lg:py-28 bg-white pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:map"></span>
+                Tuman kengashlari
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                Toshkent shahar <span class="text-uz-blue">tumanlari</span>
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Har bir tuman kengashi o'z hududidagi yoshlar faoliyatini muvofiqlashtiradi va qo'llab-quvvatlaydi.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 fade-in">
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Bektemir</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">12,500+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Chilanzar</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">95,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Hamza</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">78,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Mirobod</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">65,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Mirzo Ulug'bek</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">110,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Olmazor</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">120,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Sergeli</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">85,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Shayxontohur</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">72,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Uchtepa</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">88,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Yakkasaroy</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">55,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+            <div class="district-card bg-gray-50 rounded-xl p-5 border border-gray-100 flex items-center justify-between">
+                <div>
+                    <div class="d-name font-bold text-uz-navy text-sm">Yunusobod</div>
+                    <div class="d-count text-xs text-gray-400 mt-0.5">70,000+ yoshlar</div>
+                </div>
+                <span class="iconify d-arrow text-gray-300 text-lg" data-icon="lucide:arrow-right"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LEADERSHIP ==================== -->
+<section id="leadership" class="py-20 lg:py-28 bg-gray-50 pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:users-2"></span>
+                Rahbariyat
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                Mas'ul <span class="text-uz-blue">rahbarlar</span>
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Toshkent shahar Yoshlar Ittifoqi Kengashining mas'ul xodimlari va koordinatorlari.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 fade-in">
+            <!-- Leader 1 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 text-center group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://picsum.photos/seed/leader-man-1/400/500.jpg" alt="Rahbar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-uz-navy via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 -mt-8 relative">
+                    <h3 class="font-bold text-uz-navy">Karimov Jasur</h3>
+                    <p class="text-uz-blue text-sm font-medium">Toshkent shahar Kengashi raisi</p>
+                    <div class="flex justify-center gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:instagram"></span>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:send"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Leader 2 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 text-center group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://picsum.photos/seed/leader-woman-1/400/500.jpg" alt="Rahbar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-uz-navy via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 -mt-8 relative">
+                    <h3 class="font-bold text-uz-navy">Toshmatova Nilufar</h3>
+                    <p class="text-uz-blue text-sm font-medium">Birinchi o'rinbosar</p>
+                    <div class="flex justify-center gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:instagram"></span>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:send"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Leader 3 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 text-center group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://picsum.photos/seed/leader-man-2/400/500.jpg" alt="Rahbar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-uz-navy via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 -mt-8 relative">
+                    <h3 class="font-bold text-uz-navy">Saidov Bobur</h3>
+                    <p class="text-uz-blue text-sm font-medium">O'rinbosar — tashkilot ishi</p>
+                    <div class="flex justify-center gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:instagram"></span>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:send"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Leader 4 -->
+            <div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 text-center group">
+                <div class="relative h-64 overflow-hidden">
+                    <img src="https://picsum.photos/seed/leader-woman-2/400/500.jpg" alt="Rahbar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-uz-navy via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 -mt-8 relative">
+                    <h3 class="font-bold text-uz-navy">Xasanova Madina</h3>
+                    <p class="text-uz-blue text-sm font-medium">Loyihalar bo'yicha koordinator</p>
+                    <div class="flex justify-center gap-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:instagram"></span>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-100 hover:bg-uz-blue hover:text-white text-gray-400 rounded-lg flex items-center justify-center transition">
+                            <span class="iconify text-sm" data-icon="lucide:send"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DOCUMENTS ==================== -->
+<section id="documents" class="py-20 lg:py-28 bg-white pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-lgold text-uz-gold text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:file-text"></span>
+                Hujjatlar
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                Rasmiy <span class="text-uz-blue">hujjatlar</span>
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Nizomlar, buyruqlar, hisobotlar va boshqaruv hujjatlari.</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto space-y-3 fade-in">
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-uz-cyan hover:border-uz-blue/20 transition group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-red-100 text-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-lg" data-icon="lucide:file-text"></span>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-uz-navy text-sm group-hover:text-uz-blue transition">Yoshlar Ittifoqi Nizomi</div>
+                        <div class="text-xs text-gray-400 mt-0.5">PDF • 2.4 MB • 15 Yanvar 2025</div>
+                    </div>
+                </div>
+                <span class="iconify text-gray-300 group-hover:text-uz-blue transition" data-icon="lucide:download"></span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-uz-cyan hover:border-uz-blue/20 transition group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-lg" data-icon="lucide:file-check"></span>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-uz-navy text-sm group-hover:text-uz-blue transition">2024 yil yillik hisobot</div>
+                        <div class="text-xs text-gray-400 mt-0.5">PDF • 5.1 MB • 10 Yanvar 2025</div>
+                    </div>
+                </div>
+                <span class="iconify text-gray-300 group-hover:text-uz-blue transition" data-icon="lucide:download"></span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-uz-cyan hover:border-uz-blue/20 transition group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-green-100 text-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-lg" data-icon="lucide:scroll-text"></span>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-uz-navy text-sm group-hover:text-uz-blue transition">Tashkilot tuzilmasi va lavozimlar yo'riqnomasi</div>
+                        <div class="text-xs text-gray-400 mt-0.5">PDF • 1.8 MB • 5 Yanvar 2025</div>
+                    </div>
+                </div>
+                <span class="iconify text-gray-300 group-hover:text-uz-blue transition" data-icon="lucide:download"></span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-uz-cyan hover:border-uz-blue/20 transition group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-lg" data-icon="lucide:file-badge"></span>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-uz-navy text-sm group-hover:text-uz-blue transition">Grant loyihalari uchun ariza shakli</div>
+                        <div class="text-xs text-gray-400 mt-0.5">DOCX • 340 KB • 1 Yanvar 2025</div>
+                    </div>
+                </div>
+                <span class="iconify text-gray-300 group-hover:text-uz-blue transition" data-icon="lucide:download"></span>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100 hover:bg-uz-cyan hover:border-uz-blue/20 transition group cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-amber-100 text-amber-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-lg" data-icon="lucide:file-clock"></span>
+                    </div>
+                    <div>
+                        <div class="font-semibold text-uz-navy text-sm group-hover:text-uz-blue transition">Buyruqlar to'plami (2024)</div>
+                        <div class="text-xs text-gray-400 mt-0.5">PDF • 8.3 MB • 28 Dekabr 2024</div>
+                    </div>
+                </div>
+                <span class="iconify text-gray-300 group-hover:text-uz-blue transition" data-icon="lucide:download"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== GALLERY ==================== -->
+<section id="gallery" class="py-20 lg:py-28 bg-gray-50 pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:image"></span>
+                Foto galeriya
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                <span class="text-uz-blue">Foto</span> lahzalar
+            </h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">Yoshlar tadbirlari, jamoat loyihalari va rasmiy uchrashuvlardan eng yorqin lahzalar.</p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 fade-in">
+            <div class="gallery-item rounded-2xl relative aspect-square" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-1/1200/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-1/600/600.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+            <div class="gallery-item rounded-2xl relative aspect-[3/4] md:row-span-2" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-2/800/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-2/600/800.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+            <div class="gallery-item rounded-2xl relative aspect-square" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-3/1200/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-3/600/600.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+            <div class="gallery-item rounded-2xl relative aspect-square" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-4/1200/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-4/600/600.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+            <div class="gallery-item rounded-2xl relative aspect-square" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-5/1200/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-5/600/600.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+            <div class="gallery-item rounded-2xl relative aspect-square" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-6/1200/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-6/600/600.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+            <div class="gallery-item rounded-2xl relative aspect-square" onclick="openLightbox('https://picsum.photos/seed/gallery-youth-7/1200/1200.jpg')">
+                <img src="https://picsum.photos/seed/gallery-youth-7/600/600.jpg" alt="Gallery" class="w-full h-full object-cover rounded-2xl">
+                <div class="gallery-overlay absolute inset-0 bg-uz-blue/40 rounded-2xl flex items-center justify-center">
+                    <span class="iconify text-white text-3xl" data-icon="lucide:zoom-in"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== APPEALS ==================== -->
+<section id="appeals" class="py-20 lg:py-28 bg-white pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div class="fade-in">
+                <div class="inline-flex items-center gap-2 bg-uz-lgreen text-uz-green text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                    <span class="iconify" data-icon="lucide:message-square-plus"></span>
+                    Murojaatlar
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-6">
+                    Ovozingizni <span class="text-uz-blue">eshitamiz</span>
+                </h2>
+                <p class="text-gray-500 leading-relaxed mb-8">Takliflar, murojaatlar yoki tashabbuslaringizni yuboring — har bir murojaat alohida ko'rib chiqiladi va javob beriladi.</p>
+
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-uz-blue/10 text-uz-blue rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:shield-check"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Maxfiylik kafolati</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Barcha murojaatlar maxfiy holda ko'rib chiqiladi.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-uz-green/10 text-uz-green rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:clock"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Tezkor javob</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Murojaatlarga 3 ish kuni ichida javob beriladi.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+                        <div class="w-10 h-10 bg-uz-gold/20 text-uz-gold rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="iconify text-lg" data-icon="lucide:check-circle-2"></span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-uz-navy text-sm">Natijaga yo'naltirilgan</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Har bir murojaat amaliy natijaga erishishga qaratiladi.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <div class="fade-in">
+                <form id="appealForm" class="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100" onsubmit="submitAppeal(event)">
+                    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-uz-navy mb-2">Ism *</label>
+                            <input type="text" required placeholder="Ismingiz" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-uz-navy mb-2">Familiya *</label>
+                            <input type="text" required placeholder="Familiyangiz" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-uz-navy mb-2">Telefon raqam *</label>
+                        <input type="tel" required placeholder="+998 90 123 45 67" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-uz-navy mb-2">Email</label>
+                        <input type="email" placeholder="email@example.com" class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-uz-navy mb-2">Murojaat turi *</label>
+                        <select required class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition text-gray-600">
+                            <option value="">Tanlang...</option>
+                            <option>Taklif</option>
+                            <option>Murojaat</option>
+                            <option>Shikoyat</option>
+                            <option>Tashabbus</option>
+                            <option>Savol</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-uz-navy mb-2">Tuman</label>
+                        <select class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition text-gray-600">
+                            <option value="">Tanlang...</option>
+                            <option>Bektemir</option><option>Chilanzar</option><option>Hamza</option><option>Mirobod</option>
+                            <option>Mirzo Ulug'bek</option><option>Olmazor</option><option>Sergeli</option>
+                            <option>Shayxontohur</option><option>Uchtepa</option><option>Yakkasaroy</option><option>Yunusobod</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-uz-navy mb-2">Xabaringiz *</label>
+                        <textarea required rows="5" placeholder="Murojaatingizni batafsil yozing..." class="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-uz-blue/30 focus:border-uz-blue transition resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full flex items-center justify-center gap-2 bg-uz-blue hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-uz-blue/30 hover:shadow-uz-blue/50">
+                        <span class="iconify text-lg" data-icon="lucide:send"></span>
+                        Murojaatni yuborish
+                    </button>
+                    <p class="text-xs text-gray-400 text-center mt-3">Yuborish orqali maxfiylik siyosatiga rozilik bildirasiz.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact" class="py-20 lg:py-28 bg-gray-50 pattern-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 fade-in">
+            <div class="inline-flex items-center gap-2 bg-uz-cyan text-uz-blue text-xs font-semibold px-4 py-2 rounded-full mb-6">
+                <span class="iconify" data-icon="lucide:phone"></span>
+                Aloqa
+            </div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-uz-navy tracking-tight mb-4">
+                Bog'lanish <span class="text-uz-blue">uchun</span>
+            </h2>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 fade-in">
+            <!-- Contact Info -->
+            <div class="space-y-4">
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-uz-blue/10 text-uz-blue rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-xl" data-icon="lucide:map-pin"></span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-uz-navy mb-1">Manzil</div>
+                        <div class="text-sm text-gray-500">Toshkent sh., Amir Temur ko'chasi, 107A</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-uz-green/10 text-uz-green rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-xl" data-icon="lucide:phone"></span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-uz-navy mb-1">Telefon</div>
+                        <div class="text-sm text-gray-500">+998 71 233 55 77</div>
+                        <div class="text-sm text-gray-500">+998 71 233 55 78</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-start gap-4">
+                    <div class="w-12 h-12 bg-uz-gold/20 text-uz-gold rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span class="iconify text-xl" data-icon="lucide:mail"></span>
+                    </div>
+                    <div>
+                        <div class="font-bold text-uz-navy mb-1">Email</div>
+                        <div class="text-sm text-gray-500">info@yoshlartoshkent.uz</div>
+                    </div>
+                </div>
+                <!-- Social Media -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-100">
+                    <div class="font-bold text-uz-navy mb-4">Ijtimoiy tarmoqlar</div>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-11 h-11 bg-blue-500 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center transition shadow-lg shadow-blue-500/20">
+                            <span class="iconify text-lg" data-icon="lucide:send"></span>
+                        </a>
+                        <a href="#" class="w-11 h-11 bg-gradient-to-br from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-xl flex items-center justify-center transition shadow-lg shadow-purple-500/20">
+                            <span class="iconify text-lg" data-icon="lucide:instagram"></span>
+                        </a>
+                        <a href="#" class="w-11 h-11 bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex items-center justify-center transition shadow-lg shadow-blue-600/20">
+                            <span class="iconify text-lg" data-icon="lucide:facebook"></span>
+                        </a>
+                        <a href="#" class="w-11 h-11 bg-red-500 hover:bg-red-600 text-white rounded-xl flex items-center justify-center transition shadow-lg shadow-red-500/20">
+                            <span class="iconify text-lg" data-icon="lucide:youtube"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                <div class="w-full h-full min-h-[400px] lg:min-h-full bg-gray-200 relative">
+                    <img src="https://picsum.photos/seed/tashkent-map-view/1200/800.jpg" alt="Xarita" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl text-center max-w-sm">
+                            <div class="w-14 h-14 bg-uz-blue/10 text-uz-blue rounded-xl flex items-center justify-center mx-auto mb-4">
+                                <span class="iconify text-2xl" data-icon="lucide:map-pin"></span>
+                            </div>
+                            <div class="font-bold text-uz-navy mb-1">Toshkent shahar</div>
+                            <div class="text-sm text-gray-500 mb-4">Amir Temur ko'chasi, 107A</div>
+                            <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-2 bg-uz-blue hover:bg-blue-700 text-white font-semibold px-6 py-2.5 rounded-xl text-sm transition">
+                                <span class="iconify" data-icon="lucide:navigation"></span>
+                                Xaritada ochish
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="bg-uz-navy pt-16 pb-8 relative overflow-hidden">
+    <div class="absolute top-0 left-0 right-0 h-1 flex">
+        <div class="flex-1 bg-uz-blue"></div>
+        <div class="flex-1 bg-white"></div>
+        <div class="flex-1 bg-uz-green"></div>
+    </div>
+    <div class="absolute inset-0 pattern-bg opacity-20"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+            <!-- Col 1 -->
+            <div>
+                <div class="flex items-center gap-3 mb-5">
+                    <div class="w-10 h-10 bg-uz-blue rounded-xl flex items-center justify-center">
+                        <span class="text-white font-black text-sm">YI</span>
+                    </div>
+                    <div>
+                        <div class="text-white font-bold text-sm">Yoshlar Ittifoqi</div>
+                        <div class="text-white/40 text-xs">Toshkent shahar Kengashi</div>
+                    </div>
+                </div>
+                <p class="text-white/40 text-sm leading-relaxed mb-5">Toshkent shahridagi yoshlar harakatining rasmiy markazi. Yoshlarning qobiliyat va salohiyatini rivojlantirishga bag'ishlangan.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-uz-blue text-white/60 hover:text-white rounded-lg flex items-center justify-center transition">
+                        <span class="iconify text-sm" data-icon="lucide:send"></span>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-uz-blue text-white/60 hover:text-white rounded-lg flex items-center justify-center transition">
+                        <span class="iconify text-sm" data-icon="lucide:instagram"></span>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-uz-blue text-white/60 hover:text-white rounded-lg flex items-center justify-center transition">
+                        <span class="iconify text-sm" data-icon="lucide:facebook"></span>
+                    </a>
+                    <a href="#" class="w-9 h-9 bg-white/10 hover:bg-uz-blue text-white/60 hover:text-white rounded-lg flex items-center justify-center transition">
+                        <span class="iconify text-sm" data-icon="lucide:youtube"></span>
+                    </a>
+                </div>
+            </div>
+            <!-- Col 2 -->
+            <div>
+                <div class="text-white font-bold mb-5">Bo'limlar</div>
+                <ul class="space-y-3">
+                    <li><a href="#about" class="text-white/40 hover:text-white text-sm transition">Biz haqimizda</a></li>
+                    <li><a href="#directions" class="text-white/40 hover:text-white text-sm transition">Yo'nalishlar</a></li>
+                    <li><a href="#projects" class="text-white/40 hover:text-white text-sm transition">Loyihalar</a></li>
+                    <li><a href="#news" class="text-white/40 hover:text-white text-sm transition">Yangiliklar</a></li>
+                    <li><a href="#gallery" class="text-white/40 hover:text-white text-sm transition">Galeriya</a></li>
+                </ul>
+            </div>
+            <!-- Col 3 -->
+            <div>
+                <div class="text-white font-bold mb-5">Foydali</div>
+                <ul class="space-y-3">
+                    <li><a href="#documents" class="text-white/40 hover:text-white text-sm transition">Hujjatlar</a></li>
+                    <li><a href="#appeals" class="text-white/40 hover:text-white text-sm transition">Murojaat</a></li>
+                    <li><a href="#districts" class="text-white/40 hover:text-white text-sm transition">Tumanlar</a></li>
+                    <li><a href="#leadership" class="text-white/40 hover:text-white text-sm transition">Rahbariyat</a></li>
+                    <li><a href="#contact" class="text-white/40 hover:text-white text-sm transition">Aloqa</a></li>
+                </ul>
+            </div>
+            <!-- Col 4 -->
+            <div>
+                <div class="text-white font-bold mb-5">Aloqa ma'lumotlari</div>
+                <ul class="space-y-3">
+                    <li class="flex items-center gap-2 text-white/40 text-sm">
+                        <span class="iconify text-uz-blue" data-icon="lucide:map-pin"></span>
+                        Amir Temur ko'chasi, 107A
+                    </li>
+                    <li class="flex items-center gap-2 text-white/40 text-sm">
+                        <span class="iconify text-uz-blue" data-icon="lucide:phone"></span>
+                        +998 71 233 55 77
+                    </li>
+                    <li class="flex items-center gap-2 text-white/40 text-sm">
+                        <span class="iconify text-uz-blue" data-icon="lucide:mail"></span>
+                        info@yoshlartoshkent.uz
+                    </li>
+                    <li class="flex items-center gap-2 text-white/40 text-sm">
+                        <span class="iconify text-uz-blue" data-icon="lucide:clock"></span>
+                        Dush-Juma: 9:00 — 18:00
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom -->
+        <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-white/30 text-xs">© 2025 O'zbekiston Yoshlar Ittifoqi Toshkent shahar Kengashi. Barcha huquqlar himoyalangan.</div>
+            <div class="flex items-center gap-4">
+                <span class="text-white/30 text-xs">Rivojlantirildi:</span>
+                <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 bg-uz-blue rounded flex items-center justify-center">
+                        <span class="text-white text-[8px] font-black">IT</span>
+                    </div>
+                    <span class="text-white/50 text-xs font-semibold">Yoshlar IT markazi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="backToTop" onclick="window.scrollTo({top:0})" class="fixed bottom-6 left-6 z-50 w-12 h-12 bg-uz-blue hover:bg-blue-700 text-white rounded-xl shadow-xl shadow-uz-blue/30 flex items-center justify-center transition-all opacity-0 translate-y-4 pointer-events-none">
+    <span class="iconify text-xl" data-icon="lucide:arrow-up"></span>
+</button>
+
+<script>
+// ===== Mobile Menu =====
+function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('menuOverlay');
+    const icon = document.getElementById('menuIcon');
+    menu.classList.toggle('open');
+    overlay.classList.toggle('hidden');
+    icon.setAttribute('data-icon', menu.classList.contains('open') ? 'lucide:x' : 'lucide:menu');
+}
+
+// ===== Navbar Scroll =====
+const navbar = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 80) {
+        navbar.style.background = 'rgba(10, 22, 40, 0.95)';
+        navbar.style.backdropFilter = 'blur(20px)';
+        navbar.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.boxShadow = 'none';
+    }
+    // Back to top
+    const btn = document.getElementById('backToTop');
+    if (y > 600) {
+        btn.style.opacity = '1';
+        btn.style.transform = 'translateY(0)';
+        btn.style.pointerEvents = 'auto';
+    } else {
+        btn.style.opacity = '0';
+        btn.style.transform = 'translateY(16px)';
+        btn.style.pointerEvents = 'none';
+    }
+    lastScroll = y;
+});
+
+// ===== Scroll Animations =====
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Animate stat bars
+            entry.target.querySelectorAll('.stat-bar').forEach(bar => {
+                bar.style.width = bar.dataset.width;
+            });
+        }
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+fadeEls.forEach(el => observer.observe(el));
+
+// ===== Counter Animation =====
+const counterEls = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            if (el.dataset.animated) return;
+            el.dataset.animated = 'true';
+            const target = parseInt(el.dataset.count);
+            const suffix = el.dataset.suffix || '';
+            const duration = 2000;
+            const start = performance.now();
+            function update(now) {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(eased * target);
+                if (target >= 100000) {
+                    el.textContent = (current / 1000).toFixed(0) + 'K' + suffix;
+                } else {
+                    el.textContent = current.toLocaleString() + suffix;
+                }
+                if (progress < 1) requestAnimationFrame(update);
+                else {
+                    if (target >= 100000) el.textContent = (target / 1000).toFixed(0) + 'K' + suffix;
+                    else el.textContent = target.toLocaleString() + suffix;
+                }
+            }
+            requestAnimationFrame(update);
+        }
+    });
+}, { threshold: 0.5 });
+counterEls.forEach(el => counterObserver.observe(el));
+
+// ===== News Tabs =====
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.classList.add('text-gray-600');
+    });
+    document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+    document.querySelector(`[data-tab="${tab}"]`).classList.remove('text-gray-600');
+    
+    document.querySelectorAll('.news-item').forEach(item => {
+        const cats = item.dataset.category.split(' ');
+        if (cats.includes(tab)) {
+            item.style.display = '';
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                item.style.transition = 'all 0.4s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 50);
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// ===== Lightbox =====
+function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ===== Form Submit =====
+function submitAppeal(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = "Murojaatingiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.";
+    toast.classList.add('show');
+    e.target.reset();
+    setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// ===== Language Switcher =====
+function setLang(lang) {
+    document.getElementById('currentLang').textContent = lang.toUpperCase();
+    document.querySelectorAll('[data-lang-' + lang + ']').forEach(el => {
+        el.textContent = el.getAttribute('data-lang-' + lang);
+    });
+}
+
+// ===== Active Nav Highlight =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('text-white');
+        link.classList.add('text-white/80');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('text-white');
+            link.classList.remove('text-white/80');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
