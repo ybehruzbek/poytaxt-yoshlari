@@ -1,6 +1,17 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import styles from "./Districts.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { districts } from "@/lib/data";
+
+const MapComponent = dynamic(() => import("./Map"), {
+  ssr: false,
+  loading: () => (
+    <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8fafc" }}>
+      Xarita yuklanmoqda...
+    </div>
+  ),
+});
 
 export default function Districts() {
   return (
@@ -13,23 +24,13 @@ export default function Districts() {
               Toshkent shahar tumanlari
             </h2>
             <p className={`section-desc ${styles.sectionDesc}`}>
-              Har bir tuman kengashi o&apos;z hududidagi yoshlar faoliyatini muvofiqlashtiradi va qo&apos;llab-quvvatlaydi.
+              Har bir tuman kengashi o&apos;z hududidagi yoshlar faoliyatini muvofiqlashtiradi va qo&apos;llab-quvvatlaydi. Xarita ustiga bosing.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal>
-          <div className={styles.grid}>
-            {districts.map((d, i) => (
-              <div className={styles.card} key={i}>
-                <div>
-                  <div className={styles.name}>{d.name}</div>
-                  <div className={styles.count}>{d.youth} yoshlar</div>
-                </div>
-                <i className={`fas fa-arrow-right ${styles.arrow}`} />
-              </div>
-            ))}
-          </div>
+          <MapComponent />
         </ScrollReveal>
       </div>
     </section>

@@ -249,20 +249,24 @@ export const directions: DirectionItem[] = [
 export interface DistrictItem {
   name: string;
   youth: string;
+  lat: number;
+  lng: number;
+  image: string;
 }
 
 export const districts: DistrictItem[] = [
-  { name: "Bektemir", youth: "12,500+" },
-  { name: "Chilanzar", youth: "95,000+" },
-  { name: "Hamza", youth: "78,000+" },
-  { name: "Mirobod", youth: "65,000+" },
-  { name: "Mirzo Ulug'bek", youth: "110,000+" },
-  { name: "Olmazor", youth: "120,000+" },
-  { name: "Sergeli", youth: "85,000+" },
-  { name: "Shayxontohur", youth: "72,000+" },
-  { name: "Uchtepa", youth: "88,000+" },
-  { name: "Yakkasaroy", youth: "55,000+" },
-  { name: "Yunusobod", youth: "70,000+" },
+  { name: "Bektemir", youth: "12,500+", lat: 41.2268, lng: 69.3248, image: "https://images.unsplash.com/photo-1584227092102-14eb0234a9ee?auto=format&fit=crop&q=80&w=800" },
+  { name: "Chilanzar", youth: "95,000+", lat: 41.2750, lng: 69.2000, image: "https://images.unsplash.com/photo-1621213444036-7c60368140db?auto=format&fit=crop&q=80&w=800" },
+  { name: "Yashnobod", youth: "78,000+", lat: 41.2952, lng: 69.3400, image: "https://images.unsplash.com/photo-1584949547514-6eec4e414c54?auto=format&fit=crop&q=80&w=800" },
+  { name: "Mirobod", youth: "65,000+", lat: 41.2882, lng: 69.2818, image: "https://images.unsplash.com/photo-1502691866380-60b6af24e135?auto=format&fit=crop&q=80&w=800" },
+  { name: "Mirzo Ulug'bek", youth: "110,000+", lat: 41.3323, lng: 69.3430, image: "https://images.unsplash.com/photo-1594980596870-8caa52a7eb80?auto=format&fit=crop&q=80&w=800" },
+  { name: "Olmazor", youth: "120,000+", lat: 41.3500, lng: 69.2215, image: "https://images.unsplash.com/photo-1616016766488-81bf0529d3f1?auto=format&fit=crop&q=80&w=800" },
+  { name: "Sergeli", youth: "85,000+", lat: 41.2201, lng: 69.2265, image: "https://images.unsplash.com/photo-1585002037920-7f282490b07b?auto=format&fit=crop&q=80&w=800" },
+  { name: "Shayxontohur", youth: "72,000+", lat: 41.3263, lng: 69.2319, image: "https://images.unsplash.com/photo-1634149020967-17ed4ceca512?auto=format&fit=crop&q=80&w=800" },
+  { name: "Uchtepa", youth: "88,000+", lat: 41.2891, lng: 69.1764, image: "https://images.unsplash.com/photo-1596700777174-8b6348c4cf3c?auto=format&fit=crop&q=80&w=800" },
+  { name: "Yakkasaroy", youth: "55,000+", lat: 41.2812, lng: 69.2555, image: "https://images.unsplash.com/photo-1574701148212-8518049c7b2c?auto=format&fit=crop&q=80&w=800" },
+  { name: "Yunusobod", youth: "70,000+", lat: 41.3653, lng: 69.2844, image: "https://images.unsplash.com/photo-1601555562095-2dfb94420e79?auto=format&fit=crop&q=80&w=800" },
+  { name: "Yangihayot", youth: "45,000+", lat: 41.1963, lng: 69.2045, image: "https://images.unsplash.com/photo-1622396481328-9b1b78cdd9fd?auto=format&fit=crop&q=80&w=800" },
 ];
 
 // ===== LEADERSHIP =====
