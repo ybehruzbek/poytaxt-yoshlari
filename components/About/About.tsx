@@ -33,7 +33,7 @@ export default function About() {
             </ScrollReveal>
           ))}
 
-          <ScrollReveal delay={5}>
+          <ScrollReveal delay={5} className={styles.timelineWrapper}>
             <div className={styles.timelineCard}>
               <div>
                 <div className="section-label" style={{ marginBottom: 20 }}>Tarixiy yo&apos;l</div>

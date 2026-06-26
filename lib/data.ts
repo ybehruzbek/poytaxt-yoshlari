@@ -3,15 +3,15 @@
 
 // ===== NAVIGATION =====
 export const navLinks = [
-  { href: "#biz-haqimizda", label: "Biz haqimizda" },
+  { href: "#tashkilot", label: "Biz haqimizda" },
   { href: "#yonalishlar", label: "Yo'nalishlar" },
   { href: "#loyihalar", label: "Loyihalar" },
   { href: "#yangiliklar", label: "Yangiliklar" },
   { href: "#tumanlar", label: "Tumanlar" },
   { href: "#rahbariyat", label: "Rahbariyat" },
+  { href: "#yetakchilar", label: "Yetakchilar" },
   { href: "#hujjatlar", label: "Hujjatlar" },
   { href: "#galeriya", label: "Galeriya" },
-  { href: "#murojaat", label: "Murojaat" },
 ] as const;
 
 // ===== MINI STATS =====
@@ -201,28 +201,151 @@ export const ctaBenefits = [
   "Butun mamlakat bo'yicha professional tarmoq",
 ] as const;
 
+// ===== DIRECTIONS =====
+export interface DirectionItem {
+  icon: string;
+  iconBg: string;
+  iconColor: string;
+  title: string;
+  desc: string;
+}
+
+export const directions: DirectionItem[] = [
+  { icon: "fa-graduation-cap", iconBg: "var(--blue-pale)", iconColor: "var(--blue)", title: "Ta'lim", desc: "Yoshlar bilim va ko'nikmalarini oshirish, xorijiy tillarni o'rganish va kasbiy rivojlanish dasturlari." },
+  { icon: "fa-crown", iconBg: "var(--green-pale)", iconColor: "var(--green)", title: "Rahbarlik", desc: "Yosh yetakchilarni aniqlash, ularni tayyorlash va qo'llab-quvvatlash bo'yicha maxsus dasturlar." },
+  { icon: "fa-handshake-angle", iconBg: "#FEE2E2", iconColor: "#EF4444", title: "Volontyorlik", desc: "Jamiyatga foyda keltiradigan volontyorlik loyihalari va aksiyalarni tashkil etish." },
+  { icon: "fa-rocket", iconBg: "#FEF3C7", iconColor: "#D97706", title: "Tadbirkorlik", desc: "Yosh tadbirkorlarni qo'llab-quvvatlash, startup loyihalar va biznes treninglar." },
+  { icon: "fa-school", iconBg: "#F3E8FF", iconColor: "#7C3AED", title: "Talaba yoshlari", desc: "Oliy o'quv yurtlari talabalarining faolligini oshirish va qo'llab-quvvatlash." },
+  { icon: "fa-palette", iconBg: "#FCE7F3", iconColor: "#EC4899", title: "Madaniyat", desc: "Milliy madaniyat, san'at va ijodiy loyihalar orqali yoshlarni rivojlantirish." },
+  { icon: "fa-dumbbell", iconBg: "#FFEDD5", iconColor: "#EA580C", title: "Sport", desc: "Sog'lom turmush tarzini targ'ib qilish va sport musobaqalarini tashkil etish." },
+  { icon: "fa-hand-holding-heart", iconBg: "#CCFBF1", iconColor: "#0D9488", title: "Ijtimoiy loyihalar", desc: "Ijtimoiy ahamiyatga molik grant loyihalar va jamoat tashabbuslari." },
+];
+
+// ===== DISTRICTS =====
+export interface DistrictItem {
+  name: string;
+  youth: string;
+}
+
+export const districts: DistrictItem[] = [
+  { name: "Bektemir", youth: "12,500+" },
+  { name: "Chilanzar", youth: "95,000+" },
+  { name: "Hamza", youth: "78,000+" },
+  { name: "Mirobod", youth: "65,000+" },
+  { name: "Mirzo Ulug'bek", youth: "110,000+" },
+  { name: "Olmazor", youth: "120,000+" },
+  { name: "Sergeli", youth: "85,000+" },
+  { name: "Shayxontohur", youth: "72,000+" },
+  { name: "Uchtepa", youth: "88,000+" },
+  { name: "Yakkasaroy", youth: "55,000+" },
+  { name: "Yunusobod", youth: "70,000+" },
+];
+
+// ===== LEADERSHIP =====
+export interface LeaderItem {
+  name: string;
+  position: string;
+  image: string;
+}
+
+export const leaders: LeaderItem[] = [
+  { name: "Karimov Jasur", position: "Toshkent shahar Kengashi raisi", image: "https://picsum.photos/seed/leader-man-1/400/500.jpg" },
+  { name: "Toshmatova Nilufar", position: "Birinchi o'rinbosar", image: "https://picsum.photos/seed/leader-woman-1/400/500.jpg" },
+  { name: "Saidov Bobur", position: "O'rinbosar — tashkilot ishi", image: "https://picsum.photos/seed/leader-man-2/400/500.jpg" },
+  { name: "Xasanova Madina", position: "Loyihalar bo'yicha koordinator", image: "https://picsum.photos/seed/leader-woman-2/400/500.jpg" },
+];
+
+// ===== YOUTH LEADERS =====
+export interface YouthLeaderItem {
+  name: string;
+  place: string;
+  image: string;
+  category: "Oliygoh" | "Mahalla" | "Maktab";
+}
+
+export const youthLeaders: YouthLeaderItem[] = [
+  { name: "Abdullayev Sardor", place: "Toshkent Davlat Iqtisodiyot Universiteti", image: "https://picsum.photos/seed/youth-leader-1/400/500.jpg", category: "Oliygoh" },
+  { name: "Rustamova Shahnoza", place: "Yunusobod tumani, 'Minor' mahallasi", image: "https://picsum.photos/seed/youth-leader-2/400/500.jpg", category: "Mahalla" },
+  { name: "Ismoilov Doston", place: "O'zbekiston Milliy Universiteti", image: "https://picsum.photos/seed/youth-leader-3/400/500.jpg", category: "Oliygoh" },
+  { name: "Aliyeva Malika", place: "Chilonzor tumani, 'Bog'zor' mahallasi", image: "https://picsum.photos/seed/youth-leader-4/400/500.jpg", category: "Mahalla" },
+];
+
+// ===== DOCUMENTS =====
+export interface DocumentItem {
+  title: string;
+  type: string;
+  size: string;
+  date: string;
+  iconBg: string;
+  iconColor: string;
+  icon: string;
+}
+
+export const documents: DocumentItem[] = [
+  { title: "Yoshlar Ittifoqi Nizomi", type: "PDF", size: "2.4 MB", date: "15 Yanvar 2025", iconBg: "#FEE2E2", iconColor: "#EF4444", icon: "fa-file-pdf" },
+  { title: "2024 yil yillik hisobot", type: "PDF", size: "5.1 MB", date: "10 Yanvar 2025", iconBg: "var(--blue-pale)", iconColor: "var(--blue)", icon: "fa-file-circle-check" },
+  { title: "Tashkilot tuzilmasi va lavozimlar yo'riqnomasi", type: "PDF", size: "1.8 MB", date: "5 Yanvar 2025", iconBg: "var(--green-pale)", iconColor: "var(--green)", icon: "fa-scroll" },
+  { title: "Grant loyihalari uchun ariza shakli", type: "DOCX", size: "340 KB", date: "1 Yanvar 2025", iconBg: "#F3E8FF", iconColor: "#7C3AED", icon: "fa-file-lines" },
+  { title: "Buyruqlar to'plami (2024)", type: "PDF", size: "8.3 MB", date: "28 Dekabr 2024", iconBg: "#FEF3C7", iconColor: "#D97706", icon: "fa-clock-rotate-left" },
+];
+
+// ===== GALLERY =====
+export const galleryImages = [
+  { src: "https://picsum.photos/seed/gallery-youth-1/600/600", full: "https://picsum.photos/seed/gallery-youth-1/1200/1200", alt: "Yoshlar tadbiri", aspect: "square" as const },
+  { src: "https://picsum.photos/seed/gallery-youth-2/600/800", full: "https://picsum.photos/seed/gallery-youth-2/800/1200", alt: "Yoshlar loyihasi", aspect: "tall" as const },
+  { src: "https://picsum.photos/seed/gallery-youth-3/600/600", full: "https://picsum.photos/seed/gallery-youth-3/1200/1200", alt: "Volontyorlik", aspect: "square" as const },
+  { src: "https://picsum.photos/seed/gallery-youth-4/600/600", full: "https://picsum.photos/seed/gallery-youth-4/1200/1200", alt: "Sport musobaqasi", aspect: "square" as const },
+  { src: "https://picsum.photos/seed/gallery-youth-5/600/600", full: "https://picsum.photos/seed/gallery-youth-5/1200/1200", alt: "Konferentsiya", aspect: "square" as const },
+  { src: "https://picsum.photos/seed/gallery-youth-6/600/600", full: "https://picsum.photos/seed/gallery-youth-6/1200/1200", alt: "Madaniy tadbir", aspect: "square" as const },
+  { src: "https://picsum.photos/seed/gallery-youth-7/600/600", full: "https://picsum.photos/seed/gallery-youth-7/1200/1200", alt: "Rasmiy uchrashuv", aspect: "square" as const },
+] as const;
+
+// ===== APPEAL TYPES =====
+export const appealTypes = [
+  "Taklif",
+  "Murojaat",
+  "Shikoyat",
+  "Tashabbus",
+  "Savol",
+] as const;
+
+// ===== APPEAL GUARANTEES =====
+export const appealGuarantees = [
+  { icon: "fa-shield-halved", iconBg: "var(--blue-pale)", iconColor: "var(--blue)", title: "Maxfiylik kafolati", desc: "Barcha murojaatlar maxfiy holda ko'rib chiqiladi." },
+  { icon: "fa-clock", iconBg: "var(--green-pale)", iconColor: "var(--green)", title: "Tezkor javob", desc: "Murojaatlarga 3 ish kuni ichida javob beriladi." },
+  { icon: "fa-circle-check", iconBg: "#FEF3C7", iconColor: "#D97706", title: "Natijaga yo'naltirilgan", desc: "Har bir murojaat amaliy natijaga erishishga qaratiladi." },
+] as const;
+
+// ===== CONTACT INFO =====
+export const contactInfoItems = [
+  { icon: "fa-map-marker-alt", iconBg: "var(--blue-pale)", iconColor: "var(--blue)", label: "Manzil", value: "Toshkent sh., Amir Temur ko'chasi, 107A" },
+  { icon: "fa-phone", iconBg: "var(--green-pale)", iconColor: "var(--green)", label: "Telefon", values: ["+998 71 233 55 77", "+998 71 233 55 78"] },
+  { icon: "fa-envelope", iconBg: "#FEF3C7", iconColor: "#D97706", label: "Email", value: "info@yoshlartoshkent.uz" },
+] as const;
+
 // ===== FOOTER =====
 export const footerNav = [
   { href: "#bosh-sahifa", label: "Bosh sahifa" },
   { href: "#tashkilot", label: "Tashkilot haqida" },
-  { href: "#yangiliklar", label: "Yangiliklar" },
+  { href: "#yonalishlar", label: "Yo'nalishlar" },
   { href: "#loyihalar", label: "Loyihalar" },
-  { href: "#hududlar", label: "Hududlar" },
+  { href: "#yangiliklar", label: "Yangiliklar" },
+  { href: "#galeriya", label: "Galeriya" },
 ] as const;
 
 export const footerResources = [
-  { href: "#", label: "Yoshlar siyosati" },
-  { href: "#", label: "Grant dasturlari" },
-  { href: "#", label: "Ta'lim markazlari" },
-  { href: "#", label: "Me'yoriy hujjatlar" },
-  { href: "#", label: "Ochiq ma'lumotlar" },
+  { href: "#hujjatlar", label: "Hujjatlar" },
+  { href: "#murojaat", label: "Murojaat" },
+  { href: "#tumanlar", label: "Tumanlar" },
+  { href: "#rahbariyat", label: "Rahbariyat" },
+  { href: "#aloqa", label: "Aloqa" },
 ] as const;
 
 export const footerContact = [
-  { icon: "fa-map-marker-alt", text: "Toshkent sh., Shayxontohur t., Zarqaynar ko'chasi, 3-uy" },
-  { icon: "fa-phone", text: "+998 71 232-44-88" },
-  { icon: "fa-envelope", text: "info@yoshlarittifoqi.uz" },
-  { icon: "fa-clock", text: "Dush — Shan: 09:00 — 18:00" },
+  { icon: "fa-map-marker-alt", text: "Toshkent sh., Amir Temur ko'chasi, 107A" },
+  { icon: "fa-phone", text: "+998 71 233 55 77" },
+  { icon: "fa-envelope", text: "info@yoshlartoshkent.uz" },
+  { icon: "fa-clock", text: "Dush — Juma: 9:00 — 18:00" },
 ] as const;
 
 export const socialLinks = [
