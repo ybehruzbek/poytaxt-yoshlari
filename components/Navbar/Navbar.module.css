@@ -75,20 +75,81 @@
   z-index: 1001;
 }
 
+.langSwitchWrapper {
+  position: relative;
+}
+
 .langSwitch {
   display: flex;
   align-items: center;
+  gap: 6px;
   font-size: 13px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 8px;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.langSwitch:hover, .langOpen {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+.langIcon {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.langIconOpen {
+  transform: rotate(180deg);
+}
+
+.langDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 80px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: dropIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top right;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.langOption {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
   transition: all 0.2s;
 }
 
-.langSwitch:hover {
+.langOption:hover {
   background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.langActive {
+  background: rgba(255, 255, 255, 0.15);
   color: var(--white);
 }
 

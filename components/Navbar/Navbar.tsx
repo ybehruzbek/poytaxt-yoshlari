@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { navLinks, LOGO_URL } from "@/lib/data";
@@ -8,6 +8,9 @@ import { navLinks, LOGO_URL } from "@/lib/data";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lang, setLang] = useState("UZ");
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > window.innerHeight - 80);
@@ -15,6 +18,17 @@ export default function Navbar() {
     // Trigger once on mount to set initial state
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -82,10 +96,30 @@ export default function Navbar() {
 
           {/* RIGHT ACTION AREA */}
           <div className={styles.rightActions}>
-            <div className={styles.langSwitch}>
-              <span>UZ</span>
-              <i className="fas fa-chevron-down" style={{ fontSize: 10, marginLeft: 4 }} />
+            <div className={styles.langSwitchWrapper} ref={langRef}>
+              <div 
+                className={`${styles.langSwitch} ${langOpen ? styles.langOpen : ""}`}
+                onClick={() => setLangOpen(!langOpen)}
+              >
+                <span>{lang}</span>
+                <i className={`fas fa-chevron-down ${styles.langIcon} ${langOpen ? styles.langIconOpen : ""}`} />
+              </div>
+              
+              {langOpen && (
+                <div className={styles.langDropdown}>
+                  {["UZ", "RU", "EN"].map((l) => (
+                    <button 
+                      key={l}
+                      className={`${styles.langOption} ${lang === l ? styles.langActive : ""}`}
+                      onClick={() => { setLang(l); setLangOpen(false); }}
+                    >
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
+
             <a
               href="#murojaat"
               className={styles.navCta}

@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   title: "O'zbekiston Yoshlar Ittifoqi",
   description:
     "O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi yirik jamoat tashkiloti.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "O'zbekiston Yoshlar Ittifoqi",
     description:
