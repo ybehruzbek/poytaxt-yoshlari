@@ -271,20 +271,22 @@ export const districts: DistrictItem[] = [
 
 // ===== LEADERSHIP =====
 export interface LeaderItem {
+  id: string;
   name: string;
   position: string;
   image: string;
 }
 
 export const leaders: LeaderItem[] = [
-  { name: "Karimov Jasur", position: "Toshkent shahar Kengashi raisi", image: "https://picsum.photos/seed/leader-man-1/400/500.jpg" },
-  { name: "Toshmatova Nilufar", position: "Birinchi o'rinbosar", image: "https://picsum.photos/seed/leader-woman-1/400/500.jpg" },
-  { name: "Saidov Bobur", position: "O'rinbosar — tashkilot ishi", image: "https://picsum.photos/seed/leader-man-2/400/500.jpg" },
-  { name: "Xasanova Madina", position: "Loyihalar bo'yicha koordinator", image: "https://picsum.photos/seed/leader-woman-2/400/500.jpg" },
+  { id: "1", name: "Karimov Jasur", position: "Toshkent shahar Kengashi raisi", image: "https://picsum.photos/seed/leader-man-1/400/500.jpg" },
+  { id: "2", name: "Toshmatova Nilufar", position: "Birinchi o'rinbosar", image: "https://picsum.photos/seed/leader-woman-1/400/500.jpg" },
+  { id: "3", name: "Saidov Bobur", position: "O'rinbosar — tashkilot ishi", image: "https://picsum.photos/seed/leader-man-2/400/500.jpg" },
+  { id: "4", name: "Xasanova Madina", position: "Loyihalar bo'yicha koordinator", image: "https://picsum.photos/seed/leader-woman-2/400/500.jpg" },
 ];
 
 // ===== YOUTH LEADERS =====
 export interface YouthLeaderItem {
+  id: string;
   name: string;
   place: string;
   image: string;
@@ -292,10 +294,10 @@ export interface YouthLeaderItem {
 }
 
 export const youthLeaders: YouthLeaderItem[] = [
-  { name: "Raxmadjonova Nilufar Kamoljon qizi", place: "Vatan Universiteti", image: "/nilufar.jpg", category: "Oliygoh" },
-  { name: "Rustamova Shahnoza", place: "Yunusobod tumani, 'Minor' mahallasi", image: "https://picsum.photos/seed/youth-leader-2/400/500.jpg", category: "Mahalla" },
-  { name: "Ismoilov Doston", place: "O'zbekiston Milliy Universiteti", image: "https://picsum.photos/seed/youth-leader-3/400/500.jpg", category: "Oliygoh" },
-  { name: "Aliyeva Malika", place: "Chilonzor tumani, 'Bog'zor' mahallasi", image: "https://picsum.photos/seed/youth-leader-4/400/500.jpg", category: "Mahalla" },
+  { id: "1", name: "Raxmadjonova Nilufar Kamoljon qizi", place: "Vatan Universiteti", image: "/nilufar.jpg", category: "Oliygoh" },
+  { id: "2", name: "Rustamova Shahnoza", place: "Yunusobod tumani, 'Minor' mahallasi", image: "https://picsum.photos/seed/youth-leader-2/400/500.jpg", category: "Mahalla" },
+  { id: "3", name: "Ismoilov Doston", place: "O'zbekiston Milliy Universiteti", image: "https://picsum.photos/seed/youth-leader-3/400/500.jpg", category: "Oliygoh" },
+  { id: "4", name: "Aliyeva Malika", place: "Chilonzor tumani, 'Bog'zor' mahallasi", image: "https://picsum.photos/seed/youth-leader-4/400/500.jpg", category: "Mahalla" },
 ];
 
 // ===== DOCUMENTS =====

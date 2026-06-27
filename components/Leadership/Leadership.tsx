@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Leadership.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { leaders } from "@/lib/data";
@@ -25,11 +26,9 @@ export default function Leadership() {
               </p>
             </div>
             
-            <div className={styles.headerAction}>
-              <button className="btn-view-all">
+              <Link href="/rahbariyat" className="btn-view-all">
                 Barchasini ko&apos;rish <i className="fas fa-arrow-right"></i>
-              </button>
-            </div>
+              </Link>
           </div>
         </ScrollReveal>
       </div>
@@ -42,7 +41,7 @@ export default function Leadership() {
               <div className={styles.carouselSet}>
                 {extendedLeaders.map((leader, i) => (
                   <div key={`set1-${i}`} className={styles.carouselItem}>
-                    <div className={styles.card}>
+                    <Link href={`/rahbariyat/${leader.id}`} className={styles.card} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                       <div className={styles.imgWrap}>
                         <Image
                           src={leader.image}
@@ -57,15 +56,15 @@ export default function Leadership() {
                         <h3>{leader.name}</h3>
                         <p>{leader.position}</p>
                         <div className={styles.socials}>
-                          <a href="#" className={styles.socialBtn} aria-label="Instagram">
+                          <span className={styles.socialBtn} aria-label="Instagram">
                             <i className="fab fa-instagram" />
-                          </a>
-                          <a href="#" className={styles.socialBtn} aria-label="Telegram">
+                          </span>
+                          <span className={styles.socialBtn} aria-label="Telegram">
                             <i className="fab fa-telegram-plane" />
-                          </a>
+                          </span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -73,7 +72,7 @@ export default function Leadership() {
               <div className={styles.carouselSet}>
                 {extendedLeaders.map((leader, i) => (
                   <div key={`set2-${i}`} className={styles.carouselItem}>
-                    <div className={styles.card}>
+                    <Link href={`/rahbariyat/${leader.id}`} className={styles.card} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                       <div className={styles.imgWrap}>
                         <Image
                           src={leader.image}
@@ -88,15 +87,15 @@ export default function Leadership() {
                         <h3>{leader.name}</h3>
                         <p>{leader.position}</p>
                         <div className={styles.socials}>
-                          <a href="#" className={styles.socialBtn} aria-label="Instagram">
+                          <span className={styles.socialBtn} aria-label="Instagram">
                             <i className="fab fa-instagram" />
-                          </a>
-                          <a href="#" className={styles.socialBtn} aria-label="Telegram">
+                          </span>
+                          <span className={styles.socialBtn} aria-label="Telegram">
                             <i className="fab fa-telegram-plane" />
-                          </a>
+                          </span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>

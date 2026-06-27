@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import { navLinks, LOGO_URL } from "@/lib/data";
@@ -11,6 +12,9 @@ export default function Navbar() {
   const [lang, setLang] = useState("UZ");
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const isScrolled = !isHomePage || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > window.innerHeight - 80);
@@ -62,7 +66,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}
+        className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
         id="navbar"
         role="navigation"
         aria-label="Asosiy navigatsiya"

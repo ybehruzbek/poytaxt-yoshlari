@@ -282,6 +282,14 @@ ul, ol {
   transform: translateX(5px);
 }
 
+/* ===== UTILITY CLASSES ===== */
+.hover-card {
+  transition: all 0.3s ease;
+}
+.hover-card:hover {
+  transform: translateY(-5px);
+}
+
 /* ===== TAGS ===== */
 .tag-blue { background: var(--blue-pale); color: var(--blue); }
 .tag-green { background: var(--green-pale); color: var(--green); }

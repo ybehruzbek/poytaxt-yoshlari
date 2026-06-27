@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./YouthLeaders.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { youthLeaders } from "@/lib/data";
@@ -18,16 +19,17 @@ export default function YouthLeaders() {
                 Mahalla va oliygohlarda yoshlar bilan bevosita ishlaydigan, tashabbuskor va faol yoshlarimiz.
               </p>
             </div>
-            <a href="#" className="btn-view-all">
+            <Link href="/yetakchilar" className="btn-view-all">
               Barchasini ko&apos;rish <i className="fas fa-arrow-right" />
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
 
         <div className={styles.grid}>
           {youthLeaders.map((leader, i) => (
             <ScrollReveal key={i} delay={Math.min(i + 1, 4)} className={styles.cardWrapper}>
-              <div className={styles.card}>
+              <Link href={`/yetakchilar/${leader.id}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                <div className={styles.card}>
                 <div className={styles.glow} />
                 <div className={styles.cardInner}>
                   <div className={styles.imgWrap}>
@@ -40,9 +42,9 @@ export default function YouthLeaders() {
                     />
                     <div className={styles.categoryBadge}>{leader.category}</div>
                     <div className={styles.socialOverlay}>
-                      <a href="#" className={styles.socialBtn} aria-label="Telegram"><i className="fab fa-telegram-plane" /></a>
-                      <a href="#" className={styles.socialBtn} aria-label="Instagram"><i className="fab fa-instagram" /></a>
-                      <a href="#" className={styles.socialBtn} aria-label="Email"><i className="fas fa-envelope" /></a>
+                      <span className={styles.socialBtn} aria-label="Telegram"><i className="fab fa-telegram-plane" /></span>
+                      <span className={styles.socialBtn} aria-label="Instagram"><i className="fab fa-instagram" /></span>
+                      <span className={styles.socialBtn} aria-label="Email"><i className="fas fa-envelope" /></span>
                     </div>
                   </div>
                   <div className={styles.body}>
@@ -51,7 +53,8 @@ export default function YouthLeaders() {
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
+            </Link>
+          </ScrollReveal>
           ))}
         </div>
       </div>

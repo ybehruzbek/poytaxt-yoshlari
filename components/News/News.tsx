@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./News.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { newsItems } from "@/lib/data";
@@ -16,10 +17,10 @@ export default function News() {
               <div className="section-label">Yangiliklar</div>
               <h2 className="section-title">So&apos;nggi voqealar</h2>
             </div>
-            <a href="#" className="btn-view-all">
+            <Link href="/yangiliklar" className="btn-view-all">
               Barchasi
               <i className="fas fa-arrow-right" />
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
 
@@ -28,7 +29,7 @@ export default function News() {
             {/* Featured */}
             {featured && (
               <ScrollReveal delay={1} className={styles.featuredWrapper}>
-                <div className={styles.featured}>
+                <Link href={`/yangiliklar/${featured.id}`} className={styles.featured} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <div className={styles.featuredImg}>
                     <Image src={featured.image} alt={featured.title} width={800} height={500} sizes="(max-width: 768px) 100vw, 55vw" />
                   </div>
@@ -37,18 +38,15 @@ export default function News() {
                     <div className={styles.date}>{featured.date}</div>
                     <h3 className={`${styles.title} ${styles.featuredTitle}`}>{featured.title}</h3>
                     {featured.excerpt && <p className={styles.excerpt}>{featured.excerpt}</p>}
-                    <a href="#" className={styles.link}>
-                      Batafsil <i className="fas fa-arrow-right" />
-                    </a>
                   </div>
-                </div>
+                </Link>
               </ScrollReveal>
             )}
 
             {/* First Small Card (Top Right) */}
             {others[0] && (
               <ScrollReveal delay={2} className={styles.smallWrapper}>
-                <div className={styles.small}>
+                <Link href={`/yangiliklar/${others[0].id}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <div className={styles.smallImg}>
                     <Image src={others[0].image} alt={others[0].title} width={400} height={300} sizes="120px" />
                   </div>
@@ -56,11 +54,8 @@ export default function News() {
                     <span className={`${styles.tag} ${others[0].tagClass}`}>{others[0].tag}</span>
                     <div className={styles.date}>{others[0].date}</div>
                     <h3 className={`${styles.title} ${styles.smallTitle}`}>{others[0].title}</h3>
-                    <a href="#" className={styles.link}>
-                      Batafsil <i className="fas fa-arrow-right" />
-                    </a>
                   </div>
-                </div>
+                </Link>
               </ScrollReveal>
             )}
           </div>
@@ -69,7 +64,7 @@ export default function News() {
             {/* Remaining Small Cards */}
             {others.slice(1).map((item, i) => (
               <ScrollReveal key={item.id} delay={i + 3} className={styles.flexItem}>
-                <div className={styles.small}>
+                <Link href={`/yangiliklar/${item.id}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <div className={styles.smallImg}>
                     <Image src={item.image} alt={item.title} width={400} height={300} sizes="120px" />
                   </div>
@@ -77,11 +72,8 @@ export default function News() {
                     <span className={`${styles.tag} ${item.tagClass}`}>{item.tag}</span>
                     <div className={styles.date}>{item.date}</div>
                     <h3 className={`${styles.title} ${styles.smallTitle}`}>{item.title}</h3>
-                    <a href="#" className={styles.link}>
-                      Batafsil <i className="fas fa-arrow-right" />
-                    </a>
                   </div>
-                </div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
