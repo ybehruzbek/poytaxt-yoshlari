@@ -294,7 +294,7 @@ export interface YouthLeaderItem {
 }
 
 export const youthLeaders: YouthLeaderItem[] = [
-  { id: "1", name: "Raxmadjonova Nilufar Kamoljon qizi", place: "Vatan Universiteti", image: "/nilufar.jpg", category: "Oliygoh" },
+  { id: "1", name: "Raxmadjonova Nilufar Kamoljon qizi", place: "Vatan Universiteti", image: nilufarImg.src, category: "Oliygoh" },
   { id: "2", name: "Rustamova Shahnoza", place: "Yunusobod tumani, 'Minor' mahallasi", image: "https://picsum.photos/seed/youth-leader-2/400/500.jpg", category: "Mahalla" },
   { id: "3", name: "Ismoilov Doston", place: "O'zbekiston Milliy Universiteti", image: "https://picsum.photos/seed/youth-leader-3/400/500.jpg", category: "Oliygoh" },
   { id: "4", name: "Aliyeva Malika", place: "Chilonzor tumani, 'Bog'zor' mahallasi", image: "https://picsum.photos/seed/youth-leader-4/400/500.jpg", category: "Mahalla" },
@@ -392,6 +392,9 @@ export const socialLinks = [
 ] as const;
 
 // ===== LOGO URL =====
-export const LOGO_URL = "/logo.png";
+import logoImg from "@/public/logo.png";
+import heroImg from "@/public/login-bg.jpg";
+import nilufarImg from "@/public/nilufar.jpg";
 
-export const HERO_IMAGE_URL = "/login-bg.jpg";
+export const LOGO_URL = logoImg.src;
+export const HERO_IMAGE_URL = heroImg.src;
