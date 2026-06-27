@@ -3,7 +3,7 @@
 import { useTheme } from "@/providers/ThemeProvider";
 import { useEffect, useState } from "react";
 
-const themes = ["hero", "about", "directions", "projects", "news", "default"] as const;
+const themes = ["hero", "about", "directions", "projects", "news", "leadership", "youthleaders", "documents", "gallery", "appeals", "contact", "default"] as const;
 
 export default function BackgroundTheme() {
   const { theme } = useTheme();

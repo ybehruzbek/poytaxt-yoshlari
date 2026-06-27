@@ -16,7 +16,7 @@ export default function News() {
               <div className="section-label">Yangiliklar</div>
               <h2 className="section-title">So&apos;nggi voqealar</h2>
             </div>
-            <a href="#" className={styles.viewAllBtn}>
+            <a href="#" className="btn-view-all">
               Barchasi
               <i className="fas fa-arrow-right" />
             </a>

@@ -292,7 +292,7 @@ export interface YouthLeaderItem {
 }
 
 export const youthLeaders: YouthLeaderItem[] = [
-  { name: "Abdullayev Sardor", place: "Toshkent Davlat Iqtisodiyot Universiteti", image: "https://picsum.photos/seed/youth-leader-1/400/500.jpg", category: "Oliygoh" },
+  { name: "Raxmadjonova Nilufar Kamoljon qizi", place: "Vatan Universiteti", image: "/nilufar.jpg", category: "Oliygoh" },
   { name: "Rustamova Shahnoza", place: "Yunusobod tumani, 'Minor' mahallasi", image: "https://picsum.photos/seed/youth-leader-2/400/500.jpg", category: "Mahalla" },
   { name: "Ismoilov Doston", place: "O'zbekiston Milliy Universiteti", image: "https://picsum.photos/seed/youth-leader-3/400/500.jpg", category: "Oliygoh" },
   { name: "Aliyeva Malika", place: "Chilonzor tumani, 'Bog'zor' mahallasi", image: "https://picsum.photos/seed/youth-leader-4/400/500.jpg", category: "Mahalla" },
@@ -346,7 +346,13 @@ export const appealGuarantees = [
 
 // ===== CONTACT INFO =====
 export const contactInfoItems = [
-  { icon: "fa-map-marker-alt", iconBg: "var(--blue-pale)", iconColor: "var(--blue)", label: "Manzil", value: "Toshkent sh., Amir Temur ko'chasi, 107A" },
+  {
+    label: "Manzil",
+    value: "O'zMU Madaniyat saroy, Universitet Ko'chasi, Toshkent, Oʻzbekiston",
+    icon: "fa-map-marker-alt",
+    iconBg: "var(--blue-pale)",
+    iconColor: "var(--blue)",
+  },
   { icon: "fa-phone", iconBg: "var(--green-pale)", iconColor: "var(--green)", label: "Telefon", values: ["+998 71 233 55 77", "+998 71 233 55 78"] },
   { icon: "fa-envelope", iconBg: "#FEF3C7", iconColor: "#D97706", label: "Email", value: "info@yoshlartoshkent.uz" },
 ] as const;
@@ -370,7 +376,7 @@ export const footerResources = [
 ] as const;
 
 export const footerContact = [
-  { icon: "fa-map-marker-alt", text: "Toshkent sh., Amir Temur ko'chasi, 107A" },
+  { icon: "fa-map-marker-alt", text: "Universitet Ko'chasi, Toshkent, Oʻzbekiston" },
   { icon: "fa-phone", text: "+998 71 233 55 77" },
   { icon: "fa-envelope", text: "info@yoshlartoshkent.uz" },
   { icon: "fa-clock", text: "Dush — Juma: 9:00 — 18:00" },

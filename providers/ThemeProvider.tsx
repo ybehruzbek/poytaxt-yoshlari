@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 
-type Theme = "hero" | "about" | "directions" | "projects" | "news" | "default";
+export type Theme = "hero" | "about" | "directions" | "projects" | "news" | "leadership" | "youthleaders" | "documents" | "gallery" | "appeals" | "contact" | "default";
 
 interface ThemeContextType {
   theme: Theme;

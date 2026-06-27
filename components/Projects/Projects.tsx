@@ -15,7 +15,7 @@ export default function Projects() {
               <div className="section-label">Faol loyihalar</div>
               <h2 className="section-title">Hozirda amalga oshirilayotgan dasturlar</h2>
             </div>
-            <a href="#" className={styles.viewAllBtn}>
+            <a href="#" className="btn-view-all">
               Barcha loyihalar
               <i className="fas fa-arrow-right" />
             </a>

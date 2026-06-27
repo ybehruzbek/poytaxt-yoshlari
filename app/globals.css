@@ -98,6 +98,36 @@ body {
     radial-gradient(at 100% 0%, hsla(150,80%,94%,0.6) 0, transparent 60%), 
     radial-gradient(at 0% 100%, hsla(190,100%,92%,0.5) 0, transparent 60%);
 }
+.bg-leadership {
+  background-image: 
+    radial-gradient(at 50% 0%, hsla(280,70%,95%,0.5) 0, transparent 60%), 
+    radial-gradient(at 0% 50%, hsla(200,80%,94%,0.4) 0, transparent 60%);
+}
+.bg-youthleaders {
+  background-image: 
+    radial-gradient(at 100% 100%, hsla(30,100%,93%,0.4) 0, transparent 60%), 
+    radial-gradient(at 0% 0%, hsla(330,80%,95%,0.5) 0, transparent 60%);
+}
+.bg-documents {
+  background-image: 
+    radial-gradient(at 0% 100%, hsla(210,100%,92%,0.5) 0, transparent 60%), 
+    radial-gradient(at 100% 0%, hsla(160,80%,94%,0.4) 0, transparent 60%);
+}
+.bg-gallery {
+  background-image: 
+    radial-gradient(at 50% 100%, hsla(250,70%,95%,0.5) 0, transparent 60%), 
+    radial-gradient(at 50% 0%, hsla(300,80%,95%,0.4) 0, transparent 60%);
+}
+.bg-appeals {
+  background-image: 
+    radial-gradient(at 0% 50%, hsla(210,80%,94%,0.4) 0, transparent 60%), 
+    radial-gradient(at 100% 100%, hsla(30,100%,93%,0.5) 0, transparent 60%);
+}
+.bg-contact {
+  background-image: 
+    radial-gradient(at 100% 0%, hsla(160,80%,94%,0.4) 0, transparent 60%), 
+    radial-gradient(at 0% 100%, hsla(200,80%,94%,0.4) 0, transparent 60%);
+}
 .bg-default {
   background-color: #f8fafc;
 }
@@ -217,6 +247,39 @@ ul, ol {
 
 .btn-secondary:active {
   transform: scale(0.97);
+}
+
+.btn-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(13, 59, 102, 0.1);
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-view-all:hover {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(13, 59, 102, 0.2);
+}
+
+.btn-view-all i {
+  font-size: 13px;
+  transition: transform 0.3s ease;
+}
+
+.btn-view-all:hover i {
+  transform: translateX(5px);
 }
 
 /* ===== TAGS ===== */

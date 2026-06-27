@@ -1,33 +1,112 @@
 "use client";
 
-import { useState, useCallback, FormEvent } from "react";
+import { useState, useCallback, FormEvent, useEffect, useRef } from "react";
 import styles from "./Appeals.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { appealTypes, appealGuarantees, districts } from "@/lib/data";
 
-export default function Appeals() {
-  const [showToast, setShowToast] = useState(false);
+const CustomSelect = ({ 
+  options, 
+  value, 
+  onChange, 
+  label 
+}: { 
+  options: string[], 
+  value: string, 
+  onChange: (val: string) => void, 
+  label: string 
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-    setShowToast(true);
-    (e.target as HTMLFormElement).reset();
-    setTimeout(() => setShowToast(false), 3000);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
+    <div className={styles.inputWrapper} ref={dropdownRef} style={{ marginBottom: label === "Murojaat turi" ? "20px" : "" }}>
+      <div 
+        className={`${styles.formInput} ${styles.customSelectHeader} ${isOpen ? styles.selectOpen : ""} ${value ? styles.hasValue : ""}`} 
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className={value ? styles.valText : styles.placeholderText}>
+          {value || " "}
+        </span>
+        <i className={`fas fa-chevron-down ${styles.selectIcon} ${isOpen ? styles.iconOpen : ""}`} />
+      </div>
+      <label className={value || isOpen ? styles.formLabelActive : styles.formLabel}>{label} *</label>
+
+      {isOpen && (
+        <ul className={styles.customOptions}>
+          {options.map(opt => (
+            <li 
+              key={opt} 
+              className={`${styles.customOption} ${value === opt ? styles.selectedOption : ""}`}
+              onClick={() => {
+                onChange(opt);
+                setIsOpen(false);
+              }}
+            >
+              {opt}
+              {value === opt && <i className="fas fa-check" style={{ marginLeft: "auto", color: "var(--blue)" }} />}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default function Appeals() {
+  const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const [tuman, setTuman] = useState("");
+  const [turi, setTuri] = useState("");
+
+  const handleSubmit = useCallback((e: FormEvent) => {
+    e.preventDefault();
+    if (!tuman || !turi) {
+      alert("Iltimos, barcha maydonlarni to'ldiring!");
+      return;
+    }
+    
+    setIsSubmitting(true);
+    const form = e.target as HTMLFormElement;
+    
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setShowToast(true);
+      form.reset();
+      setTuman("");
+      setTuri("");
+      
+      setTimeout(() => setShowToast(false), 4000);
+    }, 1500);
+  }, [tuman, turi]);
+
+  return (
     <section className={styles.section} id="murojaat">
-      <div className="container">
+      <div className={styles.bgBlob1} />
+      <div className={styles.bgBlob2} />
+
+      <div className="container" style={{ position: "relative", zIndex: 2 }}>
         <div className={styles.layout}>
           {/* Left: Info */}
           <ScrollReveal>
-            <div>
+            <div className={styles.leftContent}>
               <div className="section-label">Murojaatlar</div>
-              <h2 className="section-title">
-                Ovozingizni eshitamiz
+              <h2 className={styles.title}>
+                Ovozingizni <br /> eshitamiz
               </h2>
-              <p className="section-desc">
-                Takliflar, murojaatlar yoki tashabbuslaringizni yuboring — har bir murojaat alohida ko&apos;rib chiqiladi va javob beriladi.
+              <p className={styles.desc}>
+                Takliflar, murojaatlar yoki tashabbuslaringizni yuboring. Har bir xat rahbariyat tomonidan shaxsan o'qiladi va ko'rib chiqiladi.
               </p>
 
               <div className={styles.guarantees}>
@@ -35,7 +114,7 @@ export default function Appeals() {
                   <div className={styles.guaranteeItem} key={i}>
                     <div
                       className={styles.gIcon}
-                      style={{ background: g.iconBg, color: g.iconColor }}
+                      style={{ background: g.iconBg, color: g.iconColor, boxShadow: `0 8px 20px ${g.iconBg}` }}
                     >
                       <i className={`fas ${g.icon}`} />
                     </div>
@@ -50,65 +129,70 @@ export default function Appeals() {
           </ScrollReveal>
 
           {/* Right: Form */}
-          <ScrollReveal>
+          <ScrollReveal delay={2}>
             <form className={styles.form} onSubmit={handleSubmit}>
+              <div className={styles.formHeader}>
+                <h3>Arizani to'ldirish</h3>
+                <p>Ma'lumotlaringiz xavfsizligi to'liq kafolatlanadi.</p>
+              </div>
+
               <div className={styles.formRow}>
-                <div>
-                  <label className={styles.formLabel}>Ism *</label>
-                  <input type="text" required placeholder="Ismingiz" className={styles.formInput} />
+                <div className={styles.inputWrapper}>
+                  <input type="text" required placeholder=" " className={styles.formInput} id="ism" />
+                  <label htmlFor="ism" className={styles.formLabel}>Ismingiz *</label>
                 </div>
-                <div>
-                  <label className={styles.formLabel}>Familiya *</label>
-                  <input type="text" required placeholder="Familiyangiz" className={styles.formInput} />
+                <div className={styles.inputWrapper}>
+                  <input type="text" required placeholder=" " className={styles.formInput} id="familiya" />
+                  <label htmlFor="familiya" className={styles.formLabel}>Familiyangiz *</label>
                 </div>
               </div>
 
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Telefon raqam *</label>
-                <input type="tel" required placeholder="+998 90 123 45 67" className={styles.formInput} />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Email</label>
-                <input type="email" placeholder="email@example.com" className={styles.formInput} />
-              </div>
-
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Murojaat turi *</label>
-                <select required className={styles.formSelect} defaultValue="">
-                  <option value="" disabled>Tanlang...</option>
-                  {appealTypes.map((type) => (
-                    <option key={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Tuman</label>
-                <select className={styles.formSelect} defaultValue="">
-                  <option value="" disabled>Tanlang...</option>
-                  {districts.map((d) => (
-                    <option key={d.name}>{d.name}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.formGroup}>
-                <label className={styles.formLabel}>Xabaringiz *</label>
-                <textarea
-                  required
-                  rows={5}
-                  placeholder="Murojaatingizni batafsil yozing..."
-                  className={styles.formTextarea}
+              <div className={styles.formRow}>
+                <div className={styles.inputWrapper}>
+                  <input type="tel" required placeholder=" " className={styles.formInput} id="tel" />
+                  <label htmlFor="tel" className={styles.formLabel}>Telefon *</label>
+                </div>
+                
+                <CustomSelect 
+                  options={districts.map(d => d.name)}
+                  value={tuman}
+                  onChange={setTuman}
+                  label="Tumaningiz"
                 />
               </div>
 
-              <button type="submit" className={styles.submitBtn}>
-                <i className="fas fa-paper-plane" />
-                Murojaatni yuborish
+              <CustomSelect 
+                options={appealTypes as unknown as string[]}
+                value={turi}
+                onChange={setTuri}
+                label="Murojaat turi"
+              />
+
+              <div className={styles.inputWrapper}>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder=" "
+                  className={styles.formTextarea}
+                  id="xabar"
+                />
+                <label htmlFor="xabar" className={styles.formLabel}>Xabaringiz *</label>
+              </div>
+
+              <button 
+                type="submit" 
+                className={`${styles.submitBtn} ${isSubmitting ? styles.submitting : ""}`}
+                disabled={isSubmitting}
+              >
+                <span className={styles.btnText}>
+                  {isSubmitting ? "Yuborilmoqda..." : "Murojaatni yuborish"}
+                </span>
+                <i className={`fas fa-paper-plane ${styles.btnIcon}`} />
               </button>
+              
               <p className={styles.formNote}>
-                Yuborish orqali maxfiylik siyosatiga rozilik bildirasiz.
+                <i className="fas fa-lock" style={{ marginRight: '6px', opacity: 0.6 }} />
+                Yuborish orqali shaxsiy ma'lumotlarni qayta ishlash siyosatiga rozilik bildirasiz.
               </p>
             </form>
           </ScrollReveal>
@@ -117,8 +201,16 @@ export default function Appeals() {
 
       {/* Toast */}
       <div className={`${styles.toast} ${showToast ? styles.toastShow : ""}`}>
-        <i className="fas fa-check-circle" />
-        Murojaatingiz muvaffaqiyatli yuborildi!
+        <div className={styles.toastIcon}>
+          <i className="fas fa-check" />
+        </div>
+        <div className={styles.toastContent}>
+          <h4>Muvaffaqiyatli!</h4>
+          <p>Murojaatingiz yuborildi. Tez orada siz bilan bog'lanamiz.</p>
+        </div>
+        <button type="button" className={styles.toastClose} onClick={() => setShowToast(false)}>
+          <i className="fas fa-times" />
+        </button>
       </div>
     </section>
   );

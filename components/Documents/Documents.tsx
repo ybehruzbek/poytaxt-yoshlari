@@ -12,16 +12,16 @@ export default function Documents() {
             <h2 className="section-title">
               Rasmiy hujjatlar
             </h2>
-            <p className={`section-desc ${styles.sectionDesc}`}>
+            <p className="section-desc" style={{ margin: '0 auto', maxWidth: '600px' }}>
               Nizomlar, buyruqlar, hisobotlar va boshqaruv hujjatlari.
             </p>
           </div>
         </ScrollReveal>
 
-        <ScrollReveal>
-          <div className={styles.list}>
-            {documents.map((doc, i) => (
-              <div className={styles.item} key={i}>
+        <div className={styles.list}>
+          {documents.map((doc, i) => (
+            <ScrollReveal key={i} delay={Math.min(i + 1, 4)}>
+              <div className={styles.item}>
                 <div className={styles.itemLeft}>
                   <div
                     className={styles.iconWrap}
@@ -36,11 +36,13 @@ export default function Documents() {
                     </div>
                   </div>
                 </div>
-                <i className={`fas fa-download ${styles.downloadIcon}`} />
+                <div className={styles.downloadBtnWrap}>
+                  <i className={`fas fa-download ${styles.downloadIcon}`} />
+                </div>
               </div>
-            ))}
-          </div>
-        </ScrollReveal>
+            </ScrollReveal>
+          ))}
+        </div>
       </div>
     </section>
   );

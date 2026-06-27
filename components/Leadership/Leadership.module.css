@@ -11,34 +11,7 @@
   max-width: 600px;
 }
 
-.topExpandBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--blue);
-  font-weight: 700;
-  font-size: 15px;
-  padding: 12px 28px;
-  border-radius: 100px;
-  border: 2px solid var(--border);
-  transition: all 0.3s var(--ease);
-  white-space: nowrap;
-}
 
-.topExpandBtn:hover {
-  background: var(--bg);
-  border-color: var(--blue-pale);
-  transform: translateY(-2px);
-}
-
-.topExpandBtn i {
-  transition: transform 0.3s var(--ease);
-}
-
-.topExpandBtn:hover i {
-  transform: translateX(4px);
-}
 
 /* Carousel Layout */
 .carouselWrapper {
@@ -55,23 +28,29 @@
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
-.carousel {
+.carouselTrack {
   display: flex;
-  gap: 24px; /* Reduced gap slightly to match narrower cards */
-  overflow-x: auto;
-  padding: 24px 0 40px 0; /* Removed side padding so it fills edge to edge */
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
+  width: max-content;
+  animation: scrollMarquee 80s linear infinite;
+  padding: 24px 0 40px 0;
 }
 
-.carousel::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+.carouselTrack:hover {
+  animation-play-state: paused;
 }
 
-@media (min-width: 768px) {
-  .carousel {
-    padding-left: max(28px, calc((100vw - 1180px) / 2 + 28px));
-    padding-right: max(28px, calc((100vw - 1180px) / 2 + 28px));
+.carouselSet {
+  display: flex;
+  gap: 24px;
+  padding-right: 24px; /* match the gap so it seamlessly connects with the next set */
+}
+
+@keyframes scrollMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

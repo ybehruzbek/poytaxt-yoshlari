@@ -1,59 +1,248 @@
-.section { padding: 80px 0; background: var(--bg); }
-.headerCenter { text-align: center; margin-bottom: 48px; }
-.headerCenter .sectionDesc { max-width: 560px; margin: 0 auto; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+.section { padding: 100px 0; background: transparent; position: relative; overflow: hidden; }
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+  gap: 24px;
 }
-.item {
-  border-radius: var(--radius);
-  overflow: hidden;
+
+.headerContent {
+  max-width: 600px;
+}
+
+/* Tilted Wall Carousel */
+.tiltWrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.carouselContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: max-content;
+  transform: rotate(-6deg) scale(1.1);
+  transform-style: preserve-3d;
+  /* Anti-aliasing trick for rotated containers */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.carouselContainer:hover .carouselTrack {
+  animation-play-state: paused;
+}
+
+/* Marquee Tracks */
+.carouselTrack {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.trackLeft { animation: scrollMarquee 60s linear infinite; }
+.trackRight { animation: scrollMarquee 60s linear infinite reverse; }
+.trackLeftSlow { animation: scrollMarquee 70s linear infinite; }
+
+.carouselSet {
+  display: flex;
+  gap: 16px;
+  padding-right: 16px; /* Essential for perfect infinite loop math */
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Items */
+.carouselItem {
+  flex: 0 0 auto;
+  width: 250px;
+  height: 200px;
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  /* Prevent jagged edges on rotated elements */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0); 
+  outline: 1px solid transparent; 
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carouselItem:hover {
+  transform: scale(1.05) translateZ(0);
+  z-index: 10;
+}
+
+.imgWrap {
+  width: 100%; 
+  height: 100%;
+  position: relative;
+}
+
+.imgWrap img {
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carouselItem:hover .imgWrap img {
+  transform: scale(1.1);
+}
+
+/* Hover Overlay */
+.overlay {
+  position: absolute; 
+  inset: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.carouselItem:hover .overlay {
+  opacity: 1;
+}
+
+.zoomIcon {
+  color: white;
+  font-size: 36px;
+  transform: scale(0.5);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carouselItem:hover .zoomIcon {
+  transform: scale(1);
+}
+
+/* Lightbox Premium Glassmorphism */
+.lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(9, 40, 71, 0.65);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  opacity: 0; visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightboxOpen { opacity: 1; visibility: visible; }
+
+.lightboxImg {
+  max-width: 100%; max-height: 90vh;
+  border-radius: 16px;
+  object-fit: contain;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+  transform: scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightboxOpen .lightboxImg {
+  transform: scale(1);
+}
+
+.imgZoomContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+/* Lightbox UI */
+.lightboxToolbar {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  gap: 12px;
+  z-index: 202;
+}
+
+.toolbarBtn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
-.square { aspect-ratio: 1; }
-.tall { aspect-ratio: 3/4; grid-row: span 2; }
-.item img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.6s var(--ease);
-}
-.item:hover img { transform: scale(1.08); }
-.overlay {
-  position: absolute; inset: 0;
-  background: rgba(13, 59, 102, 0.4);
-  border-radius: var(--radius);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.4s ease;
-}
-.item:hover .overlay { opacity: 1; }
-.zoomIcon { color: var(--white); font-size: 28px; }
 
-/* Lightbox */
-.lightbox {
-  position: fixed; inset: 0; z-index: 200;
-  background: rgba(0,0,0,0.9);
+.toolbarBtn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.toolbarClose {
+  background: rgba(255, 50, 50, 0.2);
+  border-color: rgba(255, 50, 50, 0.3);
+}
+
+.toolbarClose:hover {
+  background: rgba(255, 50, 50, 0.5);
+}
+
+.lightboxNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  font-size: 24px;
   display: flex; align-items: center; justify-content: center;
-  padding: 16px;
-  opacity: 0; visibility: hidden;
   transition: all 0.3s ease;
+  z-index: 201;
+  cursor: pointer;
 }
-.lightboxOpen { opacity: 1; visibility: visible; }
-.lightboxImg {
-  max-width: 100%; max-height: 85vh;
-  border-radius: var(--radius-sm);
-  object-fit: contain;
+
+.lightboxNav:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
 }
-.lightboxClose {
-  position: absolute; top: 24px; right: 24px;
-  background: none; color: rgba(255,255,255,0.7);
-  font-size: 28px;
-  transition: color 0.2s ease;
-}
-.lightboxClose:hover { color: var(--white); }
+
+.lightboxPrev { left: 40px; }
+.lightboxNext { right: 40px; }
 
 @media (max-width: 768px) {
   .section { padding: 60px 0; }
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .tall { grid-row: span 1; aspect-ratio: 1; }
+  .headerTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .lightboxToolbar {
+    top: 16px;
+    right: 16px;
+    gap: 8px;
+  }
+  .toolbarBtn {
+    width: 40px; height: 40px; font-size: 16px;
+  }
+  .lightboxPrev { left: 16px; width: 40px; height: 40px; font-size: 16px; }
+  .lightboxNext { right: 16px; width: 40px; height: 40px; font-size: 16px; }
 }
