@@ -294,7 +294,7 @@ export interface YouthLeaderItem {
 }
 
 export const youthLeaders: YouthLeaderItem[] = [
-  { id: "1", name: "Raxmadjonova Nilufar Kamoljon qizi", place: "Vatan Universiteti", image: nilufarImg.src, category: "Oliygoh" },
+  { id: "1", name: "Raxmadjonova Nilufar", place: "INHA Universiteti", image: nilufarImg.src, category: "Oliygoh" },
   { id: "2", name: "Rustamova Shahnoza", place: "Yunusobod tumani, 'Minor' mahallasi", image: "https://picsum.photos/seed/youth-leader-2/400/500.jpg", category: "Mahalla" },
   { id: "3", name: "Ismoilov Doston", place: "O'zbekiston Milliy Universiteti", image: "https://picsum.photos/seed/youth-leader-3/400/500.jpg", category: "Oliygoh" },
   { id: "4", name: "Aliyeva Malika", place: "Chilonzor tumani, 'Bog'zor' mahallasi", image: "https://picsum.photos/seed/youth-leader-4/400/500.jpg", category: "Mahalla" },
