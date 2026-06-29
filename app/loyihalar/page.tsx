@@ -1,66 +1,70 @@
+'use client';
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/data";
-
-export const metadata = {
-  title: "Barcha loyihalar | O'zbekiston Yoshlar Ittifoqi",
-};
+import PageHeader from "@/components/ui/PageHeader";
+import FilterTabs from "@/components/ui/FilterTabs";
+import styles from "@/components/Projects/Projects.module.css";
 
 export default function AllProjectsPage() {
+  const [activeTab, setActiveTab] = useState("Barchasi");
+  
+  const tabs = ["Barchasi", "Yangi", "Jarayonda", "Yakunlangan"];
+  
+  // A simple client-side filter
+  const filteredProjects = activeTab === "Barchasi" 
+    ? projects 
+    : projects.filter(item => {
+      // Map UI tabs to actual status values in data
+      if (activeTab === "Yangi" && item.status.includes("Yangi")) return true;
+      if (activeTab === "Jarayonda" && (item.status.includes("Jarayon") || item.status.includes("Ochiq"))) return true;
+      if (activeTab === "Yakunlangan" && item.status.includes("Yakunlan")) return true;
+      return false;
+    });
+
   return (
     <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh' }}>
-      <div className="section-label">Faol loyihalar</div>
-      <h1 className="section-title">Hozirda amalga oshirilayotgan dasturlar</h1>
+      <PageHeader 
+        label="Loyihalar"
+        title="Yoshlar qamrovi kengaytirilmoqda"
+        description="Bizning maqsadimiz yoshlar o'z ustida ishlashi, bilimlari va amaliy ko'nikmalarini oshirishi uchun eng zamonaviy loyiha va tanlovlarni taqdim etishdir."
+        breadcrumbs={[
+          { label: "Bosh sahifa", href: "/" },
+          { label: "Loyihalar" }
+        ]}
+      />
       
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', 
-        gap: '32px', 
-        marginTop: '48px' 
-      }}>
-        {projects.map(item => (
-          <Link href={`/loyihalar/${item.id}`} key={item.id} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-            <div className="hover-card"
-              style={{ 
-                background: 'rgba(255, 255, 255, 0.8)', 
-                backdropFilter: 'blur(12px)',
-                borderRadius: '24px', 
-                overflow: 'hidden', 
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)', 
-                border: '1px solid rgba(255,255,255,0.5)',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              <div style={{ position: 'relative', height: '240px', width: '100%' }}>
-                <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
-                <span style={{
-                  position: 'absolute', top: '16px', right: '16px',
-                  background: 'var(--green)', color: 'white', padding: '6px 12px',
-                  borderRadius: '100px', fontSize: '12px', fontWeight: 600,
-                  boxShadow: '0 4px 10px rgba(46, 139, 87, 0.3)'
-                }}>
-                  {item.status}
-                </span>
+      <FilterTabs 
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+      />
+      
+      <div className={styles.grid} style={{ marginTop: '40px' }}>
+        {filteredProjects.length > 0 ? filteredProjects.map((project, i) => (
+          <div className={styles.cardWrapper} key={project.id}>
+            <Link href={`/loyihalar/${project.id}`} className={styles.card} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+              <div className={styles.img}>
+                <Image src={project.image} alt={project.title} width={600} height={400} sizes="(max-width: 768px) 100vw, 33vw" />
+                <span className={styles.status}>{project.status}</span>
               </div>
-              <div style={{ padding: '24px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <h3 style={{ fontSize: '22px', fontWeight: 800, marginBottom: '12px', color: 'var(--primary-dark)' }}>
-                  {item.title}
-                </h3>
-                <p style={{ 
-                  fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.6,
-                  marginBottom: '24px', flex: 1
-                }}>
-                  {item.desc}
-                </p>
-                <div style={{ fontWeight: 600, color: 'var(--white)', background: 'var(--blue)', padding: '12px', borderRadius: '12px', textAlign: 'center', fontSize: '14px', transition: 'all 0.2s' }}>
-                  Loyihani ko'rish <i className="fas fa-arrow-right" style={{ marginLeft: '6px' }}/>
+              <div className={styles.body}>
+                <h3>{project.title}</h3>
+                <p>{project.desc}</p>
+                <div className={styles.btnJoin}>
+                  Loyihani ko'rish
+                  <i className="fas fa-arrow-right" />
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          </div>
+        )) : (
+          <div style={{ padding: '60px 0', textAlign: 'center', width: '100%', gridColumn: '1 / -1', color: 'var(--text-muted)' }}>
+            Ushbu bo'limda hozircha loyihalar yo'q
+          </div>
+        )}
       </div>
     </div>
   );

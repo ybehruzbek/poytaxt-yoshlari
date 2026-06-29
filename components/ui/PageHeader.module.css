@@ -1,0 +1,60 @@
+.headerWrapper {
+  margin-bottom: 48px;
+}
+
+.breadcrumbs {
+  margin-bottom: 24px;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.breadcrumbs li a {
+  color: var(--blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumbs li a:hover {
+  color: var(--green);
+}
+
+.separator {
+  margin-left: 8px;
+  color: var(--border);
+}
+
+.breadcrumbs li.active {
+  color: var(--text-secondary);
+}
+
+.title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  color: var(--primary-dark);
+  line-height: 1.2;
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+
+.description {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+}

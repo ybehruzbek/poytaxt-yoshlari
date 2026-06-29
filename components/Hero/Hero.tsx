@@ -13,6 +13,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center center" }}
         />
       </div>
       <div className={styles.mobileOverlay} />
@@ -25,6 +26,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center center" }}
         />
         <div className={styles.desktopOverlay} />
       </div>

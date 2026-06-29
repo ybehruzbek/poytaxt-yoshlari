@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Gallery.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { galleryImages } from "@/lib/data";
@@ -109,9 +110,9 @@ export default function Gallery() {
                 Yoshlar tadbirlari, jamoat loyihalari va rasmiy uchrashuvlardan eng yorqin lahzalar.
               </p>
             </div>
-            <a href="#" className="btn-view-all">
+            <Link href="/galereya" className="btn-view-all">
               Barcha rasmlar <i className="fas fa-arrow-right" />
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
       </div>

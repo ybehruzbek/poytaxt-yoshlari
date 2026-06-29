@@ -25,7 +25,10 @@ export default function Documents() {
                 <div className={styles.itemLeft}>
                   <div
                     className={styles.iconWrap}
-                    style={{ background: doc.iconBg, color: doc.iconColor }}
+                    style={{ 
+                      background: `linear-gradient(135deg, ${doc.iconBg}, #ffffff)`, 
+                      color: doc.iconColor 
+                    }}
                   >
                     <i className={`fas ${doc.icon}`} />
                   </div>

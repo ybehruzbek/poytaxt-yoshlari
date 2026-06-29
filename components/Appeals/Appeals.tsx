@@ -114,7 +114,10 @@ export default function Appeals() {
                   <div className={styles.guaranteeItem} key={i}>
                     <div
                       className={styles.gIcon}
-                      style={{ background: g.iconBg, color: g.iconColor, boxShadow: `0 8px 20px ${g.iconBg}` }}
+                      style={{ 
+                        background: `linear-gradient(135deg, ${g.iconBg}, #ffffff)`, 
+                        color: g.iconColor 
+                      }}
                     >
                       <i className={`fas ${g.icon}`} />
                     </div>

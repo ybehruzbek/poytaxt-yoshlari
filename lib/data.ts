@@ -393,7 +393,7 @@ export const socialLinks = [
 
 // ===== LOGO URL =====
 import logoImg from "@/public/logo.png";
-import heroImg from "@/public/login-bg.jpg";
+import heroImg from "@/public/login-bg-1920.jpeg";
 import nilufarImg from "@/public/nilufar.jpg";
 
 export const LOGO_URL = logoImg.src;

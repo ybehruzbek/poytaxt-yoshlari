@@ -38,40 +38,55 @@
 }
 
 .cardInner {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.9);
-  padding: 16px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s var(--ease);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   height: 100%;
 }
 
 .card:hover .cardInner {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(13, 59, 102, 0.08);
   border-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 20px 40px -10px rgba(13, 59, 102, 0.12);
-  background: rgba(255, 255, 255, 0.85);
 }
 
 .imgWrap {
-  height: 300px;
+  height: 320px;
   border-radius: 16px;
   overflow: hidden;
   position: relative;
 }
 
+.imgWrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 59, 102, 0.6), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.card:hover .imgWrap::after {
+  opacity: 1;
+}
+
 .imgWrap img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .card:hover .imgWrap img {
   transform: scale(1.08);
+  filter: brightness(1.05);
 }
 
 .categoryBadge {
@@ -96,40 +111,46 @@
 /* Social Overlay that slides up */
 .socialOverlay {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 24px 16px 16px;
-  background: linear-gradient(to top, rgba(9, 25, 43, 0.85) 0%, rgba(9, 25, 43, 0) 100%);
+  bottom: 20px;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 12px;
-  transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
 }
 
 .card:hover .socialOverlay {
+  opacity: 1;
   transform: translateY(0);
 }
 
 .socialBtn {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.4s var(--ease);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  color: var(--blue);
 }
 
 .socialBtn:hover {
-  background: var(--white);
-  color: var(--blue);
-  border-color: var(--white);
-  transform: translateY(-4px) scale(1.15);
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.4);
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
+/* Add some colors for icons like in Leadership */
+.socialBtn:nth-child(1) { color: #2AABEE; } /* Telegram */
+.socialBtn:nth-child(2) { color: #E1306C; } /* Instagram */
+.socialBtn:nth-child(3) { color: var(--primary-dark); } /* Email */
 
 .body {
   padding: 24px 8px 8px;

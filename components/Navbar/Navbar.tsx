@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { navLinks, LOGO_URL } from "@/lib/data";
 
@@ -13,6 +14,7 @@ export default function Navbar() {
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
   const isScrolled = !isHomePage || scrolled;
 
@@ -50,6 +52,14 @@ export default function Navbar() {
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       if (href === "#") return;
+      
+      if (!isHomePage && href.startsWith("#")) {
+        e.preventDefault();
+        router.push(`/${href}`);
+        closeMenu();
+        return;
+      }
+
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
@@ -60,7 +70,7 @@ export default function Navbar() {
         closeMenu();
       }
     },
-    [closeMenu]
+    [closeMenu, isHomePage, router]
   );
 
   return (
@@ -73,15 +83,13 @@ export default function Navbar() {
       >
         <div className={styles.inner}>
           {/* LOGO AREA */}
-          <a
-            href="#bosh-sahifa"
+          <Link
+            href="/"
             className={styles.logoWrap}
             aria-label="Bosh sahifa"
-            onClick={(e) => handleNavClick(e, "#bosh-sahifa")}
           >
             <Image src={LOGO_URL} alt="YI Logo" width={54} height={54} className={styles.logoIconImage} priority />
-
-          </a>
+          </Link>
 
           {/* NAV LINKS */}
           <ul className={styles.navLinks}>

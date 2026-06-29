@@ -50,19 +50,18 @@ export default function Leadership() {
                           height={500}
                           sizes="(max-width: 768px) 80vw, 360px"
                         />
-                        <div className={styles.gradient} />
+                        <div className={styles.socials}>
+                          <span className={`${styles.socialBtn} ${styles.instagram}`} aria-label="Instagram">
+                            <i className="fab fa-instagram" />
+                          </span>
+                          <span className={`${styles.socialBtn} ${styles.telegram}`} aria-label="Telegram">
+                            <i className="fab fa-telegram-plane" />
+                          </span>
+                        </div>
                       </div>
                       <div className={styles.body}>
                         <h3>{leader.name}</h3>
                         <p>{leader.position}</p>
-                        <div className={styles.socials}>
-                          <span className={styles.socialBtn} aria-label="Instagram">
-                            <i className="fab fa-instagram" />
-                          </span>
-                          <span className={styles.socialBtn} aria-label="Telegram">
-                            <i className="fab fa-telegram-plane" />
-                          </span>
-                        </div>
                       </div>
                     </Link>
                   </div>
@@ -81,19 +80,18 @@ export default function Leadership() {
                           height={500}
                           sizes="(max-width: 768px) 80vw, 360px"
                         />
-                        <div className={styles.gradient} />
+                        <div className={styles.socials}>
+                          <span className={`${styles.socialBtn} ${styles.instagram}`} aria-label="Instagram">
+                            <i className="fab fa-instagram" />
+                          </span>
+                          <span className={`${styles.socialBtn} ${styles.telegram}`} aria-label="Telegram">
+                            <i className="fab fa-telegram-plane" />
+                          </span>
+                        </div>
                       </div>
                       <div className={styles.body}>
                         <h3>{leader.name}</h3>
                         <p>{leader.position}</p>
-                        <div className={styles.socials}>
-                          <span className={styles.socialBtn} aria-label="Instagram">
-                            <i className="fab fa-instagram" />
-                          </span>
-                          <span className={styles.socialBtn} aria-label="Telegram">
-                            <i className="fab fa-telegram-plane" />
-                          </span>
-                        </div>
                       </div>
                     </Link>
                   </div>

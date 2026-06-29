@@ -37,17 +37,18 @@
   box-shadow: 0 10px 30px -5px rgba(13, 59, 102, 0.08);
 }
 .iconWrap {
-  width: 52px; height: 52px;
-  border-radius: var(--radius-sm);
+  width: 56px; height: 56px;
+  border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
-  font-size: 20px;
+  margin-bottom: 24px;
+  font-size: 24px;
+  position: relative; z-index: 2;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
   transition: all 0.4s var(--ease);
 }
 .card:hover .iconWrap {
-  background: var(--blue) !important;
-  color: var(--white) !important;
-  transform: scale(1.1);
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.12);
 }
 .card h3 { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
 .card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }

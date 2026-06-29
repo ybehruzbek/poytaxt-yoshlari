@@ -24,7 +24,10 @@ export default function Directions() {
               <div className={styles.card}>
                 <div
                   className={styles.iconWrap}
-                  style={{ background: dir.iconBg, color: dir.iconColor }}
+                  style={{ 
+                    background: `linear-gradient(135deg, ${dir.iconBg}, #ffffff)`, 
+                    color: dir.iconColor 
+                  }}
                 >
                   <i className={`fas ${dir.icon}`} />
                 </div>

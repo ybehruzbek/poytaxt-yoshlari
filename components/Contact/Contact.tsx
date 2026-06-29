@@ -26,7 +26,10 @@ export default function Contact() {
                 <div className={styles.infoCard}>
                   <div
                     className={styles.infoIcon}
-                    style={{ background: item.iconBg, color: item.iconColor }}
+                    style={{ 
+                      background: `linear-gradient(135deg, ${item.iconBg}, #ffffff)`, 
+                      color: item.iconColor 
+                    }}
                   >
                     <i className={`fas ${item.icon}`} />
                   </div>

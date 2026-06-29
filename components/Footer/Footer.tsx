@@ -13,11 +13,23 @@ export default function Footer() {
               O&apos;zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi, ularning salohiyatini ro&apos;yobga chiqarishga ko&apos;maklashuvchi eng yirik jamoat tashkiloti.
             </p>
             <div className={styles.social}>
-              {socialLinks.map((link) => (
-                <a key={link.label} href={link.href} aria-label={link.label}>
-                  <i className={`fab ${link.icon}`} />
-                </a>
-              ))}
+              {socialLinks.map((link) => {
+                const colorClass =
+                  link.label === "Telegram" ? styles.telegram :
+                  link.label === "Instagram" ? styles.instagram :
+                  link.label === "Facebook" ? styles.facebook :
+                  styles.youtube;
+                return (
+                  <a 
+                    key={link.label} 
+                    href={link.href} 
+                    aria-label={link.label}
+                    className={colorClass}
+                  >
+                    <i className={`fab ${link.icon}`} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
