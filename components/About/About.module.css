@@ -1,5 +1,15 @@
-.about { padding: 80px 0; background: transparent; }
-.header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; gap: 40px; }
+.about { padding: 100px 0 60px; background: transparent; }
+.introBlock { margin-bottom: 60px; max-width: 1000px; }
+.introText {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.highlight {
+  color: var(--blue);
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -7,19 +17,24 @@
 }
 .card {
   padding: 40px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  border: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
   transition: all 0.4s var(--ease);
   position: relative;
   overflow: hidden;
 }
-.card::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 100%);
-  opacity: 0; transition: opacity 0.4s ease;
+.bgBlue {
+  background-color: var(--blue-pale);
+}
+.bgGreen {
+  background-color: var(--green-pale);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.05);
 }
 .card:hover {
   transform: translateY(-2px);
@@ -29,17 +44,26 @@
 .card:hover::before { opacity: 1; }
 
 .cardIcon {
-  width: 56px; height: 56px;
-  border-radius: 16px;
+  width: 64px; height: 64px;
+  border-radius: 20px;
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 24px; font-size: 24px;
-  position: relative; z-index: 2;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  font-size: 28px;
+  flex-shrink: 0;
 }
-.iconBlue { background: linear-gradient(135deg, var(--blue-pale), #ffffff); color: var(--blue); }
-.iconGreen { background: linear-gradient(135deg, var(--green-pale), #ffffff); color: var(--green); }
-.card h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; position: relative; z-index: 2; }
-.card p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; position: relative; z-index: 2; }
+.iconBlue { color: var(--blue); }
+.iconGreen { color: var(--green); }
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cardContent p { 
+  font-size: 18px; 
+  font-weight: 600;
+  color: var(--text); 
+  line-height: 1.5; 
+  margin: 0;
+}
 
 /* Timeline Card - Bento Style */
 .timelineWrapper {
@@ -77,10 +101,19 @@
 .year { font-size: 14px; font-weight: 800; color: var(--text); min-width: 44px; padding-top: 1px; }
 .timelineText { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
 
+@media (max-width: 1024px) {
+  .introText {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 768px) {
-  .about { padding: 80px 0; }
-  .header { flex-direction: column; align-items: flex-start; }
+  .about { padding: 60px 0; }
   .grid { grid-template-columns: 1fr; }
-  .timelineWrapper { grid-column: span 1; }
-  .timelineCard { flex-direction: column; gap: 32px; padding: 32px; }
+  .introText { font-size: 28px; }
+  .card {
+    padding: 30px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

@@ -53,11 +53,35 @@ html {
 body {
   color: var(--text-secondary);
   line-height: 1.65;
-  background-color: #f8fafc;
+  background-color: #F5F7FA;
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* ===== CUSTOM SCROLLBAR ===== */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--blue);
 }
 
 /* ===== GLOBAL BACKGROUND THEME LAYERS ===== */
@@ -137,6 +161,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text);
   line-height: 1.15;
   letter-spacing: -0.02em;
+  font-weight: 800;
 }
 
 a {

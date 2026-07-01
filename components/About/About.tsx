@@ -7,48 +7,26 @@ export default function About() {
     <section className={styles.about} id="tashkilot">
       <div className="container">
         <ScrollReveal>
-          <div className={styles.header}>
-            <div>
-              <div className="section-label">Tashkilot haqida</div>
-              <h2 className="section-title">
-                Yoshlar manfaati —<br />bizning ustuvor yo&apos;nalishimiz
-              </h2>
-            </div>
-            <p className="section-desc" style={{ textAlign: "right" }}>
-              O&apos;zbekiston Respublikasi Konstitutsiyasi va «Yoshlar siyosati to&apos;g&apos;risida»gi qonun asosida faoliyat yurituvchi yirik jamoat tashkiloti.
-            </p>
+          <div className={styles.introBlock}>
+            <h2 className={styles.introText}>
+              <span className={styles.highlight}>O'zbekiston Yoshlar Ittifoqi</span> — yoshlarning huquq va manfaatlarini himoya qiluvchi, o'z g'oya va tashabbuslarini ro'yobga chiqarishga yordam beruvchi eng yirik jamoat tashkilotidir.
+            </h2>
           </div>
         </ScrollReveal>
 
         <div className={styles.grid}>
           {aboutCards.map((card, i) => (
             <ScrollReveal key={i} delay={i + 1}>
-              <div className={styles.card}>
+              <div className={`${styles.card} ${card.iconClass === "blue" ? styles.bgBlue : styles.bgGreen}`}>
                 <div className={`${styles.cardIcon} ${card.iconClass === "blue" ? styles.iconBlue : styles.iconGreen}`}>
                   <i className={`fas ${card.icon}`} />
                 </div>
-                <h3>{card.title}</h3>
-                <p>{card.desc}</p>
+                <div className={styles.cardContent}>
+                  <p>{card.desc}</p>
+                </div>
               </div>
             </ScrollReveal>
           ))}
-
-          <ScrollReveal delay={5} className={styles.timelineWrapper}>
-            <div className={styles.timelineCard}>
-              <div>
-                <div className="section-label" style={{ marginBottom: 20 }}>Tarixiy yo&apos;l</div>
-              </div>
-              <div className={styles.timelineVisual}>
-                {timelineItems.map((item, i) => (
-                  <div className={styles.timelineItem} key={i}>
-                    <div className={`${styles.dot} ${i === 0 ? styles.dotFirst : ""}`} />
-                    <div className={styles.year}>{item.year}</div>
-                    <div className={styles.timelineText}>{item.text}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </div>
     </section>

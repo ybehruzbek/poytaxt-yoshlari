@@ -3,16 +3,64 @@
 
 // ===== NAVIGATION =====
 export const navLinks = [
-  { href: "#tashkilot", label: "Biz haqimizda" },
-  { href: "#yonalishlar", label: "Yo'nalishlar" },
-  { href: "#loyihalar", label: "Loyihalar" },
-  { href: "#yangiliklar", label: "Yangiliklar" },
-  { href: "#tumanlar", label: "Tumanlar" },
-  { href: "#rahbariyat", label: "Rahbariyat" },
-  { href: "#yetakchilar", label: "Yetakchilar" },
-  { href: "#hujjatlar", label: "Hujjatlar" },
-  { href: "#galeriya", label: "Galeriya" },
+  { href: "/tashkilot#tashkilot", label: "Biz haqimizda" },
+  { href: "/faoliyat#yonalishlar", label: "Yo'nalishlar" },
+  { href: "/faoliyat#loyihalar", label: "Loyihalar" },
+  { href: "/axborot-markazi#yangiliklar", label: "Yangiliklar" },
+  { href: "/hududlar#tumanlar", label: "Tumanlar" },
+  { href: "/tashkilot#rahbariyat", label: "Rahbariyat" },
+  { href: "/hududlar#yetakchilar", label: "Yetakchilar" },
+  { href: "/tashkilot#hujjatlar", label: "Hujjatlar" },
+  { href: "/axborot-markazi#galeriya", label: "Galeriya" },
 ] as const;
+
+// ===== MEGA MENU =====
+export const megaMenuCategories = [
+  {
+    title: "Tashkilot haqida",
+    links: [
+      { href: "/tashkilot#tashkilot", label: "Tashkilot haqida" },
+      { href: "/tashkilot#missiya", label: "Missiya va qadriyatlar" },
+      { href: "/tashkilot#tarix", label: "Tariximiz" },
+      { href: "/tashkilot#rahbariyat", label: "Rahbariyat" },
+      { href: "/tashkilot#hujjatlar", label: "Hujjatlar" },
+    ]
+  },
+  {
+    title: "Faoliyat",
+    links: [
+      { href: "/faoliyat#yonalishlar", label: "Barcha yo'nalishlar" },
+      { href: "/faoliyat#loyihalar", label: "Asosiy loyihalar" },
+      { href: "/faoliyat#grantlar", label: "Grantlar va tanlovlar" },
+      { href: "/faoliyat#volontyorlik", label: "Volontyorlik" },
+      { href: "/faoliyat#talabalar", label: "Talabalar uchun" },
+    ]
+  },
+  {
+    title: "Axborot markazi",
+    links: [
+      { href: "/axborot-markazi#yangiliklar", label: "Barcha yangiliklar" },
+      { href: "/axborot-markazi#foto", label: "Fotogalereya" },
+      { href: "/axborot-markazi#video", label: "Videolar" },
+      { href: "/axborot-markazi#press-reliz", label: "OAV uchun" },
+    ]
+  },
+  {
+    title: "Hududlar",
+    links: [
+      { href: "/hududlar#tumanlar", label: "Tumanlar ro'yxati" },
+      { href: "/hududlar#yetakchilar", label: "Mahalliy yetakchilar" },
+    ]
+  },
+  {
+    title: "Foydali",
+    links: [
+      { href: "/murojaat#murojaat", label: "Murojaat yuborish" },
+      { href: "/murojaat#savol-javob", label: "Ko'p beriladigan savollar" },
+      { href: "/murojaat#aloqa", label: "Qayta aloqa" },
+    ]
+  }
+];
 
 // ===== MINI STATS =====
 export const miniStats = [
@@ -361,20 +409,20 @@ export const contactInfoItems = [
 
 // ===== FOOTER =====
 export const footerNav = [
-  { href: "#bosh-sahifa", label: "Bosh sahifa" },
-  { href: "#tashkilot", label: "Tashkilot haqida" },
-  { href: "#yonalishlar", label: "Yo'nalishlar" },
-  { href: "#loyihalar", label: "Loyihalar" },
-  { href: "#yangiliklar", label: "Yangiliklar" },
-  { href: "#galeriya", label: "Galeriya" },
+  { href: "/", label: "Bosh sahifa" },
+  { href: "/tashkilot#tashkilot", label: "Tashkilot haqida" },
+  { href: "/faoliyat#yonalishlar", label: "Yo'nalishlar" },
+  { href: "/faoliyat#loyihalar", label: "Loyihalar" },
+  { href: "/axborot-markazi#yangiliklar", label: "Yangiliklar" },
+  { href: "/axborot-markazi#galeriya", label: "Galeriya" },
 ] as const;
 
 export const footerResources = [
-  { href: "#hujjatlar", label: "Hujjatlar" },
-  { href: "#murojaat", label: "Murojaat" },
-  { href: "#tumanlar", label: "Tumanlar" },
-  { href: "#rahbariyat", label: "Rahbariyat" },
-  { href: "#aloqa", label: "Aloqa" },
+  { href: "/tashkilot#hujjatlar", label: "Hujjatlar" },
+  { href: "/murojaat#murojaat", label: "Murojaat" },
+  { href: "/hududlar#tumanlar", label: "Tumanlar" },
+  { href: "/tashkilot#rahbariyat", label: "Rahbariyat" },
+  { href: "/murojaat#aloqa", label: "Aloqa" },
 ] as const;
 
 export const footerContact = [
