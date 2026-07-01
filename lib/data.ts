@@ -79,7 +79,7 @@ export const newsItems: NewsItem[] = [
     date: "15 Noyabr 2024",
     tag: "Strategiya",
     tagClass: "tag-blue",
-    image: "https://picsum.photos/seed/youth-strategy-uzb/800/500",
+    image: "/news-strategy.png",
     featured: true,
   },
   {
@@ -88,7 +88,7 @@ export const newsItems: NewsItem[] = [
     date: "12 Noyabr 2024",
     tag: "Ta'lim",
     tagClass: "tag-green",
-    image: "https://picsum.photos/seed/kelajak-bunyodkori-uz/400/300",
+    image: "/news-education.png",
   },
   {
     id: "3",
@@ -96,7 +96,7 @@ export const newsItems: NewsItem[] = [
     date: "8 Noyabr 2024",
     tag: "Sport",
     tagClass: "tag-orange",
-    image: "https://picsum.photos/seed/youth-sport-medals-uz/400/300",
+    image: "/news-sports.png",
   },
   {
     id: "4",
@@ -104,7 +104,7 @@ export const newsItems: NewsItem[] = [
     date: "5 Noyabr 2024",
     tag: "Texnologiya",
     tagClass: "tag-blue",
-    image: "https://picsum.photos/seed/hackathon-uzb/400/300",
+    image: "/news-hackathon.png",
   },
   {
     id: "5",
