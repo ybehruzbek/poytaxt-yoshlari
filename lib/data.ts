@@ -133,6 +133,7 @@ export const newsItems: NewsItem[] = [
   {
     id: "2",
     title: "«Kelajak bunyodkori» tanlovining final bosqichi bo'lib o'tdi",
+    excerpt: "Poytaxtimizdagi Yoshlar ijod saroyida o'tkazilgan tanlovning yakuniy bosqichida 100 dan ortiq iqtidorli yigit-qizlar o'zlarining innovatsion g'oyalari bilan bellashdilar.",
     date: "12 Noyabr 2024",
     tag: "Ta'lim",
     tagClass: "tag-green",
@@ -141,6 +142,7 @@ export const newsItems: NewsItem[] = [
   {
     id: "3",
     title: "Yosh sportchilarimiz xalqaro musobaqada 15 medal qo'lga kiritdi",
+    excerpt: "Qozog'iston poytaxti Ostona shahrida bo'lib o'tgan yengil atletika bo'yicha xalqaro turnirda vakillarimiz munosib ishtirok etib, umumjamoa hisobida birinchi o'rinni egallashdi.",
     date: "8 Noyabr 2024",
     tag: "Sport",
     tagClass: "tag-orange",

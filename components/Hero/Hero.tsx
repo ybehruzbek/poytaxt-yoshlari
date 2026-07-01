@@ -75,17 +75,18 @@ export default function Hero() {
                 {news.title}
               </h1>
               
-              <p className={styles.desc}>
-                {news.excerpt || "O'zbekiston yoshlar ittifoqi Toshkent shahar kengashining so'nggi va eng muhim xabarlari."}
-              </p>
+              {news.excerpt && (
+                <p className={styles.desc}>
+                  {news.excerpt}
+                </p>
+              )}
               
               <div className={styles.actions}>
                 <Link href={`#yangiliklar`} className="btn-hero-primary">
                   Batafsil o'qish
-                  <i className="fas fa-arrow-right" />
                 </Link>
-                <Link href="#loyihalar" className="btn-hero-secondary">
-                  Barcha loyihalar
+                <Link href="/yangiliklar" className="btn-hero-secondary">
+                  Barcha yangiliklar
                 </Link>
               </div>
             </div>

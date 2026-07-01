@@ -163,10 +163,10 @@ ul, ol {
   justify-content: center;
   gap: 10px;
   padding: 14px 32px;
-  border-radius: 50px;
-  font-weight: 700;
+  border-radius: 8px; /* Changed from 50px to a more professional 8px */
+  font-weight: 600; /* Slightly less heavy than 700 */
   font-size: 15px;
-  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.3s ease; /* Simpler transition */
   text-decoration: none;
   cursor: pointer;
   border: none;
@@ -235,31 +235,29 @@ ul, ol {
 
 /* Hero Primary */
 .btn-hero-primary {
-  background: var(--white);
-  color: var(--blue);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
-  padding: 16px 36px;
+  background: var(--blue);
+  color: var(--white);
+  padding: 16px 32px;
   font-size: 16px;
+  box-shadow: none; /* Removed shadow */
 }
 .btn-hero-primary:hover {
-  background: var(--bg);
-  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.25);
+  background: var(--blue-deep);
+  transform: translateY(-2px);
 }
 
 /* Hero Secondary */
 .btn-hero-secondary {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: transparent;
   color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 16px 36px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 16px 32px;
   font-size: 16px;
 }
 .btn-hero-secondary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  background: var(--white);
+  color: var(--blue-deep);
+  transform: translateY(-2px);
 }
 
 /* ===== UTILITY CLASSES ===== */
