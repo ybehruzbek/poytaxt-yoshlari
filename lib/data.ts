@@ -3,15 +3,15 @@
 
 // ===== NAVIGATION =====
 export const navLinks = [
-  { href: "/tashkilot#tashkilot", label: "Biz haqimizda" },
-  { href: "/faoliyat#yonalishlar", label: "Yo'nalishlar" },
-  { href: "/faoliyat#loyihalar", label: "Loyihalar" },
-  { href: "/axborot-markazi#yangiliklar", label: "Yangiliklar" },
-  { href: "/hududlar#tumanlar", label: "Tumanlar" },
-  { href: "/tashkilot#rahbariyat", label: "Rahbariyat" },
-  { href: "/hududlar#yetakchilar", label: "Yetakchilar" },
-  { href: "/tashkilot#hujjatlar", label: "Hujjatlar" },
-  { href: "/axborot-markazi#galeriya", label: "Galeriya" },
+  { href: "/tashkilot", label: "Biz haqimizda" },
+  { href: "/faoliyat", label: "Yo'nalishlar" },
+  { href: "/loyihalar", label: "Loyihalar" },
+  { href: "/yangiliklar", label: "Yangiliklar" },
+  { href: "/hududlar", label: "Tumanlar" },
+  { href: "/rahbariyat", label: "Rahbariyat" },
+  { href: "/yetakchilar", label: "Yetakchilar" },
+  { href: "/hujjatlar", label: "Hujjatlar" },
+  { href: "/galereya", label: "Galeriya" },
 ] as const;
 
 // ===== MEGA MENU =====
@@ -19,37 +19,37 @@ export const megaMenuCategories = [
   {
     title: "Tashkilot haqida",
     links: [
-      { href: "/tashkilot#tashkilot", label: "Tashkilot haqida" },
-      { href: "/tashkilot#missiya", label: "Missiya va qadriyatlar" },
-      { href: "/tashkilot#tarix", label: "Tariximiz" },
-      { href: "/tashkilot#rahbariyat", label: "Rahbariyat" },
-      { href: "/tashkilot#hujjatlar", label: "Hujjatlar" },
+      { href: "/tashkilot", label: "Tashkilot haqida" },
+      { href: "/tashkilot/missiya", label: "Missiya va qadriyatlar" },
+      { href: "/tashkilot/tarix", label: "Tariximiz" },
+      { href: "/rahbariyat", label: "Rahbariyat" },
+      { href: "/hujjatlar", label: "Hujjatlar" },
     ]
   },
   {
     title: "Faoliyat",
     links: [
-      { href: "/faoliyat#yonalishlar", label: "Barcha yo'nalishlar" },
-      { href: "/faoliyat#loyihalar", label: "Asosiy loyihalar" },
-      { href: "/faoliyat#grantlar", label: "Grantlar va tanlovlar" },
-      { href: "/faoliyat#volontyorlik", label: "Volontyorlik" },
-      { href: "/faoliyat#talabalar", label: "Talabalar uchun" },
+      { href: "/faoliyat", label: "Barcha yo'nalishlar" },
+      { href: "/loyihalar", label: "Asosiy loyihalar" },
+      { href: "/faoliyat/grantlar", label: "Grantlar va tanlovlar" },
+      { href: "/faoliyat/volontyorlik", label: "Volontyorlik" },
+      { href: "/faoliyat/talabalar", label: "Talabalar uchun" },
     ]
   },
   {
     title: "Axborot markazi",
     links: [
-      { href: "/axborot-markazi#yangiliklar", label: "Barcha yangiliklar" },
-      { href: "/axborot-markazi#foto", label: "Fotogalereya" },
-      { href: "/axborot-markazi#video", label: "Videolar" },
-      { href: "/axborot-markazi#press-reliz", label: "OAV uchun" },
+      { href: "/yangiliklar", label: "Barcha yangiliklar" },
+      { href: "/galereya", label: "Fotogalereya" },
+      { href: "/axborot-markazi/video", label: "Videolar" },
+      { href: "/axborot-markazi/press-reliz", label: "OAV uchun" },
     ]
   },
   {
     title: "Hududlar",
     links: [
-      { href: "/hududlar#tumanlar", label: "Tumanlar ro'yxati" },
-      { href: "/hududlar#yetakchilar", label: "Mahalliy yetakchilar" },
+      { href: "/hududlar", label: "Tumanlar ro'yxati" },
+      { href: "/yetakchilar", label: "Mahalliy yetakchilar" },
     ]
   },
   {
@@ -127,7 +127,7 @@ export const newsItems: NewsItem[] = [
     date: "15 Noyabr 2024",
     tag: "Strategiya",
     tagClass: "tag-blue",
-    image: "/news-strategy.png",
+    image: "/images/news/news_strategy_1782905584191.png",
     featured: true,
   },
   {
@@ -136,7 +136,7 @@ export const newsItems: NewsItem[] = [
     date: "12 Noyabr 2024",
     tag: "Ta'lim",
     tagClass: "tag-green",
-    image: "/news-education.png",
+    image: "/images/news/news_education_1782905592898.png",
   },
   {
     id: "3",
@@ -144,7 +144,7 @@ export const newsItems: NewsItem[] = [
     date: "8 Noyabr 2024",
     tag: "Sport",
     tagClass: "tag-orange",
-    image: "/news-sports.png",
+    image: "/images/news/news_sports_1782905601772.png",
   },
   {
     id: "4",
@@ -152,7 +152,7 @@ export const newsItems: NewsItem[] = [
     date: "5 Noyabr 2024",
     tag: "Texnologiya",
     tagClass: "tag-blue",
-    image: "/news-hackathon.png",
+    image: "/images/news/news_hackathon_1782905609599.png",
   },
   {
     id: "5",
@@ -160,7 +160,7 @@ export const newsItems: NewsItem[] = [
     date: "1 Noyabr 2024",
     tag: "Ekologiya",
     tagClass: "tag-green",
-    image: "https://picsum.photos/seed/green-space-uzb/400/300",
+    image: "/images/news/news_eco_1782905632260.png",
   },
   {
     id: "6",
@@ -168,7 +168,7 @@ export const newsItems: NewsItem[] = [
     date: "28 Oktyabr 2024",
     tag: "Ta'lim",
     tagClass: "tag-blue",
-    image: "https://picsum.photos/seed/edu-exhibition-uzb/400/300",
+    image: "/images/news/news_exhibition_1782905641384.png",
   }
 ];
 
@@ -187,7 +187,7 @@ export const projects: ProjectItem[] = [
     id: "1",
     title: "Yoshlar Texnoparki",
     desc: "Yosh innovatorlar uchun zamonaviy texnoparklar tarmog'ini yaratish va IT sohasiga yo'naltirish dasturi.",
-    image: "https://picsum.photos/seed/technopark-youth-uz/600/400",
+    image: "/images/projects/project_technopark_1782905388110.png",
     progress: 75,
     status: "Faol",
   },
@@ -195,7 +195,7 @@ export const projects: ProjectItem[] = [
     id: "2",
     title: "Digital Yoshlar",
     desc: "Raqamli savodxonlikni oshirish, dasturlash va sun'iy intellekt sohalarida bepul ta'lim berish.",
-    image: "https://picsum.photos/seed/digital-youth-uz/600/400",
+    image: "/images/projects/project_digital_1782905396676.png",
     progress: 85,
     status: "Faol",
   },
@@ -203,7 +203,7 @@ export const projects: ProjectItem[] = [
     id: "3",
     title: "Kelajak O'qituvchilari",
     desc: "Ta'lim sohasida kadrlar tayyorlash, malaka oshirish va pedagogik kasbga jalb qilish dasturi.",
-    image: "https://picsum.photos/seed/future-teachers-uz/600/400",
+    image: "/images/projects/project_teachers_1782905407793.png",
     progress: 60,
     status: "Faol",
   },
@@ -211,23 +211,23 @@ export const projects: ProjectItem[] = [
     id: "4",
     title: "Sport Salohiyati",
     desc: "Ommaviy sport va sog'lom turmush tarzini targ'ib qilish, yosh sportchilarni qo'llab-quvvatlash.",
-    image: "https://picsum.photos/seed/sport-potential-uz/600/400",
+    image: "/images/projects/project_sports_1782905415673.png",
     progress: 70,
     status: "Faol",
   },
   {
     id: "5",
     title: "Yashil Makon",
-    desc: "Ekologik mas'uliyatni oshirish, yashil hududlarni kengaytirish va atrof-muhitni muhofaza qilish.",
-    image: "https://picsum.photos/seed/green-space-eco-uz/600/400",
-    progress: 45,
+    desc: "Ekologik holatni yaxshilash, daraxt ekish va atrof-muhitni muhofaza qilish yoshlar harakati.",
+    image: "/images/projects/project_eco_1782905423561.png",
+    progress: 90,
     status: "Faol",
   },
   {
     id: "6",
     title: "Ishga Joylashtirish",
     desc: "Yoshlarni mehnat bozorida qo'llab-quvvatlash, kasbiy yo'nalish bo'yicha maslahat berish dasturi.",
-    image: "https://picsum.photos/seed/employment-youth-uz/600/400",
+    image: "/images/projects/project_employment_1782905711723.png",
     progress: 55,
     status: "Faol",
   },
@@ -326,10 +326,10 @@ export interface LeaderItem {
 }
 
 export const leaders: LeaderItem[] = [
-  { id: "1", name: "Karimov Jasur", position: "Toshkent shahar Kengashi raisi", image: "https://picsum.photos/seed/leader-man-1/400/500.jpg" },
-  { id: "2", name: "Toshmatova Nilufar", position: "Birinchi o'rinbosar", image: "https://picsum.photos/seed/leader-woman-1/400/500.jpg" },
-  { id: "3", name: "Saidov Bobur", position: "O'rinbosar — tashkilot ishi", image: "https://picsum.photos/seed/leader-man-2/400/500.jpg" },
-  { id: "4", name: "Xasanova Madina", position: "Loyihalar bo'yicha koordinator", image: "https://picsum.photos/seed/leader-woman-2/400/500.jpg" },
+  { id: "1", name: "Karimov Jasur", position: "Toshkent shahar Kengashi raisi", image: "/images/leaders/leader_jasur_1782906199502.png" },
+  { id: "2", name: "Toshmatova Nilufar", position: "Birinchi o'rinbosar", image: "/images/leaders/leader_nilufar_1782906209134.png" },
+  { id: "3", name: "Saidov Bobur", position: "O'rinbosar — tashkilot ishi", image: "/images/leaders/leader_bobur_1782906218310.png" },
+  { id: "4", name: "Xasanova Madina", position: "Loyihalar bo'yicha koordinator", image: "/images/leaders/leader_madina_1782906226072.png" },
 ];
 
 // ===== YOUTH LEADERS =====

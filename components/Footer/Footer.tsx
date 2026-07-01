@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <p>&copy; 2024 O&apos;zbekiston Yoshlar Ittifoqi</p>
+          <p>&copy; {new Date().getFullYear()} O&apos;zbekiston Yoshlar Ittifoqi</p>
           <p>
             <a href="#">Maxfiylik siyosati</a> &middot; <a href="#">Foydalanish shartlari</a>
           </p>

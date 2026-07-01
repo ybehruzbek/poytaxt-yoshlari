@@ -121,14 +121,10 @@ export default function Navbar() {
             )}
           </div>
 
-          <a
-            href="#login"
-            className={styles.navCta}
-            onClick={(e) => { e.preventDefault(); closeMenu(); /* open login modal */ }}
-          >
-            <i className="fas fa-sign-in-alt" />
-            Tizimga kirish
-          </a>
+          <Link href="/login" className="nav-cta">
+            <i className="fas fa-user-circle" />
+            <span>Tizimga kirish</span>
+          </Link>
           
           <button
             className={styles.menuToggleBtn}

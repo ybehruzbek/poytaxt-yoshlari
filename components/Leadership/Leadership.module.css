@@ -1,203 +1,113 @@
-.section { padding: 80px 0; background: transparent; }
-.headerTop {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 56px;
+.section { padding: 120px 0; background: var(--bg); }
+.header { margin-bottom: 60px; max-width: 800px; }
+.title {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--blue-deep);
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.desc {
+  font-size: 20px;
+  color: var(--text);
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
-
-.headerContent {
-  max-width: 600px;
-}
-
-
-
-/* Carousel Layout */
-.carouselWrapper {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 28px;
-}
-
-.carouselContainer {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-}
-
-.carouselTrack {
-  display: flex;
-  width: max-content;
-  animation: scrollMarquee 80s linear infinite;
-  padding: 24px 0 40px 0;
-}
-
-.carouselTrack:hover {
-  animation-play-state: paused;
-}
-
-.carouselSet {
-  display: flex;
-  gap: 24px;
-  padding-right: 24px; /* match the gap so it seamlessly connects with the next set */
-}
-
-@keyframes scrollMarquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.carouselItem {
-  flex: 0 0 280px; /* Made cards much narrower (portrait style) */
-}
-
-/* Card Styling adjustments for carousel */
 .card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-  text-align: center;
-  transition: all 0.4s var(--ease);
+  background: var(--white);
+  border-radius: 40px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  text-decoration: none;
+  color: inherit;
 }
-
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 35px rgba(13, 59, 102, 0.08);
-  border-color: rgba(255, 255, 255, 1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
 }
 
 .imgWrap {
-  height: 320px;
-  position: relative;
-  border-radius: 16px;
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 32px;
   overflow: hidden;
+  position: relative;
+  margin-bottom: 24px;
 }
-
-.imgWrap::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(13, 59, 102, 0.6), transparent 50%);
-  opacity: 0;
-  transition: opacity 0.5s var(--ease);
-}
-
-.card:hover .imgWrap::after {
-  opacity: 1;
-}
-
 .imgWrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.6s var(--ease);
 }
-
 .card:hover .imgWrap img {
-  transform: scale(1.08);
-  filter: brightness(1.05);
+  transform: scale(1.05);
 }
 
 .socials {
   position: absolute;
-  bottom: 20px;
+  bottom: 16px;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 2;
+  transform: translateY(16px);
+  transition: all 0.4s var(--ease);
 }
-
 .card:hover .socials {
   opacity: 1;
   transform: translateY(0);
 }
-
 .socialBtn {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  transition: all 0.4s var(--ease);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--blue-deep);
+  transition: all 0.3s var(--ease);
+}
+.socialBtn:hover {
   background: var(--white);
   color: var(--blue);
+  transform: scale(1.1);
 }
-
-.socialBtn:hover {
-  transform: scale(1.1) translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.instagram { color: #E1306C; }
-.telegram { color: #2AABEE; }
 
 .body {
-  padding: 24px 12px 12px 12px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  padding: 0 12px 16px;
+  text-align: center;
 }
-
 .body h3 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
-  margin-bottom: 6px;
-  color: var(--primary-dark);
-}
-
-.body p {
-  font-size: 15px;
-  color: var(--blue);
-  font-weight: 600;
+  color: var(--blue-deep);
   margin-bottom: 8px;
 }
-
-.actionCenter {
-  display: flex;
-  justify-content: center;
-  margin-top: 48px;
+.body p {
+  font-size: 16px;
+  color: var(--text);
+  opacity: 0.8;
+  font-weight: 500;
 }
 
-.expandBtn {
-  font-size: 15px;
-  padding: 14px 32px;
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (max-width: 768px) {
-  .section { padding: 60px 0; }
-  .headerTop {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 40px;
-  }
-  .carouselItem { flex: 0 0 280px; }
-}
-
-@media (max-width: 480px) {
-  .carouselItem { flex: 0 0 260px; }
-  .expandBtn { width: 100%; }
+  .section { padding: 80px 0; }
+  .title { font-size: 40px; }
+  .grid { grid-template-columns: 1fr; }
+  .card { padding: 24px; border-radius: 30px; }
 }

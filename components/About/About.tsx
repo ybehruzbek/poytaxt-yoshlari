@@ -1,6 +1,6 @@
 import styles from "./About.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { aboutCards, timelineItems } from "@/lib/data";
+import { aboutCards } from "@/lib/data";
 
 export default function About() {
   return (

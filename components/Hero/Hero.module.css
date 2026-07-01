@@ -1,15 +1,16 @@
 .hero {
   position: relative;
-  width: calc(100% - 40px);
-  max-width: 1400px;
-  height: calc(100vh - 120px);
+  width: 100%;
+  height: calc(100vh - 70px);
   min-height: 600px;
-  margin: 100px auto 40px auto; /* space for navbar */
+  margin: 70px auto 40px auto; 
   background: #000;
   display: flex;
   align-items: center;
-  border-radius: 40px;
+  border-radius: 0 0 60px 60px;
   overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  transform: translateZ(0);
   box-shadow: 0 20px 50px rgba(0,0,0,0.1);
 }
 
@@ -137,69 +138,13 @@
   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
-/* ================= UNIQUE BUTTONS ================= */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-/* ================= PORTAL BUTTONS (MyRosmol / Qalampir style) ================= */
+/* ================= ACTIONS ================= */
 .actions {
   display: flex;
   align-items: center;
   gap: 16px;
   margin-top: 32px;
 }
-
-.btnPrimary {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--blue);
-  color: var(--white);
-  font-size: 18px;
-  font-weight: 700;
-  text-decoration: none;
-  padding: 18px 40px;
-  border-radius: 50px;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 8px 24px rgba(13, 59, 102, 0.3);
-}
-
-.btnPrimary:hover {
-  background: #0b3156;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(13, 59, 102, 0.3);
-}
-
-.btnPrimary i {
-  font-size: 14px;
-}
-
-.btnSecondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px);
-  color: var(--white);
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 16px 32px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease-in-out;
-}
-
-.btnSecondary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-}
-
-
 /* ================= CONTROLS ================= */
 .controlsWrap {
   display: flex;
@@ -272,8 +217,8 @@
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
   .hero {
-    border-radius: 24px;
-    width: calc(100% - 32px);
+    border-radius: 0 0 40px 40px;
+    width: 100%;
   }
   .title {
     font-size: 40px;
@@ -287,9 +232,9 @@
   .hero {
     min-height: 500px;
     height: auto;
-    margin: 80px auto 20px auto;
-    border-radius: 20px;
-    width: calc(100% - 24px);
+    margin: 70px auto 20px auto;
+    border-radius: 0 0 30px 30px;
+    width: 100%;
   }
   .containerWrap {
     padding-bottom: 40px;

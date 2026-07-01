@@ -5,7 +5,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import BackgroundTheme from "@/components/ui/BackgroundTheme";
 
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
@@ -57,7 +56,6 @@ export default function RootLayout({
         }}
       >
         <ThemeProvider>
-          <BackgroundTheme />
           <Navbar />
           <main>{children}</main>
           <Footer />

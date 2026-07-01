@@ -34,7 +34,7 @@ export default function Stats() {
           <div className={styles.statsRight}>
             <ScrollReveal delay={2} className={styles.revealWrapper}>
               <div className={styles.imageCard}>
-                <img src="https://picsum.photos/seed/yoshlar123/800/1000" alt="Yoshlar ittifoqi tadbiri" className={styles.mainImage} />
+                <img src="/images/about/about_cover_1782905651024.png" alt="Yoshlar ittifoqi jamoasi" className={styles.mainImage} />
                 <div className={styles.overlay}>
                   <div className={styles.overlayPlay}>
                     <i className="fas fa-play" />

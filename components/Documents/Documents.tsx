@@ -7,13 +7,12 @@ export default function Documents() {
     <section className={styles.section} id="hujjatlar">
       <div className="container">
         <ScrollReveal>
-          <div className={styles.headerCenter}>
-            <div className="section-label">Hujjatlar</div>
-            <h2 className="section-title">
+          <div className={styles.header}>
+            <h2 className={styles.title}>
               Rasmiy hujjatlar
             </h2>
-            <p className="section-desc" style={{ margin: '0 auto', maxWidth: '600px' }}>
-              Nizomlar, buyruqlar, hisobotlar va boshqaruv hujjatlari.
+            <p className={styles.desc}>
+              Nizomlar, buyruqlar, hisobotlar va tashkilot faoliyatiga oid boshqaruv hujjatlari bilan tanishing.
             </p>
           </div>
         </ScrollReveal>
@@ -33,7 +32,7 @@ export default function Documents() {
                     <i className={`fas ${doc.icon}`} />
                   </div>
                   <div>
-                    <div className={styles.title}>{doc.title}</div>
+                    <h3 className={styles.docTitle}>{doc.title}</h3>
                     <div className={styles.meta}>
                       {doc.type} • {doc.size} • {doc.date}
                     </div>

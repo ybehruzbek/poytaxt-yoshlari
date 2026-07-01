@@ -1,0 +1,345 @@
+.pageWrapper {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* HERO SECTION */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  text-align: center;
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroBg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(13, 59, 102, 0.4), rgba(13, 59, 102, 0.9));
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.heroBadge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.heroTitle {
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.heroDesc {
+  font-size: 24px;
+  font-weight: 400;
+  opacity: 0.9;
+  line-height: 1.5;
+  margin-bottom: 40px;
+}
+
+/* STATS SECTION */
+.statsSection {
+  padding: 80px 0;
+  background: var(--white);
+  position: relative;
+  z-index: 10;
+  margin-top: -60px;
+  border-radius: 40px 40px 0 0;
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.05);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  text-align: center;
+}
+
+.statItem {
+  padding: 32px 24px;
+  background: var(--bg);
+  border-radius: 24px;
+  transition: transform 0.4s var(--ease);
+}
+
+.statItem:hover {
+  transform: translateY(-8px);
+}
+
+.statNumber {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--blue);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* CHAIRMAN MESSAGE */
+.messageSection {
+  padding: 120px 0;
+  background: var(--bg);
+}
+
+.messageContainer {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  background: var(--white);
+  border-radius: 40px;
+  padding: 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+}
+
+.messageImage {
+  flex: 0 0 400px;
+  height: 500px;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.messageImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.messageContent {
+  flex: 1;
+}
+
+.quoteIcon {
+  font-size: 48px;
+  color: var(--blue-pale);
+  margin-bottom: 24px;
+}
+
+.messageText {
+  font-size: 24px;
+  line-height: 1.6;
+  color: var(--blue-deep);
+  font-weight: 600;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.authorName {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.authorRole {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* WHY IT MATTERS (IMPACT) */
+.impactSection {
+  padding: 120px 0;
+  background: var(--white);
+}
+
+.impactContainer {
+  display: flex;
+  align-items: stretch;
+  gap: 64px;
+  flex-direction: row-reverse;
+}
+
+.impactImage {
+  flex: 1;
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(13, 59, 102, 0.1);
+}
+
+.impactImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.impactContent {
+  flex: 1;
+}
+
+.impactTitle {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--blue-deep);
+  margin-bottom: 24px;
+  line-height: 1.1;
+}
+
+.impactDesc {
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.checkIcon {
+  width: 32px;
+  height: 32px;
+  background: var(--blue-pale);
+  color: var(--blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* NAVIGATION CARDS */
+.navSection {
+  padding: 120px 0;
+  background: var(--bg);
+}
+
+.navHeader {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.navTitle {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--blue-deep);
+}
+
+.navGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.navCard {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 32px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  transition: all 0.4s var(--ease);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.navCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  background: var(--blue);
+  color: var(--white);
+}
+
+.navIcon {
+  width: 80px;
+  height: 80px;
+  background: var(--bg);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--blue);
+  margin-bottom: 24px;
+  transition: all 0.4s var(--ease);
+}
+
+.navCard:hover .navIcon {
+  background: rgba(255,255,255,0.2);
+  color: var(--white);
+}
+
+.navCard h3 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.navCard p {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .heroTitle { font-size: 56px; }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .messageContainer { flex-direction: column; text-align: center; }
+  .messageImage { flex: none; width: 100%; height: 400px; }
+  .impactContainer { flex-direction: column; }
+  .impactImage { width: 100%; height: 400px; }
+  .navGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .heroTitle { font-size: 40px; }
+  .heroDesc { font-size: 18px; }
+  .statNumber { font-size: 40px; }
+  .messageText { font-size: 20px; }
+  .impactTitle { font-size: 36px; }
+  .navGrid { grid-template-columns: 1fr; }
+}

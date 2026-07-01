@@ -27,12 +27,15 @@ export default function Projects() {
           {projects.map((project, i) => (
             <ScrollReveal key={project.id} delay={Math.min(i + 1, 6)} className={styles.cardWrapper}>
               <Link href={`/loyihalar/${project.id}`} className={styles.card}>
-                <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
-                <div className={styles.overlay}>
+                <div className={styles.imageWrapper}>
+                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
                   <span className={styles.status}>{project.status}</span>
-                  <div className={styles.body}>
-                    <h3>{project.title}</h3>
-                    <p>{project.desc}</p>
+                </div>
+                <div className={styles.body}>
+                  <h3>{project.title}</h3>
+                  <p>{project.desc}</p>
+                  <div className={styles.action}>
+                    Batafsil <i className="fas fa-arrow-right" />
                   </div>
                 </div>
               </Link>

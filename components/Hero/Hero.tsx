@@ -80,11 +80,11 @@ export default function Hero() {
               </p>
               
               <div className={styles.actions}>
-                <Link href={`#yangiliklar`} className={styles.btnPrimary}>
+                <Link href={`#yangiliklar`} className="btn-hero-primary">
                   Batafsil o'qish
                   <i className="fas fa-arrow-right" />
                 </Link>
-                <Link href="#loyihalar" className={styles.btnSecondary}>
+                <Link href="#loyihalar" className="btn-hero-secondary">
                   Barcha loyihalar
                 </Link>
               </div>

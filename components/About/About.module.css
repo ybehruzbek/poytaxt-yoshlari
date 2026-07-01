@@ -36,12 +36,6 @@
   transform: translateY(-4px);
   box-shadow: 0 15px 30px rgba(0,0,0,0.05);
 }
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -5px rgba(13, 59, 102, 0.08);
-  border-color: rgba(255, 255, 255, 1);
-}
-.card:hover::before { opacity: 1; }
 
 .cardIcon {
   width: 64px; height: 64px;
@@ -64,42 +58,6 @@
   line-height: 1.5; 
   margin: 0;
 }
-
-/* Timeline Card - Bento Style */
-.timelineWrapper {
-  grid-column: span 2;
-}
-.timelineCard {
-  padding: 48px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  gap: 60px;
-  align-items: flex-start;
-}
-.timelineVisual { display: flex; flex-direction: column; flex-shrink: 0; width: 100%; position: relative; z-index: 2; }
-.timelineItem { display: flex; align-items: flex-start; gap: 20px; padding-bottom: 32px; position: relative; }
-.timelineItem:last-child { padding-bottom: 0; }
-.timelineItem:not(:last-child)::after {
-  content: ''; position: absolute; left: 6px; top: 20px; bottom: 0; width: 2px;
-  background: linear-gradient(to bottom, rgba(13,59,102,0.1), transparent);
-}
-.dot {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: rgba(13,59,102,0.1); border: 2px solid var(--white);
-  flex-shrink: 0; margin-top: 4px; position: relative; z-index: 2;
-  transition: all 0.4s ease;
-}
-.timelineItem:hover .dot { transform: scale(1.3); background: var(--blue); }
-.dotFirst { background: var(--green); box-shadow: 0 0 0 4px var(--green-pale); }
-.timelineItem:hover .dotFirst { background: var(--green); transform: scale(1.1); }
-.year { font-size: 14px; font-weight: 800; color: var(--text); min-width: 44px; padding-top: 1px; }
-.timelineText { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
 
 @media (max-width: 1024px) {
   .introText {
