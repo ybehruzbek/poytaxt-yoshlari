@@ -32,7 +32,7 @@ export default function Stats() {
             </div>
           </div>
           <div className={styles.statsRight}>
-            <ScrollReveal delay={2}>
+            <ScrollReveal delay={2} className={styles.revealWrapper}>
               <div className={styles.imageCard}>
                 <img src="https://picsum.photos/seed/yoshlar123/800/1000" alt="Yoshlar ittifoqi tadbiri" className={styles.mainImage} />
                 <div className={styles.overlay}>

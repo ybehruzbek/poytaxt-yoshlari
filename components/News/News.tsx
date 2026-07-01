@@ -29,15 +29,12 @@ export default function News() {
             {/* Featured */}
             {featured && (
               <ScrollReveal delay={1} className={styles.featuredWrapper}>
-                <Link href={`/yangiliklar/${featured.id}`} className={styles.featured} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <div className={styles.featuredImg}>
-                    <Image src={featured.image} alt={featured.title} width={800} height={500} sizes="(max-width: 768px) 100vw, 55vw" />
-                  </div>
-                  <div className={styles.body}>
+                <Link href={`/yangiliklar/${featured.id}`} className={styles.featured}>
+                  <Image src={featured.image} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 66vw" className={styles.bgImage} />
+                  <div className={styles.featuredOverlay}>
                     <span className={`${styles.tag} ${featured.tagClass}`}>{featured.tag}</span>
-                    <div className={styles.date}>{featured.date}</div>
-                    <h3 className={`${styles.title} ${styles.featuredTitle}`}>{featured.title}</h3>
-                    {featured.excerpt && <p className={styles.excerpt}>{featured.excerpt}</p>}
+                    <h3 className={styles.featuredTitle}>{featured.title}</h3>
+                    <div className={styles.featuredDate}>{featured.date}</div>
                   </div>
                 </Link>
               </ScrollReveal>
@@ -46,14 +43,14 @@ export default function News() {
             {/* First Small Card (Top Right) */}
             {others[0] && (
               <ScrollReveal delay={2} className={styles.smallWrapper}>
-                <Link href={`/yangiliklar/${others[0].id}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link href={`/yangiliklar/${others[0].id}`} className={styles.small}>
                   <div className={styles.smallImg}>
-                    <Image src={others[0].image} alt={others[0].title} width={400} height={300} sizes="120px" />
+                    <Image src={others[0].image} alt={others[0].title} width={400} height={300} sizes="33vw" />
                   </div>
                   <div className={styles.smallBody}>
                     <span className={`${styles.tag} ${others[0].tagClass}`}>{others[0].tag}</span>
+                    <h3 className={styles.smallTitle}>{others[0].title}</h3>
                     <div className={styles.date}>{others[0].date}</div>
-                    <h3 className={`${styles.title} ${styles.smallTitle}`}>{others[0].title}</h3>
                   </div>
                 </Link>
               </ScrollReveal>
@@ -64,14 +61,14 @@ export default function News() {
             {/* Remaining Small Cards */}
             {others.slice(1).map((item, i) => (
               <ScrollReveal key={item.id} delay={i + 3} className={styles.flexItem}>
-                <Link href={`/yangiliklar/${item.id}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link href={`/yangiliklar/${item.id}`} className={styles.small}>
                   <div className={styles.smallImg}>
-                    <Image src={item.image} alt={item.title} width={400} height={300} sizes="120px" />
+                    <Image src={item.image} alt={item.title} width={400} height={300} sizes="33vw" />
                   </div>
                   <div className={styles.smallBody}>
                     <span className={`${styles.tag} ${item.tagClass}`}>{item.tag}</span>
+                    <h3 className={styles.smallTitle}>{item.title}</h3>
                     <div className={styles.date}>{item.date}</div>
-                    <h3 className={`${styles.title} ${styles.smallTitle}`}>{item.title}</h3>
                   </div>
                 </Link>
               </ScrollReveal>

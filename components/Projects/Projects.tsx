@@ -26,14 +26,14 @@ export default function Projects() {
         <div className={styles.grid}>
           {projects.map((project, i) => (
             <ScrollReveal key={project.id} delay={Math.min(i + 1, 6)} className={styles.cardWrapper}>
-              <Link href={`/loyihalar/${project.id}`} className={styles.card} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                <div className={styles.img}>
-                  <Image src={project.image} alt={project.title} width={600} height={400} sizes="(max-width: 768px) 100vw, 33vw" />
+              <Link href={`/loyihalar/${project.id}`} className={styles.card}>
+                <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
+                <div className={styles.overlay}>
                   <span className={styles.status}>{project.status}</span>
-                </div>
-                <div className={styles.body}>
-                  <h3>{project.title}</h3>
-                  <p>{project.desc}</p>
+                  <div className={styles.body}>
+                    <h3>{project.title}</h3>
+                    <p>{project.desc}</p>
+                  </div>
                 </div>
               </Link>
             </ScrollReveal>

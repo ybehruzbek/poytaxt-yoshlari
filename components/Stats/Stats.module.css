@@ -6,14 +6,31 @@
 .splitLayout {
   display: flex;
   gap: 60px;
-  align-items: center;
+  align-items: stretch;
 }
 .statsLeft {
-  flex: 1;
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .statsRight {
   flex: 1;
-  max-width: 500px;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+}
+.statsRight > div {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.revealWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .sectionTitle {
   font-size: 48px;
@@ -31,18 +48,19 @@
 .grid { 
   display: grid; 
   grid-template-columns: repeat(2, 1fr); 
-  gap: 40px; 
+  gap: 32px; 
 }
 .item { 
   text-align: left; 
 }
 .number { 
-  font-size: clamp(48px, 6vw, 72px); 
+  font-size: clamp(36px, 5vw, 52px); 
   font-weight: 900; 
   color: var(--blue); 
   line-height: 1; 
-  margin-bottom: 12px; 
-  letter-spacing: -2px;
+  margin-bottom: 8px; 
+  letter-spacing: -1px;
+  white-space: nowrap;
 }
 .label { 
   font-size: 16px; 
@@ -53,11 +71,12 @@
 
 .imageCard {
   width: 100%;
-  border-radius: 40px;
+  height: 100%;
+  flex: 1;
+  border-radius: 30px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-  aspect-ratio: 4/5;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 .mainImage {
   width: 100%;
@@ -71,17 +90,23 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+  background: rgba(13, 59, 102, 0.4);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   padding: 40px;
   color: white;
+  transition: background 0.3s ease;
+}
+.imageCard:hover .overlay {
+  background: rgba(13, 59, 102, 0.2);
 }
 .overlayPlay {
   width: 64px;
   height: 64px;
   background: var(--blue);
+  color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -96,9 +121,11 @@
   background: var(--green);
 }
 .overlay h3 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
+  color: var(--white);
   margin: 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 @media (max-width: 1024px) { 
