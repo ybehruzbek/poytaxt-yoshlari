@@ -2,6 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Tashkilot.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import TashkilotHeroSlider from "@/components/TashkilotHeroSlider/TashkilotHeroSlider";
+import TashkilotTimelinePreview from "@/components/TashkilotTimelinePreview/TashkilotTimelinePreview";
+import TashkilotDirections from "@/components/TashkilotDirections/TashkilotDirections";
+import TashkilotValues from "@/components/TashkilotValues/TashkilotValues";
 
 export const metadata = {
   title: "Tashkilot haqida | O'zbekiston Yoshlar Ittifoqi",
@@ -10,29 +14,8 @@ export const metadata = {
 export default function TashkilotPage() {
   return (
     <div className={styles.pageWrapper}>
-      {/* 1. HERO SECTION */}
-      <section className={styles.hero}>
-        <div className={styles.heroBg}>
-          <Image 
-            src="/images/tashkilot/tashkilot_hero_1782907121959.png" 
-            alt="Toshkent yoshlari" 
-            fill 
-            priority
-          />
-          <div className={styles.heroOverlay} />
-        </div>
-        
-        <div className={styles.heroContent}>
-          <ScrollReveal>
-            <div className={styles.heroBadge}>Biz Kimmiz?</div>
-            <h1 className={styles.heroTitle}>Kelajakni birgalikda quramiz</h1>
-            <p className={styles.heroDesc}>
-              O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi, 
-              ularning g'oya va tashabbuslarini ro'yobga chiqaradigan eng yirik jamoat tashkilotidir.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* 1. HERO SLIDER SECTION */}
+      <TashkilotHeroSlider />
 
       {/* 2. STATS SECTION */}
       <section className={styles.statsSection}>
@@ -58,6 +41,71 @@ export default function TashkilotPage() {
         </div>
       </section>
 
+      {/* 2.5. ORGANIZATION STRUCTURE (NEW) */}
+      <section className={styles.structureSection}>
+        <div className="container">
+          <div className={styles.structureHeader}>
+            <ScrollReveal>
+              <h2 className={styles.structureTitle}>Tashkilot Tuzilmasi</h2>
+              <p className={styles.structureDesc}>
+                Yoshlar Ittifoqi — yoshlar o'zini o'zi boshqaradigan va yoshlar manfaati uchun xizmat qiladigan tizim.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          <div className={styles.structureGrid}>
+            <ScrollReveal delay={1} className={styles.structureCard}>
+              <div className={styles.structureIcon}><i className="fas fa-school" /></div>
+              <h3>Boshlang'ich Tashkilotlar</h3>
+              <p>Maktab, kollej, litsey va OTMlardagi Kengashlar.</p>
+            </ScrollReveal>
+            <ScrollReveal delay={2} className={styles.structureCard}>
+              <div className={styles.structureIcon}><i className="fas fa-building" /></div>
+              <h3>Tuman Kengashlari</h3>
+              <p>Tuman miqyosidagi yoshlar bilan ishlash bo'yicha koordinatsion markaz.</p>
+            </ScrollReveal>
+            <ScrollReveal delay={3} className={styles.structureCard}>
+              <div className={styles.structureIcon}><i className="fas fa-city" /></div>
+              <h3>Toshkent Shahar Kengashi</h3>
+              <p>Poytaxt miqyosida loyihalar, forumlar va yoshlar siyosatini yurituvchi asosiy organ.</p>
+            </ScrollReveal>
+            <ScrollReveal delay={4} className={styles.structureCard}>
+              <div className={styles.structureIcon}><i className="fas fa-sitemap" /></div>
+              <h3>Markaziy Kengash</h3>
+              <p>Butun Respublika yoshlari harakatini birlashtiruvchi markaziy apparat.</p>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 2.6. SARDORLAR KENGASHI (EDITORIAL TEXT) */}
+      <section className={styles.editorialSection}>
+        <div className={styles.editorialContainer}>
+          <ScrollReveal>
+            <span className={styles.editorialSubtitle}>Bizning tayanchimiz</span>
+            <h2 className={styles.editorialTitle}>Sardorlar Kengashi — O'zbekiston kelajagi poydevori</h2>
+            <p className={styles.editorialText}>
+              Sardorlar Kengashi — bu shunchaki yoshlar guruhi emas, balki mamlakatimizdagi yuz minglab maktab o'quvchilarini o'ziga qamrab olgan <strong>eng yirik Liderlik Maktabi</strong> hisoblanadi. Bu tuzilma yoshlarni faqatgina boshqarishni emas, balki mas'uliyatni o'z bo'yniga olishni, jamoa bilan ishlashni va vatanparvarlikni o'rgatadi.
+            </p>
+            <p className={styles.editorialText}>
+              Har bir maktab, tuman, shahar va respublika bosqichida saylanadigan Sardorlar o'z tengdoshlarining muammolarini o'rganadi, ularning ovozi bo'ladi. Ular nafaqat o'z hududlaridagi o'zgarishlarga, balki butun mamlakat yoshlar siyosatiga bevosita ta'sir ko'rsata oladigan haqiqiy ko'ngillilar armiyasidir.
+            </p>
+            <blockquote className={styles.editorialQuote}>
+              "Sardorlar kengashi – bu bolalarning ijodiy va ijtimoiy qobiliyatlarini ro'yobga chiqaruvchi, tengdoshlar o'rtasida sog'lom raqobat va do'stlik muhitini yaratuvchi noyob ekotizimdir."
+            </blockquote>
+            <p className={styles.editorialText}>
+              Aynan shuning uchun Yoshlar Ittifoqi o'zining asosiy e'tiborini Sardorlar Kengashini qo'llab-quvvatlash va rivojlantirishga qaratadi. Biz ishonamizki, bugungi maktab sardori — ertangi kunning buyuk davlat arbobi, kuchli tadbirkori yoki yetuk olimi bo'lishi muqarrar.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 2.7. DIRECTIONS (STICKY SCROLL) */}
+      <TashkilotDirections />
+
+      {/* 2.8. VALUES (BENTO GRID) */}
+      <TashkilotValues />
+
       {/* 3. CHAIRMAN MESSAGE */}
       <section className={styles.messageSection}>
         <div className="container">
@@ -73,7 +121,7 @@ export default function TashkilotPage() {
               </div>
               <div className={styles.messageContent}>
                 <div className={styles.quoteIcon}>
-                  <i className="fas fa-quote-left" />
+                  "
                 </div>
                 <p className={styles.messageText}>
                   "Toshkent yoshlari — poytaxtimizning yuzi, kuchi va kelajagidir. 
@@ -134,6 +182,9 @@ export default function TashkilotPage() {
           </div>
         </div>
       </section>
+
+      {/* 4.5. TIMELINE PREVIEW (NEW) */}
+      <TashkilotTimelinePreview />
 
       {/* 5. NAVIGATION CARDS */}
       <section className={styles.navSection}>
