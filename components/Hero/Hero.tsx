@@ -7,7 +7,6 @@ import styles from "./Hero.module.css";
 import { newsItems } from "@/lib/data";
 
 export default function Hero() {
-  // Faqat oxirgi 4 ta eng muhim yangilikni olamiz
   const heroNews = newsItems.slice(0, 4);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -34,90 +33,94 @@ export default function Hero() {
 
   return (
     <section className={styles.hero} id="bosh-sahifa">
-      
-      {/* Slider Backgrounds */}
-      {heroNews.map((news, idx) => (
-        <div 
-          key={news.id} 
-          className={`${styles.slideBg} ${idx === currentIndex ? styles.activeBg : ""}`}
-        >
-          <Image
-            src={news.image}
-            alt={news.title}
-            fill
-            priority={idx === 0}
-            sizes="100vw"
-            style={{ objectFit: "cover", objectPosition: "center center" }}
-          />
-          <div className={styles.overlay} />
-        </div>
-      ))}
-
-      <div className={styles.containerWrap}>
-        <div className={styles.content}>
-          
-          {/* Slider Content */}
-          {heroNews.map((news, idx) => (
-            <div 
-              key={`content-${news.id}`} 
-              className={`${styles.slideContent} ${idx === currentIndex ? styles.activeContent : ""}`}
-            >
-              <div className={styles.metaInfo}>
-                <span className={`${styles.tag} ${styles[news.tagClass] || ""}`}>
-                  {news.tag}
-                </span>
-                <span className={styles.date}>
-                  <i className="far fa-calendar-alt" /> {news.date}
-                </span>
-              </div>
-              
-              <h1 className={styles.title}>
-                {news.title}
-              </h1>
-              
-              {news.excerpt && (
-                <p className={styles.desc}>
-                  {news.excerpt}
-                </p>
-              )}
-              
-              <div className={styles.actions}>
-                <Link href={`#yangiliklar`} className="btn-hero-primary">
-                  Batafsil o'qish
-                </Link>
-                <Link href="/yangiliklar" className="btn-hero-secondary">
-                  Barcha yangiliklar
-                </Link>
-              </div>
-            </div>
-          ))}
-
-        </div>
-
-        {/* Controls */}
-        <div className={styles.controlsWrap}>
-          <div className={styles.dots}>
-            {heroNews.map((_, idx) => (
-              <button
-                key={`dot-${idx}`}
-                className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ""}`}
-                onClick={() => handleDotClick(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
+      <div className={styles.splitContainer}>
+        
+        {/* L E F T   P A N E   (Text Content) */}
+        <div className={styles.leftPane}>
+          <div className={styles.textWrap}>
+            {heroNews.map((news, idx) => (
+              <div 
+                key={`content-${news.id}`} 
+                className={`${styles.textContent} ${idx === currentIndex ? styles.activeContent : ""}`}
               >
-                <span className={styles.dotProgress}></span>
-              </button>
+                <div className={styles.metaInfo}>
+                  <span className={`${styles.tag} ${styles[news.tagClass] || ""}`}>
+                    {news.tag}
+                  </span>
+                  <span className={styles.date}>
+                    <i className="far fa-calendar-alt" /> {news.date}
+                  </span>
+                </div>
+                
+                <h1 className={styles.title}>
+                  {news.title}
+                </h1>
+                
+                {news.excerpt && (
+                  <p className={styles.desc}>
+                    {news.excerpt}
+                  </p>
+                )}
+                
+                <div className={styles.actions}>
+                  <Link href={`#yangiliklar`} className={styles.btnPrimary}>
+                    Batafsil o'qish
+                  </Link>
+                  <Link href="/yangiliklar" className={styles.btnSecondary}>
+                    Barcha yangiliklar <i className="fas fa-arrow-right" style={{ fontSize: '12px' }}/>
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
 
-          <div className={styles.navBtns}>
-            <button className={styles.navBtn} onClick={handlePrev} aria-label="Oldingi yangilik">
-              <i className="fas fa-chevron-left" />
-            </button>
-            <button className={styles.navBtn} onClick={handleNext} aria-label="Keyingi yangilik">
-              <i className="fas fa-chevron-right" />
-            </button>
+          {/* Controls - Positioned at bottom of left pane */}
+          <div className={styles.controlsWrap}>
+            <div className={styles.dots}>
+              {heroNews.map((_, idx) => (
+                <button
+                  key={`dot-${idx}`}
+                  className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ""}`}
+                  onClick={() => handleDotClick(idx)}
+                  aria-label={`Go to slide ${idx + 1}`}
+                >
+                  <span className={styles.dotProgress}></span>
+                </button>
+              ))}
+            </div>
+
+            <div className={styles.navBtns}>
+              <button className={styles.navBtn} onClick={handlePrev} aria-label="Oldingi yangilik">
+                <i className="fas fa-chevron-left" />
+              </button>
+              <button className={styles.navBtn} onClick={handleNext} aria-label="Keyingi yangilik">
+                <i className="fas fa-chevron-right" />
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* R I G H T   P A N E   (Images) */}
+        <div className={styles.rightPane}>
+          <div className={styles.imageMask}>
+            {heroNews.map((news, idx) => (
+              <div 
+                key={`image-${news.id}`} 
+                className={`${styles.imageSlide} ${idx === currentIndex ? styles.activeImage : ""}`}
+              >
+                <Image
+                  src={news.image}
+                  alt={news.title}
+                  fill
+                  priority={idx === 0}
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  style={{ objectFit: "cover", objectPosition: "center center" }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );

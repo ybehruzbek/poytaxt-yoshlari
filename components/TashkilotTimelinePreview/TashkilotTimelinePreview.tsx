@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import styles from './TashkilotTimelinePreview.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -14,49 +13,33 @@ const timelineEvents = [
 ];
 
 export default function TashkilotTimelinePreview() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollLeft = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-  };
-
   return (
     <section className={styles.timelineSection}>
       <div className="container">
         <div className={styles.header}>
           <ScrollReveal>
             <h2 className={styles.title}>Tariximiz</h2>
-            <p className={styles.desc}>Muhim voqealar xronologiyasi</p>
+            <p className={styles.desc}>Tashkilotimiz bosib o'tgan shonli yo'l</p>
           </ScrollReveal>
-          <div className={styles.controls}>
-            <button onClick={scrollLeft} className={styles.controlBtn}><i className="fas fa-chevron-left" /></button>
-            <button onClick={scrollRight} className={styles.controlBtn}><i className="fas fa-chevron-right" /></button>
-          </div>
         </div>
 
-        <div className={styles.timelineWrapper} ref={scrollRef}>
-          <div className={styles.timelineTrack}>
-            <div className={styles.line}></div>
-            {timelineEvents.map((item, i) => (
-              <div key={i} className={styles.timelineItem}>
-                <div className={styles.yearBadge}>{item.year}</div>
-                <div className={styles.itemContent}>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
+        <div className={styles.cardContainer}>
+          {timelineEvents.map((item, i) => (
+            <div 
+              key={i} 
+              className={styles.stackedCard}
+              style={{ top: `calc(15vh + ${i * 40}px)` }}
+            >
+              <div className={styles.cardInner}>
+                <div className={styles.watermarkYear}>{item.year}</div>
+                <div className={styles.cardContent}>
+                  <div className={styles.yearBadge}>{item.year}</div>
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                  <p className={styles.cardDesc}>{item.desc}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-        
-        <div className={styles.actions}>
-          <Link href="/tashkilot/tarix" className={styles.moreBtn}>
-            To'liq tarixni o'qish <i className="fas fa-arrow-right" />
-          </Link>
+            </div>
+          ))}
         </div>
       </div>
     </section>

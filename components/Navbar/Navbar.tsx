@@ -5,12 +5,12 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-import { megaMenuCategories, LOGO_URL } from "@/lib/data";
+import { megaMenuCategories, LOGO_URL, navLinks } from "@/lib/data";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [lang, setLang] = useState("UZ");
+  const [lang, setLang] = useState("O'zbekcha");
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -77,6 +77,9 @@ export default function Navbar() {
     [closeMenu, isHomePage, router]
   );
 
+  // We only show a subset of links in the center navbar to avoid crowding
+  const centerLinks = navLinks.slice(0, 5);
+
   return (
     <nav
       className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
@@ -95,6 +98,20 @@ export default function Navbar() {
           <Image src={LOGO_URL} alt="YI Logo" width={120} height={120} className={styles.logoIconImage} priority />
         </Link>
 
+        {/* CENTER LINKS (DESKTOP) */}
+        <div className={styles.centerLinks}>
+          {centerLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`${styles.centerLink} ${pathname.startsWith(link.href) ? styles.centerLinkActive : ""}`}
+              onClick={closeMenu}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
         {/* RIGHT ACTION AREA */}
         <div className={styles.rightActions}>
           <div className={styles.langSwitchWrapper} ref={langRef}>
@@ -108,7 +125,7 @@ export default function Navbar() {
             
             {langOpen && (
               <div className={styles.langDropdown}>
-                {["UZ", "RU", "EN"].map((l) => (
+                {["O'zbekcha", "Русский", "English"].map((l) => (
                   <button 
                     key={l}
                     className={`${styles.langOption} ${lang === l ? styles.langActive : ""}`}
@@ -143,6 +160,13 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* BACKDROP FOR MEGA MENU */}
+      <div 
+        className={`${styles.megaMenuBackdrop} ${menuOpen ? styles.backdropOpen : ""}`} 
+        onClick={closeMenu}
+        aria-hidden="true"
+      />
 
       {/* MEGA MENU DROPDOWN */}
       <div

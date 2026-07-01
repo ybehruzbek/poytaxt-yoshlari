@@ -48,6 +48,45 @@
   letter-spacing: -0.5px;
 }
 
+/* ================= CENTER LINKS ================= */
+.centerLinks {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.centerLink {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.centerLink:hover, .centerLinkActive {
+  color: var(--blue);
+}
+
+.centerLink::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 4px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.centerLink:hover::after, .centerLinkActive::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 /* ================= RIGHT ACTIONS ================= */
 .rightActions {
   display: flex;
@@ -164,6 +203,26 @@
 }
 
 
+/* ================= MEGA MENU BACKDROP ================= */
+.megaMenuBackdrop {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  z-index: -1; /* Dropdown is relative to nav which has z-index 900, so -1 places backdrop just beneath the inner content of nav but above page content */
+}
+
+.backdropOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
 /* ================= MEGA MENU DROPDOWN ================= */
 .megaMenuDropdown {
   position: absolute;
@@ -229,14 +288,38 @@
 }
 
 .colLinks a {
+  position: relative;
+  display: inline-block;
   color: var(--text-secondary);
   font-size: 15px;
+  font-weight: 500;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: 4px;
+}
+
+.colLinks a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .colLinks a:hover {
   color: var(--blue);
+  font-weight: 600;
+}
+
+.colLinks a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 /* ================= CONTACT BLOCK ================= */
@@ -317,6 +400,9 @@
   }
   .megaMenuContact {
     width: 100%;
+  }
+  .centerLinks {
+    display: none;
   }
 }
 

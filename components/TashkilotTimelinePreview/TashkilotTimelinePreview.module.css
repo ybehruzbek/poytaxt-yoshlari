@@ -1,14 +1,12 @@
 .timelineSection {
   padding: 120px 0;
-  background: var(--white);
-  overflow: hidden;
+  background: var(--bg-light);
+  position: relative;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 60px;
+  text-align: center;
+  margin-bottom: 80px;
 }
 
 .title {
@@ -16,158 +14,137 @@
   font-weight: 900;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .desc {
   font-size: 20px;
   color: var(--text);
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-.controls {
+.cardContainer {
+  position: relative;
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 40px; /* Space between cards before they stack */
+  padding-bottom: 100px;
 }
 
-.controlBtn {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--blue-pale);
-  color: var(--blue);
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.stackedCard {
+  position: sticky;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+  /* The inline `top` style will control where it sticks */
+}
+
+/* Beautiful distinct gradients for each card */
+.stackedCard:nth-child(1) { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+.stackedCard:nth-child(2) { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stackedCard:nth-child(3) { background: linear-gradient(135deg, #10b981, #059669); }
+.stackedCard:nth-child(4) { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.stackedCard:nth-child(5) { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+
+.cardInner {
+  position: relative;
+  padding: 80px;
+  height: 450px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
-.controlBtn:hover {
-  background: var(--blue);
-  color: var(--white);
-  transform: scale(1.1);
-}
-
-.timelineWrapper {
-  width: 100%;
-  overflow-x: auto;
-  padding: 40px 0;
-  scrollbar-width: none; /* Firefox */
-}
-
-.timelineWrapper::-webkit-scrollbar {
-  display: none; /* Chrome */
-}
-
-.timelineTrack {
-  display: flex;
-  gap: 40px;
-  position: relative;
-  min-width: max-content;
-  padding: 0 40px;
-}
-
-.line {
+.watermarkYear {
   position: absolute;
-  top: 32px; /* Center of the year badge */
-  left: 40px;
-  right: 40px;
-  height: 4px;
-  background: var(--blue-pale);
-  z-index: 0;
+  right: -50px;
+  bottom: -40px;
+  font-size: 280px;
+  font-weight: 900;
+  color: var(--white);
+  opacity: 0.15;
+  line-height: 0.8;
+  pointer-events: none;
 }
 
-.timelineItem {
+.cardContent {
   position: relative;
-  width: 320px;
-  z-index: 1;
+  z-index: 2;
+  max-width: 600px;
 }
 
 .yearBadge {
-  width: 120px;
-  height: 64px;
-  background: var(--blue-deep);
+  display: inline-flex;
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
   color: var(--white);
-  border-radius: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 900;
-  margin-bottom: 32px;
-  box-shadow: 0 10px 20px rgba(13, 59, 102, 0.2);
-  border: 4px solid var(--white);
-  transition: all 0.4s ease;
-}
-
-.timelineItem:hover .yearBadge {
-  background: var(--blue);
-  transform: scale(1.1) translateY(-10px);
-}
-
-.itemContent {
-  background: var(--bg);
-  padding: 32px;
-  border-radius: 24px;
-  transition: all 0.4s ease;
-  border: 1px solid rgba(0,0,0,0.02);
-}
-
-.timelineItem:hover .itemContent {
-  transform: translateY(-10px);
-  background: var(--white);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-}
-
-.itemContent h3 {
-  font-size: 22px;
   font-weight: 800;
-  color: var(--primary-dark);
-  margin-bottom: 12px;
+  font-size: 20px;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
 }
 
-.itemContent p {
-  font-size: 16px;
-  color: var(--text);
+.cardTitle {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.cardDesc {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.6;
 }
 
-.actions {
-  margin-top: 60px;
-  text-align: center;
-}
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .cardInner {
+    padding: 60px;
+    height: 400px;
+  }
 
-.moreBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 40px;
-  background: var(--blue-deep);
-  color: var(--white);
-  font-size: 18px;
-  font-weight: 700;
-  border-radius: 100px;
-  text-decoration: none;
-  transition: all 0.4s ease;
-}
+  .watermarkYear {
+    font-size: 200px;
+    right: -30px;
+  }
 
-.moreBtn:hover {
-  background: var(--blue);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+  .cardTitle {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
+  .cardContainer {
+    gap: 20px;
   }
-  .title { font-size: 36px; }
-  .desc { font-size: 18px; }
-  .timelineTrack { padding: 0 20px; }
-  .line { left: 20px; right: 20px; }
+
+  /* On very small screens, adjust stacking offsets or disable them if desired.
+     Keeping sticky gives a cool effect on mobile too! */
+  .stackedCard {
+    /* Optionally reset top if you want standard scrolling on mobile */
+  }
+
+  .cardInner {
+    padding: 40px;
+    height: 350px;
+  }
+
+  .watermarkYear {
+    font-size: 140px;
+    right: -10px;
+    bottom: 0px;
+  }
+
+  .cardTitle {
+    font-size: 28px;
+  }
+
+  .cardDesc {
+    font-size: 16px;
+  }
 }

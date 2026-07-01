@@ -41,39 +41,60 @@ export default function TashkilotPage() {
         </div>
       </section>
 
-      {/* 2.5. ORGANIZATION STRUCTURE (NEW) */}
-      <section className={styles.structureSection}>
+      {/* 2.5. ORGANIZATION STRUCTURE (NEW - STICKY SCROLL) */}
+      <section className={styles.stickySection}>
         <div className="container">
-          <div className={styles.structureHeader}>
-            <ScrollReveal>
-              <h2 className={styles.structureTitle}>Tashkilot Tuzilmasi</h2>
-              <p className={styles.structureDesc}>
-                Yoshlar Ittifoqi — yoshlar o'zini o'zi boshqaradigan va yoshlar manfaati uchun xizmat qiladigan tizim.
-              </p>
-            </ScrollReveal>
-          </div>
+          <div className={styles.stickyGrid}>
+            
+            {/* Left Side: Sticky Title */}
+            <div className={styles.stickyLeft}>
+              <div className={styles.stickyHeader}>
+                <ScrollReveal>
+                  <span className={styles.stickySubtitle}>Tuzilma</span>
+                  <h2 className={styles.stickyTitle}>Tashkilot<br/>Tuzilmasi</h2>
+                  <p className={styles.stickyDesc}>
+                    Yoshlar Ittifoqi — yoshlar o'zini o'zi boshqaradigan va ularning manfaatini himoya qiluvchi ulkan, o'zaro bog'langan tizim.
+                  </p>
+                </ScrollReveal>
+              </div>
+            </div>
 
-          <div className={styles.structureGrid}>
-            <ScrollReveal delay={1} className={styles.structureCard}>
-              <div className={styles.structureIcon}><i className="fas fa-school" /></div>
-              <h3>Boshlang'ich Tashkilotlar</h3>
-              <p>Maktab, kollej, litsey va OTMlardagi Kengashlar.</p>
-            </ScrollReveal>
-            <ScrollReveal delay={2} className={styles.structureCard}>
-              <div className={styles.structureIcon}><i className="fas fa-building" /></div>
-              <h3>Tuman Kengashlari</h3>
-              <p>Tuman miqyosidagi yoshlar bilan ishlash bo'yicha koordinatsion markaz.</p>
-            </ScrollReveal>
-            <ScrollReveal delay={3} className={styles.structureCard}>
-              <div className={styles.structureIcon}><i className="fas fa-city" /></div>
-              <h3>Toshkent Shahar Kengashi</h3>
-              <p>Poytaxt miqyosida loyihalar, forumlar va yoshlar siyosatini yurituvchi asosiy organ.</p>
-            </ScrollReveal>
-            <ScrollReveal delay={4} className={styles.structureCard}>
-              <div className={styles.structureIcon}><i className="fas fa-sitemap" /></div>
-              <h3>Markaziy Kengash</h3>
-              <p>Butun Respublika yoshlari harakatini birlashtiruvchi markaziy apparat.</p>
-            </ScrollReveal>
+            {/* Right Side: Scrolling Content */}
+            <div className={styles.stickyRight}>
+              
+              <ScrollReveal className={styles.scrollCard}>
+                <div className={styles.scrollIcon}><i className="fas fa-sitemap" /></div>
+                <div className={styles.scrollContent}>
+                  <h3>Markaziy Kengash</h3>
+                  <p>Butun Respublika yoshlari harakatini birlashtiruvchi, yoshlar siyosati bo'yicha eng yuqori darajadagi qarorlarni qabul qiluvchi markaziy apparat.</p>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={1} className={styles.scrollCard}>
+                <div className={styles.scrollIcon}><i className="fas fa-city" /></div>
+                <div className={styles.scrollContent}>
+                  <h3>Hududiy Kengashlar</h3>
+                  <p>Qoraqalpog'iston Respublikasi, Toshkent shahri va viloyatlar miqyosida yirik yoshlar dasturlarini amalga oshiruvchi tuzilmalar.</p>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={2} className={styles.scrollCard}>
+                <div className={styles.scrollIcon}><i className="fas fa-building" /></div>
+                <div className={styles.scrollContent}>
+                  <h3>Tuman (Shahar) Kengashlari</h3>
+                  <p>Har bir tuman va shaharda yoshlar bilan yuzma-yuz ishlaydigan, mahalliy muammolarni hal qiluvchi yoshlar Kengashlari.</p>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal delay={3} className={styles.scrollCard}>
+                <div className={styles.scrollIcon}><i className="fas fa-school" /></div>
+                <div className={styles.scrollContent}>
+                  <h3>Boshlang'ich Tashkilotlar</h3>
+                  <p>Maktab, akademik litsey, texnikum va OTMlardagi sardorlar, shuningdek mahallalardagi yoshlar yetakchilarini o'z ichiga olgan quyi bo'g'in.</p>
+                </div>
+              </ScrollReveal>
+
+            </div>
           </div>
         </div>
       </section>
@@ -195,28 +216,49 @@ export default function TashkilotPage() {
             </ScrollReveal>
           </div>
           
-          <div className={styles.navGrid}>
-            <ScrollReveal delay={1}>
-              <Link href="/tashkilot/missiya" className={styles.navCard}>
-                <div className={styles.navIcon}><i className="fas fa-bullseye" /></div>
-                <h3>Missiya va Qadriyatlar</h3>
-                <p>Biz qanday tamoyillar asosida ishlaymiz va bizning asosiy maqsadlarimiz nimalardan iborat?</p>
+          <div className={styles.navStack}>
+            <ScrollReveal delay={0.1}>
+              <Link href="/tashkilot/missiya" className={styles.navRow}>
+                <div className={styles.navRowLeft}>
+                  <span className={styles.navRowNum}>01</span>
+                  <h3 className={styles.navRowTitle}>Missiya va Qadriyatlar</h3>
+                </div>
+                <div className={styles.navRowRight}>
+                  <p className={styles.navRowDesc}>Biz qanday tamoyillar asosida ishlaymiz va bizning asosiy maqsadlarimiz nimalardan iborat?</p>
+                  <div className={styles.navRowArrow}>
+                    <i className="fas fa-arrow-right" />
+                  </div>
+                </div>
               </Link>
             </ScrollReveal>
 
-            <ScrollReveal delay={2}>
-              <Link href="/tashkilot/tarix" className={styles.navCard}>
-                <div className={styles.navIcon}><i className="fas fa-history" /></div>
-                <h3>Tariximiz</h3>
-                <p>O'zbekiston Yoshlar Ittifoqi qachon tashkil etilgan va shu kungacha qanday yo'lni bosib o'tdi?</p>
+            <ScrollReveal delay={0.2}>
+              <Link href="/tashkilot/tarix" className={styles.navRow}>
+                <div className={styles.navRowLeft}>
+                  <span className={styles.navRowNum}>02</span>
+                  <h3 className={styles.navRowTitle}>Tariximiz</h3>
+                </div>
+                <div className={styles.navRowRight}>
+                  <p className={styles.navRowDesc}>O'zbekiston Yoshlar Ittifoqi qachon tashkil etilgan va shu kungacha qanday yo'lni bosib o'tdi?</p>
+                  <div className={styles.navRowArrow}>
+                    <i className="fas fa-arrow-right" />
+                  </div>
+                </div>
               </Link>
             </ScrollReveal>
 
-            <ScrollReveal delay={3}>
-              <Link href="/hujjatlar" className={styles.navCard}>
-                <div className={styles.navIcon}><i className="fas fa-file-contract" /></div>
-                <h3>Rasmiy Hujjatlar</h3>
-                <p>Tashkilot faoliyatiga oid barcha qarorlar, nizomlar va huquqiy hujjatlar bilan tanishing.</p>
+            <ScrollReveal delay={0.3}>
+              <Link href="/hujjatlar" className={styles.navRow}>
+                <div className={styles.navRowLeft}>
+                  <span className={styles.navRowNum}>03</span>
+                  <h3 className={styles.navRowTitle}>Rasmiy Hujjatlar</h3>
+                </div>
+                <div className={styles.navRowRight}>
+                  <p className={styles.navRowDesc}>Tashkilot faoliyatiga oid barcha qarorlar, nizomlar va huquqiy hujjatlar bilan tanishing.</p>
+                  <div className={styles.navRowArrow}>
+                    <i className="fas fa-arrow-right" />
+                  </div>
+                </div>
               </Link>
             </ScrollReveal>
           </div>
