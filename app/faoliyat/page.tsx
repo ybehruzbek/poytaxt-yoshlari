@@ -32,27 +32,23 @@ export default function FaoliyatPage() {
     <div className={styles.pageWrapper}>
       {/* ===== 1. HERO SECTION ===== */}
       <section className={styles.heroContainer}>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <ScrollReveal>
-              <nav aria-label="breadcrumb" className={styles.heroBreadcrumbs}>
-                <ol>
-                  <li>
-                    <Link href="/">Bosh sahifa</Link>
-                    <span className={styles.separator}>/</span>
-                  </li>
-                  <li className={styles.activeCrumb}>
-                    <span>Barcha Yo'nalishlar</span>
-                  </li>
-                </ol>
-              </nav>
-
-              <h1 className={styles.heroTitle}>Biz Nimalar Qilamiz?</h1>
-              <p className={styles.heroDesc}>
-                Yoshlarni ta'lim, tadbirkorlik, innovatsiyalar, sport va san'at atrofida birlashtirib, 
-                ularning o'z ustida ishlashi uchun barcha imkoniyatlarni yaratib beramiz.
-              </p>
-            </ScrollReveal>
+        <div className={styles.heroBox}>
+          <div className="container">
+            <div className={styles.heroContent}>
+              <ScrollReveal>
+                <h1 className={styles.heroTitle}>
+                  BIZ NIMALAR QILAMIZ?
+                </h1>
+                <p className={styles.heroDesc}>
+                  Yoshlarni ta'lim, tadbirkorlik, innovatsiyalar, sport va san'at atrofida birlashtirib, 
+                  ularning o'z ustida ishlashi uchun barcha imkoniyatlarni yaratib beramiz.
+                </p>
+                
+                <Link href="/murojaat" className={styles.heroBtn}>
+                  Ro'yxatdan O'tish <i className="fas fa-chevron-right"></i>
+                </Link>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
@@ -62,16 +58,13 @@ export default function FaoliyatPage() {
         <div className="container">
           <div className={styles.bentoGrid}>
             {directions.map((dir, i) => (
-              <ScrollReveal key={i} delay={i + 1}>
+              <ScrollReveal key={i} delay={i * 0.1}>
                 <Link 
                   href={`/faoliyat/${dir.slug}`}
                   className={styles.bentoCard} 
-                  style={{ '--glow-color': dir.iconBg } as React.CSSProperties}
+                  style={{ '--card-color': dir.iconColor } as React.CSSProperties}
                 >
-                  <div 
-                    className={styles.bIcon}
-                    style={{ background: dir.iconBg, color: dir.iconColor }}
-                  >
+                  <div className={styles.bIcon}>
                     <i className={`fas ${dir.icon}`} />
                   </div>
                   <h3 className={styles.bTitle}>{dir.title}</h3>
@@ -94,16 +87,37 @@ export default function FaoliyatPage() {
             </div>
           </ScrollReveal>
 
-          <div className={styles.timelineGrid}>
-            {grantSteps.map((step, idx) => (
-              <ScrollReveal key={idx} delay={idx + 1}>
-                <div className={styles.timeCard}>
-                  <div className={styles.timeNum}>{step.num}</div>
-                  <h3 className={styles.timeTitle}>{step.title}</h3>
-                  <p className={styles.timeDesc}>{step.desc}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+          <div className={styles.timelineWrapper}>
+            <div className={styles.timelineGrid}>
+              {grantSteps.map((step, idx) => {
+                const bgColors = ["var(--blue)", "var(--blue-deep)", "var(--green)"];
+                const bgColor = bgColors[idx % bgColors.length];
+
+                return (
+                  <ScrollReveal key={idx} delay={idx + 1}>
+                    <div className={styles.timeCard} style={{ background: bgColor }}>
+                      {idx < 2 && (
+                        <div className={styles.arcSvgWrap}>
+                          <svg viewBox="0 0 400 40" preserveAspectRatio="none" width="100%" height="100%">
+                            <path
+                              className={styles.arcPath}
+                              d="M 0 40 Q 200 0 400 40"
+                              fill="none"
+                              stroke="rgba(255, 255, 255, 0.5)"
+                              strokeWidth="4"
+                              vectorEffect="non-scaling-stroke"
+                            />
+                          </svg>
+                        </div>
+                      )}
+                      <div className={styles.timeNum} style={{ color: bgColor }}>{step.num}</div>
+                      <h3 className={styles.timeTitle}>{step.title}</h3>
+                      <p className={styles.timeDesc}>{step.desc}</p>
+                    </div>
+                  </ScrollReveal>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
