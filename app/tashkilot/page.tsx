@@ -6,7 +6,7 @@ import TashkilotHeroSlider from "@/components/TashkilotHeroSlider/TashkilotHeroS
 import TashkilotTimelinePreview from "@/components/TashkilotTimelinePreview/TashkilotTimelinePreview";
 import TashkilotDirections from "@/components/TashkilotDirections/TashkilotDirections";
 import TashkilotValues from "@/components/TashkilotValues/TashkilotValues";
-import TashkilotOrbit from "@/components/TashkilotOrbit/TashkilotOrbit";
+import TashkilotStructure from "@/components/TashkilotStructure/TashkilotStructure";
 
 export const metadata = {
   title: "Tashkilot haqida | O'zbekiston Yoshlar Ittifoqi",
@@ -42,8 +42,8 @@ export default function TashkilotPage() {
         </div>
       </section>
 
-      {/* 2.5. ORGANIZATION STRUCTURE (GALAXY ORBIT) */}
-      <TashkilotOrbit />
+      {/* 2.5. ORGANIZATION STRUCTURE (SIMPLE GRID) */}
+      <TashkilotStructure />
 
       {/* 2.6. SARDORLAR KENGASHI (EDITORIAL TEXT) */}
       <section className={styles.editorialSection}>
