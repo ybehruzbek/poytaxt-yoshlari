@@ -1,0 +1,159 @@
+.section {
+  position: relative;
+  padding: 160px 0;
+  background: var(--bg-light, #ffffff);
+  color: var(--text, #0f172a);
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+}
+
+/* Massive Watermark Quote in the Background */
+.watermarkQuote {
+  position: absolute;
+  top: -80px;
+  left: 20px;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 600px;
+  line-height: 1;
+  color: rgba(14, 165, 233, 0.03); /* Extremely faint blue */
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* LEFT SIDE - EXECUTIVE PORTRAIT */
+.imageCol {
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.2);
+}
+
+.image {
+  object-fit: cover;
+  transform: scale(1.15); /* Slightly scaled up so parallax has room */
+  filter: contrast(1.05) saturate(1.1); /* Subtle premium grade */
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0) 60%,
+    rgba(15, 23, 42, 0.4) 100%
+  );
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* RIGHT SIDE - EDITORIAL CONTENT */
+.contentCol {
+  padding-right: 40px;
+}
+
+.mainQuote {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--blue-deep, #0f172a);
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+}
+
+.paragraph {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.8;
+  color: #475569;
+  margin-bottom: 32px;
+}
+
+.authorBlock {
+  margin-top: 64px;
+}
+
+.authorLine {
+  width: 64px;
+  height: 2px;
+  background: var(--blue, #0ea5e9);
+  margin-bottom: 24px;
+}
+
+.authorName {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--blue-deep, #0f172a);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.authorRole {
+  display: block;
+  font-size: 16px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+  
+  .imageCol {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .contentCol {
+    padding-right: 0;
+    text-align: center;
+  }
+  
+  .authorBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .watermarkQuote {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 400px;
+    top: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .container { padding: 0 24px; }
+  .mainQuote { font-size: 32px; }
+}

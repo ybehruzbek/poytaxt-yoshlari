@@ -8,6 +8,7 @@ import TashkilotDirections from "@/components/TashkilotDirections/TashkilotDirec
 import TashkilotValues from "@/components/TashkilotValues/TashkilotValues";
 import TashkilotStructure from "@/components/TashkilotStructure/TashkilotStructure";
 import SardorlarEditorial from "@/components/SardorlarEditorial/SardorlarEditorial";
+import ChairmanMessage from "@/components/ChairmanMessage/ChairmanMessage";
 
 export const metadata = {
   title: "Tashkilot haqida | O'zbekiston Yoshlar Ittifoqi",
@@ -56,35 +57,7 @@ export default function TashkilotPage() {
       <TashkilotValues />
 
       {/* 3. CHAIRMAN MESSAGE */}
-      <section className={styles.messageSection}>
-        <div className="container">
-          <ScrollReveal>
-            <div className={styles.messageContainer}>
-              <div className={styles.messageImage}>
-                <Image 
-                  src="/images/tashkilot/tashkilot_chairman_1782907129930.png" 
-                  alt="Kengash Raisi" 
-                  fill 
-                  sizes="(max-width: 768px) 100vw, 400px"
-                />
-              </div>
-              <div className={styles.messageContent}>
-                <div className={styles.quoteIcon}>
-                  "
-                </div>
-                <p className={styles.messageText}>
-                  "Toshkent yoshlari — poytaxtimizning yuzi, kuchi va kelajagidir. 
-                  Biz har bir yoshning o'z o'rnini topishi, o'z iqtidorini ro'yobga chiqarishi 
-                  uchun barcha sharoitlarni yaratishga tayyormiz. Bizning maqsadimiz — 
-                  nafaqat tadbirlar o'tkazish, balki yoshlarning chinakam suyanchig'iga aylanish."
-                </p>
-                <div className={styles.authorName}>Karimov Jasur</div>
-                <div className={styles.authorRole}>Toshkent shahar Kengashi raisi</div>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <ChairmanMessage />
 
       {/* 4. WHY IT MATTERS (IMPACT) */}
       <section className={styles.impactSection}>
