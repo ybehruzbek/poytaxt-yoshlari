@@ -1,0 +1,223 @@
+.section {
+  padding: 120px 0;
+  background: var(--white, #ffffff);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* ================= LEFT CONTENT ================= */
+.badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue, #0ea5e9);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.title {
+  font-size: clamp(32px, 3.5vw, 48px);
+  font-weight: 900;
+  color: var(--blue-deep, #0f172a);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.text {
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+/* ================= BENTO GRID ================= */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.bentoCard {
+  padding: 32px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.bentoCard:hover {
+  transform: translateY(-5px);
+}
+
+.bentoIcon {
+  font-size: 32px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+}
+
+.bentoValue {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.bentoLabel {
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Bento Themes */
+.blueCard {
+  background: rgba(14, 165, 233, 0.05);
+  border: 1px solid rgba(14, 165, 233, 0.1);
+}
+.blueCard .bentoValue, .blueCard .bentoIcon { color: var(--blue, #0ea5e9); }
+
+.greenCard {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+.greenCard .bentoValue, .greenCard .bentoIcon { color: #10b981; }
+
+.orangeCard {
+  background: rgba(245, 158, 11, 0.05);
+  border: 1px solid rgba(245, 158, 11, 0.1);
+}
+.orangeCard .bentoValue, .orangeCard .bentoIcon { color: #f59e0b; }
+
+.purpleCard {
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.1);
+}
+.purpleCard .bentoValue, .purpleCard .bentoIcon { color: #8b5cf6; }
+
+/* ================= RIGHT IMAGE & GLASS BADGE ================= */
+.imageCol {
+  position: relative;
+  height: 100%;
+  min-height: 500px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.1);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.imageWrapper:hover .image {
+  transform: scale(1.03);
+}
+
+/* Glassmorphism Badge (Now Colored) */
+.glassBadge {
+  position: absolute;
+  bottom: 40px;
+  left: 40px; 
+  background: linear-gradient(135deg, #f59e0b 0%, #fb923c 50%, #ea580c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 24px 32px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 20px 40px rgba(234, 88, 12, 0.4);
+}
+
+.glassIconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.glassText {
+  display: flex;
+  flex-direction: column;
+}
+
+.glassText strong {
+  font-size: 28px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.glassText span {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+  
+  .imageCol {
+    min-height: 400px;
+    order: -1; /* Move image to top on mobile */
+  }
+  
+  .glassBadge {
+    left: 20px;
+    bottom: 20px;
+    padding: 16px 24px;
+  }
+  
+  .glassText strong {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .container { padding: 0 24px; }
+  
+  .bentoGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bentoCard {
+    padding: 24px;
+  }
+}

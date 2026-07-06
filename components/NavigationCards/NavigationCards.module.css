@@ -1,0 +1,208 @@
+.section {
+  position: relative;
+  padding: 160px 0;
+  background: var(--bg-light, #ffffff);
+  color: var(--blue-deep, #0f172a);
+  transition: background 0.6s ease;
+  overflow: hidden; /* To keep bg images contained if needed */
+}
+
+/* ================= BACKGROUND REVEAL ================= */
+.bgWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bgImageDiv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85); /* Deep dark overlay so white text reads well */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ================= CONTENT ================= */
+.container {
+  position: relative;
+  z-index: 2; /* Sit above the background */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.header {
+  margin-bottom: 80px;
+}
+
+.badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue, #0ea5e9);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.title {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  transition: color 0.4s ease;
+}
+
+.textWhite {
+  color: #ffffff;
+}
+
+/* ================= LIST ROWS ================= */
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+/* When a background is active, switch borders to white-transparent */
+.hasActiveBg .list {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  text-decoration: none;
+  color: var(--blue-deep, #0f172a);
+  cursor: pointer;
+}
+
+.rowTitle {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--blue-deep, #0f172a);
+  transition: color 0.5s ease;
+}
+
+/* Change row border color when background is active */
+.hasActiveBg .row, .hasActiveBg .rowTitle, .hasActiveBg {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Immediately set the section background to dark so the image doesn't fade over white */
+.hasActiveBg.section {
+  background-color: var(--blue-deep, #0f172a);
+}
+
+/* Dim non-hovered rows when any row is hovered */
+.rowDimmed {
+  opacity: 0.3;
+}
+
+/* Active row styling */
+.rowActive {
+  padding: 60px 40px; /* Slight horizontal expansion */
+}
+
+.rowLeft {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.rowNum {
+  font-size: 24px;
+  font-weight: 700;
+  opacity: 0.4;
+  font-family: var(--font-mono, monospace);
+}
+
+.rowRight {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.rowDesc {
+  max-width: 400px;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* Arrow Button */
+.arrowWrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+/* Arrow border in dark mode (when bg is active) */
+.hasActiveBg .arrowWrap {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.arrowIcon {
+  font-size: 24px;
+  transition: transform 0.4s ease;
+}
+
+/* Hover effects for the row */
+.rowActive .arrowWrap {
+  background: var(--blue, #0ea5e9);
+  border-color: var(--blue, #0ea5e9);
+  color: white;
+}
+
+.rowActive .arrowIcon {
+  transform: rotate(-45deg);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  
+  .rowActive {
+    padding: 60px 0; /* Reset horizontal expansion on mobile */
+  }
+  
+  .rowRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .section { padding: 80px 0; }
+  .container { padding: 0 24px; }
+  .rowTitle { font-size: 32px; }
+  .rowDesc { font-size: 16px; max-width: 280px; }
+  .arrowWrap { width: 60px; height: 60px; }
+}
