@@ -1,0 +1,125 @@
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { directions } from "@/lib/data";
+import styles from "./DirectionDetail.module.css";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+
+interface Props {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+export async function generateMetadata({ params }: Props) {
+  const { slug } = await params;
+  const direction = directions.find((d) => d.slug === slug);
+  if (!direction) return { title: "Topilmadi - O'zbekiston Yoshlar Ittifoqi" };
+  
+  return {
+    title: `${direction.title} - O'zbekiston Yoshlar Ittifoqi`,
+    description: direction.desc,
+  };
+}
+
+export function generateStaticParams() {
+  return directions.map((direction) => ({
+    slug: direction.slug,
+  }));
+}
+
+export default async function DirectionDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const direction = directions.find((d) => d.slug === slug);
+
+  if (!direction) {
+    notFound();
+  }
+
+  return (
+    <div className={styles.pageWrapper}>
+      {/* ===== HERO ===== */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroBg}>
+          <Image src={direction.image} alt={direction.title} fill sizes="100vw" priority />
+          <div className={styles.overlay}></div>
+        </div>
+        <div className="container">
+          <div className={styles.heroContent}>
+            <ScrollReveal>
+              <nav aria-label="breadcrumb" className={styles.heroBreadcrumbs}>
+                <ol>
+                  <li><Link href="/">Bosh sahifa</Link><span className={styles.separator}>/</span></li>
+                  <li><Link href="/faoliyat">Barcha Yo'nalishlar</Link><span className={styles.separator}>/</span></li>
+                  <li className={styles.activeCrumb}><span>{direction.title}</span></li>
+                </ol>
+              </nav>
+              <div 
+                className={styles.iconWrap} 
+                style={{ background: direction.iconBg, color: direction.iconColor }}
+              >
+                <i className={`fas ${direction.icon}`}></i>
+              </div>
+              <h1 className={styles.title}>{direction.title}</h1>
+              <p className={styles.desc}>{direction.desc}</p>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== MAIN CONTENT ===== */}
+      <section className={styles.contentSection}>
+        <div className="container">
+          <div className={styles.contentGrid}>
+            <div className={styles.mainColumn}>
+              <ScrollReveal>
+                <div className={styles.infoBox}>
+                  <h2>Yo'nalish haqida batafsil</h2>
+                  <p>{direction.fullDesc}</p>
+                </div>
+                
+                <div className={styles.goalsBox}>
+                  <h2>Asosiy maqsadlar</h2>
+                  <ul>
+                    {direction.goals.map((goal, i) => (
+                      <li key={i}>
+                        <i className="fas fa-check-circle" style={{ color: direction.iconColor }}></i>
+                        <span>{goal}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollReveal>
+            </div>
+            
+            <div className={styles.sidebarColumn}>
+              <ScrollReveal delay={1}>
+                <div className={styles.statsCard}>
+                  <h3>Natijalar</h3>
+                  <div className={styles.statsList}>
+                    {direction.stats.map((stat, i) => (
+                      <div key={i} className={styles.statItem}>
+                        <div className={styles.statValue} style={{ color: direction.iconColor }}>
+                          {stat.value}
+                        </div>
+                        <div className={styles.statLabel}>{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className={styles.ctaCard}>
+                  <h3>Loyihaga qo'shiling</h3>
+                  <p>Biz bilan birga maqsadlarimiz sari harakat qiling!</p>
+                  <Link href="/murojaat" className={styles.ctaBtn} style={{ background: direction.iconColor }}>
+                    Ariza topshirish <i className="fas fa-arrow-right"></i>
+                  </Link>
+                </div>
+              </ScrollReveal>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}

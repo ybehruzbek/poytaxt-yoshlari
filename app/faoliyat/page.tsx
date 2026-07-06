@@ -63,7 +63,8 @@ export default function FaoliyatPage() {
           <div className={styles.bentoGrid}>
             {directions.map((dir, i) => (
               <ScrollReveal key={i} delay={i + 1}>
-                <div 
+                <Link 
+                  href={`/faoliyat/${dir.slug}`}
                   className={styles.bentoCard} 
                   style={{ '--glow-color': dir.iconBg } as React.CSSProperties}
                 >
@@ -75,7 +76,8 @@ export default function FaoliyatPage() {
                   </div>
                   <h3 className={styles.bTitle}>{dir.title}</h3>
                   <p className={styles.bDesc}>{dir.desc}</p>
-                </div>
+                  <div className={styles.bAction}>Batafsil <i className="fas fa-arrow-right"></i></div>
+                </Link>
               </ScrollReveal>
             ))}
           </div>
@@ -111,7 +113,7 @@ export default function FaoliyatPage() {
         <div className="container">
           <ScrollReveal>
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionLabel} style={{ color: 'var(--blue-pale)' }}>Amaliy natijalar</span>
+              <span className={styles.sectionLabel}>Amaliy natijalar</span>
               <h2 className={styles.sectionTitle}>Eng Katta Loyihalar</h2>
             </div>
           </ScrollReveal>

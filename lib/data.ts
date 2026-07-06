@@ -277,22 +277,179 @@ export const ctaBenefits = [
 
 // ===== DIRECTIONS =====
 export interface DirectionItem {
+  slug: string;
   icon: string;
   iconBg: string;
   iconColor: string;
   title: string;
   desc: string;
+  fullDesc: string;
+  image: string;
+  stats: { label: string; value: string }[];
+  goals: string[];
 }
 
 export const directions: DirectionItem[] = [
-  { icon: "fa-graduation-cap", iconBg: "var(--blue-pale)", iconColor: "var(--blue)", title: "Ta'lim", desc: "Yoshlar bilim va ko'nikmalarini oshirish, xorijiy tillarni o'rganish va kasbiy rivojlanish dasturlari." },
-  { icon: "fa-crown", iconBg: "var(--green-pale)", iconColor: "var(--green)", title: "Rahbarlik", desc: "Yosh yetakchilarni aniqlash, ularni tayyorlash va qo'llab-quvvatlash bo'yicha maxsus dasturlar." },
-  { icon: "fa-handshake-angle", iconBg: "#FEE2E2", iconColor: "#EF4444", title: "Volontyorlik", desc: "Jamiyatga foyda keltiradigan volontyorlik loyihalari va aksiyalarni tashkil etish." },
-  { icon: "fa-rocket", iconBg: "#FEF3C7", iconColor: "#D97706", title: "Tadbirkorlik", desc: "Yosh tadbirkorlarni qo'llab-quvvatlash, startup loyihalar va biznes treninglar." },
-  { icon: "fa-school", iconBg: "#F3E8FF", iconColor: "#7C3AED", title: "Talaba yoshlari", desc: "Oliy o'quv yurtlari talabalarining faolligini oshirish va qo'llab-quvvatlash." },
-  { icon: "fa-palette", iconBg: "#FCE7F3", iconColor: "#EC4899", title: "Madaniyat", desc: "Milliy madaniyat, san'at va ijodiy loyihalar orqali yoshlarni rivojlantirish." },
-  { icon: "fa-dumbbell", iconBg: "#FFEDD5", iconColor: "#EA580C", title: "Sport", desc: "Sog'lom turmush tarzini targ'ib qilish va sport musobaqalarini tashkil etish." },
-  { icon: "fa-hand-holding-heart", iconBg: "#CCFBF1", iconColor: "#0D9488", title: "Ijtimoiy loyihalar", desc: "Ijtimoiy ahamiyatga molik grant loyihalar va jamoat tashabbuslari." },
+  {
+    slug: "talim",
+    icon: "fa-graduation-cap",
+    iconBg: "var(--blue-pale)",
+    iconColor: "var(--blue)",
+    title: "Ta'lim",
+    desc: "Yoshlar bilim va ko'nikmalarini oshirish, xorijiy tillarni o'rganish va kasbiy rivojlanish dasturlari.",
+    fullDesc: "Biz yoshlarning zamonaviy ta'lim olishlari uchun qulay shart-sharoitlar yaratamiz. Bepul xorijiy tillar kurslari, IT dasturlash darslari hamda zamonaviy kasblarga o'qitish orqali yoshlarning kelajakdagi muvaffaqiyatiga poydevor quramiz.",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "O'quv kurslar", value: "150+" },
+      { label: "O'qitilgan yoshlar", value: "25k+" },
+      { label: "O'qituvchilar", value: "300+" }
+    ],
+    goals: [
+      "Zamonaviy IT va til kurslarini har bir hududga yetkazish",
+      "Ta'lim sifatini xalqaro standartlarga moslashtirish",
+      "Iqtidorli o'quvchilarga maxsus grantlar ajratish"
+    ]
+  },
+  {
+    slug: "rahbarlik",
+    icon: "fa-crown",
+    iconBg: "var(--green-pale)",
+    iconColor: "var(--green)",
+    title: "Rahbarlik",
+    desc: "Yosh yetakchilarni aniqlash, ularni tayyorlash va qo'llab-quvvatlash bo'yicha maxsus dasturlar.",
+    fullDesc: "Kelajak rahbarlarini yetishtirish bizning asosiy vazifalarimizdan biridir. Yoshlar parlamentlari, mahalliy kengashlardagi yosh deputatlar va maxsus 'Rahbarlar maktabi' dasturlari doirasida biz yetakchilik qobiliyatlarini shakllantiramiz.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Tayyorlangan rahbarlar", value: "1,200+" },
+      { label: "Treninglar soni", value: "450+" },
+      { label: "Viloyatlar bo'ylab qamrov", value: "100%" }
+    ],
+    goals: [
+      "Yosh yetakchilar uchun maxsus 'Rahbarlar Maktabi' tarmog'ini yaratish",
+      "Menejment va strategik rejalashtirish bo'yicha xalqaro tajriba almashish",
+      "Davlat boshqaruviga iqtidorli yoshlarni jalb etish"
+    ]
+  },
+  {
+    slug: "volontyorlik",
+    icon: "fa-handshake-angle",
+    iconBg: "#FEE2E2",
+    iconColor: "#EF4444",
+    title: "Volontyorlik",
+    desc: "Jamiyatga foyda keltiradigan volontyorlik loyihalari va aksiyalarni tashkil etish.",
+    fullDesc: "Biz mehr-oqibat va o'zaro yordamni qadrlaymiz. O'zbekiston bo'ylab o'n minglab ko'ngilli yoshlarimiz ekologik aksiyalarda, qariyalarga yordam berishda va yirik xalqaro tadbirlarda faol qatnashib kelmoqdalar.",
+    image: "https://images.unsplash.com/photo-1593113563332-ce147cb37783?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Faol volontyorlar", value: "50k+" },
+      { label: "Ekologik aksiyalar", value: "800+" },
+      { label: "Yordam ko'rsatilgan oilalar", value: "10k+" }
+    ],
+    goals: [
+      "Ko'ngillilar harakatini milliy miqyosda kuchaytirish",
+      "Har bir mahallada volontyorlar guruhlarini shakllantirish",
+      "Yirik xalqaro musobaqa va anjumanlarda volontyorlar faoliyatini tashkil etish"
+    ]
+  },
+  {
+    slug: "tadbirkorlik",
+    icon: "fa-rocket",
+    iconBg: "#FEF3C7",
+    iconColor: "#D97706",
+    title: "Tadbirkorlik",
+    desc: "Yosh tadbirkorlarni qo'llab-quvvatlash, startup loyihalar va biznes treninglar.",
+    fullDesc: "Biz yoshlarni nafaqat o'qiymiz, balki ularni ishbilarmonlikka yo'naltiramiz. Startap loyihalariga investitsiyalar jalb qilish, biznesni boshlash uchun imtiyozli kreditlar va bepul kovorking markazlari aynan bizning yosh tadbirkorlar uchun yaratilgan.",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Startap loyihalar", value: "300+" },
+      { label: "Ajratilgan grantlar", value: "12 mlrd" },
+      { label: "Yaratilgan ish o'rinlari", value: "4,500+" }
+    ],
+    goals: [
+      "Yoshlar texnoparklarida yangi startaplarni inkubatsiyadan o'tkazish",
+      "Biznes-reja tuzish va marketing bo'yicha bepul master-klasslar",
+      "Yosh tadbirkorlar uchun maxsus yarmarkalar tashkil etish"
+    ]
+  },
+  {
+    slug: "talaba-yoshlari",
+    icon: "fa-school",
+    iconBg: "#F3E8FF",
+    iconColor: "#7C3AED",
+    title: "Talaba yoshlari",
+    desc: "Oliy o'quv yurtlari talabalarining faolligini oshirish va qo'llab-quvvatlash.",
+    fullDesc: "Oliy ta'lim muassasalarida tahsil olayotgan talabalar uchun maxsus loyihalar, stipendiyalar va xalqaro almashinuv dasturlarini amalga oshiramiz. Har bir OTM dagi yoshlar yetakchilari talabalar hayotini qiziqarli qilish uchun ishlaydi.",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Qamrab olingan OTMlar", value: "120+" },
+      { label: "Stipendiya sohiblari", value: "1,500+" },
+      { label: "Xalqaro dasturlar", value: "45+" }
+    ],
+    goals: [
+      "Talabalar uchun yotoqxonalarda qulayliklarni oshirish bo'yicha nazorat",
+      "Iqtidorli talabalar uchun ilmiy konferensiyalar o'tkazish",
+      "OTMlar aro sport va intellektual bellashuvlar tashkil etish"
+    ]
+  },
+  {
+    slug: "madaniyat",
+    icon: "fa-palette",
+    iconBg: "#FCE7F3",
+    iconColor: "#EC4899",
+    title: "Madaniyat",
+    desc: "Milliy madaniyat, san'at va ijodiy loyihalar orqali yoshlarni rivojlantirish.",
+    fullDesc: "Yoshlar orasida milliy merosimizni saqlash, teatr va san'at to'garaklari orqali yoshlarning ijodkorligini yuzaga chiqarish uchun turli festivallar o'tkazamiz. 'Yosh kitobxon' va shunga o'xshash loyihalar yoshlar ongini boyitishga yordam beradi.",
+    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Madaniy tadbirlar", value: "1,200+" },
+      { label: "Kitobxonlar", value: "300k+" },
+      { label: "Teatr truppalari", value: "50+" }
+    ],
+    goals: [
+      "Chekka hududlarda ko'chma kutubxonalar va teatrlar tashkil etish",
+      "Yosh ijodkorlar uchun maxsus ko'rgazmalar o'tkazish",
+      "Milliy maqom va baxshichilik san'atini yoshlar orasida targ'ib qilish"
+    ]
+  },
+  {
+    slug: "sport",
+    icon: "fa-dumbbell",
+    iconBg: "#FFEDD5",
+    iconColor: "#EA580C",
+    title: "Sport",
+    desc: "Sog'lom turmush tarzini targ'ib qilish va sport musobaqalarini tashkil etish.",
+    fullDesc: "Sport – yoshlar sog'lig'i va kelajagi garovidir. Biz yoshlar o'rtasida 'Besh tashabbus' olimpiadasi doirasida minifutbol, voleybol, stritbol va shaxmat bo'yicha millionlab yoshlarni qamrab oluvchi yirik sport tadbirlarini tashkil etamiz.",
+    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Olimpiada ishtirokchilari", value: "5 mln+" },
+      { label: "Sport maydonchalari qurildi", value: "2,500+" },
+      { label: "Xalqaro chempionlar", value: "120+" }
+    ],
+    goals: [
+      "Ommaviy sportni mahallalar darajasiga tushirish",
+      "Imkoniyati cheklangan yoshlar uchun parasportni rivojlantirish",
+      "Yosh sportchilarni xalqaro arenalarga tayyorlash"
+    ]
+  },
+  {
+    slug: "ijtimoiy-loyihalar",
+    icon: "fa-hand-holding-heart",
+    iconBg: "#CCFBF1",
+    iconColor: "#0D9488",
+    title: "Ijtimoiy loyihalar",
+    desc: "Ijtimoiy ahamiyatga molik grant loyihalar va jamoat tashabbuslari.",
+    fullDesc: "Jamiyatimizning ijtimoiy ehtiyojmand qatlamlarini himoya qilish maqsadida biz alohida e'tibor talab etadigan yoshlarga psixologik, huquqiy va tibbiy yordam ko'rsatish bo'yicha kompleks chora-tadbirlarni amalga oshiramiz.",
+    image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&q=80&w=1600",
+    stats: [
+      { label: "Huquqiy maslahatlar", value: "15k+" },
+      { label: "Tibbiy yordam aksiyalari", value: "400+" },
+      { label: "Qamrab olingan mahkumlar", value: "2,000+" }
+    ],
+    goals: [
+      "Yoshlar daftari orqali ijtimoiy yordamni manzilli yetkazish",
+      "Psixologik ko'mak markazlari faoliyatini kuchaytirish",
+      "Huquqbuzarlikka moyil yoshlarni sog'lom hayotga qaytarish"
+    ]
+  }
 ];
 
 // ===== DISTRICTS =====

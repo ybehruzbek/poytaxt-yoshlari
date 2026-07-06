@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 
-const montserrat = Montserrat({
-  subsets: ["latin", "cyrillic"],
-  weight: ["500", "600", "700", "800", "900"],
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-heading",
   display: "swap",
 });
@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" className={`${montserrat.variable} ${inter.variable}`}>
+    <html lang="uz" className={`${poppins.variable} ${inter.variable}`}>
       <head>
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
