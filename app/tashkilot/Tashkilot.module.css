@@ -34,30 +34,29 @@
 }
 
 .statCard {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--white);
   padding: 40px 24px;
-  border-radius: 32px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(13, 59, 102, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.05);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .statCard:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(14, 165, 233, 0.15);
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(14, 165, 233, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: rgba(13, 59, 102, 0.1);
 }
 
 .statNumber {
-  font-size: 56px;
+  font-size: 64px;
   font-weight: 900;
-  color: var(--blue);
-  line-height: 1;
-  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.1;
+  margin-bottom: 16px;
 }
 
 .statLabel {
@@ -92,148 +91,7 @@
   font-size: 20px;
   color: var(--text);
   line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* ================= STICKY SCROLL (ORGANIZATION STRUCTURE) ================= */
-.stickySection {
-  padding: 100px 0;
-  background: var(--bg);
-  position: relative;
-}
-
-.stickyGrid {
-  display: grid;
-  grid-template-columns: 40% 60%;
-  gap: 40px;
-  align-items: flex-start; /* Important for sticky */
-}
-
-/* LEFT PANE (STICKY) */
-.stickyLeft {
-  position: sticky;
-  top: 120px; /* Distance from top of viewport when scrolling */
-  height: max-content;
-  padding-right: 40px;
-}
-
-.stickySubtitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--blue);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 24px;
-  display: block;
-}
-
-.stickyTitle {
-  font-size: clamp(40px, 4vw, 56px);
-  font-weight: 900;
-  color: var(--blue-deep);
-  line-height: 1.1;
-  margin-bottom: 24px;
-  letter-spacing: -0.02em;
-}
-
-.stickyDesc {
-  font-size: 20px;
-  color: var(--text);
-  line-height: 1.6;
-  opacity: 0.8;
-}
-
-/* RIGHT PANE (SCROLLING CARDS) */
-.stickyRight {
-  display: flex;
-  flex-direction: column;
-  gap: 40px; /* Space between scrolling cards */
-  padding-top: 60px; /* Offset the first card slightly */
-  padding-bottom: 60px;
-}
-
-.scrollCard {
-  background: var(--white);
-  padding: 48px;
-  border-radius: 32px;
-  box-shadow: 0 10px 40px rgba(13, 59, 102, 0.05);
-  border: 1px solid rgba(13, 59, 102, 0.04);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  gap: 32px;
-  align-items: flex-start;
-}
-
-.scrollCard:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(13, 59, 102, 0.1);
-  border-color: var(--blue-pale);
-}
-
-.scrollIcon {
-  width: 80px;
-  height: 80px;
-  flex-shrink: 0;
-  background: var(--blue-pale);
-  color: var(--blue);
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  transition: all 0.4s ease;
-}
-
-.scrollCard:hover .scrollIcon {
-  background: var(--blue);
-  color: var(--white);
-  transform: scale(1.1) rotate(5deg);
-}
-
-.scrollContent h3 {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--primary-dark);
-  margin-bottom: 16px;
-  line-height: 1.3;
-}
-
-.scrollContent p {
-  font-size: 18px;
-  color: var(--text);
-  line-height: 1.6;
-  opacity: 0.8;
-  margin: 0;
-}
-
-@media (max-width: 1024px) {
-  .stickyGrid {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-  
-  .stickyLeft {
-    position: relative;
-    top: 0;
-    padding-right: 0;
-    text-align: center;
-  }
-  
-  .stickyRight {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .scrollCard {
-    flex-direction: column;
-    padding: 32px;
-    gap: 24px;
-    text-align: center;
-    align-items: center;
-  }
-}
+/* THE STRUCTURE SECTION MOVED TO TashkilotOrbit COMPONENT */
 
 /* EDITORIAL TEXT SECTION (SARDORLAR KENGASHI) */
 .editorialSection {
@@ -297,67 +155,74 @@
 }
 
 .messageContainer {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 64px;
-  background: var(--white);
-  border-radius: 40px;
-  padding: 48px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+  align-items: flex-end;
+  background: var(--blue-deep);
+  border-radius: 32px;
+  padding: 64px;
+  min-height: 600px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.messageContainer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13, 59, 102, 0.95) 0%, rgba(13, 59, 102, 0.2) 60%, transparent 100%);
+  z-index: 1;
 }
 
 .messageImage {
-  flex: 0 0 400px;
-  height: 500px;
-  position: relative;
-  border-radius: 24px;
-  border-top-right-radius: 120px;
-  border-bottom-left-radius: 120px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(13, 59, 102, 0.15);
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
 }
 
 .messageImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.8s ease;
 }
 
-.messageImage:hover img {
+.messageContainer:hover .messageImage img {
   transform: scale(1.05);
 }
 
 .messageContent {
-  flex: 1;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
 }
 
 .quoteIcon {
   font-size: 80px;
-  color: var(--blue-pale);
-  margin-bottom: 24px;
+  color: var(--blue);
+  margin-bottom: 16px;
   line-height: 1;
   font-family: serif;
 }
 
 .messageText {
-  font-size: 24px;
-  line-height: 1.6;
-  color: var(--blue-deep);
-  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.4;
+  color: var(--white);
+  font-weight: 800;
   margin-bottom: 32px;
-  font-style: italic;
+  letter-spacing: -1px;
 }
 
 .authorName {
   font-size: 20px;
   font-weight: 800;
-  color: var(--primary-dark);
+  color: var(--white);
 }
 
 .authorRole {
   font-size: 16px;
-  color: var(--text-muted);
+  color: rgba(255,255,255,0.7);
   font-weight: 500;
 }
 

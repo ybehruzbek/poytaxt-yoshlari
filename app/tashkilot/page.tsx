@@ -6,6 +6,7 @@ import TashkilotHeroSlider from "@/components/TashkilotHeroSlider/TashkilotHeroS
 import TashkilotTimelinePreview from "@/components/TashkilotTimelinePreview/TashkilotTimelinePreview";
 import TashkilotDirections from "@/components/TashkilotDirections/TashkilotDirections";
 import TashkilotValues from "@/components/TashkilotValues/TashkilotValues";
+import TashkilotOrbit from "@/components/TashkilotOrbit/TashkilotOrbit";
 
 export const metadata = {
   title: "Tashkilot haqida | O'zbekiston Yoshlar Ittifoqi",
@@ -21,19 +22,19 @@ export default function TashkilotPage() {
       <section className={styles.statsSection}>
         <div className="container">
           <div className={styles.statsGrid}>
-            <ScrollReveal delay={1} className={styles.statItem}>
+            <ScrollReveal delay={1} className={styles.statCard}>
               <div className={styles.statNumber}>12 ta</div>
               <div className={styles.statLabel}>Tuman Kengashlari</div>
             </ScrollReveal>
-            <ScrollReveal delay={2} className={styles.statItem}>
+            <ScrollReveal delay={2} className={styles.statCard}>
               <div className={styles.statNumber}>300+</div>
               <div className={styles.statLabel}>Yillik Loyihalar</div>
             </ScrollReveal>
-            <ScrollReveal delay={3} className={styles.statItem}>
+            <ScrollReveal delay={3} className={styles.statCard}>
               <div className={styles.statNumber}>50,000+</div>
               <div className={styles.statLabel}>Faol A'zolar</div>
             </ScrollReveal>
-            <ScrollReveal delay={4} className={styles.statItem}>
+            <ScrollReveal delay={4} className={styles.statCard}>
               <div className={styles.statNumber}>80+</div>
               <div className={styles.statLabel}>Hamkor Tashkilotlar</div>
             </ScrollReveal>
@@ -41,63 +42,8 @@ export default function TashkilotPage() {
         </div>
       </section>
 
-      {/* 2.5. ORGANIZATION STRUCTURE (NEW - STICKY SCROLL) */}
-      <section className={styles.stickySection}>
-        <div className="container">
-          <div className={styles.stickyGrid}>
-            
-            {/* Left Side: Sticky Title */}
-            <div className={styles.stickyLeft}>
-              <div className={styles.stickyHeader}>
-                <ScrollReveal>
-                  <span className={styles.stickySubtitle}>Tuzilma</span>
-                  <h2 className={styles.stickyTitle}>Tashkilot<br/>Tuzilmasi</h2>
-                  <p className={styles.stickyDesc}>
-                    Yoshlar Ittifoqi — yoshlar o'zini o'zi boshqaradigan va ularning manfaatini himoya qiluvchi ulkan, o'zaro bog'langan tizim.
-                  </p>
-                </ScrollReveal>
-              </div>
-            </div>
-
-            {/* Right Side: Scrolling Content */}
-            <div className={styles.stickyRight}>
-              
-              <ScrollReveal className={styles.scrollCard}>
-                <div className={styles.scrollIcon}><i className="fas fa-sitemap" /></div>
-                <div className={styles.scrollContent}>
-                  <h3>Markaziy Kengash</h3>
-                  <p>Butun Respublika yoshlari harakatini birlashtiruvchi, yoshlar siyosati bo'yicha eng yuqori darajadagi qarorlarni qabul qiluvchi markaziy apparat.</p>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={1} className={styles.scrollCard}>
-                <div className={styles.scrollIcon}><i className="fas fa-city" /></div>
-                <div className={styles.scrollContent}>
-                  <h3>Hududiy Kengashlar</h3>
-                  <p>Qoraqalpog'iston Respublikasi, Toshkent shahri va viloyatlar miqyosida yirik yoshlar dasturlarini amalga oshiruvchi tuzilmalar.</p>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={2} className={styles.scrollCard}>
-                <div className={styles.scrollIcon}><i className="fas fa-building" /></div>
-                <div className={styles.scrollContent}>
-                  <h3>Tuman (Shahar) Kengashlari</h3>
-                  <p>Har bir tuman va shaharda yoshlar bilan yuzma-yuz ishlaydigan, mahalliy muammolarni hal qiluvchi yoshlar Kengashlari.</p>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={3} className={styles.scrollCard}>
-                <div className={styles.scrollIcon}><i className="fas fa-school" /></div>
-                <div className={styles.scrollContent}>
-                  <h3>Boshlang'ich Tashkilotlar</h3>
-                  <p>Maktab, akademik litsey, texnikum va OTMlardagi sardorlar, shuningdek mahallalardagi yoshlar yetakchilarini o'z ichiga olgan quyi bo'g'in.</p>
-                </div>
-              </ScrollReveal>
-
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 2.5. ORGANIZATION STRUCTURE (GALAXY ORBIT) */}
+      <TashkilotOrbit />
 
       {/* 2.6. SARDORLAR KENGASHI (EDITORIAL TEXT) */}
       <section className={styles.editorialSection}>

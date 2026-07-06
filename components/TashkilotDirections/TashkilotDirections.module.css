@@ -40,9 +40,11 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* FORCE LEFT ALIGNMENT */
+  justify-content: flex-start;
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  background: var(--bg-light); /* fallback */
+  background: var(--white);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.05);
   
   /* Initial closed state */
   flex: 1; /* evenly divide space */
