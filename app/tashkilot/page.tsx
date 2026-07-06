@@ -7,6 +7,7 @@ import TashkilotTimelinePreview from "@/components/TashkilotTimelinePreview/Tash
 import TashkilotDirections from "@/components/TashkilotDirections/TashkilotDirections";
 import TashkilotValues from "@/components/TashkilotValues/TashkilotValues";
 import TashkilotStructure from "@/components/TashkilotStructure/TashkilotStructure";
+import SardorlarEditorial from "@/components/SardorlarEditorial/SardorlarEditorial";
 
 export const metadata = {
   title: "Tashkilot haqida | O'zbekiston Yoshlar Ittifoqi",
@@ -46,26 +47,7 @@ export default function TashkilotPage() {
       <TashkilotStructure />
 
       {/* 2.6. SARDORLAR KENGASHI (EDITORIAL TEXT) */}
-      <section className={styles.editorialSection}>
-        <div className={styles.editorialContainer}>
-          <ScrollReveal>
-            <span className={styles.editorialSubtitle}>Bizning tayanchimiz</span>
-            <h2 className={styles.editorialTitle}>Sardorlar Kengashi — O'zbekiston kelajagi poydevori</h2>
-            <p className={styles.editorialText}>
-              Sardorlar Kengashi — bu shunchaki yoshlar guruhi emas, balki mamlakatimizdagi yuz minglab maktab o'quvchilarini o'ziga qamrab olgan <strong>eng yirik Liderlik Maktabi</strong> hisoblanadi. Bu tuzilma yoshlarni faqatgina boshqarishni emas, balki mas'uliyatni o'z bo'yniga olishni, jamoa bilan ishlashni va vatanparvarlikni o'rgatadi.
-            </p>
-            <p className={styles.editorialText}>
-              Har bir maktab, tuman, shahar va respublika bosqichida saylanadigan Sardorlar o'z tengdoshlarining muammolarini o'rganadi, ularning ovozi bo'ladi. Ular nafaqat o'z hududlaridagi o'zgarishlarga, balki butun mamlakat yoshlar siyosatiga bevosita ta'sir ko'rsata oladigan haqiqiy ko'ngillilar armiyasidir.
-            </p>
-            <blockquote className={styles.editorialQuote}>
-              "Sardorlar kengashi – bu bolalarning ijodiy va ijtimoiy qobiliyatlarini ro'yobga chiqaruvchi, tengdoshlar o'rtasida sog'lom raqobat va do'stlik muhitini yaratuvchi noyob ekotizimdir."
-            </blockquote>
-            <p className={styles.editorialText}>
-              Aynan shuning uchun Yoshlar Ittifoqi o'zining asosiy e'tiborini Sardorlar Kengashini qo'llab-quvvatlash va rivojlantirishga qaratadi. Biz ishonamizki, bugungi maktab sardori — ertangi kunning buyuk davlat arbobi, kuchli tadbirkori yoki yetuk olimi bo'lishi muqarrar.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <SardorlarEditorial />
 
       {/* 2.7. DIRECTIONS (STICKY SCROLL) */}
       <TashkilotDirections />
