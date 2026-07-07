@@ -1,25 +1,24 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./MissiyaHero.module.css";
+import styles from "./RahbariyatHero.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
-export default function MissiyaHero() {
+export default function RahbariyatHero() {
   return (
     <section className={styles.heroContainer}>
       <div className={styles.heroBox}>
-        {/* Background Image using Next.js Image for optimization */}
         <div className={styles.bgImageWrap}>
-          <Image 
-            src="/mission_hero_bg.png" 
-            alt="Missiya va Qadriyatlar bg" 
-            fill 
+          <Image
+            src="/rahbariyat_hero_bg.png"
+            alt="Rahbariyat"
+            fill
             priority
             className={styles.bgImage}
           />
         </div>
 
-        <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
+        <div className="container" style={{ position: "relative", zIndex: 2, width: "100%" }}>
           <div className={styles.heroContent}>
             <ScrollReveal>
               <nav aria-label="breadcrumb" className={styles.breadcrumbs}>
@@ -32,15 +31,16 @@ export default function MissiyaHero() {
                     <Link href="/tashkilot">Tashkilot haqida</Link>
                     <span className={styles.separator}>/</span>
                   </li>
-                  <li className={styles.activeCrumb}>Missiya</li>
+                  <li className={styles.activeCrumb}>Rahbariyat</li>
                 </ol>
               </nav>
 
               <h1 className={styles.heroTitle}>
-                MISSIYA VA QADRIYATLAR
+                KENGASH<br />RAHBARIYATI
               </h1>
               <p className={styles.heroDesc}>
-                O'zbekiston Yoshlar Ittifoqining davlat siyosatidagi o'rni, yoshlar bilan ishlashdagi asosiy maqsadi, kelajak qarashlari va o'zgarmas tamoyillari. Biz oddiy tashkilot emasmiz — biz yoshlarning ishonchli hamrohimiz.
+                Yoshlar manfaati yo&apos;lida kun-u tun xizmat qilish, har bir murojaat ortidagi
+                inson taqdiriga daxldorlik hissi bilan yashash — bizning bosh maqsadimizdir.
               </p>
             </ScrollReveal>
           </div>

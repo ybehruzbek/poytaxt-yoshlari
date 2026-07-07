@@ -1,0 +1,118 @@
+.section {
+  padding: 140px 0 100px;
+  background: var(--bg-light, #f8fafc);
+}
+
+.wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.content {
+  background: var(--white);
+  border-radius: 32px;
+  padding: 80px 80px 100px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.03);
+  z-index: 1;
+}
+
+.quoteMark {
+  font-family: Georgia, serif;
+  font-size: 140px;
+  line-height: 0;
+  color: rgba(14, 165, 233, 0.15);
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.text {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  color: var(--blue-deep, #0f172a);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+.authorBadge {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border-radius: 100px;
+  padding: 12px 32px 12px 12px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 16px 32px rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.1);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.avatarWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-light);
+  flex-shrink: 0;
+}
+
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--blue-deep, #0f172a);
+  margin-bottom: 2px;
+}
+
+.position {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--blue, #0ea5e9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0 100px;
+  }
+  .content {
+    padding: 60px 30px 80px;
+    border-radius: 24px;
+  }
+  .quoteMark {
+    font-size: 100px;
+    top: 60px;
+  }
+  .text {
+    font-size: 22px;
+  }
+  .authorBadge {
+    bottom: -50px;
+    flex-direction: column;
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    gap: 12px;
+  }
+}

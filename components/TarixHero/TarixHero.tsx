@@ -1,18 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./MissiyaHero.module.css";
+import styles from "./TarixHero.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
-export default function MissiyaHero() {
+export default function TarixHero() {
   return (
     <section className={styles.heroContainer}>
       <div className={styles.heroBox}>
-        {/* Background Image using Next.js Image for optimization */}
         <div className={styles.bgImageWrap}>
           <Image 
-            src="/mission_hero_bg.png" 
-            alt="Missiya va Qadriyatlar bg" 
+            src="/history_hero_bg.png" 
+            alt="Tariximiz" 
             fill 
             priority
             className={styles.bgImage}
@@ -32,15 +31,16 @@ export default function MissiyaHero() {
                     <Link href="/tashkilot">Tashkilot haqida</Link>
                     <span className={styles.separator}>/</span>
                   </li>
-                  <li className={styles.activeCrumb}>Missiya</li>
+                  <li className={styles.activeCrumb}>Tariximiz</li>
                 </ol>
               </nav>
 
               <h1 className={styles.heroTitle}>
-                MISSIYA VA QADRIYATLAR
+                YANGI DAVR TARIXI,<br />BUYUK QADAMLAR
               </h1>
               <p className={styles.heroDesc}>
-                O'zbekiston Yoshlar Ittifoqining davlat siyosatidagi o'rni, yoshlar bilan ishlashdagi asosiy maqsadi, kelajak qarashlari va o'zgarmas tamoyillari. Biz oddiy tashkilot emasmiz — biz yoshlarning ishonchli hamrohimiz.
+                Bu faqatgina bir tashkilotning emas, balki O&apos;zbekistondagi millionlab umidvor yoshlarning 
+                o&apos;zgarishlar va g&apos;alabalar sari tashlagan buyuk qadamlari solnomasidir.
               </p>
             </ScrollReveal>
           </div>

@@ -1,0 +1,71 @@
+.introSection {
+  padding: 100px 0 60px;
+  background: var(--bg);
+}
+
+.introBox {
+  background: var(--white);
+  border-radius: 32px;
+  padding: 80px 40px;
+  text-align: center;
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
+  overflow: hidden;
+}
+
+.introBox::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--blue), var(--green));
+}
+
+.iconWrap {
+  width: 80px;
+  height: 80px;
+  background: var(--bg-light, #f8fafc);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+}
+
+.quoteIcon {
+  font-size: 32px;
+  color: var(--blue, #0ea5e9);
+}
+
+.introQuote {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--blue-deep, #0f172a);
+  line-height: 1.4;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+.introText {
+  font-size: 18px;
+  color: var(--text, #475569);
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .introBox {
+    padding: 56px 24px;
+    border-radius: 24px;
+  }
+  .introQuote {
+    font-size: 20px;
+  }
+  .introText {
+    font-size: 16px;
+  }
+}

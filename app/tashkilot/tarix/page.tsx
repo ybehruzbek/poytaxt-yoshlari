@@ -1,6 +1,10 @@
 import Link from "next/link";
 import styles from "./Tarix.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import TarixHero from "@/components/TarixHero/TarixHero";
+import TarixIntro from "@/components/TarixIntro/TarixIntro";
+import TarixStats from "@/components/TarixStats/TarixStats";
+import NavigationCards from "@/components/NavigationCards/NavigationCards";
 
 export const metadata = {
   title: "Boy Tariximiz | O'zbekiston Yoshlar Ittifoqi",
@@ -116,58 +120,10 @@ export default function HistoryPage() {
     <div className={styles.pageWrapper}>
       
       {/* ===== 1. HERO SECTION ===== */}
-      <section className={styles.heroContainer}>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <ScrollReveal>
-              <nav aria-label="breadcrumb" className={styles.heroBreadcrumbs}>
-                <ol>
-                  <li>
-                    <Link href="/">Bosh sahifa</Link>
-                    <span className={styles.separator}>/</span>
-                  </li>
-                  <li>
-                    <Link href="/tashkilot">Tashkilot haqida</Link>
-                    <span className={styles.separator}>/</span>
-                  </li>
-                  <li className={styles.activeCrumb}>
-                    <span>Tariximiz</span>
-                  </li>
-                </ol>
-              </nav>
-
-              <h1 className={styles.heroTitle}>
-                Yangi davr tarixi, 
-                <br />buyuk qadamlar
-              </h1>
-              <p className={styles.heroDesc}>
-                Bu faqatgina bir tashkilotning emas, balki O'zbekistondagi millionlab umidvor yoshlarning 
-                o'zgarishlar va g'alabalar sari tashlagan buyuk qadamlari solnomasidir.
-              </p>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      <TarixHero />
 
       {/* ===== 2. ORIGIN INTRO ===== */}
-      <section className={styles.introSection}>
-        <div className="container">
-          <ScrollReveal>
-            <div className={styles.introContent}>
-              <i className={`fas fa-quote-right ${styles.quoteIcon}`}></i>
-              <h2 className={styles.introQuote}>
-                "Hech bir jamiyat o'z yoshlarining g'ayrati, shijoati va ularga bo'lgan kuchli ishonchisiz hech qachon katta yutuqlarga erisha olmaydi."
-              </h2>
-              <p className={styles.introText}>
-                Biz yo'lga chiqqanimizda yoshlarning ko'plab savollari ochiq qolgan, imkoniyatlar 
-                esa faqatgina tanlanganlar uchungina ochiqdek tuyulardi. O'zbekiston Yoshlar Ittifoqi aynan 
-                shu bo'shliqni to'ldirish, adolatni ta'minlash va barcha yoshlarga teng start olish huquqini 
-                kafolatlash maqsadida butunlay yangi ruhda maydonga chiqdi.
-              </p>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <TarixIntro />
 
       {/* ===== 3. STICKY TIMELINE WITH IMAGES (EDITORIAL) ===== */}
       <section className={styles.chronologySection}>
@@ -216,31 +172,7 @@ export default function HistoryPage() {
       </section>
 
       {/* ===== 4. STATS GRID ===== */}
-      <section className={styles.statsSection}>
-        <div className="container">
-          <ScrollReveal>
-            <div className={styles.statsHeader}>
-              <h2 className={styles.statsTitle}>Tarixiy natijalar raqamlarda</h2>
-              <p className={styles.statsDesc}>
-                Qisqa vaqt ichida erishilgan bu natijalar ortida minglab uyqusiz tunlar, 
-                uzluksiz mehnat va xalqqa xizmat qilishdek oliy maqsad yotibdi.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className={styles.statsGrid}>
-            {stats.map((stat, i) => (
-              <ScrollReveal key={i} delay={i + 1}>
-                <div className={styles.statCard}>
-                  <i className={`fas ${stat.icon} ${styles.statIcon}`}></i>
-                  <div className={styles.statNumber}>{stat.number}</div>
-                  <div className={styles.statLabel}>{stat.label}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TarixStats />
 
       {/* ===== 5. CTA SECTION (MODERN BENTO) ===== */}
       <section className={styles.ctaSection}>
@@ -264,6 +196,32 @@ export default function HistoryPage() {
           </div>
         </div>
       </section>
+      {/* ===== 6. NAVIGATION CARDS ===== */}
+      <NavigationCards
+        items={[
+          {
+            id: "01",
+            title: "Missiya va Qadriyatlar",
+            desc: "Ittifoqimizning asosiy maqsad va qadriyatlari, tamoyillari hamda strategik yo'nalishlarimiz bilan tanishing.",
+            href: "/tashkilot/missiya",
+            image: "/images/tashkilot/tashkilot_chairman_1782907129930.png"
+          },
+          {
+            id: "02",
+            title: "Tashkilot haqida",
+            desc: "O'zbekiston Yoshlar Ittifoqi umumiy tuzilmasi, maqsadlari va asosiy arxitekturasi bilan tanishing.",
+            href: "/tashkilot",
+            image: "/images/tashkilot/tashkilot_hero_1782907121959.png"
+          },
+          {
+            id: "03",
+            title: "Rasmiy Hujjatlar",
+            desc: "Tashkilot faoliyatiga oid barcha qarorlar, nizomlar va huquqiy hujjatlar bilan tanishing.",
+            href: "/hujjatlar",
+            image: "/images/tashkilot/tashkilot_impact_1782907138342.png"
+          }
+        ]}
+      />
 
     </div>
   );
