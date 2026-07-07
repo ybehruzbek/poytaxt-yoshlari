@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import styles from "./NavigationCards.module.css";
 
-const navItems = [
+const defaultNavItems = [
   {
     id: "01",
     title: "Missiya va Qadriyatlar",
@@ -30,8 +30,22 @@ const navItems = [
   }
 ];
 
-export default function NavigationCards() {
+interface NavItem {
+  id: string;
+  title: string;
+  desc: string;
+  href: string;
+  image: string;
+}
+
+interface NavigationCardsProps {
+  items?: NavItem[];
+}
+
+export default function NavigationCards({ items = defaultNavItems }: NavigationCardsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const displayItems = items;
 
   return (
     <section className={`${styles.section} ${hoveredIndex !== null ? styles.hasActiveBg : ""}`}>
@@ -49,7 +63,7 @@ export default function NavigationCards() {
               className={styles.bgImageDiv}
             >
               <Image 
-                src={navItems[hoveredIndex].image} 
+                src={displayItems[hoveredIndex].image} 
                 alt="Background" 
                 fill 
                 className={styles.image}
@@ -67,7 +81,7 @@ export default function NavigationCards() {
         </div>
         
         <div className={styles.list}>
-          {navItems.map((item, idx) => {
+          {displayItems.map((item, idx) => {
             const isHovered = hoveredIndex === idx;
             const isAnyHovered = hoveredIndex !== null;
 

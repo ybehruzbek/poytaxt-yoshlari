@@ -1,101 +1,126 @@
-.section {
-  padding: 120px 0 160px;
-  background: var(--bg-light, #ffffff);
+.grantSection {
+  padding: 100px 0;
+  background: transparent;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.header {
+.sectionHeader {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
+}
+
+.sectionLabel {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  display: block;
 }
 
 .sectionTitle {
-  font-size: clamp(32px, 4vw, 56px);
-  font-weight: 800;
-  color: var(--blue-deep, #0f172a);
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--blue-deep);
   letter-spacing: -0.02em;
-  margin-bottom: 24px;
+  text-transform: uppercase;
 }
 
-.sectionDesc {
-  font-size: 18px;
-  color: #475569;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* Stacking Cards */
-.cardsStack {
+.timelineWrapper {
   position: relative;
+  padding-top: 50px;
 }
 
-.cardWrapper {
-  position: sticky;
-  margin-bottom: 40px; /* Space between cards */
-  transition: transform 0.3s ease;
+.arcSvgWrap {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: calc(100% + 32px);
+  height: 40px;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.cardInner {
-  background: #ffffff;
-  border-radius: 32px;
-  padding: 64px;
-  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.1);
-  display: flex;
-  flex-direction: column;
+.arcPath {
+  stroke-dasharray: 12, 12;
+  animation: dashMove 1.5s linear infinite;
 }
 
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -24;
+  }
 }
 
-.iconWrap {
-  width: 80px;
-  height: 80px;
+.timelineGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeCard {
+  text-align: center;
+  padding: 50px 32px 40px;
   border-radius: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  color: var(--white);
+  border: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  height: 100%;
+}
+
+.timeCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.timeNum {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  font-size: 26px;
+  font-weight: 900;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border: 5px solid var(--bg);
+  z-index: 2;
 }
 
-.cardNumber {
-  font-family: var(--font-mono, monospace);
-  font-size: 64px;
-  font-weight: 900;
-  color: rgba(15, 23, 42, 0.05);
-  line-height: 1;
-}
-
-.cardTitle {
-  font-size: 32px;
+.timeTitle {
+  font-size: 22px;
   font-weight: 800;
-  color: var(--blue-deep, #0f172a);
-  margin-bottom: 24px;
-  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 16px;
 }
 
-.cardDesc {
-  font-size: 18px;
-  line-height: 1.7;
-  color: #475569;
+.timeDesc {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .timelineGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  .arcSvgWrap {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .section { padding: 80px 0; }
-  .container { padding: 0 24px; }
-  
-  .cardInner { padding: 32px; border-radius: 24px; }
-  .iconWrap { width: 64px; height: 64px; font-size: 24px; }
-  .cardNumber { font-size: 48px; }
-  .cardTitle { font-size: 24px; }
-  .cardDesc { font-size: 16px; }
+  .sectionTitle {
+    font-size: 32px;
+  }
 }

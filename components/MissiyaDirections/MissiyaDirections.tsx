@@ -1,63 +1,69 @@
 import React from "react";
 import styles from "./MissiyaDirections.module.css";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const overlapCards = [
   {
     id: 1,
-    icon: "fa-shield-halved",
+    num: "01",
     title: "Huquqiy va Ijtimoiy Himoya",
-    desc: "Yoshlarning ijtimoiy-iqtisodiy, siyosiy hamda ma'naviy huquqlarini har qanday vaziyatda munosib himoya qilish. Biz qonunchilik tashabbuslari bilan chiqib, yoshlarning munosib mehnat, ta'lim va yashash sharoitlariga ega bo'lishini ta'minlash yo'lida davlat tuzilmalari bilan hamkorlik qilamiz.",
-    color: "#0ea5e9", // Blue
+    desc: "Yoshlarning huquqlarini har qanday vaziyatda munosib himoya qilish va davlat tuzilmalari bilan ishlash.",
+    color: "var(--blue)"
   },
   {
     id: 2,
-    icon: "fa-graduation-cap",
-    title: "Ta'lim va Bandlik Klasteri",
-    desc: "Yoshlarning sifatli ta'lim olishi va o'z mutaxassisligi bo'yicha barqaror daromad manbaiga ega bo'lishini qo'llab-quvvatlash. Bepul o'quv kurslari, xorijiy tillarga tayyorlash, kasb-hunarga o'qitish va biznes startaplar uchun yoshlarga doimiy amaliy yordam va grantlar taqdim etish.",
-    color: "#10b981", // Green
+    num: "02",
+    title: "Ta'lim va Bandlik",
+    desc: "Sifatli ta'lim olish va o'z mutaxassisligi bo'yicha barqaror daromad manbaiga ega bo'lishini ta'minlash.",
+    color: "var(--blue-deep)"
   },
   {
     id: 3,
-    icon: "fa-globe",
-    title: "Ijtimoiy Faollik va Ekologiya",
-    desc: "Yoshlarni jamiyat boshqaruvida va turli tashabbuslarda ishtirok etishga jalb qilish. Respublika miqyosida volontyorlik (ko'ngillilar) harakatini kengaytirish, ekologik barqarorlikni ta'minlashga qaratilgan amaliy tadbirlar orqali vatanparvarlik va fuqarolik mas'uliyatini shakllantirish.",
-    color: "#8b5cf6", // Purple
+    num: "03",
+    title: "Ijtimoiy Faollik",
+    desc: "Yoshlarni jamiyat boshqaruvida va turli tashabbuslarda ishtirok etishga faol jalb qilish.",
+    color: "var(--green)"
   },
 ];
 
 export default function MissiyaDirections() {
   return (
-    <section className={styles.section}>
-      <div className={styles.container}>
-        
-        <div className={styles.header}>
-          <h2 className={styles.sectionTitle}>Uchta Ustuvor Yo'nalish</h2>
-          <p className={styles.sectionDesc}>
-            Bizning faoliyatimiz butun mamlakat yoshlarining hayotini qamrab oluvchi uchta asosiy ustunga tayanadi.
-          </p>
-        </div>
+    <section className={styles.grantSection}>
+      <div className="container">
+        <ScrollReveal>
+          <div className={styles.sectionHeader}>
+            <span className={styles.sectionLabel}>Yo'nalishlar</span>
+            <h2 className={styles.sectionTitle}>Uchta Ustuvor Yo'nalish</h2>
+          </div>
+        </ScrollReveal>
 
-        <div className={styles.cardsStack}>
-          {overlapCards.map((card, index) => (
-            <div 
-              key={card.id} 
-              className={styles.cardWrapper}
-              style={{ top: `calc(120px + ${index * 40}px)` }}
-            >
-              <div className={styles.cardInner} style={{ borderTop: `6px solid ${card.color}` }}>
-                <div className={styles.cardHeader}>
-                  <div className={styles.iconWrap} style={{ color: card.color, backgroundColor: `${card.color}15` }}>
-                    <i className={`fas ${card.icon}`}></i>
-                  </div>
-                  <div className={styles.cardNumber}>0{card.id}</div>
+        <div className={styles.timelineWrapper}>
+          <div className={styles.timelineGrid}>
+            {overlapCards.map((item, idx) => (
+              <ScrollReveal key={item.id} delay={idx + 1}>
+                <div className={styles.timeCard} style={{ background: item.color }}>
+                  {idx < 2 && (
+                    <div className={styles.arcSvgWrap}>
+                      <svg viewBox="0 0 400 40" preserveAspectRatio="none" width="100%" height="100%">
+                        <path
+                          className={styles.arcPath}
+                          d="M 0 40 Q 200 0 400 40"
+                          fill="none"
+                          stroke="rgba(255, 255, 255, 0.5)"
+                          strokeWidth="4"
+                          vectorEffect="non-scaling-stroke"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                  <div className={styles.timeNum} style={{ color: item.color }}>{item.num}</div>
+                  <h3 className={styles.timeTitle}>{item.title}</h3>
+                  <p className={styles.timeDesc}>{item.desc}</p>
                 </div>
-                <h3 className={styles.cardTitle}>{card.title}</h3>
-                <p className={styles.cardDesc}>{card.desc}</p>
-              </div>
-            </div>
-          ))}
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
-        
       </div>
     </section>
   );
