@@ -1,82 +1,15 @@
-'use client';
+import { prisma } from "@/lib/prisma";
+import YangiliklarClient from "./YangiliklarClient";
 
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { newsItems } from "@/lib/data";
-import PageHeader from "@/components/ui/PageHeader";
-import FilterTabs from "@/components/ui/FilterTabs";
-import styles from "@/components/News/News.module.css";
+export const metadata = {
+  title: "Yangiliklar | O'zbekiston Yoshlar Ittifoqi",
+  description: "Poytaxt yoshlari hayotidagi eng so'nggi va muhim yangiliklar.",
+};
 
-export default function AllNewsPage() {
-  const [activeTab, setActiveTab] = useState("Barchasi");
-  
-  const tabs = ["Barchasi", "Sport", "Ta'lim", "Tadbirlar", "IT va Texnologiya"];
-  
-  // A simple client-side filter
-  const filteredNews = activeTab === "Barchasi" 
-    ? newsItems 
-    : newsItems.filter(item => item.tag === activeTab);
+export default async function AllNewsPage() {
+  const news = await prisma.news.findMany({
+    orderBy: { createdAt: 'desc' }
+  });
 
-  return (
-    <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh' }}>
-      <PageHeader 
-        label="Yangiliklar"
-        title="Barcha yangiliklar va voqealar"
-        description="Poytaxt yoshlari hayotidagi eng so'nggi va muhim yangiliklardan xabardor bo'ling. Sport, ta'lim, fan va madaniyat yo'nalishlaridagi yutuqlar."
-        breadcrumbs={[
-          { label: "Bosh sahifa", href: "/" },
-          { label: "Yangiliklar" }
-        ]}
-      />
-      
-      <FilterTabs 
-        tabs={tabs}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-      />
-      
-      <div className={styles.bottomRow} style={{ marginTop: '40px' }}>
-        {filteredNews.length > 0 ? filteredNews.map(item => (
-          <div className={styles.flexItem} key={item.id}>
-            <Link href={`/yangiliklar/${item.id}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div className={styles.smallImg}>
-                <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
-              </div>
-              <div className={styles.smallBody}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                  <span className={styles.tag} style={{ margin: 0, background: 'var(--blue-pale)', color: 'var(--blue)' }}>{item.tag}</span>
-                  <div className={styles.date}>
-                    <i className="far fa-calendar" style={{ marginRight: '6px' }}/> {item.date}
-                  </div>
-                </div>
-                
-                <h3 className={styles.smallTitle} style={{ fontSize: '18px', fontWeight: 700, color: 'var(--primary-dark)', lineHeight: 1.4, marginBottom: '12px' }}>
-                  {item.title}
-                </h3>
-                
-                {item.excerpt && (
-                  <p style={{ 
-                    fontSize: '15px', color: 'var(--text-secondary)', lineHeight: 1.6,
-                    display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                    marginBottom: '20px'
-                  }}>
-                    {item.excerpt}
-                  </p>
-                )}
-                
-                <div style={{ marginTop: 'auto', fontWeight: 600, color: 'var(--blue)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  Batafsil o'qish <i className="fas fa-arrow-right" style={{ fontSize: '12px' }}/>
-                </div>
-              </div>
-            </Link>
-          </div>
-        )) : (
-          <div style={{ padding: '60px 0', textAlign: 'center', width: '100%', color: 'var(--text-muted)' }}>
-            Ushbu bo'limda hozircha yangiliklar yo'q
-          </div>
-        )}
-      </div>
-    </div>
-  );
+  return <YangiliklarClient initialNews={news} />;
 }

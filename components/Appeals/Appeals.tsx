@@ -70,25 +70,44 @@ export default function Appeals() {
   const [tuman, setTuman] = useState("");
   const [turi, setTuri] = useState("");
 
-  const handleSubmit = useCallback((e: FormEvent) => {
+  const handleSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault();
-    if (!tuman || !turi) {
+    const form = e.target as HTMLFormElement;
+    const ism = (form.elements.namedItem("ism") as HTMLInputElement).value;
+    const familiya = (form.elements.namedItem("familiya") as HTMLInputElement).value;
+    const tel = (form.elements.namedItem("tel") as HTMLInputElement).value;
+    const xabar = (form.elements.namedItem("xabar") as HTMLTextAreaElement).value;
+
+    if (!ism || !familiya || !tel || !tuman || !turi || !xabar) {
       alert("Iltimos, barcha maydonlarni to'ldiring!");
       return;
     }
     
     setIsSubmitting(true);
-    const form = e.target as HTMLFormElement;
     
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setShowToast(true);
-      form.reset();
-      setTuman("");
-      setTuri("");
+    try {
+      const res = await fetch("/api/appeals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ism, familiya, tel, tuman, turi, xabar })
+      });
       
-      setTimeout(() => setShowToast(false), 4000);
-    }, 1500);
+      if (res.ok) {
+        setShowToast(true);
+        form.reset();
+        setTuman("");
+        setTuri("");
+        
+        setTimeout(() => setShowToast(false), 4000);
+      } else {
+        const data = await res.json();
+        alert(data.error || "Xatolik yuz berdi");
+      }
+    } catch (error) {
+      alert("Tizimda xatolik yuz berdi. Iltimos keyinroq urunib ko'ring.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }, [tuman, turi]);
 
   return (
@@ -141,18 +160,18 @@ export default function Appeals() {
 
               <div className={styles.formRow}>
                 <div className={styles.inputWrapper}>
-                  <input type="text" required placeholder=" " className={styles.formInput} id="ism" />
+                  <input type="text" name="ism" required placeholder=" " className={styles.formInput} id="ism" />
                   <label htmlFor="ism" className={styles.formLabel}>Ismingiz *</label>
                 </div>
                 <div className={styles.inputWrapper}>
-                  <input type="text" required placeholder=" " className={styles.formInput} id="familiya" />
+                  <input type="text" name="familiya" required placeholder=" " className={styles.formInput} id="familiya" />
                   <label htmlFor="familiya" className={styles.formLabel}>Familiyangiz *</label>
                 </div>
               </div>
 
               <div className={styles.formRow}>
                 <div className={styles.inputWrapper}>
-                  <input type="tel" required placeholder=" " className={styles.formInput} id="tel" />
+                  <input type="tel" name="tel" required placeholder=" " className={styles.formInput} id="tel" />
                   <label htmlFor="tel" className={styles.formLabel}>Telefon *</label>
                 </div>
                 
@@ -173,6 +192,7 @@ export default function Appeals() {
 
               <div className={styles.inputWrapper}>
                 <textarea
+                  name="xabar"
                   required
                   rows={4}
                   placeholder=" "

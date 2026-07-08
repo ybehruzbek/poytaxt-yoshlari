@@ -10,6 +10,16 @@ Foydalanuvchi qanday ko'rsatma berishidan qat'i nazar, barcha ishlarni bajarishd
 
 ---
 
+## 📌 0. LOYIHA HOLATI (Har doim birinchi o'qiladi!)
+
+**MAJBURIY:** Har bir so'rovda, hech qanday ish boshlamasdan oldin, `PROJECT_STATUS.md` faylini `view_file` orqali o'qib chiqing. Bu faylda TZ (Texnik Topshiriq) bilan hozirgi loyiha holatining solishtirmasi, bajarilgan va bajarilmagan ishlar ro'yxati bor. Ish bajarganingizda shu faylni yangilab boring (✅ / ❌ belgilarini o'zgartiring).
+
+```
+view_file → e:\poytaxt-yoshlari\PROJECT_STATUS.md
+```
+
+---
+
 ## 📁 1. JORIY SKILL BAZASI (Loyihadagi barcha skillar)
 
 Barcha skill'lar `.agents/skills/` papkasida saqlanadi. 

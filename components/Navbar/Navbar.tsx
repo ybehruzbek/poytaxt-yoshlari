@@ -37,6 +37,12 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    // Close menu when route changes
+    setMenuOpen(false);
+    document.body.style.overflow = "";
+  }, [pathname]);
+
   const toggleMenu = useCallback(() => {
     setMenuOpen((prev) => {
       document.body.style.overflow = !prev ? "hidden" : "";
@@ -79,6 +85,8 @@ export default function Navbar() {
 
   // We only show a subset of links in the center navbar to avoid crowding
   const centerLinks = navLinks.slice(0, 5);
+
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <nav
@@ -138,7 +146,7 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/login" className="nav-cta">
+          <Link href="/admin/login" className="nav-cta">
             <i className="fas fa-user-circle" />
             <span>Tizimga kirish</span>
           </Link>

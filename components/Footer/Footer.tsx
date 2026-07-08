@@ -1,74 +1,86 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Footer.module.css";
 import { LOGO_URL, footerNav, footerResources, footerContact, socialLinks } from "@/lib/data";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin")) return null;
+
   return (
     <footer className={styles.footer}>
+      {/* Decorative top wave/gradient line */}
+      <div className={styles.gradientLine}></div>
+      
       <div className="container">
-        <div className={styles.top}>
-          <div className={styles.brand}>
-            <Image src={LOGO_URL} alt="YI logotip" width={120} height={34} />
-            <p>
+        <div className={styles.mainContent}>
+          <div className={styles.brandCol}>
+            <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center' }}>
+              <img 
+                src={LOGO_URL} 
+                alt="YI logotip" 
+                style={{ width: '140px', height: 'auto', display: 'block', maxWidth: '100%' }} 
+              />
+            </div>
+            <p className={styles.brandDesc}>
               O&apos;zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi, ularning salohiyatini ro&apos;yobga chiqarishga ko&apos;maklashuvchi eng yirik jamoat tashkiloti.
             </p>
-            <div className={styles.social}>
-              {socialLinks.map((link) => {
-                const colorClass =
-                  link.label === "Telegram" ? styles.telegram :
-                  link.label === "Instagram" ? styles.instagram :
-                  link.label === "Facebook" ? styles.facebook :
-                  styles.youtube;
-                return (
-                  <a 
-                    key={link.label} 
-                    href={link.href} 
-                    aria-label={link.label}
-                    className={colorClass}
-                  >
-                    <i className={`fab ${link.icon}`} />
-                  </a>
-                );
-              })}
+            <div className={styles.socials}>
+              {socialLinks.map((link) => (
+                <a key={link.label} href={link.href} aria-label={link.label} className={styles.socialLink}>
+                  <i className={`fab ${link.icon}`}></i>
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className={styles.col}>
-            <h4>Navigatsiya</h4>
-            <ul>
-              {footerNav.map((item) => (
-                <li key={item.href}><a href={item.href}>{item.label}</a></li>
-              ))}
-            </ul>
-          </div>
+          <div className={styles.linksGrid}>
+            <div className={styles.linkGroup}>
+              <h4>Navigatsiya</h4>
+              <ul>
+                {footerNav.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className={styles.col}>
-            <h4>Resurslar</h4>
-            <ul>
-              {footerResources.map((item) => (
-                <li key={item.label}><a href={item.href}>{item.label}</a></li>
-              ))}
-            </ul>
-          </div>
+            <div className={styles.linkGroup}>
+              <h4>Resurslar</h4>
+              <ul>
+                {footerResources.map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className={styles.col}>
-            <h4>Aloqa</h4>
-            <ul className={styles.contact}>
-              {footerContact.map((item, i) => (
-                <li key={i}>
-                  <i className={`fas ${item.icon}`} />
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
+            <div className={styles.linkGroup}>
+              <h4>Aloqa</h4>
+              <ul className={styles.contactList}>
+                {footerContact.map((item, i) => (
+                  <li key={i}>
+                    <i className={`fas ${item.icon}`}></i>
+                    <span>{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className={styles.bottom}>
-          <p>&copy; {new Date().getFullYear()} O&apos;zbekiston Yoshlar Ittifoqi</p>
-          <p>
-            <a href="#">Maxfiylik siyosati</a> &middot; <a href="#">Foydalanish shartlari</a>
-          </p>
+        <div className={styles.bottomBar}>
+          <p className={styles.copyright}>&copy; {new Date().getFullYear()} O&apos;zbekiston Yoshlar Ittifoqi. Barcha huquqlar himoyalangan.</p>
+          <div className={styles.legalLinks}>
+            <Link href="#">Maxfiylik siyosati</Link>
+            <span className={styles.dot}></span>
+            <Link href="#">Foydalanish shartlari</Link>
+          </div>
         </div>
       </div>
     </footer>

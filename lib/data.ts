@@ -182,6 +182,7 @@ export interface ProjectItem {
   image: string;
   progress: number;
   status: string;
+  category: string;
 }
 
 export const projects: ProjectItem[] = [
@@ -192,6 +193,7 @@ export const projects: ProjectItem[] = [
     image: "/images/projects/project_technopark_1782905388110.png",
     progress: 75,
     status: "Faol",
+    category: "IT va Innovatsiya"
   },
   {
     id: "2",
@@ -200,6 +202,7 @@ export const projects: ProjectItem[] = [
     image: "/images/projects/project_digital_1782905396676.png",
     progress: 85,
     status: "Faol",
+    category: "IT va Innovatsiya"
   },
   {
     id: "3",
@@ -208,6 +211,7 @@ export const projects: ProjectItem[] = [
     image: "/images/projects/project_teachers_1782905407793.png",
     progress: 60,
     status: "Faol",
+    category: "Ta'lim"
   },
   {
     id: "4",
@@ -216,6 +220,7 @@ export const projects: ProjectItem[] = [
     image: "/images/projects/project_sports_modest.png",
     progress: 70,
     status: "Faol",
+    category: "Sport"
   },
   {
     id: "5",
@@ -223,7 +228,8 @@ export const projects: ProjectItem[] = [
     desc: "Ekologik holatni yaxshilash, daraxt ekish va atrof-muhitni muhofaza qilish yoshlar harakati.",
     image: "/images/projects/project_eco_1782905423561.png",
     progress: 90,
-    status: "Faol",
+    status: "Yakunlangan",
+    category: "Ekologiya"
   },
   {
     id: "6",
@@ -231,7 +237,8 @@ export const projects: ProjectItem[] = [
     desc: "Yoshlarni mehnat bozorida qo'llab-quvvatlash, kasbiy yo'nalish bo'yicha maslahat berish dasturi.",
     image: "/images/projects/project_employment_1782905711723.png",
     progress: 55,
-    status: "Faol",
+    status: "Yangi",
+    category: "Bandlik"
   },
 ];
 
