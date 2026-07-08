@@ -23,7 +23,7 @@
 
 .title {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   letter-spacing: -0.01em;
 }
@@ -40,7 +40,7 @@
   padding: 8px 16px;
   border-radius: 100px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -105,7 +105,7 @@
 
 .docTitle {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--blue-deep);
 }
 
@@ -141,7 +141,7 @@
   padding: 12px 24px;
   border-radius: 100px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -172,7 +172,7 @@
   background: var(--white);
   color: var(--text);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;

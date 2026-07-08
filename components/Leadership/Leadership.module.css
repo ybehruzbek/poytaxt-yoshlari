@@ -2,7 +2,7 @@
 .header { margin-bottom: 60px; max-width: 800px; }
 .title {
   font-size: 56px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.1;
   color: var(--blue-deep);
   margin-bottom: 24px;
@@ -91,7 +91,7 @@
 }
 .body h3 {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   margin-bottom: 8px;
 }

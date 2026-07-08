@@ -47,7 +47,7 @@
 
 .heroTitle {
   font-size: clamp(56px, 7vw, 92px);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   line-height: 1.1;
   text-transform: uppercase;
@@ -72,7 +72,7 @@
   padding: 16px 40px;
   border-radius: 50px;
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-decoration: none;
@@ -152,7 +152,7 @@
 
 .bTitle {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   margin-bottom: 12px;
 }
@@ -170,7 +170,7 @@
   align-items: center;
   gap: 8px;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--card-color);
   margin-top: auto;
   transition: all 0.3s ease;
@@ -193,7 +193,7 @@
 
 .sectionLabel {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--green);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -203,7 +203,7 @@
 
 .sectionTitle {
   font-size: 44px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -269,7 +269,7 @@
   height: 60px;
   background: var(--white);
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 800;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -281,7 +281,7 @@
 
 .timeTitle {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
   margin-bottom: 16px;
 }
@@ -383,7 +383,7 @@
 
 .pTitle {
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   margin-bottom: 12px;
 }
@@ -416,7 +416,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 8px;
   text-transform: uppercase;
@@ -436,6 +436,23 @@
   background: var(--green);
   border-radius: 3px;
   transition: width 1s ease-out;
+}
+
+.pBatafsil {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-top: 24px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.pBatafsil:hover {
+  color: var(--green);
+  transform: translateX(4px);
 }
 
 /* 5. CTA SECTION */
@@ -476,7 +493,7 @@
 
 .ctaTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   margin-bottom: 24px;
   position: relative;
@@ -503,7 +520,7 @@
   padding: 18px 48px;
   border-radius: 50px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.4s ease;
   position: relative;

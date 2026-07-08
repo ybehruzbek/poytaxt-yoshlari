@@ -27,7 +27,7 @@
 .infoCard:hover .infoIcon {
   transform: scale(1.1) rotate(5deg);
 }
-.infoLabel { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.infoLabel { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
 .infoValue { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
 .infoValueGroup { display: flex; flex-direction: column; gap: 4px; }
 
@@ -41,7 +41,7 @@
 .socialCard:hover {
   box-shadow: 0 15px 35px rgba(0,0,0,0.06);
 }
-.socialTitle { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 20px; }
+.socialTitle { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 20px; }
 .socialGrid { display: flex; gap: 16px; }
 .socialBtn {
   width: 56px; height: 56px; border-radius: 16px;
@@ -77,7 +77,7 @@
   display: inline-flex; align-items: center; gap: 10px;
   background: var(--blue); color: var(--white);
   padding: 14px 24px; border-radius: 12px;
-  font-size: 15px; font-weight: 600;
+  font-size: 15px; font-weight: 500;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   box-shadow: 0 10px 20px rgba(13, 59, 102, 0.2);
 }

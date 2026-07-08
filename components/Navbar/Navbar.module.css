@@ -43,7 +43,7 @@
 
 .logoText {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue);
   letter-spacing: -0.5px;
 }
@@ -57,7 +57,7 @@
 
 .centerLink {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
   text-decoration: none;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -108,7 +108,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
   transition: all 0.2s ease;
 }
@@ -147,7 +147,7 @@
   border: none;
   text-align: center;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
   border-radius: 4px;
@@ -271,7 +271,7 @@
 
 .colTitle {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text);
   margin-bottom: 24px;
   padding-bottom: 12px;
@@ -314,7 +314,7 @@
 
 .colLinks a:hover {
   color: var(--blue);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .colLinks a:hover::after {
@@ -336,7 +336,7 @@
 
 .contactTitle {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text);
   margin-bottom: 24px;
 }
@@ -350,7 +350,7 @@
 .contactPhone {
   display: block;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text);
   text-decoration: none;
   margin-bottom: 24px;
@@ -359,7 +359,7 @@
 .contactEmail {
   display: inline-block;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
   text-decoration: none;
   margin-bottom: 32px;

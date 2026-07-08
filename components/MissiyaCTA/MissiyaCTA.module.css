@@ -35,7 +35,7 @@
 
 .ctaTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   margin-bottom: 24px;
   position: relative;
@@ -62,7 +62,7 @@
   padding: 18px 48px;
   border-radius: 50px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.4s ease;
   position: relative;

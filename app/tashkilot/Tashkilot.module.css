@@ -51,7 +51,7 @@
 
 .statNumber {
   font-size: 64px;
-  font-weight: 900;
+  font-weight: 800;
   background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -62,7 +62,7 @@
 .statLabel {
   font-size: 16px;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* STRUCTURE SECTION */
@@ -81,7 +81,7 @@
 
 .structureTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   margin-bottom: 24px;
   letter-spacing: -0.02em;
@@ -107,7 +107,7 @@
 
 .editorialSubtitle {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -117,7 +117,7 @@
 
 .editorialTitle {
   font-size: 56px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   line-height: 1.1;
   margin-bottom: 48px;
@@ -134,14 +134,14 @@
 
 .editorialText strong {
   color: var(--primary-dark);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .editorialQuote {
   font-size: 32px;
   line-height: 1.4;
   color: var(--blue-deep);
-  font-weight: 800;
+  font-weight: 700;
   font-style: italic;
   padding-left: 32px;
   border-left: 4px solid var(--blue);
@@ -209,14 +209,14 @@
   font-size: 32px;
   line-height: 1.4;
   color: var(--white);
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 32px;
   letter-spacing: -1px;
 }
 
 .authorName {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
 }
 
@@ -265,7 +265,7 @@
 
 .impactTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   margin-bottom: 24px;
   line-height: 1.1;
@@ -289,7 +289,7 @@
   align-items: center;
   gap: 16px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--primary-dark);
   padding: 16px;
   border-radius: 20px;
@@ -334,7 +334,7 @@
 
 .navTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
 }
 
@@ -380,7 +380,7 @@
 
 .navRowNum {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue);
   opacity: 0.5;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -388,7 +388,7 @@
 
 .navRowTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.02em;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }

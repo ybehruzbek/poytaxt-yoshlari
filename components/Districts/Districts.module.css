@@ -65,7 +65,7 @@
 /* Sidebar Typography & Elements (Dark Mode / White Text) */
 .infoLabel {
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #38bdf8; /* Bright sky blue */
@@ -74,7 +74,7 @@
 
 .infoTitle, .emptyTitle {
   font-size: 42px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   margin-bottom: 16px; /* Reduced margin */
   line-height: 1.1;
@@ -96,13 +96,13 @@
 
 .statNumber {
   font-size: 32px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
 }
 
 .statText {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 1px;

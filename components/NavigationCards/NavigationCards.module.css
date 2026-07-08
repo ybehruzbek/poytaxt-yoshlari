@@ -50,7 +50,7 @@
 .badge {
   font-family: var(--font-mono, monospace);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--blue, #0ea5e9);
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -60,7 +60,7 @@
 
 .title {
   font-size: clamp(40px, 5vw, 64px);
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: -0.03em;
   transition: color 0.4s ease;
 }
@@ -95,7 +95,7 @@
 
 .rowTitle {
   font-size: clamp(32px, 4vw, 56px);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--blue-deep, #0f172a);
   transition: color 0.5s ease;
@@ -130,7 +130,7 @@
 
 .rowNum {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   opacity: 0.4;
   font-family: var(--font-mono, monospace);
 }

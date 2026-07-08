@@ -11,7 +11,7 @@
 
 .title {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
   margin-bottom: 16px;
@@ -60,7 +60,7 @@
   right: -50px;
   bottom: -40px;
   font-size: 280px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   opacity: 0.15;
   line-height: 0.8;
@@ -81,7 +81,7 @@
   backdrop-filter: blur(10px);
   border-radius: 100px;
   color: var(--white);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 20px;
   margin-bottom: 24px;
   letter-spacing: 2px;
@@ -89,7 +89,7 @@
 
 .cardTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   line-height: 1.1;
   margin-bottom: 24px;

@@ -71,7 +71,7 @@
 
 .heroTitle {
   font-size: clamp(48px, 6vw, 80px);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -109,7 +109,7 @@
 
 .quoteText {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
   line-height: 1.5;
   margin-bottom: 40px;
@@ -124,7 +124,7 @@
 
 .quoteName {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 8px;
 }
@@ -134,7 +134,7 @@
   color: var(--blue-pale);
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* ================= 3. MAIN LEADERS (GLASSMORPHISM) ================= */
@@ -208,7 +208,7 @@
 
 .leaderPos {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--green);
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -217,7 +217,7 @@
 
 .leaderName {
   font-size: 32px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   margin-bottom: 32px;
   line-height: 1.2;
@@ -269,7 +269,7 @@
 
 .sectionLabel {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--green);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -279,7 +279,7 @@
 
 .sectionTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
 }
@@ -336,7 +336,7 @@
 
 .structureTitle {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   margin-bottom: 16px;
 }
@@ -433,7 +433,7 @@
 
 .localCat {
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -447,7 +447,7 @@
 
 .localName {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
   margin-bottom: 8px;
   line-height: 1.2;
@@ -490,7 +490,7 @@
 
 .ctaTitle {
   font-size: 48px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   margin-bottom: 24px;
   position: relative;
@@ -515,7 +515,7 @@
   padding: 16px 40px;
   border-radius: 50px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.4s ease;
   position: relative;

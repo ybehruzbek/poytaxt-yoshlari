@@ -59,7 +59,7 @@
   -webkit-backdrop-filter: blur(20px);
   border-radius: 100px;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-bottom: 24px;
@@ -70,7 +70,7 @@
 
 .heroTitle {
   font-size: 72px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.15;
   margin-bottom: 24px;
   letter-spacing: -0.02em;

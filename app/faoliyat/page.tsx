@@ -159,6 +159,9 @@ export default function FaoliyatPage() {
                         />
                       </div>
                     </div>
+                    <Link href="/loyihalar" className={styles.pBatafsil}>
+                      Batafsil <i className="fas fa-arrow-right"></i>
+                    </Link>
                   </div>
                 </div>
               </ScrollReveal>

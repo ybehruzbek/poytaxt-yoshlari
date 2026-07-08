@@ -21,7 +21,7 @@ export default function TashkilotValues() {
             <div className={styles.cardBg} style={{ backgroundImage: 'url(/images/tashkilot/uzbek_patriotic_youths.png)' }}></div>
             <div className={styles.cardOverlay}></div>
             <div className={styles.cardContent}>
-              <i className="fas fa-flag" />
+              <i className="fas fa-flag" style={{ fontSize: '36px' }} />
               <h3>Vatanparvarlik</h3>
               <p>O'zbekistonning porloq kelajagi uchun xizmat qilish va milliy qadriyatlarni asrab-avaylash.</p>
             </div>
@@ -31,7 +31,7 @@ export default function TashkilotValues() {
           <ScrollReveal delay={0.2} className={`${styles.bentoCard} ${styles.cardSquare}`}>
             <div className={styles.cardContent}>
               <div className={styles.iconWrap} style={{ background: 'rgba(14, 165, 233, 0.1)' }}>
-                <i className="fas fa-handshake" style={{ color: '#0ea5e9' }} />
+                <i className="fas fa-handshake" style={{ color: '#0ea5e9', fontSize: '28px' }} />
               </div>
               <h3 style={{ color: '#0f172a' }}>O'zaro Hurmat</h3>
               <p style={{ color: '#475569' }}>Barcha yoshlarni teng ko'rish va ularning fikrini hurmat qilish.</p>
@@ -42,7 +42,7 @@ export default function TashkilotValues() {
           <ScrollReveal delay={0.3} className={`${styles.bentoCard} ${styles.cardSquare}`}>
             <div className={styles.cardContent}>
               <div className={styles.iconWrap} style={{ background: 'rgba(245, 158, 11, 0.1)' }}>
-                <i className="fas fa-lightbulb" style={{ color: '#f59e0b' }} />
+                <i className="fas fa-lightbulb" style={{ color: '#f59e0b', fontSize: '28px' }} />
               </div>
               <h3 style={{ color: '#0f172a' }}>Innovatsiya</h3>
               <p style={{ color: '#475569' }}>Yangi g'oyalarni qo'llab-quvvatlash va zamonaviy texnologiyalarni tatbiq etish.</p>
@@ -53,7 +53,7 @@ export default function TashkilotValues() {
           <ScrollReveal delay={0.4} className={`${styles.bentoCard} ${styles.cardWide}`}>
             <div className={styles.cardContent}>
               <div className={styles.iconWrap} style={{ background: 'rgba(16, 185, 129, 0.1)' }}>
-                <i className="fas fa-balance-scale" style={{ color: '#10b981' }} />
+                <i className="fas fa-balance-scale" style={{ color: '#10b981', fontSize: '36px' }} />
               </div>
               <div className={styles.wideText}>
                 <h3 style={{ color: '#0f172a' }}>Teng Huquqlilik</h3>

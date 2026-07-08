@@ -34,7 +34,7 @@
 .youtube:hover { color: #FF0000 !important; }
 
 .col h4 {
-  color: var(--white); font-size: 20px; font-weight: 800;
+  color: var(--white); font-size: 20px; font-weight: 700;
   margin-bottom: 24px; 
 }
 .col ul { list-style: none; }

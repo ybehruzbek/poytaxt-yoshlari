@@ -63,7 +63,7 @@
 .tag {
   display: inline-block;
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--blue);
@@ -75,7 +75,7 @@
 .date {
   color: var(--text-muted);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -83,7 +83,7 @@
 
 .title {
   font-size: clamp(36px, 4vw, 56px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.15;
   color: var(--blue-deep);
   margin: 0 0 20px 0;
@@ -112,7 +112,7 @@
   background: var(--blue);
   color: var(--white);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 8px;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -132,7 +132,7 @@
   background: transparent;
   color: var(--blue);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 8px;
   border: 1px solid var(--border);
   transition: all 0.3s ease;

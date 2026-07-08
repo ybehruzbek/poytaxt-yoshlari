@@ -86,12 +86,12 @@
 
 .heroBreadcrumbs .activeCrumb {
   color: var(--white);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .heroTitle {
   font-size: clamp(40px, 5vw, 64px);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -168,7 +168,7 @@
 
 .overlapTitle {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   margin-bottom: 20px;
   line-height: 1.3;
@@ -225,7 +225,7 @@
 
 .mvLabel {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 3px;
   margin-bottom: 32px;
@@ -239,7 +239,7 @@
 
 .mvTitle {
   font-size: 36px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.25;
   margin-bottom: 28px;
   letter-spacing: -0.02em;
@@ -293,7 +293,7 @@
 
 .sectionLabel {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--green);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -303,7 +303,7 @@
 
 .sectionTitle {
   font-size: 40px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   line-height: 1.15;
   margin-bottom: 24px;
@@ -373,7 +373,7 @@
 
 .valueTitle {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   margin-bottom: 16px;
   line-height: 1.3;
@@ -488,7 +488,7 @@
 
 .timelineNum {
   font-size: 80px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-pale);
   line-height: 1;
   position: absolute;
@@ -517,7 +517,7 @@
 
 .timelineTitle {
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   margin-bottom: 16px;
   line-height: 1.3;
@@ -568,7 +568,7 @@
 
 .navTitle {
   font-size: 40px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
 }
 
@@ -625,7 +625,7 @@
 
 .navRowTitle {
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 

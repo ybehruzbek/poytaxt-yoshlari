@@ -10,7 +10,7 @@
 
 .badge {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -20,7 +20,7 @@
 
 .title {
   font-size: clamp(32px, 3vw, 48px);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
 }
@@ -80,7 +80,7 @@
 
 .closedNum {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-light);
   margin-bottom: auto; /* Pushes the title down to center it */
 }
@@ -95,7 +95,7 @@
 
 .closedTitle {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue-deep);
   white-space: nowrap;
   transform: rotate(-90deg); /* Text reads from bottom to top */
@@ -142,14 +142,14 @@
 
 .openNum {
   font-size: 36px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1;
   margin-bottom: 8px;
 }
 
 .openTitle {
   font-size: 40px;
-  font-weight: 900;
+  font-weight: 800;
   margin-bottom: 16px;
   line-height: 1.1;
 }

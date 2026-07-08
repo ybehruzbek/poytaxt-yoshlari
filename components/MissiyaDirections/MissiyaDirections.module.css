@@ -10,7 +10,7 @@
 
 .sectionLabel {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -20,7 +20,7 @@
 
 .sectionTitle {
   font-size: 44px;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -86,7 +86,7 @@
   height: 60px;
   background: var(--white);
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 800;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -98,7 +98,7 @@
 
 .timeTitle {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--white);
   margin-bottom: 16px;
 }

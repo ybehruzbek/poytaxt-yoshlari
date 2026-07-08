@@ -11,7 +11,7 @@
 .eyebrow {
   display: block;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue, #0ea5e9);
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -20,7 +20,7 @@
 
 .title {
   font-size: clamp(32px, 4vw, 44px);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep, #0f172a);
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -88,7 +88,7 @@
 
 .number {
   font-size: clamp(40px, 3.5vw, 56px);
-  font-weight: 900;
+  font-weight: 800;
   color: var(--blue-deep, #0f172a);
   letter-spacing: -0.04em;
   line-height: 1;
@@ -102,7 +102,7 @@
 
 .label {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--blue-deep, #0f172a);
   margin-bottom: 8px;
 }
