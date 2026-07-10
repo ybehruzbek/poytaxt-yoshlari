@@ -1,17 +1,28 @@
 import "@/app/globals.css";
 import React from "react";
+import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
+import { requireRole } from "@/lib/auth";
 
 export const metadata = {
   title: "Admin Panel | Poytaxt Yoshlari",
   description: "Boshqaruv paneli",
+  robots: { index: false, follow: false },
 };
 
-export default function AdminLayout({
+// Panel jonli ma'lumot ko'rsatadi — hech qachon statik render qilinmasin.
+export const dynamic = "force-dynamic";
+
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await requireRole("ADMIN", "MODERATOR");
+  if (!session) {
+    redirect("/admin/login");
+  }
+
   return (
     <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "var(--bg)" }}>
       <AdminSidebar />
@@ -26,7 +37,9 @@ export default function AdminLayout({
           justifyContent: "flex-end"
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-            <span style={{ fontWeight: 600, color: "var(--blue-deep)" }}>Admin</span>
+            <span style={{ fontWeight: 600, color: "var(--blue-deep)" }}>
+              {session.user.name}
+            </span>
             <div style={{ 
               width: "40px", height: "40px", borderRadius: "50%", 
               backgroundColor: "var(--blue-pale)", color: "var(--blue)",

@@ -1,7 +1,12 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { NEXTAUTH_SECRET } from "@/lib/env";
+import type { Role } from "@/types/next-auth";
+
+/** Tasodifiy satrning bcrypt hashi — hech qachon mos kelmaydi. */
+const DUMMY_HASH = "$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -9,7 +14,7 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
@@ -17,46 +22,67 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = await prisma.user.findUnique({
-          where: { username: credentials.username }
+          where: { username: credentials.username },
         });
 
-        if (!user) {
-          return null;
-        }
+        // Foydalanuvchi topilmaganda ham hash solishtiramiz: aks holda javob
+        // vaqti "bunday login bormi yo'qmi" degan savolga javob berib qo'yadi.
+        const passwordHash = user?.password ?? DUMMY_HASH;
+        const isPasswordValid = await bcrypt.compare(
+          credentials.password,
+          passwordHash
+        );
 
-        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
-
-        if (!isPasswordValid) {
+        if (!user || !isPasswordValid) {
           return null;
         }
 
         return {
           id: user.id,
           name: user.username,
-          role: user.role
+          role: user.role as Role,
         };
-      }
-    })
+      },
+    }),
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role;
+        token.sub = user.id;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        (session.user as any).role = token.role;
+        session.user.id = token.sub!;
+        session.user.role = token.role;
       }
       return session;
-    }
+    },
   },
   pages: {
     signIn: "/admin/login",
   },
-  secret: process.env.NEXTAUTH_SECRET || "super-secret-default-key-for-dev-1234567890",
+  secret: NEXTAUTH_SECRET,
 };
+
+/** Sessiyani serverda o'qish. */
+export function auth() {
+  return getServerSession(authOptions);
+}
+
+/**
+ * Sahifa/action ichida rolni majburlash. `proxy.ts` ga tayanib qolmaymiz —
+ * matcher o'zgarsa yoki proxy ishlamay qolsa, sahifa o'zini o'zi himoya qiladi.
+ */
+export async function requireRole(...allowed: Role[]) {
+  const session = await auth();
+  if (!session?.user || !allowed.includes(session.user.role)) {
+    return null;
+  }
+  return session;
+}

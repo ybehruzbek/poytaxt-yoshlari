@@ -1,8 +1,20 @@
-name: Deploy Next.js site to Pages
+# ⛔️ O'CHIRILGAN — GitHub Pages endi bu loyihaga to'g'ri kelmaydi.
+#
+# Sabab: loyihada API route'lar (/api/appeals, NextAuth), Prisma bazasi va
+# `proxy.ts` (admin himoyasi) bor. GitHub Pages faqat statik fayllarni
+# tarqatadi — server kodini umuman ishlata olmaydi. Ustiga, `next.config.ts`
+# dan `output: "export"` olib tashlangani uchun `next build` endi `out/`
+# papkasini yaratmaydi ham, ya'ni quyidagi `upload-pages-artifact` qadami
+# bo'sh yoki eskirgan fayllarni yuklaydi.
+#
+# TZ §17.1 deployment sifatida VPS/Cloud + Docker ni tavsiya qiladi.
+# Yangi pipeline tayyor bo'lgach, bu fayl o'chiriladi.
+#
+# Hozircha faqat qo'lda ishga tushiriladi (`workflow_dispatch`), avtomatik emas.
+
+name: "[DISABLED] Deploy Next.js site to Pages"
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -20,16 +32,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
-          
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        
+
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -38,13 +50,13 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-            
+
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Build with Next.js
         run: npm run build
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

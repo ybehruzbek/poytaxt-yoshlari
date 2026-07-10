@@ -1,21 +1,19 @@
 import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { NEXTAUTH_SECRET } from "@/lib/env";
 
-export default withAuth(
-  function middleware(req) {
-    return NextResponse.next();
+export default withAuth({
+  callbacks: {
+    // Token borligi yetarli emas — rol ham tekshiriladi.
+    authorized: ({ token }) =>
+      token?.role === "ADMIN" || token?.role === "MODERATOR",
   },
-  {
-    callbacks: {
-      authorized: ({ token }) => !!token,
-    },
-    secret: process.env.NEXTAUTH_SECRET || "super-secret-default-key-for-dev-1234567890",
-    pages: {
-      signIn: "/admin/login",
-    },
-  }
-);
+  secret: NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/admin/login",
+  },
+});
 
+// `/admin/login` himoyalanmaydi — aks holda kirish sahifasi o'ziga qayta yo'naltiradi.
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin", "/admin/((?!login).*)"],
 };

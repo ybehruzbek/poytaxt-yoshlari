@@ -1,11 +1,9 @@
 import type { NextConfig } from "next";
 
-const isGithubActions = process.env.GITHUB_ACTIONS || false;
-
 const nextConfig: NextConfig = {
-  basePath: isGithubActions ? "/poytaxt-yoshlari" : "",
-  assetPrefix: isGithubActions ? "/poytaxt-yoshlari/" : "",
   images: {
+    // TODO(Faza 1): server deploy'ga o'tgach `unoptimized` ni olib tashlash —
+    // u faqat GitHub Pages statik eksporti uchun kerak edi.
     unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "picsum.photos" },

@@ -3,38 +3,102 @@
 
 /* ===== CSS CUSTOM PROPERTIES ===== */
 :root {
-  /* Primary Colors */
-  --blue: #0D3B66;
-  --blue-light: #1A5276;
-  --blue-deep: #092847;
-  --green: #2E8B57;
-  --green-light: #3DA868;
-  --green-pale: #E8F5EE;
-  --blue-pale: #EBF2FA;
+  /* Primary Colors — Baraka.gov.uz rasmiy palitrasi (navy + orange + green) */
+  --blue: #22375B;         /* baraka --navy */
+  --blue-light: #15315E;   /* baraka --navy-800 */
+  --blue-deep: #0F2547;    /* baraka --navy-900 */
+  --blue-btn: #263A60;     /* baraka .btn--blue */
+  --green: #6CA23C;        /* baraka --green */
+  --green-light: #7BB84E;
+  --green-check: #2E9E5B;  /* baraka --green-check */
+  --green-pale: #EAF4EE;   /* baraka --bg-mand / --pill-green */
+  --blue-pale: #EAF1FB;    /* baraka --bg-blue / --pill-blue */
+  --teal: #176F8E;         /* baraka --teal */
+  --amber: #F5B53A;        /* baraka --amber */
 
-  /* Neutrals */
+  /* Accent — Baraka to'q sariq (gold o'rniga) */
+  --accent-orange: #F47B2E;      /* baraka --orange */
+  --accent-orange-dark: #D6761D; /* baraka --orange-700 */
+  --accent-gold: var(--accent-orange); /* eski nom uchun alias */
+
+  /* Gradient backgrounds — Baraka deyarli oq, toza fon */
+  --bg-gradient-start: #F6F8FC;
+  --bg-gradient-mid: #FAFBFD;
+  --bg-gradient-end: #FFFFFF;
+
+  /* Neutrals — baraka ink shkalasi */
   --white: #FFFFFF;
-  --bg: #F8FAFB;
-  --text: #1A1A2E;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --border: #E2E8F0;
-  --border-light: #F1F5F9;
+  --bg: #F6F8FC;           /* baraka --wf-bg */
+  --bg-gray: #F3F4F5;      /* baraka --bg-gray */
+  --text: #0E1A30;         /* baraka --ink */
+  --text-secondary: #3D4D63; /* baraka --ink-body */
+  --text-muted: #8A97A8;   /* baraka --ink-mute */
+  --border: #E6E9EE;       /* baraka --border */
+  --border-light: #EEF2F8; /* baraka --navy-50 */
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
+  /* Legacy aliases — komponentlarda ishlatiladi, bu yerda ta'riflanadi */
+  --gray: #F3F6FA;         /* Navbar: menu toggle, contact box */
+  --bg-light: #F3F6FA;     /* Footer social, chip fonlari */
+  --text-light: var(--text-muted);
+  --font-inter: var(--font-body);
+  --primary-dark: var(--blue-deep); /* 19 joyda sarlavhalar uchun ishlatiladi */
 
-  /* Radii */
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 6px;
+  /* Shadows — baraka navy-tinted (rgba 30,58,95) */
+  --shadow-xs: 0 1px 2px rgba(30, 58, 95, 0.04);
+  --shadow-sm: 0 1px 3px rgba(30, 58, 95, 0.06), 0 1px 2px rgba(30, 58, 95, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(30, 58, 95, 0.06), 0 2px 4px -2px rgba(30, 58, 95, 0.04);
+  --shadow-lg: 0 12px 30px rgba(30, 58, 95, 0.06);   /* baraka --shadow-card */
+  --shadow-xl: 0 20px 50px -12px rgba(30, 58, 95, 0.12);
+
+  /* Radii — baraka: card 24px, md 16px, pill 999px */
+  --radius: 24px;
+  --radius-sm: 16px;
+  --radius-xs: 10px;
+  --radius-pill: 999px;
+
+  /* ===== TYPE SCALE — fluid, 360px → 1440px ===== */
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: clamp(15px, 0.4vw + 14px, 16px);
+  --fs-md: clamp(15px, 0.6vw + 14px, 17px);
+  --fs-lg: clamp(16px, 0.8vw + 15px, 18px);
+  --fs-xl: clamp(18px, 1vw + 16px, 22px);
+  --fs-2xl: clamp(20px, 1.6vw + 16px, 28px);
+  --fs-3xl: clamp(24px, 2.4vw + 17px, 36px);
+  --fs-4xl: clamp(28px, 3.4vw + 18px, 48px);
+  --fs-5xl: clamp(30px, 4.6vw + 18px, 60px);
+
+  /* ===== SPACING — 4px asos ===== */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+
+  /* Seksiya vertikal bo'shlig'i — mobil 56px → desktop 100px */
+  --section-y: clamp(56px, 7vw, 100px);
+  /* Konteyner yon bo'shlig'i — mobil 20px → desktop 28px */
+  --gutter: clamp(20px, 3vw, 28px);
+
+  /* Navbar balandligi — hero padding-top shu yerdan hisoblanadi */
+  --nav-h: 64px;
+  --nav-top: 12px;
 
   /* Easing */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 769px) {
+  :root {
+    --nav-h: 80px;
+    --nav-top: 24px;
+  }
 }
 
 /* ===== RESET ===== */
@@ -48,16 +112,23 @@
 
 html {
   scroll-behavior: smooth;
+  /* Fixed navbar ostiga anchor sakrashining oldini oladi */
+  scroll-padding-top: calc(var(--nav-h) + var(--nav-top) + 16px);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: var(--fs-base);
   color: var(--text-secondary);
   line-height: 1.65;
-  background-color: #F5F7FA;
+  background: var(--bg);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 
 /* ===== CUSTOM SCROLLBAR ===== */
@@ -84,14 +155,24 @@ html {
   background: var(--blue);
 }
 
+::selection {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+
 /* ===== GLOBALS ===== */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), 'Poppins', sans-serif;
+  font-family: var(--font-heading), 'Manrope', sans-serif;
   color: var(--text);
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-weight: 700;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
@@ -114,11 +195,18 @@ ul, ol {
   list-style: none;
 }
 
+/* ===== ACCESSIBILITY — klaviatura fokusi ===== */
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* ===== CONTAINER ===== */
 .container {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 28px;
+  padding: 0 var(--gutter);
 }
 
 /* ===== SECTION UTILITIES ===== */
@@ -126,55 +214,66 @@ ul, ol {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--fs-xs);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--green);
-  margin-bottom: 16px;
+  letter-spacing: 2px;
+  color: var(--accent-gold);
+  margin-bottom: var(--sp-4);
 }
 
 .section-label::before {
   content: '';
-  width: 20px;
+  width: 24px;
   height: 2px;
-  background: var(--green);
+  background: var(--accent-gold);
   border-radius: 1px;
+  flex-shrink: 0;
 }
 
 .section-title {
-  font-size: clamp(28px, 3.5vw, 40px);
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 14px;
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-4xl);
+  font-weight: 800;
+  color: var(--blue-deep);
+  margin-bottom: var(--sp-3);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .section-desc {
-  font-size: 15px;
-  color: var(--text-muted);
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
   max-width: 520px;
   line-height: 1.7;
 }
 
-/* ===== UNIFIED BUTTON STYLES ===== */
+/* ===== UNIFIED BUTTON STYLES — Baraka pill shape ===== */
 .btn-primary, .btn-secondary, .btn-view-all, .nav-cta, .btn-hero-primary, .btn-hero-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   padding: 14px 32px;
-  border-radius: 8px; /* Changed from 50px to a more professional 8px */
-  font-weight: 500; /* Slightly less heavy than 700 */
+  min-height: 48px; /* qulay tegish maydoni */
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 600;
   font-size: 15px;
-  transition: all 0.3s ease; /* Simpler transition */
+  line-height: 1;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   text-decoration: none;
   cursor: pointer;
   border: none;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
-/* Base Hover Effect for all */
-.btn-primary:hover, .btn-secondary:hover, .btn-view-all:hover, .nav-cta:hover, .btn-hero-primary:hover, .btn-hero-secondary:hover {
-  transform: translateY(-3px) scale(1.02);
+/* Base Hover Effect — faqat haqiqiy kursorli qurilmalarda */
+@media (hover: hover) {
+  .btn-primary:hover, .btn-secondary:hover, .btn-view-all:hover, .nav-cta:hover, .btn-hero-primary:hover, .btn-hero-secondary:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
 }
 .btn-primary:active, .btn-secondary:active, .btn-view-all:active, .nav-cta:active, .btn-hero-primary:active, .btn-hero-secondary:active {
   transform: scale(0.97);
@@ -205,13 +304,15 @@ ul, ol {
 /* View All Button */
 .btn-view-all {
   background: var(--white);
-  color: var(--blue);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  color: var(--blue-deep);
+  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.06);
+  border: 1px solid var(--border);
 }
 .btn-view-all:hover {
-  background: var(--blue);
+  background: var(--blue-deep);
   color: var(--white);
-  box-shadow: 0 12px 25px rgba(13, 59, 102, 0.2);
+  border-color: var(--blue-deep);
+  box-shadow: 0 12px 25px rgba(13, 59, 102, 0.15);
 }
 .btn-view-all i {
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -222,15 +323,16 @@ ul, ol {
 
 /* Navbar CTA */
 .nav-cta {
-  background: var(--green);
+  background: var(--blue-deep);
   color: var(--white);
-  box-shadow: 0 4px 15px rgba(46, 139, 87, 0.2);
+  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.2);
   padding: 12px 24px;
+  min-height: 44px;
   font-size: 14px;
 }
 .nav-cta:hover {
-  background: var(--green-light);
-  box-shadow: 0 10px 20px rgba(46, 139, 87, 0.3);
+  background: var(--blue);
+  box-shadow: 0 10px 20px rgba(13, 59, 102, 0.25);
 }
 
 /* Hero Primary */
@@ -239,7 +341,7 @@ ul, ol {
   color: var(--white);
   padding: 16px 32px;
   font-size: 16px;
-  box-shadow: none; /* Removed shadow */
+  box-shadow: none;
 }
 .btn-hero-primary:hover {
   background: var(--blue-deep);
@@ -264,8 +366,10 @@ ul, ol {
 .hover-card {
   transition: all 0.3s ease;
 }
-.hover-card:hover {
-  transform: translateY(-5px);
+@media (hover: hover) {
+  .hover-card:hover {
+    transform: translateY(-5px);
+  }
 }
 
 /* ===== TAGS ===== */
@@ -292,6 +396,13 @@ ul, ol {
 .reveal-d4 { transition-delay: 0.32s; }
 .reveal-d5 { transition-delay: 0.40s; }
 .reveal-d6 { transition-delay: 0.48s; }
+
+/* Mobil: kaskad kechikishlar sekin tuyuladi — qisqartiramiz */
+@media (max-width: 768px) {
+  .reveal { transform: translateY(14px); }
+  .reveal-d1, .reveal-d2, .reveal-d3,
+  .reveal-d4, .reveal-d5, .reveal-d6 { transition-delay: 0.06s; }
+}
 
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {

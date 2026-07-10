@@ -1,11 +1,18 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { megaMenuCategories, LOGO_URL, navLinks } from "@/lib/data";
+
+const LANGS = ["O'zbekcha", "Русский", "English"] as const;
+const LANG_CODES: Record<string, string> = {
+  "O'zbekcha": "UZ",
+  "Русский": "RU",
+  English: "EN",
+};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,7 +21,6 @@ export default function Navbar() {
   const [langOpen, setLangOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const router = useRouter();
   const isHomePage = pathname === "/";
   const isScrolled = !isHomePage || scrolled || menuOpen;
 
@@ -37,51 +43,25 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Marshrut o'zgarsa menyuni yopamiz. Effektda emas, render paytida — effekt
+  // ichidagi setState kaskadli qayta render beradi va menyu bir kadr ochiq qoladi.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setMenuOpen(false);
+  }
+
+  // body scroll — tashqi tizim. Uchta joyda qo'lda yozish o'rniga bitta joyda
+  // menuOpen bilan sinxronlanadi.
   useEffect(() => {
-    // Close menu when route changes
-    setMenuOpen(false);
-    document.body.style.overflow = "";
-  }, [pathname]);
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
-  const toggleMenu = useCallback(() => {
-    setMenuOpen((prev) => {
-      document.body.style.overflow = !prev ? "hidden" : "";
-      return !prev;
-    });
-  }, []);
-
-  const closeMenu = useCallback(() => {
-    setMenuOpen(false);
-    document.body.style.overflow = "";
-  }, []);
-
-  const handleNavClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      if (href === "#") return;
-      
-      if (!isHomePage && href.startsWith("#")) {
-        e.preventDefault();
-        router.push(`/${href}`);
-        closeMenu();
-        return;
-      }
-
-      if (href.startsWith("#")) {
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          window.scrollTo({
-            top: target.getBoundingClientRect().top + window.scrollY - 72,
-            behavior: "smooth",
-          });
-          closeMenu();
-        } else {
-          closeMenu();
-        }
-      }
-    },
-    [closeMenu, isHomePage, router]
-  );
+  const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   // We only show a subset of links in the center navbar to avoid crowding
   const centerLinks = navLinks.slice(0, 5);
@@ -89,8 +69,18 @@ export default function Navbar() {
   if (pathname.startsWith("/admin")) return null;
 
   return (
+    <>
+      {/* Backdrop <nav> dan tashqarida turishi shart: nav ichida bo'lsa,
+          manfiy z-index bola element ota-onaning fonidan YUQORIDA chiziladi
+          va navbar kulrang bo'lib qolardi. */}
+      <div
+        className={`${styles.megaMenuBackdrop} ${menuOpen ? styles.backdropOpen : ""}`}
+        onClick={closeMenu}
+        aria-hidden="true"
+      />
+
     <nav
-      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""}`}
+      className={`${styles.navbar} ${isScrolled ? styles.scrolled : ""} ${menuOpen ? styles.navMenuOpen : ""}`}
       id="navbar"
       role="navigation"
       aria-label="Asosiy navigatsiya"
@@ -127,13 +117,14 @@ export default function Navbar() {
               className={`${styles.langSwitch} ${langOpen ? styles.langOpen : ""}`}
               onClick={() => setLangOpen(!langOpen)}
             >
-              <span>{lang}</span>
+              <span className={styles.langFull}>{lang}</span>
+              <span className={styles.langShort}>{LANG_CODES[lang]}</span>
               <i className={`fas fa-chevron-down ${styles.langIcon} ${langOpen ? styles.langIconOpen : ""}`} />
             </div>
-            
+
             {langOpen && (
               <div className={styles.langDropdown}>
-                {["O'zbekcha", "Русский", "English"].map((l) => (
+                {LANGS.map((l) => (
                   <button 
                     key={l}
                     className={`${styles.langOption} ${lang === l ? styles.langActive : ""}`}
@@ -146,9 +137,9 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/admin/login" className="nav-cta">
+          <Link href="/admin/login" className={`nav-cta ${styles.loginBtn}`}>
             <i className="fas fa-user-circle" />
-            <span>Tizimga kirish</span>
+            <span className={styles.loginLabel}>Tizimga kirish</span>
           </Link>
           
           <button
@@ -168,13 +159,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
-      {/* BACKDROP FOR MEGA MENU */}
-      <div 
-        className={`${styles.megaMenuBackdrop} ${menuOpen ? styles.backdropOpen : ""}`} 
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
 
       {/* MEGA MENU DROPDOWN */}
       <div
@@ -229,5 +213,6 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+    </>
   );
 }
