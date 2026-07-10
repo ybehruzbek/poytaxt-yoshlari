@@ -1,77 +1,113 @@
-.about { padding: 100px 0 60px; background: transparent; }
-.introBlock { margin-bottom: 60px; max-width: 1000px; }
+/* ===== ABOUT — BARAKA-INSPIRED STYLE ===== */
+.about {
+  padding: var(--section-y) 0 clamp(40px, 5vw, 60px);
+  background: transparent;
+  position: relative;
+}
+
+.introBlock {
+  margin-bottom: clamp(36px, 5vw, 60px);
+  max-width: 1000px;
+}
+
 .introText {
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--text);
-  letter-spacing: -0.01em;
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(22px, 2.4vw + 15px, 40px);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--blue-deep);
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
 }
+
 .highlight {
-  color: var(--blue);
+  color: var(--green);
 }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
+
 .card {
-  padding: 40px;
-  border-radius: 30px;
-  border: none;
+  padding: clamp(24px, 2.5vw, 36px) clamp(24px, 3vw, 40px);
+  border-radius: 20px;
+  border: 1px solid var(--border);
   display: flex;
   align-items: flex-start;
   gap: 20px;
   transition: all 0.4s var(--ease);
   position: relative;
   overflow: hidden;
+  background: var(--white);
 }
+
 .bgBlue {
-  background-color: var(--blue-pale);
+  background: var(--white);
+  border-left: 4px solid var(--blue);
 }
+
 .bgGreen {
-  background-color: var(--green-pale);
+  background: var(--white);
+  border-left: 4px solid var(--green);
 }
+
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 15px 40px rgba(13, 59, 102, 0.08);
+  border-color: transparent;
 }
 
 .cardIcon {
-  width: 64px; height: 64px;
-  border-radius: 20px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
   flex-shrink: 0;
 }
-.iconBlue { color: var(--blue); }
-.iconGreen { color: var(--green); }
+
+.iconBlue {
+  color: var(--blue);
+  background: var(--blue-pale);
+}
+
+.iconGreen {
+  color: var(--green);
+  background: var(--green-pale);
+}
+
 .cardContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.cardContent p { 
-  font-size: 18px; 
+
+.cardContent p {
+  font-size: var(--fs-md);
   font-weight: 500;
-  color: var(--text); 
-  line-height: 1.5; 
+  color: var(--text);
+  line-height: 1.6;
   margin: 0;
 }
 
-@media (max-width: 1024px) {
-  .introText {
-    font-size: 32px;
-  }
-}
-
 @media (max-width: 768px) {
-  .about { padding: 60px 0; }
-  .grid { grid-template-columns: 1fr; }
-  .introText { font-size: 28px; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .card {
-    padding: 30px;
+    gap: 16px;
     flex-direction: column;
     align-items: flex-start;
+  }
+  .cardIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    font-size: 20px;
   }
 }

@@ -1,103 +1,19 @@
 .footer {
   background: var(--white);
-  padding: 80px 0 20px;
-  font-family: var(--font-inter), sans-serif;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  padding: var(--section-y) 0 20px;
+  border-top: none;
+  position: relative;
 }
 
 .gradientLine {
   display: none;
 }
 
-.ctaBox {
-  background: var(--blue);
-  border-radius: 32px;
-  padding: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--white);
-  margin-bottom: 80px;
-  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Add a subtle background pattern or shape to CTA */
-.ctaBox::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.ctaContent h3 {
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: #fff;
-}
-
-.ctaContent p {
-  font-size: 16px;
-  opacity: 0.9;
-  max-width: 400px;
-  line-height: 1.5;
-  color: #e0f2fe;
-}
-
-.ctaForm {
-  display: flex;
-  gap: 12px;
-  position: relative;
-  z-index: 2;
-}
-
-.input {
-  padding: 16px 24px;
-  border-radius: 100px;
-  border: none;
-  font-size: 16px;
-  min-width: 320px;
-  outline: none;
-  color: var(--blue-deep);
-  background: var(--white);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-}
-
-.input::placeholder {
-  color: #94a3b8;
-}
-
-.subscribeBtn {
-  padding: 16px 36px;
-  border-radius: 100px;
-  background: var(--blue-deep);
-  color: var(--white);
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(13, 59, 102, 0.2);
-}
-
-.subscribeBtn:hover {
-  background: #082f49;
-  transform: translateY(-2px);
-  box-shadow: 0 15px 25px rgba(13, 59, 102, 0.3);
-}
-
 .mainContent {
   display: flex;
   justify-content: space-between;
-  gap: 80px;
-  margin-bottom: 60px;
+  gap: clamp(40px, 6vw, 80px);
+  margin-bottom: clamp(40px, 5vw, 60px);
 }
 
 .brandCol {
@@ -107,14 +23,18 @@
 
 .logoWrap {
   margin-bottom: 24px;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
+  width: 140px;
+  height: auto;
   object-fit: contain;
 }
 
 .brandDesc {
-  color: var(--text);
+  color: var(--text-secondary);
   font-size: 15px;
   line-height: 1.7;
   margin-bottom: 32px;
@@ -149,16 +69,17 @@
 .linksGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 120px;
+  gap: clamp(24px, 5vw, 80px);
   flex: 2;
 }
 
 .linkGroup h4 {
+  font-family: var(--font-heading), sans-serif;
   color: var(--blue-deep);
-  font-size: 18px;
+  font-size: var(--fs-lg);
   font-weight: 800;
   margin-bottom: 24px;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.02em;
 }
 
 .linkGroup ul {
@@ -170,6 +91,8 @@
 }
 
 .linkGroup a {
+  display: inline-block;
+  padding: 2px 0;
   color: var(--text);
   text-decoration: none;
   font-size: 15px;
@@ -177,10 +100,11 @@
   transition: all 0.2s ease;
 }
 
-.linkGroup a:hover {
-  color: var(--blue);
-  transform: translateX(4px);
-  display: inline-block;
+@media (hover: hover) {
+  .linkGroup a:hover {
+    color: var(--blue);
+    transform: translateX(4px);
+  }
 }
 
 .contactList li {
@@ -243,37 +167,42 @@
     flex-direction: column;
     gap: 40px;
   }
-  .linksGrid {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-  }
-  .ctaBox {
-    flex-direction: column;
-    text-align: center;
-    padding: 40px 24px;
-    gap: 32px;
-  }
-  .ctaContent p {
-    margin: 0 auto;
+  .brandCol {
+    max-width: 100%;
   }
 }
 
 @media (max-width: 768px) {
   .linksGrid {
-    gap: 40px;
+    gap: 32px 24px;
     grid-template-columns: 1fr 1fr;
-    display: grid;
   }
-  .ctaForm {
-    flex-direction: column;
-    width: 100%;
+  /* "Aloqa" ustuni ikkala kolonkani egallaydi — manzil matni uzun */
+  .linkGroup:last-child {
+    grid-column: 1 / -1;
   }
-  .input {
-    min-width: 100%;
+  .linkGroup h4 {
+    margin-bottom: 16px;
+  }
+  .linkGroup ul {
+    gap: 12px;
+  }
+  .logo {
+    width: 112px;
   }
   .bottomBar {
     flex-direction: column;
     gap: 16px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .linksGrid {
+    grid-template-columns: 1fr;
+  }
+  .legalLinks {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }

@@ -1,28 +1,46 @@
 /* ================= NAVBAR CORE ================= */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background: var(--white);
-  border-bottom: none;
-  z-index: 900; 
-  transition: all 0.3s ease;
+  top: var(--nav-top);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - (2 * var(--nav-top)));
+  max-width: 1400px;
+  height: var(--nav-h);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  z-index: 900;
+  transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 10px 40px rgba(13, 59, 102, 0.05);
 }
 
 .scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  top: 12px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 15px 50px rgba(13, 59, 102, 0.1);
+  border-bottom: none;
+}
+
+/* Menyu ochiq: fon to'liq ekranni qoraytiradi. Navbar yarim shaffof bo'lsa,
+   backdrop-filter o'sha qorong'i qatlamni oladi va panel kulrang ko'rinadi.
+   Shuning uchun ochiq holatda navbar butunlay oq va blursiz. */
+.navMenuOpen {
+  background: var(--white);
+  backdrop-filter: none;
+  box-shadow: 0 15px 50px rgba(13, 59, 102, 0.14);
 }
 
 .inner {
   max-width: 1300px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
 /* ================= LOGO ================= */
@@ -31,14 +49,15 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .logoIconImage {
-  width: 120px;
-  height: 120px;
-  min-width: 120px;
+  width: 104px;
+  height: 104px;
+  min-width: 104px;
   object-fit: contain;
-  margin: -20px 0; /* Let it overflow the navbar vertically */
+  margin: -16px 0; /* Let it overflow the navbar vertically */
 }
 
 .logoText {
@@ -65,7 +84,8 @@
 }
 
 .centerLink:hover, .centerLinkActive {
-  color: var(--blue);
+  color: var(--blue-deep);
+  font-weight: 600;
 }
 
 .centerLink::after {
@@ -85,6 +105,7 @@
 .centerLink:hover::after, .centerLinkActive::after {
   transform: scaleX(1);
   transform-origin: left;
+  background: var(--green);
 }
 
 /* ================= RIGHT ACTIONS ================= */
@@ -98,19 +119,31 @@
 .langSwitchWrapper {
   position: relative;
   margin-right: 8px;
+  flex-shrink: 0;
 }
 
 .langSwitch {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 10px 12px;
+  min-height: 44px;
+  border-radius: 10px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
   color: var(--text);
   transition: all 0.2s ease;
+  user-select: none;
+}
+
+/* Keng ekranda to'liq nom, tor ekranda "UZ / RU / EN" */
+.langShort { display: none; }
+
+@media (max-width: 900px) {
+  .langFull { display: none; }
+  .langShort { display: inline; font-weight: 600; letter-spacing: 0.5px; }
+  .langSwitch { padding: 10px; }
 }
 
 .langSwitch:hover, .langOpen {
@@ -164,7 +197,10 @@
   background: var(--blue-pale);
 }
 
-/* ================= LOGIN BUTTON MOVED TO GLOBALS ================= */
+/* ================= LOGIN BUTTON (base: globals .nav-cta) ================= */
+.loginBtn {
+  flex-shrink: 0;
+}
 
 /* ================= MENU TOGGLE ================= */
 .menuToggleBtn {
@@ -173,11 +209,12 @@
   justify-content: center;
   width: 44px;
   height: 44px;
+  flex-shrink: 0;
   background: var(--gray);
   border: none;
   color: var(--text);
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: all 0.2s ease;
 }
 
@@ -204,18 +241,23 @@
 
 
 /* ================= MEGA MENU BACKDROP ================= */
+/* Navbar (z-index 900) ostida, sahifa kontenti ustida turadi. */
 .megaMenuBackdrop {
   position: fixed;
-  top: 70px;
-  left: 0;
+  inset: 0;
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s ease;
-  z-index: -1; /* Dropdown is relative to nav which has z-index 900, so -1 places backdrop just beneath the inner content of nav but above page content */
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 890;
+}
+
+.backdropOpen {
+  pointer-events: auto;
 }
 
 .backdropOpen {
@@ -226,21 +268,22 @@
 /* ================= MEGA MENU DROPDOWN ================= */
 .megaMenuDropdown {
   position: absolute;
-  top: 100%; /* Just below the navbar */
+  top: calc(100% + 16px); /* Gap from the pill navbar */
   left: 50%;
   width: 100%;
   max-width: 1300px;
   background: var(--white);
   border: 1px solid var(--border);
-  border-top: none;
-  border-radius: 0 0 24px 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 24px; /* Full border radius for floating card */
+  box-shadow: 0 20px 50px rgba(13, 59, 102, 0.1);
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, -15px) scale(0.98);
   transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.4s;
-  max-height: calc(100vh - 70px);
+  max-height: calc(100dvh - var(--nav-h) - var(--nav-top) - 32px);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .megaMenuOpen {
@@ -410,17 +453,69 @@
   .logoText {
     display: none;
   }
-  .navCta {
+  .logoIconImage {
+    width: 78px;
+    height: 78px;
+    min-width: 78px;
+    margin: -8px 0;
+  }
+  .inner {
+    padding: 0 12px;
+    gap: 6px;
+  }
+  .langSwitchWrapper {
+    margin-right: 0;
+  }
+  /* Login tugmasi qolsin, faqat matn yashirinadi — ikonka tugma bo'ladi */
+  .loginLabel {
     display: none;
   }
-  .menuToggleBtn {
-    font-size: 0;
-    padding: 8px;
+  .loginBtn {
+    padding: 0;
+    width: 44px;
+    min-height: 44px;
+    gap: 0;
+    font-size: 17px;
+  }
+  .megaMenuContainer {
+    padding: 24px 16px;
+  }
+  .megaMenuBody {
+    gap: 32px;
   }
   .megaMenuGrid {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .colTitle {
+    margin-bottom: 16px;
+  }
+  .colLinks {
+    gap: 14px;
+  }
+  /* Tegish maydonini kattalashtiramiz */
+  .colLinks a {
+    display: block;
+    padding: 6px 0;
   }
   .contactBox {
     padding: 24px;
+  }
+  .contactPhone {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Juda tor telefonlar (iPhone SE ≈ 375px, Android ≈ 360px) */
+@media (max-width: 400px) {
+  .logoIconImage {
+    width: 66px;
+    height: 66px;
+    min-width: 66px;
+  }
+  .langSwitch {
+    padding: 10px 6px;
+    font-size: 13px;
   }
 }

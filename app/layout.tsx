@@ -1,21 +1,21 @@
-import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Manrope, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+// Sarlavhalar — Manrope (geometrik, 200-800 o'zgaruvchan o'q)
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
   variable: "--font-heading",
   display: "swap",
 });
 
+// Matn — Inter
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600"],
   variable: "--font-body",
   display: "swap",
 });
@@ -37,24 +37,27 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0F2547",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang="uz" className={`${manrope.variable} ${inter.variable}`}>
       <head>
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
           strategy="afterInteractive"
         />
       </head>
-      <body
-        style={{
-          fontFamily: "var(--font-body), -apple-system, sans-serif",
-        }}
-      >
+      <body>
         <ThemeProvider>
           <Navbar />
           <main>{children}</main>

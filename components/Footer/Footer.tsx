@@ -18,11 +18,13 @@ export default function Footer() {
       <div className="container">
         <div className={styles.mainContent}>
           <div className={styles.brandCol}>
-            <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center' }}>
-              <img 
-                src={LOGO_URL} 
-                alt="YI logotip" 
-                style={{ width: '140px', height: 'auto', display: 'block', maxWidth: '100%' }} 
+            <div className={styles.logoWrap}>
+              <Image
+                src={LOGO_URL}
+                alt="YI logotip"
+                width={140}
+                height={140}
+                className={styles.logo}
               />
             </div>
             <p className={styles.brandDesc}>

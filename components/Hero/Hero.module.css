@@ -1,45 +1,65 @@
+/* ===== HERO — BARAKA-INSPIRED STYLE ===== */
 .hero {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 70px);
-  margin: 70px auto 0 auto; 
-  background: var(--bg); /* Light background for the whole section */
+  min-height: 100svh;
+  margin: 0;
+  padding-top: calc(var(--nav-h) + var(--nav-top) + 32px);
+  padding-bottom: 48px;
+  background: linear-gradient(135deg, #F6F8FC 0%, #FAFBFD 45%, #FFFFFF 100%);
   display: flex;
   align-items: center;
+  overflow: hidden;
+}
+
+/* Dekorativ SVG overlay */
+.heroOverlay {
+  position: absolute;
+  top: -10%;
+  right: -15%;
+  width: 80%;
+  height: 120%;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .splitContainer {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1500px;
   margin: 0 auto;
   display: flex;
-  min-height: 700px;
-  height: calc(100vh - 120px); /* Leave some margin */
-  padding: 24px;
-  gap: 24px;
+  min-height: 600px;
+  padding: 0 40px;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ================= LEFT PANE (TEXT) ================= */
 .leftPane {
-  flex: 0 0 45%; /* 45% width */
+  /* 0 0 50% + gap 60px = 100% + 60px → o'ng ustun kesilib qolardi.
+     1 1 0 teng bo'lib, gap'ni hisobga oladi. */
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding: 40px 60px 40px 20px;
+  padding: 20px 40px 20px 0;
 }
 
 .textWrap {
   display: grid;
   width: 100%;
-  margin-bottom: 30px; /* Space between text and controls */
+  margin-bottom: 40px;
 }
 
 .textContent {
   grid-area: 1 / 1;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px); /* Changed from top:50%, translateY(-40%) */
+  transform: translateY(20px);
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   display: flex;
   flex-direction: column;
@@ -62,14 +82,14 @@
 
 .tag {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--blue);
-  background: rgba(13, 59, 102, 0.08); /* Light blue tint */
-  padding: 6px 14px;
-  border-radius: 4px;
+  letter-spacing: 1.5px;
+  color: var(--blue-deep);
+  background: rgba(13, 59, 102, 0.06);
+  padding: 8px 18px;
+  border-radius: 50px;
 }
 
 .date {
@@ -82,22 +102,26 @@
 }
 
 .title {
-  font-size: clamp(36px, 4vw, 56px);
-  font-weight: 700;
-  line-height: 1.15;
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-5xl);
+  font-weight: 800;
+  line-height: 1.08;
   color: var(--blue-deep);
-  margin: 0 0 20px 0;
-  letter-spacing: -0.02em;
+  margin: 0 0 24px 0;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
 .desc {
-  font-size: 18px;
-  line-height: 1.7;
+  font-size: var(--fs-lg);
+  line-height: 1.6;
   color: var(--text-secondary);
-  margin: 0 0 40px 0;
+  margin: 0 0 48px 0;
+  max-width: 90%;
 }
 
-/* ================= ACTIONS (BUTTONS) ================= */
+/* ================= ACTIONS (BUTTONS) — Baraka pill style ================= */
 .actions {
   display: flex;
   align-items: center;
@@ -108,20 +132,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 36px;
-  background: var(--blue);
+  padding: 16px 40px;
+  background: var(--blue-deep);
   color: var(--white);
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 50px;
   transition: all 0.3s ease;
   text-decoration: none;
+  letter-spacing: 0.3px;
 }
 
 .btnPrimary:hover {
-  background: var(--blue-deep);
+  background: var(--blue);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(13, 59, 102, 0.15);
+  box-shadow: 0 12px 24px rgba(13, 59, 102, 0.2);
 }
 
 .btnSecondary {
@@ -130,22 +155,23 @@
   justify-content: center;
   padding: 16px 36px;
   background: transparent;
-  color: var(--blue);
-  font-size: 16px;
-  font-weight: 500;
-  border-radius: 8px;
-  border: 1px solid var(--border);
+  color: var(--blue-deep);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 50px;
+  border: 2px solid var(--border);
   transition: all 0.3s ease;
   text-decoration: none;
   gap: 10px;
 }
 
 .btnSecondary:hover {
-  background: var(--blue-pale);
-  border-color: var(--blue-light);
+  background: var(--blue-deep);
+  color: var(--white);
+  border-color: var(--blue-deep);
 }
 
-/* ================= CONTROLS ================= */
+/* ================= CONTROLS — Baraka green style ================= */
 .controlsWrap {
   display: flex;
   align-items: center;
@@ -161,7 +187,7 @@
 .dot {
   width: 40px;
   height: 4px;
-  background: #E2E8F0;
+  background: #DAE5F0;
   border: none;
   border-radius: 2px;
   cursor: pointer;
@@ -176,12 +202,13 @@
   left: 0;
   height: 100%;
   width: 0%;
-  background: var(--blue);
+  background: var(--green);
+  border-radius: 2px;
 }
 
 .activeDot .dotProgress {
   width: 100%;
-  transition: width 6s linear; 
+  transition: width 6s linear;
 }
 
 .navBtns {
@@ -192,10 +219,10 @@
 .navBtn {
   width: 48px;
   height: 48px;
-  border-radius: 8px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  color: var(--blue);
+  border-radius: 50%;
+  background: var(--green);
+  border: none;
+  color: var(--white);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -205,26 +232,32 @@
 }
 
 .navBtn:hover {
-  background: var(--blue);
-  color: var(--white);
-  border-color: var(--blue);
+  background: var(--green-light);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(46, 139, 87, 0.25);
 }
 
-/* ================= RIGHT PANE (IMAGES) ================= */
+/* ================= RIGHT PANE (IMAGES) — Baraka organic shape ================= */
 .rightPane {
-  flex: 0 0 55%; /* 55% width */
+  flex: 1 1 0;
+  min-width: 0;
   position: relative;
-  height: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imageMask {
   position: relative;
   width: 100%;
-  height: 100%;
-  border-radius: 24px; /* Editorial Magazine look */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-  background: #000;
+  box-shadow: 0 40px 100px rgba(13, 59, 102, 0.15);
+  background: var(--blue-deep);
+  border: 12px solid rgba(255, 255, 255, 0.4);
+  background-clip: padding-box;
 }
 
 .imageSlide {
@@ -246,50 +279,123 @@
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: var(--section-y);
+  }
+
   .splitContainer {
     flex-direction: column;
-    height: auto;
-    padding: 16px;
+    min-height: 0;
+    padding: 0 var(--gutter);
+    gap: 40px;
   }
-  
+
+  /* Rasm matndan oldin — mobil ekranda vizual urg'u */
   .leftPane {
-    flex: none; /* Reset flex basis */
+    flex: none;
     width: 100%;
-    padding: 20px 0;
+    padding: 0;
+    order: 2;
   }
-  
+
   .rightPane {
-    flex: none; /* Reset flex basis */
+    flex: none;
     width: 100%;
-    height: 500px;
-    margin-top: 20px;
+    order: 1;
+  }
+
+  /* Doira o'rniga keng kadr — mobil ekranda balandlikni yeb qo'ymaydi */
+  .imageMask {
+    aspect-ratio: 16 / 9;
+    border-radius: 24px;
+    border-width: 6px;
+    box-shadow: 0 20px 50px rgba(13, 59, 102, 0.14);
+  }
+
+  .textWrap {
+    margin-bottom: 32px;
+  }
+
+  .desc {
+    max-width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .heroOverlay {
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .title {
-    font-size: 32px;
+  .metaInfo {
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
   }
-  
+
+  .tag {
+    font-size: 11px;
+    padding: 7px 14px;
+  }
+
+  /* Uzun yangilik sarlavhalari 5 qatorga cho'zilib, tugmalarni ekrandan
+     chiqarib yuborardi — mobil uchun kichikroq daraja */
+  .title {
+    font-size: clamp(25px, 6.6vw, 32px);
+    line-height: 1.12;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  /* Tavsif 3 qator bilan cheklanadi — hero balandligi nazoratda qoladi */
+  .desc {
+    font-size: 15px;
+    margin-bottom: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
   .actions {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
   }
-  
+
   .btnPrimary, .btnSecondary {
     width: 100%;
+    padding: 16px 24px;
+    min-height: 52px;
   }
-  
+
   .controlsWrap {
     justify-content: space-between;
     width: 100%;
+    margin-top: 28px;
   }
-  
-  .rightPane {
-    height: 400px;
-  }
-  
+
   .imageMask {
-    border-radius: 16px;
+    border-radius: 20px;
+  }
+
+  .navBtn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dot {
+    width: 32px;
+  }
+}
+
+@media (max-width: 400px) {
+  .dot {
+    width: 24px;
+  }
+
+  .date {
+    font-size: 13px;
   }
 }
