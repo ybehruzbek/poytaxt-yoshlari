@@ -1,7 +1,7 @@
 /* ===== STATS — BARAKA-INSPIRED STYLE ===== */
 .stats {
   padding: var(--section-y) 0;
-  background: linear-gradient(135deg, #EAF4EE 0%, #F3F8F4 40%, #FAFBFD 100%);
+  background: transparent;
   position: relative;
 }
 
@@ -60,26 +60,63 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(12px, 2vw, 32px);
+  grid-auto-rows: minmax(140px, auto);
+  gap: clamp(16px, 2vw, 24px);
 }
 
 .item {
   text-align: left;
-  padding: clamp(16px, 2vw, 24px);
+  padding: clamp(20px, 2vw, 32px);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
   background: var(--white);
-  border-radius: 16px;
-  border: 1px solid rgba(46, 139, 87, 0.15);
-  transition: all 0.3s ease;
+  border: 1px solid var(--border);
+}
+
+.item:nth-child(1) {
+  grid-column: span 2;
+  background: var(--blue-deep);
+  color: var(--white);
+  border: none;
+}
+
+.item:nth-child(1) .number {
+  color: var(--white);
+}
+
+.item:nth-child(1) .label {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.item:nth-child(2) {
+  background: var(--green-pale);
+  border: 1px solid rgba(46, 139, 87, 0.1);
+}
+
+.item:nth-child(3) {
+  background: var(--blue-pale);
+  border: 1px solid rgba(34, 55, 91, 0.1);
+}
+
+.item:nth-child(4) {
+  grid-column: span 2;
+  background: #FFF7ED;
+  border: 1px solid rgba(244, 123, 46, 0.1);
 }
 
 .item:hover {
-  box-shadow: 0 8px 24px rgba(46, 139, 87, 0.08);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 .number {
   font-family: var(--font-heading), sans-serif;
-  font-size: clamp(28px, 3.4vw + 12px, 52px);
+  font-size: clamp(32px, 3.8vw, 56px);
   font-weight: 800;
   color: var(--blue-deep);
   line-height: 1;
@@ -172,6 +209,12 @@
 }
 
 @media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .item:nth-child(1), .item:nth-child(4) {
+    grid-column: span 1;
+  }
   .imageCard { border-radius: 20px; aspect-ratio: 4 / 3; }
   .overlay { padding: 24px; }
   .overlay h3 { font-size: var(--fs-xl); text-align: center; }

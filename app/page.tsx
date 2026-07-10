@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero/Hero";
+import Events from "@/components/Events/Events";
 import About from "@/components/About/About";
 import Projects from "@/components/Projects/Projects";
 import News from "@/components/News/News";
@@ -21,6 +22,10 @@ export default async function Home() {
         <Hero news={news} />
       </SectionTheme>
 
+      <SectionTheme theme="events">
+        <Events />
+      </SectionTheme>
+
       <SectionTheme theme="about">
         <About />
       </SectionTheme>
@@ -29,7 +34,7 @@ export default async function Home() {
         <Projects items={projects} />
       </SectionTheme>
 
-      <SectionTheme theme="default">
+      <SectionTheme theme="stats">
         <Stats items={stats} />
       </SectionTheme>
 

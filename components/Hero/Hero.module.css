@@ -31,7 +31,7 @@
   display: flex;
   min-height: 600px;
   padding: 0 40px;
-  gap: 60px;
+  gap: 40px;
   position: relative;
   z-index: 1;
 }
@@ -49,28 +49,15 @@
   padding: 20px 40px 20px 0;
 }
 
-.textWrap {
-  display: grid;
-  width: 100%;
-  margin-bottom: 40px;
-}
-
 .textContent {
-  grid-area: 1 / 1;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
-.textContent.activeContent {
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  transition-delay: 0.1s;
+.textWrap {
+  width: 100%;
 }
 
 .metaInfo {
@@ -171,12 +158,12 @@
   border-color: var(--blue-deep);
 }
 
-/* ================= CONTROLS — Baraka green style ================= */
+/* ================= CONTROLS ================= */
 .controlsWrap {
   display: flex;
   align-items: center;
   gap: 32px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .dots {
@@ -185,9 +172,9 @@
 }
 
 .dot {
-  width: 40px;
+  width: 48px;
   height: 4px;
-  background: #DAE5F0;
+  background: rgba(13, 59, 102, 0.1);
   border: none;
   border-radius: 2px;
   cursor: pointer;
@@ -202,7 +189,7 @@
   left: 0;
   height: 100%;
   width: 0%;
-  background: var(--green);
+  background: var(--blue);
   border-radius: 2px;
 }
 
@@ -220,10 +207,10 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--green);
-  border: none;
-  color: var(--white);
-  font-size: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--blue-deep);
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,14 +219,15 @@
 }
 
 .navBtn:hover {
-  background: var(--green-light);
+  background: var(--blue-deep);
+  color: var(--white);
+  border-color: var(--blue-deep);
   transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(46, 139, 87, 0.25);
 }
 
 /* ================= RIGHT PANE (IMAGES) — Baraka organic shape ================= */
 .rightPane {
-  flex: 1 1 0;
+  flex: 1.6 1 0;
   min-width: 0;
   position: relative;
   height: auto;
@@ -248,16 +236,20 @@
   justify-content: center;
 }
 
+.imageMaskWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .imageMask {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
+  aspect-ratio: 4 / 3;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 40px 100px rgba(13, 59, 102, 0.15);
-  background: var(--blue-deep);
-  border: 12px solid rgba(255, 255, 255, 0.4);
-  background-clip: padding-box;
+  background: var(--bg-gray);
 }
 
 .imageSlide {
@@ -265,16 +257,6 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transform: scale(1.05);
-  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 3s ease-out;
-  z-index: 1;
-}
-
-.imageSlide.activeImage {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
 }
 
 /* ================= RESPONSIVE ================= */

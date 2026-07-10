@@ -1,113 +1,121 @@
 /* ===== ABOUT — BARAKA-INSPIRED STYLE ===== */
 .about {
-  padding: var(--section-y) 0 clamp(40px, 5vw, 60px);
+  padding: var(--section-y) 0;
   background: transparent;
-  position: relative;
 }
 
-.introBlock {
-  margin-bottom: clamp(36px, 5vw, 60px);
-  max-width: 1000px;
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: start;
+}
+
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .introText {
   font-family: var(--font-heading), sans-serif;
-  font-size: clamp(22px, 2.4vw + 15px, 40px);
+  font-size: clamp(28px, 3.4vw, 48px);
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--blue-deep);
   letter-spacing: -0.02em;
   text-wrap: pretty;
+  margin: 0;
 }
 
 .highlight {
   color: var(--green);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.card {
-  padding: clamp(24px, 2.5vw, 36px) clamp(24px, 3vw, 40px);
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  transition: all 0.4s var(--ease);
+.imageWrapper {
   position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  background: var(--white);
 }
 
-.bgBlue {
-  background: var(--white);
-  border-left: 4px solid var(--blue);
+.image {
+  object-fit: cover;
 }
 
-.bgGreen {
-  background: var(--white);
-  border-left: 4px solid var(--green);
+.rightCol {
+  position: relative;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(13, 59, 102, 0.08);
-  border-color: transparent;
-}
-
-.cardIcon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  flex-shrink: 0;
-}
-
-.iconBlue {
-  color: var(--blue);
-  background: var(--blue-pale);
-}
-
-.iconGreen {
-  color: var(--green);
-  background: var(--green-pale);
-}
-
-.cardContent {
+.list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 0;
+  border-top: 2px solid var(--text);
 }
 
-.cardContent p {
-  font-size: var(--fs-md);
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.6;
+.listItem {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: all 0.3s var(--ease);
+}
+
+.listItem:hover {
+  background: rgba(13, 59, 102, 0.02);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.itemNumber {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+
+.itemTitle {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--blue-deep);
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .grid {
+.itemDesc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  padding-left: 44px; /* Align with title */
+}
+
+@media (max-width: 1024px) {
+  .splitLayout {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .introText {
+    font-size: clamp(24px, 6vw, 32px);
+  }
+  .itemHeader {
     gap: 16px;
   }
-  .card {
-    gap: 16px;
-    flex-direction: column;
-    align-items: flex-start;
+  .itemDesc {
+    padding-left: 36px;
   }
-  .cardIcon {
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    font-size: 20px;
+  .imageWrapper {
+    aspect-ratio: 16 / 9;
   }
 }

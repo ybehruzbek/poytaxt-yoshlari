@@ -4,131 +4,157 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { News } from "@prisma/client";
+import { motion, AnimatePresence } from "motion/react";
 import styles from "./Hero.module.css";
 
-export default function Hero({ news }: { news: News[] }) {
-  const heroNews = news.slice(0, 4);
-  const [currentIndex, setCurrentIndex] = useState(0);
+export default function Hero({ news }: { news?: News[] }) {
+  // 3 ta eng yangi yangilikni ajratib olamiz
+  const slides = news?.slice(0, 3) || [];
+  const [current, setCurrent] = useState(0);
 
-  // Auto-play
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % heroNews.length);
-    }, 6000); // 6 seconds per slide
-
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 6000);
     return () => clearInterval(timer);
-  }, [heroNews.length]);
+  }, [slides.length]);
 
-  const handleDotClick = (index: number) => {
-    setCurrentIndex(index);
-  };
+  if (!slides.length) return null;
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? heroNews.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % heroNews.length);
-  };
+  const handleDotClick = (index: number) => setCurrent(index);
+  const handlePrev = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  const handleNext = () => setCurrent((prev) => (prev + 1) % slides.length);
 
   return (
     <section className={styles.hero} id="bosh-sahifa">
-      {/* Dekorativ SVG overlay — Baraka-ilhomli yumshoq petal */}
-      <svg className={styles.heroOverlay} viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 0 C75 0 100 25 100 50 C100 75 75 100 50 100 C25 100 0 75 0 50 C0 25 25 0 50 0Z" fill="url(#hero-gradient)" opacity="0.03" transform="scale(0.8) translate(10, 10)" />
-        <defs>
-          <linearGradient id="hero-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-            <stop stopColor="var(--blue-deep)" />
-            <stop offset="1" stopColor="var(--blue)" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       <div className={styles.splitContainer}>
         
         {/* L E F T   P A N E   (Text Content) */}
         <div className={styles.leftPane}>
-          <div className={styles.textWrap}>
-            {heroNews.map((news, idx) => (
-              <div 
-                key={`content-${news.id}`} 
-                className={`${styles.textContent} ${idx === currentIndex ? styles.activeContent : ""}`}
+          <div className={styles.textContent}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+                  },
+                  exit: {
+                    opacity: 0,
+                    transition: { duration: 0.3 }
+                  }
+                }}
+                className={styles.textWrap}
               >
-                <div className={styles.metaInfo}>
-                  <span className={`${styles.tag} ${styles[news.tagClass] || ""}`}>
-                    {news.tag}
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } }
+                  }}
+                  className={styles.metaInfo}
+                >
+                  <span className={styles.tag}>
+                    {slides[current].tag || "Yangilik"}
                   </span>
                   <span className={styles.date}>
-                    <i className="far fa-calendar-alt" /> {news.date}
+                    <i className="far fa-calendar-alt" /> {slides[current].date}
                   </span>
-                </div>
+                </motion.div>
                 
-                <h1 className={styles.title}>
-                  {news.title}
-                </h1>
+                <motion.h1 
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } }
+                  }}
+                  className={styles.title}
+                >
+                  {slides[current].title}
+                </motion.h1>
                 
-                {news.excerpt && (
-                  <p className={styles.desc}>
-                    {news.excerpt}
-                  </p>
-                )}
+                <motion.p 
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } }
+                  }}
+                  className={styles.desc}
+                >
+                  {slides[current].excerpt || "O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi eng yirik jamoat tashkilotidir."}
+                </motion.p>
                 
-                <div className={styles.actions}>
-                  <Link href={`/yangiliklar/${news.slug}`} className={styles.btnPrimary}>
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 1, 0.5, 1] } }
+                  }}
+                  className={styles.actions}
+                >
+                  <Link href={`/yangiliklar/${slides[current].slug}`} className={styles.btnPrimary}>
                     Batafsil o'qish
                   </Link>
-                  <Link href="/yangiliklar" className={styles.btnSecondary}>
-                    Barcha yangiliklar <i className="fas fa-arrow-right" style={{ fontSize: '12px' }}/>
+                  <Link href="/loyihalar" className={styles.btnSecondary}>
+                    Barcha loyihalar
                   </Link>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+
+            {slides.length > 1 && (
+              <div className={styles.controlsWrap}>
+                <div className={styles.dots}>
+                  {slides.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`${styles.dot} ${i === current ? styles.activeDot : ""}`}
+                      onClick={() => handleDotClick(i)}
+                      aria-label={`Slide ${i + 1}`}
+                    >
+                      <div className={styles.dotProgress} />
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.navBtns}>
+                  <button className={styles.navBtn} onClick={handlePrev} aria-label="Oldingi">
+                    <i className="fas fa-arrow-left" />
+                  </button>
+                  <button className={styles.navBtn} onClick={handleNext} aria-label="Keyingi">
+                    <i className="fas fa-arrow-right" />
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Controls - Positioned at bottom of left pane */}
-          <div className={styles.controlsWrap}>
-            <div className={styles.dots}>
-              {heroNews.map((_, idx) => (
-                <button
-                  key={`dot-${idx}`}
-                  className={`${styles.dot} ${idx === currentIndex ? styles.activeDot : ""}`}
-                  onClick={() => handleDotClick(idx)}
-                  aria-label={`Go to slide ${idx + 1}`}
-                >
-                  <span className={styles.dotProgress}></span>
-                </button>
-              ))}
-            </div>
-
-            <div className={styles.navBtns}>
-              <button className={styles.navBtn} onClick={handlePrev} aria-label="Oldingi yangilik">
-                <i className="fas fa-chevron-left" />
-              </button>
-              <button className={styles.navBtn} onClick={handleNext} aria-label="Keyingi yangilik">
-                <i className="fas fa-chevron-right" />
-              </button>
-            </div>
+            )}
           </div>
         </div>
 
         {/* R I G H T   P A N E   (Images) */}
         <div className={styles.rightPane}>
-          <div className={styles.imageMask}>
-            {heroNews.map((news, idx) => (
-              <div 
-                key={`image-${news.id}`} 
-                className={`${styles.imageSlide} ${idx === currentIndex ? styles.activeImage : ""}`}
-              >
-                <Image
-                  src={news.image}
-                  alt={news.title}
-                  fill
-                  priority={idx === 0}
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  style={{ objectFit: "cover", objectPosition: "center center" }}
-                />
-              </div>
-            ))}
+          <div className={styles.imageMaskWrapper}>
+            <div className={styles.imageMask}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className={styles.imageSlide}
+                >
+                  <Image
+                    src={slides[current].image || "/images/hero/youth_hero_optimistic.png"}
+                    alt={slides[current].title}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    style={{ objectFit: "cover", objectPosition: "center center" }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 

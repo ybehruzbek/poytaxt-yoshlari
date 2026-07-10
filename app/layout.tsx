@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import BackgroundController from "@/components/ui/BackgroundController";
 
 // Sarlavhalar — Manrope (geometrik, 200-800 o'zgaruvchan o'q)
 const manrope = Manrope({
@@ -59,6 +60,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
+          <BackgroundController />
           <Navbar />
           <main>{children}</main>
           <Footer />
