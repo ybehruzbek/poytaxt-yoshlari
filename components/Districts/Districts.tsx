@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { District } from "@prisma/client";
 import styles from "./Districts.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -13,7 +14,7 @@ const MapComponent = dynamic(() => import("./Map"), {
   ),
 });
 
-export default function Districts() {
+export default function Districts({ districts }: { districts: District[] }) {
   return (
     <section className={styles.section} id="tumanlar">
       <div className="container">
@@ -30,7 +31,7 @@ export default function Districts() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <MapComponent />
+          <MapComponent districts={districts} />
         </ScrollReveal>
       </div>
     </section>

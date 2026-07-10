@@ -1,32 +1,38 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { newsItems } from "@/lib/data";
+import RichText from "@/components/ui/RichText";
+import { getNewsBySlug, getNewsSlugs } from "@/lib/queries";
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
-  const item = newsItems.find(n => n.id === resolvedParams.id);
+export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = await getNewsBySlug(slug);
   if (!item) return { title: "Topilmadi" };
-  return { title: `${item.title} | O'zbekiston Yoshlar Ittifoqi` };
+  return {
+    title: `${item.title} | O'zbekiston Yoshlar Ittifoqi`,
+    description: item.excerpt ?? undefined,
+    openGraph: { images: [item.image] },
+  };
 }
 
-export function generateStaticParams() {
-  return newsItems.map((item) => ({
-    id: item.id,
-  }));
+export async function generateStaticParams() {
+  const items = await getNewsSlugs();
+  return items.map(({ slug }) => ({ slug }));
 }
 
-export default async function SingleNewsPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
-  const item = newsItems.find(n => n.id === resolvedParams.id);
-  
+export default async function SingleNewsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = await getNewsBySlug(slug);
+
   if (!item) {
     notFound();
   }
 
   return (
     <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh', maxWidth: '900px' }}>
-      
+
       <Link href="/yangiliklar" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', textDecoration: 'none', marginBottom: '32px', fontWeight: 600, fontSize: '14px' }}>
         <i className="fas fa-arrow-left" /> Ortga qaytish
       </Link>
@@ -52,15 +58,7 @@ export default async function SingleNewsPage({ params }: { params: Promise<{ id:
       </div>
 
       <div style={{ fontSize: '18px', color: 'var(--text)', lineHeight: 1.8 }}>
-        <p style={{ marginBottom: '24px' }}>
-          {item.excerpt || "Bu yerda yangilik matni bo'ladi. Hozircha bu demo ma'lumot bo'lgani uchun qisqa matn ko'rsatilmoqda. Aslida bu yerda to'liq maqola, qo'shimcha rasmlar va tafsilotlar bo'lishi kerak."}
-        </p>
-        <p style={{ marginBottom: '24px' }}>
-          Yoshlar Ittifoqi doimo shunday tadbirlarni qo'llab-quvvatlab kelmoqda. Bu orqali minglab yoshlar o'z iqtidorlarini namoyon qilish imkoniyatiga ega bo'lmoqdalar. Maqsadimiz — kelajak avlod uchun barcha sharoitlarni yaratib berishdir.
-        </p>
-        <p style={{ marginBottom: '24px' }}>
-          Tadbir so'ngida faol ishtirokchilarga faxriy yorliqlar va qimmatbaho sovg'alar topshirildi. Kelgusi yilda bunday loyihalar ko'lamini yanada kengaytirish rejalashtirilmoqda.
-        </p>
+        <RichText text={item.content ?? item.excerpt} style={{ marginBottom: '24px' }} />
       </div>
 
     </div>

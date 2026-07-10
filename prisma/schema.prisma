@@ -2,6 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 // Poytaxt Yoshlari — To'liq Ma'lumotlar Bazasi Sxemasi
+//
+// Bu sxema saytdagi BARCHA kontentning yagona manbai. `lib/data.ts` da faqat
+// navigatsiya va footer kabi tuzilma qoladi, kontent emas.
 
 generator client {
   provider = "prisma-client-js"
@@ -14,12 +17,15 @@ datasource db {
 // ===== LOYIHALAR (Projects) =====
 model Project {
   id        String   @id @default(cuid())
+  slug      String   @unique
   title     String
   desc      String
+  content   String? // Tafsilot sahifasidagi to'liq matn
   image     String
   progress  Int      @default(0)
   status    String   @default("Yangi") // Yangi, Faol, Yakunlangan
   category  String   // IT va Innovatsiya, Ta'lim, Sport, Ekologiya, Bandlik
+  published Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -27,14 +33,16 @@ model Project {
 // ===== YANGILIKLAR (News) =====
 model News {
   id       String  @id @default(cuid())
+  slug     String  @unique
   title    String
   excerpt  String?
-  content  String? // To'liq kontent (HTML yoki Markdown)
+  content  String? // To'liq matn. Paragraflar bo'sh qator bilan ajratiladi.
   date     String
   tag      String  // Strategiya, Ta'lim, Sport, Texnologiya, Ekologiya
   tagClass String  @default("tag-blue")
   image    String
   featured Boolean @default(false)
+  published Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -83,6 +91,12 @@ model Leader {
   image    String
   order    Int    @default(0) // Tartib raqami
 
+  bio            String? // Biografiya. Paragraflar bo'sh qator bilan ajratiladi.
+  receptionDays  String? // "Seshanba|10:00 - 13:00" ko'rinishidagi qatorlar
+  telegram       String?
+  instagram      String?
+  email          String?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -94,6 +108,10 @@ model YouthLeader {
   place    String
   image    String
   category String // Oliygoh, Mahalla, Maktab
+
+  bio       String? // Faoliyati
+  telegram  String?
+  instagram String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -135,8 +153,10 @@ model GalleryImage {
   full   String
   alt    String
   aspect String @default("square") // square, tall, wide
+  order  Int    @default(0)
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // ===== MUROJAATLAR (Appeals) =====
@@ -163,15 +183,19 @@ model TimelineEvent {
   order Int   @default(0)
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 // ===== STATISTIKA =====
+// group = "full"  → Stats komponenti (rasm bilan katta blok)
+// group = "mini"  → MiniStats komponenti (hero ostidagi qator)
 model Stat {
   id     String @id @default(cuid())
   target Int
   suffix String @default("")
   label  String
   order  Int    @default(0)
+  group  String @default("full")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -198,4 +222,22 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// ===== AUDIT LOG (TZ §19 SEC-05) =====
+// Har bir admin amali yoziladi. Foydalanuvchi o'chirilsa ham yozuv qoladi,
+// shuning uchun `username` alohida saqlanadi (relation emas).
+model AuditLog {
+  id       String @id @default(cuid())
+  userId   String
+  username String
+  action   String // create, update, delete
+  entity   String // news, project, ...
+  entityId String
+  summary  String? // "Yangilik: <sarlavha>"
+
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([createdAt])
 }

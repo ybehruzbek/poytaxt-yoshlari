@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { leaders } from "@/lib/data";
+import { getYouthLeaders } from "@/lib/queries";
 import PageHeader from "@/components/ui/PageHeader";
 import styles from "./Yetakchilar.module.css";
 
@@ -8,7 +8,13 @@ export const metadata = {
   title: "Yoshlar yetakchilari | O'zbekiston Yoshlar Ittifoqi",
 };
 
-export default function YouthLeadersPage() {
+export const revalidate = 60;
+
+export default async function YouthLeadersPage() {
+  // Ilgari bu yerda `leaders` (rahbariyat) ro'yxati chizilar, havolalar esa
+  // /yetakchilar/[id] ga ketardi — ya'ni butunlay boshqa odamning sahifasiga.
+  const youthLeaders = await getYouthLeaders();
+
   return (
     <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh' }}>
       <PageHeader 
@@ -22,10 +28,10 @@ export default function YouthLeadersPage() {
       />
       
       <div className={styles.grid}>
-        {leaders.map((item, i) => (
+        {youthLeaders.map((item) => (
           <Link href={`/yetakchilar/${item.id}`} key={item.id} className={styles.card} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className={styles.imgWrap}>
-              <span className={styles.districtBadge}>Tuman yetakchisi</span>
+              <span className={styles.districtBadge}>{item.category} yetakchisi</span>
               <Image src={item.image} alt={item.name} fill sizes="(max-width: 768px) 100vw, 33vw" />
               
               {/* Socials on hover */}
@@ -42,7 +48,7 @@ export default function YouthLeadersPage() {
             <div className={styles.body}>
               <h3>{item.name}</h3>
               <p className={styles.location}>
-                <i className="fas fa-map-marker-alt" /> Toshkent shahar
+                <i className="fas fa-map-marker-alt" /> {item.place}
               </p>
               
               <div className={styles.actionBtn}>

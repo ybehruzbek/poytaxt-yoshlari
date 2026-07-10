@@ -1,9 +1,9 @@
 import React from 'react';
+import type { Document } from '@prisma/client';
 import styles from './HujjatlarList.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
-import { documents } from '@/lib/data';
 
-export default function HujjatlarList() {
+export default function HujjatlarList({ items: documents }: { items: Document[] }) {
   return (
     <section className={styles.section}>
       <div className="container">
@@ -21,7 +21,7 @@ export default function HujjatlarList() {
 
           <div className={styles.list}>
             {documents.map((doc, idx) => (
-              <ScrollReveal key={idx} delay={idx + 1}>
+              <ScrollReveal key={doc.id} delay={idx + 1}>
                 <div className={styles.docRow}>
                   
                   <div className={styles.docLeft}>

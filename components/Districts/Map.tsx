@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import type { District } from "@prisma/client";
 import styles from "./Districts.module.css";
-import { districts } from "@/lib/data";
 import TashkentMapSVG from "./TashkentMapSVG";
 
-export default function Map() {
+export default function Map({ districts }: { districts: District[] }) {
   const [activeDistrict, setActiveDistrict] = useState<string | null>("Yunusobod");
 
   const activeData = activeDistrict 

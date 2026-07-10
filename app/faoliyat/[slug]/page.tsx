@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { directions } from "@/lib/data";
+import { getDirectionBySlug, getDirections } from "@/lib/queries";
 import styles from "./DirectionDetail.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -11,9 +11,11 @@ interface Props {
   }>;
 }
 
+export const revalidate = 60;
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const direction = directions.find((d) => d.slug === slug);
+  const direction = await getDirectionBySlug(slug);
   if (!direction) return { title: "Topilmadi - O'zbekiston Yoshlar Ittifoqi" };
   
   return {
@@ -22,7 +24,8 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const directions = await getDirections();
   return directions.map((direction) => ({
     slug: direction.slug,
   }));
@@ -30,7 +33,7 @@ export function generateStaticParams() {
 
 export default async function DirectionDetailPage({ params }: Props) {
   const { slug } = await params;
-  const direction = directions.find((d) => d.slug === slug);
+  const direction = await getDirectionBySlug(slug);
 
   if (!direction) {
     notFound();
@@ -81,10 +84,10 @@ export default async function DirectionDetailPage({ params }: Props) {
                 <div className={styles.goalsBox}>
                   <h2>Asosiy maqsadlar</h2>
                   <ul>
-                    {direction.goals.map((goal, i) => (
-                      <li key={i}>
+                    {direction.goals.map((goal) => (
+                      <li key={goal.id}>
                         <i className="fas fa-check-circle" style={{ color: direction.iconColor }}></i>
-                        <span>{goal}</span>
+                        <span>{goal.text}</span>
                       </li>
                     ))}
                   </ul>
@@ -97,8 +100,8 @@ export default async function DirectionDetailPage({ params }: Props) {
                 <div className={styles.statsCard}>
                   <h3>Natijalar</h3>
                   <div className={styles.statsList}>
-                    {direction.stats.map((stat, i) => (
-                      <div key={i} className={styles.statItem}>
+                    {direction.stats.map((stat) => (
+                      <div key={stat.id} className={styles.statItem}>
                         <div className={styles.statValue} style={{ color: direction.iconColor }}>
                           {stat.value}
                         </div>

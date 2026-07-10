@@ -82,7 +82,7 @@ export default function LoyihalarGrid({ initialProjects }: LoyihalarGridProps) {
           {filteredProjects.length > 0 ? (
             filteredProjects.map((item, idx) => (
               <ScrollReveal key={item.id} delay={idx + 1}>
-                <Link href={`/loyihalar/${item.id}`} className={styles.card}>
+                <Link href={`/loyihalar/${item.slug}`} className={styles.card}>
                   <div className={styles.imgWrap}>
                     <Image 
                       src={item.image} 

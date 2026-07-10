@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { YouthLeader } from "@prisma/client";
 import styles from "./YouthLeaders.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { youthLeaders } from "@/lib/data";
 
-export default function YouthLeaders() {
+export default function YouthLeaders({ items: youthLeaders }: { items: YouthLeader[] }) {
   return (
     <section className={styles.section} id="yetakchilar">
       <div className="container">
@@ -27,7 +27,7 @@ export default function YouthLeaders() {
 
         <div className={styles.grid}>
           {youthLeaders.map((leader, i) => (
-            <ScrollReveal key={i} delay={Math.min(i + 1, 4)} className={styles.cardWrapper}>
+            <ScrollReveal key={leader.id} delay={Math.min(i + 1, 4)} className={styles.cardWrapper}>
               <Link href={`/yetakchilar/${leader.id}`} style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                 <div className={styles.card}>
                 <div className={styles.glow} />

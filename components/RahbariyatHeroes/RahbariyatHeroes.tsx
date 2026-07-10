@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import type { YouthLeader } from "@prisma/client";
 import styles from "./RahbariyatHeroes.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { youthLeaders } from "@/lib/data";
 
-export default function RahbariyatHeroes() {
+export default function RahbariyatHeroes({ items: youthLeaders }: { items: YouthLeader[] }) {
   return (
     <section className={styles.section}>
       <div className="container">

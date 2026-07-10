@@ -1,11 +1,10 @@
-"use client";
-
+import Image from "next/image";
+import type { Stat } from "@prisma/client";
 import styles from "./Stats.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import CountUp from "@/components/ui/CountUp";
-import { fullStats } from "@/lib/data";
 
-export default function Stats() {
+export default function Stats({ items }: { items: Stat[] }) {
   return (
     <section className={styles.stats} id="statistika">
       <div className="container">
@@ -17,10 +16,10 @@ export default function Stats() {
                 Yoshlar Ittifoqi yillar davomida minglab yoshlarning hayotida ijobiy o'zgarishlar qildi va ularning qobiliyatlarini ro'yobga chiqarishga yordam berdi.
               </p>
             </ScrollReveal>
-            
+
             <div className={styles.grid}>
-              {fullStats.map((stat, i) => (
-                <ScrollReveal key={i} delay={i + 1}>
+              {items.map((stat, i) => (
+                <ScrollReveal key={stat.id} delay={i + 1}>
                   <div className={styles.item}>
                     <div className={styles.number}>
                       <CountUp target={stat.target} suffix={stat.suffix} duration={2200} />
@@ -34,7 +33,13 @@ export default function Stats() {
           <div className={styles.statsRight}>
             <ScrollReveal delay={2} className={styles.revealWrapper}>
               <div className={styles.imageCard}>
-                <img src="/images/about/about_cover_1782905651024.png" alt="Yoshlar ittifoqi jamoasi" className={styles.mainImage} />
+                <Image
+                  src="/images/about/about_cover_1782905651024.png"
+                  alt="Yoshlar ittifoqi jamoasi"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 460px"
+                  className={styles.mainImage}
+                />
                 <div className={styles.overlay}>
                   <div className={styles.overlayPlay}>
                     <i className="fas fa-play" />

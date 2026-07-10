@@ -3,11 +3,11 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { GalleryImage } from "@prisma/client";
 import styles from "./Gallery.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { galleryImages } from "@/lib/data";
 
-export default function Gallery() {
+export default function Gallery({ images: galleryImages }: { images: GalleryImage[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [zoom, setZoom] = useState(1);
 

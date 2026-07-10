@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Faoliyat.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { directions, projects } from "@/lib/data";
+import { getDirections, getProjects } from "@/lib/queries";
 
 export const metadata = {
   title: "Faoliyat - O'zbekiston Yoshlar Ittifoqi",
@@ -27,7 +27,11 @@ const grantSteps = [
   }
 ];
 
-export default function FaoliyatPage() {
+export const revalidate = 60;
+
+export default async function FaoliyatPage() {
+  const [directions, projects] = await Promise.all([getDirections(), getProjects()]);
+
   return (
     <div className={styles.pageWrapper}>
       {/* ===== 1. HERO SECTION ===== */}
@@ -58,7 +62,7 @@ export default function FaoliyatPage() {
         <div className="container">
           <div className={styles.bentoGrid}>
             {directions.map((dir, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
+              <ScrollReveal key={dir.id} delay={i * 0.1}>
                 <Link 
                   href={`/faoliyat/${dir.slug}`}
                   className={styles.bentoCard} 
@@ -159,7 +163,7 @@ export default function FaoliyatPage() {
                         />
                       </div>
                     </div>
-                    <Link href="/loyihalar" className={styles.pBatafsil}>
+                    <Link href={`/loyihalar/${proj.slug}`} className={styles.pBatafsil}>
                       Batafsil <i className="fas fa-arrow-right"></i>
                     </Link>
                   </div>

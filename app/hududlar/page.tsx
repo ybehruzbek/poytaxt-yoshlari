@@ -1,21 +1,29 @@
 import Districts from "@/components/Districts/Districts";
 import YouthLeaders from "@/components/YouthLeaders/YouthLeaders";
 import SectionTheme from "@/components/ui/SectionTheme";
+import { getDistricts, getYouthLeaders } from "@/lib/queries";
 
 export const metadata = {
   title: "Hududlar - O'zbekiston Yoshlar Ittifoqi",
   description: "Toshkent shahridagi tumanlar miqyosidagi loyihalar va mahalliy yetakchilar.",
 };
 
-export default function HududlarPage() {
+export const revalidate = 60;
+
+export default async function HududlarPage() {
+  const [districts, youthLeaders] = await Promise.all([
+    getDistricts(),
+    getYouthLeaders(),
+  ]);
+
   return (
     <div style={{ paddingTop: "70px" }}>
       <SectionTheme theme="default">
-        <Districts />
+        <Districts districts={districts} />
       </SectionTheme>
-      
+
       <SectionTheme theme="youthleaders">
-        <YouthLeaders />
+        <YouthLeaders items={youthLeaders} />
       </SectionTheme>
     </div>
   );

@@ -1,12 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import type { Project } from "@prisma/client";
 import styles from "./Projects.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { projects } from "@/lib/data";
 
-export default function Projects() {
+export default function Projects({ items }: { items: Project[] }) {
   return (
     <section className={styles.projects} id="loyihalar">
       <div className="container">
@@ -24,9 +22,9 @@ export default function Projects() {
         </ScrollReveal>
 
         <div className={styles.grid}>
-          {projects.map((project, i) => (
+          {items.map((project, i) => (
             <ScrollReveal key={project.id} delay={Math.min(i + 1, 6)} className={styles.cardWrapper}>
-              <Link href={`/loyihalar/${project.id}`} className={styles.card}>
+              <Link href={`/loyihalar/${project.slug}`} className={styles.card}>
                 <div className={styles.imageWrapper}>
                   <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
                   <span className={styles.status}>{project.status}</span>

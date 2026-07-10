@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import type { News } from "@prisma/client";
 import styles from "./Hero.module.css";
-import { newsItems } from "@/lib/data";
 
-export default function Hero() {
-  const heroNews = newsItems.slice(0, 4);
+export default function Hero({ news }: { news: News[] }) {
+  const heroNews = news.slice(0, 4);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-play
@@ -33,6 +33,17 @@ export default function Hero() {
 
   return (
     <section className={styles.hero} id="bosh-sahifa">
+      {/* Dekorativ SVG overlay — Baraka-ilhomli yumshoq petal */}
+      <svg className={styles.heroOverlay} viewBox="0 0 100 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 0 C75 0 100 25 100 50 C100 75 75 100 50 100 C25 100 0 75 0 50 C0 25 25 0 50 0Z" fill="url(#hero-gradient)" opacity="0.03" transform="scale(0.8) translate(10, 10)" />
+        <defs>
+          <linearGradient id="hero-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+            <stop stopColor="var(--blue-deep)" />
+            <stop offset="1" stopColor="var(--blue)" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <div className={styles.splitContainer}>
         
         {/* L E F T   P A N E   (Text Content) */}
@@ -63,7 +74,7 @@ export default function Hero() {
                 )}
                 
                 <div className={styles.actions}>
-                  <Link href={`#yangiliklar`} className={styles.btnPrimary}>
+                  <Link href={`/yangiliklar/${news.slug}`} className={styles.btnPrimary}>
                     Batafsil o'qish
                   </Link>
                   <Link href="/yangiliklar" className={styles.btnSecondary}>

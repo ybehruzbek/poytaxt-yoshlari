@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Rahbariyat.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { leaders, youthLeaders } from "@/lib/data";
+import { getLeaders, getYouthLeaders } from "@/lib/queries";
 import RahbariyatHero from "@/components/RahbariyatHero/RahbariyatHero";
 import RahbariyatIntro from "@/components/RahbariyatIntro/RahbariyatIntro";
 import RahbariyatApparat from "@/components/RahbariyatApparat/RahbariyatApparat";
@@ -16,7 +16,11 @@ export const metadata = {
 
 
 
-export default function LeadershipPage() {
+export const revalidate = 60;
+
+export default async function LeadershipPage() {
+  const [leaders, youthLeaders] = await Promise.all([getLeaders(), getYouthLeaders()]);
+
   return (
     <div className={styles.pageWrapper}>
       {/* ===== 1. EPIC HERO SECTION ===== */}
@@ -70,7 +74,7 @@ export default function LeadershipPage() {
       <RahbariyatApparat />
 
       {/* ===== 5. LOCAL YOUTH LEADERS ===== */}
-      <RahbariyatHeroes />
+      <RahbariyatHeroes items={youthLeaders} />
 
       {/* ===== 6. CTA BANNER ===== */}
       <section className={styles.ctaSection}>

@@ -1,43 +1,51 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { youthLeaders } from "@/lib/data";
+import RichText from "@/components/ui/RichText";
+import { getYouthLeaderById, getYouthLeaders } from "@/lib/queries";
+
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
-  const item = youthLeaders.find(n => n.id === resolvedParams.id);
+  const { id } = await params;
+  const item = await getYouthLeaderById(id);
   if (!item) return { title: "Topilmadi" };
-  return { title: `${item.name} | O'zbekiston Yoshlar Ittifoqi` };
+  return {
+    title: `${item.name} | O'zbekiston Yoshlar Ittifoqi`,
+    description: `${item.category} yetakchisi — ${item.place}`,
+  };
 }
 
-export function generateStaticParams() {
-  return youthLeaders.map((item) => ({
-    id: item.id,
-  }));
+export async function generateStaticParams() {
+  const items = await getYouthLeaders();
+  return items.map((item) => ({ id: item.id }));
 }
+
+const socialBtn = {
+  width: '44px', height: '44px', borderRadius: '12px',
+  display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px',
+} as const;
 
 export default async function SingleYouthLeaderPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = await params;
-  const item = youthLeaders.find(n => n.id === resolvedParams.id);
-  
+  const { id } = await params;
+  const item = await getYouthLeaderById(id);
+
   if (!item) {
     notFound();
   }
 
   return (
     <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh', maxWidth: '1000px' }}>
-      
+
       <Link href="/yetakchilar" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', textDecoration: 'none', marginBottom: '32px', fontWeight: 600, fontSize: '14px' }}>
         <i className="fas fa-arrow-left" /> Yetakchilarga qaytish
       </Link>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '48px', alignItems: 'start' }}>
-        {/* Left Side: Image */}
         <div style={{ position: 'relative', width: '100%', height: '400px', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
           <Image src={item.image} alt={item.name} fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority />
         </div>
 
-        {/* Right Side: Info */}
         <div>
           <span style={{
             background: 'var(--blue-pale)', color: 'var(--blue)', padding: '6px 14px',
@@ -53,24 +61,27 @@ export default async function SingleYouthLeaderPage({ params }: { params: Promis
             {item.place}
           </p>
 
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '40px' }}>
-            <a href="#" style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--blue-pale)', color: 'var(--blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', transition: 'all 0.3s' }}>
-              <i className="fab fa-telegram-plane" />
-            </a>
-            <a href="#" style={{ width: '44px', height: '44px', borderRadius: '12px', background: '#FCE7F3', color: '#EC4899', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', transition: 'all 0.3s' }}>
-              <i className="fab fa-instagram" />
-            </a>
-          </div>
+          {(item.telegram || item.instagram) && (
+            <div style={{ display: 'flex', gap: '12px', marginBottom: '40px' }}>
+              {item.telegram && (
+                <a href={item.telegram} style={{ ...socialBtn, background: 'var(--blue-pale)', color: 'var(--blue)' }} aria-label="Telegram">
+                  <i className="fab fa-telegram-plane" />
+                </a>
+              )}
+              {item.instagram && (
+                <a href={item.instagram} style={{ ...socialBtn, background: '#FCE7F3', color: '#EC4899' }} aria-label="Instagram">
+                  <i className="fab fa-instagram" />
+                </a>
+              )}
+            </div>
+          )}
 
-          <div style={{ fontSize: '16px', color: 'var(--text)', lineHeight: 1.8 }}>
-            <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '16px', color: 'var(--primary-dark)' }}>Faoliyati</h3>
-            <p style={{ marginBottom: '16px' }}>
-              Ushbu yetakchi o'z hududida yoshlar bilan yaqindan ishlab, ularning muammolarini o'rganish, qiziqishlarini qo'llab-quvvatlash va bo'sh vaqtlarini mazmunli tashkil etish bo'yicha ko'plab loyihalarni amalga oshirib kelmoqda.
-            </p>
-            <p style={{ marginBottom: '32px' }}>
-              Shuningdek, iqtidorli yoshlarni kashf etish va ularni rag'batlantirish bo'yicha maxsus tanlovlar va to'garaklar tashkil etishda faol ishtirok etadi.
-            </p>
-          </div>
+          {item.bio && (
+            <div style={{ fontSize: '16px', color: 'var(--text)', lineHeight: 1.8 }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '16px', color: 'var(--primary-dark)' }}>Faoliyati</h2>
+              <RichText text={item.bio} style={{ marginBottom: '16px' }} />
+            </div>
+          )}
 
         </div>
       </div>

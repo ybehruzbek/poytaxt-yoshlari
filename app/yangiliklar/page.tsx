@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getNews } from "@/lib/queries";
 import YangiliklarClient from "./YangiliklarClient";
 
 export const metadata = {
@@ -6,10 +6,11 @@ export const metadata = {
   description: "Poytaxt yoshlari hayotidagi eng so'nggi va muhim yangiliklar.",
 };
 
+// Bazadan o'qiydi — aks holda build paytida bir marta render bo'lib qotib qoladi.
+export const revalidate = 60;
+
 export default async function AllNewsPage() {
-  const news = await prisma.news.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
+  const news = await getNews();
 
   return <YangiliklarClient initialNews={news} />;
 }

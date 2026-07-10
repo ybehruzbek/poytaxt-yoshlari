@@ -1,0 +1,188 @@
+/* Admin panel uchun umumiy stillar. Ranglar/bo'shliqlar globals.css tokenlaridan. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-size: var(--fs-2xl);
+  color: var(--blue-deep);
+  margin: 0;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* ===== Tugmalar ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-xs);
+  border: 1px solid transparent;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s var(--ease);
+}
+.btn:hover { opacity: 0.88; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btnPrimary { background: var(--blue); color: var(--white); }
+.btnGhost {
+  background: var(--white);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+.btnDanger { background: transparent; color: #EF4444; border-color: #FECACA; }
+
+/* ===== Jadval ===== */
+.tableWrap { overflow-x: auto; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--fs-sm);
+  min-width: 640px;
+}
+
+.table thead tr {
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+
+.table th {
+  padding: var(--sp-4) var(--sp-5);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+
+.cellTruncate {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rowActions {
+  display: flex;
+  gap: var(--sp-2);
+  justify-content: flex-end;
+}
+
+.empty {
+  padding: var(--sp-12);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ===== Belgilar ===== */
+.badge {
+  display: inline-block;
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+.badgeOn { background: var(--green-pale); color: var(--green-check); }
+.badgeOff { background: var(--bg-gray); color: var(--text-muted); }
+
+/* ===== Forma ===== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-6);
+  max-width: 760px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+/* TZ 24-ilova: label doimo input USTIDA */
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--blue-deep);
+}
+
+.required { color: #EF4444; margin-left: 2px; }
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font: inherit;
+  font-size: var(--fs-base);
+  color: var(--text);
+  background: var(--white);
+}
+
+.input:focus-visible,
+.textarea:focus-visible,
+.select:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+  border-color: var(--blue);
+}
+
+.textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
+
+.checkboxField {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.help { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.fieldError { font-size: var(--fs-xs); color: #EF4444; font-weight: 500; }
+
+.inputInvalid { border-color: #EF4444; }
+
+.formError {
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-xs);
+  background: #FEE2E2;
+  color: #B91C1C;
+  font-size: var(--fs-sm);
+}
+
+.formActions {
+  display: flex;
+  gap: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--border);
+  margin-top: var(--sp-2);
+}

@@ -1,18 +1,18 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
+import type { MapRegion } from "@prisma/client";
 import styles from "./MapSection.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { mapRegions } from "@/lib/data";
 
-export default function MapSection() {
-  const [selected, setSelected] = useState<typeof mapRegions[0] | null>(null);
+export default function MapSection({ regions }: { regions: MapRegion[] }) {
+  const [selected, setSelected] = useState<MapRegion | null>(null);
   const [tooltipText, setTooltipText] = useState("");
   const [tooltipPos, setTooltipPos] = useState({ left: 0, top: 0 });
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseEnter = useCallback((region: typeof mapRegions[0]) => {
+  const handleMouseEnter = useCallback((region: MapRegion) => {
     setTooltipText(region.name);
     setTooltipVisible(true);
     setSelected(region);
@@ -52,9 +52,9 @@ export default function MapSection() {
           <div className={styles.layout}>
             <div className={styles.svgWrap} ref={wrapRef}>
               <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="O'zbekiston xaritasi">
-                {mapRegions.map((region) => (
+                {regions.map((region) => (
                   <polygon
-                    key={region.name}
+                    key={region.id}
                     className={styles.region}
                     points={region.points}
                     tabIndex={0}

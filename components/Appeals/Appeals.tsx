@@ -3,7 +3,7 @@
 import { useState, useCallback, FormEvent, useEffect, useRef } from "react";
 import styles from "./Appeals.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { appealTypes, appealGuarantees, districts } from "@/lib/data";
+import { appealTypes, appealGuarantees } from "@/lib/data";
 
 const CustomSelect = ({ 
   options, 
@@ -63,7 +63,7 @@ const CustomSelect = ({
   );
 };
 
-export default function Appeals() {
+export default function Appeals({ districtNames }: { districtNames: string[] }) {
   const [showToast, setShowToast] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -103,7 +103,7 @@ export default function Appeals() {
         const data = await res.json();
         alert(data.error || "Xatolik yuz berdi");
       }
-    } catch (error) {
+    } catch {
       alert("Tizimda xatolik yuz berdi. Iltimos keyinroq urunib ko'ring.");
     } finally {
       setIsSubmitting(false);
@@ -176,7 +176,7 @@ export default function Appeals() {
                 </div>
                 
                 <CustomSelect 
-                  options={districts.map(d => d.name)}
+                  options={districtNames}
                   value={tuman}
                   onChange={setTuman}
                   label="Tumaningiz"

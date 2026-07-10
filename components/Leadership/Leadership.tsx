@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Leader } from "@prisma/client";
 import styles from "./Leadership.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { leaders } from "@/lib/data";
 
-export default function Leadership() {
+export default function Leadership({ items }: { items: Leader[] }) {
   return (
     <section className={styles.section} id="rahbariyat">
       <div className="container">
@@ -18,8 +18,8 @@ export default function Leadership() {
         </ScrollReveal>
 
         <div className={styles.grid}>
-          {leaders.map((leader, i) => (
-            <ScrollReveal key={i} delay={i + 1}>
+          {items.map((leader, i) => (
+            <ScrollReveal key={leader.id} delay={i + 1}>
               <Link href={`/rahbariyat/${leader.id}`} className={styles.card}>
                 <div className={styles.imgWrap}>
                   <Image

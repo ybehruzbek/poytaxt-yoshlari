@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./Hujjatlar.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { documents } from "@/lib/data";
+import { getDocuments } from "@/lib/queries";
 import HujjatlarHero from "@/components/HujjatlarHero/HujjatlarHero";
 import HujjatlarCategories from "@/components/HujjatlarCategories/HujjatlarCategories";
 import HujjatlarList from "@/components/HujjatlarList/HujjatlarList";
@@ -17,7 +17,11 @@ export const metadata = {
 
 
 
-export default function DocumentsPage() {
+export const revalidate = 60;
+
+export default async function DocumentsPage() {
+  const documents = await getDocuments();
+
   return (
     <div className={styles.pageWrapper}>
       {/* ===== 1. HERO SECTION ===== */}
@@ -27,7 +31,7 @@ export default function DocumentsPage() {
       <HujjatlarCategories />
 
       {/* ===== 3. MAIN DOCUMENTS LIST ===== */}
-      <HujjatlarList />
+      <HujjatlarList items={documents} />
 
       {/* ===== 4. GUARANTEE SECTION ===== */}
       <HujjatlarGuarantees />

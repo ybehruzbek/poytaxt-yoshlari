@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { News as NewsItem } from "@prisma/client";
 import styles from "./News.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { newsItems } from "@/lib/data";
 
-export default function News() {
-  const featured = newsItems.find((n) => n.featured);
-  const others = newsItems.filter((n) => !n.featured);
+export default function News({ items }: { items: NewsItem[] }) {
+  const featured = items.find((n) => n.featured);
+  const others = items.filter((n) => !n.featured);
 
   return (
     <section className={styles.news} id="yangiliklar">
@@ -29,7 +29,7 @@ export default function News() {
             {/* Featured */}
             {featured && (
               <ScrollReveal delay={1} className={styles.featuredWrapper}>
-                <Link href={`/yangiliklar/${featured.id}`} className={styles.featured}>
+                <Link href={`/yangiliklar/${featured.slug}`} className={styles.featured}>
                   <Image src={featured.image} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 66vw" className={styles.bgImage} />
                   <div className={styles.featuredOverlay}>
                     <span className={`${styles.tag} ${featured.tagClass}`}>{featured.tag}</span>
@@ -43,7 +43,7 @@ export default function News() {
             {/* First Small Card (Top Right) */}
             {others[0] && (
               <ScrollReveal delay={2} className={styles.smallWrapper}>
-                <Link href={`/yangiliklar/${others[0].id}`} className={styles.small}>
+                <Link href={`/yangiliklar/${others[0].slug}`} className={styles.small}>
                   <div className={styles.smallImg}>
                     <Image src={others[0].image} alt={others[0].title} width={400} height={300} sizes="33vw" />
                   </div>
@@ -61,7 +61,7 @@ export default function News() {
             {/* Remaining Small Cards */}
             {others.slice(1).map((item, i) => (
               <ScrollReveal key={item.id} delay={i + 3} className={styles.flexItem}>
-                <Link href={`/yangiliklar/${item.id}`} className={styles.small}>
+                <Link href={`/yangiliklar/${item.slug}`} className={styles.small}>
                   <div className={styles.smallImg}>
                     <Image src={item.image} alt={item.title} width={400} height={300} sizes="33vw" />
                   </div>

@@ -1,8 +1,8 @@
+import type { Direction } from "@prisma/client";
 import styles from "./Directions.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { directions } from "@/lib/data";
 
-export default function Directions() {
+export default function Directions({ items }: { items: Direction[] }) {
   return (
     <section className={styles.section} id="yonalishlar">
       <div className="container">
@@ -13,20 +13,20 @@ export default function Directions() {
               Faoliyat yo&apos;nalishlari
             </h2>
             <p className={`section-desc ${styles.sectionDesc}`}>
-              Yoshlar rivojlanishining barcha sohalarini qamrab olgan 8 ta asosiy yo&apos;nalish bo&apos;yicha izchil ish olib boramiz.
+              Yoshlar rivojlanishining barcha sohalarini qamrab olgan {items.length} ta asosiy yo&apos;nalish bo&apos;yicha izchil ish olib boramiz.
             </p>
           </div>
         </ScrollReveal>
 
         <div className={styles.grid}>
-          {directions.map((dir, i) => (
-            <ScrollReveal key={i} delay={Math.min(i + 1, 6)} className={styles.cardWrapper}>
+          {items.map((dir, i) => (
+            <ScrollReveal key={dir.id} delay={Math.min(i + 1, 6)} className={styles.cardWrapper}>
               <div className={styles.card}>
                 <div
                   className={styles.iconWrap}
-                  style={{ 
-                    background: `linear-gradient(135deg, ${dir.iconBg}, #ffffff)`, 
-                    color: dir.iconColor 
+                  style={{
+                    background: `linear-gradient(135deg, ${dir.iconBg}, #ffffff)`,
+                    color: dir.iconColor
                   }}
                 >
                   <i className={`fas ${dir.icon}`} />

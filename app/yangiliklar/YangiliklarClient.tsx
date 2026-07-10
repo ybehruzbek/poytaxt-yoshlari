@@ -42,7 +42,7 @@ export default function YangiliklarClient({ initialNews }: YangiliklarClientProp
       <div className={styles.bottomRow} style={{ marginTop: '40px' }}>
         {filteredNews.length > 0 ? filteredNews.map(item => (
           <div className={styles.flexItem} key={item.id}>
-            <Link href={`/yangiliklar/${item.id}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link href={`/yangiliklar/${item.slug}`} className={styles.small} style={{ textDecoration: 'none', color: 'inherit' }}>
               <div className={styles.smallImg}>
                 <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 33vw" />
               </div>

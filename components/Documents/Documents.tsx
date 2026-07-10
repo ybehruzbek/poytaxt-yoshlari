@@ -1,8 +1,8 @@
+import type { Document } from "@prisma/client";
 import styles from "./Documents.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { documents } from "@/lib/data";
 
-export default function Documents() {
+export default function Documents({ items: documents }: { items: Document[] }) {
   return (
     <section className={styles.section} id="hujjatlar">
       <div className="container">
@@ -19,7 +19,7 @@ export default function Documents() {
 
         <div className={styles.list}>
           {documents.map((doc, i) => (
-            <ScrollReveal key={i} delay={Math.min(i + 1, 4)}>
+            <ScrollReveal key={doc.id} delay={Math.min(i + 1, 4)}>
               <div className={styles.item}>
                 <div className={styles.itemLeft}>
                   <div
