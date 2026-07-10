@@ -1,34 +1,74 @@
 {
   "meta": {
-    "brand_name": "[INSERT NAME]",
-    "description": "Core design tokens for UI implementation."
+    "brand_name": "Poytaxt Yoshlari",
+    "full_name": "O'zbekiston Yoshlar Ittifoqi — Toshkent shahar hududiy Kengashi",
+    "description": "Haqiqiy dizayn tokenlari. Yagona manba — app/globals.css `:root`. Bu fayl o'sha yerdan ko'chirilgan; ikkalasi mos kelishi shart.",
+    "source_of_truth": "app/globals.css"
   },
   "colors": {
-    "primary": {
-      "DEFAULT": "#000000",
-      "hover": "#333333",
-      "foreground": "#FFFFFF"
+    "brand": {
+      "blue": "#22375B",
+      "blue_light": "#15315E",
+      "blue_deep": "#0F2547",
+      "blue_btn": "#263A60",
+      "blue_pale": "#EAF1FB",
+      "green": "#6CA23C",
+      "green_light": "#7BB84E",
+      "green_check": "#2E9E5B",
+      "green_pale": "#EAF4EE",
+      "teal": "#176F8E",
+      "amber": "#F5B53A"
     },
-    "secondary": {
-      "DEFAULT": "#F4F4F5",
-      "foreground": "#18181B"
+    "accent": {
+      "orange": "#F47B2E",
+      "orange_dark": "#D6761D"
     },
-    "background": "#FFFFFF",
-    "foreground": "#09090B",
-    "muted": "#F4F4F5",
-    "accent": "#F4F4F5",
-    "destructive": "#EF4444",
-    "success": "#10B981"
+    "neutral": {
+      "white": "#FFFFFF",
+      "bg": "#F6F8FC",
+      "bg_gray": "#F3F4F5",
+      "text": "#0E1A30",
+      "text_secondary": "#3D4D63",
+      "text_muted": "#8A97A8",
+      "border": "#E6E9EE",
+      "border_light": "#EEF2F8"
+    }
   },
   "typography": {
-    "font_family_headings": ["Inter", "sans-serif"],
-    "font_family_body": ["Roboto", "sans-serif"],
-    "font_weight_bold": "700",
-    "font_weight_normal": "400"
+    "font_family_headings": ["Manrope", "sans-serif"],
+    "font_family_body": ["Inter", "sans-serif"],
+    "loaded_via": "next/font/google (subsets: latin, cyrillic) — CDN havolasi EMAS",
+    "css_vars": { "headings": "--font-heading", "body": "--font-body" },
+    "scale": {
+      "comment": "clamp() bilan fluid, 360px → 1440px. CSS o'zgaruvchilarini ishlating, px yozmang.",
+      "xs": "12px",
+      "sm": "13px",
+      "base": "clamp(15px, 0.4vw + 14px, 16px)",
+      "md": "clamp(15px, 0.6vw + 14px, 17px)",
+      "lg": "clamp(16px, 0.8vw + 15px, 18px)",
+      "xl": "clamp(18px, 1vw + 16px, 22px)",
+      "2xl": "clamp(20px, 1.6vw + 16px, 28px)",
+      "3xl": "clamp(24px, 2.4vw + 17px, 36px)",
+      "4xl": "clamp(28px, 3.4vw + 18px, 48px)",
+      "5xl": "clamp(30px, 4.6vw + 18px, 60px)"
+    }
+  },
+  "spacing": {
+    "base_unit": "4px",
+    "comment": "--sp-1 .. --sp-20 o'zgaruvchilarini ishlating",
+    "section_y": "clamp(56px, 7vw, 100px)",
+    "gutter": "clamp(20px, 3vw, 28px)"
   },
   "ui": {
-    "border_radius_default": "0.5rem",
-    "border_radius_small": "0.25rem",
-    "spacing_base_unit": "4px"
+    "radius": "24px",
+    "radius_sm": "16px",
+    "radius_xs": "10px",
+    "radius_pill": "999px",
+    "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "shadow_comment": "--shadow-xs .. --shadow-xl. Navy tusli: rgba(30, 58, 95, α)"
+  },
+  "dark_mode": {
+    "supported": false,
+    "comment": "Qorong'i rejim yo'q. layout.tsx dagi themeColor faqat mobil brauzer paneli rangi."
   }
 }
