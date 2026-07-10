@@ -1,8 +1,9 @@
-/* ===== STATS — BARAKA-INSPIRED STYLE ===== */
+/* ===== STATS — PREMIUM LIGHT MESH (GLASSMORPHISM) DESIGN ===== */
 .stats {
-  padding: var(--section-y) 0;
-  background: transparent;
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: transparent; /* Orqa fondagi saytni global nurini o'tkazish uchun */
   position: relative;
+  z-index: 1;
 }
 
 .splitLayout {
@@ -12,7 +13,7 @@
 }
 
 .statsLeft {
-  flex: 1.5;
+  flex: 1.2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +21,7 @@
 
 .statsRight {
   flex: 1;
-  max-width: 460px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -41,114 +42,94 @@
 
 .sectionTitle {
   font-family: var(--font-heading), sans-serif;
-  font-size: var(--fs-4xl);
+  font-size: clamp(32px, 4vw, 48px);
   font-weight: 800;
   color: var(--blue-deep);
   margin-bottom: 20px;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .sectionDesc {
-  font-size: var(--fs-lg);
+  font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: clamp(28px, 4vw, 48px);
+  margin-bottom: clamp(32px, 4vw, 48px);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: minmax(140px, auto);
   gap: clamp(16px, 2vw, 24px);
 }
 
 .item {
   text-align: left;
-  padding: clamp(20px, 2vw, 32px);
-  border-radius: 20px;
+  padding: clamp(24px, 3vw, 32px);
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Clean Solid White Cards */
   background: var(--white);
   border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(13, 59, 102, 0.03);
 }
 
-.item:nth-child(1) {
-  grid-column: span 2;
-  background: var(--blue-deep);
-  color: var(--white);
-  border: none;
-}
+.item:nth-child(1) { grid-column: span 2; }
+.item:nth-child(4) { grid-column: span 2; }
 
-.item:nth-child(1) .number {
-  color: var(--white);
-}
-
-.item:nth-child(1) .label {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.item:nth-child(2) {
-  background: var(--green-pale);
-  border: 1px solid rgba(46, 139, 87, 0.1);
-}
-
-.item:nth-child(3) {
-  background: var(--blue-pale);
-  border: 1px solid rgba(34, 55, 91, 0.1);
-}
-
-.item:nth-child(4) {
-  grid-column: span 2;
-  background: #FFF7ED;
-  border: 1px solid rgba(244, 123, 46, 0.1);
-}
-
+/* Barcha kartalar uchun toza oq fon, hech qanday gradientlarsiz */
 .item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(13, 59, 102, 0.08);
+  border-color: transparent;
 }
 
 .number {
   font-family: var(--font-heading), sans-serif;
-  font-size: clamp(32px, 3.8vw, 56px);
+  font-size: clamp(36px, 4vw, 56px);
   font-weight: 800;
   color: var(--blue-deep);
   line-height: 1;
-  margin-bottom: 8px;
-  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
 .label {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  line-height: 1.35;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
 }
 
+.item:hover .label {
+  color: var(--blue);
+}
+
+/* Right Side Image Card */
 .imageCard {
   width: 100%;
   height: 100%;
   flex: 1;
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
   position: relative;
   box-shadow: 0 10px 30px rgba(13, 59, 102, 0.1);
+  border: 1px solid var(--border-light);
 }
 
 .mainImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s ease;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .imageCard:hover .mainImage {
@@ -158,39 +139,46 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(9, 40, 71, 0.6) 0%, rgba(9, 40, 71, 0.1) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(9, 40, 71, 0.8) 0%, rgba(9, 40, 71, 0.1) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   padding: 40px;
   color: white;
-  transition: background 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 .imageCard:hover .overlay {
-  background: linear-gradient(to top, rgba(9, 40, 71, 0.5) 0%, rgba(9, 40, 71, 0.05) 60%, transparent 100%);
+  background: linear-gradient(to top, rgba(9, 40, 71, 0.9) 0%, rgba(9, 40, 71, 0.3) 60%, transparent 100%);
 }
 
 .overlayPlay {
-  width: 64px;
-  height: 64px;
-  background: var(--green);
+  width: 72px;
+  height: 72px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(46, 139, 87, 0.3);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease;
 }
 
 .overlayPlay:hover {
   transform: scale(1.1);
-  background: var(--green-light);
+  background: var(--white);
+  color: var(--blue-deep);
+}
+
+.overlayPlay i {
+  margin-left: 4px; /* play icon ni markazlash uchun */
 }
 
 .overlay h3 {
@@ -204,8 +192,7 @@
 @media (max-width: 1024px) {
   .splitLayout { flex-direction: column; }
   .statsRight { max-width: 100%; width: 100%; }
-  /* Ustunda rasm o'z balandligini oladi, cho'zilmaydi */
-  .imageCard { aspect-ratio: 16 / 10; height: auto; }
+  .imageCard { aspect-ratio: 16 / 9; height: auto; }
 }
 
 @media (max-width: 768px) {
@@ -219,13 +206,9 @@
   .overlay { padding: 24px; }
   .overlay h3 { font-size: var(--fs-xl); text-align: center; }
   .overlayPlay {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     font-size: 20px;
     margin-bottom: 16px;
   }
-}
-
-@media (max-width: 400px) {
-  .label { font-size: 11px; letter-spacing: 0.4px; }
 }

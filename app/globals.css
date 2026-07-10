@@ -165,13 +165,9 @@ body {
   background-color: #F1F5F9;
 }
 
-/* THEME: HERO */
-body[data-theme="hero"] .glow-1 { background-color: #DBEAFE; transform: translate(-5%, 10%); }
-body[data-theme="hero"] .glow-2 { background-color: #F3E8FF; transform: translate(10%, -5%); opacity: 0.2; }
-
-/* THEME: EVENTS */
-body[data-theme="events"] .glow-1 { background-color: #E0E7FF; transform: translate(-20%, 20%); opacity: 0.25; }
-body[data-theme="events"] .glow-2 { background-color: #CCFBF1; transform: translate(20%, -10%); opacity: 0.25; }
+/* THEME: HERO & EVENTS (Tadbirlar bo'limida fon o'zgarmaydi, oddiy qoladi) */
+body[data-theme="hero"] .glow-1, body[data-theme="events"] .glow-1 { background-color: #DBEAFE; transform: translate(-5%, 10%); opacity: 0.25; }
+body[data-theme="hero"] .glow-2, body[data-theme="events"] .glow-2 { background-color: #F3E8FF; transform: translate(10%, -5%); opacity: 0.2; }
 
 /* THEME: ABOUT */
 body[data-theme="about"] .glow-1 { background-color: #FEF3C7; transform: translate(-10%, 30%); opacity: 0.2; }

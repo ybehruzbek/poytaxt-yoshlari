@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "motion/react";
 import styles from "./Events.module.css";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const mockEvents = [
   {
@@ -33,26 +34,57 @@ const mockEvents = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.7, ease: [0.25, 1, 0.5, 1] } 
+  }
+};
+
 export default function Events() {
   return (
     <section className={styles.events} id="tadbirlar">
       <div className="container">
-        <ScrollReveal>
-          <div className={styles.header}>
-            <div>
-              <div className="section-label">Yaqin tadbirlar</div>
-              <h2 className="section-title">Yoshlar hayotidagi muhim voqealar</h2>
-            </div>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className={styles.header}
+        >
+          <motion.div variants={itemVariants}>
+            <div className="section-label">Yaqin tadbirlar</div>
+            <h2 className="section-title">Yoshlar hayotidagi muhim voqealar</h2>
+          </motion.div>
+          <motion.div variants={itemVariants}>
             <Link href="/tadbirlar" className="btn-view-all">
               Barcha tadbirlar
               <i className="fas fa-arrow-right" />
             </Link>
-          </div>
-        </ScrollReveal>
+          </motion.div>
+        </motion.div>
 
-        <div className={styles.grid}>
-          {mockEvents.map((event, i) => (
-            <ScrollReveal key={event.id} delay={i + 1}>
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className={styles.grid}
+        >
+          {mockEvents.map((event) => (
+            <motion.div key={event.id} variants={itemVariants}>
               <Link href={`/tadbirlar/${event.id}`} className={styles.card}>
                 <div className={styles.imageWrapper}>
                   <Image
@@ -83,9 +115,9 @@ export default function Events() {
                   </div>
                 </div>
               </Link>
-            </ScrollReveal>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,34 +1,59 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "motion/react";
 import type { Project } from "@prisma/client";
 import styles from "./Projects.module.css";
-import ScrollReveal from "@/components/ui/ScrollReveal";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 1, 0.5, 1] } }
+};
 
 export default function Projects({ items }: { items: Project[] }) {
   return (
     <section className={styles.projects} id="loyihalar">
       <div className="container">
-        <ScrollReveal>
-          <div className={styles.header}>
-            <div>
-              <div className="section-label">Faol loyihalar</div>
-              <h2 className="section-title">Hozirda amalga oshirilayotgan dasturlar</h2>
-            </div>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className={styles.header}
+        >
+          <motion.div variants={itemVariants}>
+            <div className="section-label">Faol loyihalar</div>
+            <h2 className="section-title">Hozirda amalga oshirilayotgan dasturlar</h2>
+          </motion.div>
+          <motion.div variants={itemVariants}>
             <Link href="/loyihalar" className="btn-view-all">
               Barcha loyihalar
               <i className="fas fa-arrow-right" />
             </Link>
-          </div>
-        </ScrollReveal>
+          </motion.div>
+        </motion.div>
 
-        <div className={styles.grid}>
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className={styles.grid}
+        >
           {items.map((project, i) => (
-            <ScrollReveal key={project.id} delay={Math.min(i + 1, 6)} className={styles.cardWrapper}>
+            <motion.div key={project.id} variants={itemVariants} className={styles.cardWrapper}>
               <Link href={`/loyihalar/${project.slug}`} className={styles.card}>
-                <div className={styles.imageWrapper}>
-                  <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
-                  <span className={styles.status}>{project.status}</span>
-                </div>
+                <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
+                <div className={styles.cardOverlay} />
+                <span className={styles.status}>{project.status}</span>
+                
                 <div className={styles.body}>
                   <h3>{project.title}</h3>
                   <p>{project.desc}</p>
@@ -37,9 +62,9 @@ export default function Projects({ items }: { items: Project[] }) {
                   </div>
                 </div>
               </Link>
-            </ScrollReveal>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
