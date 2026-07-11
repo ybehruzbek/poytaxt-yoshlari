@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./Rahbariyat.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { getLeaders, getYouthLeaders } from "@/lib/queries";
+import { parseReceptionDays } from "@/lib/format";
 import RahbariyatHero from "@/components/RahbariyatHero/RahbariyatHero";
 import RahbariyatIntro from "@/components/RahbariyatIntro/RahbariyatIntro";
 import RahbariyatApparat from "@/components/RahbariyatApparat/RahbariyatApparat";
@@ -33,39 +34,50 @@ export default async function LeadershipPage() {
       <section className={styles.leadersSection}>
         <div className="container">
           <div className={styles.leadersGrid}>
-            {leaders.map((leader, index) => (
-              <ScrollReveal key={leader.id} delay={index + 1}>
-                <div className={styles.leaderCard}>
-                  <div className={styles.leaderImageWrap}>
-                    <Image
-                      src={leader.image}
-                      alt={leader.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div className={styles.leaderInfo}>
-                    <div className={styles.leaderPos}>{leader.position}</div>
-                    <h3 className={styles.leaderName}>{leader.name}</h3>
-                    
-                    <ul className={styles.leaderContactList}>
-                      <li>
-                        <i className="fas fa-calendar-check"></i>
-                        <span>Qabul kunlari: Seshanba, Payshanba 10:00-12:00</span>
-                      </li>
-                      <li>
-                        <i className="fas fa-envelope"></i>
-                        <span>info@yoshlartoshkent.uz</span>
-                      </li>
-                      <li>
-                        <i className="fas fa-phone"></i>
-                        <span>+998 71 233-55-77</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
+            {leaders.map((leader, index) => {
+              const receptionDays = parseReceptionDays(leader.receptionDays);
+              return (
+                <ScrollReveal key={leader.id} delay={index + 1}>
+                  <Link href={`/rahbariyat/${leader.id}`} className={styles.leaderCard}>
+                    <div className={styles.leaderImageWrap}>
+                      <Image
+                        src={leader.image}
+                        alt={leader.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className={styles.leaderInfo}>
+                      <div className={styles.leaderPos}>{leader.position}</div>
+                      <h3 className={styles.leaderName}>{leader.name}</h3>
+
+                      <ul className={styles.leaderContactList}>
+                        {receptionDays.length > 0 && (
+                          <li>
+                            <i className="fas fa-calendar-check"></i>
+                            <span>
+                              Qabul kunlari: {receptionDays.map((r) => `${r.day} ${r.time}`).join(", ")}
+                            </span>
+                          </li>
+                        )}
+                        {leader.email && (
+                          <li>
+                            <i className="fas fa-envelope"></i>
+                            <span>{leader.email}</span>
+                          </li>
+                        )}
+                        {!leader.email && receptionDays.length === 0 && (
+                          <li>
+                            <i className="fas fa-arrow-right"></i>
+                            <span>Batafsil profil</span>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -191,24 +191,6 @@
   margin-bottom: 60px;
 }
 
-.sectionLabel {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--green);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.sectionTitle {
-  font-size: 44px;
-  font-weight: 800;
-  color: var(--blue-deep);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
 .timelineWrapper {
   position: relative;
   padding-top: 50px;
@@ -296,10 +278,6 @@
 .projectsSection {
   padding: 100px 0;
   background: transparent;
-}
-
-.projectsSection .sectionTitle {
-  color: var(--blue-deep);
 }
 
 .projectsGrid {

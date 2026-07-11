@@ -3,6 +3,7 @@ import RichText from "@/components/ui/RichText";
 import ProfileDetail, { type ProfileSocial } from "@/components/ui/ProfileDetail/ProfileDetail";
 import styles from "@/components/ui/ProfileDetail/ProfileDetail.module.css";
 import { getLeaderById, getLeaders } from "@/lib/queries";
+import { parseReceptionDays } from "@/lib/format";
 
 export const revalidate = 60;
 
@@ -19,16 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export async function generateStaticParams() {
   const leaders = await getLeaders();
   return leaders.map((item) => ({ id: item.id }));
-}
-
-/** "Seshanba|10:00 - 13:00" qatorlarini jadvalga aylantiradi. */
-function parseReceptionDays(raw: string | null) {
-  if (!raw) return [];
-  return raw
-    .split("\n")
-    .map((line) => line.split("|").map((s) => s.trim()))
-    .filter((parts) => parts.length === 2)
-    .map(([day, time]) => ({ day, time }));
 }
 
 export default async function SingleLeaderPage({ params }: { params: Promise<{ id: string }> }) {

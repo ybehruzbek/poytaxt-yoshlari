@@ -6,6 +6,45 @@
 
 ---
 
+## [0.9.7] — 2026-07-11 · Editorial sahifalar tozalandi (Paket 4)
+
+**Ikkita real bug tuzatildi (dizayndan tashqari):**
+- **`/tashkilot` statistikasi endi bazadan** — "12 ta", "300+", "50,000+", "80+" qo'lda
+  yozilgan raqamlar edi. Loyihada allaqachon shu aniq maqsad uchun tayyorlangan
+  `MiniStats` komponenti va `Stat` jadvalining `"mini"` guruhi bor edi — lekin hech
+  qayerda ishlatilmagan (500 000+ a'zo, 14 filial, 1200+ loyiha, 33+ yil). Endi
+  ulangan; raqamlar admin panel > Statistika bo'limidan boshqariladi.
+- **`/rahbariyat` ro'yxatidagi kontakt ma'lumotlari endi haqiqiy** — har bir
+  rahbar kartasida bir xil matn qattiq yozilgan edi ("Qabul kunlari: Seshanba,
+  Payshanba 10:00-12:00", "info@yoshlartoshkent.uz" — hammasiga bittadan).
+  `Leader` jadvalida `receptionDays` va `email` maydonlari mavjud va detail
+  sahifada ishlatiladi edi — ro'yxat sahifasi ularni e'tiborsiz qoldirib
+  o'zining qo'lda yozilgan matnini ko'rsatardi. Endi har bir karta o'z
+  rahbarining haqiqiy qabul kunini ko'rsatadi va butun karta uning profiliga
+  havola (`Link`) bo'ldi (ilgari faqat rasm bosiladigan emas edi).
+- `parseReceptionDays()` yordamchisi `lib/format.ts`ga ko'chirildi — ilgari
+  faqat `rahbariyat/[id]` sahifasida yozilgan edi, endi ro'yxat sahifasi ham
+  ishlatadi (ikki joyda bir xil kodni saqlash o'rniga).
+
+**Dizayn izchilligi:**
+- `/tashkilot/tarix` — 5 ta tarixiy voqea rasmi xom `<img>` tegi bilan
+  chizilardi (`next/image` optimallashtirishisiz, hydration ogohlantirishisiz
+  emas). Endi `next/image fill` bilan.
+- `/tashkilot/tarix` — sahifada ishlatilmagan, `TarixStats` komponenti ichida
+  aynan takrorlangan o'lik `stats` massivi o'chirildi.
+- `/faoliyat` — o'zining lokal `sectionLabel`/`sectionTitle` klasslari (yashil
+  rang, ALL CAPS majburlangan) global `.section-label`/`.section-title`
+  klasslariga almashtirildi — endi landing bilan bir xil tipografik til
+  (to'q-sariq eyebrow chiziq bilan, Title Case sarlavha).
+
+**Eslatma — qolgan ish:** yana 9 ta komponentda (`RahbariyatApparat`,
+`MissiyaDirections`, `SardorlarEditorial`, `TashkilotStructure` va h.k.) o'z
+lokal eyebrow/label uslubi bor. Bular PLAN.md dizayn tizimi bo'limida
+"maxsus wow joylar" sifatida qoldirilishi mumkin bo'lgan bespoke editorial
+bo'limlar — to'liq unifikatsiya alohida qaror talab qiladi.
+
+---
+
 ## [0.9.6] — 2026-07-11 · 4 ta detail sahifa qayta qurildi (Paket 3)
 
 **Eng eskicha 4 sahifa — dizayn tizimidan butunlay tashqarida edi:**

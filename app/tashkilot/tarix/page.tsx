@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Tarix.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import TarixHero from "@/components/TarixHero/TarixHero";
@@ -92,29 +93,6 @@ const historyData = [
   }
 ];
 
-const stats = [
-  {
-    icon: "fa-users",
-    number: "3.5M+",
-    label: "A'zolar va Qatnashchilar"
-  },
-  {
-    icon: "fa-hand-holding-heart",
-    number: "15.000+",
-    label: "Doimiy Volontyorlar"
-  },
-  {
-    icon: "fa-diagram-project",
-    number: "4,000+",
-    label: "Amalga Oshirilgan Loyihalar"
-  },
-  {
-    icon: "fa-earth-asia",
-    number: "14",
-    label: "Hududiy Kengashlar"
-  }
-];
-
 export default function HistoryPage() {
   return (
     <div className={styles.pageWrapper}>
@@ -146,8 +124,7 @@ export default function HistoryPage() {
                       
                       {/* Image section */}
                       <div className={styles.eventImageWrap}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={event.image} alt={event.title} loading="lazy" />
+                        <Image src={event.image} alt={event.title} fill sizes="(max-width: 900px) 100vw, 500px" />
                       </div>
 
                       {/* Content section */}

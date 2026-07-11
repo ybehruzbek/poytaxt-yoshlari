@@ -1,7 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
 import styles from "./Tashkilot.module.css";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import TashkilotHeroSlider from "@/components/TashkilotHeroSlider/TashkilotHeroSlider";
 import TashkilotTimelinePreview from "@/components/TashkilotTimelinePreview/TashkilotTimelinePreview";
 import TashkilotDirections from "@/components/TashkilotDirections/TashkilotDirections";
@@ -11,40 +8,25 @@ import SardorlarEditorial from "@/components/SardorlarEditorial/SardorlarEditori
 import ChairmanMessage from "@/components/ChairmanMessage/ChairmanMessage";
 import ImpactStats from "@/components/ImpactStats/ImpactStats";
 import NavigationCards from "@/components/NavigationCards/NavigationCards";
+import MiniStats from "@/components/MiniStats/MiniStats";
+import { getStats } from "@/lib/queries";
 
 export const metadata = {
   title: "Tashkilot haqida | O'zbekiston Yoshlar Ittifoqi",
 };
 
-export default function TashkilotPage() {
+export const revalidate = 60;
+
+export default async function TashkilotPage() {
+  const stats = await getStats("mini");
+
   return (
     <div className={styles.pageWrapper}>
       {/* 1. HERO SLIDER SECTION */}
       <TashkilotHeroSlider />
 
-      {/* 2. STATS SECTION */}
-      <section className={styles.statsSection}>
-        <div className="container">
-          <div className={styles.statsGrid}>
-            <ScrollReveal delay={1} className={styles.statCard}>
-              <div className={styles.statNumber}>12 ta</div>
-              <div className={styles.statLabel}>Tuman Kengashlari</div>
-            </ScrollReveal>
-            <ScrollReveal delay={2} className={styles.statCard}>
-              <div className={styles.statNumber}>300+</div>
-              <div className={styles.statLabel}>Yillik Loyihalar</div>
-            </ScrollReveal>
-            <ScrollReveal delay={3} className={styles.statCard}>
-              <div className={styles.statNumber}>50,000+</div>
-              <div className={styles.statLabel}>Faol A'zolar</div>
-            </ScrollReveal>
-            <ScrollReveal delay={4} className={styles.statCard}>
-              <div className={styles.statNumber}>80+</div>
-              <div className={styles.statLabel}>Hamkor Tashkilotlar</div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      {/* 2. STATS SECTION — bazadan, admin "Statistika" bo'limida boshqariladi */}
+      <MiniStats items={stats} />
 
       {/* 2.5. ORGANIZATION STRUCTURE (SIMPLE GRID) */}
       <TashkilotStructure />

@@ -45,3 +45,13 @@ export function uzTime(d: Date): string {
 export function uzDateTime(d: Date): string {
   return `${uzDate(d)} · ${uzTime(d)}`;
 }
+
+/** "Seshanba|10:00 - 13:00" qatorlarini {day, time} jadvaliga aylantiradi. */
+export function parseReceptionDays(raw: string | null | undefined) {
+  if (!raw) return [];
+  return raw
+    .split("\n")
+    .map((line) => line.split("|").map((s) => s.trim()))
+    .filter((parts) => parts.length === 2)
+    .map(([day, time]) => ({ day, time }));
+}

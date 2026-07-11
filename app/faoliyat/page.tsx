@@ -86,8 +86,8 @@ export default async function FaoliyatPage() {
         <div className="container">
           <ScrollReveal>
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionLabel}>Qo'llab-quvvatlash</span>
-              <h2 className={styles.sectionTitle}>G'oyangizni Biz Bilan Amalga Oshiring</h2>
+              <span className="section-label">Qo'llab-quvvatlash</span>
+              <h2 className="section-title">G'oyangizni Biz Bilan Amalga Oshiring</h2>
             </div>
           </ScrollReveal>
 
@@ -131,8 +131,8 @@ export default async function FaoliyatPage() {
         <div className="container">
           <ScrollReveal>
             <div className={styles.sectionHeader}>
-              <span className={styles.sectionLabel}>Amaliy natijalar</span>
-              <h2 className={styles.sectionTitle}>Eng Katta Loyihalar</h2>
+              <span className="section-label">Amaliy natijalar</span>
+              <h2 className="section-title">Eng Katta Loyihalar</h2>
             </div>
           </ScrollReveal>
 
