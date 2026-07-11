@@ -15,24 +15,25 @@
 .glowAmber {
   position: absolute;
   border-radius: 50%;
-  filter: blur(130px);
+  filter: blur(90px);
   pointer-events: none;
+  transform: translateZ(0);
 }
 
 .glowGreen {
-  width: 44vw;
-  height: 44vw;
-  top: -12%;
-  right: -8%;
-  background: rgba(108, 162, 60, 0.16);
+  width: 30vw;
+  height: 30vw;
+  top: -10%;
+  right: -6%;
+  background: rgba(108, 162, 60, 0.12);
 }
 
 .glowAmber {
-  width: 36vw;
-  height: 36vw;
-  bottom: -18%;
-  left: -10%;
-  background: rgba(245, 181, 58, 0.12);
+  width: 26vw;
+  height: 26vw;
+  bottom: -14%;
+  left: -8%;
+  background: rgba(245, 181, 58, 0.1);
 }
 
 .grid {

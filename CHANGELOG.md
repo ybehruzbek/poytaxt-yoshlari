@@ -6,6 +6,17 @@
 
 ---
 
+## [0.8.1] — 2026-07-11 · Tinchlantirish: ranglar soddalashdi, silliqlik tuzatildi
+
+**Foydalanuvchi fikri asosida:** juda rang-barang bo'lib ketgan edi, scroll silliq emasdi, loyiha kartalariga o'z foni kerak edi.
+
+**Nima qilindi:**
+- **Ranglar soddalashdi**: har bo'limda boshqa rang almashinuvi o'rniga bitta xotirjam juftlik (yashil + amber, past opacity) — bo'limlar orasida rang emas, faqat yengil siljish.
+- **Silliqlik tuzatildi** (scroll jank sabablari): `background-attachment: fixed` olib tashlandi (har kadrda qayta chizdirardi); glow qatlamlari kichraytirildi (40vw → 30vw) va blur yengillashtirildi (150px → 90-100px) — GPU yuki keskin kamaydi; rang-transition o'rniga faqat transform.
+- **Loyihalar kartalariga o'z foni qaytdi**: oq karta ichida rasm (baraka uslubi), kategoriya + jonli progress-chiziq + sarlavha; umumiy bo'lim foni yo'q.
+
+---
+
 ## [0.8.0] — 2026-07-11 · Chegarasiz oqim: landing to'liq ochiq uslubga o'tdi
 
 **Foydalanuvchi fikri asosida:** ark radiuslar kartalardan olib tashlandi, bo'lim orasidagi barcha "quti" fonlar yo'qotildi — hero'dagi ochiq-havodor his endi butun sahifada.

@@ -124,8 +124,8 @@ body {
   font-size: var(--fs-base);
   color: var(--text-secondary);
   line-height: 1.65;
+  /* background-attachment: fixed scroll'da har kadrni qayta chizdiradi — jank */
   background: var(--bg);
-  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
@@ -142,50 +142,48 @@ body {
   overflow: hidden;
 }
 
+/* Bitta xotirjam juftlik: yashil + amber (hero ritmi). Rang almashmaydi —
+   faqat sekin siljiydi. Blur radiusi kichraytirilgan: katta blur scroll'da
+   GPU'ni qiynab, silliqlikni buzardi. */
 .ambient-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(130px);
-  opacity: 0.5;
-  transition: background-color 1.5s ease-in-out, transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
-  will-change: transform, background-color;
+  filter: blur(100px);
+  opacity: 0.3;
+  transition: transform 2s ease-in-out;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .glow-1 {
-  top: -10%;
-  right: -5%;
-  width: 40vw;
-  height: 40vw;
-  background-color: #E2E8F0;
+  top: -8%;
+  right: -6%;
+  width: 32vw;
+  height: 32vw;
+  background-color: rgba(108, 162, 60, 0.4);
 }
 
 .glow-2 {
   bottom: -10%;
-  left: -5%;
-  width: 45vw;
-  height: 45vw;
-  background-color: #F1F5F9;
+  left: -6%;
+  width: 30vw;
+  height: 30vw;
+  background-color: rgba(245, 181, 58, 0.32);
 }
 
-/* Har bo'limda rang olami yumshoq almashadi — chegara yo'q, oqim bor.
-   Hero'dagi yashil-amber juftligi asos ritm. */
-body[data-theme="hero"] .glow-1 { background-color: rgba(108, 162, 60, 0.55); transform: translate(-5%, 10%); }
-body[data-theme="hero"] .glow-2 { background-color: rgba(245, 181, 58, 0.45); transform: translate(10%, -5%); }
+/* Bo'limlar orasida faqat yengil siljish — rang o'zgarmaydi */
+body[data-theme="hero"] .glow-1 { transform: translate(0, 0); }
+body[data-theme="events"] .glow-1 { transform: translate(-8%, 14%); }
+body[data-theme="about"] .glow-1 { transform: translate(-4%, 28%); }
+body[data-theme="projects"] .glow-1 { transform: translate(-12%, 16%); }
+body[data-theme="stats"] .glow-1 { transform: translate(-6%, 30%); }
+body[data-theme="news"] .glow-1 { transform: translate(0, 20%); }
 
-body[data-theme="events"] .glow-1 { background-color: rgba(23, 111, 142, 0.4); transform: translate(-12%, 25%); }
-body[data-theme="events"] .glow-2 { background-color: rgba(108, 162, 60, 0.35); transform: translate(15%, -12%); }
-
-body[data-theme="about"] .glow-1 { background-color: rgba(245, 181, 58, 0.5); transform: translate(-10%, 35%); }
-body[data-theme="about"] .glow-2 { background-color: rgba(244, 123, 46, 0.3); transform: translate(8%, -22%); }
-
-body[data-theme="projects"] .glow-1 { background-color: rgba(34, 55, 91, 0.3); transform: translate(-30%, 18%); }
-body[data-theme="projects"] .glow-2 { background-color: rgba(23, 111, 142, 0.35); transform: translate(28%, -15%); }
-
-body[data-theme="stats"] .glow-1 { background-color: rgba(108, 162, 60, 0.5); transform: translate(-15%, 42%); }
-body[data-theme="stats"] .glow-2 { background-color: rgba(46, 158, 91, 0.35); transform: translate(15%, -30%); }
-
-body[data-theme="news"] .glow-1 { background-color: rgba(23, 111, 142, 0.35); transform: translate(0, 15%); }
-body[data-theme="news"] .glow-2 { background-color: rgba(245, 181, 58, 0.4); transform: translate(0, -12%); }
+body[data-theme="events"] .glow-2 { transform: translate(8%, -8%); }
+body[data-theme="about"] .glow-2 { transform: translate(4%, -16%); }
+body[data-theme="projects"] .glow-2 { transform: translate(12%, -10%); }
+body[data-theme="stats"] .glow-2 { transform: translate(6%, -20%); }
+body[data-theme="news"] .glow-2 { transform: translate(0, -12%); }
 
 /* ===== CUSTOM SCROLLBAR ===== */
 html {
