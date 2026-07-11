@@ -6,6 +6,14 @@
 
 ---
 
+## [0.9.1] — 2026-07-11 · Aylanadigan yangiliklar qaytdi + navbar zichlashdi
+
+**Nima qilindi:**
+- **Yangiliklar aylanishi qaytdi** — eski hero slayderi ruhida, endi «So'nggi voqealar» bo'limidagi katta kartada: eng so'nggi 3 yangilik 6 soniyada yumshoq krossfeyd bilan almashadi, rasm ustida bosiladigan nuqtalar bor. O'ngdagi lenta esa keyingi 4 yangilikni ko'rsatadi (takrorlanish yo'q).
+- **Navbar bo'shliqlari yo'qotildi** — pill 1400px, ichki qator esa 1300px edi: har chetda 50px bo'sh joy shundan qolardi. Endi kontent pill chetlarigacha boradi; pill kengligi 1240px'ga ixchamlashdi.
+
+---
+
 ## [0.9.0] — 2026-07-11 · Navbar: bazadan boshqariladi, ixcham, login menyu ichida
 
 **Nima qilindi:**

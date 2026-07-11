@@ -5,7 +5,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - (2 * var(--nav-top)));
-  max-width: 1400px;
+  max-width: 1240px;
   height: var(--nav-h);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
@@ -33,10 +33,9 @@
 }
 
 .inner {
-  max-width: 1300px;
+  /* max-width YO'Q — kontent pill chetlarigacha boradi, bo'sh joy qolmaydi */
   height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(14px, 1.6vw, 22px);
   display: flex;
   align-items: center;
   justify-content: space-between;

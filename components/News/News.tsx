@@ -1,7 +1,8 @@
 "use client";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "motion/react";
+import { AnimatePresence, motion, type Variants } from "motion/react";
 import type { News as NewsItem } from "@prisma/client";
 import TextReveal from "@/components/ui/TextReveal";
 import styles from "./News.module.css";
@@ -20,15 +21,33 @@ const itemVariants: Variants = {
 };
 
 /**
- * "Digest" maketi — gazeta lentasi uslubi: chapda bitta katta bosh yangilik,
- * o'ngda ixcham gorizontal qatorlar. Loyiha/tadbir gridlaridan atayin farq
- * qiladi — har bo'lim o'z xarakteriga ega.
+ * "Digest" maketi: chapda aylanadigan bosh yangilik (eski hero slayderi
+ * ruhida — 6 soniyada almashadi), o'ngda ixcham lenta.
  */
 export default function News({ items }: { items: NewsItem[] }) {
-  const featured = items.find((n) => n.featured) ?? items[0];
-  const rest = items.filter((n) => n.id !== featured?.id).slice(0, 4);
+  // Bosh kartada eng so'nggi 3 ta aylanadi (featured belgilangani birinchi)
+  const flagged = items.find((n) => n.featured);
+  const pool = [
+    ...(flagged ? [flagged] : []),
+    ...items.filter((n) => n.id !== flagged?.id),
+  ].slice(0, 3);
+  const rest = items
+    .filter((n) => !pool.some((p) => p.id === n.id))
+    .slice(0, 4);
 
-  if (!featured) return null;
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (pool.length <= 1) return;
+    const timer = setInterval(
+      () => setCurrent((prev) => (prev + 1) % pool.length),
+      6000
+    );
+    return () => clearInterval(timer);
+  }, [pool.length]);
+
+  if (pool.length === 0) return null;
+  const active = pool[current];
 
   return (
     <section className={styles.news} id="yangiliklar">
@@ -58,31 +77,60 @@ export default function News({ items }: { items: NewsItem[] }) {
           viewport={{ once: true, amount: 0.1 }}
           className={styles.layout}
         >
-          {/* Bosh yangilik */}
+          {/* Aylanadigan bosh yangilik */}
           <motion.div variants={itemVariants}>
-            <Link href={`/yangiliklar/${featured.slug}`} className={styles.featured}>
-              <div className={styles.featuredImageWrap}>
-                <Image
-                  src={featured.image}
-                  alt={featured.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 55vw"
-                  className={styles.image}
-                />
-                <span className={`${styles.tag} ${featured.tagClass}`}>
-                  {featured.tag}
-                </span>
-              </div>
-              <div className={styles.featuredBody}>
-                <div className={styles.date}>{featured.date}</div>
-                <h3 className={styles.featuredTitle}>{featured.title}</h3>
-                {featured.excerpt && (
-                  <p className={styles.excerpt}>{featured.excerpt}</p>
-                )}
-                <span className={styles.readMore}>
-                  O&apos;qish <span className={styles.arrow}>→</span>
-                </span>
-              </div>
+            <Link href={`/yangiliklar/${active.slug}`} className={styles.featured}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className={styles.featuredInner}
+                >
+                  <div className={styles.featuredImageWrap}>
+                    <Image
+                      src={active.image}
+                      alt={active.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      className={styles.image}
+                    />
+                    <span className={`${styles.tag} ${active.tagClass}`}>
+                      {active.tag}
+                    </span>
+                  </div>
+                  <div className={styles.featuredBody}>
+                    <div className={styles.date}>{active.date}</div>
+                    <h3 className={styles.featuredTitle}>{active.title}</h3>
+                    {active.excerpt && (
+                      <p className={styles.excerpt}>{active.excerpt}</p>
+                    )}
+                    <span className={styles.readMore}>
+                      O&apos;qish <span className={styles.arrow}>→</span>
+                    </span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {pool.length > 1 && (
+                <div className={styles.dots}>
+                  {pool.map((item, i) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      aria-label={`${i + 1}-yangilik`}
+                      className={`${styles.dot}${i === current ? ` ${styles.dotActive}` : ""}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setCurrent(i);
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </Link>
           </motion.div>
 
