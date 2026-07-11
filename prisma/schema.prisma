@@ -241,3 +241,49 @@ model AuditLog {
   @@index([entity, entityId])
   @@index([createdAt])
 }
+
+// ===== TADBIRLAR (Events, TZ 9-bo'lim) =====
+model Event {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  type        String // Tanlov, Seminar, Forum, Uchrashuv, Sport, Volontyorlik, Boshqa
+  desc        String // qisqa tavsif (kartada)
+  content     String? // to'liq matn (paragraflar bo'sh qator bilan)
+  image       String?
+  location    String
+  mapUrl      String?
+  startsAt    DateTime
+  endsAt      DateTime?
+  organizer   String    @default("Toshkent shahar Kengashi")
+  partners    String?
+  capacity    Int       @default(0) // 0 — cheklanmagan
+  regOpen     Boolean   @default(true)
+  status      String    @default("E'lon qilingan") // E'lon qilingan, Yakunlangan, Bekor qilingan
+  results     String? // yakun: g'oliblar, xulosa
+  published   Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  registrations EventRegistration[]
+
+  @@index([startsAt])
+}
+
+// Tadbirga ro'yxatdan o'tganlar (TZ 9.2). Bitta telefon — bitta tadbirga bir marta.
+model EventRegistration {
+  id           String @id @default(cuid())
+  event        Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId      String
+  fullName     String
+  phone        String
+  telegram     String?
+  organization String? // OTM / harbiy qism / muassasa
+  note         String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([eventId, phone])
+  @@index([eventId, createdAt])
+}

@@ -6,6 +6,21 @@
 
 ---
 
+## [0.5.0] — 2026-07-11 · Tadbirlar moduli (TZ §9)
+
+**Nima qilindi:**
+- **Yangi `/tadbirlar` sahifasi** — bo'lajak va o'tgan tadbirlar, tur bo'yicha filtr (Tanlov, Seminar, Forum, Uchrashuv, Sport, Volontyorlik). Navbar'ga havola qo'shildi.
+- **Tadbir sahifasi** (`/tadbirlar/[slug]`) — banner, to'liq ma'lumot paneli (sana, joy + xarita havolasi, tashkilotchi, hamkorlar), band o'rinlar progress-bar'i, yakunlangan tadbirda natijalar bloki, Google uchun JSON-LD Event schema.
+- **Onlayn ro'yxatdan o'tish** — F.I.Sh., telefon, Telegram, OTM/muassasa, maxfiylik roziligi. Himoya: zod validatsiya, IP bo'yicha soatiga 10 ta cheklov, limit to'lganda avtomatik yopilish, bitta telefon bir tadbirga bir marta. Jonli tekshirildi: ro'yxatdan o'tish ✅, takror urinish rad etildi ✅, hisoblagich yangilandi ✅.
+- **Admin: Tadbirlar CRUD** — mavjud konfiguratsiya tizimiga qo'shildi, yangi `datetime` maydon turi bilan (sana-vaqt tanlash).
+- **Admin: Ishtirokchilar bo'limi** — har tadbir bo'yicha ro'yxat + **CSV yuklab olish** (Excel'da kirillcha to'g'ri ochiladi).
+- **Bosh sahifa Events bloki endi bazadan** — 3 ta eng yaqin tadbirni ko'rsatadi (avval qotib qolgan mock edi); tadbir bo'lmasa bo'lim yashirinadi.
+- Baza: `Event` + `EventRegistration` jadvallari (migratsiya `add_events`), seed'da 4 namunaviy tadbir.
+
+**Eslatma:** Tadbir qo'shish — Admin panel → Tadbirlar → «Yangi tadbir». «Nashr etilgan» belgilanmagunicha saytda ko'rinmaydi. Ishtirokchilar ro'yxati — Admin → Ishtirokchilar.
+
+---
+
 ## [0.4.0] — 2026-07-11 · PostgreSQL'ga ko'chish
 
 **Nima qilindi:**
@@ -84,5 +99,6 @@ npm run dev
 |---|---|
 | Baza | PostgreSQL 16 (Docker, port 5433), migratsiyalar bilan |
 | Admin | `/admin` — login `admin`, parol `.env` da |
+| Tadbirlar | ✅ To'liq ishlaydi: ro'yxat, filtr, ro'yxatdan o'tish, admin CRUD, CSV eksport |
 | Deploy | Hali yo'q — VPS/domen kutilmoqda (PLAN.md, ochiq savollar) |
-| Keyingi ish | Faza 1 qoldiqlari: fayl yuklash (1.6) yoki Dockerfile+CI (1.10); yoki Faza 2 — Tadbirlar moduli |
+| Keyingi ish | Fayl yuklash (1.6), Dockerfile+CI (1.10), yoki bosh sahifani TZ §5.2 ga moslash (shior + 3 CTA) |

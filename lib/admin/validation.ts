@@ -36,6 +36,15 @@ function schemaFor(field: Field): z.ZodTypeAny {
           (v) => v.startsWith("/") || /^https?:\/\//i.test(v),
           `${field.label}: manzil https:// yoki / bilan boshlanishi kerak`
         );
+    case "datetime":
+      // <input type="datetime-local"> dan "YYYY-MM-DDTHH:mm" keladi
+      return z
+        .string()
+        .refine(
+          (v) => !Number.isNaN(Date.parse(v)),
+          `${field.label}: sana-vaqt noto'g'ri`
+        )
+        .transform((v) => new Date(v));
     default:
       return z.string().max(MAX_TEXT, `${field.label}: matn juda uzun`);
   }

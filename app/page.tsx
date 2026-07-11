@@ -5,15 +5,16 @@ import Projects from "@/components/Projects/Projects";
 import News from "@/components/News/News";
 import Stats from "@/components/Stats/Stats";
 import SectionTheme from "@/components/ui/SectionTheme";
-import { getNews, getProjects, getStats } from "@/lib/queries";
+import { getNews, getProjects, getStats, getUpcomingEvents } from "@/lib/queries";
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const [news, projects, stats] = await Promise.all([
+  const [news, projects, stats, events] = await Promise.all([
     getNews(),
     getProjects(),
     getStats("full"),
+    getUpcomingEvents(3),
   ]);
 
   return (
@@ -23,7 +24,7 @@ export default async function Home() {
       </SectionTheme>
 
       <SectionTheme theme="events">
-        <Events />
+        <Events items={events} />
       </SectionTheme>
 
       <SectionTheme theme="about">

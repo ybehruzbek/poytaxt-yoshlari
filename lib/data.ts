@@ -12,6 +12,7 @@
 export const navLinks = [
   { href: "/tashkilot", label: "Biz haqimizda" },
   { href: "/faoliyat", label: "Yo'nalishlar" },
+  { href: "/tadbirlar", label: "Tadbirlar" },
   { href: "/loyihalar", label: "Loyihalar" },
   { href: "/yangiliklar", label: "Yangiliklar" },
   { href: "/hududlar", label: "Tumanlar" },

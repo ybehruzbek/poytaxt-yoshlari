@@ -107,6 +107,46 @@ export const getStats = cache(async (group: "full" | "mini") =>
   prisma.stat.findMany({ where: { group }, orderBy: { order: "asc" } })
 );
 
+// ===== TADBIRLAR =====
+/** Bo'lajak tadbirlar — bosh sahifa va ro'yxat tepasi uchun. */
+export const getUpcomingEvents = cache(async (limit?: number) =>
+  prisma.event.findMany({
+    where: {
+      published: true,
+      status: "E'lon qilingan",
+      startsAt: { gte: new Date() },
+    },
+    orderBy: { startsAt: "asc" },
+    take: limit,
+    include: { _count: { select: { registrations: true } } },
+  })
+);
+
+/** O'tgan/yakunlangan tadbirlar — arxiv bo'limi uchun. */
+export const getPastEvents = cache(async () =>
+  prisma.event.findMany({
+    where: {
+      published: true,
+      OR: [{ startsAt: { lt: new Date() } }, { status: { not: "E'lon qilingan" } }],
+    },
+    orderBy: { startsAt: "desc" },
+  })
+);
+
+export const getEventBySlug = cache(async (slug: string) =>
+  prisma.event.findFirst({
+    where: { slug, published: true },
+    include: { _count: { select: { registrations: true } } },
+  })
+);
+
+export const getEventSlugs = cache(async () =>
+  prisma.event.findMany({
+    where: { published: true },
+    select: { slug: true },
+  })
+);
+
 // ===== XARITA HUDUDLARI =====
 export const getMapRegions = cache(async () =>
   prisma.mapRegion.findMany({ orderBy: { createdAt: "asc" } })

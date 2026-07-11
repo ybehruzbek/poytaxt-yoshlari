@@ -1,0 +1,167 @@
+.page {
+  background: var(--bg-light, #f8fafc);
+  padding-bottom: clamp(60px, 8vw, 100px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: var(--sp-8, 32px);
+  align-items: start;
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  background: var(--bg);
+}
+
+.bannerImage {
+  object-fit: cover;
+}
+
+.body {
+  padding: clamp(24px, 4vw, 40px);
+}
+
+.badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.badge {
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--blue-pale, #dbeafe);
+  color: var(--blue-deep);
+}
+
+.badgeCancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badgeDone {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.paragraph {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.resultsBox {
+  margin-top: 28px;
+  padding: 24px;
+  border-radius: var(--radius-xs);
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.resultsTitle {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: #15803d;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5, 20px);
+  position: sticky;
+  top: 100px;
+}
+
+.infoCard,
+.regCard {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.infoTitle {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue-deep);
+  margin-bottom: 16px;
+}
+
+.infoList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.infoItem i {
+  width: 18px;
+  text-align: center;
+  color: var(--blue);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.infoItem a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.infoItem a:hover {
+  text-decoration: underline;
+}
+
+.capacityBar {
+  margin-top: 6px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.capacityFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--accent-orange) 100%);
+  transition: width 0.4s ease;
+}

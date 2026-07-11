@@ -1,32 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
-
-/**
- * Oddiy in-memory rate-limit: bitta IP dan soatiga ko'pi bilan 5 ta murojaat.
- * Ilova bitta jarayonda ishlaydi (standalone VPS) — yuklama oshsa Redis'ga
- * o'tiladi (PLAN.md, Faza 1). Turnstile captcha ham Faza 1 da qo'shiladi.
- */
-const WINDOW_MS = 60 * 60 * 1000;
-const MAX_PER_WINDOW = 5;
-const hits = new Map<string, number[]>();
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  if (recent.length >= MAX_PER_WINDOW) {
-    hits.set(ip, recent);
-    return true;
-  }
-  recent.push(now);
-  hits.set(ip, recent);
-  if (hits.size > 10_000) {
-    for (const [key, times] of hits) {
-      if (times.every((t) => now - t >= WINDOW_MS)) hits.delete(key);
-    }
-  }
-  return false;
-}
+import { isRateLimited, clientIp } from "@/lib/rate-limit";
 
 const appealSchema = z.object({
   ism: z.string().trim().min(2, "Ism juda qisqa").max(100, "Ism juda uzun"),
@@ -54,10 +29,9 @@ const appealSchema = z.object({
 
 export async function POST(req: Request) {
   try {
-    const ip =
-      (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() ||
-      "unknown";
-    if (isRateLimited(ip)) {
+    const ip = clientIp(req.headers);
+    // Turnstile captcha Faza 1 da qo'shiladi (PLAN.md)
+    if (isRateLimited("appeals", ip, { windowMs: 60 * 60 * 1000, max: 5 })) {
       return NextResponse.json(
         { error: "Juda ko'p murojaat yuborildi. Birozdan keyin qayta urinib ko'ring." },
         { status: 429 }

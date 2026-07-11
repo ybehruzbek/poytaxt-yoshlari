@@ -55,6 +55,84 @@ async function main() {
     return data;
   });
 
+  // ===== 1.5. TADBIRLAR =====
+  await seedTable("Tadbirlar", () => prisma.event.count(), async () => {
+    const day = 24 * 60 * 60 * 1000;
+    const at = (offsetDays: number, hour: number) => {
+      const d = new Date(Date.now() + offsetDays * day);
+      d.setHours(hour, 0, 0, 0);
+      return d;
+    };
+    const data = [
+      {
+        title: "Respublika Yoshlar Forumi",
+        type: "Forum",
+        desc: "Yilning eng yirik yoshlar tadbirida ishtirok eting. IT, tadbirkorlik va san'at yo'nalishlarida master-klasslar.",
+        content:
+          "Forum doirasida yoshlar siyosati, ta'lim va innovatsiyalar bo'yicha panel muhokamalar, taniqli spikerlar bilan uchrashuvlar hamda amaliy master-klasslar o'tkaziladi.\n\nIshtirok bepul, joylar soni cheklangan — oldindan ro'yxatdan o'ting.",
+        image: "https://picsum.photos/seed/youth-forum/1200/700",
+        location: "Toshkent, Yoshlar ijod saroyi",
+        startsAt: at(14, 10),
+        endsAt: at(14, 17),
+        capacity: 200,
+        regOpen: true,
+        status: "E'lon qilingan",
+        published: true,
+      },
+      {
+        title: "IT-startaplar tanlovi: final",
+        type: "Tanlov",
+        desc: "Eng yaxshi 10 ta yoshlar loyihasi investorlar oldida taqdimot qiladi. O'z loyihangiz bilan keling va ilhom oling.",
+        content:
+          "Final bosqichida hakamlar hay'ati va investorlar oldida 10 ta jamoa o'z loyihasini himoya qiladi. G'oliblarga grant va akseleratsiya dasturi taqdim etiladi.",
+        image: "https://picsum.photos/seed/startup-uz/1200/700",
+        location: "IT Park O'zbekiston",
+        startsAt: at(21, 14),
+        capacity: 50,
+        regOpen: true,
+        status: "E'lon qilingan",
+        published: true,
+      },
+      {
+        title: "Yashil kelajak: ko'kalamzorlashtirish aksiyasi",
+        type: "Volontyorlik",
+        desc: "Poytaxt yoshlari birlashib, shahar atrofini ko'kalamzorlashtirish aksiyasida ishtirok etamiz.",
+        content:
+          "Aksiya doirasida 1000 tup ko'chat ekiladi. Kerakli anjomlar tashkilotchilar tomonidan beriladi — o'zingiz bilan yaxshi kayfiyat olib keling!",
+        image: "https://picsum.photos/seed/eco-uz/1200/700",
+        location: "Botanika bog'i",
+        startsAt: at(35, 9),
+        capacity: 0,
+        regOpen: true,
+        status: "E'lon qilingan",
+        published: true,
+      },
+      {
+        title: "Zakovat intellektual o'yini: kuzgi mavsum",
+        type: "Uchrashuv",
+        desc: "An'anaviy Zakovat o'yinining kuzgi mavsumi yakunlandi — 24 ta jamoa qatnashdi.",
+        content:
+          "Kuzgi mavsumda poytaxtning 12 tumanidan 24 jamoa ishtirok etdi. Final o'yini keskin kechdi va bir savol farqi bilan hal bo'ldi.",
+        image: "https://picsum.photos/seed/zakovat/1200/700",
+        location: "Yoshlar markazi, katta zal",
+        startsAt: at(-20, 15),
+        capacity: 120,
+        regOpen: false,
+        status: "Yakunlangan",
+        results:
+          "1-o'rin — «Bilimdonlar» (Chilonzor). 2-o'rin — «Zukko» (Yunusobod). 3-o'rin — «Iqtidor» (Mirzo Ulug'bek).\n\nG'olib jamoa respublika bosqichiga yo'llanma oldi.",
+        published: true,
+      },
+    ];
+    for (const e of data) {
+      await prisma.event.create({
+        data: { ...e, slug: slugify(e.title) },
+      });
+    }
+    console.log(`  ✅ ${data.length} ta tadbir yaratildi`);
+    return data;
+  });
+
   // ===== 2. YANGILIKLAR =====
   await seedTable("Yangiliklar", () => prisma.news.count(), async () => {
     const data = [

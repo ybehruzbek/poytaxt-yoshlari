@@ -14,7 +14,8 @@ export type FieldType =
   | "number"
   | "checkbox"
   | "select"
-  | "url";
+  | "url"
+  | "datetime";
 
 export interface Field {
   name: string;
@@ -47,7 +48,52 @@ export interface ResourceDef {
 
 const TAG_CLASSES = ["tag-blue", "tag-green", "tag-orange"] as const;
 
+export const EVENT_TYPES = [
+  "Tanlov",
+  "Seminar",
+  "Forum",
+  "Uchrashuv",
+  "Sport",
+  "Volontyorlik",
+  "Boshqa",
+] as const;
+
+export const EVENT_STATUSES = [
+  "E'lon qilingan",
+  "Yakunlangan",
+  "Bekor qilingan",
+] as const;
+
 export const RESOURCES: ResourceDef[] = [
+  {
+    key: "tadbirlar",
+    label: "Tadbirlar",
+    singular: "tadbir",
+    icon: "fa-calendar-days",
+    titleField: "title",
+    slugFrom: "title",
+    orderBy: { startsAt: "desc" },
+    listColumns: ["title", "type", "startsAt", "status", "regOpen", "published"],
+    fields: [
+      { name: "title", label: "Nomi", type: "text", required: true },
+      { name: "slug", label: "Slug (URL)", type: "text", help: "Bo'sh qoldirsangiz nomdan avtomatik yasaladi." },
+      { name: "type", label: "Turi", type: "select", options: EVENT_TYPES, required: true },
+      { name: "desc", label: "Qisqa tavsif", type: "textarea", required: true, help: "Kartada ko'rinadi — 1-2 gap." },
+      { name: "content", label: "To'liq matn", type: "textarea", help: "Paragraflarni bo'sh qator bilan ajrating." },
+      { name: "image", label: "Banner rasmi", type: "url" },
+      { name: "location", label: "Manzil", type: "text", required: true },
+      { name: "mapUrl", label: "Google Maps havolasi", type: "url" },
+      { name: "startsAt", label: "Boshlanish vaqti", type: "datetime", required: true },
+      { name: "endsAt", label: "Tugash vaqti", type: "datetime" },
+      { name: "organizer", label: "Tashkilotchi", type: "text", required: true, help: "Masalan: Toshkent shahar Kengashi" },
+      { name: "partners", label: "Hamkorlar", type: "text", help: "Vergul bilan ajrating." },
+      { name: "capacity", label: "Ishtirokchilar limiti", type: "number", help: "0 — cheklanmagan" },
+      { name: "regOpen", label: "Ro'yxatdan o'tish ochiq", type: "checkbox" },
+      { name: "status", label: "Holat", type: "select", options: EVENT_STATUSES, required: true },
+      { name: "results", label: "Natijalar", type: "textarea", help: "Tadbir yakunida: g'oliblar, xulosa." },
+      { name: "published", label: "Nashr etilgan", type: "checkbox" },
+    ],
+  },
   {
     key: "yangiliklar",
     label: "Yangiliklar",

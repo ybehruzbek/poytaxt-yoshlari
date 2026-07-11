@@ -65,6 +65,18 @@ function FieldControl({
     );
   }
 
+  if (field.type === "datetime") {
+    return (
+      <input
+        id={id}
+        type="datetime-local"
+        name={field.name}
+        className={cls}
+        defaultValue={toDatetimeLocal(defaultValue)}
+      />
+    );
+  }
+
   return (
     <input
       id={id}
@@ -75,6 +87,15 @@ function FieldControl({
       defaultValue={(defaultValue as string | number) ?? ""}
     />
   );
+}
+
+/** Date → "YYYY-MM-DDTHH:mm" (datetime-local qiymati, lokal vaqtda). */
+function toDatetimeLocal(value: unknown): string {
+  if (!value) return "";
+  const d = value instanceof Date ? value : new Date(String(value));
+  if (Number.isNaN(d.getTime())) return "";
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 export default function ResourceForm({
@@ -88,10 +109,11 @@ export default function ResourceForm({
   const id = item ? String(item.id) : null;
   const [state, formAction] = useActionState<FormState, FormData>(saveResource, {});
 
-  // Checkbox'lar yangi yozuvda sukut bo'yicha yoqilgan bo'lsin (published).
+  // Checkbox'lar yangi yozuvda sukut bo'yicha yoqilgan bo'lsin.
   const defaultFor = (field: Field): unknown => {
     if (item) return item[field.name];
-    if (field.type === "checkbox") return field.name === "published";
+    if (field.type === "checkbox")
+      return field.name === "published" || field.name === "regOpen";
     return "";
   };
 

@@ -23,6 +23,15 @@ function renderCell(value: unknown) {
   if (value === null || value === undefined || value === "") {
     return <span className={styles.badgeOff}>—</span>;
   }
+  if (value instanceof Date) {
+    return value.toLocaleString("uz-UZ", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }
   return String(value);
 }
 

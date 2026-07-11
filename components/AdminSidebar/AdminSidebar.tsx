@@ -8,6 +8,7 @@ import { RESOURCES } from "@/lib/admin/resources";
 const FIXED_TOP = [
   { name: "Dashboard", icon: "fa-chart-pie", path: "/admin" },
   { name: "Murojaatlar", icon: "fa-envelope-open-text", path: "/admin/murojaatlar" },
+  { name: "Ishtirokchilar", icon: "fa-users", path: "/admin/ishtirokchilar" },
 ];
 
 const FIXED_BOTTOM = [
