@@ -6,6 +6,17 @@
 
 ---
 
+## [0.9.2] — 2026-07-11 · Footer qayta ishlandi: to'q navy, o'lik havolalar tuzatildi
+
+**Nima qilindi:**
+- **Footer fon rangi oqdan to'q navy'ga** (`--blue-deep`) — sayt hero'dan boshlanib, navy footer bilan "yopiladi"; yumshoq yashil glow va romb-ornament qatori hero bilan bitta vizual tilda.
+- **Logo oq kartachaga o'ralди** — logotipning matni och-ko'k, to'q fonda yo'qolib qolardi.
+- **Ijtimoiy tarmoq ikonkalari** — eski `translateY` sakrash-hover olib tashlandi, endi faqat rang o'zgaradi (yashilga to'ladi) — tugmalar tizimi bilan bir xil mantiq.
+- **2 ta o'lik havola tuzatildi**: «Maxfiylik siyosati» va «Foydalanish shartlari» `href="#"` edi — endi haqiqiy sahifalarga (`/maxfiylik-siyosati`, `/foydalanish-shartlari`) olib boradi, TZ §19.1 talabiga muvofiq placeholder matn bilan.
+- Footer navigatsiyasiga **«Tadbirlar»** havolasi qo'shildi (yangi bo'lim, ilgari yo'q edi).
+
+---
+
 ## [0.9.1] — 2026-07-11 · Aylanadigan yangiliklar qaytdi + navbar zichlashdi
 
 **Nima qilindi:**

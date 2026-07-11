@@ -144,6 +144,7 @@ export const footerNav = [
   { href: "/", label: "Bosh sahifa" },
   { href: "/tashkilot#tashkilot", label: "Tashkilot haqida" },
   { href: "/faoliyat#yonalishlar", label: "Yo'nalishlar" },
+  { href: "/tadbirlar", label: "Tadbirlar" },
   { href: "/faoliyat#loyihalar", label: "Loyihalar" },
   { href: "/axborot-markazi#yangiliklar", label: "Yangiliklar" },
   { href: "/axborot-markazi#galeriya", label: "Galeriya" },

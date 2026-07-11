@@ -12,9 +12,8 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      {/* Decorative top wave/gradient line */}
-      <div className={styles.gradientLine}></div>
-      
+      <div className={styles.glow} aria-hidden />
+
       <div className="container">
         <div className={styles.mainContent}>
           <div className={styles.brandCol}>
@@ -22,8 +21,8 @@ export default function Footer() {
               <Image
                 src={LOGO_URL}
                 alt="YI logotip"
-                width={140}
-                height={140}
+                width={130}
+                height={130}
                 className={styles.logo}
               />
             </div>
@@ -76,12 +75,16 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className={styles.ornament} aria-hidden>
+          <span /><span /><span /><span /><span />
+        </div>
+
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>&copy; {new Date().getFullYear()} O&apos;zbekiston Yoshlar Ittifoqi. Barcha huquqlar himoyalangan.</p>
           <div className={styles.legalLinks}>
-            <Link href="#">Maxfiylik siyosati</Link>
+            <Link href="/maxfiylik-siyosati">Maxfiylik siyosati</Link>
             <span className={styles.dot}></span>
-            <Link href="#">Foydalanish shartlari</Link>
+            <Link href="/foydalanish-shartlari">Foydalanish shartlari</Link>
           </div>
         </div>
       </div>
