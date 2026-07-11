@@ -6,6 +6,18 @@
 
 ---
 
+## [0.8.3] — 2026-07-11 · Tugmalar: minimal, faqat rang bilan ishlaydigan hover
+
+**Foydalanuvchi fikri asosida:** tugma hoverlar "sakraydigan" va notekis edi.
+
+**Nima qilindi:**
+- Barcha global tugmalardan (`btn-primary`, `btn-secondary`, `btn-view-all`, `nav-cta`, hero tugmalari) **ko'tarilish, scale va soya-sakrashlar olib tashlandi**.
+- Yangi tizim — faqat sokin rang o'tishlari (0.35s ease): primary navy→chuqur navy; secondary och-ko'k bir tonna quyuqlashadi; «Barchasi» konturli tugma hover'da yumshoq och-ko'kka to'ladi (faqat ichidagi strelka 4px siljiydi); bosishda yengil opacity.
+- Tadbir ro'yxatdan o'tish formasi tugmasi ham shu tizimga o'tdi (pill shakl).
+- Karta hoverlari (ko'tarilish) atayin qoldirildi — muammo tugmalarda edi; ichki sahifalardagi qolgan tugmalar ichki-sahifa dizayn bosqichida tekislanadi.
+
+---
+
 ## [0.8.2] — 2026-07-11 · Kartalar yakuniy: progress olib tashlandi, yangiliklar «digest»
 
 **Foydalanuvchi fikri asosida:**

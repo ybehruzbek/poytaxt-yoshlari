@@ -315,7 +315,9 @@ ul, ol {
   line-height: 1.7;
 }
 
-/* ===== UNIFIED BUTTON STYLES — Baraka pill shape ===== */
+/* ===== UNIFIED BUTTONS — minimal, faqat rang bilan ishlaydi =====
+   Hover'da ko'tarilish/scale/soya YO'Q — tekis, sokin rang o'tishlari.
+   Har tugmaning bitta aniq hover holati bor. */
 .btn-primary, .btn-secondary, .btn-view-all, .nav-cta, .btn-hero-primary, .btn-hero-secondary {
   display: inline-flex;
   align-items: center;
@@ -328,78 +330,68 @@ ul, ol {
   font-weight: 600;
   font-size: 15px;
   line-height: 1;
-  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
   text-decoration: none;
   cursor: pointer;
-  border: none;
   letter-spacing: 0.2px;
   white-space: nowrap;
 }
 
-/* Base Hover Effect — faqat haqiqiy kursorli qurilmalarda */
-@media (hover: hover) {
-  .btn-primary:hover, .btn-secondary:hover, .btn-view-all:hover, .nav-cta:hover, .btn-hero-primary:hover, .btn-hero-secondary:hover {
-    transform: translateY(-3px) scale(1.02);
-  }
-}
 .btn-primary:active, .btn-secondary:active, .btn-view-all:active, .nav-cta:active, .btn-hero-primary:active, .btn-hero-secondary:active {
-  transform: scale(0.97);
+  opacity: 0.85;
 }
 
-/* Primary Button */
+/* Primary — navy, hover'da chuqurlashadi */
 .btn-primary {
   background: var(--blue);
   color: var(--white);
-  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.2);
 }
 .btn-primary:hover {
   background: var(--blue-deep);
-  box-shadow: 0 12px 25px rgba(13, 59, 102, 0.3);
 }
 
-/* Secondary Button */
+/* Secondary — och ko'k yuza, hover'da bir tonna quyuqlashadi */
 .btn-secondary {
   background: var(--blue-pale);
   color: var(--blue);
-  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.05);
 }
 .btn-secondary:hover {
-  background: #DCE7F5;
-  box-shadow: 0 12px 25px rgba(13, 59, 102, 0.15);
+  background: #D9E4F4;
+  color: var(--blue-deep);
 }
 
-/* View All Button */
+/* View All — konturli, hover'da yumshoq to'ladi */
 .btn-view-all {
-  background: var(--white);
+  background: transparent;
   color: var(--blue-deep);
-  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.06);
-  border: 1px solid var(--border);
+  border-color: var(--border);
 }
 .btn-view-all:hover {
-  background: var(--blue-deep);
-  color: var(--white);
-  border-color: var(--blue-deep);
-  box-shadow: 0 12px 25px rgba(13, 59, 102, 0.15);
+  background: var(--blue-pale);
+  border-color: var(--blue-pale);
 }
 .btn-view-all i {
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  font-size: 13px;
+  transition: transform 0.35s ease;
 }
 .btn-view-all:hover i {
-  transform: translateX(6px) scale(1.1);
+  transform: translateX(4px);
 }
 
 /* Navbar CTA */
 .nav-cta {
   background: var(--blue-deep);
   color: var(--white);
-  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.2);
   padding: 12px 24px;
   min-height: 44px;
   font-size: 14px;
 }
 .nav-cta:hover {
   background: var(--blue);
-  box-shadow: 0 10px 20px rgba(13, 59, 102, 0.25);
 }
 
 /* Hero Primary */
@@ -408,25 +400,23 @@ ul, ol {
   color: var(--white);
   padding: 16px 32px;
   font-size: 16px;
-  box-shadow: none;
 }
 .btn-hero-primary:hover {
   background: var(--blue-deep);
-  transform: translateY(-2px);
 }
 
 /* Hero Secondary */
 .btn-hero-secondary {
   background: transparent;
   color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.8);
   padding: 16px 32px;
   font-size: 16px;
 }
 .btn-hero-secondary:hover {
   background: var(--white);
   color: var(--blue-deep);
-  transform: translateY(-2px);
+  border-color: var(--white);
 }
 
 /* ===== UTILITY CLASSES ===== */
