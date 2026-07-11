@@ -6,6 +6,18 @@
 
 ---
 
+## [0.9.4] — 2026-07-11 · Singan havolalar tuzatildi, FAQ bo'limi qo'shildi
+
+**Sayt bo'ylab link auditi o'tkazildi (Paket 1):**
+- **4 ta singan mega-menyu havolasi tuzatildi**: `/faoliyat/grantlar` (bunday yo'nalish yo'q edi) → «Tadbirlar» havolasi bilan almashtirildi; `/faoliyat/talabalar` → to'g'ri slug `/faoliyat/talaba-yoshlari`; mavjud bo'lmagan `/axborot-markazi/video` va `/axborot-markazi/press-reliz` → bitta «Media markaz» (`/axborot-markazi`) havolasiga birlashtirildi.
+- **5 ta ishlamaydigan anchor tuzatildi**: footer'dagi `/tashkilot#tashkilot`, `#hujjatlar`, `#rahbariyat` endi to'g'ridan-to'g'ri sahifalarga boradi; `/faoliyat#yonalishlar` va `#loyihalar` uchun faoliyat sahifasiga mos `id` lar qo'shildi.
+- **Yangi FAQ bo'limi** — `/murojaat#savol-javob` havolasi bor edi, bo'limning o'zi yo'q edi. 6 savolli accordion qo'shildi (`components/Faq/`): server komponent, `<details>` asosida — JS talab qilmaydi, landing dizayn tilida (`.section-label`, tokenlar).
+- **O'lik kod o'chirildi**: `components/CTA/` hech qayerda ishlatilmasdi (ichida `href="#"` placeholder ham bor edi).
+
+**Eslatma:** ijtimoiy tarmoq havolalari (Telegram/Instagram/YouTube/Facebook) hali ham `#` — buyurtmachidan rasmiy sahifa URL'lari kutilmoqda.
+
+---
+
 ## [0.9.3] — 2026-07-11 · Footer logo oq siluэt + yangiliklar lentasi to'ldirildi
 
 **Foydalanuvchi fikri asosida:**

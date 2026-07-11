@@ -39,9 +39,9 @@ export const megaMenuCategories = [
     links: [
       { href: "/faoliyat", label: "Barcha yo'nalishlar" },
       { href: "/loyihalar", label: "Asosiy loyihalar" },
-      { href: "/faoliyat/grantlar", label: "Grantlar va tanlovlar" },
+      { href: "/tadbirlar", label: "Tadbirlar" },
       { href: "/faoliyat/volontyorlik", label: "Volontyorlik" },
-      { href: "/faoliyat/talabalar", label: "Talabalar uchun" },
+      { href: "/faoliyat/talaba-yoshlari", label: "Talabalar uchun" },
     ]
   },
   {
@@ -49,8 +49,7 @@ export const megaMenuCategories = [
     links: [
       { href: "/yangiliklar", label: "Barcha yangiliklar" },
       { href: "/galereya", label: "Fotogalereya" },
-      { href: "/axborot-markazi/video", label: "Videolar" },
-      { href: "/axborot-markazi/press-reliz", label: "OAV uchun" },
+      { href: "/axborot-markazi", label: "Media markaz" },
     ]
   },
   {
@@ -126,6 +125,35 @@ export const appealGuarantees = [
   { icon: "fa-circle-check", iconBg: "#FEF3C7", iconColor: "#D97706", title: "Natijaga yo'naltirilgan", desc: "Har bir murojaat amaliy natijaga erishishga qaratiladi." },
 ] as const;
 
+// ===== FAQ (Ko'p beriladigan savollar) =====
+// Murojaat jarayoni haqidagi doimiy tushuntirishlar — sahifa tuzilmasining qismi.
+export const faqItems = [
+  {
+    q: "Murojaatimga qancha vaqtda javob berasiz?",
+    a: "Har bir murojaat ro'yxatga olinadi va mas'ul xodimga biriktiriladi. Dastlabki aloqa 3 ish kuni ichida, yakuniy javob esa murojaat murakkabligiga qarab 15 kungacha bo'lgan muddatda beriladi.",
+  },
+  {
+    q: "Ittifoqqa a'zo bo'lish uchun nima qilishim kerak?",
+    a: "Murojaat formasida «Tashabbus» turini tanlab, o'zingiz haqingizda qisqacha yozing — tumaningizdagi bo'lim mas'ul xodimi siz bilan bog'lanadi va a'zolik jarayonini tushuntiradi.",
+  },
+  {
+    q: "Loyiha yoki g'oyamni qanday taqdim etaman?",
+    a: "Formada «Taklif» turini tanlab, g'oyangizni qisqacha bayon qiling. Loyihangiz ekspertlar tomonidan ijtimoiy ahamiyati bo'yicha ko'rib chiqiladi va natija haqida sizga xabar beriladi.",
+  },
+  {
+    q: "Tadbirlarga qatnashish pullikmi?",
+    a: "Yo'q, Yoshlar Ittifoqi tashkil etadigan tadbirlar yoshlar uchun bepul. Ayrim tadbirlarda o'rinlar soni cheklangan bo'ladi — shuning uchun tadbir sahifasida oldindan ro'yxatdan o'ting.",
+  },
+  {
+    q: "Yuborgan ma'lumotlarim kimga ko'rinadi?",
+    a: "Murojaatingiz faqat uni ko'rib chiqadigan mas'ul xodimlarga ko'rinadi va maxfiylik siyosatiga muvofiq qayta ishlanadi. Ma'lumotlar uchinchi shaxslarga berilmaydi.",
+  },
+  {
+    q: "Tumanimdagi bo'lim bilan qanday bog'lanaman?",
+    a: "«Hududlar» sahifasida barcha tuman bo'limlari va ularning yetakchilari ko'rsatilgan. O'z tumaningizni tanlab, bevosita mahalliy bo'lim bilan bog'lanishingiz mumkin.",
+  },
+] as const;
+
 // ===== CONTACT INFO =====
 export const contactInfoItems = [
   {
@@ -142,7 +170,7 @@ export const contactInfoItems = [
 // ===== FOOTER =====
 export const footerNav = [
   { href: "/", label: "Bosh sahifa" },
-  { href: "/tashkilot#tashkilot", label: "Tashkilot haqida" },
+  { href: "/tashkilot", label: "Tashkilot haqida" },
   { href: "/faoliyat#yonalishlar", label: "Yo'nalishlar" },
   { href: "/tadbirlar", label: "Tadbirlar" },
   { href: "/faoliyat#loyihalar", label: "Loyihalar" },
@@ -151,10 +179,10 @@ export const footerNav = [
 ] as const;
 
 export const footerResources = [
-  { href: "/tashkilot#hujjatlar", label: "Hujjatlar" },
+  { href: "/hujjatlar", label: "Hujjatlar" },
   { href: "/murojaat#murojaat", label: "Murojaat" },
   { href: "/hududlar#tumanlar", label: "Tumanlar" },
-  { href: "/tashkilot#rahbariyat", label: "Rahbariyat" },
+  { href: "/rahbariyat", label: "Rahbariyat" },
   { href: "/murojaat#aloqa", label: "Aloqa" },
 ] as const;
 

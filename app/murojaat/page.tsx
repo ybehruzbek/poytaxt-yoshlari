@@ -1,5 +1,6 @@
 import Appeals from "@/components/Appeals/Appeals";
 import Contact from "@/components/Contact/Contact";
+import Faq from "@/components/Faq/Faq";
 import SectionTheme from "@/components/ui/SectionTheme";
 import { getDistricts } from "@/lib/queries";
 
@@ -17,6 +18,10 @@ export default async function MurojaatPage() {
     <div style={{ paddingTop: "70px" }}>
       <SectionTheme theme="appeals">
         <Appeals districtNames={districts.map((d) => d.name)} />
+      </SectionTheme>
+
+      <SectionTheme theme="about">
+        <Faq />
       </SectionTheme>
 
       <SectionTheme theme="contact">

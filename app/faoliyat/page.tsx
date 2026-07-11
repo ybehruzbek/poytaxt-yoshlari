@@ -58,7 +58,7 @@ export default async function FaoliyatPage() {
       </section>
 
       {/* ===== 2. BENTO DIRECTIONS ===== */}
-      <section className={styles.bentoSection}>
+      <section className={styles.bentoSection} id="yonalishlar">
         <div className="container">
           <div className={styles.bentoGrid}>
             {directions.map((dir, i) => (
@@ -127,7 +127,7 @@ export default async function FaoliyatPage() {
       </section>
 
       {/* ===== 4. PROJECTS LIST ===== */}
-      <section className={styles.projectsSection}>
+      <section className={styles.projectsSection} id="loyihalar">
         <div className="container">
           <ScrollReveal>
             <div className={styles.sectionHeader}>
