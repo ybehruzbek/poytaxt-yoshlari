@@ -107,6 +107,15 @@ export const getStats = cache(async (group: "full" | "mini") =>
   prisma.stat.findMany({ where: { group }, orderBy: { order: "asc" } })
 );
 
+// ===== NAVBAR MENYUSI =====
+export const getNavLinks = cache(async () =>
+  prisma.navLink.findMany({
+    where: { visible: true },
+    orderBy: { order: "asc" },
+    select: { label: true, href: true },
+  })
+);
+
 // ===== TADBIRLAR =====
 /** Bo'lajak tadbirlar — bosh sahifa va ro'yxat tepasi uchun. */
 export const getUpcomingEvents = cache(async (limit?: number) =>

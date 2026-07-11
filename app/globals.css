@@ -87,7 +87,7 @@
   --gutter: clamp(20px, 3vw, 28px);
 
   /* Navbar balandligi — hero padding-top shu yerdan hisoblanadi */
-  --nav-h: 64px;
+  --nav-h: 58px;
   --nav-top: 12px;
 
   /* Easing */
@@ -98,8 +98,8 @@
 
 @media (min-width: 769px) {
   :root {
-    --nav-h: 80px;
-    --nav-top: 24px;
+    --nav-h: 66px;
+    --nav-top: 20px;
   }
 }
 

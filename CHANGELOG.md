@@ -6,6 +6,17 @@
 
 ---
 
+## [0.9.0] — 2026-07-11 · Navbar: bazadan boshqariladi, ixcham, login menyu ichida
+
+**Nima qilindi:**
+- **Navbar havolalari endi bazadan** — admin panelda yangi **«Menyu»** bo'limi: nom, havola, tartib raqami, ko'rinadi/yo'q. Ko'rinadigan birinchi 5 tasi navbar qatorida chiqadi, tartibni sudrab emas, raqam bilan boshqarasiz. (Yangi `NavLink` jadvali, migratsiya `add_nav_links`.)
+- **Balandlik ixchamlashdi**: desktop 80→66px, mobil 64→58px; logo mosravishda kichraydi.
+- **«Tizimga kirish» asosiy qatordan olib tashlandi** — endi burger-menyu ichida, kontakt bloki ostida sokin kulrang havola (hover'da navy). Asosiy qator endi faqat: logo · havolalar · til · burger.
+
+**Eslatma:** menyuga yangi havola qo'shish — Admin → Menyu → «Yangi havola». Dev serverda yangi jadval qo'shilgandan keyin server qayta ishga tushirilishi kerak (eski Prisma klienti xotirada qoladi).
+
+---
+
 ## [0.8.3] — 2026-07-11 · Tugmalar: minimal, faqat rang bilan ishlaydigan hover
 
 **Foydalanuvchi fikri asosida:** tugma hoverlar "sakraydigan" va notekis edi.

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import BackgroundController from "@/components/ui/BackgroundController";
+import { getNavLinks } from "@/lib/queries";
 
 // Sarlavhalar — Jost (geometrik grotesk, baraka.gov.uz sarlavha shrifti;
 // kirillchasi bor — 4 til rejasi uchun ham mos)
@@ -48,11 +49,13 @@ export const viewport: Viewport = {
   themeColor: "#0F2547",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navLinks = await getNavLinks();
+
   return (
     <html lang="uz" className={`${jost.variable} ${inter.variable}`}>
       <head>
@@ -67,7 +70,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <BackgroundController />
-          <Navbar />
+          <Navbar links={navLinks} />
           <main>{children}</main>
           <Footer />
         </ThemeProvider>

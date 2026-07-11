@@ -55,6 +55,27 @@ async function main() {
     return data;
   });
 
+  // ===== 1.4. NAVBAR MENYUSI =====
+  await seedTable("Menyu", () => prisma.navLink.count(), async () => {
+    const data = [
+      { label: "Biz haqimizda", href: "/tashkilot", order: 10 },
+      { label: "Yo'nalishlar", href: "/faoliyat", order: 20 },
+      { label: "Tadbirlar", href: "/tadbirlar", order: 30 },
+      { label: "Loyihalar", href: "/loyihalar", order: 40 },
+      { label: "Yangiliklar", href: "/yangiliklar", order: 50 },
+      { label: "Tumanlar", href: "/hududlar", order: 60 },
+      { label: "Rahbariyat", href: "/rahbariyat", order: 70 },
+      { label: "Yetakchilar", href: "/yetakchilar", order: 80 },
+      { label: "Hujjatlar", href: "/hujjatlar", order: 90 },
+      { label: "Galereya", href: "/galereya", order: 100 },
+    ];
+    for (const link of data) {
+      await prisma.navLink.create({ data: link });
+    }
+    console.log(`  ✅ ${data.length} ta menyu havolasi yaratildi`);
+    return data;
+  });
+
   // ===== 1.5. TADBIRLAR =====
   await seedTable("Tadbirlar", () => prisma.event.count(), async () => {
     const day = 24 * 60 * 60 * 1000;

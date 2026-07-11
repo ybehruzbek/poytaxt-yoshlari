@@ -66,6 +66,21 @@ export const EVENT_STATUSES = [
 
 export const RESOURCES: ResourceDef[] = [
   {
+    key: "menyu",
+    label: "Menyu",
+    singular: "havola",
+    icon: "fa-bars",
+    titleField: "label",
+    orderBy: { order: "asc" },
+    listColumns: ["label", "href", "order", "visible"],
+    fields: [
+      { name: "label", label: "Nomi", type: "text", required: true },
+      { name: "href", label: "Havola (URL)", type: "text", required: true, help: "Masalan: /tadbirlar" },
+      { name: "order", label: "Tartib raqami", type: "number", help: "Kichigi birinchi. Ko'rinadigan birinchi 5 tasi navbar qatorida chiqadi." },
+      { name: "visible", label: "Ko'rinadi", type: "checkbox" },
+    ],
+  },
+  {
     key: "tadbirlar",
     label: "Tadbirlar",
     singular: "tadbir",

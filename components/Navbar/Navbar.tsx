@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-import { megaMenuCategories, LOGO_URL, navLinks } from "@/lib/data";
+import { megaMenuCategories, LOGO_URL } from "@/lib/data";
 
 const LANGS = ["O'zbekcha", "Русский", "English"] as const;
 const LANG_CODES: Record<string, string> = {
@@ -14,7 +14,12 @@ const LANG_CODES: Record<string, string> = {
   English: "EN",
 };
 
-export default function Navbar() {
+export interface NavLinkItem {
+  label: string;
+  href: string;
+}
+
+export default function Navbar({ links }: { links: NavLinkItem[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState("O'zbekcha");
@@ -63,8 +68,9 @@ export default function Navbar() {
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
-  // We only show a subset of links in the center navbar to avoid crowding
-  const centerLinks = navLinks.slice(0, 5);
+  // Tiqilib qolmasligi uchun markazda faqat birinchi 5 ta havola.
+  // Ro'yxat bazadan keladi — admin panel > Menyu bo'limida boshqariladi.
+  const centerLinks = links.slice(0, 5);
 
   if (pathname.startsWith("/admin")) return null;
 
@@ -137,11 +143,6 @@ export default function Navbar() {
             )}
           </div>
 
-          <Link href="/admin/login" className={`nav-cta ${styles.loginBtn}`}>
-            <i className="fas fa-user-circle" />
-            <span className={styles.loginLabel}>Tizimga kirish</span>
-          </Link>
-          
           <button
             className={styles.menuToggleBtn}
             onClick={toggleMenu}
@@ -207,6 +208,10 @@ export default function Navbar() {
                   <a href="#" aria-label="Instagram" className={styles.socialLink}><i className="fab fa-instagram" /></a>
                   <a href="#" aria-label="Facebook" className={styles.socialLink}><i className="fab fa-facebook-f" /></a>
                 </div>
+
+                <Link href="/admin/login" onClick={closeMenu} className={styles.menuLogin}>
+                  <i className="fas fa-user-circle" /> Tizimga kirish
+                </Link>
               </div>
             </div>
           </div>

@@ -18,6 +18,7 @@ export interface Delegate {
 }
 
 const DELEGATES: Record<string, unknown> = {
+  menyu: prisma.navLink,
   tadbirlar: prisma.event,
   yangiliklar: prisma.news,
   loyihalar: prisma.project,

@@ -242,6 +242,20 @@ model AuditLog {
   @@index([createdAt])
 }
 
+// ===== NAVBAR MENYUSI =====
+// Yuqori menyu havolalari — admin panelda boshqariladi.
+// Birinchi 5 ta ko'rinadigan havola navbar qatorida chiqadi.
+model NavLink {
+  id      String  @id @default(cuid())
+  label   String
+  href    String
+  order   Int     @default(0)
+  visible Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // ===== TADBIRLAR (Events, TZ 9-bo'lim) =====
 model Event {
   id          String    @id @default(cuid())

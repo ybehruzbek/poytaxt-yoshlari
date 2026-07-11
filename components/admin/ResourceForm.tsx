@@ -113,7 +113,11 @@ export default function ResourceForm({
   const defaultFor = (field: Field): unknown => {
     if (item) return item[field.name];
     if (field.type === "checkbox")
-      return field.name === "published" || field.name === "regOpen";
+      return (
+        field.name === "published" ||
+        field.name === "regOpen" ||
+        field.name === "visible"
+      );
     return "";
   };
 
