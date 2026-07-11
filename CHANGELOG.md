@@ -6,6 +6,46 @@
 
 ---
 
+## [0.9.10] — 2026-07-11 · Naqsh-kit haqiqiy girih fayllari bilan almashtirildi
+
+**Muammo:** Paket 6'da qo'lda chizilgan "naqsh-yulduz"/"naqsh-romb"/"naqsh-panjara"
+aslida girih yoki o'zbek naqsh qurilish qoidalariga asoslanmagan, shunchaki
+umumiy geometrik shakllar edi (foydalanuvchi to'g'ri payqadi — "haqiqiy
+o'zbekona naqshlar emas"). O'zim qayta qurishga urinib ko'rdim (ikki
+bir-biriga qo'yilgan kvadrat = haqiqiy girih yulduz konstruksiyasi;
+36°/144° girih rombi) — birinchisi to'g'ri chiqdi, lekin "bodom" va
+"offset romb" urinishlari o'zim tekshirganda buzuq chiqdi (brauzerda
+skrinshot bilan tasdiqladim, ular ishlatilmadi).
+
+**Yechim:** Foydalanuvchi 3 ta professional, haqiqiy girih SVG fayl berdi
+(`public/pattern/`):
+- **`girih-tile.svg`** (asli `s2.svg`, 2.8MB → svgo bilan 1.7MB'ga
+  optimallashtirildi) — Registan uslubidagi o'zaro kesishgan interlaced
+  strapwork tessellatsiya. Fon to'ldirilgan rangi (`fill:#79bcd7`) olib
+  tashlandi, faqat oq strapwork qoldirildi — endi `mask-image` +
+  `currentColor` texnikasi bilan istalgan rangga moslashadi.
+- **`rozetka.svg`** (asli `ss.svg`, 40KB) — bitta o'nqirrali girih
+  gul-medalyon, markaziy motiv sifatida (`.naqsh-rozetka` klassi).
+- **`footer.svg`** (171KB) — gorizontal yulduz-zanjir lentasi, footer
+  ornamenti uchun tayyor (o'z rangi/opacity'si bilan).
+
+**O'zgargan joylar:**
+- `.naqsh-yulduz` endi `girih-tile.svg`ga ishora qiladi (data-URI o'rniga
+  `url("/pattern/...")` — fayl hajmi tufayli endi tashqi so'rov, brauzer
+  keshlaydi). 404/error sahifalari avtomatik yangi naqshni oldi.
+- Footer'dagi qo'lda yasalgan 5 ta rangli nuqta ornament o'chirildi,
+  o'rniga haqiqiy `footer.svg` lentasi (`background-image`, chunki fayl
+  o'z rangi/opacity'sini o'zida saqlaydi — mask texnikasi kerak emas).
+- Ishlatilmagan/tasdiqlanmagan `.naqsh-romb`, `.naqsh-panjara`,
+  `.naqsh-burchak` klasslari globals.css'dan olib tashlandi.
+
+**Eslatma:** `girih-tile.svg` 1.7MB — bitta murakkab strapwork asar
+uchun katta, lekin faqat tanlangan "wow" joylarda ishlatiladi va birinchi
+yuklanishdan keyin brauzer keshida qoladi. Production'da gzip/brotli bilan
+haqiqiy tarmoq hajmi ancha kichik bo'ladi.
+
+---
+
 ## [0.9.9] — 2026-07-11 · Naqsh poydevori + real a11y/UX tuzatishlar (Paket 6)
 
 **Yangi naqsh-kit — o'zbek girih naqshlarini fon teksturasi sifatida ishlatish

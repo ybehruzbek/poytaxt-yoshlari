@@ -136,29 +136,18 @@
   width: 14px;
 }
 
-/* Milliy naqsh — hero bilan bitta til, sayt shu bilan "yopiladi" */
+/* Milliy naqsh — girih yulduz-zanjir lentasi (public/pattern/footer.svg),
+   sayt shu bilan "yopiladi". Fayl o'z rangi/opacity'sini o'zida saqlaydi. */
 .ornament {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  height: 32px;
   margin-bottom: 28px;
   position: relative;
   z-index: 1;
+  background-image: url('/pattern/footer.svg');
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 32px;
 }
-
-.ornament span {
-  width: 7px;
-  height: 7px;
-  transform: rotate(45deg);
-  border-radius: 2px;
-  opacity: 0.7;
-}
-
-.ornament span:nth-child(1) { background: var(--green); }
-.ornament span:nth-child(2) { background: var(--amber); }
-.ornament span:nth-child(3) { background: var(--teal); }
-.ornament span:nth-child(4) { background: var(--accent-orange); }
-.ornament span:nth-child(5) { background: var(--green); }
 
 .bottomBar {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
