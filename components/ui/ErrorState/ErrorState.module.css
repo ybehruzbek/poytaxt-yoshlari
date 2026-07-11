@@ -1,0 +1,61 @@
+.wrap {
+  --naqsh-opacity: 0.045;
+  color: var(--blue-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: var(--sp-16) var(--sp-6);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 460px;
+}
+
+.code {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(72px, 11vw, 130px);
+  font-weight: 800;
+  color: var(--blue-deep);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--sp-4);
+}
+
+.iconWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-pill);
+  background: var(--blue-pale);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto var(--sp-6);
+}
+
+.title {
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--blue-deep);
+  margin-bottom: var(--sp-3);
+}
+
+.message {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--sp-8);
+}
+
+.actions {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}

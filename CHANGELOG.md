@@ -6,6 +6,49 @@
 
 ---
 
+## [0.9.9] — 2026-07-11 · Naqsh poydevori + real a11y/UX tuzatishlar (Paket 6)
+
+**Yangi naqsh-kit — o'zbek girih naqshlarini fon teksturasi sifatida ishlatish
+tizimi (`app/globals.css`):**
+- `.naqsh-yulduz` (sakkiz qirrali yulduz to'ri), `.naqsh-romb`, `.naqsh-panjara`,
+  `.naqsh-burchak` — barchasi `mask-image` bilan chiziladi, rangi elementning
+  `color` xususiyatidan (currentColor) keladi, shuning uchun hech qanday hex
+  yozilmaydi va istalgan fonga moslashadi. Faqat dekorativ fon, opacity past.
+- `.divider-romb` — footer ornamentining bir rangli, ingichka varianti;
+  endi **`PageHeader`ning har bir sahifasida** sarlavha ostida chiqadi
+  (30+ sahifa avtomatik yangilandi, bitta joyda o'zgartirilgani uchun).
+
+**Real accessibility bug tuzatildi:**
+- **`framer-motion` animatsiyalari (TextReveal — har bir sahifa sarlavhasi,
+  Stats) OS darajasidagi "harakatni kamaytirish" sozlamasini butunlay
+  e'tiborsiz qoldirardi.** `ScrollReveal` buni JS orqali o'zi tekshirardi,
+  lekin `motion/react` animatsiyalari uchun `MotionConfig` wrapper yo'q edi.
+  `providers/ThemeProvider.tsx`ga `<MotionConfig reducedMotion="user">`
+  qo'shildi — endi butun sayt bo'ylab bitta joydan hal qilinadi.
+
+**Soxta UI olib tashlandi:**
+- **Til almashtirgich (UZ/RU/EN)** navbardan olib tashlandi — bosilganda
+  faqat yorliq o'zgarardi, hech qanday tarjima ishlamasdi (4-til rejasi
+  hali Faza 6, TZ §14). Foydalanuvchini chalg'itish o'rniga to'liq
+  yashirildi; real tarjima qo'shilgach qaytariladi.
+
+**Brendlangan 404/500 va yuklanish holatlari:**
+- `not-found.tsx` va `error.tsx` yangi ulashiladigan `ErrorState`
+  komponentiga o'tdi — naqsh-yulduz fon, izchil token-asosli tipografika
+  (ilgari qo'lda yozilgan inline style obyektlari edi).
+- **18 ta `loading.tsx`** qo'shildi (barcha async DB-fetch qiluvchi
+  sahifalarga: ro'yxat sahifalarida karta-to'r skeleton, detail
+  sahifalarda maqola skeleton). Yangi `Skeleton`/`PageSkeleton`
+  komponentlari — shimmer animatsiyasi `prefers-reduced-motion`ni
+  hurmat qiladi. Streaming SSR orqali tekshirildi: sahifa 3+ soniya
+  kutsa ham, birinchi bayt ichida skeleton keladi (oq ekran yo'q).
+
+**Eslatma:** `tashkilot/missiya` va `tashkilot/tarix` sahifalari async
+DB-fetch qilmaydi (statik kontent) — `loading.tsx` ularga ta'sir
+qilmasdi, shuning uchun qo'shilmadi.
+
+---
+
 ## [0.9.8] — 2026-07-11 · Huquqiy sahifalar kontenti yozildi (Paket 5)
 
 **`/maxfiylik-siyosati` va `/foydalanish-shartlari` — "tayyorlanmoqda" placeholder

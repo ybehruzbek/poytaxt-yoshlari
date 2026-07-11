@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
+import { MotionConfig } from "motion/react";
 
 export type Theme = "hero" | "about" | "directions" | "projects" | "news" | "leadership" | "youthleaders" | "documents" | "gallery" | "appeals" | "contact" | "default" | "events" | "stats";
 
@@ -16,7 +17,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
+      {/* framer-motion animatsiyalari (TextReveal, Stats va h.k.) OS darajasidagi
+          "harakatni kamaytirish" sozlamasini hurmat qilishi uchun — ScrollReveal
+          buni JS orqali o'zi tekshiradi, lekin motion/react animatsiyalari buni
+          shu wrapper bo'lmasa butunlay e'tiborsiz qoldiradi. */}
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </ThemeContext.Provider>
   );
 }

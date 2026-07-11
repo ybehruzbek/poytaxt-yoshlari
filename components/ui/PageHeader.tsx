@@ -41,6 +41,9 @@ export default function PageHeader({ label, title, description, breadcrumbs }: P
       <div className="section-label">{label}</div>
       <TextReveal as="h1" text={title} className={styles.title} />
       {description && <p className={styles.description}>{description}</p>}
+      <div className="divider-romb" aria-hidden="true">
+        <span /><span /><span />
+      </div>
       </div>
     </header>
   );

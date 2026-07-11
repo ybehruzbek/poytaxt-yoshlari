@@ -114,88 +114,6 @@
   gap: 20px;
 }
 
-/* ================= LANG SWITCHER ================= */
-.langSwitchWrapper {
-  position: relative;
-  margin-right: 8px;
-  flex-shrink: 0;
-}
-
-.langSwitch {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 12px;
-  min-height: 44px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-  transition: all 0.2s ease;
-  user-select: none;
-}
-
-/* Keng ekranda to'liq nom, tor ekranda "UZ / RU / EN" */
-.langShort { display: none; }
-
-@media (max-width: 900px) {
-  .langFull { display: none; }
-  .langShort { display: inline; font-weight: 600; letter-spacing: 0.5px; }
-  .langSwitch { padding: 10px; }
-}
-
-.langSwitch:hover, .langOpen {
-  background: var(--gray);
-}
-
-.langIcon {
-  font-size: 10px;
-  transition: transform 0.2s ease;
-}
-
-.langIconOpen {
-  transform: rotate(180deg);
-}
-
-.langDropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  margin-top: 4px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  min-width: 70px;
-}
-
-.langOption {
-  padding: 8px 12px;
-  background: transparent;
-  border: none;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.langOption:hover {
-  background: var(--gray);
-  color: var(--blue);
-}
-
-.langActive {
-  color: var(--blue);
-  background: var(--blue-pale);
-}
-
 /* ================= LOGIN BUTTON (base: globals .nav-cta) ================= */
 .loginBtn {
   flex-shrink: 0;
@@ -483,9 +401,6 @@
     padding: 0 12px;
     gap: 6px;
   }
-  .langSwitchWrapper {
-    margin-right: 0;
-  }
   /* Login tugmasi qolsin, faqat matn yashirinadi — ikonka tugma bo'ladi */
   .loginLabel {
     display: none;
@@ -533,9 +448,5 @@
     width: 66px;
     height: 66px;
     min-width: 66px;
-  }
-  .langSwitch {
-    padding: 10px 6px;
-    font-size: 13px;
   }
 }

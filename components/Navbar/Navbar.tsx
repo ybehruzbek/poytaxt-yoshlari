@@ -1,18 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { megaMenuCategories, LOGO_URL } from "@/lib/data";
-
-const LANGS = ["O'zbekcha", "Русский", "English"] as const;
-const LANG_CODES: Record<string, string> = {
-  "O'zbekcha": "UZ",
-  "Русский": "RU",
-  English: "EN",
-};
 
 export interface NavLinkItem {
   label: string;
@@ -22,9 +15,6 @@ export interface NavLinkItem {
 export default function Navbar({ links }: { links: NavLinkItem[] }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [lang, setLang] = useState("O'zbekcha");
-  const [langOpen, setLangOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const isScrolled = !isHomePage || scrolled || menuOpen;
@@ -35,17 +25,6 @@ export default function Navbar({ links }: { links: NavLinkItem[] }) {
     // Trigger once on mount to set initial state
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
-        setLangOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Marshrut o'zgarsa menyuni yopamiz. Effektda emas, render paytida — effekt
@@ -117,32 +96,11 @@ export default function Navbar({ links }: { links: NavLinkItem[] }) {
         </div>
 
         {/* RIGHT ACTION AREA */}
+        {/* Til almashtirgich olib tashlandi — 4-til rejasi (uz/ru/en) hali
+            faqat sxemada, real tarjima yo'q edi; tugma bosilganda hech narsa
+            o'zgarmasdan faqat yorliq almashardi. Kontent tarjima qilingach
+            (PLAN.md Faza 6) qaytariladi. */}
         <div className={styles.rightActions}>
-          <div className={styles.langSwitchWrapper} ref={langRef}>
-            <div 
-              className={`${styles.langSwitch} ${langOpen ? styles.langOpen : ""}`}
-              onClick={() => setLangOpen(!langOpen)}
-            >
-              <span className={styles.langFull}>{lang}</span>
-              <span className={styles.langShort}>{LANG_CODES[lang]}</span>
-              <i className={`fas fa-chevron-down ${styles.langIcon} ${langOpen ? styles.langIconOpen : ""}`} />
-            </div>
-
-            {langOpen && (
-              <div className={styles.langDropdown}>
-                {LANGS.map((l) => (
-                  <button 
-                    key={l}
-                    className={`${styles.langOption} ${lang === l ? styles.langActive : ""}`}
-                    onClick={() => { setLang(l); setLangOpen(false); }}
-                  >
-                    {l}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-
           <button
             className={styles.menuToggleBtn}
             onClick={toggleMenu}

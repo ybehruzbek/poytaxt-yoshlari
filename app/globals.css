@@ -540,6 +540,106 @@ a:hover .img-lively {
 .accent-word-orange { color: var(--accent-orange); }
 .accent-word-sky { color: #A9D8EB; }
 
+/* ===== NAQSH-KIT — o'zbek girih naqshlari, fon teksturasi sifatida =====
+   mask-image bilan chiziladi: shakl SVG'da, rang esa elementning `color`
+   xususiyatidan (currentColor) keladi — shu sababli har qanday fonga
+   (navy/oq) `color` orqali moslashadi, hex qayta yozilmaydi.
+
+   Ishlatilishi:
+     <div className="naqsh naqsh-yulduz" style={{ color: 'var(--white)' }}>
+   Ota elementda `position:relative` bo'lishi shart; asl kontent
+   `position:relative; z-index:1` bilan naqsh ustida turadi.
+   Faqat dekorativ fon — opacity past, kontent ustida hech qachon emas. */
+
+.naqsh {
+  position: relative;
+  overflow: hidden;
+}
+
+.naqsh::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: currentColor;
+  opacity: var(--naqsh-opacity, 0.05);
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+/* Sakkiz qirrali yulduz — girih to'ri (madrasa koshinlarida eng ko'p uchraydi) */
+.naqsh-yulduz::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 4 L38 20 L54 14 L44 28 L60 32 L44 36 L54 50 L38 44 L32 60 L26 44 L10 50 L20 36 L4 32 L20 28 L10 14 L26 20 Z' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cpath d='M32 4 L38 20 L54 14 L44 28 L60 32 L44 36 L54 50 L38 44 L32 60 L26 44 L10 50 L20 36 L4 32 L20 28 L10 14 L26 20 Z' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+  -webkit-mask-size: var(--naqsh-size, 64px);
+  mask-size: var(--naqsh-size, 64px);
+}
+
+/* Romb qatori — footer ornamentining fon-teksturasi varianti */
+.naqsh-romb::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect x='9' y='9' width='10' height='10' fill='%23000' transform='rotate(45 14 14)'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Crect x='9' y='9' width='10' height='10' fill='%23000' transform='rotate(45 14 14)'/%3E%3C/svg%3E");
+  -webkit-mask-size: var(--naqsh-size, 28px);
+  mask-size: var(--naqsh-size, 28px);
+}
+
+/* Panjara — kvadrat to'r (darvoza/panjara temiri naqshi) */
+.naqsh-panjara::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z M20 8 L32 20 L20 32 L8 20 Z' fill-rule='evenodd' fill='%23000'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M20 0 L40 20 L20 40 L0 20 Z M20 8 L32 20 L20 32 L8 20 Z' fill-rule='evenodd' fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-size: var(--naqsh-size, 40px);
+  mask-size: var(--naqsh-size, 40px);
+}
+
+/* Burchak ornamenti — iqtibos/kontakt kartalarining bitta burchagida,
+   to'liq fon emas (::after, chap-yuqori burchakka joylashadi). */
+.naqsh-burchak {
+  position: relative;
+  overflow: hidden;
+}
+
+.naqsh-burchak::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  z-index: 0;
+  pointer-events: none;
+  background-color: currentColor;
+  opacity: var(--naqsh-opacity, 0.08);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M0 0 L56 0 L56 8 L8 8 L8 56 L0 56 Z' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23000'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M0 0 L56 0 L56 8 L8 8 L8 56 L0 56 Z' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23000'/%3E%3C/svg%3E");
+}
+
+/* Ingichka romb-ajratkich — PageHeader va seksiyalar orasida,
+   footer .ornament bilan bir xil vizual til, lekin bir rangli va kichik. */
+.divider-romb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: var(--sp-6) 0;
+}
+
+.divider-romb span {
+  width: 6px;
+  height: 6px;
+  transform: rotate(45deg);
+  border-radius: 1px;
+  background: var(--accent-orange);
+  opacity: 0.6;
+}
+
+.divider-romb::before,
+.divider-romb::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
