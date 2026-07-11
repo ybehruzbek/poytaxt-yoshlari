@@ -6,6 +6,30 @@
 
 ---
 
+## [0.9.6] — 2026-07-11 · 4 ta detail sahifa qayta qurildi (Paket 3)
+
+**Eng eskicha 4 sahifa — dizayn tizimidan butunlay tashqarida edi:**
+`rahbariyat/[id]`, `yetakchilar/[id]`, `loyihalar/[slug]`, `yangiliklar/[slug]` — har birida
+CSS moduli yo'q, hammasi qo'lda yozilgan `style={{...}}` obyektlari edi (jami ~60 ta inline
+style: hardcode `fontSize:'40px'`, `boxShadow:'0 20px 40px rgba(0,0,0,0.1)'`, non-pill
+`borderRadius:'8px'` tugma, ikkita joyda so'zma-so'z takrorlangan `socialBtn` obyekti).
+
+**Ikkita ulashiladigan komponent yaratildi:**
+- `components/ui/ProfileDetail/` — rahbariyat va yetakchilar profil sahifalari uchun umumiy
+  qatlam (rasm + badge + sarlavha + ijtimoiy tugmalar + kontent). Ikkalasi bir xil vizual
+  strukturaga ega edi, faqat kontent farq qilardi.
+- `components/ui/ArticleDetail/` — loyiha va yangilik sahifalari uchun umumiy qatlam
+  (badge/meta qatori + sarlavha + banner rasm + matn).
+- `components/ui/BackLink/` — "← Ortga qaytish" havolasi, 4 joyda so'zma-so'z takrorlangan edi.
+
+**Natija:** har bir sahifa endi CSS Modules tokenlaridan foydalanadi (`--radius`,
+`--shadow-xl`, `--sp-*`), "Ariza topshirish" tugmasi global `.btn-primary` pill uslubiga
+o'tdi (ilgari tekis `borderRadius:8px` edi). Qabul kunlari jadvalidagi oxirgi qatorning
+border yo'qligi endi CSS `:last-child` bilan hal qilinadi — JS ichida qo'lda `i < length - 1`
+shart yozish shart emas.
+
+---
+
 ## [0.9.5] — 2026-07-11 · PageHeader yagonalashtirildi (Paket 2)
 
 **Bosh sahifadan tashqari sahifalarni bitta dizayn tiliga keltirish:**

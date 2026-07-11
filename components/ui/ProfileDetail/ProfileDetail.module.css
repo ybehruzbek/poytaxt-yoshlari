@@ -1,0 +1,144 @@
+.page {
+  padding-top: calc(var(--nav-h) + var(--nav-top) + clamp(32px, 5vw, 56px));
+  max-width: 1000px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--sp-12);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.badge {
+  display: inline-block;
+  background: var(--blue-pale);
+  color: var(--blue);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: var(--sp-4);
+}
+
+.title {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--blue-deep);
+  line-height: 1.2;
+  margin-bottom: var(--sp-3);
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--sp-8);
+}
+
+.subtitle i {
+  color: var(--blue);
+}
+
+.socials {
+  display: flex;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-10);
+}
+
+.socialBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.socialBtn:hover {
+  opacity: 0.8;
+}
+
+.blue {
+  background: var(--blue-pale);
+  color: var(--blue);
+}
+
+.pink {
+  background: #FCE7F3;
+  color: #EC4899;
+}
+
+.green {
+  background: var(--green-pale);
+  color: var(--green);
+}
+
+.body {
+  font-size: var(--fs-md);
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* Bola sahifalar (rahbariyat/yetakchilar) ichki bo'limlar uchun ishlatadi */
+.sectionHeading {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--blue-deep);
+  margin-bottom: var(--sp-4);
+}
+
+.sectionHeadingSpaced {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--blue-deep);
+  margin: var(--sp-8) 0 var(--sp-4);
+}
+
+.infoCard {
+  background: var(--white);
+  padding: var(--sp-6);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.receptionRow {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.receptionRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.receptionDay {
+  font-weight: 600;
+  color: var(--text-muted);
+}
