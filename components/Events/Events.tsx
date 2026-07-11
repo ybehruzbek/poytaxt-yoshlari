@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import styles from "./Events.module.css";
 
 const mockEvents = [
@@ -34,7 +34,7 @@ const mockEvents = [
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -45,7 +45,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { 
     opacity: 1, 

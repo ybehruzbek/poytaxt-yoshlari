@@ -22,6 +22,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://poytaxtyoshlari.uz"
+  ),
   title: "O'zbekiston Yoshlar Ittifoqi",
   description:
     "O'zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi yirik jamoat tashkiloti.",

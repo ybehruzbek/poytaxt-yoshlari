@@ -4,6 +4,7 @@ import type { Field, ResourceDef } from "@/lib/admin/resources";
 /** Matn maydonlar uchun yuqori chegara — cheksiz kontent yozib bo'lmasin. */
 const MAX_TEXT = 200;
 const MAX_LONGTEXT = 20_000;
+const MAX_URL = 500;
 
 export type FieldErrors = Record<string, string>;
 
@@ -26,6 +27,15 @@ function schemaFor(field: Field): z.ZodTypeAny {
       });
     case "textarea":
       return z.string().max(MAX_LONGTEXT, `${field.label}: matn juda uzun`);
+    case "url":
+      // href ga to'g'ridan-to'g'ri chiqadi — javascript: kabi sxemalar o'tmasin
+      return z
+        .string()
+        .max(MAX_URL, `${field.label}: manzil juda uzun`)
+        .refine(
+          (v) => v.startsWith("/") || /^https?:\/\//i.test(v),
+          `${field.label}: manzil https:// yoki / bilan boshlanishi kerak`
+        );
     default:
       return z.string().max(MAX_TEXT, `${field.label}: matn juda uzun`);
   }

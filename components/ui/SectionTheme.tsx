@@ -1,10 +1,10 @@
 "use client";
 
-import { useTheme } from "@/providers/ThemeProvider";
+import { useTheme, type Theme } from "@/providers/ThemeProvider";
 import { useEffect, useRef, ReactNode } from "react";
 
 interface SectionThemeProps {
-  theme: "hero" | "about" | "directions" | "projects" | "news" | "leadership" | "youthleaders" | "documents" | "gallery" | "appeals" | "contact" | "default";
+  theme: Theme;
   children: ReactNode;
   className?: string;
 }
