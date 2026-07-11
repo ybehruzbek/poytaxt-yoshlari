@@ -1,0 +1,60 @@
+.wrap {
+  max-width: 760px;
+}
+
+.updated {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--sp-8);
+}
+
+.body {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.body h2 {
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--blue-deep);
+  margin: var(--sp-10) 0 var(--sp-4);
+}
+
+.body h2:first-child {
+  margin-top: 0;
+}
+
+.body p {
+  margin-bottom: var(--sp-4);
+}
+
+.body ul {
+  margin: 0 0 var(--sp-4);
+  padding-left: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.body a {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.contactBox {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-6);
+  margin-top: var(--sp-6);
+}
+
+.contactBox p {
+  margin-bottom: var(--sp-2);
+}
+
+.contactBox p:last-child {
+  margin-bottom: 0;
+}

@@ -6,6 +6,29 @@
 
 ---
 
+## [0.9.8] — 2026-07-11 · Huquqiy sahifalar kontenti yozildi (Paket 5)
+
+**`/maxfiylik-siyosati` va `/foydalanish-shartlari` — "tayyorlanmoqda" placeholder
+matni real kontent bilan almashtirildi (TZ §19.1):**
+- Maxfiylik siyosati: 9 bo'lim — qanday ma'lumot to'planadi (murojaat va tadbirga
+  ro'yxatdan o'tish formalaridagi haqiqiy maydonlar asosida), foydalanish maqsadi,
+  uchinchi shaxslarga berilmasligi, saqlash/xavfsizlik, cookie holati (hozircha
+  faqat admin sessiyasi — ommaviy sahifalarda kuzatuv cookie'si yo'q), foydalanuvchi
+  huquqlari, bog'lanish.
+- Foydalanish shartlari: 9 bo'lim — platforma maqsadi, foydalanuvchi majburiyatlari,
+  intellektual mulk, tashqi havolalar, xizmat uzluksizligi, shaxsiy ma'lumotlarga
+  havola, bog'lanish.
+- Ikkala sahifa yangi `components/ui/LegalPage/` ulashiladigan qatlamidan
+  foydalanadi (PageHeader + "oxirgi yangilanish" sanasi + izchil h2/p/ul
+  tipografikasi) — ilgari ikkalasida ham bitta qo'lda yozilgan `<p style={{...}}>`
+  bor edi.
+
+**Eslatma:** matn haqiqiy tashkiliy ma'lumotlarga (manzil, telefon, email — Footer
+bilan bir xil) asoslangan qoralama. Yuridik xizmat tomonidan tasdiqlanishi tavsiya
+etiladi, ayniqsa "Shaxsiy ma'lumotlar to'g'risida"gi Qonunga muvofiqlik bo'yicha.
+
+---
+
 ## [0.9.7] — 2026-07-11 · Editorial sahifalar tozalandi (Paket 4)
 
 **Ikkita real bug tuzatildi (dizayndan tashqari):**
