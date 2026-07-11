@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Jost, Inter } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -57,9 +56,12 @@ export default function RootLayout({
   return (
     <html lang="uz" className={`${jost.variable} ${inter.variable}`}>
       <head>
-        <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
-          strategy="afterInteractive"
+        {/* CSS versiya — JS versiyasi <i> ni <svg> ga almashtirib, React
+            hydration bilan urishardi (151 joyda). Lokal SVG sprite'ga
+            o'tish PLAN.md Faza 4 da. */}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
       <body>

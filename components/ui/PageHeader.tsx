@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import TextReveal from '@/components/ui/TextReveal';
 import styles from './PageHeader.module.css';
 
 interface Breadcrumb {
@@ -37,7 +38,7 @@ export default function PageHeader({ label, title, description, breadcrumbs }: P
       </nav>
 
       <div className="section-label">{label}</div>
-      <h1 className={styles.title}>{title}</h1>
+      <TextReveal as="h1" text={title} className={styles.title} />
       {description && <p className={styles.description}>{description}</p>}
     </div>
   );

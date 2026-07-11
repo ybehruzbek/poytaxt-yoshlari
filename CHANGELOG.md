@@ -6,6 +6,17 @@
 
 ---
 
+## [0.7.0] — 2026-07-11 · Matn animatsiyalari va kartalar (dizayn 2-bosqich)
+
+**Nima qilindi:**
+- **TextReveal komponenti** — sarlavha so'zlari niqob ostidan birma-bir ko'tarilib chiqadi (premium "mask reveal" effekti). Bosh sahifadagi barcha bo'lim sarlavhalari + barcha ichki sahifalar sarlavhalari (PageHeader) shu animatsiya bilan chiqadi. Skrinriderlar uchun to'liq matn saqlangan.
+- **Yangiliklar kartalari qayta ishlandi** — baraka uslubida: har karta o'z pastel-gradient olamida (krem / havorang / yashil, almashinib), rasmlar **ark-tepali** (gumbaz shakli), hero arki bilan bitta vizual til.
+- **Loyihalar kartalari** — har ikkinchi karta ark shaklida, qator "mozaika" ritmini oldi.
+- **Hamma bo'lim animatsiyalari yagona tilga o'tdi** — 1s, `cubic-bezier(0.65, 0, 0.35, 1)` (Events, Projects, News, Stats).
+- **Tizimli bug tuzatildi: FontAwesome JS → CSS versiyasi.** JS versiyasi `<i>` teglarni `<svg>` ga almashtirib React hydration'ni buzardi (151 joyda, PLAN Faza 4 muammosi). CSS versiyada bu muammo yo'q — hydration xatolari butunlay yo'qoldi.
+
+---
+
 ## [0.6.0] — 2026-07-11 · Baraka-uslub dizayn tizimi (1-bosqich)
 
 **Yo'nalish:** baraka.gov.uz tahlil qilindi (skrinshot + CSS'dan o'lchab olindi) va uning "premium his" beruvchi elementlari o'zimizga moslashtirildi — nusxa emas, yoshlar identiteti bilan.

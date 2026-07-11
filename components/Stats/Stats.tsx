@@ -4,6 +4,7 @@ import { motion, type Variants } from "motion/react";
 import type { Stat } from "@prisma/client";
 import styles from "./Stats.module.css";
 import CountUp from "@/components/ui/CountUp";
+import TextReveal from "@/components/ui/TextReveal";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -15,7 +16,7 @@ const containerVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 1, 0.5, 1] } }
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.65, 0, 0.35, 1] } }
 };
 
 export default function Stats({ items }: { items: Stat[] }) {
@@ -29,7 +30,7 @@ export default function Stats({ items }: { items: Stat[] }) {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <motion.h2 variants={itemVariants} className={styles.sectionTitle}>Raqamlar gapirganda</motion.h2>
+              <TextReveal text="Raqamlar gapirganda" className={styles.sectionTitle} />
               <motion.p variants={itemVariants} className={styles.sectionDesc}>
                 Yoshlar Ittifoqi yillar davomida minglab yoshlarning hayotida ijobiy o'zgarishlar qildi va ularning qobiliyatlarini ro'yobga chiqarishga yordam berdi.
               </motion.p>

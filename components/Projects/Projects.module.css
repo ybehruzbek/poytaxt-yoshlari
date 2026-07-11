@@ -42,6 +42,12 @@
   box-shadow: 0 24px 48px rgba(13, 59, 102, 0.15);
 }
 
+/* Har ikkinchi karta ark shaklida — hero gumbazi bilan bitta vizual til,
+   qator "mozaika" ritmini oladi */
+.cardWrapper:nth-child(2n) .card {
+  border-radius: 170px 170px 24px 24px;
+}
+
 .bgImage {
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);

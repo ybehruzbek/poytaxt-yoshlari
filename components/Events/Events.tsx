@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, type Variants } from "motion/react";
 import type { EventWithCount } from "@/components/EventCard/EventCard";
 import { UZ_MONTHS_SHORT, uzTime } from "@/lib/format";
+import TextReveal from "@/components/ui/TextReveal";
 import styles from "./Events.module.css";
 
 const containerVariants: Variants = {
@@ -22,7 +23,7 @@ const itemVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.25, 1, 0.5, 1] }
+    transition: { duration: 1, ease: [0.65, 0, 0.35, 1] }
   }
 };
 
@@ -41,7 +42,10 @@ export default function Events({ items }: { items: EventWithCount[] }) {
         >
           <motion.div variants={itemVariants}>
             <div className="section-label">Yaqin tadbirlar</div>
-            <h2 className="section-title">Yoshlar hayotidagi muhim voqealar</h2>
+            <TextReveal
+              text="Yoshlar hayotidagi muhim voqealar"
+              className="section-title"
+            />
           </motion.div>
           <motion.div variants={itemVariants}>
             <Link href="/tadbirlar" className="btn-view-all">

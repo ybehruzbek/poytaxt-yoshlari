@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "motion/react";
 import type { News as NewsItem } from "@prisma/client";
+import TextReveal from "@/components/ui/TextReveal";
 import styles from "./News.module.css";
 
 const containerVariants: Variants = {
@@ -14,8 +15,8 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 1, 0.5, 1] } }
+  hidden: { opacity: 0, y: 36 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.65, 0, 0.35, 1] } }
 };
 
 export default function News({ items }: { items: NewsItem[] }) {
@@ -33,7 +34,7 @@ export default function News({ items }: { items: NewsItem[] }) {
         >
           <motion.div variants={itemVariants}>
             <div className="section-label">Yangiliklar</div>
-            <h2 className="section-title">So&apos;nggi voqealar</h2>
+            <TextReveal text="So'nggi voqealar" className="section-title" />
           </motion.div>
           <motion.div variants={itemVariants}>
             <Link href="/yangiliklar" className="btn-view-all">

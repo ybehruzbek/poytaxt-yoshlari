@@ -66,7 +66,7 @@ export default function Hero() {
 
           <motion.div variants={item} className={styles.actions}>
             <Link href="/tadbirlar" className="btn-primary">
-              <i className="far fa-calendar-check" /> Tadbirga yozilish
+              Tadbirga yozilish
             </Link>
             <Link href="/murojaat" className="btn-secondary">
               Murojaat yuborish
@@ -75,7 +75,7 @@ export default function Hero() {
 
           <motion.div variants={item} className={styles.tertiary}>
             <Link href="/loyihalar" className={styles.tertiaryLink}>
-              Loyihalar bilan tanishing <i className="fas fa-arrow-right" />
+              Loyihalar bilan tanishing <span className={styles.tertiaryArrow}>→</span>
             </Link>
           </motion.div>
 

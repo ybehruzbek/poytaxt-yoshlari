@@ -129,12 +129,12 @@
   color: var(--teal);
 }
 
-.tertiaryLink i {
+.tertiaryArrow {
+  display: inline-block;
   transition: transform 0.4s var(--ease);
-  font-size: 13px;
 }
 
-.tertiaryLink:hover i {
+.tertiaryLink:hover .tertiaryArrow {
   transform: translateX(6px);
 }
 
