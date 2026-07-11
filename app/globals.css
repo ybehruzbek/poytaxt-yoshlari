@@ -354,25 +354,26 @@ ul, ol {
   background: var(--blue-deep);
 }
 
-/* Secondary — och ko'k yuza, hover'da bir tonna quyuqlashadi */
+/* Secondary — och ko'k yuza, hover'da navy'ga to'ladi */
 .btn-secondary {
   background: var(--blue-pale);
   color: var(--blue);
 }
 .btn-secondary:hover {
-  background: #D9E4F4;
-  color: var(--blue-deep);
+  background: var(--blue);
+  color: var(--white);
 }
 
-/* View All — konturli, hover'da yumshoq to'ladi */
+/* View All — oq yuza, hover'da to'liq navy */
 .btn-view-all {
-  background: transparent;
+  background: var(--white);
   color: var(--blue-deep);
   border-color: var(--border);
 }
 .btn-view-all:hover {
-  background: var(--blue-pale);
-  border-color: var(--blue-pale);
+  background: var(--blue-deep);
+  color: var(--white);
+  border-color: var(--blue-deep);
 }
 .btn-view-all i {
   font-size: 13px;
@@ -391,7 +392,7 @@ ul, ol {
   font-size: 14px;
 }
 .nav-cta:hover {
-  background: var(--blue);
+  background: #0A1C38;
 }
 
 /* Hero Primary */

@@ -15,6 +15,7 @@
 - Yangi tizim — faqat sokin rang o'tishlari (0.35s ease): primary navy→chuqur navy; secondary och-ko'k bir tonna quyuqlashadi; «Barchasi» konturli tugma hover'da yumshoq och-ko'kka to'ladi (faqat ichidagi strelka 4px siljiydi); bosishda yengil opacity.
 - Tadbir ro'yxatdan o'tish formasi tugmasi ham shu tizimga o'tdi (pill shakl).
 - Karta hoverlari (ko'tarilish) atayin qoldirildi — muammo tugmalarda edi; ichki sahifalardagi qolgan tugmalar ichki-sahifa dizayn bosqichida tekislanadi.
+- **Qo'shimcha tuzatish (fikrdan keyin):** hover ranglari juda och edi — endi konturli tugma hover'da **to'liq navy'ga to'ladi** (oq matn), secondary ham navy bo'ladi, navbar CTA yanada quyuqlashadi. Konturli tugmaning default foni shaffof emas — **oq**.
 
 ---
 
