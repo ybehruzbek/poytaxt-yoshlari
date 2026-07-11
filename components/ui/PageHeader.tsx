@@ -16,7 +16,8 @@ interface PageHeaderProps {
 
 export default function PageHeader({ label, title, description, breadcrumbs }: PageHeaderProps) {
   return (
-    <div className={styles.headerWrapper}>
+    <header className={styles.headerWrapper}>
+      <div className="container">
       <nav aria-label="breadcrumb" className={styles.breadcrumbs}>
         <ol>
           {breadcrumbs.map((crumb, index) => {
@@ -40,6 +41,7 @@ export default function PageHeader({ label, title, description, breadcrumbs }: P
       <div className="section-label">{label}</div>
       <TextReveal as="h1" text={title} className={styles.title} />
       {description && <p className={styles.description}>{description}</p>}
-    </div>
+      </div>
+    </header>
   );
 }

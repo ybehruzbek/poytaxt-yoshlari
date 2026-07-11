@@ -1,5 +1,6 @@
 import Districts from "@/components/Districts/Districts";
 import YouthLeaders from "@/components/YouthLeaders/YouthLeaders";
+import PageHeader from "@/components/ui/PageHeader";
 import SectionTheme from "@/components/ui/SectionTheme";
 import { getDistricts, getYouthLeaders } from "@/lib/queries";
 
@@ -17,7 +18,14 @@ export default async function HududlarPage() {
   ]);
 
   return (
-    <div style={{ paddingTop: "70px" }}>
+    <>
+      <PageHeader
+        label="Hududlar"
+        title="Toshkent tumanlari"
+        description="Poytaxtdagi tuman bo'limlari, mahalliy tashabbuslar va har bir hududning yosh yetakchilari — barchasi bir joyda."
+        breadcrumbs={[{ label: "Bosh sahifa", href: "/" }, { label: "Hududlar" }]}
+      />
+
       <SectionTheme theme="default">
         <Districts districts={districts} />
       </SectionTheme>
@@ -25,6 +33,6 @@ export default async function HududlarPage() {
       <SectionTheme theme="youthleaders">
         <YouthLeaders items={youthLeaders} />
       </SectionTheme>
-    </div>
+    </>
   );
 }

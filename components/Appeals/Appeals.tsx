@@ -120,7 +120,7 @@ export default function Appeals({ districtNames }: { districtNames: string[] }) 
           {/* Left: Info */}
           <ScrollReveal>
             <div className={styles.leftContent}>
-              <div className="section-label">Murojaatlar</div>
+              <div className="section-label">Ariza yuborish</div>
               <h2 className={styles.title}>
                 Ovozingizni <br /> eshitamiz
               </h2>

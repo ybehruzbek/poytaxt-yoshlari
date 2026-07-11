@@ -1,5 +1,8 @@
+/* Sahifa boshi o'zi navbar ostidan joy ochadi — sahifalar qo'lda
+   paddingTop yozmasligi kerak. */
 .headerWrapper {
-  margin-bottom: 48px;
+  padding-top: calc(var(--nav-h) + var(--nav-top) + clamp(32px, 5vw, 56px));
+  margin-bottom: clamp(32px, 4vw, 48px);
 }
 
 .breadcrumbs {
@@ -43,18 +46,21 @@
   color: var(--text-secondary);
 }
 
+/* Landing'dagi .section-title bilan bitta tipografik til */
 .title {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 700;
-  color: var(--primary-dark);
-  line-height: 1.2;
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-4xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--blue-deep);
+  line-height: 1.1;
   margin-top: 12px;
   margin-bottom: 16px;
 }
 
 .description {
-  font-size: 16px;
+  font-size: var(--fs-md);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.7;
   max-width: 700px;
 }

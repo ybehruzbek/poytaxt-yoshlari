@@ -421,6 +421,13 @@ ul, ol {
 }
 
 /* ===== UTILITY CLASSES ===== */
+
+/* PageHeader'dan keyingi sahifa tanasi — pastki bo'shliqning yagona manbai.
+   Inline paddingBottom yozish o'rniga shu klass ishlatiladi. */
+.page-body {
+  padding-bottom: clamp(60px, 8vw, 100px);
+}
+
 .hover-card {
   transition: all 0.3s ease;
 }

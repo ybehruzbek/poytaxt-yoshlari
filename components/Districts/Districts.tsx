@@ -22,10 +22,10 @@ export default function Districts({ districts }: { districts: District[] }) {
           <div className={styles.headerCenter}>
             <div className="section-label">Tuman kengashlari</div>
             <h2 className="section-title">
-              Toshkent shahar tumanlari
+              Xaritadan tumaningizni tanlang
             </h2>
             <p className={`section-desc ${styles.sectionDesc}`}>
-              Har bir tuman kengashi o&apos;z hududidagi yoshlar faoliyatini muvofiqlashtiradi va qo&apos;llab-quvvatlaydi. Xarita ustiga bosing.
+              Har bir tuman kengashi o&apos;z hududidagi yoshlar faoliyatini muvofiqlashtiradi va qo&apos;llab-quvvatlaydi.
             </p>
           </div>
         </ScrollReveal>

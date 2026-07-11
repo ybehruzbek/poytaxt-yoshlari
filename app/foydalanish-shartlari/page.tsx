@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function FoydalanishShartlariPage() {
   return (
-    <div style={{ background: "var(--bg-light, #f8fafc)", paddingBottom: "80px" }}>
+    <div className="page-body">
       <PageHeader
         label="Huquqiy"
         title="Foydalanish shartlari"

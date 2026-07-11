@@ -1,5 +1,6 @@
 import News from "@/components/News/News";
 import Gallery from "@/components/Gallery/Gallery";
+import PageHeader from "@/components/ui/PageHeader";
 import SectionTheme from "@/components/ui/SectionTheme";
 import { getNews, getGalleryImages } from "@/lib/queries";
 
@@ -14,7 +15,14 @@ export default async function AxborotMarkaziPage() {
   const [news, images] = await Promise.all([getNews(), getGalleryImages()]);
 
   return (
-    <div style={{ paddingTop: "70px" }}>
+    <>
+      <PageHeader
+        label="Axborot markazi"
+        title="Yangiliklar va media"
+        description="Ittifoq hayotidagi so'nggi voqealar, e'lonlar va foto lavhalar — bir sahifada."
+        breadcrumbs={[{ label: "Bosh sahifa", href: "/" }, { label: "Axborot markazi" }]}
+      />
+
       <SectionTheme theme="news">
         <News items={news} />
       </SectionTheme>
@@ -22,6 +30,6 @@ export default async function AxborotMarkaziPage() {
       <SectionTheme theme="gallery">
         <Gallery images={images} />
       </SectionTheme>
-    </div>
+    </>
   );
 }

@@ -6,6 +6,19 @@
 
 ---
 
+## [0.9.5] — 2026-07-11 · PageHeader yagonalashtirildi (Paket 2)
+
+**Bosh sahifadan tashqari sahifalarni bitta dizayn tiliga keltirish:**
+- **`PageHeader` endi navbar bo'shlig'ini o'zi hisoblaydi** — sahifalarda qo'lda yozilgan `style={{paddingTop:'70px'}}` yoki `'160px'` inline qiymatlar o'rniga komponent `--nav-h`/`--nav-top` tokenlaridan foydalanadi. Pastki bo'shliq uchun yangi global `.page-body` utility klassi.
+- **3 ta sahifaga sarlavha qo'shildi** — `hududlar`, `axborot-markazi`, `murojaat` ilgari to'g'ridan-to'g'ri bo'lim bilan boshlanardi (breadcrumb yo'q, `<h1>` yo'q). Endi barchasida `PageHeader` (label + sarlavha + tavsif + breadcrumb).
+- **PageHeader tipografikasi landing bilan bittalashtirildi** — o'zining alohida `font-size`/`color` qiymatlari o'rniga endi `.section-title` bilan bir xil token (`--fs-4xl`, `--blue-deep`, Manrope).
+- **Sarlavha takrorlanishi olib tashlandi** — `hududlar` va `murojaat` sahifalarida yangi `PageHeader` sarlavhasi ostidagi bo'lim ham deyarli bir xil matn yozardi («Ovozingizni eshitamiz», «Toshkent shahar tumanlari»); ikkinchi darajali sarlavhalar farqlantirildi.
+- **Yangiliklar ro'yxati (`/yangiliklar`) qayta yozildi** — ilgari `News.module.css`'ni tashqi inline style bilan bosib qayta ishlatardi (`position:absolute` rasm to'liq ekran bo'lib chiqib ketardi). Endi mustaqil `Yangiliklar.module.css` bilan grid kartochkalar, hardcode inline style yo'q.
+
+**Eslatma:** 4 ta detail sahifa (`rahbariyat/[id]`, `yetakchilar/[id]`, `loyihalar/[slug]`, `yangiliklar/[slug]`) hali ham inline style bilan yozilgan — Paket 3 da qayta quriladi.
+
+---
+
 ## [0.9.4] — 2026-07-11 · Singan havolalar tuzatildi, FAQ bo'limi qo'shildi
 
 **Sayt bo'ylab link auditi o'tkazildi (Paket 1):**

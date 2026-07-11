@@ -16,8 +16,8 @@ export default async function YouthLeadersPage() {
   const youthLeaders = await getYouthLeaders();
 
   return (
-    <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh' }}>
-      <PageHeader 
+    <>
+      <PageHeader
         label="Yetakchilar"
         title="Tuman yetakchilari"
         description="Poytaxt tumanlaridagi faol yoshlar yetakchilari bilan tanishing. Ular bilan o'z tumaningizdagi loyihalarda ishtirok eting."
@@ -26,7 +26,8 @@ export default async function YouthLeadersPage() {
           { label: "Yoshlar yetakchilari" }
         ]}
       />
-      
+
+      <div className="container page-body">
       <div className={styles.grid}>
         {youthLeaders.map((item) => (
           <Link href={`/yetakchilar/${item.id}`} key={item.id} className={styles.card} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -58,6 +59,7 @@ export default async function YouthLeadersPage() {
           </Link>
         ))}
       </div>
-    </div>
+      </div>
+    </>
   );
 }

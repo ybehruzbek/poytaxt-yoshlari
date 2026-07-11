@@ -13,7 +13,7 @@ export default async function GalleryPage() {
   const images = await getGalleryImages();
 
   return (
-    <div className="container" style={{ paddingTop: '160px', paddingBottom: '100px', minHeight: '100vh' }}>
+    <>
       <PageHeader
         label="Galereya"
         title="Foto lahzalar"
@@ -24,7 +24,9 @@ export default async function GalleryPage() {
         ]}
       />
 
-      <GalereyaClient images={images} />
-    </div>
+      <div className="container page-body">
+        <GalereyaClient images={images} />
+      </div>
+    </>
   );
 }
