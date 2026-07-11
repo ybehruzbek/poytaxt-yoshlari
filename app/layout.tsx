@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Inter } from "next/font/google";
+import { Jost, Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
@@ -7,8 +7,9 @@ import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import BackgroundController from "@/components/ui/BackgroundController";
 
-// Sarlavhalar — Manrope (geometrik, 200-800 o'zgaruvchan o'q)
-const manrope = Manrope({
+// Sarlavhalar — Jost (geometrik grotesk, baraka.gov.uz sarlavha shrifti;
+// kirillchasi bor — 4 til rejasi uchun ham mos)
+const jost = Jost({
   subsets: ["latin", "cyrillic"],
   variable: "--font-heading",
   display: "swap",
@@ -54,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" className={`${manrope.variable} ${inter.variable}`}>
+    <html lang="uz" className={`${jost.variable} ${inter.variable}`}>
       <head>
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"

@@ -6,6 +6,21 @@
 
 ---
 
+## [0.6.0] — 2026-07-11 · Baraka-uslub dizayn tizimi (1-bosqich)
+
+**Yo'nalish:** baraka.gov.uz tahlil qilindi (skrinshot + CSS'dan o'lchab olindi) va uning "premium his" beruvchi elementlari o'zimizga moslashtirildi — nusxa emas, yoshlar identiteti bilan.
+
+**Nima qilindi:**
+- **Shrift: Manrope → Jost** (baraka sarlavha shrifti; kirillchasi bor — 4 til rejasiga ham mos).
+- **Reveal animatsiyalar sekinlashtirildi**: 0.6s → 1s, baraka'dan o'lchangan `cubic-bezier(0.65, 0, 0.35, 1)` easing — "og'ir, qimmat" his shu yerdan keladi.
+- **Yangi Hero (TZ FR-HOME-01..03)**: «YOSHLAR — KELAJAK BUNYODKORI!» shiori (urg'u so'z yashil), qo'shimcha shior, «Tadbirga yozilish» + «Murojaat yuborish» CTA'lari, **ark-maskali rasm** (o'zbek me'moriy arkasi), romb-ornament separator. Eski yangiliklar-slayderi olib tashlandi (yangiliklar quyida o'z bo'limida bor).
+- **Rang-blokli seksiyalar**: About — krem band, News — havorang band; Events oq orol bilan birga scroll'da «sahna almashinuvi» ritmi hosil bo'ldi.
+- **Yangi global utility'lar**: `.arch-mask`, `.band-*` (cream/sky/green-pale/navy), `.giant-text` (fon dekorativ matn), `.img-lively` (hover'da filter), `.accent-word`.
+
+**Keyingi dizayn bosqichi:** ichki sahifalar (tadbirlar, yangiliklar, rahbariyat) shu tilga o'tadi; PageHero yagonalashuvi; FontAwesome → SVG.
+
+---
+
 ## [0.5.0] — 2026-07-11 · Tadbirlar moduli (TZ §9)
 
 **Nima qilindi:**

@@ -92,6 +92,8 @@
 
   /* Easing */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Reveal uchun — baraka'dan o'lchab olingan (easeInOutCubic) */
+  --ease-reveal: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 @media (min-width: 769px) {
@@ -432,11 +434,13 @@ ul, ol {
 .tag-orange { background: #FFF7ED; color: #C2410C; }
 .tag-purple { background: #FAF5FF; color: #7C3AED; }
 
-/* ===== SCROLL REVEAL ===== */
+/* ===== SCROLL REVEAL =====
+   Baraka o'lchovi: 1s + cubic-bezier(0.65,0,0.35,1) — sekin, "og'ir" chiqish
+   premium his beradi. 0.3-0.6s shoshqaloq tuyuladi. */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transform: translateY(36px);
+  transition: opacity 1s var(--ease-reveal), transform 1s var(--ease-reveal);
 }
 
 .reveal.visible {
@@ -444,19 +448,88 @@ ul, ol {
   transform: translateY(0);
 }
 
-.reveal-d1 { transition-delay: 0.08s; }
-.reveal-d2 { transition-delay: 0.16s; }
-.reveal-d3 { transition-delay: 0.24s; }
-.reveal-d4 { transition-delay: 0.32s; }
-.reveal-d5 { transition-delay: 0.40s; }
-.reveal-d6 { transition-delay: 0.48s; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+.reveal-d5 { transition-delay: 0.5s; }
+.reveal-d6 { transition-delay: 0.6s; }
 
 /* Mobil: kaskad kechikishlar sekin tuyuladi — qisqartiramiz */
 @media (max-width: 768px) {
-  .reveal { transform: translateY(14px); }
+  .reveal {
+    transform: translateY(20px);
+    transition-duration: 0.7s;
+  }
   .reveal-d1, .reveal-d2, .reveal-d3,
-  .reveal-d4, .reveal-d5, .reveal-d6 { transition-delay: 0.06s; }
+  .reveal-d4, .reveal-d5, .reveal-d6 { transition-delay: 0.08s; }
 }
+
+/* ===== BARAKA-USLUB UTILITY'LAR ===== */
+
+/* Ark (gumbaz) maskasi — o'zbek me'moriy arkasi shaklidagi rasm.
+   Rasm o'ralgan konteynerga qo'ying; balandligi kengligidan katta bo'lsin. */
+.arch-mask {
+  border-radius: 999px 999px var(--radius-sm) var(--radius-sm);
+  overflow: hidden;
+}
+
+.arch-mask-full {
+  border-radius: 999px 999px 999px 999px / 60% 60% 40% 40%;
+  overflow: hidden;
+}
+
+/* Seksiya orqasidagi gigant dekorativ matn (baraka: "Imtiyoz") */
+.giant-text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(90px, 17vw, 230px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(15, 37, 71, 0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Rang-blokli seksiya bandlari — scroll'da "sahna" almashinuvi.
+   To'liq enli, katta radiusli, Events oq oroli bilan bir ritmda. */
+.band {
+  margin: 40px clamp(16px, 3vw, 40px);
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.band-cream { background: linear-gradient(160deg, #FDF6E9 0%, #FBEFD9 100%); }
+.band-sky { background: linear-gradient(160deg, #EAF3FB 0%, #DCEBF7 100%); }
+.band-green-pale { background: linear-gradient(160deg, #EFF7EA 0%, #E3F0DA 100%); }
+.band-navy {
+  background: linear-gradient(160deg, var(--blue-deep) 0%, #1A3358 100%);
+}
+.band-navy .section-title,
+.band-navy h2, .band-navy h3 { color: var(--white); }
+.band-navy .section-desc, .band-navy p { color: rgba(255, 255, 255, 0.75); }
+
+/* Rasm hover'da jonlanadi — scale emas, filter (baraka usuli, 0.5s) */
+.img-lively {
+  filter: saturate(0.92) brightness(0.99);
+  transition: filter 0.5s ease-in-out;
+}
+.img-lively:hover,
+a:hover .img-lively {
+  filter: saturate(1.08) brightness(1.03);
+}
+
+/* Sarlavhadagi urg'u so'z — "ISHONCH" effekti */
+.accent-word { color: var(--green); }
+.accent-word-orange { color: var(--accent-orange); }
+.accent-word-sky { color: #A9D8EB; }
 
 /* ===== REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
