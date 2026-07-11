@@ -145,8 +145,8 @@ body {
 .ambient-glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(150px);
-  opacity: 0.3;
+  filter: blur(130px);
+  opacity: 0.5;
   transition: background-color 1.5s ease-in-out, transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
   will-change: transform, background-color;
 }
@@ -167,25 +167,25 @@ body {
   background-color: #F1F5F9;
 }
 
-/* THEME: HERO & EVENTS (Tadbirlar bo'limida fon o'zgarmaydi, oddiy qoladi) */
-body[data-theme="hero"] .glow-1, body[data-theme="events"] .glow-1 { background-color: #DBEAFE; transform: translate(-5%, 10%); opacity: 0.25; }
-body[data-theme="hero"] .glow-2, body[data-theme="events"] .glow-2 { background-color: #F3E8FF; transform: translate(10%, -5%); opacity: 0.2; }
+/* Har bo'limda rang olami yumshoq almashadi — chegara yo'q, oqim bor.
+   Hero'dagi yashil-amber juftligi asos ritm. */
+body[data-theme="hero"] .glow-1 { background-color: rgba(108, 162, 60, 0.55); transform: translate(-5%, 10%); }
+body[data-theme="hero"] .glow-2 { background-color: rgba(245, 181, 58, 0.45); transform: translate(10%, -5%); }
 
-/* THEME: ABOUT */
-body[data-theme="about"] .glow-1 { background-color: #FEF3C7; transform: translate(-10%, 30%); opacity: 0.2; }
-body[data-theme="about"] .glow-2 { background-color: #FFEDD5; transform: translate(5%, -20%); opacity: 0.25; }
+body[data-theme="events"] .glow-1 { background-color: rgba(23, 111, 142, 0.4); transform: translate(-12%, 25%); }
+body[data-theme="events"] .glow-2 { background-color: rgba(108, 162, 60, 0.35); transform: translate(15%, -12%); }
 
-/* THEME: PROJECTS */
-body[data-theme="projects"] .glow-1 { background-color: #DBEAFE; transform: translate(-30%, 15%); opacity: 0.25; }
-body[data-theme="projects"] .glow-2 { background-color: #E0E7FF; transform: translate(30%, -15%); opacity: 0.25; }
+body[data-theme="about"] .glow-1 { background-color: rgba(245, 181, 58, 0.5); transform: translate(-10%, 35%); }
+body[data-theme="about"] .glow-2 { background-color: rgba(244, 123, 46, 0.3); transform: translate(8%, -22%); }
 
-/* THEME: STATS */
-body[data-theme="stats"] .glow-1 { background-color: #D1FAE5; transform: translate(-15%, 40%); opacity: 0.3; }
-body[data-theme="stats"] .glow-2 { background-color: #DCFCE7; transform: translate(15%, -30%); opacity: 0.25; }
+body[data-theme="projects"] .glow-1 { background-color: rgba(34, 55, 91, 0.3); transform: translate(-30%, 18%); }
+body[data-theme="projects"] .glow-2 { background-color: rgba(23, 111, 142, 0.35); transform: translate(28%, -15%); }
 
-/* THEME: NEWS */
-body[data-theme="news"] .glow-1 { background-color: #E0E7FF; transform: translate(0, 10%); opacity: 0.25; }
-body[data-theme="news"] .glow-2 { background-color: #F5F3FF; transform: translate(0, -10%); opacity: 0.2; }
+body[data-theme="stats"] .glow-1 { background-color: rgba(108, 162, 60, 0.5); transform: translate(-15%, 42%); }
+body[data-theme="stats"] .glow-2 { background-color: rgba(46, 158, 91, 0.35); transform: translate(15%, -30%); }
+
+body[data-theme="news"] .glow-1 { background-color: rgba(23, 111, 142, 0.35); transform: translate(0, 15%); }
+body[data-theme="news"] .glow-2 { background-color: rgba(245, 181, 58, 0.4); transform: translate(0, -12%); }
 
 /* ===== CUSTOM SCROLLBAR ===== */
 html {

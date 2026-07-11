@@ -1,6 +1,7 @@
-/* ===== NEWS — BARAKA-INSPIRED STYLE ===== */
+/* ===== NEWS — ochiq editorial uslub: quti yo'q, chegara yo'q ===== */
+
 .news {
-  padding: clamp(60px, 8vw, 100px) 0;
+  padding: var(--section-y) 0;
   background: transparent;
   position: relative;
 }
@@ -9,205 +10,131 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: clamp(32px, 4vw, 56px);
+  margin-bottom: clamp(36px, 5vw, 64px);
   gap: clamp(20px, 3vw, 40px);
-  position: relative;
-  z-index: 1;
 }
 
-.newsContainer {
+.layout {
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(36px, 4vw, 52px);
 }
 
 .topRow {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(24px, 3vw, 36px);
+  align-items: start;
 }
 
 .bottomRow {
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(36px, 4vw, 56px) clamp(24px, 3vw, 36px);
 }
 
 .flexItem {
-  display: flex;
-  flex: 1 1 calc(33.333% - 24px);
-  min-width: 280px;
+  flex: 1 1 calc(33.333% - 36px);
+  min-width: 260px;
 }
 
-/* Featured */
-.featuredWrapper {
-  display: flex;
-}
-
-.featured {
-  flex-grow: 1;
-  width: 100%;
-  border-radius: 24px;
-  border: none;
-  transition: all 0.4s var(--ease);
+.card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  box-shadow: 0 4px 15px rgba(13, 59, 102, 0.06);
-  position: relative;
-  overflow: hidden;
-  height: 480px;
   text-decoration: none;
+  height: 100%;
 }
 
-.featured:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(13, 59, 102, 0.12);
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: var(--bg-gray);
 }
 
-.bgImage {
+.imageWrapFeatured {
+  aspect-ratio: 16 / 9;
+}
+
+.image {
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 1;
+  filter: saturate(0.94);
+  transition:
+    transform 1s var(--ease-reveal),
+    filter 0.5s ease-in-out;
 }
 
-.featured:hover .bgImage {
-  transform: scale(1.05);
-}
-
-.featuredOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(9, 40, 71, 0.9) 0%, rgba(9, 40, 71, 0.3) 50%, transparent 100%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(20px, 3vw, 40px);
-}
-
-.featuredTitle {
-  font-family: var(--font-heading), sans-serif;
-  font-size: var(--fs-2xl);
-  font-weight: 800;
-  color: var(--white);
-  margin-bottom: 12px;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-}
-
-.featuredDate {
-  font-size: 14px;
-  color: rgba(255,255,255,0.6);
-  font-weight: 500;
+.card:hover .image {
+  transform: scale(1.04);
+  filter: saturate(1.08) brightness(1.02);
 }
 
 .tag {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 50px;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-  align-self: flex-start;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
 .date {
   font-size: 13px;
+  font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 8px;
-  font-weight: 500;
 }
 
-/* Small News Cards */
-.smallWrapper {
-  display: flex;
-}
-
-.small {
-  flex-grow: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  padding: 14px;
-  background: linear-gradient(165deg, #FDFCFA 0%, #F4F0E6 100%);
-  border-radius: var(--radius);
-  border: 1px solid rgba(230, 233, 238, 0.7);
-  transition: transform 0.6s var(--ease-reveal), box-shadow 0.6s var(--ease-reveal);
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(13, 59, 102, 0.04);
-  text-decoration: none;
-}
-
-/* Har karta o'z pastel olamida — baraka yangilik kartalari kabi */
-.smallWrapper:nth-child(2n) .small,
-.flexItem:nth-child(3n + 1) .small {
-  background: linear-gradient(165deg, #FAFCFE 0%, #E9F2FA 100%);
-}
-.flexItem:nth-child(3n + 2) .small {
-  background: linear-gradient(165deg, #FBFDF9 0%, #ECF4E4 100%);
-}
-.flexItem:nth-child(3n) .small {
-  background: linear-gradient(165deg, #FDFBF7 0%, #F8EEDB 100%);
-}
-
-.small:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 44px rgba(13, 59, 102, 0.1);
-  border-color: transparent;
-}
-
-.smallImg {
-  width: 100%;
-  height: 220px;
-  /* Yuqorisi ark — hero'dagi gumbaz shakli bilan bitta til */
-  border-radius: 150px 150px 14px 14px;
-  overflow: hidden;
-  flex-shrink: 0;
-  position: relative;
-}
-
-.smallImg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(13, 59, 102, 0.06), transparent);
-  opacity: 0;
-  transition: opacity 0.5s var(--ease);
-}
-
-.smallImageInner {
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.small:hover .smallImg::after { opacity: 1; }
-.small:hover .smallImageInner { transform: scale(1.08); }
-
-.smallBody {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 16px 8px 8px;
-}
-
-.smallTitle {
+.title {
+  font-family: var(--font-heading), sans-serif;
   font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--blue-deep);
   line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.titleFeatured {
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--blue-deep);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.card:hover .title,
+.card:hover .titleFeatured {
+  color: var(--teal);
+}
+
+.excerpt {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 620px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media (max-width: 1024px) {
-  .topRow { grid-template-columns: 1fr; }
-  .flexItem { flex: 1 1 calc(50% - 24px); }
-  .featured { height: 400px; }
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .flexItem {
+    flex: 1 1 calc(50% - 24px);
+  }
 }
 
 @media (max-width: 768px) {
@@ -215,22 +142,8 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  .header > :global(.btn-view-all) {
-    align-self: flex-start;
-  }
   .flexItem {
     flex: 1 1 100%;
-    min-width: 0; /* 280px min-width kichik ekranda toshib ketardi */
+    min-width: 0;
   }
-  .featured {
-    height: 340px;
-    border-radius: 20px;
-  }
-  .smallImg { height: 200px; }
-  .small { border-radius: 18px; }
-}
-
-@media (max-width: 400px) {
-  .featured { height: 300px; }
-  .smallImg { height: 180px; }
 }

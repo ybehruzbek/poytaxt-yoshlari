@@ -6,6 +6,19 @@
 
 ---
 
+## [0.8.0] — 2026-07-11 · Chegarasiz oqim: landing to'liq ochiq uslubga o'tdi
+
+**Foydalanuvchi fikri asosida:** ark radiuslar kartalardan olib tashlandi, bo'lim orasidagi barcha "quti" fonlar yo'qotildi — hero'dagi ochiq-havodor his endi butun sahifada.
+
+**Nima qilindi:**
+- **Bo'lim chegaralari yo'qoldi**: band'lar (krem/havorang), Events oq oroli, Projects kulrang bloki — hammasi olib tashlandi. Sahifa endi bitta uzluksiz oqim.
+- **Ambient fon kuchaytirildi**: har bo'limda brend ranglari (yashil, amber, teal, navy) yumshoq dog' bo'lib 1.5s'da almashadi — "sahna" endi chegara bilan emas, rang bilan ajraladi.
+- **Loyihalar kartalari butunlay yangi**: quti yo'q — rasm (16px radius, hover'da sekin zoom + jonlanish), kategoriya yorlig'i + jonli progress-chiziq + foiz, sarlavha (hover'da teal), tavsif, «Batafsil →». Editorial-jurnalcha uslub.
+- **Yangiliklar kartalari ham shu tilda**: pastel qutilar va ark olib tashlandi — rasm + sana + sarlavha ochiq turadi, featured yangilik katta rasm bilan.
+- **Tadbirlar kartalari (bosh sahifa)** ham qutisiz qilindi — uchala bo'lim bitta vizual oilada.
+
+---
+
 ## [0.7.0] — 2026-07-11 · Matn animatsiyalari va kartalar (dizayn 2-bosqich)
 
 **Nima qilindi:**

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "motion/react";
@@ -19,6 +19,38 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.65, 0, 0.35, 1] } }
 };
 
+function NewsCard({
+  item,
+  featured = false,
+}: {
+  item: NewsItem;
+  featured?: boolean;
+}) {
+  return (
+    <Link href={`/yangiliklar/${item.slug}`} className={styles.card}>
+      <div
+        className={`${styles.imageWrap}${featured ? ` ${styles.imageWrapFeatured}` : ""}`}
+      >
+        <Image
+          src={item.image}
+          alt={item.title}
+          fill
+          sizes={featured ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+          className={styles.image}
+        />
+        <span className={`${styles.tag} ${item.tagClass}`}>{item.tag}</span>
+      </div>
+      <div className={styles.date}>{item.date}</div>
+      <h3 className={featured ? styles.titleFeatured : styles.title}>
+        {item.title}
+      </h3>
+      {featured && item.excerpt && (
+        <p className={styles.excerpt}>{item.excerpt}</p>
+      )}
+    </Link>
+  );
+}
+
 export default function News({ items }: { items: NewsItem[] }) {
   const featured = items.find((n) => n.featured);
   const others = items.filter((n) => !n.featured);
@@ -26,7 +58,7 @@ export default function News({ items }: { items: NewsItem[] }) {
   return (
     <section className={styles.news} id="yangiliklar">
       <div className="container">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -44,59 +76,30 @@ export default function News({ items }: { items: NewsItem[] }) {
           </motion.div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className={styles.newsContainer}
+          className={styles.layout}
         >
           <div className={styles.topRow}>
-            {/* Featured */}
             {featured && (
-              <motion.div variants={itemVariants} className={styles.featuredWrapper}>
-                <Link href={`/yangiliklar/${featured.slug}`} className={styles.featured}>
-                  <Image src={featured.image} alt={featured.title} fill sizes="(max-width: 768px) 100vw, 66vw" className={styles.bgImage} />
-                  <div className={styles.featuredOverlay}>
-                    <span className={`${styles.tag} ${featured.tagClass}`}>{featured.tag}</span>
-                    <h3 className={styles.featuredTitle}>{featured.title}</h3>
-                    <div className={styles.featuredDate}>{featured.date}</div>
-                  </div>
-                </Link>
+              <motion.div variants={itemVariants}>
+                <NewsCard item={featured} featured />
               </motion.div>
             )}
-
-            {/* First Small Card (Top Right) */}
             {others[0] && (
-              <motion.div variants={itemVariants} className={styles.smallWrapper}>
-                <Link href={`/yangiliklar/${others[0].slug}`} className={styles.small}>
-                  <div className={styles.smallImg}>
-                    <Image src={others[0].image} alt={others[0].title} fill sizes="33vw" className={styles.smallImageInner} />
-                  </div>
-                  <div className={styles.smallBody}>
-                    <span className={`${styles.tag} ${others[0].tagClass}`}>{others[0].tag}</span>
-                    <h3 className={styles.smallTitle}>{others[0].title}</h3>
-                    <div className={styles.date}>{others[0].date}</div>
-                  </div>
-                </Link>
+              <motion.div variants={itemVariants}>
+                <NewsCard item={others[0]} />
               </motion.div>
             )}
           </div>
 
           <div className={styles.bottomRow}>
-            {/* Remaining Small Cards */}
             {others.slice(1).map((item) => (
               <motion.div key={item.id} variants={itemVariants} className={styles.flexItem}>
-                <Link href={`/yangiliklar/${item.slug}`} className={styles.small}>
-                  <div className={styles.smallImg}>
-                    <Image src={item.image} alt={item.title} fill sizes="33vw" className={styles.smallImageInner} />
-                  </div>
-                  <div className={styles.smallBody}>
-                    <span className={`${styles.tag} ${item.tagClass}`}>{item.tag}</span>
-                    <h3 className={styles.smallTitle}>{item.title}</h3>
-                    <div className={styles.date}>{item.date}</div>
-                  </div>
-                </Link>
+                <NewsCard item={item} />
               </motion.div>
             ))}
           </div>

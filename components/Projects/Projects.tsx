@@ -51,20 +51,37 @@ export default function Projects({ items }: { items: Project[] }) {
           viewport={{ once: true, amount: 0.1 }}
           className={styles.grid}
         >
-          {items.map((project, i) => (
+          {items.map((project) => (
             <motion.div key={project.id} variants={itemVariants} className={styles.cardWrapper}>
               <Link href={`/loyihalar/${project.slug}`} className={styles.card}>
-                <Image src={project.image} alt={project.title} fill sizes="(max-width: 768px) 100vw, 33vw" className={styles.bgImage} />
-                <div className={styles.cardOverlay} />
-                <span className={styles.status}>{project.status}</span>
-                
-                <div className={styles.body}>
-                  <h3>{project.title}</h3>
-                  <p>{project.desc}</p>
-                  <div className={styles.action}>
-                    Batafsil <i className="fas fa-arrow-right" />
-                  </div>
+                <div className={styles.imageWrap}>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={styles.image}
+                  />
+                  <span className={styles.status}>{project.status}</span>
                 </div>
+
+                <div className={styles.meta}>
+                  <span className={styles.category}>{project.category}</span>
+                  <span className={styles.progressTrack} aria-hidden>
+                    <span
+                      className={styles.progressFill}
+                      style={{ width: `${Math.min(100, project.progress)}%` }}
+                    />
+                  </span>
+                  <span className={styles.progressNum}>{project.progress}%</span>
+                </div>
+
+                <h3 className={styles.title}>{project.title}</h3>
+                <p className={styles.desc}>{project.desc}</p>
+
+                <span className={styles.action}>
+                  Batafsil <span className={styles.arrow}>→</span>
+                </span>
               </Link>
             </motion.div>
           ))}

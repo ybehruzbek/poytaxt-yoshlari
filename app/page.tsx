@@ -27,7 +27,7 @@ export default async function Home() {
         <Events items={events} />
       </SectionTheme>
 
-      <SectionTheme theme="about" className="band band-cream">
+      <SectionTheme theme="about">
         <About />
       </SectionTheme>
 
@@ -39,7 +39,7 @@ export default async function Home() {
         <Stats items={stats} />
       </SectionTheme>
 
-      <SectionTheme theme="news" className="band band-sky">
+      <SectionTheme theme="news">
         <News items={news} />
       </SectionTheme>
     </>
