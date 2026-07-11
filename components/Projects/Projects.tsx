@@ -67,13 +67,6 @@ export default function Projects({ items }: { items: Project[] }) {
 
                 <div className={styles.meta}>
                   <span className={styles.category}>{project.category}</span>
-                  <span className={styles.progressTrack} aria-hidden>
-                    <span
-                      className={styles.progressFill}
-                      style={{ width: `${Math.min(100, project.progress)}%` }}
-                    />
-                  </span>
-                  <span className={styles.progressNum}>{project.progress}%</span>
                 </div>
 
                 <h3 className={styles.title}>{project.title}</h3>

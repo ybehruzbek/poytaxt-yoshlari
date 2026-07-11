@@ -6,6 +6,15 @@
 
 ---
 
+## [0.8.2] — 2026-07-11 · Kartalar yakuniy: progress olib tashlandi, yangiliklar «digest»
+
+**Foydalanuvchi fikri asosida:**
+- **Loyihalar kartasidan foiz/progress-chiziq olib tashlandi** — landing kartada ortiqcha ma'lumot edi (gradient ham ketdi). Endi: rasm + kategoriya + sarlavha + tavsif + «Batafsil».
+- **Tadbir kartalariga oq fon qaytdi** — loyihalar bilan bir xil karta yuzasi (oq, 24px radius, hover'da ko'tarilish).
+- **Yangiliklar butunlay yangi «digest» maketida**: chapda bitta katta bosh yangilik (rasm + sarlavha + qisqacha + «O'qish»), o'ngda 4 ta ixcham gorizontal qator (kichik rasm + teg + sana + sarlavha) — gazeta lentasi uslubi. Hover'da qatorlar o'ngga siljiydi. Har bo'lim endi o'z xarakteriga ega: loyihalar — grid, tadbirlar — grid, yangiliklar — lenta.
+
+---
+
 ## [0.8.1] — 2026-07-11 · Tinchlantirish: ranglar soddalashdi, silliqlik tuzatildi
 
 **Foydalanuvchi fikri asosida:** juda rang-barang bo'lib ketgan edi, scroll silliq emasdi, loyiha kartalariga o'z foni kerak edi.

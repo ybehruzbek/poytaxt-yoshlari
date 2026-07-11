@@ -10,7 +10,7 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 }
   }
 };
 
@@ -19,41 +19,16 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.65, 0, 0.35, 1] } }
 };
 
-function NewsCard({
-  item,
-  featured = false,
-}: {
-  item: NewsItem;
-  featured?: boolean;
-}) {
-  return (
-    <Link href={`/yangiliklar/${item.slug}`} className={styles.card}>
-      <div
-        className={`${styles.imageWrap}${featured ? ` ${styles.imageWrapFeatured}` : ""}`}
-      >
-        <Image
-          src={item.image}
-          alt={item.title}
-          fill
-          sizes={featured ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
-          className={styles.image}
-        />
-        <span className={`${styles.tag} ${item.tagClass}`}>{item.tag}</span>
-      </div>
-      <div className={styles.date}>{item.date}</div>
-      <h3 className={featured ? styles.titleFeatured : styles.title}>
-        {item.title}
-      </h3>
-      {featured && item.excerpt && (
-        <p className={styles.excerpt}>{item.excerpt}</p>
-      )}
-    </Link>
-  );
-}
-
+/**
+ * "Digest" maketi — gazeta lentasi uslubi: chapda bitta katta bosh yangilik,
+ * o'ngda ixcham gorizontal qatorlar. Loyiha/tadbir gridlaridan atayin farq
+ * qiladi — har bo'lim o'z xarakteriga ega.
+ */
 export default function News({ items }: { items: NewsItem[] }) {
-  const featured = items.find((n) => n.featured);
-  const others = items.filter((n) => !n.featured);
+  const featured = items.find((n) => n.featured) ?? items[0];
+  const rest = items.filter((n) => n.id !== featured?.id).slice(0, 4);
+
+  if (!featured) return null;
 
   return (
     <section className={styles.news} id="yangiliklar">
@@ -83,23 +58,56 @@ export default function News({ items }: { items: NewsItem[] }) {
           viewport={{ once: true, amount: 0.1 }}
           className={styles.layout}
         >
-          <div className={styles.topRow}>
-            {featured && (
-              <motion.div variants={itemVariants}>
-                <NewsCard item={featured} featured />
-              </motion.div>
-            )}
-            {others[0] && (
-              <motion.div variants={itemVariants}>
-                <NewsCard item={others[0]} />
-              </motion.div>
-            )}
-          </div>
+          {/* Bosh yangilik */}
+          <motion.div variants={itemVariants}>
+            <Link href={`/yangiliklar/${featured.slug}`} className={styles.featured}>
+              <div className={styles.featuredImageWrap}>
+                <Image
+                  src={featured.image}
+                  alt={featured.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 55vw"
+                  className={styles.image}
+                />
+                <span className={`${styles.tag} ${featured.tagClass}`}>
+                  {featured.tag}
+                </span>
+              </div>
+              <div className={styles.featuredBody}>
+                <div className={styles.date}>{featured.date}</div>
+                <h3 className={styles.featuredTitle}>{featured.title}</h3>
+                {featured.excerpt && (
+                  <p className={styles.excerpt}>{featured.excerpt}</p>
+                )}
+                <span className={styles.readMore}>
+                  O&apos;qish <span className={styles.arrow}>→</span>
+                </span>
+              </div>
+            </Link>
+          </motion.div>
 
-          <div className={styles.bottomRow}>
-            {others.slice(1).map((item) => (
-              <motion.div key={item.id} variants={itemVariants} className={styles.flexItem}>
-                <NewsCard item={item} />
+          {/* Lenta — ixcham qatorlar */}
+          <div className={styles.list}>
+            {rest.map((item) => (
+              <motion.div key={item.id} variants={itemVariants}>
+                <Link href={`/yangiliklar/${item.slug}`} className={styles.row}>
+                  <div className={styles.thumb}>
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="120px"
+                      className={styles.image}
+                    />
+                  </div>
+                  <div className={styles.rowBody}>
+                    <div className={styles.rowMeta}>
+                      <span className={styles.rowTag}>{item.tag}</span>
+                      <span className={styles.date}>{item.date}</span>
+                    </div>
+                    <h3 className={styles.rowTitle}>{item.title}</h3>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
