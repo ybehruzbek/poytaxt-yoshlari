@@ -1,0 +1,25 @@
+# Dev muhit: faqat PostgreSQL. Ilova hozircha `npm run dev` bilan ishlaydi;
+# production Dockerfile va app servisi Faza 1.10 da qo'shiladi (PLAN.md).
+#
+# Host port 5433 — bu mashinada 5432 da lokal Postgres bor, konflikt bo'lmasin.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: poytaxt-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: poytaxt
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD .env faylida belgilanishi shart}
+      POSTGRES_DB: poytaxt_yoshlari
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U poytaxt -d poytaxt_yoshlari"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

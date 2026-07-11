@@ -229,9 +229,9 @@ Butun kontent bazaga ko'chdi; `lib/queries.ts`; slug URL'lar; 11 resursli admin 
 ### 🔜 Faza 1 — Poydevor (production-ga tayyor asos)
 | # | Ish | TZ |
 |---|---|---|
-| 1.1 | PostgreSQL 16 + `docker-compose.yml`; SQLite'dan ma'lumot ko'chirish skripti | §17.1 |
+| 1.1 | ✅ PostgreSQL 16 + `docker-compose.yml` (dev: host port 5433). SQLite o'chirildi; lokal ma'lumot seed'dan tiklandi | §17.1 |
 | 1.2 | Sxema TZ §18 + i18n: `*_translations` jadvallar (yoki JSONB per-locale), `organizations`, `events`, `event_registrations`, `media`, `ratings`, `notifications`, `appeals` kengaytmasi (toifa, mavzu, fayl, kod, mas'ul, muddat) | §18, §14 |
-| 1.3 | `prisma migrate` tartibi (`db push` o'rniga) | §23 |
+| 1.3 | ✅ `prisma migrate` tartibi (`db push` o'rniga): `db:migrate`, `db:deploy`, `db:reset` skriptlari | §23 |
 | 1.4 | **URL-sxema validatsiyasi** (`type:"url"` maydonlar — hozirgi yagona ma'lum xavfsizlik bo'shlig'i) | §19 |
 | 1.5 | Rate-limit + Turnstile: `/api/appeals`, login | SEC-07 |
 | 1.6 | Fayl yuklash: `/uploads` volume + sharp + MIME/hajm tekshiruvi; admin media kutubxonasi | SEC-06 |

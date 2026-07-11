@@ -1,15 +1,19 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import path from "path";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const dbPath = path.join(process.cwd(), "prisma", "dev.db");
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error(
+    "DATABASE_URL belgilanmagan. .env faylida PostgreSQL ulanish manzilini ko'rsating."
+  );
+}
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
 function createPrismaClient() {
-  const adapter = new PrismaBetterSqlite3({ url: `file:${dbPath}` });
+  const adapter = new PrismaPg({ connectionString });
   return new PrismaClient({ adapter });
 }
 

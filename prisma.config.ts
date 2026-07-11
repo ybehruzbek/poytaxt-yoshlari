@@ -9,6 +9,7 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: "file:./prisma/dev.db",
+    // PostgreSQL — docker-compose.yml dagi `db` servisi (dev: localhost:5433)
+    url: process.env.DATABASE_URL!,
   },
 });
