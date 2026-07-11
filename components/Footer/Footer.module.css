@@ -34,20 +34,21 @@
   max-width: 350px;
 }
 
-/* Logo matni och-ko'k — to'q fonda yo'qoladi, shuning uchun oq kartacha */
 .logoWrap {
   display: inline-flex;
   align-items: center;
-  background: var(--white);
-  border-radius: var(--radius-xs);
-  padding: 12px 18px;
   margin-bottom: 24px;
 }
 
+/* Logo asli rangli (yashil/ko'k) — to'q navy fonda o'chib qolardi.
+   filter bilan butun logotipni bir rangli oq silуэtga aylantiramiz:
+   brightness(0) hamma pikselni qora qiladi, invert(1) uni oqqa aylantiradi. */
 .logo {
   width: 130px;
   height: auto;
   object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.94;
 }
 
 .brandDesc {

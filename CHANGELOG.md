@@ -6,6 +6,14 @@
 
 ---
 
+## [0.9.3] — 2026-07-11 · Footer logo oq siluэt + yangiliklar lentasi to'ldirildi
+
+**Foydalanuvchi fikri asosida:**
+- **Footer logotipi endi o'zi oq** — oldingi oq kartacha yechim o'rniga CSS `filter: brightness(0) invert(1)` bilan logotipning o'zi bir rangli oq silуэtga aylantirildi (shaffoflik saqlanadi).
+- **Yangiliklar lentasidagi bo'sh joy to'ldirildi** — bazada atigi 6 ta yangilik bor edi (3 tasi aylanishda, faqat 3 tasi lentaga yetardi, 4-o'rin bo'sh qolardi). 2 ta yangi yangilik qo'shildi («IT Park bilan hamkorlik», «Yosh tadbirkor tanlovi») — endi lenta to'liq.
+
+---
+
 ## [0.9.2] — 2026-07-11 · Footer qayta ishlandi: to'q navy, o'lik havolalar tuzatildi
 
 **Nima qilindi:**

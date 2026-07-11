@@ -163,6 +163,8 @@ async function main() {
       { title: "Toshkentda 'Raqamli Avlod' yosh dasturchilar xakatoni boshlandi", excerpt: "Uch kun davom etadigan xakatonda 200 dan ortiq yosh dasturchi ijtimoiy muammolarga raqamli yechim izlaydi.", date: "5 Noyabr 2024", tag: "Texnologiya", tagClass: "tag-blue", image: "/images/news/news_hackathon_1782905609599.png", featured: false },
       { title: "Yashil Makon: Poytaxt yoshlari 10 mingta daraxt ekishdi", excerpt: "Umumshahar ko'kalamzorlashtirish aksiyasida barcha 12 tuman yoshlari ishtirok etdi.", date: "1 Noyabr 2024", tag: "Ekologiya", tagClass: "tag-green", image: "/images/news/news_eco_1782905632260.png", featured: false },
       { title: "Xalqaro ta'lim ko'rgazmasida yoshlarimizning faol ishtiroki", excerpt: "Ko'rgazmada 30 dan ortiq xorijiy oliygoh o'z dasturlarini taqdim etdi.", date: "28 Oktyabr 2024", tag: "Ta'lim", tagClass: "tag-blue", image: "/images/news/news_exhibition_1782905641384.png", featured: false },
+      { title: "Yoshlar ittifoqi va IT Park o'rtasida hamkorlik memorandumi imzolandi", excerpt: "Memorandum doirasida yosh dasturchilar uchun bepul stajirovka va grant dasturlari yo'lga qo'yiladi.", date: "24 Oktyabr 2024", tag: "Hamkorlik", tagClass: "tag-blue", image: "/images/news/news_strategy_1782905584191.png", featured: false },
+      { title: "Viloyatlararo «Yosh tadbirkor» tanlovi g'oliblari e'lon qilindi", excerpt: "Tanlovda 14 ta viloyatdan 200 dan ortiq yosh tadbirkor o'z biznes-loyihalarini taqdim etdi.", date: "20 Oktyabr 2024", tag: "Tadbirkorlik", tagClass: "tag-orange", image: "/images/news/news_education_1782905592898.png", featured: false },
     ];
     for (const n of data) {
       await prisma.news.create({
