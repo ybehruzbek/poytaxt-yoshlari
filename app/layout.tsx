@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import BackgroundController from "@/components/ui/BackgroundController";
+import PageTransition from "@/components/ui/PageTransition";
 import { getNavLinks } from "@/lib/queries";
 
 // Sarlavhalar — Jost (geometrik grotesk, baraka.gov.uz sarlavha shrifti;
@@ -57,7 +58,7 @@ export default async function RootLayout({
   const navLinks = await getNavLinks();
 
   return (
-    <html lang="uz" className={`${jost.variable} ${inter.variable}`}>
+    <html lang="uz" data-scroll-behavior="smooth" className={`${jost.variable} ${inter.variable}`}>
       <head>
         {/* CSS versiya — JS versiyasi <i> ni <svg> ga almashtirib, React
             hydration bilan urishardi (151 joyda). Lokal SVG sprite'ga
@@ -71,7 +72,7 @@ export default async function RootLayout({
         <ThemeProvider>
           <BackgroundController />
           <Navbar links={navLinks} />
-          <main>{children}</main>
+          <PageTransition>{children}</PageTransition>
           <Footer />
         </ThemeProvider>
       </body>

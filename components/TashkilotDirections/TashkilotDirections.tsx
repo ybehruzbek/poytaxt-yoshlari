@@ -18,7 +18,7 @@ const directions = [
     title: "Tadbirkorlik",
     desc: "Startap loyihalar va biznesni qo'llab-quvvatlash. Yosh tadbirkorlarga biznes reja tuzish va investitsiya jalb qilishda ko'maklashish.",
     icon: "fas fa-chart-line",
-    bg: "#f59e0b",
+    bg: "var(--amber)",
     color: "#ffffff"
   },
   {
@@ -26,7 +26,7 @@ const directions = [
     title: "Volontyorlik",
     desc: "Ijtimoiy himoyaga muhtojlarga yordam berish, ekologik aksiyalar o'tkazish va ko'ngillilar harakatini rivojlantirish orqali jamiyatga foyda keltirish.",
     icon: "fas fa-hands-helping",
-    bg: "#10b981",
+    bg: "var(--green-check)",
     color: "#ffffff"
   },
   {
@@ -34,7 +34,7 @@ const directions = [
     title: "Sport va Madaniyat",
     desc: "Sog'lom turmush tarzini targ'ib qilish, sport musobaqalari va ijodiy festivallar orqali yoshlarni jismoniy va ma'naviy yetuk etib tarbiyalash.",
     icon: "fas fa-running",
-    bg: "#f43f5e",
+    bg: "var(--accent-orange)",
     color: "#ffffff"
   }
 ];
@@ -48,7 +48,6 @@ export default function TashkilotDirections() {
         
         <div className={styles.headerArea}>
           <ScrollReveal>
-            <span className={styles.badge}>Yo'nalishlar</span>
             <h2 className={styles.title}>Biz nima bilan shug'ullanamiz?</h2>
           </ScrollReveal>
         </div>
@@ -57,19 +56,21 @@ export default function TashkilotDirections() {
           {directions.map((dir, idx) => {
             const isActive = idx === activeIndex;
             return (
-              <div 
+              <div
                 key={idx}
                 className={`${styles.accordionPanel} ${isActive ? styles.activePanel : ""}`}
                 onMouseEnter={() => setActiveIndex(idx)}
+                onClick={() => setActiveIndex(idx)}
                 style={{ backgroundColor: isActive ? dir.bg : "var(--bg-light)" }}
               >
                 
-                {/* Closed State Info (Vertical) */}
+                {/* Closed State Info (Vertical on desktop, tappable row on mobile) */}
                 <div className={`${styles.closedContent} ${isActive ? styles.hidden : ""}`}>
                   <span className={styles.closedNum}>{dir.num}</span>
                   <div className={styles.closedTitleWrap}>
                     <h3 className={styles.closedTitle}>{dir.title}</h3>
                   </div>
+                  <i className={`fas fa-chevron-down ${styles.closedChevron}`} aria-hidden="true" />
                 </div>
 
                 {/* Open State Info (Horizontal) */}

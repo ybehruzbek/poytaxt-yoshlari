@@ -1,8 +1,8 @@
 .section {
   position: relative;
-  padding: 160px 0;
-  background: var(--bg-light, #ffffff);
-  color: var(--blue-deep, #0f172a);
+  padding: var(--section-y) 0;
+  background: var(--bg-light);
+  color: var(--blue-deep);
   transition: background 0.6s ease;
   overflow: hidden; /* To keep bg images contained if needed */
 }
@@ -29,7 +29,7 @@
 .bgOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.85); /* Deep dark overlay so white text reads well */
+  background: rgba(15, 37, 71, 0.85); /* Deep dark overlay so white text reads well */
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -40,21 +40,20 @@
   z-index: 2; /* Sit above the background */
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--sp-10);
 }
 
 .header {
-  margin-bottom: 80px;
+  margin-bottom: var(--sp-20);
 }
 
 .badge {
-  font-family: var(--font-mono, monospace);
-  font-size: 14px;
+  font-size: var(--fs-sm);
   font-weight: 600;
-  color: var(--blue, #0ea5e9);
+  color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  margin-bottom: 16px;
+  margin-bottom: var(--sp-4);
   display: block;
 }
 
@@ -73,7 +72,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  border-top: 1px solid rgba(15, 37, 71, 0.1);
 }
 
 /* When a background is active, switch borders to white-transparent */
@@ -85,11 +84,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 0;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  padding: var(--sp-16) 0;
+  border-bottom: 1px solid rgba(15, 37, 71, 0.1);
   transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   text-decoration: none;
-  color: var(--blue-deep, #0f172a);
+  color: var(--blue-deep);
   cursor: pointer;
 }
 
@@ -97,7 +96,7 @@
   font-size: clamp(32px, 4vw, 56px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--blue-deep, #0f172a);
+  color: var(--blue-deep);
   transition: color 0.5s ease;
 }
 
@@ -109,7 +108,7 @@
 
 /* Immediately set the section background to dark so the image doesn't fade over white */
 .hasActiveBg.section {
-  background-color: var(--blue-deep, #0f172a);
+  background-color: var(--blue-deep);
 }
 
 /* Dim non-hovered rows when any row is hovered */
@@ -119,31 +118,30 @@
 
 /* Active row styling */
 .rowActive {
-  padding: 60px 40px; /* Slight horizontal expansion */
+  padding: var(--sp-16) var(--sp-10); /* Slight horizontal expansion */
 }
 
 .rowLeft {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: var(--sp-10);
 }
 
 .rowNum {
-  font-size: 24px;
+  font-size: var(--fs-2xl);
   font-weight: 600;
   opacity: 0.4;
-  font-family: var(--font-mono, monospace);
 }
 
 .rowRight {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: var(--sp-16);
 }
 
 .rowDesc {
   max-width: 400px;
-  font-size: 18px;
+  font-size: var(--fs-xl);
   line-height: 1.6;
   opacity: 0.7;
 }
@@ -152,8 +150,8 @@
 .arrowWrap {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
-  border: 1px solid rgba(15, 23, 42, 0.2);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(15, 37, 71, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,8 +170,8 @@
 
 /* Hover effects for the row */
 .rowActive .arrowWrap {
-  background: var(--blue, #0ea5e9);
-  border-color: var(--blue, #0ea5e9);
+  background: var(--blue);
+  border-color: var(--blue);
   color: white;
 }
 

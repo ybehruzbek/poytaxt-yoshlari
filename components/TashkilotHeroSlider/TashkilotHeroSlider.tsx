@@ -55,7 +55,7 @@ export default function TashkilotHeroSlider() {
                 <Image src={slide.image} alt={slide.title} fill priority={index === 0} />
                 <div className={styles.slideOverlay} />
               </div>
-              
+
               <div className={styles.slideContent}>
                 <ScrollReveal>
                   <div className={styles.heroBadge}>Biz Kimmiz?</div>

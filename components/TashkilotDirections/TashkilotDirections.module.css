@@ -1,21 +1,11 @@
 .directionsSection {
-  padding: 120px 0;
+  padding: var(--section-y) 0;
   background: var(--white);
 }
 
 .headerArea {
-  margin-bottom: 60px;
+  margin-bottom: var(--sp-16);
   text-align: center;
-}
-
-.badge {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--blue);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 16px;
-  display: block;
 }
 
 .title {
@@ -35,7 +25,7 @@
 
 .accordionPanel {
   position: relative;
-  border-radius: 24px;
+  border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -43,9 +33,9 @@
   justify-content: flex-start;
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   background: var(--white);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-  border: 1px solid rgba(0,0,0,0.05);
-  
+  box-shadow: var(--shadow-xs);
+  border: 1px solid var(--border-light);
+
   /* Initial closed state */
   flex: 1; /* evenly divide space */
 }
@@ -53,7 +43,7 @@
 /* When a panel is active (hovered) */
 .activePanel {
   flex: 12; /* Takes up 12 times more space than others to ensure text NEVER clips */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 50px rgba(15, 37, 71, 0.2);
 }
 
 /* Hidden class for toggling content smoothly */
@@ -75,7 +65,10 @@
   justify-content: flex-start; /* Start from top instead of space-between */
   padding: 32px 0;
   transition: opacity 0.4s ease;
-  position: relative;
+  /* position:relative yozilmaydi — .hidden klassining position:absolute
+     qiymati bilan bir xil spetsifiklikda to'qnashib, yopiq holat hali ham
+     flex layoutda joy egallab qolardi (aktiv panelning ochiq kontentini
+     o'ngga surib, mobil kenglikda tashqariga toshib chiqishiga sabab bo'lgan). */
 }
 
 .closedNum {
@@ -101,6 +94,13 @@
   transform: rotate(-90deg); /* Text reads from bottom to top */
   transform-origin: center center;
   letter-spacing: 1px;
+}
+
+/* Tap affordance — desktop'da yashirin, faqat mobil qatorda ko'rinadi.
+   !important: FontAwesome CDN .fas qoidasi bilan bir xil spetsifiklikda,
+   dev-serverda style in'ektsiya tartibi barqaror emas. */
+.closedChevron {
+  display: none !important;
 }
 
 /* ================= OPEN STATE ================= */
@@ -185,34 +185,93 @@
 }
 
 @media (max-width: 768px) {
-  /* On mobile, we change the accordion to be vertical */
+  /* Hover asosidagi akkordeon mobilda ishlamaydi (touch'da hover yo'q) —
+     shuning uchun bosish (tap) bilan boshqariladigan, har biri o'z balandligiga
+     moslashadigan vertikal ro'yxatga o'tkaziladi (fixed umumiy balandlik yo'q). */
   .accordionContainer {
     flex-direction: column;
-    height: 800px; /* Fixed high height for vertical cards */
+    height: auto;
+    gap: var(--sp-3);
   }
-  
-  .closedTitle {
-    transform: rotate(0deg); /* Normal text */
+
+  .accordionPanel {
+    flex: none;
+    width: 100%;
   }
-  
+
+  .activePanel {
+    flex: none;
+  }
+
+  /* Yopiq holat — ixcham, bosiladigan qator */
   .closedContent {
     flex-direction: row;
-    padding: 0 24px;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: var(--sp-5) var(--sp-6);
   }
-  
+
+  .closedNum {
+    margin-bottom: 0;
+  }
+
+  .closedTitleWrap {
+    flex: 1;
+    justify-content: flex-start;
+    margin: 0 0 0 var(--sp-4);
+  }
+
+  .closedTitle {
+    transform: none; /* Normal, gorizontal matn */
+    white-space: normal;
+  }
+
+  .closedChevron {
+    display: block !important;
+    font-size: 14px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  /* Ochiq holat — to'liq o'qiladigan, chapga tekislangan karta */
   .openContent {
     flex-direction: column;
-    text-align: center;
-    padding: 24px;
-    gap: 20px;
-    min-width: unset;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    padding: var(--sp-8) var(--sp-6);
+    gap: var(--sp-5);
   }
-  
+
+  .openIconWrap {
+    width: 56px;
+    height: 56px;
+  }
+
+  .openIcon {
+    font-size: 24px;
+  }
+
   .openTextWrap {
     width: 100%;
   }
-  
+
+  .openNum {
+    font-size: 28px;
+    margin-bottom: var(--sp-1);
+  }
+
+  .openTitle {
+    font-size: 28px;
+    margin-bottom: var(--sp-3);
+  }
+
   .openDesc {
-    font-size: 16px;
+    font-size: var(--fs-base);
+    max-width: 100%;
   }
 }

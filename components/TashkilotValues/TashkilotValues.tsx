@@ -30,34 +30,34 @@ export default function TashkilotValues() {
           {/* Card 2: Square */}
           <ScrollReveal delay={0.2} className={`${styles.bentoCard} ${styles.cardSquare}`}>
             <div className={styles.cardContent}>
-              <div className={styles.iconWrap} style={{ background: 'rgba(14, 165, 233, 0.1)' }}>
-                <i className="fas fa-handshake" style={{ color: '#0ea5e9', fontSize: '28px' }} />
+              <div className={styles.iconWrap} style={{ background: 'var(--blue-pale)' }}>
+                <i className="fas fa-handshake" style={{ color: 'var(--blue)', fontSize: '28px' }} />
               </div>
-              <h3 style={{ color: '#0f172a' }}>O'zaro Hurmat</h3>
-              <p style={{ color: '#475569' }}>Barcha yoshlarni teng ko'rish va ularning fikrini hurmat qilish.</p>
+              <h3 style={{ color: 'var(--blue-deep)' }}>O'zaro Hurmat</h3>
+              <p style={{ color: 'var(--text-secondary)' }}>Barcha yoshlarni teng ko'rish va ularning fikrini hurmat qilish.</p>
             </div>
           </ScrollReveal>
 
           {/* Card 3: Square */}
           <ScrollReveal delay={0.3} className={`${styles.bentoCard} ${styles.cardSquare}`}>
             <div className={styles.cardContent}>
-              <div className={styles.iconWrap} style={{ background: 'rgba(245, 158, 11, 0.1)' }}>
-                <i className="fas fa-lightbulb" style={{ color: '#f59e0b', fontSize: '28px' }} />
+              <div className={styles.iconWrap} style={{ background: 'color-mix(in srgb, var(--amber) 15%, white)' }}>
+                <i className="fas fa-lightbulb" style={{ color: 'var(--amber)', fontSize: '28px' }} />
               </div>
-              <h3 style={{ color: '#0f172a' }}>Innovatsiya</h3>
-              <p style={{ color: '#475569' }}>Yangi g'oyalarni qo'llab-quvvatlash va zamonaviy texnologiyalarni tatbiq etish.</p>
+              <h3 style={{ color: 'var(--blue-deep)' }}>Innovatsiya</h3>
+              <p style={{ color: 'var(--text-secondary)' }}>Yangi g'oyalarni qo'llab-quvvatlash va zamonaviy texnologiyalarni tatbiq etish.</p>
             </div>
           </ScrollReveal>
 
           {/* Card 4: Wide Rectangle */}
           <ScrollReveal delay={0.4} className={`${styles.bentoCard} ${styles.cardWide}`}>
             <div className={styles.cardContent}>
-              <div className={styles.iconWrap} style={{ background: 'rgba(16, 185, 129, 0.1)' }}>
-                <i className="fas fa-balance-scale" style={{ color: '#10b981', fontSize: '36px' }} />
+              <div className={styles.iconWrap} style={{ background: 'var(--green-pale)' }}>
+                <i className="fas fa-balance-scale" style={{ color: 'var(--green-check)', fontSize: '36px' }} />
               </div>
               <div className={styles.wideText}>
-                <h3 style={{ color: '#0f172a' }}>Teng Huquqlilik</h3>
-                <p style={{ color: '#475569' }}>Jinsi, millati va ijtimoiy kelib chiqishidan qat'i nazar, barcha yoshlar uchun teng imkoniyatlar yaratish.</p>
+                <h3 style={{ color: 'var(--blue-deep)' }}>Teng Huquqlilik</h3>
+                <p style={{ color: 'var(--text-secondary)' }}>Jinsi, millati va ijtimoiy kelib chiqishidan qat'i nazar, barcha yoshlar uchun teng imkoniyatlar yaratish.</p>
               </div>
             </div>
           </ScrollReveal>

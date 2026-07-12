@@ -1,15 +1,15 @@
 .section {
   position: relative;
-  padding: 160px 0;
-  background: var(--bg-light, #ffffff);
-  color: var(--text, #0f172a);
+  padding: var(--section-y) 0;
+  background: var(--bg-light);
+  color: var(--text);
   overflow: hidden;
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--sp-10);
   position: relative;
 }
 
@@ -18,10 +18,11 @@
   position: absolute;
   top: -80px;
   left: 20px;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: var(--font-heading);
+  font-weight: 800;
   font-size: 600px;
   line-height: 1;
-  color: rgba(14, 165, 233, 0.03); /* Extremely faint blue */
+  color: rgba(15, 37, 71, 0.04); /* Extremely faint navy */
   pointer-events: none;
   z-index: 0;
   user-select: none;
@@ -30,7 +31,7 @@
 .grid {
   display: grid;
   grid-template-columns: 5fr 7fr;
-  gap: 80px;
+  gap: var(--sp-20);
   align-items: center;
   position: relative;
   z-index: 2;
@@ -45,9 +46,9 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  border-radius: 24px;
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.2);
+  box-shadow: 0 40px 80px -20px rgba(15, 37, 71, 0.25);
 }
 
 .image {
@@ -61,8 +62,8 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(15, 23, 42, 0) 60%,
-    rgba(15, 23, 42, 0.4) 100%
+    rgba(15, 37, 71, 0) 60%,
+    rgba(15, 37, 71, 0.4) 100%
   );
   pointer-events: none;
   mix-blend-mode: multiply;
@@ -70,51 +71,51 @@
 
 /* RIGHT SIDE - EDITORIAL CONTENT */
 .contentCol {
-  padding-right: 40px;
+  padding-right: var(--sp-10);
 }
 
 .mainQuote {
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: var(--font-heading);
   font-size: clamp(36px, 4vw, 56px);
-  font-weight: 500;
+  font-weight: 600;
   font-style: italic;
   line-height: 1.2;
-  color: var(--blue-deep, #0f172a);
-  margin-bottom: 40px;
+  color: var(--blue-deep);
+  margin-bottom: var(--sp-10);
   letter-spacing: -0.01em;
 }
 
 .paragraph {
   font-size: clamp(18px, 1.5vw, 22px);
   line-height: 1.8;
-  color: #475569;
-  margin-bottom: 32px;
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-8);
 }
 
 .authorBlock {
-  margin-top: 64px;
+  margin-top: var(--sp-16);
 }
 
 .authorLine {
   width: 64px;
   height: 2px;
-  background: var(--blue, #0ea5e9);
-  margin-bottom: 24px;
+  background: var(--blue);
+  margin-bottom: var(--sp-6);
 }
 
 .authorName {
   display: block;
-  font-size: 24px;
+  font-size: var(--fs-2xl);
   font-weight: 700;
-  color: var(--blue-deep, #0f172a);
-  margin-bottom: 8px;
+  color: var(--blue-deep);
+  margin-bottom: var(--sp-2);
   letter-spacing: -0.01em;
 }
 
 .authorRole {
   display: block;
-  font-size: 16px;
-  color: #64748b;
+  font-size: var(--fs-base);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 500;
