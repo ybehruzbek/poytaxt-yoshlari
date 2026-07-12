@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background-color: var(--bg);
+  background-color: transparent;
 }
 
 /* NOISE TEXTURE FOR PREMIUM FEEL */

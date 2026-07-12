@@ -4,6 +4,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { Shield, WarningCircle } from "@phosphor-icons/react/ssr";
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
@@ -50,7 +51,7 @@ export default function AdminLoginPage() {
               display: "flex", alignItems: "center", justifyContent: "center",
               color: "#fff", fontSize: "32px"
             }}>
-              <i className="fas fa-shield-alt"></i>
+              <Shield weight="duotone" />
             </div>
           </div>
           <h1 style={{ fontSize: "24px", color: "var(--primary-dark)", margin: "0 0 5px" }}>Tizimga kirish</h1>
@@ -65,7 +66,7 @@ export default function AdminLoginPage() {
             borderRadius: "8px", fontSize: "14px", marginBottom: "20px",
             display: "flex", alignItems: "center", gap: "10px"
           }}>
-            <i className="fas fa-exclamation-circle"></i>
+            <WarningCircle weight="duotone" />
             {error}
           </div>
         )}

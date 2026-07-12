@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './HujjatlarHero.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import { MagnifyingGlass } from '@phosphor-icons/react/ssr';
 
 export default function HujjatlarHero() {
   return (
@@ -40,7 +41,7 @@ export default function HujjatlarHero() {
 
               <div className={styles.searchBox}>
                 <div className={styles.searchInner}>
-                  <i className={`fas fa-search ${styles.searchIcon}`}></i>
+                  <MagnifyingGlass weight="duotone" className={styles.searchIcon} />
                   <input 
                     type="text" 
                     placeholder="Hujjat nomini yoki kalit so'zni kiriting..." 

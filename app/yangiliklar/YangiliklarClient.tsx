@@ -7,6 +7,7 @@ import { News } from "@prisma/client";
 import PageHeader from "@/components/ui/PageHeader";
 import FilterTabs from "@/components/ui/FilterTabs";
 import styles from "./Yangiliklar.module.css";
+import { Calendar, ArrowRight } from "@phosphor-icons/react/ssr";
 
 interface YangiliklarClientProps {
   initialNews: News[];
@@ -56,12 +57,12 @@ export default function YangiliklarClient({ initialNews }: YangiliklarClientProp
                 </div>
                 <div className={styles.body}>
                   <span className={styles.date}>
-                    <i className="far fa-calendar" /> {item.date}
+                    <Calendar weight="duotone" /> {item.date}
                   </span>
                   <h3 className={styles.title}>{item.title}</h3>
                   {item.excerpt && <p className={styles.excerpt}>{item.excerpt}</p>}
                   <span className={styles.more}>
-                    Batafsil o&apos;qish <i className="fas fa-arrow-right" />
+                    Batafsil o&apos;qish <ArrowRight weight="duotone" />
                   </span>
                 </div>
               </Link>

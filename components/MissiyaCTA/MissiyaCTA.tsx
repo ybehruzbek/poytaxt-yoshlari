@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import styles from "./MissiyaCTA.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { Rocket } from "@phosphor-icons/react/ssr";
 
 export default function MissiyaCTA() {
   return (
@@ -15,7 +16,7 @@ export default function MissiyaCTA() {
             </p>
             <Link href="/murojaat" className={styles.ctaBtn}>
               <span>Qo'shilish</span>
-              <i className="fas fa-rocket"></i>
+              <Rocket weight="duotone" />
             </Link>
           </div>
         </ScrollReveal>

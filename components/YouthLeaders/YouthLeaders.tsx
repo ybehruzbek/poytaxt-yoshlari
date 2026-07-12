@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { YouthLeader } from "@prisma/client";
 import styles from "./YouthLeaders.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { ArrowRight, TelegramLogo, InstagramLogo, Envelope } from "@phosphor-icons/react/ssr";
 
 export default function YouthLeaders({ items: youthLeaders }: { items: YouthLeader[] }) {
   return (
@@ -20,7 +21,7 @@ export default function YouthLeaders({ items: youthLeaders }: { items: YouthLead
               </p>
             </div>
             <Link href="/yetakchilar" className="btn-view-all">
-              Barchasini ko&apos;rish <i className="fas fa-arrow-right" />
+              Barchasini ko&apos;rish <ArrowRight weight="duotone" />
             </Link>
           </div>
         </ScrollReveal>
@@ -42,9 +43,9 @@ export default function YouthLeaders({ items: youthLeaders }: { items: YouthLead
                     />
                     <div className={styles.categoryBadge}>{leader.category}</div>
                     <div className={styles.socialOverlay}>
-                      <span className={styles.socialBtn} aria-label="Telegram"><i className="fab fa-telegram-plane" /></span>
-                      <span className={styles.socialBtn} aria-label="Instagram"><i className="fab fa-instagram" /></span>
-                      <span className={styles.socialBtn} aria-label="Email"><i className="fas fa-envelope" /></span>
+                      <span className={styles.socialBtn} aria-label="Telegram"><TelegramLogo weight="duotone" /></span>
+                      <span className={styles.socialBtn} aria-label="Instagram"><InstagramLogo weight="duotone" /></span>
+                      <span className={styles.socialBtn} aria-label="Email"><Envelope weight="duotone" /></span>
                     </div>
                   </div>
                   <div className={styles.body}>

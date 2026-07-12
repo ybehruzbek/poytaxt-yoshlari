@@ -1,6 +1,6 @@
 .directionsSection {
   padding: var(--section-y) 0;
-  background: var(--white);
+  background: transparent;
 }
 
 .headerArea {

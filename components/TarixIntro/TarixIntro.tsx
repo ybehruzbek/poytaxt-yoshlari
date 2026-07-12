@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./TarixIntro.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { Quotes } from "@phosphor-icons/react/ssr";
 
 export default function TarixIntro() {
   return (
@@ -9,7 +10,7 @@ export default function TarixIntro() {
         <ScrollReveal>
           <div className={styles.introBox}>
             <div className={styles.iconWrap}>
-              <i className={`fas fa-quote-right ${styles.quoteIcon}`}></i>
+              <Quotes weight="duotone" className={styles.quoteIcon} />
             </div>
             <h2 className={styles.introQuote}>
               &ldquo;Hech bir jamiyat o&apos;z yoshlarining g&apos;ayrati, shijoati va ularga bo&apos;lgan kuchli ishonchisiz hech qachon katta yutuqlarga erisha olmaydi.&rdquo;

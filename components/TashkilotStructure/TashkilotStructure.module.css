@@ -1,13 +1,31 @@
 .section {
   padding: var(--section-y) 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
+  position: relative;
+}
+
+/* Girih to'r — arxitektura seksiyasiga rasmiylik urg'usi. Butun fonni
+   qoplamaydi — faqat yuqori-o'ng burchakda ko'rinadi, qolgan qismda
+   gradient mask orqali asta-sekin yo'qoladi. */
+.naqshBg {
+  --naqsh-opacity: 0.08;
+  --naqsh-size: 260px;
+  position: absolute;
+  inset: 0;
+  color: var(--blue-deep);
+  z-index: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at 115% -20%, black 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(circle at 115% -20%, black 0%, transparent 78%);
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--gutter);
+  position: relative;
+  z-index: 1;
 }
 
 .header {
@@ -31,56 +49,94 @@
   line-height: 1.6;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--sp-8);
+/* ===== IYERARXIYA — markazdan chetga qarab kaskadli oqim ===== */
+.hierarchy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+  max-width: 860px;
+  margin: 0 auto;
+  padding-left: 8px;
 }
 
-.card {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: var(--sp-10);
-  border: 1px solid var(--border-light);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Bog'lovchi vertikal chiziq — darajalar ranglari bo'ylab oqadi */
+.hierarchy::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  bottom: 28px;
+  left: 36px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--blue), var(--green-check), var(--amber), var(--accent-orange));
+  opacity: 0.35;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+.level {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-6);
 }
 
-.iconBox {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-sm);
+.node {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  margin-bottom: var(--sp-6);
+  font-size: 20px;
+  border: 1px solid;
+  background: var(--white);
+  position: relative;
+  z-index: 1;
 }
 
-.cardTitle {
+.levelContent {
+  flex: 1;
+  padding: var(--sp-6) var(--sp-8);
+  padding-left: calc(var(--sp-8) + var(--indent, 0px));
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, padding-left 0.3s ease;
+}
+
+.level:hover .levelContent {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.levelNum {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--sp-1);
+}
+
+.levelTitle {
   font-size: var(--fs-2xl);
   font-weight: 600;
   color: var(--blue-deep);
-  margin-bottom: var(--sp-3);
+  margin-bottom: var(--sp-2);
 }
 
-.cardDesc {
+.levelDesc {
   font-size: var(--fs-md);
   line-height: 1.6;
   color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-  }
-  .card {
-    padding: var(--sp-8) var(--sp-6);
+  .hierarchy::before { left: 27px; }
+  .node { width: 40px; height: 40px; font-size: 16px; }
+  .level { gap: var(--sp-4); }
+  .levelContent {
+    padding: var(--sp-5) var(--sp-6);
+    padding-left: var(--sp-6);
   }
 }

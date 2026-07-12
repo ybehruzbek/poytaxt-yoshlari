@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Leader } from "@prisma/client";
 import styles from "./Leadership.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { InstagramLogo, TelegramLogo } from "@phosphor-icons/react/ssr";
 
 export default function Leadership({ items }: { items: Leader[] }) {
   return (
@@ -29,8 +30,8 @@ export default function Leadership({ items }: { items: Leader[] }) {
                     sizes="(max-width: 768px) 100vw, 360px"
                   />
                   <div className={styles.socials}>
-                    <div className={styles.socialBtn}><i className="fab fa-instagram" /></div>
-                    <div className={styles.socialBtn}><i className="fab fa-telegram-plane" /></div>
+                    <div className={styles.socialBtn}><InstagramLogo weight="duotone" /></div>
+                    <div className={styles.socialBtn}><TelegramLogo weight="duotone" /></div>
                   </div>
                 </div>
                 <div className={styles.body}>

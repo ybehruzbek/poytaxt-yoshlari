@@ -9,6 +9,7 @@ import RahbariyatIntro from "@/components/RahbariyatIntro/RahbariyatIntro";
 import RahbariyatApparat from "@/components/RahbariyatApparat/RahbariyatApparat";
 import RahbariyatHeroes from "@/components/RahbariyatHeroes/RahbariyatHeroes";
 import NavigationCards from "@/components/NavigationCards/NavigationCards";
+import { CalendarCheck, Envelope, ArrowRight } from "@phosphor-icons/react/ssr";
 
 export const metadata = {
   title: "Rahbariyat | O'zbekiston Yoshlar Ittifoqi",
@@ -54,7 +55,7 @@ export default async function LeadershipPage() {
                       <ul className={styles.leaderContactList}>
                         {receptionDays.length > 0 && (
                           <li>
-                            <i className="fas fa-calendar-check"></i>
+                            <CalendarCheck weight="duotone" />
                             <span>
                               Qabul kunlari: {receptionDays.map((r) => `${r.day} ${r.time}`).join(", ")}
                             </span>
@@ -62,13 +63,13 @@ export default async function LeadershipPage() {
                         )}
                         {leader.email && (
                           <li>
-                            <i className="fas fa-envelope"></i>
+                            <Envelope weight="duotone" />
                             <span>{leader.email}</span>
                           </li>
                         )}
                         {!leader.email && receptionDays.length === 0 && (
                           <li>
-                            <i className="fas fa-arrow-right"></i>
+                            <ArrowRight weight="duotone" />
                             <span>Batafsil profil</span>
                           </li>
                         )}
@@ -100,7 +101,7 @@ export default async function LeadershipPage() {
               </p>
               <Link href="/murojaat" className={styles.ctaBtn}>
                 <span>Elektron murojaat yuborish</span>
-                <i className="fas fa-arrow-right"></i>
+                <ArrowRight weight="duotone" />
               </Link>
             </div>
           </ScrollReveal>

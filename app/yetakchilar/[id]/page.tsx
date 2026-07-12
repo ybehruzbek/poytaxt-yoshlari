@@ -3,6 +3,7 @@ import RichText from "@/components/ui/RichText";
 import ProfileDetail, { type ProfileSocial } from "@/components/ui/ProfileDetail/ProfileDetail";
 import styles from "@/components/ui/ProfileDetail/ProfileDetail.module.css";
 import { getYouthLeaderById, getYouthLeaders } from "@/lib/queries";
+import { MapPin } from "@phosphor-icons/react/ssr";
 
 export const revalidate = 60;
 
@@ -46,7 +47,7 @@ export default async function SingleYouthLeaderPage({ params }: { params: Promis
       imagePosition="center top"
       badge={`${item.category} yetakchisi`}
       name={item.name}
-      subtitle={<><i className="fas fa-map-marker-alt" /> {item.place}</>}
+      subtitle={<><MapPin weight="duotone" /> {item.place}</>}
       socials={socials}
     >
       {item.bio && (

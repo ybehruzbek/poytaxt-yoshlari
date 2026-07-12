@@ -5,6 +5,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Footer.module.css";
 import { LOGO_URL, footerNav, footerResources, footerContact, socialLinks } from "@/lib/data";
+import {
+  MapPin,
+  Phone,
+  Envelope,
+  Clock,
+  TelegramLogo,
+  InstagramLogo,
+  YoutubeLogo,
+  FacebookLogo,
+} from "@phosphor-icons/react/ssr";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+
+// lib/data.ts FontAwesome satr identifikatorlarini saqlaydi — bu yerda
+// mahalliy xarita orqali Phosphor komponentiga moslashtiramiz (Contact.tsx
+// bilan bir xil yondashuv).
+const contactIconMap: Record<string, PhosphorIcon> = {
+  "fa-map-marker-alt": MapPin,
+  "fa-phone": Phone,
+  "fa-envelope": Envelope,
+  "fa-clock": Clock,
+};
+
+const socialIconMap: Record<string, PhosphorIcon> = {
+  "fa-telegram-plane": TelegramLogo,
+  "fa-instagram": InstagramLogo,
+  "fa-youtube": YoutubeLogo,
+  "fa-facebook-f": FacebookLogo,
+};
 
 export default function Footer() {
   const pathname = usePathname();
@@ -30,11 +58,14 @@ export default function Footer() {
               O&apos;zbekiston Yoshlar Ittifoqi — yoshlarning huquq va manfaatlarini himoya qiluvchi, ularning salohiyatini ro&apos;yobga chiqarishga ko&apos;maklashuvchi eng yirik jamoat tashkiloti.
             </p>
             <div className={styles.socials}>
-              {socialLinks.map((link) => (
-                <a key={link.label} href={link.href} aria-label={link.label} className={styles.socialLink}>
-                  <i className={`fab ${link.icon}`}></i>
-                </a>
-              ))}
+              {socialLinks.map((link) => {
+                const SocialIcon = socialIconMap[link.icon] ?? TelegramLogo;
+                return (
+                  <a key={link.label} href={link.href} aria-label={link.label} className={styles.socialLink}>
+                    <SocialIcon weight="duotone" />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -64,12 +95,15 @@ export default function Footer() {
             <div className={styles.linkGroup}>
               <h4>Aloqa</h4>
               <ul className={styles.contactList}>
-                {footerContact.map((item, i) => (
-                  <li key={i}>
-                    <i className={`fas ${item.icon}`}></i>
-                    <span>{item.text}</span>
-                  </li>
-                ))}
+                {footerContact.map((item, i) => {
+                  const ContactIcon = contactIconMap[item.icon] ?? MapPin;
+                  return (
+                    <li key={i}>
+                      <ContactIcon weight="duotone" />
+                      <span>{item.text}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

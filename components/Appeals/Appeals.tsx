@@ -4,6 +4,27 @@ import { useState, useCallback, FormEvent, useEffect, useRef } from "react";
 import styles from "./Appeals.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { appealTypes, appealGuarantees } from "@/lib/data";
+import {
+  CaretDown,
+  Check,
+  PaperPlaneTilt,
+  Lock,
+  X,
+  Shield,
+  Clock,
+  CheckCircle,
+} from "@phosphor-icons/react/ssr";
+import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+
+// appealGuarantees kelib chiqishi lib/data.ts dagi umumiy ma'lumotlar
+// massividan — u fayl boshqa guruh tomonidan boshqariladi va hali
+// FontAwesome satr identifikatorlarini saqlaydi. Shu sababli bu yerda
+// mahalliy xarita orqali Phosphor komponentiga moslashtiramiz.
+const guaranteeIconMap: Record<string, PhosphorIcon> = {
+  "fa-shield-halved": Shield,
+  "fa-clock": Clock,
+  "fa-circle-check": CheckCircle,
+};
 
 const CustomSelect = ({ 
   options, 
@@ -38,7 +59,7 @@ const CustomSelect = ({
         <span className={value ? styles.valText : styles.placeholderText}>
           {value || " "}
         </span>
-        <i className={`fas fa-chevron-down ${styles.selectIcon} ${isOpen ? styles.iconOpen : ""}`} />
+        <CaretDown weight="duotone" className={`${styles.selectIcon} ${isOpen ? styles.iconOpen : ""}`} />
       </div>
       <label className={value || isOpen ? styles.formLabelActive : styles.formLabel}>{label} *</label>
 
@@ -54,7 +75,7 @@ const CustomSelect = ({
               }}
             >
               {opt}
-              {value === opt && <i className="fas fa-check" style={{ marginLeft: "auto", color: "var(--blue)" }} />}
+              {value === opt && <Check weight="duotone" style={{ marginLeft: "auto", color: "var(--blue)" }} />}
             </li>
           ))}
         </ul>
@@ -129,23 +150,26 @@ export default function Appeals({ districtNames }: { districtNames: string[] }) 
               </p>
 
               <div className={styles.guarantees}>
-                {appealGuarantees.map((g, i) => (
-                  <div className={styles.guaranteeItem} key={i}>
-                    <div
-                      className={styles.gIcon}
-                      style={{ 
-                        background: `linear-gradient(135deg, ${g.iconBg}, #ffffff)`, 
-                        color: g.iconColor 
-                      }}
-                    >
-                      <i className={`fas ${g.icon}`} />
+                {appealGuarantees.map((g, i) => {
+                  const GuaranteeIcon = guaranteeIconMap[g.icon] ?? Shield;
+                  return (
+                    <div className={styles.guaranteeItem} key={i}>
+                      <div
+                        className={styles.gIcon}
+                        style={{
+                          background: `linear-gradient(135deg, ${g.iconBg}, #ffffff)`,
+                          color: g.iconColor
+                        }}
+                      >
+                        <GuaranteeIcon weight="duotone" />
+                      </div>
+                      <div>
+                        <div className={styles.gTitle}>{g.title}</div>
+                        <div className={styles.gDesc}>{g.desc}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className={styles.gTitle}>{g.title}</div>
-                      <div className={styles.gDesc}>{g.desc}</div>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </ScrollReveal>
@@ -210,11 +234,11 @@ export default function Appeals({ districtNames }: { districtNames: string[] }) 
                 <span className={styles.btnText}>
                   {isSubmitting ? "Yuborilmoqda..." : "Murojaatni yuborish"}
                 </span>
-                <i className={`fas fa-paper-plane ${styles.btnIcon}`} />
+                <PaperPlaneTilt weight="duotone" className={styles.btnIcon} />
               </button>
-              
+
               <p className={styles.formNote}>
-                <i className="fas fa-lock" style={{ marginRight: '6px', opacity: 0.6 }} />
+                <Lock weight="duotone" style={{ marginRight: '6px', opacity: 0.6 }} />
                 Yuborish orqali shaxsiy ma'lumotlarni qayta ishlash siyosatiga rozilik bildirasiz.
               </p>
             </form>
@@ -225,14 +249,14 @@ export default function Appeals({ districtNames }: { districtNames: string[] }) 
       {/* Toast */}
       <div className={`${styles.toast} ${showToast ? styles.toastShow : ""}`}>
         <div className={styles.toastIcon}>
-          <i className="fas fa-check" />
+          <Check weight="duotone" />
         </div>
         <div className={styles.toastContent}>
           <h4>Muvaffaqiyatli!</h4>
           <p>Murojaatingiz yuborildi. Tez orada siz bilan bog'lanamiz.</p>
         </div>
         <button type="button" className={styles.toastClose} onClick={() => setShowToast(false)}>
-          <i className="fas fa-times" />
+          <X weight="duotone" />
         </button>
       </div>
     </section>

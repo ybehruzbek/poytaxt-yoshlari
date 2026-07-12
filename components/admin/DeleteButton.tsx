@@ -3,6 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { deleteResource } from "@/lib/admin/actions";
 import styles from "./Admin.module.css";
+import { Trash } from "@phosphor-icons/react/ssr";
 
 function Inner({ title }: { title: string }) {
   const { pending } = useFormStatus();
@@ -13,7 +14,7 @@ function Inner({ title }: { title: string }) {
       disabled={pending}
       aria-label={`O'chirish: ${title}`}
     >
-      <i className="fas fa-trash" />
+      <Trash weight="duotone" />
       {pending ? "O'chirilmoqda..." : "O'chirish"}
     </button>
   );

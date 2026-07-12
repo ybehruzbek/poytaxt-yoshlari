@@ -4,6 +4,7 @@ import { getResource } from "@/lib/admin/resources";
 import { getDelegate } from "@/lib/admin/db";
 import DeleteButton from "@/components/admin/DeleteButton";
 import styles from "@/components/admin/Admin.module.css";
+import { Plus, PencilSimple } from "@phosphor-icons/react/ssr";
 
 export async function generateMetadata({ params }: { params: Promise<{ resource: string }> }) {
   const { resource } = await params;
@@ -52,7 +53,7 @@ export default async function ResourceListPage({
       <div className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>{def.label}</h1>
         <Link href={`/admin/${def.key}/yangi`} className={`${styles.btn} ${styles.btnPrimary}`}>
-          <i className="fas fa-plus" /> Yangi {def.singular}
+          <Plus weight="duotone" /> Yangi {def.singular}
         </Link>
       </div>
 
@@ -91,7 +92,7 @@ export default async function ResourceListPage({
                           href={`/admin/${def.key}/${id}`}
                           className={`${styles.btn} ${styles.btnGhost}`}
                         >
-                          <i className="fas fa-pen" /> Tahrirlash
+                          <PencilSimple weight="duotone" /> Tahrirlash
                         </Link>
                         <DeleteButton resourceKey={def.key} id={id} title={title} />
                       </div>

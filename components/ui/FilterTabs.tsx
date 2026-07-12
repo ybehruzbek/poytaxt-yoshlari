@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import styles from './FilterTabs.module.css';
+import { MagnifyingGlass } from '@phosphor-icons/react/ssr';
 
 interface FilterTabsProps {
   tabs: string[];
@@ -25,7 +26,7 @@ export default function FilterTabs({ tabs, activeTab, onTabChange }: FilterTabsP
       </div>
       
       <div className={styles.searchContainer}>
-        <i className={`fas fa-search ${styles.searchIcon}`}></i>
+        <MagnifyingGlass weight="duotone" className={styles.searchIcon} />
         <input 
           type="text" 
           placeholder="Qidirish..." 

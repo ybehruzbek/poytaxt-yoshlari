@@ -1,6 +1,7 @@
 import styles from "./Faq.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { faqItems } from "@/lib/data";
+import { CaretDown } from "@phosphor-icons/react/ssr";
 
 export default function Faq() {
   return (
@@ -23,7 +24,7 @@ export default function Faq() {
                 <summary className={styles.question}>
                   <span>{item.q}</span>
                   <span className={styles.chevron} aria-hidden>
-                    <i className="fas fa-chevron-down" />
+                    <CaretDown weight="duotone" />
                   </span>
                 </summary>
                 <p className={styles.answer}>{item.a}</p>

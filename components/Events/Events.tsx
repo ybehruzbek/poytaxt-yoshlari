@@ -6,6 +6,7 @@ import type { EventWithCount } from "@/components/EventCard/EventCard";
 import { UZ_MONTHS_SHORT, uzTime } from "@/lib/format";
 import TextReveal from "@/components/ui/TextReveal";
 import styles from "./Events.module.css";
+import { ArrowRight, Clock, MapPin } from "@phosphor-icons/react/ssr";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -50,7 +51,7 @@ export default function Events({ items }: { items: EventWithCount[] }) {
           <motion.div variants={itemVariants}>
             <Link href="/tadbirlar" className="btn-view-all">
               Barcha tadbirlar
-              <i className="fas fa-arrow-right" />
+              <ArrowRight weight="duotone" />
             </Link>
           </motion.div>
         </motion.div>
@@ -85,17 +86,17 @@ export default function Events({ items }: { items: EventWithCount[] }) {
                 <div className={styles.content}>
                   <div className={styles.meta}>
                     <span className={styles.metaItem}>
-                      <i className="far fa-clock" /> {uzTime(event.startsAt)}
+                      <Clock weight="duotone" /> {uzTime(event.startsAt)}
                     </span>
                     <span className={styles.metaItem}>
-                      <i className="fas fa-map-marker-alt" /> {event.location}
+                      <MapPin weight="duotone" /> {event.location}
                     </span>
                   </div>
                   <h3 className={styles.title}>{event.title}</h3>
                   <p className={styles.desc}>{event.desc}</p>
                   <div className={styles.action}>
                     {event.regOpen ? "Ro'yxatdan o'tish" : "Batafsil"}{" "}
-                    <i className="fas fa-arrow-right" />
+                    <ArrowRight weight="duotone" />
                   </div>
                 </div>
               </Link>

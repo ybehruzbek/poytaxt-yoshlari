@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getYouthLeaders } from "@/lib/queries";
 import PageHeader from "@/components/ui/PageHeader";
 import styles from "./Yetakchilar.module.css";
+import { TelegramLogo, InstagramLogo, MapPin, ArrowRight } from "@phosphor-icons/react/ssr";
 
 export const metadata = {
   title: "Yoshlar yetakchilari | O'zbekiston Yoshlar Ittifoqi",
@@ -38,22 +39,22 @@ export default async function YouthLeadersPage() {
               {/* Socials on hover */}
               <div className={styles.socialsHover}>
                 <span className={`${styles.socialBtn} ${styles.telegram}`}>
-                  <i className="fab fa-telegram-plane" />
+                  <TelegramLogo weight="duotone" />
                 </span>
                 <span className={`${styles.socialBtn} ${styles.instagram}`}>
-                  <i className="fab fa-instagram" />
+                  <InstagramLogo weight="duotone" />
                 </span>
               </div>
             </div>
-            
+
             <div className={styles.body}>
               <h3>{item.name}</h3>
               <p className={styles.location}>
-                <i className="fas fa-map-marker-alt" /> {item.place}
+                <MapPin weight="duotone" /> {item.place}
               </p>
-              
+
               <div className={styles.actionBtn}>
-                Bog'lanish <i className="fas fa-arrow-right" />
+                Bog'lanish <ArrowRight weight="duotone" />
               </div>
             </div>
           </Link>

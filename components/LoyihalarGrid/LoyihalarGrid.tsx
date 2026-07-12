@@ -7,6 +7,7 @@ import styles from './LoyihalarGrid.module.css';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import CustomSelect from '@/components/ui/CustomSelect';
 import { Project } from '@prisma/client';
+import { MagnifyingGlass, ArrowRight, FolderOpen } from '@phosphor-icons/react/ssr';
 
 interface LoyihalarGridProps {
   initialProjects: Project[];
@@ -46,7 +47,7 @@ export default function LoyihalarGrid({ initialProjects }: LoyihalarGridProps) {
             {/* Top row: Search & Select */}
             <div className={styles.filterTopRow}>
               <div className={styles.searchWrap}>
-                <i className={`fas fa-search ${styles.searchIcon}`}></i>
+                <MagnifyingGlass weight="duotone" className={styles.searchIcon} />
                 <input 
                   type="text" 
                   placeholder="Loyiha nomi yoki tavsifi bo'yicha qidirish..." 
@@ -130,7 +131,7 @@ export default function LoyihalarGrid({ initialProjects }: LoyihalarGridProps) {
 
                     <div className={styles.cardFooter}>
                       <div className={styles.viewMoreBtn}>
-                        Batafsil ma'lumot <i className="fas fa-arrow-right"></i>
+                        Batafsil ma'lumot <ArrowRight weight="duotone" />
                       </div>
                     </div>
                   </div>
@@ -139,7 +140,7 @@ export default function LoyihalarGrid({ initialProjects }: LoyihalarGridProps) {
             ))
           ) : (
             <div className={styles.emptyState}>
-              <i className="fas fa-folder-open"></i>
+              <FolderOpen weight="duotone" />
               <p>Ushbu bo'limda hozircha loyihalar yo'q.</p>
             </div>
           )}

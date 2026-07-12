@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import styles from "@/components/admin/Admin.module.css";
+import { Users } from "@phosphor-icons/react/ssr";
 
 export const metadata = { title: "Ishtirokchilar | Admin Panel" };
 
@@ -59,7 +60,7 @@ export default async function IshtirokchilarPage() {
                         href={`/admin/ishtirokchilar/${event.id}`}
                         className={`${styles.btn} ${styles.btnGhost}`}
                       >
-                        <i className="fas fa-users" /> Ro&apos;yxat
+                        <Users weight="duotone" /> Ro&apos;yxat
                       </Link>
                     </div>
                   </td>

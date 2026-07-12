@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { Warning } from "@phosphor-icons/react/ssr";
 import ErrorState from "@/components/ui/ErrorState/ErrorState";
 
 export default function Error({
@@ -17,7 +18,7 @@ export default function Error({
 
   return (
     <ErrorState
-      icon="fas fa-triangle-exclamation"
+      icon={Warning}
       title="Kutilmagan xatolik yuz berdi"
       message="Qayta urinib ko'ring — muammo davom etsa, birozdan keyin qaytib keling."
       actions={

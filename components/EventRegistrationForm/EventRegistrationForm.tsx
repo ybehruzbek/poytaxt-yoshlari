@@ -7,6 +7,7 @@ import {
   type RegisterState,
 } from "@/lib/events/actions";
 import styles from "./EventRegistrationForm.module.css";
+import { CheckCircle } from "@phosphor-icons/react/ssr";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -26,7 +27,7 @@ export default function EventRegistrationForm({ eventId }: { eventId: string }) 
   if (state.ok) {
     return (
       <div className={styles.success}>
-        <i className="fas fa-circle-check" />
+        <CheckCircle weight="duotone" />
         <p className={styles.successTitle}>Ro&apos;yxatdan o&apos;tdingiz!</p>
         <p className={styles.successText}>
           Tadbir kuni kelganingizda ismingiz va telefon raqamingizni ayting.

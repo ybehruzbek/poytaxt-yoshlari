@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import styles from "./NavigationCards.module.css";
 
 const defaultNavItems = [
@@ -42,6 +44,17 @@ interface NavigationCardsProps {
   items?: NavItem[];
 }
 
+// Har bir qatorga o'z brend rangi — raqam, faol strelka va urg'u chizig'i
+// shu rangda. "rest" — och sahifa foni ustida (to'q rang o'qiladi), "active"
+// — hover'dagi qorong'i overlay ustida (to'q ko'k shu yerda deyarli ko'rinmas
+// edi, shuning uchun och ko'k). "icon" — strelka to'ldirilgan doira ustida —
+// och to'ldirishda (sky) to'q, o'rtacha to'ldirishda (yashil/amber) oq o'qiladi.
+const accentColors = [
+  { rest: "var(--blue)", active: "#A9D8EB", icon: "var(--blue-deep)" },
+  { rest: "var(--green-check)", active: "var(--green-check)", icon: "white" },
+  { rest: "var(--amber)", active: "var(--amber)", icon: "var(--blue-deep)" },
+];
+
 export default function NavigationCards({ items = defaultNavItems }: NavigationCardsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -75,36 +88,42 @@ export default function NavigationCards({ items = defaultNavItems }: NavigationC
       </div>
 
       <div className={styles.container}>
-        <div className={styles.header}>
+        <ScrollReveal className={styles.header}>
           <span className={styles.badge}>Davom etish</span>
           <h2 className={`${styles.title} ${hoveredIndex !== null ? styles.textWhite : ""}`}>Batafsil tanishing</h2>
-        </div>
-        
+        </ScrollReveal>
+
         <div className={styles.list}>
           {displayItems.map((item, idx) => {
             const isHovered = hoveredIndex === idx;
             const isAnyHovered = hoveredIndex !== null;
 
             return (
-              <Link 
-                href={item.href} 
-                key={item.id}
-                className={`${styles.row} ${isHovered ? styles.rowActive : ""} ${isAnyHovered && !isHovered ? styles.rowDimmed : ""}`}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className={styles.rowLeft}>
-                  <span className={styles.rowNum}>{item.id}</span>
-                  <h3 className={styles.rowTitle}>{item.title}</h3>
-                </div>
-                
-                <div className={styles.rowRight}>
-                  <p className={styles.rowDesc}>{item.desc}</p>
-                  <div className={styles.arrowWrap}>
-                    <i className={`fas fa-arrow-right ${styles.arrowIcon}`}></i>
+              <ScrollReveal key={item.id} delay={idx + 1}>
+                <Link
+                  href={item.href}
+                  className={`${styles.row} ${isHovered ? styles.rowActive : ""} ${isAnyHovered && !isHovered ? styles.rowDimmed : ""}`}
+                  style={{
+                    "--accent-rest": accentColors[idx % accentColors.length].rest,
+                    "--accent-active": accentColors[idx % accentColors.length].active,
+                    "--accent-icon": accentColors[idx % accentColors.length].icon,
+                  } as React.CSSProperties}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <div className={styles.rowLeft}>
+                    <span className={styles.rowNum}>{item.id}</span>
+                    <h3 className={styles.rowTitle}>{item.title}</h3>
                   </div>
-                </div>
-              </Link>
+
+                  <div className={styles.rowRight}>
+                    <p className={styles.rowDesc}>{item.desc}</p>
+                    <div className={styles.arrowWrap}>
+                      <ArrowRight weight="duotone" className={styles.arrowIcon} />
+                    </div>
+                  </div>
+                </Link>
+              </ScrollReveal>
             );
           })}
         </div>

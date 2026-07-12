@@ -1,6 +1,6 @@
 .valuesSection {
   padding: var(--section-y) 0;
-  background: var(--white);
+  background: transparent;
   position: relative;
 }
 
@@ -78,6 +78,21 @@
   z-index: 1;
 }
 
+/* Girih to'r — vatanparvarlik kartasida milliy urg'u, faqat fotosurat
+   ochiqroq ko'ringan yuqori qismda, matn turgan pastki qismga tegmaydi. */
+.cardPattern {
+  --naqsh-opacity: 0.06;
+  --naqsh-size: 130px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  color: var(--white);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .cardContent {
   position: relative;
   z-index: 2;
@@ -122,13 +137,11 @@
   flex-shrink: 0;
 }
 
-.bentoCard i {
-  font-size: 40px !important;
+/* Fotosurat ustidagi kartada ikonka har doim oq (kontrastni ta'minlash uchun);
+   kvadrat/keng kartalarda esa har bir ikonka o'z rangida qoladi (inline style). */
+.cardLarge svg {
+  font-size: 40px;
   color: var(--white);
-}
-
-.cardWide i {
-  font-size: 48px !important;
 }
 
 .bentoCard h3 {

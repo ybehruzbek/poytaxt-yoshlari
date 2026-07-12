@@ -6,6 +6,72 @@
 
 ---
 
+## [0.9.11] — 2026-07-12 · Tashkilot sahifasi qayta dizayn + sitewide bug tuzatishlar
+
+**Footer ikonkalari ko'rinmayotgan edi:** `Footer.tsx` FontAwesome sinflaridan
+(`fab`, `fas`) foydalanardi, lekin loyihada FontAwesome hech qachon ulanmagan
+— butun sayt `@phosphor-icons/react` ishlatadi (`Contact.tsx`dagi kabi).
+Ikonkalar Phosphor komponentlariga almashtirildi va o'lchami kattalashtirildi
+(ijtimoiy tarmoq ikonkalari 16px→20px, aloqa ro'yxati 14px→19px).
+
+**Backdrop-filter sitewide bug:** Turbopack/Lightning CSS `backdrop-filter`
+xususiyatini butunlay tashlab yuborar edi, agar undan keyin qo'lda yozilgan
+`-webkit-backdrop-filter` qatori kelsa (ikkalasi ham yo'qolardi). Shu sababli
+"Biz Kimmiz?" pillasi va yana 8 ta joyda blur/glass effekt umuman
+ko'rinmasdi: `TashkilotHeroSlider`, `Yetakchilar`, `YouthLeaders` (2 joy),
+`Gallery`, `Appeals`, `Directions`, `Districts`, `Stats`, `NavigationCards`.
+Ortiqcha `-webkit-` qatori olib tashlandi — barcha joyda backdrop-filter
+endi ishlaydi.
+
+**ChairmanMessage (Rahbar so'zi) qayta dizayn:**
+- Sarlavha shrifti `--font-heading` (Jost, italic) dan `--font-serif`ga
+  (Cormorant Garamond) o'tkazildi — bu shrift `layout.tsx`da "iqtibos uchun"
+  deb alohida ajratilgan edi, lekin hech qayerda ishlatilmagan; endi
+  `SardorlarEditorial` bilan bir xil pull-quote uslubida.
+  * Ikkita alohida qatorni `<blockquote>`ga birlashtirdik, chapdan ingichka
+  chiziq va haqiqiy tipografik qo'shtirnoq (" ") bilan.
+- Qo'lda yasalgan, ko'rinmas "massive watermark quote" (`"` belgisi,
+  `overflow:hidden` bilan kesilib qolgan) o'chirildi, o'rniga mavjud
+  naqsh-kit (`naqsh-rozetka`) portret orqasida ko'rinadigan medalyon bilan
+  almashtirildi.
+- **Haqiqiy bug tuzatildi:** mobil/planshetda (<1024px) `.imageCol` 0×0
+  o'lchamga qulab tushar, portret rasm butunlay ko'rinmas edi — grid
+  elementining aniq `width` yo'qligi va `imageWrapper`ning
+  `width:100% + aspect-ratio` kombinatsiyasi orasidagi CSS
+  circular-sizing muammosi. `.imageCol`ga `width:100%; min-width:0;`
+  qo'shib tuzatildi.
+
+**Naqsh-kit ko'proq joyda, lekin "bilinar-bilinmas" darajada:**
+`TashkilotValues`dagi "Vatanparvarlik" fotokartasida (tepa qismida, matnga
+tegmaydigan joyda) va `TashkilotStructure` ("Tashkilot Arxitekturasi") fon
+teksturasi sifatida qo'shildi. Opacity va gradient bir necha marta
+moslashtirildi: birinchi urinish juda kuchli chiqib matnni o'qib bo'lmas
+darajaga keldi, keyin radial-gradient mask bilan "faqat bir burchakda
+ko'rinsin" qilindi, so'ng gradientdagi qattiq "core→fade" chegarasi olib
+tashlanib (bitta uzluksiz gradient), ko'zga tashlanadigan halqa/chegara
+yo'qotildi.
+
+**Bo'limlar orasidagi ko'rinadigan chegaralar (seam) tuzatildi:**
+`ChairmanMessage`, `TashkilotTimelinePreview` va `NavigationCards` uchtasi
+ham o'z bo'limiga qo'lda `var(--bg-light)` fon rangi qo'ygan edi — qo'shni
+bo'limlar esa sahifaning umumiy `var(--bg)` foniga tayanadi (`transparent`).
+Ikkala rang deyarli bir xil (`#F3F6FA` vs `#F6F8FC`), lekin katta tekis
+maydonda bu farq ko'zga aniq chiziq bo'lib ko'rinardi. Barchasi
+`transparent`ga o'tkazilib, butun pastki yarim sahifa uzluksiz fonga keldi.
+
+**NavigationCards ("Davom etish / Batafsil tanishing") qayta dizayn:**
+Har bir qatorga o'z brend rangi (och ko'k / yashil / amber) — raqam, faol
+holatdagi urg'u chizig'i va strelka tugmasi shu rangda. Faol qatorda
+yumshoq highlight panel, strelka tugmasida scale+rang mos soya, fon
+rasmi overlay'i tekis rangdan gradientga o'zgartirildi. Yo'lda topilgan
+kontrast xatolar tuzatildi: `var(--blue)` (to'q navy) qorong'i overlay
+fonida deyarli ko'rinmasdi (och ko'k bilan almashtirildi), keyin oq
+strelka belgisi shu och ko'k to'ldirish ustida ko'rinmay qoldi (har bir
+rang uchun alohida ikonka rangi — sky/amber uchun to'q ko'k, yashil uchun
+oq — qo'shildi).
+
+---
+
 ## [0.9.10] — 2026-07-11 · Naqsh-kit haqiqiy girih fayllari bilan almashtirildi
 
 **Muammo:** Paket 6'da qo'lda chizilgan "naqsh-yulduz"/"naqsh-romb"/"naqsh-panjara"

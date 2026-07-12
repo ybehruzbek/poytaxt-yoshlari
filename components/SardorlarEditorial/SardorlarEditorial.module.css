@@ -1,6 +1,6 @@
 .section {
   padding: var(--section-y) 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   border-top: 1px solid var(--border-light);
 }
@@ -98,39 +98,36 @@
   background: var(--blue);
   margin: var(--sp-16) 0;
   border-radius: 2px;
+  transform-origin: left center;
 }
 
 .quoteBlock {
   position: relative;
   margin: var(--sp-20) 0;
-  padding: var(--sp-10);
-  background: var(--white);
+  padding: var(--sp-10) var(--sp-10) var(--sp-10) calc(var(--sp-10) + var(--sp-2));
+  background: linear-gradient(165deg, var(--blue-pale) 0%, var(--white) 65%);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  border-left: 4px solid var(--blue);
+  box-shadow: var(--shadow-md);
 }
 
-.quoteIcon {
-  position: absolute;
-  top: -30px;
-  left: var(--sp-8);
-  font-size: 80px;
-  line-height: 1;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  color: var(--blue-pale);
+.quoteMark {
+  width: 44px;
+  height: auto;
+  color: var(--blue);
+  opacity: 0.85;
+  margin-bottom: var(--sp-4);
 }
 
 .quoteText {
-  font-family: var(--font-heading);
-  font-size: clamp(24px, 2.5vw, 32px);
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 2.6vw, 34px);
   font-weight: 600;
   font-style: italic;
   color: var(--blue-deep);
-  line-height: 1.5;
+  line-height: 1.45;
   position: relative;
   z-index: 2;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 .statsGrid {

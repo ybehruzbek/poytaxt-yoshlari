@@ -5,6 +5,14 @@ import Image from "next/image";
 import type { GalleryImage } from "@prisma/client";
 import styles from "./Galereya.module.css";
 import galleryStyles from "@/components/Gallery/Gallery.module.css";
+import {
+  ArrowsOut,
+  MagnifyingGlassMinus,
+  MagnifyingGlassPlus,
+  X,
+  CaretLeft,
+  CaretRight,
+} from "@phosphor-icons/react/ssr";
 
 export default function GalereyaClient({ images }: { images: GalleryImage[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -74,7 +82,7 @@ export default function GalereyaClient({ images }: { images: GalleryImage[] }) {
               className={styles.image}
             />
             <div className={styles.overlay}>
-              <i className="fas fa-expand" />
+              <ArrowsOut weight="duotone" />
             </div>
           </div>
         ))}
@@ -86,24 +94,24 @@ export default function GalereyaClient({ images }: { images: GalleryImage[] }) {
           <>
             <div className={galleryStyles.lightboxToolbar}>
               <button className={galleryStyles.toolbarBtn} onClick={handleZoomOut} title="Uzoqlashtirish">
-                <i className="fas fa-search-minus" />
+                <MagnifyingGlassMinus weight="duotone" />
               </button>
               <button className={galleryStyles.toolbarBtn} onClick={handleZoomIn} title="Yaqinlashtirish">
-                <i className="fas fa-search-plus" />
+                <MagnifyingGlassPlus weight="duotone" />
               </button>
               <button className={galleryStyles.toolbarBtn} onClick={toggleFullscreen} title="To'liq ekran">
-                <i className="fas fa-expand" />
+                <ArrowsOut weight="duotone" />
               </button>
               <button className={`${galleryStyles.toolbarBtn} ${galleryStyles.toolbarClose}`} onClick={closeLightbox} title="Yopish">
-                <i className="fas fa-times" />
+                <X weight="duotone" />
               </button>
             </div>
 
             <button className={`${galleryStyles.lightboxNav} ${galleryStyles.lightboxPrev}`} onClick={prevLightboxImage}>
-              <i className="fas fa-chevron-left" />
+              <CaretLeft weight="duotone" />
             </button>
             <button className={`${galleryStyles.lightboxNav} ${galleryStyles.lightboxNext}`} onClick={nextLightboxImage}>
-              <i className="fas fa-chevron-right" />
+              <CaretRight weight="duotone" />
             </button>
 
             <div className={galleryStyles.imgZoomContainer}>

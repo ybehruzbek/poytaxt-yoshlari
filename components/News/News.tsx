@@ -6,6 +6,7 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import type { News as NewsItem } from "@prisma/client";
 import TextReveal from "@/components/ui/TextReveal";
 import styles from "./News.module.css";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -65,7 +66,7 @@ export default function News({ items }: { items: NewsItem[] }) {
           <motion.div variants={itemVariants}>
             <Link href="/yangiliklar" className="btn-view-all">
               Barchasi
-              <i className="fas fa-arrow-right" />
+              <ArrowRight weight="duotone" />
             </Link>
           </motion.div>
         </motion.div>

@@ -4,6 +4,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { RESOURCES } from "@/lib/admin/resources";
+import {
+  ChartPie,
+  EnvelopeOpen,
+  Users,
+  ClipboardText,
+  ArrowSquareOut,
+  SignOut,
+  List,
+  CalendarBlank,
+  Newspaper,
+  FlowArrow,
+  Compass,
+  IdentificationBadge,
+  Student,
+  FileText,
+  Images,
+  MapPin,
+  ClockCounterClockwise,
+  ChartBar,
+  MapTrifold,
+} from "@phosphor-icons/react/ssr";
 
 const FIXED_TOP = [
   { name: "Dashboard", icon: "fa-chart-pie", path: "/admin" },
@@ -22,6 +43,29 @@ const MENU = [
   ...RESOURCES.map((r) => ({ name: r.label, icon: r.icon, path: `/admin/${r.key}` })),
   ...FIXED_BOTTOM,
 ];
+
+// `lib/admin/resources.ts` ikonkalarni hali FontAwesome klass-nomi
+// (matn) sifatida saqlaydi — u yerdagi forma maydoni tavsifiga mos.
+// Shu sabab moslama shu yerda: FontAwesome klass -> Phosphor komponenti.
+const ICON_MAP: Record<string, typeof ChartPie> = {
+  "fa-chart-pie": ChartPie,
+  "fa-envelope-open-text": EnvelopeOpen,
+  "fa-users": Users,
+  "fa-clipboard-list": ClipboardText,
+  "fa-bars": List,
+  "fa-calendar-days": CalendarBlank,
+  "fa-newspaper": Newspaper,
+  "fa-diagram-project": FlowArrow,
+  "fa-compass": Compass,
+  "fa-user-tie": IdentificationBadge,
+  "fa-user-graduate": Student,
+  "fa-file-lines": FileText,
+  "fa-images": Images,
+  "fa-map-location-dot": MapPin,
+  "fa-clock-rotate-left": ClockCounterClockwise,
+  "fa-chart-simple": ChartBar,
+  "fa-map": MapTrifold,
+};
 
 export default function AdminSidebar() {
   const pathname = usePathname();
@@ -51,6 +95,7 @@ export default function AdminSidebar() {
             const isActive =
               pathname === item.path ||
               (item.path !== "/admin" && pathname.startsWith(`${item.path}/`));
+            const ItemIcon = ICON_MAP[item.icon] ?? Users;
             return (
               <li key={item.path}>
                 <Link
@@ -66,7 +111,7 @@ export default function AdminSidebar() {
                     fontWeight: isActive ? 600 : 400
                   }}
                 >
-                  <i className={`fas ${item.icon}`} style={{ width: "18px", textAlign: "center", color: isActive ? "var(--green)" : "inherit" }} />
+                  <ItemIcon weight="duotone" style={{ width: "18px", textAlign: "center", color: isActive ? "var(--green)" : "inherit" }} />
                   {item.name}
                 </Link>
               </li>
@@ -85,7 +130,7 @@ export default function AdminSidebar() {
             color: "rgba(255,255,255,0.6)",
           }}
         >
-          <i className="fas fa-arrow-up-right-from-square" style={{ width: "18px", textAlign: "center" }} />
+          <ArrowSquareOut weight="duotone" style={{ width: "18px", textAlign: "center" }} />
           Saytni ochish
         </Link>
         <button
@@ -98,7 +143,7 @@ export default function AdminSidebar() {
             textAlign: "left", marginTop: "4px"
           }}
         >
-          <i className="fas fa-sign-out-alt" style={{ width: "18px", textAlign: "center" }} />
+          <SignOut weight="duotone" style={{ width: "18px", textAlign: "center" }} />
           Tizimdan chiqish
         </button>
       </div>

@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useRef, ReactNode } from "react";
+import { useEffect, useRef, useState, ReactNode, HTMLAttributes } from "react";
 
-interface ScrollRevealProps {
+interface ScrollRevealProps extends Omit<HTMLAttributes<HTMLDivElement>, "className"> {
   children: ReactNode;
   className?: string;
   delay?: number;
 }
 
-export default function ScrollReveal({ children, className = "", delay }: ScrollRevealProps) {
+export default function ScrollReveal({ children, className = "", delay, ...rest }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  // React state (emas — classList.add) muhim: ota komponent qayta render
+  // bo'lganda (masalan interaktiv holat o'zgarganda) React className'ni
+  // qayta yozib, imperativ qo'shilgan "visible" klassini o'chirib
+  // yuborardi — natijada allaqachon ko'ringan element birdan yo'qolardi.
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -17,7 +22,7 @@ export default function ScrollReveal({ children, className = "", delay }: Scroll
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
-      el.classList.add("visible");
+      setVisible(true);
       return;
     }
 
@@ -25,7 +30,7 @@ export default function ScrollReveal({ children, className = "", delay }: Scroll
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+            setVisible(true);
             observer.unobserve(entry.target);
           }
         });
@@ -40,7 +45,11 @@ export default function ScrollReveal({ children, className = "", delay }: Scroll
   const delayClass = delay ? `reveal-d${delay}` : "";
 
   return (
-    <div ref={ref} className={`reveal ${delayClass} ${className}`}>
+    <div
+      ref={ref}
+      className={`reveal ${delayClass} ${className} ${visible ? "visible" : ""}`}
+      {...rest}
+    >
       {children}
     </div>
   );

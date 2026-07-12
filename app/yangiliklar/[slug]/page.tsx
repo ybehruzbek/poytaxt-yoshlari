@@ -3,6 +3,7 @@ import RichText from "@/components/ui/RichText";
 import ArticleDetail from "@/components/ui/ArticleDetail/ArticleDetail";
 import styles from "@/components/ui/ArticleDetail/ArticleDetail.module.css";
 import { getNewsBySlug, getNewsSlugs } from "@/lib/queries";
+import { Calendar } from "@phosphor-icons/react/ssr";
 
 export const revalidate = 60;
 
@@ -38,7 +39,7 @@ export default async function SingleNewsPage({ params }: { params: Promise<{ slu
       badgeVariant="blue"
       meta={
         <span className={styles.meta}>
-          <i className="far fa-calendar" /> {item.date}
+          <Calendar weight="duotone" /> {item.date}
         </span>
       }
       title={item.title}

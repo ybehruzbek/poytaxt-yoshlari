@@ -582,29 +582,14 @@ a:hover .img-lively {
   mask-size: var(--naqsh-size, 340px);
 }
 
-/* Rozetka — bitta o'nqirrali girih gul-medalyon, markaziy/burchak motiv
-   sifatida (tiled emas, bitta joyda, katta o'lchamda). */
-.naqsh-rozetka {
-  position: relative;
-  overflow: hidden;
-}
-
-.naqsh-rozetka::after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  background-color: currentColor;
-  opacity: var(--naqsh-opacity, 0.08);
+/* Rozetka — o'nqirrali girih gul-medalyon, bir-biriga yaqin takrorlanib
+   to'qilgan to'r sifatida (naqsh-yulduz bilan bir xil tiled mexanizm,
+   faqat boshqa SVG va o'z nisbatidagi o'lcham). */
+.naqsh-rozetka::before {
   -webkit-mask-image: url("/pattern/rozetka.svg");
   mask-image: url("/pattern/rozetka.svg");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  inset: 0;
+  -webkit-mask-size: var(--naqsh-size, 140px 99px);
+  mask-size: var(--naqsh-size, 140px 99px);
 }
 
 /* Ingichka romb-ajratkich — PageHeader va seksiyalar orasida,

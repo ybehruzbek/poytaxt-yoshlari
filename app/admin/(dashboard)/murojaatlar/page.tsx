@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import styles from "@/components/admin/Admin.module.css";
+import { Eye } from "@phosphor-icons/react/ssr";
 
 export const metadata = { title: "Murojaatlar | Admin Panel" };
 
@@ -77,7 +78,7 @@ export default async function AdminAppealsPage() {
                           href={`/admin/murojaatlar/${item.id}`}
                           className={`${styles.btn} ${styles.btnGhost}`}
                         >
-                          <i className="fas fa-eye" /> Ko&apos;rish
+                          <Eye weight="duotone" /> Ko&apos;rish
                         </Link>
                       </div>
                     </td>

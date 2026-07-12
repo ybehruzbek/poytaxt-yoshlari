@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { useInView, animate } from "motion/react";
+import { FlowArrow, Users, HandsClapping, Medal, Star } from "@phosphor-icons/react/ssr";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import styles from "./ImpactStats.module.css";
 
 // Reusable Counter Component
@@ -37,65 +39,67 @@ export default function ImpactStats() {
           
           {/* Left Side: Information & Bento Grid */}
           <div className={styles.contentCol}>
-            <span className={styles.badge}>Natija</span>
-            <h2 className={styles.title}>Toshkent yoshlari butun mamlakatga namuna!</h2>
-            <p className={styles.text}>
-              Yoshlar Ittifoqining Toshkent shahar Kengashi o'tgan yil davomida yuzlab yirik loyihalarni amalga oshirdi. Bu shunchaki raqamlar emas, bu minglab yoshlarning hayotidagi ijobiy o'zgarishlar, topilgan ish joylari, amalga oshgan orzular va himoya qilingan huquqlardir.
-            </p>
-            
+            <ScrollReveal>
+              <span className={styles.badge}>Natija</span>
+              <h2 className={styles.title}>Toshkent yoshlari butun mamlakatga namuna!</h2>
+              <p className={styles.text}>
+                Yoshlar Ittifoqining Toshkent shahar Kengashi o'tgan yil davomida yuzlab yirik loyihalarni amalga oshirdi. Bu shunchaki raqamlar emas, bu minglab yoshlarning hayotidagi ijobiy o'zgarishlar, topilgan ish joylari, amalga oshgan orzular va himoya qilingan huquqlardir.
+              </p>
+            </ScrollReveal>
+
             {/* Bento Grid Stats */}
             <div className={styles.bentoGrid}>
-              
-              <div className={`${styles.bentoCard} ${styles.blueCard}`}>
-                <div className={styles.bentoIcon}><i className="fas fa-project-diagram"></i></div>
+
+              <ScrollReveal delay={1} className={`${styles.bentoCard} ${styles.blueCard}`}>
+                <div className={styles.bentoIcon}><FlowArrow weight="duotone" /></div>
                 <div className={styles.bentoValue}>
                   <AnimatedCounter from={0} to={100} duration={2} />+
                 </div>
                 <div className={styles.bentoLabel}>Yirik loyihalar</div>
-              </div>
+              </ScrollReveal>
 
-              <div className={`${styles.bentoCard} ${styles.greenCard}`}>
-                <div className={styles.bentoIcon}><i className="fas fa-users"></i></div>
+              <ScrollReveal delay={2} className={`${styles.bentoCard} ${styles.greenCard}`}>
+                <div className={styles.bentoIcon}><Users weight="duotone" /></div>
                 <div className={styles.bentoValue}>
                   <AnimatedCounter from={0} to={50000} duration={2.5} />+
                 </div>
                 <div className={styles.bentoLabel}>Faol yoshlar qamrovi</div>
-              </div>
+              </ScrollReveal>
 
-              <div className={`${styles.bentoCard} ${styles.orangeCard}`}>
-                <div className={styles.bentoIcon}><i className="fas fa-hands-helping"></i></div>
+              <ScrollReveal delay={3} className={`${styles.bentoCard} ${styles.orangeCard}`}>
+                <div className={styles.bentoIcon}><HandsClapping weight="duotone" /></div>
                 <div className={styles.bentoValue}>
                   <AnimatedCounter from={0} to={2000} duration={2.2} />+
                 </div>
                 <div className={styles.bentoLabel}>Volontyorlar jamoasi</div>
-              </div>
+              </ScrollReveal>
 
-              <div className={`${styles.bentoCard} ${styles.purpleCard}`}>
-                <div className={styles.bentoIcon}><i className="fas fa-award"></i></div>
+              <ScrollReveal delay={4} className={`${styles.bentoCard} ${styles.purpleCard}`}>
+                <div className={styles.bentoIcon}><Medal weight="duotone" /></div>
                 <div className={styles.bentoValue}>
                   <AnimatedCounter from={0} to={500} duration={2} />+
                 </div>
                 <div className={styles.bentoLabel}>Tadbirkorlik grantlari</div>
-              </div>
+              </ScrollReveal>
 
             </div>
           </div>
-          
+
           {/* Right Side: Image and Glassmorphism Badge */}
-          <div className={styles.imageCol}>
+          <ScrollReveal delay={2} className={styles.imageCol}>
             <div className={styles.imageWrapper}>
-              <Image 
-                src="/images/tashkilot/tashkilot_impact_1782907138342.png" 
-                alt="Yoshlar Ittifoqi Natijalari" 
-                fill 
+              <Image
+                src="/images/tashkilot/tashkilot_impact_1782907138342.png"
+                alt="Yoshlar Ittifoqi Natijalari"
+                fill
                 className={styles.image}
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              
+
               {/* Glassmorphism Badge */}
               <div className={styles.glassBadge}>
                 <div className={styles.glassIconWrap}>
-                  <i className="fas fa-star"></i>
+                  <Star weight="duotone" />
                 </div>
                 <div className={styles.glassText}>
                   <strong>1-O'rin</strong>
@@ -103,7 +107,7 @@ export default function ImpactStats() {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
 

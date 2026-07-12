@@ -6,6 +6,15 @@ import Link from "next/link";
 import type { GalleryImage } from "@prisma/client";
 import styles from "./Gallery.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import {
+  ArrowsOut,
+  ArrowRight,
+  MagnifyingGlassMinus,
+  MagnifyingGlassPlus,
+  X,
+  CaretLeft,
+  CaretRight,
+} from "@phosphor-icons/react/ssr";
 
 export default function Gallery({ images: galleryImages }: { images: GalleryImage[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -88,7 +97,7 @@ export default function Gallery({ images: galleryImages }: { images: GalleryImag
               sizes="(max-width: 768px) 50vw, 250px"
             />
             <div className={styles.overlay}>
-              <i className={`fas fa-expand ${styles.zoomIcon}`} />
+              <ArrowsOut weight="duotone" className={styles.zoomIcon} />
             </div>
           </div>
         </div>
@@ -111,7 +120,7 @@ export default function Gallery({ images: galleryImages }: { images: GalleryImag
               </p>
             </div>
             <Link href="/galereya" className="btn-view-all">
-              Barcha rasmlar <i className="fas fa-arrow-right" />
+              Barcha rasmlar <ArrowRight weight="duotone" />
             </Link>
           </div>
         </ScrollReveal>
@@ -147,24 +156,24 @@ export default function Gallery({ images: galleryImages }: { images: GalleryImag
           <>
             <div className={styles.lightboxToolbar}>
               <button className={styles.toolbarBtn} onClick={handleZoomOut} title="Uzoqlashtirish">
-                <i className="fas fa-search-minus" />
+                <MagnifyingGlassMinus weight="duotone" />
               </button>
               <button className={styles.toolbarBtn} onClick={handleZoomIn} title="Yaqinlashtirish">
-                <i className="fas fa-search-plus" />
+                <MagnifyingGlassPlus weight="duotone" />
               </button>
               <button className={styles.toolbarBtn} onClick={toggleFullscreen} title="To'liq ekran">
-                <i className="fas fa-expand" />
+                <ArrowsOut weight="duotone" />
               </button>
               <button className={`${styles.toolbarBtn} ${styles.toolbarClose}`} onClick={closeLightbox} title="Yopish">
-                <i className="fas fa-times" />
+                <X weight="duotone" />
               </button>
             </div>
-            
+
             <button className={`${styles.lightboxNav} ${styles.lightboxPrev}`} onClick={prevLightboxImage}>
-              <i className="fas fa-chevron-left" />
+              <CaretLeft weight="duotone" />
             </button>
             <button className={`${styles.lightboxNav} ${styles.lightboxNext}`} onClick={nextLightboxImage}>
-              <i className="fas fa-chevron-right" />
+              <CaretRight weight="duotone" />
             </button>
             
             <div className={styles.imgZoomContainer}>

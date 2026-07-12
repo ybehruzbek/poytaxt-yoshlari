@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ErrorState from "@/components/ui/ErrorState/ErrorState";
+import { House } from "@phosphor-icons/react/ssr";
 
 export const metadata = {
   title: "Sahifa topilmadi | O'zbekiston Yoshlar Ittifoqi",
@@ -14,7 +15,7 @@ export default function NotFound() {
       actions={
         <>
           <Link href="/" className="btn-primary">
-            <i className="fas fa-house" style={{ fontSize: 12 }} />
+            <House weight="duotone" style={{ fontSize: 12 }} />
             Bosh sahifaga qaytish
           </Link>
           <Link href="/murojaat" className="btn-secondary">

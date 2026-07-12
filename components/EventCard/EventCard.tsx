@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Event } from "@prisma/client";
 import { UZ_MONTHS_SHORT, uzTime } from "@/lib/format";
 import styles from "./EventCard.module.css";
+import { CalendarBlank, Clock, MapPin, ArrowRight } from "@phosphor-icons/react/ssr";
 
 export type EventWithCount = Event & {
   _count?: { registrations: number };
@@ -38,7 +39,7 @@ export default function EventCard({ event }: { event: EventWithCount }) {
           />
         ) : (
           <div className={styles.imageFallback}>
-            <i className="fas fa-calendar-days" />
+            <CalendarBlank weight="duotone" />
           </div>
         )}
         <div className={styles.dateBadge}>
@@ -53,16 +54,16 @@ export default function EventCard({ event }: { event: EventWithCount }) {
       <div className={styles.content}>
         <div className={styles.meta}>
           <span className={styles.metaItem}>
-            <i className="far fa-clock" /> {uzTime(event.startsAt)}
+            <Clock weight="duotone" /> {uzTime(event.startsAt)}
           </span>
           <span className={styles.metaItem}>
-            <i className="fas fa-map-marker-alt" /> {event.location}
+            <MapPin weight="duotone" /> {event.location}
           </span>
         </div>
         <h3 className={styles.title}>{event.title}</h3>
         <p className={styles.desc}>{event.desc}</p>
         <div className={styles.action}>
-          {actionText(event, isPast)} <i className="fas fa-arrow-right" />
+          {actionText(event, isPast)} <ArrowRight weight="duotone" />
         </div>
       </div>
     </Link>

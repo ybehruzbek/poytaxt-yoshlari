@@ -4,6 +4,33 @@ import Link from "next/link";
 import { getDirectionBySlug, getDirections } from "@/lib/queries";
 import styles from "./DirectionDetail.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import {
+  ArrowRight,
+  CheckCircle,
+  GraduationCap,
+  Crown,
+  Handshake,
+  Rocket,
+  ChalkboardTeacher,
+  Palette,
+  Barbell,
+  HandHeart,
+  Lightbulb,
+} from "@phosphor-icons/react/ssr";
+import type { Icon } from "@phosphor-icons/react/lib";
+
+// Bazadagi `Direction.icon` maydoni hali ham FontAwesome nomini ("fa-xxx") saqlaydi
+// (prisma/seed.ts). Shu nomni tegishli Phosphor komponentiga moslaymiz.
+const DIRECTION_ICONS: Record<string, Icon> = {
+  "fa-graduation-cap": GraduationCap,
+  "fa-crown": Crown,
+  "fa-handshake-angle": Handshake,
+  "fa-rocket": Rocket,
+  "fa-school": ChalkboardTeacher,
+  "fa-palette": Palette,
+  "fa-dumbbell": Barbell,
+  "fa-hand-holding-heart": HandHeart,
+};
 
 interface Props {
   params: Promise<{
@@ -39,6 +66,8 @@ export default async function DirectionDetailPage({ params }: Props) {
     notFound();
   }
 
+  const DirIcon = DIRECTION_ICONS[direction.icon] ?? Lightbulb;
+
   return (
     <div className={styles.pageWrapper}>
       {/* ===== HERO ===== */}
@@ -61,7 +90,7 @@ export default async function DirectionDetailPage({ params }: Props) {
                 className={styles.iconWrap} 
                 style={{ background: direction.iconBg, color: direction.iconColor }}
               >
-                <i className={`fas ${direction.icon}`}></i>
+                <DirIcon weight="duotone" />
               </div>
               <h1 className={styles.title}>{direction.title}</h1>
               <p className={styles.desc}>{direction.desc}</p>
@@ -86,7 +115,7 @@ export default async function DirectionDetailPage({ params }: Props) {
                   <ul>
                     {direction.goals.map((goal) => (
                       <li key={goal.id}>
-                        <i className="fas fa-check-circle" style={{ color: direction.iconColor }}></i>
+                        <CheckCircle weight="duotone" style={{ color: direction.iconColor }} />
                         <span>{goal.text}</span>
                       </li>
                     ))}
@@ -115,7 +144,7 @@ export default async function DirectionDetailPage({ params }: Props) {
                   <h3>Loyihaga qo'shiling</h3>
                   <p>Biz bilan birga maqsadlarimiz sari harakat qiling!</p>
                   <Link href="/murojaat" className={styles.ctaBtn} style={{ background: direction.iconColor }}>
-                    Ariza topshirish <i className="fas fa-arrow-right"></i>
+                    Ariza topshirish <ArrowRight weight="duotone" />
                   </Link>
                 </div>
               </ScrollReveal>

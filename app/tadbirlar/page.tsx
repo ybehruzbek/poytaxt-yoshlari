@@ -3,6 +3,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import EventCard from "@/components/EventCard/EventCard";
 import { EVENT_TYPES } from "@/lib/admin/resources";
 import { getPastEvents, getUpcomingEvents } from "@/lib/queries";
+import { Lightning, Calendar, ClockCounterClockwise } from "@phosphor-icons/react/ssr";
 import styles from "./Tadbirlar.module.css";
 
 export const metadata = {
@@ -62,11 +63,11 @@ export default async function TadbirlarPage({
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>
-            <i className="fas fa-bolt" /> Bo&apos;lajak tadbirlar
+            <Lightning weight="duotone" /> Bo&apos;lajak tadbirlar
           </h2>
           {upcoming.length === 0 ? (
             <div className={styles.empty}>
-              <i className="far fa-calendar" />
+              <Calendar weight="duotone" />
               Hozircha {activeType ? `«${activeType}» turida ` : ""}bo&apos;lajak
               tadbir yo&apos;q. Tez orada yangilari e&apos;lon qilinadi.
             </div>
@@ -82,7 +83,7 @@ export default async function TadbirlarPage({
         {past.length > 0 && (
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>
-              <i className="fas fa-clock-rotate-left" /> O&apos;tgan tadbirlar
+              <ClockCounterClockwise weight="duotone" /> O&apos;tgan tadbirlar
             </h2>
             <div className={styles.grid}>
               {past.map((event) => (

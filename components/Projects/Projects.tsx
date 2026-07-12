@@ -5,6 +5,7 @@ import { motion, type Variants } from "motion/react";
 import type { Project } from "@prisma/client";
 import TextReveal from "@/components/ui/TextReveal";
 import styles from "./Projects.module.css";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -39,7 +40,7 @@ export default function Projects({ items }: { items: Project[] }) {
           <motion.div variants={itemVariants}>
             <Link href="/loyihalar" className="btn-view-all">
               Barcha loyihalar
-              <i className="fas fa-arrow-right" />
+              <ArrowRight weight="duotone" />
             </Link>
           </motion.div>
         </motion.div>

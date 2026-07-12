@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Jost, Inter } from "next/font/google";
+import { Jost, Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -20,6 +20,15 @@ const jost = Jost({
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   variable: "--font-body",
+  display: "swap",
+});
+
+// Editorial urg'u — iqtibos/pull-quote uchun, boshqa joyda ishlatilmaydi
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  style: ["italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -58,16 +67,7 @@ export default async function RootLayout({
   const navLinks = await getNavLinks();
 
   return (
-    <html lang="uz" data-scroll-behavior="smooth" className={`${jost.variable} ${inter.variable}`}>
-      <head>
-        {/* CSS versiya — JS versiyasi <i> ni <svg> ga almashtirib, React
-            hydration bilan urishardi (151 joyda). Lokal SVG sprite'ga
-            o'tish PLAN.md Faza 4 da. */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
-      </head>
+    <html lang="uz" data-scroll-behavior="smooth" className={`${jost.variable} ${inter.variable} ${cormorant.variable}`}>
       <body>
         <ThemeProvider>
           <BackgroundController />

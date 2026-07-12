@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './CustomSelect.module.css';
+import { CaretDown, Check } from '@phosphor-icons/react/ssr';
 
 interface Option {
   label: string;
@@ -62,7 +63,7 @@ export default function CustomSelect({
             {selectedOption ? selectedOption.label : placeholder}
           </span>
         </div>
-        <i className={`fas fa-chevron-down ${styles.chevron}`}></i>
+        <CaretDown weight="duotone" className={styles.chevron} />
       </button>
 
       {isOpen && (
@@ -76,7 +77,7 @@ export default function CustomSelect({
                   onClick={() => handleSelect(option.value)}
                 >
                   {option.label}
-                  {value === option.value && <i className="fas fa-check"></i>}
+                  {value === option.value && <Check weight="duotone" />}
                 </button>
               </li>
             ))}

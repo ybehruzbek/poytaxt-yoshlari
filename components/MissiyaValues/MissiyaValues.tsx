@@ -1,40 +1,49 @@
 import React from "react";
 import styles from "./MissiyaValues.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import {
+  HandHeart,
+  Rocket,
+  Heartbeat,
+  Star,
+  Scales,
+  Flag,
+  ArrowRight,
+} from "@phosphor-icons/react/ssr";
 
 const values = [
   {
-    icon: "fa-hand-holding-heart",
+    icon: HandHeart,
     title: "Insonga E'tibor",
     desc: "Biz uchun har bir yoshning hayoti muhim. Biz ularni shunchaki raqamlar orqali emas, balki aniq inson taqdiri sifatida qabul qilamiz.",
     iconColor: "#0ea5e9"
   },
   {
-    icon: "fa-rocket",
+    icon: Rocket,
     title: "Innovatsiya",
     desc: "Doimiy ravishda IT loyihalar va raqamlashtirishni amaliyotga tatbiq etish. Zamonaviy yondashuvlarni izlash.",
     iconColor: "#10b981"
   },
   {
-    icon: "fa-heart-pulse",
+    icon: Heartbeat,
     title: "Sog'lom Millat",
     desc: "Jismoniy va psixologik salomatlikni asrash. Sport va sog'lom turmush tarzini yoshlar orasida keng ommalashtirish.",
     iconColor: "#f59e0b"
   },
   {
-    icon: "fa-star",
+    icon: Star,
     title: "Iqtidor",
     desc: "Olis hududlarda ham har bir yoshning noyob iste'dodini qidirib topish va ro'yobga chiqarishga yordam berish.",
     iconColor: "#8b5cf6"
   },
   {
-    icon: "fa-scale-balanced",
+    icon: Scales,
     title: "Adolat",
     desc: "Barcha masalalarni faqat qonuniy va adolatli yo'l bilan yechish. Korrupsiya va nohaqlikka qarshi kurashish.",
     iconColor: "#ef4444"
   },
   {
-    icon: "fa-flag",
+    icon: Flag,
     title: "Vatanga Sadoqat",
     desc: "Yoshlar qalbida milliy g'urur va Vatan taraqqiyoti uchun xizmat qilish tuyg'usini yoshlikdanoq shakllantirish.",
     iconColor: "#0f172a"
@@ -53,21 +62,24 @@ export default function MissiyaValues() {
         </div>
 
         <div className={styles.bentoGrid}>
-          {values.map((val, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div 
-                className={styles.bentoCard} 
-                style={{ '--card-color': val.iconColor } as React.CSSProperties}
-              >
-                <div className={styles.bIcon}>
-                  <i className={`fas ${val.icon}`} />
+          {values.map((val, i) => {
+            const Icon = val.icon;
+            return (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div
+                  className={styles.bentoCard}
+                  style={{ '--card-color': val.iconColor } as React.CSSProperties}
+                >
+                  <div className={styles.bIcon}>
+                    <Icon weight="duotone" />
+                  </div>
+                  <h3 className={styles.bTitle}>{val.title}</h3>
+                  <p className={styles.bDesc}>{val.desc}</p>
+                  <div className={styles.bAction}>Batafsil <ArrowRight weight="duotone" /></div>
                 </div>
-                <h3 className={styles.bTitle}>{val.title}</h3>
-                <p className={styles.bDesc}>{val.desc}</p>
-                <div className={styles.bAction}>Batafsil <i className="fas fa-arrow-right"></i></div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

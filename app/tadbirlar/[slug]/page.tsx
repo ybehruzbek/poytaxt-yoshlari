@@ -5,6 +5,7 @@ import RichText from "@/components/ui/RichText";
 import EventRegistrationForm from "@/components/EventRegistrationForm/EventRegistrationForm";
 import { getEventBySlug, getEventSlugs } from "@/lib/queries";
 import { uzDateTime, uzTime } from "@/lib/format";
+import { Trophy, Calendar, Clock, MapPin, Buildings, Handshake, Users } from "@phosphor-icons/react/ssr";
 import styles from "./TadbirDetail.module.css";
 
 export const revalidate = 60;
@@ -121,7 +122,7 @@ export default async function TadbirDetailPage({
               {event.results && (
                 <div className={styles.resultsBox}>
                   <div className={styles.resultsTitle}>
-                    <i className="fas fa-trophy" /> Natijalar
+                    <Trophy weight="duotone" /> Natijalar
                   </div>
                   <RichText text={event.results} className={styles.paragraph} />
                 </div>
@@ -134,17 +135,17 @@ export default async function TadbirDetailPage({
               <h2 className={styles.infoTitle}>Tadbir ma&apos;lumotlari</h2>
               <ul className={styles.infoList}>
                 <li className={styles.infoItem}>
-                  <i className="far fa-calendar" />
+                  <Calendar weight="duotone" />
                   <span>{uzDateTime(event.startsAt)}</span>
                 </li>
                 {event.endsAt && (
                   <li className={styles.infoItem}>
-                    <i className="far fa-clock" />
+                    <Clock weight="duotone" />
                     <span>Tugashi: {uzTime(event.endsAt)}</span>
                   </li>
                 )}
                 <li className={styles.infoItem}>
-                  <i className="fas fa-map-marker-alt" />
+                  <MapPin weight="duotone" />
                   <span>
                     {event.location}
                     {event.mapUrl && (
@@ -158,18 +159,18 @@ export default async function TadbirDetailPage({
                   </span>
                 </li>
                 <li className={styles.infoItem}>
-                  <i className="fas fa-building" />
+                  <Buildings weight="duotone" />
                   <span>{event.organizer}</span>
                 </li>
                 {event.partners && (
                   <li className={styles.infoItem}>
-                    <i className="fas fa-handshake" />
+                    <Handshake weight="duotone" />
                     <span>Hamkorlar: {event.partners}</span>
                   </li>
                 )}
                 {event.capacity > 0 && !finished && !cancelled && (
                   <li className={styles.infoItem}>
-                    <i className="fas fa-users" />
+                    <Users weight="duotone" />
                     <span>
                       {taken} / {event.capacity} o&apos;rin band
                       <span className={styles.capacityBar}>

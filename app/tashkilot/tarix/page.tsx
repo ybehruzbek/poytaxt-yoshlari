@@ -6,6 +6,7 @@ import TarixHero from "@/components/TarixHero/TarixHero";
 import TarixIntro from "@/components/TarixIntro/TarixIntro";
 import TarixStats from "@/components/TarixStats/TarixStats";
 import NavigationCards from "@/components/NavigationCards/NavigationCards";
+import { ArrowRight } from "@phosphor-icons/react/ssr";
 
 export const metadata = {
   title: "Boy Tariximiz | O'zbekiston Yoshlar Ittifoqi",
@@ -165,7 +166,7 @@ export default function HistoryPage() {
                 <Link href="/loyihalar" className={styles.ctaButton}>
                   <span>Tashkilot loyihalari bilan tanishish</span>
                   <div className={styles.btnIcon}>
-                    <i className="fas fa-arrow-right"></i>
+                    <ArrowRight weight="duotone" />
                   </div>
                 </Link>
               </ScrollReveal>

@@ -1,7 +1,7 @@
 .section {
   position: relative;
   padding: var(--section-y) 0;
-  background: var(--bg-light);
+  background: transparent;
   color: var(--text);
   overflow: hidden;
 }
@@ -11,21 +11,6 @@
   margin: 0 auto;
   padding: 0 var(--sp-10);
   position: relative;
-}
-
-/* Massive Watermark Quote in the Background */
-.watermarkQuote {
-  position: absolute;
-  top: -80px;
-  left: 20px;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 600px;
-  line-height: 1;
-  color: rgba(15, 37, 71, 0.04); /* Extremely faint navy */
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
 }
 
 .grid {
@@ -40,10 +25,35 @@
 /* LEFT SIDE - EXECUTIVE PORTRAIT */
 .imageCol {
   position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Girih rozetka — milliy naqsh, portret ortida hajm beruvchi medalyon.
+   Alohida element, imageWrapper'ning overflow:hidden'idan tashqarida —
+   aks holda soyani ham kesib qo'yardi. */
+.naqshAccent {
+  --naqsh-opacity: 0.07;
+  --naqsh-size: 230px 163px;
+  position: absolute;
+  top: -90px;
+  right: -90px;
+  width: 210px;
+  height: 210px;
+  color: var(--blue-deep);
+  z-index: 0;
+}
+
+.naqshAccent::before {
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
 }
 
 .imageWrapper {
   position: relative;
+  z-index: 1;
   width: 100%;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius);
@@ -74,22 +84,53 @@
   padding-right: var(--sp-10);
 }
 
+.quoteIconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--green-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-6);
+}
+
+.quoteIcon {
+  font-size: 26px;
+  color: var(--green);
+}
+
 .mainQuote {
-  font-family: var(--font-heading);
+  font-family: var(--font-serif);
   font-size: clamp(36px, 4vw, 56px);
   font-weight: 600;
   font-style: italic;
-  line-height: 1.2;
+  line-height: 1.15;
+  padding-bottom: 0.15em; /* italic descender clearance (y/g/j) */
   color: var(--blue-deep);
-  margin-bottom: var(--sp-10);
+  margin-bottom: var(--sp-8);
   letter-spacing: -0.01em;
 }
 
+.highlight {
+  color: var(--green);
+}
+
+.quoteBlock {
+  margin: 0 0 var(--sp-6);
+  padding-left: var(--sp-6);
+  border-left: 3px solid var(--green-pale);
+}
+
 .paragraph {
-  font-size: clamp(18px, 1.5vw, 22px);
+  font-size: clamp(17px, 1.3vw, 20px);
   line-height: 1.8;
   color: var(--text-secondary);
-  margin-bottom: var(--sp-8);
+  margin-bottom: var(--sp-6);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
 }
 
 .authorBlock {
@@ -144,12 +185,21 @@
     flex-direction: column;
     align-items: center;
   }
-  
-  .watermarkQuote {
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 400px;
-    top: 100px;
+
+  .quoteIconWrap {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .quoteBlock {
+    text-align: left;
+  }
+
+  .naqshAccent {
+    width: 150px;
+    height: 150px;
+    top: -60px;
+    right: -60px;
   }
 }
 

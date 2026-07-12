@@ -5,6 +5,7 @@ import type { Stat } from "@prisma/client";
 import styles from "./Stats.module.css";
 import CountUp from "@/components/ui/CountUp";
 import TextReveal from "@/components/ui/TextReveal";
+import { Play } from "@phosphor-icons/react/ssr";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -71,7 +72,7 @@ export default function Stats({ items }: { items: Stat[] }) {
                 />
                 <div className={styles.overlay}>
                   <div className={styles.overlayPlay}>
-                    <i className="fas fa-play" />
+                    <Play weight="duotone" />
                   </div>
                   <h3>Biz haqimizda qisqacha</h3>
                 </div>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import { megaMenuCategories, LOGO_URL } from "@/lib/data";
+import { X, TelegramLogo, InstagramLogo, FacebookLogo, UserCircle } from "@phosphor-icons/react/ssr";
 
 export interface NavLinkItem {
   label: string;
@@ -108,7 +109,7 @@ export default function Navbar({ links }: { links: NavLinkItem[] }) {
             aria-expanded={menuOpen}
           >
             <span style={{ display: menuOpen ? "flex" : "none", alignItems: "center", justifyContent: "center" }}>
-              <i className="fas fa-times" style={{fontSize: "24px"}} />
+              <X weight="duotone" style={{fontSize: "24px"}} />
             </span>
             <span style={{ display: menuOpen ? "none" : "flex", alignItems: "center", justifyContent: "center" }}>
               <span className={styles.menuToggleIcon}>
@@ -162,13 +163,13 @@ export default function Navbar({ links }: { links: NavLinkItem[] }) {
                 <a href="mailto:info@yoshlartoshkent.uz" className={styles.contactEmail}>info@yoshlartoshkent.uz</a>
 
                 <div className={styles.socialIcons}>
-                  <a href="#" aria-label="Telegram" className={styles.socialLink}><i className="fab fa-telegram-plane" /></a>
-                  <a href="#" aria-label="Instagram" className={styles.socialLink}><i className="fab fa-instagram" /></a>
-                  <a href="#" aria-label="Facebook" className={styles.socialLink}><i className="fab fa-facebook-f" /></a>
+                  <a href="#" aria-label="Telegram" className={styles.socialLink}><TelegramLogo weight="duotone" /></a>
+                  <a href="#" aria-label="Instagram" className={styles.socialLink}><InstagramLogo weight="duotone" /></a>
+                  <a href="#" aria-label="Facebook" className={styles.socialLink}><FacebookLogo weight="duotone" /></a>
                 </div>
 
                 <Link href="/admin/login" onClick={closeMenu} className={styles.menuLogin}>
-                  <i className="fas fa-user-circle" /> Tizimga kirish
+                  <UserCircle weight="duotone" /> Tizimga kirish
                 </Link>
               </div>
             </div>

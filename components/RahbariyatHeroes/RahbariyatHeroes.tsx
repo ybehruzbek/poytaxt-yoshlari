@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { YouthLeader } from "@prisma/client";
 import styles from "./RahbariyatHeroes.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { MapPin, ArrowRight } from "@phosphor-icons/react/ssr";
 
 export default function RahbariyatHeroes({ items: youthLeaders }: { items: YouthLeader[] }) {
   return (
@@ -36,14 +37,14 @@ export default function RahbariyatHeroes({ items: youthLeaders }: { items: Youth
                 <div className={styles.info}>
                   <h3 className={styles.name}>{youth.name}</h3>
                   <div className={styles.place}>
-                    <i className="fas fa-map-marker-alt"></i>
+                    <MapPin weight="duotone" />
                     {youth.place}
                   </div>
                 </div>
-                
+
                 <div className={styles.cardFooter}>
                   <button className={styles.profileBtn}>
-                    Batafsil <i className="fas fa-arrow-right"></i>
+                    Batafsil <ArrowRight weight="duotone" />
                   </button>
                 </div>
               </div>

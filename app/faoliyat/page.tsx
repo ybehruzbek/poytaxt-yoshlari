@@ -3,6 +3,33 @@ import Image from "next/image";
 import styles from "./Faoliyat.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { getDirections, getProjects } from "@/lib/queries";
+import {
+  CaretRight,
+  ArrowRight,
+  Rocket,
+  GraduationCap,
+  Crown,
+  Handshake,
+  ChalkboardTeacher,
+  Palette,
+  Barbell,
+  HandHeart,
+  Lightbulb,
+} from "@phosphor-icons/react/ssr";
+import type { Icon } from "@phosphor-icons/react/lib";
+
+// Bazadagi `Direction.icon` maydoni hali ham FontAwesome nomini ("fa-xxx") saqlaydi
+// (prisma/seed.ts). Shu nomni tegishli Phosphor komponentiga moslaymiz.
+const DIRECTION_ICONS: Record<string, Icon> = {
+  "fa-graduation-cap": GraduationCap,
+  "fa-crown": Crown,
+  "fa-handshake-angle": Handshake,
+  "fa-rocket": Rocket,
+  "fa-school": ChalkboardTeacher,
+  "fa-palette": Palette,
+  "fa-dumbbell": Barbell,
+  "fa-hand-holding-heart": HandHeart,
+};
 
 export const metadata = {
   title: "Faoliyat - O'zbekiston Yoshlar Ittifoqi",
@@ -49,7 +76,7 @@ export default async function FaoliyatPage() {
                 </p>
                 
                 <Link href="/murojaat" className={styles.heroBtn}>
-                  Ro'yxatdan O'tish <i className="fas fa-chevron-right"></i>
+                  Ro'yxatdan O'tish <CaretRight weight="duotone" />
                 </Link>
               </ScrollReveal>
             </div>
@@ -61,22 +88,25 @@ export default async function FaoliyatPage() {
       <section className={styles.bentoSection} id="yonalishlar">
         <div className="container">
           <div className={styles.bentoGrid}>
-            {directions.map((dir, i) => (
-              <ScrollReveal key={dir.id} delay={i * 0.1}>
-                <Link 
-                  href={`/faoliyat/${dir.slug}`}
-                  className={styles.bentoCard} 
-                  style={{ '--card-color': dir.iconColor } as React.CSSProperties}
-                >
-                  <div className={styles.bIcon}>
-                    <i className={`fas ${dir.icon}`} />
-                  </div>
-                  <h3 className={styles.bTitle}>{dir.title}</h3>
-                  <p className={styles.bDesc}>{dir.desc}</p>
-                  <div className={styles.bAction}>Batafsil <i className="fas fa-arrow-right"></i></div>
-                </Link>
-              </ScrollReveal>
-            ))}
+            {directions.map((dir, i) => {
+              const DirIcon = DIRECTION_ICONS[dir.icon] ?? Lightbulb;
+              return (
+                <ScrollReveal key={dir.id} delay={i * 0.1}>
+                  <Link
+                    href={`/faoliyat/${dir.slug}`}
+                    className={styles.bentoCard}
+                    style={{ '--card-color': dir.iconColor } as React.CSSProperties}
+                  >
+                    <div className={styles.bIcon}>
+                      <DirIcon weight="duotone" />
+                    </div>
+                    <h3 className={styles.bTitle}>{dir.title}</h3>
+                    <p className={styles.bDesc}>{dir.desc}</p>
+                    <div className={styles.bAction}>Batafsil <ArrowRight weight="duotone" /></div>
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -164,7 +194,7 @@ export default async function FaoliyatPage() {
                       </div>
                     </div>
                     <Link href={`/loyihalar/${proj.slug}`} className={styles.pBatafsil}>
-                      Batafsil <i className="fas fa-arrow-right"></i>
+                      Batafsil <ArrowRight weight="duotone" />
                     </Link>
                   </div>
                 </div>
@@ -186,7 +216,7 @@ export default async function FaoliyatPage() {
               </p>
               <Link href="/murojaat" className={styles.ctaBtn}>
                 <span>Loyiha taklif etish</span>
-                <i className="fas fa-rocket"></i>
+                <Rocket weight="duotone" />
               </Link>
             </div>
           </ScrollReveal>

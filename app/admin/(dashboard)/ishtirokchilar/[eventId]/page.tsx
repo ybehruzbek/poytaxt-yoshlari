@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import styles from "@/components/admin/Admin.module.css";
+import { FileCsv } from "@phosphor-icons/react/ssr";
 
 export const metadata = { title: "Ishtirokchilar ro'yxati | Admin Panel" };
 
@@ -34,7 +35,7 @@ export default async function EventRegistrationsPage({
             href={`/admin/ishtirokchilar/${event.id}/csv`}
             className={`${styles.btn} ${styles.btnPrimary}`}
           >
-            <i className="fas fa-file-csv" /> CSV yuklab olish
+            <FileCsv weight="duotone" /> CSV yuklab olish
           </a>
           <Link
             href="/admin/ishtirokchilar"

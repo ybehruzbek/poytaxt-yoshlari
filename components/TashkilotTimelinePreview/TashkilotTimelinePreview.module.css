@@ -1,6 +1,6 @@
 .timelineSection {
   padding: var(--section-y) 0;
-  background: var(--bg-light);
+  background: transparent;
   position: relative;
 }
 

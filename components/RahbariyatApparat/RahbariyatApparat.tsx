@@ -1,40 +1,49 @@
 import React from "react";
 import styles from "./RahbariyatApparat.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import {
+  GraduationCap,
+  Code,
+  HandsClapping,
+  Medal,
+  Briefcase,
+  Megaphone,
+  ArrowRight,
+} from "@phosphor-icons/react/ssr";
 
 const apparatSections = [
   {
-    icon: "fa-graduation-cap",
+    icon: GraduationCap,
     title: "Ta'lim va Rivojlanish Bo'limi",
     desc: "Oliy va o'rta maxsus ta'lim muassasalaridagi yoshlar bilan ishlash, to'garaklar va intellektual tanlovlarni muvofiqlashtirish.",
     color: "#0ea5e9"
   },
   {
-    icon: "fa-code",
+    icon: Code,
     title: "IT va Innovatsiyalar",
     desc: "Yosh dasturchilarni qo'llab-quvvatlash, startap ekotizimi va zamonaviy raqamli loyihalarni amaliyotga joriy etish.",
     color: "#8b5cf6"
   },
   {
-    icon: "fa-hands-holding-circle",
+    icon: HandsClapping,
     title: "Ijtimoiy Himoya",
     desc: "Ehtiyojmand oilalar farzandlari, «Yoshlar daftari» ga kiritilgan yoshlar bilan manzilli ishlash tizimi.",
     color: "#10b981"
   },
   {
-    icon: "fa-medal",
+    icon: Medal,
     title: "Sport va Salomatlik",
     desc: "Ommaviy sport tadbirlari, marafonlar va sog'lom turmush tarzini targ'ib qilish dasturlarini boshqarish.",
     color: "#f59e0b"
   },
   {
-    icon: "fa-briefcase",
+    icon: Briefcase,
     title: "Tadbirkorlik va Bandlik",
     desc: "Yoshlarni kasb-hunarga yo'naltirish, bandligini ta'minlash va biznes loyihalarini moliyalashtirishda ko'maklashish.",
     color: "#ef4444"
   },
   {
-    icon: "fa-bullhorn",
+    icon: Megaphone,
     title: "Axborot Xizmati",
     desc: "Tashkilot faoliyatini OAV va ijtimoiy tarmoqlarda yoritish, jamoatchilik bilan aloqalar o'rnatish.",
     color: "#64748b"
@@ -58,22 +67,25 @@ export default function RahbariyatApparat() {
         <ScrollReveal delay={0.2}>
           <div className={styles.megaCard}>
             <div className={styles.grid}>
-              {apparatSections.map((item, index) => (
-                <div 
-                  key={index} 
-                  className={styles.cell}
-                  style={{ "--accent": item.color } as React.CSSProperties}
-                >
-                  <div className={styles.iconWrap}>
-                    <i className={`fas ${item.icon}`}></i>
+              {apparatSections.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={index}
+                    className={styles.cell}
+                    style={{ "--accent": item.color } as React.CSSProperties}
+                  >
+                    <div className={styles.iconWrap}>
+                      <Icon weight="duotone" />
+                    </div>
+                    <h3 className={styles.cellTitle}>{item.title}</h3>
+                    <p className={styles.cellDesc}>{item.desc}</p>
+                    <div className={styles.cellAction}>
+                      Batafsil <ArrowRight weight="duotone" />
+                    </div>
                   </div>
-                  <h3 className={styles.cellTitle}>{item.title}</h3>
-                  <p className={styles.cellDesc}>{item.desc}</p>
-                  <div className={styles.cellAction}>
-                    Batafsil <i className="fas fa-arrow-right"></i>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </ScrollReveal>

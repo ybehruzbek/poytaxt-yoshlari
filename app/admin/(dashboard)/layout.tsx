@@ -3,6 +3,7 @@ import React from "react";
 import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar/AdminSidebar";
 import { requireRole } from "@/lib/auth";
+import { User } from "@phosphor-icons/react/ssr";
 
 export const metadata = {
   title: "Admin Panel | Poytaxt Yoshlari",
@@ -46,7 +47,7 @@ export default async function AdminLayout({
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: "18px"
             }}>
-              <i className="fas fa-user"></i>
+              <User weight="duotone" />
             </div>
           </div>
         </header>
