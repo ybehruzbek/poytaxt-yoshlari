@@ -6,6 +6,22 @@
 
 ---
 
+## [0.9.14] — 2026-07-12 · zakovat_bot vendored — kelajakdagi Telegram bot integratsiyasi uchun
+
+`zakovat_bot/` papkasi qo'shildi — https://github.com/Norqulov-Sardorbek/zakovat_bot
+loyihasining vendored nusxasi (ichki `.git` olib tashlangan). Bu saytning
+qismi emas: keyinchalik **@yoshlaruchuntanlov_bot**ga ulanadigan Zakovat
+viktorina boti (Django + aiogram, Python). Hozircha faqat saqlab qo'yildi,
+integratsiya boshlanmagan — tafsilotlar `zakovat_bot/INTEGRATSIYA.md`da
+(shu jumladan ma'lum muammolar: `dispatcher.py`dagi `print(TOKEN)` va
+repoda yo'q `sms_service` importi).
+
+Bot tokeni **gitga tushmaydi** — lokal `zakovat_bot/.env`da saqlanadi
+(ildiz `.gitignore`dagi `.env*` qoidasi qoplaydi), shablon sifatida
+`.env.example` commit qilindi.
+
+---
+
 ## [0.9.13] — 2026-07-12 · Missiya sahifasi qayta dizayn: seam bug, o'lik CSS, brend tokenlari
 
 **Seam (tikuv) bug tuzatildi:** `/tashkilot/missiya` `<main>`ga inline
