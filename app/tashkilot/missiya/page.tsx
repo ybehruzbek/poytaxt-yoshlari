@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function MissiyaPage() {
   return (
-    <main style={{ backgroundColor: "var(--bg-light, #ffffff)" }}>
+    <main>
       {/* 1. HERO (STANDARD IMAGE HERO) */}
       <MissiyaHero />
 

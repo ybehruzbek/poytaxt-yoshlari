@@ -13,7 +13,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-xl);
 }
 
 .bgImageWrap {
@@ -31,7 +31,7 @@
   position: absolute;
   top: 0; left: 0; bottom: 0;
   width: 70%;
-  background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+  background: linear-gradient(to right, rgba(15, 37, 71, 0.85) 0%, rgba(15, 37, 71, 0.5) 50%, transparent 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -92,10 +92,31 @@
   line-height: 1.6;
 }
 
+/* Romb-ajratkich — hero matni chapga tekislangani uchun chapda qoladi;
+   to'q fon uchun chiziqlar oq-shaffof qilinadi. */
+.heroDivider {
+  max-width: 240px;
+  margin-top: 28px;
+}
+
+.heroDivider::before,
+.heroDivider::after {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 @media (max-width: 768px) {
   .heroBox::before {
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+    background: linear-gradient(to top, rgba(15, 37, 71, 0.9) 0%, rgba(15, 37, 71, 0.4) 100%);
+  }
+  /* clamp() minimumi 48px tor ekranda "QADRIYATLAR" so'zini kartadan
+     kesib yuborardi — mobilda kichikroq shkala. */
+  .heroTitle {
+    font-size: clamp(32px, 9.5vw, 48px);
+  }
+  .heroDivider {
+    margin-left: auto;
+    margin-right: auto;
   }
   .heroContent {
     padding: 0 20px;
@@ -106,8 +127,14 @@
   .breadcrumbs ol {
     justify-content: center;
   }
+  /* Qat'iy 600px balandlik uzun matnli kontentni tepadan kesib qo'yardi
+     (overflow:hidden) — kontent sig'masa karta o'zi cho'ziladi. */
   .heroBox {
-    height: 600px;
+    height: auto;
+    min-height: 600px;
     align-items: flex-end;
+  }
+  .heroContent {
+    padding-top: 48px;
   }
 }

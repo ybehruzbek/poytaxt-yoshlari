@@ -6,6 +6,56 @@
 
 ---
 
+## [0.9.13] — 2026-07-12 · Missiya sahifasi qayta dizayn: seam bug, o'lik CSS, brend tokenlari
+
+**Seam (tikuv) bug tuzatildi:** `/tashkilot/missiya` `<main>`ga inline
+`background: var(--bg-light)` berilgan, `MissiyaValues` seksiyasi ham
+`var(--bg-light)` fonda edi. `--bg-light` (#F3F6FA) sahifa tanasidagi `--bg`
+(#F6F8FC) dan boshqa deyarli-oq rang — natijada seksiyalar orasida ko'rinadigan
+gorizontal chiziq paydo bo'lardi. Ikkalasi ham olib tashlandi (`main` fonsiz,
+seksiya `transparent`) — endi butun sahifa yagona `--bg` fonida.
+
+**716 qatorlik o'lik CSS o'chirildi:** `app/tashkilot/missiya/Missiya.module.css`
+hech qayerda import qilinmagan orphan fayl edi (grep bilan tasdiqlandi) — o'chirildi.
+
+**Begona Tailwind palitrasi brend tokenlariga ko'chdi:** `MissiyaValues`dagi
+6 ta hardcode hex (`#0ea5e9, #10b981, #f59e0b, #8b5cf6, #ef4444, #0f172a`)
+brend tokenlari bilan almashtirildi (`--blue, --green-check, --amber, --teal,
+--accent-orange, --blue-deep`). Butun missiya modullaridagi noto'g'ri fallback
+hexlar (`var(--blue, #0ea5e9)` va h.k.) tozalandi. `MissiyaPrinciples` va
+`MissiyaHero`dagi slate gradientlari (rgba 15,23,42) va qora soyalar
+(rgba 0,0,0) navy'ga (rgba 15,37,71) yoki `--shadow-*` tokenlariga ko'chirildi;
+`MissiyaCTA`dagi begona emerald blob (rgba 16,185,129) brend-yashilga
+(rgba 108,162,60) o'zgardi.
+
+**Soxta "Batafsil →" olib tashlandi:** `MissiyaValues` kartalaridagi
+o'q-strelkali "Batafsil" matni havolasiz `<div` ustidagi bosib bo'lmaydigan
+dekorativ element edi — o'chirildi, karta endi sof ma'lumot kartasi.
+
+**Girih naqsh urg'ulari qo'shildi:** qadriyatlar bentosining birinchi (urg'uli)
+kartasiga yulduz-girih (opacity 0.06, yuqori-o'ng burchakda, matnga tegmaydi),
+CTA qutisiga esa oq rozetka burchak urg'usi (opacity 0.08, bitta uzluksiz
+radial gradient bilan so'nadi — qattiq halqasiz).
+
+**CTA sarlavhasi serif-lede'ga aylandi:** Cormorant Garamond italic
+(ChairmanMessage/yetakchi-profil tili bilan bir xil). CTA tugmasi lokal
+`!important`li CSS'dan global `.btn-hero-secondary` (to'q fon uchun oq-kontur)
+klassiga ko'chdi, ortiqcha lokal tugma CSS'i o'chirildi.
+
+**Hero'ga `divider-romb` qo'shildi** (matn tekislanishiga mos — chapda, to'q
+fonda oq-shaffof chiziqlar) va `loading.tsx` skeleton qo'shildi (qardosh
+route'lardagi konvensiya: `variant="grid" cards={6}`).
+
+**Verifikatsiyada topilgan 2 ta mobil hero bug tuzatildi** (qayta dizayndan
+oldin ham bor edi):
+- Sarlavha 375px'da o'ngdan kesilardi ("QADRIYATLA...") — `clamp()` minimumi
+  48px tor ekran uchun juda katta; mobilda `clamp(32px, 9.5vw, 48px)`.
+- Kartaning qat'iy `height: 600px`i uzun kontentni tepadan kesib
+  (`overflow: hidden`), breadcrumbs ko'rinmay qolardi — `min-height: 600px;
+  height: auto` (kontent sig'masa karta o'zi cho'ziladi).
+
+---
+
 ## [0.9.12] — 2026-07-12 · Yetakchilar sahifalari qayta dizayn: qidiruv, filtr, navy hero-profil
 
 **Ro'yxat sahifasi (/yetakchilar) — qidiruv va filtr qo'shildi:**

@@ -42,6 +42,11 @@ export default function MissiyaHero() {
               <p className={styles.heroDesc}>
                 O'zbekiston Yoshlar Ittifoqining davlat siyosatidagi o'rni, yoshlar bilan ishlashdagi asosiy maqsadi, kelajak qarashlari va o'zgarmas tamoyillari. Biz oddiy tashkilot emasmiz — biz yoshlarning ishonchli hamrohimiz.
               </p>
+              <div className={`divider-romb ${styles.heroDivider}`} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
             </ScrollReveal>
           </div>
         </div>

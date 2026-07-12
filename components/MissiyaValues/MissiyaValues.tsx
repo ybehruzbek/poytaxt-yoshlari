@@ -8,7 +8,6 @@ import {
   Star,
   Scales,
   Flag,
-  ArrowRight,
 } from "@phosphor-icons/react/ssr";
 
 const values = [
@@ -16,37 +15,37 @@ const values = [
     icon: HandHeart,
     title: "Insonga E'tibor",
     desc: "Biz uchun har bir yoshning hayoti muhim. Biz ularni shunchaki raqamlar orqali emas, balki aniq inson taqdiri sifatida qabul qilamiz.",
-    iconColor: "#0ea5e9"
+    iconColor: "var(--blue)"
   },
   {
     icon: Rocket,
     title: "Innovatsiya",
     desc: "Doimiy ravishda IT loyihalar va raqamlashtirishni amaliyotga tatbiq etish. Zamonaviy yondashuvlarni izlash.",
-    iconColor: "#10b981"
+    iconColor: "var(--green-check)"
   },
   {
     icon: Heartbeat,
     title: "Sog'lom Millat",
     desc: "Jismoniy va psixologik salomatlikni asrash. Sport va sog'lom turmush tarzini yoshlar orasida keng ommalashtirish.",
-    iconColor: "#f59e0b"
+    iconColor: "var(--amber)"
   },
   {
     icon: Star,
     title: "Iqtidor",
     desc: "Olis hududlarda ham har bir yoshning noyob iste'dodini qidirib topish va ro'yobga chiqarishga yordam berish.",
-    iconColor: "#8b5cf6"
+    iconColor: "var(--teal)"
   },
   {
     icon: Scales,
     title: "Adolat",
     desc: "Barcha masalalarni faqat qonuniy va adolatli yo'l bilan yechish. Korrupsiya va nohaqlikka qarshi kurashish.",
-    iconColor: "#ef4444"
+    iconColor: "var(--accent-orange)"
   },
   {
     icon: Flag,
     title: "Vatanga Sadoqat",
     desc: "Yoshlar qalbida milliy g'urur va Vatan taraqqiyoti uchun xizmat qilish tuyg'usini yoshlikdanoq shakllantirish.",
-    iconColor: "#0f172a"
+    iconColor: "var(--blue-deep)"
   },
 ];
 
@@ -70,12 +69,16 @@ export default function MissiyaValues() {
                   className={styles.bentoCard}
                   style={{ '--card-color': val.iconColor } as React.CSSProperties}
                 >
+                  {/* Girih to'r — faqat birinchi (urg'uli) kartada, ikonka
+                      yonidagi yuqori burchakda, matnga tegmaydi. */}
+                  {i === 0 && (
+                    <div className={`${styles.cardPattern} naqsh naqsh-yulduz`} aria-hidden="true"></div>
+                  )}
                   <div className={styles.bIcon}>
                     <Icon weight="duotone" />
                   </div>
                   <h3 className={styles.bTitle}>{val.title}</h3>
                   <p className={styles.bDesc}>{val.desc}</p>
-                  <div className={styles.bAction}>Batafsil <ArrowRight weight="duotone" /></div>
                 </div>
               </ScrollReveal>
             );

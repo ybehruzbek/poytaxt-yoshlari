@@ -1,6 +1,6 @@
 .bentoSection {
   padding: 100px 0;
-  background: var(--bg-light, #f8fafc);
+  background: transparent;
 }
 
 .sectionHeader {
@@ -11,7 +11,7 @@
 .sectionLabel {
   font-size: 14px;
   font-weight: 700;
-  color: var(--blue, #0ea5e9);
+  color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 3px;
   margin-bottom: 16px;
@@ -21,7 +21,7 @@
 .sectionTitle {
   font-size: 44px;
   font-weight: 800;
-  color: var(--blue-deep, #0f172a);
+  color: var(--blue-deep);
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
@@ -61,7 +61,27 @@
   z-index: 10;
 }
 
+/* Girih to'r — urg'uli kartaning yuqori-o'ng burchagida, bitta uzluksiz
+   radial gradient bilan so'nadi (halqa/chegara bo'lmasligi uchun), matnga
+   tegmaydi. Rang kartaning o'z rangida (--card-color), bilinar-bilinmas. */
+.cardPattern {
+  --naqsh-opacity: 0.06;
+  --naqsh-size: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 55%;
+  color: var(--card-color);
+  z-index: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 70%);
+}
+
 .bIcon {
+  position: relative;
+  z-index: 1;
   width: 64px;
   height: 64px;
   border-radius: 16px;
@@ -82,33 +102,21 @@
 }
 
 .bTitle {
+  position: relative;
+  z-index: 1;
   font-size: 24px;
   font-weight: 700;
-  color: var(--blue-deep, #0f172a);
+  color: var(--blue-deep);
   margin-bottom: 16px;
 }
 
 .bDesc {
+  position: relative;
+  z-index: 1;
   font-size: 16px;
-  color: var(--text, #475569);
+  color: var(--text);
   line-height: 1.6;
   flex-grow: 1;
-  margin-bottom: 32px;
-}
-
-.bAction {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--card-color);
-  margin-top: auto;
-  transition: all 0.3s ease;
-}
-
-.bentoCard:hover .bAction {
-  transform: translateX(6px);
 }
 
 @media (max-width: 1024px) {
