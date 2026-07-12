@@ -1,0 +1,209 @@
+/* ===== YETAKCHI PROFIL — to'q navy hero-karta (ChairmanMessage/footer tili) ===== */
+
+.page {
+  /* PageHeader'siz sahifa — navbar ostidan joyni o'zi ochadi
+     (ProfileDetail bilan bir xil formula). */
+  padding-top: calc(var(--nav-h) + var(--nav-top) + clamp(32px, 5vw, 56px));
+  max-width: 1040px;
+}
+
+/* ===== HERO-KARTA ===== */
+.heroCard {
+  position: relative;
+  background: linear-gradient(160deg, var(--blue-deep) 0%, #1A3358 100%);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 48px);
+  overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(15, 37, 71, 0.4);
+}
+
+/* Girih rozetka — burchakda, oq, bilinar-bilinmas; bitta uzluksiz radial
+   gradient bilan so'nadi (qattiq chegara/halqa bo'lmasligi uchun). */
+.naqshAccent {
+  --naqsh-opacity: 0.09;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  color: var(--white);
+  pointer-events: none;
+  mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 75%);
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+.heroBody {
+  min-width: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--sp-5);
+}
+
+.name {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: var(--sp-3);
+}
+
+.place {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--fs-lg);
+  font-weight: 500;
+}
+
+.place svg {
+  color: var(--green-light);
+  flex-shrink: 0;
+}
+
+/* divider-romb global klassi och fon uchun mo'ljallangan (chiziqlari
+   var(--border)) — to'q fonda oq-shaffof qilamiz. */
+.divider {
+  max-width: 220px;
+  margin: var(--sp-5) 0;
+}
+
+.divider::before,
+.divider::after {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-bottom: var(--sp-6);
+}
+
+.socialBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.telegram:hover {
+  background: #2AABEE;
+  border-color: #2AABEE;
+  color: var(--white);
+}
+
+.instagram:hover {
+  background: #E1306C;
+  border-color: #E1306C;
+  color: var(--white);
+}
+
+/* Bio'ning birinchi xatboshisi — serif iqtibos-lede (ChairmanMessage tili) */
+.lede {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.6;
+  padding-bottom: 0.15em; /* italic descender kesilmasligi uchun */
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 56ch;
+}
+
+/* ===== FAOLIYATI ===== */
+.bioSection {
+  margin-top: clamp(40px, 6vw, 72px);
+}
+
+.sectionHeading {
+  font-family: var(--font-heading), sans-serif;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--blue-deep);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-4);
+}
+
+.bioBlock {
+  padding-left: var(--sp-6);
+  border-left: 3px solid var(--green-pale);
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  line-height: 1.8;
+  max-width: 70ch;
+}
+
+/* ===== CTA ===== */
+.ctaRow {
+  margin-top: clamp(40px, 6vw, 64px);
+  display: flex;
+}
+
+/* ===== MOBIL ===== */
+@media (max-width: 768px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .imageWrap {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .heroBody {
+    text-align: center;
+  }
+
+  .place,
+  .socials {
+    justify-content: center;
+  }
+
+  .divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lede {
+    margin: 0 auto;
+  }
+
+  .ctaRow {
+    justify-content: center;
+  }
+}

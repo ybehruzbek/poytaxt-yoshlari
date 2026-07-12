@@ -1,9 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
 import { getYouthLeaders } from "@/lib/queries";
 import PageHeader from "@/components/ui/PageHeader";
+import YetakchilarClient from "./YetakchilarClient";
 import styles from "./Yetakchilar.module.css";
-import { TelegramLogo, InstagramLogo, MapPin, ArrowRight } from "@phosphor-icons/react/ssr";
 
 export const metadata = {
   title: "Yoshlar yetakchilari | O'zbekiston Yoshlar Ittifoqi",
@@ -17,7 +15,9 @@ export default async function YouthLeadersPage() {
   const youthLeaders = await getYouthLeaders();
 
   return (
-    <>
+    <div className={styles.pageWrap}>
+      <div className={`${styles.naqshBg} naqsh naqsh-yulduz`} aria-hidden="true" />
+
       <PageHeader
         label="Yetakchilar"
         title="Tuman yetakchilari"
@@ -29,38 +29,8 @@ export default async function YouthLeadersPage() {
       />
 
       <div className="container page-body">
-      <div className={styles.grid}>
-        {youthLeaders.map((item) => (
-          <Link href={`/yetakchilar/${item.id}`} key={item.id} className={styles.card} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className={styles.imgWrap}>
-              <span className={styles.districtBadge}>{item.category} yetakchisi</span>
-              <Image src={item.image} alt={item.name} fill sizes="(max-width: 768px) 100vw, 33vw" />
-              
-              {/* Socials on hover */}
-              <div className={styles.socialsHover}>
-                <span className={`${styles.socialBtn} ${styles.telegram}`}>
-                  <TelegramLogo weight="duotone" />
-                </span>
-                <span className={`${styles.socialBtn} ${styles.instagram}`}>
-                  <InstagramLogo weight="duotone" />
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.body}>
-              <h3>{item.name}</h3>
-              <p className={styles.location}>
-                <MapPin weight="duotone" /> {item.place}
-              </p>
-
-              <div className={styles.actionBtn}>
-                Bog'lanish <ArrowRight weight="duotone" />
-              </div>
-            </div>
-          </Link>
-        ))}
+        <YetakchilarClient initialLeaders={youthLeaders} />
       </div>
-      </div>
-    </>
+    </div>
   );
 }

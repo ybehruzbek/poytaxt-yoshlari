@@ -6,6 +6,52 @@
 
 ---
 
+## [0.9.12] — 2026-07-12 · Yetakchilar sahifalari qayta dizayn: qidiruv, filtr, navy hero-profil
+
+**Ro'yxat sahifasi (/yetakchilar) — qidiruv va filtr qo'shildi:**
+Sahifa loyihalar patterniga o'tdi: `page.tsx` yupqa server qobiq (metadata,
+fetch, PageHeader, naqsh fon), butun grid va filtrlar yangi
+`YetakchilarClient.tsx`ga ko'chdi (LoyihalarGrid andozasi).
+- **Jonli qidiruv** — ism/joy/kategoriya bo'yicha, o'zbekcha apostrof
+  normalizatsiyasi bilan: `'`, `'`, `ʻ`, `` ` `` belgilari bitta belgiga
+  keltiriladi — "o'zbekiston" deb oddiy apostrof bilan yozsangiz ham
+  ma'lumotdagi tipografik `ʻ` topiladi (brauzerda tasdiqlandi).
+- **Kategoriya pill-filtrlari** — `category` erkin matn bo'lgani uchun
+  hardcode emas, ma'lumotdan `Set` bilan olinadi.
+- **Natija soni** ("N ta yetakchi") va **bo'sh holat** ("Filtrlarni tozalash"
+  tugmasi bilan).
+- **Soxta ijtimoiy tugmalar haqiqiy havolaga aylandi:** hover'dagi
+  Telegram/Instagram ikonkalari bosib bo'lmaydigan `<span>` edi. Endi
+  stretched-link patterni (karta `<div>`, detalga absolut qatlam-havola,
+  ijtimoiy `<a>`lar yuqori z-index'da) — ichma-ich `<a>` yaroqsiz HTML'siz.
+  Ko'rinmas holatda `pointer-events:none` — bosishni karta havolasidan
+  "o'g'irlamaydi". Havolasi yo'q yetakchida ikonka umuman chiqmaydi.
+- Kartalarga ScrollReveal stagger va `:active` bosim effekti qo'shildi.
+- Bug: `.location i` o'lik selektor edi (ikonka `svg`) — joy pin'i mo'ljallangan
+  yashil rangni hech qachon olmagan. Tuzatildi.
+
+**Detal sahifasi (/yetakchilar/[id]) — to'liq yangi dizayn:**
+Umumiy `ProfileDetail`dan chiqdi (u rahbariyat bilan bo'lishilgan — unga
+tegilmadi, regressiya tekshirildi). Yangi to'q navy gradient hero-karta:
+portret, oq ism, kategoriya badge o'z brend rangida, girih rozetka burchakda
+(uzluksiz radial so'nish, qattiq chegarasiz), bio'ning birinchi xatboshisi
+Cormorant serif italic lede sifatida hero ichida, qolgani "Faoliyati"
+bo'limida, yakunda CTA. Ijtimoiy havolalar faqat mavjud bo'lsa chiqadi.
+
+**Kategoriya ranglari umumiy modulga ko'chdi (`app/yetakchilar/accent.ts`):**
+har kategoriya uchun uch ton — och fon matni / to'q fon badge to'ldirishi /
+badge ustidagi matn rangi (NavigationCards'dagi kontrast saboqlari:
+bitta rang ikkala fonda ham o'qiladi degan taxmin xato edi).
+
+**PageHeader (30+ sahifa umumiy):**
+- Sarlavhadan tashqari elementlar (breadcrumbs, label, tavsif, divider)
+  animatsiyasiz edi — endi ScrollReveal kaskadi bilan chiqadi (sarlavhaning
+  TextReveal so'z-niqob animatsiyasi bilan sinxron).
+- `divider-romb` chapga yopishib qolardi (`margin: ... 0`) — endi sahifa
+  markazida (`margin: ... auto`).
+
+---
+
 ## [0.9.11] — 2026-07-12 · Tashkilot sahifasi qayta dizayn + sitewide bug tuzatishlar
 
 **Footer ikonkalari ko'rinmayotgan edi:** `Footer.tsx` FontAwesome sinflaridan

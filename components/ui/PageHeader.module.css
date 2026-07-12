@@ -66,8 +66,10 @@
 }
 
 /* headerWrapper o'zi pastki bo'shliq beradi — ajratkichga qo'shimcha
-   pastki margin kerak emas, faqat sarlavhadan biroz ajratish uchun tepasi. */
+   pastki margin kerak emas, faqat sarlavhadan biroz ajratish uchun tepasi.
+   Chap/o'ng margin auto — ajratkich matn chapga tekislangan bo'lsa ham,
+   o'zi sahifa markazida turadi. */
 .headerWrapper :global(.divider-romb) {
   max-width: 240px;
-  margin: var(--sp-5) 0 0;
+  margin: var(--sp-5) auto 0;
 }
