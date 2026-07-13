@@ -37,7 +37,7 @@ export default function Stats({ items }: { items: Stat[] }) {
               </motion.p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"

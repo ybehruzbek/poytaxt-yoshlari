@@ -44,3 +44,6 @@ next-env.d.ts
 /lib/generated/prisma
 *.db
 *.db-journal
+
+# claude code — shaxsiy sozlamalar
+.claude/settings.local.json
