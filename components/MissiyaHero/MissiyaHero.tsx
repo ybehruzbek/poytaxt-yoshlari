@@ -18,6 +18,7 @@ export default function MissiyaHero() {
             className={styles.bgImage}
           />
         </div>
+        <div className={`${styles.heroNaqsh} naqsh naqsh-rozetka`} aria-hidden="true"></div>
 
         <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
           <div className={styles.heroContent}>

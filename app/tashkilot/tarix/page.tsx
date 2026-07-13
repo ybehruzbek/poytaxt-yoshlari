@@ -43,7 +43,7 @@ const historyData = [
       {
         date: "Avgust, 2018 yil",
         title: "Yoshlar Parlamenti va Siyosiy Iroda",
-        image: "/login-bg-1920.jpeg",
+        image: "/images/tashkilot/tashkilot_hero_1782907121959.png",
         desc: [
           "Qaror qabul qilish jarayonlarida va qonun ijodkorligida bevosita yoshlarning faol ishtirokini ta'minlash maqsadida Oliy Majlis huzurida yoshlar tuzilmalari va parlamentlari shakllantirildi."
         ]
@@ -84,7 +84,7 @@ const historyData = [
       {
         date: "Bugungi kun",
         title: "Tizimli Yangilanish va Inson Kapitali",
-        image: "/login-bg.jpg",
+        image: "/images/hero/youth_hero_optimistic.png",
         desc: [
           "Bugun O'zbekiston Yoshlar Ittifoqi — xalqaro tajribalarga tayangan, korrupsiyadan holi, raqamli va mutlaqo zamonaviy inson kapitalini shakllantiruvchi yirik klaster hisoblanadi.",
           "Biz «Mahallabay» ishlash tizimi orqali Toshkent shahri va butun respublikadagi har bir ko'cha, har bir xonadondagi yigit-qizning dardi bilan yashaydigan hamda ularga zamonaviy IT-kasblar, xorijiy tillarni o'rganishda cheksiz imkoniyat eshiklarini ochuvchi tashkilotga aylandik."
@@ -99,7 +99,7 @@ export default function HistoryPage() {
     <div className={styles.pageWrapper}>
       
       {/* ===== 1. HERO SECTION ===== */}
-      <TarixHero />
+      <TarixHero years={historyData.map((data) => data.year)} />
 
       {/* ===== 2. ORIGIN INTRO ===== */}
       <TarixIntro />
@@ -108,8 +108,8 @@ export default function HistoryPage() {
       <section className={styles.chronologySection}>
         <div className="container">
           {historyData.map((data, index) => (
-            <div key={index} className={styles.yearBlock}>
-              
+            <div key={index} id={`yil-${data.year}`} className={styles.yearBlock}>
+
               {/* Sticky Year Column */}
               <div className={styles.yearStickyCol}>
                 <ScrollReveal>
@@ -152,26 +152,23 @@ export default function HistoryPage() {
       {/* ===== 4. STATS GRID ===== */}
       <TarixStats />
 
-      {/* ===== 5. CTA SECTION (MODERN BENTO) ===== */}
+      {/* ===== 5. CTA SECTION ===== */}
       <section className={styles.ctaSection}>
         <div className="container">
-          <div className={styles.ctaCard}>
-            <div className={styles.ctaCardContent}>
-              <ScrollReveal>
-                <h2 className={styles.ctaTitle}>Tarix davom etadi!</h2>
-                <p className={styles.ctaDesc}>
-                  Siz o'qiyotgan bu tarix sahifalarining davomini yozish navbati endi sizga keldi. 
-                  Safimizga qo'shiling, loyihalarimizda qatnashib, o'z taqdiringizni biz bilan birga yarating.
-                </p>
-                <Link href="/loyihalar" className={styles.ctaButton}>
-                  <span>Tashkilot loyihalari bilan tanishish</span>
-                  <div className={styles.btnIcon}>
-                    <ArrowRight weight="duotone" />
-                  </div>
-                </Link>
-              </ScrollReveal>
+          <ScrollReveal>
+            <div className={styles.ctaBox}>
+              <div className={`${styles.ctaNaqsh} naqsh naqsh-rozetka`} aria-hidden="true"></div>
+              <h2 className={styles.ctaTitle}>Tarix davom etadi!</h2>
+              <p className={styles.ctaDesc}>
+                Siz o&apos;qiyotgan bu tarix sahifalarining davomini yozish navbati endi sizga keldi.
+                Safimizga qo&apos;shiling, loyihalarimizda qatnashib, o&apos;z taqdiringizni biz bilan birga yarating.
+              </p>
+              <Link href="/loyihalar" className={`btn-hero-secondary ${styles.ctaBtn}`}>
+                <span>Tashkilot loyihalari bilan tanishish</span>
+                <ArrowRight weight="duotone" />
+              </Link>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
       {/* ===== 6. NAVIGATION CARDS ===== */}

@@ -9,6 +9,7 @@ export default function TarixIntro() {
       <div className="container">
         <ScrollReveal>
           <div className={styles.introBox}>
+            <div className={`${styles.introNaqsh} naqsh naqsh-rozetka`} aria-hidden="true"></div>
             <div className={styles.iconWrap}>
               <Quotes weight="duotone" className={styles.quoteIcon} />
             </div>

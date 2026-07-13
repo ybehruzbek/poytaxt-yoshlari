@@ -36,6 +36,23 @@
   z-index: 1;
 }
 
+/* Girih rozetka — o'ng yuqori burchakda, matn joylashgan chap tomondan
+   uzoqda; fotosurat ustida bo'lgani uchun (rangli kartalardan farqli
+   o'laroq) burchak-fade saqlanadi, aks holda yuzlar ustiga tushib qoladi. */
+.heroNaqsh {
+  --naqsh-opacity: 0.16;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 70%;
+  color: var(--white);
+  z-index: 1;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 100% 0%, black 0%, transparent 75%);
+}
+
 .heroContent {
   position: relative;
   z-index: 2;

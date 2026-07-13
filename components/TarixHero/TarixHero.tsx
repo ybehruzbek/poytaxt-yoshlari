@@ -1,50 +1,68 @@
-import React from "react";
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { motion, type Variants } from "motion/react";
 import styles from "./TarixHero.module.css";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 
-export default function TarixHero() {
+const container: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+export default function TarixHero({ years }: { years: string[] }) {
   return (
-    <section className={styles.heroContainer}>
-      <div className={styles.heroBox}>
-        <div className={styles.bgImageWrap}>
-          <Image 
-            src="/history_hero_bg.png" 
-            alt="Tariximiz" 
-            fill 
-            priority
-            className={styles.bgImage}
-          />
-        </div>
+    <section className={styles.heroSection}>
+      <div className={styles.heroFrame}>
+        <Image
+          src="/history_hero_bg.png"
+          alt="O'zbekiston Yoshlar Ittifoqi tarixi"
+          fill
+          priority
+          sizes="100vw"
+          className={styles.heroImage}
+        />
+        <div className={styles.heroOverlay} />
+        <div className={`${styles.heroNaqsh} naqsh naqsh-rozetka`} aria-hidden="true"></div>
 
-        <div className="container" style={{ position: 'relative', zIndex: 2, width: '100%' }}>
-          <div className={styles.heroContent}>
-            <ScrollReveal>
-              <nav aria-label="breadcrumb" className={styles.breadcrumbs}>
-                <ol>
-                  <li>
-                    <Link href="/">Bosh sahifa</Link>
-                    <span className={styles.separator}>/</span>
-                  </li>
-                  <li>
-                    <Link href="/tashkilot">Tashkilot haqida</Link>
-                    <span className={styles.separator}>/</span>
-                  </li>
-                  <li className={styles.activeCrumb}>Tariximiz</li>
-                </ol>
-              </nav>
+        <motion.div
+          className={styles.content}
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.span variants={item} className={styles.eyebrow}>
+            2017-yildan buyon
+          </motion.span>
 
-              <h1 className={styles.heroTitle}>
-                YANGI DAVR TARIXI,<br />BUYUK QADAMLAR
-              </h1>
-              <p className={styles.heroDesc}>
-                Bu faqatgina bir tashkilotning emas, balki O&apos;zbekistondagi millionlab umidvor yoshlarning 
-                o&apos;zgarishlar va g&apos;alabalar sari tashlagan buyuk qadamlari solnomasidir.
-              </p>
-            </ScrollReveal>
-          </div>
-        </div>
+          <motion.h1 variants={item} className={styles.title}>
+            Yangi davr tarixi, <span className={styles.titleAccent}>buyuk qadamlar</span>
+          </motion.h1>
+
+          <motion.p variants={item} className={styles.subtitle}>
+            Bu faqatgina bir tashkilotning emas, balki O&apos;zbekistondagi millionlab umidvor
+            yoshlarning o&apos;zgarishlar va g&apos;alabalar sari tashlagan buyuk qadamlari solnomasidir.
+          </motion.p>
+
+          <motion.nav variants={item} className={styles.yearStrip} aria-label="Yillar bo'yicha o'tish">
+            {years.map((year) => (
+              <a key={year} href={`#yil-${year}`} className={styles.yearChip}>
+                {year}
+              </a>
+            ))}
+          </motion.nav>
+        </motion.div>
       </div>
     </section>
   );

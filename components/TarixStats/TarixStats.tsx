@@ -1,35 +1,37 @@
 import React from "react";
 import styles from "./TarixStats.module.css";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { UsersThree, HandHeart, Rocket, MapTrifold } from "@phosphor-icons/react/ssr";
+import type { Icon } from "@phosphor-icons/react";
 
-const stats = [
+const stats: { icon: Icon; number: string; label: string; desc: string; color: string }[] = [
   {
-    icon: "fa-users",
+    icon: UsersThree,
     number: "3.5M+",
     label: "A'zolar va Qatnashchilar",
     desc: "Butun O'zbekiston bo'ylab faol ishtirokchilar",
-    color: "#0ea5e9",
+    color: "var(--blue)",
   },
   {
-    icon: "fa-hand-holding-heart",
+    icon: HandHeart,
     number: "15,000+",
     label: "Doimiy Volontyorlar",
     desc: "Har kuni jamiyat uchun fidoyilik bilan xizmat qiladilar",
-    color: "#10b981",
+    color: "var(--green)",
   },
   {
-    icon: "fa-diagram-project",
+    icon: Rocket,
     number: "4,000+",
     label: "Amalga Oshirilgan Loyihalar",
     desc: "Ta'lim, sport, IT, san'at va ko'plab sohalarda",
-    color: "#f59e0b",
+    color: "var(--amber)",
   },
   {
-    icon: "fa-earth-asia",
+    icon: MapTrifold,
     number: "14",
     label: "Hududiy Kengashlar",
     desc: "Har bir viloyat va Toshkent shahri bo'ylab",
-    color: "#8b5cf6",
+    color: "var(--accent-orange)",
   },
 ];
 
@@ -49,21 +51,21 @@ export default function TarixStats() {
         </ScrollReveal>
 
         <div className={styles.grid}>
-          {stats.map((stat, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className={styles.card} style={{ "--accent": stat.color } as React.CSSProperties}>
-                <div className={styles.iconRow}>
+          {stats.map((stat, i) => {
+            const StatIcon = stat.icon;
+            return (
+              <ScrollReveal key={i} delay={i + 1}>
+                <div className={styles.card} style={{ "--accent": stat.color } as React.CSSProperties}>
                   <div className={styles.iconBox}>
-                    <i className={`fas ${stat.icon}`}></i>
+                    <StatIcon weight="duotone" />
                   </div>
-                  <div className={styles.line} />
+                  <div className={styles.number}>{stat.number}</div>
+                  <div className={styles.label}>{stat.label}</div>
+                  <p className={styles.desc}>{stat.desc}</p>
                 </div>
-                <div className={styles.number}>{stat.number}</div>
-                <div className={styles.label}>{stat.label}</div>
-                <p className={styles.desc}>{stat.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>
