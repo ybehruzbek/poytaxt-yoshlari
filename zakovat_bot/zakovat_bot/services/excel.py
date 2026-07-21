@@ -1,10 +1,15 @@
 """Kanallar bazasi uchun Excel import/eksport (TZ 2.2).
 
-Import format (birinchi qator sarlavha bo'lsa avtomatik tashlanadi):
-  A — OTT rasmiy nomi
-  B — kanal linki: @username, t.me/username yoki -100... ID
-  C — turi: Davlat / Xorijiy / Nodavlat (bo'sh bo'lsa Davlat)
-  D — teg (ixtiyoriy)
+Import ikki formatni tushunadi:
+
+1) Sarlavhali fayl — birinchi 10 qatordan sarlavha qatori qidiriladi va
+   ustunlar nomidan aniqlanadi: «Havola»/«Link», «OTT nomi», «Turi»,
+   «Teg» (ixtiyoriy). Ustunlar tartibi va ortiqcha ustunlar (№, Kanal nomi
+   va h.k.) ahamiyatsiz.
+
+2) Sarlavhasiz oddiy format: A — OTT nomi, B — link, C — turi, D — teg.
+
+Turi qiymatlari: Davlat / Xorijiy / Nodavlat (bo'sh bo'lsa Davlat).
 """
 from io import BytesIO
 
@@ -45,12 +50,42 @@ def normalize_link(raw):
     return None, None
 
 
-def _looks_like_header(row):
-    """Birinchi qatorda link topilmasa — sarlavha deb hisoblaymiz."""
-    if not row or len(row) < 2:
-        return True
-    username, chat_id = normalize_link(row[1])
-    return username is None and chat_id is None
+def _cell(row, idx):
+    if idx is None or idx >= len(row) or row[idx] is None:
+        return ""
+    return str(row[idx]).strip()
+
+
+def _detect_columns(rows):
+    """Birinchi 10 qatordan sarlavha qatorini qidiradi.
+
+    Qaytaradi: (data_boshlanish_indeksi, {link, name, type, tag} ustun raqamlari).
+    Sarlavha topilmasa — oddiy pozitsion format (A/B/C/D) deb olinadi.
+    """
+    for i, row in enumerate(rows[:10]):
+        cols = {"link": None, "name": None, "type": None, "tag": None}
+        for j, cell in enumerate(row or ()):
+            text = str(cell).strip().lower() if cell is not None else ""
+            if not text:
+                continue
+            if cols["link"] is None and ("havola" in text or "link" in text):
+                cols["link"] = j
+            elif cols["name"] is None and "ott" in text and "nomi" in text:
+                cols["name"] = j
+            elif cols["type"] is None and "tur" in text:
+                cols["type"] = j
+            elif cols["tag"] is None and ("teg" in text or "tag" in text):
+                cols["tag"] = j
+        # «OTT nomi» topilmasa, «kanal nomi» bo'lmagan oddiy «nomi» ham bo'ladi
+        if cols["link"] is not None and cols["name"] is None:
+            for j, cell in enumerate(row or ()):
+                text = str(cell).strip().lower() if cell is not None else ""
+                if "nomi" in text and "kanal" not in text:
+                    cols["name"] = j
+                    break
+        if cols["link"] is not None and cols["name"] is not None:
+            return i + 1, cols
+    return 0, {"name": 0, "link": 1, "type": 2, "tag": 3}
 
 
 def import_channels(file_bytes):
@@ -61,21 +96,23 @@ def import_channels(file_bytes):
     """
     wb = load_workbook(BytesIO(file_bytes), read_only=True, data_only=True)
     ws = wb.active
+    rows = [row for row in ws.iter_rows(values_only=True)]
+    wb.close()
+
+    start, cols = _detect_columns(rows)
 
     added = updated = duplicates = 0
     errors = []
     seen_in_file = set()
 
-    for row_no, row in enumerate(ws.iter_rows(values_only=True), start=1):
-        if row_no == 1 and _looks_like_header(row):
-            continue
+    for row_no, row in enumerate(rows[start:], start=start + 1):
         if not row or all(cell is None or not str(cell).strip() for cell in row):
             continue
 
-        ott_name = str(row[0]).strip() if len(row) > 0 and row[0] else ""
-        link_raw = row[1] if len(row) > 1 else None
-        type_raw = str(row[2]).strip().lower() if len(row) > 2 and row[2] else ""
-        tag = str(row[3]).strip() if len(row) > 3 and row[3] else ""
+        ott_name = _cell(row, cols["name"])
+        link_raw = _cell(row, cols["link"]) or None
+        type_raw = _cell(row, cols["type"]).lower()
+        tag = _cell(row, cols["tag"])
 
         username, chat_id = normalize_link(link_raw)
         if username is None and chat_id is None:
@@ -127,7 +164,6 @@ def import_channels(file_bytes):
         )
         added += 1
 
-    wb.close()
     return {"added": added, "updated": updated, "duplicates": duplicates, "errors": errors}
 
 
