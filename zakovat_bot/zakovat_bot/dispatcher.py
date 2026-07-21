@@ -7,6 +7,4 @@ from aiogram.enums import ParseMode
 TOKEN = config("BOT_TOKEN")
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
-print(TOKEN)
-
 dp = Dispatcher(storage=MemoryStorage())

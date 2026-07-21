@@ -200,6 +200,10 @@ export const socialLinks = [
   { href: "#", icon: "fa-facebook-f", label: "Facebook" },
 ] as const;
 
+// ===== TELEGRAM TANLOV BOTI =====
+export const TANLOV_BOT_USERNAME = "yoshlaruchuntanlov_bot";
+export const TANLOV_BOT_URL = `https://t.me/${TANLOV_BOT_USERNAME}`;
+
 // ===== BRAND ASSETS =====
 import logoImg from "@/public/logo.png";
 import heroImg from "@/public/login-bg-1920.jpeg";

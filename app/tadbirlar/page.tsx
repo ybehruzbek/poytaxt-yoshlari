@@ -2,8 +2,14 @@ import Link from "next/link";
 import PageHeader from "@/components/ui/PageHeader";
 import EventCard from "@/components/EventCard/EventCard";
 import { EVENT_TYPES } from "@/lib/admin/resources";
+import { TANLOV_BOT_URL, TANLOV_BOT_USERNAME } from "@/lib/data";
 import { getPastEvents, getUpcomingEvents } from "@/lib/queries";
-import { Lightning, Calendar, ClockCounterClockwise } from "@phosphor-icons/react/ssr";
+import {
+  Lightning,
+  Calendar,
+  ClockCounterClockwise,
+  TelegramLogo,
+} from "@phosphor-icons/react/ssr";
 import styles from "./Tadbirlar.module.css";
 
 export const metadata = {
@@ -60,6 +66,26 @@ export default async function TadbirlarPage({
             </Link>
           ))}
         </div>
+
+        <section className={styles.botCta}>
+          <div className={styles.botCtaText}>
+            <h2 className={styles.botCtaTitle}>
+              <TelegramLogo weight="duotone" /> Tanlov botida ishtirok eting
+            </h2>
+            <p className={styles.botCtaDesc}>
+              Intellektual tanlov savollari Telegram botda e&apos;lon qilinadi —
+              ro&apos;yxatdan o&apos;ting va javobingizni yuboring.
+            </p>
+          </div>
+          <a
+            href={TANLOV_BOT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.botCtaBtn}
+          >
+            <TelegramLogo weight="fill" /> @{TANLOV_BOT_USERNAME}
+          </a>
+        </section>
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>
