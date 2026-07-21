@@ -217,6 +217,13 @@ async def admin_main_menu(callback_query: CallbackQuery, state: FSMContext) -> N
 async def approve_publish(callback: CallbackQuery):
     if not has_role(callback.from_user.id, AdminRole.OPERATOR):
         return await _deny(callback)
+    if not str(CHANNEL_ID).strip():
+        await callback.answer(
+            "❗️ Zakovat kanali sozlanmagan. Dokploy'da CHANNEL_USERNAME "
+            "env'iga kanal @username'ini kiriting va qayta deploy qiling.",
+            show_alert=True,
+        )
+        return
     question_id = int(callback.data.split(":")[1])
     question = Questions.objects.get(id=question_id)
     keyboard = main_keyboard(question.uuid)

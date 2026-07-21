@@ -35,6 +35,7 @@ from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.broadcasting import (
     build_report,
     channels_for_filter,
+    clamp_lines,
     delete_broadcast_messages,
     describe_filter,
     run_broadcast,
@@ -474,14 +475,17 @@ async def stats_problems(callback: CallbackQuery):
 
     lines = ["⚠️ <b>Muammoli kanallar</b>\n"]
     if problems:
-        lines.append("<b>Bot admin bo'lmaganlar:</b>")
-        for ch in problems[:30]:
+        lines.append(f"<b>Bot admin bo'lmaganlar ({len(problems)} ta):</b>")
+        for ch in problems:
             lines.append(f"• {ch.ott_name} ({('@' + ch.username) if ch.username else ch.chat_id})")
     if failed_last:
-        lines.append(f"\n<b>Oxirgi tarqatishda (#{last_done.id}) xato berganlar:</b>")
-        for ch, reason in failed_last[:30]:
+        lines.append(f"\n<b>Oxirgi tarqatishda (#{last_done.id}) xato berganlar ({len(failed_last)} ta):</b>")
+        for ch, reason in failed_last:
             lines.append(f"• {ch.ott_name} — {reason}")
     if not problems and not failed_last:
         lines.append("Hammasi joyida — muammoli kanal yo'q ✅")
+    else:
+        lines.append("\nTo'liq ro'yxat: Kanallar bazasi → Excel eksport")
 
-    await callback.message.edit_text("\n".join(lines), reply_markup=stats_menu_keyboard())
+    # 4096 belgi chegarasidan oshmasligi uchun qisqartiriladi
+    await callback.message.edit_text(clamp_lines(lines), reply_markup=stats_menu_keyboard())

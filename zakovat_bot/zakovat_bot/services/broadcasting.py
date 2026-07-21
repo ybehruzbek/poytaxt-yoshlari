@@ -22,6 +22,19 @@ logger = logging.getLogger(__name__)
 
 SEND_PAUSE = 0.5   # kanallar orasidagi pauza (soniya)
 MAX_RETRIES = 3
+MESSAGE_LIMIT = 4000  # Telegram chegarasi 4096 — zaxira bilan
+
+
+def clamp_lines(lines, limit=MESSAGE_LIMIT):
+    """Qatorlarni Telegram xabar chegarasiga sig'diradi; ortig'i qisqartiriladi."""
+    text = ""
+    for i, line in enumerate(lines):
+        candidate = f"{text}\n{line}" if text else line
+        if len(candidate) > limit - 40:
+            skipped = len(lines) - i
+            return f"{text}\n\n… ro'yxat qisqartirildi ({skipped} qator ko'rsatilmadi)"
+        text = candidate
+    return text
 
 
 def channels_for_filter(target_filter):
@@ -197,7 +210,7 @@ async def delete_broadcast_messages(bot, broadcast_id):
         lines.extend(fail_lines[:20])
         if len(fail_lines) > 20:
             lines.append(f"… va yana {len(fail_lines) - 20} ta")
-    return "\n".join(lines)
+    return clamp_lines(lines)
 
 
 def build_report(broadcast):
@@ -218,4 +231,4 @@ def build_report(broadcast):
     deleted_count = broadcast.results.filter(deleted_from_channel=True).count()
     if deleted_count:
         lines.append(f"\n🗑 Kanallardan o'chirilgan: {deleted_count} ta")
-    return "\n".join(lines)
+    return clamp_lines(lines)
