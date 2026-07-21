@@ -173,10 +173,25 @@ def history_keyboard(broadcasts, page, total_pages):
     return kb.as_markup()
 
 
-def broadcast_report_keyboard(broadcast_id):
+def broadcast_report_keyboard(broadcast_id, can_delete=False):
     kb = InlineKeyboardBuilder()
     kb.button(text="📥 Excel hisobot", callback_data=f"st_bc_xls:{broadcast_id}")
+    if can_delete:
+        kb.button(
+            text="🗑 Kanallardan o'chirish", callback_data=f"st_bc_del:{broadcast_id}"
+        )
     kb.button(text="🔙 Orqaga", callback_data="st_history:1")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def broadcast_delete_confirm_keyboard(broadcast_id):
+    kb = InlineKeyboardBuilder()
+    kb.button(
+        text="🗑 Ha, barcha kanallardan o'chirilsin",
+        callback_data=f"st_bc_delok:{broadcast_id}",
+    )
+    kb.button(text="❌ Yo'q, qolsin", callback_data=f"st_bc:{broadcast_id}")
     kb.adjust(1)
     return kb.as_markup()
 

@@ -15,6 +15,7 @@ from django.utils import timezone
 from zakovat_bot.buttons.inline import admin_main_keyboard
 from zakovat_bot.buttons.panel import (
     broadcast_confirm_keyboard,
+    broadcast_delete_confirm_keyboard,
     broadcast_report_keyboard,
     broadcast_target_keyboard,
     history_keyboard,
@@ -33,6 +34,7 @@ from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.broadcasting import (
     build_report,
     channels_for_filter,
+    delete_broadcast_messages,
     describe_filter,
     run_broadcast,
 )
@@ -363,9 +365,59 @@ async def stats_broadcast_detail(callback: CallbackQuery):
     if not broadcast:
         await callback.message.edit_text("Tarqatish topilmadi.")
         return
-    await callback.message.edit_text(
-        build_report(broadcast), reply_markup=broadcast_report_keyboard(broadcast.id)
+    # O'chirish tugmasi: hali o'chirilmagan, yetkazilgan xabarlar bo'lsa
+    can_delete = (
+        has_role(callback.from_user.id, AdminRole.OPERATOR)
+        and broadcast.results.filter(delivered=True, deleted_from_channel=False).exists()
     )
+    await callback.message.edit_text(
+        build_report(broadcast),
+        reply_markup=broadcast_report_keyboard(broadcast.id, can_delete=can_delete),
+    )
+
+
+@dp.callback_query(F.data.startswith("st_bc_del:"))
+async def stats_broadcast_delete_ask(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    broadcast = Broadcast.objects.filter(id=int(callback.data.split(":")[1])).first()
+    if not broadcast:
+        return
+    count = broadcast.results.filter(delivered=True, deleted_from_channel=False).count()
+    await callback.message.edit_text(
+        f"🗑 Tarqatish #{broadcast.id} posti <b>{count} ta kanaldan</b> o'chirilsinmi?\n\n"
+        "⚠️ Bu amalni ortga qaytarib bo'lmaydi — post barcha kanallardan yo'qoladi.",
+        reply_markup=broadcast_delete_confirm_keyboard(broadcast.id),
+    )
+
+
+@dp.callback_query(F.data.startswith("st_bc_delok:"))
+async def stats_broadcast_delete_run(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    broadcast_id = int(callback.data.split(":")[1])
+    log_action(callback.from_user.id, "tarqatish_ochirildi", f"#{broadcast_id}")
+    await callback.message.edit_text(
+        f"🗑 Tarqatish #{broadcast_id} kanallardan o'chirilmoqda… "
+        "Yakunlangach hisobot keladi."
+    )
+    asyncio.create_task(_delete_and_report(broadcast_id, callback.from_user.id))
+
+
+async def _delete_and_report(broadcast_id, admin_tg_id):
+    try:
+        report = await delete_broadcast_messages(bot, broadcast_id)
+    except Exception as e:
+        report = f"❗️ O'chirishda xato: {e}"
+    try:
+        await bot.send_message(
+            chat_id=admin_tg_id, text=report,
+            reply_markup=broadcast_report_keyboard(broadcast_id),
+        )
+    except Exception:
+        pass
 
 
 @dp.callback_query(F.data.startswith("st_bc_xls:"))

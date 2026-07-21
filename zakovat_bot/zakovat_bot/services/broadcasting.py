@@ -64,7 +64,7 @@ async def check_bot_is_admin(bot, chat):
 
 
 async def _forward_with_retry(bot, target, source_chat_id, message_ids):
-    """Bitta kanalga yuborish; qaytaradi (message_id|None, xato_sababi)."""
+    """Bitta kanalga yuborish; qaytaradi (yuborilgan_id_lar|None, xato_sababi)."""
     last_error = "noma'lum xato"
     for attempt in range(1, MAX_RETRIES + 1):
         try:
@@ -73,8 +73,7 @@ async def _forward_with_retry(bot, target, source_chat_id, message_ids):
                 from_chat_id=source_chat_id,
                 message_ids=message_ids,
             )
-            first_id = msgs[0].message_id if msgs else None
-            return first_id, ""
+            return [m.message_id for m in msgs], ""
         except TelegramRetryAfter as e:
             # flood-limit: kutamiz va qayta urinamiz
             logger.warning("Flood-limit %s: %ss kutilmoqda", target, e.retry_after)
@@ -111,10 +110,10 @@ async def run_broadcast(bot, broadcast_id, progress_chat_id=None):
             )
             continue
 
-        message_id, error = await _forward_with_retry(
+        sent_ids, error = await _forward_with_retry(
             bot, target, broadcast.source_chat_id, broadcast.message_ids
         )
-        delivered = message_id is not None or error == ""
+        delivered = sent_ids is not None
         if delivered:
             success += 1
         else:
@@ -128,7 +127,8 @@ async def run_broadcast(bot, broadcast_id, progress_chat_id=None):
             channel=channel,
             delivered=delivered,
             error_reason=None if delivered else error,
-            message_id=message_id,
+            message_id=sent_ids[0] if sent_ids else None,
+            message_ids=sent_ids or [],
             sent_at=timezone.now() if delivered else None,
         )
         await asyncio.sleep(SEND_PAUSE)
@@ -140,6 +140,64 @@ async def run_broadcast(bot, broadcast_id, progress_chat_id=None):
     broadcast.save(update_fields=["status", "finished_at", "success_count", "failed_count"])
 
     return build_report(broadcast)
+
+
+async def delete_broadcast_messages(bot, broadcast_id):
+    """Tarqatilgan postni barcha kanallardan o'chiradi (adashib yuborilganda).
+
+    Eslatma: bot o'z xabarini 48 soat ichida istalgan joydan o'chira oladi;
+    undan keyin kanalda «xabarlarni o'chirish» admin huquqi kerak bo'ladi.
+    """
+    broadcast = Broadcast.objects.get(id=broadcast_id)
+    results = list(
+        broadcast.results.filter(delivered=True, deleted_from_channel=False)
+        .select_related("channel")
+    )
+
+    deleted = failed = 0
+    fail_lines = []
+    for r in results:
+        target = r.channel.target
+        ids = r.message_ids or ([r.message_id] if r.message_id else [])
+        if target is None or not ids:
+            failed += 1
+            fail_lines.append(f"• {r.channel.ott_name} — xabar ID saqlanmagan")
+            continue
+        ok = True
+        for mid in ids:
+            try:
+                await bot.delete_message(chat_id=target, message_id=mid)
+            except TelegramRetryAfter as e:
+                await asyncio.sleep(e.retry_after + 1)
+                try:
+                    await bot.delete_message(chat_id=target, message_id=mid)
+                except Exception as e2:
+                    ok = False
+                    fail_lines.append(f"• {r.channel.ott_name} — {e2}")
+                    break
+            except Exception as e:
+                ok = False
+                fail_lines.append(f"• {r.channel.ott_name} — {getattr(e, 'message', e)}")
+                break
+        if ok:
+            deleted += 1
+            r.deleted_from_channel = True
+            r.save(update_fields=["deleted_from_channel"])
+        else:
+            failed += 1
+        await asyncio.sleep(0.3)
+
+    lines = [
+        f"🗑 <b>Tarqatish #{broadcast.id} — kanallardan o'chirish yakunlandi</b>",
+        f"✅ O'chirildi: {deleted}",
+        f"❌ O'chirilmadi: {failed}",
+    ]
+    if fail_lines:
+        lines.append("\n<b>O'chirilmaganlar:</b>")
+        lines.extend(fail_lines[:20])
+        if len(fail_lines) > 20:
+            lines.append(f"… va yana {len(fail_lines) - 20} ta")
+    return "\n".join(lines)
 
 
 def build_report(broadcast):
@@ -157,4 +215,7 @@ def build_report(broadcast):
             lines.append(f"• {r.channel.ott_name} — {r.error_reason}")
         if failed_results.count() > 30:
             lines.append(f"… va yana {failed_results.count() - 30} ta")
+    deleted_count = broadcast.results.filter(deleted_from_channel=True).count()
+    if deleted_count:
+        lines.append(f"\n🗑 Kanallardan o'chirilgan: {deleted_count} ta")
     return "\n".join(lines)

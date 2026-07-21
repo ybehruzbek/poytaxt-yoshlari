@@ -107,6 +107,10 @@ class BroadcastResult(SafeBaseModel):
     delivered = models.BooleanField(default=False)
     error_reason = models.CharField(max_length=255, blank=True, null=True)
     message_id = models.BigIntegerField(null=True, blank=True)
+    # Kanaldagi barcha yuborilgan xabar ID'lari (albomda bir nechta bo'ladi) —
+    # adashib yuborilgan postni kanallardan o'chirish uchun kerak
+    message_ids = models.JSONField(default=list, blank=True)
+    deleted_from_channel = models.BooleanField(default=False)
     sent_at = models.DateTimeField(null=True, blank=True)
 
 
