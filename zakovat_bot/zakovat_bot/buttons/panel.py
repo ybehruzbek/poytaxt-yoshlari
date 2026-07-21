@@ -11,6 +11,14 @@ TYPE_LABELS = {
 }
 
 
+def back_to(target, text="🔙 Orqaga"):
+    """Bitta «orqaga» tugmali klaviatura — matn kiritish bosqichlaridan
+    chiqib ketish uchun (maqsad handler'lari FSM holatini tozalaydi)."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text=text, callback_data=target)
+    return kb.as_markup()
+
+
 def channels_menu_keyboard(role):
     kb = InlineKeyboardBuilder()
     kb.button(text="📋 Kanallar ro'yxati", callback_data="ch_list:1:all:all")

@@ -44,7 +44,8 @@ async def add_new_question(callback_query: CallbackQuery, state: FSMContext) -> 
     await state.set_state(QuestionState.question_name)
 
     await callback_query.message.edit_text(
-        text="✏️ Yangi savol nomini kiriting:"
+        text="✏️ Yangi savol nomini kiriting:",
+        reply_markup=back_keyboard(),
     )
 
 @dp.message(StateFilter(QuestionState.question_name))
@@ -58,7 +59,8 @@ async def process_question_name(message: Message, state: FSMContext) -> None:
     await state.set_state(QuestionState.waiting_for_question)
 
     await message.answer(
-        text="📎 Endi savol faylini yuboring:"
+        text="📎 Endi savol faylini yuboring:",
+        reply_markup=back_keyboard(),
     )
     
 @dp.message(StateFilter(QuestionState.waiting_for_question))
@@ -189,8 +191,9 @@ async def change_question(callback_query: CallbackQuery) -> None:
         
         
 @dp.callback_query( F.data == "cancel")
-async def admin_main(callback_query: CallbackQuery) -> None:
+async def admin_main(callback_query: CallbackQuery, state: FSMContext) -> None:
     await callback_query.answer()
+    await state.clear()
     admin = get_admin(callback_query.from_user.id)
     await callback_query.message.delete()
     await callback_query.message.answer(
@@ -389,8 +392,14 @@ async def process_broadcast_message(message: Message, state: FSMContext) -> None
 @dp.callback_query(F.data == "back")
 async def back_handler(callback_query: CallbackQuery, state: FSMContext) -> None:
     await callback_query.answer()
+    # Jarayon o'rtasida orqaga qaytilsa, FSM holati tozalanishi shart
+    await state.clear()
+    admin = get_admin(callback_query.from_user.id)
     await callback_query.message.delete()
-    await callback_query.message.answer(text="🤵🏼 Admin paneli",reply_markup=admin_main_keyboard())
+    await callback_query.message.answer(
+        text="🤵🏼 Admin paneli",
+        reply_markup=admin_main_keyboard(admin.role if admin else None),
+    )
 
 
 # Eski Excel-asosidagi tarqatish oqimi (ChannelSendState) olib tashlandi:

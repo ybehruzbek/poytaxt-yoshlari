@@ -10,6 +10,7 @@ from aiogram.fsm.context import FSMContext
 
 from zakovat_bot.buttons.panel import (
     TYPE_LABELS,
+    back_to,
     channel_detail_keyboard,
     channels_list_keyboard,
     channels_menu_keyboard,
@@ -108,13 +109,17 @@ async def channels_list(callback: CallbackQuery):
 
 
 @dp.callback_query(F.data.startswith("ch_det:"))
-async def channel_detail(callback: CallbackQuery):
+async def channel_detail(callback: CallbackQuery, state: FSMContext):
     if not is_admin(callback.from_user.id):
         return await _deny(callback)
     await callback.answer()
+    await state.clear()
     channel = Channel.all_objects.filter(id=int(callback.data.split(":")[1])).first()
     if not channel:
-        await callback.message.edit_text("Kanal topilmadi (o'chirilgan bo'lishi mumkin).")
+        await callback.message.edit_text(
+            "Kanal topilmadi (o'chirilgan bo'lishi mumkin).",
+            reply_markup=back_to("ch_menu"),
+        )
         return
     admin = get_admin(callback.from_user.id)
     await callback.message.edit_text(
@@ -132,7 +137,8 @@ async def channel_add_start(callback: CallbackQuery, state: FSMContext):
     await state.set_state(ChannelState.add_link)
     await callback.message.edit_text(
         "🔗 Kanal linkini yuboring: <code>@username</code>, "
-        "<code>t.me/username</code> yoki <code>-100...</code> ID"
+        "<code>t.me/username</code> yoki <code>-100...</code> ID",
+        reply_markup=back_to("ch_menu"),
     )
 
 
@@ -140,13 +146,19 @@ async def channel_add_start(callback: CallbackQuery, state: FSMContext):
 async def channel_add_link(message: Message, state: FSMContext):
     username, chat_id = normalize_link(message.text)
     if username is None and chat_id is None:
-        await message.answer("❗️ Link noto'g'ri. Qaytadan yuboring (@username yoki -100... ID).")
+        await message.answer(
+            "❗️ Link noto'g'ri. Qaytadan yuboring (@username yoki -100... ID).",
+            reply_markup=back_to("ch_menu"),
+        )
         return
 
     exists = Channel.all_objects.filter(username__iexact=username).exists() if username \
         else Channel.all_objects.filter(chat_id=chat_id).exists()
     if exists:
-        await message.answer("❗️ Bu kanal bazada allaqachon bor. Boshqa link yuboring.")
+        await message.answer(
+            "❗️ Bu kanal bazada allaqachon bor. Boshqa link yuboring.",
+            reply_markup=back_to("ch_menu"),
+        )
         return
 
     # Bot adminligini avtomatik tekshiramiz (TZ 2.1)
@@ -159,7 +171,10 @@ async def channel_add_link(message: Message, state: FSMContext):
         bot_is_admin=ok,
     )
     status_line = "✅ Bot kanalda admin, post yubora oladi." if ok else f"⚠️ {reason}."
-    await message.answer(f"{status_line}\n\n📝 Endi OTT rasmiy nomini kiriting:")
+    await message.answer(
+        f"{status_line}\n\n📝 Endi OTT rasmiy nomini kiriting:",
+        reply_markup=back_to("ch_menu"),
+    )
     await state.set_state(ChannelState.add_name)
 
 
@@ -219,7 +234,9 @@ async def channel_edit_start(callback: CallbackQuery, state: FSMContext):
     }
     await state.set_state(ChannelState.edit_value)
     await state.update_data(edit_channel_id=int(channel_id), edit_field=field)
-    await callback.message.edit_text(prompts[field])
+    await callback.message.edit_text(
+        prompts[field], reply_markup=back_to(f"ch_det:{channel_id}")
+    )
 
 
 @dp.callback_query(F.data.startswith("ch_settype:"))
@@ -358,8 +375,9 @@ async def excel_import_start(callback: CallbackQuery, state: FSMContext):
     await state.set_state(ChannelState.import_excel)
     await callback.message.edit_text(
         "📥 Excel faylni yuboring.\n\n"
-        "Format: A — OTT nomi, B — link (@username / t.me/... / -100... ID), "
-        "C — turi (Davlat/Xorijiy/Nodavlat), D — teg (ixtiyoriy)."
+        "Sarlavhali fayl bo'lsa ustunlar avtomatik topiladi (Havola, OTT nomi, "
+        "Turi). Oddiy format: A — OTT nomi, B — link, C — turi, D — teg.",
+        reply_markup=back_to("ch_menu"),
     )
 
 

@@ -14,6 +14,7 @@ from django.utils import timezone
 
 from zakovat_bot.buttons.inline import admin_main_keyboard
 from zakovat_bot.buttons.panel import (
+    back_to,
     broadcast_confirm_keyboard,
     broadcast_delete_confirm_keyboard,
     broadcast_report_keyboard,
@@ -61,12 +62,14 @@ async def broadcast_new(callback: CallbackQuery, state: FSMContext):
     if active == 0:
         await callback.message.edit_text(
             "❗️ Bazada faol kanal yo'q. Avval «Kanallar bazasi» bo'limidan kanal qo'shing.",
+            reply_markup=back_to("admin_main_menu"),
         )
         return
     await state.set_state(BroadcastState.waiting_post)
     await callback.message.edit_text(
         "📨 Tarqatiladigan postni botga <b>forward</b> qiling "
-        "(albom bo'lsa hammasini birga yuboring):"
+        "(albom bo'lsa hammasini birga yuboring):",
+        reply_markup=back_to("admin_main_menu"),
     )
 
 
@@ -206,7 +209,8 @@ async def broadcast_schedule_ask(callback: CallbackQuery, state: FSMContext):
     await state.set_state(BroadcastState.waiting_schedule)
     await callback.message.edit_text(
         "⏰ Yuborish sanasi va vaqtini kiriting.\n\n"
-        "Format: <code>KK.OO.YYYY SS:DD</code> (masalan, <code>22.07.2026 09:00</code>)"
+        "Format: <code>KK.OO.YYYY SS:DD</code> (masalan, <code>22.07.2026 09:00</code>)",
+        reply_markup=back_to("admin_main_menu", text="❌ Bekor qilish"),
     )
 
 
@@ -224,10 +228,16 @@ def _parse_schedule(text):
 async def broadcast_schedule_set(message: Message, state: FSMContext):
     when = _parse_schedule(message.text or "")
     if when is None:
-        await message.answer("❗️ Format noto'g'ri. Masalan: <code>22.07.2026 09:00</code>")
+        await message.answer(
+            "❗️ Format noto'g'ri. Masalan: <code>22.07.2026 09:00</code>",
+            reply_markup=back_to("admin_main_menu", text="❌ Bekor qilish"),
+        )
         return
     if when <= timezone.now():
-        await message.answer("❗️ Vaqt kelajakda bo'lishi kerak.")
+        await message.answer(
+            "❗️ Vaqt kelajakda bo'lishi kerak.",
+            reply_markup=back_to("admin_main_menu", text="❌ Bekor qilish"),
+        )
         return
 
     data = await state.get_data()
@@ -284,7 +294,10 @@ async def scheduled_detail(callback: CallbackQuery):
     await callback.answer()
     broadcast = Broadcast.objects.filter(id=int(callback.data.split(":")[1])).first()
     if not broadcast or broadcast.status != BroadcastStatus.SCHEDULED:
-        await callback.message.edit_text("Bu reja topilmadi yoki allaqachon bajarilgan.")
+        await callback.message.edit_text(
+            "Bu reja topilmadi yoki allaqachon bajarilgan.",
+            reply_markup=back_to("bc_plans"),
+        )
         return
     count = channels_for_filter(broadcast.target_filter).count()
     when = timezone.localtime(broadcast.scheduled_at)
@@ -307,9 +320,14 @@ async def scheduled_cancel(callback: CallbackQuery):
         broadcast.status = BroadcastStatus.CANCELLED
         broadcast.save(update_fields=["status"])
         log_action(callback.from_user.id, "reja_bekor_qilindi", f"#{broadcast.id}")
-        await callback.message.edit_text(f"🚫 Reja #{broadcast.id} bekor qilindi.")
+        await callback.message.edit_text(
+            f"🚫 Reja #{broadcast.id} bekor qilindi.", reply_markup=back_to("bc_plans")
+        )
     else:
-        await callback.message.edit_text("Bu reja topilmadi yoki allaqachon bajarilgan.")
+        await callback.message.edit_text(
+            "Bu reja topilmadi yoki allaqachon bajarilgan.",
+            reply_markup=back_to("bc_plans"),
+        )
 
 
 # ================= Statistika (TZ 5) =================

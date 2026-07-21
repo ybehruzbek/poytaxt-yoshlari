@@ -8,6 +8,7 @@ from zakovat_bot.buttons.panel import (
     admin_detail_keyboard,
     admin_role_keyboard,
     admins_menu_keyboard,
+    back_to,
 )
 from zakovat_bot.dispatcher import dp
 from zakovat_bot.models import AdminRole, TelegramAdminsID
@@ -41,7 +42,8 @@ async def admin_add_start(callback: CallbackQuery, state: FSMContext):
     await state.set_state(AdminMgmtState.add_id)
     await callback.message.edit_text(
         "🆔 Yangi adminning Telegram ID raqamini yuboring.\n"
-        "(U buni @userinfobot orqali bilib olishi mumkin.)"
+        "(U buni @userinfobot orqali bilib olishi mumkin.)",
+        reply_markup=back_to("adm_menu"),
     )
 
 
@@ -49,16 +51,23 @@ async def admin_add_start(callback: CallbackQuery, state: FSMContext):
 async def admin_add_id(message: Message, state: FSMContext):
     text = (message.text or "").strip()
     if not text.isdigit():
-        await message.answer("❗️ Faqat raqamlardan iborat ID yuboring.")
+        await message.answer(
+            "❗️ Faqat raqamlardan iborat ID yuboring.", reply_markup=back_to("adm_menu")
+        )
         return
     tg_id = int(text)
     if TelegramAdminsID.objects.filter(tg_id=tg_id).exists():
-        await message.answer("❗️ Bu foydalanuvchi allaqachon admin.")
+        await message.answer(
+            "❗️ Bu foydalanuvchi allaqachon admin.", reply_markup=back_to("adm_menu")
+        )
         await state.clear()
         return
     await state.update_data(new_admin_id=tg_id)
     await state.set_state(AdminMgmtState.add_name)
-    await message.answer("📝 Ismini kiriting (ro'yxatda ko'rinishi uchun):")
+    await message.answer(
+        "📝 Ismini kiriting (ro'yxatda ko'rinishi uchun):",
+        reply_markup=back_to("adm_menu"),
+    )
 
 
 @dp.message(StateFilter(AdminMgmtState.add_name))
