@@ -1,22 +1,21 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-def admin_main_keyboard():
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [
-            InlineKeyboardButton(text="➕ Yangi savol", callback_data="add_new_question")],[
-            InlineKeyboardButton(text="❓ Savollar ro'yxati", callback_data="questions_list"),
-        ],[
-            InlineKeyboardButton(text="👥 Foydalanuvchi bilan aloqa", callback_data="user_talk"),
-        ],
-        [
-            InlineKeyboardButton(text="📢 Botga habar jo'natish", callback_data="broadcast_message"),
-        ],
-        [
-            InlineKeyboardButton(text="📚 Kanallarga xabar yuborish", callback_data="chanel"),
-        ]
-    ])
-    return keyboard
+def admin_main_keyboard(role=None):
+    """Admin panel menyusi. role=None — eski chaqiruvlar uchun operator to'plami."""
+    rows = [
+        [InlineKeyboardButton(text="📡 Kanallar bazasi", callback_data="ch_menu")],
+        [InlineKeyboardButton(text="📤 Kanallarga tarqatish", callback_data="bc_new")],
+        [InlineKeyboardButton(text="⏰ Rejalashtirilganlar", callback_data="bc_plans")],
+        [InlineKeyboardButton(text="📈 Statistika", callback_data="st_menu")],
+        [InlineKeyboardButton(text="➕ Yangi savol", callback_data="add_new_question")],
+        [InlineKeyboardButton(text="❓ Savollar ro'yxati", callback_data="questions_list")],
+        [InlineKeyboardButton(text="👥 Foydalanuvchi bilan aloqa", callback_data="user_talk")],
+        [InlineKeyboardButton(text="📢 Bot foydalanuvchilariga xabar", callback_data="broadcast_message")],
+    ]
+    if role == "superadmin":
+        rows.append([InlineKeyboardButton(text="👮 Adminlar", callback_data="adm_menu")])
+    return InlineKeyboardMarkup(inline_keyboard=rows)
 
 def main_keyboard(uuid) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardMarkup(inline_keyboard=[

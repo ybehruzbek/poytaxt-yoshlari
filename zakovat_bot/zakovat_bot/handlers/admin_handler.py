@@ -1,29 +1,45 @@
 import asyncio
 from aiogram import F
 from aiogram.types import CallbackQuery,   Message
-from aiogram.filters import  StateFilter
-from zakovat_bot.models import  TelegramAdminsID,Questions, Users
+from aiogram.filters import Command, StateFilter
+from zakovat_bot.models import  AdminRole, TelegramAdminsID,Questions, Users
 from zakovat_bot.dispatcher import dp,bot
 from zakovat_bot.buttons.inline import *
 from aiogram.fsm.context import FSMContext
 from zakovat_bot.state import  QuestionState, Register,ChannelSendState
 from django.utils import timezone
 from zakovat_bot.utils import sent_file_to_admins
+from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from decouple import config
 
 CHANNEL_ID = config("CHANNEL_USERNAME")
 PER_PAGE = 10
+
+
+async def _deny(callback: CallbackQuery):
+    await callback.answer("⛔ Bu amal uchun huquqingiz yetarli emas.", show_alert=True)
+
+
+# Eski xatti-harakat ("admin_panel" yozgan har kim admin bo'lardi) olib tashlandi:
+# endi panelga faqat bazadagi adminlar kiradi (TZ 2.3 / 7-xavfsizlik).
+@dp.message(Command("admin"))
 @dp.message(F.text == "admin_panel")
 async def start(message: Message) -> None:
-    tg_id = message.from_user.id
-    if not TelegramAdminsID.objects.filter(tg_id=tg_id).exists():
-        TelegramAdminsID.objects.create(tg_id=tg_id)
-    await message.answer(text="Admin paneliga xush kelibsiz",reply_markup=admin_main_keyboard())
-    
-    
-    
+    admin = get_admin(message.from_user.id)
+    if admin is None:
+        await message.answer("⛔ Siz admin emassiz.")
+        return
+    await message.answer(
+        text="Admin paneliga xush kelibsiz",
+        reply_markup=admin_main_keyboard(admin.role),
+    )
+
+
+
 @dp.callback_query(F.data == "add_new_question")
 async def add_new_question(callback_query: CallbackQuery, state: FSMContext) -> None:
+    if not has_role(callback_query.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback_query)
     await callback_query.answer()
     await state.set_state(QuestionState.question_name)
 
@@ -175,18 +191,29 @@ async def change_question(callback_query: CallbackQuery) -> None:
 @dp.callback_query( F.data == "cancel")
 async def admin_main(callback_query: CallbackQuery) -> None:
     await callback_query.answer()
+    admin = get_admin(callback_query.from_user.id)
     await callback_query.message.delete()
-    await callback_query.message.answer(text="🤵🏼 Admin paneli",reply_markup=admin_main_keyboard())
-    
-    
+    await callback_query.message.answer(
+        text="🤵🏼 Admin paneli",
+        reply_markup=admin_main_keyboard(admin.role if admin else None),
+    )
+
+
 @dp.callback_query(F.data == "admin_main_menu" )
-async def admin_main_menu(callback_query: CallbackQuery) -> None:
+async def admin_main_menu(callback_query: CallbackQuery, state: FSMContext) -> None:
     await callback_query.answer()
-    await callback_query.message.edit_text(text="Admin paneli",reply_markup=admin_main_keyboard())
+    await state.clear()
+    admin = get_admin(callback_query.from_user.id)
+    await callback_query.message.edit_text(
+        text="Admin paneli",
+        reply_markup=admin_main_keyboard(admin.role if admin else None),
+    )
     
     
 @dp.callback_query(F.data.startswith("approve:"))
 async def approve_publish(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
     question_id = int(callback.data.split(":")[1])
     question = Questions.objects.get(id=question_id)
     keyboard = main_keyboard(question.uuid)
@@ -241,6 +268,7 @@ async def approve_publish(callback: CallbackQuery):
         )
 
     await callback.message.edit_reply_markup()
+    log_action(callback.from_user.id, "zakovat_elon_qilindi", f"savol #{question.id}")
     await callback.message.answer("📤 Kanalga muvaffaqiyatli joylandi!")
     await callback.answer()
 
@@ -248,6 +276,8 @@ async def approve_publish(callback: CallbackQuery):
 
 @dp.callback_query(F.data == "user_talk")
 async def user_talk(callback_query: CallbackQuery,state: FSMContext) -> None:
+    if not has_role(callback_query.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback_query)
     await callback_query.answer()
     await callback_query.message.answer(text="💬 Suhbat uchun foydalanuvchi ID sini yuboring:",reply_markup=back_keyboard())
     await state.set_state(QuestionState.user_id)
@@ -326,6 +356,8 @@ async def end_talk(callback_query: CallbackQuery, state: FSMContext) -> None:
     
 @dp.callback_query(F.data == "broadcast_message")
 async def broadcast_message(callback_query: CallbackQuery, state: FSMContext) -> None:
+    if not has_role(callback_query.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback_query)
     await callback_query.answer()
     await callback_query.message.answer("📢 Iltimos, bot foydalanuvchilariga jo'natiladigan xabar matnini kiriting:",reply_markup=back_keyboard(    ))
     await state.set_state(Register.every_one)
@@ -359,150 +391,7 @@ async def back_handler(callback_query: CallbackQuery, state: FSMContext) -> None
     await callback_query.answer()
     await callback_query.message.delete()
     await callback_query.message.answer(text="🤵🏼 Admin paneli",reply_markup=admin_main_keyboard())
-    
-@dp.callback_query(F.data == "chanel")
-async def send_message_to_channel(callback_query: CallbackQuery, state: FSMContext):
-    await callback_query.answer()
-    await state.set_state(ChannelSendState.waiting_for_excel)
-    await callback_query.message.answer("Excel file yuboring.")
-    
-    
-    
-import pandas as pd
-
-@dp.message(ChannelSendState.waiting_for_excel, F.document)
-async def handle_excel(message: Message, state: FSMContext):
-    file = await message.bot.get_file(message.document.file_id)
-    file_path = file.file_path
-    downloaded = await message.bot.download_file(file_path)
-
-    df = pd.read_excel(downloaded)
-    links = (
-    df.iloc[:, 1]
-    .dropna()
-    .astype(str)
-    .str.strip()
-    .apply(lambda x: x.replace("https://t.me/", "")
-                       .replace("http://t.me/", "")
-                       .replace("t.me/", "")
-                       .replace("@", ""))
-    .tolist()
-)
-
-    await state.update_data(links=links)
-    await state.set_state(ChannelSendState.waiting_for_message)
-
-    await message.answer("Endi forward qilinadigan messageni yuboring.")
-    
-    
-from collections import defaultdict
-import asyncio
-
-pending_posts = {}
-pending_tasks = {}
-from aiogram.exceptions import TelegramRetryAfter
 
 
-@dp.message(ChannelSendState.waiting_for_message)
-async def handle_post(message: Message, state: FSMContext):
-
-    user_id = message.from_user.id
-    chat_id = message.chat.id
-
-    if user_id not in pending_posts:
-        pending_posts[user_id] = {
-            "chat_id": chat_id,
-            "message_ids": []
-        }
-
-    pending_posts[user_id]["message_ids"].append(message.message_id)
-
-    if user_id in pending_tasks:
-        pending_tasks[user_id].cancel()
-
-    pending_tasks[user_id] = asyncio.create_task(
-        finalize_post(user_id, state)
-    )
-    
-async def finalize_post(user_id: int, state: FSMContext):
-
-    await asyncio.sleep(1.2)
-
-    post_data = pending_posts.pop(user_id, None)
-    pending_tasks.pop(user_id, None)
-
-    if not post_data:
-        return
-
-    await state.update_data(
-        source_chat_id=post_data["chat_id"],
-        message_ids=post_data["message_ids"]
-    )
-
-    await state.set_state(ChannelSendState.waiting_for_confirmation)
-
-    await bot.send_message(
-        user_id,
-        "Forward qilamizmi?",
-        reply_markup=confirm_keyboard()
-    )
-@dp.callback_query(ChannelSendState.waiting_for_confirmation, F.data == "confirm_yes")
-async def confirm_send(callback_query: CallbackQuery, state: FSMContext):
-
-    data = await state.get_data()
-    await callback_query.answer()
-
-    links = data["links"]
-    source_chat_id = data["source_chat_id"]
-    message_ids = data["message_ids"]
-
-    await callback_query.message.edit_text("Yuborilmoqda...")
-
-    success = 0
-    failed = 0
-
-    for link in links:
-
-        target_chat = link.strip()
-
-        if not target_chat.startswith("@") and not target_chat.startswith("-100"):
-            target_chat = f"@{target_chat}"
-
-        try:
-            await callback_query.bot.forward_messages(
-                chat_id=target_chat,
-                from_chat_id=source_chat_id,
-                message_ids=message_ids
-            )
-            success += 1
-
-        except TelegramRetryAfter as e:
-            await asyncio.sleep(e.retry_after)
-            try:
-                await callback_query.bot.forward_messages(
-                    chat_id=target_chat,
-                    from_chat_id=source_chat_id,
-                    message_ids=message_ids
-                )
-                success += 1
-            except:
-                failed += 1
-
-        except Exception as e:
-            print(f"Xatolik {target_chat}: {e}")
-            failed += 1
-
-        await asyncio.sleep(0.05)
-
-    await state.clear()
-
-    await callback_query.message.edit_text(
-        f"Yuborildi: {success} ta\nXatolik: {failed} ta",reply_markup=admin_main_keyboard()
-    )
-    
-    
-@dp.callback_query(ChannelSendState.waiting_for_confirmation, F.data == "confirm_no")
-async def cancel_send(callback_query: CallbackQuery, state: FSMContext):
-    await callback_query.answer()
-    await state.clear()
-    await callback_query.message.edit_text("Bekor qilindi.", reply_markup=admin_main_keyboard())
+# Eski Excel-asosidagi tarqatish oqimi (ChannelSendState) olib tashlandi:
+# o'rnini kanallar bazasidan ishlaydigan broadcast_handler.py egalladi (TZ 2, 4).

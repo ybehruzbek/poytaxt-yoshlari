@@ -120,7 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# Rejalashtirilgan tarqatishlar admin kiritgan mahalliy vaqtda ishlashi uchun
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 

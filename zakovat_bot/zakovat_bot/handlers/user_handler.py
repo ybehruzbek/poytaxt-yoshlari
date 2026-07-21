@@ -14,8 +14,9 @@ from zakovat_bot.utils import sent_file_to_admins
 async def start(message: Message,state: FSMContext) -> None:
     tg_id = message.from_user.id
     username = message.from_user.username or ""
-    if TelegramAdminsID.objects.filter(tg_id=tg_id).exists():
-        await message.answer(text="Siz admin panelidasiz.",reply_markup=admin_main_keyboard())
+    admin = TelegramAdminsID.objects.filter(tg_id=tg_id).first()
+    if admin:
+        await message.answer(text="Siz admin panelidasiz.",reply_markup=admin_main_keyboard(admin.role))
         return
     if not Users.objects.filter(tg_id=message.from_user.id).exists():
         Users.objects.create(tg_id=message.from_user.id,username=username)
