@@ -166,9 +166,12 @@ async def question_detail(callback_query: CallbackQuery) -> None:
     await callback_query.answer()
     question_id = int(callback_query.data.split("_")[-1])
     question = Questions.objects.get(id=question_id)
+    # questioned_at faqat kanalga joylangach to'ladi — ungacha yaratilgan sana
+    when = question.questioned_at or question.created_datetime
+    status = "e'lon qilingan" if question.questioned_at else "hali e'lon qilinmagan"
     await callback_query.message.edit_text(
         text=f"📄 Savol nomi: {question.name}\n"
-             f"🕒 Yaratilgan: {question.questioned_at.strftime('%Y-%m-%d %H:%M:%S')}",
+             f"🕒 {when.strftime('%Y-%m-%d %H:%M:%S')} ({status})",
         reply_markup=change_question_keyboard(question_id)
     )
     

@@ -43,7 +43,9 @@ def build_answers_excel(question):
     )
 
     for ans in answers:
-        delta = ans.answered_at - question.questioned_at
+        # Savol hali e'lon qilinmagan bo'lsa questioned_at bo'sh bo'ladi
+        base_time = question.questioned_at or question.created_datetime
+        delta = ans.answered_at - base_time
         answer_time_str = humanize_timedelta(delta)
 
         ws.append([
@@ -64,7 +66,12 @@ def build_answers_excel(question):
 async def sent_file_to_admins( question,tg_id):
     excel_buffer = build_answers_excel(question)
     file_bytes = excel_buffer.getvalue()
-    filename = f"{question.name}.xlsx"
+    # Fayl nomi: birinchi qator, xavfsiz belgilar, 50 belgigacha
+    safe_name = "".join(
+        c if c.isalnum() or c in " -_" else "_"
+        for c in (question.name or "savol").split("\n")[0][:50]
+    ).strip() or "savol"
+    filename = f"{safe_name}.xlsx"
 
     admins = TelegramAdminsID.objects.all()
     doc = BufferedInputFile(file_bytes, filename=filename)
