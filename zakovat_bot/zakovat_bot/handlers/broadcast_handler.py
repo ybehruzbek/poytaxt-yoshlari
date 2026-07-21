@@ -94,10 +94,14 @@ async def _finalize_post(user_id, state):
         Channel.objects.filter(is_active=True, tag__isnull=False)
         .values_list("tag", flat=True).distinct()
     )
+    active = Channel.objects.filter(is_active=True)
+    counts = {"all": active.count()}
+    for t in ("davlat", "xorijiy", "nodavlat"):
+        counts[t] = active.filter(ott_type=t).count()
     await bot.send_message(
         user_id,
         "🎯 Qamrovni tanlang — post qaysi kanallarga yuborilsin?",
-        reply_markup=broadcast_target_keyboard(tags),
+        reply_markup=broadcast_target_keyboard(tags, counts),
     )
 
 

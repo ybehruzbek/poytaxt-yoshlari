@@ -95,12 +95,21 @@ def confirm_delete_keyboard(channel_id):
     return kb.as_markup()
 
 
-def broadcast_target_keyboard(tags):
-    """Qamrov tanlash (TZ 4.1): hammasi / tur / teg."""
+def broadcast_target_keyboard(tags, counts=None):
+    """Qamrov tanlash (TZ 4.1): hammasi / tur / teg.
+    counts — {"all": N, "davlat": N, ...} bo'lsa tugmalarda kanal soni ko'rsatiladi."""
+    counts = counts or {}
+
+    def _n(key):
+        return f" ({counts[key]} ta)" if key in counts else ""
+
     kb = InlineKeyboardBuilder()
-    kb.button(text="📡 Barcha faol kanallar", callback_data="bc_tgt:all")
+    kb.button(text=f"📡 Barcha faol kanallar{_n('all')}", callback_data="bc_tgt:all")
     for t, label in TYPE_LABELS.items():
-        kb.button(text=f"🏷 Faqat {label}", callback_data=f"bc_tgt:type:{t.value}")
+        kb.button(
+            text=f"🏷 Faqat {label}{_n(t.value)}",
+            callback_data=f"bc_tgt:type:{t.value}",
+        )
     for tag in tags[:10]:
         kb.button(text=f"🔖 {tag}", callback_data=f"bc_tgt:tag:{tag}")
     kb.button(text="❌ Bekor qilish", callback_data="admin_main_menu")

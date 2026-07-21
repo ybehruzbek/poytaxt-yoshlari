@@ -30,6 +30,20 @@ async def _deny(callback):
     await callback.answer("⛔ Bu amal uchun huquqingiz yetarli emas.", show_alert=True)
 
 
+def _menu_text():
+    """Kanallar menyusi matni: umumiy va OTT turi bo'yicha ajratilgan hisob."""
+    total = Channel.all_objects.count()
+    active = Channel.objects.filter(is_active=True)
+    lines = [
+        "📡 <b>Kanallar bazasi</b>\n",
+        f"Jami: {total} ta | Faol: {active.count()} ta\n",
+        "<b>OTT turi bo'yicha (faollar):</b>",
+    ]
+    for value, label in [("davlat", "🏛 Davlat"), ("xorijiy", "🌍 Xorijiy"), ("nodavlat", "🏢 Nodavlat")]:
+        lines.append(f"{label}: {active.filter(ott_type=value).count()} ta")
+    return "\n".join(lines)
+
+
 def _channel_card(channel):
     link = f"@{channel.username}" if channel.username else "—"
     return (
@@ -53,11 +67,8 @@ async def channels_menu(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
     await state.clear()
     admin = get_admin(callback.from_user.id)
-    total = Channel.all_objects.count()
-    active = Channel.objects.filter(is_active=True).count()
     await callback.message.edit_text(
-        f"📡 <b>Kanallar bazasi</b>\n\nJami: {total} ta | Faol: {active} ta",
-        reply_markup=channels_menu_keyboard(admin.role),
+        _menu_text(), reply_markup=channels_menu_keyboard(admin.role)
     )
 
 
@@ -298,11 +309,8 @@ async def channel_delete_confirmed(callback: CallbackQuery):
         channel.delete()
     await callback.message.edit_text("🗑 Kanal o'chirildi.")
     admin = get_admin(callback.from_user.id)
-    total = Channel.all_objects.count()
-    active = Channel.objects.filter(is_active=True).count()
     await callback.message.answer(
-        f"📡 <b>Kanallar bazasi</b>\n\nJami: {total} ta | Faol: {active} ta",
-        reply_markup=channels_menu_keyboard(admin.role),
+        _menu_text(), reply_markup=channels_menu_keyboard(admin.role)
     )
 
 
