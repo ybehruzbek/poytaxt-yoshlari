@@ -23,7 +23,8 @@ from openpyxl import Workbook
 
 from zakovat_bot.models import (
     AdminRole, Answers, AuditLog, Broadcast, BroadcastResult, BroadcastStatus,
-    Channel, Questions, TelegramAdminsID, Users,
+    Channel, ChatEvent, ChatParticipant, ParticipantStatus, Questions,
+    ReminderLog, TelegramAdminsID, Users,
 )
 
 SUPER, OPER, OBSV, NOBODY, USER1 = 990001, 990002, 990003, 990004, 990005
@@ -53,6 +54,14 @@ class FakeBot:
     def __init__(self):
         self.calls = []
         self.fail_delete_ids = set()
+        self.forbidden_ids = set()  # 403 qaytaradigan chat_id'lar (blok testi)
+
+    async def send_message(self, chat_id, text=None, **kw):
+        if chat_id in self.forbidden_ids:
+            from aiogram.exceptions import TelegramForbiddenError
+            raise TelegramForbiddenError(method=None, message="bot was blocked by the user")
+        self.calls.append(("send_message", chat_id, text))
+        return SimpleNamespace(message_id=next(_next_id))
 
     async def forward_messages(self, chat_id, from_chat_id, message_ids):
         self.calls.append(("forward", chat_id, tuple(message_ids)))
@@ -79,7 +88,9 @@ class FakeBot:
 
 class FakeMessage:
     def __init__(self, user_id, text=None, document=None, contact=None):
-        self.from_user = SimpleNamespace(id=user_id, username="smoketest")
+        self.from_user = SimpleNamespace(
+            id=user_id, username="smoketest", first_name="Smoke"
+        )
         self.chat = SimpleNamespace(id=user_id)
         self.message_id = next(_next_id)
         self.text = text
@@ -117,7 +128,9 @@ class FakeMessage:
 class FakeCallback:
     def __init__(self, data, user_id, message=None):
         self.data = data
-        self.from_user = SimpleNamespace(id=user_id, username="smoketest")
+        self.from_user = SimpleNamespace(
+            id=user_id, username="smoketest", first_name="Smoke"
+        )
         self.message = message or FakeMessage(user_id)
         self.alerts = []
 
@@ -168,6 +181,9 @@ def cleanup():
         b.delete()
     Channel.all_objects.filter(tag=TAG).delete()
     AuditLog.all_objects.filter(admin_id__in=TEST_IDS).delete()
+    ReminderLog.all_objects.filter(participant__telegram_id__in=TEST_IDS).delete()
+    ChatParticipant.all_objects.filter(telegram_id__in=TEST_IDS).delete()
+    ChatEvent.all_objects.filter(title__startswith="SMOKE").delete()
 
 
 async def main():
@@ -185,9 +201,11 @@ async def main():
     fake_bot.excel_bytes = make_excel()
 
     # Modullardagi haqiqiy bot o'rniga soxta bot
+    from zakovat_bot.handlers import chat_admin_handler as _cah
     channel_handler.bot = fake_bot
     broadcast_handler.bot = fake_bot
     admin_handler.bot = fake_bot
+    _cah.bot = fake_bot
     utils.bot = fake_bot
     broadcasting.SEND_PAUSE = 0
 
@@ -211,7 +229,7 @@ async def main():
 
     m = FakeMessage(NOBODY, text="/admin")
     await admin_handler.start(m)
-    check("begonaga rad javobi", "admin emassiz" in m.texts().lower())
+    check("begonaga /admin jim (TZ F-08)", len(m.out) == 0, m.texts())
 
     cb = FakeCallback("ch_add", OPER)
     await channel_handler.channel_add_start(cb, FakeState())
@@ -482,6 +500,12 @@ async def main():
 
     # ---------- 9. Foydalanuvchi oqimi ----------
     print("9) Foydalanuvchi")
+    # Faol chat tadbiri bo'lsa oddiy /start chat oqimiga ketadi — zakovat
+    # oqimini sinash uchun tadbirlarni vaqtincha o'chiramiz
+    saved_event_ids = list(
+        ChatEvent.objects.filter(is_active=True).values_list("id", flat=True)
+    )
+    ChatEvent.objects.filter(id__in=saved_event_ids).update(is_active=False)
     st = FakeState()
     m = FakeMessage(USER1, text="/start")
     await user_handler.start(m, st)
@@ -563,6 +587,203 @@ async def main():
 
     check("audit-jurnal yozildi", AuditLog.objects.filter(admin_id__in=TEST_IDS).count() >= 5,
           f"bor: {AuditLog.objects.filter(admin_id__in=TEST_IDS).count()}")
+
+    # ---------- 12. Online chat: ro'yxat oqimi (T-01 – T-07) ----------
+    print("12) Online chat ro'yxati")
+    from datetime import timedelta
+    from django.utils import timezone as djtz
+    from zakovat_bot.handlers import chat_admin_handler, chat_handler
+    from zakovat_bot.services import chat_event as chat_service
+
+    event = ChatEvent.objects.create(
+        title="SMOKE chat", start_at=djtz.now() + timedelta(minutes=30)
+    )
+
+    # T-01: deep link orqali kirish
+    st = FakeState()
+    m = FakeMessage(USER1, text="/start chat_09aug")
+    await user_handler.start(m, st)
+    check("T-01 deep link → tanishtiruv", "online chat" in m.texts().lower())
+    p = ChatParticipant.objects.filter(event=event, telegram_id=USER1).first()
+    check("T-01 manba (source) qayd etildi", p is not None and p.source == "chat_09aug")
+
+    # Ro'yxat tugmasi → ism bosqichi
+    cb = FakeCallback("chatreg_start", USER1)
+    await chat_handler.chatreg_start(cb, st)
+    check("ism so'raldi", "Ism va familiya" in cb.message.texts())
+
+    # T-03: noto'g'ri ismlar
+    for bad in ("Ali123", "Sardor", "abc", "A" * 61):
+        m = FakeMessage(USER1, text=bad)
+        await chat_handler.chatreg_full_name(m, st)
+        if "to'g'ri kiriting" not in m.texts():
+            check(f"T-03 noto'g'ri ism rad ({bad[:10]})", False, m.texts())
+            break
+    else:
+        check("T-03 noto'g'ri ismlar rad etildi (4 xil)", True)
+
+    # T-02: to'g'ri ism
+    m = FakeMessage(USER1, text="Aliyev Sardor")
+    await chat_handler.chatreg_full_name(m, st)
+    check("T-02 to'g'ri ism → telefon bosqichi", "Telefon raqamingizni" in m.texts())
+
+    # T-05: noto'g'ri raqam
+    m = FakeMessage(USER1, text="12345")
+    await chat_handler.chatreg_phone(m, st)
+    check("T-05 noto'g'ri raqam rad etildi", "noto'g'ri kiritildi" in m.texts())
+
+    # T-04: qo'lda to'g'ri raqam (normallashtirish)
+    m = FakeMessage(USER1, text="90 123 45 67")
+    await chat_handler.chatreg_phone(m, st)
+    check("T-04 raqam qabul va tasdiqlash ekrani", "+998901234567" in m.texts())
+
+    # T-06: «Ishtirok etaman»
+    cb = FakeCallback("chatreg_confirm", USER1)
+    await chat_handler.chatreg_confirm(cb, st)
+    p.refresh_from_db()
+    check("T-06 ro'yxatdan o'tdi", p.status == ParticipantStatus.REGISTERED
+          and p.phone == "+998901234567" and p.registered_at is not None)
+
+    # T-07: qayta kirganda holat, takroriy yozuv yo'q
+    st = FakeState()
+    m = FakeMessage(USER1, text="/start chat_09aug")
+    await user_handler.start(m, st)
+    check("T-07 holat ko'rsatildi", "allaqachon ro'yxatdan o'tgansiz" in m.texts())
+    check("T-07 takroriy yozuv yaratilmadi",
+          ChatParticipant.objects.filter(event=event, telegram_id=USER1).count() == 1)
+
+    # Dublikat telefon (boshqa foydalanuvchi)
+    st2 = FakeState()
+    m = FakeMessage(NOBODY, text="/start")
+    await user_handler.start(m, st2)
+    cb = FakeCallback("chatreg_start", NOBODY)
+    await chat_handler.chatreg_start(cb, st2)
+    m = FakeMessage(NOBODY, text="Valiyev Bekzod")
+    await chat_handler.chatreg_full_name(m, st2)
+    m = FakeMessage(NOBODY, text="+998901234567")
+    await chat_handler.chatreg_phone(m, st2)
+    check("dublikat telefon rad etildi", "allaqachon ro'yxatdan o'tilgan" in m.texts())
+
+    # Bekor qilish va qayta ro'yxat
+    cb = FakeCallback("chatreg_cancel", USER1)
+    await chat_handler.chatreg_cancel(cb, FakeState())
+    p.refresh_from_db()
+    check("ishtirok bekor qilindi", p.status == ParticipantStatus.CANCELLED)
+    p.status = ParticipantStatus.REGISTERED
+    p.save(update_fields=["status"])
+
+    # ---------- 13. Eslatmalar (T-08 – T-11) ----------
+    print("13) Eslatmalar")
+    # Tadbir 30 daqiqadan keyin → «1 soat oldin» eslatmasi hozir yuborilishi kerak
+    p2 = ChatParticipant.objects.create(
+        event=event, telegram_id=OBSV, full_name="Kech Qolgan", phone="+998901111111",
+        status=ParticipantStatus.REGISTERED,
+        registered_at=djtz.now(),  # eslatma vaqtidan KEYIN ro'yxatdan o'tgan (T-10)
+    )
+    # NOBODY uchun yozuv dublikat-test paytida yaratilgan — qayta ishlatamiz
+    p3 = ChatParticipant.objects.get(event=event, telegram_id=NOBODY)
+    p3.full_name = "Bloklagan Foydalanuvchi"
+    p3.phone = "+998902222222"
+    p3.status = ParticipantStatus.REGISTERED
+    p3.registered_at = djtz.now() - timedelta(hours=2)
+    p3.save()
+    p.registered_at = djtz.now() - timedelta(hours=2)
+    p.save(update_fields=["registered_at"])
+
+    fake_bot.forbidden_ids.add(NOBODY)  # T-09: bu foydalanuvchi botni bloklagan
+
+    def hour_reminder_sends():
+        """Faqat USER1'ga ketgan «1 soat» eslatmalarini sanaydi — boshqa fon
+        vazifalarning xabarlari hisobga aralashmasligi uchun."""
+        return len([
+            c for c in fake_bot.calls
+            if c[0] == "send_message" and c[1] == USER1 and "1 soat qoldi" in str(c[2])
+        ])
+
+    before = hour_reminder_sends()
+    await chat_service.process_due_reminders(fake_bot)
+
+    log1 = ReminderLog.objects.filter(participant=p, reminder_type="1hour").first()
+    check("T-08 eslatma yuborildi", log1 is not None and log1.status == "sent")
+    check("T-10 kech ro'yxatdan o'tganga yuborilmadi",
+          not ReminderLog.objects.filter(participant=p2, reminder_type="1hour").exists())
+    p3.refresh_from_db()
+    log3 = ReminderLog.objects.filter(participant=p3, reminder_type="1hour").first()
+    check("T-09 bloklagan aniqlandi", p3.is_blocked and log3.status == "blocked")
+    check("eskirgan eslatmalar (1kun/10soat) o'tkazib yuborildi",
+          not ReminderLog.objects.filter(
+              participant=p, reminder_type__in=["1day", "10hours"]).exists())
+
+    # T-11: scheduler qayta ishga tushsa takror yubormaydi
+    await chat_service.process_due_reminders(fake_bot)
+    after = hour_reminder_sends()
+    check("T-11 idempotent (takror yuborilmadi)",
+          ReminderLog.objects.filter(participant=p, reminder_type="1hour").count() == 1
+          and after == before + 1,
+          f"yuborishlar: {after - before}")
+
+    # «Chat boshlandi» xabari: havolasiz yuborilmaydi, havola bilan yuboriladi
+    event.start_at = djtz.now() - timedelta(minutes=1)
+    event.save(update_fields=["start_at"])
+    await chat_service.process_due_reminders(fake_bot)
+    check("havolasiz start xabari yuborilmadi",
+          not ReminderLog.objects.filter(
+              participant=p, reminder_type="start", status="sent").exists())
+    event.chat_link = "https://t.me/+smoke_link"
+    event.save(update_fields=["chat_link"])
+    await chat_service.process_due_reminders(fake_bot)
+    slog = ReminderLog.objects.filter(participant=p, reminder_type="start").first()
+    check("havola bilan start xabari yuborildi", slog is not None and slog.status == "sent")
+
+    # ---------- 14. Chat admin bo'limi (T-12, F-08) ----------
+    print("14) Chat admin")
+    cb = FakeCallback("chadm_menu", SUPER)
+    await chat_admin_handler.chat_admin_menu(cb, FakeState())
+    check("chat admin menyusi", "Online chat" in cb.message.texts())
+
+    cb = FakeCallback("chadm_stats", OBSV)
+    await chat_admin_handler.chat_admin_stats(cb)
+    check("chat statistika", "ro'yxatdan o'tganlar" in cb.message.texts().lower())
+
+    cb = FakeCallback("chadm_reminders", OBSV)
+    await chat_admin_handler.chat_admin_reminders(cb)
+    check("eslatmalar holati", "1 soat oldin" in cb.message.texts())
+
+    cb = FakeCallback("chadm_export", OPER)
+    await chat_admin_handler.chat_admin_export(cb)
+    check("ishtirokchilar eksporti", any(k == "answer_document" for k, _ in cb.message.out))
+
+    # Ommaviy xabar (copy_message)
+    st = FakeState()
+    cb = FakeCallback("chadm_bcast", OPER)
+    await chat_admin_handler.chat_admin_bcast(cb, st)
+    m = FakeMessage(OPER, text="SMOKE chat e'loni")
+    await chat_admin_handler.chat_admin_bcast_send(m, st)
+    check("ishtirokchilarga ommaviy xabar",
+          any(k == "copy_message" for k, *_ in fake_bot.calls))
+
+    # Sozlamalar: sana va havola
+    st = FakeState()
+    cb = FakeCallback("chadm_set_dt", SUPER)
+    await chat_admin_handler.chat_admin_set_dt(cb, st)
+    m = FakeMessage(SUPER, text="10.08.2026 21:00")
+    await chat_admin_handler.chat_admin_set_dt_save(m, st)
+    event.refresh_from_db()
+    check("sana o'zgartirildi", djtz.localtime(event.start_at).hour == 21)
+
+    st = FakeState()
+    cb = FakeCallback("chadm_set_link", SUPER)
+    await chat_admin_handler.chat_admin_set_link(cb, st)
+    m = FakeMessage(SUPER, text="havola emas")
+    await chat_admin_handler.chat_admin_set_link_save(m, st)
+    check("noto'g'ri havola rad etildi", "boshlanishi kerak" in m.texts())
+    m = FakeMessage(SUPER, text="https://t.me/+yangi_link")
+    await chat_admin_handler.chat_admin_set_link_save(m, st)
+    event.refresh_from_db()
+    check("havola saqlandi", event.chat_link == "https://t.me/+yangi_link")
+
+    # Tadbirlarni asl holiga qaytaramiz
+    ChatEvent.objects.filter(id__in=saved_event_ids).update(is_active=True)
 
     channel_handler.check_bot_is_admin = real_check
     cleanup()

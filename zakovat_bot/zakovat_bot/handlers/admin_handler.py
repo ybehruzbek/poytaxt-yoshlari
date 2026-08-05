@@ -27,7 +27,7 @@ async def _deny(callback: CallbackQuery):
 async def start(message: Message) -> None:
     admin = get_admin(message.from_user.id)
     if admin is None:
-        await message.answer("⛔ Siz admin emassiz.")
+        # TZ F-08: admin bo'lmaganga /admin hech qanday javob bermaydi
         return
     await message.answer(
         text="Admin paneliga xush kelibsiz",

@@ -122,3 +122,65 @@ class AuditLog(SafeBaseModel):
 
     def __str__(self):
         return f"{self.admin_id}: {self.action}"
+
+
+# ==================== Online chat (TZ: online chat bot) ====================
+
+class ChatEvent(SafeBaseModel):
+    """Online chat tadbiri (TZ 4.3). is_active — joriy tadbir belgisi."""
+    title = models.CharField(max_length=255, default="Online chat")
+    start_at = models.DateTimeField()
+    chat_link = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.title} — {self.start_at:%d.%m.%Y %H:%M}"
+
+
+class ParticipantStatus(models.TextChoices):
+    PENDING = "pending", "Jarayonda"
+    REGISTERED = "registered", "Ro'yxatdan o'tgan"
+    CANCELLED = "cancelled", "Bekor qilgan"
+
+
+class ChatParticipant(SafeBaseModel):
+    """Online chat ishtirokchisi (TZ 4.1)."""
+    event = models.ForeignKey(ChatEvent, on_delete=models.CASCADE, related_name="participants")
+    telegram_id = models.BigIntegerField()
+    username = models.CharField(max_length=64, blank=True, null=True)
+    full_name = models.CharField(max_length=60, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    source = models.CharField(max_length=32, blank=True, null=True)
+    status = models.CharField(
+        max_length=16, choices=ParticipantStatus.choices, default=ParticipantStatus.PENDING
+    )
+    is_blocked = models.BooleanField(default=False)
+    registered_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["event", "telegram_id"], name="uniq_participant_per_event"
+            ),
+        ]
+
+    def __str__(self):
+        return f"#{self.id} {self.full_name or self.telegram_id}"
+
+
+class ReminderLog(SafeBaseModel):
+    """Eslatmalar jurnali (TZ 4.2): idempotentlik kafolati."""
+    participant = models.ForeignKey(
+        ChatParticipant, on_delete=models.CASCADE, related_name="reminders"
+    )
+    reminder_type = models.CharField(max_length=16)  # 1day / 10hours / 1hour / start
+    status = models.CharField(max_length=16, default="pending")  # pending/sent/failed/blocked
+    attempts = models.IntegerField(default=0)
+    error_message = models.TextField(blank=True, null=True)
+    sent_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["participant", "reminder_type"], name="uniq_reminder_per_participant"
+            ),
+        ]

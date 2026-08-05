@@ -1,7 +1,17 @@
 # Bot rivojlantirish rejasi (TZ bo'yicha)
 
-TZ manbasi: `TZ_BOT.md` (buyurtmachidan, to'liq variant, 2026-07-21).
+TZ manbalari: `TZ_BOT.md` (asosiy, 2026-07-21) va `TZ_CHAT_BOT.md`
+(online chat ro'yxati, 2026-08-05, muddat: 7-avgust).
 Buyurtmachi belgilagan ustuvorlik: **1-bosqich → 5-bosqich (monitoring) → 6-bosqich (ommaviy qatlam)**.
+
+## Online chat boti (TZ_CHAT_BOT.md) — ✅ Bajarildi (2026-08-05)
+
+F-01–F-08 to'liq: deep-link (`?start=chat_09aug`), ro'yxat oqimi (ism/telefon
+validatsiya, dublikat nazorati), tasdiqlash, takroriy kirish, idempotent
+eslatmalar (1 kun/10 soat/1 soat/start — scheduler'da, T-10 kafolati bilan),
+admin bo'limi (statistika, xlsx eksport, ommaviy xabar, eslatmalar holati,
+sozlamalar). 9-avgust 20:00 tadbiri migratsiyada seed qilingan.
+Smoke-testda T-01–T-12 ssenariylari qamrab olingan (91 tekshiruv).
 
 ## Bosqichlar holati
 

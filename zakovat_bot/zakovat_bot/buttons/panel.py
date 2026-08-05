@@ -232,3 +232,50 @@ def admin_detail_keyboard(admin):
     kb.button(text="🔙 Orqaga", callback_data="adm_menu")
     kb.adjust(1)
     return kb.as_markup()
+
+
+# ==================== Online chat (TZ online chat bot) ====================
+
+def chat_register_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✅ Ro'yxatdan o'tish", callback_data="chatreg_start")
+    return kb.as_markup()
+
+
+def chat_confirm_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="🙋 Ishtirok etaman", callback_data="chatreg_confirm")
+    kb.button(text="✏️ Ma'lumotni o'zgartirish", callback_data="chatreg_start")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def chat_status_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✏️ Ma'lumotni yangilash", callback_data="chatreg_start")
+    kb.button(text="❌ Ishtirokni bekor qilish", callback_data="chatreg_cancel")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def chat_admin_menu_keyboard(role):
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📊 Statistika", callback_data="chadm_stats")
+    kb.button(text="📥 Eksport (.xlsx)", callback_data="chadm_export")
+    if role in (AdminRole.SUPERADMIN, AdminRole.OPERATOR):
+        kb.button(text="📨 Ishtirokchilarga xabar", callback_data="chadm_bcast")
+    kb.button(text="⏰ Eslatmalar holati", callback_data="chadm_reminders")
+    if role == AdminRole.SUPERADMIN:
+        kb.button(text="⚙️ Sozlamalar", callback_data="chadm_settings")
+    kb.button(text="🔙 Orqaga", callback_data="admin_main_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def chat_settings_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📅 Sana/vaqtni o'zgartirish", callback_data="chadm_set_dt")
+    kb.button(text="🔗 Chat havolasini o'zgartirish", callback_data="chadm_set_link")
+    kb.button(text="🔙 Orqaga", callback_data="chadm_menu")
+    kb.adjust(1)
+    return kb.as_markup()

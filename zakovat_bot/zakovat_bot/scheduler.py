@@ -11,6 +11,7 @@ from django.utils import timezone
 
 from zakovat_bot.models import Broadcast, BroadcastStatus
 from zakovat_bot.services.broadcasting import run_broadcast
+from zakovat_bot.services.chat_event import process_due_reminders
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,12 @@ POLL_INTERVAL = 30  # soniya
 async def scheduler_loop(bot):
     logger.info("Rejalashtirilgan tarqatish poller'i ishga tushdi")
     while True:
+        # Online chat eslatmalari (TZ F-06) — idempotent, xato bo'lsa keyingi
+        # aylanishda qayta uriniladi
+        try:
+            await process_due_reminders(bot)
+        except Exception:
+            logger.exception("Eslatma yuborishda xato")
         try:
             due = list(
                 Broadcast.objects.filter(

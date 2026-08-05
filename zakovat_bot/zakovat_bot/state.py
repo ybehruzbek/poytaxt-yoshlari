@@ -41,3 +41,16 @@ class AdminMgmtState(StatesGroup):
     """Adminlarni boshqarish (TZ 2.3, faqat superadmin)."""
     add_id = State()
     add_name = State()
+
+
+class ChatRegState(StatesGroup):
+    """Online chatga ro'yxatdan o'tish (TZ F-03, F-04)."""
+    full_name = State()
+    phone = State()
+
+
+class ChatAdminState(StatesGroup):
+    """Online chat admin bo'limi (TZ F-08)."""
+    broadcast = State()
+    edit_datetime = State()
+    edit_link = State()
