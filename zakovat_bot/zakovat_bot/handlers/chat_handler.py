@@ -11,7 +11,6 @@ from django.utils import timezone
 
 from zakovat_bot.buttons.panel import (
     chat_confirm_keyboard,
-    chat_register_keyboard,
     chat_status_keyboard,
 )
 from zakovat_bot.buttons.reply import ask_phone_keyboard
@@ -56,17 +55,18 @@ async def begin(message: Message, state: FSMContext, source=None):
         participant.source = source
         participant.save(update_fields=["source"])
 
+    # Start bosilishi bilan ro'yxat darhol boshlanadi — qo'shimcha tugma yo'q
     name = message.from_user.first_name or "do'st"
+    await state.set_state(ChatRegState.full_name)
     await message.answer(
         f"Assalomu alaykum, {name}! 👋\n\n"
         "Siz O'zbekiston Yoshlar ittifoqi Toshkent shahar hududiy Kengashining "
         "<b>online chat</b> tadbiriga ro'yxatdan o'tish botidasiz.\n\n"
         f"📅 <b>{event_when_text(event)}</b>\n\n"
         "Ma'lumotlaringiz (ism-familiya, telefon) faqat mazkur tadbir doirasida "
-        "ishlatiladi.\n\n"
-        "Ro'yxatdan o'tish 1 daqiqadan kam vaqt oladi. Boshlash uchun quyidagi "
-        "tugmani bosing.",
-        reply_markup=chat_register_keyboard(),
+        "ishlatiladi. Ro'yxatdan o'tish 1 daqiqadan kam vaqt oladi.\n\n"
+        "✍️ <b>Ism va familiyangizni kiriting</b>\n\nNamuna: <i>Aliyev Sardor</i>",
+        reply_markup=ReplyKeyboardRemove(),
     )
 
 

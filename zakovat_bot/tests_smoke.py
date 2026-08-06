@@ -599,18 +599,15 @@ async def main():
         title="SMOKE chat", start_at=djtz.now() + timedelta(minutes=30)
     )
 
-    # T-01: deep link orqali kirish
+    # T-01: deep link orqali kirish — Start bosilishi bilan ro'yxat boshlanadi
     st = FakeState()
     m = FakeMessage(USER1, text="/start chat_09aug")
     await user_handler.start(m, st)
-    check("T-01 deep link → tanishtiruv", "online chat" in m.texts().lower())
+    check("T-01 deep link → tanishtiruv + darhol ism so'raldi",
+          "online chat" in m.texts().lower() and "Ism va familiya" in m.texts())
+    check("T-01 holat darhol o'rnatildi", st._state is not None)
     p = ChatParticipant.objects.filter(event=event, telegram_id=USER1).first()
     check("T-01 manba (source) qayd etildi", p is not None and p.source == "chat_09aug")
-
-    # Ro'yxat tugmasi → ism bosqichi
-    cb = FakeCallback("chatreg_start", USER1)
-    await chat_handler.chatreg_start(cb, st)
-    check("ism so'raldi", "Ism va familiya" in cb.message.texts())
 
     # T-03: noto'g'ri ismlar
     for bad in ("Ali123", "Sardor", "abc", "A" * 61):
@@ -652,12 +649,11 @@ async def main():
     check("T-07 takroriy yozuv yaratilmadi",
           ChatParticipant.objects.filter(event=event, telegram_id=USER1).count() == 1)
 
-    # Dublikat telefon (boshqa foydalanuvchi)
+    # Dublikat telefon (boshqa foydalanuvchi) — oddiy /start ham darhol boshlaydi
     st2 = FakeState()
     m = FakeMessage(NOBODY, text="/start")
     await user_handler.start(m, st2)
-    cb = FakeCallback("chatreg_start", NOBODY)
-    await chat_handler.chatreg_start(cb, st2)
+    check("oddiy /start ham darhol ism so'raydi", "Ism va familiya" in m.texts())
     m = FakeMessage(NOBODY, text="Valiyev Bekzod")
     await chat_handler.chatreg_full_name(m, st2)
     m = FakeMessage(NOBODY, text="+998901234567")
