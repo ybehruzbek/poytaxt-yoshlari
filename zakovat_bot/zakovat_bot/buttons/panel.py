@@ -261,7 +261,7 @@ def chat_status_keyboard():
 def chat_admin_menu_keyboard(role):
     kb = InlineKeyboardBuilder()
     kb.button(text="📊 Statistika", callback_data="chadm_stats")
-    kb.button(text="👥 Ro'yxatdaganlar", callback_data="chadm_list:1")
+    kb.button(text="👥 Ro'yxatdan o'tganlar", callback_data="chadm_list:1")
     kb.button(text="📥 Eksport (.xlsx)", callback_data="chadm_export")
     if role in (AdminRole.SUPERADMIN, AdminRole.OPERATOR):
         kb.button(text="📨 Ishtirokchilarga xabar", callback_data="chadm_bcast")

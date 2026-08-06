@@ -747,7 +747,7 @@ async def main():
 
     cb = FakeCallback("chadm_list:1", OBSV)
     await chat_admin_handler.chat_admin_participants(cb)
-    check("ro'yxatdaganlar bot ichida ko'rinadi",
+    check("ro'yxatdan o'tganlar bot ichida ko'rinadi",
           "Ro'yxatdan o'tganlar" in cb.message.texts()
           and "Aliyev Sardor" in cb.message.texts())
 

@@ -33,12 +33,12 @@ kiritilgan), ikkinchisi **oddiy foydalanuvchi** (hamkasb telefoni ham bo'ladi).
 | № | Qadam | Kutilgan natija |
 |---|---|---|
 | 1 | Oddiy (admin bo'lmagan) akkauntdan `/admin` yozing | Bot **umuman javob bermaydi** (TZ talabi) |
-| 2 | Admin akkauntdan `/admin` → 💬 Online chat | Menyu: sana, havola, ro'yxatdaganlar soni |
+| 2 | Admin akkauntdan `/admin` → 💬 Online chat | Menyu: sana, havola, ro'yxatdan o'tganlar soni |
 | 3 | **📊 Statistika** | Jami / bugungi / bloklaganlar / eslatma foizlari |
 | 4 | **📥 Eksport (.xlsx)** | Excel fayl: №, ism, telefon, ID, username, sana |
 | 5 | **⏰ Eslatmalar holati** | 4 eslatma vaqtlari bilan (🕓 kutilmoqda / ✅ yuborilgan) |
 | 6 | **⚙️ Sozlamalar → 🔗 Chat havolasi** | Chat guruh/kanal havolasini kiriting — «Chat boshlandi» xabarida shu ketadi. **Buni albatta kiriting!** |
-| 7 | **📨 Ishtirokchilarga xabar** → test matn yozing | Ro'yxatdaganlarning hammasiga keladi (o'zingiz ham ro'yxatdan o'tgan bo'lsangiz — sizga ham) |
+| 7 | **📨 Ishtirokchilarga xabar** → test matn yozing | Ro'yxatdan o'tganlarning hammasiga keladi (o'zingiz ham ro'yxatdan o'tgan bo'lsangiz — sizga ham) |
 
 ---
 
