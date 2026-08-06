@@ -261,6 +261,7 @@ def chat_status_keyboard():
 def chat_admin_menu_keyboard(role):
     kb = InlineKeyboardBuilder()
     kb.button(text="📊 Statistika", callback_data="chadm_stats")
+    kb.button(text="👥 Ro'yxatdaganlar", callback_data="chadm_list:1")
     kb.button(text="📥 Eksport (.xlsx)", callback_data="chadm_export")
     if role in (AdminRole.SUPERADMIN, AdminRole.OPERATOR):
         kb.button(text="📨 Ishtirokchilarga xabar", callback_data="chadm_bcast")
@@ -269,6 +270,19 @@ def chat_admin_menu_keyboard(role):
         kb.button(text="⚙️ Sozlamalar", callback_data="chadm_settings")
     kb.button(text="🔙 Orqaga", callback_data="admin_main_menu")
     kb.adjust(1)
+    return kb.as_markup()
+
+
+def chat_participants_keyboard(page, total_pages):
+    kb = InlineKeyboardBuilder()
+    nav = []
+    if page > 1:
+        nav.append(InlineKeyboardButton(text="⬅️ Oldingi", callback_data=f"chadm_list:{page - 1}"))
+    if page < total_pages:
+        nav.append(InlineKeyboardButton(text="Keyingi ➡️", callback_data=f"chadm_list:{page + 1}"))
+    if nav:
+        kb.row(*nav)
+    kb.row(InlineKeyboardButton(text="🔙 Orqaga", callback_data="chadm_menu"))
     return kb.as_markup()
 
 

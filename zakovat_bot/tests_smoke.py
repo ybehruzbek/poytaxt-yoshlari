@@ -745,6 +745,12 @@ async def main():
     await chat_admin_handler.chat_admin_reminders(cb)
     check("eslatmalar holati", "1 soat oldin" in cb.message.texts())
 
+    cb = FakeCallback("chadm_list:1", OBSV)
+    await chat_admin_handler.chat_admin_participants(cb)
+    check("ro'yxatdaganlar bot ichida ko'rinadi",
+          "Ro'yxatdan o'tganlar" in cb.message.texts()
+          and "Aliyev Sardor" in cb.message.texts())
+
     cb = FakeCallback("chadm_export", OPER)
     await chat_admin_handler.chat_admin_export(cb)
     check("ishtirokchilar eksporti", any(k == "answer_document" for k, _ in cb.message.out))

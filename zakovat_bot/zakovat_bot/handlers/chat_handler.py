@@ -202,8 +202,8 @@ async def chatreg_confirm(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer(
         "🎉 <b>Tabriklaymiz! Siz ro'yxatdan o'tdingiz.</b>\n\n"
         f"Ro'yxat raqamingiz: <b>#{participant.id}</b>\n\n"
-        f"{event_when_text(event)} da online chatda ko'rishguncha! "
-        "Eslatmalarni o'tkazib yubormaslik uchun botni blokdan chiqarmang. 🤝",
+        f"{event_when_text(event)} da online chatda ko'rishamiz! "
+        "Eslatmalarni o'tkazib yubormaslik uchun botni bloklab qo'ymang. 🤝",
         reply_markup=ReplyKeyboardRemove(),
     )
 

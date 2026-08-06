@@ -13,6 +13,7 @@ from django.utils import timezone
 from zakovat_bot.buttons.panel import (
     back_to,
     chat_admin_menu_keyboard,
+    chat_participants_keyboard,
     chat_settings_keyboard,
 )
 from zakovat_bot.dispatcher import bot, dp
@@ -120,6 +121,47 @@ async def chat_admin_reminders(callback: CallbackQuery):
             f"   yuborildi: {r['sent']}, xato: {r['failed']}, blok: {r['blocked']}"
         )
     await callback.message.edit_text("\n".join(lines), reply_markup=back_to("chadm_menu"))
+
+
+PARTICIPANTS_PER_PAGE = 15
+
+
+@dp.callback_query(F.data.startswith("chadm_list:"))
+async def chat_admin_participants(callback: CallbackQuery):
+    """Ro'yxatdan o'tganlar — bot ichida sahifalangan ro'yxat."""
+    if not is_admin(callback.from_user.id):
+        return await _deny(callback)
+    await callback.answer()
+    event = active_event()
+    if event is None:
+        await callback.message.edit_text("Faol tadbir yo'q.", reply_markup=back_to("chadm_menu"))
+        return
+
+    qs = ChatParticipant.objects.filter(
+        event=event, status=ParticipantStatus.REGISTERED
+    ).order_by("id")
+    total = qs.count()
+    if total == 0:
+        await callback.message.edit_text(
+            "Hozircha hech kim ro'yxatdan o'tmagan.", reply_markup=back_to("chadm_menu")
+        )
+        return
+
+    page = max(1, int(callback.data.split(":")[1]))
+    total_pages = (total + PARTICIPANTS_PER_PAGE - 1) // PARTICIPANTS_PER_PAGE
+    page = min(page, total_pages)
+    start = (page - 1) * PARTICIPANTS_PER_PAGE
+
+    lines = [f"👥 <b>Ro'yxatdan o'tganlar</b> — jami {total} ta "
+             f"(sahifa {page}/{total_pages})\n"]
+    for p in qs[start:start + PARTICIPANTS_PER_PAGE]:
+        username = f" (@{p.username})" if p.username else ""
+        blocked = " 🚫" if p.is_blocked else ""
+        lines.append(f"<b>#{p.id}</b> {p.full_name} — {p.phone}{username}{blocked}")
+
+    await callback.message.edit_text(
+        "\n".join(lines), reply_markup=chat_participants_keyboard(page, total_pages)
+    )
 
 
 @dp.callback_query(F.data == "chadm_export")
