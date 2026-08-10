@@ -12,8 +12,10 @@ from zakovat_bot.utils import sent_file_to_admins
 
 @dp.message(Command("start"))
 async def start(message: Message,state: FSMContext) -> None:
+    from zakovat_bot.handlers.appeal_handler import begin as appeal_begin
     from zakovat_bot.handlers.chat_handler import begin as chat_begin
     from zakovat_bot.services.chat_event import active_event as chat_active_event
+    from zakovat_bot.buttons.panel import user_menu_keyboard
 
     tg_id = message.from_user.id
     username = message.from_user.username or ""
@@ -22,9 +24,18 @@ async def start(message: Message,state: FSMContext) -> None:
     parts = text.split(maxsplit=1)
     arg = parts[1].strip() if len(parts) > 1 else None
 
-    # Online chat deep link (chat_...) — adminlar ham oqimni sinay olishi uchun
-    # admin tekshiruvidan OLDIN yo'naltiriladi (TZ F-01)
+    # Deep linklar admin tekshiruvidan OLDIN — adminlar ham oqimni sinay olsin
+    if arg and arg.startswith("murojaat"):
+        await appeal_begin(message, state, source=arg)
+        return
+
     if arg and arg.startswith("chat_"):
+        if chat_active_event() is None:
+            await message.answer(
+                "Ushbu tadbirga ro'yxatdan o'tish yopilgan.",
+                reply_markup=user_menu_keyboard(chat_active=False),
+            )
+            return
         await chat_begin(message, state, source=arg)
         return
 
@@ -33,10 +44,18 @@ async def start(message: Message,state: FSMContext) -> None:
         await message.answer(text="Siz admin panelidasiz.",reply_markup=admin_main_keyboard(admin.role))
         return
 
-    # Oddiy /start: faol chat tadbiri bo'lsa — chat taklifi (TZ F-02);
-    # zakovat deep-link (savol uuid) esa pastdagi eski oqimda qoladi
-    if arg is None and chat_active_event() is not None:
-        await chat_begin(message, state)
+    # Oddiy /start: bosh menyu — murojaat va (faol bo'lsa) chat ro'yxati.
+    # Zakovat deep-link (savol uuid) pastdagi eski oqimda qoladi.
+    if arg is None:
+        await state.clear()
+        chat_active = chat_active_event() is not None
+        greet = message.from_user.first_name or "do'st"
+        await message.answer(
+            f"Assalomu alaykum, {greet}! 👋\n\n"
+            "Siz O'zbekiston Yoshlar ittifoqi Toshkent shahar hududiy Kengashining "
+            "rasmiy botidasiz.\n\nQuyidagilardan birini tanlang:",
+            reply_markup=user_menu_keyboard(chat_active=chat_active),
+        )
         return
 
     if not Users.objects.filter(tg_id=message.from_user.id).exists():

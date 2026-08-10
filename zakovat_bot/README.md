@@ -7,6 +7,15 @@ Texnik topshiriq: `TZ_BOT.md`, bosqichlar holati: `PLAN_BOT.md`.
 
 ## Imkoniyatlar
 
+- **Murojaatlar:** `?start=murojaat` havolasi orqali fuqarolar taklif, murojaat,
+  shikoyat, tashabbus yoki savol yo'llaydi (ism/telefon validatsiyasi bilan).
+  Admin panelda: ro'yxat va filtrlar, javob yozish (bot orqali yetkaziladi),
+  holat (yangi / ko'rib chiqilmoqda / javob berildi), Excel eksport, havola
+  generatsiyasi. Yangi murojaat kelganda adminlarga bildirishnoma boradi.
+- **Online chat:** tadbirga ro'yxatga olish va avtomatik eslatmalar
+  (`TZ_CHAT_BOT.md`). Sozlamalardan tadbirni yoqish/o'chirish mumkin —
+  o'chirilganda botda taklif ko'rinmaydi va eslatmalar yuborilmaydi.
+
 - **Kanallar bazasi (TZ 2):** kanal qo'shish/tahrirlash/o'chirish, faol/nofaol holat,
   OTT turi (Davlat/Xorijiy/Nodavlat) va teg bo'yicha filtr, sahifalangan ro'yxat.
   Qo'shishda bot kanalda admin ekanligi avtomatik tekshiriladi.

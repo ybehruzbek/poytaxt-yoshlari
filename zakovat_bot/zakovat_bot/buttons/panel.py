@@ -2,7 +2,7 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from zakovat_bot.models import AdminRole, OttType
+from zakovat_bot.models import AdminRole, AppealStatus, AppealType, OttType
 
 TYPE_LABELS = {
     OttType.DAVLAT: "Davlat",
@@ -286,10 +286,103 @@ def chat_participants_keyboard(page, total_pages):
     return kb.as_markup()
 
 
-def chat_settings_keyboard():
+def chat_settings_keyboard(is_active=True):
     kb = InlineKeyboardBuilder()
     kb.button(text="📅 Sana/vaqtni o'zgartirish", callback_data="chadm_set_dt")
     kb.button(text="🔗 Chat havolasini o'zgartirish", callback_data="chadm_set_link")
+    if is_active:
+        kb.button(text="🔕 Tadbirni o'chirish (botda ko'rinmasin)",
+                  callback_data="chadm_toggle")
+    else:
+        kb.button(text="🔔 Tadbirni yoqish", callback_data="chadm_toggle")
     kb.button(text="🔙 Orqaga", callback_data="chadm_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+# ==================== Murojaatlar ====================
+
+def user_menu_keyboard(chat_active=False):
+    """Botga kirgan oddiy foydalanuvchi menyusi."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📝 Murojaat yo'llash", callback_data="ap_start")
+    if chat_active:
+        kb.button(text="💬 Online chatga ro'yxatdan o'tish", callback_data="chatreg_start")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def appeal_type_keyboard():
+    kb = InlineKeyboardBuilder()
+    icons = {
+        AppealType.MUROJAAT: "📩", AppealType.TAKLIF: "💡",
+        AppealType.SHIKOYAT: "⚠️", AppealType.TASHABBUS: "🚀",
+        AppealType.SAVOL: "❓",
+    }
+    for t in AppealType:
+        kb.button(text=f"{icons[t]} {t.label}", callback_data=f"ap_type:{t.value}")
+    kb.adjust(2, 2, 1)
+    return kb.as_markup()
+
+
+def appeal_reuse_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✅ Ha, shu ma'lumotlar bilan", callback_data="ap_reuse")
+    kb.button(text="✏️ O'zgartiraman", callback_data="ap_fresh")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def appeals_menu_keyboard(role):
+    kb = InlineKeyboardBuilder()
+    kb.button(text="🆕 Yangi murojaatlar", callback_data="apadm_list:1:new")
+    kb.button(text="📋 Barcha murojaatlar", callback_data="apadm_list:1:all")
+    kb.button(text="🔗 Murojaat havolasi", callback_data="apadm_link")
+    kb.button(text="📥 Eksport (.xlsx)", callback_data="apadm_export")
+    kb.button(text="🔙 Orqaga", callback_data="admin_main_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def appeals_list_keyboard(appeals, page, total_pages, status_f):
+    kb = InlineKeyboardBuilder()
+    for a in appeals:
+        mark = {"new": "🆕", "in_review": "🔄", "answered": "✅"}.get(a.status, "")
+        kb.button(text=f"{mark} #{a.id} {a.full_name[:22]}", callback_data=f"apadm_det:{a.id}")
+    kb.adjust(1)
+
+    filters = [("all", "Barchasi"), ("new", "Yangi"),
+               ("in_review", "Ko'rilmoqda"), ("answered", "Javob berilgan")]
+    kb.row(*[
+        InlineKeyboardButton(
+            text=f"{'• ' if status_f == value else ''}{label}",
+            callback_data=f"apadm_list:1:{value}",
+        )
+        for value, label in filters
+    ])
+
+    nav = []
+    if page > 1:
+        nav.append(InlineKeyboardButton(
+            text="⬅️ Oldingi", callback_data=f"apadm_list:{page - 1}:{status_f}"))
+    if page < total_pages:
+        nav.append(InlineKeyboardButton(
+            text="Keyingi ➡️", callback_data=f"apadm_list:{page + 1}:{status_f}"))
+    if nav:
+        kb.row(*nav)
+    kb.row(InlineKeyboardButton(text="🔙 Orqaga", callback_data="apadm_menu"))
+    return kb.as_markup()
+
+
+def appeal_detail_keyboard(appeal):
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✍️ Javob yozish", callback_data=f"apadm_reply:{appeal.id}")
+    if appeal.status == AppealStatus.NEW:
+        kb.button(text="🔄 «Ko'rib chiqilmoqda» deb belgilash",
+                  callback_data=f"apadm_status:{appeal.id}:in_review")
+    if appeal.status != AppealStatus.ANSWERED:
+        kb.button(text="✅ «Javob berildi» deb belgilash",
+                  callback_data=f"apadm_status:{appeal.id}:answered")
+    kb.button(text="🔙 Ro'yxatga", callback_data="apadm_list:1:all")
     kb.adjust(1)
     return kb.as_markup()

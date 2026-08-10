@@ -54,3 +54,16 @@ class ChatAdminState(StatesGroup):
     broadcast = State()
     edit_datetime = State()
     edit_link = State()
+
+
+class AppealState(StatesGroup):
+    """Murojaat yo'llash oqimi."""
+    full_name = State()
+    phone = State()
+    message = State()
+
+
+class AppealAdminState(StatesGroup):
+    """Murojaatga javob yozish (admin)."""
+    reply = State()
+    link_source = State()

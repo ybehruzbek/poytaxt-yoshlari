@@ -4,6 +4,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 def admin_main_keyboard(role=None):
     """Admin panel menyusi. role=None — eski chaqiruvlar uchun operator to'plami."""
     rows = [
+        [InlineKeyboardButton(text="📬 Murojaatlar", callback_data="apadm_menu")],
         [InlineKeyboardButton(text="💬 Online chat", callback_data="chadm_menu")],
         [InlineKeyboardButton(text="📡 Kanallar bazasi", callback_data="ch_menu")],
         [InlineKeyboardButton(text="📤 Kanallarga tarqatish", callback_data="bc_new")],

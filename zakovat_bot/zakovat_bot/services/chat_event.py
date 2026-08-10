@@ -5,7 +5,6 @@ Idempotentlik — ReminderLog'dagi UNIQUE(participant, reminder_type) orqali.
 """
 import asyncio
 import logging
-import re
 from datetime import timedelta
 from io import BytesIO
 
@@ -37,37 +36,12 @@ RETRY_BACKOFF = [timedelta(minutes=1), timedelta(minutes=5), timedelta(minutes=1
 MAX_ATTEMPTS = 3
 
 
-# ==================== Validatsiya (F-03, F-04) ====================
-
-# Lotin, kirill, o'zbek apostrof variantlari, bo'sh joy, defis
-_NAME_RE = re.compile(r"^[A-Za-zА-Яа-яЁёЎўҚқҒғҲҳʼ‘’'` \-]+$")
-
-PHONE_RE = re.compile(
-    r"^(\+?998)?[\s\-]?(9[0-9]|33|55|77|88|20)[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$"
+# Validatsiya (TZ 3.3, 3.4) — umumiy modulda; bu yerdan ham import qilinadi
+from zakovat_bot.services.validators import (  # noqa: E402,F401
+    PHONE_RE,
+    normalize_phone,
+    validate_full_name,
 )
-
-
-def validate_full_name(text):
-    """TZ 3.3: 5-60 belgi, faqat harflar, kamida ikki so'z. Qaytaradi: xato|None."""
-    value = (text or "").strip()
-    if len(value) < 5 or len(value) > 60:
-        return "uzunlik 5–60 belgi oralig'ida bo'lishi kerak"
-    if not _NAME_RE.match(value):
-        return "faqat harflardan foydalaning"
-    if len(value.split()) < 2:
-        return "ism va familiya alohida so'z bo'lishi shart"
-    return None
-
-
-def normalize_phone(text):
-    """TZ 3.4: raqamni +998XXXXXXXXX ko'rinishiga keltiradi; noto'g'ri bo'lsa None."""
-    value = (text or "").strip()
-    if not PHONE_RE.match(value):
-        return None
-    digits = re.sub(r"\D", "", value)
-    if len(digits) == 9:
-        digits = "998" + digits
-    return f"+{digits}"
 
 
 # ==================== Tadbir ====================

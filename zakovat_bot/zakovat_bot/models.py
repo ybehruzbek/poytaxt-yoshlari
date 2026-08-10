@@ -167,6 +167,43 @@ class ChatParticipant(SafeBaseModel):
         return f"#{self.id} {self.full_name or self.telegram_id}"
 
 
+class AppealType(models.TextChoices):
+    """Sayt `Appeal.type` qiymatlari bilan bir xil (keyingi sinxronlash uchun)."""
+    TAKLIF = "Taklif", "Taklif"
+    MUROJAAT = "Murojaat", "Murojaat"
+    SHIKOYAT = "Shikoyat", "Shikoyat"
+    TASHABBUS = "Tashabbus", "Tashabbus"
+    SAVOL = "Savol", "Savol"
+
+
+class AppealStatus(models.TextChoices):
+    NEW = "new", "🆕 Yangi"
+    IN_REVIEW = "in_review", "🔄 Ko'rib chiqilmoqda"
+    ANSWERED = "answered", "✅ Javob berildi"
+
+
+class Appeal(SafeBaseModel):
+    """Bot orqali kelgan murojaat (sayt `Appeal` modeliga mos maydonlar)."""
+    telegram_id = models.BigIntegerField()
+    username = models.CharField(max_length=64, blank=True, null=True)
+    full_name = models.CharField(max_length=60)
+    phone = models.CharField(max_length=20)
+    type = models.CharField(
+        max_length=20, choices=AppealType.choices, default=AppealType.MUROJAAT
+    )
+    message = models.TextField()
+    status = models.CharField(
+        max_length=16, choices=AppealStatus.choices, default=AppealStatus.NEW
+    )
+    response = models.TextField(blank=True, null=True)
+    answered_by = models.BigIntegerField(null=True, blank=True)
+    answered_at = models.DateTimeField(null=True, blank=True)
+    source = models.CharField(max_length=32, blank=True, null=True)
+
+    def __str__(self):
+        return f"#{self.id} {self.type} — {self.full_name}"
+
+
 class ReminderLog(SafeBaseModel):
     """Eslatmalar jurnali (TZ 4.2): idempotentlik kafolati."""
     participant = models.ForeignKey(

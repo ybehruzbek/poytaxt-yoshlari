@@ -22,9 +22,9 @@ from types import SimpleNamespace
 from openpyxl import Workbook
 
 from zakovat_bot.models import (
-    AdminRole, Answers, AuditLog, Broadcast, BroadcastResult, BroadcastStatus,
-    Channel, ChatEvent, ChatParticipant, ParticipantStatus, Questions,
-    ReminderLog, TelegramAdminsID, Users,
+    AdminRole, Answers, Appeal, AppealStatus, AuditLog, Broadcast,
+    BroadcastResult, BroadcastStatus, Channel, ChatEvent, ChatParticipant,
+    ParticipantStatus, Questions, ReminderLog, TelegramAdminsID, Users,
 )
 
 SUPER, OPER, OBSV, NOBODY, USER1 = 990001, 990002, 990003, 990004, 990005
@@ -72,6 +72,9 @@ class FakeBot:
             raise Exception("message to delete not found")
         self.calls.append(("delete", chat_id, message_id))
 
+    async def get_me(self):
+        return SimpleNamespace(username="yoshlaruchuntanlov_bot", id=1)
+
     async def get_file(self, file_id):
         return SimpleNamespace(file_path="fake/path")
 
@@ -99,13 +102,16 @@ class FakeMessage:
         self.audio = self.photo = self.video = self.voice = None
         self.content_type = "document" if document else "text"
         self.out = []
+        self._markups = []
 
     async def answer(self, text=None, reply_markup=None, **kw):
         self.out.append(("answer", text))
+        self._markups.append(reply_markup)
         return FakeMessage(self.from_user.id)
 
     async def edit_text(self, text=None, reply_markup=None, **kw):
         self.out.append(("edit", text))
+        self._markups.append(reply_markup)
 
     async def edit_reply_markup(self, *a, **kw):
         self.out.append(("edit_markup", None))
@@ -123,6 +129,16 @@ class FakeMessage:
 
     def texts(self):
         return " | ".join(str(t) for _, t in self.out if t)
+
+    def buttons(self):
+        """Yuborilgan klaviaturalardagi barcha tugma matnlari."""
+        out = []
+        for markup in self._markups:
+            rows = getattr(markup, "inline_keyboard", None) or getattr(markup, "keyboard", None)
+            for row in rows or []:
+                for btn in row:
+                    out.append(btn.text)
+        return out
 
 
 class FakeCallback:
@@ -184,6 +200,7 @@ def cleanup():
     ReminderLog.all_objects.filter(participant__telegram_id__in=TEST_IDS).delete()
     ChatParticipant.all_objects.filter(telegram_id__in=TEST_IDS).delete()
     ChatEvent.all_objects.filter(title__startswith="SMOKE").delete()
+    Appeal.all_objects.filter(telegram_id__in=TEST_IDS).delete()
 
 
 async def main():
@@ -500,16 +517,25 @@ async def main():
 
     # ---------- 9. Foydalanuvchi oqimi ----------
     print("9) Foydalanuvchi")
-    # Faol chat tadbiri bo'lsa oddiy /start chat oqimiga ketadi — zakovat
-    # oqimini sinash uchun tadbirlarni vaqtincha o'chiramiz
+    # Faol chat tadbiri bo'lsa /start menyusi chiqadi — zakovat oqimini
+    # sinash uchun tadbirlarni vaqtincha o'chiramiz
     saved_event_ids = list(
         ChatEvent.objects.filter(is_active=True).values_list("id", flat=True)
     )
     ChatEvent.objects.filter(id__in=saved_event_ids).update(is_active=False)
+
+    # Oddiy /start — bosh menyu (murojaat tugmasi bilan)
     st = FakeState()
     m = FakeMessage(USER1, text="/start")
     await user_handler.start(m, st)
-    check("yangi foydalanuvchi ro'yxati", Users.objects.filter(tg_id=USER1).exists())
+    check("/start bosh menyu ko'rsatadi",
+          any("Murojaat yo'llash" in b for b in m.buttons()), m.buttons())
+
+    # Zakovat: savol deep-linki orqali birinchi kirish → ro'yxat
+    st = FakeState()
+    m = FakeMessage(USER1, text=f"/start {q.uuid}")
+    await user_handler.start(m, st)
+    check("zakovat: yangi foydalanuvchi ro'yxati", Users.objects.filter(tg_id=USER1).exists())
     m = FakeMessage(USER1, text="Smoke Foydalanuvchi")
     await user_handler.register_full_name(m, st)
     m = FakeMessage(USER1, text="matn")  # kontakt o'rniga matn
@@ -649,11 +675,11 @@ async def main():
     check("T-07 takroriy yozuv yaratilmadi",
           ChatParticipant.objects.filter(event=event, telegram_id=USER1).count() == 1)
 
-    # Dublikat telefon (boshqa foydalanuvchi) — oddiy /start ham darhol boshlaydi
+    # Dublikat telefon (boshqa foydalanuvchi)
     st2 = FakeState()
-    m = FakeMessage(NOBODY, text="/start")
+    m = FakeMessage(NOBODY, text="/start chat_09aug")
     await user_handler.start(m, st2)
-    check("oddiy /start ham darhol ism so'raydi", "Ism va familiya" in m.texts())
+    check("deep link darhol ism so'raydi", "Ism va familiya" in m.texts())
     m = FakeMessage(NOBODY, text="Valiyev Bekzod")
     await chat_handler.chatreg_full_name(m, st2)
     m = FakeMessage(NOBODY, text="+998901234567")
@@ -783,6 +809,164 @@ async def main():
     await chat_admin_handler.chat_admin_set_link_save(m, st)
     event.refresh_from_db()
     check("havola saqlandi", event.chat_link == "https://t.me/+yangi_link")
+
+    # ---------- 15. Chat tadbirini yoqish/o'chirish ----------
+    print("15) Chat yoqish/o'chirish")
+    from zakovat_bot.services.chat_event import active_event as _active_event
+    cb = FakeCallback("chadm_toggle", SUPER)
+    await chat_admin_handler.chat_admin_toggle(cb, FakeState())
+    event.refresh_from_db()
+    check("tadbir o'chirildi", not event.is_active and "o'chirildi" in cb.message.texts())
+
+    # O'chirilganda /start da chat taklifi ko'rinmaydi, murojaat qoladi
+    st = FakeState()
+    m = FakeMessage(USER1, text="/start")
+    await user_handler.start(m, st)
+    btns = m.buttons()
+    check("o'chirilganda chat taklifi yo'q",
+          any("Murojaat" in b for b in btns) and not any("Online chat" in b for b in btns),
+          btns)
+
+    # O'chirilgan tadbir deep-linki ham yopiq
+    st = FakeState()
+    m = FakeMessage(USER1, text="/start chat_09aug")
+    await user_handler.start(m, st)
+    check("o'chirilgan tadbir deep-linki yopiq", "yopilgan" in m.texts())
+
+    # O'chirilgan tadbirga eslatma yuborilmaydi
+    logs_before = ReminderLog.objects.filter(participant__event=event).count()
+    await chat_service.process_due_reminders(fake_bot)
+    check("o'chirilgan tadbirga eslatma yo'q",
+          ReminderLog.objects.filter(participant__event=event).count() == logs_before)
+
+    # Sozlamalar o'chirilgan holatda ham ochiladi
+    cb = FakeCallback("chadm_settings", SUPER)
+    await chat_admin_handler.chat_admin_settings(cb, FakeState())
+    check("o'chirilganda ham sozlamalar ochiladi", "Sozlamalar" in cb.message.texts())
+
+    cb = FakeCallback("chadm_toggle", SUPER)
+    await chat_admin_handler.chat_admin_toggle(cb, FakeState())
+    event.refresh_from_db()
+    check("tadbir qayta yoqildi", event.is_active)
+
+    cb = FakeCallback("chadm_toggle", OPER)
+    await chat_admin_handler.chat_admin_toggle(cb, FakeState())
+    check("operator tadbirni o'chira olmaydi", any("huquq" in a for a in cb.alerts))
+
+    # ---------- 16. Murojaatlar ----------
+    print("16) Murojaatlar")
+    from zakovat_bot.handlers import appeal_admin_handler, appeal_handler
+    from zakovat_bot.services import appeals as appeals_service
+    appeal_handler.bot = fake_bot
+    appeal_admin_handler.bot = fake_bot
+
+    # Deep link orqali murojaat oqimi
+    st = FakeState()
+    m = FakeMessage(NOBODY, text="/start murojaat_kanal")
+    await user_handler.start(m, st)
+    check("murojaat deep link ishladi", "Murojaat yo'llash" in m.texts())
+
+    # NOBODY chat ro'yxatida bor — ism/telefon qayta ishlatilishi taklif qilinadi
+    check("saqlangan ma'lumot taklif qilindi", "davom etamizmi" in m.texts())
+    cb = FakeCallback("ap_reuse", NOBODY)
+    await appeal_handler.appeal_reuse(cb, st)
+    check("tur so'raldi", "turini tanlang" in cb.message.texts())
+
+    cb = FakeCallback("ap_type:Shikoyat", NOBODY)
+    await appeal_handler.appeal_type(cb, st)
+    check("matn so'raldi", "matnini yozing" in cb.message.texts())
+
+    m = FakeMessage(NOBODY, text="qisqa")
+    await appeal_handler.appeal_message(m, st)
+    check("qisqa matn rad etildi", "juda qisqa" in m.texts())
+
+    m = FakeMessage(NOBODY, text="Mahallamizda yoshlar uchun sport maydonchasi yo'q, iltimos ko'rib chiqing.")
+    await appeal_handler.appeal_message(m, st)
+    appeal = Appeal.objects.filter(telegram_id=NOBODY).order_by("-id").first()
+    check("murojaat saqlandi",
+          appeal is not None and appeal.type == "Shikoyat"
+          and appeal.source == "murojaat_kanal" and appeal.status == AppealStatus.NEW)
+    check("foydalanuvchiga tasdiq berildi", "qabul qilindi" in m.texts())
+    check("adminlarga bildirishnoma ketdi",
+          any(k == "send_message" and "Yangi murojaat" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Yangi foydalanuvchi — to'liq oqim (ism + telefon validatsiyasi)
+    st = FakeState()
+    m = FakeMessage(USER1, text="/start murojaat")
+    await user_handler.start(m, st)
+    cb = FakeCallback("ap_fresh", USER1)
+    await appeal_handler.appeal_fresh(cb, st)
+    m = FakeMessage(USER1, text="Ali")
+    await appeal_handler.appeal_full_name(m, st)
+    check("murojaatda noto'g'ri ism rad etildi", "to'g'ri kiriting" in m.texts())
+    m = FakeMessage(USER1, text="Karimov Jasur")
+    await appeal_handler.appeal_full_name(m, st)
+    m = FakeMessage(USER1, text="000")
+    await appeal_handler.appeal_phone(m, st)
+    check("murojaatda noto'g'ri raqam rad etildi", "noto'g'ri kiritildi" in m.texts())
+    m = FakeMessage(USER1, contact=SimpleNamespace(phone_number="998907654321"))
+    await appeal_handler.appeal_phone(m, st)
+    check("kontakt qabul qilindi", "turini tanlang" in m.texts())
+    cb = FakeCallback("ap_type:Taklif", USER1)
+    await appeal_handler.appeal_type(cb, st)
+    m = FakeMessage(USER1, text="Yoshlar uchun IT kurslarini ko'paytirishni taklif qilaman.")
+    await appeal_handler.appeal_message(m, st)
+    a2 = Appeal.objects.filter(telegram_id=USER1).order_by("-id").first()
+    check("ikkinchi murojaat saqlandi",
+          a2 is not None and a2.type == "Taklif" and a2.phone == "+998907654321")
+
+    # Admin bo'limi
+    cb = FakeCallback("apadm_menu", OBSV)
+    await appeal_admin_handler.appeals_menu(cb, FakeState())
+    check("murojaatlar menyusi", "Murojaatlar" in cb.message.texts())
+
+    for data in ("apadm_list:1:all", "apadm_list:1:new", "apadm_list:1:answered"):
+        cb = FakeCallback(data, OBSV)
+        await appeal_admin_handler.appeals_list(cb)
+    check("murojaatlar ro'yxati va filtrlari", True)
+
+    cb = FakeCallback(f"apadm_det:{appeal.id}", OBSV)
+    await appeal_admin_handler.appeal_detail(cb, FakeState())
+    check("murojaat kartochkasi", f"Murojaat #{appeal.id}" in cb.message.texts())
+
+    cb = FakeCallback(f"apadm_status:{appeal.id}:in_review", OPER)
+    await appeal_admin_handler.appeal_set_status(cb)
+    appeal.refresh_from_db()
+    check("holat o'zgartirildi", appeal.status == AppealStatus.IN_REVIEW)
+
+    cb = FakeCallback(f"apadm_status:{appeal.id}:answered", OBSV)
+    await appeal_admin_handler.appeal_set_status(cb)
+    check("kuzatuvchi holatni o'zgartira olmaydi", any("huquq" in a for a in cb.alerts))
+
+    # Javob yozish (NOBODY endi botni bloklamagan — 13-bo'lim sinovidan tozalaymiz)
+    fake_bot.forbidden_ids.discard(NOBODY)
+    st = FakeState()
+    cb = FakeCallback(f"apadm_reply:{appeal.id}", OPER)
+    await appeal_admin_handler.appeal_reply_start(cb, st)
+    m = FakeMessage(OPER, text="Murojaatingiz ko'rib chiqildi, sport maydonchasi rejaga kiritildi.")
+    await appeal_admin_handler.appeal_reply_send(m, st)
+    appeal.refresh_from_db()
+    check("javob saqlandi va holat yangilandi",
+          appeal.status == AppealStatus.ANSWERED and appeal.response
+          and appeal.answered_at is not None)
+    check("javob foydalanuvchiga yuborildi",
+          any(k == "send_message" and c == NOBODY and "murojaatingizga javob" in str(t).lower()
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Havola generatsiyasi
+    cb = FakeCallback("apadm_link", SUPER)
+    await appeal_admin_handler.appeals_link(cb)
+    check("murojaat havolasi generatsiya qilindi",
+          "?start=murojaat" in cb.message.texts()
+          and "yoshlaruchuntanlov_bot" in cb.message.texts())
+
+    cb = FakeCallback("apadm_export", OBSV)
+    await appeal_admin_handler.appeals_export(cb)
+    check("murojaatlar eksporti", any(k == "answer_document" for k, _ in cb.message.out))
+
+    link = await appeals_service.build_appeal_link(fake_bot, source="sayt")
+    check("manbali havola", link.endswith("?start=murojaat_sayt"), link)
 
     # Tadbirlarni asl holiga qaytaramiz
     ChatEvent.objects.filter(id__in=saved_event_ids).update(is_active=True)

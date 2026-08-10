@@ -27,7 +27,6 @@ from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.chat_event import (
     REMINDER_LABELS,
     SEND_PAUSE,
-    active_event,
     event_stats,
     event_when_text,
     export_participants_excel,
@@ -39,14 +38,21 @@ async def _deny(callback):
     await callback.answer("⛔ Bu amal uchun huquqingiz yetarli emas.", show_alert=True)
 
 
+def _latest_event():
+    """Faol yoki o'chirilgan — oxirgi tadbir (admin bo'limida ko'rsatish uchun)."""
+    return ChatEvent.all_objects.order_by("-id").first()
+
+
 def _menu_text(event):
     if event is None:
-        return "💬 <b>Online chat</b>\n\nFaol tadbir yo'q."
+        return "💬 <b>Online chat</b>\n\nTadbir topilmadi."
     link = event.chat_link or "kiritilmagan"
+    holat = "🟢 yoqilgan" if event.is_active else "🔴 o'chirilgan"
     return (
         "💬 <b>Online chat</b>\n\n"
         f"📅 {event_when_text(event)}\n"
         f"🔗 Havola: {link}\n"
+        f"⚙️ Holati: {holat}\n"
         f"👥 Ro'yxatdan o'tganlar: "
         f"{ChatParticipant.objects.filter(event=event, status=ParticipantStatus.REGISTERED).count()} ta"
     )
@@ -59,14 +65,14 @@ async def chat_admin_menu(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
     await state.clear()
     admin = get_admin(callback.from_user.id)
-    event = active_event()
+    # O'chirilgan tadbir ham ko'rinadi (aks holda sozlamalarga kirib bo'lmaydi)
+    event = _latest_event()
     if event is None and admin.role == AdminRole.SUPERADMIN:
-        # Tadbir yo'q bo'lsa superadmin darhol yaratishi uchun
-        ChatEvent.objects.create(
+        # Umuman tadbir yo'q bo'lsa superadmin darhol yaratishi uchun
+        event = ChatEvent.objects.create(
             title="Online chat",
             start_at=timezone.now() + timedelta(days=7),
         )
-        event = active_event()
     await callback.message.edit_text(
         _menu_text(event), reply_markup=chat_admin_menu_keyboard(admin.role)
     )
@@ -77,7 +83,7 @@ async def chat_admin_stats(callback: CallbackQuery):
     if not is_admin(callback.from_user.id):
         return await _deny(callback)
     await callback.answer()
-    event = active_event()
+    event = _latest_event()
     if event is None:
         await callback.message.edit_text("Faol tadbir yo'q.", reply_markup=back_to("chadm_menu"))
         return
@@ -105,7 +111,7 @@ async def chat_admin_reminders(callback: CallbackQuery):
     if not is_admin(callback.from_user.id):
         return await _deny(callback)
     await callback.answer()
-    event = active_event()
+    event = _latest_event()
     if event is None:
         await callback.message.edit_text("Faol tadbir yo'q.", reply_markup=back_to("chadm_menu"))
         return
@@ -132,7 +138,7 @@ async def chat_admin_participants(callback: CallbackQuery):
     if not is_admin(callback.from_user.id):
         return await _deny(callback)
     await callback.answer()
-    event = active_event()
+    event = _latest_event()
     if event is None:
         await callback.message.edit_text("Faol tadbir yo'q.", reply_markup=back_to("chadm_menu"))
         return
@@ -169,7 +175,7 @@ async def chat_admin_export(callback: CallbackQuery):
     if not is_admin(callback.from_user.id):
         return await _deny(callback)
     await callback.answer("Tayyorlanmoqda…")
-    event = active_event()
+    event = _latest_event()
     if event is None:
         return
     data = export_participants_excel(event)
@@ -198,7 +204,7 @@ async def chat_admin_bcast(callback: CallbackQuery, state: FSMContext):
 @dp.message(StateFilter(ChatAdminState.broadcast))
 async def chat_admin_bcast_send(message: Message, state: FSMContext):
     await state.clear()
-    event = active_event()
+    event = _latest_event()
     if event is None:
         await message.answer("Faol tadbir yo'q.")
         return
@@ -249,15 +255,46 @@ async def chat_admin_settings(callback: CallbackQuery, state: FSMContext):
         return await _deny(callback)
     await callback.answer()
     await state.clear()
-    event = active_event()
+    event = _latest_event()
     if event is None:
-        await callback.message.edit_text("Faol tadbir yo'q.", reply_markup=back_to("chadm_menu"))
+        await callback.message.edit_text("Tadbir topilmadi.", reply_markup=back_to("chadm_menu"))
         return
+    holat = "🟢 yoqilgan" if event.is_active else "🔴 o'chirilgan"
     await callback.message.edit_text(
         "⚙️ <b>Sozlamalar</b>\n\n"
         f"📅 Hozirgi vaqt: {event_when_text(event)}\n"
-        f"🔗 Havola: {event.chat_link or 'kiritilmagan'}",
-        reply_markup=chat_settings_keyboard(),
+        f"🔗 Havola: {event.chat_link or 'kiritilmagan'}\n"
+        f"⚙️ Holati: {holat}\n\n"
+        "<i>O'chirilganda botga kirgan foydalanuvchiga chat taklifi "
+        "ko'rsatilmaydi va eslatmalar yuborilmaydi.</i>",
+        reply_markup=chat_settings_keyboard(event.is_active),
+    )
+
+
+@dp.callback_query(F.data == "chadm_toggle")
+async def chat_admin_toggle(callback: CallbackQuery, state: FSMContext):
+    """Tadbirni yoqish/o'chirish — /start da chat taklifi ko'rinishini boshqaradi."""
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    event = _latest_event()
+    if event is None:
+        await callback.message.edit_text("Tadbir topilmadi.", reply_markup=back_to("chadm_menu"))
+        return
+    event.is_active = not event.is_active
+    event.save(update_fields=["is_active"])
+    log_action(
+        callback.from_user.id, "chat_tadbir_holati",
+        f"#{event.id} {'yoqildi' if event.is_active else 'ochirildi'}",
+    )
+    holat = "🟢 yoqildi" if event.is_active else "🔴 o'chirildi"
+    note = ("Endi botga kirganlarga chat taklifi ko'rsatiladi."
+            if event.is_active else
+            "Endi botga kirganlarga chat taklifi ko'rsatilmaydi va "
+            "eslatmalar yuborilmaydi.")
+    await callback.message.edit_text(
+        f"⚙️ Tadbir {holat}.\n\n{note}",
+        reply_markup=chat_settings_keyboard(event.is_active),
     )
 
 
@@ -291,7 +328,7 @@ async def chat_admin_set_dt_save(message: Message, state: FSMContext):
         )
         return
     await state.clear()
-    event = active_event()
+    event = _latest_event()
     if event:
         event.start_at = when
         event.save(update_fields=["start_at"])
@@ -325,7 +362,7 @@ async def chat_admin_set_link_save(message: Message, state: FSMContext):
         )
         return
     await state.clear()
-    event = active_event()
+    event = _latest_event()
     if event:
         event.chat_link = value
         event.save(update_fields=["chat_link"])
