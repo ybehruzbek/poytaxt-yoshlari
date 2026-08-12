@@ -278,7 +278,29 @@ def chat_admin_menu_keyboard(role):
     kb.button(text="⏰ Eslatmalar holati", callback_data="chadm_reminders")
     if role == AdminRole.SUPERADMIN:
         kb.button(text="⚙️ Sozlamalar", callback_data="chadm_settings")
+        kb.button(text="📅 Barcha tadbirlar", callback_data="chadm_events")
     kb.button(text="🔙 Orqaga", callback_data="admin_main_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def events_list_keyboard(events):
+    kb = InlineKeyboardBuilder()
+    for e in events:
+        mark = "🟢" if e.is_active else "🔴"
+        kb.button(text=f"{mark} {e.title[:35]}", callback_data=f"chadm_ev:{e.id}")
+    kb.button(text="🔙 Orqaga", callback_data="chadm_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def event_card_keyboard(event):
+    kb = InlineKeyboardBuilder()
+    if event.is_active:
+        kb.button(text="🔕 O'chirish", callback_data=f"chadm_evtgl:{event.id}")
+    else:
+        kb.button(text="🔔 Yoqish", callback_data=f"chadm_evtgl:{event.id}")
+    kb.button(text="🔙 Ro'yxatga", callback_data="chadm_events")
     kb.adjust(1)
     return kb.as_markup()
 
@@ -299,7 +321,8 @@ def chat_participants_keyboard(page, total_pages):
 def chat_settings_keyboard(is_active=True):
     kb = InlineKeyboardBuilder()
     kb.button(text="📅 Sana/vaqtni o'zgartirish", callback_data="chadm_set_dt")
-    kb.button(text="🔗 Chat havolasini o'zgartirish", callback_data="chadm_set_link")
+    kb.button(text="📍 Manzilni o'zgartirish", callback_data="chadm_set_loc")
+    kb.button(text="🔗 Havolani o'zgartirish", callback_data="chadm_set_link")
     if is_active:
         kb.button(text="🔕 Tadbirni o'chirish (botda ko'rinmasin)",
                   callback_data="chadm_toggle")

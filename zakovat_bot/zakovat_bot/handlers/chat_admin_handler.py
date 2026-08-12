@@ -15,6 +15,8 @@ from zakovat_bot.buttons.panel import (
     chat_admin_menu_keyboard,
     chat_participants_keyboard,
     chat_settings_keyboard,
+    event_card_keyboard,
+    events_list_keyboard,
 )
 from zakovat_bot.dispatcher import bot, dp
 from zakovat_bot.models import (
@@ -98,23 +100,42 @@ async def cmd_send(message: Message, state: FSMContext):
 
 
 def _latest_event():
-    """Faol yoki o'chirilgan — oxirgi tadbir (admin bo'limida ko'rsatish uchun)."""
-    return ChatEvent.all_objects.order_by("-id").first()
+    """Panel boshqaradigan tadbir: faol tadbir (eng yaqini), bo'lmasa oxirgisi."""
+    return (
+        ChatEvent.objects.filter(is_active=True).order_by("start_at").first()
+        or ChatEvent.all_objects.order_by("-id").first()
+    )
+
+
+def _event_card(event):
+    """Tadbir kartochkasi: nomi, sana, manzil/havola, holati, ro'yxat soni."""
+    holat = "🟢 yoqilgan" if event.is_active else "🔴 o'chirilgan"
+    registered = ChatParticipant.objects.filter(
+        event=event, status=ParticipantStatus.REGISTERED
+    ).count()
+    lines = [
+        f"📅 <b>{event.title}</b>\n",
+        f"🕒 {event_when_text(event)}",
+    ]
+    if event.location:
+        lines.append(f"📍 Manzil: {event.location}")
+    if event.chat_link:
+        lines.append(f"🔗 Havola: {event.chat_link}")
+    if event.subscription_channel:
+        lines.append(f"📢 Majburiy obuna: {event.subscription_channel}")
+    if event.slug:
+        lines.append(f"🔗 Ro'yxat havolasi: <code>?start={event.slug}</code>")
+    lines += [
+        f"⚙️ Holati: {holat}",
+        f"👥 Ro'yxatdan o'tganlar: <b>{registered}</b> ta",
+    ]
+    return "\n".join(lines)
 
 
 def _menu_text(event):
     if event is None:
-        return "💬 <b>Online chat</b>\n\nTadbir topilmadi."
-    link = event.chat_link or "kiritilmagan"
-    holat = "🟢 yoqilgan" if event.is_active else "🔴 o'chirilgan"
-    return (
-        "💬 <b>Online chat</b>\n\n"
-        f"📅 {event_when_text(event)}\n"
-        f"🔗 Havola: {link}\n"
-        f"⚙️ Holati: {holat}\n"
-        f"👥 Ro'yxatdan o'tganlar: "
-        f"{ChatParticipant.objects.filter(event=event, status=ParticipantStatus.REGISTERED).count()} ta"
-    )
+        return "📅 <b>Tadbirlar</b>\n\nTadbir topilmadi."
+    return _event_card(event)
 
 
 @dp.callback_query(F.data == "chadm_menu")
@@ -354,6 +375,83 @@ async def chat_admin_toggle(callback: CallbackQuery, state: FSMContext):
         f"⚙️ Tadbir {holat}.\n\n{note}",
         reply_markup=chat_settings_keyboard(event.is_active),
     )
+
+
+@dp.callback_query(F.data == "chadm_events")
+async def chat_admin_events(callback: CallbackQuery, state: FSMContext):
+    """Barcha tadbirlar ro'yxati — o'tganlari ham ko'rinadi."""
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    await state.clear()
+    events = list(ChatEvent.all_objects.order_by("-start_at"))
+    if not events:
+        await callback.message.edit_text("Tadbir yo'q.", reply_markup=back_to("chadm_menu"))
+        return
+    await callback.message.edit_text(
+        f"📅 <b>Barcha tadbirlar</b> ({len(events)} ta)\n\n"
+        "🟢 — faol (botda ro'yxat ochiq), 🔴 — o'chirilgan",
+        reply_markup=events_list_keyboard(events),
+    )
+
+
+@dp.callback_query(F.data.startswith("chadm_ev:"))
+async def chat_admin_event_card(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    event = ChatEvent.all_objects.filter(id=int(callback.data.split(":")[1])).first()
+    if not event:
+        await callback.message.edit_text("Tadbir topilmadi.", reply_markup=back_to("chadm_events"))
+        return
+    await callback.message.edit_text(
+        _event_card(event), reply_markup=event_card_keyboard(event)
+    )
+
+
+@dp.callback_query(F.data.startswith("chadm_evtgl:"))
+async def chat_admin_event_toggle(callback: CallbackQuery):
+    """Ro'yxatdagi aniq tadbirni yoqish/o'chirish."""
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    event = ChatEvent.all_objects.filter(id=int(callback.data.split(":")[1])).first()
+    if not event:
+        return
+    event.is_active = not event.is_active
+    event.save(update_fields=["is_active"])
+    log_action(
+        callback.from_user.id, "chat_tadbir_holati",
+        f"#{event.id} {'yoqildi' if event.is_active else 'ochirildi'}",
+    )
+    await callback.message.edit_text(
+        _event_card(event), reply_markup=event_card_keyboard(event)
+    )
+
+
+@dp.callback_query(F.data == "chadm_set_loc")
+async def chat_admin_set_loc(callback: CallbackQuery, state: FSMContext):
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    await state.set_state(ChatAdminState.edit_location)
+    await callback.message.edit_text(
+        "📍 Tadbir manzilini yozing (o'chirish uchun «-» yuboring).\n\n"
+        "Manzil tasdiqlash va yakuniy xabarlarda ko'rsatiladi.",
+        reply_markup=back_to("chadm_settings", text="❌ Bekor qilish"),
+    )
+
+
+@dp.message(StateFilter(ChatAdminState.edit_location))
+async def chat_admin_set_loc_save(message: Message, state: FSMContext):
+    await state.clear()
+    event = _latest_event()
+    value = (message.text or "").strip()
+    if event:
+        event.location = None if value == "-" else (value or None)
+        event.save(update_fields=["location"])
+        log_action(message.from_user.id, "chat_manzil_ozgartirildi", value[:100])
+    await message.answer("✅ Manzil saqlandi.", reply_markup=back_to("chadm_menu"))
 
 
 @dp.callback_query(F.data == "chadm_set_dt")

@@ -50,10 +50,11 @@ class ChatRegState(StatesGroup):
 
 
 class ChatAdminState(StatesGroup):
-    """Online chat admin bo'limi (TZ F-08)."""
+    """Tadbirlar admin bo'limi (TZ F-08)."""
     broadcast = State()
     edit_datetime = State()
     edit_link = State()
+    edit_location = State()
 
 
 class AppealState(StatesGroup):

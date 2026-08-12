@@ -820,7 +820,48 @@ async def _run_all(saved_event_ids):
     print("14) Chat admin")
     cb = FakeCallback("chadm_menu", SUPER)
     await chat_admin_handler.chat_admin_menu(cb, FakeState())
-    check("chat admin menyusi", "Online chat" in cb.message.texts())
+    check("tadbir admin menyusi (kartochka)",
+          "SMOKE seminar" in cb.message.texts()
+          and "Ro'yxatdan o'tganlar" in cb.message.texts())
+    check("kartochkada manzil va ro'yxat havolasi",
+          "Smoke ko'chasi" in cb.message.texts()
+          and "?start=smoke_event" in cb.message.texts())
+
+    # Barcha tadbirlar ro'yxati va aniq tadbirni yoqish/o'chirish
+    cb = FakeCallback("chadm_events", SUPER)
+    await chat_admin_handler.chat_admin_events(cb, FakeState())
+    check("barcha tadbirlar ro'yxati", "Barcha tadbirlar" in cb.message.texts())
+    check("ro'yxatda tadbir tugmalari bor",
+          any("SMOKE seminar" in b for b in cb.message.buttons()), cb.message.buttons())
+
+    cb = FakeCallback(f"chadm_ev:{event.id}", SUPER)
+    await chat_admin_handler.chat_admin_event_card(cb)
+    check("tadbir kartochkasi ochildi", "SMOKE seminar" in cb.message.texts())
+
+    cb = FakeCallback(f"chadm_evtgl:{event.id}", SUPER)
+    await chat_admin_handler.chat_admin_event_toggle(cb)
+    event.refresh_from_db()
+    check("ro'yxatdan tadbir o'chirildi", not event.is_active)
+    cb = FakeCallback(f"chadm_evtgl:{event.id}", SUPER)
+    await chat_admin_handler.chat_admin_event_toggle(cb)
+    event.refresh_from_db()
+    check("ro'yxatdan tadbir yoqildi", event.is_active)
+
+    cb = FakeCallback(f"chadm_ev:{event.id}", OPER)
+    await chat_admin_handler.chat_admin_event_card(cb)
+    check("operator tadbirlar ro'yxatiga kirolmaydi",
+          any("huquq" in a for a in cb.alerts))
+
+    # Manzilni tahrirlash
+    st = FakeState()
+    cb = FakeCallback("chadm_set_loc", SUPER)
+    await chat_admin_handler.chat_admin_set_loc(cb, st)
+    m = FakeMessage(SUPER, text="Toshkent, Yangi manzil, 5-uy")
+    await chat_admin_handler.chat_admin_set_loc_save(m, st)
+    event.refresh_from_db()
+    check("manzil tahrirlandi", event.location == "Toshkent, Yangi manzil, 5-uy")
+    event.location = "Toshkent, Smoke ko'chasi, 1-uy"
+    event.save(update_fields=["location"])
 
     cb = FakeCallback("chadm_stats", OBSV)
     await chat_admin_handler.chat_admin_stats(cb)
