@@ -1,6 +1,7 @@
-"""Online chat: validatsiya, eslatmalar va hisobotlar (TZ online chat bot).
+"""Tadbirga ro'yxat: validatsiya, obuna tekshiruvi, eslatmalar va hisobotlar.
 
-Eslatmalar jadvali (F-06): 1 kun / 10 soat / 1 soat oldin + boshlanish xabari.
+Eslatma vaqtlari har tadbirda o'zi belgilanadi (`ChatEvent.reminder_hours`,
+masalan [24, 10, 1] yoki [5]) + ixtiyoriy «boshlandi» xabari.
 Idempotentlik — ReminderLog'dagi UNIQUE(participant, reminder_type) orqali.
 """
 import asyncio
@@ -23,17 +24,35 @@ logger = logging.getLogger(__name__)
 
 SEND_PAUSE = 0.05  # ~20 xabar/soniya — TZ 25-30 chegarasidan past
 
-# (tur, boshlanishdan necha oldin, kechikish oynasi)
-# Oyna: bot shu muddatdan ko'p to'xtab qolgan bo'lsa, eskirgan eslatma yuborilmaydi
-REMINDERS = [
-    ("1day", timedelta(hours=24), timedelta(hours=3)),
-    ("10hours", timedelta(hours=10), timedelta(hours=2)),
-    ("1hour", timedelta(hours=1), timedelta(minutes=45)),
-    ("start", timedelta(0), timedelta(hours=2)),
-]
+DEFAULT_REMINDER_HOURS = [24, 10, 1]
 
 RETRY_BACKOFF = [timedelta(minutes=1), timedelta(minutes=5), timedelta(minutes=15)]
 MAX_ATTEMPTS = 3
+
+
+def event_reminders(event):
+    """Tadbir eslatmalari: [(tur, boshlanishdan oldin, kechikish oynasi), ...].
+
+    Oyna — bot shu muddatdan ko'p to'xtab qolgan bo'lsa, eskirgan eslatma
+    yuborilmaydi (odamga «tadbirga 1 soat qoldi» deb kechikib bormasin).
+    """
+    out = []
+    hours = event.reminder_hours or DEFAULT_REMINDER_HOURS
+    for h in sorted({int(x) for x in hours if int(x) > 0}, reverse=True):
+        grace = timedelta(hours=min(3.0, max(0.75, h / 4)))
+        out.append((f"h{h}", timedelta(hours=h), grace))
+    if event.send_start_message:
+        out.append(("start", timedelta(0), timedelta(hours=2)))
+    return out
+
+
+def reminder_label(rtype):
+    if rtype == "start":
+        return "Tadbir boshlandi"
+    hours = int(rtype[1:])
+    if hours % 24 == 0:
+        return f"{hours // 24} kun oldin"
+    return f"{hours} soat oldin"
 
 
 # Validatsiya (TZ 3.3, 3.4) — umumiy modulda; bu yerdan ham import qilinadi
@@ -50,6 +69,13 @@ def active_event():
     return ChatEvent.objects.filter(is_active=True).order_by("start_at").first()
 
 
+def event_by_slug(slug):
+    """Deep link parametri bo'yicha faol tadbir."""
+    if not slug:
+        return None
+    return ChatEvent.objects.filter(is_active=True, slug=slug).first()
+
+
 def event_when_text(event):
     local = timezone.localtime(event.start_at)
     weekdays = ["dushanba", "seshanba", "chorshanba", "payshanba",
@@ -64,39 +90,77 @@ def first_name(participant):
     return (participant.full_name or "do'st").split()[0]
 
 
+def event_info_text(event, with_link=False):
+    """Tadbir ma'lumotlari bloki: nomi, sana, vaqt, manzil/havola, izoh."""
+    local = timezone.localtime(event.start_at)
+    lines = [
+        f"📌 Tadbir: <b>{event.title}</b>",
+        f"📅 Sana: {event_when_text(event)}",
+        f"🕑 Vaqt: {local:%H:%M}",
+    ]
+    if event.location:
+        lines.append(f"📍 Manzil: {event.location}")
+    if with_link and (event.chat_link or "").strip():
+        lines.append(f"🔗 Havola: {event.chat_link}")
+    if event.arrival_note:
+        lines.append(f"\n⏰ {event.arrival_note}")
+    return "\n".join(lines)
+
+
+# ==================== Majburiy obuna (TZ 3) ====================
+
+SUBSCRIBED_STATUSES = {"member", "administrator", "creator"}
+
+
+async def check_subscription(bot, event, tg_id):
+    """Foydalanuvchi tadbir kanaliga a'zomi?
+
+    Qaytaradi: (ok, xato_sababi). Kanal belgilanmagan bo'lsa — har doim ok.
+    Bot kanalda admin bo'lmasa tekshirib bo'lmaydi — bunda ro'yxatga to'sqinlik
+    qilmaymiz (ok=True), lekin log'ga yozamiz.
+    """
+    channel = (event.subscription_channel or "").strip()
+    if not channel:
+        return True, ""
+    try:
+        member = await bot.get_chat_member(chat_id=channel, user_id=tg_id)
+    except Exception as e:
+        logger.warning("Obunani tekshirib bo'lmadi (%s): %s", channel, e)
+        return True, "tekshirib bo'lmadi"
+    return getattr(member, "status", None) in SUBSCRIBED_STATUSES, ""
+
+
 # ==================== Eslatma matnlari (F-06) ====================
 
 def build_reminder_text(rtype, participant, event):
+    """Eslatma matni. None qaytsa — bu eslatma yuborilmaydi."""
     when = timezone.localtime(event.start_at)
-    if rtype == "1day":
-        return (
-            "⏰ <b>Eslatma: 1 kun qoldi</b>\n\n"
-            f"Hurmatli {first_name(participant)}, ertaga — "
-            f"<b>{event_when_text(event)}</b> da online chat bo'lib o'tadi.\n\n"
-            "Savollaringizni oldindan tayyorlab qo'ying! 📝"
-        )
-    if rtype == "10hours":
-        return (
-            f"⏰ <b>Eslatma: bugun soat {when:%H:%M}</b>\n\n"
-            f"Hurmatli {first_name(participant)}, bugun "
-            f"<b>soat {when:%H:%M}</b> da online chat boshlanadi.\n\n"
-            "Vaqtida qatnashishni unutmang! 🕗"
-        )
-    if rtype == "1hour":
-        return (
-            "🔔 <b>Chatga 1 soat qoldi!</b>\n\n"
-            f"Hurmatli {first_name(participant)}, online chat "
-            f"<b>soat {when:%H:%M}</b> da boshlanadi.\n\n"
-            "Tayyor bo'ling — bir necha daqiqadan so'ng kirish havolasi yuboriladi. 🚀"
-        )
+    name = first_name(participant)
+
     if rtype == "start":
         if not (event.chat_link or "").strip():
-            return None  # havola kiritilmagan — yuborilmaydi
+            return None  # havola kiritilmagan — yuborishdan ma'no yo'q
         return (
-            "🟢 <b>Online chat boshlandi!</b>\n\n"
+            f"🟢 <b>{event.title} boshlandi!</b>\n\n"
             f"Quyidagi havola orqali qo'shiling:\n{event.chat_link}"
         )
-    return None
+
+    hours = int(rtype[1:])
+    if hours >= 24:
+        days = hours // 24
+        head = f"⏰ <b>Eslatma: {days} kun qoldi</b>"
+        intro = (f"Hurmatli {name}, {'ertaga' if days == 1 else f'{days} kundan keyin'} — "
+                 f"<b>{event_when_text(event)}</b> da tadbir bo'lib o'tadi.")
+    elif hours == 1:
+        head = "🔔 <b>Tadbirga 1 soat qoldi!</b>"
+        intro = f"Hurmatli {name}, tadbir <b>soat {when:%H:%M}</b> da boshlanadi."
+    else:
+        head = f"⏰ <b>Eslatma: bugun soat {when:%H:%M}</b>"
+        intro = (f"Hurmatli {name}, bugun <b>soat {when:%H:%M}</b> da tadbir "
+                 "boshlanadi.")
+
+    parts = [head, "", intro, "", event_info_text(event, with_link=bool(hours <= 1))]
+    return "\n".join(parts)
 
 
 # ==================== Eslatma yuboruvchi ====================
@@ -108,12 +172,14 @@ async def process_due_reminders(bot):
     vaqtidan keyin ro'yxatdan o'tganlarga yuborilmaydi (T-10); 403 → is_blocked
     (T-09); xatoda 3 martagacha qayta urinish (1/5/15 daqiqa).
     """
-    event = active_event()
-    if event is None:
-        return
+    for event in ChatEvent.objects.filter(is_active=True):
+        await _process_event_reminders(bot, event)
+
+
+async def _process_event_reminders(bot, event):
     now = timezone.now()
 
-    for rtype, offset, grace in REMINDERS:
+    for rtype, offset, grace in event_reminders(event):
         due = event.start_at - offset
         if now < due or now > due + grace:
             continue
@@ -177,25 +243,19 @@ def event_stats(event):
         "cancelled": qs.filter(status=ParticipantStatus.CANCELLED).count(),
         "reminders": [],
     }
-    for rtype, _offset, _grace in REMINDERS:
+    for rtype, offset, _grace in event_reminders(event):
         logs = ReminderLog.objects.filter(
             participant__event=event, reminder_type=rtype
         )
         stats["reminders"].append({
             "type": rtype,
+            "label": reminder_label(rtype),
+            "due": event.start_at - offset,
             "sent": logs.filter(status="sent").count(),
             "failed": logs.filter(status="failed").count(),
             "blocked": logs.filter(status="blocked").count(),
         })
     return stats
-
-
-REMINDER_LABELS = {
-    "1day": "1 kun oldin",
-    "10hours": "10 soat oldin",
-    "1hour": "1 soat oldin",
-    "start": "Chat boshlandi",
-}
 
 
 def export_participants_excel(event):

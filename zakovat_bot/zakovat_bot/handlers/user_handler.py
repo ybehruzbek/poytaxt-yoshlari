@@ -1,7 +1,7 @@
 from aiogram import F
 from aiogram.types import CallbackQuery, Message,ReplyKeyboardRemove
 from aiogram.filters import Command , StateFilter
-from zakovat_bot.models import  TelegramAdminsID,Users,Questions,Answers
+from zakovat_bot.models import  ChatEvent,TelegramAdminsID,Users,Questions,Answers
 from zakovat_bot.dispatcher import dp
 from zakovat_bot.buttons.inline import *
 from zakovat_bot.buttons.reply import *
@@ -24,37 +24,47 @@ async def start(message: Message,state: FSMContext) -> None:
     parts = text.split(maxsplit=1)
     arg = parts[1].strip() if len(parts) > 1 else None
 
+    from zakovat_bot.services.chat_event import event_by_slug
+
     # Deep linklar admin tekshiruvidan OLDIN — adminlar ham oqimni sinay olsin
     if arg and arg.startswith("murojaat"):
         await appeal_begin(message, state, source=arg)
         return
 
-    if arg and arg.startswith("chat_"):
-        if chat_active_event() is None:
+    # Tadbir deep-linki: `?start=<tadbir_slug>` (masalan brm_seminar, chat_09aug)
+    if arg:
+        event = event_by_slug(arg)
+        if event is not None:
+            await state.clear()
+            await chat_begin(message, state, source=arg, event=event)
+            return
+        # Slug mavjud, lekin tadbir yopilgan bo'lsa — tushunarli javob
+        if ChatEvent.all_objects.filter(slug=arg).exists():
             await message.answer(
                 "Ushbu tadbirga ro'yxatdan o'tish yopilgan.",
                 reply_markup=user_menu_keyboard(chat_active=False),
             )
             return
-        await chat_begin(message, state, source=arg)
-        return
 
     admin = TelegramAdminsID.objects.filter(tg_id=tg_id).first()
     if admin:
         await message.answer(text="Siz admin panelidasiz.",reply_markup=admin_main_keyboard(admin.role))
         return
 
-    # Oddiy /start: bosh menyu — murojaat va (faol bo'lsa) chat ro'yxati.
-    # Zakovat deep-link (savol uuid) pastdagi eski oqimda qoladi.
+    # Oddiy /start: faol tadbir bo'lsa — ro'yxat darhol boshlanadi (TZ 2.4),
+    # aks holda bosh menyu. Zakovat deep-linki (savol uuid) eski oqimda qoladi.
     if arg is None:
         await state.clear()
-        chat_active = chat_active_event() is not None
+        event = chat_active_event()
+        if event is not None:
+            await chat_begin(message, state, event=event)
+            return
         greet = message.from_user.first_name or "do'st"
         await message.answer(
             f"Assalomu alaykum, {greet}! 👋\n\n"
             "Siz O'zbekiston Yoshlar ittifoqi Toshkent shahar hududiy Kengashining "
             "rasmiy botidasiz.\n\nQuyidagilardan birini tanlang:",
-            reply_markup=user_menu_keyboard(chat_active=chat_active),
+            reply_markup=user_menu_keyboard(chat_active=False),
         )
         return
 

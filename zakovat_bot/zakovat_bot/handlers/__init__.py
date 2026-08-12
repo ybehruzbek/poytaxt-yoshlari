@@ -7,3 +7,5 @@ from zakovat_bot.handlers.chat_handler import *
 from zakovat_bot.handlers.chat_admin_handler import *
 from zakovat_bot.handlers.appeal_handler import *
 from zakovat_bot.handlers.appeal_admin_handler import *
+# Catch-all — eng oxirida bo'lishi SHART
+from zakovat_bot.handlers.fallback_handler import *

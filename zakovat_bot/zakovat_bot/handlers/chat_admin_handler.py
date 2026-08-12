@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from aiogram import F
 from aiogram.types import BufferedInputFile, CallbackQuery, Message
-from aiogram.filters import StateFilter
+from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.exceptions import TelegramForbiddenError, TelegramRetryAfter
 from django.utils import timezone
@@ -25,7 +25,6 @@ from zakovat_bot.models import (
 )
 from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.chat_event import (
-    REMINDER_LABELS,
     SEND_PAUSE,
     event_stats,
     event_when_text,
@@ -36,6 +35,66 @@ from zakovat_bot.state import ChatAdminState
 
 async def _deny(callback):
     await callback.answer("⛔ Bu amal uchun huquqingiz yetarli emas.", show_alert=True)
+
+
+# ==================== Admin buyruqlari (TZ 7) ====================
+
+@dp.message(Command("stat"))
+async def cmd_stat(message: Message):
+    """Ro'yxatdan o'tganlar statistikasi. Admin bo'lmaganga javob bermaydi."""
+    if not is_admin(message.from_user.id):
+        return
+    event = _latest_event()
+    if event is None:
+        await message.answer("Faol tadbir yo'q.")
+        return
+    s = event_stats(event)
+    pending = ChatParticipant.objects.filter(
+        event=event, status=ParticipantStatus.PENDING
+    ).count()
+    lines = [
+        f"📊 <b>{event.title}</b>",
+        f"{event_when_text(event)}\n",
+        f"✅ Tasdiqlangan: <b>{s['registered']}</b>",
+        f"⏳ Tugallanmagan: {pending}",
+        f"🆕 Bugun ro'yxatdan o'tgan: {s['today']}",
+        f"🚫 Botni bloklaganlar: {s['blocked']}",
+        f"❌ Bekor qilganlar: {s['cancelled']}",
+    ]
+    if s["reminders"]:
+        lines.append("\n⏰ <b>Eslatmalar:</b>")
+        for r in s["reminders"]:
+            lines.append(f"• {r['label']}: yuborildi {r['sent']}, xato {r['failed']}")
+    await message.answer("\n".join(lines))
+
+
+@dp.message(Command("export"))
+async def cmd_export(message: Message):
+    """Ishtirokchilar ro'yxatini .xlsx qilib yuboradi."""
+    if not is_admin(message.from_user.id):
+        return
+    event = _latest_event()
+    if event is None:
+        await message.answer("Faol tadbir yo'q.")
+        return
+    data = export_participants_excel(event)
+    log_action(message.from_user.id, "chat_eksport", f"tadbir #{event.id} (/export)")
+    await message.answer_document(
+        document=BufferedInputFile(data, filename="ishtirokchilar.xlsx"),
+        caption=f"📥 Ishtirokchilar ro'yxati — {event.title}",
+    )
+
+
+@dp.message(Command("send"))
+async def cmd_send(message: Message, state: FSMContext):
+    """Barcha tasdiqlangan ishtirokchilarga xabar yuborish."""
+    if not has_role(message.from_user.id, AdminRole.OPERATOR):
+        return
+    await state.set_state(ChatAdminState.broadcast)
+    await message.answer(
+        "📨 Ishtirokchilarga yuboriladigan xabarni yozing (matn yoki rasm).\n"
+        "Bekor qilish uchun /start bosing.",
+    )
 
 
 def _latest_event():
@@ -100,7 +159,7 @@ async def chat_admin_stats(callback: CallbackQuery):
         total = s["registered"] or 1
         pct = round(100 * r["sent"] / total)
         lines.append(
-            f"• {REMINDER_LABELS[r['type']]}: yuborildi {r['sent']} ({pct}%), "
+            f"• {r['label']}: yuborildi {r['sent']} ({pct}%), "
             f"xato {r['failed']}, blok {r['blocked']}"
         )
     await callback.message.edit_text("\n".join(lines), reply_markup=back_to("chadm_menu"))
@@ -118,12 +177,11 @@ async def chat_admin_reminders(callback: CallbackQuery):
     s = event_stats(event)
     now = timezone.now()
     lines = ["⏰ <b>Eslatmalar holati</b>\n"]
-    from zakovat_bot.services.chat_event import REMINDERS
-    for (rtype, offset, _grace), r in zip(REMINDERS, s["reminders"]):
-        due = timezone.localtime(event.start_at - offset)
-        mark = "✅" if now >= event.start_at - offset else "🕓"
+    for r in s["reminders"]:
+        due = timezone.localtime(r["due"])
+        mark = "✅" if now >= r["due"] else "🕓"
         lines.append(
-            f"{mark} <b>{REMINDER_LABELS[rtype]}</b> — {due:%d.%m %H:%M}\n"
+            f"{mark} <b>{r['label']}</b> — {due:%d.%m %H:%M}\n"
             f"   yuborildi: {r['sent']}, xato: {r['failed']}, blok: {r['blocked']}"
         )
     await callback.message.edit_text("\n".join(lines), reply_markup=back_to("chadm_menu"))

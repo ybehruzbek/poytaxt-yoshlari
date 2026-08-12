@@ -242,10 +242,20 @@ def chat_register_keyboard():
     return kb.as_markup()
 
 
+def subscribe_keyboard(channel_username):
+    """Majburiy obuna: kanalga o'tish + qayta tekshirish tugmalari."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📢 Kanalga a'zo bo'lish",
+              url=f"https://t.me/{channel_username}")
+    kb.button(text="✅ A'zo bo'ldim", callback_data="chatsub_check")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
 def chat_confirm_keyboard():
     kb = InlineKeyboardBuilder()
-    kb.button(text="🙋 Ishtirok etaman", callback_data="chatreg_confirm")
-    kb.button(text="✏️ Ma'lumotni o'zgartirish", callback_data="chatreg_start")
+    kb.button(text="✅ Ishtirok etaman", callback_data="chatreg_confirm")
+    kb.button(text="✏️ Ma'lumotlarni o'zgartirish", callback_data="chatreg_start")
     kb.adjust(1)
     return kb.as_markup()
 

@@ -6,7 +6,8 @@ from aiogram.types import BufferedInputFile
 from zakovat_bot.dispatcher import bot
 async def set_bot_commands(bot):
     commands = [
-        BotCommand(command="start", description="🚀 Botni ishga tushirish"),
+        BotCommand(command="start", description="🚀 Ro'yxatdan o'tish / bosh menyu"),
+        BotCommand(command="help", description="ℹ️ Yordam"),
     ]
     await bot.set_my_commands(commands)
 

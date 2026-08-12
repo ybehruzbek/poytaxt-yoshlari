@@ -12,9 +12,12 @@ Texnik topshiriq: `TZ_BOT.md`, bosqichlar holati: `PLAN_BOT.md`.
   Admin panelda: ro'yxat va filtrlar, javob yozish (bot orqali yetkaziladi),
   holat (yangi / ko'rib chiqilmoqda / javob berildi), Excel eksport, havola
   generatsiyasi. Yangi murojaat kelganda adminlarga bildirishnoma boradi.
-- **Online chat:** tadbirga ro'yxatga olish va avtomatik eslatmalar
-  (`TZ_CHAT_BOT.md`). Sozlamalardan tadbirni yoqish/o'chirish mumkin —
-  o'chirilganda botda taklif ko'rinmaydi va eslatmalar yuborilmaydi.
+- **Tadbirlarga ro'yxat:** har tadbirning o'z deep-linki (`?start=<slug>`),
+  majburiy obuna tekshiruvi, F.I.Sh./telefon validatsiyasi, tasdiqlash ekrani
+  (sana, vaqt, manzil), avtomatik eslatmalar — vaqtlari tadbirda belgilanadi
+  (`reminder_hours`, masalan [24,10,1] yoki [5]). Sozlamalardan tadbirni
+  yoqish/o'chirish mumkin. TZ: `TZ_CHAT_BOT.md`, `TZ_SEMINAR_BOT.md`.
+- **Admin buyruqlari:** `/admin` (panel), `/stat`, `/export`, `/send`, `/help`.
 
 - **Kanallar bazasi (TZ 2):** kanal qo'shish/tahrirlash/o'chirish, faol/nofaol holat,
   OTT turi (Davlat/Xorijiy/Nodavlat) va teg bo'yicha filtr, sahifalangan ro'yxat.

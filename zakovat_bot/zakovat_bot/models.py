@@ -127,10 +127,25 @@ class AuditLog(SafeBaseModel):
 # ==================== Online chat (TZ: online chat bot) ====================
 
 class ChatEvent(SafeBaseModel):
-    """Online chat tadbiri (TZ 4.3). is_active — joriy tadbir belgisi."""
+    """Tadbir (online chat yoki oflayn seminar). is_active — joriy tadbir belgisi.
+
+    Bir bot orqali bir nechta tadbirga ro'yxat olish uchun har tadbirning
+    `slug`i bo'ladi: `?start=<slug>` deep linki aynan shu tadbirga bog'laydi.
+    """
     title = models.CharField(max_length=255, default="Online chat")
+    slug = models.CharField(max_length=32, unique=True, null=True, blank=True)
     start_at = models.DateTimeField()
+    # Onlayn tadbir uchun — kirish havolasi; oflayn uchun — manzil
     chat_link = models.TextField(blank=True, null=True)
+    location = models.TextField(blank=True, null=True)
+    # Ro'yxatdan o'tishdan oldin majburiy obuna (@kanal yoki -100... ID)
+    subscription_channel = models.CharField(max_length=64, blank=True, null=True)
+    # Yakuniy xabar va eslatmalarga qo'shiladigan izoh (masalan «20-25 daqiqa oldin keling»)
+    arrival_note = models.TextField(blank=True, null=True)
+    # Boshlanishidan necha soat oldin eslatma yuborilsin: [24, 10, 1]
+    reminder_hours = models.JSONField(default=list, blank=True)
+    # Tadbir boshlanganda xabar yuborilsinmi (onlayn chat uchun — havola bilan)
+    send_start_message = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.title} — {self.start_at:%d.%m.%Y %H:%M}"
