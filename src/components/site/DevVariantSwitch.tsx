@@ -30,7 +30,18 @@ const write = (key: string, v: V) => {
   listeners.forEach((l) => l())
 }
 
-export function DevVariantSwitch({ name, label, titles }: { name: string; label: string; titles: [string, string, string] }) {
+export function DevVariantSwitch({
+  name,
+  label,
+  titles,
+  labels,
+}: {
+  name: string
+  label: string
+  titles: [string, string, string]
+  /** tugmalardagi qisqa yozuv (sukut: A, B, C) */
+  labels?: [string, string, string]
+}) {
   const key = `v-${name}`
   const v = useSyncExternalStore(subscribe, () => read(key), () => 'a' as V)
 
@@ -54,7 +65,7 @@ export function DevVariantSwitch({ name, label, titles }: { name: string; label:
       {label}
       {(['a', 'b', 'c'] as V[]).map((x, i) => (
         <button key={x} type="button" title={titles[i]} className={v === x ? 'on' : undefined} onClick={() => write(key, x)}>
-          {x.toUpperCase()}
+          {labels?.[i] ?? x.toUpperCase()}
         </button>
       ))}
     </div>

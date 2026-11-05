@@ -61,7 +61,7 @@ export default async function LocaleLayout(props: {
         {locale === 'uz' && <AlphabetSwitch />}
         {/* VAQTINCHA (faqat dev): footer variantlarini ko'rib chiqish */}
         {process.env.NODE_ENV !== 'production' && (
-          <DevVariantSwitch name="ft" label="Footer" titles={['Hozirgi', 'Sayt xaritasi', 'Aloqa markazda']} />
+          <DevVariantSwitch name="ft" label="Footer" titles={['B1 · Xarita+', 'B2 · Shior bilan', 'B3 · Kartali']} labels={['B1', 'B2', 'B3']} />
         )}
       </body>
     </html>

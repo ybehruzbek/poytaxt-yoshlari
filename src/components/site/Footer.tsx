@@ -48,75 +48,79 @@ const CONTACTS = [
   { k: 'Ish vaqti', v: 'Dushanba–Juma, 09:00–18:00', href: undefined },
 ]
 
-/** A · Hozirgi: katta jumla, havolalar qatori, aloqa va tarmoqlar */
-function FooterA({ locale }: { locale: Locale }) {
+const Arrow = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+)
+
+/** Menyuning barcha bo'limlari ustunlarda (majburiy tuzilma: src/config/nav.ts) */
+function SiteMap({ locale, className = 'fb-cols' }: { locale: Locale; className?: string }) {
+  const L = (h: string) => `/${locale}${h}`
   return (
-    <footer className="ftv ftv-a">
-      <div className="wrap">
-        <p className="foot-big">
-          Yoshlar uchun, yoshlar bilan — <span>poytaxt miqyosida.</span>
-        </p>
-        <div className="foot-row">
-          <div className="foot-links">
-            <Link href={`/${locale}/biz-haqimizda/hududiy-kengash`}>Biz haqimizda</Link>
-            <Link href={`/${locale}/faoliyat/loyihalar`}>Imkoniyatlar</Link>
-          </div>
-          <Link href={`/${locale}`} className="logo">
-            <img src="/img/logo-toshkent.png" alt="O‘zbekiston Yoshlar Ittifoqi — Toshkent shahar hududiy kengashi" />
-          </Link>
-          <div className="foot-links">
-            <Link href={`/${locale}/faoliyat/tadbirlar`}>Tadbirlar</Link>
-            <Link href={`/${locale}/yangiliklar`}>Yangiliklar</Link>
-            <Link href={`/${locale}/boglanish/aloqa`}>Aloqa</Link>
-          </div>
+    <nav className={className} aria-label="Sayt xaritasi">
+      {NAV.filter((g) => g.items).map((g) => (
+        <div key={g.key}>
+          <b>{g.label}</b>
+          <ul>
+            {g.items!.map((it) => (
+              <li key={it.href}>
+                <Link href={L(it.href)}>{it.label}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
-        <div className="foot-bot">
-          {/* Manzil va telefon NAMUNA: rasmiy ma'lumot bilan almashtiring */}
-          <address>
-            Toshkent shahri
-            <br />
-            Telefon: <a href="tel:+998000000000">+998 (__) ___-__-__</a>
-          </address>
-          <Socials />
-        </div>
-        <p className="copy">© 2026 O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashi</p>
-      </div>
-    </footer>
+      ))}
+    </nav>
   )
 }
 
-/** B · Sayt xaritasi: to'q fon, menyuning barcha bo'limlari ustunlarda */
-function FooterB({ locale }: { locale: Locale }) {
+function Contacts({ className }: { className: string }) {
+  return (
+    <div className={className}>
+      {CONTACTS.map((c) => (
+        <div key={c.k}>
+          <small>{c.k}</small>
+          {c.href ? <a href={c.href}>{c.v}</a> : <b>{c.v}</b>}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const COPY = '© 2026 O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashi'
+const NOTE = 'Materiallardan foydalanilganda manba ko‘rsatilishi shart.'
+
+/** B1 · Sayt xaritasi+: tepada aloqa qatori, o'rtada bo'limlar, pastda huquqiy qator */
+function FooterB1({ locale }: { locale: Locale }) {
   const L = (h: string) => `/${locale}${h}`
   return (
-    <footer className="ftv ftv-b fb">
+    <footer className="ftv ftv-a fb fb1">
       <div className="wrap">
-        <div className="fb-top">
-          <div className="fb-brand">
-            <Link href={L('')} className="fb-logo">
-              <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
-            </Link>
+        <div className="fb1-strip">
+          <Link href={L('')} className="fb-logo">
+            <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
+          </Link>
+          <Contacts className="fb1-contacts" />
+        </div>
+        <div className="fb1-mid">
+          <SiteMap locale={locale} />
+          <div className="fb1-side">
             <p>O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashining rasmiy veb-sayti.</p>
             <Socials />
           </div>
-          <nav className="fb-cols" aria-label="Sayt xaritasi">
-            {NAV.filter((g) => g.items).map((g) => (
-              <div key={g.key}>
-                <b>{g.label}</b>
-                <ul>
-                  {g.items!.map((it) => (
-                    <li key={it.href}>
-                      <Link href={L(it.href)}>{it.label}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </nav>
         </div>
         <div className="fb-bot">
-          <span>© 2026 O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashi</span>
-          <span>Materiallardan foydalanilganda manba ko‘rsatilishi shart.</span>
+          <span>{COPY}</span>
+          <span>{NOTE}</span>
           <a href="#" className="fb-up">
             Yuqoriga ↑
           </a>
@@ -126,41 +130,89 @@ function FooterB({ locale }: { locale: Locale }) {
   )
 }
 
-/** C · Aloqa markazda: aloqa kartalari, qisqa menyu, tarmoqlar */
-function FooterC({ locale }: { locale: Locale }) {
+/** B2 · Shior bilan: katta shior va murojaat tugmasi, bo'limlar, pastda katta "YOSHKENT" yozuvi */
+function FooterB2({ locale }: { locale: Locale }) {
   const L = (h: string) => `/${locale}${h}`
   return (
-    <footer className="ftv ftv-c fc">
+    <footer className="ftv ftv-b fb fb2">
       <div className="wrap">
-        <div className="fc-head">
-          <Link href={L('')} className="fc-logo">
-            <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
-          </Link>
-          <p className="fc-slogan">
+        <div className="fb2-hero">
+          <p className="fb2-slogan">
             Yoshlar uchun, yoshlar bilan — <span>poytaxt miqyosida.</span>
           </p>
+          <div className="fb2-cta">
+            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
+              Murojaat yuborish{' '}
+              <span className="ic">
+                <Arrow />
+              </span>
+            </Link>
+            <Socials />
+          </div>
         </div>
-        <div className="fc-contacts">
-          {CONTACTS.map((c) => (
-            <div key={c.k} className="fc-card">
-              <small>{c.k}</small>
-              {c.href ? <a href={c.href}>{c.v}</a> : <b>{c.v}</b>}
-            </div>
+        <div className="fb2-mid">
+          <div className="fb2-brand">
+            <Link href={L('')} className="fb-logo">
+              <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
+            </Link>
+            <Contacts className="fb2-contacts" />
+          </div>
+          <SiteMap locale={locale} />
+        </div>
+        <div className="fb-bot">
+          <span>{COPY}</span>
+          <span>{NOTE}</span>
+          <a href="#" className="fb-up">
+            Yuqoriga ↑
+          </a>
+        </div>
+      </div>
+      <div className="fb2-word" aria-hidden="true">
+        YOSHKENT
+      </div>
+    </footer>
+  )
+}
+
+/** B3 · Kartali: chapda oq kartada logo va aloqa, o'ngda bo'limlar, pastda tezkor havolalar; dekor shakllar */
+function FooterB3({ locale }: { locale: Locale }) {
+  const L = (h: string) => `/${locale}${h}`
+  const quick = [
+    { t: 'Elektron murojaat', h: '/boglanish/murojaat' },
+    { t: 'Qabul kunlari', h: '/biz-haqimizda/qabul-kunlari' },
+    { t: 'Tadbirlar va kalendar', h: '/faoliyat/tadbirlar' },
+    { t: 'Yangiliklar', h: '/yangiliklar' },
+  ]
+  return (
+    <footer className="ftv ftv-c fb fb3">
+      <span className="fb3-shape s1" aria-hidden="true" />
+      <span className="fb3-shape s2" aria-hidden="true" />
+      <span className="fb3-shape s3" aria-hidden="true" />
+      <div className="wrap">
+        <div className="fb3-grid">
+          <div className="fb3-card">
+            <Link href={L('')} className="fb3-logo">
+              <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
+            </Link>
+            <p>O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashining rasmiy veb-sayti.</p>
+            <Contacts className="fb3-contacts" />
+            <Socials />
+          </div>
+          <SiteMap locale={locale} className="fb-cols fb3-cols" />
+        </div>
+        <div className="fb3-quick">
+          {quick.map((q) => (
+            <Link key={q.h} href={L(q.h)}>
+              {q.t} <Arrow />
+            </Link>
           ))}
         </div>
-        <nav className="fc-nav" aria-label="Pastki menyu">
-          {NAV.map((g) => {
-            const href = g.href ?? g.items![0].href
-            return (
-              <Link key={g.key} href={L(href)}>
-                {g.label}
-              </Link>
-            )
-          })}
-        </nav>
-        <div className="fc-bot">
-          <span>© 2026 O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashi</span>
-          <Socials />
+        <div className="fb-bot">
+          <span>{COPY}</span>
+          <span>{NOTE}</span>
+          <a href="#" className="fb-up">
+            Yuqoriga ↑
+          </a>
         </div>
       </div>
     </footer>
@@ -168,17 +220,17 @@ function FooterC({ locale }: { locale: Locale }) {
 }
 
 /**
- * Sayt pastki qismi.
- * VAQTINCHA: 3 ta ko'rinish (<html data-ft="a|b|c">) faqat ishlab chiqish rejimida chiqadi;
- * production'da faqat A ko'rsatiladi. Variant tanlangandan keyin qolganlari o'chiriladi.
+ * Sayt pastki qismi — "sayt xaritasi" uslubi.
+ * VAQTINCHA: B1/B2/B3 ko'rinishlari (<html data-ft="a|b|c">) faqat ishlab chiqish rejimida chiqadi;
+ * production'da faqat B1 ko'rsatiladi. Variant tanlangandan keyin qolganlari o'chiriladi.
  */
 export function Footer({ locale }: { locale: Locale }) {
   const preview = process.env.NODE_ENV !== 'production'
   return (
     <>
-      <FooterA locale={locale} />
-      {preview && <FooterB locale={locale} />}
-      {preview && <FooterC locale={locale} />}
+      <FooterB1 locale={locale} />
+      {preview && <FooterB2 locale={locale} />}
+      {preview && <FooterB3 locale={locale} />}
     </>
   )
 }

@@ -1,6 +1,6 @@
 /* =====================================================================
-   FOOTER — 3 ta ko'rinish: <html data-ft="a|b|c"> (VAQTINCHA, faqat dev rejimida)
-   A — hozirgi · B — sayt xaritasi (to'q fon) · C — aloqa markazda
+   FOOTER — "sayt xaritasi" uslubi, 3 ta ko'rinish: <html data-ft="a|b|c"> (VAQTINCHA, faqat dev)
+   B1 (a) — xarita+ · B2 (b) — shior bilan · B3 (c) — kartali
    ===================================================================== */
 .ftv {
   display: none !important;
@@ -12,44 +12,37 @@
   display: block !important;
 }
 
-/* =====================  B · Sayt xaritasi  ===================== */
+/* =====================  Umumiy (B1/B2/B3)  ===================== */
 .fb {
+  position: relative;
+  overflow: hidden;
   margin-top: 40px;
   background: var(--navy);
   color: #e9d7d2;
   border-radius: 56px 56px 0 0;
-  padding: 72px 0 32px;
+  padding: 64px 0 32px;
 }
-.fb-top {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 56px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-}
-.fb-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.fb .wrap {
+  position: relative;
+  z-index: 1;
 }
 .fb-logo {
-  align-self: flex-start;
+  display: inline-block;
+  flex-shrink: 0;
   background: #fff;
   border-radius: 24px;
   padding: 12px 16px;
 }
 .fb-logo img {
-  height: 64px;
-}
-.fb-brand p {
-  font-size: 15px;
-  line-height: 1.6;
+  height: 60px;
 }
 .fb .socials {
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 .fb .socials a {
-  height: 48px;
+  height: 46px;
   padding: 0 16px;
   font-size: 14px;
   color: #fff;
@@ -67,14 +60,14 @@
 .fb-cols {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 28px;
+  gap: 36px 28px;
 }
 .fb-cols b {
   display: block;
   font: 800 16px/1.2 var(--f-head);
   color: #fff;
   padding-bottom: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   border-bottom: 2px solid var(--yellow);
 }
 .fb-cols ul {
@@ -98,6 +91,7 @@
   justify-content: space-between;
   gap: 12px 24px;
   padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   font-size: 13.5px;
   color: #c9b4ae;
 }
@@ -107,123 +101,301 @@
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-weight: 600;
+  transition: background 0.2s, color 0.2s;
 }
 .fb-up:hover {
   background: var(--yellow);
   color: var(--navy);
 }
+/* aloqa bandlari: kichik sarlavha + qiymat */
+:is(.fb1-contacts, .fb2-contacts) small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: #c9b4ae;
+}
+:is(.fb1-contacts, .fb2-contacts) :is(b, a) {
+  font: 700 15.5px/1.4 var(--f-head);
+  color: #fff;
+}
+:is(.fb1-contacts, .fb2-contacts) a:hover {
+  color: var(--yellow);
+}
 
-/* =====================  C · Aloqa markazda  ===================== */
-.fc {
-  padding: 72px 0 40px;
-  background: var(--soft);
-  margin-top: 40px;
-}
-.fc-head {
+/* =====================  B1 · Xarita+  ===================== */
+.fb1-strip {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 18px;
-  text-align: center;
-  margin-bottom: 40px;
+  gap: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
-.fc-logo img {
-  height: 76px;
-}
-.fc-slogan {
-  font: 700 clamp(24px, 2.4vw, 34px) / 1.3 var(--f-head);
-  color: var(--navy);
-}
-.fc-slogan span {
-  color: var(--blue);
-}
-.fc-contacts {
+.fb1-contacts {
+  flex: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
 }
-.fc-card {
+.fb1-contacts > div {
+  padding-left: 18px;
+  border-left: 2px solid var(--yellow);
+}
+.fb1-mid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 56px;
+  padding: 48px 0;
+}
+.fb1-side {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 22px 24px;
-  border-radius: 28px;
-  background: #fff;
+  gap: 20px;
+  padding: 28px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.06);
 }
-.fc-card small {
-  font-size: 13px;
+.fb1-side p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* =====================  B2 · Shior bilan  ===================== */
+.fb2 {
+  padding-bottom: 0;
+}
+.fb2-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.fb2-slogan {
+  max-width: 760px;
+  font: 800 clamp(32px, 3.6vw, 56px) / 1.12 var(--f-head);
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+.fb2-slogan span {
+  color: var(--yellow);
+}
+.fb2-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+.fb2-cta .socials {
+  justify-content: flex-end;
+  max-width: 440px;
+}
+.fb2-mid {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 56px;
+  padding: 48px 0;
+}
+.fb2-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+}
+.fb2-contacts {
+  display: grid;
+  gap: 16px;
+}
+.fb2 .fb-bot {
+  padding-bottom: 8px;
+}
+.fb2-word {
+  font: 900 clamp(72px, 17.5vw, 270px) / 0.8 var(--f-head);
+  letter-spacing: -0.03em;
+  text-align: center;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.07);
+  margin-top: 16px;
+  margin-bottom: -0.1em;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* =====================  B3 · Kartali  ===================== */
+.fb3-shape {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.fb3-shape.s1 {
+  width: 280px;
+  height: 280px;
+  top: -190px;
+  right: -110px;
+  background: var(--yellow);
+}
+.fb3-shape.s2 {
+  width: 180px;
+  height: 180px;
+  top: 38%;
+  left: -130px;
+  background: var(--lime);
+}
+.fb3-shape.s3 {
+  width: 96px;
+  height: 96px;
+  bottom: -30px;
+  right: 9%;
+  border: 16px solid var(--sky);
+  opacity: 0.4;
+}
+.fb3-grid {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+.fb3-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  border-radius: 40px;
+  background: #fff;
+  color: var(--grey);
+}
+.fb3-logo img {
+  height: 64px;
+}
+.fb3-card p {
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--muted);
 }
-.fc-card b,
-.fc-card a {
-  font: 700 17px/1.35 var(--f-head);
+.fb3-contacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.fb3-contacts small {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.fb3-contacts :is(b, a) {
+  font: 700 14.5px/1.4 var(--f-head);
   color: var(--navy);
 }
-.fc-card a:hover {
+.fb3-contacts a:hover {
   color: var(--blue);
 }
-.fc-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 36px 0;
-}
-.fc-nav a {
-  padding: 10px 18px;
-  border-radius: 99px;
-  font: 600 15px/1 var(--f-body);
+.fb3-card .socials a {
   color: var(--navy);
-  transition: background 0.2s;
+  border-color: var(--silver);
 }
-.fc-nav a:hover {
-  background: #fff;
+.fb3-cols {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-top: 8px;
 }
-.fc-bot {
+.fb3-quick {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 48px 0 32px;
+}
+.fb3-quick a {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding-top: 28px;
-  border-top: 1px solid #e3d6cc;
-  font-size: 13.5px;
-  color: var(--muted);
+  gap: 12px;
+  padding: 22px 24px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.08);
+  font: 700 16px/1.3 var(--f-head);
+  color: #fff;
+  transition: background 0.25s, color 0.25s;
 }
-.fc .socials a {
-  height: 48px;
-  padding: 0 16px;
-  font-size: 14px;
+.fb3-quick svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform 0.25s;
 }
-.fc .socials svg {
-  width: 18px;
-  height: 18px;
+.fb3-quick a:hover {
+  background: var(--yellow);
+  color: var(--navy);
+}
+.fb3-quick a:hover svg {
+  transform: translateX(4px);
 }
 
 /* =====================  Moslashuv  ===================== */
-@media (max-width: 1100px) {
-  .fb-top {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 1200px) {
   .fb-cols {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .fc-contacts {
+  .fb1-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .fb1-contacts {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+  .fb1-mid,
+  .fb2-mid,
+  .fb3-grid {
+    grid-template-columns: 1fr;
+  }
+  .fb2-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .fb2-cta {
+    align-items: flex-start;
+  }
+  .fb2-cta .socials {
+    justify-content: flex-start;
+  }
+  .fb3-card {
+    max-width: 560px;
+  }
+  .fb3-quick {
     grid-template-columns: 1fr 1fr;
   }
 }
 @media (max-width: 640px) {
   .fb {
     border-radius: 36px 36px 0 0;
-    padding-top: 48px;
+    padding-top: 44px;
   }
-  .fb-cols {
+  .fb-cols,
+  .fb1-contacts {
     grid-template-columns: 1fr 1fr;
   }
-  .fc-contacts {
+  .fb3-contacts,
+  .fb3-quick {
     grid-template-columns: 1fr;
   }
-  .fc-bot,
+  .fb3-card {
+    padding: 24px;
+    border-radius: 32px;
+  }
+  .fb3-shape.s1 {
+    width: 180px;
+    height: 180px;
+    top: -110px;
+    right: -80px;
+  }
+  .fb3-shape.s3 {
+    display: none;
+  }
   .fb-bot {
     flex-direction: column;
     align-items: flex-start;
