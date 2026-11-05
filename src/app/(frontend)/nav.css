@@ -1,0 +1,239 @@
+/* =====================================================================
+   NAVBAR menyusi: majburiy tuzilma (src/config/nav.ts), tanlangan ko'rinish — "A · Klassik ro'yxat".
+   Ochiladigan ro'yxat bo'lim tagida; 3-daraja ("Yoshlar yetakchilari") o'ngga ochiladi.
+   site.css dagi eski .nav qoidalari bu yerda ishlatilmaydi (.mnav).
+   ===================================================================== */
+
+/* ---------- Kapsula ichidagi asosiy qator ---------- */
+.mnav > ul {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+.mnav > ul > li {
+  position: relative;
+}
+.mnav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 44px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 99px;
+  background: none;
+  font: 700 15px/1 var(--f-body);
+  color: var(--navy);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.mnav-link:hover,
+.mnav li.is-open > .mnav-link {
+  background: rgba(83, 40, 34, 0.07);
+}
+.mnav-link.active {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(83, 40, 34, 0.08);
+}
+.mnav-link .chev {
+  transition: transform 0.2s;
+}
+.mnav li.is-open > .mnav-link .chev {
+  transform: rotate(180deg);
+}
+
+/* ---------- Umumiy panel (shisha) ---------- */
+.dd,
+.mdrawer {
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 24px 60px rgba(83, 40, 34, 0.16);
+}
+.dd[hidden],
+.mdrawer[hidden],
+.m-sub[hidden] {
+  display: none !important;
+}
+.dd a,
+.mdrawer a {
+  color: var(--navy);
+}
+
+/* =====================  Ochiladigan ro'yxat  ===================== */
+.dd {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 0;
+  z-index: 30;
+  min-width: 300px;
+  padding: 10px;
+  border-radius: 24px;
+}
+/* hover "ko'prigi": panel va tugma orasidagi bo'shliqda menyu yopilmasin */
+.dd::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20px;
+  height: 20px;
+}
+.dd-list {
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+.dd-list > li {
+  position: relative;
+}
+.dd-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font: 600 15px/1.35 var(--f-body);
+  transition: background 0.15s;
+}
+.dd-list a:hover,
+.dd-list a:focus-visible {
+  background: var(--soft);
+}
+.dd-list a.cur {
+  background: var(--soft);
+  box-shadow: inset 3px 0 0 var(--yellow);
+}
+.dd-list .t {
+  flex: 1;
+}
+.dd-list .chev-right {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+/* ichki (3-daraja) menyu: o'ngga ochiladi */
+.dd-sub {
+  list-style: none;
+  position: absolute;
+  left: calc(100% + 8px);
+  top: -10px;
+  min-width: 260px;
+  padding: 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 20px 50px rgba(83, 40, 34, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.15s,
+    transform 0.15s,
+    visibility 0.15s;
+}
+.dd-sub::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+}
+.has-sub:hover > .dd-sub,
+.has-sub:focus-within > .dd-sub {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* =====================  Mobil menyu (≤1180px)  ===================== */
+.mdrawer {
+  display: none;
+}
+@media (max-width: 1180px) {
+  .mnav,
+  .header .head-cta {
+    display: none !important;
+  }
+  .burger {
+    display: flex;
+  }
+  .mdrawer:not([hidden]) {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 30;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    padding: 12px;
+    border-radius: 28px;
+  }
+  .mdrawer > ul {
+    list-style: none;
+    display: grid;
+    gap: 2px;
+  }
+  .m-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px;
+    border: none;
+    border-radius: 18px;
+    background: none;
+    font: 700 17px/1.2 var(--f-head);
+    color: var(--navy);
+    cursor: pointer;
+    text-align: left;
+  }
+  .m-top.active {
+    background: var(--soft);
+  }
+  .m-top[aria-expanded='true'] {
+    background: var(--soft);
+  }
+  .m-top[aria-expanded='true'] .chev {
+    transform: rotate(180deg);
+  }
+  .m-sub {
+    list-style: none;
+    display: grid;
+    gap: 2px;
+    padding: 6px 8px 10px 16px;
+  }
+  .m-sub a {
+    display: block;
+    padding: 12px 12px;
+    border-radius: 14px;
+    font: 500 15.5px/1.4 var(--f-body);
+  }
+  .m-sub a:hover {
+    background: var(--soft);
+  }
+  .m-sub ul {
+    list-style: none;
+    padding-left: 14px;
+    border-left: 2px solid var(--line);
+    margin-left: 12px;
+  }
+  .m-sub ul a {
+    font-size: 14.5px;
+    color: var(--muted);
+  }
+  .m-join {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 1320px) and (min-width: 1181px) {
+  .mnav-link {
+    padding: 0 10px;
+    font-size: 14px;
+  }
+}
