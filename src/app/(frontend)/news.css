@@ -373,3 +373,13 @@
     animation: none !important;
   }
 }
+
+/* navbatdagi karta to'lishi (o'chib ketgan kalit kadrlar qaytarildi) */
+@keyframes pg-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+/* hover/fokusda to'lish pauza bo'ladi va shu joydan davom etadi */
+.pg-next.paused {
+  animation-play-state: paused;
+}

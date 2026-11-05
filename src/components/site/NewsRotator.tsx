@@ -85,12 +85,10 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
     [ensure, items.length],
   )
 
-  const auto = playing && !hover && !reduced && items.length > 1
-  useEffect(() => {
-    if (!auto) return
-    const t = window.setTimeout(() => go(1), INTERVAL)
-    return () => window.clearTimeout(t)
-  }, [auto, idx, go])
+  // Avtomatik almashish navbatdagi kartaning "to'lish" animatsiyasiga bog'langan:
+  // animatsiya tugashi (onAnimationEnd) — almashish signali. Hover/fokusda animatsiya pauza bo'ladi
+  // va qolgan joyidan davom etadi (taymer qaytadan boshlanmaydi).
+  const run = playing && !reduced && items.length > 1
 
   if (!items.length) return null
   const n = items.length
@@ -151,7 +149,14 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
           <li key={`${s.id}-${idx + 1 + k}`} style={{ animationDelay: `${k * 60}ms` }} className={k === 0 ? 'is-next' : undefined}>
             <article>
               {/* navbatdagi karta almashishgacha sariq bilan to'lib boradi */}
-              {k === 0 && auto && <span className="pg-next" style={{ animationDuration: `${INTERVAL}ms` }} aria-hidden="true" />}
+              {k === 0 && run && (
+                <span
+                  className={`pg-next${hover ? ' paused' : ''}`}
+                  style={{ animationDuration: `${INTERVAL}ms` }}
+                  onAnimationEnd={() => go(1)}
+                  aria-hidden="true"
+                />
+              )}
               {k === 0 && <span className="pg-next-label">Keyingi</span>}
               <div className="th"><img className="cover" src={s.image} alt={s.imageAlt} /></div>
               <div>
