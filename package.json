@@ -10,13 +10,16 @@
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
-    "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
+    "lint": "pnpm imlo && cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts",
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
-    "seed:news": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/news.ts"
+    "seed:news": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/news.ts",
+    "imlo": "tsx scripts/imlo.ts",
+    "imlo:fix": "tsx scripts/imlo.ts --fix",
+    "imlo:db": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/imlo-db.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.93.0",
