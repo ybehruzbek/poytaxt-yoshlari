@@ -4,7 +4,7 @@ export type Locale = (typeof locales)[number]
 export const defaultLocale: Locale = 'uz'
 
 export const localeLabels: Record<Locale, string> = {
-  uz: 'O‘zbekcha',
+  uz: 'Özbekça',
   ru: 'Русский',
   en: 'English',
 }

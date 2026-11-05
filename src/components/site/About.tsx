@@ -8,7 +8,7 @@ export function About(_props: { locale: Locale }) {
 <section className="sec" id="biz-haqimizda">
   <div className="wrap">
     <div className="about-head">
-      <h2 className="h2">Biz Toshkent yoshlarining ovozi, tashabbusi <span className="mute">va g‘oyalarini qo‘llab-quvvatlaymiz, ularni real loyihalarga aylantiramiz.</span></h2>
+      <h2 className="h2">Biz Toşkent yoşlarining ovozi, taşabbusi <span className="mute">va ğoyalarini qöllab-quvvatlaymiz, ularni real loyihalarga aylantiramiz.</span></h2>
       <div className="about-art" aria-hidden="true">
         <svg style={{ left: "6px", top: "15px", width: "166px" }} viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#43A574" strokeWidth="20" /></svg>
         <svg style={{ left: "213px", top: "25px", width: "32px" }} viewBox="0 0 40 40"><path fill="#43A574" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" /></svg>
@@ -22,11 +22,11 @@ export function About(_props: { locale: Locale }) {
     <div className="about-row">
       <div className="ach">
         {/* Raqamlar NAMUNA: kengashning rasmiy ma'lumotlari bilan almashtiring */}
-        <div><b data-namuna>100+</b><span>Boshlang‘ich tashkilotlar</span></div>
+        <div><b data-namuna>100+</b><span>Boşlanğiç taşkilotlar</span></div>
         <div><b data-namuna>150+</b><span>Yillik tadbirlar</span></div>
-        <div><b data-namuna>40+</b><span>Hamkor tashkilotlar</span></div>
+        <div><b data-namuna>40+</b><span>Hamkor taşkilotlar</span></div>
       </div>
-      <p className="body4">Kengash faoliyati, poytaxt oliy ta’lim muassasalari va boshqa tuzilmalardagi boshlang‘ich tashkilotlar hayoti, yoshlarga poytaxt va davlat siyosati darajasida yaratilayotgan imkoniyatlar — barchasi shu yerda.</p>
+      <p className="body4">Kengaş faoliyati, poytaxt oliy taʼlim muassasalari va boşqa tuzilmalardagi boşlanğiç taşkilotlar hayoti, yoşlarga poytaxt va davlat siyosati darajasida yaratilayotgan imkoniyatlar — barçasi şu yerda.</p>
     </div>
   </div>
 </section>

@@ -97,9 +97,9 @@ export function Header({ locale }: { locale: Locale }) {
             if (!headerRef.current?.contains(e.relatedTarget as Node)) setOpen(null)
           }}
         >
-          <Link href={`/${locale}`} className="logo" aria-label="Bosh sahifa">
+          <Link href={`/${locale}`} className="logo" aria-label="Boş sahifa">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo-toshkent.png" alt="O‘zbekiston Yoshlar Ittifoqi — Toshkent shahar hududiy kengashi" />
+            <img src="/img/logo-toshkent.png" alt="Özbekiston Yoşlar Ittifoqi — Toşkent şahar hududiy kengaşi" />
           </Link>
 
           {/* ===== Kompyuter menyusi ===== */}
@@ -155,7 +155,7 @@ export function Header({ locale }: { locale: Locale }) {
           </nav>
 
           <Link href={joinHref} className="btn btn-outline head-cta">
-            A‘zo bo‘lish
+            Aʼzo böliş
           </Link>
           <button
             className="burger"
@@ -211,7 +211,7 @@ export function Header({ locale }: { locale: Locale }) {
               )}
             </ul>
             <Link href={joinHref} className="btn btn-primary m-join">
-              A‘zo bo‘lish <span className="ic"><Arrow /></span>
+              Aʼzo böliş <span className="ic"><Arrow /></span>
             </Link>
           </nav>
         </header>

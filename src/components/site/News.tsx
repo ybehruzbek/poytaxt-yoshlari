@@ -26,8 +26,8 @@ export async function News({ locale }: { locale: Locale }) {
     <section className="sec news-sec" id="yangiliklar" aria-labelledby="news-title">
       <div className="wrap">
         <div className="sec-head">
-          <h2 className="h2" id="news-title">So‘nggi yangiliklar</h2>
-          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost">Barcha yangiliklar</Link>
+          <h2 className="h2" id="news-title">Sönggi yangiliklar</h2>
+          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost">Barça yangiliklar</Link>
         </div>
         <NewsRotator locale={locale} initial={res.docs.map(toNewsCard)} total={res.totalDocs} />
       </div>

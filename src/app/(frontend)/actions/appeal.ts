@@ -24,7 +24,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
   if (str(fd, 'website')) return { ok: true, message: 'Rahmat! Murojaatingiz qabul qilindi.' }
 
   const ip = clientIp(await headers())
-  if (rateLimited(ip)) return { ok: false, message: 'Juda ko‘p urinish. Iltimos, birozdan keyin qayta yuboring.' }
+  if (rateLimited(ip)) return { ok: false, message: 'Juda köp uriniş. Iltimos, birozdan keyin qayta yuboring.' }
 
   const type = str(fd, 'type')
   const name = str(fd, 'name')
@@ -35,21 +35,21 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
 
   const errors: AppealState['errors'] = {}
   if (!APPEAL_TYPES.some((t) => t.value === type)) errors.type = 'Murojaat turini tanlang.'
-  if (name.length < 3 || name.length > 120) errors.name = 'Ism-familiyangizni to‘liq kiriting.'
+  if (name.length < 3 || name.length > 120) errors.name = 'Ism-familiyangizni töliq kiriting.'
   const digits = phone.replace(/\D/g, '')
-  if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini to‘g‘ri kiriting, masalan: +998 90 123 45 67.'
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160) errors.email = 'Elektron pochta manzilini to‘g‘ri kiriting.'
-  if (message.length < 10 || message.length > 4000) errors.message = 'Xabar kamida 10 ta belgidan iborat bo‘lsin.'
+  if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160) errors.email = 'Elektron poçta manzilini töğri kiriting.'
+  if (message.length < 10 || message.length > 4000) errors.message = 'Xabar kamida 10 ta belgidan iborat bölsin.'
 
   let upload: File | null = null
   if (file instanceof File && file.size > 0) {
-    if (file.size > APPEAL_FILE_MAX) errors.file = 'Fayl hajmi 10 MB dan oshmasin.'
+    if (file.size > APPEAL_FILE_MAX) errors.file = 'Fayl hajmi 10 MB dan oşmasin.'
     else if (!APPEAL_FILE_TYPES.includes(file.type) || !ALLOWED_EXT.test(file.name))
       errors.file = 'Faqat PDF, JPG, PNG, WEBP yoki Word (DOC, DOCX) fayl biriktiring.'
     else upload = file
   }
 
-  if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekshiring.' }
+  if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekşiring.' }
 
   try {
     const payload = await getPayload({ config })
@@ -77,9 +77,9 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
       },
       overrideAccess: true,
     })
-    return { ok: true, message: 'Rahmat! Murojaatingiz qabul qilindi — tez orada siz bilan bog‘lanamiz.' }
+    return { ok: true, message: 'Rahmat! Murojaatingiz qabul qilindi — tez orada siz bilan boğlanamiz.' }
   } catch (err) {
-    console.error('[murojaat] saqlashda xato:', err)
-    return { ok: false, message: 'Murojaatni saqlab bo‘lmadi. Iltimos, keyinroq qayta urinib ko‘ring.' }
+    console.error('[murojaat] saqlaşda xato:', err)
+    return { ok: false, message: 'Murojaatni saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
   }
 }

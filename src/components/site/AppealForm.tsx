@@ -21,7 +21,7 @@ export function AppealForm() {
     const fd = new FormData(form)
     const f = fd.get('file')
     if (f instanceof File && f.size > MAX) {
-      setState({ ok: false, errors: { file: 'Fayl hajmi 10 MB dan oshmasin.' }, message: 'Iltimos, belgilangan maydonlarni tekshiring.' })
+      setState({ ok: false, errors: { file: 'Fayl hajmi 10 MB dan oşmasin.' }, message: 'Iltimos, belgilangan maydonlarni tekşiring.' })
       return
     }
     start(async () => {
@@ -47,7 +47,7 @@ export function AppealForm() {
 
   return (
     <form ref={formRef} className="cb-form" onSubmit={onSubmit} noValidate>
-      <p className="cb-form-title">Murojaat yuborish</p>
+      <p className="cb-form-title">Murojaat yuboriş</p>
 
       <fieldset className="cb-types">
         <legend>Murojaat turi</legend>
@@ -75,7 +75,7 @@ export function AppealForm() {
           {errEl('phone')}
         </label>
         <label className="cb-field">
-          <span>Elektron pochta <i aria-hidden="true">*</i></span>
+          <span>Elektron poçta <i aria-hidden="true">*</i></span>
           <input name="email" type="email" autoComplete="email" required placeholder="nom@pochta.uz" {...field('email')} />
           {errEl('email')}
         </label>
@@ -98,8 +98,8 @@ export function AppealForm() {
           <path d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5" />
         </svg>
         <span>
-          <b>{fileName || 'Fayl biriktirish'}</b>
-          <small>{fileName ? 'Boshqa fayl tanlash uchun bosing' : 'PDF, JPG, PNG, Word · 10 MB gacha (ixtiyoriy)'}</small>
+          <b>{fileName || 'Fayl biriktiriş'}</b>
+          <small>{fileName ? 'Boşqa fayl tanlaş uçun bosing' : 'PDF, JPG, PNG, Word · 10 MB gaça (ixtiyoriy)'}</small>
         </span>
       </label>
       {errEl('file')}
@@ -108,14 +108,14 @@ export function AppealForm() {
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="cb-hp" aria-hidden="true" />
 
       <button type="submit" className="btn btn-primary" disabled={pending} aria-busy={pending}>
-        {pending ? 'Yuborilmoqda…' : 'Yuborish'}
+        {pending ? 'Yuborilmoqda…' : 'Yuboriş'}
         <span className="ic">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
         </span>
       </button>
-      <p className="cb-note"><i aria-hidden="true">*</i> — to‘ldirilishi shart bo‘lgan maydonlar</p>
+      <p className="cb-note"><i aria-hidden="true">*</i> — töldirilişi şart bölgan maydonlar</p>
 
       {state?.message && (
         <p className={`cb-msg ${state.ok ? 'ok' : 'bad'}`} role={state.ok ? 'status' : 'alert'}>

@@ -24,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' — Yoshlar Ittifoqi admin',
+      titleSuffix: ' — Yoşlar Ittifoqi admin',
     },
   },
   // Admin panel tili. Payload'da o'zbekcha tarjima yo'q — hozircha ruscha (asosiy) va inglizcha.
@@ -36,7 +36,7 @@ export default buildConfig({
   // Yangi alifbo (Ö Ğ Ş Ç) alohida til emas — o'zbekcha matndan avtomatik o'giriladi (src/lib/alifbo.ts).
   localization: {
     locales: [
-      { code: 'uz', label: 'O‘zbekcha' },
+      { code: 'uz', label: 'Özbekça' },
       { code: 'ru', label: 'Русский' },
       { code: 'en', label: 'English' },
     ],

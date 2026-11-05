@@ -31,7 +31,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug, locale } = await props.params
   const doc = await getNews(slug, locale)
   if (!doc) return {}
-  return { title: `${doc.title} — Yoshlar Ittifoqi Toshkent shahar hududiy kengashi`, description: doc.excerpt }
+  return { title: `${doc.title} — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi`, description: doc.excerpt }
 }
 
 /** Bitta yangilik sahifasi ("Batafsil o'qish") */
@@ -48,8 +48,8 @@ export default async function NewsPage(props: Props) {
     <article>
       <section className="page-hero">
         <div className="wrap">
-          <nav className="crumbs" aria-label="Yo‘l">
-            <Link href={`/${locale}`}>Bosh sahifa</Link>
+          <nav className="crumbs" aria-label="Yöl">
+            <Link href={`/${locale}`}>Boş sahifa</Link>
             <span>/</span>
             <Link href={`/${locale}/yangiliklar`}>Yangiliklar</Link>
           </nav>
@@ -74,7 +74,7 @@ export default async function NewsPage(props: Props) {
             </div>
           )}
           <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost" style={{ justifySelf: 'start', color: 'var(--navy)' }}>
-            ← Barcha yangiliklar
+            ← Barça yangiliklar
           </Link>
         </div>
       </section>

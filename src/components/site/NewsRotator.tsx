@@ -121,14 +121,14 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
           <p>{main.excerpt}</p>
           <div className="na-actions">
             <Link href={href(main)} className="btn btn-primary">
-              Batafsil o‘qish <span className="ic"><Arrow /></span>
+              Batafsil öqiş <span className="ic"><Arrow /></span>
             </Link>
             {n > 1 && (
-              <div className="na-ctrl" role="group" aria-label="Yangiliklarni almashtirish">
+              <div className="na-ctrl" role="group" aria-label="Yangiliklarni almaştiriş">
                 <button type="button" onClick={() => go(-1)} aria-label="Oldingi yangilik">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
                 </button>
-                <button type="button" onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'To‘xtatish' : 'Davom ettirish'} aria-pressed={!playing}>
+                <button type="button" onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Töxtatiş' : 'Davom ettiriş'} aria-pressed={!playing}>
                   {playing ? (
                     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" /><rect x="14" y="5" width="4" height="14" rx="1.5" /></svg>
                   ) : (
@@ -165,7 +165,7 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
                   <time dateTime={s.dateISO}>{s.date}</time>
                 </div>
                 <h3>{s.title}</h3>
-                <Link href={href(s)} className="more">Batafsil o‘qish <Arrow /></Link>
+                <Link href={href(s)} className="more">Batafsil öqiş <Arrow /></Link>
               </div>
             </article>
           </li>

@@ -11,7 +11,7 @@ export async function getSocials(): Promise<Record<Net, string>> {
     // hali saqlanmagan maydon (null/undefined) — boshlang'ich havola; ataylab bo'shatilgan ('') — ko'rsatilmaydi
     return Object.fromEntries(NETS.map((n) => [n, doc[n] ?? DEFAULT_SOCIALS[n]])) as Record<Net, string>
   } catch (err) {
-    console.error('[socials] havolalarni o‘qib bo‘lmadi:', err)
+    console.error('[socials] havolalarni öqib bölmadi:', err)
     return DEFAULT_SOCIALS
   }
 }

@@ -59,13 +59,13 @@ export function Opportunities({ locale }: { locale: Locale }) {
       <section className="sec" id="imkoniyatlar">
         <div className="wrap">
           <h2 className="h2 opps-title">
-            Siz uchun <span>imkoniyatlar</span>
+            Siz uçun <span>imkoniyatlar</span>
           </h2>
           <div className="opps">
             <Link href={`/${locale}/faoliyat/loyihalar`} className="opp big o1">
               <div className="title">
                 <b>Grantlar</b>
-                <span>Tashabbusingizni moliyalashtiring</span>
+                <span>Taşabbusingizni moliyalaştiring</span>
               </div>
               <svg className="deco" style={{ left: '20px', top: '320px', width: '72px', transform: 'rotate(-28deg)' }} viewBox="0 0 40 40">
                 <path fill="#532822" d="M20 0l4 13 13-6-6 13 13 4-13 4 6 13-13-6-4 13-4-13-13 6 6-13-13-4 13-4-6-13 13 6z" />
@@ -80,7 +80,7 @@ export function Opportunities({ locale }: { locale: Locale }) {
                 />
               </svg>
               <div className="ph">
-                <img className="cover" src="/img/opp-grant.jpg" alt="Grant tanlovi ishtirokchilari" />
+                <img className="cover" src="/img/opp-grant.jpg" alt="Grant tanlovi iştirokçilari" />
               </div>
               <OppInfo t="grant" />
             </Link>
@@ -151,7 +151,7 @@ export function Opportunities({ locale }: { locale: Locale }) {
                 }}
               ></div>
               <div className="ph">
-                <img className="cover" src="/img/news-1.jpg" alt="Tanlov ishtirokchilari" />
+                <img className="cover" src="/img/news-1.jpg" alt="Tanlov iştirokçilari" />
               </div>
               <OppInfo t="tanlov" />
             </Link>

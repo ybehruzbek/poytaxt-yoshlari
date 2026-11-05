@@ -10,7 +10,7 @@ import { getSocials } from '@/lib/socials-server'
  * Telefon ichidagi ko'rinishlar sahifaning soddalashtirilgan illyustratsiyasi (haqiqiy skrinshot emas);
  * obunachilar soni kabi raqamlar ataylab ko'rsatilmaydi.
  */
-const NAME = 'Poytaxt yoshlari'
+const NAME = 'Poytaxt yoşlari'
 
 export const Icon: Record<Net, ReactNode> = {
   telegram: (
@@ -70,15 +70,15 @@ function TelegramScreen({ handle }: { handle: string }) {
       <div className="ph-tg-feed">
         <div className="ph-tg-post">
           <img src="/img/news-1.jpg" alt="" loading="lazy" />
-          <p>Yoshlar uchun yangi grant tanlovi e’lon qilindi. Batafsil — saytimizda.</p>
+          <p>Yoşlar uçun yangi grant tanlovi eʼlon qilindi. Batafsil — saytimizda.</p>
           <small>10:24</small>
         </div>
         <div className="ph-tg-post">
-          <p>Shanba kuni poytaxt yoshlari forumi bo‘lib o‘tadi. Ro‘yxatdan o‘ting!</p>
+          <p>Şanba kuni poytaxt yoşlari forumi bölib ötadi. Röyxatdan öting!</p>
           <small>12:05</small>
         </div>
       </div>
-      <div className="ph-tg-join">Kanalga qo‘shilish</div>
+      <div className="ph-tg-join">Kanalga qöşiliş</div>
     </div>
   )
 }
@@ -96,10 +96,10 @@ function InstagramScreen({ handle }: { handle: string }) {
         </span>
         <span className="ph-ig-name">
           <b>{NAME}</b>
-          <small>Yoshlar Ittifoqi · Toshkent shahar</small>
+          <small>Yoşlar Ittifoqi · Toşkent şahar</small>
         </span>
       </div>
-      <div className="ph-btn">Obuna bo‘lish</div>
+      <div className="ph-btn">Obuna böliş</div>
       <div className="ph-ig-grid">
         {tiles.map((t) => (
           <img key={t} src={`/img/${t}.jpg`} alt="" loading="lazy" />
@@ -118,8 +118,8 @@ function FacebookScreen(_: { handle: string }) {
       <div className="ph-fb-id">
         <Ava size="l" />
         <b>{NAME}</b>
-        <small>Jamoat tashkiloti</small>
-        <div className="ph-btn">Kuzatish</div>
+        <small>Jamoat taşkiloti</small>
+        <div className="ph-btn">Kuzatiş</div>
       </div>
       <div className="ph-fb-post">
         <div className="ph-fb-ph">
@@ -129,7 +129,7 @@ function FacebookScreen(_: { handle: string }) {
             <small>2 soat oldin</small>
           </span>
         </div>
-        <p>Volontyorlar safiga qo‘shiling — har bir yaxshi ish poytaxtdan boshlanadi.</p>
+        <p>Volontyorlar safiga qöşiling — har bir yaxşi iş poytaxtdan boşlanadi.</p>
         <img src="/img/opp-vol.jpg" alt="" loading="lazy" />
       </div>
     </div>
@@ -138,8 +138,8 @@ function FacebookScreen(_: { handle: string }) {
 
 function YoutubeScreen({ handle }: { handle: string }) {
   const videos = [
-    { img: 'news-2', t: 'Poytaxt yoshlari forumi — to‘liq lavha' },
-    { img: 'about-1', t: 'Kengash faoliyati: yil yakunlari' },
+    { img: 'news-2', t: 'Poytaxt yoşlari forumi — töliq lavha' },
+    { img: 'about-1', t: 'Kengaş faoliyati: yil yakunlari' },
   ]
   return (
     <div className="ph-scr ph-yt">
@@ -151,7 +151,7 @@ function YoutubeScreen({ handle }: { handle: string }) {
           {handle && <small>{handle}</small>}
         </span>
       </div>
-      <div className="ph-btn">Obuna bo‘lish</div>
+      <div className="ph-btn">Obuna böliş</div>
       <div className="ph-yt-list">
         {videos.map((v) => (
           <div key={v.img} className="ph-yt-vid">
@@ -185,7 +185,7 @@ export async function SocialPhones() {
           <h2 className="h2">
             Bizni <span>kuzatib boring</span>
           </h2>
-          <p className="body4">Yangiliklar, e’lonlar va tadbirlar — birinchi bo‘lib ijtimoiy tarmoqlarimizda.</p>
+          <p className="body4">Yangiliklar, eʼlonlar va tadbirlar — birinçi bölib ijtimoiy tarmoqlarimizda.</p>
         </div>
         <div className="sp-phones">
           {nets.map((net) => {
@@ -197,7 +197,7 @@ export async function SocialPhones() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`sp-phone sp-phone-${net}`}
-                aria-label={`${aria} (yangi oynada ochiladi)`}
+                aria-label={`${aria} (yangi oynada oçiladi)`}
               >
                 <span className="ph" aria-hidden="true">
                   <span className="ph-island" />

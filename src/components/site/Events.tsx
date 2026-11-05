@@ -15,14 +15,14 @@ type Ev = {
 
 /** NAMUNA tadbirlar — keyin admin paneldagi "Tadbirlar" bo'limidan keladi. */
 const EVENTS: Ev[] = [
-  { title: 'Volontyorlar forumi', type: 'Forum', org: 'Shahar kengashi', start: '2026-11-14T10:00:00+05:00', img: '/img/opp-vol.jpg', color: 'var(--green)' },
-  { title: 'Yosh tadbirkorlar uchrashuvi', type: 'Uchrashuv', org: 'Hamkor tashkilotlar bilan', start: '2026-11-20T15:00:00+05:00', img: '/img/about-2.jpg', color: 'var(--blue)' },
-  { title: 'Kitobxonlik tanlovi finali', type: 'Tanlov', org: 'OTM boshlang‘ich tashkilotlari', start: '2026-11-27T11:00:00+05:00', img: '/img/opp-stip.jpg', color: 'var(--sky)', dark: true },
+  { title: 'Volontyorlar forumi', type: 'Forum', org: 'Şahar kengaşi', start: '2026-11-14T10:00:00+05:00', img: '/img/opp-vol.jpg', color: 'var(--green)' },
+  { title: 'Yoş tadbirkorlar uçraşuvi', type: 'Uçraşuv', org: 'Hamkor taşkilotlar bilan', start: '2026-11-20T15:00:00+05:00', img: '/img/about-2.jpg', color: 'var(--blue)' },
+  { title: 'Kitobxonlik tanlovi finali', type: 'Tanlov', org: 'OTM boşlanğiç taşkilotlari', start: '2026-11-27T11:00:00+05:00', img: '/img/opp-stip.jpg', color: 'var(--sky)', dark: true },
   { title: 'IT va startaplar haftaligi', type: 'Haftalik', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy)' },
 ]
 
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
-const WD = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba']
+const WD = ['Yakşanba', 'Duşanba', 'Seşanba', 'Çorşanba', 'Payşanba', 'Juma', 'Şanba']
 
 /** ISO → Toshkent vaqtidagi qismlar */
 function parts(iso: string) {
@@ -66,7 +66,7 @@ export function Events({ locale }: { locale: Locale }) {
       <div className="wrap">
         <div className="sec-head">
           <h2 className="h2" id="ev-title">Yaqin tadbirlar</h2>
-          <Link href={href} className="btn btn-ghost">Barcha tadbirlar</Link>
+          <Link href={href} className="btn btn-ghost">Barça tadbirlar</Link>
         </div>
 
         {/* Chipta ko'rinishi */}
@@ -90,7 +90,7 @@ export function Events({ locale }: { locale: Locale }) {
                   <p><Org /> {e.org}</p>
                 </div>
               </div>
-              <span className="pt-cta">Ro‘yxatdan o‘tish <Arrow /></span>
+              <span className="pt-cta">Röyxatdan ötiş <Arrow /></span>
             </Link>
           ))}
         </div>

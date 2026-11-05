@@ -35,10 +35,10 @@ export function checkSocialUrl(net: Net, value: string): string | null {
   try {
     u = new URL(value)
   } catch {
-    return 'To‘liq havola kiriting, masalan: https://…'
+    return 'Töliq havola kiriting, masalan: https://…'
   }
-  if (u.protocol !== 'https:') return 'Havola https:// bilan boshlanishi kerak.'
-  if (!HOSTS[net].includes(u.hostname.toLowerCase())) return `${NET_LABEL[net]} havolasi bo‘lishi kerak (${HOSTS[net][0]}).`
+  if (u.protocol !== 'https:') return 'Havola https:// bilan boşlanişi kerak.'
+  if (!HOSTS[net].includes(u.hostname.toLowerCase())) return `${NET_LABEL[net]} havolasi bölişi kerak (${HOSTS[net][0]}).`
   return null
 }
 

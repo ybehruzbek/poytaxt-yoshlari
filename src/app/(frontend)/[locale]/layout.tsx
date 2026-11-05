@@ -3,7 +3,6 @@ import { Inter, Montserrat } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { AlphabetSwitch } from '@/components/site/AlphabetSwitch'
 import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
@@ -35,9 +34,9 @@ const body = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'O‘zbekiston Yoshlar Ittifoqi — Toshkent shahar hududiy kengashi',
+  title: 'Özbekiston Yoşlar Ittifoqi — Toşkent şahar hududiy kengaşi',
   description:
-    'O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashining rasmiy veb-sayti: kengash faoliyati, boshlang‘ich tashkilotlar hayoti, yoshlar uchun imkoniyatlar va yangiliklar.',
+    'Özbekiston Yoşlar Ittifoqi Toşkent şahar hududiy kengaşining rasmiy veb-sayti: kengaş faoliyati, boşlanğiç taşkilotlar hayoti, yoşlar uçun imkoniyatlar va yangiliklar.',
   icons: { icon: '/img/logo-toshkent.png' },
 }
 
@@ -58,11 +57,9 @@ export default async function LocaleLayout(props: {
         <Header locale={locale} />
         <main>{props.children}</main>
         <Footer locale={locale} />
-        {/* Yangi alifbo faqat o'zbekcha matn uchun */}
-        {locale === 'uz' && <AlphabetSwitch />}
         {/* VAQTINCHA (faqat dev): footer variantlarini ko'rib chiqish */}
         {process.env.NODE_ENV !== 'production' && (
-          <DevVariantSwitch name="ft" label="Footer" titles={['A · Shior bilan (B2)', 'B · Katta so‘z', 'C · Rasmiy']} />
+          <DevVariantSwitch name="ft" label="Footer" titles={['A · Şior bilan (B2)', 'B · Katta söz', 'C · Rasmiy']} />
         )}
       </body>
     </html>

@@ -17,7 +17,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug } = await props.params
   const { trail } = findNav('/' + slug.join('/'))
   const page = trail[trail.length - 1]
-  return { title: page ? `${page.label} — Yoshlar Ittifoqi Toshkent shahar hududiy kengashi` : undefined }
+  return { title: page ? `${page.label} — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi` : undefined }
 }
 
 /**
@@ -38,8 +38,8 @@ export default async function SectionPage(props: Props) {
     <>
       <section className="page-hero">
         <div className="wrap">
-          <nav className="crumbs" aria-label="Yo‘l">
-            <Link href={L('')}>Bosh sahifa</Link>
+          <nav className="crumbs" aria-label="Yöl">
+            <Link href={L('')}>Boş sahifa</Link>
             <span>/</span>
             <span>{group.label}</span>
             {trail.map((t, i) => (
@@ -58,11 +58,11 @@ export default async function SectionPage(props: Props) {
         <div className="wrap" style={{ display: 'grid', gap: 32 }}>
           <div style={{ background: 'var(--soft)', borderRadius: 32, padding: '28px 32px', maxWidth: 760 }}>
             <p style={{ fontFamily: 'var(--f-head)', fontWeight: 700, fontSize: 22, color: 'var(--navy)' }}>Sahifa tayyorlanmoqda</p>
-            <p style={{ marginTop: 8, color: 'var(--muted)' }}>Bu bo‘lim mazmuni admin panel orqali kiritiladi.</p>
+            <p style={{ marginTop: 8, color: 'var(--muted)' }}>Bu bölim mazmuni admin panel orqali kiritiladi.</p>
           </div>
           {siblings.length > 1 && (
             <div>
-              <p style={{ fontFamily: 'var(--f-head)', fontWeight: 800, fontSize: 20, color: 'var(--navy)', marginBottom: 14 }}>{group.label} bo‘limida</p>
+              <p style={{ fontFamily: 'var(--f-head)', fontWeight: 800, fontSize: 20, color: 'var(--navy)', marginBottom: 14 }}>{group.label} bölimida</p>
               <div className="tabs" style={{ marginBottom: 0 }}>
                 {siblings.map((s) => (
                   <Link key={s.href} href={L(s.href)} className={`tab${s.href === path || trail[0]?.href === s.href ? ' on' : ''}`} style={{ display: 'inline-flex', alignItems: 'center' }}>

@@ -530,19 +530,19 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Social {
   id: number;
   /**
-   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
    */
   telegram?: string | null;
   /**
-   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
    */
   instagram?: string | null;
   /**
-   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
    */
   facebook?: string | null;
   /**
-   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
    */
   youtube?: string | null;
   updatedAt?: string | null;

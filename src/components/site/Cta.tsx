@@ -14,7 +14,7 @@ export function Cta(_props: { locale: Locale }) {
             <h2 className="h2">
               Savol, murojaat yoki taklifingiz bormi? <span>Biz yordam beramiz.</span>
             </h2>
-            <p>Yozing — mas’ul xodimlarimiz murojaatingizni ko‘rib chiqib, siz bilan bog‘lanadi.</p>
+            <p>Yozing — masʼul xodimlarimiz murojaatingizni körib çiqib, siz bilan boğlanadi.</p>
             <ol className="cb-steps">
               <li>
                 <b>1</b>
@@ -25,13 +25,13 @@ export function Cta(_props: { locale: Locale }) {
               <li>
                 <b>2</b>
                 <span>
-                  <strong>Ko‘rib chiqamiz</strong>Mas’ul xodim murojaatni o‘rganadi
+                  <strong>Körib çiqamiz</strong>Masʼul xodim murojaatni örganadi
                 </span>
               </li>
               <li>
                 <b>3</b>
                 <span>
-                  <strong>Bog‘lanamiz</strong>Telefon yoki pochta orqali javob beramiz
+                  <strong>Boğlanamiz</strong>Telefon yoki poçta orqali javob beramiz
                 </span>
               </li>
             </ol>

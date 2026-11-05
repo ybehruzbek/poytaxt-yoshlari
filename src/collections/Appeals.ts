@@ -70,7 +70,7 @@ export const Appeals: CollectionConfig = {
           defaultValue: 'yangi',
           options: [
             { label: 'Yangi', value: 'yangi' },
-            { label: 'Ko‘rib chiqilmoqda', value: 'jarayonda' },
+            { label: 'Körib çiqilmoqda', value: 'jarayonda' },
             { label: 'Yopildi', value: 'yopildi' },
           ],
         },
@@ -81,12 +81,12 @@ export const Appeals: CollectionConfig = {
       fields: [
         { name: 'name', label: 'Ism-familiya', type: 'text', required: true },
         { name: 'phone', label: 'Telefon', type: 'text', required: true },
-        { name: 'email', label: 'Elektron pochta', type: 'email', required: true },
+        { name: 'email', label: 'Elektron poçta', type: 'email', required: true },
       ],
     },
     { name: 'message', label: 'Xabar', type: 'textarea', required: true },
     { name: 'file', label: 'Biriktirilgan fayl', type: 'upload', relationTo: 'appeal-files' },
-    { name: 'note', label: 'Ichki izoh (faqat xodimlar uchun)', type: 'textarea' },
+    { name: 'note', label: 'Içki izoh (faqat xodimlar uçun)', type: 'textarea' },
   ],
   timestamps: true,
 }

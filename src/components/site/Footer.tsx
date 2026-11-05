@@ -9,17 +9,17 @@ import { getSocials } from '@/lib/socials-server'
 
 import { Arrow, Svg } from './SocialPhones'
 
-const LOGO_ALT = 'O‘zbekiston Yoshlar Ittifoqi — Toshkent shahar hududiy kengashi'
-const COPY = '© 2026 O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashi'
-const NOTE = 'Materiallardan foydalanilganda manba ko‘rsatilishi shart.'
-const WORD = 'YOSHKENT'
+const LOGO_ALT = 'Özbekiston Yoşlar Ittifoqi — Toşkent şahar hududiy kengaşi'
+const COPY = '© 2026 Özbekiston Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi'
+const NOTE = 'Materiallardan foydalanilganda manba körsatilişi şart.'
+const WORD = 'YOŞKENT'
 
 /* Aloqa ma'lumotlari NAMUNA: rasmiy manzil, telefon va pochta bilan almashtiring */
 const CONTACTS = [
-  { k: 'Manzil', v: 'Toshkent shahri (manzil kiritiladi)', href: undefined as string | undefined },
+  { k: 'Manzil', v: 'Toşkent şahri (manzil kiritiladi)', href: undefined as string | undefined },
   { k: 'Telefon', v: '+998 (__) ___-__-__', href: 'tel:+998000000000' },
-  { k: 'Elektron pochta', v: 'info@yoshkent.uz', href: 'mailto:info@yoshkent.uz' },
-  { k: 'Ish vaqti', v: 'Dushanba–Juma, 09:00–18:00', href: undefined },
+  { k: 'Elektron poçta', v: 'info@yoshkent.uz', href: 'mailto:info@yoshkent.uz' },
+  { k: 'Iş vaqti', v: 'Duşanba–Juma, 09:00–18:00', href: undefined },
 ]
 
 /** Davlat resurslari (rasmiy saytlar) */
@@ -27,8 +27,8 @@ const GOV = [
   { t: 'Hukumat portali', h: 'https://gov.uz' },
   { t: 'Davlat xizmatlari portali', h: 'https://my.gov.uz' },
   { t: 'Prezident rasmiy veb-sayti', h: 'https://president.uz' },
-  { t: 'Yoshlar ishlari agentligi', h: 'https://yoshlar.gov.uz' },
-  { t: 'Qonunchilik ma’lumotlari bazasi', h: 'https://lex.uz' },
+  { t: 'Yoşlar işlari agentligi', h: 'https://yoshlar.gov.uz' },
+  { t: 'Qonunçilik maʼlumotlari bazasi', h: 'https://lex.uz' },
 ]
 
 type Socials = Record<Net, string>
@@ -109,11 +109,11 @@ function FooterA({ locale, socials }: { locale: Locale; socials: Socials }) {
       <div className="wrap">
         <div className="fb2-hero">
           <p className="fb2-slogan">
-            Yoshlar uchun, yoshlar bilan — <span>poytaxt miqyosida.</span>
+            Yoşlar uçun, yoşlar bilan — <span>poytaxt miqyosida.</span>
           </p>
           <div className="fb2-cta">
             <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Murojaat yuborish{' '}
+              Murojaat yuboriş{' '}
               <span className="ic">
                 <Arrow />
               </span>
@@ -154,10 +154,10 @@ function FooterB({ locale, socials }: { locale: Locale; socials: Socials }) {
               <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
             </Link>
             <p>
-              Yoshlar uchun, yoshlar bilan — <span>poytaxt miqyosida.</span>
+              Yoşlar uçun, yoşlar bilan — <span>poytaxt miqyosida.</span>
             </p>
             <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Murojaat yuborish{' '}
+              Murojaat yuboriş{' '}
               <span className="ic">
                 <Arrow />
               </span>
@@ -218,7 +218,7 @@ function FooterC({ locale, socials }: { locale: Locale; socials: Socials }) {
             <Link href={L('')} className="fr-logo">
               <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
             </Link>
-            <p>O‘zbekiston Yoshlar Ittifoqi Toshkent shahar hududiy kengashining rasmiy veb-sayti.</p>
+            <p>Özbekiston Yoşlar Ittifoqi Toşkent şahar hududiy kengaşining rasmiy veb-sayti.</p>
             <Contacts className="fr-contacts" />
             <SocialLinks socials={socials} />
           </div>

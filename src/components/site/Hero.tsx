@@ -14,10 +14,10 @@ export function Hero({ locale }: { locale: Locale }) {
       <div className="hero-text">
         <div>
           <h1 className="h1 hero-slogan"><span>Orzu qil.</span> <span>Harakat qil.</span> <span>Biz yoningdamiz.</span></h1>
-          <p className="lead">Ta’lim, sport, ijod, tadbirkorlik va volontyorlik yo‘nalishlarida poytaxt yoshlari uchun doimiy dasturlar. Yangiliklarni o‘tkazib yubormang.</p>
+          <p className="lead">Taʼlim, sport, ijod, tadbirkorlik va volontyorlik yönalişlarida poytaxt yoşlari uçun doimiy dasturlar. Yangiliklarni ötkazib yubormang.</p>
         </div>
         <div className="hero-actions">
-          <Link href={`/${locale}/faoliyat/loyihalar`} className="btn btn-primary">Imkoniyatlarni ko‘rish
+          <Link href={`/${locale}/faoliyat/loyihalar`} className="btn btn-primary">Imkoniyatlarni köriş
             <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
           </Link>
         </div>
@@ -32,7 +32,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="c-play"></div>
           <svg className="c-star" viewBox="0 0 40 40"><path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" /></svg>
           <div className="c-half"></div>
-          <div className="c-tag">Yoshlar Ittifoqi</div>
+          <div className="c-tag">Yoşlar Ittifoqi</div>
           <div className="c-circle">
             <i style={{ height: "40px", left: "62px", top: "104px" }}></i><i style={{ height: "24px", left: "62px", top: "128px", borderRadius: "50%" }}></i>
             <i style={{ height: "66px", left: "96px", top: "78px" }}></i><i style={{ height: "96px", left: "130px", top: "52px" }}></i>
