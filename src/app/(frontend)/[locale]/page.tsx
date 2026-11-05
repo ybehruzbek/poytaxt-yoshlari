@@ -5,6 +5,7 @@ import { Events } from '@/components/site/Events'
 import { Hero } from '@/components/site/Hero'
 import { News } from '@/components/site/News'
 import { Opportunities } from '@/components/site/Opportunities'
+import { SocialPhones } from '@/components/site/SocialPhones'
 import type { Locale } from '@/i18n/config'
 
 /** Bosh sahifa har 60 soniyada yangilanadi (yangi yangiliklar shu orqali ko'rinadi) */
@@ -25,6 +26,7 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <About locale={locale} />
       <Benefits locale={locale} />
       <Cta locale={locale} />
+      <SocialPhones />
     </>
   )
 }

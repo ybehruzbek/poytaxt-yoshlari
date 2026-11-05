@@ -1,0 +1,455 @@
+/* =====================================================================
+   "Bizni kuzatib boring" — ijtimoiy tarmoqlar iPhone ko'rinishida (bosh sahifa)
+   ===================================================================== */
+.sp-head p {
+  max-width: 420px;
+  color: var(--muted);
+}
+/* ---------- telefonlar ---------- */
+.sp-phones {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 248px;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 24px 0 40px;
+}
+.sp-phone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  color: #fff;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sp-phone:nth-child(1) {
+  transform: translateY(28px) rotate(-4deg);
+}
+.sp-phone:nth-child(2) {
+  transform: translateY(-8px);
+}
+.sp-phone:nth-child(3) {
+  transform: translateY(8px);
+}
+.sp-phone:nth-child(4) {
+  transform: translateY(-20px) rotate(4deg);
+}
+.sp-phone:hover,
+.sp-phone:focus-visible {
+  transform: translateY(-14px) rotate(0);
+}
+.sp-phone:focus-visible {
+  outline: none;
+}
+.sp-phone:focus-visible .ph {
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
+}
+.sp-phone-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 16px/1 var(--f-head);
+}
+.sp-phone-label > svg {
+  width: 20px;
+  height: 20px;
+}
+.sp-phone-go {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.25s, color 0.25s;
+}
+.sp-phone-go svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(-45deg);
+}
+.sp-phone:hover .sp-phone-go,
+.sp-phone:focus-visible .sp-phone-go {
+  background: var(--yellow);
+  color: var(--navy);
+}
+
+/* iPhone korpusi */
+.ph {
+  position: relative;
+  display: block;
+  width: 248px;
+  height: 508px;
+  padding: 9px;
+  border-radius: 48px;
+  background: #171312;
+  box-shadow:
+    inset 0 0 0 2px #3a302d,
+    0 30px 60px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.45s;
+}
+.sp-phone:hover .ph {
+  box-shadow:
+    inset 0 0 0 2px #3a302d,
+    0 40px 80px rgba(0, 0, 0, 0.45),
+    0 0 0 6px rgba(255, 210, 90, 0.25);
+}
+.ph-island {
+  position: absolute;
+  z-index: 3;
+  top: 19px;
+  left: 50%;
+  width: 76px;
+  height: 22px;
+  border-radius: 20px;
+  background: #000;
+  transform: translateX(-50%);
+}
+.ph-status {
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  left: 9px;
+  right: 9px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 0 28px;
+  border-radius: 39px 39px 0 0;
+  font: 600 12px/1 var(--f-body);
+  color: var(--navy);
+}
+.ph-status i {
+  width: 22px;
+  height: 11px;
+  border-radius: 3px;
+  border: 1.5px solid currentColor;
+  background: linear-gradient(90deg, currentColor 70%, transparent 70%) padding-box;
+  background-clip: content-box;
+  padding: 1px;
+}
+.ph-scr {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 39px;
+  background: #fff;
+  padding-top: 42px;
+  font: 500 11px/1.4 var(--f-body);
+  color: var(--grey);
+  text-align: left;
+}
+.ph-scr img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+.ph-ava {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  overflow: hidden;
+}
+.ph-ava img {
+  width: 82%;
+  height: auto;
+  object-fit: contain;
+}
+.ph-ava-s {
+  width: 30px;
+  height: 30px;
+}
+.ph-ava-m {
+  width: 40px;
+  height: 40px;
+}
+.ph-ava-l {
+  width: 58px;
+  height: 58px;
+}
+.ph-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.ph-bar-plain {
+  justify-content: center;
+  font: 700 13px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.ph-back {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--blue);
+}
+.ph-title {
+  display: grid;
+}
+.ph-title b {
+  font: 700 12px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.ph-title small,
+.ph-scr small {
+  font-size: 10px;
+  color: var(--muted);
+}
+.ph-btn {
+  margin: 0 12px;
+  padding: 8px;
+  border-radius: 10px;
+  background: var(--yellow);
+  font: 700 11px/1.2 var(--f-head);
+  text-align: center;
+  color: var(--navy);
+}
+
+/* Telegram */
+.ph-tg-feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(137, 192, 255, 0.35), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 210, 90, 0.3), transparent 55%),
+    var(--soft);
+}
+.ph-tg-post {
+  display: grid;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 14px 14px 14px 4px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(83, 40, 34, 0.1);
+}
+.ph-tg-post img {
+  height: 104px;
+  border-radius: 10px;
+}
+.ph-tg-post p {
+  padding: 0 4px;
+}
+.ph-tg-post small {
+  justify-self: end;
+  padding: 0 4px;
+}
+.ph-tg-join {
+  padding: 13px;
+  border-top: 1px solid var(--line);
+  font: 700 12px/1 var(--f-head);
+  text-align: center;
+  color: var(--blue);
+}
+
+/* Instagram */
+.ph-ig-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px 12px;
+}
+.ph-ig-ring {
+  padding: 3px;
+  border-radius: 50%;
+  background: conic-gradient(var(--yellow), var(--blue), var(--lime), var(--yellow));
+}
+.ph-ig-ring .ph-ava {
+  box-shadow: 0 0 0 2px #fff;
+}
+.ph-ig-name {
+  display: grid;
+  gap: 2px;
+}
+.ph-ig-name b {
+  font: 700 13px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.ph-ig-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 12px;
+}
+.ph-ig-grid img {
+  aspect-ratio: 1;
+  height: auto;
+}
+
+/* Facebook */
+.ph-fb {
+  padding-top: 0;
+}
+.ph-fb-cover img {
+  height: 112px;
+}
+.ph-fb-id {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: -30px;
+  padding-bottom: 10px;
+  border-bottom: 6px solid var(--soft);
+}
+.ph-fb-id .ph-ava {
+  box-shadow: 0 0 0 3px #fff;
+  margin-bottom: 4px;
+}
+.ph-fb-id b {
+  font: 700 13px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.ph-fb-id .ph-btn {
+  align-self: stretch;
+  margin-top: 8px;
+}
+.ph-fb-post {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+}
+.ph-fb-ph {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ph-fb-ph span {
+  display: grid;
+}
+.ph-fb-ph b {
+  font: 700 11px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.ph-fb-post img {
+  height: 120px;
+  border-radius: 10px;
+}
+
+/* YouTube */
+.ph-yt-banner {
+  height: 64px;
+  margin: 4px 10px 0;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 85% 30%, var(--yellow) 0 22px, transparent 23px),
+    radial-gradient(circle at 15% 90%, var(--lime) 0 26px, transparent 27px),
+    var(--navy);
+}
+.ph-yt-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+}
+.ph-yt-id span {
+  display: grid;
+}
+.ph-yt-id b {
+  font: 700 13px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.ph-yt-list {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+.ph-yt-vid {
+  display: grid;
+  gap: 6px;
+}
+.ph-yt-vid b {
+  font: 700 11px/1.3 var(--f-head);
+  color: var(--navy);
+}
+.ph-yt-thumb {
+  position: relative;
+  display: block;
+}
+.ph-yt-thumb img {
+  height: 92px;
+  border-radius: 10px;
+}
+.ph-yt-thumb i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 34px;
+  height: 24px;
+  border-radius: 8px;
+  background: var(--blue);
+  transform: translate(-50%, -50%);
+}
+.ph-yt-thumb i::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  border: 6px solid transparent;
+  border-left: 9px solid #fff;
+  border-right: 0;
+  transform: translate(-50%, -50%);
+}
+
+
+/* yorug' fonda: yozuvlar jigarrang, soyalar yumshoqroq */
+.sp-phone {
+  color: var(--navy);
+}
+.sp-phone-go {
+  background: #fff;
+}
+.sp-phone .ph {
+  box-shadow:
+    inset 0 0 0 2px #3a302d,
+    0 30px 60px rgba(83, 40, 34, 0.22);
+}
+.sp-phone:hover .ph {
+  box-shadow:
+    inset 0 0 0 2px #3a302d,
+    0 40px 80px rgba(83, 40, 34, 0.3),
+    0 0 0 6px rgba(255, 210, 90, 0.5);
+}
+
+@media (max-width: 1240px) {
+  .sp-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* telefonlar yonma-yon suriladi */
+  .sp-phones {
+    justify-content: start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 -40px;
+    padding: 40px 40px 32px;
+  }
+  .sp-phones::-webkit-scrollbar {
+    display: none;
+  }
+  .sp-phone {
+    scroll-snap-align: center;
+  }
+  .sp-phone:nth-child(n) {
+    transform: none;
+  }
+}
+@media (max-width: 640px) {
+  .sp-phones {
+    gap: 20px;
+    margin: 0 -20px;
+    padding: 32px 20px;
+  }
+}
