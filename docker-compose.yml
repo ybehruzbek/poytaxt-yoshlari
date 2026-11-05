@@ -1,0 +1,23 @@
+# Lokal ishlab chiqish uchun: faqat PostgreSQL.
+# Ishga tushirish:  docker compose up -d
+# Server (production) uchun alohida compose fayl 6-bosqichda qo'shiladi.
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ittifoq
+      POSTGRES_USER: ittifoq
+      POSTGRES_PASSWORD: ittifoq_dev
+    ports:
+      - '127.0.0.1:5437:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ittifoq -d ittifoq']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:
