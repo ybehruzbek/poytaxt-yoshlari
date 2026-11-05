@@ -57,7 +57,7 @@ export default async function LocaleLayout(props: {
         {/* Yangi alifbo faqat o'zbekcha matn uchun */}
         {locale === 'uz' && <AlphabetSwitch />}
         {/* VAQTINCHA: "Yaqin tadbirlar" variantlarini ko'rib chiqish */}
-        <DevVariantSwitch name="ev" label="Tadbirlar" titles={['Lenta', 'Eng yaqin + ro‘yxat', 'Afisha']} />
+        <DevVariantSwitch name="ev" label="Tadbirlar" titles={['Afisha+', 'Asosiy afisha', 'Chipta']} />
       </body>
     </html>
   )

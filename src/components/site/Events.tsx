@@ -5,6 +5,7 @@ import type { Locale } from '@/i18n/config'
 
 type Ev = {
   title: string
+  type: string // tadbir turi
   org: string
   start: string // ISO, Toshkent vaqti
   img: string
@@ -14,15 +15,16 @@ type Ev = {
 
 /** NAMUNA tadbirlar — keyin admin paneldagi "Tadbirlar" bo'limidan keladi. */
 const EVENTS: Ev[] = [
-  { title: 'Volontyorlar forumi', org: 'Shahar kengashi', start: '2026-11-14T10:00:00+05:00', img: '/img/opp-vol.jpg', color: 'var(--green)' },
-  { title: 'Yosh tadbirkorlar uchrashuvi', org: 'Hamkor tashkilotlar bilan', start: '2026-11-20T15:00:00+05:00', img: '/img/about-2.jpg', color: 'var(--blue)' },
-  { title: 'Kitobxonlik tanlovi finali', org: 'OTM boshlang‘ich tashkilotlari', start: '2026-11-27T11:00:00+05:00', img: '/img/opp-stip.jpg', color: 'var(--sky)', dark: true },
-  { title: 'IT va startaplar haftaligi', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy)' },
+  { title: 'Volontyorlar forumi', type: 'Forum', org: 'Shahar kengashi', start: '2026-11-14T10:00:00+05:00', img: '/img/opp-vol.jpg', color: 'var(--green)' },
+  { title: 'Yosh tadbirkorlar uchrashuvi', type: 'Uchrashuv', org: 'Hamkor tashkilotlar bilan', start: '2026-11-20T15:00:00+05:00', img: '/img/about-2.jpg', color: 'var(--blue)' },
+  { title: 'Kitobxonlik tanlovi finali', type: 'Tanlov', org: 'OTM boshlang‘ich tashkilotlari', start: '2026-11-27T11:00:00+05:00', img: '/img/opp-stip.jpg', color: 'var(--sky)', dark: true },
+  { title: 'IT va startaplar haftaligi', type: 'Haftalik', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy)' },
 ]
 
 const MON = ['YAN', 'FEV', 'MAR', 'APR', 'MAY', 'IYN', 'IYL', 'AVG', 'SEN', 'OKT', 'NOY', 'DEK']
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
-const WD = ['yakshanba', 'dushanba', 'seshanba', 'chorshanba', 'payshanba', 'juma', 'shanba']
+const WD = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba']
+const WD_S = ['Ya', 'Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh']
 
 /** ISO → Toshkent vaqtidagi qismlar */
 function parts(iso: string) {
@@ -32,13 +34,16 @@ function parts(iso: string) {
   return {
     day: String(d.getUTCDate()).padStart(2, '0'),
     mon: MON[d.getUTCMonth()],
-    full: `${d.getUTCDate()}-${MON_FULL[d.getUTCMonth()]}, ${WD[d.getUTCDay()]}`,
+    wd: WD[d.getUTCDay()],
+    wds: WD_S[d.getUTCDay()],
+    full: `${d.getUTCDate()}-${MON_FULL[d.getUTCMonth()]}`,
     time: `${hh}:${mm}`,
   }
 }
 function daysLeft(iso: string) {
   return Math.max(0, Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000))
 }
+const leftLabel = (n: number) => (n === 0 ? 'Bugun' : n === 1 ? 'Ertaga' : `${n} kun qoldi`)
 
 const Arrow = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -58,14 +63,12 @@ const Org = () => (
 )
 
 /**
- * Yaqin tadbirlar.
- * VAQTINCHA 3 ta ko'rinish (<html data-ev="a|b|c">): A — lenta, B — eng yaqin + ro'yxat, C — afisha.
+ * Yaqin tadbirlar — "Afisha" asosida 3 ta takomillashtirilgan ko'rinish (VAQTINCHA, <html data-ev="a|b|c">):
+ *  A — Afisha+ (hover'da "Ro'yxatdan o'tish" chiqadi), B — Asosiy afisha (bento), C — Chipta.
  */
 export function Events({ locale }: { locale: Locale }) {
   const href = `/${locale}/faoliyat/tadbirlar`
-  const [first, ...rest] = EVENTS
-  const f = parts(first.start)
-  const left = daysLeft(first.start)
+  const items = EVENTS.map((e) => ({ ...e, p: parts(e.start), left: daysLeft(e.start) }))
 
   return (
     <section className="sec ev-sec" id="tadbirlar" aria-labelledby="ev-title">
@@ -75,89 +78,82 @@ export function Events({ locale }: { locale: Locale }) {
           <Link href={href} className="btn btn-ghost">Barcha tadbirlar</Link>
         </div>
 
-        {/* ===== A · Lenta (gorizontal kartalar) ===== */}
-        <div className="evv evv-a track">
-          {EVENTS.map((e) => {
-            const p = parts(e.start)
-            return (
-              <Link key={e.title} href={href} className="ev">
-                <div className="ev-thumb" style={{ background: e.color }}>
-                  <span>{p.day}<small>{p.mon}</small></span>
-                  <img className="cover" src={e.img} alt="" />
-                </div>
-                <div className="ev-body">
-                  <h3>{e.title}</h3>
-                  <p><Org /> {e.org}</p>
-                  <p><Clock /> {p.time}</p>
-                </div>
-                <span className="go"><Arrow /></span>
-              </Link>
-            )
-          })}
-        </div>
-
-        {/* ===== B · Eng yaqin tadbir + ro'yxat ===== */}
-        <div className="evv evv-b">
-          <article className="eb-main">
-            <img className="cover" src={first.img} alt="" />
-            <div className="eb-shade" />
-            <div className="eb-count" aria-label={`${left} kun qoldi`}>
-              <b>{left}</b>
-              <span>kun qoldi</span>
-            </div>
-            <div className="eb-bd">
-              <span className="eb-tag">Eng yaqin tadbir</span>
-              <h3>{first.title}</h3>
-              <div className="eb-meta">
-                <span>{f.full}</span>
-                <span><Clock /> {f.time}</span>
-                <span><Org /> {first.org}</span>
-              </div>
-              <Link href={href} className="btn btn-primary">Ro‘yxatdan o‘tish <span className="ic"><Arrow /></span></Link>
-            </div>
-          </article>
-          <ul className="eb-list">
-            {rest.map((e) => {
-              const p = parts(e.start)
-              return (
-                <li key={e.title}>
-                  <Link href={href} className="eb-row">
-                    <span className="eb-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
-                      <b>{p.day}</b>
-                      <small>{p.mon}</small>
-                    </span>
-                    <span className="eb-txt">
-                      <b>{e.title}</b>
-                      <small><Clock /> {p.time} · {e.org}</small>
-                    </span>
-                    <span className="go-sm"><Arrow /></span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-
-        {/* ===== C · Afisha (plakat kartalar) ===== */}
-        <div className="evv evv-c">
-          {EVENTS.map((e) => {
-            const p = parts(e.start)
-            return (
-              <Link key={e.title} href={href} className="ec-card">
-                <img className="cover" src={e.img} alt="" />
-                <div className="ec-shade" />
-                <span className="ec-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
-                  <b>{p.day}</b>
-                  <small>{p.mon}</small>
+        {/* ===== A · Afisha+ ===== */}
+        <div className="evv evv-a">
+          {items.map((e, i) => (
+            <Link key={e.title} href={href} className="pa-card">
+              <img className="cover" src={e.img} alt="" />
+              <div className="pa-shade" />
+              <div className="pa-top">
+                <span className="pa-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
+                  <b>{e.p.day}</b>
+                  <small>{e.p.mon}</small>
+                  <i>{e.p.wds}</i>
                 </span>
-                <div className="ec-bd">
+                <span className="pa-type">{e.type}</span>
+              </div>
+              {i === 0 && <span className="pa-soon">{leftLabel(e.left)}</span>}
+              <div className="pa-bd">
+                <h3>{e.title}</h3>
+                <p><Clock /> {e.p.time}<span>·</span><Org /> {e.org}</p>
+                <span className="pa-cta">Ro‘yxatdan o‘tish <Arrow /></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* ===== B · Asosiy afisha (bento) ===== */}
+        <div className="evv evv-b">
+          {items.map((e, i) => (
+            <Link key={e.title} href={href} className={`pb-card pb-${i}`}>
+              <img className="cover" src={e.img} alt="" />
+              <div className="pa-shade" />
+              <div className="pa-top">
+                <span className="pa-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
+                  <b>{e.p.day}</b>
+                  <small>{e.p.mon}</small>
+                  <i>{e.p.wds}</i>
+                </span>
+                <span className="pa-type">{e.type}</span>
+              </div>
+              <div className="pa-bd">
+                {i === 0 && <span className="pb-soon">Eng yaqin · {leftLabel(e.left)}</span>}
+                <h3>{e.title}</h3>
+                <p><Clock /> {e.p.time}<span>·</span><Org /> {e.org}</p>
+                {i === 0 ? (
+                  <span className="btn btn-primary">Ro‘yxatdan o‘tish <span className="ic"><Arrow /></span></span>
+                ) : (
+                  <span className="pa-cta show">Batafsil <Arrow /></span>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* ===== C · Chipta ===== */}
+        <div className="evv evv-c">
+          {items.map((e) => (
+            <Link key={e.title} href={href} className="pt-ticket">
+              <div className="pt-img">
+                <img className="cover" src={e.img} alt="" />
+                <span className="pa-type">{e.type}</span>
+                <span className="pt-left">{leftLabel(e.left)}</span>
+              </div>
+              <div className="pt-cut" aria-hidden="true" />
+              <div className="pt-stub">
+                <span className="pt-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
+                  <b>{e.p.day}</b>
+                  <small>{e.p.mon}</small>
+                </span>
+                <div className="pt-txt">
                   <h3>{e.title}</h3>
-                  <p><Clock /> {p.time} · {e.org}</p>
-                  <span className="ec-more">Batafsil <Arrow /></span>
+                  <p>{e.p.wd}, {e.p.full} · {e.p.time}</p>
+                  <p><Org /> {e.org}</p>
                 </div>
-              </Link>
-            )
-          })}
+              </div>
+              <span className="pt-cta">Ro‘yxatdan o‘tish <Arrow /></span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

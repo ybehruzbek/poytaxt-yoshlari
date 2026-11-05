@@ -1,13 +1,12 @@
 /* =====================================================================
-   YAQIN TADBIRLAR — 3 ta ko'rinish: <html data-ev="a|b|c">
+   YAQIN TADBIRLAR — "Afisha" asosida 3 ta ko'rinish: <html data-ev="a|b|c">
+   A — Afisha+ · B — Asosiy afisha (bento) · C — Chipta
    ===================================================================== */
 .evv {
   display: none !important;
 }
 :root:not([data-ev]) .evv-a,
-[data-ev='a'] .evv-a {
-  display: flex !important;
-}
+[data-ev='a'] .evv-a,
 [data-ev='b'] .evv-b,
 [data-ev='c'] .evv-c {
   display: grid !important;
@@ -18,198 +17,83 @@
   flex-shrink: 0;
 }
 
-/* =====================  A · Lenta  ===================== */
-.evv-a .ev p {
-  font-size: 14.5px;
-}
-.evv-a .ev .go svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* =====================  B · Eng yaqin + ro'yxat  ===================== */
-.evv-b {
-  grid-template-columns: 1.25fr 1fr;
-  gap: 16px;
-}
-.eb-main {
+/* ---------- Umumiy afisha elementlari ---------- */
+.pa-card,
+.pb-card {
   position: relative;
-  min-height: 460px;
-  border-radius: var(--r-card);
-  overflow: hidden;
-  color: #fff;
-}
-.eb-main > img {
-  position: absolute;
-  inset: 0;
-}
-.eb-shade {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(83, 40, 34, 0.1) 0%, rgba(83, 40, 34, 0.92) 78%);
-}
-.eb-count {
-  position: absolute;
-  right: 24px;
-  top: 24px;
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  background: var(--yellow);
-  color: var(--navy);
-  display: grid;
-  place-content: center;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-}
-.eb-count b {
-  font: 800 40px/1 var(--f-head);
-}
-.eb-count span {
-  font: 700 12px/1.2 var(--f-body);
-  margin-top: 4px;
-}
-.eb-bd {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: flex-start;
-}
-.eb-tag {
-  font: 700 12px/1 var(--f-body);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 99px;
-  padding: 8px 12px;
-}
-.eb-bd h3 {
-  font: 800 calc(clamp(28px, 2.6vw, 40px) * var(--h-scale)) / 1.15 var(--f-head);
-  color: #fff;
-}
-.eb-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-  font-size: 15px;
-  color: #f3e6de;
-}
-.eb-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.eb-list {
-  list-style: none;
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  gap: 16px;
-}
-.eb-row {
-  display: grid;
-  grid-template-columns: 96px 1fr auto;
-  align-items: center;
-  gap: 20px;
-  height: 100%;
-  padding: 16px 22px 16px 16px;
-  border-radius: 32px;
-  background: #f8f8f8;
-  transition: background 0.2s;
-}
-.eb-row:hover {
-  background: #f2efec;
-}
-.eb-date {
-  height: 96px;
-  border-radius: 24px;
-  display: grid;
-  place-content: center;
-  text-align: center;
-}
-.eb-date b {
-  font: 800 36px/1 var(--f-head);
-}
-.eb-date small {
-  font: 700 12px/1 var(--f-body);
-  letter-spacing: 1px;
-  margin-top: 4px;
-}
-.eb-txt {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-.eb-txt b {
-  font: 700 20px/1.25 var(--f-head);
-  color: var(--navy);
-}
-.eb-txt small {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  color: var(--muted);
-}
-.eb-row:hover .go-sm {
-  transform: rotate(-45deg);
-}
-
-/* =====================  C · Afisha  ===================== */
-.evv-c {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.ec-card {
-  position: relative;
-  height: 440px;
   border-radius: var(--r-card);
   overflow: hidden;
   color: #fff;
   isolation: isolate;
 }
-.ec-card > img {
+.pa-card > img,
+.pb-card > img {
   position: absolute;
   inset: 0;
   z-index: -2;
-  transition: transform 0.6s;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.ec-card:hover > img {
+.pa-card:hover > img,
+.pb-card:hover > img,
+.pa-card:focus-visible > img,
+.pb-card:focus-visible > img {
   transform: scale(1.06);
 }
-.ec-shade {
+.pa-shade {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(83, 40, 34, 0) 35%, rgba(83, 40, 34, 0.94) 100%);
+  background: linear-gradient(180deg, rgba(83, 40, 34, 0.25) 0%, rgba(83, 40, 34, 0) 28%, rgba(83, 40, 34, 0) 42%, rgba(83, 40, 34, 0.95) 100%);
+  transition: background 0.3s;
 }
-.ec-date {
+.pa-top {
   position: absolute;
   left: 18px;
+  right: 18px;
   top: 18px;
-  width: 78px;
-  height: 84px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.pa-date {
+  width: 76px;
+  padding: 12px 0 10px;
   border-radius: 22px;
   display: grid;
-  place-content: center;
-  text-align: center;
+  justify-items: center;
+  gap: 2px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
-.ec-date b {
+.pa-date b {
   font: 800 32px/1 var(--f-head);
 }
-.ec-date small {
+.pa-date small {
   font: 700 12px/1 var(--f-body);
   letter-spacing: 1px;
-  margin-top: 4px;
 }
-.ec-bd {
+.pa-date i {
+  font: 600 11px/1 var(--f-body);
+  font-style: normal;
+  opacity: 0.85;
+  margin-top: 4px;
+  padding-top: 5px;
+  border-top: 1px solid currentColor;
+  width: 34px;
+  text-align: center;
+}
+.pa-type {
+  padding: 8px 12px;
+  border-radius: 99px;
+  font: 700 12px/1 var(--f-body);
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.pa-bd {
   position: absolute;
   left: 0;
   right: 0;
@@ -219,71 +103,313 @@
   flex-direction: column;
   gap: 10px;
 }
-.ec-bd h3 {
+.pa-bd h3 {
   font: 800 22px/1.2 var(--f-head);
   color: #fff;
 }
-.ec-bd p {
-  display: inline-flex;
+.pa-bd p {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 6px;
   font-size: 14px;
   color: #f3e6de;
 }
-.ec-more {
+.pa-bd p > span {
+  opacity: 0.6;
+}
+
+/* =====================  A · Afisha+  ===================== */
+.evv-a {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pa-card {
+  height: 460px;
+}
+/* hover/fokusda pastdan "Ro'yxatdan o'tish" tugmasi chiqadi */
+.pa-cta {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-  font: 700 15px/1 var(--f-head);
-  padding: 8px 0;
-  border-bottom: 2px solid var(--yellow);
-  transition: gap 0.2s;
+  gap: 8px;
+  height: 0;
+  padding: 0 18px;
+  border-radius: 99px;
+  background: var(--yellow);
+  color: var(--navy);
+  font: 700 14px/1 var(--f-head);
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+  transition:
+    height 0.3s,
+    opacity 0.3s,
+    transform 0.3s,
+    margin 0.3s;
 }
-.ec-card:hover .ec-more {
-  gap: 10px;
+.pa-card:hover .pa-cta,
+.pa-card:focus-visible .pa-cta,
+.pa-cta.show {
+  height: 42px;
+  opacity: 1;
+  transform: none;
+  margin-top: 4px;
+}
+.pa-card:hover .pa-shade {
+  background: linear-gradient(180deg, rgba(83, 40, 34, 0.25) 0%, rgba(83, 40, 34, 0) 25%, rgba(83, 40, 34, 0.15) 40%, rgba(83, 40, 34, 0.97) 100%);
+}
+/* eng yaqin tadbirda "N kun qoldi" belgisi */
+.pa-soon {
+  position: absolute;
+  left: 18px;
+  top: 150px;
+  padding: 8px 12px;
+  border-radius: 99px;
+  background: var(--yellow);
+  color: var(--navy);
+  font: 800 13px/1 var(--f-head);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+.pa-soon::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--navy);
+  animation: pa-pulse 1.4s ease-in-out infinite;
+  vertical-align: 1px;
+}
+@keyframes pa-pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* =====================  B · Asosiy afisha (bento)  ===================== */
+.evv-b {
+  grid-template-columns: 1.3fr 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  gap: 16px;
+}
+.pb-0 {
+  grid-row: 1 / 3;
+}
+.pb-3 {
+  grid-column: 2 / 4;
+}
+.pb-0 .pa-bd {
+  padding: 32px;
+  gap: 14px;
+}
+.pb-0 .pa-bd h3 {
+  font-size: calc(clamp(28px, 2.6vw, 40px) * var(--h-scale));
+}
+.pb-0 .pa-bd .btn {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+.pb-card:not(.pb-0) .pa-date {
+  width: 64px;
+  padding: 10px 0 8px;
+}
+.pb-card:not(.pb-0) .pa-date b {
+  font-size: 26px;
+}
+.pb-card:not(.pb-0) .pa-bd {
+  padding: 20px 22px;
+  gap: 8px;
+}
+.pb-card:not(.pb-0) .pa-bd h3 {
+  font-size: 19px;
+}
+.pb-card .pa-cta.show {
+  height: auto;
+  padding: 8px 0;
+  background: none;
+  color: #fff;
+  border-radius: 0;
+  border-bottom: 2px solid var(--yellow);
+  margin-top: 0;
+}
+.pb-soon {
+  align-self: flex-start;
+  padding: 8px 12px;
+  border-radius: 99px;
+  background: var(--yellow);
+  color: var(--navy);
+  font: 800 13px/1 var(--f-head);
+}
+
+/* =====================  C · Chipta  ===================== */
+.evv-c {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.pt-ticket {
+  --notch: 14px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #f8f8f8;
+  border-radius: 32px;
+  overflow: hidden;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  /* chipta "teshiklari": rasm va stub chegarasida yon tomondan o'yilgan */
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 220px, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 220px, #0000 98%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at 0 220px, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 220px, #0000 98%, #000) right / 51% 100% no-repeat;
+}
+.pt-ticket:hover,
+.pt-ticket:focus-visible {
+  transform: translateY(-6px);
+}
+.pt-img {
+  position: relative;
+  height: 220px;
+  flex-shrink: 0;
+}
+.pt-img .pa-type {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  background: rgba(83, 40, 34, 0.45);
+}
+.pt-left {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  padding: 8px 12px;
+  border-radius: 99px;
+  background: var(--yellow);
+  color: var(--navy);
+  font: 800 12.5px/1 var(--f-head);
+}
+.pt-cut {
+  height: 0;
+  margin: 0 22px;
+  border-top: 2px dashed #d9cfc8;
+}
+.pt-stub {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 14px;
+  padding: 18px 18px 8px;
+  flex: 1;
+}
+.pt-date {
+  height: 72px;
+  border-radius: 18px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+.pt-date b {
+  font: 800 28px/1 var(--f-head);
+}
+.pt-date small {
+  font: 700 11px/1 var(--f-body);
+  letter-spacing: 1px;
+  margin-top: 3px;
+}
+.pt-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.pt-txt h3 {
+  font: 800 18px/1.25 var(--f-head);
+  color: var(--navy);
+}
+.pt-txt p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.pt-cta {
+  margin: 8px 18px 18px;
+  height: 46px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--yellow);
+  color: var(--navy);
+  font: 700 15px/1 var(--f-head);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.pt-ticket:hover .pt-cta,
+.pt-ticket:focus-visible .pt-cta {
+  background: var(--navy);
+  color: #fff;
 }
 
 /* =====================  Moslashuv  ===================== */
 @media (max-width: 1100px) {
-  .evv-b {
-    grid-template-columns: 1fr;
-  }
+  .evv-a,
   .evv-c {
     grid-template-columns: 1fr 1fr;
   }
+  .evv-b {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 420px 260px 260px;
+  }
+  .pb-0 {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+  .pb-3 {
+    grid-column: 1 / -1;
+  }
 }
 @media (max-width: 640px) {
-  .eb-main {
-    min-height: 520px;
-  }
-  .eb-bd {
-    padding: 24px;
-  }
-  .eb-count {
-    width: 92px;
-    height: 92px;
-    right: 18px;
-    top: 18px;
-  }
-  .eb-count b {
-    font-size: 32px;
-  }
-  .eb-row {
-    grid-template-columns: 72px 1fr;
-  }
-  .eb-row .go-sm {
-    display: none;
-  }
-  .eb-date {
-    height: 76px;
-  }
+  .evv-a,
+  .evv-b,
   .evv-c {
     grid-template-columns: 1fr;
   }
-  .ec-card {
-    height: 380px;
+  .evv-b {
+    grid-template-rows: none;
+    grid-auto-rows: 300px;
+  }
+  .pb-0 {
+    min-height: 420px;
+  }
+  .pa-card {
+    height: 400px;
+  }
+  /* sensor ekranda hover yo'q — tugma doim ko'rinadi */
+  .pa-cta {
+    height: 42px;
+    opacity: 1;
+    transform: none;
+    margin-top: 4px;
+  }
+}
+@media (hover: none) {
+  .pa-cta {
+    height: 42px;
+    opacity: 1;
+    transform: none;
+    margin-top: 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pa-soon::before {
+    animation: none;
   }
 }
 
