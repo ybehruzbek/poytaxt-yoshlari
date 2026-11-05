@@ -2,15 +2,19 @@
 import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
+import { OppsFeed, OppsTabs } from './OppsVariants'
 
-/** Imkoniyatlar kartalari. ittifoq/index.html prototipidan avtomatik ko'chirilgan — dizaynni o'zgartirmang. */
+/**
+ * Siz uchun imkoniyatlar.
+ * VAQTINCHA 3 ta ko'rinish (<html data-op="a|b|c">): A — rangli kartalar (prototip), B — tablar, C — muddat bo'yicha lenta.
+ */
 export function Opportunities({ locale }: { locale: Locale }) {
   return (
     <>
 <section className="sec" id="imkoniyatlar">
   <div className="wrap">
     <h2 className="h2 opps-title">Siz uchun <span>imkoniyatlar</span></h2>
-    <div className="opps">
+    <div className="opv opv-a opps">
       <Link href={`/${locale}/faoliyat/loyihalar`} className="opp big o1">
         <div className="title"><b>Grantlar</b><span>Tashabbusingizni moliyalashtiring</span></div>
         <svg className="deco" style={{ left: "20px", top: "320px", width: "72px", transform: "rotate(-28deg)" }} viewBox="0 0 40 40"><path fill="#532822" d="M20 0l4 13 13-6-6 13 13 4-13 4 6 13-13-6-4 13-4-13-13 6 6-13-13-4 13-4-6-13 13 6z" /></svg>
@@ -38,6 +42,8 @@ export function Opportunities({ locale }: { locale: Locale }) {
         <div className="ph"><img className="cover" src="/img/news-1.jpg" alt="Tanlov ishtirokchilari" /></div>
       </Link>
     </div>
+    <OppsTabs locale={locale} />
+    <OppsFeed locale={locale} />
   </div>
 </section>
     </>
