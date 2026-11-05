@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { imloMatn } from '../lib/imlo-hook'
+
 export const Media: CollectionConfig = {
   slug: 'media',
   labels: { singular: 'Rasm / fayl', plural: 'Media' },
@@ -17,6 +19,7 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
       localized: true,
+      hooks: { beforeChange: [imloMatn] },
     },
   ],
   upload: {
