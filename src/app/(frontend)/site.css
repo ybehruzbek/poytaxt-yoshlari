@@ -383,3 +383,9 @@ html,body{overflow-x:clip}
 .hero-slogan{font-size:max(32px,min(calc(92px * var(--h-scale)),10.6cqi))}
 .hero-slogan > span{display:block;color:inherit}
 @media (max-width:900px){.hero-text{flex:none;width:100%}}
+
+/* ===== Dizayn variantlarini ko'rib chiqish paneli (DevVariantSwitch, faqat dev) ===== */
+.dev-switch{position:fixed;right:20px;bottom:76px;z-index:100;display:flex;align-items:center;gap:4px;background:#fff;border-radius:99px;padding:5px 5px 5px 14px;box-shadow:0 12px 36px rgba(83,40,34,.2);font:600 12px/1 var(--f-body);color:#8a7f7a}
+.dev-switch button{border:none;background:none;border-radius:99px;min-width:34px;padding:9px 10px;font:700 13px/1 var(--f-body);color:var(--navy);cursor:pointer}
+.dev-switch button.on{background:var(--yellow)}
+@media (max-width:640px){.dev-switch{right:12px;bottom:64px}}
