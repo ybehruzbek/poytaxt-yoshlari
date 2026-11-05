@@ -7,6 +7,10 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  experimental: {
+    // murojaat shaklidagi fayl (10 MB gacha) uchun
+    serverActions: { bodySizeLimit: '11mb' },
+  },
   images: {
     localPatterns: [
       {

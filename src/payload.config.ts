@@ -10,6 +10,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
+import { AppealFiles, Appeals } from './collections/Appeals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,7 +42,7 @@ export default buildConfig({
     defaultLocale: 'uz',
     fallback: true,
   },
-  collections: [News, Media, Users],
+  collections: [News, Media, Appeals, AppealFiles, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

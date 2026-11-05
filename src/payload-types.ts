@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     news: News;
     media: Media;
+    appeals: Appeal;
+    'appeal-files': AppealFile;
     users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,6 +81,8 @@ export interface Config {
   collectionsSelect: {
     news: NewsSelect<false> | NewsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    appeals: AppealsSelect<false> | AppealsSelect<true>;
+    'appeal-files': AppealFilesSelect<false> | AppealFilesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -201,6 +205,41 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appeals".
+ */
+export interface Appeal {
+  id: number;
+  type: 'savol' | 'murojaat' | 'taklif';
+  status: 'yangi' | 'jarayonda' | 'yopildi';
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+  file?: (number | null) | AppealFile;
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appeal-files".
+ */
+export interface AppealFile {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -258,6 +297,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'appeals';
+        value: number | Appeal;
+      } | null)
+    | ({
+        relationTo: 'appeal-files';
+        value: number | AppealFile;
       } | null)
     | ({
         relationTo: 'users';
@@ -373,6 +420,39 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appeals_select".
+ */
+export interface AppealsSelect<T extends boolean = true> {
+  type?: T;
+  status?: T;
+  name?: T;
+  phone?: T;
+  email?: T;
+  message?: T;
+  file?: T;
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "appeal-files_select".
+ */
+export interface AppealFilesSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
