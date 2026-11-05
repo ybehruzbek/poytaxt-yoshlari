@@ -4,23 +4,56 @@ import Link from 'next/link'
 import type { Locale } from '@/i18n/config'
 import { OPPS, OPP_TYPES, type OppType, deadlineLabel } from '@/lib/opps'
 
-/** Karta kengayganda chiqadigan ma'lumot: faol dasturlar soni, eng yaqin muddat va "Batafsil" */
+const ICON: Record<OppType, React.ReactNode> = {
+  grant: <path d="M12 2v20M17 6.5C17 4.6 14.8 3.5 12 3.5S7 4.6 7 6.5s2.2 2.8 5 3.5 5 1.6 5 3.5-2.2 3-5 3-5-1.1-5-3" />,
+  stip: <path d="M2 9l10-5 10 5-10 5L2 9zm4 2.2V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.8M22 9v6" />,
+  vol: <path d="M12 21s-7.5-4.6-9.3-9.2C1.4 8.3 3.6 5 7 5c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.4 0 5.6 3.3 4.3 6.8C19.5 16.4 12 21 12 21z" />,
+  tanlov: <path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4" />,
+}
+
+/**
+ * Kartaning qo'shimcha qatlamlari (qaysi biri ko'rinishi variantga bog'liq):
+ *  .opp-rail  — toraygan kartadagi vertikal nom, ikonka va son (B)
+ *  .opp-shade — rasm butun kartaga yoyilganda matn o'qilishi uchun soya (C)
+ *  .opp-info  — kengaygan kartadagi tavsif, dasturlar ro'yxati, muddat va "Batafsil"
+ */
 function OppInfo({ t }: { t: OppType }) {
   const type = OPP_TYPES.find((x) => x.key === t)!
   const list = OPPS.filter((o) => o.type === t)
   const next = list.map((o) => o.deadline).filter(Boolean).sort()[0] ?? null
+  const icon = (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {ICON[t]}
+    </svg>
+  )
   return (
-    <div className="opp-info">
-      <p>{type.desc}</p>
-      <div className="opp-meta">
-        <span><b>{list.length}</b> ta faol dastur</span>
-        <span>{next ? <>Eng yaqin muddat: <b>{deadlineLabel(next)}</b></> : <b>Doimiy qabul</b>}</span>
-      </div>
-      <span className="opp-more">
-        Batafsil
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    <>
+      <span className="opp-rail" aria-hidden="true">
+        <i>{icon}</i>
+        <b>{type.label}</b>
+        <small>{list.length} ta</small>
       </span>
-    </div>
+      <span className="opp-shade" aria-hidden="true" />
+      <div className="opp-info">
+        <p>{type.desc}</p>
+        <ul className="opp-progs">
+          {list.slice(0, 3).map((o) => (
+            <li key={o.title}>
+              <span>{o.title}</span>
+              <em>{deadlineLabel(o.deadline)}</em>
+            </li>
+          ))}
+        </ul>
+        <div className="opp-meta">
+          <span><b>{list.length}</b> ta faol dastur</span>
+          <span>{next ? <>Eng yaqin muddat: <b>{deadlineLabel(next)}</b></> : <b>Doimiy qabul</b>}</span>
+        </div>
+        <span className="opp-more">
+          Batafsil
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </span>
+      </div>
+    </>
   )
 }
 
