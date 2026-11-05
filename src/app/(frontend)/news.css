@@ -1,0 +1,375 @@
+/* =====================================================================
+   YANGILIKLAR (hero ostida): asosiy yangilik + ro'yxat
+   ===================================================================== */
+
+.news-sec .meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.news-sec .chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 99px;
+  font: 600 12.5px/1 var(--f-body);
+}
+.news-sec .chip.o { background: #ffe9de; color: #a64818; }
+.news-sec .chip.g { background: #e3f3ea; color: #2b7550; }
+.news-sec .chip.b { background: #e4f0ff; color: #2b5d9c; }
+.news-sec .chip.y { background: #fff3cf; color: #7d5b00; }
+.news-sec h3 {
+  font-family: var(--f-head);
+  color: var(--navy);
+}
+.news-sec .more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 700 15px/1 var(--f-head);
+  color: var(--navy);
+  padding: 8px 0;
+  border-bottom: 2px solid var(--yellow);
+  transition: gap 0.2s;
+}
+.news-sec .more svg {
+  width: 18px;
+  height: 18px;
+}
+.news-sec .more:hover {
+  gap: 10px;
+}
+
+.nv-a {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 16px;
+}
+.na-main {
+  background: #f8f8f8;
+  border-radius: var(--r-card);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.na-main .im {
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-thumb);
+  overflow: hidden;
+}
+.na-main .bd {
+  padding: 24px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+.na-main h3 {
+  font-weight: 800;
+  font-size: calc(clamp(24px, 2.2vw, 32px) * var(--h-scale));
+  line-height: 1.2;
+}
+.na-main p {
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+.na-main .btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.na-list {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.na-list article {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 18px;
+  align-items: center;
+  background: #f8f8f8;
+  border-radius: 32px;
+  padding: 12px 20px 12px 12px;
+  transition: background 0.2s;
+}
+.na-list article:hover {
+  background: #f2efec;
+}
+.na-list .th {
+  aspect-ratio: 1;
+  border-radius: 24px;
+  overflow: hidden;
+}
+.na-list h3 {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  margin: 8px 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* =====================  Moslashuv  ===================== */
+@media (max-width: 1100px) {
+  .nv-a {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .na-list article {
+    grid-template-columns: 96px 1fr;
+    gap: 14px;
+    padding-right: 14px;
+  }
+  .na-main .btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* =====================  Aylanish (NewsRotator)  ===================== */
+.na-main .im {
+  position: relative;
+}
+.na-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.na-main .na-actions .btn {
+  margin-top: 0;
+}
+.na-ctrl {
+  display: flex;
+  gap: 8px;
+}
+.na-ctrl button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.na-ctrl button:hover {
+  background: var(--soft);
+  border-color: var(--navy);
+}
+.na-ctrl button[aria-pressed='true'] {
+  background: var(--yellow);
+  border-color: var(--yellow);
+}
+.na-ctrl svg {
+  width: 18px;
+  height: 18px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .na-main,
+  .na-list > li {
+    animation: none;
+  }
+}
+@media (max-width: 700px) {
+  .na-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .na-ctrl {
+    justify-content: center;
+  }
+}
+
+/* =====================  Yangilik sahifasi matni  ===================== */
+.news-body {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--grey);
+  max-width: 760px;
+}
+.news-body p + p {
+  margin-top: 1em;
+}
+.news-body h2,
+.news-body h3 {
+  color: var(--navy);
+  margin: 1.4em 0 0.5em;
+}
+.news-body a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-underline-offset: 3px;
+}
+
+/* =====================  Balandlik: katta yangilik = 4 ta kichik karta  ===================== */
+.nv-a {
+  align-items: stretch;
+}
+.na-main {
+  height: 100%;
+}
+/* matn uzunligi har xil bo'lsa ham balandlik sakramasin */
+.na-main h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em;
+}
+.na-main p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 4.8em;
+}
+.na-list {
+  height: 100%;
+  grid-template-rows: repeat(4, minmax(150px, 1fr));
+}
+.na-list > li {
+  display: flex;
+  min-height: 0;
+}
+.na-list article {
+  flex: 1;
+  grid-template-columns: 156px 1fr;
+  align-items: stretch;
+  padding: 12px 22px 12px 12px;
+}
+.na-list .th {
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 126px;
+}
+.na-list article > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.na-list h3 {
+  font-size: 17.5px;
+  -webkit-line-clamp: 3;
+}
+@media (max-width: 1100px) {
+  .na-list {
+    height: auto;
+    grid-template-rows: none;
+  }
+}
+@media (max-width: 700px) {
+  .na-list article {
+    grid-template-columns: 104px 1fr;
+  }
+  .na-list .th {
+    min-height: 104px;
+  }
+}
+
+/* =====================  Almashish animatsiyasi: "Kattalashish"  =====================
+   Rasm kichik kartadan kattalashib chiqqandek paydo bo'ladi, ko'rsatilayotganda sekin yaqinlashadi. */
+.na-main .im img {
+  transform-origin: center;
+  animation: c-kenburns 7.5s linear both;
+}
+.na-main .im {
+  animation: c-img 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.na-main .bd {
+  animation: c-txt 0.6s 0.15s ease both;
+}
+.na-list > li {
+  animation: c-side 0.5s ease both;
+}
+@keyframes c-img {
+  from { opacity: 0; transform: scale(0.86); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes c-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+@keyframes c-txt {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes c-side {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .na-main,
+  .na-main *,
+  .na-list > li {
+    animation: none !important;
+  }
+}
+
+/* telefonda katta sarlavha to'liqroq ko'rinsin */
+@media (max-width: 700px) {
+  .na-main h3 {
+    -webkit-line-clamp: 4;
+    min-height: 0;
+  }
+  .na-main p {
+    min-height: 0;
+  }
+}
+
+/* =====================  Almashishgacha qolgan vaqt: navbatdagi karta sariq bilan to'lib boradi  ===================== */
+.na-list article {
+  position: relative;
+  overflow: hidden;
+}
+.na-list article > :not(.pg-next):not(.pg-next-label) {
+  position: relative;
+  z-index: 1;
+}
+.pg-next {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(255, 210, 90, 0.42), rgba(255, 210, 90, 0.22));
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: pg-fill linear forwards;
+}
+.pg-next-label {
+  display: block;
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  z-index: 2;
+  padding: 5px 10px;
+  border-radius: 99px;
+  background: var(--navy);
+  color: #fff;
+  font: 700 11px/1 var(--f-body);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+.na-list li.is-next article {
+  box-shadow: inset 0 0 0 2px var(--yellow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pg-next {
+    animation: none !important;
+  }
+}
