@@ -1,0 +1,79 @@
+/* =====================================================================
+   Dizayn tokenlari — ittifoq/ prototipi va InsightPod referensidan.
+   Ranglarni O'ZGARTIRMANG (referens bo'yicha qat'iy).
+   Shriftlar next/font orqali o'z serverimizdan: --f-head (Montserrat), --f-body (Inter).
+   ===================================================================== */
+:root {
+  --navy: #532822; /* Brown: asosiy matn, to'q bloklar */
+  --yellow: #ffd25a; /* asosiy tugma */
+  --green: #43a574;
+  --green-d: #43a574;
+  --blue: #ff854b; /* Orange: aksent (prototipdagi nom saqlangan) */
+  --sky: #89c0ff;
+  --lime: #ff939a; /* Pink */
+  --silver: #d5d0cc;
+  --soft: #fff4e9; /* Natural */
+  --grey: #383838;
+  --muted: #6e6662;
+  --line: #eee6e0;
+  --r-pill: 96px;
+  --r-card: 48px;
+  --r-thumb: 32px;
+  --h-scale: 0.94;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+html,
+body {
+  overflow-x: clip;
+}
+body {
+  font-family: var(--f-body), system-ui, sans-serif;
+  color: var(--grey);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--f-head), system-ui, sans-serif;
+}
+.wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 72px;
+}
+@media (max-width: 1240px) {
+  .wrap {
+    padding: 0 40px;
+  }
+}
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,97 @@
+/* =====================================================================
+   TUGMALAR: hover / active / focus — tanlangan variant "B · To'ldirish".
+   Hover'da chapdan o'ngga rang to'ladi, strelka 45° buriladi.
+   Klaviatura fokusi: oq + jigarrang ikki qavatli halqa (sichqoncha bosganda chiqmaydi).
+   site.css dan KEYIN ulanadi (bir xil specificity'dagi qoidalarni ustidan yozadi).
+   ===================================================================== */
+
+/* Sichqoncha bosganda fokus halqasi chiqmaydi, klaviaturada chiqadi */
+a:focus,
+button:focus {
+  outline: none;
+}
+
+:is(.btn, .socials a) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+:is(.btn, .socials a)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+:is(.btn, .socials a):hover::before,
+:is(.btn, .socials a):focus-visible::before {
+  transform: scaleX(1);
+}
+/* asosiy (sariq) → jigarrang to'ladi */
+.btn-primary::before,
+.head-cta::before,
+.socials a::before {
+  background: var(--navy);
+}
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.head-cta:hover,
+.head-cta:focus-visible,
+.socials a:hover,
+.socials a:focus-visible {
+  transform: none;
+  box-shadow: none;
+  color: #fff;
+  background: var(--yellow);
+}
+.socials a:hover,
+.socials a:focus-visible {
+  background: transparent;
+}
+.head-cta:hover {
+  border-color: var(--navy);
+}
+/* chiziqli (sariq chegara) → sariq to'ladi */
+.btn-ghost::before {
+  background: var(--yellow);
+}
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: transparent;
+  color: var(--navy);
+}
+.btn-primary .ic svg,
+.ev .go svg {
+  transition: transform 0.35s;
+}
+.btn-primary:hover .ic svg,
+.btn-primary:focus-visible .ic svg {
+  transform: rotate(-45deg);
+}
+.btn:active {
+  transform: scale(0.98);
+}
+:is(a, button):focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px #fff,
+    0 0 0 6px var(--navy);
+}
+.ev:hover .go,
+.ev:focus-visible .go {
+  background: var(--navy);
+  color: #fff;
+  transform: none;
+}
+.ev:hover .go svg,
+.ev:focus-visible .go svg {
+  transform: rotate(-45deg);
+}
+
+/* Kartalar klaviatura fokusida ham ajralib turadi */
+:is(.ev, .opp, .nc):focus-visible {
+  outline-offset: 4px;
+}
