@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import { APPEAL_FILE_MAX, APPEAL_FILE_TYPES, APPEAL_TYPES } from '@/collections/Appeals'
+import { clientIp, rateLimited } from '@/lib/rate-limit'
 
 export type AppealField = 'type' | 'name' | 'phone' | 'email' | 'message' | 'file'
 export type AppealState = {
@@ -15,17 +16,6 @@ export type AppealState = {
 
 const ALLOWED_EXT = /\.(pdf|jpe?g|png|webp|docx?)$/i
 
-/* Oddiy spam himoyasi: bitta IP'dan 10 daqiqada 5 tadan ortiq murojaat qabul qilinmaydi.
-   (Bitta server nusxasi uchun yetarli; bir nechta nusxada umumiy xotira kerak bo'ladi.) */
-const hits = new Map<string, number[]>()
-function rateLimited(ip: string): boolean {
-  const now = Date.now()
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 10 * 60 * 1000)
-  recent.push(now)
-  hits.set(ip, recent)
-  return recent.length > 5
-}
-
 const str = (fd: FormData, k: string) => String(fd.get(k) ?? '').trim()
 
 /** Saytdagi "Savol, murojaat yoki taklif" shaklini qabul qiladi */
@@ -33,8 +23,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
   // bot uchun yashirin maydon to'ldirilgan bo'lsa — jimgina "qabul qilindi" deymiz
   if (str(fd, 'website')) return { ok: true, message: 'Rahmat! Murojaatingiz qabul qilindi.' }
 
-  const h = await headers()
-  const ip = (h.get('x-forwarded-for') ?? h.get('x-real-ip') ?? 'local').split(',')[0].trim()
+  const ip = clientIp(await headers())
   if (rateLimited(ip)) return { ok: false, message: 'Juda ko‘p urinish. Iltimos, birozdan keyin qayta yuboring.' }
 
   const type = str(fd, 'type')
