@@ -1,20 +1,34 @@
 /* eslint-disable @next/next/no-img-element -- logotip PNG va namunaviy rasmlar; SVG varianti kelganda almashtiriladi */
 import Link from 'next/link'
+import config from '@payload-config'
+import { getPayload } from 'payload'
 import type { ReactNode } from 'react'
 
 import type { Locale } from '@/i18n/config'
+import { DEFAULT_SOCIALS, NET_LABEL, NETS, type Net, socialHandle } from '@/lib/socials'
 
 const LOGO_ALT = 'O‘zbekiston Yoshlar Ittifoqi — Toshkent shahar hududiy kengashi'
 
 /*
- * Ijtimoiy tarmoqlar. Havolalar va "@yoshkent" nomi NAMUNA — rasmiy sahifalar bilan almashtiring.
+ * Ijtimoiy tarmoqlar: havolalar admin paneldan olinadi (Sayt sozlamalari → Ijtimoiy tarmoqlar).
  * Telefon ichidagi ko'rinishlar sahifaning soddalashtirilgan illyustratsiyasi (haqiqiy skrinshot emas);
  * obunachilar soni kabi raqamlar ataylab ko'rsatilmaydi.
  */
-const HANDLE = '@yoshkent'
 const NAME = 'Poytaxt yoshlari'
 
-const Icon = {
+async function getSocials(): Promise<Record<Net, string>> {
+  try {
+    const payload = await getPayload({ config })
+    const doc = (await payload.findGlobal({ slug: 'socials', depth: 0 })) as Partial<Record<Net, string | null>>
+    // hali saqlanmagan maydon (null/undefined) — boshlang'ich havola; ataylab bo'shatilgan ('') — ko'rsatilmaydi
+    return Object.fromEntries(NETS.map((n) => [n, doc[n] ?? DEFAULT_SOCIALS[n]])) as Record<Net, string>
+  } catch (err) {
+    console.error('[footer] ijtimoiy tarmoqlarni o‘qib bo‘lmadi:', err)
+    return DEFAULT_SOCIALS
+  }
+}
+
+const Icon: Record<Net, ReactNode> = {
   telegram: (
     <path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13 1.4 11.5c-1-.3-1-1 .2-1.5L20.6 2.7c.9-.3 1.6.2 1.3 1.6z" />
   ),
@@ -30,7 +44,6 @@ const Icon = {
     <path d="M23 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.6 3.6 12 3.6 12 3.6s-4.6 0-7.8.3c-.4.1-1.4.1-2.3 1C1.2 5.6 1 7.2 1 7.2S.8 9.1.8 11v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.6.2 7.6.2s4.6 0 7.8-.3c.4-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8V11c0-1.9-.2-3.8-.2-3.8zM9.7 14.9V8.4l6.1 3.3-6.1 3.2z" />
   ),
 }
-type Net = keyof typeof Icon
 
 const Svg = ({ net }: { net: Net }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -59,7 +72,7 @@ const Ava = ({ size = 'm' }: { size?: 's' | 'm' | 'l' }) => (
   </span>
 )
 
-function TelegramScreen() {
+function TelegramScreen({ handle }: { handle: string }) {
   return (
     <div className="ph-scr ph-tg">
       <div className="ph-bar">
@@ -67,7 +80,7 @@ function TelegramScreen() {
         <Ava size="s" />
         <span className="ph-title">
           <b>{NAME}</b>
-          <small>kanal</small>
+          <small>{handle ? `${handle} · kanal` : 'kanal'}</small>
         </span>
       </div>
       <div className="ph-tg-feed">
@@ -86,12 +99,12 @@ function TelegramScreen() {
   )
 }
 
-function InstagramScreen() {
+function InstagramScreen({ handle }: { handle: string }) {
   const tiles = ['about-1', 'news-2', 'opp-vol', 'news-3', 'about-2', 'opp-grant', 'hero-tk', 'opp-stip', 'about-3']
   return (
     <div className="ph-scr ph-ig">
       <div className="ph-bar ph-bar-plain">
-        <b>{HANDLE.slice(1)}</b>
+        <b>{handle || NAME}</b>
       </div>
       <div className="ph-ig-head">
         <span className="ph-ig-ring">
@@ -112,7 +125,7 @@ function InstagramScreen() {
   )
 }
 
-function FacebookScreen() {
+function FacebookScreen(_: { handle: string }) {
   return (
     <div className="ph-scr ph-fb">
       <div className="ph-fb-cover">
@@ -139,7 +152,7 @@ function FacebookScreen() {
   )
 }
 
-function YoutubeScreen() {
+function YoutubeScreen({ handle }: { handle: string }) {
   const videos = [
     { img: 'news-2', t: 'Poytaxt yoshlari forumi — to‘liq lavha' },
     { img: 'about-1', t: 'Kengash faoliyati: yil yakunlari' },
@@ -151,7 +164,7 @@ function YoutubeScreen() {
         <Ava size="m" />
         <span>
           <b>{NAME}</b>
-          <small>{HANDLE}</small>
+          {handle && <small>{handle}</small>}
         </span>
       </div>
       <div className="ph-btn">Obuna bo‘lish</div>
@@ -170,15 +183,17 @@ function YoutubeScreen() {
   )
 }
 
-const PHONES: { net: Net; label: string; aria: string; Screen: () => ReactNode }[] = [
-  { net: 'telegram', label: 'Telegram', aria: 'Telegram kanalimiz', Screen: TelegramScreen },
-  { net: 'instagram', label: 'Instagram', aria: 'Instagram sahifamiz', Screen: InstagramScreen },
-  { net: 'facebook', label: 'Facebook', aria: 'Facebook sahifamiz', Screen: FacebookScreen },
-  { net: 'youtube', label: 'YouTube', aria: 'YouTube kanalimiz', Screen: YoutubeScreen },
-]
+const PHONES: Record<Net, { aria: string; Screen: (p: { handle: string }) => ReactNode }> = {
+  telegram: { aria: 'Telegram kanalimiz', Screen: TelegramScreen },
+  instagram: { aria: 'Instagram sahifamiz', Screen: InstagramScreen },
+  facebook: { aria: 'Facebook sahifamiz', Screen: FacebookScreen },
+  youtube: { aria: 'YouTube kanalimiz', Screen: YoutubeScreen },
+}
 
 /** Sayt pastki qismi: shior + murojaat, ijtimoiy tarmoqlar telefon ko'rinishida, logo va huquqiy qator */
-export function Footer({ locale }: { locale: Locale }) {
+export async function Footer({ locale }: { locale: Locale }) {
+  const socials = await getSocials()
+  const nets = NETS.filter((n) => socials[n])
   const L = (h: string) => `/${locale}${h}`
   return (
     <footer className="fb">
@@ -195,27 +210,39 @@ export function Footer({ locale }: { locale: Locale }) {
           </Link>
         </div>
 
-        <div className="fb-phones">
-          {PHONES.map(({ net, label, aria, Screen }) => (
-            <a key={net} href="#" className={`fb-phone fb-phone-${net}`} aria-label={aria}>
-              <span className="ph" aria-hidden="true">
-                <span className="ph-island" />
-                <span className="ph-status">
-                  <b>9:41</b>
-                  <i />
-                </span>
-                <Screen />
-              </span>
-              <span className="fb-phone-label">
-                <Svg net={net} />
-                {label}
-                <span className="fb-phone-go">
-                  <Arrow />
-                </span>
-              </span>
-            </a>
-          ))}
-        </div>
+        {nets.length > 0 && (
+          <div className="fb-phones">
+            {nets.map((net) => {
+              const { aria, Screen } = PHONES[net]
+              return (
+                <a
+                  key={net}
+                  href={socials[net]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`fb-phone fb-phone-${net}`}
+                  aria-label={`${aria} (yangi oynada ochiladi)`}
+                >
+                  <span className="ph" aria-hidden="true">
+                    <span className="ph-island" />
+                    <span className="ph-status">
+                      <b>9:41</b>
+                      <i />
+                    </span>
+                    <Screen handle={socialHandle(net, socials[net])} />
+                  </span>
+                  <span className="fb-phone-label">
+                    <Svg net={net} />
+                    {NET_LABEL[net]}
+                    <span className="fb-phone-go">
+                      <Arrow />
+                    </span>
+                  </span>
+                </a>
+              )
+            })}
+          </div>
+        )}
 
         <div className="fb-bot">
           <Link href={L('')} className="fb-logo">

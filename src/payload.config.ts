@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { AppealFiles, Appeals } from './collections/Appeals'
+import { Socials } from './globals/Socials'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,6 +44,7 @@ export default buildConfig({
     fallback: true,
   },
   collections: [News, Media, Appeals, AppealFiles, Users],
+  globals: [Socials],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

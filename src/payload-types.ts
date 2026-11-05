@@ -93,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('uz' | 'ru' | 'en') | ('uz' | 'ru' | 'en')[];
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    socials: Social;
+  };
+  globalsSelect: {
+    socials: SocialsSelect<false> | SocialsSelect<true>;
+  };
   locale: 'uz' | 'ru' | 'en';
   widgets: {
     collections: CollectionsWidget;
@@ -518,6 +522,44 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials".
+ */
+export interface Social {
+  id: number;
+  /**
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   */
+  telegram?: string | null;
+  /**
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   */
+  instagram?: string | null;
+  /**
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   */
+  facebook?: string | null;
+  /**
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
+   */
+  youtube?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "socials_select".
+ */
+export interface SocialsSelect<T extends boolean = true> {
+  telegram?: T;
+  instagram?: T;
+  facebook?: T;
+  youtube?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
