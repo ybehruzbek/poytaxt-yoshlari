@@ -24,7 +24,6 @@ const EVENTS: Ev[] = [
 const MON = ['YAN', 'FEV', 'MAR', 'APR', 'MAY', 'IYN', 'IYL', 'AVG', 'SEN', 'OKT', 'NOY', 'DEK']
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
 const WD = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba']
-const WD_S = ['Ya', 'Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh']
 
 /** ISO → Toshkent vaqtidagi qismlar */
 function parts(iso: string) {
@@ -35,7 +34,6 @@ function parts(iso: string) {
     day: String(d.getUTCDate()).padStart(2, '0'),
     mon: MON[d.getUTCMonth()],
     wd: WD[d.getUTCDay()],
-    wds: WD_S[d.getUTCDay()],
     full: `${d.getUTCDate()}-${MON_FULL[d.getUTCMonth()]}`,
     time: `${hh}:${mm}`,
   }
@@ -50,12 +48,6 @@ const Arrow = () => (
     <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 )
-const Clock = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="9" />
-    <path d="M12 7v5l3 2" />
-  </svg>
-)
 const Org = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" />
@@ -63,8 +55,8 @@ const Org = () => (
 )
 
 /**
- * Yaqin tadbirlar — "Afisha" asosida 3 ta takomillashtirilgan ko'rinish (VAQTINCHA, <html data-ev="a|b|c">):
- *  A — Afisha+ (hover'da "Ro'yxatdan o'tish" chiqadi), B — Asosiy afisha (bento), C — Chipta.
+ * Yaqin tadbirlar — "chipta" ko'rinishi: tepada rasm va qolgan kunlar, o'yilgan chiziq,
+ * pastda sana, vaqt, tashkilotchi va "Ro'yxatdan o'tish".
  */
 export function Events({ locale }: { locale: Locale }) {
   const href = `/${locale}/faoliyat/tadbirlar`
@@ -78,60 +70,8 @@ export function Events({ locale }: { locale: Locale }) {
           <Link href={href} className="btn btn-ghost">Barcha tadbirlar</Link>
         </div>
 
-        {/* ===== A · Afisha+ ===== */}
-        <div className="evv evv-a">
-          {items.map((e, i) => (
-            <Link key={e.title} href={href} className="pa-card">
-              <img className="cover" src={e.img} alt="" />
-              <div className="pa-shade" />
-              <div className="pa-top">
-                <span className="pa-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
-                  <b>{e.p.day}</b>
-                  <small>{e.p.mon}</small>
-                  <i>{e.p.wds}</i>
-                </span>
-                <span className="pa-type">{e.type}</span>
-              </div>
-              {i === 0 && <span className="pa-soon">{leftLabel(e.left)}</span>}
-              <div className="pa-bd">
-                <h3>{e.title}</h3>
-                <p><Clock /> {e.p.time}<span>·</span><Org /> {e.org}</p>
-                <span className="pa-cta">Ro‘yxatdan o‘tish <Arrow /></span>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* ===== B · Asosiy afisha (bento) ===== */}
-        <div className="evv evv-b">
-          {items.map((e, i) => (
-            <Link key={e.title} href={href} className={`pb-card pb-${i}`}>
-              <img className="cover" src={e.img} alt="" />
-              <div className="pa-shade" />
-              <div className="pa-top">
-                <span className="pa-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
-                  <b>{e.p.day}</b>
-                  <small>{e.p.mon}</small>
-                  <i>{e.p.wds}</i>
-                </span>
-                <span className="pa-type">{e.type}</span>
-              </div>
-              <div className="pa-bd">
-                {i === 0 && <span className="pb-soon">Eng yaqin · {leftLabel(e.left)}</span>}
-                <h3>{e.title}</h3>
-                <p><Clock /> {e.p.time}<span>·</span><Org /> {e.org}</p>
-                {i === 0 ? (
-                  <span className="btn btn-primary">Ro‘yxatdan o‘tish <span className="ic"><Arrow /></span></span>
-                ) : (
-                  <span className="pa-cta show">Batafsil <Arrow /></span>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* ===== C · Chipta ===== */}
-        <div className="evv evv-c">
+        {/* Chipta ko'rinishi */}
+        <div className="evv-c">
           {items.map((e) => (
             <Link key={e.title} href={href} className="pt-ticket">
               <div className="pt-img">
