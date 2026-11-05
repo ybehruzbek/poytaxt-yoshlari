@@ -1,330 +1,154 @@
 /* =====================================================================
-   SIZ UCHUN IMKONIYATLAR — 3 ta ko'rinish: <html data-op="a|b|c">
-   A — rangli kartalar (prototip) · B — tablar · C — muddat bo'yicha lenta
+   SIZ UCHUN IMKONIYATLAR — rangli kartalar, hover'da kengayadi
    ===================================================================== */
-.opv {
-  display: none !important;
-}
-:root:not([data-op]) .opv-a,
-[data-op='a'] .opv-a,
-[data-op='b'] .opv-b,
-[data-op='c'] .opv-c {
-  display: grid !important;
-}
-#imkoniyatlar svg {
-  flex-shrink: 0;
+.opp:hover {
+  transform: none; /* eski "ko'tarilish" o'rniga kengayish */
 }
 
-/* =====================  B · Tablar  ===================== */
-.opv-b {
-  grid-template-columns: 360px 1fr;
-  gap: 16px;
-  align-items: stretch;
-}
-.ob-tabs {
-  display: grid;
-  gap: 10px;
-  align-content: start;
-}
-.ob-tab {
-  display: grid;
-  grid-template-columns: 56px 1fr 20px;
-  align-items: center;
-  gap: 16px;
-  width: 100%;
-  padding: 14px 20px 14px 14px;
-  border: 1px solid transparent;
-  border-radius: 28px;
-  background: #f8f8f8;
-  color: var(--navy);
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    border-color 0.2s,
-    transform 0.2s;
-}
-.ob-tab:hover {
-  background: #f2efec;
-}
-.ob-tab.on {
-  background: #fff;
-  border-color: var(--navy);
-  box-shadow: 0 10px 30px rgba(83, 40, 34, 0.1);
-}
-.ob-tab > svg {
-  width: 20px;
-  height: 20px;
-  opacity: 0.35;
-  transition:
-    opacity 0.2s,
-    transform 0.2s;
-}
-.ob-tab.on > svg {
-  opacity: 1;
-  transform: translateX(3px);
-}
-.ob-ic {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-}
-.ob-ic svg {
-  width: 26px;
-  height: 26px;
-}
-.ob-tx {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.ob-tx b {
-  font: 800 19px/1.2 var(--f-head);
-}
-.ob-tx small {
-  font-size: 13.5px;
-  color: var(--muted);
-}
-.ob-panel {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 8px;
-  background: #f8f8f8;
-  border-radius: var(--r-card);
-  padding: 14px;
-  animation: ob-in 0.4s ease both;
-}
-@keyframes ob-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-.ob-img {
-  position: relative;
-  border-radius: 36px;
-  overflow: hidden;
-  min-height: 380px;
-}
-.ob-lead {
+/* ---------- Kengaygan kartadagi ma'lumot paneli ---------- */
+.opp-info {
   position: absolute;
-  left: 18px;
-  bottom: 18px;
-  padding: 10px 16px;
-  border-radius: 99px;
-  background: #fff;
-  color: var(--navy);
-  font: 700 14px/1 var(--f-head);
-}
-.ob-bd {
-  padding: 22px 20px 18px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.ob-bd h3 {
-  font: 800 calc(clamp(28px, 2.4vw, 38px) * var(--h-scale)) / 1.15 var(--f-head);
-  color: var(--navy);
-}
-.ob-bd > p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--grey);
-}
-.ob-list {
-  list-style: none;
-  display: grid;
-  gap: 8px;
-}
-.ob-list a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 14px 16px;
-  border-radius: 20px;
-  background: #fff;
-  transition: background 0.2s;
-}
-.ob-list a:hover {
-  background: var(--soft);
-}
-.ob-list a > span {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.ob-list b {
-  font: 700 15.5px/1.3 var(--f-head);
-  color: var(--navy);
-}
-.ob-list small {
-  font-size: 13px;
-  color: var(--muted);
-}
-.ob-list em {
-  font-style: normal;
-  white-space: nowrap;
-  font: 700 12.5px/1 var(--f-body);
-  color: var(--navy);
-  background: #fff3cf;
-  padding: 8px 10px;
-  border-radius: 99px;
-}
-.ob-bd .btn {
-  align-self: flex-start;
-  margin-top: auto;
-}
-
-/* =====================  C · Muddat bo'yicha lenta  ===================== */
-.opv-c {
-  gap: 24px;
-}
-.oc-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.oc-filter .tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.oc-filter .tab span {
-  min-width: 24px;
-  height: 24px;
-  padding: 0 7px;
-  border-radius: 99px;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  background: var(--soft);
-  color: var(--navy);
-}
-.oc-filter .tab.on span {
-  background: var(--yellow);
-}
-.oc-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.oc-card {
-  position: relative;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 230px;
-  padding: 24px;
-  border-radius: 36px;
-  background: #f8f8f8;
-  transition:
-    background 0.2s,
-    transform 0.25s;
-}
-.oc-card:hover {
-  background: #f2efec;
-  transform: translateY(-4px);
-}
-.oc-ic {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-}
-.oc-ic svg {
-  width: 24px;
-  height: 24px;
-}
-.oc-type {
-  font: 600 13px/1.3 var(--f-body);
-  color: var(--muted);
-}
-.oc-card > b {
-  font: 800 21px/1.25 var(--f-head);
+  padding: 20px 22px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.93);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   color: var(--navy);
-  padding-right: 40px;
+  box-shadow: 0 16px 40px rgba(83, 40, 34, 0.18);
+  opacity: 0;
+  transform: translateY(18px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.oc-foot {
-  margin-top: auto;
+.opp-info p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--grey);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.opp-meta {
   display: flex;
-  align-items: center;
-  gap: 10px;
   flex-wrap: wrap;
-}
-.oc-left {
-  padding: 7px 12px;
-  border-radius: 99px;
-  background: #e3f3ea;
-  color: #2b7550;
-  font: 700 12.5px/1 var(--f-body);
-}
-.oc-left.urgent {
-  background: #ffe9de;
-  color: #a64818;
-}
-.oc-dl {
-  font-size: 13.5px;
+  gap: 6px 16px;
+  font-size: 14px;
   color: var(--muted);
 }
-.oc-card .go-sm {
-  position: absolute;
-  right: 20px;
-  top: 20px;
+.opp-meta b {
+  color: var(--navy);
+  font-weight: 700;
 }
-.oc-card:hover .go-sm {
-  transform: rotate(-45deg);
+.opp-more {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 99px;
+  background: var(--yellow);
+  color: var(--navy);
+  font: 700 15px/1 var(--f-head);
+}
+.opp-more svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s;
+}
+.opp:is(:hover, :focus-visible) .opp-info {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+.opp:is(:hover, :focus-visible) .opp-more svg {
+  transform: translateX(3px);
 }
 
-/* =====================  Moslashuv  ===================== */
-@media (max-width: 1100px) {
-  .opv-b {
-    grid-template-columns: 1fr;
+/* ---------- Kompyuter: kartalar bir qatorda, hover'dagi karta kengayadi ---------- */
+@media (min-width: 1241px) {
+  .opps {
+    display: flex;
   }
-  .ob-tabs {
-    grid-template-columns: 1fr 1fr;
+  .opp {
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto !important;
+    transition: flex-grow 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .oc-grid {
-    grid-template-columns: 1fr 1fr;
+  /* sukut bo'yicha "Grantlar" keng */
+  .opp.big {
+    flex-grow: 2.07;
+  }
+  /* boshqa karta ustiga kelganda: hammasi tenglashadi, faqat o'sha karta kengayadi */
+  .opps:has(.opp:hover, .opp:focus-visible) .opp {
+    flex-grow: 1;
+  }
+  /* specificity yuqoridagi :has qoidasidan baland bo'lishi shart */
+  .opps:has(.opp:hover, .opp:focus-visible) .opp:is(:hover, :focus-visible) {
+    flex-grow: 2.4;
+  }
+
+  /* "Grantlar" torayganda sarlavhasi kichrayadi, "Tashabbusingizni..." yashirinadi */
+  .opp.big .title b {
+    transition: font-size 0.4s;
+  }
+  .opp.big .title span {
+    transition: opacity 0.25s;
+  }
+  .opps:has(.opp:not(.big):hover, .opp:not(.big):focus-visible) .opp.big .title b {
+    font-size: 32px;
+  }
+  .opps:has(.opp:not(.big):hover, .opp:not(.big):focus-visible) .opp.big .title span {
+    opacity: 0;
+  }
+
+  /* kichik karta kengayganda nomi kattalashadi */
+  .opp:not(.big) .name {
+    transition: font-size 0.4s;
+  }
+  .opp:not(.big):is(:hover, :focus-visible) .name {
+    font-size: 40px;
+    width: 90%;
+  }
+  /* toraygan kartalarda uzun nom ("Stipendiyalar") sig'ishi uchun */
+  .opps:has(.opp:hover, .opp:focus-visible) .opp:not(.big):not(:hover):not(:focus-visible) .name {
+    font-size: 26px;
+    padding: 0 12px;
   }
 }
-@media (max-width: 700px) {
-  .ob-tabs {
-    grid-template-columns: 1fr;
+
+/* sensorli ekranlarda hover yo'q — ma'lumot doim ko'rinadi */
+@media (hover: none) {
+  .opp-info {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
-  .ob-panel {
-    grid-template-columns: 1fr;
-  }
-  .ob-img {
-    min-height: 220px;
-  }
-  .ob-list a {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .oc-grid {
-    grid-template-columns: 1fr;
-  }
-  .ob-bd .btn {
-    width: 100%;
-    justify-content: space-between;
+}
+@media (max-width: 640px) {
+  .opp-info {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px 18px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ob-panel {
-    animation: none;
+  .opp,
+  .opp-info,
+  .opp .name,
+  .opp .title b {
+    transition: none !important;
   }
 }
-
-/* ===== VAQTINCHA: variant tanlash paneli ===== */
-.dev-switch{position:fixed;right:20px;bottom:76px;z-index:100;display:flex;align-items:center;gap:4px;background:#fff;border-radius:99px;padding:5px 5px 5px 14px;box-shadow:0 12px 36px rgba(83,40,34,.2);font:600 12px/1 var(--f-body);color:#8a7f7a}
-.dev-switch button{border:none;background:none;border-radius:99px;min-width:34px;padding:9px 10px;font:700 13px/1 var(--f-body);color:var(--navy);cursor:pointer}
-.dev-switch button.on{background:var(--yellow)}
-@media (max-width:640px){.dev-switch{right:12px;bottom:64px}}
