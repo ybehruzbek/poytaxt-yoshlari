@@ -21,7 +21,6 @@ const EVENTS: Ev[] = [
   { title: 'IT va startaplar haftaligi', type: 'Haftalik', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy)' },
 ]
 
-const MON = ['YAN', 'FEV', 'MAR', 'APR', 'MAY', 'IYN', 'IYL', 'AVG', 'SEN', 'OKT', 'NOY', 'DEK']
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
 const WD = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba']
 
@@ -32,7 +31,7 @@ function parts(iso: string) {
   const mm = String(d.getUTCMinutes()).padStart(2, '0')
   return {
     day: String(d.getUTCDate()).padStart(2, '0'),
-    mon: MON[d.getUTCMonth()],
+    mon: MON_FULL[d.getUTCMonth()].toUpperCase(), // oy nomi to'liq: NOYABR
     wd: WD[d.getUTCDay()],
     full: `${d.getUTCDate()}-${MON_FULL[d.getUTCMonth()]}`,
     time: `${hh}:${mm}`,
