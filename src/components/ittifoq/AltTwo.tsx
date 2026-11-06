@@ -1,8 +1,7 @@
 'use client'
-/* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import { useState } from 'react'
 
-import { IMG, PRIORITIES, PROJECT_CARDS, QUOTE, RESULTS } from './data'
+import { PROJECT_CARDS, RESULTS } from './data'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const ALL = 'Hammasi'
@@ -12,168 +11,11 @@ const count = (a: string) =>
 const byArea = (a: string) =>
   a === ALL ? PROJECT_CARDS : PROJECT_CARDS.filter((p) => p.area === a)
 
-function Source() {
-  return (
-    <>
-      <a href={PRIORITIES.href} target="_blank" rel="noopener noreferrer">
-        {PRIORITIES.source} <span aria-hidden="true">↗</span>
-      </a>{' '}
-      Ittifoq faoliyatining 12 ta ustuvor yönalişini belgilab bergan.
-    </>
-  )
-}
-
 /* ================= Ustuvor yönalişlar ================= */
-
-/** B — krem fon, katta sariq raqamli oq kartalar uç ustunda */
-export function PrioritiesB() {
-  return (
-    <section className="sec x2-pb-sec">
-      <div className="wrap">
-        <div className="x2-pb-head">
-          <span className="x2-pb-big" aria-hidden="true">
-            12
-          </span>
-          <div>
-            <h2 className="h2">Davlat belgilagan ustuvor yönalişlar</h2>
-            <p>
-              <Source />
-            </p>
-          </div>
-        </div>
-        <ol className="x2-pb">
-          {PRIORITIES.items.map((x, i) => (
-            <li key={x}>
-              <span>{pad(i)}</span>
-              <p>{x}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
-
-/** C — chapda yopişqoq töq karta (sarlavha va manba), öngda raqam-pilyulali ingiçka röyxat */
-export function PrioritiesC() {
-  return (
-    <section className="sec x2-pc-sec">
-      <div className="wrap x2-pc">
-        <aside className="x2-pc-card">
-          <img src="/img/ittifoq/belgi.png" alt="" />
-          <h2 className="h2">Davlat belgilagan ustuvor yönalişlar</h2>
-          <p>
-            <Source />
-          </p>
-        </aside>
-        <ol className="x2-pc-list">
-          {PRIORITIES.items.map((x, i) => (
-            <li key={x}>
-              <span>{pad(i)}</span>
-              <p>{x}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
 
 /* ================= Iqtibos ================= */
 
-/** B — butun kenglikdagi surat ustida markazlaşgan oq iqtibos */
-export function QuoteB() {
-  return (
-    <section className="sec x2-qb-sec">
-      <div className="wrap">
-        <figure className="x2-qb">
-          <img src={IMG.readers} alt="" />
-          <blockquote>
-            <p>«{QUOTE.text}»</p>
-            <footer>
-              <b>{QUOTE.author}</b>
-              <span>{QUOTE.role}</span>
-            </footer>
-          </blockquote>
-        </figure>
-      </div>
-    </section>
-  )
-}
-
-/** C — sariq karta, ulkan qoştirnoq, öngda doira surat va belgi */
-export function QuoteC() {
-  return (
-    <section className="sec">
-      <div className="wrap">
-        <figure className="x2-qc">
-          <span className="x2-qc-mark" aria-hidden="true">
-            «
-          </span>
-          <blockquote>
-            <p>{QUOTE.text}</p>
-            <footer>
-              <b>{QUOTE.author}</b>
-              <span>{QUOTE.role}</span>
-            </footer>
-          </blockquote>
-          <div className="x2-qc-pic">
-            <img src={IMG.readers} alt="" />
-            <img className="x2-qc-badge" src="/img/ittifoq/belgi.png" alt="" />
-          </div>
-        </figure>
-      </div>
-    </section>
-  )
-}
-
 /* ================= Yirik loyihalar ================= */
-
-/** B — sanoqli segment süzgiç va jadvalsimon qatorlar: nom, maqsad, qamrov, iştirokçilar */
-export function ProjectCardsB() {
-  const [area, setArea] = useState(ALL)
-  return (
-    <div className="x2-kb">
-      <div className="x2-kb-head">
-        <h3>Yirik loyihalar</h3>
-        <div className="x2-kb-tabs" role="group" aria-label="Loyihalar yönalişi">
-          {AREAS.map((a) => (
-            <button
-              key={a}
-              type="button"
-              aria-pressed={a === area}
-              className={a === area ? 'on' : undefined}
-              onClick={() => setArea(a)}
-            >
-              {a} <sup>{count(a)}</sup>
-            </button>
-          ))}
-        </div>
-      </div>
-      <ul className="x2-kb-list">
-        {byArea(area).map((p) => (
-          <li key={p.t}>
-            <div className="x2-kb-name">
-              <span>{p.area}</span>
-              <h4>{p.t}</h4>
-            </div>
-            <p>{p.goal}</p>
-            <dl>
-              <div>
-                <dt>Qamrov</dt>
-                <dd className="x2-kb-reach">{p.reach}</dd>
-              </div>
-              <div>
-                <dt>Iştirokçilar</dt>
-                <dd>{p.who}</dd>
-              </div>
-            </dl>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
 
 /** C — chapda vertikal yönaliş menyusi, öngda qamrovi katta raqam bilan ajratilgan kartalar */
 export function ProjectCardsC() {
@@ -225,34 +67,6 @@ function ResSrc({ src }: { src?: string }) {
     </a>
   ) : (
     <span className="x2-src x2-src-mute">Manba: Ittifoq taqdimoti, 2026</span>
-  )
-}
-
-/** B — vertikal vaqt çiziği: chapda katta yil, öngda natijalar kiçik kartalarda */
-export function ResultsB() {
-  return (
-    <section className="sec x2-rb-sec">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 className="h2">Natijalar</h2>
-        </div>
-        <ol className="x2-rb">
-          {RESULTS.map((r) => (
-            <li key={r.y}>
-              <div className="x2-rb-y">
-                <b>{r.y}</b>
-                <ResSrc src={r.src} />
-              </div>
-              <ul>
-                {r.items.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
   )
 }
 

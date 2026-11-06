@@ -6,7 +6,6 @@ import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
-import '../../../ittifoq-alt1.css'
 import '../../../ittifoq-alt2.css'
 import '../../../ittifoq-alt3.css'
 

@@ -1,34 +1,8 @@
 /* ===== Ittifoq: B/C variantlari — taşkilotlar, tuzilma, aʼzolik, hujjatlar, rasmiy maʼlumotlar (x3-) ===== */
 
 /* ---------- Taşkilotlar B ---------- */
-.x3-orgsb-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
-.x3-orgsb-side{position:sticky;top:120px}
-.x3-orgsb-side p{margin-top:24px;font-size:19px;line-height:1.65;color:var(--grey);max-width:440px}
-.x3-orgsb-list{list-style:none;border-top:2px solid var(--navy)}
-.x3-orgsb-list li{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
-.x3-orgsb-list li>span{font:800 28px/1 var(--f-head);color:var(--blue)}
-.x3-orgsb-list h3{font:800 20px/1.3 var(--f-head);color:var(--navy)}
-.x3-orgsb-list p{margin-top:6px;font-size:15px;line-height:1.55;color:var(--muted)}
-.x3-orgsb-band{margin-top:56px;background:var(--yellow);border-radius:var(--r-card);padding:40px 48px}
-.x3-orgsb-band h3{font:800 22px/1.3 var(--f-head);color:var(--navy);margin-bottom:20px}
-.x3-orgsb-band ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 0}
-.x3-orgsb-band li{font:700 clamp(18px,1.8vw,26px)/1.4 var(--f-head);color:var(--navy)}
-.x3-orgsb-band li:not(:last-child)::after{content:'·';margin:0 14px;color:var(--blue)}
 
 /* ---------- Taşkilotlar C ---------- */
-.x3-orgsc-top{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;background:var(--soft);border-radius:var(--r-card);overflow:hidden}
-.x3-orgsc-top img{width:100%;height:420px;object-fit:cover}
-.x3-orgsc-top>div{padding:48px;display:flex;flex-direction:column;justify-content:center;gap:20px}
-.x3-orgsc-top p{font-size:18px;line-height:1.65}
-.x3-orgsc-cols{columns:3;column-gap:32px;margin-top:48px}
-.x3-orgsc-cols article{break-inside:avoid;border-left:4px solid var(--yellow);padding:4px 0 4px 18px;margin-bottom:28px}
-.x3-orgsc-cols h3{font:800 17px/1.3 var(--f-head);color:var(--navy)}
-.x3-orgsc-cols p{margin-top:6px;font-size:14px;line-height:1.55;color:var(--muted)}
-.x3-orgsc-comp{margin-top:24px;background:var(--navy);color:#fff;border-radius:var(--r-card);padding:44px 48px}
-.x3-orgsc-comp h3{font:800 24px/1.3 var(--f-head);color:var(--yellow);margin-bottom:24px}
-.x3-orgsc-comp ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px}
-.x3-orgsc-comp li{display:flex;gap:14px;padding:14px 0;border-top:1px solid rgba(255,255,255,.14);font-weight:600;line-height:1.4}
-.x3-orgsc-comp li span{flex:none;font:800 14px/1.4 var(--f-head);color:var(--sky)}
 
 /* ---------- Tuzilma B ---------- */
 .x3-strb-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:48px}
@@ -56,95 +30,14 @@
 .x3-strb-princ li{border:2px solid var(--navy);border-radius:99px;padding:10px 22px;font:700 16px/1.2 var(--f-head);color:var(--navy)}
 
 /* ---------- Tuzilma C ---------- */
-.x3-strc-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
-.x3-strc-side{position:sticky;top:120px}
-.x3-strc-side>p{margin-top:20px;font-size:18px;line-height:1.65}
-.x3-strc-side img{width:100%;height:280px;object-fit:cover;border-radius:var(--r-thumb);margin-top:28px}
-.x3-strc-side ol{list-style:none;margin-top:28px;display:grid;gap:8px}
-.x3-strc-side ol li{display:flex;align-items:center;gap:14px;background:var(--soft);border-radius:99px;padding:10px 20px 10px 10px;font-weight:600;color:var(--navy)}
-.x3-strc-side ol span{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--yellow);font:800 13px/1 var(--f-head)}
-.x3-strc-list{list-style:none}
-.x3-strc-list li{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:32px 0;border-top:1px solid var(--line)}
-.x3-strc-list li:last-child{border-bottom:1px solid var(--line)}
-.x3-strc-list li>span{font:800 64px/.9 var(--f-head);color:var(--line);transition:color .25s}
-.x3-strc-list li:hover>span{color:var(--blue)}
-.x3-strc-list h3{font:800 26px/1.2 var(--f-head);color:var(--navy)}
-.x3-strc-list p{margin-top:10px;font-size:16px;line-height:1.6}
 
 /* ---------- Aʼzolik B ---------- */
-.x3-joinb{background:var(--navy);color:#fff}
-.x3-joinb .h2{color:var(--soft)}
-.x3-joinb-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
-.x3-joinb-side h3{margin-top:32px;font:800 26px/1.25 var(--f-head);color:var(--yellow)}
-.x3-joinb-side p{margin:14px 0 32px;font-size:17px;line-height:1.7;opacity:.85;max-width:520px}
-.x3-joinb-steps{list-style:none;position:relative}
-.x3-joinb-steps::before{content:'';position:absolute;left:27px;top:28px;bottom:28px;width:2px;background:rgba(255,255,255,.18)}
-.x3-joinb-steps li{position:relative;display:grid;grid-template-columns:56px 1fr;gap:24px;padding:0 0 32px}
-.x3-joinb-steps li:last-child{padding-bottom:0}
-.x3-joinb-steps i{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--yellow);color:var(--navy);font:800 22px/1 var(--f-head);font-style:normal}
-.x3-joinb-steps h3{font:800 21px/1.3 var(--f-head);color:#fff;padding-top:14px}
-.x3-joinb-steps p{margin-top:6px;line-height:1.6;opacity:.8}
-.x3-joinb-cards{display:grid;grid-template-columns:1fr 1.3fr;gap:14px;margin-top:56px}
-.x3-joinb-cards>div{border-radius:var(--r-thumb);padding:32px}
-.x3-joinb-cards h3{font:800 22px/1.25 var(--f-head);margin-bottom:18px}
-.x3-joinb-cards ul{list-style:none;display:grid;gap:12px}
-.x3-joinb-cards li{position:relative;padding-left:28px;line-height:1.55}
-.x3-joinb-rights{background:var(--yellow);color:var(--navy)}
-.x3-joinb-rights li::before{content:'✓';position:absolute;left:0;font-weight:800;color:var(--green)}
-.x3-joinb-perks{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
-.x3-joinb-perks h3{color:var(--soft)}
-.x3-joinb-perks li{opacity:.9}
-.x3-joinb-perks li::before{content:'';position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:50%;background:var(--lime)}
 
 /* ---------- Aʼzolik C ---------- */
-.x3-joinc{background:var(--soft)}
-.x3-joinc-top{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.x3-joinc-pic{position:relative}
-.x3-joinc-pic>img:first-child{width:100%;height:440px;object-fit:cover;border-radius:var(--r-card)}
-.x3-joinc-badge{position:absolute;right:-24px;bottom:-24px;width:120px;height:120px;object-fit:contain;background:#fff;border-radius:50%;padding:10px;box-shadow:0 12px 30px rgba(83,40,34,.15)}
-.x3-joinc-rights{list-style:none;margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.x3-joinc-rights li{background:#fff;border-radius:24px;padding:18px 20px;font-weight:600;color:var(--navy);line-height:1.45}
-.x3-joinc-steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;border-top:2px solid var(--navy)}
-.x3-joinc-steps li{position:relative;padding:28px 24px 0 0}
-.x3-joinc-steps li::before{content:'';position:absolute;left:0;top:-9px;width:16px;height:16px;border-radius:50%;background:var(--blue);border:3px solid var(--soft)}
-.x3-joinc-steps b{display:block;font:800 44px/1 var(--f-head);color:var(--blue)}
-.x3-joinc-steps h3{margin-top:14px;font:800 19px/1.3 var(--f-head);color:var(--navy)}
-.x3-joinc-steps p{margin-top:8px;font-size:15px;line-height:1.55}
-.x3-joinc-bottom{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:14px;margin-top:56px}
-.x3-joinc-perk{background:#fff;border-radius:var(--r-thumb);padding:28px;line-height:1.6;border-top:6px solid var(--green)}
-.x3-joinc-perk+.x3-joinc-perk{border-top-color:var(--sky)}
-.x3-joinc-cta{background:var(--yellow);border-radius:var(--r-thumb);padding:32px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
-.x3-joinc-cta h3{font:800 26px/1.2 var(--f-head);color:var(--navy)}
-.x3-joinc-cta p{line-height:1.6;color:var(--navy)}
-.x3-joinc-cta .btn{margin-top:8px;background:var(--navy);color:#fff}
 
 /* ---------- Hujjatlar B ---------- */
-.x3-actsb-grid{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.x3-actsb-grid li{display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);border-radius:28px;padding:26px;transition:border-color .2s,transform .2s}
-.x3-actsb-grid li:hover{border-color:var(--navy);transform:translateY(-3px)}
-.x3-actsb-y{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-bottom:14px;border-bottom:1px dashed var(--line)}
-.x3-actsb-y b{font:800 40px/1 var(--f-head);color:var(--navy)}
-.x3-actsb-y time{font-size:13px;font-weight:600;color:var(--muted)}
-.x3-actsb-grid h3{font:800 17px/1.3 var(--f-head);color:var(--navy)}
-.x3-actsb-grid p{font-size:14px;line-height:1.55;color:var(--muted);flex:1}
-.x3-actsb-grid a{align-self:flex-start;background:var(--soft);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--blue)}
-.x3-actsb-grid a:hover{background:var(--yellow);color:var(--navy)}
-.x3-actsb-note{margin-top:24px;max-width:820px;color:var(--muted);font-size:15px;line-height:1.6}
 
 /* ---------- Hujjatlar C ---------- */
-.x3-actsc-h{text-align:center;margin-bottom:56px}
-.x3-actsc-line{list-style:none;position:relative;max-width:1100px;margin:0 auto}
-.x3-actsc-line::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--line)}
-.x3-actsc-line li{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:16px 0}
-.x3-actsc-line li::before{content:'';position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--yellow);border:4px solid #fff;box-shadow:0 0 0 2px var(--navy)}
-.x3-actsc-line time{font:800 22px/1.2 var(--f-head);color:var(--blue);text-align:right}
-.x3-actsc-line li:nth-child(even) time{order:2;text-align:left}
-.x3-actsc-card{background:var(--soft);border-radius:28px;padding:24px 28px}
-.x3-actsc-card h3{font:800 18px/1.3 var(--f-head);color:var(--navy)}
-.x3-actsc-card h3 a{color:inherit;text-decoration:underline;text-decoration-color:var(--silver);text-underline-offset:4px}
-.x3-actsc-card h3 a:hover{text-decoration-color:var(--navy)}
-.x3-actsc-card p{margin-top:8px;font-size:15px;line-height:1.55}
-.x3-actsc-note{margin:40px auto 0;max-width:760px;text-align:center;color:var(--muted);font-size:15px;line-height:1.6}
 
 /* ---------- Rasmiy maʼlumotlar B ---------- */
 .x3-offb-card{background:var(--navy);color:#fff;border-radius:var(--r-card);padding:48px;display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:center}
@@ -157,12 +50,6 @@
 .x3-offb-card dd{margin-top:8px;font:700 18px/1.35 var(--f-head);color:#fff;overflow-wrap:anywhere}
 
 /* ---------- Rasmiy maʼlumotlar C ---------- */
-.x3-offc dl{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px;margin-top:40px}
-.x3-offc dl>div{border-top:4px solid var(--yellow);padding-top:18px}
-.x3-offc dl>div:nth-child(3n+2){border-top-color:var(--green)}
-.x3-offc dl>div:nth-child(3n){border-top-color:var(--sky)}
-.x3-offc dt{font:800 13px/1.2 var(--f-head);letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
-.x3-offc dd{margin-top:12px;font:800 clamp(20px,2vw,28px)/1.25 var(--f-head);color:var(--navy);overflow-wrap:anywhere}
 
 /* ---------- Moslaşuvçanlik ---------- */
 @media (max-width:1100px){
@@ -182,39 +69,11 @@
   .x3-offc dl{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:640px){
-  .x3-orgsb-list li{grid-template-columns:44px 1fr;gap:12px}
-  .x3-orgsb-list li>span{font-size:22px}
-  .x3-orgsb-band,.x3-orgsc-comp,.x3-offb-card{padding:28px 24px;border-radius:var(--r-thumb)}
-  .x3-orgsc-top{grid-template-columns:1fr}
-  .x3-orgsc-top img{height:240px}
-  .x3-orgsc-top>div{padding:28px 24px}
-  .x3-orgsc-cols{columns:1}
-  .x3-orgsc-comp ol{grid-template-columns:1fr}
+  .x3-offb-card{padding:28px 24px;border-radius:var(--r-thumb)}
   .x3-strb-row{grid-template-columns:1fr}
   .x3-strb-tree>article,.x3-strb-row article{padding:24px}
   .x3-strb-top h3{font-size:26px}
-  .x3-strc-list li{grid-template-columns:1fr;gap:8px;padding:24px 0}
-  .x3-strc-list li>span{font-size:44px}
-  .x3-strc-list h3{font-size:22px}
-  .x3-joinb-steps li{grid-template-columns:44px 1fr;gap:16px}
-  .x3-joinb-steps i{width:44px;height:44px;font-size:18px}
-  .x3-joinb-steps::before{left:21px}
-  .x3-joinb-steps h3{padding-top:8px;font-size:19px}
-  .x3-joinb-side .btn{white-space:normal}
-  .x3-joinc-pic>img:first-child{height:280px;border-radius:var(--r-thumb)}
-  .x3-joinc-badge{width:88px;height:88px;bottom:-20px}
-  .x3-joinc-rights,.x3-joinc-steps,.x3-joinc-bottom,.x3-actsb-grid,.x3-offb-card dl,.x3-offc dl{grid-template-columns:1fr}
-  .x3-joinc-steps{border-top:0;border-left:2px solid var(--navy);gap:28px}
-  .x3-joinc-steps li{padding:0 0 0 24px}
-  .x3-joinc-steps li::before{left:-9px;top:6px}
-  .x3-actsc-h{text-align:left;margin-bottom:32px}
-  .x3-actsc-line::before{left:8px}
-  .x3-actsc-line li{grid-template-columns:1fr;gap:10px;padding:14px 0 14px 36px}
-  .x3-actsc-line li::before{left:8px;top:22px;margin-top:0}
-  .x3-actsc-line time,.x3-actsc-line li:nth-child(even) time{order:0;text-align:left;font-size:18px}
-  .x3-actsc-note{text-align:left}
+  .x3-offb-card dl{grid-template-columns:1fr}
 }
 /* C: logotiplar */
-.x3-orgsc-cols article{display:flex;gap:16px;align-items:flex-start}
-.x3-orgsc-logo{flex:none;width:64px;height:64px;border-radius:18px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;padding:8px}
-.x3-orgsc-logo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+
