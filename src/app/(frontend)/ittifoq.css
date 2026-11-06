@@ -335,10 +335,10 @@
 .acc-grp{display:none}
 
 /* A — röyxat (sukut) */
-html:not([data-acc]) .acc,html[data-acc=a] .acc{border-top:1px solid var(--line)}
-html:not([data-acc]) .acc:last-of-type,html[data-acc=a] .acc:last-of-type{border-bottom:1px solid var(--line)}
-html:not([data-acc]) .acc[open]>summary,html[data-acc=a] .acc[open]>summary{background:var(--soft)}
-html:not([data-acc]) .acc>summary:hover,html[data-acc=a] .acc>summary:hover{background:var(--soft)}
+html:not([data-acc]) .acc,html[data-acc=a] .acc,html[data-acc=e] .acc{border-top:1px solid var(--line)}
+html:not([data-acc]) .acc:last-of-type,html[data-acc=a] .acc:last-of-type,html[data-acc=e] .acc:last-of-type{border-bottom:1px solid var(--line)}
+html:not([data-acc]) .acc[open]>summary,html[data-acc=a] .acc[open]>summary,html[data-acc=e] .acc[open]>summary{background:var(--soft)}
+html:not([data-acc]) .acc>summary:hover,html[data-acc=a] .acc>summary:hover,html[data-acc=e] .acc>summary:hover{background:var(--soft)}
 
 /* B — kartalar */
 html[data-acc=b] .acc{margin:0 auto 12px;max-width:1440px;padding:0 72px}
@@ -387,4 +387,37 @@ html[data-acc=d] .acc[open] .acc-ic::before,html[data-acc=d] .acc[open] .acc-ic:
   html[data-acc=b] .acc{padding:0 20px}
   html[data-acc=b] .acc .acc-body{margin:0 -20px}
   html[data-acc=b] .acc .acc-n{width:36px;height:36px;font-size:12px}
+}
+
+/* E — ITMO uslubidagi, lekin gorizontal: yopiq guruhlar keng rangli qatorlar, oçig'i qolgan joyni egallaydi */
+.gp-strip{display:none}
+@media (min-width:1101px){
+  html[data-acc=e] .gdeck{display:flex;flex-direction:column;height:calc(100vh - 96px);min-height:600px;margin-top:8px;overflow:hidden}
+  html[data-acc=e] .gp{display:flex;flex-direction:column;flex:0 0 76px;min-height:0;transition:flex-basis .5s ease}
+  html[data-acc=e] .gdeck[data-active=biz] .gp[data-g=biz],
+  html[data-acc=e] .gdeck[data-active=faol] .gp[data-g=faol],
+  html[data-acc=e] .gdeck[data-active=tizim] .gp[data-g=tizim],
+  html[data-acc=e] .gdeck[data-active=azo] .gp[data-g=azo]{flex:1 1 auto}
+  html[data-acc=e] .gp-strip{display:flex;align-items:center;gap:24px;height:76px;flex:none;width:100%;border:none;padding:0 max(72px,calc((100vw - 1440px)/2 + 72px));cursor:pointer;color:#fff;text-align:left;transition:filter .2s}
+  html[data-acc=e] .gp-strip:hover{filter:brightness(1.08)}
+  html[data-acc=e] .gp-strip:focus-visible{outline:3px solid var(--navy);outline-offset:-6px}
+  html[data-acc=e] .gp-strip::after{content:'';margin-left:auto;width:14px;height:14px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg) translateY(-4px)}
+  html[data-acc=e] .gp-num{font:800 18px/1 var(--f-head);opacity:.85}
+  html[data-acc=e] .gp-label{font:800 26px/1 var(--f-head);letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+  html[data-acc=e] .gp-strip[data-g=biz]{background:linear-gradient(90deg,var(--yellow),var(--blue));color:var(--navy)}
+  html[data-acc=e] .gp-strip[data-g=faol]{background:linear-gradient(90deg,var(--sky),var(--green))}
+  html[data-acc=e] .gp-strip[data-g=tizim]{background:linear-gradient(90deg,var(--lime),var(--blue))}
+  html[data-acc=e] .gp-strip[data-g=azo]{background:linear-gradient(90deg,#7a3b31,var(--navy))}
+  html[data-acc=e] .gp-body{display:none;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;background:#fff}
+  html[data-acc=e] .gdeck[data-active=biz] .gp[data-g=biz] .gp-strip,
+  html[data-acc=e] .gdeck[data-active=faol] .gp[data-g=faol] .gp-strip,
+  html[data-acc=e] .gdeck[data-active=tizim] .gp[data-g=tizim] .gp-strip,
+  html[data-acc=e] .gdeck[data-active=azo] .gp[data-g=azo] .gp-strip{display:none}
+  html[data-acc=e] .gdeck[data-active=biz] .gp[data-g=biz] .gp-body,
+  html[data-acc=e] .gdeck[data-active=faol] .gp[data-g=faol] .gp-body,
+  html[data-acc=e] .gdeck[data-active=tizim] .gp[data-g=tizim] .gp-body,
+  html[data-acc=e] .gdeck[data-active=azo] .gp[data-g=azo] .gp-body{display:block;animation:it-fade .4s ease}
+  html[data-acc=e] .gp-body .acc-grp{display:block}
+  html[data-acc=e] .gp-body .acc-grp .wrap{padding-top:32px;padding-bottom:16px}
+  html[data-acc=e] .gp-body .acc-grp h2{font:800 clamp(32px,3vw,48px)/1.1 var(--f-head);color:var(--navy)}
 }
