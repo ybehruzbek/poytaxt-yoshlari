@@ -250,22 +250,22 @@
 .site-head .logo img{transition:height .35s ease,filter .3s}
 .burger{color:var(--navy);transition:color .3s,border-color .3s}
 
-.site-head.scrolled,.site-head.menu-open{padding:14px 0}
-.site-head.scrolled .header,.site-head.menu-open .header{max-width:1240px;padding:10px 10px 10px 28px;
+.site-head.scrolled{padding:14px 0}
+.site-head.scrolled .header{max-width:1240px;padding:10px 10px 10px 28px;
   background:rgba(255,255,255,.84);border-color:rgba(255,255,255,.65);box-shadow:0 16px 40px rgba(83,40,34,.14);
   -webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
 .site-head.scrolled .logo img{height:50px}
 
 /* toʼq hero ustida, tepada */
-body:has([data-head-dark]) .site-head:not(.scrolled):not(.menu-open) .logo img{filter:brightness(0) invert(1)}
-body:has([data-head-dark]) .site-head:not(.scrolled):not(.menu-open) .mnav-link{color:#fff}
-body:has([data-head-dark]) .site-head:not(.scrolled):not(.menu-open) .mnav-link:hover,
-body:has([data-head-dark]) .site-head:not(.scrolled):not(.menu-open) .mnav li.is-open>.mnav-link{background:rgba(255,255,255,.14)}
-body:has([data-head-dark]) .site-head:not(.scrolled):not(.menu-open) .mnav-link.active{background:rgba(255,255,255,.2);box-shadow:none}
-body:has([data-head-dark]) .site-head:not(.scrolled):not(.menu-open) .burger{color:#fff;border-color:rgba(255,255,255,.7)}
+body:has([data-head-dark]) .site-head:not(.scrolled) .logo img{filter:brightness(0) invert(1)}
+body:has([data-head-dark]) .site-head:not(.scrolled) .mnav-link{color:#fff}
+body:has([data-head-dark]) .site-head:not(.scrolled) .mnav-link:hover,
+body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open>.mnav-link{background:rgba(255,255,255,.14)}
+body:has([data-head-dark]) .site-head:not(.scrolled) .mnav-link.active{background:rgba(255,255,255,.2);box-shadow:none}
+body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-color:rgba(255,255,255,.7)}
 
 @media (max-width:1180px){
-  .site-head.scrolled .header,.site-head.menu-open .header{padding:8px 8px 8px 20px}
+  .site-head.scrolled .header{padding:8px 8px 8px 20px}
 }
 @media (max-width:640px){
   .site-head{padding:14px 0}
