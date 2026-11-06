@@ -4,6 +4,7 @@ import type { CSSProperties, ReactNode } from 'react'
 
 import { Arrow } from '@/components/site/SocialPhones'
 
+import { Centres } from './Centres'
 import { GOALS, IMG, INTL, INTRO, MISSION, MORE_STATS, PRIVILEGES, PROJECTS, QUOTE, STATS } from './data'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -12,7 +13,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 
 /**
  * "Özbekiston yoşlar ittifoqi" sahifasi: butun ekranli surat bilan boşlanadigan hero,
- * vazifa va raqamlar, suratlar mozaikasi, maqsadlar, iqtibos, imtiyozlar, loyihalar, xalqaro hamkorlik.
+ * vazifa va raqamlar, suratlar mozaikasi, maqsadlar, iqtibos, imtiyozlar, loyihalar, xalqaro hamkorlik, Yoşlar markazlari.
  */
 export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
@@ -162,6 +163,8 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
+
+      <Centres />
 
       <section className="sec">
         <div className="wrap">{siblings}</div>

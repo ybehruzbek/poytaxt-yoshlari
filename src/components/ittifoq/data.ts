@@ -128,3 +128,42 @@ export const IMG = {
   books: '/img/ittifoq/kitoblar-olami.jpg',
   volunteers: '/img/ittifoq/volontyorlar.jpg',
 }
+
+/* ---------------- Yoşlar markazlari ---------------- */
+
+export const PALACE = {
+  name: 'Yoşlar ijod saroyi',
+  org: 'Özbekiston yoşlar ittifoqi',
+  text: 'Poytaxtdagi yoşlar uçun oçiq ijod maskani. Saroyda xalqimizning sanʼat sohasidagi bebaho merosini namoyiş qiliş, uning milliy va umumbaşariy madaniyat taraqqiyotidagi örnini keng tarğib qiliş uçun körgazmalar taşkil etiladi.',
+  features: ['«Kitoblar olami» kitobxonlik maydoni', 'Podkast studiyasi', 'Kovorking va uçraşuv xonalari', 'Körgazmalar va ijodiy tadbirlar'],
+  img: '/img/markazlar/ijod-saroyi.jpg',
+  gallery: ['/img/markazlar/ijod-kitoblar-olami.jpg', '/img/markazlar/ijod-podkast.jpg', '/img/markazlar/ijod-davr-bizniki.jpg'],
+}
+
+/* Toşkent şahar markazi: matn NAMUNA — manzil, ish vaqti va rasmiy tavsif kelgaçi almaştiriladi */
+export const CITY_CENTRE = {
+  name: 'Toşkent şahar Yoşlar markazi',
+  text: 'Poytaxt yoşlarining asosiy uçraşuv maydoni: tadbirlar, töʼgaraklar, uçraşuvlar va yoşlar taşabbuslari şu yerda boşlanadi.',
+  facts: ['Tadbir va uçraşuvlar zali', 'Töʼgaraklar va örganiş xonalari', 'Yoşlar taşabbuslarini qöllab-quvvatlaş'],
+  img: '/img/markazlar/toshkent-shahar.jpg',
+}
+
+export type Centre = { region: string; img: string }
+
+/** Toşkent şahri birinçi, keyin viloyatlar */
+export const CENTRES: Centre[] = [
+  { region: 'Toşkent şahri', img: '/img/markazlar/toshkent-shahar.jpg' },
+  { region: 'Toşkent viloyati', img: '/img/markazlar/toshkent-viloyati.jpg' },
+  { region: 'Qoraqalpoğiston Respublikasi', img: '/img/markazlar/qoraqalpogiston.jpg' },
+  { region: 'Andijon viloyati', img: '/img/markazlar/andijon.jpg' },
+  { region: 'Buxoro viloyati', img: '/img/markazlar/buxoro.jpg' },
+  { region: 'Jizzax viloyati', img: '/img/markazlar/jizzax.jpg' },
+  { region: 'Qaşqadaryo viloyati', img: '/img/markazlar/qashqadaryo.jpg' },
+  { region: 'Navoiy viloyati', img: '/img/markazlar/navoiy.jpg' },
+  { region: 'Namangan viloyati', img: '/img/markazlar/namangan.jpg' },
+  { region: 'Samarqand viloyati', img: '/img/markazlar/samarqand.jpg' },
+  { region: 'Sirdaryo viloyati', img: '/img/markazlar/sirdaryo.jpg' },
+  { region: 'Surxondaryo viloyati', img: '/img/markazlar/surxondaryo.jpg' },
+  { region: 'Farğona viloyati', img: '/img/markazlar/fargona.jpg' },
+  { region: 'Xorazm viloyati', img: '/img/markazlar/xorazm.jpg' },
+]
