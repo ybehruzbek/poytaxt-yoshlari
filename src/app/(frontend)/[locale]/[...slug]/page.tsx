@@ -7,10 +7,13 @@ import type { Locale } from '@/i18n/config'
 
 type Props = { params: Promise<{ locale: Locale; slug: string[] }> }
 
+/** Özining alohida sahifasi bor yöllar (bu umumiy sahifa ularni yasamaydi) */
+const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq'])
+
 /** Menyudagi barcha yo'llar oldindan tayyorlanadi */
 export function generateStaticParams() {
   const paths = NAV.flatMap((g) => (g.href ? [g.href] : (g.items ?? []).flatMap((i) => [i.href, ...(i.children ?? []).map((c) => c.href)])))
-  return paths.map((p) => ({ slug: p.split('/').filter(Boolean) }))
+  return paths.filter((p) => !OWN_PAGES.has(p)).map((p) => ({ slug: p.split('/').filter(Boolean) }))
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
