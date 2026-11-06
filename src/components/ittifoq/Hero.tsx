@@ -26,14 +26,13 @@ function Btns({ L, light }: { L: H['L']; light?: boolean }) {
   )
 }
 
-/** A — butun ekranli surat, matn ustida (hozirgi) */
+/** A — butun ekranli surat; matn pastki gradient ustida, yöl zanjiri şaffof kapsulada */
 export function HeroA({ L, crumbs }: H) {
   return (
     <section className="it-hero ith ith-a">
       <img src={IMG.team} alt="" />
       <div className="wrap">
-        {crumbs}
-        <span className="it-day">30-iyun — Yoşlar kuni</span>
+        <div className="it-crumbs">{crumbs}</div>
         <h1 className="h1">{TITLE}</h1>
         <p className="lead">{INTRO}</p>
         <Btns L={L} />
