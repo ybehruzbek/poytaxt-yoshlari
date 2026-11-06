@@ -214,3 +214,7 @@
   .x3-actsc-line time,.x3-actsc-line li:nth-child(even) time{order:0;text-align:left;font-size:18px}
   .x3-actsc-note{text-align:left}
 }
+/* C: logotiplar */
+.x3-orgsc-cols article{display:flex;gap:16px;align-items:flex-start}
+.x3-orgsc-logo{flex:none;width:64px;height:64px;border-radius:18px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;padding:8px}
+.x3-orgsc-logo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}

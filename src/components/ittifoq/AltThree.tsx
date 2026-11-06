@@ -75,8 +75,15 @@ export function OrgsC() {
         <div className="x3-orgsc-cols">
           {ORGS.ngos.map((o, i) => (
             <article key={o.t} style={{ borderColor: ACCENTS[i % ACCENTS.length] }}>
-              <h3>{o.t}</h3>
-              <p>{o.d}</p>
+              {o.logo && (
+                <span className="x3-orgsc-logo">
+                  <img src={o.logo} alt={`${o.t} logotipi`} loading="lazy" />
+                </span>
+              )}
+              <div>
+                <h3>{o.t}</h3>
+                <p>{o.d}</p>
+              </div>
             </article>
           ))}
         </div>

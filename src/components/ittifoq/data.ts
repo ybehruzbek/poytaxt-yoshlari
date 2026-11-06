@@ -336,30 +336,30 @@ export const RESULTS: YearResult[] = [
 
 /* ---------------- Ittifoq taʼsisçiligidagi taşkilotlar ---------------- */
 
-export type Org = { t: string; d: string }
+export type Org = { t: string; d: string; logo?: string }
 
 export const ORGS = {
   lead: 'Ittifoq tizimida 36 ta taşkilot faoliyat yuritadi: 19 tasi nodavlat notijorat taşkilot, 14 tasi tijorat taşkiloti. Ularda 228 kişi işlaydi.',
   ngos: [
-    { t: 'Yetakçilar akademiyasi', d: 'Mahallalar, taʼlim muassasalari, vazirlik va taşkilotlardagi yoşlar yetakçilarining iş samaradorligini oşiradi.' },
-    { t: 'Özbekiston quvnoqlar va zukkolar assotsiatsiyasi', d: 'Mustaqil fikrlaydigan yoşlarni şakllantiradi, iqtidorli yoşlarni izlab topib, isteʼdodini röyobga çiqarişga yordam beradi.' },
-    { t: 'Prezidentning 5 taşabbus loyiha ofisi', d: 'Yoşlarning musiqa, rassomlik, adabiyot, teatr va sanʼatga qiziqişini oşiradi, kitobxonlikni tarğib qiladi.' },
-    { t: 'Yoşlar tadbirkorligini qöllab-quvvatlaş markazi', d: 'Yoş tadbirkorlarni qöllab-quvvatlaydi, ğoyalarni hayotga tatbiq etişga yordam beradi.' },
-    { t: 'Respublika yoş ijodkorlar kengaşi', d: 'Hududlardagi namoyon bölmagan yoş isteʼdod egalarini izlab topib, jamiyatda öz örnini topişiga kömaklaşadi.' },
-    { t: 'Özbekiston volontyorlari assotsiatsiyasi', d: 'Volontyorlik faoliyatini taşkil etadi, fuqarolik taşabbuslarini rivojlantiradi, volontyorlarning huquqlarini himoya qiladi.' },
-    { t: 'Özbekiston yoşlari umumjahon assotsiatsiyasi', d: 'Xorijda öqiyotgan va işlayotgan özbekistonlik yoşlarga har tomonlama kömaklaşadi.' },
-    { t: 'Loyihalar boşqaruvi markazi', d: 'Maʼnaviy-maʼrifiy va ijtimoiy mavzularda maqolalar, eşittirişlar, roliklar, filmlar va tok-şoular tayyorlaydi.' },
-    { t: '«Yangi avlod forumi» bolalar ijodiyoti markazi', d: 'Maktabdan taşqari taʼlimni, bolalarning madaniyat va sanʼatdagi salohiyatini rivojlantiradi.' },
-    { t: 'Respublika yoşlar markazi', d: 'Hududlarda yoşlarning savodxonligini oşiradi, kasb-hunar örgatuvçi öquv va ijodiy tögaraklar oçadi.' },
-    { t: 'Ijtimoiy-huquqiy media markaz', d: 'Yoşlarning huquqiy ongini oşirişga qaratilgan media mahsulotlar tayyorlaydi.' },
-    { t: 'Özbekiston yoş fermerlari kengaşi', d: 'Yoşlar örtasida fermerlikni tarğib qiladi, köp tarmoqli fermer xöjaliklarini rivojlantiradi.' },
-    { t: 'Imkoniyati çeklangan yoşlar va bolalar markazi', d: 'Imkoniyati çeklangan yoşlarga teng imkoniyat yaratadi, huquqiy, psixologik va pedagogik yordam beradi.' },
-    { t: 'Yoşlar ijod saroyi', d: 'Sanʼat merosini namoyiş qiluvçi körgazmalar, ijodiy tadbirlar va uçraşuvlar maskani.' },
-    { t: 'Yoş huquqşunoslar kengaşi', d: 'Sud-huquq islohotlarida yoşlar iştirokini faollaştiradi, yoşlar huquqini himoya qiladi.' },
-    { t: 'Respublika yoş olimlar kengaşi', d: 'Ilmiy tadqiqot olib borayotgan yoş olimlar va iqtidorli yoşlarni moddiy va maʼnaviy qöllab-quvvatlaydi.' },
-    { t: 'Yoş dizaynerlar kengaşi', d: 'Yangi avlod dizaynerlarining işlanmalarini ommalaştiradi, kreativ yoşlar jamoasini şakllantiradi.' },
-    { t: 'Yoş kinoijodkorlar kengaşi', d: 'Isteʼdodli yoş kinoijodkorlarni topib, loyihalarini amalga oşirişga yordam beradi.' },
-    { t: 'Tibbiyot oliy öquv yurtlari talabalari assotsiatsiyasi', d: 'Yoşlarning tibbiy savodxonligini oşiradi, soğliqni saqlaş sohasiga xorijiy grantlarni jalb qiladi.' },
+    { t: 'Yetakçilar akademiyasi', d: 'Mahallalar, taʼlim muassasalari, vazirlik va taşkilotlardagi yoşlar yetakçilarining iş samaradorligini oşiradi.', logo: '/img/tashkilotlar/yetakchilar.png' },
+    { t: 'Özbekiston quvnoqlar va zukkolar assotsiatsiyasi', d: 'Mustaqil fikrlaydigan yoşlarni şakllantiradi, iqtidorli yoşlarni izlab topib, isteʼdodini röyobga çiqarişga yordam beradi.', logo: '/img/tashkilotlar/qvz.png' },
+    { t: 'Prezidentning 5 taşabbus loyiha ofisi', d: 'Yoşlarning musiqa, rassomlik, adabiyot, teatr va sanʼatga qiziqişini oşiradi, kitobxonlikni tarğib qiladi.', logo: '/img/tashkilotlar/tashabbus5.png' },
+    { t: 'Yoşlar tadbirkorligini qöllab-quvvatlaş markazi', d: 'Yoş tadbirkorlarni qöllab-quvvatlaydi, ğoyalarni hayotga tatbiq etişga yordam beradi.', logo: '/img/tashkilotlar/tadbirkorlik.png' },
+    { t: 'Respublika yoş ijodkorlar kengaşi', d: 'Hududlardagi namoyon bölmagan yoş isteʼdod egalarini izlab topib, jamiyatda öz örnini topişiga kömaklaşadi.', logo: '/img/tashkilotlar/ijodkorlar.png' },
+    { t: 'Özbekiston volontyorlari assotsiatsiyasi', d: 'Volontyorlik faoliyatini taşkil etadi, fuqarolik taşabbuslarini rivojlantiradi, volontyorlarning huquqlarini himoya qiladi.', logo: '/img/tashkilotlar/volontyorlar.png' },
+    { t: 'Özbekiston yoşlari umumjahon assotsiatsiyasi', d: 'Xorijda öqiyotgan va işlayotgan özbekistonlik yoşlarga har tomonlama kömaklaşadi.', logo: '/img/tashkilotlar/umumjahon.png' },
+    { t: 'Loyihalar boşqaruvi markazi', d: 'Maʼnaviy-maʼrifiy va ijtimoiy mavzularda maqolalar, eşittirişlar, roliklar, filmlar va tok-şoular tayyorlaydi.', logo: '/img/tashkilotlar/mpmg.png' },
+    { t: '«Yangi avlod forumi» bolalar ijodiyoti markazi', d: 'Maktabdan taşqari taʼlimni, bolalarning madaniyat va sanʼatdagi salohiyatini rivojlantiradi.', logo: '/img/tashkilotlar/yangiavlod.png' },
+    { t: 'Respublika yoşlar markazi', d: 'Hududlarda yoşlarning savodxonligini oşiradi, kasb-hunar örgatuvçi öquv va ijodiy tögaraklar oçadi.', logo: '/img/tashkilotlar/yoshlarmarkazi.png' },
+    { t: 'Ijtimoiy-huquqiy media markaz', d: 'Yoşlarning huquqiy ongini oşirişga qaratilgan media mahsulotlar tayyorlaydi.', logo: '/img/tashkilotlar/mediamarkaz.png' },
+    { t: 'Özbekiston yoş fermerlari kengaşi', d: 'Yoşlar örtasida fermerlikni tarğib qiladi, köp tarmoqli fermer xöjaliklarini rivojlantiradi.', logo: '/img/tashkilotlar/fermerlar.png' },
+    { t: 'Imkoniyati çeklangan yoşlar va bolalar markazi', d: 'Imkoniyati çeklangan yoşlarga teng imkoniyat yaratadi, huquqiy, psixologik va pedagogik yordam beradi.', logo: '/img/tashkilotlar/imkoniyat.png' },
+    { t: 'Yoşlar ijod saroyi', d: 'Sanʼat merosini namoyiş qiluvçi körgazmalar, ijodiy tadbirlar va uçraşuvlar maskani.', logo: '/img/tashkilotlar/ijodsaroyi.png' },
+    { t: 'Yoş huquqşunoslar kengaşi', d: 'Sud-huquq islohotlarida yoşlar iştirokini faollaştiradi, yoşlar huquqini himoya qiladi.', logo: '/img/tashkilotlar/huquqshunoslar.png' },
+    { t: 'Respublika yoş olimlar kengaşi', d: 'Ilmiy tadqiqot olib borayotgan yoş olimlar va iqtidorli yoşlarni moddiy va maʼnaviy qöllab-quvvatlaydi.', logo: '/img/tashkilotlar/olimlar.png' },
+    { t: 'Yoş dizaynerlar kengaşi', d: 'Yangi avlod dizaynerlarining işlanmalarini ommalaştiradi, kreativ yoşlar jamoasini şakllantiradi.', logo: '/img/tashkilotlar/dizaynerlar.png' },
+    { t: 'Yoş kinoijodkorlar kengaşi', d: 'Isteʼdodli yoş kinoijodkorlarni topib, loyihalarini amalga oşirişga yordam beradi.', logo: '/img/tashkilotlar/kino.png' },
+    { t: 'Tibbiyot oliy öquv yurtlari talabalari assotsiatsiyasi', d: 'Yoşlarning tibbiy savodxonligini oşiradi, soğliqni saqlaş sohasiga xorijiy grantlarni jalb qiladi.', logo: '/img/tashkilotlar/tibbiyot.png' },
   ] as Org[],
   companies: [
     '«Yoşlar» teleradiokanali',
