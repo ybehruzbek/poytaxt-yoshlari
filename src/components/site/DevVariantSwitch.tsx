@@ -42,7 +42,7 @@ export function DevVariantSwitch({
   titles: string[]
   /** tugmalardagi qisqa yozuv (sukut: A, B, C, …) */
   labels?: string[]
-  /** qöşimça klass (masalan, panelni çap tomonga qöyiş uçun: dev-left) */
+  /** qöşimça klass (masalan, ikkinçi panel uçun joylaşuv) */
   className?: string
 }) {
   const key = `v-${name}`

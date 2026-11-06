@@ -272,20 +272,21 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
   .site-head.scrolled .logo img{height:44px}
 }
 
-/* ===== VAQTINCHA: oçiladigan ro'yxat foni variantlari (DevVariantSwitch, <html data-dd>) ===== */
-.dev-switch.dev-left{right:auto;left:72px}
+/* ===== VAQTINCHA: menyu paneli foni variantlari (<html data-dd="a|b|c|d">) ===== */
+/* B — şaffof oq shisha */
+html[data-dd=b] .dd,html[data-dd=b] .dd-sub{background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.6);
+  -webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);box-shadow:0 24px 60px rgba(40,18,15,.18)}
+html[data-dd=b] .dd-list a:hover,html[data-dd=b] .dd-list a:focus-visible,html[data-dd=b] .dd-list a.cur{background:rgba(255,255,255,.65)}
 
-/* B — och şişa: oq, lekin orqasi körinadi */
-html[data-dd=b] .dd,html[data-dd=b] .dd-sub{background:rgba(255,255,255,.58);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);border:1px solid rgba(255,255,255,.55);box-shadow:0 24px 60px rgba(40,18,15,.18)}
-html[data-dd=b] .dd-list a:hover,html[data-dd=b] .dd-list a:focus-visible,html[data-dd=b] .dd-list a.cur{background:rgba(255,255,255,.7)}
-
-/* C — toʼq şişa: jigarrang şaffof, yozuvlar oq */
-html[data-dd=c] .dd,html[data-dd=c] .dd-sub{background:rgba(48,22,18,.62);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 60px rgba(20,8,6,.35)}
+/* C — toʼq shisha, oq yozuv */
+html[data-dd=c] .dd,html[data-dd=c] .dd-sub{background:rgba(48,22,18,.58);border:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:0 24px 60px rgba(20,8,6,.35)}
 html[data-dd=c] .dd a{color:#fff}
 html[data-dd=c] .dd-list a:hover,html[data-dd=c] .dd-list a:focus-visible{background:rgba(255,255,255,.12)}
-html[data-dd=c] .dd-list a.cur{background:rgba(255,255,255,.14);box-shadow:inset 3px 0 0 var(--yellow);color:var(--yellow)}
+html[data-dd=c] .dd-list a.cur{background:rgba(255,255,255,.1);color:var(--yellow)}
 
-/* D — iliq krem şişa: sayt fon rangida, yarim şaffof */
-html[data-dd=d] .dd,html[data-dd=d] .dd-sub{background:rgba(255,244,233,.66);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,210,90,.35);box-shadow:0 24px 60px rgba(83,40,34,.16)}
+/* D — iliq krem shisha (brend «soft» rangi) */
+html[data-dd=d] .dd,html[data-dd=d] .dd-sub{background:rgba(255,244,233,.7);border:1px solid rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);box-shadow:0 24px 60px rgba(83,40,34,.16)}
 html[data-dd=d] .dd-list a:hover,html[data-dd=d] .dd-list a:focus-visible{background:rgba(255,210,90,.35)}
-html[data-dd=d] .dd-list a.cur{background:var(--yellow);box-shadow:none}
+html[data-dd=d] .dd-list a.cur{background:rgba(255,210,90,.45)}
