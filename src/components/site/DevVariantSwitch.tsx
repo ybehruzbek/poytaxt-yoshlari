@@ -35,12 +35,15 @@ export function DevVariantSwitch({
   label,
   titles,
   labels,
+  className,
 }: {
   name: string
   label: string
   titles: string[]
   /** tugmalardagi qisqa yozuv (sukut: A, B, C, …) */
   labels?: string[]
+  /** qöşimça klass (masalan, panelni çap tomonga qöyiş uçun: dev-left) */
+  className?: string
 }) {
   const key = `v-${name}`
   const keys = titles.map((_, i) => String.fromCharCode(97 + i))
@@ -63,7 +66,7 @@ export function DevVariantSwitch({
 
   if (process.env.NODE_ENV === 'production') return null
   return (
-    <div className="dev-switch" role="group" aria-label={`${label} varianti`}>
+    <div className={`dev-switch${className ? ` ${className}` : ''}`} role="group" aria-label={`${label} varianti`}>
       {label}
       {keys.map((x, i) => (
         <button key={x} type="button" title={titles[i]} className={v === x ? 'on' : undefined} onClick={() => write(key, x)}>

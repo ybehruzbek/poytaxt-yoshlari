@@ -23,9 +23,9 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
   const crumbs = (
     <nav className="crumbs" aria-label="Yöl">
       <Link href={L('')}>Boş sahifa</Link>
-      <span className="sep">/</span>
+      <span>/</span>
       <span>{group.label}</span>
-      <span className="sep">/</span>
+      <span>/</span>
       <span aria-current="page">Özbekiston yoşlar ittifoqi</span>
     </nav>
   )

@@ -3,6 +3,7 @@ import { Inter, Montserrat } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
 import { isLocale, locales } from '@/i18n/config'
@@ -56,6 +57,9 @@ export default async function LocaleLayout(props: {
         <Header locale={locale} />
         <main>{props.children}</main>
         <Footer locale={locale} />
+        {process.env.NODE_ENV !== 'production' && (
+          <DevVariantSwitch name="dd" label="Menyu foni" className="dev-left" titles={['A · Oq (hozirgi)', 'B · Oç şişa', 'C · Töq şişa', 'D · Iliq krem şişa']} />
+        )}
       </body>
     </html>
   )
