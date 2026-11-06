@@ -5,8 +5,8 @@ import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 import { Arrow } from '@/components/site/SocialPhones'
 import { CompaniesA } from './Companies'
 import { CentresB } from './CentresAlt'
+import { Acc, AccGroup, AccHead, type AccMeta } from './Accordion'
 import { Hero } from './Hero'
-import { NavA, NavB, NavC, NavD, type NavGroup, type NavItem } from './SectionNav'
 import { ProjectCardsC, ResultsC } from './AltTwo'
 import { OfficialB, StructureB } from './AltThree'
 import { OrgsD } from './OrgsLogos'
@@ -14,33 +14,94 @@ import { QuoteE } from './QuotePhoto'
 import { ACTS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, PRIORITIES, STATS, WHO } from './data'
 import { IntlB, PrivilegesB, ProjectsB } from './Sections'
 
-/** VAQTINCHA: bölimlar navigatsiyasi variantlari (B, C, D) faqat ishlab chiqish rejimida */
+/** VAQTINCHA: akkordeon körinişi variantlari faqat ishlab chiqish rejimida */
 const DEV = process.env.NODE_ENV !== 'production'
 
-/** Bölimlar röyxati (sahifa navigatsiyasi uçun) */
-const NAV_ITEMS: NavItem[] = [
-  { id: 'biz-kimmiz', label: 'Biz kimmiz', g: 'biz' },
-  { id: 'tarix', label: 'Tarix', g: 'biz' },
-  { id: 'maqsad', label: 'Maqsad', g: 'biz' },
-  { id: 'ustuvor', label: 'Ustuvor yönalişlar', g: 'biz' },
-  { id: 'imtiyozlar', label: 'Imtiyozlar', g: 'faol' },
-  { id: 'loyihalar', label: 'Loyihalar', g: 'faol' },
-  { id: 'natijalar', label: 'Natijalar', g: 'faol' },
-  { id: 'xalqaro', label: 'Xalqaro hamkorlik', g: 'faol' },
-  { id: 'markazlar', label: 'Yoşlar markazlari', g: 'tizim' },
-  { id: 'taskilotlar', label: 'Taşkilotlar', g: 'tizim' },
-  { id: 'media', label: 'Media va xizmatlar', g: 'tizim' },
-  { id: 'tuzilma', label: 'Tuzilma', g: 'tizim' },
-  { id: 'azolik', label: 'Aʼzolik', g: 'azo' },
-  { id: 'hujjatlar', label: 'Hujjatlar', g: 'azo' },
-  { id: 'rasmiy', label: 'Rasmiy maʼlumotlar', g: 'azo' },
-]
-const NAV_GROUPS: NavGroup[] = [
-  { g: 'biz', label: 'Biz haqimizda' },
-  { g: 'faol', label: 'Faoliyat va natijalar' },
-  { g: 'tizim', label: 'Tizim va taşkilotlar' },
-  { g: 'azo', label: 'Aʼzolik va hujjatlar' },
-]
+/** Akkordeon bölimlari: nomi, qisqa izohi va guruhi */
+const ACC: Record<string, AccMeta> = {
+  'biz-kimmiz': {
+    id: 'biz-kimmiz',
+    title: 'Biz kimmiz',
+    sub: 'Taşkilot haqida qisqaça va asosiy raqamlar',
+    g: 'biz',
+  },
+  suratlar: {
+    id: 'suratlar',
+    title: 'Suratlarda Ittifoq',
+    sub: 'Tadbirlardan lavhalar va yana 4 ta raqam',
+    g: 'biz',
+  },
+  tarix: { id: 'tarix', title: 'Qisqa tarix', sub: '2001-yildan bugungaça', g: 'biz' },
+  maqsad: { id: 'maqsad', title: 'Maqsadimiz', sub: 'Biz nimaga intilamiz', g: 'biz' },
+  ustuvor: {
+    id: 'ustuvor',
+    title: 'Ustuvor yönalişlar',
+    sub: 'PF-5106-son Farmondagi 12 ta yönaliş',
+    g: 'biz',
+  },
+  iqtibos: { id: 'iqtibos', title: 'Prezident iqtibosi', sub: 'Yoşlarga murojaat', g: 'biz' },
+  imtiyozlar: {
+    id: 'imtiyozlar',
+    title: 'Mukofot va imtiyozlar',
+    sub: '6 ta mukofot va imtiyoz',
+    g: 'faol',
+  },
+  loyihalar: {
+    id: 'loyihalar',
+    title: 'Loyihalar',
+    sub: '10 ta yönaliş va 19 ta yirik loyiha',
+    g: 'faol',
+  },
+  natijalar: {
+    id: 'natijalar',
+    title: 'Natijalar',
+    sub: '2018, 2023 va 2025–2026-yillar',
+    g: 'faol',
+  },
+  xalqaro: {
+    id: 'xalqaro',
+    title: 'Xalqaro hamkorlik',
+    sub: '20 dan ziyod hamkor mamlakat',
+    g: 'faol',
+  },
+  markazlar: {
+    id: 'markazlar',
+    title: 'Yoşlar markazlari',
+    sub: 'Yoşlar ijod saroyi va 14 ta hudud',
+    g: 'tizim',
+  },
+  taskilotlar: {
+    id: 'taskilotlar',
+    title: 'Ittifoq taʼsisçiligidagi taşkilotlar',
+    sub: '19 ta nodavlat notijorat taşkilot',
+    g: 'tizim',
+  },
+  media: {
+    id: 'media',
+    title: 'Media, naşriyot va xizmat taşkilotlari',
+    sub: '11 ta taşkilot va Ittifoq uluşi',
+    g: 'tizim',
+  },
+  tuzilma: {
+    id: 'tuzilma',
+    title: 'Qanday tuzilganmiz',
+    sub: 'Qurultoydan boşlanğiç taşkilotgaça',
+    g: 'tizim',
+  },
+  azolik: {
+    id: 'azolik',
+    title: 'Qanday aʼzo böliş mumkin',
+    sub: '4 ta qadam va aʼzolar imkoniyatlari',
+    g: 'azo',
+  },
+  hujjatlar: {
+    id: 'hujjatlar',
+    title: 'Normativ-huquqiy hujjatlar',
+    sub: '8 ta asosiy hujjat',
+    g: 'azo',
+  },
+  rasmiy: { id: 'rasmiy', title: 'Rasmiy maʼlumotlar', sub: 'Nomi, sanasi va manzili', g: 'azo' },
+}
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
@@ -53,28 +114,19 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
  */
 export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
-    <div className="it">
+    <div className="it it-accs">
       <Hero L={L} crumbs={crumbs} />
-      <NavA items={NAV_ITEMS} />
-      {DEV && (
-        <>
-          <NavB items={NAV_ITEMS} />
-          <NavC items={NAV_ITEMS} />
-          <NavD items={NAV_ITEMS} groups={NAV_GROUPS} />
-          <DevVariantSwitch
-            name="toc"
-            label="Bölimlar"
-            titles={[
-              'A · Yopişqoq qator',
-              'B · Çapda mundarija',
-              'C · Öngda nuqtalar',
-              'D · 4 ta yorliq',
-            ]}
-          />
-        </>
-      )}
 
-      <div className="it-anc" id="biz-kimmiz" data-g="biz">
+      <AccHead />
+      {DEV && (
+        <DevVariantSwitch
+          name="acc"
+          label="Akkordeon"
+          titles={['A · Röyxat', 'B · Kartalar', 'C · Guruhlar', 'D · Töq çiziqlar']}
+        />
+      )}
+      <AccGroup label="Biz haqimizda" />
+      <Acc meta={ACC['biz-kimmiz']} n={1} open>
         <section className="sec">
           <div className="wrap">
             <div className="it-who">
@@ -98,9 +150,9 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </div>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="suratlar" data-g="biz">
+      <Acc meta={ACC['suratlar']} n={2}>
         <section className="sec">
           <div className="wrap">
             <div className="it-mosaic">
@@ -120,9 +172,9 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </div>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="tarix" data-g="biz">
+      <Acc meta={ACC['tarix']} n={3}>
         <section className="sec">
           <div className="wrap">
             <div className="sec-head">
@@ -138,9 +190,9 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </ol>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="maqsad" data-g="biz">
+      <Acc meta={ACC['maqsad']} n={4}>
         <section className="sec">
           <div className="wrap">
             <p className="it-kick">Maqsadimiz</p>
@@ -151,9 +203,9 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             <p className="it-charter">{MISSION.charter}</p>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="ustuvor" data-g="biz">
+      <Acc meta={ACC['ustuvor']} n={5}>
         <section className="sec it-pri-sec">
           <div className="wrap">
             <div className="it-pri-head">
@@ -175,13 +227,14 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </ol>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="iqtibos" data-g="biz">
+      <Acc meta={ACC['iqtibos']} n={6}>
         <QuoteE />
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="imtiyozlar" data-g="faol">
+      <AccGroup label="Faoliyat va natijalar" />
+      <Acc meta={ACC['imtiyozlar']} n={7}>
         <section className="sec">
           <div className="wrap">
             <div className="sec-head">
@@ -191,9 +244,9 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             <PrivilegesB />
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="loyihalar" data-g="faol">
+      <Acc meta={ACC['loyihalar']} n={8}>
         <section className="sec">
           <div className="wrap">
             <div className="sec-head">
@@ -205,37 +258,39 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             <ProjectCardsC />
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="natijalar" data-g="faol">
+      <Acc meta={ACC['natijalar']} n={9}>
         <ResultsC />
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="xalqaro" data-g="faol">
+      <Acc meta={ACC['xalqaro']} n={10}>
         <section className="sec">
           <div className="wrap">
             <IntlB />
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="markazlar" data-g="tizim">
+      <AccGroup label="Tizim va taşkilotlar" />
+      <Acc meta={ACC['markazlar']} n={11}>
         <CentresB />
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="taskilotlar" data-g="tizim">
+      <Acc meta={ACC['taskilotlar']} n={12}>
         <OrgsD />
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="media" data-g="tizim">
+      <Acc meta={ACC['media']} n={13}>
         <CompaniesA />
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="tuzilma" data-g="tizim">
+      <Acc meta={ACC['tuzilma']} n={14}>
         <StructureB />
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="azolik" data-g="azo">
+      <AccGroup label="Aʼzolik va hujjatlar" />
+      <Acc meta={ACC['azolik']} n={15}>
         <section className="sec it-join-sec" id="azo-bolish">
           <div className="wrap">
             <div className="sec-head">
@@ -282,9 +337,9 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </div>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="hujjatlar" data-g="azo">
+      <Acc meta={ACC['hujjatlar']} n={16}>
         <section className="sec">
           <div className="wrap">
             <div className="sec-head">
@@ -315,11 +370,11 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </p>
           </div>
         </section>
-      </div>
+      </Acc>
 
-      <div className="it-anc" id="rasmiy" data-g="azo">
+      <Acc meta={ACC['rasmiy']} n={17}>
         <OfficialB />
-      </div>
+      </Acc>
 
       <section className="sec">
         <div className="wrap">{siblings}</div>
