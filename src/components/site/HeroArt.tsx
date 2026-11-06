@@ -1,160 +1,209 @@
 /* eslint-disable @next/next/no-img-element -- namuna rasmlar; CMS ulanganda next/image ga ötadi */
 import type { CSSProperties, ReactNode } from 'react'
 
-import { FitCanvas } from './FitCanvas'
-
 /*
- * VAQTINCHA (faqat dev): boş ekran öng tomoni — "Orbita" (C) va uning takomillaştirilgan körinişlari.
+ * VAQTINCHA (faqat dev): boş ekran öng tomoni uçun butunlay boşqa yönalişdagi variantlar.
  * A — hozirgi kollaj (Hero.tsx içida). Tanlangandan keyin qolganlari öçiriladi.
  */
 
-export const Ico = ({ children }: { children: ReactNode }) => (
+const Ico = ({ children }: { children: ReactNode }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     {children}
   </svg>
 )
 
-/** Hero matnidagi yönalişlar. img/izoh — C2 uçun (rasmlar NAMUNA, yönalişga mos suratlar bilan almaştiriladi) */
-export const DIRS: { t: string; c: string; dark?: boolean; i: ReactNode; img: string; d: string }[] = [
-  { t: 'Taʼlim', c: 'var(--sky)', dark: true, img: 'news-1', d: 'Grantlar, stipendiyalar va öquv kurslari', i: <path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" /> },
-  { t: 'Sport', c: 'var(--green)', img: 'about-3', d: 'Musobaqalar va soğlom turmuş tarzi', i: <><circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8" /></> },
-  { t: 'Ijod', c: 'var(--lime)', dark: true, img: 'about-2', d: 'Tanlovlar, festivallar va ijodiy loyihalar', i: <path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.6 0-1.2-1-1.4-1-2.4 0-.9.7-1.5 1.6-1.5H16a5 5 0 0 0 5-5c0-4.2-4-7.5-9-7.5zM7.5 11h.01M10.5 7.5h.01M15 8h.01" /> },
-  { t: 'Tadbirkorlik', c: 'var(--blue)', img: 'opp-grant', d: 'Startaplar va biznes taşabbuslari', i: <><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18" /></> },
-  { t: 'Volontyorlik', c: 'var(--yellow)', dark: true, img: 'opp-vol', d: 'Şahar tadbirlari va ijtimoiy aksiyalar', i: <path d="M12 21s-7-4.4-9.3-9C1 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3C21 5 23 8.5 21.3 12 19 16.6 12 21 12 21z" /> },
-]
-
-/** Yönaliş yorliği: rangli belgi + nom */
-export function DirChip({ d, className = 'hac-chip' }: { d: (typeof DIRS)[number]; className?: string }) {
-  return (
-    <span className={className}>
-      <span className={`hac-ic${d.dark ? ' dark' : ''}`} style={{ background: d.c }}>
-        <Ico>{d.i}</Ico>
-      </span>
-      {d.t}
-    </span>
-  )
-}
-
-const angle = (i: number, n: number, shift = -90) => ({ '--a': `${(360 / n) * i + shift}deg` }) as CSSProperties
-
 const Star = ({ className, fill = '#FF854B' }: { className: string; fill?: string }) => (
-  <svg className={className} viewBox="0 0 40 40">
+  <svg className={className} viewBox="0 0 40 40" aria-hidden="true">
     <path fill={fill} d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
   </svg>
 )
 
-/** C · Orbita (asl): markazda surat, atrofida 5 yönaliş sekin aylanadi */
-export function HeroArtC() {
-  return (
-    <div className="ha hac" aria-hidden="true">
-      <span className="hac-ring r1" />
-      <span className="hac-ring r2" />
-      <div className="hac-photo">
-        <img src="/img/hero-tk.jpg" alt="" />
-      </div>
-      <span className="hac-bubble">Salom!</span>
-      <div className="hac-orbit">
-        {DIRS.map((d, i) => (
-          <span key={d.t} className="hac-item" style={angle(i, DIRS.length)}>
-            <DirChip d={d} />
-          </span>
-        ))}
-      </div>
-      <Star className="hac-star" />
-      <span className="hac-half" />
-    </div>
-  )
-}
-
-/**
- * C1 · Ikki orbita: içki orbitada 5 yönaliş, taşqi orbitada yoşlar suratlari — ikkalasi qarama-qarşi
- * yönalişda aylanadi; markazda surat va "Yoşlar Ittifoqi" yorliği, orqada iliq nur.
- */
-export function HeroArtC1() {
-  const faces = ['about-1', 'news-2', 'opp-vol', 'about-2', 'news-3', 'opp-stip']
-  return (
-    <div className="ha hac hac1" aria-hidden="true">
-      <span className="hac1-glow" />
-      <span className="hac-ring r1" />
-      <span className="hac-ring r2" />
-      <div className="hac-orbit hac1-outer">
-        {faces.map((f, i) => (
-          <span key={f} className="hac-item hac1-far" style={angle(i, faces.length, -60)}>
-            <span className="hac1-face">
-              <img src={`/img/${f}.jpg`} alt="" />
-            </span>
-          </span>
-        ))}
-      </div>
-      <div className="hac-photo hac1-photo">
-        <img src="/img/hero-tk.jpg" alt="" />
-      </div>
-      <span className="hac1-tag">Yoşlar Ittifoqi</span>
-      <div className="hac-orbit hac1-inner">
-        {DIRS.map((d, i) => (
-          <span key={d.t} className="hac-item hac1-near" style={angle(i, DIRS.length)}>
-            <DirChip d={d} />
-          </span>
-        ))}
-      </div>
-      <span className="hac-bubble">Salom!</span>
-      <Star className="hac-star" />
-    </div>
-  )
-}
-
-/** C3 orbitalari: 600×700 kanvasdagi qiya ellipslar (markaz 300,350). front — oldingi yarmi */
-const C3_ORBITS = [
-  { rx: 300, ry: 100, rot: -18, a: [585.3, 257.3], b: [14.7, 442.7], dur: 26, dirs: DIRS.slice(0, 3) },
-  { rx: 270, ry: 85, rot: 22, a: [550.3, 451.1], b: [49.7, 248.9], dur: 20, dirs: DIRS.slice(3) },
+const PILLS = [
+  { t: 'Taʼlim', c: 'var(--sky)', dark: true },
+  { t: 'Sport', c: 'var(--green)' },
+  { t: 'Ijod', c: 'var(--lime)', dark: true },
+  { t: 'Tadbirkorlik', c: 'var(--blue)' },
+  { t: 'Volontyorlik', c: 'var(--yellow)', dark: true },
 ]
-const arc = (o: (typeof C3_ORBITS)[number], to: number[]) => `A ${o.rx} ${o.ry} ${o.rot} 1 1 ${to[0]} ${to[1]}`
-const fullPath = (o: (typeof C3_ORBITS)[number]) => `M ${o.a[0]} ${o.a[1]} ${arc(o, o.b)} ${arc(o, o.a)}`
-const frontPath = (o: (typeof C3_ORBITS)[number]) => `M ${o.a[0]} ${o.a[1]} ${arc(o, o.b)}`
 
-/**
- * C3 · Qiya orbitalar: surat atrofida ikkita qiya ellips-orbita (3D taassurot);
- * yönalişlar ellips böylab harakatlanadi — orqada surat ortiga ötib kiçrayadi, oldinda kattalaşadi.
- */
-export function HeroArtC3() {
+/** B · Plakat: suratsiz, yirik tipografik plakat — "POYTAXT YOŞLARI BIRGA!" va yönaliş stikerlari */
+export function HeroArtPoster() {
   return (
-    <FitCanvas className="ha hac3">
-      <div className="hac3-canvas">
-        <span className="hac3-glow" />
-        <svg className="hac3-lines back" viewBox="0 0 600 700">
-          {C3_ORBITS.map((o, i) => (
-            <path key={i} d={fullPath(o)} />
-          ))}
-        </svg>
-        <div className="hac3-photo">
-          <img src="/img/hero-tk.jpg" alt="" />
-        </div>
-        <svg className="hac3-lines front" viewBox="0 0 600 700">
-          {C3_ORBITS.map((o, i) => (
-            <path key={i} d={frontPath(o)} />
-          ))}
-        </svg>
-        {C3_ORBITS.flatMap((o, oi) =>
-          o.dirs.map((d, i) => (
+    <div className="ha hp" aria-hidden="true">
+      <div className="hp-card">
+        <span className="hp-kicker">Toşkent · 2026</span>
+        <span className="hp-w w1">Poytaxt</span>
+        <span className="hp-w w2">yoşlari</span>
+        <span className="hp-w w3">birga!</span>
+        <div className="hp-pills">
+          {PILLS.map((p, i) => (
             <span
-              key={d.t}
-              className="hac3-mover"
-              style={
-                {
-                  offsetPath: `path("${fullPath(o)}")`,
-                  animationDuration: `${o.dur}s`,
-                  animationDelay: `${(-o.dur / o.dirs.length) * i - oi * 3}s`,
-                } as CSSProperties
-              }
+              key={p.t}
+              className={`hp-pill${p.dark ? ' dark' : ''}`}
+              style={{ background: p.c, '--i': i } as CSSProperties}
             >
-              <DirChip d={d} className="hac3-chip" />
+              {p.t}
             </span>
-          )),
-        )}
-        <span className="hac-bubble hac3-bubble">Salom!</span>
-        <Star className="hac3-star" />
-        <Star className="hac3-star2" fill="#43A574" />
+          ))}
+        </div>
+        <span className="hp-photo">
+          <img src="/img/about-1.jpg" alt="" />
+        </span>
+        <svg className="hp-arrow" viewBox="0 0 120 80">
+          <path d="M6 70C30 20 70 8 108 18" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
+          <path d="M92 6l18 12-16 14" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </div>
-    </FitCanvas>
+      <Star className="hp-star" />
+      <Star className="hp-star2" fill="#43A574" />
+    </div>
+  )
+}
+
+/** C · Ilova: saytning foydasi interfeys kartalari körinişida — imkoniyatlar röyxati, yaqin tadbir, bildiriş */
+export function HeroArtApp() {
+  const opps = [
+    { t: 'Yoşlar taşabbuslari granti', s: 'Poytaxt miqyosida', c: 'var(--yellow)', i: <path d="M12 2v20M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /> },
+    { t: 'Iqtidorli yoşlar stipendiyasi', s: 'Davlat dasturi', c: 'var(--sky)', i: <path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" /> },
+    { t: 'Şahar volontyorlari dasturi', s: 'Poytaxt miqyosida', c: 'var(--green)', i: <path d="M12 21s-7-4.4-9.3-9C1 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3C21 5 23 8.5 21.3 12 19 16.6 12 21 12 21z" /> },
+  ]
+  return (
+    <div className="ha hu" aria-hidden="true">
+      <div className="hu-main">
+        <div className="hu-head">
+          <b>Siz uçun imkoniyatlar</b>
+          <span className="hu-tabs">
+            <i className="on">Barçasi</i>
+            <i>Grantlar</i>
+            <i>Tanlovlar</i>
+          </span>
+        </div>
+        <ul>
+          {opps.map((o) => (
+            <li key={o.t}>
+              <span className="hu-ic" style={{ background: o.c }}>
+                <Ico>{o.i}</Ico>
+              </span>
+              <span className="hu-txt">
+                <b>{o.t}</b>
+                <small>{o.s}</small>
+              </span>
+              <span className="hu-status">Oçiq</span>
+            </li>
+          ))}
+        </ul>
+        <span className="hu-more">Barça imkoniyatlar →</span>
+      </div>
+
+      <div className="hu-event">
+        <span className="hu-date">
+          <b>14</b>
+          <small>noyabr</small>
+        </span>
+        <span className="hu-ev-txt">
+          <small>Yaqin tadbir</small>
+          <b>Volontyorlar forumi</b>
+        </span>
+        <span className="hu-go">
+          <Ico>
+            <path d="M7 17 17 7M8 7h9v9" />
+          </Ico>
+        </span>
+      </div>
+
+      <div className="hu-toast">
+        <span className="hu-bell">
+          <Ico>
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0" />
+          </Ico>
+        </span>
+        <span>
+          <small>Yangi eʼlon</small>
+          <b>Startap ğoyalar granti</b>
+        </span>
+      </div>
+
+      <span className="hu-blob" />
+      <Star className="hu-star" />
+    </div>
+  )
+}
+
+/** D · Poytaxt: Toşkent silueti (teleminora, gumbazli bino, zamonaviy minoralar) va havodagi yönaliş şarlari */
+export function HeroArtCity() {
+  return (
+    <div className="ha hk" aria-hidden="true">
+      <svg className="hk-city" viewBox="0 0 600 700">
+        {/* quyoş va bulutlar */}
+        <circle cx="400" cy="250" r="150" fill="#FFD25A" />
+        <circle cx="400" cy="250" r="190" fill="none" stroke="#FFD25A" strokeOpacity=".35" strokeWidth="2" strokeDasharray="4 10" />
+        <g fill="#fff">
+          <rect x="70" y="150" width="140" height="34" rx="17" />
+          <rect x="110" y="128" width="70" height="44" rx="22" />
+          <rect x="430" y="96" width="120" height="28" rx="14" />
+        </g>
+
+        {/* orqa qator: zamonaviy minoralar (och) */}
+        <g fill="#89C0FF">
+          <rect x="300" y="330" width="56" height="300" rx="6" />
+          <path d="M370 300h54v330h-54z" />
+          <path d="M436 360l46-20v290h-46z" />
+          <rect x="492" y="410" width="48" height="220" rx="6" />
+        </g>
+        <g fill="#fff" opacity=".55">
+          {Array.from({ length: 8 }, (_, r) =>
+            [312, 330].map((x) => <rect key={`a${r}${x}`} x={x} y={350 + r * 32} width="10" height="16" rx="2" />),
+          )}
+          {Array.from({ length: 9 }, (_, r) =>
+            [382, 404].map((x) => <rect key={`b${r}${x}`} x={x} y={322 + r * 32} width="10" height="16" rx="2" />),
+          )}
+        </g>
+
+        {/* teleminora */}
+        <g fill="#532822">
+          <path d="M150 640l18-200h10l18 200h-12l-11-150-11 150z" />
+          <rect x="166" y="150" width="14" height="300" rx="4" />
+          <ellipse cx="173" cy="300" rx="34" ry="14" />
+          <ellipse cx="173" cy="286" rx="24" ry="9" />
+          <ellipse cx="173" cy="200" rx="20" ry="8" />
+          <rect x="171" y="80" width="4" height="74" rx="2" />
+        </g>
+        <circle cx="173" cy="80" r="6" fill="#FF854B" />
+
+        {/* gumbazli bino */}
+        <g fill="#FF854B">
+          <rect x="196" y="500" width="150" height="130" rx="6" />
+          <path d="M216 500a55 55 0 0 1 110 0z" />
+          <rect x="208" y="440" width="14" height="190" rx="4" />
+          <rect x="320" y="440" width="14" height="190" rx="4" />
+        </g>
+        <g fill="#FF854B">
+          <path d="M206 440l9-22 9 22z" />
+          <path d="M318 440l9-22 9 22z" />
+        </g>
+        <g fill="#FFF4E9">
+          <path d="M252 630v-60a19 19 0 0 1 38 0v60z" />
+          <path d="M222 600v-26a9 9 0 0 1 18 0v26zM302 600v-26a9 9 0 0 1 18 0v26z" />
+        </g>
+        <circle cx="271" cy="452" r="6" fill="#532822" />
+
+        {/* daraxtlar va yer */}
+        <g fill="#43A574">
+          <circle cx="70" cy="600" r="34" />
+          <circle cx="110" cy="612" r="26" />
+          <circle cx="372" cy="606" r="30" />
+          <circle cx="560" cy="604" r="32" />
+        </g>
+        <rect x="0" y="624" width="600" height="76" rx="38" fill="#532822" />
+        <path d="M60 662h480" stroke="#FFD25A" strokeWidth="4" strokeDasharray="22 18" strokeLinecap="round" />
+      </svg>
+
+      {PILLS.map((p, i) => (
+        <span key={p.t} className={`hk-balloon b${i + 1}${p.dark ? ' dark' : ''}`} style={{ background: p.c }}>
+          {p.t}
+        </span>
+      ))}
+      <span className="hk-bubble">Salom, poytaxt!</span>
+    </div>
   )
 }
