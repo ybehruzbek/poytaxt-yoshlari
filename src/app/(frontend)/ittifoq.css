@@ -481,3 +481,68 @@
   .iq-e img{height:280px;border-radius:32px}
   .iq-e-mark{font-size:80px}
 }
+
+/* ===== Taşkilotlar D, E, F (logotiplar bilan) ===== */
+.ol-lead{max-width:760px;font-size:18px;line-height:1.65;margin:-24px 0 32px}
+.ol-comp{margin-top:20px;border:1px solid var(--line);border-radius:var(--r-thumb);padding:24px 28px}
+.ol-comp h3{font:800 18px/1.3 var(--f-head);color:var(--navy);margin-bottom:14px}
+.ol-comp div{display:flex;flex-wrap:wrap;gap:8px}
+.ol-comp span{background:var(--soft);border-radius:99px;padding:8px 14px;font-size:14px;font-weight:600;color:var(--navy)}
+.ol-comp-dark{border-color:rgba(255,255,255,.15)}
+.ol-comp-dark h3{color:var(--soft)}
+.ol-comp-dark span{background:rgba(255,255,255,.1);color:#fff}
+[class^=ol-] img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
+
+/* D — logotiplar devori */
+.ol-d{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.ol-d article{border:1px solid var(--line);border-radius:28px;padding:22px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;transition:border-color .2s,transform .2s,box-shadow .2s;background:#fff}
+.ol-d article:hover{border-color:var(--yellow);transform:translateY(-3px);box-shadow:0 18px 40px rgba(83,40,34,.1)}
+.ol-d-logo{display:grid;place-items:center;width:104px;height:104px;padding:8px}
+.ol-d h3{font:800 15px/1.3 var(--f-head);color:var(--navy)}
+.ol-d p{font-size:13px;line-height:1.5;color:var(--muted)}
+
+/* E — lenta va ixçam röyxat */
+.ol-e-sec{background:var(--soft)}
+.ol-e-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+.ol-e-head p{line-height:1.65;font-size:17px}
+.ol-e-marq{overflow:hidden;margin:40px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ol-e-marq>div{display:flex;gap:16px;width:max-content;animation:ix-marq 45s linear infinite}
+.ol-e-marq:hover>div{animation-play-state:paused}
+.ol-e-chip{display:grid;place-items:center;width:120px;height:120px;border-radius:32px;background:#fff;padding:16px;box-shadow:0 10px 30px rgba(83,40,34,.08)}
+.ol-e-list{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ol-e-list li{display:flex;gap:14px;align-items:center;background:#fff;border-radius:24px;padding:14px 16px}
+.ol-e-logo{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:#fff;border:1px solid var(--line);padding:6px}
+.ol-e-list h3{font:800 15px/1.3 var(--f-head);color:var(--navy)}
+.ol-e-list p{margin-top:4px;font-size:13px;line-height:1.45;color:var(--muted)}
+.ol-e-sec .ol-comp{background:#fff;border-color:#fff}
+
+/* F — töq bölim, doiralar */
+.ol-f-sec{background:var(--navy);color:#fff}
+.ol-f-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
+.ol-f-head .h2{color:var(--soft)}
+.ol-f-head p{line-height:1.65;opacity:.85}
+.ol-f{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:28px 16px}
+.ol-f li{width:calc((100% - 80px) / 6)}
+.ol-f li{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;outline:none}
+.ol-f-logo{display:grid;place-items:center;width:112px;height:112px;border-radius:50%;background:#fff;padding:20px;transition:transform .25s,box-shadow .25s}
+.ol-f li:hover .ol-f-logo,.ol-f li:focus-visible .ol-f-logo{transform:scale(1.06);box-shadow:0 0 0 6px var(--yellow)}
+.ol-f h3{font:700 14px/1.3 var(--f-head);color:#fff}
+.ol-f p{position:absolute;left:50%;top:calc(100% + 6px);z-index:3;width:240px;transform:translateX(-50%) translateY(-4px);background:#fff;color:var(--navy);border-radius:16px;padding:12px 14px;font-size:13px;line-height:1.45;box-shadow:0 18px 40px rgba(20,8,6,.35);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s}
+.ol-f li:hover p,.ol-f li:focus-visible p{opacity:1;visibility:visible;transform:translateX(-50%)}
+.ol-f-sec .ol-comp{margin-top:56px}
+
+@media (max-width:1100px){
+  .ol-d{grid-template-columns:repeat(3,1fr)}
+  .ol-e-head,.ol-f-head{grid-template-columns:1fr;gap:16px}
+  .ol-e-list{grid-template-columns:repeat(2,1fr)}
+  .ol-f li{width:calc((100% - 48px) / 4)}
+}
+@media (max-width:640px){
+  .ol-d{grid-template-columns:repeat(2,1fr);gap:10px}
+  .ol-d-logo{width:80px;height:80px}
+  .ol-e-list{grid-template-columns:1fr}
+  .ol-e-chip{width:90px;height:90px;border-radius:24px}
+  .ol-f li{width:calc((100% - 16px) / 2)}
+  .ol-f p{position:static;transform:none;width:auto;opacity:1;visibility:visible;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);box-shadow:none}
+  .ol-f li:hover p,.ol-f li:focus-visible p{transform:none}
+}

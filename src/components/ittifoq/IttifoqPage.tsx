@@ -31,6 +31,7 @@ import {
   StructureB,
   StructureC,
 } from './AltThree'
+import { OrgsD, OrgsE, OrgsF } from './OrgsLogos'
 import { ProjectCards } from './ProjectCards'
 import { QuoteD, QuoteE } from './QuotePhoto'
 import {
@@ -95,7 +96,7 @@ const PANEL: PanelSection[] = [
   ['azo', 'Aʼzolik'],
   ['huj', 'Normativ hujjatlar'],
   ['ras', 'Rasmiy maʼlumotlar'],
-].map(([name, label]) => ({ name, label, count: name === 'iqt' ? 5 : 3 }))
+].map(([name, label]) => ({ name, label, count: name === 'iqt' ? 5 : name === 'tas' ? 6 : 3 }))
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -453,6 +454,15 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
           </V>
           <V name="tas" k="c">
             <OrgsC />
+          </V>
+          <V name="tas" k="d">
+            <OrgsD />
+          </V>
+          <V name="tas" k="e">
+            <OrgsE />
+          </V>
+          <V name="tas" k="f">
+            <OrgsF />
           </V>
         </>
       )}
