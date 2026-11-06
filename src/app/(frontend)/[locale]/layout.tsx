@@ -3,7 +3,6 @@ import { Inter, Montserrat } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
 import { isLocale, locales } from '@/i18n/config'
@@ -17,7 +16,6 @@ import '../opps.css'
 import '../cta.css'
 import '../footer.css'
 import '../social.css'
-import '../hero-art.css'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
 // latin-ext: Ö Ğ Ş Ç ’ (yangi alifbo); cyrillic: rus tili.
@@ -58,10 +56,6 @@ export default async function LocaleLayout(props: {
         <Header locale={locale} />
         <main>{props.children}</main>
         <Footer locale={locale} />
-        {/* VAQTINCHA (faqat dev): bosh ekran öng tomoni variantlari */}
-        {process.env.NODE_ENV !== 'production' && (
-          <DevVariantSwitch name="hr" label="Hero" titles={['A · Hozirgi kollaj', 'B · Plakat', 'C · Ilova', 'D · Poytaxt']} />
-        )}
       </body>
     </html>
   )
