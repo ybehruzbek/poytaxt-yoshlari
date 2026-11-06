@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
-import type { CSSProperties, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
 import { Centres } from './Centres'
+import { CompaniesA, CompaniesB, CompaniesC } from './Companies'
 import { CentresB, CentresC } from './CentresAlt'
 import { Hero } from './Hero'
 import { HistoryB, HistoryC, MissionB, MissionC, MosaicB, MosaicC, WhoB, WhoC } from './AltOne'
@@ -92,6 +93,7 @@ const PANEL: PanelSection[] = [
   ['xal', 'Xalqaro hamkorlik'],
   ['mar', 'Yoşlar markazlari'],
   ['tas', 'Taşkilotlar'],
+  ['med', 'Media va xizmat taşkilotlari'],
   ['tuz', 'Tuzilma'],
   ['azo', 'Aʼzolik'],
   ['huj', 'Normativ hujjatlar'],
@@ -228,7 +230,6 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
           </V>
         </>
       )}
-
 
       <V name="ust" k="a">
         <section className="sec it-pri-sec">
@@ -436,14 +437,6 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
                 </article>
               ))}
             </div>
-            <div className="it-comp">
-              <h3>Media, naşriyot va xizmat taşkilotlari</h3>
-              <div>
-                {ORGS.companies.map((c) => (
-                  <span key={c}>{c}</span>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
       </V>
@@ -463,6 +456,20 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
           </V>
           <V name="tas" k="f">
             <OrgsF />
+          </V>
+        </>
+      )}
+
+      <V name="med" k="a">
+        <CompaniesA />
+      </V>
+      {DEV && (
+        <>
+          <V name="med" k="b">
+            <CompaniesB />
+          </V>
+          <V name="med" k="c">
+            <CompaniesC />
           </V>
         </>
       )}

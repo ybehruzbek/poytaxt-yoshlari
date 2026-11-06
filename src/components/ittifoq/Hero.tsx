@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 

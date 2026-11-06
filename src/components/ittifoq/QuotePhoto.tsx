@@ -40,7 +40,10 @@ export function QuoteE() {
           </footer>
         </blockquote>
         <figure>
-          <img src={IMG.presYouth2} alt="Prezident Şavkat Mirziyoyev talabalar bilan suhbatlaşmoqda" />
+          <img
+            src={IMG.presYouth2}
+            alt="Prezident Şavkat Mirziyoyev talabalar bilan suhbatlaşmoqda"
+          />
           <figcaption>{CREDIT}</figcaption>
         </figure>
       </div>

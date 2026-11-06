@@ -2,23 +2,9 @@
 import { ORGS } from './data'
 
 const TITLE = 'Ittifoq taʼsisçiligidagi taşkilotlar'
-const COMP_TITLE = 'Media, naşriyot va xizmat taşkilotlari'
 
 function Logo({ src, alt, className }: { src?: string; alt: string; className: string }) {
   return <span className={className}>{src && <img src={src} alt={alt} loading="lazy" />}</span>
-}
-
-function Companies({ dark }: { dark?: boolean }) {
-  return (
-    <div className={`ol-comp${dark ? ' ol-comp-dark' : ''}`}>
-      <h3>{COMP_TITLE}</h3>
-      <div>
-        {ORGS.companies.map((c) => (
-          <span key={c}>{c}</span>
-        ))}
-      </div>
-    </div>
-  )
 }
 
 /** D — logotiplar devori: katta logotip, ostida nomi va qisqa tavsif */
@@ -39,7 +25,6 @@ export function OrgsD() {
             </article>
           ))}
         </div>
-        <Companies />
       </div>
     </section>
   )
@@ -75,7 +60,6 @@ export function OrgsE() {
             </li>
           ))}
         </ol>
-        <Companies />
       </div>
     </section>
   )
@@ -99,7 +83,6 @@ export function OrgsF() {
             </li>
           ))}
         </ul>
-        <Companies dark />
       </div>
     </section>
   )

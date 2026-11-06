@@ -61,7 +61,14 @@ export function Centres() {
         <div className="it-reg">
           <div className="it-reg-list" role="tablist" aria-label="Hududlar">
             {CENTRES.map((x, k) => (
-              <button key={x.region} type="button" role="tab" aria-selected={k === i} className={k === i ? 'on' : undefined} onClick={() => setI(k)}>
+              <button
+                key={x.region}
+                type="button"
+                role="tab"
+                aria-selected={k === i}
+                className={k === i ? 'on' : undefined}
+                onClick={() => setI(k)}
+              >
                 {x.region}
               </button>
             ))}

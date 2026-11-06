@@ -47,20 +47,12 @@ export function OrgsB() {
             ))}
           </ol>
         </div>
-        <div className="x3-orgsb-band">
-          <h3>Media, naşriyot va xizmat taşkilotlari</h3>
-          <ul>
-            {ORGS.companies.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   )
 }
 
-/** C — surat ustida lid, rangli belgili ustunlar va töq kartadagi kompaniyalar */
+/** C — surat ustida lid, logotipli rangli belgili ustunlar */
 export function OrgsC() {
   return (
     <section className="sec x3-orgsc">
@@ -86,17 +78,6 @@ export function OrgsC() {
               </div>
             </article>
           ))}
-        </div>
-        <div className="x3-orgsc-comp">
-          <h3>Media, naşriyot va xizmat taşkilotlari</h3>
-          <ol>
-            {ORGS.companies.map((c, i) => (
-              <li key={c}>
-                <span>{pad(i)}</span>
-                {c}
-              </li>
-            ))}
-          </ol>
         </div>
       </div>
     </section>
@@ -276,7 +257,8 @@ export function JoinC({ L }: LP) {
 
 /* ================= 4. Hujjatlar ================= */
 
-const NOTE = 'Ittifoq faoliyati, şuningdek, Özbekiston Respublikasi Konstitutsiyasi, nodavlat notijorat taşkilotlari töğrisidagi qonunlar va Ittifoq Ustaviga asoslanadi.'
+const NOTE =
+  'Ittifoq faoliyati, şuningdek, Özbekiston Respublikasi Konstitutsiyasi, nodavlat notijorat taşkilotlari töğrisidagi qonunlar va Ittifoq Ustaviga asoslanadi.'
 
 /** B — yil katta raqam bilan berilgan hujjat kartalari töri */
 export function ActsB() {

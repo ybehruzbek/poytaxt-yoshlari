@@ -375,3 +375,22 @@ export const ORGS = {
     'Motivatsion kontent studiyasi',
   ],
 }
+
+/* ---------------- Media, naşriyot va xizmat taşkilotlari (taqdimotdan) ---------------- */
+
+export type Company = { t: string; d: string; share: string; logo: string; kind: 'Media' | 'Naşriyot' | 'Xizmat' }
+
+/** Ittifoq uluşi bölgan, faoliyat yuritayotgan taşkilotlar. «Uluş» — Ittifoq Markaziy Kengaşining ustav fondidagi uluşi */
+export const COMPANIES: Company[] = [
+  { kind: 'Media', t: '«Yoşlar» teleradiokanali', d: 'Televizion dasturlar yaratiş va efirga uzatiş', share: '50%', logo: '/img/tashkilotlar/c-yoshlartv.png' },
+  { kind: 'Media', t: '«Ozod yurt tölqinlari» (My5)', d: 'Televizion dasturlar yaratiş va efirga uzatiş', share: '61%', logo: '/img/tashkilotlar/c-ozodyurt.png' },
+  { kind: 'Media', t: '«Yoşlar ovozi» radiosi', d: 'Radioeşittiriş', share: '49%', logo: '/img/tashkilotlar/c-ovoziradio.png' },
+  { kind: 'Media', t: 'Motivatsion kontent', d: 'Ijtimoiy tarmoqlarda yoşlar uçun foydali kontent yaratiş', share: '40%', logo: '/img/tashkilotlar/c-motivatsion.png' },
+  { kind: 'Naşriyot', t: '«Yoşlar ovozi» gazetasi', d: 'Matbuot naşrlarini tayyorlaş va çop etiş', share: '100%', logo: '/img/tashkilotlar/c-ovozigazeta.png' },
+  { kind: 'Naşriyot', t: '«Yoş kuç» jurnali', d: 'Naşriyot faoliyati', share: '100%', logo: '/img/tashkilotlar/c-yoshkuch.png' },
+  { kind: 'Naşriyot', t: 'Yoşlar naşriyot uyi', d: 'Naşriyot faoliyati', share: '100%', logo: '/img/tashkilotlar/c-nashriyot.png' },
+  { kind: 'Xizmat', t: '«Kitob olami»', d: 'Kovorking va kitob savdosi', share: '100%', logo: '/img/tashkilotlar/c-kitobolami.png' },
+  { kind: 'Xizmat', t: 'Yoşlar turizm agentligi', d: 'Joy bron qiliş bilan boğliq turistik xizmatlar', share: '100%', logo: '/img/tashkilotlar/c-turizm.png' },
+  { kind: 'Xizmat', t: 'Yoşlar oromgohi', d: 'Soğlomlaştiriş va dam oliş maskanlari', share: '100%', logo: '/img/tashkilotlar/c-oromgoh.png' },
+  { kind: 'Xizmat', t: '«Şafran» toğ kurort majmuasi', d: 'Soğlomlaştiriş va dam oliş maskani', share: '100%', logo: '/img/tashkilotlar/c-shafran.png' },
+]

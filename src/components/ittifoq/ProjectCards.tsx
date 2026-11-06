@@ -16,7 +16,13 @@ export function ProjectCards() {
         <h3>Yirik loyihalar</h3>
         <div className="ipc-tabs" role="group" aria-label="Loyihalar yönalişi">
           {AREAS.map((a) => (
-            <button key={a} type="button" aria-pressed={a === area} className={a === area ? 'on' : undefined} onClick={() => setArea(a)}>
+            <button
+              key={a}
+              type="button"
+              aria-pressed={a === area}
+              className={a === area ? 'on' : undefined}
+              onClick={() => setArea(a)}
+            >
               {a}
             </button>
           ))}

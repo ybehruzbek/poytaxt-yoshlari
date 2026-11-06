@@ -12,7 +12,14 @@ export function ProjectsTabs() {
     <div className="ipr-c">
       <div className="ipr-c-list" role="tablist" aria-label="Yönalişlar">
         {PROJECTS.map((x, k) => (
-          <button key={x.t} type="button" role="tab" aria-selected={k === i} className={k === i ? 'on' : undefined} onClick={() => setI(k)}>
+          <button
+            key={x.t}
+            type="button"
+            role="tab"
+            aria-selected={k === i}
+            className={k === i ? 'on' : undefined}
+            onClick={() => setI(k)}
+          >
             <span>{String(k + 1).padStart(2, '0')}</span>
             {x.t}
           </button>

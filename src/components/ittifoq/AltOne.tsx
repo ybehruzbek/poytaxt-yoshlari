@@ -120,7 +120,12 @@ export function MosaicC() {
         <div className="x1-mos-c-grid">
           {cells.map((cell, i) =>
             cell.k === 'p' ? (
-              <img key={i} src={cell.v.src} alt={cell.v.alt} className={'cls' in cell ? cell.cls : undefined} />
+              <img
+                key={i}
+                src={cell.v.src}
+                alt={cell.v.alt}
+                className={'cls' in cell ? cell.cls : undefined}
+              />
             ) : (
               <div key={i} className={`x1-mos-c-stat x1-tone-${cell.tone}`}>
                 <b>{cell.v.v}</b>

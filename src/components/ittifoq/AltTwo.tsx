@@ -1,15 +1,16 @@
 'use client'
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import { useState } from 'react'
-import type { CSSProperties } from 'react'
 
 import { IMG, PRIORITIES, PROJECT_CARDS, QUOTE, RESULTS } from './data'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const ALL = 'Hammasi'
 const AREAS = [ALL, ...Array.from(new Set(PROJECT_CARDS.map((p) => p.area)))]
-const count = (a: string) => (a === ALL ? PROJECT_CARDS.length : PROJECT_CARDS.filter((p) => p.area === a).length)
-const byArea = (a: string) => (a === ALL ? PROJECT_CARDS : PROJECT_CARDS.filter((p) => p.area === a))
+const count = (a: string) =>
+  a === ALL ? PROJECT_CARDS.length : PROJECT_CARDS.filter((p) => p.area === a).length
+const byArea = (a: string) =>
+  a === ALL ? PROJECT_CARDS : PROJECT_CARDS.filter((p) => p.area === a)
 
 function Source() {
   return (
@@ -137,7 +138,13 @@ export function ProjectCardsB() {
         <h3>Yirik loyihalar</h3>
         <div className="x2-kb-tabs" role="group" aria-label="Loyihalar yönalişi">
           {AREAS.map((a) => (
-            <button key={a} type="button" aria-pressed={a === area} className={a === area ? 'on' : undefined} onClick={() => setArea(a)}>
+            <button
+              key={a}
+              type="button"
+              aria-pressed={a === area}
+              className={a === area ? 'on' : undefined}
+              onClick={() => setArea(a)}
+            >
               {a} <sup>{count(a)}</sup>
             </button>
           ))}
@@ -177,7 +184,13 @@ export function ProjectCardsC() {
         <h3>Yirik loyihalar</h3>
         <div className="x2-kc-tabs" role="group" aria-label="Loyihalar yönalişi">
           {AREAS.map((a) => (
-            <button key={a} type="button" aria-pressed={a === area} className={a === area ? 'on' : undefined} onClick={() => setArea(a)}>
+            <button
+              key={a}
+              type="button"
+              aria-pressed={a === area}
+              className={a === area ? 'on' : undefined}
+              onClick={() => setArea(a)}
+            >
               <span>{a}</span>
               <b>{count(a)}</b>
             </button>
@@ -254,7 +267,13 @@ export function ResultsC() {
           <h2 className="h2">Natijalar</h2>
           <div className="x2-rc-tabs" role="group" aria-label="Yil">
             {RESULTS.map((x) => (
-              <button key={x.y} type="button" aria-pressed={x.y === y} className={x.y === y ? 'on' : undefined} onClick={() => setY(x.y)}>
+              <button
+                key={x.y}
+                type="button"
+                aria-pressed={x.y === y}
+                className={x.y === y ? 'on' : undefined}
+                onClick={() => setY(x.y)}
+              >
                 {x.y}
               </button>
             ))}
