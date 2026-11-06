@@ -30,6 +30,8 @@ const RULES: Array<[RegExp, string]> = [
   [/CH/g, 'Ç'],
   [/Ch/g, 'Ç'],
   [/ch/g, 'ç'],
+  // Ö/Ğ dan keyin tutuq ortiqça (tö'lov → tölov, tö'garak → tögarak)
+  [new RegExp('([ÖöĞğ])' + APOS, 'g'), '$1'],
   // qolgan apostroflar — harf orasida yoki so'z oxirida turgan bo'lsa tutuq belgisi
   [new RegExp(`(?<=\\p{L})${APOS}(?=\\p{L})`, 'gu'), TUTUQ],
 ]

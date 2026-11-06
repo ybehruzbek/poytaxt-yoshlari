@@ -92,8 +92,8 @@ export const PRIVILEGES: Privilege[] = [
     img: '/img/ittifoq/seminar.jpg',
   },
   {
-    t: 'Kontrakt töʼlovi',
-    text: 'PQ-213-son qarorga muvofiq muddatli harbiy xizmatni tugatgan talabalarning kontrakt töʼlovi qoplab beriladi.',
+    t: 'Kontrakt tölovi',
+    text: 'PQ-213-son qarorga muvofiq muddatli harbiy xizmatni tugatgan talabalarning kontrakt tölovi qoplab beriladi.',
     fact: '2018–2024-yillarda 17 009 talabaga 53,77 mlrd söm',
     img: '/img/ittifoq/harbiy.jpg',
   },
@@ -152,8 +152,8 @@ export const PALACE = {
 /* Toşkent şahar markazi: matn NAMUNA — manzil, ish vaqti va rasmiy tavsif kelgaçi almaştiriladi */
 export const CITY_CENTRE = {
   name: 'Toşkent şahar Yoşlar markazi',
-  text: 'Poytaxt yoşlarining asosiy uçraşuv maydoni: tadbirlar, töʼgaraklar, uçraşuvlar va yoşlar taşabbuslari şu yerda boşlanadi.',
-  facts: ['Tadbir va uçraşuvlar zali', 'Töʼgaraklar va örganiş xonalari', 'Yoşlar taşabbuslarini qöllab-quvvatlaş'],
+  text: 'Poytaxt yoşlarining asosiy uçraşuv maydoni: tadbirlar, tögaraklar, uçraşuvlar va yoşlar taşabbuslari şu yerda boşlanadi.',
+  facts: ['Tadbir va uçraşuvlar zali', 'Tögaraklar va örganiş xonalari', 'Yoşlar taşabbuslarini qöllab-quvvatlaş'],
   img: '/img/markazlar/toshkent-shahar.jpg',
 }
 
