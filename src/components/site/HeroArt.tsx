@@ -1,79 +1,49 @@
 /* eslint-disable @next/next/no-img-element -- namuna rasmlar; CMS ulanganda next/image ga ötadi */
-import Link from 'next/link'
 import type { CSSProperties, ReactNode } from 'react'
 
-import type { Locale } from '@/i18n/config'
+import { FitCanvas } from './FitCanvas'
 
 /*
- * VAQTINCHA (faqat dev): bosh ekran öng tomoni uçun B va C variantlari.
+ * VAQTINCHA (faqat dev): boş ekran öng tomoni — "Orbita" (C) va uning takomillaştirilgan körinişlari.
  * A — hozirgi kollaj (Hero.tsx içida). Tanlangandan keyin qolganlari öçiriladi.
  */
 
-/** B · Mozaika: real suratlar bento-tör körinişida, yaqin tadbir kartasi va palitra şakllari */
-export function HeroArtB({ locale }: { locale: Locale }) {
-  return (
-    <div className="ha hab">
-      <div className="hab-grid">
-        <div className="hab-tile hab-main">
-          <img src="/img/hero-tk.jpg" alt="" />
-          <span className="hab-tag">Yoşlar Ittifoqi</span>
-        </div>
-        <div className="hab-tile hab-voice" aria-hidden="true">
-          <span className="hab-wave">
-            <b />
-            <b />
-            <b />
-            <b />
-            <b />
-          </span>
-          <span>Poytaxt yoşlari ovozi</span>
-        </div>
-        <div className="hab-tile hab-pill">
-          <img src="/img/about-1.jpg" alt="" />
-        </div>
-        <Link href={`/${locale}/faoliyat/tadbirlar`} className="hab-tile hab-event">
-          <small>Yaqin tadbir</small>
-          <b>
-            14 <span>noyabr</span>
-          </b>
-          <span className="hab-ev-title">Volontyorlar forumi</span>
-          <span className="hab-ev-go" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17 17 7M8 7h9v9" />
-            </svg>
-          </span>
-        </Link>
-      </div>
-      <svg className="hab-blob" viewBox="0 0 100 100" aria-hidden="true">
-        <path
-          fill="#89C0FF"
-          d="M50 2l8 9 12-4 3 12 12 2-3 12 10 8-9 8 6 11-12 4 1 12-12-1-4 12-11-6-8 9-8-9-11 6-4-12-12 1 1-12-12-4 6-11-9-8 10-8-3-12 12-2 3-12 12 4z"
-        />
-      </svg>
-      <svg className="hab-star" viewBox="0 0 40 40" aria-hidden="true">
-        <path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
-      </svg>
-      <span className="hab-dot" aria-hidden="true" />
-    </div>
-  )
-}
-
-const Ico = ({ children }: { children: ReactNode }) => (
+export const Ico = ({ children }: { children: ReactNode }) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     {children}
   </svg>
 )
 
-/** Hero matnidagi yönalişlar */
-const DIRS: { t: string; c: string; dark?: boolean; i: ReactNode }[] = [
-  { t: 'Taʼlim', c: 'var(--sky)', dark: true, i: <path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" /> },
-  { t: 'Sport', c: 'var(--green)', i: <><circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8" /></> },
-  { t: 'Ijod', c: 'var(--lime)', dark: true, i: <path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.6 0-1.2-1-1.4-1-2.4 0-.9.7-1.5 1.6-1.5H16a5 5 0 0 0 5-5c0-4.2-4-7.5-9-7.5zM7.5 11h.01M10.5 7.5h.01M15 8h.01" /> },
-  { t: 'Tadbirkorlik', c: 'var(--blue)', i: <><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18" /></> },
-  { t: 'Volontyorlik', c: 'var(--yellow)', dark: true, i: <path d="M12 21s-7-4.4-9.3-9C1 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3C21 5 23 8.5 21.3 12 19 16.6 12 21 12 21z" /> },
+/** Hero matnidagi yönalişlar. img/izoh — C2 uçun (rasmlar NAMUNA, yönalişga mos suratlar bilan almaştiriladi) */
+export const DIRS: { t: string; c: string; dark?: boolean; i: ReactNode; img: string; d: string }[] = [
+  { t: 'Taʼlim', c: 'var(--sky)', dark: true, img: 'news-1', d: 'Grantlar, stipendiyalar va öquv kurslari', i: <path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" /> },
+  { t: 'Sport', c: 'var(--green)', img: 'about-3', d: 'Musobaqalar va soğlom turmuş tarzi', i: <><circle cx="12" cy="12" r="9" /><path d="M12 3v18M3 12h18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8" /></> },
+  { t: 'Ijod', c: 'var(--lime)', dark: true, img: 'about-2', d: 'Tanlovlar, festivallar va ijodiy loyihalar', i: <path d="M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.6 0-1.2-1-1.4-1-2.4 0-.9.7-1.5 1.6-1.5H16a5 5 0 0 0 5-5c0-4.2-4-7.5-9-7.5zM7.5 11h.01M10.5 7.5h.01M15 8h.01" /> },
+  { t: 'Tadbirkorlik', c: 'var(--blue)', img: 'opp-grant', d: 'Startaplar va biznes taşabbuslari', i: <><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18" /></> },
+  { t: 'Volontyorlik', c: 'var(--yellow)', dark: true, img: 'opp-vol', d: 'Şahar tadbirlari va ijtimoiy aksiyalar', i: <path d="M12 21s-7-4.4-9.3-9C1 8.5 3 5 6.5 5c2 0 3.5 1.2 5.5 3 2-1.8 3.5-3 5.5-3C21 5 23 8.5 21.3 12 19 16.6 12 21 12 21z" /> },
 ]
 
-/** C · Orbita: markazda surat, atrofida hero matnidagi 5 yönaliş sekin aylanadi */
+/** Yönaliş yorliği: rangli belgi + nom */
+export function DirChip({ d, className = 'hac-chip' }: { d: (typeof DIRS)[number]; className?: string }) {
+  return (
+    <span className={className}>
+      <span className={`hac-ic${d.dark ? ' dark' : ''}`} style={{ background: d.c }}>
+        <Ico>{d.i}</Ico>
+      </span>
+      {d.t}
+    </span>
+  )
+}
+
+const angle = (i: number, n: number, shift = -90) => ({ '--a': `${(360 / n) * i + shift}deg` }) as CSSProperties
+
+const Star = ({ className, fill = '#FF854B' }: { className: string; fill?: string }) => (
+  <svg className={className} viewBox="0 0 40 40">
+    <path fill={fill} d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
+  </svg>
+)
+
+/** C · Orbita (asl): markazda surat, atrofida 5 yönaliş sekin aylanadi */
 export function HeroArtC() {
   return (
     <div className="ha hac" aria-hidden="true">
@@ -85,119 +55,106 @@ export function HeroArtC() {
       <span className="hac-bubble">Salom!</span>
       <div className="hac-orbit">
         {DIRS.map((d, i) => (
-          <span key={d.t} className="hac-item" style={{ '--a': `${(360 / DIRS.length) * i - 90}deg` } as CSSProperties}>
-            <span className="hac-chip">
-              <span className={`hac-ic${d.dark ? ' dark' : ''}`} style={{ background: d.c }}>
-                <Ico>{d.i}</Ico>
-              </span>
-              {d.t}
-            </span>
+          <span key={d.t} className="hac-item" style={angle(i, DIRS.length)}>
+            <DirChip d={d} />
           </span>
         ))}
       </div>
-      <svg className="hac-star" viewBox="0 0 40 40">
-        <path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
-      </svg>
+      <Star className="hac-star" />
       <span className="hac-half" />
     </div>
   )
 }
 
-/** D · Lahzalar: yelpiğiç kabi joylaşgan 3 ta foto-karta (izohli), stikerlar; ustiga kelinganda kartalar yoyiladi */
-export function HeroArtD() {
-  const cards = [
-    { img: 'opp-vol', t: 'Volontyorlik aksiyasi', c: 'var(--green)' },
-    { img: 'news-2', t: 'Talabalar bilan muloqot', c: 'var(--sky)' },
-    { img: 'hero-tk', t: 'Poytaxt yoşlari forumi', c: 'var(--yellow)' },
-  ]
+/**
+ * C1 · Ikki orbita: içki orbitada 5 yönaliş, taşqi orbitada yoşlar suratlari — ikkalasi qarama-qarşi
+ * yönalişda aylanadi; markazda surat va "Yoşlar Ittifoqi" yorliği, orqada iliq nur.
+ */
+export function HeroArtC1() {
+  const faces = ['about-1', 'news-2', 'opp-vol', 'about-2', 'news-3', 'opp-stip']
   return (
-    <div className="ha had" aria-hidden="true">
-      {cards.map((k, i) => (
-        <figure key={k.img} className={`had-card k${i + 1}`}>
-          <span className="had-img">
-            <img src={`/img/${k.img}.jpg`} alt="" />
-          </span>
-          <figcaption>
-            <i style={{ background: k.c }} />
-            {k.t}
-          </figcaption>
-        </figure>
-      ))}
-      <span className="had-sticker s1">Salom!</span>
-      <span className="had-sticker s2">#YoşlarBilan</span>
-      <svg className="had-star" viewBox="0 0 40 40">
-        <path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
-      </svg>
-      <span className="had-dot" />
-    </div>
-  )
-}
-
-/** E · Muhr: tirik şakldagi katta surat va aylanib turuvçi doira-yozuv (hero şiori) */
-export function HeroArtE() {
-  const text = 'ORZU QIL • HARAKAT QIL • BIZ YONINGDAMIZ • '
-  return (
-    <div className="ha hae" aria-hidden="true">
-      <span className="hae-bg" />
-      <div className="hae-photo">
-        <img src="/img/hero-tk.jpg" alt="" />
-      </div>
-      <div className="hae-seal">
-        <svg viewBox="0 0 200 200">
-          <defs>
-            <path id="hae-circle" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0" />
-          </defs>
-          <text>
-            <textPath href="#hae-circle" textLength="486" lengthAdjust="spacing">{text}</textPath>
-          </text>
-        </svg>
-        <svg className="hae-seal-star" viewBox="0 0 40 40">
-          <path fill="currentColor" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
-        </svg>
-      </div>
-      <span className="hae-pill p1">Taʼlim</span>
-      <span className="hae-pill p2">Sport</span>
-      <span className="hae-pill p3">Ijod</span>
-      <div className="hae-mini">
-        <img src="/img/about-1.jpg" alt="" />
-      </div>
-    </div>
-  )
-}
-
-function HafCol({ imgs, dir }: { imgs: string[]; dir: 'up' | 'down' }) {
-  return (
-    <div className={`haf-col ${dir}`}>
-      <div className="haf-track">
-        {[...imgs, ...imgs].map((m, i) => (
-          <span key={i} className="haf-img">
-            <img src={`/img/${m}.jpg`} alt="" />
+    <div className="ha hac hac1" aria-hidden="true">
+      <span className="hac1-glow" />
+      <span className="hac-ring r1" />
+      <span className="hac-ring r2" />
+      <div className="hac-orbit hac1-outer">
+        {faces.map((f, i) => (
+          <span key={f} className="hac-item hac1-far" style={angle(i, faces.length, -60)}>
+            <span className="hac1-face">
+              <img src={`/img/${f}.jpg`} alt="" />
+            </span>
           </span>
         ))}
       </div>
+      <div className="hac-photo hac1-photo">
+        <img src="/img/hero-tk.jpg" alt="" />
+      </div>
+      <span className="hac1-tag">Yoşlar Ittifoqi</span>
+      <div className="hac-orbit hac1-inner">
+        {DIRS.map((d, i) => (
+          <span key={d.t} className="hac-item hac1-near" style={angle(i, DIRS.length)}>
+            <DirChip d={d} />
+          </span>
+        ))}
+      </div>
+      <span className="hac-bubble">Salom!</span>
+      <Star className="hac-star" />
     </div>
   )
 }
 
-/** F · Ustunlar: suratlar ikki ustunda sekin tepaga va pastga oqib turadi */
-export function HeroArtF() {
-  const col1 = ['hero-tk', 'opp-vol', 'news-1', 'about-2']
-  const col2 = ['about-1', 'news-3', 'opp-grant', 'news-2']
+/** C3 orbitalari: 600×700 kanvasdagi qiya ellipslar (markaz 300,350). front — oldingi yarmi */
+const C3_ORBITS = [
+  { rx: 300, ry: 100, rot: -18, a: [585.3, 257.3], b: [14.7, 442.7], dur: 26, dirs: DIRS.slice(0, 3) },
+  { rx: 270, ry: 85, rot: 22, a: [550.3, 451.1], b: [49.7, 248.9], dur: 20, dirs: DIRS.slice(3) },
+]
+const arc = (o: (typeof C3_ORBITS)[number], to: number[]) => `A ${o.rx} ${o.ry} ${o.rot} 1 1 ${to[0]} ${to[1]}`
+const fullPath = (o: (typeof C3_ORBITS)[number]) => `M ${o.a[0]} ${o.a[1]} ${arc(o, o.b)} ${arc(o, o.a)}`
+const frontPath = (o: (typeof C3_ORBITS)[number]) => `M ${o.a[0]} ${o.a[1]} ${arc(o, o.b)}`
+
+/**
+ * C3 · Qiya orbitalar: surat atrofida ikkita qiya ellips-orbita (3D taassurot);
+ * yönalişlar ellips böylab harakatlanadi — orqada surat ortiga ötib kiçrayadi, oldinda kattalaşadi.
+ */
+export function HeroArtC3() {
   return (
-    <div className="ha haf" aria-hidden="true">
-      <div className="haf-frame">
-        <HafCol imgs={col1} dir="up" />
-        <HafCol imgs={col2} dir="down" />
+    <FitCanvas className="ha hac3">
+      <div className="hac3-canvas">
+        <span className="hac3-glow" />
+        <svg className="hac3-lines back" viewBox="0 0 600 700">
+          {C3_ORBITS.map((o, i) => (
+            <path key={i} d={fullPath(o)} />
+          ))}
+        </svg>
+        <div className="hac3-photo">
+          <img src="/img/hero-tk.jpg" alt="" />
+        </div>
+        <svg className="hac3-lines front" viewBox="0 0 600 700">
+          {C3_ORBITS.map((o, i) => (
+            <path key={i} d={frontPath(o)} />
+          ))}
+        </svg>
+        {C3_ORBITS.flatMap((o, oi) =>
+          o.dirs.map((d, i) => (
+            <span
+              key={d.t}
+              className="hac3-mover"
+              style={
+                {
+                  offsetPath: `path("${fullPath(o)}")`,
+                  animationDuration: `${o.dur}s`,
+                  animationDelay: `${(-o.dur / o.dirs.length) * i - oi * 3}s`,
+                } as CSSProperties
+              }
+            >
+              <DirChip d={d} className="hac3-chip" />
+            </span>
+          )),
+        )}
+        <span className="hac-bubble hac3-bubble">Salom!</span>
+        <Star className="hac3-star" />
+        <Star className="hac3-star2" fill="#43A574" />
       </div>
-      <span className="haf-badge">
-        <b>Poytaxt</b> yoşlari hayoti
-      </span>
-      <svg className="haf-blob" viewBox="0 0 100 100">
-        <path
-          fill="#89C0FF"
-          d="M50 2l8 9 12-4 3 12 12 2-3 12 10 8-9 8 6 11-12 4 1 12-12-1-4 12-11-6-8 9-8-9-11 6-4-12-12 1 1-12-12-4 6-11-9-8 10-8-3-12 12-2 3-12 12 4z"
-        />
-      </svg>
-    </div>
+    </FitCanvas>
   )
 }

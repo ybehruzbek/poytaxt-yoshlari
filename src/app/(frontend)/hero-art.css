@@ -1,6 +1,6 @@
 /* =====================================================================
-   BOŞ EKRAN ÖNG TOMONI — 3 ta köriniş: <html data-hr="a|b|c"> (VAQTINCHA, faqat dev)
-   A — hozirgi kollaj · B — mozaika · C — orbita · D — lahzalar · E — muhr · F — ustunlar
+   BOŞ EKRAN ÖNG TOMONI — <html data-hr="a|b|c|d|e"> (VAQTINCHA, faqat dev)
+   A — hozirgi kollaj · C — orbita (asl) · C1 — ikki orbita · C2 — faol yönaliş · C3 — qiya orbitalar
    ===================================================================== */
 .hrv {
   display: none !important;
@@ -10,15 +10,13 @@
 [data-hr='b'] .hrv-b,
 [data-hr='c'] .hrv-c,
 [data-hr='d'] .hrv-d,
-[data-hr='e'] .hrv-e,
-[data-hr='f'] .hrv-f {
+[data-hr='e'] .hrv-e {
   display: block !important;
 }
 .hrv-b,
 .hrv-c,
 .hrv-d,
-.hrv-e,
-.hrv-f {
+.hrv-e {
   flex-shrink: 0;
 }
 
@@ -28,169 +26,6 @@
   width: min(600px, 46vw);
   aspect-ratio: 600 / 700;
   container-type: inline-size;
-}
-
-/* =====================  B · Mozaika  ===================== */
-.hab-grid {
-  position: absolute;
-  inset: 5cqw 0 0;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  grid-template-rows: 1fr 0.5fr 1fr;
-  gap: 3cqw;
-}
-.hab-tile {
-  position: relative;
-  overflow: hidden;
-  border-radius: 7cqw;
-}
-.hab-tile img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.hab-tile:hover img {
-  transform: scale(1.05);
-}
-.hab-main {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  border-radius: 50cqw 50cqw 7cqw 7cqw;
-}
-.hab-main img {
-  object-position: 50% 40%;
-}
-.hab-tag {
-  position: absolute;
-  left: 5cqw;
-  bottom: 6cqw;
-  padding: 2.2cqw 4.4cqw;
-  border-radius: 99px;
-  background: var(--navy);
-  font: 600 4.2cqw/1 var(--f-head);
-  color: #fff;
-  white-space: nowrap;
-  transform: rotate(-6deg);
-}
-.hab-voice {
-  grid-column: 2;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 5cqw;
-  background: var(--green);
-  font: 700 4.4cqw/1.2 var(--f-head);
-  color: #fff;
-}
-.hab-wave {
-  display: flex;
-  align-items: center;
-  gap: 1.6cqw;
-  height: 12cqw;
-}
-.hab-wave b {
-  width: 2.4cqw;
-  border-radius: 9px;
-  background: #fff;
-  animation: eq 1.2s ease-in-out infinite;
-}
-.hab-wave b:nth-child(1),
-.hab-wave b:nth-child(5) {
-  height: 6cqw;
-}
-.hab-wave b:nth-child(2),
-.hab-wave b:nth-child(4) {
-  height: 9cqw;
-  animation-delay: 0.15s;
-}
-.hab-wave b:nth-child(3) {
-  height: 12cqw;
-  animation-delay: 0.3s;
-}
-.hab-pill {
-  grid-column: 2;
-  grid-row: 2 / 4;
-  border-radius: 99px;
-  background: var(--sky);
-}
-.hab-pill img {
-  object-position: 50% 30%;
-}
-.hab-event {
-  grid-column: 1;
-  grid-row: 3;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 1.4cqw;
-  padding: 5cqw;
-  background: #fff;
-  color: var(--navy);
-  box-shadow: 0 2cqw 6cqw rgba(83, 40, 34, 0.08);
-  transition: background 0.25s;
-}
-.hab-event small {
-  font: 600 3cqw/1 var(--f-body);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.hab-event b {
-  font: 800 11cqw/1 var(--f-head);
-}
-.hab-event b span {
-  font-size: 4.6cqw;
-  font-weight: 700;
-}
-.hab-ev-title {
-  font: 700 4.2cqw/1.25 var(--f-head);
-}
-.hab-ev-go {
-  position: absolute;
-  top: 4.5cqw;
-  right: 4.5cqw;
-  display: grid;
-  place-items: center;
-  width: 10cqw;
-  height: 10cqw;
-  border-radius: 50%;
-  background: var(--yellow);
-  transition: transform 0.3s;
-}
-.hab-ev-go svg {
-  width: 5cqw;
-  height: 5cqw;
-}
-.hab-event:hover {
-  background: var(--yellow);
-}
-.hab-event:hover .hab-ev-go {
-  background: #fff;
-  transform: rotate(45deg);
-}
-.hab-blob {
-  position: absolute;
-  top: -2cqw;
-  right: -5cqw;
-  width: 24cqw;
-  animation: spin 30s linear infinite;
-}
-.hab-star {
-  position: absolute;
-  top: 50%;
-  left: -4cqw;
-  width: 10cqw;
-}
-.hab-dot {
-  position: absolute;
-  bottom: -3cqw;
-  left: 50%;
-  width: 13cqw;
-  height: 13cqw;
-  border-radius: 50%;
-  background: var(--lime);
 }
 
 /* =====================  C · Orbita  ===================== */
@@ -311,283 +146,290 @@
   translate: -50% 0;
 }
 
-/* =====================  D · Lahzalar  ===================== */
-.had-card {
+
+/* =====================  C1 · Ikki orbita  ===================== */
+.hac1-glow,
+.hac2-glow {
   position: absolute;
-  width: 58cqw;
-  margin: 0;
-  padding: 3cqw 3cqw 0;
-  border-radius: 5cqw;
-  background: #fff;
-  box-shadow: 0 3cqw 8cqw rgba(83, 40, 34, 0.14);
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  left: 50%;
+  top: 50%;
+  width: 110cqw;
+  height: 110cqw;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: radial-gradient(circle, rgba(255, 210, 90, 0.55), rgba(255, 210, 90, 0) 62%);
 }
-.had-img {
+.hac1-outer {
+  animation: spin 90s linear infinite reverse;
+}
+.hac1-far {
+  transform: rotate(var(--a)) translateX(48cqw) rotate(calc(var(--a) * -1));
+}
+.hac1-face {
   display: block;
-  aspect-ratio: 4 / 5;
+  width: 13cqw;
+  height: 13cqw;
   overflow: hidden;
-  border-radius: 3.5cqw;
+  border: 1.2cqw solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1.5cqw 4cqw rgba(83, 40, 34, 0.16);
+  translate: -50% -50%;
+  animation: spin 90s linear infinite;
 }
-.had-img img {
+.hac1-face img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.had-card figcaption {
-  display: flex;
-  align-items: center;
-  gap: 2cqw;
-  padding: 3.6cqw 1cqw;
-  font: 700 3.8cqw/1.2 var(--f-head);
-  color: var(--navy);
+.hac1-photo {
+  width: 52cqw;
+  height: 52cqw;
+  box-shadow: 0 0 0 1.6cqw var(--soft), 0 3cqw 8cqw rgba(83, 40, 34, 0.18);
 }
-.had-card figcaption i {
-  flex-shrink: 0;
-  width: 3cqw;
-  height: 3cqw;
-  border-radius: 50%;
-}
-.had-card.k1 {
-  left: 0;
-  top: 10cqw;
-  z-index: 1;
-  transform: rotate(-12deg);
-}
-.had-card.k2 {
-  right: 0;
-  top: 3cqw;
-  z-index: 2;
-  transform: rotate(10deg);
-}
-.had-card.k3 {
-  left: 20cqw;
-  top: 32cqw;
-  z-index: 3;
-  width: 60cqw;
-  transform: rotate(-2deg);
-}
-.had:hover .had-card.k1 {
-  transform: translate(-5cqw, -2cqw) rotate(-17deg);
-}
-.had:hover .had-card.k2 {
-  transform: translate(5cqw, -3cqw) rotate(15deg);
-}
-.had:hover .had-card.k3 {
-  transform: translateY(-2cqw) rotate(0);
-}
-.had-sticker {
+.hac1-tag {
   position: absolute;
+  left: 50%;
+  top: calc(50% + 21cqw);
   z-index: 4;
-  padding: 2.2cqw 4.6cqw;
+  padding: 2cqw 4.4cqw;
   border-radius: 99px;
-  font: 700 4.2cqw/1 var(--f-head);
+  background: var(--navy);
+  font: 600 4cqw/1 var(--f-head);
+  color: #fff;
   white-space: nowrap;
-  box-shadow: 0 1.5cqw 4cqw rgba(83, 40, 34, 0.12);
+  translate: -50% 0;
+  rotate: -4deg;
 }
-.had-sticker.s1 {
-  left: 66cqw;
-  top: 30cqw;
-  background: #fff;
-  color: var(--navy);
-  transform: rotate(8deg);
+.hac1-inner {
+  z-index: 3;
 }
-.had-sticker.s2 {
-  left: 0;
-  bottom: 16cqw;
-  background: var(--yellow);
-  color: var(--navy);
-  transform: rotate(-8deg);
-}
-.had-star {
-  position: absolute;
-  z-index: 4;
-  right: 2cqw;
-  bottom: 14cqw;
-  width: 10cqw;
-}
-.had-dot {
-  position: absolute;
-  left: 30cqw;
-  top: 0;
-  width: 12cqw;
-  height: 12cqw;
-  border-radius: 50%;
-  background: var(--lime);
+.hac:hover .hac1-face {
+  animation-play-state: paused;
 }
 
-/* =====================  E · Muhr  ===================== */
-@keyframes hae-morph {
-  0% {
-    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-  }
-  50% {
-    border-radius: 40% 60% 45% 55% / 60% 40% 60% 40%;
-  }
-  100% {
-    border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
-  }
+/* =====================  C2 · Faol yönaliş  ===================== */
+.hac2 :is(.hac-ring, .hac2-photo, .hac2-glow) {
+  top: 44%;
 }
-.hae-bg,
-.hae-photo {
+.hac2-glow {
+  background: radial-gradient(circle, color-mix(in srgb, var(--tone) 50%, transparent), transparent 62%);
+  transition: background 0.6s;
+}
+.hac2-photo {
+  border: 1.6cqw solid var(--tone);
+  transition: border-color 0.6s;
+}
+.hac2-photo img {
   position: absolute;
-  left: 8cqw;
-  top: 8cqw;
-  width: 86cqw;
-  height: 94cqw;
-  animation: hae-morph 14s ease-in-out infinite alternate;
+  inset: 0;
+  opacity: 0;
+  scale: 1.08;
+  transition:
+    opacity 0.8s,
+    scale 3s ease-out;
 }
-.hae-bg {
-  background: var(--yellow);
-  translate: 4cqw 4cqw;
-  animation-delay: -5s;
+.hac2-photo img.on {
+  opacity: 1;
+  scale: 1;
 }
-.hae-photo {
+.hac2-item {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  z-index: 3;
+  transform: rotate(var(--a)) translateX(36cqw) rotate(calc(var(--a) * -1));
+}
+.hac2-item .hac-chip {
+  animation: none;
+  cursor: default;
+  transition:
+    scale 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    background 0.3s,
+    color 0.3s;
+}
+.hac2-item.on .hac-chip {
+  scale: 1.14;
+  background: var(--navy);
+  color: #fff;
+}
+.hac2-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 1cqw;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 1.4cqw;
+  width: 78cqw;
+  padding: 3.6cqw 5cqw;
+  border-radius: 6cqw;
+  background: #fff;
+  box-shadow: 0 2cqw 6cqw rgba(83, 40, 34, 0.1);
+  text-align: center;
+  translate: -50% 0;
+}
+.hac2-caption b {
+  font: 800 5.6cqw/1.1 var(--f-head);
+  color: var(--navy);
+}
+.hac2-caption > span {
+  font-size: 3.6cqw;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.hac2-dots {
+  display: flex;
+  gap: 1.4cqw;
+  margin-top: 0.6cqw;
+}
+.hac2-dots i {
+  width: 2cqw;
+  height: 2cqw;
+  border-radius: 99px;
+  background: var(--silver);
+  transition:
+    width 0.35s,
+    background 0.35s;
+}
+.hac2-dots i.on {
+  width: 6cqw;
+  background: var(--tone);
+}
+
+/* =====================  C3 · Qiya orbitalar (600×700 px kanvas, FitCanvas masştablaydi)  ===================== */
+.hac3-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 700px;
+  transform-origin: top left;
+}
+.hac3-canvas > * {
+  position: absolute;
+}
+.hac3-glow {
+  left: -30px;
+  top: 20px;
+  width: 660px;
+  height: 660px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 210, 90, 0.55), rgba(255, 210, 90, 0) 62%);
+}
+.hac3-lines {
+  inset: 0;
+  width: 600px;
+  height: 700px;
+  overflow: visible;
+  fill: none;
+  stroke: rgba(83, 40, 34, 0.3);
+  stroke-width: 2;
+  pointer-events: none;
+}
+.hac3-lines.back {
+  z-index: 1;
+  stroke-dasharray: 6 8;
+}
+.hac3-lines.front {
+  z-index: 3;
+  stroke: rgba(83, 40, 34, 0.45);
+}
+.hac3-photo {
+  left: 150px;
+  top: 200px;
+  z-index: 2;
+  width: 300px;
+  height: 300px;
   overflow: hidden;
+  border-radius: 50%;
+  box-shadow: 0 0 0 12px #fff, 0 24px 60px rgba(83, 40, 34, 0.2);
 }
-.hae-photo img {
+.hac3-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: 50% 40%;
 }
-.hae-seal {
-  position: absolute;
+.hac3-mover {
   left: 0;
-  bottom: 4cqw;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  width: 38cqw;
-  height: 38cqw;
-  border-radius: 50%;
-  background: var(--navy);
-  color: #fff;
+  top: 0;
+  offset-rotate: 0deg;
+  animation: hac3-move 24s linear infinite;
 }
-.hae-seal > svg:first-child {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  animation: spin 20s linear infinite;
-}
-.hae-seal text {
-  fill: #fff;
-  font: 700 14px var(--f-head);
-}
-.hae-seal-star {
-  width: 11cqw;
-  color: var(--yellow);
-}
-.hae-pill {
-  position: absolute;
-  z-index: 3;
-  padding: 2.4cqw 5cqw;
-  border-radius: 99px;
-  font: 700 4cqw/1 var(--f-head);
-  white-space: nowrap;
-}
-.hae-pill.p1 {
-  right: -2cqw;
-  top: 16cqw;
-  background: var(--green);
-  color: #fff;
-  transform: rotate(8deg);
-}
-.hae-pill.p2 {
-  right: 4cqw;
-  top: 56cqw;
-  background: var(--blue);
-  color: #fff;
-  transform: rotate(-6deg);
-}
-.hae-pill.p3 {
-  left: 46cqw;
-  bottom: 6cqw;
-  background: var(--lime);
-  color: var(--navy);
-  transform: rotate(4deg);
-}
-.hae-mini {
-  position: absolute;
-  right: 0;
-  bottom: 14cqw;
-  z-index: 2;
-  width: 28cqw;
-  height: 28cqw;
-  overflow: hidden;
-  border: 2cqw solid var(--soft);
-  border-radius: 50%;
-}
-.hae-mini img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* =====================  F · Ustunlar  ===================== */
-@keyframes haf-run {
-  to {
-    transform: translateY(-50%);
+/* yöl böşlanişi — ellipsning öng uçi; 0–50% oldingi yarmi, 50–100% orqa yarmi (surat ortida) */
+@keyframes hac3-move {
+  0% {
+    offset-distance: 0%;
+    z-index: 4;
+    scale: 1;
+    opacity: 1;
+  }
+  25% {
+    scale: 1.1;
+  }
+  49.9% {
+    z-index: 4;
+  }
+  50% {
+    z-index: 1;
+    scale: 0.96;
+  }
+  75% {
+    scale: 0.78;
+    opacity: 0.85;
+  }
+  100% {
+    offset-distance: 100%;
+    z-index: 1;
+    scale: 1;
+    opacity: 1;
   }
 }
-.haf-frame {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3cqw;
-  overflow: hidden;
-  border-radius: 8cqw;
-  mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent);
+.hac3-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 20px 9px 9px;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(83, 40, 34, 0.16);
+  font: 700 20px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
 }
-.haf-col {
-  overflow: hidden;
+.hac3-chip .hac-ic {
+  width: 46px;
+  height: 46px;
 }
-.haf-track {
-  animation: haf-run 32s linear infinite;
+.hac3-chip .hac-ic svg {
+  width: 26px;
+  height: 26px;
 }
-.haf-col.down .haf-track {
-  animation-direction: reverse;
-  animation-delay: -12s;
-}
-.haf-img {
-  display: block;
-  aspect-ratio: 3 / 4;
-  margin-bottom: 3cqw;
-  overflow: hidden;
-  border-radius: 6cqw;
-}
-.haf-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.haf:hover .haf-track {
+.hac3:hover .hac3-mover {
   animation-play-state: paused;
 }
-.haf-badge {
-  position: absolute;
-  left: -4cqw;
-  bottom: 14cqw;
-  z-index: 2;
-  padding: 3cqw 5cqw;
-  border-radius: 99px;
-  background: var(--navy);
-  font: 600 4.4cqw/1 var(--f-head);
-  color: #fff;
-  white-space: nowrap;
-  transform: rotate(-6deg);
+.hac3-bubble {
+  left: 30px;
+  top: 60px;
+  padding: 11px 24px;
+  border-radius: 24px;
+  font-size: 26px;
 }
-.haf-badge b {
-  color: var(--yellow);
+.hac3-bubble::after {
+  left: 26px;
+  bottom: -12px;
+  border-top-width: 14px;
+  border-right-width: 14px;
 }
-.haf-blob {
-  position: absolute;
-  top: -4cqw;
-  right: -5cqw;
-  z-index: 2;
-  width: 22cqw;
-  animation: spin 30s linear infinite;
+.hac3-star {
+  right: 30px;
+  top: 70px;
+  width: 56px;
+}
+.hac3-star2 {
+  left: 70px;
+  bottom: 70px;
+  width: 36px;
 }
 
 /* =====================  Moslaşuv  ===================== */
@@ -595,8 +437,7 @@
   .hrv-b,
   .hrv-c,
   .hrv-d,
-  .hrv-e,
-  .hrv-f {
+  .hrv-e {
     align-self: center;
     width: min(560px, 100%);
   }
@@ -607,13 +448,8 @@
 @media (prefers-reduced-motion: reduce) {
   .hac-orbit,
   .hac-chip,
-  .hab-blob,
-  .hab-wave b,
-  .hae-photo,
-  .hae-bg,
-  .hae-seal svg,
-  .haf-track,
-  .haf-blob {
+  .hac1-face,
+  .hac3-mover {
     animation: none;
   }
 }

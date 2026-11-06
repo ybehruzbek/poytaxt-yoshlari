@@ -60,7 +60,8 @@ export default async function LocaleLayout(props: {
         <Footer locale={locale} />
         {/* VAQTINCHA (faqat dev): bosh ekran öng tomoni variantlari */}
         {process.env.NODE_ENV !== 'production' && (
-          <DevVariantSwitch name="hr" label="Hero" titles={['A · Hozirgi kollaj', 'B · Mozaika', 'C · Orbita', 'D · Lahzalar', 'E · Muhr', 'F · Ustunlar']} />
+          <DevVariantSwitch name="hr" label="Hero" titles={['A · Hozirgi kollaj', 'C · Orbita (asl)', 'C1 · Ikki orbita', 'C2 · Faol yönaliş', 'C3 · Qiya orbitalar']}
+            labels={['A', 'C', 'C1', 'C2', 'C3']} />
         )}
       </body>
     </html>
