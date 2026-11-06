@@ -382,4 +382,3 @@ html,body{overflow-x:clip}
 .dev-switch button{border:none;background:none;border-radius:99px;min-width:34px;padding:9px 10px;font:700 13px/1 var(--f-body);color:var(--navy);cursor:pointer}
 .dev-switch button.on{background:var(--yellow)}
 @media (max-width:640px){.dev-switch{right:12px;bottom:12px}}
-.dev-switch.left{right:auto;left:70px}
