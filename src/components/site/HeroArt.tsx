@@ -102,3 +102,102 @@ export function HeroArtC() {
     </div>
   )
 }
+
+/** D · Lahzalar: yelpiğiç kabi joylaşgan 3 ta foto-karta (izohli), stikerlar; ustiga kelinganda kartalar yoyiladi */
+export function HeroArtD() {
+  const cards = [
+    { img: 'opp-vol', t: 'Volontyorlik aksiyasi', c: 'var(--green)' },
+    { img: 'news-2', t: 'Talabalar bilan muloqot', c: 'var(--sky)' },
+    { img: 'hero-tk', t: 'Poytaxt yoşlari forumi', c: 'var(--yellow)' },
+  ]
+  return (
+    <div className="ha had" aria-hidden="true">
+      {cards.map((k, i) => (
+        <figure key={k.img} className={`had-card k${i + 1}`}>
+          <span className="had-img">
+            <img src={`/img/${k.img}.jpg`} alt="" />
+          </span>
+          <figcaption>
+            <i style={{ background: k.c }} />
+            {k.t}
+          </figcaption>
+        </figure>
+      ))}
+      <span className="had-sticker s1">Salom!</span>
+      <span className="had-sticker s2">#YoşlarBilan</span>
+      <svg className="had-star" viewBox="0 0 40 40">
+        <path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
+      </svg>
+      <span className="had-dot" />
+    </div>
+  )
+}
+
+/** E · Muhr: tirik şakldagi katta surat va aylanib turuvçi doira-yozuv (hero şiori) */
+export function HeroArtE() {
+  const text = 'ORZU QIL • HARAKAT QIL • BIZ YONINGDAMIZ • '
+  return (
+    <div className="ha hae" aria-hidden="true">
+      <span className="hae-bg" />
+      <div className="hae-photo">
+        <img src="/img/hero-tk.jpg" alt="" />
+      </div>
+      <div className="hae-seal">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <path id="hae-circle" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0" />
+          </defs>
+          <text>
+            <textPath href="#hae-circle" textLength="486" lengthAdjust="spacing">{text}</textPath>
+          </text>
+        </svg>
+        <svg className="hae-seal-star" viewBox="0 0 40 40">
+          <path fill="currentColor" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
+        </svg>
+      </div>
+      <span className="hae-pill p1">Taʼlim</span>
+      <span className="hae-pill p2">Sport</span>
+      <span className="hae-pill p3">Ijod</span>
+      <div className="hae-mini">
+        <img src="/img/about-1.jpg" alt="" />
+      </div>
+    </div>
+  )
+}
+
+function HafCol({ imgs, dir }: { imgs: string[]; dir: 'up' | 'down' }) {
+  return (
+    <div className={`haf-col ${dir}`}>
+      <div className="haf-track">
+        {[...imgs, ...imgs].map((m, i) => (
+          <span key={i} className="haf-img">
+            <img src={`/img/${m}.jpg`} alt="" />
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/** F · Ustunlar: suratlar ikki ustunda sekin tepaga va pastga oqib turadi */
+export function HeroArtF() {
+  const col1 = ['hero-tk', 'opp-vol', 'news-1', 'about-2']
+  const col2 = ['about-1', 'news-3', 'opp-grant', 'news-2']
+  return (
+    <div className="ha haf" aria-hidden="true">
+      <div className="haf-frame">
+        <HafCol imgs={col1} dir="up" />
+        <HafCol imgs={col2} dir="down" />
+      </div>
+      <span className="haf-badge">
+        <b>Poytaxt</b> yoşlari hayoti
+      </span>
+      <svg className="haf-blob" viewBox="0 0 100 100">
+        <path
+          fill="#89C0FF"
+          d="M50 2l8 9 12-4 3 12 12 2-3 12 10 8-9 8 6 11-12 4 1 12-12-1-4 12-11-6-8 9-8-9-11 6-4-12-12 1 1-12-12-4 6-11-9-8 10-8-3-12 12-2 3-12 12 4z"
+        />
+      </svg>
+    </div>
+  )
+}

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
 import { CollageScaler } from './CollageScaler'
-import { HeroArtB, HeroArtC } from './HeroArt'
+import { HeroArtB, HeroArtC, HeroArtD, HeroArtE, HeroArtF } from './HeroArt'
 
 /** Bosh ekran: sarlavha, tugma va kollaj. ittifoq/index.html prototipidan avtomatik ko'chirilgan — dizaynni o'zgartirmang. */
 export function Hero({ locale }: { locale: Locale }) {
@@ -50,6 +50,9 @@ export function Hero({ locale }: { locale: Locale }) {
         <>
           <div className="hrv hrv-b"><HeroArtB locale={locale} /></div>
           <div className="hrv hrv-c"><HeroArtC /></div>
+          <div className="hrv hrv-d"><HeroArtD /></div>
+          <div className="hrv hrv-e"><HeroArtE /></div>
+          <div className="hrv hrv-f"><HeroArtF /></div>
         </>
       )}
     </div>

@@ -1,6 +1,6 @@
 /* =====================================================================
    BOŞ EKRAN ÖNG TOMONI — 3 ta köriniş: <html data-hr="a|b|c"> (VAQTINCHA, faqat dev)
-   A — hozirgi kollaj · B — mozaika · C — orbita
+   A — hozirgi kollaj · B — mozaika · C — orbita · D — lahzalar · E — muhr · F — ustunlar
    ===================================================================== */
 .hrv {
   display: none !important;
@@ -8,11 +8,17 @@
 :root:not([data-hr]) .hrv-a,
 [data-hr='a'] .hrv-a,
 [data-hr='b'] .hrv-b,
-[data-hr='c'] .hrv-c {
+[data-hr='c'] .hrv-c,
+[data-hr='d'] .hrv-d,
+[data-hr='e'] .hrv-e,
+[data-hr='f'] .hrv-f {
   display: block !important;
 }
 .hrv-b,
-.hrv-c {
+.hrv-c,
+.hrv-d,
+.hrv-e,
+.hrv-f {
   flex-shrink: 0;
 }
 
@@ -305,10 +311,292 @@
   translate: -50% 0;
 }
 
+/* =====================  D · Lahzalar  ===================== */
+.had-card {
+  position: absolute;
+  width: 58cqw;
+  margin: 0;
+  padding: 3cqw 3cqw 0;
+  border-radius: 5cqw;
+  background: #fff;
+  box-shadow: 0 3cqw 8cqw rgba(83, 40, 34, 0.14);
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.had-img {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 3.5cqw;
+}
+.had-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.had-card figcaption {
+  display: flex;
+  align-items: center;
+  gap: 2cqw;
+  padding: 3.6cqw 1cqw;
+  font: 700 3.8cqw/1.2 var(--f-head);
+  color: var(--navy);
+}
+.had-card figcaption i {
+  flex-shrink: 0;
+  width: 3cqw;
+  height: 3cqw;
+  border-radius: 50%;
+}
+.had-card.k1 {
+  left: 0;
+  top: 10cqw;
+  z-index: 1;
+  transform: rotate(-12deg);
+}
+.had-card.k2 {
+  right: 0;
+  top: 3cqw;
+  z-index: 2;
+  transform: rotate(10deg);
+}
+.had-card.k3 {
+  left: 20cqw;
+  top: 32cqw;
+  z-index: 3;
+  width: 60cqw;
+  transform: rotate(-2deg);
+}
+.had:hover .had-card.k1 {
+  transform: translate(-5cqw, -2cqw) rotate(-17deg);
+}
+.had:hover .had-card.k2 {
+  transform: translate(5cqw, -3cqw) rotate(15deg);
+}
+.had:hover .had-card.k3 {
+  transform: translateY(-2cqw) rotate(0);
+}
+.had-sticker {
+  position: absolute;
+  z-index: 4;
+  padding: 2.2cqw 4.6cqw;
+  border-radius: 99px;
+  font: 700 4.2cqw/1 var(--f-head);
+  white-space: nowrap;
+  box-shadow: 0 1.5cqw 4cqw rgba(83, 40, 34, 0.12);
+}
+.had-sticker.s1 {
+  left: 66cqw;
+  top: 30cqw;
+  background: #fff;
+  color: var(--navy);
+  transform: rotate(8deg);
+}
+.had-sticker.s2 {
+  left: 0;
+  bottom: 16cqw;
+  background: var(--yellow);
+  color: var(--navy);
+  transform: rotate(-8deg);
+}
+.had-star {
+  position: absolute;
+  z-index: 4;
+  right: 2cqw;
+  bottom: 14cqw;
+  width: 10cqw;
+}
+.had-dot {
+  position: absolute;
+  left: 30cqw;
+  top: 0;
+  width: 12cqw;
+  height: 12cqw;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+/* =====================  E · Muhr  ===================== */
+@keyframes hae-morph {
+  0% {
+    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  }
+  50% {
+    border-radius: 40% 60% 45% 55% / 60% 40% 60% 40%;
+  }
+  100% {
+    border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%;
+  }
+}
+.hae-bg,
+.hae-photo {
+  position: absolute;
+  left: 8cqw;
+  top: 8cqw;
+  width: 86cqw;
+  height: 94cqw;
+  animation: hae-morph 14s ease-in-out infinite alternate;
+}
+.hae-bg {
+  background: var(--yellow);
+  translate: 4cqw 4cqw;
+  animation-delay: -5s;
+}
+.hae-photo {
+  overflow: hidden;
+}
+.hae-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+.hae-seal {
+  position: absolute;
+  left: 0;
+  bottom: 4cqw;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 38cqw;
+  height: 38cqw;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+}
+.hae-seal > svg:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spin 20s linear infinite;
+}
+.hae-seal text {
+  fill: #fff;
+  font: 700 14px var(--f-head);
+}
+.hae-seal-star {
+  width: 11cqw;
+  color: var(--yellow);
+}
+.hae-pill {
+  position: absolute;
+  z-index: 3;
+  padding: 2.4cqw 5cqw;
+  border-radius: 99px;
+  font: 700 4cqw/1 var(--f-head);
+  white-space: nowrap;
+}
+.hae-pill.p1 {
+  right: -2cqw;
+  top: 16cqw;
+  background: var(--green);
+  color: #fff;
+  transform: rotate(8deg);
+}
+.hae-pill.p2 {
+  right: 4cqw;
+  top: 56cqw;
+  background: var(--blue);
+  color: #fff;
+  transform: rotate(-6deg);
+}
+.hae-pill.p3 {
+  left: 46cqw;
+  bottom: 6cqw;
+  background: var(--lime);
+  color: var(--navy);
+  transform: rotate(4deg);
+}
+.hae-mini {
+  position: absolute;
+  right: 0;
+  bottom: 14cqw;
+  z-index: 2;
+  width: 28cqw;
+  height: 28cqw;
+  overflow: hidden;
+  border: 2cqw solid var(--soft);
+  border-radius: 50%;
+}
+.hae-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =====================  F · Ustunlar  ===================== */
+@keyframes haf-run {
+  to {
+    transform: translateY(-50%);
+  }
+}
+.haf-frame {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3cqw;
+  overflow: hidden;
+  border-radius: 8cqw;
+  mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent);
+}
+.haf-col {
+  overflow: hidden;
+}
+.haf-track {
+  animation: haf-run 32s linear infinite;
+}
+.haf-col.down .haf-track {
+  animation-direction: reverse;
+  animation-delay: -12s;
+}
+.haf-img {
+  display: block;
+  aspect-ratio: 3 / 4;
+  margin-bottom: 3cqw;
+  overflow: hidden;
+  border-radius: 6cqw;
+}
+.haf-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.haf:hover .haf-track {
+  animation-play-state: paused;
+}
+.haf-badge {
+  position: absolute;
+  left: -4cqw;
+  bottom: 14cqw;
+  z-index: 2;
+  padding: 3cqw 5cqw;
+  border-radius: 99px;
+  background: var(--navy);
+  font: 600 4.4cqw/1 var(--f-head);
+  color: #fff;
+  white-space: nowrap;
+  transform: rotate(-6deg);
+}
+.haf-badge b {
+  color: var(--yellow);
+}
+.haf-blob {
+  position: absolute;
+  top: -4cqw;
+  right: -5cqw;
+  z-index: 2;
+  width: 22cqw;
+  animation: spin 30s linear infinite;
+}
+
 /* =====================  Moslaşuv  ===================== */
 @media (max-width: 900px) {
   .hrv-b,
-  .hrv-c {
+  .hrv-c,
+  .hrv-d,
+  .hrv-e,
+  .hrv-f {
     align-self: center;
     width: min(560px, 100%);
   }
@@ -320,7 +608,12 @@
   .hac-orbit,
   .hac-chip,
   .hab-blob,
-  .hab-wave b {
+  .hab-wave b,
+  .hae-photo,
+  .hae-bg,
+  .hae-seal svg,
+  .haf-track,
+  .haf-blob {
     animation: none;
   }
 }
