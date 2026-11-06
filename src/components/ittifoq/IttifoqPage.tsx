@@ -1,16 +1,11 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import type { CSSProperties, ReactNode } from 'react'
 
-import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
-
 import { Centres } from './Centres'
 import { Hero } from './Hero'
 import { GOALS, IMG, INTL, MISSION, MORE_STATS, PRIVILEGES, PROJECTS, QUOTE, STATS } from './data'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
-
-/** VAQTINCHA: yöl zanjiri joylaşuvi variantlari faqat ishlab chiqish rejimida */
-const DEV = process.env.NODE_ENV !== 'production'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -22,7 +17,6 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
     <div className="it">
       <Hero L={L} crumbs={crumbs} />
-      {DEV && <DevVariantSwitch name="itcr" label="Yöl zanjiri" titles={['A · Sarlavha ustida kapsula', 'B · Hero ostida oq lenta', 'C · Pastda, tugmalar yonida']} />}
 
       <section className="sec">
         <div className="wrap">

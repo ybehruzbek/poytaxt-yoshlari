@@ -16,7 +16,7 @@
 .it-hero .crumbs span{opacity:.8}
 .it-hero .crumbs [aria-current]{opacity:1;font-weight:700}
 .it-hero .crumbs a{opacity:.95}
-.it-hero .crumbs a:hover{opacity:1;text-decoration:underline}
+.it-hero .crumbs a:hover,.it-hero .crumbs a:focus-visible{opacity:1;color:var(--yellow)}
 .it-day{display:inline-block;background:var(--yellow);color:var(--navy);border-radius:99px;padding:8px 16px;font-weight:700;font-size:14px;margin-bottom:18px}
 .it-hero .h1{color:#fff;font-size:calc(clamp(40px,5vw,76px) * var(--h-scale))}
 .it-hero .lead{color:rgba(255,255,255,.88);max-width:680px}
@@ -152,18 +152,3 @@
   .it-reg{padding:12px}
   .it-reg-view{min-height:280px}
 }
-
-/* ===== VAQTINCHA: yöl zanjiri joylaşuvi (DevVariantSwitch, <html data-itcr>) ===== */
-.itcr{display:none!important}
-html:not([data-itcr]) .itcr-a,html[data-itcr=a] .itcr-a{display:inline-block!important}
-html[data-itcr=b] .itcr-b,html[data-itcr=c] .itcr-c{display:block!important}
-.it-hero-bot{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
-/* B — heroʼdan keyin oq lenta */
-.it-crumbs-b{background:#fff;border-bottom:1px solid var(--line)}
-.it-crumbs-b .crumbs{margin:0;padding:18px 0;font-size:14px}
-.it-crumbs-b [aria-current]{color:var(--navy);font-weight:700;opacity:1}
-/* C — pastda, tugmalar yonida (eng toʼq gradient ustida) */
-.it-crumbs-c .crumbs{margin:0;color:rgba(255,255,255,.92);font-size:14px;font-weight:500;padding-bottom:18px}
-.it-crumbs-c .crumbs span{opacity:.7}
-.it-crumbs-c .crumbs [aria-current]{opacity:1;font-weight:700;color:var(--yellow)}
-@media (max-width:640px){.it-crumbs-c .crumbs{flex-wrap:wrap;padding-bottom:0}}
