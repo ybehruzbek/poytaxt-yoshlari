@@ -1,13 +1,16 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
-import Link from 'next/link'
 import type { CSSProperties, ReactNode } from 'react'
 
-import { Arrow } from '@/components/site/SocialPhones'
+import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 
 import { Centres } from './Centres'
-import { GOALS, IMG, INTL, INTRO, MISSION, MORE_STATS, PRIVILEGES, PROJECTS, QUOTE, STATS } from './data'
+import { HeroA, HeroB, HeroC, HeroD } from './Hero'
+import { GOALS, IMG, INTL, MISSION, MORE_STATS, PRIVILEGES, PROJECTS, QUOTE, STATS } from './data'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
+
+/** VAQTINCHA: hero variantlari (B, C, D) faqat ishlab chiqish rejimida çiziladi */
+const DEV = process.env.NODE_ENV !== 'production'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -18,26 +21,11 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
     <div className="it">
-      <section className="it-hero">
-        <img src={IMG.team} alt="" />
-        <div className="wrap">
-          {crumbs}
-          <span className="it-day">30-iyun — Yoşlar kuni</span>
-          <h1 className="h1">Özbekiston yoşlar ittifoqi</h1>
-          <p className="lead">{INTRO}</p>
-          <div className="it-btns">
-            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Aʼzo böliş{' '}
-              <span className="ic">
-                <Arrow />
-              </span>
-            </Link>
-            <Link href={L('/faoliyat/loyihalar')} className="btn btn-ghost">
-              Loyihalarni köriş
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroA L={L} crumbs={crumbs} />
+      {DEV && <HeroB L={L} crumbs={crumbs} />}
+      {DEV && <HeroC L={L} crumbs={crumbs} />}
+      {DEV && <HeroD L={L} crumbs={crumbs} />}
+      {DEV && <DevVariantSwitch name="ith" label="Hero" titles={['A · Butun ekranli surat', 'B · Arka va raqamlar', 'C · Oq karta va raqamlar', 'D · Katta sarlavha va surat lentasi']} />}
 
       <section className="sec">
         <div className="wrap">
