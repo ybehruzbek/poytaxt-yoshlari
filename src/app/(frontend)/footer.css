@@ -1,18 +1,7 @@
 /* =====================================================================
-   FOOTER — 3 ta ko'rinish: <html data-ft="a|b|c"> (VAQTINCHA, faqat dev)
-   A — shior bilan (avvalgi B2) · B — katta so'z · C — rasmiy
+   FOOTER — "katta söz": logo, şior, sayt xaritasi, tarmoqlar yozuv bilan,
+   pastda ekran enini egallagan sariq YOŞKENT
    ===================================================================== */
-.ftv {
-  display: none !important;
-}
-:root:not([data-ft]) .ftv-a,
-[data-ft='a'] .ftv-a,
-[data-ft='b'] .ftv-b,
-[data-ft='c'] .ftv-c {
-  display: block !important;
-}
-
-/* =====================  Umumiy (B1/B2/B3)  ===================== */
 .fb {
   position: relative;
   overflow: hidden;
@@ -25,37 +14,6 @@
 .fb .wrap {
   position: relative;
   z-index: 1;
-}
-.fb-logo {
-  display: inline-block;
-  flex-shrink: 0;
-  background: #fff;
-  border-radius: 24px;
-  padding: 12px 16px;
-}
-.fb-logo img {
-  height: 60px;
-}
-.fb .socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.fb .socials a {
-  height: 46px;
-  padding: 0 16px;
-  font-size: 14px;
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.35);
-}
-.fb .socials a:hover {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--navy);
-}
-.fb .socials svg {
-  width: 18px;
-  height: 18px;
 }
 .fb-cols {
   display: grid;
@@ -108,83 +66,6 @@
   color: var(--navy);
 }
 /* aloqa bandlari: kichik sarlavha + qiymat */
-.fb2-contacts small {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 12.5px;
-  letter-spacing: 0.02em;
-  color: #c9b4ae;
-}
-.fb2-contacts :is(b, a) {
-  font: 700 15.5px/1.4 var(--f-head);
-  color: #fff;
-}
-.fb2-contacts a:hover {
-  color: var(--yellow);
-}
-
-/* =====================  A · Shior bilan (avvalgi B2)  ===================== */
-.fb2 {
-  padding-bottom: 0;
-}
-.fb2-hero {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-}
-.fb2-slogan {
-  max-width: 760px;
-  font: 800 clamp(32px, 3.6vw, 56px) / 1.12 var(--f-head);
-  letter-spacing: -0.01em;
-  color: #fff;
-}
-.fb2-slogan span {
-  color: var(--yellow);
-}
-.fb2-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 16px;
-}
-.fb2-cta .socials {
-  justify-content: flex-end;
-  max-width: 440px;
-}
-.fb2-mid {
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  gap: 56px;
-  padding: 48px 0;
-}
-.fb2-brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 28px;
-}
-.fb2-contacts {
-  display: grid;
-  gap: 16px;
-}
-.fb2 .fb-bot {
-  padding-bottom: 8px;
-}
-.fb2-word {
-  font: 900 clamp(72px, 17.5vw, 270px) / 0.8 var(--f-head);
-  letter-spacing: -0.03em;
-  text-align: center;
-  white-space: nowrap;
-  color: rgba(255, 255, 255, 0.07);
-  margin-top: 16px;
-  margin-bottom: -0.1em;
-  user-select: none;
-  pointer-events: none;
-}
-
 /* to'q fonda tugma jigarrang emas, oq rangga to'ladi */
 .fb .btn-primary::before {
   background: #fff;
@@ -194,7 +75,6 @@
   color: var(--navy);
 }
 
-/* =====================  B · Katta so'z  ===================== */
 .fw {
   padding-bottom: 0;
 }
@@ -302,233 +182,28 @@
   padding-bottom: 28px;
 }
 
-/* =====================  C · Rasmiy  ===================== */
-.fr {
-  position: relative;
-  overflow: hidden;
-  margin-top: 40px;
-  border-radius: 56px 56px 0 0;
-  background: #fff;
-  color: var(--grey);
-  padding-bottom: 28px;
-}
-.fr-marquee {
-  overflow: hidden;
-  padding: 18px 0;
-  background: var(--yellow);
-}
-.fr-track {
-  display: flex;
-  width: max-content;
-  animation: fr-run 40s linear infinite;
-}
-.fr-track > span {
-  display: flex;
-}
-.fr-track > span > span {
-  padding-right: 28px;
-  font: 800 22px/1 var(--f-head);
-  color: var(--navy);
-  white-space: nowrap;
-}
-.fr-track i {
-  margin-left: 24px;
-  font-style: normal;
-  color: var(--blue);
-}
-.fr-marquee:hover .fr-track {
-  animation-play-state: paused;
-}
-@keyframes fr-run {
-  to {
-    transform: translateX(-50%);
-  }
-}
-.fr-grid {
-  display: grid;
-  grid-template-columns: 340px minmax(0, 1fr);
-  gap: 64px;
-  padding: 64px 0 40px;
-}
-.fr-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.fr-logo img {
-  display: block;
-  height: 64px;
-}
-.fr-brand p {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-.fr-contacts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 20px;
-  padding: 20px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.fr-contacts small {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 12.5px;
-  color: var(--muted);
-}
-.fr-contacts :is(b, a) {
-  font: 700 14.5px/1.4 var(--f-head);
-  color: var(--navy);
-}
-.fr-contacts a:hover {
-  color: var(--blue);
-}
-.fr .socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.fr .socials a {
-  height: 44px;
-  padding: 0 16px;
-  font-size: 14px;
-}
-.fr .socials svg {
-  width: 18px;
-  height: 18px;
-}
-.fr-cols b {
-  color: var(--navy);
-}
-.fr-cols a {
-  color: var(--muted);
-}
-.fr-cols a:hover {
-  color: var(--blue);
-}
-.fr-gov {
-  margin-top: 40px;
-  padding: 24px;
-  border-radius: 32px;
-  background: var(--soft);
-}
-.fr-gov b {
-  display: block;
-  margin-bottom: 16px;
-  font: 800 16px/1.2 var(--f-head);
-  color: var(--navy);
-}
-.fr-gov ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-}
-.fr-gov a {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-  height: 100%;
-  padding: 14px 16px;
-  border-radius: 20px;
-  background: #fff;
-  transition: background 0.2s;
-}
-.fr-gov a span {
-  font: 700 14px/1.35 var(--f-head);
-  color: var(--navy);
-}
-.fr-gov a small {
-  font-size: 12.5px;
-  color: var(--muted);
-}
-.fr-gov a:hover {
-  background: var(--yellow);
-}
-/* konturli so'z: ustiga kelinganda harflar navbat bilan sariq to'ladi */
-.fr-word {
-  display: flex;
-  justify-content: center;
-  padding: 24px 0 32px;
-  font: 900 14vw/0.8 var(--f-head);
-  letter-spacing: 0.005em;
-  /* fon rangidagi to'ldirish shriftning ichki kesishgan konturlarini yopadi; chiziq tashqarida qoladi */
-  color: #fff;
-  -webkit-text-stroke: 4px var(--navy);
-  paint-order: stroke fill;
-  user-select: none;
-}
-.fr-word span {
-  transition: color 0.3s;
-  transition-delay: calc(var(--i) * 45ms);
-}
-.fr-word:hover span {
-  color: var(--yellow);
-}
 @media (min-width: 1440px) {
   .fw-word {
     font-size: 224px;
   }
-  .fr-word {
-    font-size: 200px;
-  }
-}
-.fr .fb-bot {
-  border-top-color: var(--line);
-  color: var(--muted);
-}
-.fr .fb-up {
-  background: var(--soft);
-  color: var(--navy);
-}
-.fr .fb-up:hover {
-  background: var(--yellow);
 }
 
-/* =====================  Moslashuv  ===================== */
+/* =====================  Moslaşuv  ===================== */
 @media (max-width: 1240px) {
   .fb-cols {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-  .fb2-mid,
-  .fw-top,
-  .fr-grid {
+  .fw-top {
     grid-template-columns: 1fr;
-  }
-  .fb2-hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .fb2-cta {
-    align-items: flex-start;
-  }
-  .fb2-cta .socials {
-    justify-content: flex-start;
-  }
-  .fr-gov ul {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 @media (max-width: 640px) {
-  .fb,
-  .fr {
-    border-radius: 36px 36px 0 0;
-  }
   .fb {
+    border-radius: 36px 36px 0 0;
     padding-top: 48px;
   }
-  .fb-cols,
-  .fr-gov ul {
+  .fb-cols {
     grid-template-columns: 1fr 1fr;
-  }
-  .fr-contacts {
-    grid-template-columns: 1fr;
-  }
-  .fr-word {
-    -webkit-text-stroke-width: 3px;
   }
   .fb-bot {
     flex-direction: column;
@@ -536,7 +211,6 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .fr-track,
   .fw-word span {
     animation: none;
   }

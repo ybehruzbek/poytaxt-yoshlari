@@ -3,7 +3,6 @@ import { Inter, Montserrat } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
 import { isLocale, locales } from '@/i18n/config'
@@ -52,15 +51,11 @@ export default async function LocaleLayout(props: {
   if (!isLocale(locale)) notFound()
 
   return (
-    <html lang={locale} data-ft="a" suppressHydrationWarning className={`${head.variable} ${body.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${head.variable} ${body.variable}`}>
       <body>
         <Header locale={locale} />
         <main>{props.children}</main>
         <Footer locale={locale} />
-        {/* VAQTINCHA (faqat dev): footer variantlarini ko'rib chiqish */}
-        {process.env.NODE_ENV !== 'production' && (
-          <DevVariantSwitch name="ft" label="Footer" titles={['A · Şior bilan (B2)', 'B · Katta söz', 'C · Rasmiy']} />
-        )}
       </body>
     </html>
   )
