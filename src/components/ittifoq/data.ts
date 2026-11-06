@@ -69,44 +69,49 @@ export const GOALS: Goal[] = [
   },
 ]
 
-export type Privilege = { t: string; text: string; fact: string }
+export type Privilege = { t: string; text: string; fact: string; img: string; badge?: boolean }
 
 export const PRIVILEGES: Privilege[] = [
   {
     t: '«Özbekiston belgisi» kökrak nişoni',
     text: 'Prezidentning 2003-yil 4-avgustdagi PF-3290-son Farmoniga asosan Vatan şaʼnini yuksaltirişga xizmat qilayotgan faol yoşlar taqdirlanadi.',
     fact: '2003-yildan buyon 1 198 nafar yoş taqdirlangan',
+    img: '/img/ittifoq/belgi.png',
+    badge: true,
   },
   {
     t: 'Tavsiyanoma beriş',
     text: 'Vazirlar Mahkamasining 914-son qaroriga asosan ittifoqning faol aʼzolariga oliy taʼlim muassasalariga imtiyozli qabul qiliş böyiça tavsiyanoma beriladi.',
     fact: 'Har bir hududdan 1 nafardan',
+    img: '/img/ittifoq/kitobxonlar.jpg',
   },
   {
     t: 'Yoşlarga kafillik',
     text: '2017-yil 5-dekabrda Oliy sud bilan imzolangan memorandumga asosan jinoyat köçasiga adaşib kirgan yoşlar uçun kafillik xatlari beriladi.',
     fact: 'Yoşlar sud zalidan ozod etilmoqda',
+    img: '/img/ittifoq/seminar.jpg',
   },
   {
     t: 'Kontrakt töʼlovi',
     text: 'PQ-213-son qarorga muvofiq muddatli harbiy xizmatni tugatgan talabalarning kontrakt töʼlovi qoplab beriladi.',
     fact: '2018–2024-yillarda 17 009 talabaga 53,77 mlrd söm',
+    img: '/img/ittifoq/harbiy.jpg',
   },
 ]
 
-export type Direction = { t: string; p: string[] }
+export type Direction = { t: string; p: string[]; logo: string }
 
 export const PROJECTS: Direction[] = [
-  { t: 'Qadriyat', p: ['Milliy Fashion Show', 'Kitob olami festivali'] },
-  { t: 'Taʼlim', p: ['Yetakçilar forumi', 'Ittifoq Quiz', 'Talaba fest', 'Munozara'] },
-  { t: 'Ekologiya', p: ['Suvni birgalikda asraymiz!', 'Bir talaba — on köçat'] },
-  { t: 'Bandlik', p: ['Qaytiş'] },
-  { t: 'Sunʼiy intellekt', p: ['AI Yoşlar ittifoqi'] },
-  { t: 'Vatanparvarlik', p: ['Ajdodlar izidan', 'Vatanparvarlar', 'Universal'] },
-  { t: 'Maʼrifat qalqoni', p: ['Qalqon jamoatçilik guruhi'] },
-  { t: 'Xalqaro hamdöstlik', p: ['Yoş diplomatlar', 'Turkiy dunyo yoşlar harakati', 'Milliy dialog'] },
-  { t: 'Ijtimoiy fikr', p: ['TEDx Ittifoq', 'Talaba kundaligi'] },
-  { t: 'Sport', p: ['Ittifoq billur kubogi'] },
+  { t: 'Qadriyat', p: ['Milliy Fashion Show', 'Kitob olami festivali'], logo: '/img/loyihalar/qadriyat.png' },
+  { t: 'Taʼlim', p: ['Yetakçilar forumi', 'Ittifoq Quiz', 'Talaba fest', 'Munozara'], logo: '/img/loyihalar/talim.png' },
+  { t: 'Ekologiya', p: ['Suvni birgalikda asraymiz!', 'Bir talaba — on köçat'], logo: '/img/loyihalar/ekologiya.png' },
+  { t: 'Bandlik', p: ['Qaytiş'], logo: '/img/loyihalar/bandlik.png' },
+  { t: 'Sunʼiy intellekt', p: ['AI Yoşlar ittifoqi'], logo: '/img/loyihalar/ai.png' },
+  { t: 'Vatanparvarlik', p: ['Ajdodlar izidan', 'Vatanparvarlar', 'Universal'], logo: '/img/loyihalar/vatanparvarlik.png' },
+  { t: 'Maʼrifat qalqoni', p: ['Qalqon jamoatçilik guruhi'], logo: '/img/loyihalar/qalqon.png' },
+  { t: 'Xalqaro hamdöstlik', p: ['Yoş diplomatlar', 'Turkiy dunyo yoşlar harakati', 'Milliy dialog'], logo: '/img/loyihalar/xalqaro.png' },
+  { t: 'Ijtimoiy fikr', p: ['TEDx Ittifoq', 'Talaba kundaligi'], logo: '/img/loyihalar/ijtimoiy.png' },
+  { t: 'Sport', p: ['Ittifoq billur kubogi'], logo: '/img/loyihalar/sport.png' },
 ]
 
 export const INTL = {
@@ -117,6 +122,10 @@ export const INTL = {
     { v: '25', l: 'davlatda assotsiatsiya vakillari' },
     { v: '100 000', l: 'yoş xalqaro loyihalarda' },
   ] as Stat[],
+  forms: ['Hamkorlikda forumlar va sammitlar', 'Amaliyot va almaşinuv dasturlari', 'Uçraşuv va konferensiyalar'],
+  projects: ['Milliy dialog', 'Yoş diplomatlar', 'Turkiy dunyo yoşlar harakati', 'BMT modeli', 'Isteʼdodli yoşlar', 'Taʼlim Expo', 'TDT modeli', 'Xorijdagi vatandoşlar biznes marafoni'],
+  partners: '/img/ittifoq/hamkorlar.png',
+  flags: '/img/ittifoq/bayroqlar.png',
 }
 
 export const IMG = {

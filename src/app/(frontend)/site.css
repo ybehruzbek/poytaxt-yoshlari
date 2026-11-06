@@ -382,3 +382,5 @@ html,body{overflow-x:clip}
 .dev-switch button{border:none;background:none;border-radius:99px;min-width:34px;padding:9px 10px;font:700 13px/1 var(--f-body);color:var(--navy);cursor:pointer}
 .dev-switch button.on{background:var(--yellow)}
 @media (max-width:640px){.dev-switch{right:12px;bottom:12px}}
+/* bir sahifada bir neçta variant paneli — ustma-ust */
+.dev-switch.s1{bottom:20px}.dev-switch.s2{bottom:66px}.dev-switch.s3{bottom:112px}.dev-switch.s4{bottom:158px}
