@@ -57,22 +57,6 @@ export const MORE_STATS: Stat[] = [
   { v: '36', l: 'taşkilot ittifoq tizimida faoliyat yuritadi' },
 ]
 
-export type Goal = { t: string; d: string; c: string }
-
-/** Nima qilamiz */
-export const GOALS: Goal[] = [
-  { t: 'Taʼlim va kasb', d: 'Yoşlarga zamonaviy kasb egallaş, yangi bilim oliş va öz yölini topişda yordam beramiz. Innovatsion loyihalar va startaplarni qöllab-quvvatlaymiz.', c: 'var(--yellow)' },
-  { t: 'Iş va tadbirkorlik', d: 'Yoşlarning bandligi, öz işini boşlaşi va tadbirkorlik qobiliyatini rivojlantiriş uçun imkoniyatlar yaratamiz.', c: 'var(--green)' },
-  { t: 'Huquq va manfaatlarni himoya qiliş', d: 'Yoşlarning huquqlarini himoya qilamiz. Qiyin vaziyatga tuşgan, nogironligi bölgan va ehtiyojmand oilalardagi yoşlarni alohida qöllab-quvvatlaymiz.', c: 'var(--blue)' },
-  { t: 'Isteʼdod va ilm', d: 'Isteʼdodli yoşlarni izlab topamiz, ularning ijodiy va ilmiy salohiyatini oçişga şaroit yaratamiz.', c: 'var(--sky)' },
-  { t: 'Sport va soğlom turmuş', d: 'Sport musobaqalari va tadbirlar ötkazamiz, yoşlarni muntazam sport bilan şuğullanişga çorlaymiz. Giyohvandlik, çekiş va içkilikka qarşi profilaktika işlarini olib boramiz.', c: 'var(--lime)' },
-  { t: 'Kitobxonlik va maʼnaviyat', d: 'Kitob öqişni, milliy qadriyatlarni va vatanparvarlikni tarğib qilamiz. Yoşlarni zararli ğoyalar va «ommaviy madaniyat»ning salbiy taʼsiridan asraymiz.', c: 'var(--yellow)' },
-  { t: 'Volontyorlik va taşabbuslar', d: 'Jamiyatdagi muammolarni hal etişda yoşlarning özi taşabbus körsatişi uçun volontyorlik harakatini kengaytiramiz.', c: 'var(--green)' },
-  { t: 'Raqamli texnologiyalar', d: 'Yoşlarni IT va raqamli texnologiyalarni örganişga undaymiz, texnoparklar va ilmiy laboratoriyalar bilan hamkorlik qilamiz.', c: 'var(--blue)' },
-  { t: 'Xalqaro hamkorlik', d: 'Xorijiy yoşlar taşkilotlari bilan hamkorlik qilamiz, almaşinuv dasturlari va xalqaro forumlarda iştirok etamiz. Çet elda öqiyotgan va işlayotgan yurtdoşlarimizni qöllab-quvvatlaymiz.', c: 'var(--sky)' },
-  { t: 'Yoş yetakçilar', d: 'Bilimli, taşabbuskor va halol yoş yetakçilarni tarbiyalaymiz. Ittifoq yoşlar uçun «ijtimoiy lift» — faol yigit-qizlarning ösişi va jamiyatga xizmat qilişi uçun yöl oçadi.', c: 'var(--lime)' },
-]
-
 export type Privilege = { t: string; text: string; fact: string; img: string; badge?: boolean }
 
 export const PRIVILEGES: Privilege[] = [

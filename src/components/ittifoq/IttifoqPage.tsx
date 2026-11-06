@@ -10,8 +10,6 @@ import { CentresB, CentresC } from './CentresAlt'
 import { Hero } from './Hero'
 import { HistoryB, HistoryC, MissionB, MissionC, MosaicB, MosaicC, WhoB, WhoC } from './AltOne'
 import {
-  GoalsB,
-  GoalsC,
   PrioritiesB,
   PrioritiesC,
   ProjectCardsB,
@@ -36,7 +34,6 @@ import {
 import { ProjectCards } from './ProjectCards'
 import {
   ACTS,
-  GOALS,
   HISTORY,
   IMG,
   JOIN,
@@ -84,7 +81,6 @@ const PANEL: PanelSection[] = [
   ['mos', 'Suratlar va raqamlar'],
   ['tar', 'Qisqa tarix'],
   ['maq', 'Maqsadimiz'],
-  ['nim', 'Nima qilamiz'],
   ['ust', 'Ustuvor yönalişlar'],
   ['iqt', 'Iqtibos'],
   ['imt', 'Mukofot va imtiyozlar'],
@@ -231,34 +227,6 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
         </>
       )}
 
-      <V name="nim" k="a">
-        <section className="sec it-goals-sec">
-          <div className="wrap">
-            <div className="sec-head">
-              <h2 className="h2">Nima qilamiz</h2>
-            </div>
-            <div className="it-goals">
-              {GOALS.map((g, i) => (
-                <article key={g.t} style={{ '--c': g.c } as CSSProperties}>
-                  <span className="it-num">{pad(i)}</span>
-                  <h3>{g.t}</h3>
-                  <p>{g.d}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      </V>
-      {DEV && (
-        <>
-          <V name="nim" k="b">
-            <GoalsB />
-          </V>
-          <V name="nim" k="c">
-            <GoalsC />
-          </V>
-        </>
-      )}
 
       <V name="ust" k="a">
         <section className="sec it-pri-sec">

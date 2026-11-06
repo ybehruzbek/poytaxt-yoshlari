@@ -45,30 +45,6 @@ Oddiy qilib aytganda: **sizda ğoya bölsa — biz uni amalga oşirişga yordam 
 
 ---
 
-## Nima qilamiz
-
-**Taʼlim va kasb.** Yoşlarga zamonaviy kasb egallaş, yangi bilim oliş va öz yölini topişda yordam beramiz. Innovatsion loyihalar va startaplarni qöllab-quvvatlaymiz.
-
-**Iş va tadbirkorlik.** Yoşlarning bandligi, öz işini boşlaşi va tadbirkorlik qobiliyatini rivojlantiriş uçun imkoniyatlar yaratamiz.
-
-**Huquq va manfaatlarni himoya qiliş.** Yoşlarning huquqlarini himoya qilamiz. Qiyin vaziyatga tuşgan, nogironligi bölgan va ehtiyojmand oilalardagi yoşlarni alohida qöllab-quvvatlaymiz.
-
-**Isteʼdod va ilm.** Isteʼdodli yoşlarni izlab topamiz, ularning ijodiy va ilmiy salohiyatini oçişga şaroit yaratamiz.
-
-**Sport va soğlom turmuş.** Sport musobaqalari va tadbirlar ötkazamiz, yoşlarni muntazam sport bilan şuğullanişga çorlaymiz. Giyohvandlik, çekiş va içkilikka qarşi profilaktika işlarini olib boramiz.
-
-**Kitobxonlik va maʼnaviyat.** Kitob öqişni, milliy qadriyatlarni va vatanparvarlikni tarğib qilamiz. Yoşlarni zararli ğoyalar va "ommaviy madaniyat"ning salbiy taʼsiridan asraymiz.
-
-**Volontyorlik va taşabbuslar.** Jamiyatdagi muammolarni hal etişda yoşlarning özi taşabbus körsatişi uçun volontyorlik harakatini kengaytiramiz.
-
-**Raqamli texnologiyalar.** Yoşlarni IT va raqamli texnologiyalarni örganişga undaymiz, texnoparklar va ilmiy laboratoriyalar bilan hamkorlik qilamiz.
-
-**Xalqaro hamkorlik.** Xorijiy yoşlar taşkilotlari bilan hamkorlik qilamiz, almaşinuv dasturlari va xalqaro forumlarda iştirok etamiz. Çet elda öqiyotgan va işlayotgan yurtdoşlarimizni qöllab-quvvatlaymiz.
-
-**Yoş yetakçilar.** Bilimli, taşabbuskor va halol yoş yetakçilarni tarbiyalaymiz. Prezident taʼbiri bilan aytganda, Ittifoq yoşlar uçun **"ijtimoiy lift"** bölişi kerak — faol yigit-qizlarning ösişi va jamiyatga xizmat qilişi uçun yöl oçişi kerak.
-
----
-
 ## Raqamlarda
 
 - **59 974** — yoşlar yetakçilari va koordinatorlari

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import type { CSSProperties } from 'react'
 
-import { GOALS, IMG, PRIORITIES, PROJECT_CARDS, QUOTE, RESULTS } from './data'
+import { IMG, PRIORITIES, PROJECT_CARDS, QUOTE, RESULTS } from './data'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const ALL = 'Hammasi'
@@ -19,57 +19,6 @@ function Source() {
       </a>{' '}
       Ittifoq faoliyatining 12 ta ustuvor yönalişini belgilab bergan.
     </>
-  )
-}
-
-/* ================= Nima qilamiz ================= */
-
-/** B — tahririy röyxat: chapda yopişqoq sarlavha, öngda katta raqamli qatorlar */
-export function GoalsB() {
-  return (
-    <section className="sec x2-gb-sec">
-      <div className="wrap x2-gb">
-        <div className="x2-gb-head">
-          <h2 className="h2">Nima qilamiz</h2>
-          <div className="x2-gb-dots" aria-hidden="true">
-            {GOALS.map((g) => (
-              <i key={g.t} style={{ background: g.c }} />
-            ))}
-          </div>
-        </div>
-        <ol className="x2-gb-list">
-          {GOALS.map((g, i) => (
-            <li key={g.t} style={{ '--c': g.c } as CSSProperties}>
-              <span className="x2-gb-n">{pad(i)}</span>
-              <h3>{g.t}</h3>
-              <p>{g.d}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
-
-/** C — rangli bento mozaika: har bir yönaliş öz rangidagi plitkada, turli ölçamda */
-export function GoalsC() {
-  return (
-    <section className="sec x2-gc-sec">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 className="h2">Nima qilamiz</h2>
-        </div>
-        <div className="x2-gc">
-          {GOALS.map((g, i) => (
-            <article key={g.t} className={`x2-gc-${i}`} style={{ '--c': g.c } as CSSProperties}>
-              <span className="x2-gc-n">{pad(i)}</span>
-              <h3>{g.t}</h3>
-              <p>{g.d}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
   )
 }
 
