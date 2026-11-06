@@ -85,7 +85,7 @@ export const PRIVILEGES: Privilege[] = [
   },
   {
     t: 'Tavsiyanoma beriş',
-    text: 'Vazirlar Mahkamasining 914-son qaroriga asosan ittifoqning faol aʼzolariga oliy taʼlim muassasalariga imtiyozli qabul qiliş böyiça tavsiyanoma beriladi.',
+    text: 'Vazirlar Mahkamasining 2017-yil 14-noyabrdagi 914-son qaroriga asosan Ittifoq tizimidagi sardorlar, boşlanğiç taşkilotlardagi yönaliş yetakçilari va ikki yillik stajga ega fidoyi yoşlarga oliy taʼlim muassasalariga imtiyozli qabul uçun tavsiyanoma beriladi.',
     fact: 'Har bir hududdan 1 nafardan',
     img: '/img/ittifoq/kitobxonlar.jpg',
   },
@@ -100,6 +100,18 @@ export const PRIVILEGES: Privilege[] = [
     text: 'PQ-213-son qarorga muvofiq muddatli harbiy xizmatni tugatgan talabalarning kontrakt tölovi qoplab beriladi.',
     fact: '2018–2024-yillarda 17 009 talabaga 53,77 mlrd söm',
     img: '/img/ittifoq/harbiy.jpg',
+  },
+  {
+    t: '«Mard öğlon» davlat mukofoti',
+    text: 'PQ-3402-son qarorga köra Ittifoq Markaziy Kengaşining taklifi bilan har yili «Yoşlar kuni» arafasida har bir hududdan 2 nafar iqtidorli yigit şu mukofot bilan taqdirlanadi.',
+    fact: 'Ittifoq taklifi bilan taʼsis etilgan',
+    img: '/img/ittifoq/yetakchilar.jpg',
+  },
+  {
+    t: '«Kelajak bunyodkori» medali',
+    text: 'Öqiş, mehnat va jamoat işlarida faol iştirok etayotgan 14–30 yoşli yoşlarni taqdirlaş uçun Ittifoq taklifi asosida taʼsis etilgan davlat mukofoti.',
+    fact: '2017-yil 28-dekabrdagi ZRU-451-son Qonun',
+    img: '/img/ittifoq/volontyorlar.jpg',
   },
 ]
 
@@ -225,13 +237,6 @@ export const OFFICIAL = {
     ['Taşkil etilgan sana', '2017-yil 30-iyun'],
     ['Markaziy Kengaş manzili', 'Toşkent şahri, Alişer Navoiy köçasi, 11-uy'],
   ] as [string, string][],
-  laws: [
-    { t: 'Özbekiston Respublikasi Konstitutsiyasi' },
-    { t: '«Yoşlarga oid davlat siyosati töğrisida»gi Qonun' },
-    { t: '«Nodavlat notijorat taşkilotlari töğrisida»gi va «Nodavlat notijorat taşkilotlari faoliyatining kafolatlari töğrisida»gi qonunlar' },
-    { t: 'Prezidentning 2017-yil 5-iyuldagi PF-5106-son Farmoni', href: 'https://lex.uz/docs/-3255680' },
-    { t: 'Özbekiston yoşlar ittifoqining Ustavi' },
-  ] as { t: string; href?: string }[],
 }
 
 /* ---------------- PF-5106: ustuvor yönalişlar ---------------- */
@@ -285,3 +290,98 @@ export const PROJECT_CARDS: ProjectCard[] = [
   { area: 'Tizim taşkilotlari', t: 'Xorijdagi yoşlar uçun «Musofir» platformasi', goal: 'Xorijda öqiyotgan va işlayotgan yoşlar bilan muntazam muloqot qiliş.', reach: '2 000 yoş', who: 'Xorijdagi talabalar va yoşlar' },
   { area: 'Tizim taşkilotlari', t: '«Yoş ijodkorlar» körik tanlovi', goal: 'Yoşlarning innovatsion ğoyalarini qöllab-quvvatlaş.', reach: '50 000 yoş', who: 'Talabalar va iqtidorli yoşlar' },
 ]
+
+/* ---------------- Normativ-huquqiy hujjatlar ---------------- */
+
+export type Act = { y: string; t: string; d: string; href?: string }
+
+/** Ittifoq faoliyatiga doir asosiy hujjatlar (lex.uz va president.uz da tekşirilgan) */
+export const ACTS: Act[] = [
+  { y: '14.09.2016', t: '«Yoşlarga oid davlat siyosati töğrisida»gi Qonun (ÖRQ-406)', d: 'Yoşlar siyosatining asosiy qonuni; yoşlar nodavlat taşkilotlarini davlat qöllab-quvvatlaşini belgilaydi.', href: 'https://lex.uz/docs/-3026246' },
+  { y: '05.07.2017', t: 'Prezidentning PF-5106-son Farmoni', d: 'Ittifoq taşkil etilgani qabul qilindi, 30-iyun «Yoşlar kuni» deb eʼlon qilindi, 12 ta ustuvor yönaliş belgilandi.', href: 'https://lex.uz/docs/-3255680' },
+  { y: '18.07.2017', t: 'Prezidentning PQ-3138-son qarori', d: 'Ittifoq faoliyatini takomillaştirişga doir kompleks çora-tadbirlar dasturi tasdiqlandi.', href: 'https://president.uz/oz/lists/view/795' },
+  { y: '14.11.2017', t: 'Vazirlar Mahkamasining 914-son qarori', d: 'Ittifoqning faol aʼzolariga oliy taʼlim muassasalariga imtiyozli qabul uçun tavsiyanoma beriş tartibi joriy etildi.', href: 'https://lex.uz/mact/-3409650' },
+  { y: '21.11.2017', t: 'Prezidentning PQ-3402-son qarori', d: '«Mard öğlon» davlat mukofotini har yili har bir hududdan 2 nafar yigitga topşiriş haqidagi Ittifoq taklifi maʼqullandi.', href: 'https://lex.uz/docs/-3418697' },
+  { y: '28.12.2017', t: 'ZRU-451-son Qonun', d: '14–30 yoşli faol yoşlar uçun «Kelajak bunyodkori» medali taʼsis etildi.', href: 'https://lex.uz/docs/3479567' },
+  { y: '10.01.2018', t: 'Oliy taʼlim va Moliya vazirliklarining qarori (röyxat raqami 2961)', d: 'Faol aʼzo talabalarning yillik kontrakt tölovining 35 foizini Ittifoq tölab beriş tartibi tasdiqlandi.', href: 'https://lex.uz/docs/-3497684' },
+  { y: '30.06.2020', t: 'Prezidentning PF-6017-son Farmoni va PQ-4768-son qarori', d: 'Yoşlar işlari agentligi taşkil etildi: yoşlarga oid davlat siyosatini amalga oşiriş agentlikka ötdi, Ittifoq esa nodavlat notijorat taşkilot sifatida işini davom ettirmoqda.', href: 'https://lex.uz/docs/-4880189' },
+]
+
+/* ---------------- Natijalar ---------------- */
+
+export type YearResult = { y: string; items: string[]; src?: string }
+
+export const RESULTS: YearResult[] = [
+  {
+    y: '2018',
+    items: [
+      'Yoşlar taşabbusi bilan 26 ta taşkilot tuzildi, jumladan Yoşlar naşriyot uyi va Yoş olimlar kengaşi',
+      '1 066 nafar yoş fermerga 52 mlrd söm, 4 300 yoş tadbirkor loyihasiga 226,6 mlrd söm ajratildi',
+      '848 ta yoş oilaga «Yoşlar uylari» kalitlari topşirildi',
+      'Ittifoq ŞHT Yoşlar kengaşining töla huquqli aʼzosi böldi',
+    ],
+    src: 'https://kun.uz/news/2019/01/19/ozbekiston-yoshlar-ittifoqining-2018-yildagi-faoliyati-sarhisob-qilindi',
+  },
+  {
+    y: '2023',
+    items: [
+      '11 915 ta boşlanğiç taşkilot: 210 tasi oliy taʼlim muassasalarida, 703 tasi kollejlarda, 517 tasi korxonalarda, 309 tasi harbiy qismlarda',
+      'Taxminan 5,7 mln yoş birlaşgan, 35 384 ta loyiha va tadbir ötkazildi',
+      '2 199 nafar talabaning kontrakt tölovi uçun 7,3 mlrd söm tölab berildi',
+      '«Kamalak» bolalar taşkiloti 10–14 yoşli 3 mln dan ortiq bola bilan işladi',
+    ],
+    src: 'https://uza.uz/oz/posts/joriy-yilda-2-ming-199-nafar-talaba-yoshlarning-73-milliard-somlik-shartnoma-mablaglari-tolab-berildi_550506',
+  },
+  {
+    y: '2025–2026',
+    items: [
+      '59 974 nafar yoşlar yetakçisi va koordinatori faoliyat yuritmoqda',
+      '26 ta yirik loyiha va 12 273 ta tadbir, 1,87 mln yoş qamrab olindi',
+      '951 nafar talabaning kontrakt tölovi (3,4 mlrd söm) tölab berildi',
+      '13 nafar yoş 914-son qaror asosida bakalavriatga qabul qilindi',
+      '164 ta vazirlik va idora bilan qöşma dasturlar imzolandi',
+    ],
+  },
+]
+
+/* ---------------- Ittifoq taʼsisçiligidagi taşkilotlar ---------------- */
+
+export type Org = { t: string; d: string }
+
+export const ORGS = {
+  lead: 'Ittifoq tizimida 36 ta taşkilot faoliyat yuritadi: 19 tasi nodavlat notijorat taşkilot, 14 tasi tijorat taşkiloti. Ularda 228 kişi işlaydi.',
+  ngos: [
+    { t: 'Yetakçilar akademiyasi', d: 'Mahallalar, taʼlim muassasalari, vazirlik va taşkilotlardagi yoşlar yetakçilarining iş samaradorligini oşiradi.' },
+    { t: 'Özbekiston quvnoqlar va zukkolar assotsiatsiyasi', d: 'Mustaqil fikrlaydigan yoşlarni şakllantiradi, iqtidorli yoşlarni izlab topib, isteʼdodini röyobga çiqarişga yordam beradi.' },
+    { t: 'Prezidentning 5 taşabbus loyiha ofisi', d: 'Yoşlarning musiqa, rassomlik, adabiyot, teatr va sanʼatga qiziqişini oşiradi, kitobxonlikni tarğib qiladi.' },
+    { t: 'Yoşlar tadbirkorligini qöllab-quvvatlaş markazi', d: 'Yoş tadbirkorlarni qöllab-quvvatlaydi, ğoyalarni hayotga tatbiq etişga yordam beradi.' },
+    { t: 'Respublika yoş ijodkorlar kengaşi', d: 'Hududlardagi namoyon bölmagan yoş isteʼdod egalarini izlab topib, jamiyatda öz örnini topişiga kömaklaşadi.' },
+    { t: 'Özbekiston volontyorlari assotsiatsiyasi', d: 'Volontyorlik faoliyatini taşkil etadi, fuqarolik taşabbuslarini rivojlantiradi, volontyorlarning huquqlarini himoya qiladi.' },
+    { t: 'Özbekiston yoşlari umumjahon assotsiatsiyasi', d: 'Xorijda öqiyotgan va işlayotgan özbekistonlik yoşlarga har tomonlama kömaklaşadi.' },
+    { t: 'Loyihalar boşqaruvi markazi', d: 'Maʼnaviy-maʼrifiy va ijtimoiy mavzularda maqolalar, eşittirişlar, roliklar, filmlar va tok-şoular tayyorlaydi.' },
+    { t: '«Yangi avlod forumi» bolalar ijodiyoti markazi', d: 'Maktabdan taşqari taʼlimni, bolalarning madaniyat va sanʼatdagi salohiyatini rivojlantiradi.' },
+    { t: 'Respublika yoşlar markazi', d: 'Hududlarda yoşlarning savodxonligini oşiradi, kasb-hunar örgatuvçi öquv va ijodiy tögaraklar oçadi.' },
+    { t: 'Ijtimoiy-huquqiy media markaz', d: 'Yoşlarning huquqiy ongini oşirişga qaratilgan media mahsulotlar tayyorlaydi.' },
+    { t: 'Özbekiston yoş fermerlari kengaşi', d: 'Yoşlar örtasida fermerlikni tarğib qiladi, köp tarmoqli fermer xöjaliklarini rivojlantiradi.' },
+    { t: 'Imkoniyati çeklangan yoşlar va bolalar markazi', d: 'Imkoniyati çeklangan yoşlarga teng imkoniyat yaratadi, huquqiy, psixologik va pedagogik yordam beradi.' },
+    { t: 'Yoşlar ijod saroyi', d: 'Sanʼat merosini namoyiş qiluvçi körgazmalar, ijodiy tadbirlar va uçraşuvlar maskani.' },
+    { t: 'Yoş huquqşunoslar kengaşi', d: 'Sud-huquq islohotlarida yoşlar iştirokini faollaştiradi, yoşlar huquqini himoya qiladi.' },
+    { t: 'Respublika yoş olimlar kengaşi', d: 'Ilmiy tadqiqot olib borayotgan yoş olimlar va iqtidorli yoşlarni moddiy va maʼnaviy qöllab-quvvatlaydi.' },
+    { t: 'Yoş dizaynerlar kengaşi', d: 'Yangi avlod dizaynerlarining işlanmalarini ommalaştiradi, kreativ yoşlar jamoasini şakllantiradi.' },
+    { t: 'Yoş kinoijodkorlar kengaşi', d: 'Isteʼdodli yoş kinoijodkorlarni topib, loyihalarini amalga oşirişga yordam beradi.' },
+    { t: 'Tibbiyot oliy öquv yurtlari talabalari assotsiatsiyasi', d: 'Yoşlarning tibbiy savodxonligini oşiradi, soğliqni saqlaş sohasiga xorijiy grantlarni jalb qiladi.' },
+  ] as Org[],
+  companies: [
+    '«Yoşlar» teleradiokanali',
+    '«Ozod yurt tölqinlari» telekanali',
+    '«Yoşlar ovozi» radiosi',
+    '«Yoşlar ovozi» gazetasi',
+    '«Yoş kuç» jurnali',
+    'Yoşlar naşriyot uyi',
+    '«Kitob olami» kovorking va kitob dökonlari',
+    'Yoşlar turizm agentligi',
+    'Yoşlar oromgohi',
+    '«Şafran» toğ kurort majmuasi',
+    'Motivatsion kontent studiyasi',
+  ],
+}

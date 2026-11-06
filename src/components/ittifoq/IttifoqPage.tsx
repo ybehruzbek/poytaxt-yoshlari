@@ -9,7 +9,7 @@ import { Centres } from './Centres'
 import { CentresB, CentresC } from './CentresAlt'
 import { Hero } from './Hero'
 import { ProjectCards } from './ProjectCards'
-import { GOALS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, OFFICIAL, PRIORITIES, QUOTE, STATS, STRUCTURE, WHO } from './data'
+import { ACTS, GOALS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, OFFICIAL, ORGS, PRIORITIES, QUOTE, RESULTS, STATS, STRUCTURE, WHO } from './data'
 import { IntlA, IntlB, IntlC, PrivilegesA, PrivilegesB, PrivilegesC, ProjectsA, ProjectsB, ProjectsC } from './Sections'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -204,6 +204,33 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
 
+      <section className="sec it-res-sec">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Natijalar</h2>
+          </div>
+          <div className="it-res">
+            {RESULTS.map((r) => (
+              <article key={r.y}>
+                <b>{r.y}</b>
+                <ul>
+                  {r.items.map((x) => (
+                    <li key={x}>{x}</li>
+                  ))}
+                </ul>
+                {r.src ? (
+                  <a href={r.src} target="_blank" rel="noopener noreferrer">
+                    Manba <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <span className="it-res-src">Manba: Ittifoq taqdimoti, 2026</span>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="sec">
         <div className="wrap">
           <V name="xal" k="a">
@@ -239,6 +266,31 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
           <DevVariantSwitch name="mar" label="Markazlar" className="s4" titles={['A · Hozirgi', 'B · Keng lenta va suratli tör', 'C · Gorizontal lenta']} />
         </>
       )}
+
+      <section className="sec">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Ittifoq taʼsisçiligidagi taşkilotlar</h2>
+          </div>
+          <p className="it-struct-lead">{ORGS.lead}</p>
+          <div className="it-orgs">
+            {ORGS.ngos.map((o) => (
+              <article key={o.t}>
+                <h3>{o.t}</h3>
+                <p>{o.d}</p>
+              </article>
+            ))}
+          </div>
+          <div className="it-comp">
+            <h3>Media, naşriyot va xizmat taşkilotlari</h3>
+            <div>
+              {ORGS.companies.map((c) => (
+                <span key={c}>{c}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="sec">
         <div className="wrap">
@@ -312,34 +364,44 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
       </section>
 
       <section className="sec">
-        <div className="wrap it-off">
-          <div>
-            <h2 className="h2">Rasmiy maʼlumotlar</h2>
-            <dl>
-              {OFFICIAL.rows.map(([k, v]) => (
-                <div key={k}>
-                  <dt>{k}</dt>
-                  <dd>{v}</dd>
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Normativ-huquqiy hujjatlar</h2>
+          </div>
+          <ol className="it-acts">
+            {ACTS.map((x) => (
+              <li key={x.t}>
+                <time>{x.y}</time>
+                <div>
+                  <h3>
+                    {x.href ? (
+                      <a href={x.href} target="_blank" rel="noopener noreferrer">
+                        {x.t} <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      x.t
+                    )}
+                  </h3>
+                  <p>{x.d}</p>
                 </div>
-              ))}
-            </dl>
-          </div>
-          <div>
-            <h3>Huquqiy asos</h3>
-            <ul>
-              {OFFICIAL.laws.map((x) => (
-                <li key={x.t}>
-                  {x.href ? (
-                    <a href={x.href} target="_blank" rel="noopener noreferrer">
-                      {x.t} <span aria-hidden="true">↗</span>
-                    </a>
-                  ) : (
-                    x.t
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+              </li>
+            ))}
+          </ol>
+          <p className="it-acts-note">Ittifoq faoliyati, şuningdek, Özbekiston Respublikasi Konstitutsiyasi, nodavlat notijorat taşkilotlari töğrisidagi qonunlar va Ittifoq Ustaviga asoslanadi.</p>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="wrap it-off">
+          <h2 className="h2">Rasmiy maʼlumotlar</h2>
+          <dl>
+            {OFFICIAL.rows.map(([k, v]) => (
+              <div key={k}>
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
