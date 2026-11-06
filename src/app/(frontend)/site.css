@@ -384,3 +384,14 @@ html,body{overflow-x:clip}
 @media (max-width:640px){.dev-switch{right:12px;bottom:12px}}
 /* bir sahifada bir neçta variant paneli — ustma-ust */
 .dev-switch.s1{bottom:20px}.dev-switch.s2{bottom:66px}.dev-switch.s3{bottom:112px}.dev-switch.s4{bottom:158px}
+/* köp bölimli variant paneli (DevSectionsPanel, faqat dev) */
+.dev-panel{position:fixed;right:20px;bottom:20px;z-index:100;font:600 13px/1.2 var(--f-body);color:var(--navy)}
+.dev-panel-toggle{border:none;background:var(--navy);color:#fff;border-radius:99px;padding:12px 18px;font:700 13px/1 var(--f-body);cursor:pointer;box-shadow:0 12px 36px rgba(83,40,34,.25)}
+.dev-panel ul{list-style:none;position:absolute;right:0;bottom:calc(100% + 8px);width:330px;max-height:70vh;overflow:auto;background:#fff;border-radius:20px;padding:8px;box-shadow:0 18px 50px rgba(83,40,34,.22)}
+.dev-panel li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 6px;border-radius:12px}
+.dev-panel li:hover{background:var(--soft)}
+.dev-panel-name{border:none;background:none;text-align:left;font:600 13px/1.2 var(--f-body);color:var(--navy);cursor:pointer;flex:1;padding:6px 4px}
+.dev-panel li span{display:flex;gap:2px}
+.dev-panel li span button{border:none;background:none;border-radius:99px;min-width:30px;padding:7px 8px;font:700 12px/1 var(--f-body);color:var(--navy);cursor:pointer}
+.dev-panel li span button.on{background:var(--yellow)}
+@media (max-width:640px){.dev-panel{right:12px;bottom:12px}.dev-panel ul{width:min(330px,calc(100vw - 24px))}}

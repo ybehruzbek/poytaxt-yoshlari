@@ -153,12 +153,7 @@
   .it-reg-view{min-height:280px}
 }
 
-/* ===== VAQTINCHA: bölimlar variantlari (<html data-imt|loy|xal|mar="a|b|c">) ===== */
-.vx{display:none}
-html:not([data-imt]) [data-v=imt-a],html[data-imt=a] [data-v=imt-a],html[data-imt=b] [data-v=imt-b],html[data-imt=c] [data-v=imt-c],
-html:not([data-loy]) [data-v=loy-a],html[data-loy=a] [data-v=loy-a],html[data-loy=b] [data-v=loy-b],html[data-loy=c] [data-v=loy-c],
-html:not([data-xal]) [data-v=xal-a],html[data-xal=a] [data-v=xal-a],html[data-xal=b] [data-v=xal-b],html[data-xal=c] [data-v=xal-c],
-html:not([data-mar]) [data-v=mar-a],html[data-mar=a] [data-v=mar-a],html[data-mar=b] [data-v=mar-b],html[data-mar=c] [data-v=mar-c]{display:block}
+/* Bölimlar variantlari: körsatiş qoidalarini DevSectionsPanel özi qöşadi (faqat dev) */
 
 /* ----- Imtiyozlar A ----- */
 .ip-a{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
