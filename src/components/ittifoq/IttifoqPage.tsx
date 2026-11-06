@@ -8,7 +8,8 @@ import { Arrow } from '@/components/site/SocialPhones'
 import { Centres } from './Centres'
 import { CentresB, CentresC } from './CentresAlt'
 import { Hero } from './Hero'
-import { GOALS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, OFFICIAL, QUOTE, STATS, STRUCTURE, WHO } from './data'
+import { ProjectCards } from './ProjectCards'
+import { GOALS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, OFFICIAL, PRIORITIES, QUOTE, STATS, STRUCTURE, WHO } from './data'
 import { IntlA, IntlB, IntlC, PrivilegesA, PrivilegesB, PrivilegesC, ProjectsA, ProjectsB, ProjectsC } from './Sections'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -125,6 +126,28 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
 
+      <section className="sec it-pri-sec">
+        <div className="wrap">
+          <div className="it-pri-head">
+            <h2 className="h2">Davlat belgilagan ustuvor yönalişlar</h2>
+            <p>
+              <a href={PRIORITIES.href} target="_blank" rel="noopener noreferrer">
+                {PRIORITIES.source} <span aria-hidden="true">↗</span>
+              </a>{' '}
+              Ittifoq faoliyatining 12 ta ustuvor yönalişini belgilab bergan.
+            </p>
+          </div>
+          <ol className="it-pri">
+            {PRIORITIES.items.map((x, i) => (
+              <li key={x}>
+                <span>{pad(i)}</span>
+                <p>{x}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section className="sec">
         <div className="wrap it-quote">
           <img src={IMG.readers} alt="" />
@@ -177,6 +200,7 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
               </V>
             </>
           )}
+          <ProjectCards />
         </div>
       </section>
 

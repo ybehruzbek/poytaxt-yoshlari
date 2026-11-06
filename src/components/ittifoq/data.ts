@@ -233,3 +233,55 @@ export const OFFICIAL = {
     { t: 'Özbekiston yoşlar ittifoqining Ustavi' },
   ] as { t: string; href?: string }[],
 }
+
+/* ---------------- PF-5106: ustuvor yönalişlar ---------------- */
+
+/**
+ * Prezidentning 2017-yil 5-iyuldagi PF-5106-son Farmoni, 3-band — Ittifoq faoliyatining 12 ta ustuvor yönalişi
+ * (asl matn qisqartirib, maʼnosi saqlangan holda berilgan). Manba: https://lex.uz/docs/-3255680
+ */
+export const PRIORITIES = {
+  source: 'Prezidentning 2017-yil 5-iyuldagi PF-5106-son Farmoni',
+  href: 'https://lex.uz/docs/-3255680',
+  items: [
+    'Yoşlarga oid davlat siyosatini amalga oşirişda davlat organlari, nodavlat notijorat taşkilotlari va fuqarolik jamiyati institutlari bilan samarali hamkorlikni taʼminlovçi, «Yoşlar — kelajak bunyodkori» şiori ostida professional işlaydigan tuzilmaga aylaniş.',
+    'Yoşlarning huquqlari, erkinliklari va qonuniy manfaatlarini himoya qiliş, ularni milliy va umuminsoniy qadriyatlarga hurmat, Vatanga muhabbat ruhida tarbiyalaş, turli mafkuraviy tahdidlardan asraş.',
+    'Demokratik islohotlarda yoşlar faolligini oşiriş, maʼnaviyati yuksak, mustaqil fikrlaydigan, el-yurt manfaati yölida bor kuçini safarbar qiladigan taşabbuskor yoşlar safini kengaytiriş.',
+    'Yoşlarning zamonaviy kasblarni egallaşi, bandligi, kiçik biznes va tadbirkorlikka jalb etilişi, intellektual va ijodiy salohiyatini röyobga çiqarişiga kömaklaşiş.',
+    'Ilmiy va badiiy kitoblarni, jumladan elektron asarlarni öqişga qiziqişni oşiriş; huquqiy, ekologik, tibbiy va axborot texnologiyalari madaniyatini yuksaltiriş orqali yot ğoyalarga qarşi immunitetni şakllantiriş.',
+    'Soğlom turmuş tarzi va oila muqaddasligi ğoyalarini tarğib qiliş, erta turmuş quriş va yoş oilalar ajralişining oldini oliş.',
+    'Yoşlarning böş vaqtini mazmunli taşkil etiş: sport va jismoniy tarbiya, ijodiy tögaraklar, xorijiy tillar va boşqa öquv kurslariga keng jalb etiş.',
+    'Yoş oilalarni, imkoniyati çeklangan va ijtimoiy himoyaga muhtoj yoşlarni maʼnaviy va moddiy qöllab-quvvatlaş, ular uçun munosib uy-joy va şaroit yaratiş.',
+    'Yoşlar örtasida huquqbuzarlik va jinoyatçilikning barvaqt oldini oliş va profilaktika işlarida faol iştirok etiş.',
+    'Bilimli, taşabbuskor, halol va fidoyi yoş rahbar kadrlarni tarbiyalaş, zaxirasini yaratiş va masʼul lavozimlarga tavsiya etiş.',
+    'Yoşlar siyosati sohasida xalqaro hamkorlikni rivojlantiriş, xorijda tahsil olayotgan va mehnat qilayotgan yoşlarning huquq va manfaatlarini himoya qiliş.',
+    'Davlat organlari, nodavlat notijorat taşkilotlari va fuqarolik jamiyati institutlariga yoşlar bilan işlaşda ğoyaviy-uslubiy yordam beriş.',
+  ],
+}
+
+/* ---------------- Loyihalar: batafsil kartalar (taqdimotdan) ---------------- */
+
+export type ProjectCard = { t: string; goal: string; reach: string; who: string; area: string }
+
+/** Yirik loyihalar — taqdimotdagi «Loyihadan maqsad / Qamrov / Iştirokçilar» maʼlumotlari */
+export const PROJECT_CARDS: ProjectCard[] = [
+  { area: 'Boşlanğiç taşkilotlar', t: '«Munozara» respublika turniri', goal: 'Taʼlim muassasalaridagi yoşlar örtasida nutq madaniyati va tahliliy fikrlaşni rivojlantiriş.', reach: '5 000 nafar yoş', who: 'Öquvçi va talabalar' },
+  { area: 'Boşlanğiç taşkilotlar', t: '«Talabalar festivali»', goal: 'Talabalar örtasida milliy qadriyat va anʼanalarimizni tarğib qiliş.', reach: '1,5 mln yoş', who: 'Oliy taʼlim muassasalaridagi faol talabalar' },
+  { area: 'Boşlanğiç taşkilotlar', t: '«Yetakçilar forumi»', goal: 'Yetakçilar faoliyatini qöllab-quvvatlaş va ularga uslubiy kömak beriş.', reach: '2 500 yetakçi', who: 'Oliy taʼlim va kasbiy taʼlim muassasalari yetakçilari' },
+  { area: 'Boşlanğiç taşkilotlar', t: '«Milliy Fashion Show»', goal: 'Yoşlar örtasida milliy liboslarimizni tarğib qiliş, yoş dizaynerlarni qöllab-quvvatlaş.', reach: '100 000 yoş', who: 'Oliy taʼlim va kasbiy taʼlim talabalari' },
+  { area: 'Boşlanğiç taşkilotlar', t: '«Kitob festivali»', goal: 'Yoşlarni kitobxonlikka keng jalb qiliş.', reach: '500 000 yoş', who: 'Talaba yoşlar va barça uçun' },
+  { area: 'Boşlanğiç taşkilotlar', t: '«Ittifoq Quiz»', goal: 'Yoşlarning bilim salohiyatini rivojlantiriş.', reach: '100 000 yoş', who: 'Oliy taʼlim va kasbiy taʼlim talabalari' },
+  { area: 'Harbiy vatanparvarlik', t: '«Universal» harbiy-sport musobaqasi', goal: 'Kuç tuzilmalaridagi yoş harbiy xizmatçilar örtasida harbiy birodarlikni tarğib qiliş.', reach: '55 000 yoş', who: 'Yoş harbiy xizmatçilar' },
+  { area: 'Harbiy vatanparvarlik', t: '«Harbiy qismda bir kunim»', goal: 'Yoşlarni vatanparvarlik ruhida tarbiyalaş, harbiy xizmatga qiziqişini oşiriş.', reach: '11 250 yoş', who: 'Kuç tuzilmalaridagi yoşlar' },
+  { area: 'Harbiy vatanparvarlik', t: '«Ajdodlar izidan» intellektual tanlovi', goal: 'Harbiy qismlardagi yoşlar örtasida kitobxonlikni tarğib qiliş.', reach: '25 000 yoş', who: 'Yoş harbiy xizmatçilar' },
+  { area: 'Harbiy vatanparvarlik', t: '«Harbiylar köpkuraşi»', goal: 'Yoş harbiy xizmatçilar örtasida soğlom turmuş tarzini tarğib qiliş.', reach: '45 000 yoş', who: 'Yoş harbiy xizmatçilar' },
+  { area: 'Harbiy vatanparvarlik', t: '«Vatanparvarlik karvoni» festivali', goal: 'Yoşlarni milliy ğoya va Vatanga sadoqat ruhida tarbiyalaş.', reach: '40 000 yoş', who: 'Yoş harbiy xizmatçilar' },
+  { area: 'Harbiy vatanparvarlik', t: '«Ezgu amal»', goal: 'Kuç tuzilmalarida faoliyat olib borayotgan yoşlarni qöllab-quvvatlaş.', reach: '50 000 yoş', who: 'Yoş harbiy xizmatçilar' },
+  { area: 'Tizim taşkilotlari', t: 'Germaniya amaliyot dasturi', goal: 'Çet eldagi yoşlar taşkilotlari bilan hamkorlikda talabalarni amaliyotga yuboriş.', reach: '1 500 yoş', who: 'Oliy taʼlim talabalari va isteʼdodli yoşlar' },
+  { area: 'Tizim taşkilotlari', t: '«Ustoz AI» platformasi', goal: 'Taʼlim muassasalarining 10–30 foizini qamrab oliş uçun şaroit yaratiş.', reach: '530 000 yoş', who: 'Zamonaviy kasblarda faoliyat yuritayotgan yoşlar' },
+  { area: 'Tizim taşkilotlari', t: '«Parlament FM» podkasti', goal: 'Oliy Majlisda qabul qilinayotgan qonunlar va islohotlar mazmunini yoritiş.', reach: '19 000 yoş', who: 'Yoşlar va fuqarolar' },
+  { area: 'Tizim taşkilotlari', t: 'Yuridik laboratoriya', goal: 'Yoşlarning huquqiy faolligini oşiriş, qonunçilik böyiça bilimlarini mustahkamlaş.', reach: '1 000 yoş', who: 'Talabalar, maktab va kollej öquvçilari' },
+  { area: 'Tizim taşkilotlari', t: '«Biznes taʼlim» platformasi', goal: 'Yoşlarning biznes sohasidagi bilimlarini oşiriş.', reach: '20 000 yoş', who: 'Talabalar va yoş tadbirkorlar' },
+  { area: 'Tizim taşkilotlari', t: 'Xorijdagi yoşlar uçun «Musofir» platformasi', goal: 'Xorijda öqiyotgan va işlayotgan yoşlar bilan muntazam muloqot qiliş.', reach: '2 000 yoş', who: 'Xorijdagi talabalar va yoşlar' },
+  { area: 'Tizim taşkilotlari', t: '«Yoş ijodkorlar» körik tanlovi', goal: 'Yoşlarning innovatsion ğoyalarini qöllab-quvvatlaş.', reach: '50 000 yoş', who: 'Talabalar va iqtidorli yoşlar' },
+]
