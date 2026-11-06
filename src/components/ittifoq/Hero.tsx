@@ -15,7 +15,10 @@ type H = { L: (h: string) => string; crumbs: ReactNode }
 export function Hero({ L, crumbs }: H) {
   return (
     <section className="it-hero" data-head-dark>
-      <img src={IMG.team} alt="" />
+      <picture>
+        <source media="(max-width: 640px)" srcSet={IMG.collageSm} />
+        <img src={IMG.collage} alt="" />
+      </picture>
       <div className="wrap">
         <div className="it-crumbs">{crumbs}</div>
         <h1 className="h1">Özbekiston yoşlar ittifoqi</h1>
@@ -32,6 +35,7 @@ export function Hero({ L, crumbs }: H) {
           </Link>
         </div>
       </div>
+      <span className="it-hero-credit">Suratlar: UzA</span>
     </section>
   )
 }

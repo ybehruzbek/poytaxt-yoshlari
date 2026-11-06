@@ -146,6 +146,9 @@ export const INTL = {
 
 export const IMG = {
   team: '/img/ittifoq/jamoa-prezident.jpg',
+  /** Hero kollaji: UzA (uza.uz) suratlaridan yiğilgan, 11 ta yoş */
+  collage: '/img/ittifoq/hero-kollaj.jpg',
+  collageSm: '/img/ittifoq/hero-kollaj-sm.jpg',
   leaders: '/img/ittifoq/yetakchilar.jpg',
   seminar: '/img/ittifoq/seminar.jpg',
   girls: '/img/ittifoq/kitob-qizlar.jpg',
