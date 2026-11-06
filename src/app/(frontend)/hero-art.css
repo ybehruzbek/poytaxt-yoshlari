@@ -1,0 +1,326 @@
+/* =====================================================================
+   BOŞ EKRAN ÖNG TOMONI — 3 ta köriniş: <html data-hr="a|b|c"> (VAQTINCHA, faqat dev)
+   A — hozirgi kollaj · B — mozaika · C — orbita
+   ===================================================================== */
+.hrv {
+  display: none !important;
+}
+:root:not([data-hr]) .hrv-a,
+[data-hr='a'] .hrv-a,
+[data-hr='b'] .hrv-b,
+[data-hr='c'] .hrv-c {
+  display: block !important;
+}
+.hrv-b,
+.hrv-c {
+  flex-shrink: 0;
+}
+
+/* umumiy kanvas: A bilan bir xil ölçam (600×700), içi kanvas enidan foizda (cqw) */
+.ha {
+  position: relative;
+  width: min(600px, 46vw);
+  aspect-ratio: 600 / 700;
+  container-type: inline-size;
+}
+
+/* =====================  B · Mozaika  ===================== */
+.hab-grid {
+  position: absolute;
+  inset: 5cqw 0 0;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  gap: 3cqw;
+}
+.hab-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 7cqw;
+}
+.hab-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.hab-tile:hover img {
+  transform: scale(1.05);
+}
+.hab-main {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  border-radius: 50cqw 50cqw 7cqw 7cqw;
+}
+.hab-main img {
+  object-position: 50% 40%;
+}
+.hab-tag {
+  position: absolute;
+  left: 5cqw;
+  bottom: 6cqw;
+  padding: 2.2cqw 4.4cqw;
+  border-radius: 99px;
+  background: var(--navy);
+  font: 600 4.2cqw/1 var(--f-head);
+  color: #fff;
+  white-space: nowrap;
+  transform: rotate(-6deg);
+}
+.hab-voice {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5cqw;
+  background: var(--green);
+  font: 700 4.4cqw/1.2 var(--f-head);
+  color: #fff;
+}
+.hab-wave {
+  display: flex;
+  align-items: center;
+  gap: 1.6cqw;
+  height: 12cqw;
+}
+.hab-wave b {
+  width: 2.4cqw;
+  border-radius: 9px;
+  background: #fff;
+  animation: eq 1.2s ease-in-out infinite;
+}
+.hab-wave b:nth-child(1),
+.hab-wave b:nth-child(5) {
+  height: 6cqw;
+}
+.hab-wave b:nth-child(2),
+.hab-wave b:nth-child(4) {
+  height: 9cqw;
+  animation-delay: 0.15s;
+}
+.hab-wave b:nth-child(3) {
+  height: 12cqw;
+  animation-delay: 0.3s;
+}
+.hab-pill {
+  grid-column: 2;
+  grid-row: 2 / 4;
+  border-radius: 99px;
+  background: var(--sky);
+}
+.hab-pill img {
+  object-position: 50% 30%;
+}
+.hab-event {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1.4cqw;
+  padding: 5cqw;
+  background: #fff;
+  color: var(--navy);
+  box-shadow: 0 2cqw 6cqw rgba(83, 40, 34, 0.08);
+  transition: background 0.25s;
+}
+.hab-event small {
+  font: 600 3cqw/1 var(--f-body);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hab-event b {
+  font: 800 11cqw/1 var(--f-head);
+}
+.hab-event b span {
+  font-size: 4.6cqw;
+  font-weight: 700;
+}
+.hab-ev-title {
+  font: 700 4.2cqw/1.25 var(--f-head);
+}
+.hab-ev-go {
+  position: absolute;
+  top: 4.5cqw;
+  right: 4.5cqw;
+  display: grid;
+  place-items: center;
+  width: 10cqw;
+  height: 10cqw;
+  border-radius: 50%;
+  background: var(--yellow);
+  transition: transform 0.3s;
+}
+.hab-ev-go svg {
+  width: 5cqw;
+  height: 5cqw;
+}
+.hab-event:hover {
+  background: var(--yellow);
+}
+.hab-event:hover .hab-ev-go {
+  background: #fff;
+  transform: rotate(45deg);
+}
+.hab-blob {
+  position: absolute;
+  top: -2cqw;
+  right: -5cqw;
+  width: 24cqw;
+  animation: spin 30s linear infinite;
+}
+.hab-star {
+  position: absolute;
+  top: 50%;
+  left: -4cqw;
+  width: 10cqw;
+}
+.hab-dot {
+  position: absolute;
+  bottom: -3cqw;
+  left: 50%;
+  width: 13cqw;
+  height: 13cqw;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+/* =====================  C · Orbita  ===================== */
+.hac-ring,
+.hac-photo,
+.hac-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+}
+.hac-ring {
+  border-radius: 50%;
+}
+.hac-ring.r1 {
+  width: 96cqw;
+  height: 96cqw;
+  border: 2px dashed rgba(83, 40, 34, 0.22);
+}
+.hac-ring.r2 {
+  width: 72cqw;
+  height: 72cqw;
+  border: 1.6cqw solid #fff;
+}
+.hac-photo {
+  width: 54cqw;
+  height: 54cqw;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--sky);
+}
+.hac-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+.hac-orbit {
+  width: 0;
+  height: 0;
+  translate: none;
+  animation: spin 60s linear infinite;
+}
+.hac-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(var(--a)) translateX(36cqw) rotate(calc(var(--a) * -1));
+}
+.hac-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2cqw;
+  padding: 1.6cqw 3.4cqw 1.6cqw 1.6cqw;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 2cqw 5cqw rgba(83, 40, 34, 0.14);
+  font: 700 3.4cqw/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+  translate: -50% -50%;
+  animation: spin 60s linear infinite reverse;
+}
+.hac-ic {
+  display: grid;
+  place-items: center;
+  width: 8cqw;
+  height: 8cqw;
+  border-radius: 50%;
+  color: #fff;
+}
+.hac-ic.dark {
+  color: var(--navy);
+}
+.hac-ic svg {
+  width: 4.6cqw;
+  height: 4.6cqw;
+}
+.hac:hover .hac-orbit,
+.hac:hover .hac-chip {
+  animation-play-state: paused;
+}
+.hac-bubble {
+  position: absolute;
+  left: 4cqw;
+  top: 9cqw;
+  z-index: 2;
+  padding: 1.8cqw 4cqw;
+  border-radius: 4cqw;
+  background: #fff;
+  font: 700 4.4cqw/1 var(--f-head);
+  color: var(--navy);
+  transform: rotate(-9deg);
+  box-shadow: 0 1cqw 3cqw rgba(83, 40, 34, 0.08);
+}
+.hac-bubble::after {
+  content: '';
+  position: absolute;
+  left: 4.4cqw;
+  bottom: -2cqw;
+  border-top: 2.4cqw solid #fff;
+  border-right: 2.4cqw solid transparent;
+}
+.hac-star {
+  position: absolute;
+  right: 4cqw;
+  top: 8cqw;
+  width: 10cqw;
+}
+.hac-half {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 56cqw;
+  height: 12cqw;
+  border-radius: 40cqw 40cqw 0 0;
+  background: var(--navy);
+  translate: -50% 0;
+}
+
+/* =====================  Moslaşuv  ===================== */
+@media (max-width: 900px) {
+  .hrv-b,
+  .hrv-c {
+    align-self: center;
+    width: min(560px, 100%);
+  }
+  .ha {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hac-orbit,
+  .hac-chip,
+  .hab-blob,
+  .hab-wave b {
+    animation: none;
+  }
+}

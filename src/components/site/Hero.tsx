@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
 import { CollageScaler } from './CollageScaler'
+import { HeroArtB, HeroArtC } from './HeroArt'
 
 /** Bosh ekran: sarlavha, tugma va kollaj. ittifoq/index.html prototipidan avtomatik ko'chirilgan — dizaynni o'zgartirmang. */
 export function Hero({ locale }: { locale: Locale }) {
@@ -23,7 +24,7 @@ export function Hero({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      <div className="collage-fit" id="collageFit"><CollageScaler />
+      <div className="collage-fit hrv hrv-a" id="collageFit"><CollageScaler />
         <div className="collage" id="collage" aria-hidden="true">
           <div className="c-wave"><b style={{ height: "34px" }}></b><b style={{ height: "46px" }}></b><b style={{ height: "60px" }}></b><b style={{ height: "46px" }}></b><b style={{ height: "34px" }}></b></div>
           <div className="c-pill"><img src="/img/about-1.jpg" alt="" /></div>
@@ -44,6 +45,13 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="c-o"></div>
         </div>
       </div>
+      {/* VAQTINCHA (faqat dev): öng tomon variantlari */}
+      {process.env.NODE_ENV !== 'production' && (
+        <>
+          <div className="hrv hrv-b"><HeroArtB locale={locale} /></div>
+          <div className="hrv hrv-c"><HeroArtC /></div>
+        </>
+      )}
     </div>
   </div>
 </section>
