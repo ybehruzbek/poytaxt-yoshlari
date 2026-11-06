@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
+import Link from 'next/link'
 import type { CSSProperties, ReactNode } from 'react'
 
 import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
+import { Arrow } from '@/components/site/SocialPhones'
 
 import { Centres } from './Centres'
 import { CentresB, CentresC } from './CentresAlt'
 import { Hero } from './Hero'
-import { GOALS, IMG, MISSION, MORE_STATS, QUOTE, STATS } from './data'
+import { GOALS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, OFFICIAL, QUOTE, STATS, STRUCTURE, WHO } from './data'
 import { IntlA, IntlB, IntlC, PrivilegesA, PrivilegesB, PrivilegesC, ProjectsA, ProjectsB, ProjectsC } from './Sections'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -26,8 +28,9 @@ function V({ name, k, children }: { name: string; k: string; children: ReactNode
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
 /**
- * "Özbekiston yoşlar ittifoqi" sahifasi: butun ekranli surat bilan boşlanadigan hero,
- * vazifa va raqamlar, suratlar mozaikasi, maqsadlar, iqtibos, imtiyozlar, loyihalar, xalqaro hamkorlik, Yoşlar markazlari.
+ * "Özbekiston yoşlar ittifoqi" sahifasi (matn: docs/matnlar/ittifoq-haqida.md): hero, biz kimmiz, raqamlar,
+ * qisqa tarix, maqsad, nima qilamiz, iqtibos, imtiyozlar, loyihalar, xalqaro hamkorlik, Yoşlar markazlari,
+ * tuzilma, aʼzolik va rasmiy maʼlumotlar.
  */
 export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
@@ -36,10 +39,17 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
 
       <section className="sec">
         <div className="wrap">
-          <h2 className="h2 it-mission">
-            {MISSION.lead}
-            <span className="mute">{MISSION.rest}</span>
-          </h2>
+          <div className="it-who">
+            <div>
+              <h2 className="h2">Biz kimmiz</h2>
+              <p className="it-motto">«{WHO.motto}»</p>
+            </div>
+            <div className="it-who-txt">
+              {WHO.paras.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+            </div>
+          </div>
           <div className="it-stats">
             {STATS.map((s) => (
               <div key={s.l}>
@@ -71,21 +81,44 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
 
+      <section className="sec">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Qisqa tarix</h2>
+          </div>
+          <ol className="it-hist">
+            {HISTORY.map((m) => (
+              <li key={m.y}>
+                <b>{m.y}</b>
+                <p>{m.t}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="wrap">
+          <p className="it-kick">Maqsadimiz</p>
+          <h2 className="h2 it-mission">
+            {MISSION.lead}
+            <span className="mute">{MISSION.rest}</span>
+          </h2>
+          <p className="it-charter">{MISSION.charter}</p>
+        </div>
+      </section>
+
       <section className="sec it-goals-sec">
         <div className="wrap">
           <div className="sec-head">
-            <h2 className="h2">Maqsad va vazifalar</h2>
+            <h2 className="h2">Nima qilamiz</h2>
           </div>
           <div className="it-goals">
             {GOALS.map((g, i) => (
               <article key={g.t} style={{ '--c': g.c } as CSSProperties}>
                 <span className="it-num">{pad(i)}</span>
                 <h3>{g.t}</h3>
-                <ul>
-                  {g.items.map((x) => (
-                    <li key={x}>{x}</li>
-                  ))}
-                </ul>
+                <p>{g.d}</p>
               </article>
             ))}
           </div>
@@ -182,6 +215,109 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
           <DevVariantSwitch name="mar" label="Markazlar" className="s4" titles={['A · Hozirgi', 'B · Keng lenta va suratli tör', 'C · Gorizontal lenta']} />
         </>
       )}
+
+      <section className="sec">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Qanday tuzilganmiz</h2>
+          </div>
+          <p className="it-struct-lead">{STRUCTURE.lead}</p>
+          <ol className="it-struct">
+            {STRUCTURE.organs.map((o, i) => (
+              <li key={o.t}>
+                <span className="it-num">{pad(i)}</span>
+                <h3>{o.t}</h3>
+                <p>{o.d}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="it-princ">
+            <span>Tamoyillarimiz:</span>
+            {STRUCTURE.principles.map((x) => (
+              <b key={x}>{x}</b>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sec it-join-sec" id="azo-bolish">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Qanday aʼzo böliş mumkin</h2>
+          </div>
+          <ol className="it-steps">
+            {JOIN.steps.map((st, i) => (
+              <li key={st.t}>
+                <i>{i + 1}</i>
+                <h3>{st.t}</h3>
+                <p>{st.d}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="it-join-grid">
+            <div>
+              <h3>Aʼzo sifatida siz</h3>
+              <ul>
+                {JOIN.rights.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3>Qöşimça imkoniyatlar</h3>
+              <ul>
+                {JOIN.perks.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="it-cta">
+            <div>
+              <h2 className="h2">{JOIN.cta.t}</h2>
+              <p>{JOIN.cta.d}</p>
+            </div>
+            <Link href={L('/boglanish/murojaat?mavzu=azo')} className="btn btn-primary">
+              Aʼzo böliş{' '}
+              <span className="ic">
+                <Arrow />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="sec">
+        <div className="wrap it-off">
+          <div>
+            <h2 className="h2">Rasmiy maʼlumotlar</h2>
+            <dl>
+              {OFFICIAL.rows.map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div>
+            <h3>Huquqiy asos</h3>
+            <ul>
+              {OFFICIAL.laws.map((x) => (
+                <li key={x.t}>
+                  {x.href ? (
+                    <a href={x.href} target="_blank" rel="noopener noreferrer">
+                      {x.t} <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    x.t
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <section className="sec">
         <div className="wrap">{siblings}</div>

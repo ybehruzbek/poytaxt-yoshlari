@@ -4,13 +4,36 @@
  * Keyinçalik admin paneldan (Payload) boşqariladi.
  */
 
+/** Sahifa boşidagi qisqa matn */
 export const INTRO =
-  'Özbekiston yoşlar ittifoqi 2017-yil 30-iyunda Özbekiston Respublikasi Prezidenti taşabbusi bilan taşkil etilgan, mamlakat yoşlarini birlaştiruvçi nodavlat notijorat taşkilotidir.'
+  'Mamlakat yoşlarini birlaştiruvçi eng katta taşkilot. Biz yoşlarning ovozini eşitamiz, ğoyalarini qöllab-quvvatlaymiz va ularni real natijaga aylantirişga yordam beramiz.'
 
-export const MISSION = {
-  lead: 'Jismonan soğlom, maʼnan yetuk va intellektual rivojlangan, mustaqil fikrlaydigan yoş avlodni şakllantiriş',
-  rest: ' — yoşlarni taşqi tahdidlar va «ommaviy madaniyat»ning zararli taʼsiridan himoya qiliş, ularning huquq va qonuniy manfaatlarini himoya qilişga kömaklaşiş.',
+/** Biz kimmiz */
+export const WHO = {
+  paras: [
+    'Özbekiston yoşlar ittifoqi — mamlakat yoşlarini birlaştiruvçi nodavlat notijorat taşkilot. U 2017-yil 30-iyunda taşkil etilgan. Şu kun har yili butun mamlakatda «Yoşlar kuni» sifatida nişonlanadi.',
+    'Ittifoqqa 14 yoşdan 30 yoşgaça bölgan har bir yigit-qiz öz xohişi bilan aʼzo bölişi mumkin. Bizda heç kim majburlab yozilmaydi: kimdir sport bilan, kimdir ilm bilan, kimdir volontyorlik yoki öz biznesi bilan keladi. Barçamizni bitta maqsad birlaştiradi — özimiz va yurtimiz uçun foydali iş qiliş.',
+  ],
+  motto: 'Yoşlar — kelajak bunyodkori',
 }
+
+/** Maqsadimiz (katta sarlavha) */
+export const MISSION = {
+  lead: 'Biz yoşlar öz kuçiga işonadigan, bilim va kasb egallaydigan, öz örnini topadigan va mamlakat hayotida faol qatnaşadigan muhit yaratamiz.',
+  rest: ' Sizda ğoya bölsa — biz uni amalga oşirişga yordam beramiz. Sizga yordam kerak bölsa — biz yoningizdamiz.',
+  charter:
+    'Ustavimizda bu şunday yozilgan: Ittifoqning maqsadi — yigit-qizlarning huquq va manfaatlarini himoya qiliş, ularning maʼnaviy va kasbiy saviyasini oşiriş, intellektual va ijodiy salohiyatini röyobga çiqarişga kömaklaşiş, yoşlarni mamlakatdagi islohotlarga va Özbekistonning rivojiga faol jalb qiliş.',
+}
+
+export type Milestone = { y: string; t: string }
+
+/** Qisqa tarix */
+export const HISTORY: Milestone[] = [
+  { y: '2001', t: '«Kamolot» yoşlar ijtimoiy harakati taşkil etildi. U ön olti yil davomida yoşlar bilan işlab, katta tajriba töpladi.' },
+  { y: '30.06.2017', t: 'Toşkentdagi Simpoziumlar saroyida «Kamolot»ning IV qurultoyi bölib ötdi. Delegatlar uning negizida yangi taşkilot — Özbekiston yoşlar ittifoqini tuziş taklifini qöllab-quvvatladi.' },
+  { y: '05.07.2017', t: 'Prezidentning PF-5106-son Farmoni qabul qilindi: Ittifoqning ustuvor yönalişlari belgilandi, 30-iyun «Yoşlar kuni» deb eʼlon qilindi.' },
+  { y: 'Bugun', t: 'Ittifoq «Kamolot»ning huquqiy vorisi sifatida butun mamlakat böylab işlaydi: Qoraqalpoğiston Respublikasi, barça viloyatlar va Toşkent şahrida hududiy kengaşlari, taʼlim muassasalari, korxonalar va harbiy qismlarda boşlanğiç taşkilotlari bor.' },
+]
 
 export const QUOTE = {
   text: 'Yoşlik — ğanimat, vaqt — ğanimat, fursat borida otni qamçilang! Davlatimiz, xalqimiz yaratib berayotgan imkoniyatlarning qadriga yeting! Dunyoga öz sözingizni ayting!',
@@ -34,39 +57,20 @@ export const MORE_STATS: Stat[] = [
   { v: '36', l: 'taşkilot ittifoq tizimida faoliyat yuritadi' },
 ]
 
-export type Goal = { t: string; items: [string, string]; c: string }
+export type Goal = { t: string; d: string; c: string }
 
+/** Nima qilamiz */
 export const GOALS: Goal[] = [
-  {
-    t: 'Taʼlim va kasb-hunarga yönaltiriş',
-    items: ['Kasb-hunar örganiş va zamonaviy bilimlarni özlaştirişga imkoniyat yaratiş', 'Innovatsion loyihalar va startaplarni qöllab-quvvatlaş'],
-    c: 'var(--yellow)',
-  },
-  {
-    t: 'Ijtimoiy taşabbus va volontyorlik',
-    items: ['Volontyorlik faoliyatini kengaytiriş va rivojlantiriş', 'Jamiyatdagi muammolarni hal etişda yoşlarning iştirokini oşiriş'],
-    c: 'var(--green)',
-  },
-  {
-    t: 'Yoşlarning huquq va manfaatlarini himoya qiliş',
-    items: ['Yoşlarni iş bilan taʼminlaş, yoş mutaxassislarning mehnat huquqlarini himoya qiliş', 'Qiyin şaroitdagi, nogironligi bölgan va ehtiyojmand oilalar farzandlarini qöllab-quvvatlaş'],
-    c: 'var(--blue)',
-  },
-  {
-    t: 'Innovatsiya va texnologiyalar',
-    items: ['Yoşlarni raqamli texnologiyalar va IT sohasida bilim olişga rağbatlantiriş', 'Texnoparklar va ilmiy laboratoriyalar bilan hamkorlik qiliş'],
-    c: 'var(--sky)',
-  },
-  {
-    t: 'Soğlom turmuş tarzi va sport',
-    items: ['Sport tadbirlari va musobaqalarni taşkil qiliş', 'Zararkundalikka (giyohvandlik, tamaki, alkogol) qarşi profilaktika işlari'],
-    c: 'var(--lime)',
-  },
-  {
-    t: 'Xalqaro yoşlar taşkilotlari bilan hamkorlik',
-    items: ['Çet eldagi yoşlar bilan hamkorlikni rivojlantiriş', 'Xalqaro almaşinuv dasturlari va forumlarda iştirok etiş'],
-    c: 'var(--silver)',
-  },
+  { t: 'Taʼlim va kasb', d: 'Yoşlarga zamonaviy kasb egallaş, yangi bilim oliş va öz yölini topişda yordam beramiz. Innovatsion loyihalar va startaplarni qöllab-quvvatlaymiz.', c: 'var(--yellow)' },
+  { t: 'Iş va tadbirkorlik', d: 'Yoşlarning bandligi, öz işini boşlaşi va tadbirkorlik qobiliyatini rivojlantiriş uçun imkoniyatlar yaratamiz.', c: 'var(--green)' },
+  { t: 'Huquq va manfaatlarni himoya qiliş', d: 'Yoşlarning huquqlarini himoya qilamiz. Qiyin vaziyatga tuşgan, nogironligi bölgan va ehtiyojmand oilalardagi yoşlarni alohida qöllab-quvvatlaymiz.', c: 'var(--blue)' },
+  { t: 'Isteʼdod va ilm', d: 'Isteʼdodli yoşlarni izlab topamiz, ularning ijodiy va ilmiy salohiyatini oçişga şaroit yaratamiz.', c: 'var(--sky)' },
+  { t: 'Sport va soğlom turmuş', d: 'Sport musobaqalari va tadbirlar ötkazamiz, yoşlarni muntazam sport bilan şuğullanişga çorlaymiz. Giyohvandlik, çekiş va içkilikka qarşi profilaktika işlarini olib boramiz.', c: 'var(--lime)' },
+  { t: 'Kitobxonlik va maʼnaviyat', d: 'Kitob öqişni, milliy qadriyatlarni va vatanparvarlikni tarğib qilamiz. Yoşlarni zararli ğoyalar va «ommaviy madaniyat»ning salbiy taʼsiridan asraymiz.', c: 'var(--yellow)' },
+  { t: 'Volontyorlik va taşabbuslar', d: 'Jamiyatdagi muammolarni hal etişda yoşlarning özi taşabbus körsatişi uçun volontyorlik harakatini kengaytiramiz.', c: 'var(--green)' },
+  { t: 'Raqamli texnologiyalar', d: 'Yoşlarni IT va raqamli texnologiyalarni örganişga undaymiz, texnoparklar va ilmiy laboratoriyalar bilan hamkorlik qilamiz.', c: 'var(--blue)' },
+  { t: 'Xalqaro hamkorlik', d: 'Xorijiy yoşlar taşkilotlari bilan hamkorlik qilamiz, almaşinuv dasturlari va xalqaro forumlarda iştirok etamiz. Çet elda öqiyotgan va işlayotgan yurtdoşlarimizni qöllab-quvvatlaymiz.', c: 'var(--sky)' },
+  { t: 'Yoş yetakçilar', d: 'Bilimli, taşabbuskor va halol yoş yetakçilarni tarbiyalaymiz. Ittifoq yoşlar uçun «ijtimoiy lift» — faol yigit-qizlarning ösişi va jamiyatga xizmat qilişi uçun yöl oçadi.', c: 'var(--lime)' },
 ]
 
 export type Privilege = { t: string; text: string; fact: string; img: string; badge?: boolean }
@@ -86,8 +90,8 @@ export const PRIVILEGES: Privilege[] = [
     img: '/img/ittifoq/kitobxonlar.jpg',
   },
   {
-    t: 'Yoşlarga kafillik',
-    text: '2017-yil 5-dekabrda Oliy sud bilan imzolangan memorandumga asosan jinoyat köçasiga adaşib kirgan yoşlar uçun kafillik xatlari beriladi.',
+    t: 'Ikkinçi imkoniyat',
+    text: 'Oliy sud bilan imzolangan memorandum asosida adaşib qolgan yoşlarga Ittifoq kafillik xatini beradi — bu ularga töğri yölga qaytiş imkonini beradi.',
     fact: 'Yoşlar sud zalidan ozod etilmoqda',
     img: '/img/ittifoq/seminar.jpg',
   },
@@ -176,3 +180,56 @@ export const CENTRES: Centre[] = [
   { region: 'Farğona viloyati', img: '/img/markazlar/fargona.jpg' },
   { region: 'Xorazm viloyati', img: '/img/markazlar/xorazm.jpg' },
 ]
+
+/* ---------------- Tuzilma, aʼzolik, rasmiy maʼlumotlar ---------------- */
+
+export type Organ = { t: string; d: string }
+
+/** Qanday tuzilganmiz */
+export const STRUCTURE = {
+  lead: 'Ittifoq demokratik tamoyillar asosida işlaydi: rahbarlar aʼzolar tomonidan saylanadi, qarorlar oçiq muhokama qilinadi.',
+  organs: [
+    { t: 'Qurultoy', d: 'Ittifoqning oliy organi. U Ustavni tasdiqlaydi, Markaziy Kengaş va uning raisini saylaydi.' },
+    { t: 'Markaziy Kengaş', d: 'Qurultoylar oraliğida Ittifoqqa rahbarlik qiladi. Uning tarkibida har bir hududdan kamida ikki nafar yoş vakil böladi.' },
+    { t: 'Ijroiya qömitasi', d: 'Kundalik taşkiliy masalalar böyiça tezkor qarorlar qabul qiladi.' },
+    { t: 'Nazorat-taftiş komissiyasi', d: 'Ittifoq faoliyati va mablağlarining töğri işlatilişini nazorat qiladi.' },
+    { t: 'Hududiy kengaşlar', d: 'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahrida işlaydi. Toşkent şahar hududiy kengaşi poytaxt yoşlari bilan işlaydi.' },
+    { t: 'Boşlanğiç taşkilotlar', d: 'Öqiş, iş va xizmat joylarida tuziladi. Kamida beş nafar aʼzo bölsa, boşlanğiç taşkilot oçiş mumkin. Uni aʼzolar özlari saylagan yetakçi boşqaradi.' },
+  ] as Organ[],
+  principles: ['Ixtiyoriylik', 'Qonuniylik', 'Oçiqlik', 'Aʼzolarning teng huquqliligi', 'Özini özi boşqariş'],
+}
+
+/** Qanday aʼzo böliş mumkin */
+export const JOIN = {
+  steps: [
+    { t: 'Yoşingiz 14 dan 30 gaça bölsin', d: 'Özbekiston fuqarosi yoki mamlakatda doimiy yaşaydigan şaxs bölsangiz kifoya.' },
+    { t: 'Ariza yozing', d: 'Öqiş yoki iş joyingizdagi boşlanğiç taşkilotga yoki saytimiz orqali murojaat qiling.' },
+    { t: 'Boşlanğiç taşkilot qaror qabul qiladi', d: 'Uning qarori yakuniy — yuqori taşkilot tasdiği talab qilinmaydi.' },
+    { t: 'Faol böling', d: 'Loyihalarda qatnaşing, öz ğoyangizni taklif qiling, yetakçi yoki sardor böling.' },
+  ] as Organ[],
+  rights: ['Fikringizni erkin bildirasiz', 'Rahbar organlarga saylaysiz va saylanasiz', 'Ittifoq faoliyati haqida maʼlumot olasiz', 'Istalgan rahbar organga taklif bilan murojaat qilasiz'],
+  perks: [
+    'Faol aʼzo, örtaça özlaştirişi 86 foiz va undan yuqori bölgan bakalavr va magistrlarga kontrakt tölovining 35 foizi Ittifoq jamğarmasi hisobidan tölab beriladi.',
+    'Respublika va xalqaro forumlar, tanlovlar, sport musobaqalari, intellektual öyinlar va almaşinuv dasturlarida qatnaşiş imkoniyati.',
+  ],
+  cta: { t: 'Kelajakni birga quramiz', d: 'Sizning ğoyangiz, bilimingiz va ğayratingiz yurtimiz uçun kerak. Özbekiston yoşlar ittifoqiga qöşiling — tengdoşlaringiz bilan birga örganing, yarating va öz hissangizni qöşing.' },
+}
+
+/** Rasmiy maʼlumotlar */
+export const OFFICIAL = {
+  rows: [
+    ['Töliq nomi', 'Özbekiston yoşlar ittifoqi'],
+    ['Ruşça', 'Союз молодежи Узбекистана'],
+    ['Inglizça', 'Uzbekistan Youth Union'],
+    ['Taşkiliy-huquqiy şakli', 'Nodavlat notijorat taşkilot (ittifoq)'],
+    ['Taşkil etilgan sana', '2017-yil 30-iyun'],
+    ['Markaziy Kengaş manzili', 'Toşkent şahri, Alişer Navoiy köçasi, 11-uy'],
+  ] as [string, string][],
+  laws: [
+    { t: 'Özbekiston Respublikasi Konstitutsiyasi' },
+    { t: '«Yoşlarga oid davlat siyosati töğrisida»gi Qonun' },
+    { t: '«Nodavlat notijorat taşkilotlari töğrisida»gi va «Nodavlat notijorat taşkilotlari faoliyatining kafolatlari töğrisida»gi qonunlar' },
+    { t: 'Prezidentning 2017-yil 5-iyuldagi PF-5106-son Farmoni', href: 'https://lex.uz/docs/-3255680' },
+    { t: 'Özbekiston yoşlar ittifoqining Ustavi' },
+  ] as { t: string; href?: string }[],
+}
