@@ -4,138 +4,48 @@ import type { ReactNode } from 'react'
 
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { IMG, INTRO, STATS } from './data'
+import { IMG, INTRO } from './data'
 
 type H = { L: (h: string) => string; crumbs: ReactNode }
 
-const TITLE = 'Özbekiston yoşlar ittifoqi'
+/** VAQTINCHA: yöl zanjiri joylaşuvi variantlari (B, C) faqat ishlab chiqish rejimida */
+const DEV = process.env.NODE_ENV !== 'production'
 
-function Btns({ L, light }: { L: H['L']; light?: boolean }) {
+/**
+ * Sahifa boşi: butun ekranli surat, matn pastki gradient ustida.
+ * Yöl zanjiri: A — sarlavha ustida toʼq kapsulada; B — heroʼdan keyin oq lentada;
+ * C — pastki gradientda, tugmalar qatorining öng tomonida.
+ */
+export function Hero({ L, crumbs }: H) {
   return (
-    <div className="it-btns">
-      <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-        Aʼzo böliş{' '}
-        <span className="ic">
-          <Arrow />
-        </span>
-      </Link>
-      <Link href={L('/faoliyat/loyihalar')} className={`btn btn-ghost${light ? ' ith-ghost' : ''}`}>
-        Loyihalarni köriş
-      </Link>
-    </div>
-  )
-}
-
-/** A — butun ekranli surat; matn pastki gradient ustida, yöl zanjiri şaffof kapsulada */
-export function HeroA({ L, crumbs }: H) {
-  return (
-    <section className="it-hero ith ith-a">
-      <img src={IMG.team} alt="" />
-      <div className="wrap">
-        <div className="it-crumbs">{crumbs}</div>
-        <h1 className="h1">{TITLE}</h1>
-        <p className="lead">{INTRO}</p>
-        <Btns L={L} />
-      </div>
-    </section>
-  )
-}
-
-/** B — çapda matn, öngda arka şaklidagi katta surat va suzib turgan raqamlar */
-export function HeroB({ L, crumbs }: H) {
-  return (
-    <section className="page-hero ith ith-b">
-      <div className="wrap ithb-in">
-        <div>
-          {crumbs}
-          <span className="it-day">2017-yildan beri · 30-iyun — Yoşlar kuni</span>
-          <h1 className="h1">
-            Özbekiston <span>yoşlar</span> ittifoqi
-          </h1>
-          <p className="lead">{INTRO}</p>
-          <Btns L={L} light />
-        </div>
-        <div className="ithb-art">
-          <div className="ithb-arch">
-            <img src={IMG.team} alt="" />
-          </div>
-          <div className="ithb-chip ithb-c1">
-            <b>{STATS[0].v}</b>
-            <span>yetakçi va koordinator</span>
-          </div>
-          <div className="ithb-chip ithb-c2">
-            <b>{STATS[2].v}</b>
-            <span>hududda Yoşlar markazi</span>
-          </div>
-          <div className="ithb-sun" aria-hidden="true">
-            <b>30</b>
-            <span>iyun</span>
-          </div>
-          <svg className="ithb-star" viewBox="0 0 40 40" aria-hidden="true">
-            <path fill="#43A574" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
-          </svg>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C — surat ustida oq karta, pastda 4 ta raqam lentasi */
-export function HeroC({ L, crumbs }: H) {
-  return (
-    <section className="ith ith-c">
-      <div className="ithc-photo">
+    <>
+      <section className="it-hero">
         <img src={IMG.team} alt="" />
-      </div>
-      <div className="wrap ithc-in">
-        <div className="ithc-card">
-          {crumbs}
-          <h1 className="h1">{TITLE}</h1>
+        <div className="wrap">
+          <div className="it-crumbs itcr itcr-a">{crumbs}</div>
+          <h1 className="h1">Özbekiston yoşlar ittifoqi</h1>
           <p className="lead">{INTRO}</p>
-          <Btns L={L} light />
-        </div>
-        <div className="ithc-stats">
-          {STATS.map((s) => (
-            <div key={s.l}>
-              <b>{s.v}</b>
-              <span>{s.l}</span>
+          <div className="it-hero-bot">
+            <div className="it-btns">
+              <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
+                Aʼzo böliş{' '}
+                <span className="ic">
+                  <Arrow />
+                </span>
+              </Link>
+              <Link href={L('/faoliyat/loyihalar')} className="btn btn-ghost">
+                Loyihalarni köriş
+              </Link>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** D — katta sarlavha, ostida keng surat lentasi va yoşlar suratlari */
-export function HeroD({ L, crumbs }: H) {
-  return (
-    <section className="page-hero ith ith-d">
-      <div className="wrap">
-        {crumbs}
-        <div className="ithd-top">
-          <h1 className="h1">
-            Yoşlar uçun, <span>yoşlar</span> bilan
-          </h1>
-          <div>
-            <p className="ithd-kick">{TITLE}</p>
-            <p className="lead">{INTRO}</p>
-            <Btns L={L} light />
+            {DEV && <div className="it-crumbs-c itcr itcr-c">{crumbs}</div>}
           </div>
         </div>
-        <div className="ithd-strip">
-          <div className="ithd-p ithd-p1">
-            <img src={IMG.girls} alt="" />
-          </div>
-          <div className="ithd-p ithd-p2">
-            <img src={IMG.team} alt="" />
-            <span className="ithd-badge">30-iyun — Yoşlar kuni</span>
-          </div>
-          <div className="ithd-p ithd-p3">
-            <img src={IMG.volunteers} alt="" />
-          </div>
+      </section>
+      {DEV && (
+        <div className="it-crumbs-b itcr itcr-b">
+          <div className="wrap">{crumbs}</div>
         </div>
-      </div>
-    </section>
+      )}
+    </>
   )
 }

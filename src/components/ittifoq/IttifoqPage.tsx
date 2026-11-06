@@ -4,12 +4,12 @@ import type { CSSProperties, ReactNode } from 'react'
 import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
 
 import { Centres } from './Centres'
-import { HeroA, HeroB, HeroC, HeroD } from './Hero'
+import { Hero } from './Hero'
 import { GOALS, IMG, INTL, MISSION, MORE_STATS, PRIVILEGES, PROJECTS, QUOTE, STATS } from './data'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
-/** VAQTINCHA: hero variantlari (B, C, D) faqat ishlab chiqish rejimida çiziladi */
+/** VAQTINCHA: yöl zanjiri joylaşuvi variantlari faqat ishlab chiqish rejimida */
 const DEV = process.env.NODE_ENV !== 'production'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
@@ -21,11 +21,8 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
     <div className="it">
-      <HeroA L={L} crumbs={crumbs} />
-      {DEV && <HeroB L={L} crumbs={crumbs} />}
-      {DEV && <HeroC L={L} crumbs={crumbs} />}
-      {DEV && <HeroD L={L} crumbs={crumbs} />}
-      {DEV && <DevVariantSwitch name="ith" label="Hero" titles={['A · Butun ekranli surat', 'B · Arka va raqamlar', 'C · Oq karta va raqamlar', 'D · Katta sarlavha va surat lentasi']} />}
+      <Hero L={L} crumbs={crumbs} />
+      {DEV && <DevVariantSwitch name="itcr" label="Yöl zanjiri" titles={['A · Sarlavha ustida kapsula', 'B · Hero ostida oq lenta', 'C · Pastda, tugmalar yonida']} />}
 
       <section className="sec">
         <div className="wrap">
