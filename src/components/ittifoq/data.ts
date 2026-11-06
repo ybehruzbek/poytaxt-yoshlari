@@ -132,6 +132,9 @@ export const IMG = {
   team: '/img/ittifoq/jamoa-prezident.jpg',
   /** Hero kollaji: UzA (uza.uz) suratlaridan yiğilgan, 11 ta yoş */
   collage: '/img/ittifoq/hero-kollaj.jpg',
+  /** Iqtibos uçun: Prezident matbuot xizmati suratlari */
+  presYouth1: '/img/ittifoq/prezident-yoshlar-1.jpg',
+  presYouth2: '/img/ittifoq/prezident-yoshlar-2.jpg',
   collageSm: '/img/ittifoq/hero-kollaj-sm.jpg',
   leaders: '/img/ittifoq/yetakchilar.jpg',
   seminar: '/img/ittifoq/seminar.jpg',
