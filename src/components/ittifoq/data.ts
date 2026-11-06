@@ -7,8 +7,6 @@
 export const INTRO =
   'Özbekiston yoşlar ittifoqi 2017-yil 30-iyunda Özbekiston Respublikasi Prezidenti taşabbusi bilan taşkil etilgan, mamlakat yoşlarini birlaştiruvçi nodavlat notijorat taşkilotidir.'
 
-export const DAY_NOTE = 'Özbekistonda bu sana «Yoşlar kuni» sifatida nişonlanadi.'
-
 export const MISSION = {
   lead: 'Jismonan soğlom, maʼnan yetuk va intellektual rivojlangan, mustaqil fikrlaydigan yoş avlodni şakllantiriş',
   rest: ' — yoşlarni taşqi tahdidlar va «ommaviy madaniyat»ning zararli taʼsiridan himoya qiliş, ularning huquq va qonuniy manfaatlarini himoya qilişga kömaklaşiş.',
@@ -96,16 +94,6 @@ export const PRIVILEGES: Privilege[] = [
   },
 ]
 
-export type Milestone = { y: string; t: string }
-
-export const TIMELINE: Milestone[] = [
-  { y: '2003', t: '«Özbekiston belgisi» kökrak nişoni taʼsis etildi' },
-  { y: '2017', t: '30-iyun — Özbekiston yoşlar ittifoqi taşkil etildi' },
-  { y: '2017', t: 'Oliy sud bilan yoşlarga kafillik memorandumi imzolandi' },
-  { y: '2018–2024', t: '17 009 talabaning kontrakt töʼlovi qoplab berildi' },
-  { y: '2025', t: '164 ta vazirlik va idora bilan qöşma dasturlar imzolandi' },
-]
-
 export type Direction = { t: string; p: string[] }
 
 export const PROJECTS: Direction[] = [
@@ -131,33 +119,12 @@ export const INTL = {
   ] as Stat[],
 }
 
-export const REGIONS = [
-  'Toşkent şahri',
-  'Andijon',
-  'Buxoro',
-  'Jizzax',
-  'Qaşqadaryo',
-  'Navoiy',
-  'Namangan',
-  'Samarqand',
-  'Sirdaryo',
-  'Surxondaryo',
-  'Toşkent viloyati',
-  'Farğona',
-  'Xorazm',
-  'Qoraqalpoğiston',
-]
-
 export const IMG = {
   team: '/img/ittifoq/jamoa-prezident.jpg',
-  hq: '/img/ittifoq/markaziy-kengash.jpg',
   leaders: '/img/ittifoq/yetakchilar.jpg',
-  forum: '/img/ittifoq/forum.jpg',
   seminar: '/img/ittifoq/seminar.jpg',
-  palace: '/img/ittifoq/ijod-saroyi.jpg',
   girls: '/img/ittifoq/kitob-qizlar.jpg',
   readers: '/img/ittifoq/kitobxonlar.jpg',
   books: '/img/ittifoq/kitoblar-olami.jpg',
   volunteers: '/img/ittifoq/volontyorlar.jpg',
-  mural: '/img/ittifoq/davr-bizniki.jpg',
 }

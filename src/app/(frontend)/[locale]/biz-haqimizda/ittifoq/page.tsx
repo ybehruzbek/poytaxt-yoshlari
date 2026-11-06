@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { VariantA, VariantB, VariantC } from '@/components/ittifoq/Variants'
-import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
+import { IttifoqPage as Content } from '@/components/ittifoq/IttifoqPage'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
@@ -14,12 +13,8 @@ export const metadata: Metadata = {
 }
 
 const PATH = '/biz-haqimizda/ittifoq'
-const DEV = process.env.NODE_ENV !== 'production'
 
-/**
- * "Özbekiston yoşlar ittifoqi" sahifasi. VAQTINCHA uç variant (A, B, C) — tanlangaçi qoladi,
- * qolganlari öçiriladi. Production build'da faqat A çiziladi.
- */
+/** "Özbekiston yoşlar ittifoqi" sahifasi (mazmun: components/ittifoq/data.ts) */
 export default async function IttifoqPage(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
   const L = (h: string) => `/${locale}${h}`
@@ -48,13 +43,5 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
     </div>
   )
 
-  const p = { L, crumbs, siblings }
-  return (
-    <>
-      <VariantA {...p} />
-      {DEV && <VariantB {...p} />}
-      {DEV && <VariantC {...p} />}
-      {DEV && <DevVariantSwitch name="itt" label="Ittifoq" titles={['A · Hikoya', 'B · Raqamlar', 'C · Qöllanma']} />}
-    </>
-  )
+  return <Content L={L} crumbs={crumbs} siblings={siblings} />
 }
