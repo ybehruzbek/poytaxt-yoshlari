@@ -19,7 +19,7 @@ const DEV = process.env.NODE_ENV !== 'production'
 export function Hero({ L, crumbs }: H) {
   return (
     <>
-      <section className="it-hero">
+      <section className="it-hero" data-head-dark>
         <img src={IMG.team} alt="" />
         <div className="wrap">
           <div className="it-crumbs itcr itcr-a">{crumbs}</div>

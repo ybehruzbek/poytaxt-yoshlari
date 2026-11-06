@@ -19,7 +19,7 @@ const Arrow = () => (
 )
 
 /**
- * Navbar · shaffof kapsula + majburiy menyu tuzilmasi (src/config/nav.ts).
+ * Navbar · tepada fonsiz va keng, aylantirganda shisha kapsulaga yiğiladi; menyu tuzilmasi: src/config/nav.ts.
  * Ochiladigan ro'yxat: hover yoki bosish bilan ochiladi; Esc / tashqariga bosish yopadi.
  */
 export function Header({ locale }: { locale: Locale }) {
@@ -165,7 +165,7 @@ export function Header({ locale }: { locale: Locale }) {
             aria-expanded={drawer}
             onClick={() => setDrawer((d) => !d)}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#532822" strokeWidth="2" strokeLinecap="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {drawer ? <path d="M6 6l12 12M18 6 6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
