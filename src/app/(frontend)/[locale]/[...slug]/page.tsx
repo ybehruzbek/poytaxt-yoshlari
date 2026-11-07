@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { NAV, findNav } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
@@ -41,17 +42,7 @@ export default async function SectionPage(props: Props) {
     <>
       <section className="page-hero">
         <div className="wrap">
-          <nav className="crumbs" aria-label="Yöl">
-            <Link href={L('')}>Boş sahifa</Link>
-            <span>/</span>
-            <span>{group.label}</span>
-            {trail.map((t, i) => (
-              <span key={t.href} style={{ display: 'contents' }}>
-                <span>/</span>
-                {i === trail.length - 1 ? <span aria-current="page">{t.label}</span> : <Link href={L(t.href)}>{t.label}</Link>}
-              </span>
-            ))}
-          </nav>
+          <PageCrumbs locale={locale} path={path} />
           <h1 className="h1">{page.label}</h1>
           {page.desc && <p className="lead">{page.desc}</p>}
         </div>

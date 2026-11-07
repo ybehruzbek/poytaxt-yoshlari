@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { KengashPage as Content } from '@/components/kengash/KengashPage'
+import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
@@ -23,15 +24,7 @@ export default async function KengashRoute(props: { params: Promise<{ locale: Lo
   const L = (h: string) => `/${locale}${h}`
   const group = NAV.find((g) => g.key === 'biz')!
 
-  const crumbs = (
-    <nav className="crumbs" aria-label="Yöl">
-      <Link href={L('')}>Boş sahifa</Link>
-      <span>/</span>
-      <span>{group.label}</span>
-      <span>/</span>
-      <span aria-current="page">Markaziy Kengaş</span>
-    </nav>
-  )
+  const crumbs = <PageCrumbs locale={locale} path={PATH} />
 
   const siblings = (
     <div className="it-sib">

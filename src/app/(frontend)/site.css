@@ -284,6 +284,9 @@ html,body{overflow-x:clip}
 .pg-crumbs .crumbs span{opacity:.6}
 .pg-crumbs .crumbs [aria-current]{opacity:1;font-weight:700}
 .pg-crumbs .crumbs a:hover{color:var(--blue)}
+.page-hero .pg-crumbs{background:#fff;margin-bottom:22px}
+.pg-crumbs{max-width:100%}
+.pg-crumbs .crumbs{flex-wrap:wrap;row-gap:4px}
 .pg-title{font-size:clamp(28px,2.6vw,40px)}
 .pg-lead{margin-top:12px;max-width:760px;font-size:17px;line-height:1.6;color:var(--muted)}
 @media (max-width:640px){.pg-head{padding-top:100px}.pg-crumbs{padding:7px 14px}.pg-crumbs .crumbs{font-size:13px;gap:6px;flex-wrap:wrap}}

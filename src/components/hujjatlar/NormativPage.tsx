@@ -13,7 +13,7 @@ export function NormativPage({ crumbs }: { crumbs: ReactNode }) {
     <div className="nh">
       <header className="pg-head">
         <div className="wrap">
-          <div className="pg-crumbs">{crumbs}</div>
+          {crumbs}
           <h1 className="h2 pg-title">Normativ-huquqiy hujjatlar</h1>
           <p className="pg-lead">{INTRO}</p>
           <nav className="nh-jump" aria-label="Toifalar">

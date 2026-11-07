@@ -10,6 +10,7 @@ import config from '@payload-config'
 import type { Locale } from '@/i18n/config'
 import { CATEGORY_TONE, toNewsCard } from '@/lib/news'
 import type { Media } from '@/payload-types'
+import { PageCrumbs } from '@/components/site/PageCrumbs'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
@@ -48,11 +49,7 @@ export default async function NewsPage(props: Props) {
     <article>
       <section className="page-hero">
         <div className="wrap">
-          <nav className="crumbs" aria-label="Yöl">
-            <Link href={`/${locale}`}>Boş sahifa</Link>
-            <span>/</span>
-            <Link href={`/${locale}/yangiliklar`}>Yangiliklar</Link>
-          </nav>
+          <PageCrumbs locale={locale} path="/yangiliklar" extra={[{ label: doc.title }]} />
           <div className="news-sec" style={{ marginBottom: 18 }}>
             <div className="meta">
               <span className={`chip ${CATEGORY_TONE[card.category]}`}>{card.categoryLabel}</span>

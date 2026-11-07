@@ -260,7 +260,7 @@ export function KengashPage({ L, crumbs, siblings }: P) {
     <div className="it kg">
       <header className="pg-head">
         <div className="wrap">
-          <div className="pg-crumbs">{crumbs}</div>
+          {crumbs}
           <h1 className="h2 pg-title">Markaziy Kengaş</h1>
           <p className="pg-lead">{INTRO}</p>
         </div>

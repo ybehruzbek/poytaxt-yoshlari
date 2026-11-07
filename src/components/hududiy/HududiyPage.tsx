@@ -10,9 +10,7 @@ export function HududiyPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="it hk">
       <div id="jamoa" className="hk-jamoa pg-head">
-        <div className="wrap">
-          <div className="pg-crumbs">{crumbs}</div>
-        </div>
+        <div className="wrap">{crumbs}</div>
         <TeamNamuna />
       </div>
     </div>
