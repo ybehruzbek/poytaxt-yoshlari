@@ -18,6 +18,7 @@ import {
   INTRO,
   RECEPTION,
   TASKS,
+  type Social,
 } from './data'
 import { HkVariants } from './variants'
 
@@ -51,7 +52,10 @@ const IC = {
   phone:
     'M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z',
   mail: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6',
-  send: 'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
+  Telegram: 'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
+  Instagram:
+    'M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 4.5h.01M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
+  Facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
   clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm0-14v4l3 2',
 }
 
@@ -73,6 +77,9 @@ function Ic({ d }: { d: string }) {
 }
 
 type Member = {
+  phone?: string
+  email?: string
+  socials?: Social[]
   name: string
   role: string
   img: string
@@ -183,38 +190,32 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
                     <p>{m.role}</p>
                     {m.dept && <small>{m.dept}</small>}
                   </div>
-                  {(g.lead || m.reception) && (
-                    <ul className="hk-lead-con">
-                      {g.lead && (
-                        <>
-                          <li>
-                            <Ic d={IC.phone} />
-                            <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-                          </li>
-                          <li>
-                            <Ic d={IC.mail} />
-                            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-                          </li>
-                          <li>
-                            <Ic d={IC.send} />
-                            <a
-                              href={CHAIR.socials[0]?.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {CHAIR.socials[0]?.handle}
-                            </a>
-                          </li>
-                        </>
-                      )}
-                      {m.reception && (
-                        <li>
-                          <Ic d={IC.clock} />
-                          <span>{m.reception}</span>
-                        </li>
-                      )}
-                    </ul>
-                  )}
+                  <ul className="hk-lead-con">
+                    <li>
+                      <Ic d={IC.phone} />
+                      <a href={`tel:${(m.phone ?? CONTACT.phone).replace(/[^+\d]/g, '')}`}>
+                        {m.phone ?? CONTACT.phone}
+                      </a>
+                    </li>
+                    <li>
+                      <Ic d={IC.mail} />
+                      <a href={`mailto:${m.email ?? CONTACT.email}`}>{m.email ?? CONTACT.email}</a>
+                    </li>
+                    {m.socials?.map((x) => (
+                      <li key={x.net}>
+                        <Ic d={IC[x.net]} />
+                        <a href={x.href} target="_blank" rel="noopener noreferrer">
+                          {x.handle}
+                        </a>
+                      </li>
+                    ))}
+                    {m.reception && (
+                      <li>
+                        <Ic d={IC.clock} />
+                        <span>{m.reception}</span>
+                      </li>
+                    )}
+                  </ul>
                   {m.duties && (
                     <details className="hk-duty">
                       <summary>

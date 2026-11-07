@@ -28,10 +28,16 @@ export const TASKS: string[] = [
   'Ittifoq faoliyati haqida jamoatçilikni OAV va ijtimoiy tarmoqlar orqali muntazam xabardor qiladi',
 ]
 
+export type Social = { net: 'Telegram' | 'Instagram' | 'Facebook'; handle: string; href: string }
+
 export type Person = {
   name: string
   role: string
   img: string
+  /** şaxsiy aloqa; bölmasa — Kengaşning umumiy telefoni va poçtasi körsatiladi */
+  phone?: string
+  email?: string
+  socials?: Social[]
   /** xodimning xizmat (funksional) vazifalari; bölmasa — bölim vazifalari körsatiladi */
   duties?: string[]
 }
@@ -47,7 +53,7 @@ export const CHAIR = {
     'Kollegial organlar qarorlari, iş rejasi va farmoyişlar ijrosini taşkil etadi va nazorat qiladi',
     'Idora, muassasa va taşkilotlarda Ittifoqning vakolatli vakili sifatida iş yuritadi',
   ],
-  socials: [
+  socials: <Social[]>[
     {
       net: 'Telegram',
       handle: '@Shukurulloxon_Official',
@@ -175,6 +181,13 @@ export const DEPTS: Dept[] = [
         name: 'Temirov Oğabek Fazliddin öğli',
         role: 'Bölim boşliği, matbuot kotibi',
         img: P('o-temirov'),
+        socials: [
+          {
+            net: 'Instagram',
+            handle: '@temirov_ogabek.f',
+            href: 'https://www.instagram.com/temirov_ogabek.f/',
+          },
+        ],
         duties: [
           'Tizimdagi OAV faoliyatini kuzatadi, tadbirlarni yoritişga OAVni jalb etadi',
           'Apparatning «Yoşlar press-klubi» faoliyatini muvofiqlaştiradi',
