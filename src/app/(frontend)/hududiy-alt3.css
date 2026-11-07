@@ -12,21 +12,38 @@
   align-items: end;
   min-height: 480px;
   border-radius: var(--r-card);
-  background: linear-gradient(
-    100deg,
-    #f8f5f3 0%,
-    #fff 38%,
-    color-mix(in srgb, var(--lime) 16%, #fff) 100%
-  );
+  background: linear-gradient(100deg, #f8f5f3 0%, #fff 38%, var(--soft) 100%);
 }
-.z5-hero-mark {
+/* Fon naqşi: ingiçka bir rangli yoylar + nuqtalar (öng tomonda, matn ostida) */
+.z5-art {
   position: absolute;
-  right: 4%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(46%, 520px);
-  opacity: 0.08;
+  inset: 0;
   pointer-events: none;
+}
+.z5-art svg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(44%, 520px);
+  height: auto;
+}
+.z5-art path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--navy) 13%, transparent);
+  stroke-width: 1.2;
+}
+.z5-art-dots {
+  position: absolute;
+  top: 36px;
+  right: 44px;
+  width: 176px;
+  height: 104px;
+  background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--navy) 12%, transparent) 1.5px,
+      transparent 2px
+    )
+    0 0 / 18px 18px;
 }
 .z5-hero-ph {
   position: relative;
@@ -221,10 +238,18 @@
     order: 2;
     max-width: 260px;
   }
-  .z5-hero-mark {
+  .z5-art svg {
     width: 300px;
-    right: -90px;
-    top: 30%;
+    bottom: auto;
+    top: 0;
+    transform: scaleY(-1);
+  }
+  .z5-art-dots {
+    top: auto;
+    bottom: 24px;
+    right: 22px;
+    width: 120px;
+    height: 72px;
   }
   .z5-grid {
     grid-template-columns: 1fr;
@@ -316,9 +341,11 @@
 .z7 .z5-hero {
   background: var(--navy);
 }
-.z7 .z5-hero-mark {
-  opacity: 0.06;
-  filter: brightness(0) invert(1);
+.z7 .z5-art-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.18) 2px, transparent 2.5px);
+}
+.z7 .z5-art path {
+  stroke: rgba(255, 255, 255, 0.09);
 }
 .z7 .z5-hero::before {
   content: '';

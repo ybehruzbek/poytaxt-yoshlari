@@ -98,10 +98,26 @@ function Duties({ m, id }: { m: Member; id: string }) {
   )
 }
 
+/** Rais kartasi fonidagi naqş: öng past burçakdan tarqalgan ingiçka konsentrik yoylar va nuqtalar töri (bir rangli) */
+const ARCS = Array.from({ length: 12 }, (_, i) => 120 + i * 30)
+
+function Art() {
+  return (
+    <div className="z5-art" aria-hidden="true">
+      <span className="z5-art-dots" />
+      <svg viewBox="0 0 520 480" preserveAspectRatio="xMaxYMax meet">
+        {ARCS.map((r) => (
+          <path key={r} d={`M${520 - r} 480 A${r} ${r} 0 0 1 520 ${480 - r}`} />
+        ))}
+      </svg>
+    </div>
+  )
+}
+
 function Hero({ m, id }: { m: Member; id: string }) {
   return (
     <article className="z5-hero">
-      <img className="z5-hero-mark" src="/img/ittifoq/belgi.png" alt="" aria-hidden="true" />
+      <Art />
       <img className="z5-hero-ph" src={m.img} alt={m.name} />
       <div className="z5-hero-txt">
         <Name n={m.name} />
