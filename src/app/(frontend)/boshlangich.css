@@ -98,8 +98,8 @@
 .bt-search {
   position: relative;
   display: block;
-  flex: 1 1 300px;
-  max-width: 400px;
+  flex: 1 1 320px;
+  max-width: 440px;
 }
 /* lupa belgisi — maydon qidiruv ekani darhol körinsin */
 .bt-search-ic {
@@ -283,15 +283,15 @@
   .bt-search {
     max-width: none;
   }
-  /* töliq yozuv (“oliy taʼlim taşkiloti yoki yetakçi nomi”) tor ekranga sığsin */
+  /* töliq yozuv (“oliy taʼlim taşkiloti nomi yoki yetakçi F.I.Ş.”) tor ekranga sığsin */
   .bt-search input {
-    padding: 0 12px 0 38px;
-    font-size: 13px;
+    padding: 0 10px 0 36px;
+    font-size: 12px;
   }
   .bt-search-ic {
-    left: 14px;
-    width: 16px;
-    height: 16px;
+    left: 13px;
+    width: 15px;
+    height: 15px;
   }
 }
 

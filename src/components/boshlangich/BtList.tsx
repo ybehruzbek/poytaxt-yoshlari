@@ -199,7 +199,7 @@ export function BtList({ otms, view = 'a', base }: { otms: Otm[]; view?: View; b
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Qidiruv: oliy taʼlim taşkiloti yoki yetakçi nomi"
+            placeholder="Qidiruv: oliy taʼlim taşkiloti nomi yoki yetakçi F.I.Ş."
           />
         </label>
       </div>
