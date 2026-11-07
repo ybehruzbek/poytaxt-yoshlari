@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { ABOUT, BODIES, CONTACT, IMG, INTRO, LEADERS, MEMBERS, ORGANS, POWERS, STATS } from './data'
+import { ABOUT, BODIES, CONTACT, EVENTS, IMG, INTRO, LEADERS, MEMBERS, ORGANS, POWERS, STATS } from './data'
 import { KgVariants } from './variants'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -191,6 +191,21 @@ export function KengashPage({ L, crumbs, siblings }: P) {
               </span>
             </Link>
           </div>
+          <h3 className="kg-ev-title">Sönggi tadbirlar</h3>
+          <div className="kg-ev">
+            {EVENTS.map((e) => (
+              <a key={e.href} href={e.href} target="_blank" rel="noopener noreferrer">
+                <img src={e.img} alt="" loading="lazy" />
+                <div>
+                  <time>{e.date}</time>
+                  <h4>{e.t}</h4>
+                  <p>{e.d}</p>
+                  <span>UzA xabari ↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <p className="kg-credit">Suratlar: UzA</p>
         </div>
       </section>
     ),

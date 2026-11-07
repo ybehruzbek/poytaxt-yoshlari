@@ -61,11 +61,11 @@ export const MEMBERS = {
   link: 'Toşkent şahar hududiy kengaşi raisi ham Markaziy Kengaş tarkibiga kiradi — poytaxt yoşlarining ovozi Ittifoqning boşqaruvida şu orqali eşitiladi.',
 }
 
-/* Rahbariyat: NAMUNA — rasmiy ism, lavozim va suratlar kelgaçi almaştiriladi */
+/* Rahbariyat: rais — UzA xabarlaridan (2025–2026); örinbosarlar NAMUNA — rasmiy maʼlumot kelgaçi almaştiriladi */
 export type Leader = { name: string; role: string; img?: string }
 
 export const LEADERS: Leader[] = [
-  { name: 'Maʼlumot tez orada', role: 'Markaziy Kengaş raisi' },
+  { name: 'Xayrulla Sattorov', role: 'Markaziy Kengaş raisi' },
   { name: 'Maʼlumot tez orada', role: 'Rais örinbosari' },
   { name: 'Maʼlumot tez orada', role: 'Rais örinbosari' },
 ]
@@ -104,4 +104,35 @@ export const CONTACT = {
 
 export const IMG = {
   building: '/img/kengash/bino.jpg',
+  forum2026: '/img/kengash/forum-2026.jpg',
+  forum2024: '/img/kengash/forum-2024.jpg',
+  election: '/img/kengash/saylov-2025.jpg',
+  delegates: '/img/kengash/delegatlar.jpg',
 }
+
+export type KgEvent = { date: string; t: string; d: string; img: string; href: string }
+
+/** Kengaş iştirokidagi soʼnggi tadbirlar (UzA xabarlari; suratlar: UzA) */
+export const EVENTS: KgEvent[] = [
+  {
+    date: '12.10.2026',
+    t: 'Oliy taʼlim yoşlar yetakçilari forumi — 2026',
+    d: 'Ikki kunlik forumda Ittifoq loyihalari taqdim etildi: «IELTS Marafon», «Suvni birgalikda asraymiz», «Yölovçi», «Kitob-top».',
+    img: '/img/kengash/forum-2026.jpg',
+    href: 'https://uza.uz/oz/posts/mRVoF0b1l4YssnBCB19nRc62BAGFaZ4n',
+  },
+  {
+    date: '27.10.2025',
+    t: 'Boşlanğiç taşkilotda hisobot-saylov yiğilişi',
+    d: 'Guliston davlat universitetidagi boşlanğiç taşkilot yetakçisi hisobot berdi va qayta saylandi; yiğilişda Markaziy Kengaş raisi iştirok etdi.',
+    img: '/img/kengash/saylov-2025.jpg',
+    href: 'https://uza.uz/oz/posts/yoshlar-ittifoqi-yetakchisi-hisobot-berdi-va-qayta-saylandi_776143',
+  },
+  {
+    date: '23.12.2024',
+    t: 'Yoşlar yetakçilari forumi',
+    d: 'Oliy taʼlim muassasalaridagi boşlanğiç taşkilotlarning faol yetakçilari taqdirlandi.',
+    img: '/img/kengash/forum-2024.jpg',
+    href: 'https://uza.uz/oz/posts/faol-yoshlar-yetakchilari-taqdirlandi_671313',
+  },
+]
