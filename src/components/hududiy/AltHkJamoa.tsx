@@ -147,39 +147,25 @@ function Card({ m, id }: { m: Member; id: string }) {
 const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
 const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
-/** Variantlar umumiy tuzilişi; farqi faqat bölim klassida (CSS) */
-function Team({ k, mod }: { k: string; mod?: string }) {
+/**
+ * Kengaş jamoasi (namuna asosida): rais — keng karta (surat çapda, F.I.Ş. va lavozim, öngda aloqa, fonda ingiçka naqş);
+ * qolganlar bitta 3 ustunli tarmoqda: F.I.Ş. va lavozim çap yuqorida, surat öng pastda.
+ * Rais va birinçi qator xodimlar bitta ekranga siğadi.
+ */
+export function TeamNamuna() {
   return (
-    <section className={`sec${mod ? ` ${mod}` : ''}`}>
+    <section className="sec">
       <div className="wrap">
         <Head />
         {LEADS.map((m, i) => (
-          <Hero key={m.name} m={m} id={`vz-${k}-r${i}`} />
+          <Hero key={m.name} m={m} id={`vz-r${i}`} />
         ))}
         <div className="z5-grid">
           {REST.map((m, i) => (
-            <Card key={m.name} m={m} id={`vz-${k}-${i}`} />
+            <Card key={m.name} m={m} id={`vz-${i}`} />
           ))}
         </div>
       </div>
     </section>
   )
-}
-
-/**
- * Namuna asosida: rais — keng karta (surat çapda, ism va lavozim öngda, fonda Ittifoq belgisi);
- * qolganlar guruhlarga ajratilmasdan bitta 3 ustunli tarmoqda: ism va lavozim çap yuqorida, surat öng pastda.
- */
-export function TeamNamuna() {
-  return <Team k="a" />
-}
-
-/** B — rangli: har karta palitradan öz tusida, surat orqasida yirik doira; raisda sariq doira */
-export function TeamRangli() {
-  return <Team k="b" mod="z6" />
-}
-
-/** C — ixcham: rais kartasi töq fonda, xodimlar 4 ustunli vertikal kartalarda (surat tepada) */
-export function TeamIxcham() {
-  return <Team k="c" mod="z7" />
 }

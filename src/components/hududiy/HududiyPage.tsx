@@ -1,16 +1,9 @@
 import type { ReactNode } from 'react'
 
-import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
-
-import { TeamIxcham, TeamNamuna, TeamRangli } from './AltHkJamoa'
-
-/** VAQTINCHA: «Jamoa» variantlari faqat işlab çiqiş rejimida */
-const DEV = process.env.NODE_ENV !== 'production'
-const PANEL: PanelSection[] = [{ name: 'hjm', label: 'Jamoa', count: 3 }]
-const TEAMS = { a: TeamNamuna, b: TeamRangli, c: TeamIxcham }
+import { TeamNamuna } from './AltHkJamoa'
 
 /**
- * «Toşkent şahar hududiy Kengaşi» sahifasi — faqat Kengaş jamoasi
+ * «Toşkent şahar hududiy Kengaşi» sahifasi — yöl va Kengaş jamoasi
  * (mazmun: components/hududiy/data.ts).
  */
 export function HududiyPage({ crumbs }: { crumbs: ReactNode }) {
@@ -20,17 +13,8 @@ export function HududiyPage({ crumbs }: { crumbs: ReactNode }) {
         <div className="wrap">
           <div className="hk-crumbs">{crumbs}</div>
         </div>
-        {DEV ? (
-          Object.entries(TEAMS).map(([k, Team]) => (
-            <div key={k} className="vx" data-v={`hjm-${k}`}>
-              <Team />
-            </div>
-          ))
-        ) : (
-          <TeamNamuna />
-        )}
+        <TeamNamuna />
       </div>
-      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }
