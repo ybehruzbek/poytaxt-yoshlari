@@ -58,7 +58,7 @@ function Name({ n }: { n: string }) {
 }
 
 /**
- * Vazifalar — «Vazifalari →» tugmasi öngdan çiqadigan yon panelni (popover) oçadi:
+ * Vazifalar — “Vazifalari →” tugmasi öngdan çiqadigan yon panelni (popover) oçadi:
  * surat, F.I.Ş., lavozim, vazifalar röyxati va aloqa.
  */
 function Duties({ m, id }: { m: Member; id: string }) {

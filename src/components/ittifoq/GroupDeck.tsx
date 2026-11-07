@@ -4,7 +4,7 @@ import { useState, type MouseEvent, type ReactNode } from 'react'
 
 /**
  * Guruh panellari to'plami: tik çiziqni (gp-strip) bosganda şu guruh faol bo'ladi.
- * Faqat «yonga oçiladigan çiziqlar» körinişida (CSS) panel sifatida çiziladi, boşqa körinişlarda oddiy röyxat.
+ * Faqat “yonga oçiladigan çiziqlar” körinişida (CSS) panel sifatida çiziladi, boşqa körinişlarda oddiy röyxat.
  */
 export function GroupDeck({ children }: { children: ReactNode }) {
   const [active, setActive] = useState('biz')

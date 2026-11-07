@@ -52,7 +52,7 @@ export function StructureB() {
 
 /* ================= 5. Rasmiy maʼlumotlar ================= */
 
-/** B — töq «pasport» kartasi: nişon va maʼlumot plitalari */
+/** B — töq “pasport” kartasi: nişon va maʼlumot plitalari */
 export function OfficialB() {
   return (
     <section className="sec x3-offb">

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 const PATH = '/biz-haqimizda/markaziy-kengash'
 
-/** «Markaziy Kengaş» sahifasi (mazmun: components/kengash/data.ts) */
+/** “Markaziy Kengaş” sahifasi (mazmun: components/kengash/data.ts) */
 export default async function KengashRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
   const L = (h: string) => `/${locale}${h}`

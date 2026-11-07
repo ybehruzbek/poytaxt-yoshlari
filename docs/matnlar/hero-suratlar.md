@@ -1,7 +1,7 @@
 # Ittifoq sahifasi hero kollaji — suratlar manbai
 
 Kollaj: `public/img/ittifoq/hero-kollaj.jpg` (2880×1400) va `hero-kollaj-sm.jpg` (1440×700).
-Barça suratlar Özbekiston milliy axborot agentligi — UzA (uza.uz) maqolalaridan. Saytda «Suratlar: UzA» deb körsatilgan.
+Barça suratlar Özbekiston milliy axborot agentligi — UzA (uza.uz) maqolalaridan. Saytda “Suratlar: UzA” deb körsatilgan.
 Saytga çiqarişdan oldin UzA dan foydalaniş ruxsatini tasdiqlab oliş tavsiya etiladi.
 
 | # | Mavzu | Maqola |

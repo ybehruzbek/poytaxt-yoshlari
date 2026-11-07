@@ -17,7 +17,7 @@ const KIND: Record<Act['kind'], string> = {
   Ustav: 'USTAV',
 }
 const title = (x: Act) => x.name ?? x.t
-/** «Özbekiston Respublikasi» sarlavhada turgani uçun organ nomida takrorlanmaydi */
+/** “Özbekiston Respublikasi” sarlavhada turgani uçun organ nomida takrorlanmaydi */
 const orgShort = (x: Act) =>
   x.kind === 'Ustav'
     ? ''
@@ -140,7 +140,7 @@ function DocsC({ acts }: { acts: Act[] }) {
 const DOCS = { a: DocsA, b: DocsB, c: DocsC }
 
 /**
- * «Normativ-huquqiy hujjatlar» sahifasi: yöl va sarlavha, toifalar böyiça tezkor havolalar,
+ * “Normativ-huquqiy hujjatlar” sahifasi: yöl va sarlavha, toifalar böyiça tezkor havolalar,
  * uç toifa — davlat siyosati, Ittifoq faoliyati, yoşlarga yaratilgan imkoniyatlar.
  */
 export function NormativPage({ crumbs }: { crumbs: ReactNode }) {

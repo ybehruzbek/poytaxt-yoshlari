@@ -8,6 +8,7 @@
  *   Tutuq belgisi — faqat ʼ (U+02BC, MODIFIER LETTER APOSTROPHE): taʼlim, eʼtibor, sanʼat, maʼno.
  *   Oddiy apostrof ', o'ng qo'shtirnoq ’, teskari ‘ va ʻ tutuq o'rnida ishlatilmaydi.
  *   s va h alohida tovush bo'lsa, ular orasidagi tutuq saqlanadi va Ş ga aylanmaydi: Isʼhoq, musʼhaf.
+ *   Qo'shtirnoq — faqat “…” (U+201C / U+201D). Ruscha «…» va „…“ ishlatilmaydi: «Yoshlar kuni» → “Yoshlar kuni”.
  *
  * Bu fayl — qoidaning yagona manbai: sayt matnlari (scripts/imlo.mjs), admin paneldan saqlanadigan
  * kontent (Payload hook) va tekshiruv shu funksiyalardan foydalanadi.
@@ -34,6 +35,10 @@ const RULES: Array<[RegExp, string]> = [
   [new RegExp('([ÖöĞğ])' + APOS, 'g'), '$1'],
   // qolgan apostroflar — harf orasida yoki so'z oxirida turgan bo'lsa tutuq belgisi
   [new RegExp(`(?<=\\p{L})${APOS}(?=\\p{L})`, 'gu'), TUTUQ],
+  // qo'shtirnoq: faqat “…” — ruscha «…» va nemischa „…“ almaştiriladi
+  [/„([^“”„]*)“/g, '\u201C$1\u201D'],
+  [/[«„]/g, '\u201C'],
+  [/»/g, '\u201D'],
 ]
 
 /**

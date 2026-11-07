@@ -22,6 +22,11 @@ Asos: ÖRQ-1184-son Qonun, 2026-yil 21-oktabr ([lex.uz](https://www.lex.uz/uz/do
 - Oddiy apostrof `'`, qöştirnoq `’`, `‘` va `ʻ` tutuq örnida **işlatilmaydi**.
 - s va h alohida tovuş bölsa, orasidagi tutuq saqlanadi va Ş ga aylanmaydi: Isʼhoq.
 
+## Qöştirnoq — qatʼiy
+
+- Faqat **“…”** (U+201C oçiluvçi, U+201D yopiluvçi): “Yoşlar kuni”, “Mard öğlon” mukofoti.
+- Ruscha **«…»** va nemisça **„…“** **işlatilmaydi** — `pnpm imlo` ularni xato deb topadi, `pnpm imlo:fix` va admin panel hook'i özi almaştiradi.
+
 ## Özgarmaydiganlar
 
 - Havolalar, slug va domenlar ASCII bölib qoladi: `yoshkent.uz`, `/boglanish/murojaat`, `info@yoshkent.uz`.

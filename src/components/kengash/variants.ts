@@ -4,7 +4,7 @@ import { AboutB, AboutC, MembersB, MembersC, OrgansB, OrgansC, PowersB, PowersC 
 import { BodiesB, BodiesC, ContactB, ContactC, DecisionsB, DecisionsC, LeadersB, LeadersC } from './AltKgTwo'
 
 /**
- * VAQTINCHA: bölimlar B/C variantlari reestri. Kalit: «{bölim}-{b|c}».
+ * VAQTINCHA: bölimlar B/C variantlari reestri. Kalit: “{bölim}-{b|c}”.
  * Tanlov tugagaç olib taşlanadi.
  */
 export const KgVariants: Record<string, ComponentType<{ L: (h: string) => string }>> = {

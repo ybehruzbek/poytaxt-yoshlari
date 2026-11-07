@@ -1,5 +1,5 @@
 /**
- * «Markaziy Kengaş» sahifasi mazmuni.
+ * “Markaziy Kengaş” sahifasi mazmuni.
  * Manba: Özbekiston yoşlar ittifoqining Ustavi (V bob, 5.1–5.7-bandlar). Keyinçalik admin paneldan boşqariladi.
  */
 
@@ -54,7 +54,7 @@ export const MEMBERS = {
     'Markaziy Kengaş raisi va uning örinbosarlari',
     'Markaziy Kengaş apparati boşqarma va bölim rahbarlari',
     'Yoşlar muammolarini örganiş va istiqbolli kadrlarni tayyorlaş instituti rektori',
-    'Ittifoq naşrlari va «Yoşlar» teleradiokanali rahbarlari',
+    'Ittifoq naşrlari va “Yoşlar” teleradiokanali rahbarlari',
     'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahar hududiy kengaşlari raislari',
   ],
   fields: ['Taʼlim', 'Fan', 'Madaniyat va sanʼat', 'Ommaviy axborot vositalari', 'Işlab çiqariş va xizmat', 'Tadbirkorlik va fermerlik', 'Sport', 'Soğliqni saqlaş', 'Ekologiya', 'Qurolli kuçlar', 'Huquq-tartibot organlari'],
@@ -117,7 +117,7 @@ export const EVENTS: KgEvent[] = [
   {
     date: '12.10.2026',
     t: 'Oliy taʼlim yoşlar yetakçilari forumi — 2026',
-    d: 'Ikki kunlik forumda Ittifoq loyihalari taqdim etildi: «IELTS Marafon», «Suvni birgalikda asraymiz», «Yölovçi», «Kitob-top».',
+    d: 'Ikki kunlik forumda Ittifoq loyihalari taqdim etildi: “IELTS Marafon”, “Suvni birgalikda asraymiz”, “Yölovçi”, “Kitob-top”.',
     img: '/img/kengash/forum-2026.jpg',
     href: 'https://uza.uz/oz/posts/mRVoF0b1l4YssnBCB19nRc62BAGFaZ4n',
   },

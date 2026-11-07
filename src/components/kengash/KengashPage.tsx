@@ -54,7 +54,7 @@ const initials = (s: string) =>
     .join('')
 
 /**
- * «Markaziy Kengaş» sahifasi (mazmun: components/kengash/data.ts, Ustav V bob):
+ * “Markaziy Kengaş” sahifasi (mazmun: components/kengash/data.ts, Ustav V bob):
  * yöl va sarlavha, kengaş haqida, boşqaruv tizimi, vakolatlari, tarkibi, rahbariyat, ijroiya qömitasi va komissiya,
  * qarorlar va yiğilişlar, aloqa.
  */

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'Toşkent şahar hududiy Kengaşi jamoasi: rais, bölim boşliqlari va mutaxassislar, ularning vazifalari va aloqa maʼlumotlari.',
 }
 
-/** «Toşkent şahar hududiy Kengaşi» sahifasi (mazmun: components/hududiy/data.ts) */
+/** “Toşkent şahar hududiy Kengaşi” sahifasi (mazmun: components/hududiy/data.ts) */
 export default async function HududiyRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
   const crumbs = <PageCrumbs locale={locale} path="/biz-haqimizda/hududiy-kengash" />

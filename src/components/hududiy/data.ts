@@ -1,5 +1,5 @@
 /**
- * «Toşkent şahar hududiy Kengaşi» sahifasi mazmuni.
+ * “Toşkent şahar hududiy Kengaşi” sahifasi mazmuni.
  * Manba: Kengaş apparatining axborot doskalari (Claude Design loyihasi, 2026-yil noyabr) va
  * Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova.
  * Keyinçalik admin paneldan boşqariladi.
@@ -73,7 +73,7 @@ export const DEPTS: Dept[] = [
       'Kadrlar siyosatini muvofiqlaştiradi, zaxira kadrlar bazasini şakllantiradi',
       'Boşlanğiç taşkilotlarni röyxatga oladi va uslubiy qöllab-quvvatlaydi',
       'Yetakçilar hisobotlarini, yoşlarga oid axborot va statistikani umumlaştiradi',
-      '«Ijro.gov.uz» va «E-xat» orqali hujjat almaşinuvini yuritadi',
+      '“Ijro.gov.uz” va “E-xat” orqali hujjat almaşinuvini yuritadi',
       'Fuqarolar murojaatlari va qabullarini taşkil etadi, ijrosini nazorat qiladi',
     ],
     staff: [
@@ -167,7 +167,7 @@ export const DEPTS: Dept[] = [
         ],
         duties: [
           'Tizimdagi OAV faoliyatini kuzatadi, tadbirlarni yoritişga OAVni jalb etadi',
-          'Apparatning «Yoşlar press-klubi» faoliyatini muvofiqlaştiradi',
+          'Apparatning “Yoşlar press-klubi” faoliyatini muvofiqlaştiradi',
           'Rasmiy veb-sayt va ijtimoiy tarmoqlardagi sahifalar işini muvofiqlaştiradi',
           'Tadbir uçun masʼul şaxs bilan birgalikda press-xabarlar tayyorlaydi va tarqatadi',
         ],

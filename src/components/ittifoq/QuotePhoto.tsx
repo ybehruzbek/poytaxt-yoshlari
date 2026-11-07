@@ -10,7 +10,7 @@ export function QuoteE() {
       <div className="wrap iq-e">
         <blockquote>
           <span className="iq-e-mark" aria-hidden="true">
-            «
+            “
           </span>
           <p>{QUOTE.text}</p>
           <footer>

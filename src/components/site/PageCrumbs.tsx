@@ -6,7 +6,7 @@ type Extra = { label: string; href?: string }
 
 /**
  * QATʼIY QOIDA: yuqori menyudan oçiladigan har bir sahifaning boşida şu yöl kapsulasi turadi —
- * «Boş sahifa / {menyu guruhi} / {sahifa}». Yöl config/nav.ts dagi menyudan quriladi.
+ * “Boş sahifa / {menyu guruhi} / {sahifa}”. Yöl config/nav.ts dagi menyudan quriladi.
  * `extra` — menyuda yöq içki daraja (masalan, yangilik sarlavhasi).
  */
 export function PageCrumbs({

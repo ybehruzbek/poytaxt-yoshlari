@@ -1,5 +1,5 @@
 /* =====================================================================
-   «Kengaş jamoasi» — namuna asosidagi dizayn. Prefiks: z5-
+   “Kengaş jamoasi” — namuna asosidagi dizayn. Prefiks: z5-
    Suratlar oq fonli — multiply orqali karta gradiyentiga singadi.
    ===================================================================== */
 
@@ -86,7 +86,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
-/* Ixçam karta: rais bilan birinçi qator bitta ekranga siğadi; «Vazifalari» ikonkalar qatorida */
+/* Ixçam karta: rais bilan birinçi qator bitta ekranga siğadi; “Vazifalari” ikonkalar qatorida */
 .z5-card {
   display: grid;
   grid-template-columns: 1fr 170px;

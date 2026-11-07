@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     'Yoşlarga oid davlat siyosati, Özbekiston yoşlar ittifoqi faoliyati hamda yoşlarga yaratilgan imkoniyat va imtiyozlarga doir normativ-huquqiy hujjatlar.',
 }
 
-/** «Normativ-huquqiy hujjatlar» sahifasi (mazmun: components/hujjatlar/data.ts) */
+/** “Normativ-huquqiy hujjatlar” sahifasi (mazmun: components/hujjatlar/data.ts) */
 export default async function NormativRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
   const crumbs = <PageCrumbs locale={locale} path="/hujjatlar/normativ" />

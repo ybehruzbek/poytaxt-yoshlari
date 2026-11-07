@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import { TeamNamuna } from './AltHkJamoa'
 
 /**
- * «Toşkent şahar hududiy Kengaşi» sahifasi — yöl va Kengaş jamoasi
+ * “Toşkent şahar hududiy Kengaşi” sahifasi — yöl va Kengaş jamoasi
  * (mazmun: components/hududiy/data.ts).
  */
 export function HududiyPage({ crumbs }: { crumbs: ReactNode }) {
