@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- xodimlar suratlari; CMS ulanganda next/image ga o'tadi */
+import type { ReactNode } from 'react'
+
 import { CONTACT } from './data'
 import { IC, Ic, type Member, TEAM } from './team'
 
@@ -7,14 +9,13 @@ const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 function Head() {
   return (
     <div className="sec-head hk-jm-head">
-      <span>Özbekiston yoşlar ittifoqi</span>
       <h1 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h1>
     </div>
   )
 }
 
 /** Telefon va qabul — matn; poçta (kartalarda) va ijtimoiy tarmoqlar — dumaloq ikonkalar */
-function Reach({ m, full }: { m: Member; full?: boolean }) {
+function Reach({ m, full, children }: { m: Member; full?: boolean; children?: ReactNode }) {
   const phone = m.phone ?? CONTACT.phone
   const email = m.email ?? CONTACT.email
   return (
@@ -40,6 +41,7 @@ function Reach({ m, full }: { m: Member; full?: boolean }) {
             <Ic d={IC[x.net]} />
           </a>
         ))}
+        {children}
       </div>
     </div>
   )
@@ -133,10 +135,11 @@ function Card({ m, id }: { m: Member; id: string }) {
         <Name n={m.name} />
         <p>{m.role}</p>
         {m.dept && <small title={m.dept}>{m.dept}</small>}
-        <Reach m={m} />
+        <Reach m={m}>
+          <Duties m={m} id={id} />
+        </Reach>
       </div>
       <img className="z5-card-ph" src={m.img} alt={m.name} loading="lazy" />
-      <Duties m={m} id={id} />
     </article>
   )
 }
