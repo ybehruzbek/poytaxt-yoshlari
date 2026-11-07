@@ -58,18 +58,10 @@
   color: var(--muted);
 }
 
-/* Bölim sarlavhasi */
-.z5-grp {
-  margin-top: 56px;
-}
-.z5-gt {
-  font: 800 22px/1.25 var(--f-head);
-  color: var(--navy);
-  margin-bottom: 20px;
-}
 
 /* Kartalar */
 .z5-grid {
+  margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;

@@ -66,52 +66,48 @@ function Duties({ list }: { list?: string[] }) {
 
 /**
  * Namuna asosida: rais — keng karta (surat çapda, ism va lavozim öngda, fonda Ittifoq belgisi);
- * qolganlar — 3 ustunli kartalar: ism va lavozim çap yuqorida, surat öng pastda.
+ * qolganlar guruhlarga ajratilmasdan bitta 3 ustunli tarmoqda: ism va lavozim çap yuqorida, surat öng pastda.
  */
 export function TeamNamuna() {
   return (
     <section className="sec" id="jamoa">
       <div className="wrap">
         <Head />
-        {TEAM.map((g) =>
-          g.lead ? (
-            g.people.map((m) => (
-              <article key={m.name} className="z5-hero">
-                <img
-                  className="z5-hero-mark"
-                  src="/img/ittifoq/belgi.png"
-                  alt=""
-                  aria-hidden="true"
-                />
-                <img className="z5-hero-ph" src={m.img} alt={m.name} />
-                <div className="z5-hero-txt">
+        {TEAM.filter((g) => g.lead).flatMap((g) =>
+          g.people.map((m) => (
+            <article key={m.name} className="z5-hero">
+              <img
+                className="z5-hero-mark"
+                src="/img/ittifoq/belgi.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <img className="z5-hero-ph" src={m.img} alt={m.name} />
+              <div className="z5-hero-txt">
+                <h3>{m.name}</h3>
+                <p>{m.role}</p>
+                <Reach m={m} full />
+                <Duties list={m.duties} />
+              </div>
+            </article>
+          )),
+        )}
+        <div className="z5-grid">
+          {TEAM.filter((g) => !g.lead)
+            .flatMap((g) => g.people)
+            .map((m) => (
+              <article key={m.name} className="z5-card">
+                <div className="z5-card-txt">
                   <h3>{m.name}</h3>
                   <p>{m.role}</p>
-                  <Reach m={m} full />
-                  <Duties list={m.duties} />
+                  {m.dept && <small>{m.dept}</small>}
+                  <Reach m={m} />
                 </div>
+                <img className="z5-card-ph" src={m.img} alt={m.name} loading="lazy" />
+                <Duties list={m.duties} />
               </article>
-            ))
-          ) : (
-            <div key={g.title} className="z5-grp">
-              <h3 className="z5-gt">{g.title}</h3>
-              <div className="z5-grid">
-                {g.people.map((m) => (
-                  <article key={m.name} className="z5-card">
-                    <div className="z5-card-txt">
-                      <h3>{m.name}</h3>
-                      <p>{m.role}</p>
-                      {m.dept && <small>{m.dept}</small>}
-                      <Reach m={m} />
-                    </div>
-                    <img className="z5-card-ph" src={m.img} alt={m.name} loading="lazy" />
-                    <Duties list={m.duties} />
-                  </article>
-                ))}
-              </div>
-            </div>
-          ),
-        )}
+            ))}
+        </div>
       </div>
     </section>
   )
