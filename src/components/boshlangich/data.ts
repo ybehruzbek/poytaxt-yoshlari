@@ -419,7 +419,7 @@ export const OTMS: Otm[] = [
     },
   },
   { otm: 'Özbekiston Respublikasi Huquqni muhofaza qiliş akademiyasi', type: 'davlat' },
-  { otm: 'Tashkent Tech universiteti', type: 'davlat' },
+  { otm: 'Taşkent Tech universiteti', type: 'davlat' },
   {
     otm: 'Soliq oliy maktabi',
     type: 'davlat',
@@ -710,7 +710,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Tashkent International University',
+    otm: 'Taşkent International University',
     type: 'nodavlat',
     leader: {
       name: 'Kurbanaliyev Sardor Alidjonoviç',
@@ -723,7 +723,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'British Management University',
+    otm: 'Britiş Management University',
     type: 'nodavlat',
     leader: {
       name: 'Ziyadullayeva Diyora Xasanovna',
@@ -737,7 +737,7 @@ export const OTMS: Otm[] = [
   },
   { otm: 'TEAM University', type: 'nodavlat' },
   {
-    otm: 'Tashkent International University of Education',
+    otm: 'Taşkent International University of Education',
     type: 'nodavlat',
     leader: {
       name: 'Halimov Humoyun Şavkatjon öğli',
@@ -1065,7 +1065,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Tashkent Metropolitan University',
+    otm: 'Taşkent Metropolitan University',
     type: 'nodavlat',
     leader: {
       name: 'Aşirbayev Avazbek Asanoviç',

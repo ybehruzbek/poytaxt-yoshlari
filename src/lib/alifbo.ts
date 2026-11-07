@@ -47,8 +47,8 @@ const RULES: Array<[RegExp, string]> = [
  */
 const XORIJIY = [
   'Fashion Show', 'English', 'ChatGPT', 'Chrome', 'Shopify', 'Dashboard', 'Microsoft', 'TikTok', 'WhatsApp',
-  // inglizça OTM nomlari (Tashkent Tech, British Management University, International School of …)
-  'Tashkent', 'Tech', 'Technology', 'Technologies', 'British', 'School',
+  // inglizça sözlar: “ch” bu yerda “k” deb öqiladi, ç ga ögirilmaydi (Taşkent Tech, International School of …)
+  'Tech', 'Technology', 'Technologies', 'School',
 ]
 const HIMOYA = new RegExp(
   [
