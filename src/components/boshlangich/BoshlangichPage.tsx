@@ -1,9 +1,16 @@
 import type { ReactNode } from 'react'
 
-import { BtList } from './BtList'
+import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
+
+import { BtList, type View } from './BtList'
 import { OTMS } from './data'
 
 const LED = OTMS.filter((o) => o.leader).length
+
+/** VAQTINCHA: dizayn variantlari faqat işlab çiqiş rejimida */
+const DEV = process.env.NODE_ENV !== 'production'
+const PANEL: PanelSection[] = [{ name: 'btv', label: 'Sahifa körinişi', count: 4 }]
+const VIEWS: View[] = ['a', 'b', 'c', 'd']
 
 /**
  * «Boşlanğiç taşkilotlar» sahifasi: yöl va sarlavha, raqamlar, OTM turi böyiça saralaş va qidiruv,
@@ -38,9 +45,18 @@ export function BoshlangichPage({ crumbs }: { crumbs: ReactNode }) {
       </header>
       <section className="sec bt-sec">
         <div className="wrap">
-          <BtList otms={OTMS} />
+          {DEV ? (
+            VIEWS.map((v) => (
+              <div key={v} className="vx" data-v={`btv-${v}`}>
+                <BtList otms={OTMS} view={v} />
+              </div>
+            ))
+          ) : (
+            <BtList otms={OTMS} />
+          )}
         </div>
       </section>
+      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }

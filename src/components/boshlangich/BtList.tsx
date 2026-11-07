@@ -68,8 +68,134 @@ const FILTERS: Array<{ k: 'all' | OtmType; t: string }> = [
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
+/** VAQTINCHA: dizayn variantlari — a: katta kartalar, b: ixçam röyxat, c: portret galereyasi, d: OTM markazda */
+export type View = 'a' | 'b' | 'c' | 'd'
+
+const Ghost = ({ className }: { className: string }) => (
+  <svg className={className} viewBox="0 0 120 150" aria-hidden="true">
+    <circle cx="60" cy="48" r="28" />
+    <path d="M8 150c0-34 23-58 52-58s52 24 52 58z" />
+  </svg>
+)
+
+function Name3({ n, className }: { n: string; className: string }) {
+  const [a, b, c] = nameLines(n)
+  return (
+    <h3 className={className}>
+      <span>{a}</span> <span>{b}</span> <span>{c}</span>
+    </h3>
+  )
+}
+
+/** Yetakçili OTM kartasi — tanlangan körinişda */
+function Lead({ o, view }: { o: Otm; view: View }) {
+  const L = o.leader!
+  if (view === 'b')
+    return (
+      <article className="bt-row">
+        <img className="bt-row-ph" src={L.img} alt={L.name} loading="lazy" />
+        <div className="bt-row-txt">
+          <h3>{L.name}</h3>
+          <span title={o.otm}>{o.otm}</span>
+        </div>
+        <Reach c={L} />
+      </article>
+    )
+  if (view === 'c')
+    return (
+      <article className="bt-tile">
+        <div className="bt-tile-ph">
+          <img src={L.img} alt={L.name} loading="lazy" />
+        </div>
+        <Name3 n={L.name} className="bt-tile-name" />
+        <span className="bt-tile-otm" title={o.otm}>
+          {o.otm}
+        </span>
+        <Reach c={L} />
+      </article>
+    )
+  if (view === 'd')
+    return (
+      <article className="bt-org">
+        <span className="bt-org-type">{TYPE_LABEL[o.type]}</span>
+        <h3 className="bt-org-t">{o.otm}</h3>
+        <div className="bt-org-lead">
+          <img src={L.img} alt={L.name} loading="lazy" />
+          <div>
+            <small>Yoşlar yetakçisi</small>
+            <b>{L.name}</b>
+          </div>
+        </div>
+        <Reach c={L} />
+      </article>
+    )
+  return (
+    <article className="bt-card">
+      <div className="bt-txt">
+        <span className="bt-otm" title={o.otm}>
+          {o.otm}
+        </span>
+        <Name3 n={L.name} className="bt-name" />
+        <Reach c={L} />
+      </div>
+      <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />
+    </article>
+  )
+}
+
+/** Vakant OTM kartasi — tanlangan körinişda */
+function Vac({ o, view }: { o: Otm; view: View }) {
+  if (view === 'b')
+    return (
+      <article className="bt-row bt-row--vac">
+        <Ghost className="bt-row-ph" />
+        <div className="bt-row-txt">
+          <h3>{o.otm}</h3>
+          <span>{TYPE_LABEL[o.type]}</span>
+        </div>
+        <span className="bt-badge">Vakant</span>
+      </article>
+    )
+  if (view === 'c')
+    return (
+      <article className="bt-tile bt-tile--vac">
+        <div className="bt-tile-ph">
+          <Ghost className="bt-tile-ghost" />
+          <span className="bt-badge">Vakant</span>
+        </div>
+        <h3 className="bt-tile-name">{o.otm}</h3>
+        <span className="bt-tile-otm">{TYPE_LABEL[o.type]}</span>
+      </article>
+    )
+  if (view === 'd')
+    return (
+      <article className="bt-org bt-org--vac">
+        <span className="bt-org-type">{TYPE_LABEL[o.type]}</span>
+        <h3 className="bt-org-t">{o.otm}</h3>
+        <div className="bt-org-lead">
+          <Ghost className="bt-org-ghost" />
+          <div>
+            <small>Yoşlar yetakçisi</small>
+            <span className="bt-badge">Vakant</span>
+          </div>
+        </div>
+      </article>
+    )
+  return (
+    <article className="bt-card bt-vac">
+      <div className="bt-txt">
+        <span className="bt-type">{TYPE_LABEL[o.type]}</span>
+        <h3 className="bt-vac-otm">{o.otm}</h3>
+        <span className="bt-badge">Vakant</span>
+        <p className="bt-role">Yoşlar yetakçisi lavozimi böş</p>
+      </div>
+      <Ghost className="bt-ghost" />
+    </article>
+  )
+}
+
 /** Saralaş (OTM turi) va qidiruv bilan kartalar: avval yetakçili OTMlar, oxirida vakantlar */
-export function BtList({ otms }: { otms: Otm[] }) {
+export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
   const [type, setType] = useState<'all' | OtmType>('all')
   const [q, setQ] = useState('')
 
@@ -113,25 +239,10 @@ export function BtList({ otms }: { otms: Otm[] }) {
       </div>
 
       {led.length > 0 && (
-        <div className="bt-grid">
-          {led.map((o) => {
-            const L = o.leader!
-            const [a, b, c] = nameLines(L.name)
-            return (
-              <article key={o.otm} className="bt-card">
-                <div className="bt-txt">
-                  <span className="bt-otm" title={o.otm}>
-                    {o.otm}
-                  </span>
-                  <h3 className="bt-name">
-                    <span>{a}</span> <span>{b}</span> <span>{c}</span>
-                  </h3>
-                  <Reach c={L} />
-                </div>
-                <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />
-              </article>
-            )
-          })}
+        <div className={`bt-grid bt-grid--${view}`}>
+          {led.map((o) => (
+            <Lead key={o.otm} o={o} view={view} />
+          ))}
         </div>
       )}
 
@@ -140,20 +251,9 @@ export function BtList({ otms }: { otms: Otm[] }) {
           <h2 className="bt-vac-h">
             Vakant boşlanğiç taşkilotlar <span>{vac.length}</span>
           </h2>
-          <div className="bt-grid">
+          <div className={`bt-grid bt-grid--${view}`}>
             {vac.map((o) => (
-              <article key={o.otm} className="bt-card bt-vac">
-                <div className="bt-txt">
-                  <span className="bt-type">{TYPE_LABEL[o.type]}</span>
-                  <h3 className="bt-vac-otm">{o.otm}</h3>
-                  <span className="bt-badge">Vakant</span>
-                  <p className="bt-role">Yoşlar yetakçisi lavozimi böş</p>
-                </div>
-                <svg className="bt-ghost" viewBox="0 0 120 150" aria-hidden="true">
-                  <circle cx="60" cy="48" r="28" />
-                  <path d="M8 150c0-34 23-58 52-58s52 24 52 58z" />
-                </svg>
-              </article>
+              <Vac key={o.otm} o={o} view={view} />
             ))}
           </div>
         </>
