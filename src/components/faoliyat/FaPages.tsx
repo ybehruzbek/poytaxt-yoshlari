@@ -4,27 +4,14 @@ import type { ReactNode } from 'react'
 
 import { ANNOUNCEMENTS } from './announcements'
 import { AnnounceList } from './AnnounceList'
-import { CALLS } from './calls'
 import { DIRECTIONS, dirProjects, dirTitle, PROJECTS, REPORT_2025, YEARS } from './data'
 import { EVENTS } from './events'
 import { EventsList } from './EventsList'
-import {
-  DirB,
-  DirC,
-  DirsB,
-  DirsC,
-  JoinB,
-  JoinC,
-  ProjB,
-  ProjC,
-  ResultsB,
-  ResultsC,
-} from './FaVariants'
+import { DirB, DirC, DirsC1, DirsC2, DirsC3, ProjB, ProjC, ResultsB, ResultsC } from './FaVariants'
 import { ProjectsList } from './ProjectsList'
 import { V, VPanel } from './Var'
-import { CHANNEL, fmtDate, type Project, TG } from './types'
+import { fmtDate, type Project, TG } from './types'
 
-const pad = (i: number) => String(i + 1).padStart(2, '0')
 const TODAY = new Date().toISOString().slice(0, 10)
 
 function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead: string }) {
@@ -56,38 +43,15 @@ export function DirectionsPage({ crumbs, base }: { crumbs: ReactNode; base: stri
         lead="Kengaş yoşlar bilan işlaşning 11 ta asosiy yönalişi böyiça faoliyat olib boradi. Har bir yönalişda loyihalar va ötkazilgan tadbirlar bilan tanişişingiz mumkin."
       />
       <V name="fyo" k="a">
-        <section className="sec fa-sec">
-          <div className="wrap fa-dirs">
-            {DIRECTIONS.map((d, i) => {
-              const nP = dirProjects(d.slug).length
-              const nE = EVENTS.filter((e) => e.dir === d.slug).length
-              return (
-                <Link key={d.slug} href={`${base}/${d.slug}`} className="fa-dir">
-                  <span className="fa-dir-n">{pad(i)}</span>
-                  <h2>{d.title}</h2>
-                  <p>{d.lead}</p>
-                  <span className="fa-dir-foot">
-                    <span>
-                      {nP ? `${nP} ta loyiha · ` : ''}
-                      {nE} ta tadbir
-                    </span>
-                    <span className="fa-go">
-                      Batafsil <span aria-hidden="true">→</span>
-                    </span>
-                  </span>
-                </Link>
-              )
-            })}
-          </div>
-        </section>
+        <DirsC1 base={base} />
       </V>
       <V name="fyo" k="b">
-        <DirsB base={base} />
+        <DirsC2 base={base} />
       </V>
       <V name="fyo" k="c">
-        <DirsC base={base} />
+        <DirsC3 base={base} />
       </V>
-      <VPanel name="fyo" label="Yönalişlar" />
+      <VPanel name="fyo" label="Yönalişlar (C1 · C2 · C3)" />
     </div>
   )
 }
@@ -516,99 +480,6 @@ export function ResultsPage({ crumbs }: { crumbs: ReactNode }) {
         <ResultsC />
       </V>
       <VPanel name="fna" label="Natijalar" />
-    </div>
-  )
-}
-
-/* ===================== Köngillilik va iştirok ===================== */
-
-export function JoinPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
-  const WAYS: Array<{ t: string; d: string; href: string; go: string; ext?: boolean }> = [
-    {
-      t: 'Ittifoqqa aʼzo böliş',
-      d: '14 yoşdan 30 yoşgaça bölgan yoşlar Özbekiston yoşlar ittifoqiga aʼzo bölib, uning loyihalari va imkoniyatlaridan foydalanişi mumkin.',
-      href: L('/boglanish/murojaat?mavzu=azo'),
-      go: 'Ariza qoldiriş',
-    },
-    {
-      t: 'Köngilli böliş',
-      d: 'Köngillilar tadbirlar, xayriya aksiyalari va yirik loyihalarni taşkil etişda iştirok etadi. Köngillilar maktabiga qabul eʼlonlari kanalda beriladi.',
-      href: L('/boglanish/murojaat'),
-      go: 'Murojaat qoldiriş',
-    },
-    {
-      t: 'Boşlanğiç taşkilotga qöşiliş',
-      d: 'Har bir oliy taʼlim taşkilotida Ittifoqning boşlanğiç taşkiloti va yoşlar yetakçisi bor. Yetakçingiz bilan tanişing va uning faoliyatiga qöşiling.',
-      href: L('/biz-haqimizda/boshlangich-tashkilotlar'),
-      go: 'Yetakçingizni toping',
-    },
-    {
-      t: 'Loyiha yoki ğoya taklif qiliş',
-      d: 'Yoşlar uçun foydali loyiha yoki taşabbusingiz bölsa, Kengaşga yuboring — birgalikda amalga oşirişni körib çiqamiz.',
-      href: L('/boglanish/murojaat'),
-      go: 'Ğoyani yuboriş',
-    },
-  ]
-  const calls = CALLS.slice(0, 8)
-  return (
-    <div className="fa">
-      <Head
-        crumbs={crumbs}
-        title="Köngillilik va iştirok"
-        lead="Kengaş faoliyatiga qöşilişning yöllari: aʼzolik, köngillilik, boşlanğiç taşkilotlar va yoşlar taşabbuslari."
-      />
-      <V name="fis" k="a">
-        <section className="sec fa-sec">
-          <div className="wrap">
-            <div className="fa-ways">
-              {WAYS.map((w, i) => (
-                <section key={w.t} className="fa-way">
-                  <span className="fa-way-n">{pad(i)}</span>
-                  <h2>{w.t}</h2>
-                  <p>{w.d}</p>
-                  <Link href={w.href} className="fa-go">
-                    {w.go} <span aria-hidden="true">→</span>
-                  </Link>
-                </section>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section className="sec fa-sec">
-          <div className="wrap">
-            <h2 className="fa-h2">Kanaldagi sönggi çaqiriqlar</h2>
-            <div className="fa-calls">
-              {calls.map((c) => (
-                <a
-                  key={c.id}
-                  href={TG(c.id)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="fa-call"
-                >
-                  <time dateTime={c.date}>{fmtDate(c.date)}</time>
-                  <strong>{c.call}</strong>
-                  {c.how && <span>{c.how}</span>}
-                  <span className="fa-src">Telegramda köriş ↗</span>
-                </a>
-              ))}
-            </div>
-            <p className="fa-src-note">
-              Barça eʼlonlar:{' '}
-              <a href={CHANNEL} target="_blank" rel="noopener noreferrer">
-                “Poytaxt yoşlari” Telegram kanali
-              </a>
-            </p>
-          </div>
-        </section>
-      </V>
-      <V name="fis" k="b">
-        <JoinB ways={WAYS} />
-      </V>
-      <V name="fis" k="c">
-        <JoinC ways={WAYS} />
-      </V>
-      <VPanel name="fis" label="Iştirok" />
     </div>
   )
 }

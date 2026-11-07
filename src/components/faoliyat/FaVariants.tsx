@@ -5,10 +5,9 @@
  */
 import Link from 'next/link'
 
-import { CALLS } from './calls'
 import { DIRECTIONS, dirProjects, dirTitle, REPORT_2025, YEARS } from './data'
 import { EVENTS } from './events'
-import { CHANNEL, fmtDate, type Project, TG } from './types'
+import { fmtDate, type Project, TG } from './types'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const STATUS = (s: Project['status']) =>
@@ -23,74 +22,156 @@ const Src = ({ id }: { id: number }) => (
 const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
 const Arrow = () => <span aria-hidden="true">→</span>
 
-/* ===================== Yönalişlar ===================== */
+/* ===================== Yönalişlar (C asosida 3 köriniş) ===================== */
 
-/** B — suratli plitkalar: har yönaliş sönggi tadbir surati fonida */
-export function DirsB({ base }: { base: string }) {
+const dirData = () =>
+  DIRECTIONS.map((d, i) => {
+    const evs = dirEvents(d.slug)
+    return {
+      d,
+      n: pad(i),
+      evs,
+      pics: evs.filter((e) => e.img),
+      nP: dirProjects(d.slug).length,
+      last: evs[0]?.date,
+    }
+  })
+
+function DirSummary() {
+  const all = dirData()
+  const nE = all.reduce((a, x) => a + x.evs.length, 0)
+  const nP = all.reduce((a, x) => a + x.nP, 0)
+  return (
+    <div className="vy-sum">
+      <span>
+        <b>{all.length}</b> yönaliş
+      </span>
+      <span>
+        <b>{nE}</b> tadbir
+      </span>
+      <span>
+        <b>{nP}</b> loyiha
+      </span>
+    </div>
+  )
+}
+
+/** C1 — takomillaşgan qatorlar: hisob tasmasi, çiplar, 4 ta surat, sönggi tadbir sanasi */
+export function DirsC1({ base }: { base: string }) {
   return (
     <section className="sec fa-sec">
-      <div className="wrap vb-tiles">
-        {DIRECTIONS.map((d, i) => {
-          const evs = dirEvents(d.slug)
-          const img = evs.find((e) => e.img)?.img
-          const nP = dirProjects(d.slug).length
-          return (
-            <Link key={d.slug} href={`${base}/${d.slug}`} className="vb-tile">
-              {img && <img src={img} alt="" loading="lazy" />}
-              <span className="vb-tile-n">{pad(i)}</span>
-              <span className="vb-tile-txt">
+      <div className="wrap">
+        <DirSummary />
+        <div className="vy1">
+          {dirData().map(({ d, n, evs, pics, nP, last }) => (
+            <Link key={d.slug} href={`${base}/${d.slug}`} className="vy1-row">
+              <span className="vy1-n">{n}</span>
+              <span className="vy1-t">
                 <strong>{d.title}</strong>
-                <span>
-                  {nP ? `${nP} ta loyiha · ` : ''}
-                  {evs.length} ta tadbir
+                <span>{d.lead}</span>
+                <span className="vy1-chips">
+                  <em>{evs.length} ta tadbir</em>
+                  {nP > 0 && <em>{nP} ta loyiha</em>}
+                  {last && <i>Sönggi: {fmtDate(last)}</i>}
                 </span>
               </span>
+              <span className="vy1-ph">
+                {pics.slice(0, 4).map((e) => (
+                  <img key={e.id} src={e.img} alt="" loading="lazy" />
+                ))}
+              </span>
+              <span className="vy1-go">
+                <Arrow />
+              </span>
             </Link>
-          )
-        })}
+          ))}
+        </div>
       </div>
     </section>
   )
 }
 
-/** C — keng qatorlar: raqam, nom va tavsif, hisob, 3 ta kiçik surat */
-export function DirsC({ base }: { base: string }) {
+/** C2 — kino-lenta: sarlavha qatori, ostida tavsif va 5 ta suratli lenta */
+export function DirsC2({ base }: { base: string }) {
   return (
     <section className="sec fa-sec">
-      <div className="wrap vc-rows">
-        {DIRECTIONS.map((d, i) => {
-          const evs = dirEvents(d.slug)
-          const nP = dirProjects(d.slug).length
-          return (
-            <Link key={d.slug} href={`${base}/${d.slug}`} className="vc-row">
-              <span className="vc-row-n">{pad(i)}</span>
-              <span className="vc-row-t">
+      <div className="wrap">
+        <DirSummary />
+        <div className="vy2">
+          {dirData().map(({ d, n, evs, pics, nP }) => (
+            <Link key={d.slug} href={`${base}/${d.slug}`} className="vy2-row">
+              <span className="vy2-head">
+                <span className="vy2-n">{n}</span>
                 <strong>{d.title}</strong>
-                <span>{d.lead}</span>
+                <span className="vy2-c">
+                  {evs.length} tadbir{nP > 0 ? ` · ${nP} loyiha` : ''}
+                </span>
+                <span className="vy2-go">
+                  Yönalişga ötiş <Arrow />
+                </span>
               </span>
-              <span className="vc-row-c">
-                <b>{evs.length}</b> tadbir
-                {nP > 0 && (
-                  <>
-                    <br />
-                    <b>{nP}</b> loyiha
-                  </>
-                )}
-              </span>
-              <span className="vc-row-ph">
-                {evs
-                  .filter((e) => e.img)
-                  .slice(0, 3)
-                  .map((e) => (
+              <span className="vy2-body">
+                <span className="vy2-lead">{d.lead}</span>
+                <span className="vy2-film">
+                  {pics.slice(0, 5).map((e) => (
                     <img key={e.id} src={e.img} alt="" loading="lazy" />
                   ))}
-              </span>
-              <span className="vc-row-go">
-                <Arrow />
+                </span>
               </span>
             </Link>
-          )
-        })}
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** C3 — zig-zag: navbatma-navbat çap/öng, surat kollaji va sönggi 3 tadbir */
+export function DirsC3({ base }: { base: string }) {
+  return (
+    <section className="sec fa-sec">
+      <div className="wrap">
+        <DirSummary />
+        <div className="vy3">
+          {dirData().map(({ d, n, evs, pics, nP }) => (
+            <article key={d.slug} className="vy3-row">
+              <Link href={`${base}/${d.slug}`} className="vy3-ph" tabIndex={-1} aria-hidden="true">
+                {pics.slice(0, 3).map((e) => (
+                  <img key={e.id} src={e.img} alt="" loading="lazy" />
+                ))}
+              </Link>
+              <div className="vy3-txt">
+                <span className="vy3-n">{n}</span>
+                <h2>
+                  <Link href={`${base}/${d.slug}`}>{d.title}</Link>
+                </h2>
+                <p>{d.lead}</p>
+                <ul>
+                  {evs.slice(0, 3).map((e) => (
+                    <li key={e.id}>
+                      <time dateTime={e.date}>{fmtDate(e.date)}</time>
+                      {e.title}
+                    </li>
+                  ))}
+                </ul>
+                <div className="vy3-foot">
+                  <span>
+                    <b>{evs.length}</b> tadbir
+                    {nP > 0 && (
+                      <>
+                        {' '}
+                        · <b>{nP}</b> loyiha
+                      </>
+                    )}
+                  </span>
+                  <Link href={`${base}/${d.slug}`} className="btn btn-primary">
+                    Batafsil
+                  </Link>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -492,89 +573,5 @@ export function ResultsC() {
         </div>
       </div>
     </section>
-  )
-}
-
-/* ===================== Iştirok ===================== */
-
-export type Way = { t: string; d: string; href: string; go: string }
-
-const Calls = ({ cls }: { cls: string }) => (
-  <div className={cls}>
-    {CALLS.slice(0, 8).map((c) => (
-      <a key={c.id} href={TG(c.id)} target="_blank" rel="noopener noreferrer">
-        <time dateTime={c.date}>{fmtDate(c.date)}</time>
-        <strong>{c.call}</strong>
-        {c.how && <span>{c.how}</span>}
-        <em>Telegramda köriş ↗</em>
-      </a>
-    ))}
-  </div>
-)
-
-const ChannelNote = () => (
-  <p className="fa-src-note">
-    Barça eʼlonlar:{' '}
-    <a href={CHANNEL} target="_blank" rel="noopener noreferrer">
-      “Poytaxt yoşlari” Telegram kanali
-    </a>
-  </p>
-)
-
-/** B — bosqiçlar: yöllar keng qatorlarda tugma bilan, çaqiriqlar jadvalda */
-export function JoinB({ ways }: { ways: Way[] }) {
-  return (
-    <section className="sec fa-sec">
-      <div className="wrap">
-        <div className="vb-steps">
-          {ways.map((w, i) => (
-            <section key={w.t}>
-              <span className="vb-steps-n">{pad(i)}</span>
-              <div>
-                <h2>{w.t}</h2>
-                <p>{w.d}</p>
-              </div>
-              <Link href={w.href} className="btn btn-primary">
-                {w.go}
-              </Link>
-            </section>
-          ))}
-        </div>
-        <h2 className="fa-h2">Kanaldagi sönggi çaqiriqlar</h2>
-        <Calls cls="vb-table" />
-        <ChannelNote />
-      </div>
-    </section>
-  )
-}
-
-/** C — kontrast: yöllar tög‘ fonda 2×2, çaqiriqlar sariq çiziqli kartoçkalarda */
-export function JoinC({ ways }: { ways: Way[] }) {
-  return (
-    <>
-      <section className="sec fa-sec">
-        <div className="wrap">
-          <div className="vc-dark">
-            {ways.map((w, i) => (
-              <Link key={w.t} href={w.href} className="vc-dark-i">
-                <span>{pad(i)}</span>
-                <h2>{w.t}</h2>
-                <p>{w.d}</p>
-                <em>
-                  {w.go} <Arrow />
-                </em>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="sec fa-sec">
-        <div className="wrap">
-          <h2 className="fa-h2">Kanaldagi sönggi çaqiriqlar</h2>
-          <Calls cls="vc-calls" />
-          <ChannelNote />
-        </div>
-      </section>
-    </>
   )
 }
