@@ -16,7 +16,7 @@ const VIEWS: View[] = ['a', 'b', 'c', 'd']
  * «Boşlanğiç taşkilotlar» sahifasi: yöl va sarlavha, raqamlar, OTT turi böyiça saralaş va qidiruv,
  * yetakçilar kartalari (surat, F.I.Ş., OTT, aloqa şabloni), oxirida vakant OTTlar.
  */
-export function BoshlangichPage({ crumbs }: { crumbs: ReactNode }) {
+export function BoshlangichPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
   return (
     <div className="bt">
       <header className="pg-head">
@@ -48,11 +48,11 @@ export function BoshlangichPage({ crumbs }: { crumbs: ReactNode }) {
           {DEV ? (
             VIEWS.map((v) => (
               <div key={v} className="vx" data-v={`btv-${v}`}>
-                <BtList otms={OTMS} view={v} />
+                <BtList otms={OTMS} view={v} base={base} />
               </div>
             ))
           ) : (
-            <BtList otms={OTMS} />
+            <BtList otms={OTMS} base={base} />
           )}
         </div>
       </section>

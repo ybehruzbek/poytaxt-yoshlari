@@ -17,6 +17,7 @@ export default async function BoshlangichRoute(props: { params: Promise<{ locale
   const { locale } = await props.params
   return (
     <Content
+      base={`/${locale}/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim`}
       crumbs={
         <PageCrumbs locale={locale} path="/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim" />
       }

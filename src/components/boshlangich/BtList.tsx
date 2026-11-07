@@ -1,65 +1,10 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element -- yetakçilar suratlari; CMS ulanganda next/image ga o'tadi */
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
-import { IC } from '@/components/hududiy/team'
-
-import { type Contacts, type Otm, type OtmType, TYPE_LABEL } from './data'
-
-/** Aloqa şabloni: qiymat bölsa — faol havola, böş bölsa — xira joy (keyin töldiriladi) */
-const SLOTS: Array<{ k: keyof Contacts; t: string; d: string; href: (v: string) => string }> = [
-  { k: 'phone', t: 'Telefon', d: IC.phone, href: (v) => `tel:${v.replace(/[^+\d]/g, '')}` },
-  { k: 'email', t: 'Elektron poçta', d: IC.mail, href: (v) => `mailto:${v}` },
-  { k: 'telegram', t: 'Telegram', d: IC.Telegram, href: (v) => v },
-  { k: 'instagram', t: 'Instagram', d: IC.Instagram, href: (v) => v },
-  { k: 'facebook', t: 'Facebook', d: IC.Facebook, href: (v) => v },
-]
-
-/** Telefon raqami matn sifatida (bölsa) — bosilganda qöngiroq */
-function Tel({ c, className = 'bt-tel' }: { c: Contacts; className?: string }) {
-  const v = c.phone.trim()
-  return v ? (
-    <a className={className} href={`tel:${v.replace(/[^+\d]/g, '')}`}>
-      {v}
-    </a>
-  ) : null
-}
-
-function Reach({ c }: { c: Contacts }) {
-  return (
-    <ul className="bt-reach">
-      {SLOTS.map(({ k, t, d, href }) => {
-        const v = c[k].trim()
-        const ic = (
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d={d} />
-          </svg>
-        )
-        return (
-          <li key={k}>
-            {v ? (
-              <a
-                href={href(v)}
-                title={`${t}: ${v}`}
-                aria-label={`${t}: ${v}`}
-                {...(k === 'phone' || k === 'email'
-                  ? {}
-                  : { target: '_blank', rel: 'noopener noreferrer' })}
-              >
-                {ic}
-              </a>
-            ) : (
-              <span className="off" title={`${t} — tez orada`} aria-label={`${t} — tez orada`}>
-                {ic}
-              </span>
-            )}
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
+import { type Otm, type OtmType, TYPE_LABEL } from './data'
 
 /** F.I.Ş. uç qatorda: familiya / ism / ota ismi (öğli, qizi bilan birga) */
 function nameLines(n: string): [string, string, string] {
@@ -97,38 +42,43 @@ function Name3({ n, className }: { n: string; className: string }) {
   )
 }
 
-/** Yetakçili OTT kartasi — tanlangan körinişda */
-function Lead({ o, view }: { o: Otm; view: View }) {
+const More = () => (
+  <span className="bt-more">
+    Batafsil <span aria-hidden="true">→</span>
+  </span>
+)
+
+/** Yetakçili OTT kartasi — tanlangan körinişda; butun karta yetakçi sahifasiga olib boradi */
+function Lead({ o, view, base }: { o: Otm; view: View; base: string }) {
   const L = o.leader!
+  const href = `${base}/${L.slug}`
   if (view === 'b')
     return (
-      <article className="bt-row">
+      <Link href={href} className="bt-row">
         <img className="bt-row-ph" src={L.img} alt={L.name} loading="lazy" />
         <div className="bt-row-txt">
+          <span className="bt-row-otm">{o.otm}</span>
           <h3>{L.name}</h3>
-          <span title={o.otm}>{o.otm}</span>
-          <Tel c={L} />
         </div>
-        <Reach c={L} />
-      </article>
+        <More />
+      </Link>
     )
   if (view === 'c')
     return (
-      <article className="bt-tile">
+      <Link href={href} className="bt-tile">
         <div className="bt-tile-ph">
           <img src={L.img} alt={L.name} loading="lazy" />
         </div>
-        <Name3 n={L.name} className="bt-tile-name" />
         <span className="bt-tile-otm" title={o.otm}>
           {o.otm}
         </span>
-        <Tel c={L} />
-        <Reach c={L} />
-      </article>
+        <Name3 n={L.name} className="bt-tile-name" />
+        <More />
+      </Link>
     )
   if (view === 'd')
     return (
-      <article className="bt-org">
+      <Link href={href} className="bt-org">
         <span className="bt-org-type">{TYPE_LABEL[o.type]}</span>
         <h3 className="bt-org-t">{o.otm}</h3>
         <div className="bt-org-lead">
@@ -136,24 +86,22 @@ function Lead({ o, view }: { o: Otm; view: View }) {
           <div>
             <small>Yoşlar yetakçisi</small>
             <b>{L.name}</b>
-            <Tel c={L} />
           </div>
         </div>
-        <Reach c={L} />
-      </article>
+        <More />
+      </Link>
     )
   return (
-    <article className="bt-card">
+    <Link href={href} className="bt-card">
       <div className="bt-txt">
         <span className="bt-otm" title={o.otm}>
           {o.otm}
         </span>
         <Name3 n={L.name} className="bt-name" />
-        <Tel c={L} />
-        <Reach c={L} />
+        <More />
       </div>
       <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />
-    </article>
+    </Link>
   )
 }
 
@@ -209,7 +157,7 @@ function Vac({ o, view }: { o: Otm; view: View }) {
 }
 
 /** Saralaş (OTT turi) va qidiruv bilan kartalar: avval yetakçili OTTlar, oxirida vakantlar */
-export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
+export function BtList({ otms, view = 'a', base }: { otms: Otm[]; view?: View; base: string }) {
   const [type, setType] = useState<'all' | OtmType>('all')
   const [q, setQ] = useState('')
 
@@ -255,7 +203,7 @@ export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
       {led.length > 0 && (
         <div className={`bt-grid bt-grid--${view}`}>
           {led.map((o) => (
-            <Lead key={o.otm} o={o} view={view} />
+            <Lead key={o.otm} o={o} view={view} base={base} />
           ))}
         </div>
       )}
