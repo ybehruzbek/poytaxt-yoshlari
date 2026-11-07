@@ -50,7 +50,6 @@ export const NAV: NavGroup[] = [
       { label: 'Tadbirlar va kalendar', href: '/faoliyat/tadbirlar', desc: 'Yaqin tadbirlar taqvimi' },
       { label: 'Eʼlonlar', href: '/faoliyat/elonlar', desc: 'Tanlovlar, röyxatdan ötiş, çellenjlar' },
       { label: 'Natijalar va hisobotlar', href: '/faoliyat/natijalar', desc: 'Yil yakunlari raqamlarda' },
-      { label: 'Köngillilik va iştirok', href: '/faoliyat/ishtirok', desc: 'Qanday qöşiliş mumkin' },
     ],
   },
   {

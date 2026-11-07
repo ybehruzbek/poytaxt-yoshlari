@@ -42,10 +42,32 @@ const nextConfig: NextConfig = {
     const to = `/${loc}/biz-haqimizda/boshlangich-tashkilotlar`
     return [
       { source: `/${loc}/faoliyat/yetakchilar`, destination: to, permanent: true },
-      { source: `/${loc}/faoliyat/yetakchilar/otm`, destination: `${to}/oliy-talim`, permanent: true },
-      { source: `/${loc}/faoliyat/yetakchilar/harbiy`, destination: `${to}/harbiy`, permanent: true },
-      { source: `/${loc}/faoliyat/otm-tashkilotlar`, destination: `${to}/oliy-talim`, permanent: true },
-      { source: `/${loc}/faoliyat/harbiy-tashkilotlar`, destination: `${to}/harbiy`, permanent: true },
+      {
+        source: `/${loc}/faoliyat/yetakchilar/otm`,
+        destination: `${to}/oliy-talim`,
+        permanent: true,
+      },
+      {
+        source: `/${loc}/faoliyat/yetakchilar/harbiy`,
+        destination: `${to}/harbiy`,
+        permanent: true,
+      },
+      {
+        source: `/${loc}/faoliyat/otm-tashkilotlar`,
+        destination: `${to}/oliy-talim`,
+        permanent: true,
+      },
+      {
+        source: `/${loc}/faoliyat/harbiy-tashkilotlar`,
+        destination: `${to}/harbiy`,
+        permanent: true,
+      },
+      // “Köngillilik va iştirok” sahifasi olib taşlandi
+      {
+        source: `/${loc}/faoliyat/ishtirok`,
+        destination: `/${loc}/faoliyat/elonlar`,
+        permanent: true,
+      },
     ]
   },
 }

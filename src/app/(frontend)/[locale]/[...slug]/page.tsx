@@ -17,7 +17,6 @@ const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq', '/biz-haqimizda/markaziy-ke
   '/faoliyat/tadbirlar',
   '/faoliyat/elonlar',
   '/faoliyat/natijalar',
-  '/faoliyat/ishtirok',
 ])
 
 /** Menyudagi barcha yo'llar oldindan tayyorlanadi */
