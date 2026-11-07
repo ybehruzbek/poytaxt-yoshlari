@@ -29,7 +29,15 @@ export const NAV: NavGroup[] = [
       { label: 'Özbekiston yoşlar ittifoqi', href: '/biz-haqimizda/ittifoq', desc: 'Taşkilot tarixi, maqsad va vazifalari' },
       { label: 'Markaziy Kengaş', href: '/biz-haqimizda/markaziy-kengash', desc: 'Ittifoqning respublika darajasidagi boşqaruvi' },
       { label: 'Toşkent şahar hududiy Kengaşi', href: '/biz-haqimizda/hududiy-kengash', desc: 'Poytaxt Kengaşi jamoasi' },
-      { label: 'Boşlanğiç taşkilotlar', href: '/biz-haqimizda/boshlangich-tashkilotlar', desc: 'OTTlardagi yoşlar yetakçilari' },
+      {
+        label: 'Boşlanğiç taşkilotlar',
+        href: '/biz-haqimizda/boshlangich-tashkilotlar',
+        desc: 'OTT va harbiy qismlardagi taşkilotlar',
+        children: [
+          { label: 'Oliy taʼlim taşkilotlaridagi', href: '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim' },
+          { label: 'Harbiy qismlar va muassasalardagi', href: '/biz-haqimizda/boshlangich-tashkilotlar/harbiy' },
+        ],
+      },
     ],
   },
   {

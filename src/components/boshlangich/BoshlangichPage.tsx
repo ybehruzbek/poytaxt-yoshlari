@@ -22,7 +22,7 @@ export function BoshlangichPage({ crumbs }: { crumbs: ReactNode }) {
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Boşlanğiç taşkilotlar</h1>
+          <h1 className="h2 pg-title">Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar</h1>
           <p className="pg-lead">
             Toşkent şahridagi oliy taʼlim taşkilotlarida faoliyat yuritayotgan Özbekiston yoşlar
             ittifoqi boşlanğiç taşkilotlari va ularning yoşlar yetakçilari.

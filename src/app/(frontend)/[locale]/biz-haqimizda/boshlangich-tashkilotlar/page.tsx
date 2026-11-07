@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { BoshlangichPage as Content } from '@/components/boshlangich/BoshlangichPage'
+import { BtHub as Content } from '@/components/boshlangich/BtHub'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
@@ -9,14 +9,16 @@ import '../../../boshlangich.css'
 export const metadata: Metadata = {
   title: 'Boşlanğiç taşkilotlar — Özbekiston yoşlar ittifoqi',
   description:
-    'Toşkent şahridagi oliy taʼlim taşkilotlaridagi Özbekiston yoşlar ittifoqi boşlanğiç taşkilotlari va ularning yoşlar yetakçilari.',
+    'Özbekiston yoşlar ittifoqining Toşkent şahridagi boşlanğiç taşkilotlari: oliy taʼlim taşkilotlarida hamda harbiy qismlar va muassasalarda.',
 }
 
-/** «Boşlanğiç taşkilotlar» sahifasi (mazmun: components/boshlangich/data.ts) */
-export default async function BoshlangichRoute(props: { params: Promise<{ locale: Locale }> }) {
+/** “Boşlanğiç taşkilotlar” — ikki yönaliş: oliy taʼlim taşkilotlari va harbiy qismlar */
+export default async function BtHubRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
+  const L = (h: string) => `/${locale}${h}`
   return (
     <Content
+      L={L}
       crumbs={<PageCrumbs locale={locale} path="/biz-haqimizda/boshlangich-tashkilotlar" />}
     />
   )
