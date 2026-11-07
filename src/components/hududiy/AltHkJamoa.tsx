@@ -48,6 +48,16 @@ function Reach({ m, full }: { m: Member; full?: boolean }) {
   )
 }
 
+/** F.I.Ş. har doim 3 qatorda: familiya / ism / ota ismi */
+function Name({ n }: { n: string }) {
+  const [a, b, ...c] = n.split(' ')
+  return (
+    <h3 className="z5-name">
+      <span>{a}</span> <span>{b}</span> <span>{c.join(' ')}</span>
+    </h3>
+  )
+}
+
 function Duties({ list }: { list?: string[] }) {
   if (!list) return null
   return (
@@ -70,7 +80,7 @@ function Hero({ m }: { m: Member }) {
       <img className="z5-hero-mark" src="/img/ittifoq/belgi.png" alt="" aria-hidden="true" />
       <img className="z5-hero-ph" src={m.img} alt={m.name} />
       <div className="z5-hero-txt">
-        <h3>{m.name}</h3>
+        <Name n={m.name} />
         <p>{m.role}</p>
         <Reach m={m} full />
         <Duties list={m.duties} />
@@ -83,9 +93,9 @@ function Card({ m }: { m: Member }) {
   return (
     <article className="z5-card">
       <div className="z5-card-txt">
-        <h3>{m.name}</h3>
+        <Name n={m.name} />
         <p>{m.role}</p>
-        {m.dept && <small>{m.dept}</small>}
+        {m.dept && <small title={m.dept}>{m.dept}</small>}
         <Reach m={m} />
       </div>
       <img className="z5-card-ph" src={m.img} alt={m.name} loading="lazy" />

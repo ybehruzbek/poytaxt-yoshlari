@@ -58,6 +58,12 @@
   color: var(--muted);
 }
 
+/* F.I.Ş. — 3 qator */
+.z5-name span {
+  display: block;
+  white-space: nowrap;
+}
+
 /* Kartalar */
 .z5-grid {
   margin-top: 20px;
@@ -95,7 +101,11 @@
   color: var(--muted);
 }
 .z5-card-txt > small {
-  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
   margin-top: 6px;
   font-size: 13px;
   line-height: 1.45;
@@ -105,10 +115,12 @@
 .z5-card-ph {
   grid-column: 2;
   grid-row: 1;
-  align-self: end;
+  align-self: stretch;
   display: block;
   width: 170px;
-  height: 227px;
+  height: auto;
+  min-height: 227px;
+  margin-top: 34px;
   object-fit: cover;
   object-position: top;
   mix-blend-mode: multiply;
@@ -247,7 +259,8 @@
   }
   .z5-card-ph {
     width: 140px;
-    height: 187px;
+    min-height: 187px;
+    margin-top: 28px;
   }
   .z5-card .z5-duty {
     padding: 14px 22px;
@@ -393,6 +406,7 @@
   justify-self: center;
   width: 180px;
   height: 240px;
+  min-height: 0;
   margin-top: 20px;
 }
 .z7 .z5-card-txt {
