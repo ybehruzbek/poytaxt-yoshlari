@@ -13,8 +13,8 @@ const PANEL: PanelSection[] = [{ name: 'btv', label: 'Sahifa körinişi', count:
 const VIEWS: View[] = ['a', 'b', 'c', 'd']
 
 /**
- * «Boşlanğiç taşkilotlar» sahifasi: yöl va sarlavha, raqamlar, OTM turi böyiça saralaş va qidiruv,
- * yetakçilar kartalari (surat, F.I.Ş., OTM, aloqa şabloni), oxirida vakant OTMlar.
+ * «Boşlanğiç taşkilotlar» sahifasi: yöl va sarlavha, raqamlar, OTT turi böyiça saralaş va qidiruv,
+ * yetakçilar kartalari (surat, F.I.Ş., OTT, aloqa şabloni), oxirida vakant OTTlar.
  */
 export function BoshlangichPage({ crumbs }: { crumbs: ReactNode }) {
   return (

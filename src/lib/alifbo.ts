@@ -9,6 +9,7 @@
  *   Oddiy apostrof ', o'ng qo'shtirnoq ’, teskari ‘ va ʻ tutuq o'rnida ishlatilmaydi.
  *   s va h alohida tovush bo'lsa, ular orasidagi tutuq saqlanadi va Ş ga aylanmaydi: Isʼhoq, musʼhaf.
  *   Qo'shtirnoq — faqat “…” (U+201C / U+201D). Ruscha «…» va „…“ ishlatilmaydi: «Yoshlar kuni» → “Yoshlar kuni”.
+ *   Atama: oliy ta'lim tashkiloti — OTT (OTM emas).
  *
  * Bu fayl — qoidaning yagona manbai: sayt matnlari (scripts/imlo.mjs), admin paneldan saqlanadigan
  * kontent (Payload hook) va tekshiruv shu funksiyalardan foydalanadi.
@@ -39,6 +40,8 @@ const RULES: Array<[RegExp, string]> = [
   [/„([^“”„]*)“/g, '\u201C$1\u201D'],
   [/[«„]/g, '\u201C'],
   [/»/g, '\u201D'],
+  // atama: oliy taʼlim taşkiloti — OTT (OTM emas): OTMlarda → OTTlarda
+  [/\bOTM(?!S\b)/g, 'OTT'],
 ]
 
 /**

@@ -160,7 +160,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '26.08.2020',
         t: 'Vazirlar Mahkamasining 517-son qarori',
-        d: 'Nizomning 17¹-bandiga köra Ittifoq boşlanğiç taşkilotiga yetakçilik qilayotgan OTM professor-öqituvçi va xodimlariga har oy katta öqituvçi lavozim maoşining 50 foizi miqdorida qöşimça haq tölanadi.',
+        d: 'Nizomning 17¹-bandiga köra Ittifoq boşlanğiç taşkilotiga yetakçilik qilayotgan OTT professor-öqituvçi va xodimlariga har oy katta öqituvçi lavozim maoşining 50 foizi miqdorida qöşimça haq tölanadi.',
         href: 'https://lex.uz/uz/docs/-4969845',
         kind: 'Qaror',
         org: 'Vazirlar Mahkamasining qarori',

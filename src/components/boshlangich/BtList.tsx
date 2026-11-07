@@ -68,7 +68,7 @@ const FILTERS: Array<{ k: 'all' | OtmType; t: string }> = [
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
-/** VAQTINCHA: dizayn variantlari — a: katta kartalar, b: ixçam röyxat, c: portret galereyasi, d: OTM markazda */
+/** VAQTINCHA: dizayn variantlari — a: katta kartalar, b: ixçam röyxat, c: portret galereyasi, d: OTT markazda */
 export type View = 'a' | 'b' | 'c' | 'd'
 
 const Ghost = ({ className }: { className: string }) => (
@@ -87,7 +87,7 @@ function Name3({ n, className }: { n: string; className: string }) {
   )
 }
 
-/** Yetakçili OTM kartasi — tanlangan körinişda */
+/** Yetakçili OTT kartasi — tanlangan körinişda */
 function Lead({ o, view }: { o: Otm; view: View }) {
   const L = o.leader!
   if (view === 'b')
@@ -143,7 +143,7 @@ function Lead({ o, view }: { o: Otm; view: View }) {
   )
 }
 
-/** Vakant OTM kartasi — tanlangan körinişda */
+/** Vakant OTT kartasi — tanlangan körinişda */
 function Vac({ o, view }: { o: Otm; view: View }) {
   if (view === 'b')
     return (
@@ -194,7 +194,7 @@ function Vac({ o, view }: { o: Otm; view: View }) {
   )
 }
 
-/** Saralaş (OTM turi) va qidiruv bilan kartalar: avval yetakçili OTMlar, oxirida vakantlar */
+/** Saralaş (OTT turi) va qidiruv bilan kartalar: avval yetakçili OTTlar, oxirida vakantlar */
 export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
   const [type, setType] = useState<'all' | OtmType>('all')
   const [q, setQ] = useState('')
@@ -213,7 +213,7 @@ export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
   return (
     <>
       <div className="bt-tools">
-        <div className="bt-chips" role="group" aria-label="OTM turi">
+        <div className="bt-chips" role="group" aria-label="OTT turi">
           {FILTERS.map((f) => (
             <button
               key={f.k}
@@ -233,7 +233,7 @@ export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="OTM yoki yetakçi nomi"
+            placeholder="OTT yoki yetakçi nomi"
           />
         </label>
       </div>

@@ -29,7 +29,7 @@ export const NAV: NavGroup[] = [
       { label: 'Özbekiston yoşlar ittifoqi', href: '/biz-haqimizda/ittifoq', desc: 'Taşkilot tarixi, maqsad va vazifalari' },
       { label: 'Markaziy Kengaş', href: '/biz-haqimizda/markaziy-kengash', desc: 'Ittifoqning respublika darajasidagi boşqaruvi' },
       { label: 'Toşkent şahar hududiy Kengaşi', href: '/biz-haqimizda/hududiy-kengash', desc: 'Poytaxt Kengaşi jamoasi' },
-      { label: 'Boşlanğiç taşkilotlar', href: '/biz-haqimizda/boshlangich-tashkilotlar', desc: 'OTMlardagi yoşlar yetakçilari' },
+      { label: 'Boşlanğiç taşkilotlar', href: '/biz-haqimizda/boshlangich-tashkilotlar', desc: 'OTTlardagi yoşlar yetakçilari' },
     ],
   },
   {
@@ -38,14 +38,14 @@ export const NAV: NavGroup[] = [
     intro: 'Yönalişlar, boşlanğiç taşkilotlar, yetakçilar va loyihalar.',
     items: [
       { label: 'Faoliyat yönalişlari', href: '/faoliyat/yonalishlar', desc: 'Kengaşning ustuvor yönalişlari' },
-      { label: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar', href: '/faoliyat/otm-tashkilotlar', desc: 'Poytaxt OTMlaridagi taşkilotlar' },
+      { label: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar', href: '/faoliyat/otm-tashkilotlar', desc: 'Poytaxt OTTlaridagi taşkilotlar' },
       { label: 'Harbiy qismlardagi boşlanğiç taşkilotlar', href: '/faoliyat/harbiy-tashkilotlar', desc: 'Harbiy qismlardagi taşkilotlar' },
       {
         label: 'Yoşlar yetakçilari',
         href: '/faoliyat/yetakchilar',
-        desc: 'OTM va harbiy qismlardagi yetakçilar',
+        desc: 'OTT va harbiy qismlardagi yetakçilar',
         children: [
-          { label: 'OTMlardagi yetakçilar', href: '/faoliyat/yetakchilar/otm' },
+          { label: 'OTTlardagi yetakçilar', href: '/faoliyat/yetakchilar/otm' },
           { label: 'Harbiy qismlardagi yetakçilar', href: '/faoliyat/yetakchilar/harbiy' },
         ],
       },

@@ -21,9 +21,9 @@ export type Leader = { name: string; img: string } & Contacts
 export type Otm = { otm: string; type: OtmType; leader?: Leader }
 
 export const TYPE_LABEL: Record<OtmType, string> = {
-  davlat: 'Davlat OTM',
-  xorijiy: 'Xorijiy OTM filiali',
-  nodavlat: 'Nodavlat OTM',
+  davlat: 'Davlat OTT',
+  xorijiy: 'Xorijiy OTT filiali',
+  nodavlat: 'Nodavlat OTT',
 }
 
 /** Rasmiy röyxat tartibida: davlat, xorijiy, nodavlat */

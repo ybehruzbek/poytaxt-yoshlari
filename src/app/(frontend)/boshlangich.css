@@ -470,7 +470,7 @@ svg.bt-row-ph {
   font-size: 14px;
 }
 
-/* ---------- D — OTM markazda ---------- */
+/* ---------- D — OTT markazda ---------- */
 .bt-grid--d {
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;

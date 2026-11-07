@@ -72,7 +72,7 @@ const ITEMS: Array<{ title: string; cat: Cat; img: string; excerpt: string; body
     body: ['Forum iştirokçilari taşabbuslar böyiça takliflar bildirdi.'],
   },
   {
-    title: 'OTM boşlanğiç taşkilotlari koordinatorlari bilan yiğiliş',
+    title: 'OTT boşlanğiç taşkilotlari koordinatorlari bilan yiğiliş',
     cat: 'boshlangich',
     img: 'about-3.jpg',
     excerpt: 'Yiğilişda yangi öquv yili uçun iş rejasi va ustuvor vazifalar belgilab olindi.',
