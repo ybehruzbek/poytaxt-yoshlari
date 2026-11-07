@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { ABOUT, BASIS, CHAIR, DEPTS, RECEPTION, SHOTS, STATS } from './data'
+import { ABOUT, BASIS, CHAIR, DEPTS, RECEPTION, SHOTS, TASKS } from './data'
 
 type P = { L: (h: string) => string }
 
@@ -34,11 +34,12 @@ export function AboutB(_: P) {
             </p>
           ))}
         </div>
-        <div className="z1-ab-band">
-          {STATS.map((s) => (
-            <div key={s.l}>
-              <b>{s.v}</b>
-              <span>{s.l}</span>
+        <h3 className="hk-tasks-h">Asosiy vazifalari</h3>
+        <div className="z1-ab-band hk-tasks">
+          {TASKS.map((t, i) => (
+            <div key={t}>
+              <b>{pad(i)}</b>
+              <span>{t}</span>
             </div>
           ))}
         </div>
@@ -66,11 +67,12 @@ export function AboutC(_: P) {
             {ABOUT.paras.map((t) => (
               <p key={t}>{t}</p>
             ))}
-            <div className="z1-ac-stats">
-              {STATS.map((s) => (
-                <div key={s.l}>
-                  <b>{s.v}</b>
-                  <span>{s.l}</span>
+            <h3 className="hk-tasks-h">Asosiy vazifalari</h3>
+            <div className="z1-ac-stats hk-tasks">
+              {TASKS.map((t, i) => (
+                <div key={t}>
+                  <b>{pad(i)}</b>
+                  <span>{t}</span>
                 </div>
               ))}
             </div>

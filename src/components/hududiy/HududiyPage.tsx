@@ -19,7 +19,7 @@ import {
   ORGS,
   RECEPTION,
   SHOTS,
-  STATS,
+  TASKS,
 } from './data'
 import { HkVariants } from './variants'
 
@@ -74,11 +74,12 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
               ))}
             </div>
           </div>
-          <div className="it-stats">
-            {STATS.map((s) => (
-              <div key={s.l}>
-                <b>{s.v}</b>
-                <span>{s.l}</span>
+          <h3 className="hk-tasks-h">Asosiy vazifalari</h3>
+          <div className="it-stats hk-tasks">
+            {TASKS.map((t, i) => (
+              <div key={t}>
+                <b>{pad(i)}</b>
+                <span>{t}</span>
               </div>
             ))}
           </div>

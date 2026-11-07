@@ -12,20 +12,20 @@ export const BASIS =
   'Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova asosida'
 
 export const ABOUT = {
-  lead: 'Toşkent şahar hududiy Kengaşi — Ittifoqning poytaxtdagi vakolatli tuzilmasi.',
+  lead: 'Toşkent şahar hududiy Kengaşi — Özbekiston yoşlar ittifoqining poytaxtdagi vakolatli tuzilmasi.',
   paras: [
-    'Kengaş şahardagi oliy taʼlim taşkilotlari, harbiy qismlar va boşqa muassasalardagi boşlanğiç taşkilotlarni röyxatga oladi, ularga uslubiy yordam beradi va faoliyatini muvofiqlaştiradi.',
-    'Kengaş apparati rahbariyat va tört bölimdan iborat. Har bir bölim öz yönalişi böyiça Kengaş faoliyatini olib boradi, fuqarolar murojaatlarini qabul qiladi va körib çiqadi.',
+    'Kengaş şahardagi oliy taʼlim taşkilotlari, harbiy qismlar va boşqa muassasalardagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiradi va ularga uslubiy yordam beradi.',
+    'Kengaş Ittifoq Ustavi, Markaziy Kengaş va uning Ijroiya qömitasi qarorlari asosida faoliyat yuritadi, idora va taşkilotlarda Ittifoqning vakolatli vakili sifatida iş olib boradi.',
   ],
 }
 
-export type Stat = { v: string; l: string }
-
-export const STATS: Stat[] = [
-  { v: '9', l: 'nafar xodim — Kengaş apparati' },
-  { v: '4', l: 'bölim öz yönalişi böyiça iş olib boradi' },
-  { v: '97', l: 'oliy taʼlim taşkiloti poytaxtda faoliyat yuritadi' },
-  { v: '5', l: 'kun — haftalik qabul jadvali' },
+/** Kengaşning asosiy vazifalari (apparat bölimlari vazifalaridan umumlaştirilgan) */
+export const TASKS: string[] = [
+  'Boşlanğiç taşkilotlarni röyxatga oladi, ularga uslubiy yordam beradi va faoliyatini muvofiqlaştiradi',
+  'Yoşlarning huquq va manfaatlarini himoya qiladi, fuqarolar murojaatlarini körib çiqadi',
+  'Yoşlarni harbiy-vatanparvarlik ruhida tarbiyalaş tadbirlarini amalga oşiradi',
+  'Yoşlar yetakçilari uçun öquvlar taşkil etadi, namunali yetakçilarni taqdirlaşga tavsiya etadi',
+  'Ittifoq faoliyati haqida jamoatçilikni OAV va ijtimoiy tarmoqlar orqali muntazam xabardor qiladi',
 ]
 
 export type Person = { name: string; role: string; img: string }
