@@ -52,7 +52,6 @@ const IC = {
     'M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z',
   mail: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6',
   send: 'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
-  door: 'M3 21h18M6 21V3h12v18M14 12h.01',
   clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm0-14v4l3 2',
 }
 
@@ -184,40 +183,38 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
                     <p>{m.role}</p>
                     {m.dept && <small>{m.dept}</small>}
                   </div>
-                  <ul className="hk-lead-con">
-                    {g.lead && (
-                      <>
+                  {(g.lead || m.reception) && (
+                    <ul className="hk-lead-con">
+                      {g.lead && (
+                        <>
+                          <li>
+                            <Ic d={IC.phone} />
+                            <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+                          </li>
+                          <li>
+                            <Ic d={IC.mail} />
+                            <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+                          </li>
+                          <li>
+                            <Ic d={IC.send} />
+                            <a
+                              href={CHAIR.socials[0]?.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {CHAIR.socials[0]?.handle}
+                            </a>
+                          </li>
+                        </>
+                      )}
+                      {m.reception && (
                         <li>
-                          <Ic d={IC.phone} />
-                          <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+                          <Ic d={IC.clock} />
+                          <span>{m.reception}</span>
                         </li>
-                        <li>
-                          <Ic d={IC.mail} />
-                          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-                        </li>
-                        <li>
-                          <Ic d={IC.send} />
-                          <a
-                            href={CHAIR.socials[0]?.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {CHAIR.socials[0]?.handle}
-                          </a>
-                        </li>
-                      </>
-                    )}
-                    <li>
-                      <Ic d={IC.door} />
-                      <span>{m.room}</span>
-                    </li>
-                    {m.reception && (
-                      <li>
-                        <Ic d={IC.clock} />
-                        <span>{m.reception}</span>
-                      </li>
-                    )}
-                  </ul>
+                      )}
+                    </ul>
+                  )}
                   {m.duties && (
                     <details className="hk-duty">
                       <summary>
