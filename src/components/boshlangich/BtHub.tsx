@@ -23,7 +23,7 @@ const DIRS: Dir[] = [
     t: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar',
     d: 'Davlat, nodavlat va xorijiy oliy taʼlim taşkilotlarining filiallaridagi boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
     href: '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim',
-    go: 'Yetakçilarni köriş',
+    go: 'Sahifaga ötiş',
     stats: [
       { v: String(OTMS.length), t: 'Oliy taʼlim taşkiloti' },
       { v: String(LED.length), t: 'Yoşlar yetakçisi' },
