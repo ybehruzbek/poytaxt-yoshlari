@@ -18,13 +18,10 @@ export function ProjectsList({
   projects,
   dirs,
   base,
-  view = 'a',
 }: {
   projects: Project[]
   dirs: Array<{ slug: DirSlug; title: string }>
   base: string
-  /** VAQTINÇA: dizayn varianti — a kartalar, b keng qatorlar, c jurnal */
-  view?: 'a' | 'b' | 'c'
 }) {
   const [dir, setDir] = useState<'all' | DirSlug>('all')
   const [st, setSt] = useState<'all' | Project['status']>('all')
@@ -91,80 +88,26 @@ export function ProjectsList({
         </div>
       </div>
       <p className="fa-count">{list.length} ta loyiha</p>
-      {view === 'b' && (
-        <div className="vb-plist">
-          {list.map((p) => (
-            <Link key={p.slug} href={`${base}/${p.slug}`} className="vb-plist-i">
-              <img src={p.cover} alt="" loading="lazy" />
-              <span className="vb-plist-t">
-                <span className="fa-proj-dir">{title(p.dir)}</span>
-                <strong>{p.title}</strong>
-                <p>{p.lead}</p>
-              </span>
-              <span className="vb-plist-m">
-                <span className="fa-status" data-s={p.status}>
-                  {STATUS[p.status]}
-                </span>
-                <span>{p.period}</span>
-                <span className="fa-go">
-                  Batafsil <span aria-hidden="true">→</span>
-                </span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      )}
 
-      {view === 'c' && (
-        <div className="vc-mag">
-          {list.map((p, i) => (
-            <Link
-              key={p.slug}
-              href={`${base}/${p.slug}`}
-              className={i === 0 ? 'vc-mag-i vc-mag-big' : 'vc-mag-i'}
-            >
-              <img src={p.cover} alt="" loading="lazy" />
-              <span className="vc-mag-t">
-                <small>
-                  {title(p.dir)} · {STATUS[p.status]}
-                </small>
-                <strong>{p.title}</strong>
-                {i === 0 && <span>{p.lead}</span>}
-              </span>
-            </Link>
-          ))}
-        </div>
-      )}
+      <div className="vc-mag">
+        {list.map((p, i) => (
+          <Link
+            key={p.slug}
+            href={`${base}/${p.slug}`}
+            className={i === 0 ? 'vc-mag-i vc-mag-big' : 'vc-mag-i'}
+          >
+            <img src={p.cover} alt="" loading="lazy" />
+            <span className="vc-mag-t">
+              <small>
+                {title(p.dir)} · {STATUS[p.status]}
+              </small>
+              <strong>{p.title}</strong>
+              {i === 0 && <span>{p.lead}</span>}
+            </span>
+          </Link>
+        ))}
+      </div>
 
-      {view === 'a' && (
-        <div className="fa-projs">
-          {list.map((p) => (
-            <Link key={p.slug} href={`${base}/${p.slug}`} className="fa-proj">
-              <span className="fa-proj-ph">
-                {p.cover ? (
-                  <img src={p.cover} alt="" loading="lazy" />
-                ) : (
-                  <span className="fa-ev-noph" />
-                )}
-                <span className="fa-status" data-s={p.status}>
-                  {STATUS[p.status]}
-                </span>
-              </span>
-              <span className="fa-proj-txt">
-                <span className="fa-proj-dir">{title(p.dir)}</span>
-                <strong>{p.title}</strong>
-                <p>{p.lead}</p>
-                <span className="fa-proj-foot">
-                  <span>{p.period}</span>
-                  <span className="fa-go">
-                    Batafsil <span aria-hidden="true">→</span>
-                  </span>
-                </span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      )}
       {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
     </>
   )

@@ -4,10 +4,10 @@ import type { ReactNode } from 'react'
 
 import { ANNOUNCEMENTS } from './announcements'
 import { AnnounceList } from './AnnounceList'
-import { DIRECTIONS, dirProjects, dirTitle, PROJECTS, REPORT_2025, YEARS } from './data'
+import { DIRECTIONS, dirProjects, dirTitle, PROJECTS } from './data'
 import { EVENTS } from './events'
 import { EventsList } from './EventsList'
-import { DirB, DirC, DirsList, ProjB, ProjC, ResultsB, ResultsC } from './FaVariants'
+import { DirB, DirC, DirsList, ProjB, ProjC, ResultsB } from './FaVariants'
 import { ProjectsList } from './ProjectsList'
 import { V, VPanel } from './Var'
 import { fmtDate, type Project, TG } from './types'
@@ -166,19 +166,13 @@ export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string
       />
       <section className="sec fa-sec">
         <div className="wrap">
-          {(['a', 'b', 'c'] as const).map((k) => (
-            <V key={k} name="flo" k={k}>
-              <ProjectsList
-                view={k}
-                projects={PROJECTS}
-                dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))}
-                base={base}
-              />
-            </V>
-          ))}
+          <ProjectsList
+            projects={PROJECTS}
+            dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))}
+            base={base}
+          />
         </div>
       </section>
-      <VPanel name="flo" label="Loyihalar" />
     </div>
   )
 }
@@ -360,18 +354,9 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
             <Link href={annHref}>Eʼlonlar sahifasida</Link>.
           </p>
           <h2 className="fa-h2">Tadbirlar arxivi</h2>
-          {(['a', 'b', 'c'] as const).map((k) => (
-            <V key={k} name="ftd" k={k}>
-              <EventsList
-                view={k}
-                events={past}
-                dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))}
-              />
-            </V>
-          ))}
+          <EventsList events={past} dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))} />
         </div>
       </section>
-      <VPanel name="ftd" label="Tadbirlar arxivi" />
     </div>
   )
 }
@@ -388,14 +373,9 @@ export function AnnouncePage({ crumbs }: { crumbs: ReactNode }) {
       />
       <section className="sec fa-sec">
         <div className="wrap">
-          {(['a', 'b', 'c'] as const).map((k) => (
-            <V key={k} name="fel" k={k}>
-              <AnnounceList view={k} items={ANNOUNCEMENTS} />
-            </V>
-          ))}
+          <AnnounceList items={ANNOUNCEMENTS} />
         </div>
       </section>
-      <VPanel name="fel" label="Eʼlonlar" />
     </div>
   )
 }
@@ -410,67 +390,7 @@ export function ResultsPage({ crumbs }: { crumbs: ReactNode }) {
         title="Natijalar va hisobotlar"
         lead="Kengaş faoliyatining yillar kesimidagi asosiy natijalari. Barça raqamlar Kengaşning rasmiy eʼlonlaridan olingan va asl manbaga bog‘langan."
       />
-      <V name="fna" k="a">
-        <section className="sec fa-sec">
-          <div className="wrap">
-            <div className="fa-big">
-              <div className="fa-big-h">
-                <h2>2025-yil yakunlari</h2>
-                <a href={TG(REPORT_2025.post)} target="_blank" rel="noopener noreferrer">
-                  Rasmiy hisobot ↗
-                </a>
-              </div>
-              <dl className="fa-nums">
-                {REPORT_2025.nums.map((n) => (
-                  <div key={n.t}>
-                    <dt>{n.t}</dt>
-                    <dd>{n.v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="fa-years">
-              {YEARS.map((y) => (
-                <section key={y.y} className="fa-year">
-                  <b>{y.y}</b>
-                  <ul>
-                    {y.items.map((it) => (
-                      <li key={it.text}>
-                        <span>
-                          {it.text}
-                          <Src id={it.post} />
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))}
-            </div>
-
-            <div className="fa-report">
-              <svg viewBox="0 0 54 64" aria-hidden="true">
-                <path d="M4 2h32l14 14v46H4z" />
-                <path d="M36 2v14h14M14 30h26M14 40h26M14 50h16" />
-              </svg>
-              <div>
-                <h3>Yillik hisobotlar</h3>
-                <p>
-                  Kengaşning yillik hisobotlari PDF şaklida şu yerda eʼlon qilinadi. Hozirça
-                  hisobotlar “Poytaxt yoşlari” kanalida eʼlon qilinadi.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </V>
-      <V name="fna" k="b">
-        <ResultsB />
-      </V>
-      <V name="fna" k="c">
-        <ResultsC />
-      </V>
-      <VPanel name="fna" label="Natijalar" />
+      <ResultsB />
     </div>
   )
 }
