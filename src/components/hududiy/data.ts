@@ -28,7 +28,13 @@ export const TASKS: string[] = [
   'Ittifoq faoliyati haqida jamoatçilikni OAV va ijtimoiy tarmoqlar orqali muntazam xabardor qiladi',
 ]
 
-export type Person = { name: string; role: string; img: string }
+export type Person = {
+  name: string
+  role: string
+  img: string
+  /** xodimning xizmat (funksional) vazifalari; bölmasa — bölim vazifalari körsatiladi */
+  duties?: string[]
+}
 
 export const CHAIR = {
   name: 'Anvarov Şukurulloxon Maqsudxon öğli',
@@ -104,7 +110,21 @@ export const DEPTS: Dept[] = [
       'Yoşlarni harbiy-vatanparvarlik ruhida tarbiyalaş tadbirlarini amalga oşiradi',
       'Yetakçilar uçun öquvlar taşkil etadi, uslubiy qöllanma va tavsiyalar tayyorlaydi',
     ],
-    staff: [{ name: 'Ismoilov Sarvar Umar öğli', role: 'Bölim boşliği', img: P('ismoilov') }],
+    staff: [
+      {
+        name: 'Ismoilov Sarvar Umar öğli',
+        role: 'Bölim boşliği',
+        img: P('ismoilov'),
+        duties: [
+          'Boşlanğiç taşkilotlar va ularning yetakçilariga oid maʼlumotlarni, aʼzolar hisobi va hisobotini yuritadi',
+          'Harbiy-vatanparvarlik tarbiyasi böyiça çora-tadbirlarni amalga oşiradi',
+          'Taşkilotlar faoliyatini örganadi, kamçiliklarni bartaraf etiş işlarini taşkil etadi va nazorat qiladi',
+          'Öquvlarning tematik rejalarini işlab çiqadi, tajribali mutaxassislarni jalb etadi',
+          'Xizmat doirasidagi maʼlumot va hujjatlar saqlanişiga javob beradi',
+          'Bölimda yiğmajildlar nomenklaturasining töğri yuritilişiga masʼul',
+        ],
+      },
+    ],
   },
   {
     key: 'buxgalteriya',
@@ -118,7 +138,20 @@ export const DEPTS: Dept[] = [
       'Byudjetdan taşqari mablağlar jalb qiliş imkoniyatlarini izlaydi',
     ],
     staff: [
-      { name: 'Temirov Dilşod Saloxiddin öğli', role: 'Bölim boşliği', img: P('d-temirov') },
+      {
+        name: 'Temirov Dilşod Saloxiddin öğli',
+        role: 'Bölim boşliği',
+        img: P('d-temirov'),
+        duties: [
+          'Bölimga kelgan hujjat, xat, ariza va şikoyatlarni körib çiqadi, javob xatlarini tayyorlaydi',
+          'Byudjet va smeta loyihalarini şakllantiradi, pul mablağlarining töğri sarflanişini nazorat qiladi',
+          'Iş haqi va unga tenglaştirilgan tölovlarni hisoblaydi va tölanişini taʼminlaydi',
+          'Moliyaviy hisobotlarni belgilangan muddatlarda tuzadi va topşiradi, boş jurnal kitobini yuritadi',
+          'Inventarizatsiya natijalarini öz vaqtida rasmiylaştiradi',
+          'Ştat, moliya va kassa intizomiga qatʼiy rioya etilişini taʼminlaydi',
+          'Moliya-buxgalteriya hujjatlari konfidensialligini taʼminlaydi',
+        ],
+      },
       {
         name: 'Saidburxonov Saidabzal Toxirxon öğli',
         role: 'Bölim boşliği',
@@ -142,6 +175,12 @@ export const DEPTS: Dept[] = [
         name: 'Temirov Oğabek Fazliddin öğli',
         role: 'Bölim boşliği, matbuot kotibi',
         img: P('o-temirov'),
+        duties: [
+          'Tizimdagi OAV faoliyatini kuzatadi, tadbirlarni yoritişga OAVni jalb etadi',
+          'Apparatning «Yoşlar press-klubi» faoliyatini muvofiqlaştiradi',
+          'Rasmiy veb-sayt va ijtimoiy tarmoqlardagi sahifalar işini muvofiqlaştiradi',
+          'Tadbir uçun masʼul şaxs bilan birgalikda press-xabarlar tayyorlaydi va tarqatadi',
+        ],
       },
       { name: 'Yunusov Yusufjon Muxsin öğli', role: 'Bölim boşliği', img: P('yunusov') },
     ],

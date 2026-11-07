@@ -6,7 +6,7 @@
 .hk-basis{color:var(--muted);font-size:14px;line-height:1.55;margin:-8px 0 28px;max-width:760px}
 
 
-/* Rahbariyat: kartoçka (rasm · ism va lavozim · aloqa) */
+/* Jamoa: rais → bölim boşliqlari → mutaxassislar; kartoçka (rasm · ism va lavozim · aloqa · vazifalar) */
 .hk-lead{display:grid;grid-template-columns:260px 1fr minmax(280px,.8fr);gap:48px;align-items:center;border:1px solid var(--line);border-radius:var(--r-card);padding:44px 56px}
 .hk-lead-ph{width:240px;height:240px;border-radius:50%;overflow:hidden;background:var(--soft)}
 .hk-lead-ph img{width:100%;height:100%;object-fit:cover;object-position:top}
@@ -17,31 +17,6 @@
 .hk-lead-con a:hover{color:var(--blue)}
 .hk-lead-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--blue);display:grid;place-items:center}
 .hk-lead-ic svg{width:20px;height:20px}
-
-/* Apparat tuzilmasi */
-.hk-depts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.hk-depts article{border:1px solid var(--line);border-radius:var(--r-card);padding:34px;display:flex;flex-direction:column;gap:14px}
-.hk-depts article:first-child{background:var(--navy);color:#fff;border-color:var(--navy)}
-.hk-dept-top{display:flex;justify-content:space-between;align-items:center}
-.hk-dept-top .it-num{margin:0}
-.hk-depts article:first-child .it-num{color:var(--yellow)}
-.hk-room{background:var(--soft);color:var(--navy);border-radius:99px;padding:7px 14px;font-weight:700;font-size:13px}
-.hk-depts h3{font:800 clamp(20px,1.8vw,24px)/1.3 var(--f-head);color:var(--navy)}
-.hk-depts article:first-child h3{color:var(--soft)}
-.hk-depts ul{list-style:none;display:grid;gap:9px;flex:1}
-.hk-depts li{padding-left:22px;position:relative;line-height:1.5;font-size:15px}
-.hk-depts li::before{content:'';position:absolute;left:0;top:7px;width:9px;height:9px;border-radius:50%;background:var(--yellow)}
-.hk-dept-head{border-top:1px solid var(--line);padding-top:16px;font-weight:700;color:var(--navy)}
-.hk-depts article:first-child .hk-dept-head{color:#fff;border-color:rgba(255,255,255,.2)}
-
-/* Jamoa */
-.hk-team-sec{background:var(--soft)}
-.hk-team{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.hk-team article{background:#fff;border-radius:var(--r-thumb);padding:20px;display:grid;grid-template-columns:96px 1fr;grid-template-rows:auto auto 1fr;column-gap:18px;row-gap:4px;align-items:start}
-.hk-team img{grid-row:1/4;width:96px;height:128px;object-fit:cover;object-position:top;border-radius:20px;background:var(--soft)}
-.hk-team h3{font:800 17px/1.3 var(--f-head);color:var(--navy)}
-.hk-team p{font-size:14px;font-weight:700;color:var(--blue)}
-.hk-team span{font-size:13px;color:var(--muted);line-height:1.45;align-self:end}
 
 /* Qabul jadvali */
 .hk-rec{list-style:none;border-top:1px solid var(--line)}
@@ -101,12 +76,10 @@
 .hk-con-list dd{font-weight:700;color:var(--navy);overflow-wrap:anywhere}
 .hk-con-list a:hover{color:var(--blue)}
 
-@media (max-width:1100px){
-  .hk-depts,.hk-org,.hk-con{grid-template-columns:1fr}
+@media (max-width:1100px){.hk-org,.hk-con{grid-template-columns:1fr}
   .hk-lead{grid-template-columns:200px 1fr;padding:36px;gap:32px}
   .hk-lead-ph{width:200px;height:200px}
   .hk-lead-con{grid-column:1/-1;grid-template-columns:1fr 1fr}
-  .hk-team{grid-template-columns:repeat(2,1fr)}
   .hk-rec li{grid-template-columns:130px 1fr auto;row-gap:6px}
   .hk-rec-time{grid-column:1;grid-row:2;font-size:14px}
   .hk-rec-who{grid-column:2;grid-row:1/3}
@@ -116,11 +89,9 @@
   .hk-shots figure:first-child img{min-height:300px}
 }
 @media (max-width:640px){
-  .hk-depts article{padding:26px 22px}
   .hk-lead{grid-template-columns:1fr;padding:28px 22px;justify-items:center;text-align:center}
   .hk-lead-ph{width:180px;height:180px}
   .hk-lead-con{grid-template-columns:1fr;justify-self:stretch;text-align:left}
-  .hk-team{grid-template-columns:1fr}
   .hk-rec li{grid-template-columns:1fr auto}
   .hk-rec-day{grid-column:1;grid-row:1}
   .hk-rec-time{grid-column:1;grid-row:2}
@@ -152,4 +123,37 @@
 }
 @media (max-width:640px){
   .hk .it-stats.hk-tasks,.hk .z1-ab-band.hk-tasks{grid-template-columns:1fr}
+}
+
+.hk-jm-head{flex-direction:column;align-items:flex-start;gap:8px}
+.hk-jm-head span{font-weight:700;font-size:14px;color:var(--blue);letter-spacing:.3px}
+.hk-jm-grp+.hk-jm-grp{margin-top:44px}
+.hk-jm-gt{font:800 22px/1.25 var(--f-head);color:var(--navy);margin-bottom:16px}
+.hk-jm-grp .hk-lead+.hk-lead{margin-top:14px}
+.hk-lead-main small{display:block;margin-top:8px;color:var(--muted);font-size:14px;line-height:1.5}
+.hk-lead--sm{grid-template-columns:160px 1fr minmax(260px,.8fr);padding:30px 40px;gap:36px}
+.hk-lead--sm .hk-lead-ph{width:150px;height:150px}
+.hk-lead--sm .hk-lead-main h3{font-size:clamp(20px,1.8vw,24px)}
+.hk-lead--sm .hk-lead-main p{font-size:16px;margin-top:8px;font-weight:700;color:var(--blue)}
+.hk-lead--sm .hk-lead-con{gap:12px}
+.hk-lead--sm .hk-lead-con li{font-size:15px}
+.hk-lead--sm .hk-lead-ic{width:38px;height:38px}
+.hk-duty{grid-column:1/-1;border-top:1px solid var(--line);padding-top:4px;margin-top:-8px}
+.hk-duty summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:14px 0 6px;font:800 17px/1.3 var(--f-head);color:var(--navy)}
+.hk-duty summary::-webkit-details-marker{display:none}
+.hk-duty summary span{width:34px;height:34px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:20px;transition:transform .2s}
+.hk-duty[open] summary span{transform:rotate(45deg)}
+.hk-duty summary:hover{color:var(--blue)}
+.hk-duty ol{list-style:none;counter-reset:d;display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;padding:10px 0 4px}
+.hk-duty li{counter-increment:d;display:flex;gap:12px;line-height:1.55}
+.hk-duty li::before{content:counter(d,decimal-leading-zero);flex:none;font:800 15px/1.55 var(--f-head);color:var(--blue)}
+@media (max-width:1100px){
+  .hk-lead--sm{grid-template-columns:150px 1fr;padding:28px}
+  .hk-lead--sm .hk-lead-ph{width:140px;height:140px}
+  .hk-duty ol{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .hk-lead--sm{grid-template-columns:1fr;padding:26px 20px}
+  .hk-lead--sm .hk-lead-ph{width:140px;height:140px}
+  .hk-duty{text-align:left;justify-self:stretch}
 }

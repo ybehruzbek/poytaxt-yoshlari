@@ -37,14 +37,12 @@ function V({ name, k, children }: { name: string; k: string; children: ReactNode
   )
 }
 
-/** Rahbariyat bölimi tanlangan (variantsiz) */
-const FIXED = 'hra'
+/** Jamoa bölimi tanlangan (variantsiz) */
+const FIXED = 'hjm'
 
 const PANEL: PanelSection[] = [
   ['hab', 'Kengaş haqida'],
-  ['hra', 'Rahbariyat'],
-  ['hap', 'Apparat tuzilmasi'],
-  ['hja', 'Apparat jamoasi'],
+  ['hjm', 'Jamoa'],
   ['hqa', 'Qabul kunlari'],
   ['hmu', 'Murojaat tartibi'],
   ['hbo', 'Boşlanğiç taşkilotlar'],
@@ -58,6 +56,7 @@ const IC = {
     'M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z',
   mail: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6',
   send: 'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
+  door: 'M3 21h18M6 21V3h12v18M14 12h.01',
   clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm0-14v4l3 2',
 }
 
@@ -78,6 +77,59 @@ function Ic({ d }: { d: string }) {
   )
 }
 
+type Member = {
+  name: string
+  role: string
+  img: string
+  dept?: string
+  room: string
+  reception?: string
+  duties?: string[]
+}
+
+const recOf = (name: string) => {
+  const r = RECEPTION.find((x) => x.name === name)
+  return r ? `${r.day} ${r.time}` : undefined
+}
+
+/** Jamoa: rais → bölim boşliqlari → mutaxassislar */
+const TEAM: { title: string; lead?: boolean; people: Member[] }[] = [
+  {
+    title: 'Rais',
+    lead: true,
+    people: [
+      {
+        ...CHAIR,
+        room: CHAIR.room,
+        reception: CHAIR.reception.replace(' · ', ' '),
+        duties: CHAIR.duties,
+      },
+    ],
+  },
+  {
+    title: 'Bölim boşliqlari',
+    people: DEPTS.flatMap((d) =>
+      d.staff
+        .filter((x) => x.role.startsWith('Bölim boşliği'))
+        .map((x) => ({
+          ...x,
+          dept: d.t,
+          room: d.room,
+          reception: recOf(x.name),
+          duties: x.duties ?? d.tasks,
+        })),
+    ),
+  },
+  {
+    title: 'Mutaxassislar',
+    people: DEPTS.flatMap((d) =>
+      d.staff
+        .filter((x) => !x.role.startsWith('Bölim boşliği'))
+        .map((x) => ({ ...x, dept: d.t, room: d.room, duties: x.duties })),
+    ),
+  },
+]
+
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
 /**
@@ -86,8 +138,6 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
  * boşlanğiç taşkilotlar, tadbirlardan lavhalar, aloqa.
  */
 export function HududiyPage({ L, crumbs, siblings }: P) {
-  const staff = DEPTS.flatMap((d) => d.staff.map((s) => ({ ...s, dept: d.short, room: d.room })))
-
   const sections: Record<string, ReactNode> = {
     hab: (
       <section className="sec">
@@ -115,94 +165,77 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
     ),
-    hra: (
-      <section className="sec">
+    hjm: (
+      <section className="sec" id="jamoa">
         <div className="wrap">
-          <div className="sec-head">
-            <h2 className="h2">Rahbariyat</h2>
-          </div>
-          <article className="hk-lead">
-            <div className="hk-lead-ph">
-              <img src={CHAIR.img} alt={CHAIR.name} />
-            </div>
-            <div className="hk-lead-main">
-              <h3>{CHAIR.name}</h3>
-              <p>{CHAIR.role}</p>
-            </div>
-            <ul className="hk-lead-con">
-              <li>
-                <Ic d={IC.phone} />
-                <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-              </li>
-              <li>
-                <Ic d={IC.mail} />
-                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-              </li>
-              <li>
-                <Ic d={IC.send} />
-                <a href={CHAIR.socials[0]?.href} target="_blank" rel="noopener noreferrer">
-                  {CHAIR.socials[0]?.handle}
-                </a>
-              </li>
-              <li>
-                <Ic d={IC.clock} />
-                <span>
-                  {CHAIR.reception.replace(' · ', ' ')} · {CHAIR.room}
-                </span>
-              </li>
-            </ul>
-          </article>
-        </div>
-      </section>
-    ),
-    hap: (
-      <section className="sec">
-        <div className="wrap">
-          <div className="sec-head">
-            <h2 className="h2">Apparat tuzilmasi</h2>
+          <div className="sec-head hk-jm-head">
+            <span>Özbekiston yoşlar ittifoqi</span>
+            <h2 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h2>
           </div>
           <p className="hk-basis">{BASIS}</p>
-          <div className="hk-depts">
-            {DEPTS.map((d, i) => (
-              <article key={d.key}>
-                <div className="hk-dept-top">
-                  <span className="it-num">{pad(i)}</span>
-                  <span className="hk-room">{d.room}</span>
-                </div>
-                <h3>{d.t}</h3>
-                <ul>
-                  {d.tasks.map((x) => (
-                    <li key={x}>{x}</li>
-                  ))}
-                </ul>
-                <p className="hk-dept-head">
-                  <small>Bölim boşliği</small>
-                  {d.staff[0]?.name}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-    ),
-    hja: (
-      <section className="sec hk-team-sec">
-        <div className="wrap">
-          <div className="sec-head">
-            <h2 className="h2">Kengaş apparati jamoasi</h2>
-          </div>
-          <div className="hk-team">
-            {staff.map((s) => (
-              <article key={s.name}>
-                <img src={s.img} alt={s.name} loading="lazy" />
-                <h3>{s.name}</h3>
-                <p>{s.role}</p>
-                <span>
-                  {s.dept} · {s.room}
-                </span>
-              </article>
-            ))}
-          </div>
+          {TEAM.map((g) => (
+            <div key={g.title} className="hk-jm-grp">
+              <h3 className="hk-jm-gt">{g.title}</h3>
+              {g.people.map((m) => (
+                <article key={m.name} className={`hk-lead${g.lead ? '' : ' hk-lead--sm'}`}>
+                  <div className="hk-lead-ph">
+                    <img src={m.img} alt={m.name} loading="lazy" />
+                  </div>
+                  <div className="hk-lead-main">
+                    <h3>{m.name}</h3>
+                    <p>{m.role}</p>
+                    {m.dept && <small>{m.dept}</small>}
+                  </div>
+                  <ul className="hk-lead-con">
+                    {g.lead && (
+                      <>
+                        <li>
+                          <Ic d={IC.phone} />
+                          <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+                        </li>
+                        <li>
+                          <Ic d={IC.mail} />
+                          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+                        </li>
+                        <li>
+                          <Ic d={IC.send} />
+                          <a
+                            href={CHAIR.socials[0]?.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {CHAIR.socials[0]?.handle}
+                          </a>
+                        </li>
+                      </>
+                    )}
+                    <li>
+                      <Ic d={IC.door} />
+                      <span>{m.room}</span>
+                    </li>
+                    {m.reception && (
+                      <li>
+                        <Ic d={IC.clock} />
+                        <span>{m.reception}</span>
+                      </li>
+                    )}
+                  </ul>
+                  {m.duties && (
+                    <details className="hk-duty">
+                      <summary>
+                        Vazifalari <span aria-hidden="true">+</span>
+                      </summary>
+                      <ol>
+                        {m.duties.map((x) => (
+                          <li key={x}>{x}</li>
+                        ))}
+                      </ol>
+                    </details>
+                  )}
+                </article>
+              ))}
+            </div>
+          ))}
         </div>
       </section>
     ),
