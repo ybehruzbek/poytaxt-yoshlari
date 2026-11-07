@@ -33,6 +33,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(dirname),
   },
+  // “Faoliyat → Yoşlar yetakçilari” olib taşlandi: yetakçilar endi “Biz haqimizda → Boşlanğiç taşkilotlar” da
+  async redirects() {
+    const to = '/:locale/biz-haqimizda/boshlangich-tashkilotlar'
+    return [
+      { source: '/:locale/faoliyat/yetakchilar', destination: to, permanent: true },
+      { source: '/:locale/faoliyat/yetakchilar/otm', destination: `${to}/oliy-talim`, permanent: true },
+      { source: '/:locale/faoliyat/yetakchilar/harbiy', destination: `${to}/harbiy`, permanent: true },
+    ]
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

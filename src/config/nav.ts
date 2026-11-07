@@ -43,20 +43,11 @@ export const NAV: NavGroup[] = [
   {
     key: 'faoliyat',
     label: 'Faoliyat',
-    intro: 'Yönalişlar, boşlanğiç taşkilotlar, yetakçilar va loyihalar.',
+    intro: 'Yönalişlar, boşlanğiç taşkilotlar va loyihalar.',
     items: [
       { label: 'Faoliyat yönalişlari', href: '/faoliyat/yonalishlar', desc: 'Kengaşning ustuvor yönalişlari' },
       { label: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar', href: '/faoliyat/otm-tashkilotlar', desc: 'Poytaxt OTTlaridagi taşkilotlar' },
       { label: 'Harbiy qismlardagi boşlanğiç taşkilotlar', href: '/faoliyat/harbiy-tashkilotlar', desc: 'Harbiy qismlardagi taşkilotlar' },
-      {
-        label: 'Yoşlar yetakçilari',
-        href: '/faoliyat/yetakchilar',
-        desc: 'OTT va harbiy qismlardagi yetakçilar',
-        children: [
-          { label: 'OTTlardagi yetakçilar', href: '/faoliyat/yetakchilar/otm' },
-          { label: 'Harbiy qismlardagi yetakçilar', href: '/faoliyat/yetakchilar/harbiy' },
-        ],
-      },
       { label: 'Loyihalar', href: '/faoliyat/loyihalar', desc: 'Kengaş va hamkorlar loyihalari' },
       { label: 'Tadbirlar va kalendar', href: '/faoliyat/tadbirlar', desc: 'Yaqin tadbirlar taqvimi' },
     ],
