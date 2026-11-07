@@ -24,14 +24,11 @@ export const NAV: NavGroup[] = [
   {
     key: 'biz',
     label: 'Biz haqimizda',
-    intro: 'Ittifoq, Kengaş va jamoamiz bilan tanişing.',
+    intro: 'Ittifoq, Markaziy Kengaş va poytaxt Kengaşi bilan tanişing.',
     items: [
       { label: 'Özbekiston yoşlar ittifoqi', href: '/biz-haqimizda/ittifoq', desc: 'Taşkilot tarixi, maqsad va vazifalari' },
       { label: 'Markaziy Kengaş', href: '/biz-haqimizda/markaziy-kengash', desc: 'Ittifoqning respublika darajasidagi boşqaruvi' },
-      { label: 'Toşkent şahar hududiy Kengaşi', href: '/biz-haqimizda/hududiy-kengash', desc: 'Poytaxt kengaşi faoliyati va tuzilmasi' },
-      { label: 'Rahbariyat', href: '/biz-haqimizda/rahbariyat', desc: 'Kengaş rahbarlari' },
-      { label: 'Jamoamiz', href: '/biz-haqimizda/jamoa', desc: 'Barça xodimlar' },
-      { label: 'Qabul kunlari', href: '/biz-haqimizda/qabul-kunlari', desc: 'Rahbariyat qabuli jadvali' },
+      { label: 'Toşkent şahar hududiy Kengaşi', href: '/biz-haqimizda/hududiy-kengash', desc: 'Poytaxt Kengaşi jamoasi' },
     ],
   },
   {
