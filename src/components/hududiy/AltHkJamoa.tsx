@@ -1,18 +1,15 @@
 /* eslint-disable @next/next/no-img-element -- xodimlar suratlari; CMS ulanganda next/image ga o'tadi */
-import { BASIS, CONTACT } from './data'
+import { CONTACT } from './data'
 import { IC, Ic, type Member, TEAM } from './team'
 
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 
 function Head() {
   return (
-    <>
-      <div className="sec-head hk-jm-head">
-        <span>Özbekiston yoşlar ittifoqi</span>
-        <h1 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h1>
-      </div>
-      <p className="hk-basis">{BASIS}</p>
-    </>
+    <div className="sec-head hk-jm-head">
+      <span>Özbekiston yoşlar ittifoqi</span>
+      <h1 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h1>
+    </div>
   )
 }
 

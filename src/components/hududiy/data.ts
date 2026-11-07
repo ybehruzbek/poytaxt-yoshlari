@@ -5,9 +5,6 @@
  * Keyinçalik admin paneldan boşqariladi.
  */
 
-export const BASIS =
-  'Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova asosida'
-
 export type Social = { net: 'Telegram' | 'Instagram' | 'Facebook'; handle: string; href: string }
 
 export type Person = {
