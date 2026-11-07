@@ -5,9 +5,6 @@
  * Keyinçalik admin paneldan boşqariladi.
  */
 
-export const INTRO =
-  'Poytaxtdagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiruvçi, yoşlar manfaatlari va huquqlarini himoya qiluvçi Ittifoqning hududiy tuzilmasi.'
-
 export const BASIS =
   'Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova asosida'
 
@@ -240,8 +237,4 @@ export const CONTACT = {
       href: 'https://www.facebook.com/share/1DZFdJ2wTc/',
     },
   ],
-}
-
-export const IMG = {
-  hero: '/img/hududiy/lavhalar/olimpiya.jpg',
 }

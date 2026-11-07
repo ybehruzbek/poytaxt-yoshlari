@@ -1,6 +1,6 @@
 /* =====================================================================
    «Toşkent şahar hududiy Kengaşi» sahifasi (/biz-haqimizda/hududiy-kengash).
-   Umumiy klasslar ittifoq.css (it-*) dan.
+   Hero yöq: sahifa jamoa bölimidan boşlanadi, yuqorida suzuvçi navbar uçun joy.
    ===================================================================== */
 
 .hk-basis{color:var(--muted);font-size:14px;line-height:1.55;margin:-8px 0 28px;max-width:760px}
@@ -9,5 +9,7 @@
 .hk-lead-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--blue);display:grid;place-items:center}
 .hk-lead-ic svg{width:20px;height:20px}
 
+.hk-jamoa{padding-top:96px}
+@media (max-width:640px){.hk-jamoa{padding-top:64px}}
 .hk-jm-head{flex-direction:column;align-items:flex-start;gap:8px}
 .hk-jm-head span{font-weight:700;font-size:14px;color:var(--blue);letter-spacing:.3px}

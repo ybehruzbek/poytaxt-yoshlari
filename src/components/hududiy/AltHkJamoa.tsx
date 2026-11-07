@@ -9,7 +9,7 @@ function Head() {
     <>
       <div className="sec-head hk-jm-head">
         <span>Özbekiston yoşlar ittifoqi</span>
-        <h2 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h2>
+        <h1 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h1>
       </div>
       <p className="hk-basis">{BASIS}</p>
     </>
