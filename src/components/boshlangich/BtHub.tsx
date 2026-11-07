@@ -2,15 +2,9 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
-
 import { OTMS } from './data'
 
 const LED = OTMS.filter((o) => o.leader)
-
-/** VAQTINCHA: dizayn variantlari faqat işlab çiqiş rejimida */
-const DEV = process.env.NODE_ENV !== 'production'
-const PANEL: PanelSection[] = [{ name: 'bth', label: 'Sahifa körinişi', count: 4 }]
 
 type Stat = { v: string; t: string; accent?: boolean }
 type Dir = {
@@ -48,8 +42,6 @@ const DIRS: Dir[] = [
   },
 ]
 
-type V = 'a' | 'b' | 'c' | 'd'
-
 function Stats({ s }: { s: Stat[] }) {
   return (
     <dl className="bt-stats">
@@ -72,77 +64,29 @@ const Shield = () => (
   </svg>
 )
 
-/** Bitta yönaliş kartasi — tanlangan körinişda */
-function Dir({ x, view, L }: { x: Dir; view: V; L: (h: string) => string }) {
-  const href = L(x.href)
-  if (view === 'c')
-    return (
-      <Link href={href} className="bh-row">
-        <span className="bh-row-n">{x.n}</span>
-        <span className="bh-row-txt">
-          <h2>{x.t}</h2>
-          <p>{x.d}</p>
-        </span>
-        <Stats s={x.stats} />
-        <span className="bh-row-go" aria-label={x.go}>
-          <Arrow />
-        </span>
-      </Link>
-    )
-  if (view === 'd')
-    return (
-      <Link href={href} className="bh-pic">
-        <span className="bh-pic-txt">
-          <span className="bt-hub-n">{x.n}</span>
-          <h2>{x.t}</h2>
-          <p>{x.d}</p>
-          <Stats s={x.stats} />
-          <span className="bt-hub-go">
-            {x.go} <Arrow />
-          </span>
-        </span>
-        <span className="bh-pic-side" aria-hidden="true">
-          {x.faces.length ? (
-            <span className="bh-mosaic">
-              {x.faces.slice(0, 12).map((f) => (
-                <img key={f} src={f} alt="" />
-              ))}
-            </span>
-          ) : (
-            <Shield />
-          )}
-        </span>
-      </Link>
-    )
-  // a va b — bir xil tuzilma, b da töq/oçiq kontrast va yirik raqamlar
+/**
+ * Bitta yönaliş kartasi (B — kontrastli): birinçisi töq fonda sariq yirik raqamlar va yetakçilar
+ * suratlari bilan, ikkinçisi oçiq fonda qalqon belgisi bilan.
+ */
+function Dir({ x, L }: { x: Dir; L: (h: string) => string }) {
   return (
-    <Link href={href} className={`bt-hub-card${view === 'b' ? ' bh-b' : ''}`}>
+    <Link href={L(x.href)} className="bt-hub-card bh-b">
       <span className="bt-hub-n">{x.n}</span>
       <h2>{x.t}</h2>
       <p>{x.d}</p>
       <Stats s={x.stats} />
       <span className="bt-hub-foot">
         <span className="bt-faces" aria-hidden="true">
-          {x.faces.slice(0, view === 'b' ? 8 : 6).map((f) => (
+          {x.faces.slice(0, 8).map((f) => (
             <img key={f} src={f} alt="" />
           ))}
-          {!x.faces.length && view === 'b' && <Shield />}
+          {!x.faces.length && <Shield />}
         </span>
         <span className="bt-hub-go">
           {x.go} <Arrow />
         </span>
       </span>
     </Link>
-  )
-}
-
-function Hub({ view, L }: { view: V; L: (h: string) => string }) {
-  return (
-    <div className={`wrap bt-hub bt-hub--${view}`}>
-      {DIRS.map((x) => (
-        <Dir key={x.n} x={x} view={view} L={L} />
-      ))}
-    </div>
   )
 }
 
@@ -164,17 +108,12 @@ export function BtHub({ L, crumbs }: { L: (h: string) => string; crumbs: ReactNo
         </div>
       </header>
       <section className="sec bt-sec">
-        {DEV ? (
-          (['a', 'b', 'c', 'd'] as const).map((v) => (
-            <div key={v} className="vx" data-v={`bth-${v}`}>
-              <Hub view={v} L={L} />
-            </div>
-          ))
-        ) : (
-          <Hub view="a" L={L} />
-        )}
+        <div className="wrap bt-hub bt-hub--b">
+          {DIRS.map((x) => (
+            <Dir key={x.n} x={x} L={L} />
+          ))}
+        </div>
       </section>
-      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }
