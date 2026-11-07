@@ -744,32 +744,6 @@ export const PROJECTS: Project[] = [
     national: false,
   },
   {
-    slug: 'yolovchi',
-    title: '“Yölovçi” loyihasi',
-    dir: 'huquqiy-madaniyat',
-    status: 'davom etmoqda',
-    period: '2026',
-    lead: 'Piyodalar va haydovçilar örtasida yangi yöl harakati madaniyatini tarğib qiluvçi Özbekiston yoşlar ittifoqi loyihasi.',
-    description:
-      'Loyiha piyodalar ötiş joyidan qölni kötarib, haydovçi eʼtiborini jalb qilib ötiş odatini tarğib qiladi. Yölni belgilanmagan joydan kesib ötiş, telefonga çalğiş, şaxsiy harakatlaniş vositasidan tuşmasdan ötiş xavfi tuşuntiriladi. Loyiha oldiga yöl-transport hodisalarini 30 foizga, ular oqibatidagi ölim holatlarini 50 foizga kamaytiriş maqsadi qöyilgan.',
-    audience: 'Yoşlar, piyodalar va haydovçilar',
-    partners: [],
-    results: [
-      {
-        text: '2026-yil 23-sentabrda Özbekiston milliy pedagogika universitetida loyiha doirasida tarğibot tadbiri ötkazildi.',
-        post: 6777,
-      },
-    ],
-    milestones: [
-      { date: '2026-07-24', text: '“Yölovçi” loyihasi yölga qöyildi', post: 6544 },
-      { date: '2026-09-23', text: 'ÖzMPUda tarğibot tadbiri', post: 6777 },
-    ],
-    posts: [6460, 6544, 6616, 6692, 6767, 6777, 6778, 7007],
-    cover: '',
-    gallery: [],
-    national: true,
-  },
-  {
     slug: 'jaholatga-qarshi-marifat',
     title: '“Jaholatga qarşi maʼrifat” loyihasi',
     dir: 'huquqiy-madaniyat',

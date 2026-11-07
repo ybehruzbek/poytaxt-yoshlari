@@ -6,13 +6,6 @@ export type Announce = { id: number; date: string; title: string; text: string; 
 
 export const ANNOUNCEMENTS: Announce[] = [
   {
-    id: 7035,
-    date: '2026-11-06',
-    title: 'Xalqaro Öqituvçilar rivojlanişi simpoziumi',
-    text: '21–22-noyabr; 5 nafar xorijiy taʼlim eksperti (David Nunan va boşqalar) iştirok etadi.',
-    img: '/img/faoliyat/e/7035.webp',
-  },
-  {
     id: 6961,
     date: '2026-10-25',
     title: 'Respublika ilmiy maqolalar tanlovida iştirok etiş',
@@ -25,27 +18,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     title: '“Sahna Quiz” intellektual şousiga röyxatdan ötiş',
     text: '5 kişilik jamoa yoki yakka tartibda “Sahna Quiz” Telegram boti orqali; manzil Matbuotçilar köçasi, 17',
     img: '/img/faoliyat/e/6926.webp',
-  },
-  {
-    id: 6923,
-    date: '2026-10-16',
-    title: '“Ajdodlar izidan” respublika bosqiçida iştirokçilarni qöllab-quvvatlaş',
-    text: 'Yoşlar ijod saroyi, soat 09:00',
-    img: '/img/faoliyat/e/6923.webp',
-  },
-  {
-    id: 6799,
-    date: '2026-10-03',
-    title: 'Xalqaro taʼlim körgazmasiga röyxatdan ötiş',
-    text: 'Google forma orqali; maʼlumot: +998712309191',
-    img: '/img/faoliyat/e/6799.webp',
-  },
-  {
-    id: 6778,
-    date: '2026-09-25',
-    title: '“Yölovçi” loyihasiga qöşiliş',
-    text: 'Piyodalar ötiş joyida qölni kötariş, haydovçi bölsangiz piyodaga yöl beriş',
-    img: '/img/faoliyat/e/6778.webp',
   },
   {
     id: 6768,
@@ -97,32 +69,11 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/6517.webp',
   },
   {
-    id: 6332,
-    date: '2026-06-26',
-    title: '“Kitob olami” festivali (28-iyun, Yoşlar ijod saroyi)',
-    text: 'Festivalga taşrif buyuriş',
-    img: '/img/faoliyat/e/6332.webp',
-  },
-  {
     id: 6282,
     date: '2026-06-12',
     title: 'Milliy terma jamoani qöllab-quvvatlaş “çallenge”i',
     text: 'Instagramdagi çallengeda iştirok etiş',
     img: '/img/faoliyat/e/6282.webp',
-  },
-  {
-    id: 6263,
-    date: '2026-06-09',
-    title: '“Milliy Fashion Show” Respublika finalini tomoşa qiliş (17-iyun, kiriş bepul)',
-    text: 'Yoşlar ijod saroyiga keliş',
-    img: '/img/faoliyat/e/6263.webp',
-  },
-  {
-    id: 6258,
-    date: '2026-06-04',
-    title: 'IELTS Marafon (bepul)',
-    text: 'Onlayn röyxatdan ötiş',
-    img: '/img/faoliyat/e/6258.webp',
   },
   {
     id: 6232,
@@ -146,13 +97,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/6229.webp',
   },
   {
-    id: 6178,
-    date: '2026-05-19',
-    title: "“DIGITAL AGRO '26” agroblogerlar forumi (bepul)",
-    text: 'Telegram bot orqali röyxatdan ötiş',
-    img: '/img/faoliyat/e/6178.webp',
-  },
-  {
     id: 6090,
     date: '2026-05-08',
     title: '“Toşkent Yoş diplomatlar oromgohi – 2026” (21–28-iyun, JIDU)',
@@ -174,27 +118,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/5931.webp',
   },
   {
-    id: 5930,
-    date: '2026-04-23',
-    title: '“Qalb diplomatiyasi” xalqaro konferensiyasi (27–29-aprel)',
-    text: 'Toşkentda yaşaş va ingliz tili C1 talab; onlayn röyxatdan ötiş',
-    img: '/img/faoliyat/e/5930.webp',
-  },
-  {
-    id: 5851,
-    date: '2026-04-16',
-    title: '“Munozara” respublika turnirida qatnaşiş (3 kişilik jamoa)',
-    text: 'Taʼlim muassasasining Yoşlar masalalari va maʼnaviy-maʼrifiy işlar böyiça masʼullariga murojaat',
-    img: '/img/faoliyat/e/5851.webp',
-  },
-  {
-    id: 5561,
-    date: '2026-03-11',
-    title: '“Milliy Fashion Show” yangi mavsumida qatnaşiş',
-    text: 'Yoşlar ittifoqining hududiy Kengaşlariga murojaat qiliş',
-    img: '/img/faoliyat/e/5561.webp',
-  },
-  {
     id: 5552,
     date: '2026-03-09',
     title: 'Onlayn “Zakovat” viktorinasi finali',
@@ -214,13 +137,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     title: 'OTT yoşlar yetakçilari uçun seminar-trening',
     text: '27-fevral soat 09:00, Yoşlar Press klubi',
     img: '/img/faoliyat/e/5365.webp',
-  },
-  {
-    id: 5364,
-    date: '2026-02-26',
-    title: 'YUTRIP sayohatlariga joy band qiliş',
-    text: '@yutrip_admin yoki +998949340328 orqali',
-    img: '/img/faoliyat/e/5364.webp',
   },
   {
     id: 5331,
@@ -270,13 +186,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     title: 'Harbiy xizmatni ötagan talabalar kontraktining 35% qoplanişi uçun ariza',
     text: 'Arizalar OTT boşlanğiç taşkilot yetakçilari tomonidan qabul qilinadi',
     img: '/img/faoliyat/e/5106.webp',
-  },
-  {
-    id: 5062,
-    date: '2026-01-21',
-    title: 'Aholi va qişloq xöjaligini röyxatga olişda iştirok eting',
-    text: 'census.stat.uz orqali röyxatdan ötiş',
-    img: '/img/faoliyat/e/5062.webp',
   },
   {
     id: 4626,
@@ -335,25 +244,11 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/4442.webp',
   },
   {
-    id: 4353,
-    date: '2025-10-20',
-    title: '#SuvniBirgaAsraymiz çellenji',
-    text: 'Suvni tejaş böyiça amalingizni suratga olib #SuvniBirgaAsraymiz heştegi bilan ijtimoiy tarmoqqa joylaş',
-    img: '/img/faoliyat/e/4353.webp',
-  },
-  {
     id: 4173,
     date: '2025-09-25',
     title: 'Kengaş ijodiy jamoasiga (fotograf, videooperator, montaj) işga taklif',
     text: '18–26 yoş; aloqa: +998994034504, Telegram @temirov_o_f; manzil: Toşkent şahar yoşlar markazi, Universitet köçasi, 2-uy',
     img: '/img/faoliyat/e/4173.webp',
-  },
-  {
-    id: 4168,
-    date: '2025-09-14',
-    title: 'Toşkent şahar Yoş turizm Elçilari jamoasiga qöşiling',
-    text: 'Havola orqali röyxatdan ötib savollarga javob beriş; 15-sentabr 20:00 gaça',
-    img: '/img/faoliyat/e/4168.webp',
   },
   {
     id: 3984,
@@ -363,32 +258,11 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/3984.webp',
   },
   {
-    id: 3856,
-    date: '2025-06-28',
-    title: '“Men donorman” aksiyasi',
-    text: 'Qon quyiş markazlariga boriş',
-    img: '/img/faoliyat/e/3856.webp',
-  },
-  {
     id: 3781,
     date: '2025-06-19',
     title: 'TMII “Freşman Summer School 2025”',
     text: 'Röyxatdan ötiş majburiy va bepul',
     img: '/img/faoliyat/e/3781.webp',
-  },
-  {
-    id: 3521,
-    date: '2025-05-13',
-    title: 'IBRAT Debat Turniri 2025',
-    text: 'Telegram bot orqali röyxatdan ötiş',
-    img: '/img/faoliyat/e/3521.webp',
-  },
-  {
-    id: 3522,
-    date: '2025-05-13',
-    title: 'Xalqaro “Biznes marafon” (bepul)',
-    text: 'Telegram bot orqali röyxatdan ötiş; Yoşlar ijod saroyi',
-    img: '/img/faoliyat/e/3522.webp',
   },
   {
     id: 3520,
@@ -398,25 +272,11 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/3520.webp',
   },
   {
-    id: 3478,
-    date: '2025-05-07',
-    title: '“Jismoniy tayyorgarlik darajasi” sport sinovlari',
-    text: 'Telegram bot orqali röyxatdan ötib yönalişni tanlaş',
-    img: '/img/faoliyat/e/3478.webp',
-  },
-  {
     id: 3469,
     date: '2025-05-02',
     title: '“BMT modeli”da delegat yoki volontyor sifatida iştirok',
     text: 'Telegram bot orqali röyxatdan ötiş va qömita tanlaş',
     img: '/img/faoliyat/e/3469.webp',
-  },
-  {
-    id: 3467,
-    date: '2025-05-01',
-    title: '“Talabalar festivali”da iştirok',
-    text: 'Telegram bot orqali röyxatdan ötib yönaliş tanlaş',
-    img: '/img/faoliyat/e/3467.webp',
   },
   {
     id: 3394,
@@ -433,20 +293,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/3218.webp',
   },
   {
-    id: 3225,
-    date: '2025-04-10',
-    title: 'Ijtimoiy himoyaga muhtoj oila farzandlari uçun bepul IT taʼlim (3 bosqiçli loyiha)',
-    text: 'itstudy.uz platformasida onlayn kurslarni öqib sertifikat oliş',
-    img: '/img/faoliyat/e/3225.webp',
-  },
-  {
-    id: 3140,
-    date: '2025-04-01',
-    title: '“Ilhom” mukofoti tanlovi',
-    text: 'OTTning yoşlar masalalari, maʼnaviy-maʼrifiy işlar böyiça masʼullariga ariza bilan murojaat qiliş',
-    img: '/img/faoliyat/e/3140.webp',
-  },
-  {
     id: 3123,
     date: '2025-03-26',
     title: '“PhD sari qadam” 3-mavsumi (ilmiy faoliyatga qiziquvçi xotin-qizlar uçun)',
@@ -459,13 +305,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     title: '“Mahmudxöja Behbudiy saboqlari” inşolar tanlovi',
     text: 'OTTning yoşlar masalalari va maʼnaviy-maʼrifiy işlar böyiça masʼullariga murojaat qiliş',
     img: '/img/faoliyat/e/3078.webp',
-  },
-  {
-    id: 3016,
-    date: '2025-03-03',
-    title: '“Milliy Fashion Show” modalar namoyişi (bepul)',
-    text: 'Yoşlar ijod saroyiga keliş',
-    img: '/img/faoliyat/e/3016.webp',
   },
   {
     id: 2962,
@@ -496,14 +335,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/2746.webp',
   },
   {
-    id: 2356,
-    date: '2024-11-26',
-    title:
-      '“Xalqaro talabalar turizm forumi” doirasidagi BMT modeli loyihasiga röyxatdan ötiş (bepul)',
-    text: 'Postdagi havola orqali röyxatdan ötiş; joylar soni çegaralangan',
-    img: '/img/faoliyat/e/2356.webp',
-  },
-  {
     id: 2185,
     date: '2024-11-11',
     title: '“Toşkent talabalar assotsiatsiyasi” taʼsis yiğilişi',
@@ -511,25 +342,11 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/2185.webp',
   },
   {
-    id: 1744,
-    date: '2024-07-23',
-    title: 'Mahalla yoşlari örtasida harbiy-vatanparvarlik sport musobaqalari',
-    text: 'Estafeta, arqon tortiş, Zakovat va qöşiqlar tanlovida faol iştirok etiş.',
-    img: '/img/faoliyat/e/1744.webp',
-  },
-  {
     id: 1556,
     date: '2024-06-26',
     title: 'Butunjahon yoşlar festivali-2024 uçraşuvlariga röyxatdan ötiş',
     text: 'Yoşlar ijod saroyidagi sportçilar, olimlar, biznes liderlar, yozuvçilar va rektorlar bilan uçraşuvlar uçun bot orqali röyxatdan ötiş.',
     img: '/img/faoliyat/e/1556.webp',
-  },
-  {
-    id: 1532,
-    date: '2024-06-21',
-    title: '“Volontyor” filmi premyerasi',
-    text: 'Toşkent arxitektura-quriliş universitetining faollar zali; barça xohlovçilar iştirok etişi mumkin.',
-    img: '/img/faoliyat/e/1532.webp',
   },
   {
     id: 1480,
@@ -614,13 +431,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     title: '“Baxtli bolalik” tanlovlarida iştirok eting',
     text: 'Poytaxt yoşlari tanlov va aksiyalarda iştirok etişga çorlandi.',
     img: '/img/faoliyat/e/162.webp',
-  },
-  {
-    id: 161,
-    date: '2023-05-30',
-    title: 'Mega-şou dasturiga bepul kiriş',
-    text: '“Alpomiş” muz saroyiga keliş; kiriş bepul.',
-    img: '/img/faoliyat/e/161.webp',
   },
   {
     id: 11,

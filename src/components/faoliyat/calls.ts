@@ -3,12 +3,6 @@ export type Call = { id: number; date: string; call: string; how: string }
 
 export const CALLS: Call[] = [
   {
-    id: 7035,
-    date: '2026-11-06',
-    call: 'Xalqaro Öqituvçilar rivojlanişi simpoziumiga röyxatdan ötiş',
-    how: 'events.edu-action.uz; +998779230256',
-  },
-  {
     id: 6961,
     date: '2026-10-25',
     call: 'Respublika ilmiy maqolalar tanlovida iştirok etiş',
@@ -19,24 +13,6 @@ export const CALLS: Call[] = [
     date: '2026-10-17',
     call: '“Sahna Quiz” intellektual şousiga röyxatdan ötiş',
     how: '5 kişilik jamoa yoki yakka tartibda “Sahna Quiz” Telegram boti orqali; manzil Matbuotçilar köçasi, 17',
-  },
-  {
-    id: 6923,
-    date: '2026-10-16',
-    call: '“Ajdodlar izidan” respublika bosqiçida iştirokçilarni qöllab-quvvatlaş',
-    how: 'Yoşlar ijod saroyi, soat 09:00',
-  },
-  {
-    id: 6799,
-    date: '2026-10-03',
-    call: 'Xalqaro taʼlim körgazmasiga röyxatdan ötiş',
-    how: 'Google forma orqali; maʼlumot: +998712309191',
-  },
-  {
-    id: 6778,
-    date: '2026-09-25',
-    call: '“Yölovçi” loyihasiga qöşiliş',
-    how: 'Piyodalar ötiş joyida qölni kötariş, haydovçi bölsangiz piyodaga yöl beriş',
   },
   {
     id: 6768,
@@ -73,5 +49,29 @@ export const CALLS: Call[] = [
     date: '2026-07-14',
     call: '“Yoş diplomat – 2026” doirasida Kengaş raisi bilan oçiq muloqotga röyxatdan ötiş',
     how: 'Telegram orqali röyxatdan ötiş',
+  },
+  {
+    id: 6282,
+    date: '2026-06-12',
+    call: 'Milliy terma jamoani qöllab-quvvatlaş “çallenge”i',
+    how: 'Instagramdagi çallengeda iştirok etiş',
+  },
+  {
+    id: 6232,
+    date: '2026-05-25',
+    call: '“Taşabbuslar marafoni”da qatnaşiş',
+    how: 'Onlayn röyxatdan ötiş',
+  },
+  {
+    id: 6229,
+    date: '2026-05-23',
+    call: '“WikiSfera” oromgohiga ariza',
+    how: 'Arizalar 20-may – 20-iyun @WikiTanlov_bot orqali',
+  },
+  {
+    id: 6090,
+    date: '2026-05-08',
+    call: '“Toşkent Yoş diplomatlar oromgohi – 2026” (21–28-iyun, JIDU)',
+    how: 'Mahalliy iştirokçilar: @zzdilsuz; xalqaro: info.uwedsummerschool@gmail.com',
   },
 ]
