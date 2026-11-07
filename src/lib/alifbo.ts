@@ -45,7 +45,11 @@ const RULES: Array<[RegExp, string]> = [
  * O'girilmaydigan qismlar: havolalar, elektron pochta, domenlar, @nomlar va o'zbekcha bo'lmagan nomlar
  * (domen va pochta ASCII bo'lib qoladi: yoshkent.uz, info@yoshkent.uz).
  */
-const XORIJIY = ['Fashion Show', 'English', 'ChatGPT', 'Chrome', 'Shopify', 'Dashboard', 'Microsoft', 'TikTok', 'WhatsApp']
+const XORIJIY = [
+  'Fashion Show', 'English', 'ChatGPT', 'Chrome', 'Shopify', 'Dashboard', 'Microsoft', 'TikTok', 'WhatsApp',
+  // inglizça OTM nomlari (Tashkent Tech, British Management University, International School of …)
+  'Tashkent', 'Tech', 'Technology', 'Technologies', 'British', 'School',
+]
 const HIMOYA = new RegExp(
   [
     String.raw`https?:\/\/\S+`,

@@ -1,0 +1,299 @@
+/* =====================================================================
+   «Boşlanğiç taşkilotlar» sahifasi (/biz-haqimizda/boshlangich-tashkilotlar). Prefiks: bt-
+   Kartalar hududiy Kengaş jamoasi dizayniga hamohang: gradient fon, surat öng pastda (multiply).
+   ===================================================================== */
+
+.bt .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Raqamlar */
+.bt-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.bt-stats div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  border-radius: 99px;
+  background: var(--soft);
+  padding: 10px 20px;
+}
+.bt-stats dd {
+  order: -1;
+  font: 800 22px/1 var(--f-head);
+  color: var(--navy);
+}
+.bt-stats dt {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.bt-stats div:last-child dd {
+  color: var(--blue);
+}
+
+/* Saralaş va qidiruv */
+.bt-sec {
+  padding-top: 32px;
+}
+.bt-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.bt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bt-chips button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #fff;
+  padding: 9px 10px 9px 18px;
+  font: 600 14px/1 var(--f-body);
+  color: var(--navy);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.bt-chips button span {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 7px;
+  border-radius: 99px;
+  background: var(--soft);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.bt-chips button:hover {
+  border-color: var(--yellow);
+}
+.bt-chips button.on {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.bt-chips button.on span {
+  background: rgba(255, 255, 255, 0.16);
+}
+.bt-search input {
+  width: min(320px, 100%);
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #fff;
+  padding: 0 20px;
+  font: 500 15px var(--f-body);
+  color: var(--navy);
+}
+.bt-search input:focus {
+  outline: none;
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--yellow) 30%, transparent);
+}
+
+/* Kartalar */
+.bt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.bt-card {
+  display: grid;
+  grid-template-columns: 1fr 160px;
+  min-height: 250px;
+  overflow: hidden;
+  border-radius: var(--r-thumb);
+  background: linear-gradient(
+    110deg,
+    #f8f5f3 0%,
+    #fff 45%,
+    color-mix(in srgb, var(--lime) 14%, #fff) 100%
+  );
+}
+.bt-txt {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px 6px 22px 26px;
+}
+.bt-otm {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--blue);
+}
+.bt-name {
+  margin-top: 12px;
+  font: 800 19px/1.2 var(--f-head);
+  color: var(--grey);
+}
+.bt-name span {
+  display: block;
+}
+.bt-ph {
+  align-self: end;
+  display: block;
+  width: 160px;
+  height: auto;
+  aspect-ratio: 260/347;
+  object-fit: cover;
+  object-position: top;
+  mix-blend-mode: multiply;
+}
+
+/* Aloqa şabloni: böş joylar xira */
+.bt-reach {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+.bt-reach a,
+.bt-reach span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  color: var(--blue);
+  transition: background 0.2s;
+}
+.bt-reach a:hover {
+  background: var(--yellow);
+  color: var(--navy);
+}
+.bt-reach .off {
+  color: color-mix(in srgb, var(--navy) 22%, transparent);
+  background: transparent;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--navy) 8%, transparent);
+}
+.bt-reach svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Vakantlar */
+.bt-vac-h {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 48px 0 18px;
+  font: 800 22px/1.25 var(--f-head);
+  color: var(--navy);
+}
+.bt-vac-h span {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 9px;
+  border-radius: 99px;
+  background: var(--yellow);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+.bt-vac {
+  position: relative;
+  min-height: 200px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 14px,
+    color-mix(in srgb, var(--navy) 3%, transparent) 14px 15px
+  );
+}
+.bt-type {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--muted);
+}
+.bt-vac-otm {
+  margin-top: 8px;
+  font: 800 17px/1.3 var(--f-head);
+  color: var(--navy);
+}
+.bt-badge {
+  align-self: flex-start;
+  margin-top: auto;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--blue) 14%, #fff);
+  padding: 6px 14px;
+  font: 800 12px/1 var(--f-head);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.bt-vac .bt-role {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.bt-ghost {
+  align-self: end;
+  justify-self: center;
+  width: 110px;
+  fill: color-mix(in srgb, var(--navy) 7%, transparent);
+}
+.bt-empty {
+  padding: 40px 0;
+  color: var(--muted);
+}
+
+@media (max-width: 1100px) {
+  .bt-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .bt-grid {
+    grid-template-columns: 1fr;
+  }
+  .bt-card {
+    grid-template-columns: 1fr 130px;
+  }
+  .bt-ph {
+    width: 130px;
+  }
+  .bt-ghost {
+    width: 90px;
+  }
+  .bt-search,
+  .bt-search input {
+    width: 100%;
+  }
+}

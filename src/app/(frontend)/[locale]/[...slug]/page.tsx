@@ -9,7 +9,7 @@ import type { Locale } from '@/i18n/config'
 type Props = { params: Promise<{ locale: Locale; slug: string[] }> }
 
 /** Özining alohida sahifasi bor yöllar (bu umumiy sahifa ularni yasamaydi) */
-const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq', '/biz-haqimizda/markaziy-kengash', '/biz-haqimizda/hududiy-kengash', '/hujjatlar/normativ'])
+const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq', '/biz-haqimizda/markaziy-kengash', '/biz-haqimizda/hududiy-kengash', '/hujjatlar/normativ', '/biz-haqimizda/boshlangich-tashkilotlar'])
 
 /** Menyudagi barcha yo'llar oldindan tayyorlanadi */
 export function generateStaticParams() {
