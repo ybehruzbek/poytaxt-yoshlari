@@ -9,7 +9,14 @@ import { fmtDate, TG } from './types'
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
 /** Eʼlonlar: poster töliq körinadi (kesilmaydi), yil va qidiruv böyiça saralaş */
-export function AnnounceList({ items }: { items: Announce[] }) {
+export function AnnounceList({
+  items,
+  view = 'a',
+}: {
+  items: Announce[]
+  /** VAQTINÇA: dizayn varianti — a poster to‘ri, b masonry, c doska qatorlari */
+  view?: 'a' | 'b' | 'c'
+}) {
   const years = useMemo(
     () => [...new Set(items.map((e) => e.date.slice(0, 4)))].sort().reverse(),
     [items],
@@ -70,38 +77,70 @@ export function AnnounceList({ items }: { items: Announce[] }) {
 
       <p className="fa-count">{list.length} ta eʼlon</p>
 
-      <div className="fa-anns">
-        {list.slice(0, limit).map((e) => (
-          <a
-            key={e.id}
-            href={TG(e.id)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="fa-ann"
-          >
-            <span className="fa-ann-ph">
-              {e.img ? (
-                <img src={e.img} alt="" loading="lazy" />
-              ) : (
-                <span className="fa-ann-noph" aria-hidden="true">
-                  <small>Eʼlon</small>
-                  <b>{Number(e.date.slice(8, 10))}</b>
-                  <em>{fmtDate(e.date, false).split('-')[1]}</em>
-                  <i>{e.date.slice(0, 4)}</i>
-                </span>
-              )}
-            </span>
-            <span className="fa-ann-txt">
-              <time dateTime={e.date}>{fmtDate(e.date)}</time>
-              <strong>{e.title}</strong>
-              {e.text && <span className="fa-ann-sum">{e.text}</span>}
-              <span className="fa-ev-src">
-                Telegramda köriş <span aria-hidden="true">↗</span>
+      {view === 'b' && (
+        <div className="vb-mas">
+          {list.slice(0, limit).map((e) => (
+            <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer">
+              <img src={e.img} alt="" loading="lazy" />
+              <span>
+                <time dateTime={e.date}>{fmtDate(e.date)}</time>
+                <strong>{e.title}</strong>
               </span>
-            </span>
-          </a>
-        ))}
-      </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {view === 'c' && (
+        <div className="vc-board">
+          {list.slice(0, limit).map((e) => (
+            <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer">
+              <img src={e.img} alt="" loading="lazy" />
+              <span className="vc-board-t">
+                <time dateTime={e.date}>{fmtDate(e.date)}</time>
+                <strong>{e.title}</strong>
+                <span>{e.text}</span>
+              </span>
+              <em>Batafsil ↗</em>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {view === 'a' && (
+        <div className="fa-anns">
+          {list.slice(0, limit).map((e) => (
+            <a
+              key={e.id}
+              href={TG(e.id)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="fa-ann"
+            >
+              <span className="fa-ann-ph">
+                {e.img ? (
+                  <img src={e.img} alt="" loading="lazy" />
+                ) : (
+                  <span className="fa-ann-noph" aria-hidden="true">
+                    <small>Eʼlon</small>
+                    <b>{Number(e.date.slice(8, 10))}</b>
+                    <em>{fmtDate(e.date, false).split('-')[1]}</em>
+                    <i>{e.date.slice(0, 4)}</i>
+                  </span>
+                )}
+              </span>
+              <span className="fa-ann-txt">
+                <time dateTime={e.date}>{fmtDate(e.date)}</time>
+                <strong>{e.title}</strong>
+                {e.text && <span className="fa-ann-sum">{e.text}</span>}
+                <span className="fa-ev-src">
+                  Telegramda köriş <span aria-hidden="true">↗</span>
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
 
       {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
       {list.length > limit && (

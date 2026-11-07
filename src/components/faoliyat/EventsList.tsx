@@ -12,9 +12,12 @@ const low = (s: string) => s.toLocaleLowerCase('uz')
 export function EventsList({
   events,
   dirs,
+  view = 'a',
 }: {
   events: Ev[]
   dirs: Array<{ slug: DirSlug; title: string }>
+  /** VAQTINÇA: dizayn varianti — a kartalar, b oylar böyiça röyxat, c foto-devor */
+  view?: 'a' | 'b' | 'c'
 }) {
   const years = useMemo(
     () => [...new Set(events.map((e) => e.date.slice(0, 4)))].sort().reverse(),
@@ -36,6 +39,8 @@ export function EventsList({
   }, [events, year, dir, q])
 
   const usedDirs = dirs.filter((d) => events.some((e) => e.dir === d.slug))
+  const shown = list.slice(0, limit)
+  const months = [...new Set(shown.map((e) => e.date.slice(0, 7)))]
 
   return (
     <>
@@ -91,30 +96,83 @@ export function EventsList({
 
       <p className="fa-count">{list.length} ta tadbir</p>
 
-      <div className="fa-evs">
-        {list.slice(0, limit).map((e) => (
-          <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer" className="fa-ev">
-            <span className="fa-ev-ph">
-              {e.img ? (
-                <img src={e.img} alt="" loading="lazy" />
-              ) : (
-                <span className="fa-ev-noph" aria-hidden="true">
-                  Tadbir
-                </span>
-              )}
-            </span>
-            <span className="fa-ev-txt">
-              <time dateTime={e.date}>{fmtDate(e.date)}</time>
-              <strong>{e.title}</strong>
-              <span className="fa-ev-place">{e.place}</span>
-              <span className="fa-ev-sum">{e.summary}</span>
-              <span className="fa-ev-src">
-                Telegramda köriş <span aria-hidden="true">↗</span>
+      {view === 'b' && (
+        <div className="vb-evl">
+          {months.map((m) => {
+            const items = shown.filter((e) => e.date.startsWith(m))
+            return (
+              <section key={m}>
+                <h3>
+                  {fmtDate(m)} <span>{items.length}</span>
+                </h3>
+                {items.map((e) => (
+                  <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer">
+                    <span className="vb-evl-d">
+                      <b>{Number(e.date.slice(8, 10)) || '—'}</b>
+                    </span>
+                    {e.img && <img src={e.img} alt="" loading="lazy" />}
+                    <span className="vb-evl-t">
+                      <strong>{e.title}</strong>
+                      <span>{e.place}</span>
+                    </span>
+                    <span className="vb-evl-go" aria-hidden="true">
+                      ↗
+                    </span>
+                  </a>
+                ))}
+              </section>
+            )
+          })}
+        </div>
+      )}
+
+      {view === 'c' && (
+        <div className="vc-wall">
+          {shown.map((e) => (
+            <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer">
+              <img src={e.img} alt="" loading="lazy" />
+              <span>
+                <time dateTime={e.date}>{fmtDate(e.date)}</time>
+                <strong>{e.title}</strong>
+                <em>{e.place}</em>
               </span>
-            </span>
-          </a>
-        ))}
-      </div>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {view === 'a' && (
+        <div className="fa-evs">
+          {shown.map((e) => (
+            <a
+              key={e.id}
+              href={TG(e.id)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="fa-ev"
+            >
+              <span className="fa-ev-ph">
+                {e.img ? (
+                  <img src={e.img} alt="" loading="lazy" />
+                ) : (
+                  <span className="fa-ev-noph" aria-hidden="true">
+                    Tadbir
+                  </span>
+                )}
+              </span>
+              <span className="fa-ev-txt">
+                <time dateTime={e.date}>{fmtDate(e.date)}</time>
+                <strong>{e.title}</strong>
+                <span className="fa-ev-place">{e.place}</span>
+                <span className="fa-ev-sum">{e.summary}</span>
+                <span className="fa-ev-src">
+                  Telegramda köriş <span aria-hidden="true">↗</span>
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      )}
 
       {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
       {list.length > limit && (
