@@ -7,6 +7,8 @@ import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
 import '../../../kengash.css'
+import '../../../kengash-alt1.css'
+import '../../../kengash-alt2.css'
 
 export const metadata: Metadata = {
   title: 'Markaziy Kengaş — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi',
