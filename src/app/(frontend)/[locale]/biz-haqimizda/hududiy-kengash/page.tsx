@@ -8,8 +8,6 @@ import type { Locale } from '@/i18n/config'
 import '../../../ittifoq.css'
 import '../../../kengash.css'
 import '../../../hududiy.css'
-import '../../../hududiy-alt1.css'
-import '../../../hududiy-alt2.css'
 import '../../../hududiy-alt3.css'
 
 export const metadata: Metadata = {

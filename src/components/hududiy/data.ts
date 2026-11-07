@@ -11,23 +11,6 @@ export const INTRO =
 export const BASIS =
   'Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova asosida'
 
-export const ABOUT = {
-  lead: 'Toşkent şahar hududiy Kengaşi — Özbekiston yoşlar ittifoqining poytaxtdagi vakolatli tuzilmasi.',
-  paras: [
-    'Kengaş şahardagi oliy taʼlim taşkilotlari, harbiy qismlar va boşqa muassasalardagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiradi va ularga uslubiy yordam beradi.',
-    'Kengaş Ittifoq Ustavi, Markaziy Kengaş va uning Ijroiya qömitasi qarorlari asosida faoliyat yuritadi, idora va taşkilotlarda Ittifoqning vakolatli vakili sifatida iş olib boradi.',
-  ],
-}
-
-/** Kengaşning asosiy vazifalari (apparat bölimlari vazifalaridan umumlaştirilgan) */
-export const TASKS: string[] = [
-  'Boşlanğiç taşkilotlarni röyxatga oladi, ularga uslubiy yordam beradi va faoliyatini muvofiqlaştiradi',
-  'Yoşlarning huquq va manfaatlarini himoya qiladi, fuqarolar murojaatlarini körib çiqadi',
-  'Yoşlarni harbiy-vatanparvarlik ruhida tarbiyalaş tadbirlarini amalga oşiradi',
-  'Yoşlar yetakçilari uçun öquvlar taşkil etadi, namunali yetakçilarni taqdirlaşga tavsiya etadi',
-  'Ittifoq faoliyati haqida jamoatçilikni OAV va ijtimoiy tarmoqlar orqali muntazam xabardor qiladi',
-]
-
 export type Social = { net: 'Telegram' | 'Instagram' | 'Facebook'; handle: string; href: string }
 
 export type Person = {
@@ -239,50 +222,6 @@ export const RECEPTION: Reception[] = [
     name: 'Temirov Oğabek Fazliddin öğli',
     dept: 'Axborot xizmati',
   },
-]
-
-/** Murojaatni körib çiqiş tartibi (OʼRQ-445) */
-export const APPEAL_STEPS = [
-  { t: 'Qabul qiliş va röyxatga oliş', d: '1 iş kuni içida' },
-  { t: 'Ijroçiga yönaltiriş', d: '2 iş kuni içida' },
-  { t: 'Örganiş va körib çiqiş', d: '15 kun içida' },
-  { t: 'Yozma javob beriş', d: 'Qöşimça örganiş kerak bölsa — 1 oygaça' },
-]
-
-export const APPEAL_NOTE =
-  'Murojaat ariza, taklif yoki şikoyat şaklida — yozma, elektron hujjat körinişida yoxud oğzaki qabul qilinadi. Muallifi körsatilmagan murojaatlar, huquqbuzarlik haqidagi maʼlumotlardan taşqari, körib çiqilmaydi.'
-
-export const APPEAL_LAW =
-  '«Jismoniy va yuridik şaxslarning murojaatlari töğrisida»gi Qonun (ÖRQ-445-son, 11.09.2017)'
-
-export type Shot = { t: string; img: string }
-
-/** Tadbirlardan lavhalar (Kengaş axborot xizmati suratlari) */
-export const SHOTS: Shot[] = [
-  {
-    t: '«Özbekiston belgisi» kökrak nişoni bilan taqdirlaş marosimi',
-    img: '/img/hududiy/lavhalar/belgi.jpg',
-  },
-  { t: 'Oliy Majlis Senati', img: '/img/hududiy/lavhalar/senat.jpg' },
-  {
-    t: 'Özbekistondagi Islom sivilizatsiyasi markaziga taşrif',
-    img: '/img/hududiy/lavhalar/islom-markazi.jpg',
-  },
-  {
-    t: 'Nizomiy nomidagi Özbekiston milliy pedagogika universitetida hisobot-saylov yiğilişi',
-    img: '/img/hududiy/lavhalar/pedagogika-saylov.jpg',
-  },
-  { t: '«Ajdodlar izidan» intellektual öyini', img: '/img/hududiy/lavhalar/ajdodlar.jpg' },
-  { t: 'Harbiy xavfsizlik va mudofaa universiteti', img: '/img/hududiy/lavhalar/mudofaa-univ.jpg' },
-  {
-    t: 'Oliy taʼlim, fan va innovatsiyalar vaziri faxriy yorliği bilan taqdirlaş',
-    img: '/img/hududiy/lavhalar/faxriy-yorliq.jpg',
-  },
-  {
-    t: 'Sunʼiy intellekt va media texnologiyalari böyiça xalqaro öquv kursi',
-    img: '/img/hududiy/lavhalar/ai-kurs.jpg',
-  },
-  { t: 'Toşkent xalqaro universiteti', img: '/img/hududiy/lavhalar/txu.jpg' },
 ]
 
 export const CONTACT = {

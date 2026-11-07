@@ -5,21 +5,19 @@ import type { ReactNode } from 'react'
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { AboutB } from './AltHkOne'
-import { AppealC, ContactB } from './AltHkTwo'
 import { TeamIxcham, TeamNamuna, TeamRangli } from './AltHkJamoa'
 import { IMG, INTRO } from './data'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
-/** VAQTINCHA: «Jamoa» variantlari faqat işlab çiqiş rejimida (qolgan bölimlar tanlab bölingan) */
+/** VAQTINCHA: «Jamoa» variantlari faqat işlab çiqiş rejimida  */
 const DEV = process.env.NODE_ENV !== 'production'
 const PANEL: PanelSection[] = [{ name: 'hjm', label: 'Jamoa', count: 3 }]
 const TEAMS = { a: TeamNamuna, b: TeamRangli, c: TeamIxcham }
 
 /**
  * «Toşkent şahar hududiy Kengaşi» sahifasi (mazmun: components/hududiy/data.ts):
- * hero, Kengaş haqida, Kengaş jamoasi, murojaat tartibi, aloqa.
+ * hero va Kengaş jamoasi.
  */
 export function HududiyPage({ L, crumbs, siblings }: P) {
   return (
@@ -44,8 +42,6 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
 
-      <AboutB L={L} />
-
       <div id="jamoa" className="hk-jamoa">
         {DEV ? (
           Object.entries(TEAMS).map(([k, Team]) => (
@@ -57,9 +53,6 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           <TeamNamuna />
         )}
       </div>
-
-      <AppealC L={L} />
-      <ContactB L={L} />
 
       <section className="sec">
         <div className="wrap">{siblings}</div>
