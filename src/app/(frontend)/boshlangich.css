@@ -280,6 +280,19 @@
   .bt-search input {
     width: 100%;
   }
+  .bt-search {
+    max-width: none;
+  }
+  /* töliq yozuv (“oliy taʼlim taşkiloti yoki yetakçi nomi”) tor ekranga sığsin */
+  .bt-search input {
+    padding: 0 12px 0 38px;
+    font-size: 13px;
+  }
+  .bt-search-ic {
+    left: 14px;
+    width: 16px;
+    height: 16px;
+  }
 }
 
 /* =====================================================================
