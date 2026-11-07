@@ -37,9 +37,12 @@ function V({ name, k, children }: { name: string; k: string; children: ReactNode
   )
 }
 
+/** Rahbariyat bölimi tanlangan (variantsiz) */
+const FIXED = 'hra'
+
 const PANEL: PanelSection[] = [
   ['hab', 'Kengaş haqida'],
-  ['hra', 'Rais'],
+  ['hra', 'Rahbariyat'],
   ['hap', 'Apparat tuzilmasi'],
   ['hja', 'Apparat jamoasi'],
   ['hqa', 'Qabul kunlari'],
@@ -48,6 +51,32 @@ const PANEL: PanelSection[] = [
   ['hla', 'Tadbirlardan lavhalar'],
   ['hal', 'Aloqa'],
 ].map(([name, label]) => ({ name, label, count: 3 }))
+
+/* Rahbariyat kartasi uçun çiziqli belgilar (24×24) */
+const IC = {
+  phone:
+    'M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z',
+  mail: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm18 2-10 7L2 6',
+  send: 'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
+  clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm0-14v4l3 2',
+}
+
+function Ic({ d }: { d: string }) {
+  return (
+    <span className="hk-lead-ic" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d={d} />
+      </svg>
+    </span>
+  )
+}
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -87,35 +116,42 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
       </section>
     ),
     hra: (
-      <section className="sec hk-chair-sec">
+      <section className="sec">
         <div className="wrap">
-          <div className="hk-chair">
-            <img src={CHAIR.img} alt={CHAIR.name} />
-            <div>
-              <span className="hk-tag">Rahbariyat · {CHAIR.room}</span>
-              <h2 className="h2">{CHAIR.name}</h2>
-              <p className="hk-chair-role">{CHAIR.role}</p>
-              <ul className="hk-chair-duties">
-                {CHAIR.duties.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-              <div className="hk-chair-foot">
-                <div>
-                  <small>Qabul kuni</small>
-                  <b>{CHAIR.reception}</b>
-                </div>
-                <div className="hk-soc">
-                  {CHAIR.socials.map((s) => (
-                    <a key={s.net} href={s.href} target="_blank" rel="noopener noreferrer">
-                      <small>{s.net}</small>
-                      {s.handle}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="sec-head">
+            <h2 className="h2">Rahbariyat</h2>
           </div>
+          <article className="hk-lead">
+            <div className="hk-lead-ph">
+              <img src={CHAIR.img} alt={CHAIR.name} />
+            </div>
+            <div className="hk-lead-main">
+              <h3>{CHAIR.name}</h3>
+              <p>{CHAIR.role}</p>
+            </div>
+            <ul className="hk-lead-con">
+              <li>
+                <Ic d={IC.phone} />
+                <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+              </li>
+              <li>
+                <Ic d={IC.mail} />
+                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+              </li>
+              <li>
+                <Ic d={IC.send} />
+                <a href={CHAIR.socials[0]?.href} target="_blank" rel="noopener noreferrer">
+                  {CHAIR.socials[0]?.handle}
+                </a>
+              </li>
+              <li>
+                <Ic d={IC.clock} />
+                <span>
+                  {CHAIR.reception.replace(' · ', ' ')} · {CHAIR.room}
+                </span>
+              </li>
+            </ul>
+          </article>
         </div>
       </section>
     ),
@@ -360,9 +396,13 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
 
       {PANEL.map(({ name }) => (
         <div key={name} style={{ display: 'contents' }}>
-          <V name={name} k="a">
-            {sections[name]}
-          </V>
+          {name === FIXED ? (
+            sections[name]
+          ) : (
+            <V name={name} k="a">
+              {sections[name]}
+            </V>
+          )}
           {DEV &&
             (['b', 'c'] as const).map((k) => {
               const C = HkVariants[`${name}-${k}`]
@@ -378,7 +418,7 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
       <section className="sec">
         <div className="wrap">{siblings}</div>
       </section>
-      {DEV && <DevSectionsPanel sections={PANEL} />}
+      {DEV && <DevSectionsPanel sections={PANEL.filter((x) => x.name !== FIXED)} />}
     </div>
   )
 }
