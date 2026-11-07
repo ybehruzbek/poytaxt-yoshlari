@@ -3,16 +3,16 @@
  * Hujjatlar lex.uz va president.uz da tekşirilgan. Keyinçalik admin paneldan boşqariladi.
  */
 
-export type ActKind = 'Qonun' | 'Farmon' | 'Qaror'
-/** y — sana, t — töliq nomi, kind — turi, org — qabul qilgan organ, no — raqami, name — rasmiy nomi (bölsa) */
+export type ActKind = 'Qonun' | 'Farmon' | 'Qaror' | 'Ustav'
+/** y — sana (Ustavda yöq), t — töliq nomi, kind — turi, org — qabul qilgan organ, no — raqami (Ustavda yöq), name — rasmiy nomi (bölsa) */
 export type Act = {
-  y: string
+  y?: string
   t: string
   d: string
   href?: string
   kind: ActKind
   org: string
-  no: string
+  no?: string
   name?: string
 }
 export type ActGroup = { id: string; t: string; lead: string; acts: Act[] }
@@ -102,6 +102,14 @@ export const GROUPS: ActGroup[] = [
     t: 'Özbekiston yoşlar ittifoqi faoliyatiga doir normativ-huquqiy hujjatlar',
     lead: 'Ittifoqning taşkil etiliși, vakolatlari va faoliyatini takomillaştirişga doir hujjatlar.',
     acts: [
+      {
+        t: 'Özbekiston yoşlar ittifoqining Ustavi',
+        d: 'Ittifoqning maqsad va vazifalari, aʼzolik, rahbar organlari, hududiy tuzilmalari, mulki va hisobotini belgilovçi asosiy hujjat. 10 bob, 16 bet.',
+        href: '/hujjatlar/ittifoq-ustavi.pdf',
+        kind: 'Ustav',
+        org: 'Özbekiston yoşlar ittifoqi',
+        name: 'Özbekiston yoşlar ittifoqining Ustavi',
+      },
       {
         y: '05.07.2017',
         t: 'Prezidentning PF-5106-son Farmoni',

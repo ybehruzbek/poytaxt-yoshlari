@@ -10,17 +10,31 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 const DEV = process.env.NODE_ENV !== 'production'
 const PANEL: PanelSection[] = [{ name: 'nhd', label: 'Hujjat körinişi', count: 3 }]
 
-const KIND: Record<Act['kind'], string> = { Qonun: 'QONUN', Farmon: 'FARMON', Qaror: 'QAROR' }
+const KIND: Record<Act['kind'], string> = {
+  Qonun: 'QONUN',
+  Farmon: 'FARMON',
+  Qaror: 'QAROR',
+  Ustav: 'USTAV',
+}
 const title = (x: Act) => x.name ?? x.t
 /** «Özbekiston Respublikasi» sarlavhada turgani uçun organ nomida takrorlanmaydi */
 const orgShort = (x: Act) =>
-  x.kind === 'Qonun' ? 'Qonun' : x.org.replace(/^Özbekiston Respublikasi\s+/, '')
+  x.kind === 'Ustav'
+    ? ''
+    : x.kind === 'Qonun'
+      ? 'Qonun'
+      : x.org.replace(/^Özbekiston Respublikasi\s+/, '')
+/** Ustav — davlat hujjati emas: sarlavhada Ittifoq nomi turadi */
+const head = (x: Act) =>
+  x.kind === 'Ustav' ? 'Özbekiston yoşlar ittifoqi' : 'Özbekiston Respublikasi'
+const noTxt = (x: Act) => (x.no ? `№ ${x.no}` : 'Amaldagi tahrir')
+const isPdf = (x: Act) => x.href?.endsWith('.pdf')
 
 function Open({ x, cls }: { x: Act; cls: string }) {
   if (!x.href) return null
   return (
     <span className={cls}>
-      Matnini oçiş <span aria-hidden="true">↗</span>
+      {isPdf(x) ? 'PDF faylni oçiş' : 'Matnini oçiş'} <span aria-hidden="true">↗</span>
     </span>
   )
 }
@@ -50,12 +64,12 @@ function DocsA({ acts }: { acts: Act[] }) {
     <div className="nd-a">
       {acts.map((x) => (
         <Wrap key={x.t} x={x} className="nd-a-doc">
-          <span className="nd-a-state">Özbekiston Respublikasi</span>
+          <span className="nd-a-state">{head(x)}</span>
           <b className="nd-a-kind">{KIND[x.kind]}</b>
-          {x.kind !== 'Qonun' && <span className="nd-a-org">{orgShort(x)}</span>}
+          {x.kind !== 'Qonun' && orgShort(x) && <span className="nd-a-org">{orgShort(x)}</span>}
           <span className="nd-a-meta">
-            <span>№ {x.no}</span>
-            <time>{x.y}</time>
+            <span>{noTxt(x)}</span>
+            {x.y && <time>{x.y}</time>}
           </span>
           <strong className="nd-a-name">{title(x)}</strong>
           <p>{x.d}</p>
@@ -74,7 +88,7 @@ function DocsB({ acts }: { acts: Act[] }) {
         <Wrap key={x.t} x={x} className="nd-b-row">
           <span className="nd-b-thumb" aria-hidden="true">
             <b>{KIND[x.kind]}</b>
-            <span className="nd-b-no">{x.no}</span>
+            <span className="nd-b-no">{x.no ?? 'PDF'}</span>
             <i />
             <i />
             <i />
@@ -82,7 +96,7 @@ function DocsB({ acts }: { acts: Act[] }) {
           </span>
           <span className="nd-b-txt">
             <span className="nd-b-meta">
-              {x.org} · <time>{x.y}</time>
+              {x.org} · {x.y ? <time>{x.y}</time> : 'amaldagi tahrir'}
             </span>
             <strong>{title(x)}</strong>
             <p>{x.d}</p>
@@ -101,12 +115,18 @@ function DocsC({ acts }: { acts: Act[] }) {
       {acts.map((x) => (
         <Wrap key={x.t} x={x} className="nd-c-doc">
           <span className="nd-c-frame">
-            <span className="nd-c-state">Özbekiston Respublikasi</span>
+            <span className="nd-c-state">{head(x)}</span>
             <span className="nd-c-rule" aria-hidden="true" />
-            <span className="nd-c-org">{orgShort(x)}</span>
+            <span className="nd-c-org">{orgShort(x) || KIND[x.kind]}</span>
             <strong className="nd-c-name">{title(x)}</strong>
             <span className="nd-c-meta">
-              Toşkent ş. · <time>{x.y}</time> · № {x.no}
+              {x.y ? (
+                <>
+                  Toşkent ş. · <time>{x.y}</time> · {noTxt(x)}
+                </>
+              ) : (
+                noTxt(x)
+              )}
             </span>
             <p>{x.d}</p>
             <Open x={x} cls="nd-c-open" />
