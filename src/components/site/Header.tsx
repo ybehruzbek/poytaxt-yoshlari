@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { NAV, type NavGroup, groupPaths } from '@/config/nav'
-import type { Locale } from '@/i18n/config'
+import { type Locale, localeLabels, locales } from '@/i18n/config'
 
 const Chevron = ({ dir = 'down' }: { dir?: 'down' | 'right' }) => (
   <svg className={`chev chev-${dir}`} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -17,6 +17,28 @@ const Arrow = () => (
     <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 )
+
+/** Til tanlagiç: UZ · RU · EN — joriy sahifaning boşqa tildagi nusxasiga olib boradi */
+function LangSwitch({ locale, path }: { locale: Locale; path: string }) {
+  return (
+    <nav className="lang" aria-label="Til">
+      {locales.map((l) => (
+        <Link
+          key={l}
+          href={`/${l}${path === '/' ? '' : path}`}
+          hrefLang={l}
+          lang={l}
+          className={l === locale ? 'on' : undefined}
+          aria-current={l === locale ? 'true' : undefined}
+          aria-label={localeLabels[l]}
+          title={localeLabels[l]}
+        >
+          {l.toUpperCase()}
+        </Link>
+      ))}
+    </nav>
+  )
+}
 
 /**
  * Navbar · tepada fonsiz va keng, aylantirganda shisha kapsulaga yiğiladi; menyu tuzilmasi: src/config/nav.ts.
@@ -154,9 +176,12 @@ export function Header({ locale }: { locale: Locale }) {
             </ul>
           </nav>
 
-          <Link href={joinHref} className="btn btn-outline head-cta">
-            Aʼzo böliş
-          </Link>
+          <div className="head-end">
+            <LangSwitch locale={locale} path={path} />
+            <Link href={joinHref} className="btn btn-outline head-cta">
+              Aʼzo böliş
+            </Link>
+          </div>
           <button
             className="burger"
             type="button"

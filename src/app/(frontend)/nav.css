@@ -278,3 +278,20 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
 .site-head:not(.scrolled) .dd a{color:#fff}
 .site-head:not(.scrolled) .dd-list a:hover,.site-head:not(.scrolled) .dd-list a:focus-visible{background:rgba(255,255,255,.12)}
 .site-head:not(.scrolled) .dd-list a.cur{background:rgba(255,255,255,.1);color:var(--yellow)}
+
+/* ===== Til tanlagiç: UZ · RU · EN ===== */
+.head-end{display:flex;align-items:center;gap:12px}
+.lang{display:flex;align-items:center;gap:2px;padding:4px;border-radius:99px;background:rgba(83,40,34,.06)}
+.lang a{min-width:38px;height:34px;padding:0 9px;border-radius:99px;display:grid;place-items:center;
+  font:800 13px/1 var(--f-head);letter-spacing:.4px;color:var(--navy);transition:background .2s,color .2s}
+.lang a:hover{background:rgba(83,40,34,.08)}
+.lang a.on{background:#fff;box-shadow:0 2px 8px rgba(83,40,34,.12)}
+body:has([data-head-dark]) .site-head:not(.scrolled) .lang{background:rgba(255,255,255,.14)}
+body:has([data-head-dark]) .site-head:not(.scrolled) .lang a{color:#fff}
+body:has([data-head-dark]) .site-head:not(.scrolled) .lang a.on{background:#fff;color:var(--navy)}
+@media (max-width:1180px){
+  .head-end{margin-left:auto;margin-right:10px}
+}
+@media (max-width:420px){
+  .lang a{min-width:32px;height:30px;padding:0 6px;font-size:12px}
+}
