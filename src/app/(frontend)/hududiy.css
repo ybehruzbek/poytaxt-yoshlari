@@ -36,12 +36,14 @@
 .hk-steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
 .hk-steps li{background:rgba(255,255,255,.07);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:8px}
 .hk-steps span{width:40px;height:40px;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font:800 18px/1 var(--f-head);margin-bottom:8px}
-.hk-steps h3{font:800 18px/1.3 var(--f-head);color:#fff}
+.hk-steps h3{font:800 18px/1.3 var(--f-head);color:#fff;min-height:2.6em}
 .hk-steps p{font-size:14px;opacity:.8;line-height:1.5}
-.hk-app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:28px}
-.hk-app-foot a:not(.btn){background:rgba(255,255,255,.1);border-radius:24px;padding:14px 20px;font-weight:700;color:#fff}
-.hk-app-foot a:not(.btn):hover{background:rgba(255,255,255,.18)}
-.hk-app-foot .btn{margin-left:auto}
+.hk-app-foot{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.hk-app-foot a:not(.btn){background:rgba(255,255,255,.07);border-radius:28px;padding:20px 24px;color:#fff;font:800 18px/1.3 var(--f-head);white-space:nowrap;overflow-wrap:normal;min-width:0}
+.hk-app-foot a:not(.btn) small{display:block;margin-bottom:6px;font:600 13px/1.3 var(--f-body);opacity:.7}
+.hk-app-foot a:not(.btn):hover{background:rgba(255,255,255,.14)}
+.hk-app-foot a[href^="mailto"]{font-size:16px}
+.hk-app-foot .btn{grid-column:4;align-self:stretch;height:auto;min-height:64px;justify-content:space-between;border-radius:28px}
 
 /* Aloqa */
 .hk-con{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
@@ -59,7 +61,8 @@
   .hk-rec-time{grid-column:1;grid-row:2;font-size:14px}
   .hk-rec-who{grid-column:2;grid-row:1/3}
   .hk-rec-room{grid-column:3;grid-row:1/3}
-  .hk-steps{grid-template-columns:repeat(2,1fr)}
+  .hk-steps,.hk-app-foot{grid-template-columns:repeat(2,1fr)}
+  .hk-app-foot .btn{grid-column:1/-1}
 }
 @media (max-width:640px){
   .hk-lead{grid-template-columns:1fr;padding:28px 22px;justify-items:center;text-align:center}
@@ -71,8 +74,8 @@
   .hk-rec-who{grid-column:1/3;grid-row:3}
   .hk-rec-room{grid-column:2;grid-row:1/3}
   .hk-app{padding:30px 22px}
-  .hk-steps{grid-template-columns:1fr}
-  .hk-app-foot .btn{margin-left:0}
+  .hk-steps,.hk-app-foot{grid-template-columns:1fr}
+  .hk-steps h3{min-height:0}
   .hk-con-list{grid-template-columns:1fr}
 }
 
