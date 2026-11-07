@@ -1,8 +1,123 @@
 import type { ReactNode } from 'react'
 
-import { GROUPS, INTRO, NOTE } from './data'
+import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
+
+import { type Act, GROUPS, INTRO, NOTE } from './data'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
+
+/** VAQTINCHA: hujjat körinişi variantlari faqat işlab çiqiş rejimida */
+const DEV = process.env.NODE_ENV !== 'production'
+const PANEL: PanelSection[] = [{ name: 'nhd', label: 'Hujjat körinişi', count: 3 }]
+
+const KIND: Record<Act['kind'], string> = { Qonun: 'QONUN', Farmon: 'FARMON', Qaror: 'QAROR' }
+const title = (x: Act) => x.name ?? x.t
+/** «Özbekiston Respublikasi» sarlavhada turgani uçun organ nomida takrorlanmaydi */
+const orgShort = (x: Act) =>
+  x.kind === 'Qonun' ? 'Qonun' : x.org.replace(/^Özbekiston Respublikasi\s+/, '')
+
+function Open({ x, cls }: { x: Act; cls: string }) {
+  if (!x.href) return null
+  return (
+    <span className={cls}>
+      Matnini oçiş <span aria-hidden="true">↗</span>
+    </span>
+  )
+}
+
+/** Hujjat kartasi — href bölsa, butun karta lex.uz dagi matnga havola */
+function Wrap({ x, className, children }: { x: Act; className: string; children: ReactNode }) {
+  return x.href ? (
+    <a
+      className={className}
+      href={x.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-kind={x.kind}
+    >
+      {children}
+    </a>
+  ) : (
+    <div className={className} data-kind={x.kind}>
+      {children}
+    </div>
+  )
+}
+
+/** A — hujjat muqovasi: qoğoz varaq (bukilgan burçak, orqada varaqlar), tur, organ, raqam va sana */
+function DocsA({ acts }: { acts: Act[] }) {
+  return (
+    <div className="nd-a">
+      {acts.map((x) => (
+        <Wrap key={x.t} x={x} className="nd-a-doc">
+          <span className="nd-a-state">Özbekiston Respublikasi</span>
+          <b className="nd-a-kind">{KIND[x.kind]}</b>
+          {x.kind !== 'Qonun' && <span className="nd-a-org">{orgShort(x)}</span>}
+          <span className="nd-a-meta">
+            <span>№ {x.no}</span>
+            <time>{x.y}</time>
+          </span>
+          <strong className="nd-a-name">{title(x)}</strong>
+          <p>{x.d}</p>
+          <Open x={x} cls="nd-a-open" />
+        </Wrap>
+      ))}
+    </div>
+  )
+}
+
+/** B — fayl qatori: çapda kiçik hujjat eskizi (tur, raqam, matn çiziqlari), öngda nomi, mazmuni va havola */
+function DocsB({ acts }: { acts: Act[] }) {
+  return (
+    <div className="nd-b">
+      {acts.map((x) => (
+        <Wrap key={x.t} x={x} className="nd-b-row">
+          <span className="nd-b-thumb" aria-hidden="true">
+            <b>{KIND[x.kind]}</b>
+            <span className="nd-b-no">{x.no}</span>
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+          <span className="nd-b-txt">
+            <span className="nd-b-meta">
+              {x.org} · <time>{x.y}</time>
+            </span>
+            <strong>{title(x)}</strong>
+            <p>{x.d}</p>
+            <Open x={x} cls="nd-b-open" />
+          </span>
+        </Wrap>
+      ))}
+    </div>
+  )
+}
+
+/** C — rasmiy blank: ikki qavat ramka, markazda davlat nomi, hujjat turi, raqam va sana */
+function DocsC({ acts }: { acts: Act[] }) {
+  return (
+    <div className="nd-c">
+      {acts.map((x) => (
+        <Wrap key={x.t} x={x} className="nd-c-doc">
+          <span className="nd-c-frame">
+            <span className="nd-c-state">Özbekiston Respublikasi</span>
+            <span className="nd-c-rule" aria-hidden="true" />
+            <span className="nd-c-org">{orgShort(x)}</span>
+            <strong className="nd-c-name">{title(x)}</strong>
+            <span className="nd-c-meta">
+              Toşkent ş. · <time>{x.y}</time> · № {x.no}
+            </span>
+            <p>{x.d}</p>
+            <Open x={x} cls="nd-c-open" />
+          </span>
+        </Wrap>
+      ))}
+    </div>
+  )
+}
+
+const DOCS = { a: DocsA, b: DocsB, c: DocsC }
 
 /**
  * «Normativ-huquqiy hujjatlar» sahifasi: yöl va sarlavha, toifalar böyiça tezkor havolalar,
@@ -38,25 +153,15 @@ export function NormativPage({ crumbs }: { crumbs: ReactNode }) {
                 <p>{g.lead}</p>
               </div>
             </div>
-            <ol className="nh-acts">
-              {g.acts.map((x) => (
-                <li key={x.t}>
-                  <time>{x.y}</time>
-                  <div>
-                    <h3>
-                      {x.href ? (
-                        <a href={x.href} target="_blank" rel="noopener noreferrer">
-                          {x.t} <span aria-hidden="true">↗</span>
-                        </a>
-                      ) : (
-                        x.t
-                      )}
-                    </h3>
-                    <p>{x.d}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            {DEV ? (
+              Object.entries(DOCS).map(([k, Docs]) => (
+                <div key={k} className="vx" data-v={`nhd-${k}`}>
+                  <Docs acts={g.acts} />
+                </div>
+              ))
+            ) : (
+              <DocsA acts={g.acts} />
+            )}
           </div>
         </section>
       ))}
@@ -66,6 +171,7 @@ export function NormativPage({ crumbs }: { crumbs: ReactNode }) {
           <p className="nh-note">{NOTE}</p>
         </div>
       </section>
+      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }
