@@ -35,9 +35,6 @@ function V({ name, k, children }: { name: string; k: string; children: ReactNode
   )
 }
 
-/** Jamoa bölimi tanlangan (variantsiz) */
-const FIXED = 'hjm'
-
 const PANEL: PanelSection[] = [
   ['hab', 'Kengaş haqida'],
   ['hjm', 'Jamoa'],
@@ -373,13 +370,9 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
 
       {PANEL.map(({ name }) => (
         <div key={name} style={{ display: 'contents' }}>
-          {name === FIXED ? (
-            sections[name]
-          ) : (
-            <V name={name} k="a">
-              {sections[name]}
-            </V>
-          )}
+          <V name={name} k="a">
+            {sections[name]}
+          </V>
           {DEV &&
             (['b', 'c'] as const).map((k) => {
               const C = HkVariants[`${name}-${k}`]
@@ -395,7 +388,7 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
       <section className="sec">
         <div className="wrap">{siblings}</div>
       </section>
-      {DEV && <DevSectionsPanel sections={PANEL.filter((x) => x.name !== FIXED)} />}
+      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }
