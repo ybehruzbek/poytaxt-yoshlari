@@ -12,6 +12,11 @@ type Props = { params: Promise<{ locale: Locale; slug: string[] }> }
 const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq', '/biz-haqimizda/markaziy-kengash', '/biz-haqimizda/hududiy-kengash', '/hujjatlar/normativ', '/biz-haqimizda/boshlangich-tashkilotlar',
   '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim',
   '/biz-haqimizda/boshlangich-tashkilotlar/harbiy',
+  '/faoliyat/yonalishlar',
+  '/faoliyat/loyihalar',
+  '/faoliyat/tadbirlar',
+  '/faoliyat/natijalar',
+  '/faoliyat/ishtirok',
 ])
 
 /** Menyudagi barcha yo'llar oldindan tayyorlanadi */

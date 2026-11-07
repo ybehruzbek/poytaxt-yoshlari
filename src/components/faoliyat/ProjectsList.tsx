@@ -1,0 +1,121 @@
+'use client'
+
+/* eslint-disable @next/next/no-img-element -- kanal suratlari; CMS ulanganda next/image ga o'tadi */
+import Link from 'next/link'
+import { useMemo, useState } from 'react'
+
+import { type DirSlug, type Project } from './types'
+
+const low = (s: string) => s.toLocaleLowerCase('uz')
+const STATUS = {
+  'davom etmoqda': 'Davom etmoqda',
+  'har yili': 'Har yili',
+  yakunlangan: 'Yakunlangan',
+} as const
+
+/** Loyihalar: yönaliş va holat böyiça saralaş, qidiruv */
+export function ProjectsList({
+  projects,
+  dirs,
+  base,
+}: {
+  projects: Project[]
+  dirs: Array<{ slug: DirSlug; title: string }>
+  base: string
+}) {
+  const [dir, setDir] = useState<'all' | DirSlug>('all')
+  const [st, setSt] = useState<'all' | Project['status']>('all')
+  const [q, setQ] = useState('')
+  const title = (s: DirSlug) => dirs.find((d) => d.slug === s)?.title ?? ''
+  const used = dirs.filter((d) => projects.some((p) => p.dir === d.slug))
+
+  const list = useMemo(() => {
+    const s = low(q.trim())
+    return projects.filter(
+      (p) =>
+        (dir === 'all' || p.dir === dir) &&
+        (st === 'all' || p.status === st) &&
+        (!s || low(`${p.title} ${p.lead} ${p.description}`).includes(s)),
+    )
+  }, [projects, dir, st, q])
+
+  if (!projects.length) return <p className="fa-empty">Loyihalar maʼlumoti tayyorlanmoqda.</p>
+
+  return (
+    <>
+      <div className="fa-tools">
+        <div className="fa-chips" role="group" aria-label="Holati">
+          {(['all', 'davom etmoqda', 'har yili', 'yakunlangan'] as const).map((k) => (
+            <button
+              key={k}
+              type="button"
+              className={st === k ? 'on' : undefined}
+              aria-pressed={st === k}
+              onClick={() => setSt(k)}
+            >
+              {k === 'all' ? 'Barçasi' : STATUS[k]}{' '}
+              <span>
+                {k === 'all' ? projects.length : projects.filter((p) => p.status === k).length}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="fa-tools-r">
+          <label className="fa-select">
+            <span className="sr-only">Yönaliş</span>
+            <select value={dir} onChange={(e) => setDir(e.target.value as 'all' | DirSlug)}>
+              <option value="all">Barça yönalişlar</option>
+              {used.map((d) => (
+                <option key={d.slug} value={d.slug}>
+                  {d.title}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="fa-search">
+            <span className="sr-only">Qidiruv</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-4-4" />
+            </svg>
+            <input
+              type="search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Qidiruv: loyiha nomi"
+            />
+          </label>
+        </div>
+      </div>
+      <p className="fa-count">{list.length} ta loyiha</p>
+      <div className="fa-projs">
+        {list.map((p) => (
+          <Link key={p.slug} href={`${base}/${p.slug}`} className="fa-proj">
+            <span className="fa-proj-ph">
+              {p.cover ? (
+                <img src={p.cover} alt="" loading="lazy" />
+              ) : (
+                <span className="fa-ev-noph" />
+              )}
+              <span className="fa-status" data-s={p.status}>
+                {STATUS[p.status]}
+              </span>
+            </span>
+            <span className="fa-proj-txt">
+              <span className="fa-proj-dir">{title(p.dir)}</span>
+              <strong>{p.title}</strong>
+              <p>{p.lead}</p>
+              <span className="fa-proj-foot">
+                <span>{p.period}</span>
+                <span className="fa-go">
+                  Batafsil <span aria-hidden="true">→</span>
+                </span>
+              </span>
+            </span>
+          </Link>
+        ))}
+      </div>
+      {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
+    </>
+  )
+}
