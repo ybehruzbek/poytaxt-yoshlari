@@ -2,6 +2,8 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
+import { ANNOUNCEMENTS } from './announcements'
+import { AnnounceList } from './AnnounceList'
 import { CALLS } from './calls'
 import { DIRECTIONS, dirProjects, dirTitle, PROJECTS, REPORT_2025, YEARS } from './data'
 import { EVENTS } from './events'
@@ -310,7 +312,7 @@ export function ProjectPage({
 
 /* ===================== Tadbirlar va kalendar ===================== */
 
-export function EventsPage({ crumbs }: { crumbs: ReactNode }) {
+export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: string }) {
   const up = EVENTS.filter((e) => e.date >= TODAY).sort((a, b) => a.date.localeCompare(b.date))
   const past = EVENTS.filter((e) => e.date < TODAY)
   return (
@@ -352,8 +354,31 @@ export function EventsPage({ crumbs }: { crumbs: ReactNode }) {
               Hozirça eʼlon qilingan tadbir yöq. Yangiliklarni kanalimizda kuzatib boring.
             </p>
           )}
+          <p className="fa-note">
+            Tanlov, röyxatdan ötiş va boşqa eʼlonlar alohida —{' '}
+            <Link href={annHref}>Eʼlonlar sahifasida</Link>.
+          </p>
           <h2 className="fa-h2">Tadbirlar arxivi</h2>
           <EventsList events={past} dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))} />
+        </div>
+      </section>
+    </div>
+  )
+}
+
+/* ===================== Eʼlonlar ===================== */
+
+export function AnnouncePage({ crumbs }: { crumbs: ReactNode }) {
+  return (
+    <div className="fa">
+      <Head
+        crumbs={crumbs}
+        title="Eʼlonlar"
+        lead="Tanlovlar, röyxatdan ötiş, çellenjlar, sayohatlar va tadbir eʼlonlari bir joyda. Har bir eʼlon “Poytaxt yoşlari” kanalidagi asl postga bog‘langan."
+      />
+      <section className="sec fa-sec">
+        <div className="wrap">
+          <AnnounceList items={ANNOUNCEMENTS} />
         </div>
       </section>
     </div>

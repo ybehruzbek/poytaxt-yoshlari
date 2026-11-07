@@ -165,17 +165,24 @@
   transform: translateY(-2px);
 }
 .fa-ev-ph {
+  position: relative;
   display: block;
+  overflow: hidden;
   aspect-ratio: 16/10;
   background: var(--soft);
 }
 .fa-ev-ph img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 .fa-ev-noph {
-  display: block;
+  display: grid;
+  place-items: center;
+  font: 800 22px/1 var(--f-head);
+  color: color-mix(in srgb, var(--navy) 35%, transparent);
   width: 100%;
   height: 100%;
   background:
@@ -196,26 +203,141 @@
   font: 700 13px/1 var(--f-head);
   color: var(--blue);
 }
-.fa-ev-txt strong {
+.fa-ev-txt strong,
+.fa-ann-txt strong {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: calc(2 * 1.35em);
   margin-top: 8px;
   font: 800 16px/1.35 var(--f-head);
   color: var(--navy);
 }
 .fa-ev-place {
+  overflow: hidden;
+  min-height: 1.4em;
   margin-top: 6px;
   font-size: 13px;
   font-weight: 600;
+  line-height: 1.4;
   color: var(--muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.fa-ev-sum {
+.fa-ev-sum,
+.fa-ann-sum {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   line-clamp: 3;
   overflow: hidden;
+  min-height: calc(3 * 1.5em);
   margin-top: 8px;
   font-size: 14px;
   line-height: 1.5;
+}
+
+/* ---------- Eʼlonlar (poster töliq körinadi) ---------- */
+.fa-anns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.fa-ann {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--r-thumb);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  color: var(--grey);
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.fa-ann:hover {
+  box-shadow:
+    0 0 0 1px var(--yellow),
+    0 16px 34px rgba(83, 40, 34, 0.1);
+  transform: translateY(-2px);
+}
+.fa-ann-ph {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4/5;
+  padding: 10px;
+  background: var(--soft);
+}
+.fa-ann-ph img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.fa-ann-noph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      color-mix(in srgb, var(--yellow) 30%, transparent),
+      transparent 55%
+    ),
+    var(--navy);
+  color: #fff;
+  text-align: center;
+}
+.fa-ann-noph small {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--yellow);
+  font: 800 12px/1 var(--f-head);
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.fa-ann-noph b {
+  margin-top: 6px;
+  font: 800 64px/1 var(--f-head);
+}
+.fa-ann-noph em {
+  font: 700 18px/1 var(--f-head);
+  font-style: normal;
+}
+.fa-ann-noph i {
+  font: 600 13px/1 var(--f-body);
+  font-style: normal;
+  opacity: 0.6;
+}
+.fa-ann-txt {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px 18px 18px;
+}
+.fa-ann-txt time {
+  font: 700 13px/1 var(--f-head);
+  color: var(--blue);
+}
+.fa-note {
+  margin: 4px 0 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.fa-note a {
+  font-weight: 700;
+  color: var(--blue);
 }
 .fa-ev-src {
   margin-top: auto;
@@ -759,6 +881,9 @@
 }
 
 @media (max-width: 1100px) {
+  .fa-anns {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .fa-evs,
   .fa-dirs,
   .fa-projs {
@@ -772,6 +897,16 @@
   }
 }
 @media (max-width: 640px) {
+  .fa-anns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .fa-ann-txt {
+    padding: 12px;
+  }
+  .fa-ann-sum {
+    display: none;
+  }
   .fa-evs,
   .fa-dirs,
   .fa-projs,

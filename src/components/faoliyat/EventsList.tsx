@@ -95,13 +95,19 @@ export function EventsList({
         {list.slice(0, limit).map((e) => (
           <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer" className="fa-ev">
             <span className="fa-ev-ph">
-              {e.img ? <img src={e.img} alt="" loading="lazy" /> : <span className="fa-ev-noph" />}
+              {e.img ? (
+                <img src={e.img} alt="" loading="lazy" />
+              ) : (
+                <span className="fa-ev-noph" aria-hidden="true">
+                  Tadbir
+                </span>
+              )}
             </span>
             <span className="fa-ev-txt">
               <time dateTime={e.date}>{fmtDate(e.date)}</time>
               <strong>{e.title}</strong>
-              {e.place && <span className="fa-ev-place">{e.place}</span>}
-              {e.summary && <span className="fa-ev-sum">{e.summary}</span>}
+              <span className="fa-ev-place">{e.place}</span>
+              <span className="fa-ev-sum">{e.summary}</span>
               <span className="fa-ev-src">
                 Telegramda köriş <span aria-hidden="true">↗</span>
               </span>

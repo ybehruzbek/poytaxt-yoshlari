@@ -19,18 +19,6 @@ export type Ev = {
 
 export const EVENTS: Ev[] = [
   {
-    id: 7035,
-    date: '2026-11-21',
-    title: 'Xalqaro Öqituvçilar rivojlanişi simpoziumi',
-    place: 'Yoşlar ijod saroyi',
-    type: 'simpozium',
-    summary:
-      '21–22-noyabr; 5 nafar xorijiy taʼlim eksperti (David Nunan va boşqalar) iştirok etadi.',
-    dir: 'talim-kasb',
-    img: '',
-    upcoming: true,
-  },
-  {
     id: 7036,
     date: '2026-11-07',
     title: '“Red Bull Wings Cup” kibersport turniri',
@@ -309,17 +297,6 @@ export const EVENTS: Ev[] = [
     img: '/img/faoliyat/t/6739.webp',
   },
   {
-    id: 6737,
-    date: '2026-09-11',
-    title: '“Men — Özbekiston yoşlar ittifoqi aʼzosiman!” çallenge',
-    place: 'Ijtimoiy tarmoqlar',
-    type: 'çallenge',
-    summary:
-      'Yoşlar öz suratlari bilan çallengeʼda iştirok etişga va döstlarini çorlaşga taklif qilindi.',
-    dir: 'manaviyat-kitobxonlik',
-    img: '/img/faoliyat/t/6737.webp',
-  },
-  {
     id: 6726,
     date: '2026-09-10',
     title: '“Payşanba — yoşlar kuni”: 1-kurs talabalari bilan uçraşuvlar',
@@ -393,28 +370,6 @@ export const EVENTS: Ev[] = [
       'BMTning 17 ta BRM va yoşlarning örni haqida seminar, interaktiv quizlar, faol iştirokçilar taqdirlandi.',
     dir: 'intellektual',
     img: '/img/faoliyat/t/6626.webp',
-  },
-  {
-    id: 6622,
-    date: '2026-08-12',
-    title: '“YUTRIP” tungi sayohati',
-    place: 'Yiğiliş: Özbekiston mehmonxonasi oldi, Amir Temur metro bekati',
-    type: 'sayohat',
-    summary:
-      '12–13-avgust kunlari yulduzlar yomğirini kuzatiş va quyoş çiqişini qarşi oliş sayohati.',
-    dir: 'ijod-turizm',
-    img: '/img/faoliyat/t/6622.webp',
-  },
-  {
-    id: 6606,
-    date: '2026-08-09',
-    title: 'IAESTE xalqaro amaliyot dasturi haqida ovozli çat',
-    place: 'Telegram, @poytaxtyoshlari_yi',
-    type: 'onlayn suhbat',
-    summary:
-      'Xorijda haq tölanadigan amaliyotlar, Exçange va Global Internşip haqida ovozli çat; yozuv va taqdimot ulaşildi.',
-    dir: 'manaviyat-kitobxonlik',
-    img: '/img/faoliyat/t/6606.webp',
   },
   {
     id: 6578,
@@ -647,17 +602,6 @@ export const EVENTS: Ev[] = [
       '6 kunlik kurs yakunlandi; iştirokçilar loyihalarini taqdim etdi, sertifikatlar berildi.',
     dir: 'intellektual',
     img: '/img/faoliyat/t/6219.webp',
-  },
-  {
-    id: 6230,
-    date: '2026-05-22',
-    title: '“Munozara” respublika bosqiçi finali',
-    place: 'Namangan viloyati',
-    type: 'intellektual turnir finali',
-    summary:
-      'Barça sovrinli örinlarni Toşkent jamoalari egalladi: TIQXMMI MTU “Elita”, ÖzMU “Taraqqiyot yoşlari”, TDYU “Yuristlar”.',
-    dir: 'intellektual',
-    img: '/img/faoliyat/t/6230.webp',
   },
   {
     id: 6205,
@@ -1039,17 +983,6 @@ export const EVENTS: Ev[] = [
     img: '/img/faoliyat/t/5539.webp',
   },
   {
-    id: 5552,
-    date: '2026-03-05',
-    title: 'Onlayn “Zakovat” viktorinasi finali',
-    place: 'Poytaxt yoşlari Telegram kanali',
-    type: 'intellektual tanlov finali',
-    summary:
-      '50 nafar bilimdon 20 ta savoldan iborat finalda bellaşdi; 1-örin Toşpölatov Javlonbek (ÖzDJTU).',
-    dir: 'intellektual',
-    img: '/img/faoliyat/t/5552.webp',
-  },
-  {
     id: 5518,
     date: '2026-03-05',
     title: 'TDTUda Markaziy Kengaş raisi bilan oçiq muloqot',
@@ -1427,16 +1360,6 @@ export const EVENTS: Ev[] = [
     summary: 'Xalqaro talabalar kuni munosabati bilan talabalar uçun bayram tadbiri.',
     dir: 'ijod-turizm',
     img: '',
-  },
-  {
-    id: 4518,
-    date: '2025-11-17',
-    title: '“Mangu hilpirayver mağrur bayroğim” tanlovi natijalari',
-    place: 'Poytaxt yoşlari Telegram kanali',
-    type: 'tanlov',
-    summary: 'Davlat bayroği kuni munosabati bilan videoroliklar tanlovi ğoliblari eʼlon qilindi.',
-    dir: 'manaviyat-kitobxonlik',
-    img: '/img/faoliyat/t/4518.webp',
   },
   {
     id: 4490,
@@ -2865,17 +2788,6 @@ export const EVENTS: Ev[] = [
       'Blogerlar, faol yoşlar va volontyorlar iştirokida köngiloçar dastur va xayriya aksiyalari, bolalarga sovğalar.',
     dir: 'volontyorlik',
     img: '/img/faoliyat/t/236.webp',
-  },
-  {
-    id: 221,
-    date: '2023-07-04',
-    title: '“Yengilmas” 3-son premyerasi',
-    place: 'Yoşlar press klubi',
-    type: 'premyera',
-    summary:
-      'Motivatsion film 3-soni namoyiş etildi; Markaziy Kengaş raisi loyihaga moddiy-texnik baza vaʼda qildi.',
-    dir: 'media',
-    img: '/img/faoliyat/t/221.webp',
   },
   {
     id: 203,

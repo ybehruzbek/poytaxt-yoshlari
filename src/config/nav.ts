@@ -43,11 +43,12 @@ export const NAV: NavGroup[] = [
   {
     key: 'faoliyat',
     label: 'Faoliyat',
-    intro: 'Yönalişlar, loyihalar, tadbirlar va natijalar.',
+    intro: 'Yönalişlar, loyihalar, tadbirlar, eʼlonlar va natijalar.',
     items: [
       { label: 'Faoliyat yönalişlari', href: '/faoliyat/yonalishlar', desc: 'Kengaşning ustuvor yönalişlari' },
       { label: 'Loyihalar', href: '/faoliyat/loyihalar', desc: 'Kengaş va hamkorlar loyihalari' },
       { label: 'Tadbirlar va kalendar', href: '/faoliyat/tadbirlar', desc: 'Yaqin tadbirlar taqvimi' },
+      { label: 'Eʼlonlar', href: '/faoliyat/elonlar', desc: 'Tanlovlar, röyxatdan ötiş, çellenjlar' },
       { label: 'Natijalar va hisobotlar', href: '/faoliyat/natijalar', desc: 'Yil yakunlari raqamlarda' },
       { label: 'Köngillilik va iştirok', href: '/faoliyat/ishtirok', desc: 'Qanday qöşiliş mumkin' },
     ],
