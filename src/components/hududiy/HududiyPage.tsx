@@ -5,18 +5,8 @@ import type { ReactNode } from 'react'
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
-import {
-  ABOUT,
-  APPEAL_LAW,
-  APPEAL_NOTE,
-  APPEAL_STEPS,
-  BASIS,
-  CONTACT,
-  IMG,
-  INTRO,
-  TASKS,
-} from './data'
-import { IC, Ic, TEAM } from './team'
+import { ABOUT, APPEAL_LAW, APPEAL_NOTE, APPEAL_STEPS, CONTACT, IMG, INTRO, TASKS } from './data'
+import { TeamNamuna } from './AltHkJamoa'
 import { HkVariants } from './variants'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -75,77 +65,7 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
     ),
-    hjm: (
-      <section className="sec" id="jamoa">
-        <div className="wrap">
-          <div className="sec-head hk-jm-head">
-            <span>Özbekiston yoşlar ittifoqi</span>
-            <h2 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h2>
-          </div>
-          <p className="hk-basis">{BASIS}</p>
-          {TEAM.map((g) => (
-            <div key={g.title} className="hk-jm-grp">
-              <h3 className="hk-jm-gt">
-                {g.title} <span>{g.people.length}</span>
-              </h3>
-              {g.people.map((m) => (
-                <article key={m.name} className={`hk-lead${g.lead ? '' : ' hk-lead--sm'}`}>
-                  <div className="hk-lead-ph">
-                    <img src={m.img} alt={m.name} loading="lazy" />
-                  </div>
-                  <div className="hk-lead-main">
-                    <h3>{m.name}</h3>
-                    <p>{m.role}</p>
-                    {m.dept && <small>{m.dept}</small>}
-                  </div>
-                  <ul className="hk-lead-con">
-                    <li>
-                      <Ic d={IC.phone} />
-                      <a href={`tel:${(m.phone ?? CONTACT.phone).replace(/[^+\d]/g, '')}`}>
-                        {m.phone ?? CONTACT.phone}
-                      </a>
-                    </li>
-                    <li>
-                      <Ic d={IC.mail} />
-                      <a href={`mailto:${m.email ?? CONTACT.email}`}>{m.email ?? CONTACT.email}</a>
-                    </li>
-                    {m.socials?.map((x) => (
-                      <li key={x.net}>
-                        <Ic d={IC[x.net]} />
-                        <a href={x.href} target="_blank" rel="noopener noreferrer">
-                          {x.handle}
-                        </a>
-                      </li>
-                    ))}
-                    {m.reception && (
-                      <li>
-                        <Ic d={IC.clock} />
-                        <span>{m.reception}</span>
-                      </li>
-                    )}
-                  </ul>
-                  {m.duties && (
-                    <details className="hk-duty">
-                      <summary>
-                        <span className="hk-duty-l">Vazifalari</span>
-                        <span className="hk-duty-ic" aria-hidden="true">
-                          +
-                        </span>
-                      </summary>
-                      <ol>
-                        {m.duties.map((x) => (
-                          <li key={x}>{x}</li>
-                        ))}
-                      </ol>
-                    </details>
-                  )}
-                </article>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-    ),
+    hjm: <TeamNamuna />,
     hmu: (
       <section className="sec">
         <div className="wrap">

@@ -1,293 +1,264 @@
 /* =====================================================================
-   «Kengaş jamoasi» B varianti (namuna asosida). Prefiks: z4-
+   «Kengaş jamoasi» — namuna asosidagi dizayn. Prefiks: z5-
    Suratlar oq fonli — multiply orqali karta gradiyentiga singadi.
    ===================================================================== */
 
-/* Rais — katta karta */
-.z4-hero {
+/* Rais — keng karta */
+.z5-hero {
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(300px, 420px) 1fr;
-  gap: 48px;
+  grid-template-columns: 44% 1fr;
   align-items: end;
+  min-height: 480px;
   border-radius: var(--r-card);
   background: linear-gradient(
-    115deg,
-    #fff 0%,
-    var(--soft) 45%,
-    color-mix(in srgb, var(--lime) 28%, var(--soft)) 100%
+    100deg,
+    #f8f5f3 0%,
+    #fff 38%,
+    color-mix(in srgb, var(--lime) 16%, #fff) 100%
   );
-  padding: 48px 56px 0;
-  min-height: 440px;
 }
-.z4-hero-mark {
+.z5-hero-mark {
   position: absolute;
-  right: -60px;
+  right: 4%;
   top: 50%;
   transform: translateY(-50%);
-  width: 440px;
-  opacity: 0.07;
+  width: min(46%, 520px);
+  opacity: 0.08;
   pointer-events: none;
 }
-.z4-hero-ph {
+.z5-hero-ph {
   position: relative;
   display: block;
+  justify-self: center;
   width: 100%;
-  max-width: 360px;
+  max-width: 340px;
   height: auto;
   aspect-ratio: 260/347;
   object-fit: cover;
   object-position: top;
   mix-blend-mode: multiply;
-  justify-self: center;
 }
-.z4-hero-txt {
+.z5-hero-txt {
   position: relative;
   align-self: center;
-  padding-bottom: 48px;
+  padding: 56px 56px 56px 0;
 }
-.z4-hero-txt h3 {
-  font: 800 clamp(30px, 3.4vw, 48px)/1.12 var(--f-head);
-  color: var(--navy);
+.z5-hero-txt h3 {
+  max-width: 560px;
+  font: 800 clamp(30px, 3.3vw, 48px)/1.12 var(--f-head);
+  color: var(--grey);
 }
-.z4-hero-txt > p {
-  margin-top: 14px;
-  font-size: 19px;
+.z5-hero-txt > p {
+  margin-top: 22px;
+  max-width: 460px;
+  font-size: 20px;
+  line-height: 1.4;
   color: var(--muted);
 }
-.z4-hero .z4-con {
-  margin-top: 28px;
-  grid-template-columns: 1fr 1fr;
-}
-.z4-hero .z4-duty {
-  margin-top: 22px;
-  border: 0;
-  background: #fff;
-  border-radius: 24px;
-}
 
-/* Kontaktlar */
-.z4-con {
-  list-style: none;
-  display: grid;
-  gap: 10px 22px;
+/* Bölim sarlavhasi */
+.z5-grp {
+  margin-top: 56px;
 }
-.z4-con li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  font-size: 15px;
+.z5-gt {
+  font: 800 22px/1.25 var(--f-head);
   color: var(--navy);
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-.z4-con a:hover {
-  color: var(--blue);
-}
-.z4-con .hk-lead-ic {
-  width: 36px;
-  height: 36px;
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
-}
-.z4-con .hk-lead-ic svg {
-  width: 16px;
-  height: 16px;
-}
-.z4-con--sm {
-  margin-top: 18px;
-  gap: 8px;
-}
-.z4-con--sm li {
-  font-size: 13px;
-}
-.z4-con--sm .hk-lead-ic {
-  width: 28px;
-  height: 28px;
-}
-.z4-con--sm .hk-lead-ic svg {
-  width: 13px;
-  height: 13px;
+  margin-bottom: 20px;
 }
 
-/* Guruhlar va kartalar */
-.z4-grp {
-  margin-top: 52px;
-}
-.z4-grid {
+/* Kartalar */
+.z5-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  align-items: start;
+  gap: 20px;
+  align-items: stretch;
 }
-.z4-card {
-  border-radius: var(--r-thumb);
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
-}
-.z4-card:hover {
-  box-shadow:
-    0 0 0 1px var(--yellow),
-    0 18px 40px rgba(83, 40, 34, 0.1);
-  transform: translateY(-2px);
-}
-.z4-card-top {
+.z5-card {
   display: grid;
-  grid-template-columns: 1fr 150px;
-  align-items: end;
-  min-height: 320px;
+  grid-template-columns: 1fr 170px;
+  grid-template-rows: 1fr auto;
+  min-height: 290px;
+  overflow: hidden;
+  border-radius: var(--r-thumb);
   background: linear-gradient(
-    135deg,
-    #fff 0%,
-    var(--soft) 55%,
-    color-mix(in srgb, var(--lime) 26%, var(--soft)) 100%
+    110deg,
+    #f8f5f3 0%,
+    #fff 45%,
+    color-mix(in srgb, var(--lime) 14%, #fff) 100%
   );
 }
-.z4-card-txt {
-  align-self: start;
-  padding: 28px 0 26px 28px;
+.z5-card-txt {
+  padding: 38px 8px 30px 34px;
   min-width: 0;
 }
-.z4-card-txt h3 {
-  font: 800 20px/1.22 var(--f-head);
-  color: var(--navy);
+.z5-card-txt h3 {
+  font: 800 22px/1.2 var(--f-head);
+  color: var(--grey);
 }
-.z4-role {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--blue);
-  background: #fff;
-  border-radius: 99px;
-  padding: 5px 12px;
-}
-.z4-card-txt small {
-  display: block;
-  margin-top: 10px;
-  font-size: 13px;
+.z5-card-txt > p {
+  margin-top: 16px;
+  font-size: 15px;
   line-height: 1.45;
   color: var(--muted);
 }
-.z4-card-ph {
+.z5-card-txt > small {
   display: block;
-  width: 150px;
-  height: 200px;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+  opacity: 0.8;
+}
+.z5-card-ph {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  display: block;
+  width: 170px;
+  height: 227px;
   object-fit: cover;
   object-position: top;
   mix-blend-mode: multiply;
 }
 
-/* Vazifalari */
-.z4-duty {
-  border-top: 1px solid var(--line);
-}
-.z4-duty summary {
-  list-style: none;
-  cursor: pointer;
+/* Aloqa: matnli qatorlar + dumaloq ijtimoiy ikonkalar */
+.z5-reach {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 22px 14px 28px;
-  font: 800 15px/1 var(--f-head);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--navy);
 }
-.z4-duty summary::-webkit-details-marker {
-  display: none;
+.z5-reach > a,
+.z5-reach > span {
+  overflow-wrap: anywhere;
 }
-.z4-duty summary:hover {
+.z5-reach > span {
+  font-weight: 500;
+  color: var(--muted);
+}
+.z5-reach a:hover {
   color: var(--blue);
 }
-.z4-duty-ic {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+.z5-soc {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.z5-soc .hk-lead-ic {
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  transition: background 0.2s;
+}
+.z5-soc a:hover .hk-lead-ic {
   background: var(--yellow);
-  display: grid;
-  place-items: center;
+  color: var(--navy);
+}
+.z5-soc .hk-lead-ic svg {
+  width: 15px;
+  height: 15px;
+}
+.z5-hero .z5-reach {
+  margin-top: 28px;
+  font-size: 16px;
+}
+
+/* Vazifalari */
+.z5-duty {
+  grid-column: 1/-1;
+}
+.z5-duty summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 700 14px/1 var(--f-head);
+  color: var(--blue);
+}
+.z5-duty summary::-webkit-details-marker {
+  display: none;
+}
+.z5-duty summary span {
   font-size: 18px;
   transition: transform 0.2s;
 }
-.z4-duty[open] .z4-duty-ic {
+.z5-duty[open] summary span {
   transform: rotate(45deg);
 }
-.z4-duty ol {
-  list-style: none;
-  counter-reset: d;
+.z5-duty ul {
   display: grid;
-  gap: 10px;
-  padding: 4px 28px 24px;
-}
-.z4-duty li {
-  counter-increment: d;
-  display: flex;
-  gap: 10px;
+  gap: 8px;
+  margin-top: 14px;
+  padding-left: 18px;
   font-size: 14px;
   line-height: 1.5;
+  color: var(--grey);
 }
-.z4-duty li::before {
-  content: counter(d, decimal-leading-zero);
-  flex: none;
-  font: 800 14px/1.5 var(--f-head);
-  color: var(--blue);
+.z5-card .z5-duty {
+  border-top: 1px solid color-mix(in srgb, var(--navy) 8%, transparent);
+  padding: 16px 36px;
 }
-.z4-hero .z4-duty ol {
-  grid-template-columns: 1fr 1fr;
-  column-gap: 28px;
+.z5-card .z5-duty[open] {
+  padding-bottom: 24px;
+}
+.z5-hero .z5-duty {
+  margin-top: 22px;
+}
+.z5-hero .z5-duty ul {
+  max-width: 620px;
 }
 
 @media (max-width: 1100px) {
-  .z4-hero {
-    grid-template-columns: 260px 1fr;
-    gap: 28px;
-    padding: 36px 36px 0;
+  .z5-hero {
+    grid-template-columns: 38% 1fr;
   }
-  .z4-hero .z4-con {
-    grid-template-columns: 1fr;
+  .z5-hero-txt {
+    padding: 40px 36px 40px 0;
   }
-  .z4-hero .z4-duty ol {
-    grid-template-columns: 1fr;
-  }
-  .z4-grid {
+  .z5-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 640px) {
-  .z4-hero {
+  .z5-hero {
     grid-template-columns: 1fr;
-    padding: 28px 22px 0;
     min-height: 0;
   }
-  .z4-hero-ph {
+  .z5-hero-txt {
+    padding: 32px 22px 8px;
+  }
+  .z5-hero-ph {
     order: 2;
-    max-width: 240px;
+    max-width: 260px;
   }
-  .z4-hero-txt {
-    padding-bottom: 0;
-  }
-  .z4-hero-mark {
-    width: 280px;
-    right: -80px;
+  .z5-hero-mark {
+    width: 300px;
+    right: -90px;
     top: 30%;
   }
-  .z4-grid {
+  .z5-grid {
     grid-template-columns: 1fr;
   }
-  .z4-card-top {
-    grid-template-columns: 1fr 120px;
+  .z5-card {
+    grid-template-columns: 1fr 140px;
     min-height: 0;
   }
-  .z4-card-ph {
-    width: 120px;
-    height: 160px;
+  .z5-card-txt {
+    padding: 28px 0 24px 22px;
   }
-  .z4-card-txt {
-    padding: 22px 0 22px 22px;
+  .z5-card-ph {
+    width: 140px;
+    height: 187px;
+  }
+  .z5-card .z5-duty {
+    padding: 14px 22px;
   }
 }
