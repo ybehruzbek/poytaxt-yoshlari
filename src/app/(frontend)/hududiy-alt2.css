@@ -1,125 +1,14 @@
-.z2-law {
-  margin-top: 22px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* ---------- Murojaat B: gorizontal progress ---------- */
-.z2-ab-head {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: end;
-}
-.z2-ab-head p {
-  line-height: 1.65;
-  color: var(--grey);
-}
-.z2-ab-track {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin-top: 56px;
-  position: relative;
-}
-.z2-ab-track::before {
-  content: '';
-  position: absolute;
-  left: 28px;
-  right: 28px;
-  top: 27px;
-  height: 4px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--yellow), var(--blue));
-}
-.z2-ab-track li {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.z2-ab-dot {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: #fff;
-  border: 4px solid var(--yellow);
-  display: grid;
-  place-items: center;
-  font: 800 22px/1 var(--f-head);
-  color: var(--navy);
-  margin-bottom: 14px;
-  position: relative;
-}
-.z2-ab-track li:last-child .z2-ab-dot {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-}
-.z2-ab-track h3 {
-  font: 800 19px/1.3 var(--f-head);
-  color: var(--navy);
-}
-.z2-ab-track p {
-  display: inline-block;
-  align-self: flex-start;
-  background: var(--soft);
-  border-radius: 99px;
-  padding: 7px 14px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-  line-height: 1.4;
-}
-.z2-ab-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 28px;
-  margin-top: 56px;
-  padding-top: 36px;
-  border-top: 1px solid var(--line);
-}
-.z2-ab-phone {
-  font: 800 clamp(34px, 5.6vw, 80px)/1 var(--f-head);
-  color: var(--navy);
-  letter-spacing: -0.02em;
-  transition: color 0.2s;
-}
-.z2-ab-phone:hover {
-  color: var(--blue);
-}
-.z2-ab-phone small,
+/* ===== «Toşkent şahar hududiy Kengaşi»: murojaat tartibi va aloqa (z2-) ===== */
 .z2-ac-card small,
-.z2-cc-ch small,
-.z2-cb-soc small,
-.z2-cc-soc small {
+.z2-cb-soc small {
   display: block;
   font: 600 13px/1.4 var(--f-body);
   letter-spacing: 0;
   opacity: 0.7;
   margin-bottom: 8px;
 }
-.z2-ab-side {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 20px;
-}
-.z2-ab-side > a:not(.btn) {
-  font-weight: 700;
-  color: var(--navy);
-  border-bottom: 2px solid var(--yellow);
-  padding-bottom: 2px;
-  overflow-wrap: anywhere;
-}
-.z2-ab-side > a:not(.btn):hover {
-  color: var(--blue);
-}
 
-/* ---------- Murojaat C: vertikal vaqt çiziği + yopişqoq karta ---------- */
+/* ---------- Murojaat tartibi: vertikal vaqt çiziği + yopişqoq karta ---------- */
 .z2-ac-sec {
   background: var(--soft);
 }
@@ -215,7 +104,7 @@
   opacity: 0.65;
 }
 
-/* ---------- Aloqa B: katta töq karta ---------- */
+/* ---------- Aloqa: katta töq karta ---------- */
 .z2-cb {
   background: var(--navy);
   color: #fff;
@@ -323,96 +212,7 @@
   margin-bottom: 2px;
 }
 
-/* ---------- Aloqa C: markazlaşgan blok ---------- */
-.z2-cc-sec {
-  background: var(--soft);
-}
-.z2-cc {
-  max-width: 880px;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.z2-cc-addr {
-  margin-top: 20px;
-  font: 800 clamp(22px, 2.4vw, 32px)/1.3 var(--f-head);
-  color: var(--navy);
-}
-.z2-cc-hours {
-  margin-top: 12px;
-  display: inline-block;
-  background: #fff;
-  border-radius: 99px;
-  padding: 8px 18px;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--blue);
-}
-.z2-cc-ch {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  width: 100%;
-  margin-top: 40px;
-}
-.z2-cc-ch a {
-  background: #fff;
-  border-radius: var(--r-thumb);
-  padding: 32px 24px;
-  font: 800 clamp(20px, 2vw, 28px)/1.2 var(--f-head);
-  color: var(--navy);
-  overflow-wrap: anywhere;
-  transition: background 0.2s;
-}
-.z2-cc-ch a:hover {
-  background: var(--yellow);
-}
-.z2-cc-soc {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 24px;
-  margin-bottom: 36px;
-}
-.z2-cc-soc a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--silver);
-  border-radius: 99px;
-  padding: 12px 22px;
-  font-weight: 700;
-  color: var(--navy);
-  transition:
-    border-color 0.2s,
-    background 0.2s;
-}
-.z2-cc-soc a:hover {
-  background: #fff;
-  border-color: #fff;
-}
-.z2-cc-soc small {
-  display: inline;
-  margin: 0;
-  opacity: 1;
-  color: var(--blue);
-}
-
 @media (max-width: 1100px) {
-  .z2-ab-head {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .z2-ab-track {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 36px;
-  }
-  .z2-ab-track::before {
-    display: none;
-  }
   .z2-ac {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -425,23 +225,6 @@
   }
 }
 @media (max-width: 640px) {
-  .z2-ab-track {
-    grid-template-columns: 1fr;
-    row-gap: 26px;
-  }
-  .z2-ab-track li {
-    display: grid;
-    grid-template-columns: 58px 1fr;
-    column-gap: 16px;
-    row-gap: 6px;
-  }
-  .z2-ab-dot {
-    grid-row: 1/3;
-    margin: 0;
-  }
-  .z2-ab-foot {
-    margin-top: 40px;
-  }
   .z2-ac-line li {
     grid-template-columns: 48px 1fr;
     gap: 16px;
@@ -469,8 +252,5 @@
   }
   .z2-cb-phone {
     margin-top: 36px;
-  }
-  .z2-cc-ch {
-    grid-template-columns: 1fr;
   }
 }

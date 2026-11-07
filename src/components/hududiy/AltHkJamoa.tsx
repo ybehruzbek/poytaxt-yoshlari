@@ -59,23 +59,13 @@ function Name({ n }: { n: string }) {
 }
 
 /**
- * Vazifalar — uç körinişda (panel: «Vazifalar», html[data-hvz]):
- * A — oçiladigan röyxat; B — öngdan çiqadigan yon panel (popover); C — röyxat karta ustini qoplaydi.
+ * Vazifalar — «Vazifalari →» tugmasi öngdan çiqadigan yon panelni (popover) oçadi:
+ * surat, F.I.Ş., lavozim, vazifalar röyxati va aloqa.
  */
 function Duties({ m, id }: { m: Member; id: string }) {
   if (!m.duties) return null
   return (
     <div className="z5-dz">
-      <details className="z5-duty">
-        <summary>
-          Vazifalari <span aria-hidden="true">+</span>
-        </summary>
-        <ul>
-          {m.duties.map((x) => (
-            <li key={x}>{x}</li>
-          ))}
-        </ul>
-      </details>
       <button type="button" className="z5-duty-btn" popoverTarget={id}>
         Vazifalari <span aria-hidden="true">→</span>
       </button>
@@ -142,9 +132,9 @@ const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
 const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
 /** Variantlar umumiy tuzilişi; farqi faqat bölim klassida (CSS) */
-function Team({ k, mod, id }: { k: string; mod?: string; id?: string }) {
+function Team({ k, mod }: { k: string; mod?: string }) {
   return (
-    <section className={`sec${mod ? ` ${mod}` : ''}`} id={id}>
+    <section className={`sec${mod ? ` ${mod}` : ''}`}>
       <div className="wrap">
         <Head />
         {LEADS.map((m, i) => (
@@ -165,7 +155,7 @@ function Team({ k, mod, id }: { k: string; mod?: string; id?: string }) {
  * qolganlar guruhlarga ajratilmasdan bitta 3 ustunli tarmoqda: ism va lavozim çap yuqorida, surat öng pastda.
  */
 export function TeamNamuna() {
-  return <Team k="a" id="jamoa" />
+  return <Team k="a" />
 }
 
 /** B — rangli: har karta palitradan öz tusida, surat orqasida yirik doira; raisda sariq doira */
