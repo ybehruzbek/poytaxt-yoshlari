@@ -3,6 +3,8 @@ import type { NextConfig } from 'next'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import { locales } from './src/i18n/config'
+
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
@@ -35,11 +37,13 @@ const nextConfig: NextConfig = {
   },
   // “Faoliyat → Yoşlar yetakçilari” olib taşlandi: yetakçilar endi “Biz haqimizda → Boşlanğiç taşkilotlar” da
   async redirects() {
-    const to = '/:locale/biz-haqimizda/boshlangich-tashkilotlar'
+    // til qismi faqat saytdagi tillar bilan cheklangan — tekşirilmagan qiymat Location ga tuşmaydi
+    const loc = `:locale(${locales.join('|')})`
+    const to = `/${loc}/biz-haqimizda/boshlangich-tashkilotlar`
     return [
-      { source: '/:locale/faoliyat/yetakchilar', destination: to, permanent: true },
-      { source: '/:locale/faoliyat/yetakchilar/otm', destination: `${to}/oliy-talim`, permanent: true },
-      { source: '/:locale/faoliyat/yetakchilar/harbiy', destination: `${to}/harbiy`, permanent: true },
+      { source: `/${loc}/faoliyat/yetakchilar`, destination: to, permanent: true },
+      { source: `/${loc}/faoliyat/yetakchilar/otm`, destination: `${to}/oliy-talim`, permanent: true },
+      { source: `/${loc}/faoliyat/yetakchilar/harbiy`, destination: `${to}/harbiy`, permanent: true },
     ]
   },
 }
