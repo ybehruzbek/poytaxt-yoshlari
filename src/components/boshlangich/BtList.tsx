@@ -61,9 +61,9 @@ function nameLines(n: string): [string, string, string] {
 
 const FILTERS: Array<{ k: 'all' | OtmType; t: string }> = [
   { k: 'all', t: 'Barçasi' },
-  { k: 'davlat', t: 'Davlat' },
-  { k: 'xorijiy', t: 'Xorijiy filiallar' },
-  { k: 'nodavlat', t: 'Nodavlat' },
+  { k: 'davlat', t: 'Davlat oliy taʼlim taşkilotlari' },
+  { k: 'xorijiy', t: 'Xorijiy oliy taʼlim taşkilotlarining filiallari' },
+  { k: 'nodavlat', t: 'Nodavlat oliy taʼlim taşkilotlari' },
 ]
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
@@ -213,7 +213,7 @@ export function BtList({ otms, view = 'a' }: { otms: Otm[]; view?: View }) {
   return (
     <>
       <div className="bt-tools">
-        <div className="bt-chips" role="group" aria-label="OTT turi">
+        <div className="bt-chips" role="group" aria-label="Oliy taʼlim taşkiloti turi">
           {FILTERS.map((f) => (
             <button
               key={f.k}
