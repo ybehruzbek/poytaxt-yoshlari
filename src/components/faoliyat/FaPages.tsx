@@ -7,7 +7,7 @@ import { AnnounceList } from './AnnounceList'
 import { DIRECTIONS, dirProjects, dirTitle, PROJECTS, REPORT_2025, YEARS } from './data'
 import { EVENTS } from './events'
 import { EventsList } from './EventsList'
-import { DirB, DirC, DirsC1, DirsC2, DirsC3, ProjB, ProjC, ResultsB, ResultsC } from './FaVariants'
+import { DirB, DirC, DirsList, ProjB, ProjC, ResultsB, ResultsC } from './FaVariants'
 import { ProjectsList } from './ProjectsList'
 import { V, VPanel } from './Var'
 import { fmtDate, type Project, TG } from './types'
@@ -42,16 +42,7 @@ export function DirectionsPage({ crumbs, base }: { crumbs: ReactNode; base: stri
         title="Faoliyat yönalişlari"
         lead="Kengaş yoşlar bilan işlaşning 11 ta asosiy yönalişi böyiça faoliyat olib boradi. Har bir yönalişda loyihalar va ötkazilgan tadbirlar bilan tanişişingiz mumkin."
       />
-      <V name="fyo" k="a">
-        <DirsC1 base={base} />
-      </V>
-      <V name="fyo" k="b">
-        <DirsC2 base={base} />
-      </V>
-      <V name="fyo" k="c">
-        <DirsC3 base={base} />
-      </V>
-      <VPanel name="fyo" label="Yönalişlar (C1 · C2 · C3)" />
+      <DirsList base={base} />
     </div>
   )
 }

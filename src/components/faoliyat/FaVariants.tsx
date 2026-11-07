@@ -22,122 +22,44 @@ const Src = ({ id }: { id: number }) => (
 const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
 const Arrow = () => <span aria-hidden="true">→</span>
 
-/* ===================== Yönalişlar (C asosida 3 köriniş) ===================== */
+/* ===================== Yönalişlar ===================== */
 
-const dirData = () =>
-  DIRECTIONS.map((d, i) => {
+/** Yönaliş röyxati: navbatma-navbat çap/öng, surat kollaji, sönggi 3 tadbir (tadbir yöq bölsa — loyihalar) */
+export function DirsList({ base }: { base: string }) {
+  const all = DIRECTIONS.map((d, i) => {
     const evs = dirEvents(d.slug)
-    return {
-      d,
-      n: pad(i),
-      evs,
-      pics: evs.filter((e) => e.img),
-      nP: dirProjects(d.slug).length,
-      last: evs[0]?.date,
-    }
+    const projs = dirProjects(d.slug)
+    const pics = [
+      ...evs.filter((e) => e.img).map((e) => e.img),
+      ...projs.flatMap((p) => [p.cover, ...p.gallery]).filter(Boolean),
+    ].slice(0, 3)
+    const items = evs.length
+      ? evs.slice(0, 3).map((e) => ({ k: String(e.id), top: fmtDate(e.date), t: e.title }))
+      : projs.slice(0, 3).map((p) => ({ k: p.slug, top: `Loyiha · ${p.period}`, t: p.title }))
+    return { d, n: pad(i), evs, nP: projs.length, pics, items }
   })
-
-function DirSummary() {
-  const all = dirData()
   const nE = all.reduce((a, x) => a + x.evs.length, 0)
   const nP = all.reduce((a, x) => a + x.nP, 0)
   return (
-    <div className="vy-sum">
-      <span>
-        <b>{all.length}</b> yönaliş
-      </span>
-      <span>
-        <b>{nE}</b> tadbir
-      </span>
-      <span>
-        <b>{nP}</b> loyiha
-      </span>
-    </div>
-  )
-}
-
-/** C1 — takomillaşgan qatorlar: hisob tasmasi, çiplar, 4 ta surat, sönggi tadbir sanasi */
-export function DirsC1({ base }: { base: string }) {
-  return (
     <section className="sec fa-sec">
       <div className="wrap">
-        <DirSummary />
-        <div className="vy1">
-          {dirData().map(({ d, n, evs, pics, nP, last }) => (
-            <Link key={d.slug} href={`${base}/${d.slug}`} className="vy1-row">
-              <span className="vy1-n">{n}</span>
-              <span className="vy1-t">
-                <strong>{d.title}</strong>
-                <span>{d.lead}</span>
-                <span className="vy1-chips">
-                  <em>{evs.length} ta tadbir</em>
-                  {nP > 0 && <em>{nP} ta loyiha</em>}
-                  {last && <i>Sönggi: {fmtDate(last)}</i>}
-                </span>
-              </span>
-              <span className="vy1-ph">
-                {pics.slice(0, 4).map((e) => (
-                  <img key={e.id} src={e.img} alt="" loading="lazy" />
-                ))}
-              </span>
-              <span className="vy1-go">
-                <Arrow />
-              </span>
-            </Link>
-          ))}
+        <div className="vy-sum">
+          <span>
+            <b>{all.length}</b> yönaliş
+          </span>
+          <span>
+            <b>{nE}</b> tadbir
+          </span>
+          <span>
+            <b>{nP}</b> loyiha
+          </span>
         </div>
-      </div>
-    </section>
-  )
-}
-
-/** C2 — kino-lenta: sarlavha qatori, ostida tavsif va 5 ta suratli lenta */
-export function DirsC2({ base }: { base: string }) {
-  return (
-    <section className="sec fa-sec">
-      <div className="wrap">
-        <DirSummary />
-        <div className="vy2">
-          {dirData().map(({ d, n, evs, pics, nP }) => (
-            <Link key={d.slug} href={`${base}/${d.slug}`} className="vy2-row">
-              <span className="vy2-head">
-                <span className="vy2-n">{n}</span>
-                <strong>{d.title}</strong>
-                <span className="vy2-c">
-                  {evs.length} tadbir{nP > 0 ? ` · ${nP} loyiha` : ''}
-                </span>
-                <span className="vy2-go">
-                  Yönalişga ötiş <Arrow />
-                </span>
-              </span>
-              <span className="vy2-body">
-                <span className="vy2-lead">{d.lead}</span>
-                <span className="vy2-film">
-                  {pics.slice(0, 5).map((e) => (
-                    <img key={e.id} src={e.img} alt="" loading="lazy" />
-                  ))}
-                </span>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C3 — zig-zag: navbatma-navbat çap/öng, surat kollaji va sönggi 3 tadbir */
-export function DirsC3({ base }: { base: string }) {
-  return (
-    <section className="sec fa-sec">
-      <div className="wrap">
-        <DirSummary />
         <div className="vy3">
-          {dirData().map(({ d, n, evs, pics, nP }) => (
+          {all.map(({ d, n, evs, nP, pics, items }) => (
             <article key={d.slug} className="vy3-row">
               <Link href={`${base}/${d.slug}`} className="vy3-ph" tabIndex={-1} aria-hidden="true">
-                {pics.slice(0, 3).map((e) => (
-                  <img key={e.id} src={e.img} alt="" loading="lazy" />
+                {pics.map((src) => (
+                  <img key={src} src={src} alt="" loading="lazy" />
                 ))}
               </Link>
               <div className="vy3-txt">
@@ -147,25 +69,19 @@ export function DirsC3({ base }: { base: string }) {
                 </h2>
                 <p>{d.lead}</p>
                 <ul>
-                  {evs.slice(0, 3).map((e) => (
-                    <li key={e.id}>
-                      <time dateTime={e.date}>{fmtDate(e.date)}</time>
-                      {e.title}
+                  {items.map((it) => (
+                    <li key={it.k}>
+                      <time>{it.top}</time>
+                      <span>{it.t}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="vy3-foot">
                   <span>
-                    <b>{evs.length}</b> tadbir
-                    {nP > 0 && (
-                      <>
-                        {' '}
-                        · <b>{nP}</b> loyiha
-                      </>
-                    )}
+                    <b>{evs.length}</b> tadbir · <b>{nP}</b> loyiha
                   </span>
-                  <Link href={`${base}/${d.slug}`} className="btn btn-primary">
-                    Batafsil
+                  <Link href={`${base}/${d.slug}`} className="vy3-more">
+                    Batafsil <Arrow />
                   </Link>
                 </div>
               </div>
