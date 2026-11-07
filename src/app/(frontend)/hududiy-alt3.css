@@ -1,0 +1,293 @@
+/* =====================================================================
+   «Kengaş jamoasi» B varianti (namuna asosida). Prefiks: z4-
+   Suratlar oq fonli — multiply orqali karta gradiyentiga singadi.
+   ===================================================================== */
+
+/* Rais — katta karta */
+.z4-hero {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: 48px;
+  align-items: end;
+  border-radius: var(--r-card);
+  background: linear-gradient(
+    115deg,
+    #fff 0%,
+    var(--soft) 45%,
+    color-mix(in srgb, var(--lime) 28%, var(--soft)) 100%
+  );
+  padding: 48px 56px 0;
+  min-height: 440px;
+}
+.z4-hero-mark {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 440px;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.z4-hero-ph {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  aspect-ratio: 260/347;
+  object-fit: cover;
+  object-position: top;
+  mix-blend-mode: multiply;
+  justify-self: center;
+}
+.z4-hero-txt {
+  position: relative;
+  align-self: center;
+  padding-bottom: 48px;
+}
+.z4-hero-txt h3 {
+  font: 800 clamp(30px, 3.4vw, 48px)/1.12 var(--f-head);
+  color: var(--navy);
+}
+.z4-hero-txt > p {
+  margin-top: 14px;
+  font-size: 19px;
+  color: var(--muted);
+}
+.z4-hero .z4-con {
+  margin-top: 28px;
+  grid-template-columns: 1fr 1fr;
+}
+.z4-hero .z4-duty {
+  margin-top: 22px;
+  border: 0;
+  background: #fff;
+  border-radius: 24px;
+}
+
+/* Kontaktlar */
+.z4-con {
+  list-style: none;
+  display: grid;
+  gap: 10px 22px;
+}
+.z4-con li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--navy);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.z4-con a:hover {
+  color: var(--blue);
+}
+.z4-con .hk-lead-ic {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.z4-con .hk-lead-ic svg {
+  width: 16px;
+  height: 16px;
+}
+.z4-con--sm {
+  margin-top: 18px;
+  gap: 8px;
+}
+.z4-con--sm li {
+  font-size: 13px;
+}
+.z4-con--sm .hk-lead-ic {
+  width: 28px;
+  height: 28px;
+}
+.z4-con--sm .hk-lead-ic svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Guruhlar va kartalar */
+.z4-grp {
+  margin-top: 52px;
+}
+.z4-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.z4-card {
+  border-radius: var(--r-thumb);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+.z4-card:hover {
+  box-shadow:
+    0 0 0 1px var(--yellow),
+    0 18px 40px rgba(83, 40, 34, 0.1);
+  transform: translateY(-2px);
+}
+.z4-card-top {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  align-items: end;
+  min-height: 320px;
+  background: linear-gradient(
+    135deg,
+    #fff 0%,
+    var(--soft) 55%,
+    color-mix(in srgb, var(--lime) 26%, var(--soft)) 100%
+  );
+}
+.z4-card-txt {
+  align-self: start;
+  padding: 28px 0 26px 28px;
+  min-width: 0;
+}
+.z4-card-txt h3 {
+  font: 800 20px/1.22 var(--f-head);
+  color: var(--navy);
+}
+.z4-role {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  background: #fff;
+  border-radius: 99px;
+  padding: 5px 12px;
+}
+.z4-card-txt small {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.z4-card-ph {
+  display: block;
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  mix-blend-mode: multiply;
+}
+
+/* Vazifalari */
+.z4-duty {
+  border-top: 1px solid var(--line);
+}
+.z4-duty summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px 14px 28px;
+  font: 800 15px/1 var(--f-head);
+  color: var(--navy);
+}
+.z4-duty summary::-webkit-details-marker {
+  display: none;
+}
+.z4-duty summary:hover {
+  color: var(--blue);
+}
+.z4-duty-ic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--yellow);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  transition: transform 0.2s;
+}
+.z4-duty[open] .z4-duty-ic {
+  transform: rotate(45deg);
+}
+.z4-duty ol {
+  list-style: none;
+  counter-reset: d;
+  display: grid;
+  gap: 10px;
+  padding: 4px 28px 24px;
+}
+.z4-duty li {
+  counter-increment: d;
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.z4-duty li::before {
+  content: counter(d, decimal-leading-zero);
+  flex: none;
+  font: 800 14px/1.5 var(--f-head);
+  color: var(--blue);
+}
+.z4-hero .z4-duty ol {
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+}
+
+@media (max-width: 1100px) {
+  .z4-hero {
+    grid-template-columns: 260px 1fr;
+    gap: 28px;
+    padding: 36px 36px 0;
+  }
+  .z4-hero .z4-con {
+    grid-template-columns: 1fr;
+  }
+  .z4-hero .z4-duty ol {
+    grid-template-columns: 1fr;
+  }
+  .z4-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .z4-hero {
+    grid-template-columns: 1fr;
+    padding: 28px 22px 0;
+    min-height: 0;
+  }
+  .z4-hero-ph {
+    order: 2;
+    max-width: 240px;
+  }
+  .z4-hero-txt {
+    padding-bottom: 0;
+  }
+  .z4-hero-mark {
+    width: 280px;
+    right: -80px;
+    top: 30%;
+  }
+  .z4-grid {
+    grid-template-columns: 1fr;
+  }
+  .z4-card-top {
+    grid-template-columns: 1fr 120px;
+    min-height: 0;
+  }
+  .z4-card-ph {
+    width: 120px;
+    height: 160px;
+  }
+  .z4-card-txt {
+    padding: 22px 0 22px 22px;
+  }
+}
