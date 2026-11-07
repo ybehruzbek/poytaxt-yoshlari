@@ -1,21 +1,10 @@
 /* eslint-disable @next/next/no-img-element -- Kengaş axborot xizmati suratlari; CMS ulanganda next/image ga o'tadi */
-import Link from 'next/link'
 
-import { Arrow } from '@/components/site/SocialPhones'
-
-import { ABOUT, CHAIR, DEPTS, RECEPTION, SHOTS, TASKS } from './data'
+import { ABOUT, SHOTS, TASKS } from './data'
 
 type P = { L: (h: string) => string }
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
-
-/** Xodim ismi böyiça surat (qabul jadvali uçun) */
-const PHOTO: Record<string, string> = Object.fromEntries(
-  [CHAIR, ...DEPTS.flatMap((d) => d.staff)].map((p) => [p.name, p.img]),
-)
-
-/** Familiya va ism (otasining ismisiz) */
-const short = (name: string) => name.split(' ').slice(0, 2).join(' ')
 
 /* ================= Kengaş haqida ================= */
 
@@ -77,87 +66,6 @@ export function AboutC(_: P) {
               ))}
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ================= Qabul kunlari ================= */
-
-const HOURS = ['09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-
-/** B — haftalik kalendar: 09–18 soat panjarasida 14:00–17:00 qabul bloklari */
-export function ReceptionB(_: P) {
-  return (
-    <section className="sec" id="qabul-b">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 className="h2">Qabul kunlari</h2>
-        </div>
-        <div className="z1-rb">
-          <div className="z1-rb-hours" aria-hidden="true">
-            {HOURS.map((h) => (
-              <span key={h}>{h}:00</span>
-            ))}
-          </div>
-          {RECEPTION.map((r) => (
-            <div key={r.day} className="z1-rb-day">
-              <div className="z1-rb-cap">
-                <b>{r.day}</b>
-                <span>{r.time}</span>
-              </div>
-              <div className="z1-rb-col">
-                <article>
-                  {PHOTO[r.name] && <img src={PHOTO[r.name]} alt="" loading="lazy" />}
-                  <b>{short(r.name)}</b>
-                  <small>{r.dept}</small>
-                  <em>{r.room}-xona</em>
-                </article>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C — vertikal vaqt çizigi: çapda sarlavha va tugma, öngda kunlar */
-export function ReceptionC({ L }: P) {
-  return (
-    <section className="sec z1-rc-sec" id="qabul-c">
-      <div className="wrap">
-        <div className="z1-rc">
-          <div className="z1-rc-head">
-            <h2 className="h2">Qabul kunlari</h2>
-            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Onlayn murojaat{' '}
-              <span className="ic">
-                <Arrow />
-              </span>
-            </Link>
-          </div>
-          <ol className="z1-rc-line">
-            {RECEPTION.map((r) => (
-              <li key={r.day}>
-                <div className="z1-rc-when">
-                  <b>{r.day}</b>
-                  <span>{r.time}</span>
-                </div>
-                <div className="z1-rc-card">
-                  {PHOTO[r.name] && <img src={PHOTO[r.name]} alt="" loading="lazy" />}
-                  <div>
-                    <strong>{r.name}</strong>
-                    <small>{r.dept}</small>
-                  </div>
-                  <span className="z1-rc-room">
-                    <b>{r.room}</b>xona
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ol>
         </div>
       </div>
     </section>

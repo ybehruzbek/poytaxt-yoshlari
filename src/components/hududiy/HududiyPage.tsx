@@ -42,7 +42,6 @@ const FIXED = 'hjm'
 const PANEL: PanelSection[] = [
   ['hab', 'Kengaş haqida'],
   ['hjm', 'Jamoa'],
-  ['hqa', 'Qabul kunlari'],
   ['hmu', 'Murojaat tartibi'],
   ['hal', 'Aloqa'],
 ].map(([name, label]) => ({ name, label, count: 3 }))
@@ -136,7 +135,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 
 /**
  * «Toşkent şahar hududiy Kengaşi» sahifasi (mazmun: components/hududiy/data.ts):
- * hero, Kengaş haqida, rais, apparat tuzilmasi, jamoa, qabul jadvali, murojaat tartibi,
+ * hero, Kengaş haqida, Kengaş jamoasi, murojaat tartibi,
  * aloqa.
  */
 export function HududiyPage({ L, crumbs, siblings }: P) {
@@ -235,30 +234,6 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
               ))}
             </div>
           ))}
-        </div>
-      </section>
-    ),
-    hqa: (
-      <section className="sec" id="qabul">
-        <div className="wrap">
-          <div className="sec-head">
-            <h2 className="h2">Qabul kunlari</h2>
-          </div>
-          <ol className="hk-rec">
-            {RECEPTION.map((r) => (
-              <li key={r.day}>
-                <b className="hk-rec-day">{r.day}</b>
-                <span className="hk-rec-time">{r.time}</span>
-                <div className="hk-rec-who">
-                  <strong>{r.name}</strong>
-                  <span>{r.dept}</span>
-                </div>
-                <span className="hk-rec-room">
-                  <b>{r.room}</b>xona
-                </span>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
     ),
@@ -367,8 +342,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
                 <Arrow />
               </span>
             </Link>
-            <a href="#qabul" className="btn btn-ghost">
-              Qabul jadvali
+            <a href="#jamoa" className="btn btn-ghost">
+              Kengaş jamoasi
             </a>
           </div>
         </div>
