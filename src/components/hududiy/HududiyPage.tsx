@@ -35,6 +35,9 @@ function V({ name, k, children }: { name: string; k: string; children: ReactNode
   )
 }
 
+/** Jamoa bölimi tanlangan (A, variantsiz) */
+const FIXED = 'hjm'
+
 const PANEL: PanelSection[] = [
   ['hab', 'Kengaş haqida'],
   ['hjm', 'Jamoa'],
@@ -168,7 +171,9 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           <p className="hk-basis">{BASIS}</p>
           {TEAM.map((g) => (
             <div key={g.title} className="hk-jm-grp">
-              <h3 className="hk-jm-gt">{g.title}</h3>
+              <h3 className="hk-jm-gt">
+                {g.title} <span>{g.people.length}</span>
+              </h3>
               {g.people.map((m) => (
                 <article key={m.name} className={`hk-lead${g.lead ? '' : ' hk-lead--sm'}`}>
                   <div className="hk-lead-ph">
@@ -216,7 +221,11 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
                   {m.duties && (
                     <details className="hk-duty">
                       <summary>
-                        Vazifalari <span aria-hidden="true">+</span>
+                        <span className="hk-duty-l">Vazifalari</span>
+                        <em>{m.duties.length}</em>
+                        <span className="hk-duty-ic" aria-hidden="true">
+                          +
+                        </span>
                       </summary>
                       <ol>
                         {m.duties.map((x) => (
@@ -370,9 +379,13 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
 
       {PANEL.map(({ name }) => (
         <div key={name} style={{ display: 'contents' }}>
-          <V name={name} k="a">
-            {sections[name]}
-          </V>
+          {name === FIXED ? (
+            sections[name]
+          ) : (
+            <V name={name} k="a">
+              {sections[name]}
+            </V>
+          )}
           {DEV &&
             (['b', 'c'] as const).map((k) => {
               const C = HkVariants[`${name}-${k}`]
@@ -388,7 +401,7 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
       <section className="sec">
         <div className="wrap">{siblings}</div>
       </section>
-      {DEV && <DevSectionsPanel sections={PANEL} />}
+      {DEV && <DevSectionsPanel sections={PANEL.filter((x) => x.name !== FIXED)} />}
     </div>
   )
 }
