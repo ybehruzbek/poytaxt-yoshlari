@@ -58,23 +58,57 @@ function Name({ n }: { n: string }) {
   )
 }
 
-function Duties({ list }: { list?: string[] }) {
-  if (!list) return null
+/**
+ * Vazifalar — uç körinişda (panel: «Vazifalar», html[data-hvz]):
+ * A — oçiladigan röyxat; B — öngdan çiqadigan yon panel (popover); C — röyxat karta ustini qoplaydi.
+ */
+function Duties({ m, id }: { m: Member; id: string }) {
+  if (!m.duties) return null
   return (
-    <details className="z5-duty">
-      <summary>
-        Vazifalari <span aria-hidden="true">+</span>
-      </summary>
-      <ul>
-        {list.map((x) => (
-          <li key={x}>{x}</li>
-        ))}
-      </ul>
-    </details>
+    <div className="z5-dz">
+      <details className="z5-duty">
+        <summary>
+          Vazifalari <span aria-hidden="true">+</span>
+        </summary>
+        <ul>
+          {m.duties.map((x) => (
+            <li key={x}>{x}</li>
+          ))}
+        </ul>
+      </details>
+      <button type="button" className="z5-duty-btn" popoverTarget={id}>
+        Vazifalari <span aria-hidden="true">→</span>
+      </button>
+      <div id={id} popover="auto" className="z5-drawer" aria-label={`${m.name} — vazifalari`}>
+        <button
+          type="button"
+          className="z5-drawer-x"
+          popoverTarget={id}
+          popoverTargetAction="hide"
+          aria-label="Yopiş"
+        >
+          ×
+        </button>
+        <div className="z5-drawer-head">
+          <img src={m.img} alt="" loading="lazy" />
+          <div>
+            <Name n={m.name} />
+            <p>{m.role}</p>
+          </div>
+        </div>
+        <h4>Funksional vazifalari</h4>
+        <ul>
+          {m.duties.map((x) => (
+            <li key={x}>{x}</li>
+          ))}
+        </ul>
+        <Reach m={m} full />
+      </div>
+    </div>
   )
 }
 
-function Hero({ m }: { m: Member }) {
+function Hero({ m, id }: { m: Member; id: string }) {
   return (
     <article className="z5-hero">
       <img className="z5-hero-mark" src="/img/ittifoq/belgi.png" alt="" aria-hidden="true" />
@@ -83,13 +117,13 @@ function Hero({ m }: { m: Member }) {
         <Name n={m.name} />
         <p>{m.role}</p>
         <Reach m={m} full />
-        <Duties list={m.duties} />
+        <Duties m={m} id={id} />
       </div>
     </article>
   )
 }
 
-function Card({ m }: { m: Member }) {
+function Card({ m, id }: { m: Member; id: string }) {
   return (
     <article className="z5-card">
       <div className="z5-card-txt">
@@ -99,7 +133,7 @@ function Card({ m }: { m: Member }) {
         <Reach m={m} />
       </div>
       <img className="z5-card-ph" src={m.img} alt={m.name} loading="lazy" />
-      <Duties list={m.duties} />
+      <Duties m={m} id={id} />
     </article>
   )
 }
@@ -108,17 +142,17 @@ const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
 const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
 /** Variantlar umumiy tuzilişi; farqi faqat bölim klassida (CSS) */
-function Team({ mod, id }: { mod?: string; id?: string }) {
+function Team({ k, mod, id }: { k: string; mod?: string; id?: string }) {
   return (
     <section className={`sec${mod ? ` ${mod}` : ''}`} id={id}>
       <div className="wrap">
         <Head />
-        {LEADS.map((m) => (
-          <Hero key={m.name} m={m} />
+        {LEADS.map((m, i) => (
+          <Hero key={m.name} m={m} id={`vz-${k}-r${i}`} />
         ))}
         <div className="z5-grid">
-          {REST.map((m) => (
-            <Card key={m.name} m={m} />
+          {REST.map((m, i) => (
+            <Card key={m.name} m={m} id={`vz-${k}-${i}`} />
           ))}
         </div>
       </div>
@@ -131,15 +165,15 @@ function Team({ mod, id }: { mod?: string; id?: string }) {
  * qolganlar guruhlarga ajratilmasdan bitta 3 ustunli tarmoqda: ism va lavozim çap yuqorida, surat öng pastda.
  */
 export function TeamNamuna() {
-  return <Team id="jamoa" />
+  return <Team k="a" id="jamoa" />
 }
 
 /** B — rangli: har karta palitradan öz tusida, surat orqasida yirik doira; raisda sariq doira */
 export function TeamRangli() {
-  return <Team mod="z6" />
+  return <Team k="b" mod="z6" />
 }
 
 /** C — ixcham: rais kartasi töq fonda, xodimlar 4 ustunli vertikal kartalarda (surat tepada) */
 export function TeamIxcham() {
-  return <Team mod="z7" />
+  return <Team k="c" mod="z7" />
 }

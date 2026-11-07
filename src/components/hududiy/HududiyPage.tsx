@@ -28,6 +28,8 @@ const PANEL: PanelSection[] = [
   ['hjm', 'Jamoa'],
   ['hmu', 'Murojaat tartibi'],
   ['hal', 'Aloqa'],
+  // «Vazifalar» — alohida örama yöq: html[data-hvz] orqali jamoa kartalarida vazifalar körinişini almaştiradi
+  ['hvz', 'Vazifalar körinişi'],
 ].map(([name, label]) => ({ name, label, count: 3 }))
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
@@ -178,7 +180,7 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
 
-      {PANEL.map(({ name }) => (
+      {PANEL.filter(({ name }) => sections[name]).map(({ name }) => (
         <div key={name} style={{ display: 'contents' }}>
           <V name={name} k="a">
             {sections[name]}
