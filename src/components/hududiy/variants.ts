@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
 
 import { AboutB, AboutC } from './AltHkOne'
-import { TeamCards } from './AltHkJamoa'
+import { TeamIxcham, TeamRangli } from './AltHkJamoa'
 import { AppealB, AppealC, ContactB, ContactC } from './AltHkTwo'
 
 /**
@@ -11,7 +11,8 @@ import { AppealB, AppealC, ContactB, ContactC } from './AltHkTwo'
 export const HkVariants: Record<string, ComponentType<{ L: (h: string) => string }>> = {
   'hab-b': AboutB,
   'hab-c': AboutC,
-  'hjm-b': TeamCards,
+  'hjm-b': TeamRangli,
+  'hjm-c': TeamIxcham,
   'hmu-b': AppealB,
   'hmu-c': AppealC,
   'hal-b': ContactB,

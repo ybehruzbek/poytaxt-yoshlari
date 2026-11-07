@@ -6,15 +6,7 @@
 .hk-basis{color:var(--muted);font-size:14px;line-height:1.55;margin:-8px 0 28px;max-width:760px}
 
 
-/* Jamoa: rais → bölim boşliqlari → mutaxassislar; kartoçka (rasm · ism va lavozim · aloqa · vazifalar) */
-.hk-lead{display:grid;grid-template-columns:260px 1fr minmax(280px,.8fr);gap:48px;align-items:center;border:1px solid var(--line);border-radius:var(--r-card);padding:44px 56px}
-.hk-lead-ph{width:240px;height:240px;border-radius:50%;overflow:hidden;background:var(--soft)}
-.hk-lead-ph img{width:100%;height:100%;object-fit:cover;object-position:top}
-.hk-lead-main h3{font:800 clamp(24px,2.4vw,34px)/1.2 var(--f-head);color:var(--navy)}
-.hk-lead-main p{margin-top:14px;font-size:18px;line-height:1.55}
-.hk-lead-con{list-style:none;display:grid;gap:18px}
-.hk-lead-con li{display:flex;align-items:center;gap:14px;font-size:17px;font-weight:600;color:var(--navy);overflow-wrap:anywhere}
-.hk-lead-con a:hover{color:var(--blue)}
+/* Jamoa: ikonka doirasi (z5- dizayni hududiy-alt3.css da) */
 .hk-lead-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--blue);display:grid;place-items:center}
 .hk-lead-ic svg{width:20px;height:20px}
 
@@ -44,16 +36,10 @@
 .hk-con-list a:hover{color:var(--blue)}
 
 @media (max-width:1100px){.hk-con{grid-template-columns:1fr}
-  .hk-lead{grid-template-columns:200px 1fr;padding:36px;gap:32px}
-  .hk-lead-ph{width:200px;height:200px}
-  .hk-lead-con{grid-column:1/-1;grid-template-columns:1fr 1fr}
   .hk-steps,.hk-app-foot{grid-template-columns:repeat(2,1fr)}
   .hk-app-foot .btn{grid-column:1/-1}
 }
 @media (max-width:640px){
-  .hk-lead{grid-template-columns:1fr;padding:28px 22px;justify-items:center;text-align:center}
-  .hk-lead-ph{width:180px;height:180px}
-  .hk-lead-con{grid-template-columns:1fr;justify-self:stretch;text-align:left}
   .hk-app{padding:30px 22px}
   .hk-steps,.hk-app-foot{grid-template-columns:1fr}
   .hk-steps h3{min-height:0}
@@ -80,46 +66,3 @@
 
 .hk-jm-head{flex-direction:column;align-items:flex-start;gap:8px}
 .hk-jm-head span{font-weight:700;font-size:14px;color:var(--blue);letter-spacing:.3px}
-.hk-jm-grp+.hk-jm-grp{margin-top:52px}
-.hk-jm-gt{display:flex;align-items:center;gap:12px;font:800 22px/1.25 var(--f-head);color:var(--navy);margin-bottom:18px}
-.hk-jm-gt::after{content:'';flex:1;height:1px;background:var(--line)}
-.hk-jm-gt span{min-width:30px;height:30px;padding:0 9px;border-radius:99px;background:var(--yellow);display:grid;place-items:center;font-size:14px}
-.hk-jm-grp .hk-lead+.hk-lead{margin-top:14px}
-.hk-lead{transition:border-color .2s,box-shadow .2s}
-.hk-lead:hover{border-color:var(--yellow);box-shadow:0 18px 44px rgba(83,40,34,.08)}
-.hk-lead-ph{border:6px solid #fff;box-shadow:0 0 0 1px var(--line),0 14px 32px rgba(83,40,34,.12)}
-.hk-lead-ph img{object-position:50% 16%}
-.hk-lead-main p{display:inline-block}
-.hk-lead-main small{display:block;margin-top:10px;color:var(--muted);font-size:14px;line-height:1.5;max-width:520px}
-.hk-lead-con{background:var(--soft);border-radius:28px;padding:18px 20px;gap:12px;align-self:center}
-.hk-lead-ic{background:#fff}
-.hk-lead--sm{grid-template-columns:150px 1fr minmax(260px,.75fr);padding:28px 36px;gap:36px;row-gap:16px}
-.hk-lead--sm .hk-lead-ph{width:150px;height:150px}
-.hk-lead--sm .hk-lead-main h3{font-size:clamp(20px,1.8vw,24px)}
-.hk-lead--sm .hk-lead-main p{margin-top:10px;font-size:14px;font-weight:700;color:var(--blue);background:color-mix(in srgb,var(--blue) 12%,#fff);border-radius:99px;padding:6px 14px}
-.hk-lead--sm .hk-lead-con li{font-size:15px}
-.hk-lead--sm .hk-lead-ic{width:36px;height:36px}
-.hk-lead--sm .hk-lead-ic svg{width:17px;height:17px}
-.hk-duty{grid-column:2/-1}
-.hk-duty summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:99px;padding:6px 6px 6px 18px;font:800 15px/1 var(--f-head);color:var(--navy);transition:border-color .2s,background .2s}
-.hk-duty summary::-webkit-details-marker{display:none}
-.hk-duty summary:hover,.hk-duty[open] summary{border-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 18%,#fff)}
-.hk-duty-ic{width:30px;height:30px;border-radius:50%;background:var(--yellow);display:grid;place-items:center;font-size:18px;transition:transform .2s}
-.hk-duty[open] .hk-duty-ic{transform:rotate(45deg)}
-.hk-duty ol{list-style:none;counter-reset:d;display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;margin-top:14px;background:var(--soft);border-radius:24px;padding:22px 26px}
-.hk-duty li{counter-increment:d;display:flex;gap:12px;line-height:1.55;font-size:15px}
-.hk-duty li::before{content:counter(d,decimal-leading-zero);flex:none;font:800 15px/1.55 var(--f-head);color:var(--blue)}
-@media (max-width:1100px){
-  .hk-lead--sm{grid-template-columns:150px 1fr;padding:28px}
-  .hk-lead--sm .hk-lead-ph{width:140px;height:140px}
-  .hk-duty ol{grid-template-columns:1fr}
-  .hk-duty{grid-column:1/-1}
-}
-@media (max-width:640px){
-  .hk-lead--sm{grid-template-columns:1fr;padding:26px 20px}
-  .hk-lead--sm .hk-lead-ph{width:140px;height:140px}
-  .hk-duty{text-align:left;justify-self:stretch}
-  .hk-duty summary{display:flex;justify-content:space-between}
-  .hk-duty-l{flex:1}
-  .hk-lead--sm .hk-lead-main p{margin-top:8px}
-}

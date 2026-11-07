@@ -28,7 +28,7 @@ const PANEL: PanelSection[] = [
   ['hjm', 'Jamoa'],
   ['hmu', 'Murojaat tartibi'],
   ['hal', 'Aloqa'],
-].map(([name, label]) => ({ name, label, count: name === 'hjm' ? 2 : 3 }))
+].map(([name, label]) => ({ name, label, count: 3 }))
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
