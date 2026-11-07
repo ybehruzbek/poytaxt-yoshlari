@@ -34,7 +34,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Xoltoyeva Şaxlo Şuxrat qizi',
       img: '/img/yetakchilar/10.jpg',
-      phone: '',
+      phone: '+998 93 121-44-55',
       email: '',
       telegram: '',
       instagram: '',
@@ -47,7 +47,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Töxtayev Uluğbek Husniddin öğli',
       img: '/img/yetakchilar/11.jpg',
-      phone: '',
+      phone: '+998 93 311-11-49',
       email: '',
       telegram: '',
       instagram: '',
@@ -60,7 +60,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Nodirov Bexzod Baxodiroviç',
       img: '/img/yetakchilar/27.jpg',
-      phone: '',
+      phone: '+998 94 954-90-54',
       email: '',
       telegram: '',
       instagram: '',
@@ -73,7 +73,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Risqiboyev Şahzodbek Olimbek öğli',
       img: '/img/yetakchilar/24.jpg',
-      phone: '',
+      phone: '+998 94 846-07-64',
       email: '',
       telegram: '',
       instagram: '',
@@ -86,7 +86,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Islomova Sevinç Botirjon qizi',
       img: '/img/yetakchilar/22.jpg',
-      phone: '',
+      phone: '+998 93 148-08-51',
       email: '',
       telegram: '',
       instagram: '',
@@ -99,7 +99,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Turajanova Nilufar Elmurod qizi',
       img: '/img/yetakchilar/09.jpg',
-      phone: '',
+      phone: '+998 88 333-51-13',
       email: '',
       telegram: '',
       instagram: '',
@@ -112,7 +112,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Tursunpölatov Izzatullo Ibrohimjon öğli',
       img: '/img/yetakchilar/13.jpg',
-      phone: '',
+      phone: '+998 94 151-82-32',
       email: '',
       telegram: '',
       instagram: '',
@@ -125,7 +125,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mirsoliyev Jamşidbek Sohibjon öğli',
       img: '/img/yetakchilar/12.jpg',
-      phone: '',
+      phone: '+998 93 737-03-80',
       email: '',
       telegram: '',
       instagram: '',
@@ -138,7 +138,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Anvarova Muqaddasxon Xomidjon qizi',
       img: '/img/yetakchilar/21.jpg',
-      phone: '',
+      phone: '+998 90 409-66-80',
       email: '',
       telegram: '',
       instagram: '',
@@ -151,7 +151,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Abdulatipov Azamat Abdulaziz öğli',
       img: '/img/yetakchilar/28.jpg',
-      phone: '',
+      phone: '+998 93 517-49-39',
       email: '',
       telegram: '',
       instagram: '',
@@ -164,7 +164,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Safarov Daler Şuhrat öğli',
       img: '/img/yetakchilar/01.jpg',
-      phone: '',
+      phone: '+998 94 261-01-08',
       email: '',
       telegram: '',
       instagram: '',
@@ -177,7 +177,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Xakimov Abdufattoh Abdujalil öğli',
       img: '/img/yetakchilar/25.jpg',
-      phone: '',
+      phone: '+998 33 001-85-23',
       email: '',
       telegram: '',
       instagram: '',
@@ -190,7 +190,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Anarbayeva Gulsara Dilşod qizi',
       img: '/img/yetakchilar/18.jpg',
-      phone: '',
+      phone: '+998 90 132-31-03',
       email: '',
       telegram: '',
       instagram: '',
@@ -203,7 +203,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mirzaxmedov Şoxruh Anvaroviç',
       img: '/img/yetakchilar/03.jpg',
-      phone: '',
+      phone: '+998 97 656-19-95',
       email: '',
       telegram: '',
       instagram: '',
@@ -216,7 +216,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Qöçqarov Urolboy Xolmurod öğli',
       img: '/img/yetakchilar/14.jpg',
-      phone: '',
+      phone: '+998 99 467-30-03',
       email: '',
       telegram: '',
       instagram: '',
@@ -229,7 +229,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Abduraxmanov Abdulaziz Xujamurot öğli',
       img: '/img/yetakchilar/06.jpg',
-      phone: '',
+      phone: '+998 94 794-68-86',
       email: '',
       telegram: '',
       instagram: '',
@@ -242,7 +242,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Eşbayeva Sevinçbonu Olim qizi',
       img: '/img/yetakchilar/07.jpg',
-      phone: '',
+      phone: '+998 99 107-75-17',
       email: '',
       telegram: '',
       instagram: '',
@@ -255,7 +255,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Sobitov Mirşod Isoqjon öğli',
       img: '/img/yetakchilar/05.jpg',
-      phone: '',
+      phone: '+998 90 813-07-73',
       email: '',
       telegram: '',
       instagram: '',
@@ -268,7 +268,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Zokirjonov Muhammadzoir Zoxidjon öğli',
       img: '/img/yetakchilar/20.jpg',
-      phone: '',
+      phone: '+998 90 798-79-90',
       email: '',
       telegram: '',
       instagram: '',
@@ -281,7 +281,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Boboyev Jahongir Mirsodiq öğli',
       img: '/img/yetakchilar/15.jpg',
-      phone: '',
+      phone: '+998 77 008-96-96',
       email: '',
       telegram: '',
       instagram: '',
@@ -294,7 +294,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Eşmatov Alişer Şavkat öğli',
       img: '/img/yetakchilar/17.jpg',
-      phone: '',
+      phone: '+998 99 678-40-17',
       email: '',
       telegram: '',
       instagram: '',
@@ -307,7 +307,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Sobirov Umarjon Umid öğli',
       img: '/img/yetakchilar/23.jpg',
-      phone: '',
+      phone: '+998 99 799-95-30',
       email: '',
       telegram: '',
       instagram: '',
@@ -320,7 +320,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Xusanxonov Azizxon Azimxon öğli',
       img: '/img/yetakchilar/19.jpg',
-      phone: '',
+      phone: '+998 93 726-00-56',
       email: '',
       telegram: '',
       instagram: '',
@@ -333,7 +333,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Tursunkulov Elbek Oybek öğli',
       img: '/img/yetakchilar/02.jpg',
-      phone: '',
+      phone: '+998 97 350-11-07',
       email: '',
       telegram: '',
       instagram: '',
@@ -346,7 +346,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Böriyev Murodjon Ibragim öğli',
       img: '/img/yetakchilar/08.jpg',
-      phone: '',
+      phone: '+998 99 804-85-40',
       email: '',
       telegram: '',
       instagram: '',
@@ -359,7 +359,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Xöjamurodov Surxonbek Xusan öğli',
       img: '/img/yetakchilar/16.jpg',
-      phone: '',
+      phone: '+998 93 680-80-20',
       email: '',
       telegram: '',
       instagram: '',
@@ -372,7 +372,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Muminov Islomjon Nozimjonoviç',
       img: '/img/yetakchilar/30.jpg',
-      phone: '',
+      phone: '+998 99 888-51-45',
       email: '',
       telegram: '',
       instagram: '',
@@ -385,7 +385,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Şaymardonov Şahboz Iskandar öğli',
       img: '/img/yetakchilar/04.jpg',
-      phone: '',
+      phone: '+998 93 248-14-45',
       email: '',
       telegram: '',
       instagram: '',
@@ -398,7 +398,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Sufyanov Daler Ravşanoviç',
       img: '/img/yetakchilar/29.jpg',
-      phone: '',
+      phone: '+998 97 156-40-56',
       email: '',
       telegram: '',
       instagram: '',
@@ -411,7 +411,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Sultonaliyev Xusanboy Sultonali öğli',
       img: '/img/yetakchilar/26.jpg',
-      phone: '',
+      phone: '+998 33 292-20-00',
       email: '',
       telegram: '',
       instagram: '',
@@ -426,7 +426,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Olimbayev Muhammadaziz Ğulomjon öğli',
       img: '/img/yetakchilar/31.jpg',
-      phone: '',
+      phone: '+998 95 755-60-40',
       email: '',
       telegram: '',
       instagram: '',
@@ -440,7 +440,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mamasoatov Asliddin Xasanoviç',
       img: '/img/yetakchilar/32.jpg',
-      phone: '',
+      phone: '+998 99 120-20-55',
       email: '',
       telegram: '',
       instagram: '',
@@ -453,7 +453,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Gordiyenko Anastasiya Aleksandrovna',
       img: '/img/yetakchilar/33.jpg',
-      phone: '',
+      phone: '+998 90 130-09-12',
       email: '',
       telegram: '',
       instagram: '',
@@ -466,7 +466,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Nuraliyeva Malika Nizomjonovna',
       img: '/img/yetakchilar/34.jpg',
-      phone: '',
+      phone: '+998 90 283-80-75',
       email: '',
       telegram: '',
       instagram: '',
@@ -479,7 +479,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Irisaliyeva Kamola Otabekovna',
       img: '/img/yetakchilar/35.jpg',
-      phone: '',
+      phone: '+998 93 788-87-15',
       email: '',
       telegram: '',
       instagram: '',
@@ -492,7 +492,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Raximov Doston Doniyor öğli',
       img: '/img/yetakchilar/36.jpg',
-      phone: '',
+      phone: '+998 99 538-25-38',
       email: '',
       telegram: '',
       instagram: '',
@@ -505,7 +505,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Tilyayev Timofey Timuroviç',
       img: '/img/yetakchilar/37.jpg',
-      phone: '',
+      phone: '+998 90 810-14-92',
       email: '',
       telegram: '',
       instagram: '',
@@ -528,7 +528,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Abduvoxidov Abduazim Abdubori öğli',
       img: '/img/yetakchilar/38.jpg',
-      phone: '',
+      phone: '+998 93 511-68-25',
       email: '',
       telegram: '',
       instagram: '',
@@ -541,7 +541,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Dalibayeva Şaxzoda Oralboy qizi',
       img: '/img/yetakchilar/43.jpg',
-      phone: '',
+      phone: '+998 91 785-99-23',
       email: '',
       telegram: '',
       instagram: '',
@@ -554,7 +554,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Abdisalomova Raʼno Komil qizi',
       img: '/img/yetakchilar/45.jpg',
-      phone: '',
+      phone: '+998 90 911-04-10',
       email: '',
       telegram: '',
       instagram: '',
@@ -567,7 +567,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Najmiddinov Xondamir Kamoliddinoviç',
       img: '/img/yetakchilar/39.jpg',
-      phone: '',
+      phone: '+998 91 460-20-27',
       email: '',
       telegram: '',
       instagram: '',
@@ -580,7 +580,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Kustikov Ruslan Zabixillayeviç',
       img: '/img/yetakchilar/44.jpg',
-      phone: '',
+      phone: '+998 90 000-94-49',
       email: '',
       telegram: '',
       instagram: '',
@@ -593,7 +593,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mogoç Tamila Sergeyevna',
       img: '/img/yetakchilar/46.jpg',
-      phone: '',
+      phone: '+998 90 124-32-79',
       email: '',
       telegram: '',
       instagram: '',
@@ -606,7 +606,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Abdurasulov Javoxirxon Buzruk öğli',
       img: '/img/yetakchilar/41.jpg',
-      phone: '',
+      phone: '+998 90 777-25-00',
       email: '',
       telegram: '',
       instagram: '',
@@ -619,7 +619,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Toxirjonov Baxrom Baxtiyorjonoviç',
       img: '/img/yetakchilar/47.jpg',
-      phone: '',
+      phone: '+998 90 131-58-55',
       email: '',
       telegram: '',
       instagram: '',
@@ -632,7 +632,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Qaxramonov Oğabek Sanjar öğli',
       img: '/img/yetakchilar/42.jpg',
-      phone: '',
+      phone: '+998 93 644-51-61',
       email: '',
       telegram: '',
       instagram: '',
@@ -645,7 +645,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Imomqulov Jabborbek Jalol öğli',
       img: '/img/yetakchilar/40.jpg',
-      phone: '',
+      phone: '+998 33 715-33-55',
       email: '',
       telegram: '',
       instagram: '',
@@ -658,7 +658,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Irisboyev Islombek Otabek öğli',
       img: '/img/yetakchilar/48.jpg',
-      phone: '',
+      phone: '+998 90 933-11-23',
       email: '',
       telegram: '',
       instagram: '',
@@ -676,7 +676,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Raxmatova Aylin Maxamatvaliyevna',
       img: '/img/yetakchilar/63.jpg',
-      phone: '',
+      phone: '+998 97 101-86-68',
       email: '',
       telegram: '',
       instagram: '',
@@ -689,7 +689,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Qayumjonov Faridun Oxunjonoviç',
       img: '/img/yetakchilar/64.jpg',
-      phone: '',
+      phone: '+998 95 642-44-47',
       email: '',
       telegram: '',
       instagram: '',
@@ -702,7 +702,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Muhammadov Mustafo Maʼrufoviç',
       img: '/img/yetakchilar/83.jpg',
-      phone: '',
+      phone: '+998 77 288-99-99',
       email: '',
       telegram: '',
       instagram: '',
@@ -715,7 +715,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Kurbanaliyev Sardor Alidjonoviç',
       img: '/img/yetakchilar/84.jpg',
-      phone: '',
+      phone: '+998 90 451-53-05',
       email: '',
       telegram: '',
       instagram: '',
@@ -728,7 +728,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Ziyadullayeva Diyora Xasanovna',
       img: '/img/yetakchilar/75.jpg',
-      phone: '',
+      phone: '+998 91 827-88-81',
       email: '',
       telegram: '',
       instagram: '',
@@ -742,7 +742,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Halimov Humoyun Şavkatjon öğli',
       img: '/img/yetakchilar/65.jpg',
-      phone: '',
+      phone: '+998 70 122-09-05',
       email: '',
       telegram: '',
       instagram: '',
@@ -755,7 +755,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Ikromov Husan Ali öğli',
       img: '/img/yetakchilar/76.jpg',
-      phone: '',
+      phone: '+998 95 685-34-39',
       email: '',
       telegram: '',
       instagram: '',
@@ -768,7 +768,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mehmonqöziyev Murodjon Ahadjon öğli',
       img: '/img/yetakchilar/50.jpg',
-      phone: '',
+      phone: '+998 90 013-32-33',
       email: '',
       telegram: '',
       instagram: '',
@@ -781,7 +781,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Iskandarov Yusufbek Ravşanbekoviç',
       img: '/img/yetakchilar/79.jpg',
-      phone: '',
+      phone: '+998 95 933-11-77',
       email: '',
       telegram: '',
       instagram: '',
@@ -795,7 +795,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Badriddinova Nurixon Badriddin qizi',
       img: '/img/yetakchilar/72.jpg',
-      phone: '',
+      phone: '+998 94 105-35-86',
       email: '',
       telegram: '',
       instagram: '',
@@ -809,7 +809,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mahmudjonov Muhammad Ali Şuhratjon öğli',
       img: '/img/yetakchilar/60.jpg',
-      phone: '',
+      phone: '+998 94 946-35-99',
       email: '',
       telegram: '',
       instagram: '',
@@ -822,7 +822,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mamadaliyev Anvarjon Abduqahhor öğli',
       img: '/img/yetakchilar/53.jpg',
-      phone: '',
+      phone: '+998 94 300-51-21',
       email: '',
       telegram: '',
       instagram: '',
@@ -835,7 +835,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Rasulov Javoxirbek Yaxyobek öğli',
       img: '/img/yetakchilar/66.jpg',
-      phone: '',
+      phone: '+998 91 610-45-95',
       email: '',
       telegram: '',
       instagram: '',
@@ -848,7 +848,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Jamolov Asadbek Jörabek öğli',
       img: '/img/yetakchilar/78.jpg',
-      phone: '',
+      phone: '+998 77 577-55-05',
       email: '',
       telegram: '',
       instagram: '',
@@ -862,7 +862,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Olimjonov Azizbek Oybek öğli',
       img: '/img/yetakchilar/71.jpg',
-      phone: '',
+      phone: '+998 93 775-00-69',
       email: '',
       telegram: '',
       instagram: '',
@@ -875,7 +875,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Maxamadaminov Şohijahon Uluğbek öğli',
       img: '/img/yetakchilar/81.jpg',
-      phone: '',
+      phone: '+998 93 225-20-27',
       email: '',
       telegram: '',
       instagram: '',
@@ -888,7 +888,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Jalilov Abdulvosidxon Muhammad öğli',
       img: '/img/yetakchilar/55.jpg',
-      phone: '',
+      phone: '+998 90 307-43-02',
       email: '',
       telegram: '',
       instagram: '',
@@ -901,7 +901,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Meymonova Ruxşona Xudoyberdiyevna',
       img: '/img/yetakchilar/73.jpg',
-      phone: '',
+      phone: '+998 90 808-59-96',
       email: '',
       telegram: '',
       instagram: '',
@@ -914,7 +914,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Saidanvarxöjayeva Farzona Saydiabror qizi',
       img: '/img/yetakchilar/49.jpg',
-      phone: '',
+      phone: '+998 99 346-29-06',
       email: '',
       telegram: '',
       instagram: '',
@@ -927,7 +927,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Xabibullayev Boburmirzo Baxtiyor öğli',
       img: '/img/yetakchilar/51.jpg',
-      phone: '',
+      phone: '+998 90 695-17-05',
       email: '',
       telegram: '',
       instagram: '',
@@ -940,7 +940,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Ismoilov Abduvali Xasanboy öğli',
       img: '/img/yetakchilar/62.jpg',
-      phone: '',
+      phone: '+998 97 999-64-00',
       email: '',
       telegram: '',
       instagram: '',
@@ -953,7 +953,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Usmonov Zuxriddin Jaxongiroviç',
       img: '/img/yetakchilar/56.jpg',
-      phone: '',
+      phone: '+998 20 006-33-06',
       email: '',
       telegram: '',
       instagram: '',
@@ -966,7 +966,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Sultonov Abdurahmon Abduqodiroviç',
       img: '/img/yetakchilar/59.jpg',
-      phone: '',
+      phone: '+998 90 069-60-79',
       email: '',
       telegram: '',
       instagram: '',
@@ -979,7 +979,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Qiliçev Bunyod Ziyodulla öğli',
       img: '/img/yetakchilar/69.jpg',
-      phone: '',
+      phone: '+998 90 877-77-65',
       email: '',
       telegram: '',
       instagram: '',
@@ -992,7 +992,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Obidov Mustafojon Qurbonzoda',
       img: '/img/yetakchilar/52.jpg',
-      phone: '',
+      phone: '+998 90 954-54-99',
       email: '',
       telegram: '',
       instagram: '',
@@ -1005,7 +1005,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Pulatov Şaxzodjon Siyovuş öğli',
       img: '/img/yetakchilar/54.jpg',
-      phone: '',
+      phone: '+998 99 643-47-74',
       email: '',
       telegram: '',
       instagram: '',
@@ -1018,7 +1018,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Nusrattillayev Abdurahmon Abduraufoviç',
       img: '/img/yetakchilar/74.jpg',
-      phone: '',
+      phone: '+998 93 349-32-00',
       email: '',
       telegram: '',
       instagram: '',
@@ -1031,7 +1031,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Aşurov Akobir Raxmat öğli',
       img: '/img/yetakchilar/82.jpg',
-      phone: '',
+      phone: '+998 20 000-32-82',
       email: '',
       telegram: '',
       instagram: '',
@@ -1044,7 +1044,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Maxammadjonov Oyatillo Dilşod öğli',
       img: '/img/yetakchilar/57.jpg',
-      phone: '',
+      phone: '+998 94 007-24-59',
       email: '',
       telegram: '',
       instagram: '',
@@ -1057,7 +1057,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Hamidov Abdullo Abduqodir öğli',
       img: '/img/yetakchilar/80.jpg',
-      phone: '',
+      phone: '+998 94 009-36-27',
       email: '',
       telegram: '',
       instagram: '',
@@ -1070,7 +1070,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Aşirbayev Avazbek Asanoviç',
       img: '/img/yetakchilar/70.jpg',
-      phone: '',
+      phone: '+998 99 468-25-35',
       email: '',
       telegram: '',
       instagram: '',
@@ -1083,7 +1083,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Mamatov Şerxon Nurali öğli',
       img: '/img/yetakchilar/58.jpg',
-      phone: '',
+      phone: '+998 95 534-41-41',
       email: '',
       telegram: '',
       instagram: '',
@@ -1096,7 +1096,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Nasirova Asilbegim Juraʼtovna',
       img: '/img/yetakchilar/61.jpg',
-      phone: '',
+      phone: '+998 97 725-48-50',
       email: '',
       telegram: '',
       instagram: '',
@@ -1110,7 +1110,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Nosirjonov Muxammadamin Sunnatjon öğli',
       img: '/img/yetakchilar/67.jpg',
-      phone: '',
+      phone: '+998 99 500-05-10',
       email: '',
       telegram: '',
       instagram: '',
@@ -1123,7 +1123,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Abduraximov Ehsonjon Abdulazizzoda',
       img: '/img/yetakchilar/68.jpg',
-      phone: '',
+      phone: '+998 77 701-80-83',
       email: '',
       telegram: '',
       instagram: '',
@@ -1137,7 +1137,7 @@ export const OTMS: Otm[] = [
     leader: {
       name: 'Baxodirov Şavkatjon Toxirjon öğli',
       img: '/img/yetakchilar/77.jpg',
-      phone: '',
+      phone: '+998 97 860-22-00',
       email: '',
       telegram: '',
       instagram: '',

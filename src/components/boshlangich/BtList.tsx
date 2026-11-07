@@ -16,6 +16,16 @@ const SLOTS: Array<{ k: keyof Contacts; t: string; d: string; href: (v: string) 
   { k: 'facebook', t: 'Facebook', d: IC.Facebook, href: (v) => v },
 ]
 
+/** Telefon raqami matn sifatida (bölsa) — bosilganda qöngiroq */
+function Tel({ c, className = 'bt-tel' }: { c: Contacts; className?: string }) {
+  const v = c.phone.trim()
+  return v ? (
+    <a className={className} href={`tel:${v.replace(/[^+\d]/g, '')}`}>
+      {v}
+    </a>
+  ) : null
+}
+
 function Reach({ c }: { c: Contacts }) {
   return (
     <ul className="bt-reach">
@@ -97,6 +107,7 @@ function Lead({ o, view }: { o: Otm; view: View }) {
         <div className="bt-row-txt">
           <h3>{L.name}</h3>
           <span title={o.otm}>{o.otm}</span>
+          <Tel c={L} />
         </div>
         <Reach c={L} />
       </article>
@@ -111,6 +122,7 @@ function Lead({ o, view }: { o: Otm; view: View }) {
         <span className="bt-tile-otm" title={o.otm}>
           {o.otm}
         </span>
+        <Tel c={L} />
         <Reach c={L} />
       </article>
     )
@@ -124,6 +136,7 @@ function Lead({ o, view }: { o: Otm; view: View }) {
           <div>
             <small>Yoşlar yetakçisi</small>
             <b>{L.name}</b>
+            <Tel c={L} />
           </div>
         </div>
         <Reach c={L} />
@@ -136,6 +149,7 @@ function Lead({ o, view }: { o: Otm; view: View }) {
           {o.otm}
         </span>
         <Name3 n={L.name} className="bt-name" />
+        <Tel c={L} />
         <Reach c={L} />
       </div>
       <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />

@@ -980,3 +980,27 @@ svg.bt-row-ph {
     display: none;
   }
 }
+
+/* Telefon raqami matn sifatida */
+.bt-tel {
+  display: inline-block;
+  margin-top: 10px;
+  font: 700 14px/1.2 var(--f-body);
+  color: var(--navy);
+  white-space: nowrap;
+}
+.bt-tel:hover {
+  color: var(--blue);
+}
+.bt-row-txt .bt-tel {
+  margin-top: 4px;
+  font-size: 13px;
+}
+.bt-tile .bt-tel {
+  margin-top: 8px;
+  font-size: 13px;
+}
+.bt-org-lead .bt-tel {
+  margin-top: 4px;
+  font-size: 13px;
+}
