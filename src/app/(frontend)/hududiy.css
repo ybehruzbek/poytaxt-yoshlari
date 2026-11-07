@@ -7,15 +7,6 @@
 .hk-lead-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--blue);display:grid;place-items:center}
 .hk-lead-ic svg{width:20px;height:20px}
 
-.hk-jamoa{padding-top:112px}
-/* Yöl (breadcrumbs): yoruğ sahifada oçiq kapsula */
-.hk-crumbs{display:inline-block;margin-bottom:14px;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:8px 18px}
-.hk-crumbs .crumbs{margin:0;font-size:14px;font-weight:500;color:var(--navy)}
-.hk-crumbs .crumbs span{opacity:.6}
-.hk-crumbs .crumbs [aria-current]{opacity:1;font-weight:700}
-.hk-crumbs .crumbs a:hover{color:var(--blue)}
 .hk-jamoa .sec{padding-top:0}
 .hk-jamoa .sec-head{margin-bottom:22px}
-.hk-jamoa .hk-jm-head .h2{font-size:clamp(28px,2.6vw,40px)}
-@media (max-width:640px){.hk-jamoa{padding-top:100px}.hk-crumbs{padding:7px 14px}.hk-crumbs .crumbs{font-size:13px;gap:6px;flex-wrap:wrap}}
 .hk-jm-head{flex-direction:column;align-items:flex-start;gap:6px}

@@ -9,7 +9,7 @@ const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 function Head() {
   return (
     <div className="sec-head hk-jm-head">
-      <h1 className="h2">Toşkent şahar hududiy Kengaşi jamoasi</h1>
+      <h1 className="h2 pg-title">Toşkent şahar hududiy Kengaşi jamoasi</h1>
     </div>
   )
 }

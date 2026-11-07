@@ -5,7 +5,19 @@ import type { ReactNode } from 'react'
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { ABOUT, BODIES, CONTACT, EVENTS, IMG, INTRO, LEADERS, MEMBERS, ORGANS, POWERS, STATS } from './data'
+import {
+  ABOUT,
+  BODIES,
+  CONTACT,
+  EVENTS,
+  IMG,
+  INTRO,
+  LEADERS,
+  MEMBERS,
+  ORGANS,
+  POWERS,
+  STATS,
+} from './data'
 import { KgVariants } from './variants'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
@@ -43,7 +55,7 @@ const initials = (s: string) =>
 
 /**
  * «Markaziy Kengaş» sahifasi (mazmun: components/kengash/data.ts, Ustav V bob):
- * hero, kengaş haqida, boşqaruv tizimi, vakolatlari, tarkibi, rahbariyat, ijroiya qömitasi va komissiya,
+ * yöl va sarlavha, kengaş haqida, boşqaruv tizimi, vakolatlari, tarkibi, rahbariyat, ijroiya qömitasi va komissiya,
  * qarorlar va yiğilişlar, aloqa.
  */
 export function KengashPage({ L, crumbs, siblings }: P) {
@@ -147,7 +159,9 @@ export function KengashPage({ L, crumbs, siblings }: P) {
           <div className="kg-lead">
             {LEADERS.map((p, i) => (
               <article key={i}>
-                <div className="kg-ava">{p.img ? <img src={p.img} alt={p.name} /> : <span>{initials(p.role)}</span>}</div>
+                <div className="kg-ava">
+                  {p.img ? <img src={p.img} alt={p.name} /> : <span>{initials(p.role)}</span>}
+                </div>
                 <h3>{p.name}</h3>
                 <p>{p.role}</p>
               </article>
@@ -182,7 +196,10 @@ export function KengashPage({ L, crumbs, siblings }: P) {
           <div className="kg-dec">
             <div>
               <h2 className="h2">Qarorlar va yiğilişlar</h2>
-              <p>Markaziy Kengaş yiğilişlari, qabul qilingan qarorlar va hisobotlar şu yerda eʼlon qilinadi.</p>
+              <p>
+                Markaziy Kengaş yiğilişlari, qabul qilingan qarorlar va hisobotlar şu yerda eʼlon
+                qilinadi.
+              </p>
             </div>
             <Link href={L('/hujjatlar/kengash')} className="btn btn-primary">
               Kengaş hujjatlari{' '}
@@ -217,7 +234,12 @@ export function KengashPage({ L, crumbs, siblings }: P) {
             <p className="kg-con-addr">{CONTACT.address}</p>
             <p className="kg-con-note">{CONTACT.note}</p>
             <div className="it-btns">
-              <a href={CONTACT.map} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <a
+                href={CONTACT.map}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
                 Xaritada köriş{' '}
                 <span className="ic">
                   <Arrow />
@@ -236,25 +258,13 @@ export function KengashPage({ L, crumbs, siblings }: P) {
 
   return (
     <div className="it kg">
-      <section className="it-hero" data-head-dark>
-        <img src={IMG.building} alt="" />
+      <header className="pg-head">
         <div className="wrap">
-          <div className="it-crumbs">{crumbs}</div>
-          <h1 className="h1">Markaziy Kengaş</h1>
-          <p className="lead">{INTRO}</p>
-          <div className="it-btns">
-            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Murojaat yuboriş{' '}
-              <span className="ic">
-                <Arrow />
-              </span>
-            </Link>
-            <Link href={L('/hujjatlar/kengash')} className="btn btn-ghost">
-              Hujjatlar
-            </Link>
-          </div>
+          <div className="pg-crumbs">{crumbs}</div>
+          <h1 className="h2 pg-title">Markaziy Kengaş</h1>
+          <p className="pg-lead">{INTRO}</p>
         </div>
-      </section>
+      </header>
 
       {PANEL.map(({ name }) => (
         <div key={name} style={{ display: 'contents' }}>

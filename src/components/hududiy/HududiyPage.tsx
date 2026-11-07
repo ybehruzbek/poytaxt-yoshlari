@@ -9,9 +9,9 @@ import { TeamNamuna } from './AltHkJamoa'
 export function HududiyPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="it hk">
-      <div id="jamoa" className="hk-jamoa">
+      <div id="jamoa" className="hk-jamoa pg-head">
         <div className="wrap">
-          <div className="hk-crumbs">{crumbs}</div>
+          <div className="pg-crumbs">{crumbs}</div>
         </div>
         <TeamNamuna />
       </div>
