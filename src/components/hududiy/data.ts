@@ -1,0 +1,275 @@
+/**
+ * «Toşkent şahar hududiy Kengaşi» sahifasi mazmuni.
+ * Manba: Kengaş apparatining axborot doskalari (Claude Design loyihasi, 2026-yil noyabr) va
+ * Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova.
+ * Keyinçalik admin paneldan boşqariladi.
+ */
+
+export const INTRO =
+  'Poytaxtdagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiruvçi, yoşlar manfaatlari va huquqlarini himoya qiluvçi Ittifoqning hududiy tuzilmasi.'
+
+export const BASIS =
+  'Ittifoq Markaziy Kengaşi Ijroiya qömitasining 2024-yil 29-maydagi 01-04/947-sonli qaroriga 7-ilova asosida'
+
+export const ABOUT = {
+  lead: 'Toşkent şahar hududiy Kengaşi — Ittifoqning poytaxtdagi vakolatli tuzilmasi.',
+  paras: [
+    'Kengaş şahardagi oliy taʼlim taşkilotlari, harbiy qismlar va boşqa muassasalardagi boşlanğiç taşkilotlarni röyxatga oladi, ularga uslubiy yordam beradi va faoliyatini muvofiqlaştiradi.',
+    'Kengaş apparati rahbariyat va tört bölimdan iborat. Har bir bölim öz yönalişi böyiça Kengaş faoliyatini olib boradi, fuqarolar murojaatlarini qabul qiladi va körib çiqadi.',
+  ],
+}
+
+export type Stat = { v: string; l: string }
+
+export const STATS: Stat[] = [
+  { v: '9', l: 'nafar xodim — Kengaş apparati' },
+  { v: '4', l: 'bölim öz yönalişi böyiça iş olib boradi' },
+  { v: '97', l: 'oliy taʼlim taşkiloti poytaxtda faoliyat yuritadi' },
+  { v: '5', l: 'kun — haftalik qabul jadvali' },
+]
+
+export type Person = { name: string; role: string; img: string }
+
+export const CHAIR = {
+  name: 'Anvarov Şukurulloxon Maqsudxon öğli',
+  role: 'Toşkent şahar hududiy Kengaşi raisi',
+  img: '/img/hududiy/xodimlar/anvarov.jpg',
+  room: '11-xona',
+  reception: 'Duşanba · 14:00 — 17:00',
+  duties: [
+    'Hududiy Kengaş faoliyatiga rahbarlik qiladi, yoşlar manfaatlari va huquqlarini himoya etadi',
+    'Kollegial organlar qarorlari, iş rejasi va farmoyişlar ijrosini taşkil etadi va nazorat qiladi',
+    'Idora, muassasa va taşkilotlarda Ittifoqning vakolatli vakili sifatida iş yuritadi',
+  ],
+  socials: [
+    {
+      net: 'Telegram',
+      handle: '@Shukurulloxon_Official',
+      href: 'https://t.me/Shukurulloxon_Official',
+    },
+    {
+      net: 'Instagram',
+      handle: '@shukurulloxon.anvarov',
+      href: 'https://www.instagram.com/shukurulloxon.anvarov/',
+    },
+    {
+      net: 'Facebook',
+      handle: '@shukurulloxon.anvarov',
+      href: 'https://www.facebook.com/shukurulloxon.anvarov',
+    },
+  ],
+}
+
+export type Dept = {
+  key: string
+  /** qisqa nom (kartalar, jadval) */
+  short: string
+  /** rasmiy töliq nom */
+  t: string
+  room: string
+  tasks: string[]
+  staff: Person[]
+}
+
+const P = (f: string) => `/img/hududiy/xodimlar/${f}.jpg`
+
+export const DEPTS: Dept[] = [
+  {
+    key: 'kadr',
+    short: 'Taşkiliy-kadrlar bölimi',
+    t: 'Taşkiliy-kadrlar va boşlanğiç taşkilotlar faoliyatini muvofiqlaştiriş bölimi',
+    room: '7 · 9-xona',
+    tasks: [
+      'Apparat faoliyatini taşkiliy jihatdan taʼminlaydi',
+      'Kadrlar siyosatini muvofiqlaştiradi, zaxira kadrlar bazasini şakllantiradi',
+      'Boşlanğiç taşkilotlarni röyxatga oladi va uslubiy qöllab-quvvatlaydi',
+      'Yetakçilar hisobotlarini, yoşlarga oid axborot va statistikani umumlaştiradi',
+      '«Ijro.gov.uz» va «E-xat» orqali hujjat almaşinuvini yuritadi',
+      'Fuqarolar murojaatlari va qabullarini taşkil etadi, ijrosini nazorat qiladi',
+    ],
+    staff: [
+      { name: 'Jöraboyev Mavlonbek Zafarjon öğli', role: 'Bölim boşliği', img: P('joraboyev') },
+      { name: 'Xalilova Jasmina Davron qizi', role: 'Boş mutaxassis', img: P('xalilova') },
+      { name: 'Raşidov Kamoliddin Sayfiddin öğli', role: 'Boş mutaxassis', img: P('rashidov') },
+    ],
+  },
+  {
+    key: 'harbiy',
+    short: 'Harbiy-vatanparvarlik bölimi',
+    t: 'Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiriş hamda yoşlarni harbiy-vatanparvarlik ruhida tarbiyalaş bölimi',
+    room: '8-xona',
+    tasks: [
+      'Harbiy qism va muassasalardagi boşlanğiç taşkilotlar bilan munosabatlarni örnatadi',
+      'Harbiy qismlardagi yoşlar manfaatlarini himoya qiladi, aʼzolar hisobini yuritadi',
+      'Yoşlarni harbiy-vatanparvarlik ruhida tarbiyalaş tadbirlarini amalga oşiradi',
+      'Yetakçilar uçun öquvlar taşkil etadi, uslubiy qöllanma va tavsiyalar tayyorlaydi',
+    ],
+    staff: [{ name: 'Ismoilov Sarvar Umar öğli', role: 'Bölim boşliği', img: P('ismoilov') }],
+  },
+  {
+    key: 'buxgalteriya',
+    short: 'Buxgalteriya bölimi',
+    t: 'Buxgalteriya bölimi',
+    room: '10-xona',
+    tasks: [
+      'Moliya-buxgalteriya faoliyatini qonunçilik va Ittifoq Ustavi asosida taşkil qiladi',
+      'Yillik byudjet va xarajatlar smetasi loyihalarini tayyorlaydi, ijrosini taʼminlaydi',
+      'Iş haqi va unga tenglaştirilgan tölovlarning öz vaqtida tölanişini taʼminlaydi',
+      'Byudjetdan taşqari mablağlar jalb qiliş imkoniyatlarini izlaydi',
+    ],
+    staff: [
+      { name: 'Temirov Dilşod Saloxiddin öğli', role: 'Bölim boşliği', img: P('d-temirov') },
+      {
+        name: 'Saidburxonov Saidabzal Toxirxon öğli',
+        role: 'Bölim boşliği',
+        img: P('saidburxonov'),
+      },
+    ],
+  },
+  {
+    key: 'axborot',
+    short: 'Axborot xizmati',
+    t: 'Axborot xizmati bölimi',
+    room: '12-xona',
+    tasks: [
+      'Ittifoq faoliyati haqida OAV va ijtimoiy tarmoqlar orqali muntazam, tezkor axborot beradi',
+      'Axborot makonini kuzatadi va tahlil qiladi, axborot xurujlariga tezkor munosabat bildiradi',
+      'Rasmiy veb-sayt va ijtimoiy tarmoqlardagi sahifalar işini muvofiqlaştiradi',
+      'Matnli, foto, audio va videomateriallar bazasini yuritadi',
+    ],
+    staff: [
+      {
+        name: 'Temirov Oğabek Fazliddin öğli',
+        role: 'Bölim boşliği, matbuot kotibi',
+        img: P('o-temirov'),
+      },
+      { name: 'Yunusov Yusufjon Muxsin öğli', role: 'Bölim boşliği', img: P('yunusov') },
+    ],
+  },
+]
+
+/** Rahbariyat qabuli (axborot doskasidagi jadval) */
+export type Reception = { day: string; time: string; room: string; name: string; dept: string }
+
+export const RECEPTION: Reception[] = [
+  {
+    day: 'Duşanba',
+    time: '14:00 — 17:00',
+    room: '11',
+    name: 'Anvarov Şukurulloxon Maqsudxon öğli',
+    dept: 'Kengaş raisi',
+  },
+  {
+    day: 'Seşanba',
+    time: '14:00 — 17:00',
+    room: '08',
+    name: 'Ismoilov Sarvar Umar öğli',
+    dept: 'Harbiy-vatanparvarlik bölimi',
+  },
+  {
+    day: 'Çorşanba',
+    time: '14:00 — 17:00',
+    room: '09',
+    name: 'Jöraboyev Mavlonbek Zafarjon öğli',
+    dept: 'Taşkiliy-kadrlar bölimi',
+  },
+  {
+    day: 'Payşanba',
+    time: '14:00 — 17:00',
+    room: '10',
+    name: 'Temirov Dilşod Saloxiddin öğli',
+    dept: 'Buxgalteriya bölimi',
+  },
+  {
+    day: 'Juma',
+    time: '14:00 — 17:00',
+    room: '12',
+    name: 'Temirov Oğabek Fazliddin öğli',
+    dept: 'Axborot xizmati',
+  },
+]
+
+/** Murojaatni körib çiqiş tartibi (OʼRQ-445) */
+export const APPEAL_STEPS = [
+  { t: 'Qabul qiliş va röyxatga oliş', d: '1 iş kuni içida' },
+  { t: 'Ijroçiga yönaltiriş', d: '2 iş kuni içida' },
+  { t: 'Örganiş va körib çiqiş', d: '15 kun içida' },
+  { t: 'Yozma javob beriş', d: 'Qöşimça örganiş kerak bölsa — 1 oygaça' },
+]
+
+export const APPEAL_NOTE =
+  'Murojaat ariza, taklif yoki şikoyat şaklida — yozma, elektron hujjat körinişida yoxud oğzaki qabul qilinadi. Muallifi körsatilmagan murojaatlar, huquqbuzarlik haqidagi maʼlumotlardan taşqari, körib çiqilmaydi.'
+
+export const APPEAL_LAW =
+  '«Jismoniy va yuridik şaxslarning murojaatlari töğrisida»gi Qonun (ÖRQ-445-son, 11.09.2017)'
+
+/** Boşlanğiç taşkilotlar: Vazirlik va Ittifoq Markaziy Kengaşining 2023-yil 29-martdagi qöşma qarori */
+export const ORGS = {
+  basis:
+    'Oliy taʼlim, fan va innovatsiyalar vazirligi hamda Ittifoq Markaziy Kengaşining 2023-yil 29-martdagi qöşma qarori asosida',
+  total: { v: '97', l: 'oliy taʼlim taşkiloti poytaxtda faoliyat yuritadi' },
+  split: [
+    { v: '32', l: 'davlat' },
+    { v: '42', l: 'nodavlat' },
+    { v: '23', l: 'xorijiy va filial' },
+  ],
+  tasks: [
+    'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştirib boradi',
+    'Taşkilotlarga vazifalarini lozim darajada bajarişi uçun uslubiy kömaklaşadi',
+    'Muammolarni hal qiliş uçun idoralararo hamkorlikni taʼminlaydi',
+    'Oliy taʼlim muassasalariga çiqib, işlarni joyida örganib boradi',
+    'Namunali yetakçilarni «Özbekiston belgisi» kökrak nişoni bilan taqdirlaşga tavsiya etadi',
+  ],
+}
+
+export type Shot = { t: string; img: string }
+
+/** Tadbirlardan lavhalar (Kengaş axborot xizmati suratlari) */
+export const SHOTS: Shot[] = [
+  {
+    t: '«Özbekiston belgisi» kökrak nişoni bilan taqdirlaş marosimi',
+    img: '/img/hududiy/lavhalar/belgi.jpg',
+  },
+  { t: 'Oliy Majlis Senati', img: '/img/hududiy/lavhalar/senat.jpg' },
+  {
+    t: 'Özbekistondagi Islom sivilizatsiyasi markaziga taşrif',
+    img: '/img/hududiy/lavhalar/islom-markazi.jpg',
+  },
+  {
+    t: 'Nizomiy nomidagi Özbekiston milliy pedagogika universitetida hisobot-saylov yiğilişi',
+    img: '/img/hududiy/lavhalar/pedagogika-saylov.jpg',
+  },
+  { t: '«Ajdodlar izidan» intellektual öyini', img: '/img/hududiy/lavhalar/ajdodlar.jpg' },
+  { t: 'Harbiy xavfsizlik va mudofaa universiteti', img: '/img/hududiy/lavhalar/mudofaa-univ.jpg' },
+  {
+    t: 'Oliy taʼlim, fan va innovatsiyalar vaziri faxriy yorliği bilan taqdirlaş',
+    img: '/img/hududiy/lavhalar/faxriy-yorliq.jpg',
+  },
+  {
+    t: 'Sunʼiy intellekt va media texnologiyalari böyiça xalqaro öquv kursi',
+    img: '/img/hududiy/lavhalar/ai-kurs.jpg',
+  },
+  { t: 'Toşkent xalqaro universiteti', img: '/img/hududiy/lavhalar/txu.jpg' },
+]
+
+export const CONTACT = {
+  address: 'Toşkent şahri, Universitet köçasi, 4-uy',
+  map: 'https://yandex.uz/maps/?text=Toshkent%2C%20Universitet%20ko%27chasi%2C%204',
+  phone: '+998 71 246-10-70',
+  phoneHref: 'tel:+998712461070',
+  email: 'poytaxtyoshlari.yi@gmail.com',
+  hours: 'Duşanba — juma · 09:00 — 18:00',
+  socials: [
+    { net: 'Telegram', handle: '@Poytaxtyoshlari_yi', href: 'https://t.me/poytaxtyoshlari_yi' },
+    { net: 'Instagram', handle: '@yoshlar.uzb', href: 'https://www.instagram.com/yoshlar.uzb/' },
+    {
+      net: 'Facebook',
+      handle: 'Poytaxt yoşlari',
+      href: 'https://www.facebook.com/share/1DZFdJ2wTc/',
+    },
+  ],
+}
+
+export const IMG = {
+  hero: '/img/hududiy/lavhalar/olimpiya.jpg',
+}
