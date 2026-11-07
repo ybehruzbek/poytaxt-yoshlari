@@ -1,8 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- kanal suratlari; CMS ulanganda next/image ga o'tadi */
-/**
- * VAQTINÇA: Faoliyat sahifalarining B va C dizayn variantlari (Var.tsx bilan almaştiriladi).
- * Tanlov qilingaç, tanlanmagan variantlar şu fayldan öçiriladi.
- */
+/** Faoliyat sahifalarining tanlangan körinişlari: yönalişlar, yönaliş, loyiha va natijalar */
 import Link from 'next/link'
 
 import { DIRECTIONS, dirProjects, dirTitle, REPORT_2025, YEARS } from './data'
@@ -95,86 +92,16 @@ export function DirsList({ base }: { base: string }) {
 
 /* ===================== Yönaliş sahifasi ===================== */
 
-/** B — mozaika: raqamlar va suratlar, loyihalar qator, tadbirlar ixçam röyxat */
-export function DirB({ slug, projBase }: { slug: string; projBase: string }) {
-  const projs = dirProjects(slug as Project['dir'])
-  const evs = dirEvents(slug)
-  const pics = evs.filter((e) => e.img).slice(0, 4)
-  const years = [...new Set(evs.map((e) => e.date.slice(0, 4)))].sort()
-  return (
-    <>
-      <section className="sec fa-sec">
-        <div className="wrap vb-split">
-          <dl className="vb-stats">
-            <div>
-              <dd>{evs.length}</dd>
-              <dt>ta tadbir ötkazildi</dt>
-            </div>
-            <div>
-              <dd>{projs.length}</dd>
-              <dt>ta loyiha</dt>
-            </div>
-            {years.length > 0 && (
-              <div>
-                <dd>
-                  {years[0]}–{years[years.length - 1]}
-                </dd>
-                <dt>yillar davomida</dt>
-              </div>
-            )}
-          </dl>
-          <div className="vb-mosaic">
-            {pics.map((e) => (
-              <img key={e.id} src={e.img} alt="" loading="lazy" />
-            ))}
-          </div>
-        </div>
-      </section>
-      {projs.length > 0 && (
-        <section className="sec fa-sec">
-          <div className="wrap">
-            <h2 className="fa-h2">Loyihalar</h2>
-            <div className="vb-prows">
-              {projs.map((p) => (
-                <Link key={p.slug} href={`${projBase}/${p.slug}`} className="vb-prow">
-                  {p.cover && <img src={p.cover} alt="" loading="lazy" />}
-                  <span>
-                    <small>
-                      {p.period} · {STATUS(p.status)}
-                    </small>
-                    <strong>{p.title}</strong>
-                    <span>{p.lead}</span>
-                  </span>
-                  <Arrow />
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-      <section className="sec fa-sec">
-        <div className="wrap">
-          <h2 className="fa-h2">Sönggi tadbirlar</h2>
-          <ul className="vb-elist">
-            {evs.slice(0, 10).map((e) => (
-              <li key={e.id}>
-                <a href={TG(e.id)} target="_blank" rel="noopener noreferrer">
-                  <time dateTime={e.date}>{fmtDate(e.date)}</time>
-                  <strong>{e.title}</strong>
-                  <span>{e.place}</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    </>
-  )
-}
-
 /** C — xronologiya: tadbirlar yillar böyiça vertikal çiziqda, loyihalar yon ustunda */
-export function DirC({ slug, projBase }: { slug: string; projBase: string }) {
+export function DirC({
+  slug,
+  projBase,
+  listHref,
+}: {
+  slug: string
+  projBase: string
+  listHref: string
+}) {
   const projs = dirProjects(slug as Project['dir'])
   const evs = dirEvents(slug).slice(0, 14)
   const byYear = [...new Set(evs.map((e) => e.date.slice(0, 4)))].map((y) => ({
@@ -186,6 +113,11 @@ export function DirC({ slug, projBase }: { slug: string; projBase: string }) {
       <div className="wrap vc-split">
         <div>
           <h2 className="fa-h2">Tadbirlar xronologiyasi</h2>
+          {byYear.length === 0 && (
+            <p className="fa-empty">
+              Bu yönaliş böyiça alohida tadbirlar hozirça yöq — yonidagi loyihalar bilan tanişing.
+            </p>
+          )}
           <div className="vc-tl">
             {byYear.map((g) => (
               <section key={g.y}>
@@ -222,48 +154,16 @@ export function DirC({ slug, projBase }: { slug: string; projBase: string }) {
           ))}
         </aside>
       </div>
+      <div className="wrap fa-back">
+        <Link href={listHref} className="btn btn-outline">
+          Barça yönalişlar
+        </Link>
+      </div>
     </section>
   )
 }
 
 /* ===================== Loyiha sahifasi ===================== */
-
-function Facts({ p }: { p: Project }) {
-  return (
-    <dl className="fa-facts">
-      <div>
-        <dt>Yönaliş</dt>
-        <dd>{dirTitle(p.dir)}</dd>
-      </div>
-      <div>
-        <dt>Holati</dt>
-        <dd>{STATUS(p.status)}</dd>
-      </div>
-      <div>
-        <dt>Davri</dt>
-        <dd>{p.period}</dd>
-      </div>
-      {p.audience && (
-        <div>
-          <dt>Kimlar uçun</dt>
-          <dd>{p.audience}</dd>
-        </div>
-      )}
-      {p.partners.length > 0 && (
-        <div>
-          <dt>Hamkorlar</dt>
-          <dd>{p.partners.join(', ')}</dd>
-        </div>
-      )}
-      {p.national && (
-        <div>
-          <dt>Daraja</dt>
-          <dd>Respublika loyihasi — şahar bosqiçi</dd>
-        </div>
-      )}
-    </dl>
-  )
-}
 
 const SrcNote = ({ p }: { p: Project }) => (
   <p className="fa-src-note">
@@ -273,66 +173,6 @@ const SrcNote = ({ p }: { p: Project }) => (
     </a>
   </p>
 )
-
-/** B — yonma-yon: çapda surat va maʼlumotlar (yopişqoq), öngda matn */
-export function ProjB({ p, listHref }: { p: Project; listHref: string }) {
-  return (
-    <section className="sec fa-sec">
-      <div className="wrap vb-proj">
-        <aside className="vb-proj-side">
-          {p.cover && <img src={p.cover} alt={p.title} />}
-          <Facts p={p} />
-        </aside>
-        <div className="vb-proj-main">
-          <h2 className="fa-h2">Loyiha haqida</h2>
-          <p className="vb-proj-desc">{p.description}</p>
-          {p.results.length > 0 && (
-            <>
-              <h2 className="fa-h2">Natijalar</h2>
-              <ol className="vb-res">
-                {p.results.map((r) => (
-                  <li key={r.text}>
-                    {r.text} <Src id={r.post} />
-                  </li>
-                ))}
-              </ol>
-            </>
-          )}
-          {p.milestones.length > 0 && (
-            <>
-              <h2 className="fa-h2">Muhim sanalar</h2>
-              <ol className="fa-tl">
-                {p.milestones.map((m) => (
-                  <li key={`${m.date}-${m.text}`}>
-                    <time dateTime={m.date}>{fmtDate(m.date)}</time>
-                    <p>
-                      {m.text} <Src id={m.post} />
-                    </p>
-                  </li>
-                ))}
-              </ol>
-            </>
-          )}
-          {p.gallery.length > 0 && (
-            <div className="vb-gal">
-              {p.gallery.map((g) => (
-                <a key={g} href={g} target="_blank" rel="noopener noreferrer">
-                  <img src={g} alt="" loading="lazy" />
-                </a>
-              ))}
-            </div>
-          )}
-          <SrcNote p={p} />
-          <div className="fa-back">
-            <Link href={listHref} className="btn btn-outline">
-              Barça loyihalar
-            </Link>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /** C — hikoya: keng banner, tor matn ustuni, natijalar kartoçkalarda, gorizontal sanalar */
 export function ProjC({ p, listHref }: { p: Project; listHref: string }) {

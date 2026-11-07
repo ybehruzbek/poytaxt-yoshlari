@@ -1,16 +1,14 @@
-/* eslint-disable @next/next/no-img-element -- kanal suratlari; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { ANNOUNCEMENTS } from './announcements'
 import { AnnounceList } from './AnnounceList'
-import { DIRECTIONS, dirProjects, dirTitle, PROJECTS } from './data'
+import { DIRECTIONS, PROJECTS } from './data'
 import { EVENTS } from './events'
 import { EventsList } from './EventsList'
-import { DirB, DirC, DirsList, ProjB, ProjC, ResultsB } from './FaVariants'
+import { DirC, DirsList, ProjC, ResultsB } from './FaViews'
 import { ProjectsList } from './ProjectsList'
-import { V, VPanel } from './Var'
-import { fmtDate, type Project, TG } from './types'
+import { fmtDate, TG } from './types'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
@@ -25,12 +23,6 @@ function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead:
     </header>
   )
 }
-
-const Src = ({ id }: { id: number }) => (
-  <a className="fa-src" href={TG(id)} target="_blank" rel="noopener noreferrer">
-    manba ↗
-  </a>
-)
 
 /* ===================== Faoliyat yönalişlari ===================== */
 
@@ -59,102 +51,15 @@ export function DirectionPage({
   listHref: string
 }) {
   const d = DIRECTIONS.find((x) => x.slug === slug)!
-  const projs = dirProjects(d.slug)
-  const evs = EVENTS.filter((e) => e.dir === d.slug).slice(0, 6)
   return (
     <div className="fa">
       <Head crumbs={crumbs} title={d.title} lead={d.body} />
-      <V name="fyd" k="a">
-        {projs.length > 0 && (
-          <section className="sec fa-sec">
-            <div className="wrap">
-              <h2 className="fa-h2">Loyihalar</h2>
-              <div className="fa-projs">
-                {projs.map((p) => (
-                  <ProjCard key={p.slug} p={p} href={`${projBase}/${p.slug}`} />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-        <section className="sec fa-sec">
-          <div className="wrap">
-            <h2 className="fa-h2">Sönggi tadbirlar</h2>
-            <div className="fa-evs">
-              {evs.map((e) => (
-                <a
-                  key={e.id}
-                  href={TG(e.id)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="fa-ev"
-                >
-                  <span className="fa-ev-ph">
-                    {e.img ? (
-                      <img src={e.img} alt="" loading="lazy" />
-                    ) : (
-                      <span className="fa-ev-noph" />
-                    )}
-                  </span>
-                  <span className="fa-ev-txt">
-                    <time dateTime={e.date}>{fmtDate(e.date)}</time>
-                    <strong>{e.title}</strong>
-                    {e.summary && <span className="fa-ev-sum">{e.summary}</span>}
-                    <span className="fa-ev-src">
-                      Telegramda köriş <span aria-hidden="true">↗</span>
-                    </span>
-                  </span>
-                </a>
-              ))}
-            </div>
-            <div className="fa-back">
-              <Link href={listHref} className="btn btn-outline">
-                Barça yönalişlar
-              </Link>
-            </div>
-          </div>
-        </section>
-      </V>
-      <V name="fyd" k="b">
-        <DirB slug={d.slug} projBase={projBase} />
-      </V>
-      <V name="fyd" k="c">
-        <DirC slug={d.slug} projBase={projBase} />
-      </V>
-      <VPanel name="fyd" label="Yönaliş sahifasi" />
+      <DirC slug={d.slug} projBase={projBase} listHref={listHref} />
     </div>
   )
 }
 
 /* ===================== Loyihalar ===================== */
-
-export function ProjCard({ p, href }: { p: Project; href: string }) {
-  return (
-    <Link href={href} className="fa-proj">
-      <span className="fa-proj-ph">
-        {p.cover ? <img src={p.cover} alt="" loading="lazy" /> : <span className="fa-ev-noph" />}
-        <span className="fa-status" data-s={p.status}>
-          {p.status === 'davom etmoqda'
-            ? 'Davom etmoqda'
-            : p.status === 'har yili'
-              ? 'Har yili'
-              : 'Yakunlangan'}
-        </span>
-      </span>
-      <span className="fa-proj-txt">
-        <span className="fa-proj-dir">{dirTitle(p.dir)}</span>
-        <strong>{p.title}</strong>
-        <p>{p.lead}</p>
-        <span className="fa-proj-foot">
-          <span>{p.period}</span>
-          <span className="fa-go">
-            Batafsil <span aria-hidden="true">→</span>
-          </span>
-        </span>
-      </span>
-    </Link>
-  )
-}
 
 export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
   return (
@@ -190,117 +95,7 @@ export function ProjectPage({
   return (
     <div className="fa">
       <Head crumbs={crumbs} title={p.title} lead={p.lead} />
-      <V name="flp" k="a">
-        <section className="sec fa-sec">
-          <div className="wrap">
-            {p.cover && (
-              <div className="fa-ph-hero">
-                <img src={p.cover} alt={p.title} />
-              </div>
-            )}
-            <div className="fa-meta">
-              <span>{dirTitle(p.dir)}</span>
-              <span>{p.period}</span>
-              <span>
-                {p.status === 'davom etmoqda'
-                  ? 'Davom etmoqda'
-                  : p.status === 'har yili'
-                    ? 'Har yili ötkaziladi'
-                    : 'Yakunlangan'}
-              </span>
-              {p.national && <span>Respublika loyihasi — şahar bosqiçi</span>}
-            </div>
-            <div className="fa-cols">
-              <div>
-                <section className="fa-box">
-                  <h2>Loyiha haqida</h2>
-                  <p>{p.description}</p>
-                </section>
-                {p.results.length > 0 && (
-                  <section className="fa-box">
-                    <h2>Natijalar</h2>
-                    <ul className="fa-results">
-                      {p.results.map((r) => (
-                        <li key={r.text}>
-                          <span>
-                            {r.text}
-                            <Src id={r.post} />
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                )}
-              </div>
-              <div>
-                <section className="fa-box">
-                  <dl className="fa-facts">
-                    {p.audience && (
-                      <div>
-                        <dt>Kimlar uçun</dt>
-                        <dd>{p.audience}</dd>
-                      </div>
-                    )}
-                    {p.partners.length > 0 && (
-                      <div>
-                        <dt>Hamkorlar</dt>
-                        <dd>{p.partners.join(', ')}</dd>
-                      </div>
-                    )}
-                    <div>
-                      <dt>Davri</dt>
-                      <dd>{p.period}</dd>
-                    </div>
-                  </dl>
-                </section>
-                {p.milestones.length > 0 && (
-                  <section className="fa-box">
-                    <h2>Muhim sanalar</h2>
-                    <ol className="fa-tl">
-                      {p.milestones.map((m) => (
-                        <li key={`${m.date}-${m.text}`}>
-                          <time dateTime={m.date}>{fmtDate(m.date)}</time>
-                          <p>
-                            {m.text}
-                            <Src id={m.post} />
-                          </p>
-                        </li>
-                      ))}
-                    </ol>
-                  </section>
-                )}
-              </div>
-            </div>
-            {p.gallery.length > 0 && (
-              <div className="fa-gal">
-                {p.gallery.map((g) => (
-                  <a key={g} href={g} target="_blank" rel="noopener noreferrer">
-                    <img src={g} alt="" loading="lazy" />
-                  </a>
-                ))}
-              </div>
-            )}
-            <p className="fa-src-note">
-              Manba: “Poytaxt yoşlari” Telegram kanali —{' '}
-              <a href={TG(p.posts[0])} target="_blank" rel="noopener noreferrer">
-                {p.posts.length} ta post
-              </a>
-            </p>
-            <div className="fa-back">
-              <Link href={listHref} className="btn btn-outline">
-                Barça loyihalar
-              </Link>
-            </div>
-          </div>
-        </section>
-      </V>
-      <V name="flp" k="b">
-        <ProjB p={p} listHref={listHref} />
-      </V>
-      <V name="flp" k="c">
-        <ProjC p={p} listHref={listHref} />
-      </V>
-      <VPanel name="flp" label="Loyiha sahifasi" />
+      <ProjC p={p} listHref={listHref} />
     </div>
   )
 }

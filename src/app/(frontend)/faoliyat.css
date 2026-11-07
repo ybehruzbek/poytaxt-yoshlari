@@ -1,5 +1,5 @@
 /* =====================================================================
-   “Faoliyat” bölimi: yönalişlar, loyihalar, tadbirlar, natijalar, iştirok. Prefiks: fa-
+   “Faoliyat” bölimi: yönalişlar, loyihalar, tadbirlar, eʼlonlar, natijalar. Prefiks: fa-, vc-, vb-, vy-
    Sahifa boşi umumiy: .pg-head / .pg-crumbs / .pg-title / .pg-lead (site.css).
    ===================================================================== */
 
@@ -301,189 +301,7 @@
   white-space: nowrap;
 }
 
-.fa-go {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 99px;
-  background: var(--yellow);
-  padding: 9px 16px;
-  font: 800 13px/1 var(--f-head);
-  color: var(--navy);
-  white-space: nowrap;
-}
-
-/* ---------- Loyihalar ---------- */
-.fa-projs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.fa-proj {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: var(--r-thumb);
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
-  color: var(--grey);
-  transition:
-    box-shadow 0.2s,
-    transform 0.2s;
-}
-.fa-proj:hover {
-  box-shadow:
-    0 0 0 1px var(--yellow),
-    0 16px 34px rgba(83, 40, 34, 0.1);
-  transform: translateY(-2px);
-}
-.fa-proj-ph {
-  position: relative;
-  aspect-ratio: 16/10;
-  background: var(--soft);
-}
-.fa-proj-ph img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.fa-status {
-  position: absolute;
-  left: 14px;
-  top: 14px;
-  border-radius: 99px;
-  background: #fff;
-  padding: 6px 12px;
-  font: 800 12px/1 var(--f-head);
-  color: var(--navy);
-  box-shadow: 0 4px 12px rgba(83, 40, 34, 0.14);
-}
-.fa-status[data-s='davom etmoqda'] {
-  background: var(--green);
-  color: #fff;
-}
-.fa-status[data-s='har yili'] {
-  background: var(--yellow);
-}
-.fa-proj-txt {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 18px 20px 20px;
-}
-.fa-proj-dir {
-  font: 700 12px/1.3 var(--f-head);
-  color: var(--blue);
-}
-.fa-proj-txt strong {
-  margin-top: 8px;
-  font: 800 18px/1.3 var(--f-head);
-  color: var(--navy);
-}
-.fa-proj-txt p {
-  margin-top: 8px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-.fa-proj-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: auto;
-  padding-top: 16px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-}
-
-/* Loyiha sahifasi */
-.fa-ph-hero {
-  overflow: hidden;
-  border-radius: var(--r-card);
-  aspect-ratio: 21/9;
-  background: var(--soft);
-}
-.fa-ph-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.fa-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 16px;
-}
-.fa-meta span {
-  border-radius: 99px;
-  background: var(--soft);
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--navy);
-}
-.fa-cols {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 24px;
-  margin-top: 28px;
-  align-items: start;
-}
-.fa-box {
-  border-radius: var(--r-thumb);
-  background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
-  padding: 26px 28px;
-}
-.fa-box + .fa-box {
-  margin-top: 16px;
-}
-.fa-box h2 {
-  margin-bottom: 14px;
-  font: 800 20px/1.25 var(--f-head);
-  color: var(--navy);
-}
-.fa-box > p {
-  line-height: 1.7;
-}
-.fa-facts {
-  display: grid;
-  gap: 12px;
-}
-.fa-facts dt {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-}
-.fa-facts dd {
-  margin-top: 3px;
-  font-weight: 700;
-  color: var(--navy);
-}
-.fa-results {
-  list-style: none;
-  display: grid;
-  gap: 10px;
-}
-.fa-results li {
-  display: flex;
-  gap: 12px;
-  border-radius: 18px;
-  background: var(--soft);
-  padding: 12px 16px;
-  line-height: 1.5;
-}
-.fa-results li::before {
-  content: '';
-  flex: none;
-  width: 8px;
-  height: 8px;
-  margin-top: 8px;
-  border-radius: 50%;
-  background: var(--blue);
-}
+/* Manba havolasi va “orqaga” tugmasi */
 .fa-src {
   margin-left: 6px;
   font-size: 12px;
@@ -491,57 +309,7 @@
   color: var(--blue);
   white-space: nowrap;
 }
-.fa-tl {
-  list-style: none;
-  display: grid;
-  gap: 0;
-  border-left: 2px solid var(--line);
-  margin-left: 6px;
-}
-.fa-tl li {
-  position: relative;
-  padding: 0 0 18px 20px;
-}
-.fa-tl li::before {
-  content: '';
-  position: absolute;
-  left: -7px;
-  top: 4px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--yellow);
-  box-shadow: 0 0 0 3px #fff;
-}
-.fa-tl time {
-  font: 700 13px/1 var(--f-head);
-  color: var(--blue);
-}
-.fa-tl p {
-  margin-top: 4px;
-  line-height: 1.5;
-}
-.fa-gal {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 28px;
-}
-.fa-gal a {
-  overflow: hidden;
-  border-radius: 20px;
-  aspect-ratio: 4/3;
-  background: var(--soft);
-}
-.fa-gal img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-.fa-gal a:hover img {
-  transform: scale(1.04);
-}
+
 .fa-back {
   display: flex;
   justify-content: center;
@@ -549,17 +317,12 @@
 }
 
 @media (max-width: 1100px) {
-  .fa-evs,
-  .fa-projs {
+  .fa-evs {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .fa-cols {
-    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 640px) {
-  .fa-evs,
-  .fa-projs {
+  .fa-evs {
     grid-template-columns: 1fr;
   }
   .fa-tools-r {
@@ -582,140 +345,9 @@
   .fa-up-date {
     font-size: 26px;
   }
-
-  .fa-gal {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .fa-ph-hero {
-    aspect-ratio: 4/3;
-  }
 }
 
-/* =====================================================================
-   Tanlangan variantlar + hali tanlanmagan sahifalar (yönaliş, loyiha) uçun VAQTINÇA B/C
-   ===================================================================== */
-
-/* ---- Yönaliş sahifasi B: mozaika ---- */
-.vb-split {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 32px;
-  align-items: stretch;
-}
-.vb-stats {
-  display: grid;
-  gap: 12px;
-  margin: 0;
-}
-.vb-stats div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 22px 26px;
-  border-radius: var(--r-thumb);
-  background: var(--soft);
-}
-.vb-stats div:first-child {
-  background: var(--navy);
-  color: #fff;
-}
-.vb-stats dd {
-  margin: 0;
-  font: 800 40px/1 var(--f-head);
-}
-.vb-stats dt {
-  margin-top: 6px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-.vb-mosaic {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 10px;
-  min-height: 380px;
-}
-.vb-mosaic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: var(--r-thumb);
-}
-.vb-mosaic img:first-child {
-  grid-row: 1 / 4;
-}
-.vb-prows {
-  display: grid;
-  gap: 12px;
-}
-.vb-prow {
-  display: grid;
-  grid-template-columns: 200px 1fr 30px;
-  gap: 22px;
-  align-items: center;
-  padding: 12px;
-  border-radius: var(--r-thumb);
-  box-shadow: 0 0 0 1px var(--line);
-  color: var(--grey);
-}
-.vb-prow:hover {
-  box-shadow: 0 0 0 1px var(--yellow);
-}
-.vb-prow img {
-  width: 100%;
-  aspect-ratio: 16/10;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.vb-prow > span {
-  display: grid;
-  gap: 6px;
-}
-.vb-prow small {
-  font: 700 12px/1 var(--f-head);
-  color: var(--blue);
-}
-.vb-prow strong {
-  font: 800 18px/1.3 var(--f-head);
-  color: var(--navy);
-}
-.vb-prow span span {
-  font-size: 14px;
-  line-height: 1.5;
-}
-.vb-elist {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--line);
-}
-.vb-elist a {
-  display: grid;
-  grid-template-columns: 160px 1fr 260px 20px;
-  gap: 18px;
-  align-items: baseline;
-  padding: 16px 6px;
-  border-bottom: 1px solid var(--line);
-  color: var(--grey);
-}
-.vb-elist a:hover {
-  background: var(--soft);
-}
-.vb-elist time {
-  font: 700 13px/1.3 var(--f-head);
-  color: var(--blue);
-}
-.vb-elist strong {
-  font: 700 15px/1.4 var(--f-head);
-  color: var(--navy);
-}
-.vb-elist span {
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* ---- Yönaliş sahifasi C: xronologiya ---- */
+/* ---------- Yönaliş sahifasi: xronologiya ---------- */
 .vc-split {
   display: grid;
   grid-template-columns: 1fr 340px;
@@ -825,7 +457,7 @@
   color: var(--muted);
 }
 
-/* ---- Loyihalar: jurnal (tanlangan) ---- */
+/* ---------- Loyihalar: jurnal ---------- */
 .vc-mag {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -891,76 +523,7 @@
   opacity: 0.85;
 }
 
-/* ---- Loyiha sahifasi B: yonma-yon ---- */
-.vb-proj {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 48px;
-  align-items: start;
-}
-.vb-proj-side {
-  position: sticky;
-  top: 110px;
-  display: grid;
-  gap: 18px;
-  padding: 16px;
-  border-radius: var(--r-thumb);
-  background: var(--soft);
-}
-.vb-proj-side img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.vb-proj-desc {
-  font-size: 17px;
-  line-height: 1.7;
-}
-.vb-res {
-  display: grid;
-  gap: 10px;
-  margin: 0 0 24px;
-  padding: 0;
-  list-style: none;
-  counter-reset: r;
-}
-.vb-res li {
-  position: relative;
-  padding: 16px 18px 16px 62px;
-  border-radius: var(--r-thumb);
-  box-shadow: 0 0 0 1px var(--line);
-  line-height: 1.55;
-  counter-increment: r;
-}
-.vb-res li::before {
-  content: counter(r);
-  position: absolute;
-  top: 14px;
-  left: 16px;
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--yellow);
-  font: 800 14px/1 var(--f-head);
-  color: var(--navy);
-}
-.vb-gal {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 24px;
-}
-.vb-gal img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-/* ---- Loyiha sahifasi C: hikoya ---- */
+/* ---------- Loyiha sahifasi: hikoya ---------- */
 .vc-banner {
   position: relative;
   overflow: hidden;
@@ -1070,7 +633,7 @@
   border-radius: 10px;
 }
 
-/* ---- Eʼlonlar: doska qatorlari (tanlangan) ---- */
+/* ---------- Eʼlonlar: doska ---------- */
 .vc-board {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1129,7 +692,7 @@
   color: var(--navy);
 }
 
-/* ---- Natijalar: panel (tanlangan) ---- */
+/* ---------- Natijalar: panel ---------- */
 .vb-dash {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -1219,16 +782,13 @@
   line-height: 1.55;
 }
 
-/* ---- Variantlar: planşet ---- */
+/* ---------- Planşet ---------- */
 @media (max-width: 1100px) {
-  .vb-split,
   .vc-split,
-  .vb-proj,
   .vb-dash {
     grid-template-columns: 1fr;
   }
-  .vc-aside,
-  .vb-proj-side {
+  .vc-aside {
     position: static;
   }
 
@@ -1238,30 +798,14 @@
   }
 }
 
-/* ---- Variantlar: telefon ---- */
+/* ---------- Telefon ---------- */
 @media (max-width: 640px) {
   .vc-mag,
   .vb-ycols,
   .vc-board {
     grid-template-columns: 1fr;
   }
-  .vb-mosaic {
-    min-height: 260px;
-  }
-  .vb-prow {
-    grid-template-columns: 1fr;
-  }
-  .vb-prow > span:last-child {
-    display: none;
-  }
 
-  .vb-elist a {
-    grid-template-columns: 1fr;
-    gap: 4px;
-  }
-  .vb-elist a > span:last-child {
-    display: none;
-  }
   .vc-tl section {
     padding-left: 22px;
   }
@@ -1292,7 +836,7 @@
   .vc-mag-big .vc-mag-t span {
     display: none;
   }
-  .vb-gal,
+
   .vc-mas {
     grid-template-columns: repeat(2, 1fr);
     columns: 2;
