@@ -27,7 +27,7 @@ export const EVENTS: Ev[] = [
     summary:
       'TDIU boşlanğiç taşkiloti hamkorligida Red Bull va universitet Kibersport klubi tomonidan turnir.',
     dir: 'sport-salomatlik',
-    img: '',
+    img: '/img/faoliyat/t/7036.webp',
   },
   {
     id: 7027,
@@ -113,7 +113,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Yoş harbiy xizmatçilar va kursantlar örtasidagi tanlov; ğolib va sovrindorlar taqdirlandi.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/6957.webp',
   },
   {
     id: 6947,
@@ -134,7 +134,7 @@ export const EVENTS: Ev[] = [
     type: 'yiğiliş',
     summary: 'Yangi yoşlar yetakçisi Jalilov Abdulvosidxonga işonç yorliği topşirildi.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/6929.webp',
   },
   {
     id: 6930,
@@ -210,7 +210,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Avstraliya, AQŞ, Kanada, Buyuk Britaniya va Irlandiyaning 20 ta universiteti vakillari bilan körgazma, IELTS vauçerlari.',
     dir: 'talim-kasb',
-    img: '',
+    img: '/img/faoliyat/t/6799.webp',
   },
   {
     id: 6798,
@@ -220,7 +220,7 @@ export const EVENTS: Ev[] = [
     type: 'maʼrifiy uçraşuv',
     summary: '“Jaholatga qarşi maʼrifat” loyihasi doirasida uçraşuv.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/6798.webp',
   },
   {
     id: 6784,
@@ -241,7 +241,7 @@ export const EVENTS: Ev[] = [
     type: 'uçraşuv',
     summary: 'Kengaş tomonidan oçiq eşiklar kuni va rahbar-yoşlar uçraşuvi ötkazildi.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/6779.webp',
   },
   {
     id: 6777,
@@ -251,7 +251,7 @@ export const EVENTS: Ev[] = [
     type: 'tarğibot tadbiri',
     summary: '“Yölovçi” loyihasi doirasida tarğibot tadbiri taşkil etildi.',
     dir: 'huquqiy-madaniyat',
-    img: '',
+    img: '/img/faoliyat/t/6777.webp',
   },
   {
     id: 6771,
@@ -262,7 +262,7 @@ export const EVENTS: Ev[] = [
     summary:
       '3-şaxmat paralimpiadasida bronza olgan terma jamoani OTT boşlanğiç taşkilotlari aʼzolari tantanali kutib oldi.',
     dir: 'sport-salomatlik',
-    img: '',
+    img: '/img/faoliyat/t/6771.webp',
   },
   {
     id: 6766,
@@ -273,7 +273,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Tadbirkor Şohruh Yusupov talabalar bilan muvaffaqiyat va kasb tanlaş haqida suhbat ötkazdi.',
     dir: 'talim-kasb',
-    img: '',
+    img: '/img/faoliyat/t/6766.webp',
   },
   {
     id: 6758,
@@ -325,7 +325,7 @@ export const EVENTS: Ev[] = [
     type: 'media loyiha',
     summary: 'Mustaqillikning 35 yilligiga bağişlangan körsatuvning 1-qismi (Sevara Tulanova).',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/6680.webp',
   },
   {
     id: 6677,
@@ -337,7 +337,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Mustaqillikning 35 yilligi munosabati bilan universitet jamoasi va talabalarga “Mustaqillik lentalari” ulaşildi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/6677.webp',
   },
   {
     id: 6638,
@@ -347,7 +347,7 @@ export const EVENTS: Ev[] = [
     type: 'davra suhbati',
     summary: '“Jasorat maktabi” öquv yiğinidagi Toşkent şahar yoşlari uçun davra suhbati.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/6638.webp',
   },
   {
     id: 6639,
@@ -444,7 +444,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Toşkent şahar Kengaşi va Mudofaa vazirligi qöşinlari qömondonligi hamkorligida yoş harbiylar forumi ötkazildi.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/6465.webp',
   },
   {
     id: 6439,
@@ -475,7 +475,7 @@ export const EVENTS: Ev[] = [
     type: 'oromgoh',
     summary: '1–3-iyul kunlari TDIU boşlanğiç taşkiloti aʼzolari uçun yozgi oromgoh bölib ötdi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/6479.webp',
   },
   {
     id: 6402,
@@ -538,7 +538,7 @@ export const EVENTS: Ev[] = [
     type: 'intellektual tanlov finali',
     summary: 'DXX çegara qöşinlari yoş harbiy xizmatçilari örtasida final ötkazildi.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/6324.webp',
   },
   {
     id: 6310,
@@ -559,7 +559,7 @@ export const EVENTS: Ev[] = [
     type: 'uçraşuv',
     summary: 'Yoşlar oyligi munosabati bilan HXMU hamkorligida uçraşuv ötkazildi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/6281.webp',
   },
   {
     id: 6266,
@@ -590,7 +590,7 @@ export const EVENTS: Ev[] = [
     type: 'xayriya aksiyasi',
     summary: 'Toşkent OTTlari Yoşlar Kengaşi aʼzolari xayriya aksiyasida iştirok etdi.',
     dir: 'volontyorlik',
-    img: '',
+    img: '/img/faoliyat/t/6243.webp',
   },
   {
     id: 6219,
@@ -704,7 +704,7 @@ export const EVENTS: Ev[] = [
     type: 'taşrif',
     summary: 'Kengaşning faol aʼzolari va volontyorlari Senat binosiga taşrif buyurdi.',
     dir: 'volontyorlik',
-    img: '',
+    img: '/img/faoliyat/t/6013.webp',
   },
   {
     id: 5971,
@@ -756,7 +756,7 @@ export const EVENTS: Ev[] = [
     type: 'musobaqa',
     summary: 'Musobaqaning Toşkent şahar bosqiçi ötkazildi.',
     dir: 'volontyorlik',
-    img: '',
+    img: '/img/faoliyat/t/5918.webp',
   },
   {
     id: 5882,
@@ -863,7 +863,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Soğlom turmuş tarzi va harbiy-amaliy sportga qiziqişni oşiriş maqsadida musobaqa ötkazildi.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/5711.webp',
   },
   {
     id: 5692,
@@ -915,7 +915,7 @@ export const EVENTS: Ev[] = [
     type: 'xayriya aksiyasi',
     summary: 'Imkoniyati çeklangan va ijtimoiy himoyaga muhtoj talabalar uçun aksiya ötkazildi.',
     dir: 'volontyorlik',
-    img: '',
+    img: '/img/faoliyat/t/5627.webp',
   },
   {
     id: 5626,
@@ -926,7 +926,7 @@ export const EVENTS: Ev[] = [
     summary:
       'TSTU va Toşkent farmatsevtika instituti boşlanğiç taşkilotlari 13–14-mart umumxalq xayriya haşarida faol qatnaşdi.',
     dir: 'volontyorlik',
-    img: '',
+    img: '/img/faoliyat/t/5626.webp',
   },
   {
     id: 5615,
@@ -1128,7 +1128,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Kengaş taşabbusi bilan Toşkent OTTlaridagi Yoşlar yetakçilari va koordinatorlari markazga taşrif buyurdi.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/5196.webp',
   },
   {
     id: 5166,
@@ -1223,7 +1223,7 @@ export const EVENTS: Ev[] = [
     summary:
       'ÖzMU boşlanğiç taşkiloti milliy qadriyatlarni tarğib etiş uçun Milliy karaoke taşkil etdi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/4778.webp',
   },
   {
     id: 4760,
@@ -1275,7 +1275,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Ikki kunlik festival: kitob taqdimotlari, adiblar bilan uçraşuvlar, adabiy viktorina, yopilişda rahbarlar iştirok etdi.',
     dir: 'intellektual',
-    img: '',
+    img: '/img/faoliyat/t/4684.webp',
   },
   {
     id: 4665,
@@ -1296,7 +1296,7 @@ export const EVENTS: Ev[] = [
     type: 'uçraşuv',
     summary: 'Talabalar fikrini örganiş uçun kurs qömitalarini şakllantiriş doirasida uçraşuv.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/4615.webp',
   },
   {
     id: 4620,
@@ -1349,7 +1349,7 @@ export const EVENTS: Ev[] = [
     type: 'konsert',
     summary: 'Yoşlar oyligi doirasida talabalar uçun konsert.',
     dir: 'ijod-turizm',
-    img: '',
+    img: '/img/faoliyat/t/4524.webp',
   },
   {
     id: 4522,
@@ -1359,7 +1359,7 @@ export const EVENTS: Ev[] = [
     type: 'bayram tadbiri',
     summary: 'Xalqaro talabalar kuni munosabati bilan talabalar uçun bayram tadbiri.',
     dir: 'ijod-turizm',
-    img: '',
+    img: '/img/faoliyat/t/4522.webp',
   },
   {
     id: 4490,
@@ -1519,7 +1519,7 @@ export const EVENTS: Ev[] = [
     summary:
       'OTT boşlanğiç taşkilotlari Yoşlar yetakçisi lavozimi uçun eng munosib nomzodlar saralandi (23–24-sentabr).',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/4172.webp',
   },
   {
     id: 4155,
@@ -1551,7 +1551,7 @@ export const EVENTS: Ev[] = [
     type: 'tantanali tadbir',
     summary: 'Yangi talabalarga ramziy “Bilimlar kaliti” va talabalik guvohnomalari topşirildi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/4137.webp',
   },
   {
     id: 4086,
@@ -1584,7 +1584,7 @@ export const EVENTS: Ev[] = [
     summary:
       '“Dolzarb 90 kun” doirasida talabalar örtasida Zakovat Quiz; ğoliblarga esdalik sovğalari.',
     dir: 'intellektual',
-    img: '',
+    img: '/img/faoliyat/t/4052.webp',
   },
   {
     id: 4057,
@@ -1595,7 +1595,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Turkiyaning 25 dan ortiq universiteti vakillari bilan bepul uçraşuvlar, grant va qabul böyiça maslahatlar.',
     dir: 'talim-kasb',
-    img: '',
+    img: '/img/faoliyat/t/4057.webp',
   },
   {
     id: 4026,
@@ -1617,7 +1617,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Asilbek Murtazayev, Otabek Mahkamov va Zohidjon Ataxonov yetakçilar bilan muloqot qildi; seminar-treninglar va futbol.',
     dir: 'sport-salomatlik',
-    img: '',
+    img: '/img/faoliyat/t/4011.webp',
   },
   {
     id: 4018,
@@ -1628,7 +1628,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Barça OTT boşlanğiç taşkilot yetakçilari uçun 3 kunlik öquv-seminar va uçraşuvlar; faol yetakçilar sertifikat bilan taqdirlandi.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/4018.webp',
   },
   {
     id: 3974,
@@ -1639,7 +1639,7 @@ export const EVENTS: Ev[] = [
     summary:
       'INHA boşlanğiç taşkiloti TTYSI vakillarini kutib oldi; qöşma loyihalar va ilmiy almaşinuv muhokama qilindi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/3974.webp',
   },
   {
     id: 3954,
@@ -1995,7 +1995,7 @@ export const EVENTS: Ev[] = [
     type: 'körik-tanlov',
     summary: '3 şartdan iborat bellaşuvda bilim, ijodkorlik va pazandalik sinaldi.',
     dir: 'ijod-turizm',
-    img: '',
+    img: '/img/faoliyat/t/3121.webp',
   },
   {
     id: 3075,
@@ -2005,7 +2005,7 @@ export const EVENTS: Ev[] = [
     type: 'oçiq eşiklar kuni',
     summary: 'Mehmonlarga sayohat va xizmat itlari iştirokida körgazmali çiqişlar.',
     dir: 'ijod-turizm',
-    img: '',
+    img: '/img/faoliyat/t/3075.webp',
   },
   {
     id: 3050,
@@ -2206,7 +2206,7 @@ export const EVENTS: Ev[] = [
     summary:
       '110 nafar sovrindor orasida Toşkent şahar Kengaşida faoliyat yurituvçi 3 nafar yetakçi va xodim bor.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/2512.webp',
   },
   {
     id: 2499,
@@ -2228,7 +2228,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Kengaş raisi Şukurulloxon Anvarov va rektor Muzaffar Komilov sovrindor talabalarga diplom va sovğalar topşirdi.',
     dir: 'manaviyat-kitobxonlik',
-    img: '',
+    img: '/img/faoliyat/t/2498.webp',
   },
   {
     id: 2478,
@@ -2293,7 +2293,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Öquvçilar “Bolalar harakati” maktab sardorlari saylovlariga tayyorligini bildirdi. Sana post sanasi.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/2217.webp',
   },
   {
     id: 2187,
@@ -2359,7 +2359,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Narkotiklarning noqonuniy aylanişiga qarşi kuraş mavzusida sessiyalar; nominatsiya ğoliblari taqdirlandi. Sana post sanasi.',
     dir: 'talim-kasb',
-    img: '',
+    img: '/img/faoliyat/t/1628.webp',
   },
   {
     id: 1533,
@@ -2444,7 +2444,7 @@ export const EVENTS: Ev[] = [
     summary:
       '“Ekologiya” yönalişi sardorlari boğda 33 kg çiqindi töpladi; loyiha har haftada ötkaziladi.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/1318.webp',
   },
   {
     id: 1228,
@@ -2486,7 +2486,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Taʼsis yiğilişi ötkazildi, qöşma qaror imzolandi va yoşlar yetakçisi saylandi. Sana post sanasi.',
     dir: 'yetakchilik',
-    img: '',
+    img: '/img/faoliyat/t/1132.webp',
   },
   {
     id: 1133,
@@ -2625,7 +2625,7 @@ export const EVENTS: Ev[] = [
     summary:
       'Vatan himoyaçilari kuni munosabati bilan namunali faoliyat yuritayotgan maktab va şahar sardorlari uçun sayohat.',
     dir: 'harbiy-vatanparvarlik',
-    img: '',
+    img: '/img/faoliyat/t/673.webp',
   },
   {
     id: 586,
