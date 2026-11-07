@@ -222,7 +222,6 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
                     <details className="hk-duty">
                       <summary>
                         <span className="hk-duty-l">Vazifalari</span>
-                        <em>{m.duties.length}</em>
                         <span className="hk-duty-ic" aria-hidden="true">
                           +
                         </span>
