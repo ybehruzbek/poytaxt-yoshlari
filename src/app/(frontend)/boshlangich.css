@@ -95,15 +95,41 @@
 .bt-chips button.on span {
   background: rgba(255, 255, 255, 0.16);
 }
+.bt-search {
+  position: relative;
+  display: block;
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+/* lupa belgisi — maydon qidiruv ekani darhol körinsin */
+.bt-search-ic {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  pointer-events: none;
+}
 .bt-search input {
-  width: min(320px, 100%);
-  height: 46px;
-  border: 1px solid var(--line);
+  width: 100%;
+  height: 48px;
+  border: 1.5px solid color-mix(in srgb, var(--navy) 16%, transparent);
   border-radius: 99px;
   background: #fff;
-  padding: 0 20px;
+  padding: 0 18px 0 44px;
   font: 500 15px var(--f-body);
   color: var(--navy);
+}
+.bt-search input::placeholder {
+  color: var(--muted);
+}
+.bt-search input:hover {
+  border-color: var(--yellow);
 }
 .bt-search input:focus {
   outline: none;

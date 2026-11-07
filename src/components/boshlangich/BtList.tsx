@@ -191,11 +191,15 @@ export function BtList({ otms, view = 'a', base }: { otms: Otm[]; view?: View; b
         </div>
         <label className="bt-search">
           <span className="sr-only">Qidiruv</span>
+          <svg className="bt-search-ic" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-4-4" />
+          </svg>
           <input
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="OTT yoki yetakçi nomi"
+            placeholder="Qidiruv: OTT yoki yetakçi nomi"
           />
         </label>
       </div>
