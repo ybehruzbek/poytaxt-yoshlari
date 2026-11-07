@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
 
 import { AboutB, AboutC, ReceptionB, ReceptionC } from './AltHkOne'
-import { AppealB, AppealC, ContactB, ContactC, OrgsB, OrgsC, ShotsB, ShotsC } from './AltHkTwo'
+import { AppealB, AppealC, ContactB, ContactC } from './AltHkTwo'
 
 /**
  * VAQTINCHA: bölimlar B/C variantlari reestri. Kalit: «{bölim}-{b|c}».
@@ -14,10 +14,6 @@ export const HkVariants: Record<string, ComponentType<{ L: (h: string) => string
   'hqa-c': ReceptionC,
   'hmu-b': AppealB,
   'hmu-c': AppealC,
-  'hbo-b': OrgsB,
-  'hbo-c': OrgsC,
-  'hla-b': ShotsB,
-  'hla-c': ShotsC,
   'hal-b': ContactB,
   'hal-c': ContactC,
 }

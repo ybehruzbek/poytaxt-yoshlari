@@ -16,9 +16,7 @@ import {
   DEPTS,
   IMG,
   INTRO,
-  ORGS,
   RECEPTION,
-  SHOTS,
   TASKS,
 } from './data'
 import { HkVariants } from './variants'
@@ -45,8 +43,6 @@ const PANEL: PanelSection[] = [
   ['hjm', 'Jamoa'],
   ['hqa', 'Qabul kunlari'],
   ['hmu', 'Murojaat tartibi'],
-  ['hbo', 'Boşlanğiç taşkilotlar'],
-  ['hla', 'Tadbirlardan lavhalar'],
   ['hal', 'Aloqa'],
 ].map(([name, label]) => ({ name, label, count: 3 }))
 
@@ -135,7 +131,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 /**
  * «Toşkent şahar hududiy Kengaşi» sahifasi (mazmun: components/hududiy/data.ts):
  * hero, Kengaş haqida, rais, apparat tuzilmasi, jamoa, qabul jadvali, murojaat tartibi,
- * boşlanğiç taşkilotlar, tadbirlardan lavhalar, aloqa.
+ * aloqa.
  */
 export function HududiyPage({ L, crumbs, siblings }: P) {
   const sections: Record<string, ReactNode> = {
@@ -297,58 +293,6 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
                 </span>
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-    ),
-    hbo: (
-      <section className="sec hk-org-sec">
-        <div className="wrap">
-          <div className="hk-org">
-            <div>
-              <h2 className="h2">Oliy taʼlimdagi boşlanğiç taşkilotlar</h2>
-              <p className="hk-basis">{ORGS.basis}</p>
-              <div className="hk-org-num">
-                <b>{ORGS.total.v}</b>
-                <span>{ORGS.total.l}</span>
-              </div>
-              <div className="hk-org-split">
-                {ORGS.split.map((x) => (
-                  <div key={x.l}>
-                    <b>{x.v}</b>
-                    <span>{x.l}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <h3>Hududiy Kengaşga yuklatilgan vazifalar</h3>
-              <ol className="hk-org-tasks">
-                {ORGS.tasks.map((x, i) => (
-                  <li key={x}>
-                    <span>{pad(i)}</span>
-                    <p>{x}</p>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </div>
-      </section>
-    ),
-    hla: (
-      <section className="sec">
-        <div className="wrap">
-          <div className="sec-head">
-            <h2 className="h2">Tadbirlardan lavhalar</h2>
-          </div>
-          <div className="hk-shots">
-            {SHOTS.map((s) => (
-              <figure key={s.img}>
-                <img src={s.img} alt={s.t} loading="lazy" />
-                <figcaption>{s.t}</figcaption>
-              </figure>
-            ))}
           </div>
         </div>
       </section>

@@ -1,23 +1,12 @@
-/* eslint-disable @next/next/no-img-element -- Kengaş axborot xizmati suratlari; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
 
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { APPEAL_LAW, APPEAL_NOTE, APPEAL_STEPS, CONTACT, ORGS, SHOTS } from './data'
+import { APPEAL_LAW, APPEAL_NOTE, APPEAL_STEPS, CONTACT } from './data'
 
 type P = { L: (h: string) => string }
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
-const total = Number(ORGS.total.v)
-const share = (v: string) => (Number(v) / total) * 100
-const SPLIT_COLORS = ['var(--yellow)', 'var(--blue)', 'var(--sky)']
-/** halqa diagramma uçun conic-gradient bosqiçlari */
-const RING_STOPS = ORGS.split
-  .map((x, i) => {
-    const from = ORGS.split.slice(0, i).reduce((a, y) => a + share(y.v), 0)
-    return `${SPLIT_COLORS[i]} ${from}% ${from + share(x.v)}%`
-  })
-  .join(', ')
 
 function ArrowBtn({ href, children }: { href: string; children: string }) {
   return (
@@ -99,144 +88,6 @@ export function AppealC({ L }: P) {
             <ArrowBtn href={L('/boglanish/murojaat')}>Onlayn murojaat</ArrowBtn>
             <p>{APPEAL_LAW}</p>
           </aside>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ---------- Boşlanğiç taşkilotlar ---------- */
-
-/** B: katta 97 va 32/42/23 uluşini körsatuvçi proporsional çiziq, vazifalar qator kartalarda */
-export function OrgsB(_: P) {
-  return (
-    <section className="sec">
-      <div className="wrap">
-        <div className="z2-ob-top">
-          <div>
-            <h2 className="h2">Oliy taʼlimdagi boşlanğiç taşkilotlar</h2>
-            <p className="z2-basis">{ORGS.basis}</p>
-          </div>
-          <div className="z2-ob-num">
-            <b>{ORGS.total.v}</b>
-            <span>{ORGS.total.l}</span>
-          </div>
-        </div>
-        <div className="z2-ob-bar">
-          {ORGS.split.map((x, i) => (
-            <div
-              key={x.l}
-              style={{ flexGrow: Number(x.v), background: SPLIT_COLORS[i] }}
-              className={`z2-ob-seg z2-ob-seg${i}`}
-            >
-              <b>{x.v}</b>
-              <span>{x.l}</span>
-            </div>
-          ))}
-        </div>
-        <h3 className="z2-ob-h3">Hududiy Kengaşga yuklatilgan vazifalar</h3>
-        <ol className="z2-ob-tasks">
-          {ORGS.tasks.map((x, i) => (
-            <li key={x}>
-              <span>{pad(i)}</span>
-              <p>{x}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
-
-/** C: töq karta — halqa diagramma markazida 97, öngda vazifalar röyxati */
-export function OrgsC(_: P) {
-  return (
-    <section className="sec">
-      <div className="wrap">
-        <div className="z2-oc">
-          <div className="z2-oc-left">
-            <div className="z2-oc-ring" style={{ background: `conic-gradient(${RING_STOPS})` }}>
-              <div>
-                <b>{ORGS.total.v}</b>
-                <span>{ORGS.total.l}</span>
-              </div>
-            </div>
-            <ul className="z2-oc-legend">
-              {ORGS.split.map((x, i) => (
-                <li key={x.l}>
-                  <i style={{ background: SPLIT_COLORS[i] }} />
-                  <b>{x.v}</b>
-                  {x.l}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="h2">Oliy taʼlimdagi boşlanğiç taşkilotlar</h2>
-            <p className="z2-oc-basis">{ORGS.basis}</p>
-            <h3>Hududiy Kengaşga yuklatilgan vazifalar</h3>
-            <ol className="z2-oc-tasks">
-              {ORGS.tasks.map((x, i) => (
-                <li key={x}>
-                  <span>{pad(i)}</span>
-                  <p>{x}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ---------- Tadbirlardan lavhalar ---------- */
-
-/** B: gorizontal aylantiriladigan lenta (scroll-snap), raqamli izohlar */
-export function ShotsB(_: P) {
-  const n = String(SHOTS.length).padStart(2, '0')
-  return (
-    <section className="sec z2-sb-sec">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 className="h2">Tadbirlardan lavhalar</h2>
-          <span className="z2-sb-count">
-            {SHOTS.length} <small>lavha</small>
-          </span>
-        </div>
-        <div className="z2-sb">
-          {SHOTS.map((s, i) => (
-            <figure key={s.img}>
-              <img src={s.img} alt={s.t} loading="lazy" />
-              <figcaption>
-                <span>
-                  {pad(i)} / {n}
-                </span>
-                {s.t}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C: mozaika — turli ölçamdagi suratlar, izohlar surat ustida */
-export function ShotsC(_: P) {
-  return (
-    <section className="sec z2-sc-sec">
-      <div className="wrap">
-        <div className="sec-head">
-          <h2 className="h2">Tadbirlardan lavhalar</h2>
-        </div>
-        <div className="z2-sc">
-          {SHOTS.map((s, i) => (
-            <figure key={s.img} className={`z2-sc-${i}`}>
-              <img src={s.img} alt={s.t} loading="lazy" />
-              <figcaption>{s.t}</figcaption>
-            </figure>
-          ))}
         </div>
       </div>
     </section>

@@ -242,25 +242,6 @@ export const APPEAL_NOTE =
 export const APPEAL_LAW =
   '«Jismoniy va yuridik şaxslarning murojaatlari töğrisida»gi Qonun (ÖRQ-445-son, 11.09.2017)'
 
-/** Boşlanğiç taşkilotlar: Vazirlik va Ittifoq Markaziy Kengaşining 2023-yil 29-martdagi qöşma qarori */
-export const ORGS = {
-  basis:
-    'Oliy taʼlim, fan va innovatsiyalar vazirligi hamda Ittifoq Markaziy Kengaşining 2023-yil 29-martdagi qöşma qarori asosida',
-  total: { v: '97', l: 'oliy taʼlim taşkiloti poytaxtda faoliyat yuritadi' },
-  split: [
-    { v: '32', l: 'davlat' },
-    { v: '42', l: 'nodavlat' },
-    { v: '23', l: 'xorijiy va filial' },
-  ],
-  tasks: [
-    'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştirib boradi',
-    'Taşkilotlarga vazifalarini lozim darajada bajarişi uçun uslubiy kömaklaşadi',
-    'Muammolarni hal qiliş uçun idoralararo hamkorlikni taʼminlaydi',
-    'Oliy taʼlim muassasalariga çiqib, işlarni joyida örganib boradi',
-    'Namunali yetakçilarni «Özbekiston belgisi» kökrak nişoni bilan taqdirlaşga tavsiya etadi',
-  ],
-}
-
 export type Shot = { t: string; img: string }
 
 /** Tadbirlardan lavhalar (Kengaş axborot xizmati suratlari) */
