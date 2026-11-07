@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
+import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
 import {
@@ -20,8 +21,33 @@ import {
   SHOTS,
   STATS,
 } from './data'
+import { HkVariants } from './variants'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
+
+/** VAQTINCHA: bölimlar variantlari faqat işlab çiqiş rejimida */
+const DEV = process.env.NODE_ENV !== 'production'
+
+function V({ name, k, children }: { name: string; k: string; children: ReactNode }) {
+  if (!DEV) return <>{children}</>
+  return (
+    <div className="vx" data-v={`${name}-${k}`}>
+      {children}
+    </div>
+  )
+}
+
+const PANEL: PanelSection[] = [
+  ['hab', 'Kengaş haqida'],
+  ['hra', 'Rais'],
+  ['hap', 'Apparat tuzilmasi'],
+  ['hja', 'Apparat jamoasi'],
+  ['hqa', 'Qabul kunlari'],
+  ['hmu', 'Murojaat tartibi'],
+  ['hbo', 'Boşlanğiç taşkilotlar'],
+  ['hla', 'Tadbirlardan lavhalar'],
+  ['hal', 'Aloqa'],
+].map(([name, label]) => ({ name, label, count: 3 }))
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -33,29 +59,8 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 export function HududiyPage({ L, crumbs, siblings }: P) {
   const staff = DEPTS.flatMap((d) => d.staff.map((s) => ({ ...s, dept: d.short, room: d.room })))
 
-  return (
-    <div className="it hk">
-      <section className="it-hero" data-head-dark>
-        <img src={IMG.hero} alt="" />
-        <div className="wrap">
-          <div className="it-crumbs">{crumbs}</div>
-          <h1 className="h1">Toşkent şahar hududiy Kengaşi</h1>
-          <p className="lead">{INTRO}</p>
-          <div className="it-btns">
-            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Murojaat yuboriş{' '}
-              <span className="ic">
-                <Arrow />
-              </span>
-            </Link>
-            <a href="#qabul" className="btn btn-ghost">
-              Qabul jadvali
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Kengaş haqida */}
+  const sections: Record<string, ReactNode> = {
+    hab: (
       <section className="sec">
         <div className="wrap">
           <div className="it-who">
@@ -79,8 +84,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Rais */}
+    ),
+    hra: (
       <section className="sec hk-chair-sec">
         <div className="wrap">
           <div className="hk-chair">
@@ -112,8 +117,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Apparat tuzilmasi */}
+    ),
+    hap: (
       <section className="sec">
         <div className="wrap">
           <div className="sec-head">
@@ -142,8 +147,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Jamoa */}
+    ),
+    hja: (
       <section className="sec hk-team-sec">
         <div className="wrap">
           <div className="sec-head">
@@ -163,8 +168,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Qabul jadvali */}
+    ),
+    hqa: (
       <section className="sec" id="qabul">
         <div className="wrap">
           <div className="sec-head">
@@ -187,8 +192,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </ol>
         </div>
       </section>
-
-      {/* Murojaat tartibi */}
+    ),
+    hmu: (
       <section className="sec">
         <div className="wrap">
           <div className="hk-app">
@@ -225,8 +230,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Boşlanğiç taşkilotlar */}
+    ),
+    hbo: (
       <section className="sec hk-org-sec">
         <div className="wrap">
           <div className="hk-org">
@@ -260,8 +265,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Tadbirlardan lavhalar */}
+    ),
+    hla: (
       <section className="sec">
         <div className="wrap">
           <div className="sec-head">
@@ -277,8 +282,8 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
-
-      {/* Aloqa */}
+    ),
+    hal: (
       <section className="sec">
         <div className="wrap">
           <div className="hk-con">
@@ -327,10 +332,52 @@ export function HududiyPage({ L, crumbs, siblings }: P) {
           </div>
         </div>
       </section>
+    ),
+  }
+
+  return (
+    <div className="it hk">
+      <section className="it-hero" data-head-dark>
+        <img src={IMG.hero} alt="" />
+        <div className="wrap">
+          <div className="it-crumbs">{crumbs}</div>
+          <h1 className="h1">Toşkent şahar hududiy Kengaşi</h1>
+          <p className="lead">{INTRO}</p>
+          <div className="it-btns">
+            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
+              Murojaat yuboriş{' '}
+              <span className="ic">
+                <Arrow />
+              </span>
+            </Link>
+            <a href="#qabul" className="btn btn-ghost">
+              Qabul jadvali
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {PANEL.map(({ name }) => (
+        <div key={name} style={{ display: 'contents' }}>
+          <V name={name} k="a">
+            {sections[name]}
+          </V>
+          {DEV &&
+            (['b', 'c'] as const).map((k) => {
+              const C = HkVariants[`${name}-${k}`]
+              return C ? (
+                <V key={k} name={name} k={k}>
+                  <C L={L} />
+                </V>
+              ) : null
+            })}
+        </div>
+      ))}
 
       <section className="sec">
         <div className="wrap">{siblings}</div>
       </section>
+      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }

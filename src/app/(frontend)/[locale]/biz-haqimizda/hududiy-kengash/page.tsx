@@ -8,6 +8,8 @@ import type { Locale } from '@/i18n/config'
 import '../../../ittifoq.css'
 import '../../../kengash.css'
 import '../../../hududiy.css'
+import '../../../hududiy-alt1.css'
+import '../../../hududiy-alt2.css'
 
 export const metadata: Metadata = {
   title: 'Toşkent şahar hududiy Kengaşi — Özbekiston yoşlar ittifoqi',
