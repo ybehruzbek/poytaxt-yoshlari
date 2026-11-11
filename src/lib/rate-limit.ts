@@ -1,5 +1,5 @@
 /**
- * Murojaat shakli uchun spam cheklovi va ishonchli mijoz IP'si (server tomonida ishlatiladi).
+ * Murojaat shakli va matndagi xato xabarlari uchun spam cheklovi va ishonchli mijoz IP'si (server tomonida ishlatiladi).
  *
  *  - Bitta IP'dan 10 daqiqada 5 tadan ortiq murojaat qabul qilinmaydi.
  *  - IP'dan qat'i nazar, butun sayt bo'yicha 10 daqiqada 60 tadan ortiq murojaat qabul qilinmaydi
@@ -10,41 +10,52 @@
  *  xotira (masalan, Redis INCR + EXPIRE) kerak bo'ladi.
  */
 const WINDOW = 10 * 60 * 1000
-const LIMIT = 5
-const GLOBAL_LIMIT = 60
 const MAX_KEYS = 10_000
-const hits = new Map<string, number[]>()
-let globalHits: number[] = []
-let lastSweep = 0
 
-function sweep(now: number) {
-  for (const [k, ts] of hits) {
+/** Har bir funksiya öz hisoblagiçi bilan — biri ikkinçisining limitini egallab qöya olmaydi */
+type Bucket = {
+  limit: number
+  global: number
+  hits: Map<string, number[]>
+  all: number[]
+  lastSweep: number
+}
+const BUCKETS: Record<string, Bucket> = {}
+const bucket = (scope: string, limit: number, global: number) =>
+  (BUCKETS[scope] ??= { limit, global, hits: new Map(), all: [], lastSweep: 0 })
+
+function sweep(b: Bucket, now: number) {
+  for (const [k, ts] of b.hits) {
     const recent = ts.filter((t) => now - t < WINDOW)
-    if (recent.length) hits.set(k, recent)
-    else hits.delete(k)
+    if (recent.length) b.hits.set(k, recent)
+    else b.hits.delete(k)
   }
-  lastSweep = now
+  b.lastSweep = now
 }
 
-export function rateLimited(ip: string): boolean {
+/**
+ * @param scope   funksiya nomi: 'appeal' (murojaatlar: 5 / 60), 'text-error' (matndagi xato: 10 / 120)
+ */
+export function rateLimited(ip: string, scope: 'appeal' | 'text-error' = 'appeal'): boolean {
+  const b = scope === 'appeal' ? bucket(scope, 5, 60) : bucket(scope, 10, 120)
   const now = Date.now()
 
   // 1) umumiy chegara — IP'ga bog'liq emas
-  globalHits = globalHits.filter((t) => now - t < WINDOW)
-  if (globalHits.length >= GLOBAL_LIMIT) return true
+  b.all = b.all.filter((t) => now - t < WINDOW)
+  if (b.all.length >= b.global) return true
 
   // 2) muddati o'tganlarnigina tozalaymiz; faol hisoblagichlarga tegmaymiz
-  if (now - lastSweep > WINDOW || hits.size >= MAX_KEYS) sweep(now)
-  if (hits.size >= MAX_KEYS && !hits.has(ip)) return true // joy yo'q — yangi kalit rad etiladi
+  if (now - b.lastSweep > WINDOW || b.hits.size >= MAX_KEYS) sweep(b, now)
+  if (b.hits.size >= MAX_KEYS && !b.hits.has(ip)) return true // joy yo'q — yangi kalit rad etiladi
 
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW)
-  if (recent.length >= LIMIT) {
-    hits.set(ip, recent)
+  const recent = (b.hits.get(ip) ?? []).filter((t) => now - t < WINDOW)
+  if (recent.length >= b.limit) {
+    b.hits.set(ip, recent)
     return true
   }
   recent.push(now)
-  hits.set(ip, recent)
-  globalHits.push(now)
+  b.hits.set(ip, recent)
+  b.all.push(now)
   return false
 }
 

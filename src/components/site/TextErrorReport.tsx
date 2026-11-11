@@ -15,6 +15,7 @@ export function TextErrorReport() {
   const [comment, setComment] = useState('')
   const [state, setState] = useState<{ ok: boolean; message: string } | null>(null)
   const [pending, setPending] = useState(false)
+  const trap = useRef<HTMLInputElement>(null)
   const dlg = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -40,7 +41,12 @@ export function TextErrorReport() {
   const send = async () => {
     if (!sel) return
     setPending(true)
-    const res = await reportTextError({ ...sel, comment, page: location.pathname })
+    const res = await reportTextError({
+      ...sel,
+      comment,
+      page: location.pathname,
+      website: trap.current?.value,
+    })
     setPending(false)
     setState(res)
   }
@@ -53,6 +59,14 @@ export function TextErrorReport() {
         onSubmit={(e) => (e.preventDefault(), state?.ok ? dlg.current?.close() : send())}
       >
         <h2 id="te-h">Matndagi xato</h2>
+        <input
+          ref={trap}
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="te-trap"
+        />
         {state?.ok ? (
           <p className="te-ok" role="status">
             {state.message}
