@@ -1,7 +1,10 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import { CENTRES, CITY_CENTRE, PALACE } from './data'
+import { ShowMore } from './ShowMore'
 
 const REGIONAL = CENTRES.slice(1)
+/** Dastlab Buxoro viloyatigaça körinadi, qolganlari tugma bilan oçiladi */
+const FIRST = REGIONAL.findIndex((c) => c.region.startsWith('Buxoro')) + 1
 
 function Head() {
   return (
@@ -33,7 +36,7 @@ export function CentresB() {
             </ul>
           </div>
         </article>
-        <div className="icb-grid">
+        <div className="icb-grid" id="markazlar-royxat">
           <article className="icb-city">
             <img src={CITY_CENTRE.img} alt={`${CITY_CENTRE.name} binosi`} />
             <div>
@@ -42,8 +45,8 @@ export function CentresB() {
               <p>{CITY_CENTRE.text}</p>
             </div>
           </article>
-          {REGIONAL.map((c) => (
-            <figure key={c.region} className="icb-card">
+          {REGIONAL.map((c, i) => (
+            <figure key={c.region} className={i < FIRST ? 'icb-card' : 'icb-card icb-more'}>
               <img src={c.img} alt={`${c.region} Yoşlar markazi binosi`} />
               <figcaption>
                 <b>{c.region}</b>
@@ -52,6 +55,7 @@ export function CentresB() {
             </figure>
           ))}
         </div>
+        {REGIONAL.length > FIRST && <ShowMore target="markazlar-royxat" count={REGIONAL.length - FIRST} noun="markaz" />}
       </div>
     </section>
   )

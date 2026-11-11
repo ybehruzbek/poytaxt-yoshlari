@@ -1,0 +1,24 @@
+/* Yoşlar markazlari: dastlab Buxoro viloyatigaça, qolganlari “Yana … körsatiş” tugmasi bilan */
+.icb-grid:not([data-open]) .icb-more {
+  display: none;
+}
+.icb-grid[data-open] .icb-more {
+  animation: icb-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.icb-grid[data-open] .icb-more:nth-child(3n + 2) {
+  animation-delay: 60ms;
+}
+.icb-grid[data-open] .icb-more:nth-child(3n) {
+  animation-delay: 120ms;
+}
+@keyframes icb-in {
+  from {
+    opacity: 0;
+    translate: 0 30px;
+  }
+}
+.it-more-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
