@@ -114,12 +114,8 @@
   color: var(--muted);
 }
 .z5-card-txt > small {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  margin-top: 2px;
+  display: block;
+  margin-top: 4px;
   font-size: 13px;
   line-height: 1.45;
   color: var(--muted);
@@ -655,12 +651,15 @@
   padding: 20px 20px 4px;
   flex: 1;
 }
+.kc-txt .kv-rec {
+  order: 4;
+  margin-top: 6px;
+}
 .kc-tag {
-  padding: 5px 10px;
-  border-radius: 99px;
-  background: var(--soft);
-  font: 700 11.5px/1.2 var(--f-head);
-  color: var(--navy);
+  order: 3;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--muted);
 }
 .kc-txt h3 {
   margin-top: 4px;
@@ -727,8 +726,10 @@
   color: var(--muted);
 }
 .kd-txt > p span {
-  color: var(--navy);
-  font-weight: 600;
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.4;
 }
 .kd-meta {
   display: flex;
@@ -833,7 +834,8 @@
   border-bottom: 2px solid var(--yellow);
 }
 .kf-group h2 {
-  font: 800 22px/1.2 var(--f-head);
+  max-width: 900px;
+  font: 800 20px/1.3 var(--f-head);
   color: var(--navy);
 }
 .kf-group header span {

@@ -170,7 +170,7 @@ function Card({ m, id }: { m: Member; id: string }) {
       <div className="z5-card-txt">
         <Name n={m.name} />
         <p>{m.role}</p>
-        {m.deptShort && <small title={m.dept}>{m.deptShort}</small>}
+        {m.dept && <small>{m.dept}</small>}
         <Reach m={m}>
           <Duties m={m} id={id} />
         </Reach>
@@ -208,7 +208,7 @@ function CardPortrait({ m, id }: { m: Member; id: string }) {
         <img src={m.img} alt={m.name} loading="lazy" />
       </div>
       <div className="kc-txt">
-        {m.deptShort && <span className="kc-tag">{m.deptShort}</span>}
+        {m.dept && <span className="kc-tag">{m.dept}</span>}
         <Name n={m.name} />
         <p>{m.role}</p>
         <Rec m={m} />
@@ -227,7 +227,7 @@ function CardRow({ m, id }: { m: Member; id: string }) {
         <Name n={m.name} />
         <p>
           {m.role}
-          {m.deptShort && <span> · {m.deptShort}</span>}
+          {m.dept && <span>{m.dept}</span>}
         </p>
         <div className="kd-meta">
           <Rec m={m} />
@@ -245,7 +245,7 @@ function CardDark({ m, id }: { m: Member; id: string }) {
       <div className="ke-txt">
         <span className="ke-role">{m.role}</span>
         <Name n={m.name} />
-        {m.deptShort && <small>{m.deptShort}</small>}
+        {m.dept && <small>{m.dept}</small>}
         <Rec m={m} />
         <Duties m={m} id={id} />
       </div>
@@ -259,10 +259,10 @@ const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
 /** F — Bölimlar böyiça: har bölim alohida guruh (nomi va xonasi), ičida ixçam portret kartalar */
 function ByDept({ ids }: { ids: string }) {
-  const groups = Array.from(new Set(REST.map((m) => m.deptShort ?? ''))).map((d) => ({
+  const groups = Array.from(new Set(REST.map((m) => m.dept ?? ''))).map((d) => ({
     d,
-    room: REST.find((m) => m.deptShort === d)?.room,
-    people: REST.filter((m) => (m.deptShort ?? '') === d),
+    room: REST.find((m) => m.dept === d)?.room,
+    people: REST.filter((m) => (m.dept ?? '') === d),
   }))
   return (
     <div className="kf">
