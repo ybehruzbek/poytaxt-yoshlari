@@ -61,7 +61,9 @@ export function DevSectionsPanel({ sections }: { sections: PanelSection[] }) {
   }, [namesId, state])
 
   const jump = (name: string) => {
-    const vis = [...document.querySelectorAll<HTMLElement>(`[data-v^="${name}-"]`)].find((e) => e.offsetParent !== null)
+    const vis =
+      [...document.querySelectorAll<HTMLElement>(`[data-v^="${name}-"]`)].find((e) => e.offsetParent !== null) ??
+      document.querySelector<HTMLElement>(`[data-m="${name}"]`)
     vis?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 

@@ -165,20 +165,37 @@ export function HomeMotion() {
     addEventListener('scroll', onScroll, { passive: true })
     addEventListener('resize', onScroll)
 
-    // Variant almaşganda bölim animatsiyasini qayta öynatiş
+    // Variant almaşganda: bölimga ötib, animatsiyani boşidan körsatiş va nomini yozib qöyiş
+    const toast = document.createElement('div')
+    toast.className = 'm-toast'
+    document.body.append(toast)
+    let toastT = 0
+    const born = performance.now() // sahifa yuklanişidagi dastlabki tiklaşni almaşiş deb hisoblamaslik
     const mo = new MutationObserver((muts) => {
       muts.forEach((m) => {
         const name = m.attributeName?.replace(/^data-/, '')
         const hit = found.find((f) => f.s.name === name)
-        if (!hit || m.oldValue === html.getAttribute(m.attributeName!)) return
-        const el = hit.el
+        const v = html.getAttribute(m.attributeName!) || 'a'
+        if (!hit || m.oldValue === v || m.oldValue === null || performance.now() - born < 1200) return
+        const { el, s } = hit
+        toast.textContent = `${s.label}: ${v.toUpperCase()} — ${s.hints?.[v.charCodeAt(0) - 97] ?? ''}`
+        toast.classList.add('on')
+        clearTimeout(toastT)
+        toastT = window.setTimeout(() => toast.classList.remove('on'), 2600)
+
+        // 1) yaşirin holatga bir zumda qaytariş (öçiş animatsiyasisiz)
+        el.classList.add('m-reset')
         el.classList.remove('m-in')
         counters(el).forEach((b) => b.dataset.mOrig && (b.textContent = b.dataset.mOrig))
+        // 2) bölim pastdan kirib kelişi uçun undan sal yuqoriga sakrab, keyin silliq tuşiş
+        const top = el.getBoundingClientRect().top + scrollY
+        if (top > 0) scrollTo({ top: Math.max(0, top - innerHeight * 0.85), behavior: 'instant' })
         void el.offsetWidth
+        el.classList.remove('m-reset')
+        onScroll()
         requestAnimationFrame(() => {
-          onScroll()
-          const r = el.getBoundingClientRect()
-          if (r.top < innerHeight && r.bottom > 0) setTimeout(() => enter(el), 60)
+          if (top > 0) scrollTo({ top: Math.max(0, top - 90), behavior: 'smooth' })
+          setTimeout(() => enter(el), top > 0 ? 250 : 80)
         })
       })
     })
@@ -187,6 +204,7 @@ export function HomeMotion() {
     return () => {
       io.disconnect()
       mo.disconnect()
+      toast.remove()
       removeEventListener('scroll', onScroll)
       removeEventListener('resize', onScroll)
       html.classList.remove('m-ready')

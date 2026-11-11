@@ -8,6 +8,34 @@ html.m-ready {
   --m-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --m-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+/* Variant almaşganda bir zumda boşlanğiç holatga qaytariş */
+html.m-ready .m-reset,
+html.m-ready .m-reset * {
+  transition: none !important;
+}
+/* Tanlangan variant nomi (faqat panel bilan almaştirganda) */
+.m-toast {
+  position: fixed;
+  left: 50%;
+  top: 104px;
+  z-index: 120;
+  translate: -50% -12px;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--navy);
+  color: #fff;
+  font: 600 15px/1.2 var(--f-body);
+  padding: 14px 22px;
+  border-radius: 999px;
+  box-shadow: 0 16px 40px rgba(83, 40, 34, 0.25);
+  transition:
+    opacity 0.35s,
+    translate 0.35s;
+}
+.m-toast.on {
+  opacity: 1;
+  translate: -50% 0;
+}
 @keyframes m-float {
   50% {
     translate: 0 -14px;
