@@ -1,16 +1,14 @@
-/* eslint-disable @next/next/no-img-element -- logotip PNG va namunaviy rasmlar */
+/* eslint-disable @next/next/no-img-element -- tarmoqlar sahifalarining skrinşotlari */
 import type { ReactNode } from 'react'
 
-import { NET_LABEL, NETS, type Net, socialHandle } from '@/lib/socials'
+import { NET_LABEL, NETS, type Net } from '@/lib/socials'
 import { getSocials } from '@/lib/socials-server'
 
 /*
- * "Bizni kuzatib boring" bo'limi: ijtimoiy tarmoqlar iPhone ko'rinishida.
+ * "Bizni kuzatib boring" bölimi: ijtimoiy tarmoqlar iPhone körinişida.
  * Havolalar admin paneldan (Sayt sozlamalari → Ijtimoiy tarmoqlar).
- * Telefon ichidagi ko'rinishlar sahifaning soddalashtirilgan illyustratsiyasi (haqiqiy skrinshot emas);
- * obunachilar soni kabi raqamlar ataylab ko'rsatilmaydi.
+ * Telefon ičida — har bir sahifaning ASL skrinşoti (yasalgan illyustratsiya emas).
  */
-const NAME = 'Poytaxt yoşlari'
 
 export const Icon: Record<Net, ReactNode> = {
   telegram: (
@@ -49,129 +47,16 @@ export const Arrow = () => (
   </svg>
 )
 
-/** Kichik dumaloq avatar — oq fonda logotip */
-const Ava = ({ size = 'm' }: { size?: 's' | 'm' | 'l' }) => (
-  <span className={`ph-ava ph-ava-${size}`}>
-    <img src="/img/logo-toshkent.png" alt="" />
-  </span>
-)
-
-function TelegramScreen({ handle }: { handle: string }) {
-  return (
-    <div className="ph-scr ph-tg">
-      <div className="ph-bar">
-        <span className="ph-back">‹</span>
-        <Ava size="s" />
-        <span className="ph-title">
-          <b>{NAME}</b>
-          <small>{handle ? `${handle} · kanal` : 'kanal'}</small>
-        </span>
-      </div>
-      <div className="ph-tg-feed">
-        <div className="ph-tg-post">
-          <img src="/img/news-1.jpg" alt="" loading="lazy" />
-          <p>Yoşlar uçun yangi grant tanlovi eʼlon qilindi. Batafsil — saytimizda.</p>
-          <small>10:24</small>
-        </div>
-        <div className="ph-tg-post">
-          <p>Şanba kuni poytaxt yoşlari forumi bölib ötadi. Röyxatdan öting!</p>
-          <small>12:05</small>
-        </div>
-      </div>
-      <div className="ph-tg-join">Kanalga qöşiliş</div>
-    </div>
-  )
-}
-
-function InstagramScreen({ handle }: { handle: string }) {
-  const tiles = ['about-1', 'news-2', 'opp-vol', 'news-3', 'about-2', 'opp-grant', 'hero-tk', 'opp-stip', 'about-3']
-  return (
-    <div className="ph-scr ph-ig">
-      <div className="ph-bar ph-bar-plain">
-        <b>{handle || NAME}</b>
-      </div>
-      <div className="ph-ig-head">
-        <span className="ph-ig-ring">
-          <Ava size="l" />
-        </span>
-        <span className="ph-ig-name">
-          <b>{NAME}</b>
-          <small>Yoşlar ittifoqi · Toşkent şahar</small>
-        </span>
-      </div>
-      <div className="ph-btn">Obuna böliş</div>
-      <div className="ph-ig-grid">
-        {tiles.map((t) => (
-          <img key={t} src={`/img/${t}.jpg`} alt="" loading="lazy" />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function FacebookScreen(_: { handle: string }) {
-  return (
-    <div className="ph-scr ph-fb">
-      <div className="ph-fb-cover">
-        <img src="/img/hero-tk.jpg" alt="" loading="lazy" />
-      </div>
-      <div className="ph-fb-id">
-        <Ava size="l" />
-        <b>{NAME}</b>
-        <small>Jamoat taşkiloti</small>
-        <div className="ph-btn">Kuzatiş</div>
-      </div>
-      <div className="ph-fb-post">
-        <div className="ph-fb-ph">
-          <Ava size="s" />
-          <span>
-            <b>{NAME}</b>
-            <small>2 soat oldin</small>
-          </span>
-        </div>
-        <p>Volontyorlar safiga qöşiling — har bir yaxşi iş poytaxtdan boşlanadi.</p>
-        <img src="/img/opp-vol.jpg" alt="" loading="lazy" />
-      </div>
-    </div>
-  )
-}
-
-function YoutubeScreen({ handle }: { handle: string }) {
-  const videos = [
-    { img: 'news-2', t: 'Poytaxt yoşlari forumi — töliq lavha' },
-    { img: 'about-1', t: 'Kengaş faoliyati: yil yakunlari' },
-  ]
-  return (
-    <div className="ph-scr ph-yt">
-      <div className="ph-yt-banner" />
-      <div className="ph-yt-id">
-        <Ava size="m" />
-        <span>
-          <b>{NAME}</b>
-          {handle && <small>{handle}</small>}
-        </span>
-      </div>
-      <div className="ph-btn">Obuna böliş</div>
-      <div className="ph-yt-list">
-        {videos.map((v) => (
-          <div key={v.img} className="ph-yt-vid">
-            <span className="ph-yt-thumb">
-              <img src={`/img/${v.img}.jpg`} alt="" loading="lazy" />
-              <i />
-            </span>
-            <b>{v.t}</b>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const PHONES: Record<Net, { aria: string; Screen: (p: { handle: string }) => ReactNode }> = {
-  telegram: { aria: 'Telegram kanalimiz', Screen: TelegramScreen },
-  instagram: { aria: 'Instagram sahifamiz', Screen: InstagramScreen },
-  facebook: { aria: 'Facebook sahifamiz', Screen: FacebookScreen },
-  youtube: { aria: 'YouTube kanalimiz', Screen: YoutubeScreen },
+/**
+ * Har bir tarmoqning ASL sahifasidan olingan skrinşot (public/img/socials/{tarmoq}.webp, telefon eni 390 px).
+ * Yangilaş: sahifani telefon enida oçib skrinşot oling va şu faylni almaştiring.
+ * dark — ekran töq (holat satri oq yoziladi).
+ */
+const PHONES: Record<Net, { aria: string; dark: boolean }> = {
+  telegram: { aria: 'Telegram kanalimiz', dark: true },
+  instagram: { aria: 'Instagram sahifamiz', dark: true },
+  facebook: { aria: 'Facebook sahifamiz', dark: false },
+  youtube: { aria: 'YouTube kanalimiz', dark: true },
 }
 
 export async function SocialPhones() {
@@ -189,7 +74,7 @@ export async function SocialPhones() {
         </div>
         <div className="sp-phones">
           {nets.map((net) => {
-            const { aria, Screen } = PHONES[net]
+            const { aria, dark } = PHONES[net]
             return (
               <a
                 key={net}
@@ -199,13 +84,15 @@ export async function SocialPhones() {
                 className={`sp-phone sp-phone-${net}`}
                 aria-label={`${aria} (yangi oynada oçiladi)`}
               >
-                <span className="ph" aria-hidden="true">
+                <span className={`ph ph-${dark ? 'dark' : 'light'}`} aria-hidden="true">
                   <span className="ph-island" />
                   <span className="ph-status">
                     <b>9:41</b>
                     <i />
                   </span>
-                  <Screen handle={socialHandle(net, socials[net])} />
+                  <span className="ph-scr ph-shot">
+                    <img src={`/img/socials/${net}.webp`} alt="" loading="lazy" width={390} height={844} />
+                  </span>
                 </span>
                 <span className="sp-phone-label">
                   <Svg net={net} />
