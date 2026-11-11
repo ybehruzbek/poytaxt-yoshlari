@@ -60,7 +60,9 @@
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   font-weight: 600;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 .fb-up:hover {
   background: var(--yellow);
@@ -159,45 +161,7 @@
 .fw-mail a:hover {
   color: var(--yellow);
 }
-/* ekran enini to'liq egallaydigan so'z: 8 harf ≈ 6.1em → 16vw */
-.fw-word {
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  overflow: clip;
-  padding: 40px 0 8px;
-  font: 900 15.6vw/0.8 var(--f-head);
-  letter-spacing: -0.035em;
-  color: var(--yellow);
-  user-select: none;
-}
-.fw-word span {
-  display: inline-block;
-  transition:
-    translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-    color 0.25s;
-}
-.fw-word span:hover {
-  translate: 0 -12%;
-  color: var(--lime);
-}
-@supports (animation-timeline: view()) {
-  .fw-word span {
-    animation: fw-rise linear both;
-    animation-timeline: view();
-    animation-range: entry calc(var(--i) * 5%) entry calc(45% + var(--i) * 5%);
-  }
-}
-@keyframes fw-rise {
-  from {
-    transform: translateY(70%);
-    opacity: 0;
-  }
-  to {
-    transform: none;
-    opacity: 1;
-  }
-}
+
 /* ---------- Footer animatsiyasi (Apple uslubi, skrollga boğlangan; faqat qöllaydigan brauzerlarda) ----------
    Footer “varaq” bölib kattalaşib köteriladi, keyin ičidagilar xiradan aniqlaşib, navbat bilan çiqadi:
    logo → şior → tugma, menyu ustunlari çapdan öngga, çiziqlar örtadan yoyiladi. */
@@ -307,12 +271,6 @@
   padding-bottom: 28px;
 }
 
-@media (min-width: 1440px) {
-  .fw-word {
-    font-size: 224px;
-  }
-}
-
 /* =====================  Moslaşuv  ===================== */
 @media (max-width: 1240px) {
   .fb-cols {
@@ -333,11 +291,6 @@
   .fb-bot {
     flex-direction: column;
     align-items: flex-start;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .fw-word span {
-    animation: none;
   }
 }
 

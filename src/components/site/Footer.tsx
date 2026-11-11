@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- logotip PNG; SVG varianti kelganda almashtiriladi */
 import Link from 'next/link'
-import type { CSSProperties } from 'react'
 
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
@@ -12,7 +11,6 @@ import { Arrow, Svg } from './SocialPhones'
 const LOGO_ALT = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
 const COPY = `© 2001–${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi. Barça huquqlar himoyalangan.`
 const NOTE = 'Uşbu veb-saytdagi maʼlumotlardan foydalanilganda havola körsatilişi şart.'
-const WORD = 'YOŞKENT'
 
 /* Aloqa: Kengaşning rasmiy telefonlari (pochta — NAMUNA) */
 const PHONES = [
@@ -58,15 +56,6 @@ function Bottom() {
       </a>
     </div>
   )
-}
-
-/** Har bir harf alohida — harflab chiqish/to'lish animatsiyasi uchun */
-function Letters() {
-  return WORD.split('').map((ch, i) => (
-    <span key={i} style={{ '--i': i } as CSSProperties}>
-      {ch}
-    </span>
-  ))
 }
 
 /**
@@ -117,9 +106,6 @@ export async function Footer({ locale }: { locale: Locale }) {
             ))}
           </div>
         </div>
-      </div>
-      <div className="fw-word" aria-hidden="true">
-        <Letters />
       </div>
       <div className="wrap">
         <Bottom />
