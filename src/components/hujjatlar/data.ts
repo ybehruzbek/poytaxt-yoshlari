@@ -4,7 +4,12 @@
  */
 
 export type ActKind = 'Qonun' | 'Farmon' | 'Qaror' | 'Ustav'
-/** y — sana (Ustavda yöq), t — töliq nomi, kind — turi, org — qabul qilgan organ, no — raqami (Ustavda yöq), name — rasmiy nomi (bölsa) */
+/**
+ * y — qabul qilingan sana (Ustavda yöq), t — qisqa nomi, d — qisqaça mazmuni, kind — turi,
+ * org — qabul qilgan organ, no — raqami (Ustavda yöq), name — rasmiy nomi (“… töğrisida” qismi).
+ * by/kw — rasmiy nomdagi organ (qaratqiç kelişigida) va hujjat turi, agar org dan çiqarib bölmasa;
+ * reg — Adliya vazirligida davlat röyxatidan ötkazilgani (idoraviy hujjatlar uçun).
+ */
 export type Act = {
   y?: string
   t: string
@@ -14,6 +19,11 @@ export type Act = {
   org: string
   no?: string
   name?: string
+  by?: string
+  kw?: string
+  reg?: string
+  /** rasmiy nomdagi raqam, agar “no” dan farq qilsa */
+  noT?: string
 }
 export type ActGroup = { id: string; t: string; lead: string; acts: Act[] }
 
@@ -38,12 +48,23 @@ export const GROUPS: ActGroup[] = [
       },
       {
         y: '30.06.2020',
-        t: 'Prezidentning PF-6017-son Farmoni va PQ-4768-son qarori',
-        d: 'Yoşlar işlari agentligi taşkil etildi: yoşlarga oid davlat siyosatini amalga oşiriş agentlikka ötdi, Ittifoq esa nodavlat notijorat taşkilot sifatida işini davom ettirmoqda.',
+        t: 'Prezidentning PF-6017-son Farmoni',
+        d: 'Yoşlar işlari agentligi va uning hududiy boşqarmalari taşkil etildi, yoşlarga oid davlat siyosatini yanada rivojlantiriş böyiça qöşimça çora-tadbirlar dasturi tasdiqlandi.',
         href: 'https://lex.uz/docs/-4880189',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
         no: 'PF-6017',
+        name: 'Özbekiston Respublikasida yoşlarga oid davlat siyosatini tubdan isloh qiliş va yangi bosqiçga olib çiqiş çora-tadbirlari töğrisida',
+      },
+      {
+        y: '30.06.2020',
+        t: 'Prezidentning PQ-4768-son qarori',
+        d: 'Yangi taşkil etilgan Yoşlar işlari agentligining tuzilmasi va faoliyatini yölga qöyiş tartibi belgilandi.',
+        href: 'https://lex.uz/docs/-4880129',
+        kind: 'Qaror',
+        org: 'Özbekiston Respublikasi Prezidentining qarori',
+        no: 'PQ-4768',
+        name: 'Özbekiston Respublikasi Yoşlar işlari agentligi faoliyatini taşkil etiş töğrisida',
       },
       {
         y: '18.01.2021',
@@ -128,6 +149,7 @@ export const GROUPS: ActGroup[] = [
         kind: 'Qaror',
         org: 'Özbekiston Respublikasi Prezidentining qarori',
         no: 'PQ-3138',
+        name: 'Özbekiston yoşlar ittifoqi faoliyatini takomillaştirişga doir kompleks çora-tadbirlar töğrisida',
       },
       {
         y: '14.11.2017',
@@ -137,15 +159,21 @@ export const GROUPS: ActGroup[] = [
         kind: 'Qaror',
         org: 'Vazirlar Mahkamasining qarori',
         no: '914',
+        name: 'Özbekiston yoşlar ittifoqining faol aʼzolariga oliy taʼlim muassasalariga kirişda imtiyozlar beriş töğrisida',
       },
       {
-        y: '10.01.2018',
-        t: 'Oliy taʼlim va Moliya vazirliklarining qarori (röyxat raqami 2961)',
+        y: '27.12.2017',
+        t: 'Oliy va örta maxsus taʼlim hamda Moliya vazirliklarining qarori (röyxat raqami 2961)',
         d: 'Faol aʼzo talabalarning yillik kontrakt tölovining 35 foizini Ittifoq tölab beriş tartibi tasdiqlandi.',
         href: 'https://lex.uz/docs/-3497684',
         kind: 'Qaror',
-        org: 'Oliy taʼlim va Moliya vazirliklarining qarori',
+        org: 'Oliy va örta maxsus taʼlim vazirligi hamda Moliya vazirligining qarori',
         no: '2961',
+        noT: '30-2017, 186',
+        by: 'Özbekiston Respublikasi Oliy va örta maxsus taʼlim vazirligi hamda Moliya vazirligining',
+        kw: 'qarori',
+        reg: 'Adliya vazirligida 2018-yil 10-yanvarda 2961-son bilan davlat röyxatidan ötkazilgan',
+        name: 'Özbekiston yoşlar ittifoqi tomonidan oliy taʼlim muassasalarida tölov-kontrakt asosida tahsil olayotgan, Özbekiston yoşlar ittifoqining faol aʼzosi bölgan talabalarni moddiy qöllab-quvvatlaş tartibi töğrisidagi nizomni tasdiqlaş haqida',
       },
       {
         y: '31.01.2020',
@@ -175,6 +203,8 @@ export const GROUPS: ActGroup[] = [
         kind: 'Qaror',
         org: 'Oliy taʼlim, fan va innovatsiyalar vazirligi va Ittifoq Markaziy Kengaşining qöşma qarori',
         no: '6-Q/Q, 1-Q/Q',
+        by: 'Özbekiston Respublikasi Oliy taʼlim, fan va innovatsiyalar vazirligi hamda Özbekiston yoşlar ittifoqi Markaziy Kengaşining',
+        kw: 'qöşma qarori',
         name: 'Özbekiston yoşlar ittifoqining oliy taʼlim muassasalaridagi boşlanğiç taşkilotlari faoliyatini takomillaştiriş çora-tadbirlari töğrisida',
       },
     ],
