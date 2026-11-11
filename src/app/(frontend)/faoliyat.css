@@ -937,31 +937,38 @@
   font-size: 16px;
   line-height: 1.6;
 }
+/* sönggi tadbirlar — fonsiz, ingiçka ajratgiçli röyxat: sana çapda, nomi öngda */
 .vy3-txt ul {
-  display: grid;
-  gap: 8px;
   margin: 4px 0 0;
   padding: 0;
   list-style: none;
+  border-top: 1px solid var(--line);
 }
 .vy3-txt li {
   display: grid;
-  gap: 4px;
-  padding: 10px 14px;
-  border-left: 3px solid var(--yellow);
-  border-radius: 0 10px 10px 0;
-  background: var(--soft);
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
 }
 .vy3-txt li time {
-  font: 600 12px/1.2 var(--f-body);
+  font: 500 13px/1.4 var(--f-body);
   color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 .vy3-txt li span {
   overflow: hidden;
-  font: 700 14px/1.4 var(--f-head);
+  font: 600 15px/1.4 var(--f-head);
   color: var(--navy);
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+@media (max-width: 640px) {
+  .vy3-txt li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
 }
 /* pastki qator har doim kartaning tagida — tugmalar bir çiziqda turadi */
 .vy3-foot {
