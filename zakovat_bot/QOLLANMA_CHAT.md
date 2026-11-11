@@ -1,5 +1,7 @@
 # Online chat boti — test va foydalanish qo'llanmasi
 
+> **Tarixiy ssenariy — 2026-09-09:** eski topshiriqlar va rejalar bekor qilingan. Quyidagi sana, havola va qadamlar avvalgi tadbir sinov qo‘llanmasidir; yangi talab yoki jonli ishga tushirish ko‘rsatmasi emas. Bu hujjat sinovlarning bajarilganini tasdiqlamaydi.
+
 Bot: **@yoshlaruchuntanlov_bot** · Tadbir: 9-avgust 20:00 (Toshkent vaqti)
 
 Test uchun ikkita Telegram akkaunt qulay: biri **admin** (SUPER_ADMIN_ID
@@ -32,7 +34,7 @@ kiritilgan), ikkinchisi **oddiy foydalanuvchi** (hamkasb telefoni ham bo'ladi).
 
 | № | Qadam | Kutilgan natija |
 |---|---|---|
-| 1 | Oddiy (admin bo'lmagan) akkauntdan `/admin` yozing | Bot **umuman javob bermaydi** (TZ talabi) |
+| 1 | Oddiy (admin bo'lmagan) akkauntdan `/admin` yozing | Bot **umuman javob bermaydi** |
 | 2 | Admin akkauntdan `/admin` → 💬 Online chat | Menyu: sana, havola, ro'yxatdan o'tganlar soni |
 | 3 | **📊 Statistika** | Jami / bugungi / bloklaganlar / eslatma foizlari |
 | 4 | **📥 Eksport (.xlsx)** | Excel fayl: №, ism, telefon, ID, username, sana |
@@ -62,16 +64,3 @@ bo'lganida qiling.
 Eslatma turi bir marta yuborilgani bazada qayd etiladi. Agar sinovdan keyin
 xuddi shu ishtirokchiga «toza» eslatma sinovi kerak bo'lsa, ishtirokni bekor
 qilib qayta ro'yxatdan o'ting (yangi yozuv ochiladi).
-
----
-
-## 4-qism. Jonli ishga tushirish tartibi
-
-1. Yuqoridagi barcha testlar o'tdi ✅
-2. Sana `09.08.2026 20:00` va **chat havolasi kiritilgan** ✅
-3. Kanalga e'lon joylang (TZ'dagi matn), postga URL-tugma qo'shing:
-   - Matn: **«📝 Ishtirok etish uchun ro'yxatdan o'ting»**
-   - Havola: `https://t.me/yoshlaruchuntanlov_bot?start=chat_09aug`
-4. Avtomatik jadval: 8-avg 20:00 (1 kun) → 9-avg 10:00 (10 soat) →
-   9-avg 19:00 (1 soat) → 9-avg 20:00 (havola).
-5. Kuzatish: `/admin → 💬 Online chat → Statistika / Eslatmalar holati`.

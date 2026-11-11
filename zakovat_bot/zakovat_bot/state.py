@@ -64,6 +64,24 @@ class AppealState(StatesGroup):
     message = State()
 
 
+class ContestState(StatesGroup):
+    """«Talabalik davrim» tanloviga ariza topshirish oqimi (TZ 4-5)."""
+    full_name = State()
+    university = State()
+    faculty = State()
+    phone = State()
+    title = State()
+    description = State()
+    media = State()
+
+
+class ContestAdminState(StatesGroup):
+    """Moderatsiya va tanlov sozlamalari."""
+    reject_reason = State()
+    revision_reason = State()
+    broadcast = State()
+
+
 class AppealAdminState(StatesGroup):
     """Murojaatga javob yozish (admin)."""
     reply = State()

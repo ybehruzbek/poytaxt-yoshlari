@@ -1,6 +1,8 @@
 """Rol tekshiruvi va audit-jurnal (TZ 2.3).
 
-Rollar ierarxiyasi: superadmin > operator > observer.
+Rollar ierarxiyasi: superadmin > operator > moderator > observer.
+Moderator tanlov arizalarini ko'rib chiqadi, lekin tarqatish va sozlamalarga
+tegmaydi (TZ 12: «moderator tanlov muddatini o'zgartira olmasin»).
 Birinchi superadmin SUPER_ADMIN_ID env orqali bootstrap qilinadi.
 """
 from decouple import config
@@ -9,8 +11,9 @@ from zakovat_bot.models import AdminRole, AuditLog, TelegramAdminsID
 
 _ROLE_ORDER = {
     AdminRole.OBSERVER: 1,
-    AdminRole.OPERATOR: 2,
-    AdminRole.SUPERADMIN: 3,
+    AdminRole.MODERATOR: 2,
+    AdminRole.OPERATOR: 3,
+    AdminRole.SUPERADMIN: 4,
 }
 
 

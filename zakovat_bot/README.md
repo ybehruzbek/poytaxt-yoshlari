@@ -1,7 +1,8 @@
 # «Yoshlar uchun imkoniyatlar» boti (@yoshlaruchuntanlov_bot)
 
+> **2026-09-09 kontekst yangilanishi:** oldingi topshiriqlar va rivojlanish rejalari bekor qilingan. Quyidagi matn mavjud bot kodi haqidagi tarixiy qo‘llanma; yangi mahsulot talablari yoki ish rejasi emas. Joriy kontekst: [PROJECT_STATUS.md](../PROJECT_STATUS.md).
+
 Kanallar bazasi, admin-panel va ommaviy tarqatishni avtomatlashtiruvchi Telegram bot.
-Texnik topshiriq: `TZ_BOT.md`, bosqichlar holati: `PLAN_BOT.md`.
 
 **Stek:** Python 3.12 · Django 5.2 · aiogram 3.22 (polling) · PostgreSQL
 
@@ -16,22 +17,22 @@ Texnik topshiriq: `TZ_BOT.md`, bosqichlar holati: `PLAN_BOT.md`.
   majburiy obuna tekshiruvi, F.I.Sh./telefon validatsiyasi, tasdiqlash ekrani
   (sana, vaqt, manzil), avtomatik eslatmalar — vaqtlari tadbirda belgilanadi
   (`reminder_hours`, masalan [24,10,1] yoki [5]). Sozlamalardan tadbirni
-  yoqish/o'chirish mumkin. TZ: `TZ_CHAT_BOT.md`, `TZ_SEMINAR_BOT.md`.
+  yoqish/o'chirish mumkin.
 - **Admin buyruqlari:** `/admin` (panel), `/stat`, `/export`, `/send`, `/help`.
 
-- **Kanallar bazasi (TZ 2):** kanal qo'shish/tahrirlash/o'chirish, faol/nofaol holat,
+- **Kanallar bazasi:** kanal qo'shish/tahrirlash/o'chirish, faol/nofaol holat,
   OTT turi (Davlat/Xorijiy/Nodavlat) va teg bo'yicha filtr, sahifalangan ro'yxat.
   Qo'shishda bot kanalda admin ekanligi avtomatik tekshiriladi.
-- **Excel (TZ 2.2):** bazani ommaviy yangilash uchun import (dublikat aniqlanadi,
+- **Excel:** bazani ommaviy yangilash uchun import (dublikat aniqlanadi,
   xato qatorlar hisobotda) va istalgan vaqtda eksport (zaxira).
-- **Rollar (TZ 2.3):** Bosh admin / Operator / Kuzatuvchi. Kanal qo'shish-o'chirish va
+- **Rollar:** Bosh admin / Operator / Kuzatuvchi. Kanal qo'shish-o'chirish va
   adminlarni boshqarish — faqat Bosh admin. Barcha amallar audit-jurnalga yoziladi.
-- **Tarqatish (TZ 4.1):** postni forward qilish → qamrov tanlash (hammasi / tur / teg) →
+- **Tarqatish:** postni forward qilish → qamrov tanlash (hammasi / tur / teg) →
   preview → yuborish. Flood-limitga pauza, 3 martagacha qayta urinish, har kanal
   natijasi bazada.
-- **Rejalashtirish (TZ 4.2):** aniq sana-vaqtga qo'yish, ro'yxatini ko'rish, bekor qilish.
+- **Rejalashtirish:** aniq sana-vaqtga qo'yish, ro'yxatini ko'rish, bekor qilish.
   Bot qayta ishga tushsa ham rejalar saqlanadi (DB-polling scheduler).
-- **Statistika (TZ 5):** tarqatishlar tarixi, yetkazilmaganlar sabab bilan, muammoli
+- **Statistika:** tarqatishlar tarixi, yetkazilmaganlar sabab bilan, muammoli
   (bot admin bo'lmagan) kanallar, Excel hisobot.
 - **Zakovat (eski funksiya):** savol e'lon qilish, javoblar yig'ish, Excel yuklab olish.
 

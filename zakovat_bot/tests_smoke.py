@@ -24,7 +24,9 @@ from openpyxl import Workbook
 from zakovat_bot.models import (
     AdminRole, Answers, Appeal, AppealStatus, AuditLog, Broadcast,
     BroadcastResult, BroadcastStatus, Channel, ChatEvent, ChatParticipant,
-    ParticipantStatus, Questions, ReminderLog, TelegramAdminsID, Users,
+    Contest, ContestParticipant, ContestStage, Entry, EntryMedia, EntryStatus,
+    Nomination, ParticipantStatus, Questions, ReminderLog, TelegramAdminsID,
+    Users, Vote,
 )
 
 SUPER, OPER, OBSV, NOBODY, USER1 = 990001, 990002, 990003, 990004, 990005
@@ -96,7 +98,8 @@ class FakeBot:
 
 
 class FakeMessage:
-    def __init__(self, user_id, text=None, document=None, contact=None):
+    def __init__(self, user_id, text=None, document=None, contact=None,
+                 photo=None, video=None):
         self.from_user = SimpleNamespace(
             id=user_id, username="smoketest", first_name="Smoke"
         )
@@ -105,7 +108,9 @@ class FakeMessage:
         self.text = text
         self.document = document
         self.contact = contact
-        self.audio = self.photo = self.video = self.voice = None
+        self.photo = photo
+        self.video = video
+        self.audio = self.voice = None
         self.content_type = "document" if document else "text"
         self.out = []
         self._markups = []
@@ -210,17 +215,27 @@ def cleanup():
     ChatParticipant.all_objects.filter(telegram_id__in=TEST_IDS).delete()
     ChatEvent.all_objects.filter(title__startswith="SMOKE").delete()
     Appeal.all_objects.filter(telegram_id__in=TEST_IDS).delete()
+    Vote.all_objects.filter(voter_user_id__in=TEST_IDS).delete()
+    Entry.all_objects.filter(participant__telegram_id__in=TEST_IDS).delete()
+    ContestParticipant.all_objects.filter(telegram_id__in=TEST_IDS).delete()
+    Contest.all_objects.filter(slug__startswith="smoke_").delete()
 
 
 async def main():
-    """Testlar yiqilsa ham faol tadbirlar o'z holiga qaytarilishi kafolatlanadi."""
+    """Testlar yiqilsa ham faol tadbir va tanlovlar o'z holiga qaytariladi."""
     saved_event_ids = list(
         ChatEvent.objects.filter(is_active=True).values_list("id", flat=True)
     )
+    saved_contest_ids = list(
+        Contest.objects.filter(is_active=True).values_list("id", flat=True)
+    )
+    # Eski oqimlar (zakovat, tadbir) sinovi uchun joriy tanlov vaqtincha yopiladi
+    Contest.objects.filter(id__in=saved_contest_ids).update(is_active=False)
     try:
         await _run_all(saved_event_ids)
     finally:
         ChatEvent.objects.filter(id__in=saved_event_ids).update(is_active=True)
+        Contest.objects.filter(id__in=saved_contest_ids).update(is_active=True)
 
 
 async def _run_all(saved_event_ids):
@@ -1138,6 +1153,249 @@ async def _run_all(saved_event_ids):
               (djtz.localtime(due).hour, djtz.localtime(due).minute) == (9, 0))
         check("oflayn tadbirga «boshlandi» xabari yo'q",
               seminar.send_start_message is False)
+
+    # ---------- 19. «Talabalik davrim» tanlovi (TZ 16: qabul mezonlari) ----------
+    print("19) Tanlov: ariza topshirish")
+    from zakovat_bot.handlers import contest_handler
+    from zakovat_bot.services import contest as contest_service
+    contest_handler.bot = fake_bot
+
+    _photo_n = iter(range(1000, 9999))
+
+    def fake_photo(size=500_000):
+        n = next(_photo_n)
+        return [SimpleNamespace(file_id=f"ph_{n}", file_unique_id=f"phu_{n}",
+                                file_size=size)]
+
+    def fake_video(duration=60, size_mb=10):
+        n = next(_photo_n)
+        return SimpleNamespace(file_id=f"vd_{n}", file_unique_id=f"vdu_{n}",
+                               file_size=int(size_mb * 1024 * 1024),
+                               duration=duration, mime_type="video/mp4")
+
+    contest = Contest.objects.create(
+        title="SMOKE tanlov", slug="smoke_td",
+        stage=ContestStage.ACCEPTING,
+        submission_deadline=djtz.now() + timedelta(days=2),
+        min_photos=1, max_photos=3, max_video_seconds=180, max_video_mb=50,
+        rules_text="Smoke shartlari", contact_text="Smoke aloqa",
+    )
+
+    # Deep link to'g'ridan-to'g'ri tanlovga olib keladi
+    st = FakeState()
+    m = FakeMessage(USER1, text="/start smoke_td")
+    await user_handler.start(m, st)
+    check("TZ16: deep link tanlovga olib keldi", "SMOKE tanlov" in m.texts())
+    check("TZ16: menyuda ishtirok tugmasi bor",
+          any("Tanlovda ishtirok" in b for b in m.buttons()), m.buttons())
+
+    # Eski loyiha havolasi endi ro'yxatni boshlamaydi
+    st_old = FakeState()
+    m = FakeMessage(USER1, text="/start brm_seminar")
+    await user_handler.start(m, st_old)
+    check("TZ16: eski havola ro'yxatni boshlamaydi",
+          "familiya, ism va sharif" not in m.texts().lower())
+
+    # Anketa
+    cb = FakeCallback("td_join", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_join(cb, st)
+    check("anketa boshlandi", "familiya, ism va sharif" in cb.message.texts().lower())
+
+    m = FakeMessage(USER1, text="Aziz")
+    await contest_handler.td_full_name(m, st)
+    check("noto'g'ri F.I.Sh. rad etildi", "to'g'ri kiriting" in m.texts())
+
+    m = FakeMessage(USER1, text="Karimov Aziz Baxtiyorovich")
+    await contest_handler.td_full_name(m, st)
+    check("F.I.Sh. qabul qilindi", "ta'lim tashkiloti" in m.texts())
+
+    m = FakeMessage(USER1, text="Smoke universiteti")
+    await contest_handler.td_university(m, st)
+    check("OTM bosqichi o'tdi", "Fakultet" in m.texts() or "tanlang" in m.texts())
+    if "tanlang" in m.texts():
+        cb = FakeCallback("td_uni:own", USER1, message=FakeMessage(USER1))
+        await contest_handler.td_university_pick(cb, st)
+
+    m = FakeMessage(USER1, text="Matematika")
+    await contest_handler.td_faculty(m, st)
+    cb = FakeCallback("td_year:2-kurs", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_year(cb, st)
+    check("bosqich tanlandi", "telefon" in cb.message.texts().lower())
+
+    m = FakeMessage(USER1, text="12345")
+    await contest_handler.td_phone(m, st)
+    check("noto'g'ri raqam rad etildi", "noto'g'ri" in m.texts())
+
+    m = FakeMessage(USER1, text="90 123 45 67")
+    await contest_handler.td_phone(m, st)
+    participant = ContestParticipant.objects.filter(
+        contest=contest, telegram_id=USER1).first()
+    check("anketa saqlandi",
+          participant is not None and participant.phone == "+998901234567"
+          and participant.university == "Smoke universiteti")
+
+    # Foto nominatsiyasi
+    cb = FakeCallback("td_nom:foto", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_nomination(cb, st)
+    entry = Entry.objects.filter(participant=participant,
+                                 nomination=Nomination.FOTO).first()
+    check("foto arizasi yaratildi (draft)",
+          entry is not None and entry.status == EntryStatus.DRAFT)
+    check("ariza raqami TD- formatida", entry.code.startswith("TD-"), entry.code)
+
+    m = FakeMessage(USER1, text="Talabalik lahzalari")
+    await contest_handler.td_title(m, st)
+    m = FakeMessage(USER1, text="Universitetdagi eng yorqin kunlarim haqida.")
+    await contest_handler.td_description(m, st)
+    check("rozilik so'raldi", "rozilik" in m.texts().lower())
+
+    cb = FakeCallback("td_consent", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_consent(cb, st)
+    participant.refresh_from_db()
+    check("rozilik qayd etildi", participant.consent_at is not None)
+
+    # TZ 16: 1-2-3 rasm qabul, 4-chisi rad
+    for i in range(3):
+        m = FakeMessage(USER1, photo=fake_photo())
+        await contest_handler.td_media(m, st)
+    await asyncio.sleep(1.3)
+    check("TZ16: 3 ta rasm qabul qilindi", entry.media.count() == 3,
+          entry.media.count())
+
+    m = FakeMessage(USER1, photo=fake_photo())
+    await contest_handler.td_media(m, st)
+    check("TZ16: 4-chi rasm rad etildi",
+          "qabul qilinmaydi" in m.texts() and entry.media.count() == 3)
+
+    # Video foto nominatsiyasiga tushmaydi
+    m = FakeMessage(USER1, video=fake_video())
+    await contest_handler.td_media(m, st)
+    check("foto nominatsiyasida video rad etildi",
+          "faqat rasm" in m.texts() or "qabul qilinmaydi" in m.texts())
+
+    # Oldindan ko'rish va topshirish
+    cb = FakeCallback("td_media_done", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_media_done(cb, st)
+    check("TZ16: tasdiqlashdan oldin ko'rinish",
+          "Arizangizni tekshiring" in cb.message.texts()
+          and "3 ta foto" in cb.message.texts())
+
+    cb = FakeCallback(f"td_submit:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_submit(cb, st)
+    entry.refresh_from_db()
+    check("ariza topshirildi",
+          entry.status == EntryStatus.MODERATION and entry.submitted_at is not None)
+    check("foydalanuvchiga tasdiq berildi",
+          "qabul qilindi" in cb.message.texts() and entry.code in cb.message.texts())
+    check("moderatorlarga xabar ketdi",
+          any(k == "send_message" and "Yangi ariza" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # TZ 16: takroriy bosish ikki nusxa yaratmaydi
+    cb2 = FakeCallback(f"td_submit:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_submit(cb2, st)
+    check("TZ16: takroriy topshirish dublikat yaratmadi",
+          Entry.objects.filter(participant=participant,
+                               nomination=Nomination.FOTO).count() == 1
+          and any("allaqachon" in a for a in cb2.alerts), cb2.alerts)
+
+    # Video nominatsiyasi — cheklovlar
+    st2 = FakeState()
+    await st2.update_data(td_contest_id=contest.id)
+    cb = FakeCallback("td_nom:video", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_nomination(cb, st2)
+    ventry = Entry.objects.filter(participant=participant,
+                                  nomination=Nomination.VIDEO).first()
+    check("video arizasi yaratildi", ventry is not None)
+    m = FakeMessage(USER1, text="Talabalik videosi")
+    await contest_handler.td_title(m, st2)
+    m = FakeMessage(USER1, text="Qisqa video lavha talabalik hayotidan.")
+    await contest_handler.td_description(m, st2)
+    cb = FakeCallback("td_consent", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_consent(cb, st2)
+
+    m = FakeMessage(USER1, video=fake_video(duration=400))
+    await contest_handler.td_media(m, st2)
+    check("uzun video rad etildi", "juda uzun" in m.texts())
+
+    m = FakeMessage(USER1, video=fake_video(size_mb=120))
+    await contest_handler.td_media(m, st2)
+    check("katta hajmli video rad etildi", "hajmi katta" in m.texts())
+
+    m = FakeMessage(USER1, video=fake_video(duration=60, size_mb=10))
+    await contest_handler.td_media(m, st2)
+    await asyncio.sleep(1.3)
+    check("TZ16: 1 ta video qabul qilindi", ventry.media.count() == 1)
+
+    m = FakeMessage(USER1, video=fake_video(duration=50, size_mb=8))
+    await contest_handler.td_media(m, st2)
+    check("TZ16: 2-chi video rad etildi",
+          "qabul qilinmaydi" in m.texts() and ventry.media.count() == 1)
+
+    cb = FakeCallback("td_media_done", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_media_done(cb, st2)
+    cb = FakeCallback(f"td_submit:{ventry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_submit(cb, st2)
+    ventry.refresh_from_db()
+    check("video arizasi topshirildi", ventry.status == EntryStatus.MODERATION)
+
+    # «Mening arizam»
+    cb = FakeCallback("td_my", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_my(cb, st2)
+    check("«Mening arizam» ikkala arizani ko'rsatdi",
+          entry.code in cb.message.texts() and ventry.code in cb.message.texts())
+
+    # ---------- 20. Qabul muddati (TZ 7, 16) ----------
+    print("20) Tanlov: muddat nazorati")
+    # 17:59:59 — qabul qilinadi
+    contest.submission_deadline = djtz.now() + timedelta(seconds=1)
+    contest.save(update_fields=["submission_deadline"])
+    check("TZ16: muddatdan 1 soniya oldin qabul ochiq", contest.is_accepting)
+
+    # 18:00:00 — rad etiladi
+    contest.submission_deadline = djtz.now() - timedelta(seconds=1)
+    contest.save(update_fields=["submission_deadline"])
+    check("TZ16: muddat tugagach qabul yopiq", not contest.is_accepting)
+
+    st3 = FakeState()
+    await st3.update_data(td_contest_id=contest.id)
+    cb = FakeCallback("td_join", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_join(cb, st3)
+    check("TZ16: muddatdan keyin ariza boshlab bo'lmaydi",
+          "yakunlandi" in cb.message.texts())
+
+    # Muddatdan keyin topshirish server tomonda bloklanadi
+    p2 = ContestParticipant.objects.create(
+        contest=contest, telegram_id=NOBODY, full_name="Valiyev Bek",
+        university="Smoke OTM", phone="+998901112233", consent_at=djtz.now())
+    late = Entry.objects.create(contest=contest, participant=p2,
+                                nomination=Nomination.FOTO,
+                                title="Kech", description="Kech topshirilgan")
+    EntryMedia.objects.create(entry=late, file_id="x", file_unique_id="xu",
+                              media_type="photo", position=0)
+    st4 = FakeState()
+    await st4.update_data(td_contest_id=contest.id, td_entry_id=late.id,
+                          td_title="Kech", td_description="Kech topshirilgan")
+    cb = FakeCallback(f"td_submit:{late.id}", NOBODY, message=FakeMessage(NOBODY))
+    await contest_handler.td_submit(cb, st4)
+    late.refresh_from_db()
+    check("TZ16: muddatdan keyingi ariza server tomonda rad etildi",
+          late.status == EntryStatus.DRAFT and "yakunlandi" in cb.message.texts())
+
+    # Avtomatik yopilish (scheduler)
+    contest.stage = ContestStage.ACCEPTING
+    contest.save(update_fields=["stage"])
+    await contest_service.close_submissions_if_due(fake_bot)
+    contest.refresh_from_db()
+    check("TZ7: qabul avtomatik yopildi (scheduler)",
+          contest.stage == ContestStage.MODERATION)
+    check("TZ7: adminga yakuniy statistika yuborildi",
+          any(k == "send_message" and "qabuli yakunlandi" in str(t).lower()
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Eksport
+    data = contest_service.export_entries_excel(contest)
+    check("arizalar Excel eksporti", len(data) > 1000)
 
     channel_handler.check_bot_is_admin = real_check
     cleanup()

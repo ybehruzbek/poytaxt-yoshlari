@@ -6,6 +6,7 @@ from core.models.basemodel import SafeBaseModel
 class AdminRole(models.TextChoices):
     SUPERADMIN = "superadmin", "Bosh admin"
     OPERATOR = "operator", "Admin (operator)"
+    MODERATOR = "moderator", "Moderator"
     OBSERVER = "observer", "Kuzatuvchi"
 
 
@@ -217,6 +218,198 @@ class Appeal(SafeBaseModel):
 
     def __str__(self):
         return f"#{self.id} {self.type} — {self.full_name}"
+
+
+# ============ «Talabalik davrim» tanlovi (TZ: foto/video challenge) ============
+
+class Nomination(models.TextChoices):
+    FOTO = "foto", "📸 Foto"
+    VIDEO = "video", "🎬 Video"
+
+
+class ContestStage(models.TextChoices):
+    """Tanlov bosqichi — qabul, nashr va ovoz oqimini boshqaradi."""
+    DRAFT = "draft", "Tayyorlanmoqda"
+    ACCEPTING = "accepting", "Arizalar qabuli"
+    MODERATION = "moderation", "Yakuniy moderatsiya"
+    PUBLISHING = "publishing", "Kanalga nashr"
+    VOTING = "voting", "Ovoz berish"
+    FINISHED = "finished", "Yakunlangan"
+
+
+class Contest(SafeBaseModel):
+    """Tanlov va uning sozlamalari (TZ 13: contest_settings).
+
+    Nizomda aniqlashtiriladigan parametrlar (media cheklovlari, g'oliblar soni,
+    ikkala nominatsiyada qatnashish) shu yerda — admin panel orqali o'zgaradi.
+    """
+    title = models.CharField(max_length=255)
+    slug = models.CharField(max_length=40, unique=True)
+    description = models.TextField(blank=True, null=True)
+
+    stage = models.CharField(
+        max_length=16, choices=ContestStage.choices, default=ContestStage.DRAFT
+    )
+    submission_deadline = models.DateTimeField()
+    voting_start_at = models.DateTimeField(null=True, blank=True)
+    voting_end_at = models.DateTimeField(null=True, blank=True)
+    voting_hours = models.IntegerField(default=48)
+
+    # Tanlov ishlari e'lon qilinadigan kanal (@username yoki -100... ID)
+    channel_id = models.CharField(max_length=64, blank=True, null=True)
+
+    # Media cheklovlari (TZ 5)
+    min_photos = models.IntegerField(default=1)
+    max_photos = models.IntegerField(default=3)
+    max_video_seconds = models.IntegerField(default=180)
+    max_video_mb = models.IntegerField(default=50)
+
+    # Nizom parametrlari (TZ 1)
+    allow_both_nominations = models.BooleanField(default=True)
+    winners_per_nomination = models.IntegerField(default=1)
+
+    rules_text = models.TextField(blank=True, null=True)
+    contact_text = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def is_accepting(self):
+        """Qabul ochiqmi — bosqich ham, muddat ham tekshiriladi (TZ 7)."""
+        from django.utils import timezone as _tz
+        return (
+            self.is_active
+            and self.stage == ContestStage.ACCEPTING
+            and _tz.now() < self.submission_deadline
+        )
+
+
+class ContestParticipant(SafeBaseModel):
+    """Tanlov ishtirokchisi anketasi (TZ 13: participants)."""
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, related_name="participants")
+    telegram_id = models.BigIntegerField()
+    username = models.CharField(max_length=64, blank=True, null=True)
+
+    full_name = models.CharField(max_length=120)
+    university = models.CharField(max_length=255)
+    faculty = models.CharField(max_length=255, blank=True, null=True)
+    study_year = models.CharField(max_length=40, blank=True, null=True)
+    phone = models.CharField(max_length=20)
+
+    # Nizom, mualliflik huquqi va e'lon qilishga rozilik vaqti (TZ 4.9)
+    consent_at = models.DateTimeField(null=True, blank=True)
+    is_blocked = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["contest", "telegram_id"], name="uniq_contest_participant"
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.full_name} ({self.university})"
+
+
+class EntryStatus(models.TextChoices):
+    DRAFT = "draft", "📝 To'ldirilmoqda"
+    MODERATION = "moderation_pending", "⏳ Moderatsiyada"
+    REVISION = "revision_requested", "🔄 Tuzatish so'ralgan"
+    APPROVED = "approved", "✅ Tasdiqlangan"
+    REJECTED = "rejected", "❌ Rad etilgan"
+    PUBLISHED = "published", "📢 Kanalda e'lon qilingan"
+    FINISHED = "finished", "🏆 Natija yakunlangan"
+
+
+class Entry(SafeBaseModel):
+    """Tanlov ishi — 1-3 foto yoki 1 video bitta ish sanaladi (TZ 13: entries)."""
+    contest = models.ForeignKey(Contest, on_delete=models.CASCADE, related_name="entries")
+    participant = models.ForeignKey(
+        ContestParticipant, on_delete=models.CASCADE, related_name="entries"
+    )
+    nomination = models.CharField(max_length=10, choices=Nomination.choices)
+    title = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    status = models.CharField(
+        max_length=24, choices=EntryStatus.choices, default=EntryStatus.DRAFT
+    )
+    submitted_at = models.DateTimeField(null=True, blank=True)
+    reject_reason = models.TextField(blank=True, null=True)
+    # Ovozlar soni — tugmada tez ko'rsatish uchun; haqiqiy manba `votes` jadvali
+    votes_count = models.IntegerField(default=0)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["participant", "nomination"], name="uniq_entry_per_nomination"
+            ),
+        ]
+
+    def __str__(self):
+        return f"{self.code} — {self.title or 'nomsiz'}"
+
+    @property
+    def code(self):
+        """Ariza raqami: TD-000125."""
+        return f"TD-{self.id:06d}"
+
+
+class EntryMedia(SafeBaseModel):
+    """Ish mediasi (TZ 13: entry_media). Fayl Telegram'da `file_id` bilan saqlanadi."""
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name="media")
+    file_id = models.CharField(max_length=255)
+    file_unique_id = models.CharField(max_length=128)
+    media_type = models.CharField(max_length=16)  # photo / video / document
+    position = models.IntegerField(default=0)
+    file_size = models.BigIntegerField(null=True, blank=True)
+    duration = models.IntegerField(null=True, blank=True)
+    mime_type = models.CharField(max_length=64, blank=True, null=True)
+
+    class Meta:
+        ordering = ["position", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["entry", "file_unique_id"], name="uniq_media_per_entry"
+            ),
+        ]
+
+
+class ModerationAction(models.TextChoices):
+    APPROVE = "approve", "✅ Qabul qilindi"
+    REJECT = "reject", "❌ Rad etildi"
+    REVISION = "revision", "🔄 Tuzatish so'raldi"
+
+
+class ModerationLog(SafeBaseModel):
+    """Moderator qarorlari jurnali (TZ 13: moderation_logs)."""
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name="moderation_logs")
+    moderator_id = models.BigIntegerField()
+    action = models.CharField(max_length=16, choices=ModerationAction.choices)
+    reason = models.TextField(blank=True, null=True)
+
+
+class Publication(SafeBaseModel):
+    """Kanalga e'lon (TZ 13: publications). OneToOne — takror joylanmaydi (TZ 8.6)."""
+    entry = models.OneToOneField(Entry, on_delete=models.CASCADE, related_name="publication")
+    channel_id = models.CharField(max_length=64)
+    message_id = models.BigIntegerField(null=True, blank=True)
+    vote_message_id = models.BigIntegerField(null=True, blank=True)
+    published_at = models.DateTimeField(null=True, blank=True)
+    post_url = models.TextField(blank=True, null=True)
+
+
+class Vote(SafeBaseModel):
+    """Ovoz (TZ 13: votes). UNIQUE(entry, voter) — bir foydalanuvchi bir marta."""
+    entry = models.ForeignKey(Entry, on_delete=models.CASCADE, related_name="votes")
+    voter_user_id = models.BigIntegerField()
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["entry", "voter_user_id"], name="uniq_vote_per_entry_voter"
+            ),
+        ]
 
 
 class ReminderLog(SafeBaseModel):

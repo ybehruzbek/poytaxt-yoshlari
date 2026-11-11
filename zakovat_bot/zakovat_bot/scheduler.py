@@ -12,6 +12,7 @@ from django.utils import timezone
 from zakovat_bot.models import Broadcast, BroadcastStatus
 from zakovat_bot.services.broadcasting import run_broadcast
 from zakovat_bot.services.chat_event import process_due_reminders
+from zakovat_bot.services.contest import close_submissions_if_due
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,11 @@ async def scheduler_loop(bot):
             await process_due_reminders(bot)
         except Exception:
             logger.exception("Eslatma yuborishda xato")
+        # Tanlov qabulini avtomatik yopish (TZ 7)
+        try:
+            await close_submissions_if_due(bot)
+        except Exception:
+            logger.exception("Tanlov qabulini yopishda xato")
         try:
             due = list(
                 Broadcast.objects.filter(

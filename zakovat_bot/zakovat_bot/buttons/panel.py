@@ -419,3 +419,101 @@ def appeal_detail_keyboard(appeal):
     kb.button(text="🔙 Ro'yxatga", callback_data="apadm_list:1:all")
     kb.adjust(1)
     return kb.as_markup()
+
+
+# ============ «Talabalik davrim» tanlovi ============
+
+def contest_main_keyboard(has_entry=False):
+    """Tanlovning bosh menyusi (TZ 3.2)."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📸🎬 Tanlovda ishtirok etish", callback_data="td_join")
+    kb.button(text="📋 Tanlov shartlari", callback_data="td_rules")
+    if has_entry:
+        kb.button(text="📂 Mening arizam", callback_data="td_my")
+    kb.button(text="🏆 Tanlov natijalari", callback_data="td_results")
+    kb.button(text="☎️ Bog'lanish", callback_data="td_contact")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def nomination_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📸 Foto", callback_data="td_nom:foto")
+    kb.button(text="🎬 Video", callback_data="td_nom:video")
+    kb.button(text="🔙 Orqaga", callback_data="td_menu")
+    kb.adjust(2, 1)
+    return kb.as_markup()
+
+
+def university_suggest_keyboard(names, typed):
+    """Qidiruv natijalari + «shu nom bilan davom etish» varianti."""
+    kb = InlineKeyboardBuilder()
+    for i, name in enumerate(names):
+        kb.button(text=name[:60], callback_data=f"td_uni:{i}")
+    kb.button(text=f"✍️ «{typed[:40]}» — shu nomni qoldiraman",
+              callback_data="td_uni:own")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def study_year_keyboard():
+    kb = InlineKeyboardBuilder()
+    for label in ("1-kurs", "2-kurs", "3-kurs", "4-kurs"):
+        kb.button(text=label, callback_data=f"td_year:{label}")
+    kb.button(text="Magistratura", callback_data="td_year:Magistratura")
+    kb.button(text="Boshqa", callback_data="td_year:Boshqa")
+    kb.adjust(2, 2, 2)
+    return kb.as_markup()
+
+
+def media_done_keyboard(count, limit, nomination):
+    """Media yuklash bosqichi: yuborilganlar soni va keyingi qadam."""
+    kb = InlineKeyboardBuilder()
+    if count:
+        kb.button(text=f"➡️ Davom etish ({count}/{limit})", callback_data="td_media_done")
+        kb.button(text="🔄 Mediani almashtirish", callback_data="td_media_reset")
+    kb.button(text="❌ Bekor qilish", callback_data="td_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def consent_keyboard():
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✅ Roziman", callback_data="td_consent")
+    kb.button(text="❌ Rozi emasman", callback_data="td_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def entry_confirm_keyboard(entry):
+    """Yakuniy tasdiqlash (TZ 5.3).
+
+    Tugmaga ariza id'si bog'lanadi — takroriy bosishda FSM holatiga tayanmasdan
+    arizani aniqlash va dublikatni rad etish uchun.
+    """
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✅ Arizani yuborish", callback_data=f"td_submit:{entry.id}")
+    kb.button(text="✏️ Ma'lumotni tahrirlash", callback_data="td_edit")
+    kb.button(text="🔄 Mediani almashtirish", callback_data="td_media_reset")
+    kb.button(text="❌ Bekor qilish", callback_data="td_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def my_entry_keyboard(entry, can_edit):
+    kb = InlineKeyboardBuilder()
+    if can_edit:
+        kb.button(text="✏️ Qayta topshirish", callback_data=f"td_resubmit:{entry.id}")
+    if getattr(entry, "publication", None) and entry.publication.post_url:
+        kb.button(text="📢 Kanaldagi postim", url=entry.publication.post_url)
+    kb.button(text="🔙 Orqaga", callback_data="td_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def vote_keyboard(entry):
+    """Kanal postidagi ovoz tugmasi (TZ 9.1)."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text=f"❤️ Ovoz berish — {entry.votes_count}",
+              callback_data=f"td_vote:{entry.id}")
+    return kb.as_markup()

@@ -25,21 +25,34 @@ async def start(message: Message,state: FSMContext) -> None:
     arg = parts[1].strip() if len(parts) > 1 else None
 
     from zakovat_bot.services.chat_event import event_by_slug
+    from zakovat_bot.handlers.contest_handler import begin as contest_begin
+    from zakovat_bot.services.contest import active_contest, contest_by_slug
 
     # Deep linklar admin tekshiruvidan OLDIN — adminlar ham oqimni sinay olsin
     if arg and arg.startswith("murojaat"):
         await appeal_begin(message, state, source=arg)
         return
 
-    # Tadbir deep-linki: `?start=<tadbir_slug>` (masalan brm_seminar, chat_09aug)
+    # Tanlov deep-linki: `?start=talabalik_davrim_2026`
+    if arg:
+        contest = contest_by_slug(arg)
+        if contest is not None:
+            await contest_begin(message, state, contest=contest, source=arg)
+            return
+
+    # Tadbir deep-linki: `?start=<tadbir_slug>` (masalan chat_09aug)
     if arg:
         event = event_by_slug(arg)
         if event is not None:
             await state.clear()
             await chat_begin(message, state, source=arg, event=event)
             return
-        # Slug mavjud, lekin tadbir yopilgan bo'lsa — tushunarli javob
+        # Slug mavjud, lekin tadbir yopilgan bo'lsa — joriy tanlovga yo'naltiramiz
         if ChatEvent.all_objects.filter(slug=arg).exists():
+            contest = active_contest()
+            if contest is not None:
+                await contest_begin(message, state, contest=contest)
+                return
             await message.answer(
                 "Ushbu tadbirga ro'yxatdan o'tish yopilgan.",
                 reply_markup=user_menu_keyboard(chat_active=False),
@@ -51,10 +64,14 @@ async def start(message: Message,state: FSMContext) -> None:
         await message.answer(text="Siz admin panelidasiz.",reply_markup=admin_main_keyboard(admin.role))
         return
 
-    # Oddiy /start: faol tadbir bo'lsa — ro'yxat darhol boshlanadi (TZ 2.4),
+    # Oddiy /start: faol tanlov bo'lsa — tanlov menyusi (TZ 2.4); keyin tadbir;
     # aks holda bosh menyu. Zakovat deep-linki (savol uuid) eski oqimda qoladi.
     if arg is None:
         await state.clear()
+        contest = active_contest()
+        if contest is not None:
+            await contest_begin(message, state, contest=contest)
+            return
         event = chat_active_event()
         if event is not None:
             await chat_begin(message, state, event=event)
