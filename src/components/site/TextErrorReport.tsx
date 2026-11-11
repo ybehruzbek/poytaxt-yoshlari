@@ -24,10 +24,13 @@ export function TextErrorReport() {
       const s = window.getSelection()
       const text = s?.toString().trim() ?? ''
       if (!text) return
-      const node = s?.anchorNode?.parentElement?.closest('p, li, h1, h2, h3, h4, td, dd, span, a')
+      // atrofidagi matn: belgilangan qismni töliq öz ičiga olgan eng yaqin element
+      const anc = s?.rangeCount ? s.getRangeAt(0).commonAncestorContainer : null
+      const base = anc instanceof Element ? anc : anc?.parentElement
+      const node = base?.closest('p, li, h1, h2, h3, h4, td, dd, blockquote, article, section') ?? base
       e.preventDefault()
       setSel({
-        text: text.slice(0, 1000),
+        text: text.slice(0, 300),
         context: (node?.textContent ?? '').trim().slice(0, 2000),
       })
       setComment('')

@@ -32,15 +32,15 @@ export async function reportTextError(input: {
   const page = String(input.page ?? '')
     .trim()
     .slice(0, 300)
-  if (!text || !page.startsWith('/'))
-    return { ok: false, message: 'Avval xato bor matnni belgilang.' }
-  // boşqaruv belgilari yöq, belgilangan matn atrofidagi matnning bir qismi bölişi kerak
-  if (/[\u0000-\u0008\u000b-\u001f]/.test(text + comment) || (context && !norm(context).includes(norm(text).slice(0, 30))))
-    return { ok: false, message: 'Xabarni yuborib bölmadi. Iltimos, matnni qayta belgilang.' }
-
   const ip = clientIp(await headers())
   if (rateLimited(ip, 'text-error'))
     return { ok: false, message: 'Juda köp uriniş. Iltimos, birozdan keyin qayta yuboring.' }
+
+  const bad = { ok: false, message: 'Xabarni yuborib bölmadi. Iltimos, matnni qayta belgilang.' }
+  if (!text || text.length > 300 || !page.startsWith('/')) return bad
+  // belgilangan matn sahifadagi atrofidagi matnning töliq bir qismi bölişi şart; boşqaruv belgilari yöq
+  if (!context || !norm(context).includes(norm(text))) return bad
+  if (/[\u0000-\u0008\u000b-\u001f]/.test(text + comment)) return bad
 
   try {
     const payload = await getPayload({ config })
