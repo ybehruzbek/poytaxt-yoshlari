@@ -773,18 +773,6 @@ a:hover .bt-more {
   }
 }
 
-/* Kartada yetakçining lavozimi yoki kursi (2 qatorgaça) */
-.bt-lrole {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-  margin-top: 8px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted);
-}
 /* “Yana … ta yetakçini körsatiş” */
 .bt-more-row {
   display: flex;

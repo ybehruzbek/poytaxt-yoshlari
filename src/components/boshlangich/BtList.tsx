@@ -58,11 +58,6 @@ function Lead({ o, base }: { o: Otm; base: string }) {
           {o.otm}
         </span>
         <Name3 n={L.name} className="bt-name" />
-        {L.role && (
-          <p className="bt-lrole" title={L.role}>
-            {L.role}
-          </p>
-        )}
         <More />
       </div>
       <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />
