@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import { INTL, PRIVILEGES, PROJECTS } from './data'
+import { FlagsMarquee } from './FlagsMarquee'
 
 /* ======================= Mukofot va imtiyozlar ======================= */
 
@@ -87,12 +88,7 @@ export function IntlB() {
           <p>{INTL.assoc}</p>
         </div>
       </div>
-      <div className="ix-b-flags" aria-label="Hamkor mamlakatlar bayroqlari">
-        <div>
-          <img src={INTL.flags} alt="" />
-          <img src={INTL.flags} alt="" />
-        </div>
-      </div>
+      <FlagsMarquee />
     </div>
   )
 }

@@ -10,6 +10,7 @@ import '../../../ittifoq.css'
 import '../../../ittifoq-alt2.css'
 import '../../../ittifoq-alt3.css'
 import '../../../reveal.css'
+import '../../../ittifoq-flags.css'
 
 export const metadata: Metadata = {
   title: 'Özbekiston yoşlar ittifoqi — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi',
@@ -55,7 +56,7 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
         words=".it-mission"
         counters=".it-stats b, .it-more b"
         images=".it-mosaic img"
-        skip=".crumbs, .it-sib, [role=tablist]"
+        skip=".crumbs, .it-sib, [role=tablist], .fm"
       />
     </>
   )

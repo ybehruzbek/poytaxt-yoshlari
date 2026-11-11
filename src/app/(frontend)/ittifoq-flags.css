@@ -1,0 +1,98 @@
+/* =====================================================================
+   Hamkor mamlakatlar bayroqlari (FlagsMarquee.tsx): ikki qator dumaloq
+   bayroqli kapsulalar qarama-qarşi tomonga uzluksiz aylanadi.
+   Lenta ičida ro'yxat ikki marta; har kapsulaning öng çeti (margin) bir xil,
+   şuning uçun -50% surilişda bölak qolmaydi va ulanish körinmaydi.
+   ===================================================================== */
+.fm {
+  margin-top: 40px;
+  display: grid;
+  gap: 14px;
+  padding: 26px 0;
+  border-radius: 28px;
+  background: var(--soft);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.fm-row {
+  overflow: hidden;
+}
+.fm-track {
+  list-style: none;
+  display: flex;
+  width: max-content;
+  animation: fm-move var(--dur, 40s) linear infinite;
+}
+.fm-row.rev .fm-track {
+  animation-direction: reverse;
+}
+.fm:hover .fm-track {
+  animation-play-state: paused;
+}
+@keyframes fm-move {
+  to {
+    translate: -50% 0;
+  }
+}
+.fm-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 14px;
+  padding: 8px 22px 8px 8px;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 8px 22px rgba(83, 40, 34, 0.08);
+  font: 700 16px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+  transition:
+    translate 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s;
+}
+.fm-chip:hover {
+  translate: 0 -3px;
+  box-shadow: 0 14px 30px rgba(83, 40, 34, 0.14);
+}
+/* dumaloq bayroq: nozik halqa va yuqoridan yumşoq nur (“şişa” tugma) */
+.fm-flag {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+  box-shadow: 0 0 0 1px rgba(83, 40, 34, 0.12);
+}
+.fm-flag img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.fm-flag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(120% 90% at 30% 10%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0) 55%);
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.12);
+}
+@media (max-width: 640px) {
+  .fm {
+    padding: 18px 0;
+    gap: 10px;
+  }
+  .fm-chip {
+    font-size: 14px;
+    padding-right: 16px;
+  }
+  .fm-flag {
+    width: 32px;
+    height: 32px;
+  }
+}
