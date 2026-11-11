@@ -6,29 +6,64 @@ import { IC, Ic, type Member, TEAM } from './team'
 
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 
+/** “Duşanba — juma · 09:00 — 18:00” → “Duşanba–juma, 09:00–18:00” */
+const dash = (t: string) => t.replace(/\s*—\s*/g, '–').replace(' · ', ', ')
+
+/** Sarlavha, qisqa izoh va Kengaşning umumiy aloqa maʼlumotlari (kartalarda takrorlanmaydi) */
 function Head() {
   return (
-    <div className="sec-head hk-jm-head">
-      <h1 className="h2 pg-title">Toşkent şahar hududiy Kengaşi jamoasi</h1>
+    <div className="hk-jm-head">
+      <div className="sec-head">
+        <h1 className="h2 pg-title">Toşkent şahar hududiy Kengaşi jamoasi</h1>
+      </div>
+      <p className="z5-lead">
+        Kengaş raisi, bölim boşliqlari va mutaxassislar. Har bir xodimning vazifalari, qabul kuni va
+        xonasi bilan şu yerda tanişişingiz mumkin.
+      </p>
+      <ul className="z5-contact" aria-label="Kengaş bilan boğlaniş">
+        <li>
+          <Ic d={IC.phone} />
+          <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+        </li>
+        <li>
+          <Ic d={IC.mail} />
+          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+        </li>
+        <li>
+          <Ic d={IC.pin} />
+          <a href={CONTACT.map} target="_blank" rel="noopener noreferrer">
+            {CONTACT.address}
+          </a>
+        </li>
+        <li>
+          <Ic d={IC.clock} />
+          <span>{dash(CONTACT.hours)}</span>
+        </li>
+      </ul>
     </div>
   )
 }
 
-/** Telefon va qabul — matn; poçta (kartalarda) va ijtimoiy tarmoqlar — dumaloq ikonkalar */
+/**
+ * Aloqa: şaxsiy telefon/poçta (bölsa), qabul kuni va xonasi, ijtimoiy tarmoqlar.
+ * Kengaşning umumiy telefoni va poçtasi kartalarda takrorlanmaydi (sahifa boşida bir marta) —
+ * faqat vazifalar panelida (`full`) körsatiladi.
+ */
 function Reach({ m, full, children }: { m: Member; full?: boolean; children?: ReactNode }) {
-  const phone = m.phone ?? CONTACT.phone
-  const email = m.email ?? CONTACT.email
+  const phone = m.phone ?? (full ? CONTACT.phone : undefined)
+  const email = m.email ?? (full ? CONTACT.email : undefined)
   return (
     <div className="z5-reach">
-      <a href={tel(phone)}>{phone}</a>
-      {full && <a href={`mailto:${email}`}>{email}</a>}
-      {m.reception && <span>Qabul: {m.reception}</span>}
+      {phone && <a href={tel(phone)}>{phone}</a>}
+      {email && <a href={`mailto:${email}`}>{email}</a>}
+      {m.reception ? (
+        <span className="z5-rec">
+          <b>Qabul:</b> {m.reception}
+        </span>
+      ) : (
+        m.room && <span className="z5-rec">{m.room}</span>
+      )}
       <div className="z5-soc">
-        {!full && (
-          <a href={`mailto:${email}`} aria-label={email} title={email}>
-            <Ic d={IC.mail} />
-          </a>
-        )}
         {m.socials?.map((x) => (
           <a
             key={x.net}
@@ -83,9 +118,10 @@ function Duties({ m, id }: { m: Member; id: string }) {
           <div>
             <Name n={m.name} />
             <p>{m.role}</p>
+            {m.dept && <small>{m.dept}</small>}
           </div>
         </div>
-        <h4>Funksional vazifalari</h4>
+        <h4>{m.deptDuties ? 'Bölim vazifalari' : 'Funksional vazifalari'}</h4>
         <ul>
           {m.duties.map((x) => (
             <li key={x}>{x}</li>
@@ -121,8 +157,31 @@ function Hero({ m, id }: { m: Member; id: string }) {
       <div className="z5-hero-txt">
         <Name n={m.name} />
         <p>{m.role}</p>
-        <Reach m={m} full />
-        <Duties m={m} id={id} />
+        {m.reception && (
+          <p className="z5-hero-rec">
+            <Ic d={IC.clock} />
+            <span>
+              <small>Fuqarolar qabuli</small>
+              {m.reception}
+            </span>
+          </p>
+        )}
+        <div className="z5-hero-act">
+          <Duties m={m} id={id} />
+          {m.socials?.map((x) => (
+            <a
+              key={x.net}
+              className="z5-pill"
+              href={x.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`${x.net}: ${x.handle}`}
+            >
+              <Ic d={IC[x.net]} />
+              <span className="sr-only">{x.net}</span>
+            </a>
+          ))}
+        </div>
       </div>
     </article>
   )
@@ -134,7 +193,7 @@ function Card({ m, id }: { m: Member; id: string }) {
       <div className="z5-card-txt">
         <Name n={m.name} />
         <p>{m.role}</p>
-        {m.dept && <small title={m.dept}>{m.dept}</small>}
+        {m.deptShort && <small title={m.dept}>{m.deptShort}</small>}
         <Reach m={m}>
           <Duties m={m} id={id} />
         </Reach>
