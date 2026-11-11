@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan logotiplar */
 import { ORGS } from './data'
+import { ShowMore } from './ShowMore'
 
 const TITLE = 'Ittifoq taʼsisçiligidagi taşkilotlar'
 
@@ -16,7 +17,7 @@ export function OrgsD() {
           <h2 className="h2">{TITLE}</h2>
         </div>
         <p className="ol-lead">{ORGS.lead}</p>
-        <div className="ol-d">
+        <div className="ol-d" id="taskilotlar-royxat">
           {ORGS.ngos.map((o) => (
             <article key={o.t}>
               <Logo src={o.logo} alt={`${o.t} logotipi`} className="ol-d-logo" />
@@ -25,6 +26,7 @@ export function OrgsD() {
             </article>
           ))}
         </div>
+        <ShowMore target="taskilotlar-royxat" noun="taşkilot" />
       </div>
     </section>
   )

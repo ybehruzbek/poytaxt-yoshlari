@@ -22,3 +22,21 @@
   justify-content: center;
   margin-top: 28px;
 }
+
+/* Ittifoq taʼsisçiligidagi taşkilotlar: dastlab 2 qator (5 / 3 / 2 ustunli törga mos), qolgani tugma bilan */
+.ol-d:not([data-open]) > :nth-child(n + 11) {
+  display: none;
+}
+@media (max-width: 1100px) {
+  .ol-d:not([data-open]) > :nth-child(n + 7) {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .ol-d:not([data-open]) > :nth-child(n + 5) {
+    display: none;
+  }
+}
+.ol-d[data-open] > :nth-child(n + 5) {
+  animation: icb-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
