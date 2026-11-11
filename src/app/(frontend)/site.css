@@ -415,3 +415,30 @@ html,body{overflow-x:clip}
 
 /* rangli çiplarda kulrang çegara kerak emas */
 .chip.b,.chip.g,.chip.o,.chip.p,.chip.y,.featured .chip,.oc .im .chip{border-color:transparent}
+
+/* ---------- Hero: pastga suriş belgisi (ScrollCue) ---------- */
+.hero{position:relative}
+.cue{position:fixed;left:50%;bottom:22px;translate:-50% 0;z-index:3;transition:opacity .4s,translate .4s}
+.cue.cue-gone{opacity:0;translate:-50% 12px;pointer-events:none}
+.cue button{border:0;background:none;padding:0;cursor:pointer;color:var(--navy);font:inherit}
+/* A — siçqonça */
+.cue-a{display:flex;flex-direction:column;align-items:center;gap:10px}
+.cue-mouse{position:relative;width:26px;height:42px;border:2px solid var(--navy);border-radius:14px}
+.cue-mouse i{position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--navy);animation:cue-wheel 1.8s cubic-bezier(.6,0,.4,1) infinite}
+.cue-a-t{font:600 12px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cue-a:hover .cue-mouse{border-color:var(--orange)}
+@keyframes cue-wheel{0%{opacity:0;translate:0 -4px}30%{opacity:1}70%{opacity:1;translate:0 10px}100%{opacity:0;translate:0 12px}}
+/* B — aylana yozuv */
+.cue-b{position:relative;display:grid;place-items:center;width:112px;height:112px}
+.cue-ring{position:absolute;inset:0;width:100%;height:100%;animation:cue-spin 14s linear infinite}
+.cue-ring text{font:700 10.5px/1 var(--f-head);letter-spacing:.12em;fill:var(--navy)}
+.cue-b-ic{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--navy);color:#fff;transition:background .2s,color .2s}
+.cue-b:hover .cue-b-ic{background:var(--yellow);color:var(--navy)}
+.cue-b:hover .cue-ring{animation-duration:6s}
+@keyframes cue-spin{to{rotate:360deg}}
+/* C — sariq tugma */
+.cue-c{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--yellow) !important;box-shadow:0 10px 24px rgba(83,40,34,.14);animation:cue-bob 2.2s ease-in-out infinite;transition:background .2s,color .2s}
+.cue-c:hover{background:var(--navy) !important;color:#fff !important}
+@keyframes cue-bob{50%{translate:0 8px}}
+@media (max-width:640px){.cue{bottom:18px}.cue-b{width:92px;height:92px}.cue-b-ic{width:42px;height:42px}.cue-c{width:48px;height:48px}}
+@media (prefers-reduced-motion:reduce){.cue-mouse i,.cue-ring,.cue-c{animation:none}}

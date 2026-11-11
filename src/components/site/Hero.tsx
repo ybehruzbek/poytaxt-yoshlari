@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
 import { CollageScaler } from './CollageScaler'
+import { ScrollCue } from './ScrollCue'
 
 /** Bosh ekran: sarlavha, tugma va kollaj. ittifoq/index.html prototipidan avtomatik ko'chirilgan — dizaynni o'zgartirmang. */
 export function Hero({ locale }: { locale: Locale }) {
@@ -46,6 +47,7 @@ export function Hero({ locale }: { locale: Locale }) {
       </div>
     </div>
   </div>
+  <ScrollCue />
 </section>
     </>
   )
