@@ -13,8 +13,6 @@
  */
 const WINDOW = 10 * 60 * 1000
 const MAX_KEYS = 10_000 // har bir funksiya uçun alohida IP kalitlari çegarasi
-const TOTAL_LIMIT = 150 // ikkinçi darajali funksiyalar (matndagi xato) uçun jami; murojaatlarga taʼsir qilmaydi
-let totalAll: number[] = []
 
 /** Har bir funksiya öz hisoblagiçi bilan — biri ikkinçisining limitini egallab qöya olmaydi */
 type Bucket = {
@@ -44,10 +42,6 @@ export function rateLimited(ip: string, scope: 'appeal' | 'text-error' = 'appeal
   const b = scope === 'appeal' ? bucket(scope, 5, 60) : bucket(scope, 10, 120)
   const now = Date.now()
 
-  // 0) jami chegara faqat ikkinçi darajali funksiyalarga — murojaatlar uçun joy doim ajratilgan
-  totalAll = totalAll.filter((t) => now - t < WINDOW)
-  if (scope !== 'appeal' && totalAll.length >= TOTAL_LIMIT) return true
-
   // 1) funksiya chegarasi — IP'ga bog'liq emas
   b.all = b.all.filter((t) => now - t < WINDOW)
   if (b.all.length >= b.global) return true
@@ -64,7 +58,6 @@ export function rateLimited(ip: string, scope: 'appeal' | 'text-error' = 'appeal
   recent.push(now)
   b.hits.set(ip, recent)
   b.all.push(now)
-  if (scope !== 'appeal') totalAll.push(now)
   return false
 }
 
