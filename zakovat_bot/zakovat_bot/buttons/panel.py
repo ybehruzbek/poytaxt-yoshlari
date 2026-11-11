@@ -608,6 +608,11 @@ def contest_settings_keyboard(contest):
     kb = InlineKeyboardBuilder()
     kb.button(text="📅 Qabul muddatini o'zgartirish", callback_data="tdadm_set_dl")
     kb.button(text="📢 Tanlov kanalini belgilash", callback_data="tdadm_set_ch")
+    if contest.stage != "accepting":
+        kb.button(text="🔄 Arizalar qabulini qayta ochish",
+                  callback_data="tdadm_reopen")
+    kb.button(text="🧹 Sinov ma'lumotlarini tozalash",
+              callback_data="tdadm_reset")
     if contest.is_active:
         kb.button(text="🔕 Tanlovni o'chirish", callback_data="tdadm_toggle")
     else:
@@ -628,6 +633,9 @@ def publish_menu_keyboard(ready_count, published_count, contest):
                   callback_data="tdadm_vote_start")
     if contest.voting_start_at:
         kb.button(text="🏆 Natijalar", callback_data="tdadm_results")
+    if contest.stage == "voting":
+        kb.button(text="⏹ Ovoz berishni to'xtatish",
+                  callback_data="tdadm_vote_stop")
     kb.button(text="🔙 Orqaga", callback_data="tdadm_menu")
     kb.adjust(1)
     return kb.as_markup()
@@ -647,5 +655,14 @@ def vote_start_confirm_keyboard(hours):
     kb.button(text=f"🗳 Ha, {hours} soatlik ovoz berishni boshlash",
               callback_data="tdadm_vote_go")
     kb.button(text="❌ Bekor qilish", callback_data="tdadm_pub_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def confirm_action_keyboard(action, label, back="tdadm_settings"):
+    """Xavfli amal uchun tasdiqlash."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text=label, callback_data=action)
+    kb.button(text="❌ Bekor qilish", callback_data=back)
     kb.adjust(1)
     return kb.as_markup()

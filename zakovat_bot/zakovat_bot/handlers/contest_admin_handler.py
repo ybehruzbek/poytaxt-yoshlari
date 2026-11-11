@@ -19,6 +19,7 @@ from zakovat_bot.buttons.panel import (
     contest_settings_keyboard,
     entries_list_keyboard,
     entry_admin_keyboard,
+    confirm_action_keyboard,
     moderation_keyboard,
     post_edit_keyboard,
     publish_confirm_keyboard,
@@ -29,12 +30,15 @@ from zakovat_bot.dispatcher import bot, dp
 from zakovat_bot.models import (
     AdminRole,
     Contest,
+    ContestParticipant,
     ContestStage,
     Entry,
     EntryStatus,
     ModerationAction,
     ModerationLog,
     Nomination,
+    Publication,
+    Vote,
 )
 from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.contest import (
@@ -927,3 +931,165 @@ async def tdadm_edit_fak(message: Message, state: FSMContext):
 @dp.message(StateFilter(ContestAdminState.edit_title))
 async def tdadm_edit_title(message: Message, state: FSMContext):
     await _save_edit(message, state, "nom")
+
+
+# ============ Bosqichni boshqarish va sinovni tozalash ============
+
+@dp.callback_query(F.data == "tdadm_vote_stop")
+async def tdadm_vote_stop_ask(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    await callback.message.answer(
+        "⏹ <b>Ovoz berishni to'xtatish</b>\n\n"
+        "Ovoz qabul qilish darhol to'xtaydi, berilgan ovozlar saqlanadi.\n"
+        "Kerak bo'lsa, keyin yangidan boshlash mumkin.",
+        reply_markup=confirm_action_keyboard(
+            "tdadm_vote_stop_go", "⏹ Ha, to'xtatilsin", back="tdadm_pub_menu"),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_vote_stop_go")
+async def tdadm_vote_stop_go(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    contest.stage = ContestStage.FINISHED
+    contest.voting_end_at = timezone.now()
+    contest.save(update_fields=["stage", "voting_end_at"])
+    log_action(callback.from_user.id, "tanlov_ovoz_toxtatildi", contest.slug)
+    await callback.message.answer(
+        "⏹ Ovoz berish to'xtatildi. Ovozlar saqlanib qoldi.",
+        reply_markup=back_to("tdadm_pub_menu"),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_reopen")
+async def tdadm_reopen_ask(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    warn = ""
+    if contest.submission_deadline <= timezone.now():
+        warn = ("\n\n⚠️ Qabul muddati o'tib ketgan — qayta ochgandan keyin "
+                "«📅 Qabul muddatini o'zgartirish» orqali yangi sana qo'ying, "
+                "aks holda arizalar baribir qabul qilinmaydi.")
+    await callback.message.answer(
+        "🔄 <b>Arizalar qabulini qayta ochish</b>\n\n"
+        "Tanlov yana «arizalar qabuli» bosqichiga qaytadi va ishtirokchilar "
+        "material yubora oladi.\n"
+        "Ovoz berish vaqtlari bekor qilinadi (keyin yangidan boshlanadi), "
+        "berilgan ovozlar va e'lon qilingan postlar saqlanadi." + warn,
+        reply_markup=confirm_action_keyboard(
+            "tdadm_reopen_go", "🔄 Ha, qabulni ochish"),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_reopen_go")
+async def tdadm_reopen_go(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    contest.stage = ContestStage.ACCEPTING
+    contest.voting_start_at = None
+    contest.voting_end_at = None
+    contest.is_active = True
+    contest.save(update_fields=["stage", "voting_start_at", "voting_end_at",
+                                "is_active"])
+    log_action(callback.from_user.id, "tanlov_qabul_qayta_ochildi", contest.slug)
+    status = ("✅ Arizalar qabul qilinmoqda."
+              if contest.is_accepting else
+              "⚠️ Qabul muddati o'tgan — sanani yangilang.")
+    await callback.message.answer(
+        f"🔄 Tanlov «arizalar qabuli» bosqichiga qaytarildi.\n\n{status}",
+        reply_markup=back_to("tdadm_settings"),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_reset")
+async def tdadm_reset_ask(callback: CallbackQuery):
+    """Sinovdan keyin tanlovni toza holatga qaytarish (faqat bosh admin)."""
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    entries = Entry.objects.filter(contest=contest).count()
+    votes = Vote.objects.filter(entry__contest=contest).count()
+    people = ContestParticipant.objects.filter(contest=contest).count()
+    posts = Publication.objects.filter(entry__contest=contest).count()
+    await callback.message.answer(
+        "🧹 <b>Sinov ma'lumotlarini tozalash</b>\n\n"
+        f"O'chiriladi:\n"
+        f"• {entries} ta ariza\n"
+        f"• {people} ta ishtirokchi anketasi\n"
+        f"• {votes} ta ovoz\n"
+        f"• {posts} ta nashr yozuvi\n\n"
+        "Bot kanalga joylagan sinov postlarini ham o'chirishga harakat "
+        "qiladi (48 soat ichidagilarini).\n\n"
+        "⚠️ <b>Bu amalni ortga qaytarib bo'lmaydi.</b> Haqiqiy tanlov "
+        "boshlangach bu tugmani bosmang!",
+        reply_markup=confirm_action_keyboard(
+            "tdadm_reset_go", "🧹 Ha, hammasini o'chirish"),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_reset_go")
+async def tdadm_reset_go(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.SUPERADMIN):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+
+    # Kanaldagi sinov postlarini o'chirishga harakat qilamiz
+    deleted_posts, failed_posts = 0, 0
+    for pub in Publication.objects.filter(entry__contest=contest):
+        for msg_id in {pub.message_id, pub.vote_message_id}:
+            if not msg_id:
+                continue
+            try:
+                await bot.delete_message(chat_id=pub.channel_id,
+                                         message_id=msg_id)
+                deleted_posts += 1
+            except Exception:
+                failed_posts += 1
+
+    entries = Entry.objects.filter(contest=contest).count()
+    people = ContestParticipant.objects.filter(contest=contest).count()
+    # Ariza o'chirilganda media, ovoz va nashr yozuvlari ham o'chadi (CASCADE)
+    Entry.all_objects.filter(contest=contest).delete()
+    ContestParticipant.all_objects.filter(contest=contest).delete()
+
+    contest.stage = ContestStage.ACCEPTING
+    contest.voting_start_at = None
+    contest.voting_end_at = None
+    contest.save(update_fields=["stage", "voting_start_at", "voting_end_at"])
+    log_action(callback.from_user.id, "tanlov_sinov_tozalandi",
+               f"{entries} ariza, {people} ishtirokchi")
+
+    note = ""
+    if failed_posts:
+        note = (f"\n\n⚠️ {failed_posts} ta kanal xabarini o'chirib bo'lmadi "
+                "(48 soatdan eski yoki huquq yetmaydi) — ularni kanalda "
+                "qo'lda o'chiring.")
+    await callback.message.answer(
+        f"🧹 Tozalandi: {entries} ta ariza, {people} ta anketa.\n"
+        f"Kanaldan o'chirildi: {deleted_posts} ta xabar.{note}\n\n"
+        "Tanlov «arizalar qabuli» bosqichiga qaytarildi.",
+        reply_markup=back_to("tdadm_menu"),
+    )

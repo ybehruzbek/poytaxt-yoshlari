@@ -2024,6 +2024,79 @@ async def _run_all(saved_event_ids):
     tied_entry.delete()
     tie_participant.delete()
 
+    # ---------- 23. Bosqichni boshqarish va sinovni tozalash ----------
+    print("23) Tanlov: bosqich boshqaruvi")
+
+    # Ovoz berishni to'xtatish
+    contest.stage = ContestStage.VOTING
+    contest.voting_start_at = djtz.now() - timedelta(hours=1)
+    contest.voting_end_at = djtz.now() + timedelta(hours=47)
+    contest.save(update_fields=["stage", "voting_start_at", "voting_end_at"])
+    check("ovoz berish ochiq edi", pub_service.voting_is_open(contest))
+
+    cb = FakeCallback("tdadm_vote_stop_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_vote_stop_go(cb)
+    contest.refresh_from_db()
+    check("ovoz berish to'xtatildi",
+          contest.stage == ContestStage.FINISHED
+          and not pub_service.voting_is_open(contest))
+    check("berilgan ovozlar saqlandi",
+          Vote.objects.filter(entry__contest=contest).exists())
+
+    # Qabulni qayta ochish — sinovdan keyin eng kerakli amal
+    check("qayta ochishdan oldin qabul yopiq", not contest.is_accepting)
+    contest.submission_deadline = djtz.now() + timedelta(days=3)
+    contest.save(update_fields=["submission_deadline"])
+    cb = FakeCallback("tdadm_reopen_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_reopen_go(cb)
+    contest.refresh_from_db()
+    check("qabul qayta ochildi",
+          contest.stage == ContestStage.ACCEPTING and contest.is_accepting
+          and contest.voting_start_at is None)
+    check("foydalanuvchiga qabul ochiq ko'rinadi",
+          "qabul qilinmoqda" in cb.message.texts().lower()
+          or contest.is_accepting)
+
+    # Qayta ochilgandan keyin yangi ariza topshirish mumkin
+    st_new = FakeState()
+    m = FakeMessage(USER1, text="/start smoke_td")
+    await user_handler.start(m, st_new)
+    check("qayta ochilgach bot material qabul qiladi",
+          "Qolgan vaqt" in m.texts() or "qabuli" in m.texts(), m.texts()[:80])
+
+    # Kuzatuvchi bu amallarni bajara olmaydi
+    cb = FakeCallback("tdadm_reopen_go", NOBODY, message=FakeMessage(NOBODY))
+    await contest_admin_handler.tdadm_reopen_go(cb)
+    check("kuzatuvchi qabulni ocha olmaydi",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+    cb = FakeCallback("tdadm_reset_go", OPER, message=FakeMessage(OPER))
+    await contest_admin_handler.tdadm_reset_go(cb)
+    check("operator sinov tozalay olmaydi (faqat bosh admin)",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+
+    # Sinov ma'lumotlarini tozalash
+    cb = FakeCallback("tdadm_reset", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_reset_ask(cb)
+    check("tozalashdan oldin nima o'chishi ko'rsatildi",
+          "ta ariza" in cb.message.texts()
+          and "ortga qaytarib bo'lmaydi" in cb.message.texts())
+
+    entries_before = Entry.objects.filter(contest=contest).count()
+    check("tozalashdan oldin arizalar bor edi", entries_before > 0)
+    cb = FakeCallback("tdadm_reset_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_reset_go(cb)
+    contest.refresh_from_db()
+    check("sinov arizalari tozalandi",
+          Entry.objects.filter(contest=contest).count() == 0
+          and ContestParticipant.objects.filter(contest=contest).count() == 0)
+    check("sinov ovozlari va nashrlari ham tozalandi",
+          not Vote.objects.filter(entry__contest=contest).exists()
+          and not Publication.objects.filter(entry__contest=contest).exists())
+    check("kanaldagi sinov postlari o'chirildi",
+          any(k == "delete" for k, *_ in fake_bot.calls))
+    check("tozalashdan keyin tanlov qabul bosqichida",
+          contest.stage == ContestStage.ACCEPTING)
+
     channel_handler.check_bot_is_admin = real_check
     cleanup()
 
