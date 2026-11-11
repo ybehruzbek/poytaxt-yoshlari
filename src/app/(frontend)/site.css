@@ -42,6 +42,9 @@ h1,h2,h3,.rh{font-family:var(--f-head)}
 
 /* ---------- Header ---------- */
 .hero{background:var(--soft);padding-top:118px}
+/* hero birinçi ekranni töliq egallaydi — pastdagi oq bölim kirişda körinmaydi */
+.hero{min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+.hero>.wrap{flex:1 0 auto;width:100%;display:flex;flex-direction:column;justify-content:center}
 .header{display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative}
 .logo img{height:84px;width:auto}
 .nav{display:flex;gap:32px;font-size:16px;line-height:1.4}
