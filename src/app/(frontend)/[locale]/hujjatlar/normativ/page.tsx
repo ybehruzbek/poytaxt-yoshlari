@@ -17,5 +17,5 @@ export default async function NormativRoute(props: { params: Promise<{ locale: L
   const { locale } = await props.params
   const crumbs = <PageCrumbs locale={locale} path="/hujjatlar/normativ" />
 
-  return <Content crumbs={crumbs} />
+  return <Content crumbs={crumbs} locale={locale} />
 }

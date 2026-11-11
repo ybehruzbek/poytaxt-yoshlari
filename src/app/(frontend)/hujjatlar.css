@@ -239,3 +239,75 @@ a.nd-b-row:hover {
   margin-top: 10px;
   font-size: 17px;
 }
+
+/* ---------- Imkoniyatlar: yoşlar qatlami böyiça saralaş ---------- */
+.nd-aud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.nd-aud-l {
+  margin-right: 4px;
+  font: 600 14px/1 var(--f-body);
+  color: var(--muted);
+}
+.nd-aud button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 8px 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #fff;
+  font: 600 14px/1 var(--f-head);
+  color: var(--navy);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.nd-aud button b {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background: var(--line);
+  font-size: 12px;
+}
+.nd-aud button:hover {
+  border-color: var(--navy);
+}
+.nd-aud button[aria-pressed='true'] {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+.nd-aud button[aria-pressed='true'] b {
+  background: rgba(255, 255, 255, 0.18);
+}
+.nd-for {
+  margin-top: 8px;
+  font: 600 12.5px/1.4 var(--f-body);
+  color: var(--blue);
+}
+@media (max-width: 640px) {
+  .nd-aud {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -16px;
+    padding: 0 16px 4px;
+    scrollbar-width: none;
+  }
+  .nd-aud button {
+    flex: none;
+  }
+  .nd-aud-l {
+    flex: none;
+  }
+}
