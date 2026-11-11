@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { IttifoqPage as Content } from '@/components/ittifoq/IttifoqPage'
+import { RevealMotion } from '@/components/site/RevealMotion'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
 import '../../../ittifoq-alt2.css'
 import '../../../ittifoq-alt3.css'
+import '../../../reveal.css'
 
 export const metadata: Metadata = {
   title: 'Özbekiston yoşlar ittifoqi — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi',
@@ -45,5 +47,16 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
     </div>
   )
 
-  return <Content L={L} crumbs={crumbs} siblings={siblings} />
+  return (
+    <>
+      <Content L={L} crumbs={crumbs} siblings={siblings} />
+      <RevealMotion
+        root=".it"
+        words=".it-mission"
+        counters=".it-stats b, .it-more b"
+        images=".it-mosaic img"
+        skip=".crumbs, .it-sib, [role=tablist]"
+      />
+    </>
+  )
 }
