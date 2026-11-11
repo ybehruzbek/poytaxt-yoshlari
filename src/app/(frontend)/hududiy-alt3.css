@@ -820,3 +820,19 @@
     height: 84px;
   }
 }
+
+/* Bölimning uzun rasmiy nomi kartada 3 qatorgaça, davomi “…” (töliği siçqonça ustida va vazifalar panelida) */
+.z5-card-txt > small,
+.kc-tag,
+.kd-txt > p span,
+.ke-txt small {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.kd-txt > p span {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}

@@ -95,7 +95,7 @@ function Duties({ m, id }: { m: Member; id: string }) {
           <div>
             <Name n={m.name} />
             <p>{m.role}</p>
-            {m.dept && <small>{m.dept}</small>}
+            {m.dept && <small title={m.dept}>{m.dept}</small>}
           </div>
         </div>
         <h4>{m.deptDuties ? 'Bölim vazifalari' : 'Funksional vazifalari'}</h4>
@@ -147,7 +147,7 @@ function Card({ m, id }: { m: Member; id: string }) {
       <div className="z5-card-txt">
         <Name n={m.name} />
         <p>{m.role}</p>
-        {m.dept && <small>{m.dept}</small>}
+        {m.dept && <small title={m.dept}>{m.dept}</small>}
         <Reach m={m}>
           <Duties m={m} id={id} />
         </Reach>
@@ -185,7 +185,11 @@ function CardPortrait({ m, id }: { m: Member; id: string }) {
         <img src={m.img} alt={m.name} loading="lazy" />
       </div>
       <div className="kc-txt">
-        {m.dept && <span className="kc-tag">{m.dept}</span>}
+        {m.dept && (
+          <span className="kc-tag" title={m.dept}>
+            {m.dept}
+          </span>
+        )}
         <Name n={m.name} />
         <p>{m.role}</p>
         <Rec m={m} />
@@ -204,7 +208,7 @@ function CardRow({ m, id }: { m: Member; id: string }) {
         <Name n={m.name} />
         <p>
           {m.role}
-          {m.dept && <span>{m.dept}</span>}
+          {m.dept && <span title={m.dept}>{m.dept}</span>}
         </p>
         <div className="kd-meta">
           <Rec m={m} />
@@ -222,7 +226,7 @@ function CardDark({ m, id }: { m: Member; id: string }) {
       <div className="ke-txt">
         <span className="ke-role">{m.role}</span>
         <Name n={m.name} />
-        {m.dept && <small>{m.dept}</small>}
+        {m.dept && <small title={m.dept}>{m.dept}</small>}
         <Rec m={m} />
         <Duties m={m} id={id} />
       </div>
