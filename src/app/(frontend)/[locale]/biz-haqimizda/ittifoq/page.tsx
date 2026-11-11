@@ -2,15 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { IttifoqPage as Content } from '@/components/ittifoq/IttifoqPage'
-import { MotionBoot } from '@/components/site/MotionBoot'
-import { RevealMotion } from '@/components/site/RevealMotion'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
 import '../../../ittifoq-alt2.css'
 import '../../../ittifoq-alt3.css'
-import '../../../reveal.css'
 import '../../../ittifoq-flags.css'
 import '../../../ittifoq-centres.css'
 
@@ -50,17 +47,5 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
     </div>
   )
 
-  return (
-    <>
-      <MotionBoot />
-      <Content L={L} crumbs={crumbs} siblings={siblings} />
-      <RevealMotion
-        root=".it"
-        words=".it-mission"
-        counters=".it-stats b, .it-more b"
-        images=".it-mosaic img"
-        skip=".crumbs, .it-sib, [role=tablist], .fm"
-      />
-    </>
-  )
+  return <Content L={L} crumbs={crumbs} siblings={siblings} />
 }

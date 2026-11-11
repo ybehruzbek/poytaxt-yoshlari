@@ -166,11 +166,15 @@ html.m-ready [data-m='m-sp'].m-in .sp-phone {
   animation-delay: calc(var(--j) * -1.5s);
 }
 
-/* Birinçi çiziliş: animatsiya tayyor bölguncha mazmun yaşirin (MotionBoot.tsx);
-   JS işlamay qolsa — 3 soniyada baribir körinadi */
-html.motion-boot main {
-  opacity: 0;
-  animation: motion-boot-fail 0s 3s forwards;
+/* Birinçi çiziliş: animatsiya tayyor bölguncha (<html> da .motion-on yöq) mazmun yaşirin —
+   şunda birinçi ekrandagi elementlar ham animatsiya bilan çiqadi. RevealMotion / HomeMotion
+   elementlarni boşlanğiç holatga keltirgaç .motion-on qöyadi. “Harakatni kamaytiriş” yoqilgan
+   bölsa yaşirilmaydi; JS işlamasa yoki kesa — 3 soniyada baribir körinadi. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.motion-on) main {
+    opacity: 0;
+    animation: motion-boot-fail 0s 3s forwards;
+  }
 }
 @keyframes motion-boot-fail {
   to {

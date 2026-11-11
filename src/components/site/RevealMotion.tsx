@@ -76,7 +76,7 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
     const host = document.querySelector<HTMLElement>(root)
     const html = document.documentElement
     if (!host || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      html.classList.remove('motion-boot')
+      html.classList.add('motion-on')
       return
     }
     const skipped = (e: Element) => !!skip && !!e.closest(skip)
@@ -118,6 +118,7 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
 
     const nums = counters ? [...host.querySelectorAll<HTMLElement>(counters)] : []
     let pending = [...items].filter((e) => !e.classList.contains('rv-words'))
+    const timers: number[] = []
 
     // Har kadrda: ekranga kirgan (yoki allaqaçon ötib ketilgan) elementlar navbat bilan oçiladi
     let raf = 0
@@ -139,8 +140,11 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
         .sort((x, y) => x.r.top - y.r.top || x.r.left - y.r.left)
         .forEach(({ el, r }, i) => {
           // ötib ketilganlari kutmasdan, ekrandagilari navbat bilan
-          el.style.setProperty('--d', r.bottom < 0 ? '0ms' : `${Math.min(i, 8) * 70}ms`)
+          const d = r.bottom < 0 ? 0 : Math.min(i, 8) * 70
+          el.style.setProperty('--d', `${d}ms`)
           el.classList.add('rv-in')
+          // çiqib bölgaç animatsiya sinflari olinadi — elementning öz hover/transition uslublari qaytadi
+          timers.push(window.setTimeout(() => el.classList.remove('rv', 'rv-in', 'rv-img'), d + 1700))
           nums.forEach((n) => (n === el || el.contains(n)) && countUp(n))
         })
     }
@@ -149,13 +153,14 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
     }
     // boşlanğiç (yaşirin) holat hisoblansin, keyin mazmun oçiladi va keyingi kadrda elementlar çiqadi
     void host.offsetWidth
-    html.classList.remove('motion-boot')
+    html.classList.add('motion-on')
     raf = requestAnimationFrame(update)
     addEventListener('scroll', onScroll, { passive: true })
     addEventListener('resize', onScroll)
 
     return () => {
       cancelAnimationFrame(raf)
+      timers.forEach(clearTimeout)
       removeEventListener('scroll', onScroll)
       removeEventListener('resize', onScroll)
       items.forEach((e) => e.classList.remove('rv', 'rv-in', 'rv-img', 'rv-words'))

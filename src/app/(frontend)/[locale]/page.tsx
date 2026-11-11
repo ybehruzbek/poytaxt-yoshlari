@@ -3,7 +3,6 @@ import { Benefits } from '@/components/site/Benefits'
 import { Cta } from '@/components/site/Cta'
 import { Events } from '@/components/site/Events'
 import { Hero } from '@/components/site/Hero'
-import { MotionBoot } from '@/components/site/MotionBoot'
 import { HomeMotion } from '@/components/site/HomeMotion'
 import { News } from '@/components/site/News'
 import { Opportunities } from '@/components/site/Opportunities'
@@ -21,7 +20,6 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
   const { locale } = await props.params
   return (
     <>
-      <MotionBoot />
       <Hero locale={locale} />
       <News locale={locale} />
       <Events locale={locale} />

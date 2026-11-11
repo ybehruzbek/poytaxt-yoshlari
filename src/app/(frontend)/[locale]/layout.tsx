@@ -5,6 +5,7 @@ import React from 'react'
 
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
+import { PageMotion } from '@/components/site/PageMotion'
 import { isLocale, locales } from '@/i18n/config'
 import '../styles.css'
 import '../site.css'
@@ -17,6 +18,7 @@ import '../cta.css'
 import '../footer.css'
 import '../social.css'
 import '../motion.css'
+import '../reveal.css'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
 // latin-ext: Ö Ğ Ş Ç ’ (yangi alifbo); cyrillic: rus tili.
@@ -57,6 +59,7 @@ export default async function LocaleLayout(props: {
         <Header locale={locale} />
         <main>{props.children}</main>
         <Footer locale={locale} />
+        <PageMotion locale={locale} />
       </body>
     </html>
   )

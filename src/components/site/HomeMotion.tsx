@@ -92,13 +92,13 @@ export function HomeMotion() {
     })
 
     if (reduce) {
-      html.classList.remove('motion-boot')
+      html.classList.add('motion-on')
       return
     }
     html.classList.add('m-ready')
     // boşlanğiç (yaşirin) holat hisoblansin, keyin mazmun oçiladi — birinçi ekran ham animatsiya bilan çiqadi
     void document.body.offsetWidth
-    html.classList.remove('motion-boot')
+    html.classList.add('motion-on')
 
     const io = new IntersectionObserver(
       (ents) =>
