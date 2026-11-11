@@ -6,7 +6,7 @@ from html import escape as esc
 
 from aiogram.exceptions import TelegramRetryAfter
 from django.db import IntegrityError, transaction
-from django.db.models import F
+from django.db.models import F, Q
 from django.utils import timezone
 
 from zakovat_bot.buttons.panel import vote_keyboard
@@ -26,10 +26,16 @@ PUBLISH_PAUSE = 1.0  # postlar orasidagi pauza — Telegram cheklovlari uchun
 
 
 def ready_for_publication(contest):
-    """Tasdiqlangan, lekin hali e'lon qilinmagan ishlar (TZ 8.1-8.2)."""
+    """Tasdiqlangan, lekin hali e'lon qilinmagan ishlar (TZ 8.1-8.2).
+
+    «Band qilingan, lekin yuborilmagan» (publication bor, `published_at`
+    bo'sh) ishlar ham navbatda qoladi: bot qayta ishga tushsa yoki jarayon
+    uzilsa, ariza yo'qolib qolmasdan qayta urinishda joylanadi.
+    """
     return (
         Entry.objects.filter(contest=contest, status=EntryStatus.APPROVED)
-        .filter(publication__isnull=True)
+        .filter(Q(publication__isnull=True) |
+                Q(publication__published_at__isnull=True))
         .select_related("participant")
         .order_by("nomination", "id")
     )
@@ -90,17 +96,25 @@ async def publish_entry(bot, contest, entry, channel_username=None):
         )
         if locked is None:
             return True, "tasdiqlanmagan yoki o'chirilgan"
-        if Publication.objects.filter(entry=locked).exists():
-            return True, "allaqachon e'lon qilingan"
         try:
-            pub = Publication.objects.create(
-                entry=locked, channel_id=str(channel))
+            pub, _ = Publication.objects.get_or_create(
+                entry=locked, defaults={"channel_id": str(channel)})
         except IntegrityError:
+            return True, "allaqachon e'lon qilingan"
+        if pub.published_at is not None:
             return True, "allaqachon e'lon qilingan"
 
     media = groups[0]
     try:
-        if len(media) == 1:
+        if len(media) > 1 and pub.message_id:
+            # Albom oldingi urinishda yuborilgan — faqat ovoz kartochkasi qoldi
+            first_id = pub.message_id
+            card = await bot.send_message(
+                chat_id=channel, text=post_text(entry),
+                reply_markup=vote_keyboard(entry),
+                reply_to_message_id=first_id)
+            vote_id = card.message_id
+        elif len(media) == 1:
             # Bitta fayl — matn va ovoz tugmasi o'sha xabarning o'zida
             item = media[0]
             kind = entry.media.first().media_type
@@ -122,17 +136,21 @@ async def publish_entry(bot, contest, entry, channel_username=None):
             # alohida xabar sifatida albomga javob qilib yuboriladi
             msgs = await bot.send_media_group(chat_id=channel, media=media)
             first_id = msgs[0].message_id if msgs else None
+            # Albom yuborildi — darhol qayd etamiz, qayta urinishda
+            # rasmlar ikkinchi marta joylanmasligi uchun
+            pub.message_id = first_id
+            pub.save(update_fields=["message_id"])
             card = await bot.send_message(
                 chat_id=channel, text=post_text(entry),
                 reply_markup=vote_keyboard(entry),
                 reply_to_message_id=first_id)
             vote_id = card.message_id
     except TelegramRetryAfter as e:
-        pub.delete()  # bandlikni bo'shatamiz — qayta urinish mumkin bo'lsin
+        # Band qilish saqlanadi: `published_at` bo'sh bo'lgani uchun ish
+        # navbatda qoladi va keyingi urinishda davom ettiriladi
         await asyncio.sleep(e.retry_after + 1)
         return False, f"flood-limit ({e.retry_after}s)"
     except Exception as e:
-        pub.delete()
         logger.exception("Nashr xatosi: %s", entry.code)
         return False, str(e)[:200]
 

@@ -642,19 +642,20 @@ async def tdadm_publish_go(callback: CallbackQuery):
     if not ready_for_publication(contest).exists():
         await callback.answer("Nashrga tayyor ish yo'q.", show_alert=True)
         return
+    # Tekshirish va band qilish orasida `await` bo'lmasligi shart —
+    # aks holda ikki bosish ham tekshiruvdan o'tib ketadi
     if contest.id in _publishing_now:
         await callback.answer("Nashr allaqachon ketmoqda — kuting.",
                               show_alert=True)
         return
-
-    await callback.answer()
     _publishing_now.add(contest.id)
-    contest.stage = ContestStage.PUBLISHING
-    contest.save(update_fields=["stage"])
-    log_action(callback.from_user.id, "tanlov_nashr_boshlandi", contest.slug)
-    await callback.message.answer("📢 E'lon qilish boshlandi…")
 
     try:
+        await callback.answer()
+        contest.stage = ContestStage.PUBLISHING
+        contest.save(update_fields=["stage"])
+        log_action(callback.from_user.id, "tanlov_nashr_boshlandi", contest.slug)
+        await callback.message.answer("📢 E'lon qilish boshlandi…")
         ok, failed, errors = await publish_all(bot, contest)
     finally:
         _publishing_now.discard(contest.id)

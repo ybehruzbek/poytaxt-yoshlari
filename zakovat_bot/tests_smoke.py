@@ -1742,6 +1742,23 @@ async def _run_all(saved_event_ids):
           Publication.objects.filter(entry__contest=contest).count()
           == pubs_before, pubs_before)
 
+    # Xavfsizlik: uzilib qolgan nashr (band qilingan, yuborilmagan) tiklanadi
+    stuck = Entry.objects.create(
+        contest=contest, participant=bad, nomination=Nomination.FOTO,
+        title="Uzilgan nashr", status=EntryStatus.APPROVED)
+    EntryMedia.objects.create(entry=stuck, file_id="s1",
+                              file_unique_id="su1", media_type="photo")
+    Publication.objects.create(entry=stuck, channel_id="-100777")  # band, yuborilmagan
+    check("uzilib qolgan nashr navbatda qoldi",
+          pub_service.ready_for_publication(contest).filter(id=stuck.id).exists())
+    cb = FakeCallback("tdadm_publish_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_publish_go(cb)
+    stuck.refresh_from_db()
+    check("uzilib qolgan nashr qayta urinishda yakunlandi",
+          stuck.status == EntryStatus.PUBLISHED
+          and stuck.publication.published_at is not None)
+    stuck.delete()
+
     # TZ 9.3: hamma post chiqmaguncha ovoz boshlanmaydi
     extra_entry = Entry.objects.create(
         contest=contest, participant=bad, nomination=Nomination.FOTO,
