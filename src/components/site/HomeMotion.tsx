@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 /**
  * Bosh sahifa animatsiyalari (Apple uslubi). Bölimlar belgilanmaydi — mavjud sinflar orqali topiladi:
@@ -70,7 +70,7 @@ function countUp(els: HTMLElement[]) {
 }
 
 export function HomeMotion() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const html = document.documentElement
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
     const found = SECTIONS.map((s) => ({ s, el: document.querySelector<HTMLElement>(s.sel) })).filter(
@@ -91,8 +91,14 @@ export function HomeMotion() {
       if (s.name === 'm-about') el.querySelectorAll<HTMLElement>('.about-head h2').forEach(splitWords)
     })
 
-    if (reduce) return
+    if (reduce) {
+      html.classList.remove('motion-boot')
+      return
+    }
     html.classList.add('m-ready')
+    // boşlanğiç (yaşirin) holat hisoblansin, keyin mazmun oçiladi — birinçi ekran ham animatsiya bilan çiqadi
+    void document.body.offsetWidth
+    html.classList.remove('motion-boot')
 
     const io = new IntersectionObserver(
       (ents) =>

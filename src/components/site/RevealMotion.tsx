@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 /**
  * Ički sahifalar uçun umumiy skroll animatsiyasi (Apple uslubi). Sahifa kodiga tegmaydi — elementlarni
@@ -71,10 +71,14 @@ function countUp(el: HTMLElement) {
 }
 
 export function RevealMotion({ root, words, counters, images, skip, extra }: Props) {
-  useEffect(() => {
+  // useLayoutEffect: sahifalar orasida ötganda ham yangi mazmun çizilişidan oldin tayyorlanadi
+  useLayoutEffect(() => {
     const host = document.querySelector<HTMLElement>(root)
-    if (!host || matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const html = document.documentElement
+    if (!host || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      html.classList.remove('motion-boot')
+      return
+    }
     const skipped = (e: Element) => !!skip && !!e.closest(skip)
     const items = new Set<HTMLElement>()
     const add = (e: HTMLElement, kind = '') => {
@@ -143,7 +147,10 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
     }
-    requestAnimationFrame(update)
+    // boşlanğiç (yaşirin) holat hisoblansin, keyin mazmun oçiladi va keyingi kadrda elementlar çiqadi
+    void host.offsetWidth
+    html.classList.remove('motion-boot')
+    raf = requestAnimationFrame(update)
     addEventListener('scroll', onScroll, { passive: true })
     addEventListener('resize', onScroll)
 

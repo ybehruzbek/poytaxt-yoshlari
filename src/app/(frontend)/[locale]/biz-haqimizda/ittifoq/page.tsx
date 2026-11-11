@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { IttifoqPage as Content } from '@/components/ittifoq/IttifoqPage'
+import { MotionBoot } from '@/components/site/MotionBoot'
 import { RevealMotion } from '@/components/site/RevealMotion'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
@@ -51,6 +52,7 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
 
   return (
     <>
+      <MotionBoot />
       <Content L={L} crumbs={crumbs} siblings={siblings} />
       <RevealMotion
         root=".it"

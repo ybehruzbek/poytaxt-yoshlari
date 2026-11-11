@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 
 import { HududiyPage as Content } from '@/components/hududiy/HududiyPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
+import { MotionBoot } from '@/components/site/MotionBoot'
 import { RevealMotion } from '@/components/site/RevealMotion'
 import type { Locale } from '@/i18n/config'
 
@@ -24,6 +25,7 @@ export default async function HududiyRoute(props: { params: Promise<{ locale: Lo
 
   return (
     <>
+      <MotionBoot />
       <Content crumbs={crumbs} />
       <RevealMotion
         root=".hk"

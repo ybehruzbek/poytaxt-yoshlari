@@ -165,3 +165,15 @@ html.m-ready [data-m='m-sp'].m-in .sp-phone {
   animation: m-float 6s ease-in-out infinite;
   animation-delay: calc(var(--j) * -1.5s);
 }
+
+/* Birinçi çiziliş: animatsiya tayyor bölguncha mazmun yaşirin (MotionBoot.tsx);
+   JS işlamay qolsa — 3 soniyada baribir körinadi */
+html.motion-boot main {
+  opacity: 0;
+  animation: motion-boot-fail 0s 3s forwards;
+}
+@keyframes motion-boot-fail {
+  to {
+    opacity: 1;
+  }
+}
