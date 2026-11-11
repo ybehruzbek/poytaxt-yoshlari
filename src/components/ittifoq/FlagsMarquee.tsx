@@ -65,7 +65,11 @@ function Waving() {
     <div className="fw2" role="img" aria-label={LABEL}>
       <ul className="fw2-track">
         {twice(COUNTRIES).map(({ c: [code, name], copy }, i) => (
-          <li key={`${copy}-${code}`} aria-hidden={copy === 1 || undefined} style={v(i % COUNTRIES.length)}>
+          <li
+            key={`${copy}-${code}`}
+            aria-hidden={copy === 1 || undefined}
+            style={v(i % COUNTRIES.length)}
+          >
             <span className="fw2-pole" />
             <span className="fw2-cloth">
               <img src={wide(code)} alt="" width={120} height={90} />
@@ -108,7 +112,12 @@ function Wave() {
     <div className="fv" role="img" aria-label={LABEL}>
       <ul className="fv-track">
         {twice(COUNTRIES).map(({ c: [code, name], copy }, i) => (
-          <li key={`${copy}-${code}`} aria-hidden={copy === 1 || undefined} style={v(i)} data-name={name}>
+          <li
+            key={`${copy}-${code}`}
+            aria-hidden={copy === 1 || undefined}
+            style={v(i)}
+            data-name={name}
+          >
             <img src={sq(code)} alt="" width={96} height={96} />
           </li>
         ))}
@@ -138,9 +147,98 @@ function Flip() {
   )
 }
 
-const VARIANTS = [Chips, Waving, Ring, Wave, Flip]
+/**
+ * Haqiqiy mato tölqini: bayroq N ta ensiz bölakka börinadi, har bölak dastadan uzoqlaşgan sari
+ * kattaroq amplituda bilan köterilib-tuşadi va yoruğ-soyasi özgaradi (fazasi siljigan).
+ */
+function Cloth({ code, k, n = 12 }: { code: string; k: number; n?: number }) {
+  return (
+    <span
+      className="wc"
+      style={{ '--img': `url(${wide(code)})`, '--n': n, '--k': k } as CSSProperties}
+      aria-hidden="true"
+    >
+      {Array.from({ length: n }, (_, s) => (
+        <i key={s} style={{ '--s': s } as CSSProperties} />
+      ))}
+    </span>
+  )
+}
 
-/** Hamkor mamlakatlar bayroqlari — vaqtinça 5 köriniş varianti (panel faqat işlab çiqiş rejimida) */
+/* B2 — Mato tölqini: dastadagi bayroqlar haqiqiy mato kabi tölqinlanadi, osmon fonida oqadi */
+function WavingCloth() {
+  return (
+    <div className="fb2" role="img" aria-label={LABEL}>
+      <ul className="fb2-track">
+        {twice(COUNTRIES).map(({ c: [code, name], copy }, i) => (
+          <li key={`${copy}-${code}`} aria-hidden={copy === 1 || undefined}>
+            <span className="fb2-pole" />
+            <Cloth code={code} k={i % COUNTRIES.length} />
+            <small>{name}</small>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+/* B3 — Bayroqlar xiyoboni: har xil balandlikdagi baland dastalar yerga tikilgan, bayroqlar tölqinlanadi, nomi taxtaçada */
+function Alley() {
+  return (
+    <div className="fb3" role="img" aria-label={LABEL}>
+      <ul className="fb3-track">
+        {twice(COUNTRIES).map(({ c: [code, name], copy }, i) => (
+          <li
+            key={`${copy}-${code}`}
+            aria-hidden={copy === 1 || undefined}
+            style={{ '--h': [0, 18, 6, 24, 10][i % 5] } as CSSProperties}
+          >
+            <span className="fb3-pole" />
+            <Cloth code={code} k={i % COUNTRIES.length} />
+            <small>{name}</small>
+          </li>
+        ))}
+      </ul>
+      <span className="fb3-ground" aria-hidden="true" />
+    </div>
+  )
+}
+
+/* B4 — Katta sahna: markazda bitta katta bayroq tölqinlanadi va har 3 soniyada keyingisiga almaşadi; ostida barça bayroqlar */
+function Stage() {
+  const n = COUNTRIES.length
+  return (
+    <div
+      className="fb4"
+      role="img"
+      aria-label={LABEL}
+      style={{ '--total': `${n * 3}s` } as CSSProperties}
+    >
+      <div className="fb4-main">
+        <span className="fb4-pole" />
+        <div className="fb4-slides">
+          {COUNTRIES.map(([code, name], i) => (
+            <div key={code} className="fb4-slide" style={{ '--i': i } as CSSProperties}>
+              <Cloth code={code} k={i} n={24} />
+              <b>{name}</b>
+            </div>
+          ))}
+        </div>
+      </div>
+      <ul className="fb4-dots">
+        {COUNTRIES.map(([code], i) => (
+          <li key={code} style={{ '--i': i } as CSSProperties}>
+            <img src={sq(code)} alt="" width={30} height={30} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+const VARIANTS = [Chips, Waving, Ring, Wave, Flip, WavingCloth, Alley, Stage]
+
+/** Hamkor mamlakatlar bayroqlari — vaqtinça 8 köriniş varianti (panel faqat işlab çiqiş rejimida) */
 export function FlagsMarquee() {
   return (
     <>
@@ -155,7 +253,16 @@ export function FlagsMarquee() {
             name: 'flags',
             label: 'Hamkor mamlakatlar',
             count: VARIANTS.length,
-            hints: ['Kapsulalar', 'Hilpiraydigan bayroqlar', '3D karusel', 'Tölqin', 'Aylanuvçi kartalar'],
+            hints: [
+              'Kapsulalar',
+              'Hilpiraydigan bayroqlar',
+              '3D karusel',
+              'Tölqin',
+              'Aylanuvçi kartalar',
+              'B2 — Mato tölqini',
+              'B3 — Bayroqlar xiyoboni',
+              'B4 — Katta sahna',
+            ],
           },
         ]}
       />

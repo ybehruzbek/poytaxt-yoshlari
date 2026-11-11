@@ -434,3 +434,293 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* ---------- Mato tölqini (B2–B4 uçun umumiy) ----------
+   Bayroq --n ta ensiz bölakka börinadi; har bölak dastadan uzoqlaşgan sari kattaroq amplituda bilan,
+   siljigan fazada köterilib-tuşadi va yoruğ-soyasi özgaradi — mato tölqini hosil böladi. */
+.wc {
+  display: flex;
+  aspect-ratio: 4 / 3;
+  filter: drop-shadow(0 10px 14px rgba(83, 40, 34, 0.16));
+}
+.wc i {
+  flex: 1;
+  margin-right: -1px; /* bölaklar bir-birini sal yopadi — orasida tirqiş qolmaydi */
+  background-image: var(--img);
+  background-size: calc(var(--n) * 100%) 100%;
+  background-position: calc(var(--s) / (var(--n) - 1) * 100%) 0;
+  --amp: calc(var(--s) / var(--n) * 7px + 0.4px);
+  animation: wc-wave 1.7s ease-in-out infinite alternate;
+  animation-delay: calc(var(--s) * -0.13s + var(--k) * -0.41s);
+}
+.wc i:last-child {
+  border-radius: 0 4px 4px 0;
+}
+@keyframes wc-wave {
+  from {
+    translate: 0 calc(var(--amp) * -1);
+    filter: brightness(var(--hi, 1.08));
+  }
+  to {
+    translate: 0 var(--amp);
+    filter: brightness(var(--lo, 0.88));
+  }
+}
+
+/* ---------- B2 — Mato tölqini ---------- */
+.fb2 {
+  margin-top: 40px;
+  padding: 40px 0 28px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #cfe6ff 0%, #eef6ff 70%, var(--soft) 100%);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.fb2-track {
+  list-style: none;
+  display: flex;
+  width: max-content;
+  animation: fm-move 64s linear infinite;
+}
+.fb2:hover .fb2-track {
+  animation-play-state: paused;
+}
+.fb2-track li {
+  position: relative;
+  flex: none;
+  width: 156px;
+  margin-right: 30px;
+  padding-left: 7px;
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+}
+.fb2-track .wc {
+  width: 136px;
+}
+.fb2-pole {
+  position: absolute;
+  left: 0;
+  top: -10px;
+  width: 6px;
+  height: 140px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #a8968f, #fff 45%, #8d7670);
+}
+.fb2-pole::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: -9px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6c8, var(--yellow) 60%, #c99a1b);
+}
+.fb2-track small {
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.75);
+  font: 700 13px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+/* ---------- B3 — Bayroqlar xiyoboni ---------- */
+.fb3 {
+  position: relative;
+  margin-top: 40px;
+  height: 330px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #bfdcff 0%, #e8f3ff 62%, #f6efe6 62%, #efe3d4 100%);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.fb3-track {
+  list-style: none;
+  position: absolute;
+  left: 0;
+  bottom: 22px;
+  display: flex;
+  align-items: flex-end;
+  width: max-content;
+  animation: fm-move 70s linear infinite;
+}
+.fb3:hover .fb3-track {
+  animation-play-state: paused;
+}
+.fb3-track li {
+  position: relative;
+  flex: none;
+  width: 150px;
+  height: calc(250px + var(--h) * 1px);
+  margin-right: 26px;
+}
+.fb3-pole {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  height: calc(100% - 4px);
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(90deg, #9d8a84, #fff 45%, #826b65);
+}
+.fb3-pole::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: -8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6c8, var(--yellow) 60%, #c99a1b);
+}
+.fb3-pole::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  bottom: -4px;
+  width: 22px;
+  height: 8px;
+  border-radius: 4px;
+  background: #826b65;
+}
+.fb3-track .wc {
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  width: 124px;
+}
+.fb3-track small {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(83, 40, 34, 0.1);
+  font: 700 12px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+}
+.fb3-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22px;
+  background: repeating-linear-gradient(90deg, #e2d2bf 0 60px, #d9c7b2 60px 62px);
+}
+
+/* ---------- B4 — Katta sahna ---------- */
+.fb4 {
+  margin-top: 40px;
+  padding: 40px 24px 28px;
+  border-radius: 28px;
+  background: radial-gradient(90% 80% at 50% 30%, #e6f2ff 0, var(--soft) 70%);
+  display: grid;
+  justify-items: center;
+  gap: 26px;
+  overflow: hidden;
+}
+.fb4-main {
+  position: relative;
+  width: min(440px, 80vw);
+  padding-left: 14px;
+}
+.fb4-pole {
+  position: absolute;
+  left: 0;
+  top: -16px;
+  width: 9px;
+  height: calc(100% + 30px);
+  border-radius: 5px;
+  background: linear-gradient(90deg, #9d8a84, #fff 45%, #826b65);
+}
+.fb4-pole::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: -12px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff6c8, var(--yellow) 60%, #c99a1b);
+}
+.fb4-slides {
+  display: grid;
+}
+.fb4-slide {
+  grid-area: 1 / 1;
+  display: grid;
+  gap: 18px;
+  opacity: 0;
+  animation: fb4-show var(--total) linear infinite;
+  animation-delay: calc(var(--i) * 3s - var(--total));
+}
+.fb4-slide .wc {
+  --hi: 1.05;
+  --lo: 0.93;
+  width: 100%;
+  filter: drop-shadow(0 22px 26px rgba(83, 40, 34, 0.2));
+}
+.fb4-slide b {
+  font: 800 clamp(24px, 3vw, 34px)/1.1 var(--f-head);
+  color: var(--navy);
+}
+.fb4:hover .fb4-slide,
+.fb4:hover .fb4-dots li {
+  animation-play-state: paused;
+}
+/* oldingisi butunlay ketgaç keyingisi kiradi — nomlar ustma-ust tuşmaydi */
+@keyframes fb4-show {
+  0%,
+  0.5% {
+    opacity: 0;
+    translate: 24px 0;
+  }
+  2%,
+  5.2% {
+    opacity: 1;
+    translate: 0 0;
+  }
+  5.8%,
+  100% {
+    opacity: 0;
+    translate: -16px 0;
+  }
+}
+.fb4-dots {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 760px;
+}
+.fb4-dots li {
+  opacity: 0.45;
+  animation: fb4-dot var(--total) linear infinite;
+  animation-delay: calc(var(--i) * 3s - var(--total));
+}
+.fb4-dots img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff;
+}
+@keyframes fb4-dot {
+  0%,
+  5.5% {
+    opacity: 1;
+    scale: 1.25;
+  }
+  6.5%,
+  100% {
+    opacity: 0.45;
+    scale: 1;
+  }
+}

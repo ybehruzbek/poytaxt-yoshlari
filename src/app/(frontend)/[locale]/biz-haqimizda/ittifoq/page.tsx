@@ -57,7 +57,7 @@ export default async function IttifoqPage(props: { params: Promise<{ locale: Loc
         words=".it-mission"
         counters=".it-stats b, .it-more b"
         images=".it-mosaic img"
-        skip=".crumbs, .it-sib, [role=tablist], .fm, .fw2, .fr, .fv, .ff"
+        skip=".crumbs, .it-sib, [role=tablist], .fm, .fw2, .fr, .fv, .ff, .fb2, .fb3, .fb4"
       />
     </>
   )
