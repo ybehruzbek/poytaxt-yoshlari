@@ -283,9 +283,11 @@ html.m-ready[data-m-opps='c'] [data-m='m-opps']:not(.m-in) .opp .ph img {
 
 /* ---------------- Biz haqimizda ---------------- */
 /* A — Matn sözma-söz yorişadi (skroll) + raqamlar sanaladi */
+/* --t: sarlavhaning öz progressi; har söz 3 söz kengligidagi yumşoq tölqin bilan yorişadi —
+   töq qism ham, oç (mute) qism ham xira holatdan öz rangiga çiqadi */
 html.m-ready[data-m-about='a'] [data-m='m-about'] .m-w {
-  opacity: clamp(0.13, calc((var(--e, 1) - 0.15) * 1.4 * (var(--wn) + 3) - var(--w)), 1);
-  transition: opacity 0.25s linear;
+  opacity: clamp(0.12, calc((var(--t, 1) * (var(--wn) + 3) - var(--w)) / 3), 1);
+  transition: opacity 0.3s linear;
 }
 html.m-ready[data-m-about='a'] [data-m='m-about'] :is(.about-art > *, .ach > div, .about-row .body4) {
   transition:

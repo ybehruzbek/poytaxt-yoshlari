@@ -156,6 +156,11 @@ export function HomeMotion() {
         st.setProperty('--x', clamp(-r.top / Math.max(r.height, 1)).toFixed(4))
         st.setProperty('--p', clamp((vh - r.top) / (vh + r.height)).toFixed(4))
         st.setProperty('--s', clamp(-r.top / Math.max(r.height - vh, 1)).toFixed(4))
+        // Söz-söz yorişadigan sarlavha: öz örniga qarab — ekran pastidan (90%) örtasiğa (40%) çiqquncha
+        el.querySelectorAll<HTMLElement>('[data-m-split]').forEach((h) => {
+          const hr = h.getBoundingClientRect()
+          h.style.setProperty('--t', clamp((vh * 0.9 - hr.top) / (vh * 0.5)).toFixed(4))
+        })
       })
     }
     const onScroll = () => {
