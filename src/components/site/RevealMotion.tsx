@@ -17,6 +17,8 @@ type Props = {
   counters?: string
   images?: string
   skip?: string
+  /** qöşimça oçiladigan elementlar (sarlavha va töplamlardan taşqari) */
+  extra?: string
 }
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
@@ -68,7 +70,7 @@ function countUp(el: HTMLElement) {
   requestAnimationFrame(tick)
 }
 
-export function RevealMotion({ root, words, counters, images, skip }: Props) {
+export function RevealMotion({ root, words, counters, images, skip, extra }: Props) {
   useEffect(() => {
     const host = document.querySelector<HTMLElement>(root)
     if (!host || matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -98,7 +100,9 @@ export function RevealMotion({ root, words, counters, images, skip }: Props) {
       if (!kids.every((c) => c.tagName === kids[0].tagName)) return
       kids.forEach((c) => add(c))
     })
-    // 4) sarlavhalar va qolgan matnlar
+    // 4) qöşimça elementlar
+    if (extra) host.querySelectorAll<HTMLElement>(extra).forEach((e) => add(e))
+    // 5) sarlavhalar va qolgan matnlar
     host
       .querySelectorAll<HTMLElement>('h1, h2, .sec-head, h1 ~ p, h2 ~ p, h1 ~ div, .btn, blockquote, figure')
       .forEach((e) => {
@@ -150,7 +154,7 @@ export function RevealMotion({ root, words, counters, images, skip }: Props) {
       items.forEach((e) => e.classList.remove('rv', 'rv-in', 'rv-img', 'rv-words'))
       html.classList.remove('rv-ready')
     }
-  }, [root, words, counters, images, skip])
+  }, [root, words, counters, images, skip, extra])
 
   return null
 }

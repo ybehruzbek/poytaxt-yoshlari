@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 
 import { HududiyPage as Content } from '@/components/hududiy/HududiyPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
+import { RevealMotion } from '@/components/site/RevealMotion'
 import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
 import '../../../kengash.css'
 import '../../../hududiy.css'
 import '../../../hududiy-alt3.css'
+import '../../../reveal.css'
 
 export const metadata: Metadata = {
   title: 'Toşkent şahar hududiy Kengaşi — Özbekiston yoşlar ittifoqi',
@@ -20,5 +22,15 @@ export default async function HududiyRoute(props: { params: Promise<{ locale: Lo
   const { locale } = await props.params
   const crumbs = <PageCrumbs locale={locale} path="/biz-haqimizda/hududiy-kengash" />
 
-  return <Content crumbs={crumbs} />
+  return (
+    <>
+      <Content crumbs={crumbs} />
+      <RevealMotion
+        root=".hk"
+        extra=".z5-lead, .z5-hero"
+        images=".z5-hero-ph, .z5-card-ph"
+        skip=".pg-crumbs, [popover]"
+      />
+    </>
+  )
 }

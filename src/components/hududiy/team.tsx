@@ -11,7 +11,6 @@ export const IC = {
     'M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 4.5h.01M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',
   Facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
   clock: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zm0-14v4l3 2',
-  pin: 'M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
 }
 
 export function Ic({ d }: { d: string }) {
@@ -38,10 +37,8 @@ export type Member = {
   name: string
   role: string
   img: string
-  /** bölimning rasmiy töliq nomi (vazifalar panelida) */
+  /** bölimning rasmiy töliq nomi */
   dept?: string
-  /** bölimning qisqa nomi (kartada) */
-  deptShort?: string
   room: string
   /** qabul: “çorşanba, 14:00–17:00 · 9-xona” */
   reception?: string
@@ -82,7 +79,6 @@ export const TEAM: { title: string; lead?: boolean; people: Member[] }[] = [
         .map((x) => ({
           ...x,
           dept: d.t,
-          deptShort: d.short,
           room: d.room,
           reception: recOf(x.name),
           duties: x.duties ?? d.tasks,
@@ -98,7 +94,6 @@ export const TEAM: { title: string; lead?: boolean; people: Member[] }[] = [
         .map((x) => ({
           ...x,
           dept: d.t,
-          deptShort: d.short,
           room: d.room,
           duties: x.duties ?? d.tasks,
           deptDuties: !x.duties,

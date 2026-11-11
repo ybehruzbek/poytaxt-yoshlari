@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- xodimlar suratlari; CMS ulanganda next/image ga o'tadi */
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 import { CONTACT } from './data'
 import { IC, Ic, type Member, TEAM } from './team'
@@ -118,8 +118,12 @@ function Art() {
     <div className="z5-art" aria-hidden="true">
       <span className="z5-art-dots" />
       <svg viewBox="0 0 520 480" preserveAspectRatio="xMaxYMax meet">
-        {ARCS.map((r) => (
-          <path key={r} d={`M${520 - r} 480 A${r} ${r} 0 0 1 520 ${480 - r}`} />
+        {ARCS.map((r, i) => (
+          <path
+            key={r}
+            d={`M${520 - r} 480 A${r} ${r} 0 0 1 520 ${480 - r}`}
+            style={{ '--i': i } as CSSProperties}
+          />
         ))}
       </svg>
     </div>
@@ -157,153 +161,26 @@ function Card({ m, id }: { m: Member; id: string }) {
   )
 }
 
-/* ---------- Karta variantlari (vaqtinça, solişiriş uçun) ---------- */
-
-/** Qabul qatori: kun va vaqt, xona (bölsa) */
-function Rec({ m }: { m: Member }) {
-  if (m.reception) {
-    return (
-      <span className="kv-rec">
-        <Ic d={IC.clock} />
-        <span>{m.reception}</span>
-      </span>
-    )
-  }
-  return m.room ? (
-    <span className="kv-rec">
-      <Ic d={IC.pin} />
-      <span>{m.room}</span>
-    </span>
-  ) : null
-}
-
-/** C — Portret: katta surat tepada (yumşoq doira fonida), ostida F.I.Ş., lavozim yorliği, qabul va tugma */
-function CardPortrait({ m, id }: { m: Member; id: string }) {
-  return (
-    <article className="kc">
-      <div className="kc-ph">
-        <img src={m.img} alt={m.name} loading="lazy" />
-      </div>
-      <div className="kc-txt">
-        {m.dept && (
-          <span className="kc-tag" title={m.dept}>
-            {m.dept}
-          </span>
-        )}
-        <Name n={m.name} />
-        <p>{m.role}</p>
-        <Rec m={m} />
-      </div>
-      <Duties m={m} id={id} />
-    </article>
-  )
-}
-
-/** D — Maʼlumotnoma: dumaloq surat çapda, öngda F.I.Ş. va maʼlumotlar; ikki ustunli ixçam röyxat */
-function CardRow({ m, id }: { m: Member; id: string }) {
-  return (
-    <article className="kd">
-      <img className="kd-ph" src={m.img} alt={m.name} loading="lazy" />
-      <div className="kd-txt">
-        <Name n={m.name} />
-        <p>
-          {m.role}
-          {m.dept && <span title={m.dept}>{m.dept}</span>}
-        </p>
-        <div className="kd-meta">
-          <Rec m={m} />
-          <Duties m={m} id={id} />
-        </div>
-      </div>
-    </article>
-  )
-}
-
-/** E — Töq karta: töq fon, surat öng pastda yumşoq soya bilan, sariq lavozim yorliği */
-function CardDark({ m, id }: { m: Member; id: string }) {
-  return (
-    <article className="ke">
-      <div className="ke-txt">
-        <span className="ke-role">{m.role}</span>
-        <Name n={m.name} />
-        {m.dept && <small title={m.dept}>{m.dept}</small>}
-        <Rec m={m} />
-        <Duties m={m} id={id} />
-      </div>
-      <img className="ke-ph" src={m.img} alt={m.name} loading="lazy" />
-    </article>
-  )
-}
-
 const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
 const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
-/** F — Bölimlar böyiça: har bölim alohida guruh (nomi va xonasi), ičida ixçam portret kartalar */
-function ByDept({ ids }: { ids: string }) {
-  const groups = Array.from(new Set(REST.map((m) => m.dept ?? ''))).map((d) => ({
-    d,
-    room: REST.find((m) => m.dept === d)?.room,
-    people: REST.filter((m) => (m.dept ?? '') === d),
-  }))
-  return (
-    <div className="kf">
-      {groups.map((g, gi) => (
-        <section key={g.d} className="kf-group">
-          <header>
-            <h2>{g.d}</h2>
-            {g.room && <span>{g.room}</span>}
-          </header>
-          <div className="kf-list">
-            {g.people.map((m, i) => (
-              <article key={m.name} className="kf-card">
-                <img src={m.img} alt={m.name} loading="lazy" />
-                <div>
-                  <Name n={m.name} />
-                  <p>{m.role}</p>
-                  {m.reception && <Rec m={m} />}
-                  <Duties m={m} id={`${ids}-${gi}-${i}`} />
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
-  )
-}
-
-const CARDS = { a: Card, c: CardPortrait, d: CardRow, e: CardDark } as const
-const GRID = { a: 'z5-grid', c: 'kc-grid', d: 'kd-grid', e: 'ke-grid' } as const
-
 /**
  * Kengaş jamoasi (namuna asosida): rais — keng karta (surat çapda, F.I.Ş. va lavozim, öngda aloqa, fonda ingiçka naqş);
- * qolganlar — `card` variantidagi kartalar (a — asosiy; c, d, e, f — vaqtinça solişiriş uçun).
- * `ids` — vazifalar paneli id'lari uçun prefiks (bir sahifada bir neçta nusxa bölsa takrorlanmasin).
+ * qolganlar bitta 3 ustunli tarmoqda: F.I.Ş. va lavozim çap yuqorida, surat öng pastda.
  */
-export function TeamNamuna({
-  card = 'a',
-  ids = 'vz',
-}: {
-  card?: keyof typeof CARDS | 'f'
-  ids?: string
-}) {
-  const C = card === 'f' ? null : CARDS[card]
+export function TeamNamuna() {
   return (
     <section className="sec">
       <div className="wrap">
         <Head />
         {LEADS.map((m, i) => (
-          <Hero key={m.name} m={m} id={`${ids}-r${i}`} />
+          <Hero key={m.name} m={m} id={`vz-r${i}`} />
         ))}
-        {C ? (
-          <div className={GRID[card as keyof typeof GRID]}>
-            {REST.map((m, i) => (
-              <C key={m.name} m={m} id={`${ids}-${i}`} />
-            ))}
-          </div>
-        ) : (
-          <ByDept ids={ids} />
-        )}
+        <div className="z5-grid">
+          {REST.map((m, i) => (
+            <Card key={m.name} m={m} id={`vz-${i}`} />
+          ))}
+        </div>
       </div>
     </section>
   )
