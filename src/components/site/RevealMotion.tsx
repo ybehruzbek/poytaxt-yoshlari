@@ -144,17 +144,16 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
           el.style.setProperty('--d', `${d}ms`)
           el.classList.add('rv-in')
           // çiqib bölgaç animatsiya sinflari olinadi — elementning öz hover/transition uslublari qaytadi
-          timers.push(window.setTimeout(() => el.classList.remove('rv', 'rv-in', 'rv-img'), d + 1700))
+          timers.push(window.setTimeout(() => el.classList.remove('rv', 'rv-in', 'rv-img'), d + 1500))
           nums.forEach((n) => (n === el || el.contains(n)) && countUp(n))
         })
     }
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update)
     }
-    // boşlanğiç (yaşirin) holat hisoblansin, keyin mazmun oçiladi va keyingi kadrda elementlar çiqadi
-    void host.offsetWidth
+    // ekrandagi elementlar shu zahoti (çizilişdan oldin) .rv-in oladi — keyframe animatsiya birinçi kadrdan öynaydi
+    update()
     html.classList.add('motion-on')
-    raf = requestAnimationFrame(update)
     addEventListener('scroll', onScroll, { passive: true })
     addEventListener('resize', onScroll)
 
