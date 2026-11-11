@@ -247,11 +247,8 @@
   font-weight: 700;
   color: var(--blue);
 }
-.fa-ev-src {
+.fa-ev-txt > .more-btn {
   margin-top: auto;
-  padding-top: 12px;
-  font: 700 13px/1 var(--f-head);
-  color: var(--blue);
 }
 
 /* Yaqinlaşayotgan tadbirlar */
@@ -291,14 +288,6 @@
   margin-top: 6px;
   font-size: 14px;
   opacity: 0.85;
-}
-.fa-up-item a {
-  border-radius: 99px;
-  background: var(--yellow);
-  padding: 12px 18px;
-  font: 800 14px/1 var(--f-head);
-  color: var(--navy);
-  white-space: nowrap;
 }
 
 /* Manba havolasi va “orqaga” tugmasi */
@@ -682,14 +671,8 @@
   font-size: 13px;
   line-height: 1.5;
 }
-.vc-board em {
+.vc-board .more-btn {
   justify-self: start;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: var(--yellow);
-  font: 700 12px/1 var(--f-head);
-  font-style: normal;
-  color: var(--navy);
 }
 
 /* ---------- Natijalar: panel ---------- */
@@ -995,26 +978,6 @@
   font: 800 18px/1 var(--f-head);
   color: var(--navy);
 }
-.vy3-more {
-  display: inline-flex;
-  gap: 8px;
-  align-items: center;
-  flex: none;
-  height: 44px;
-  padding: 0 22px;
-  border-radius: 999px;
-  background: var(--yellow);
-  font: 700 14px/1 var(--f-head);
-  color: var(--navy);
-  white-space: nowrap;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-.vy3-more:hover {
-  background: var(--navy);
-  color: #fff;
-}
 
 @media (max-width: 1100px) {
   .vy3-row {
@@ -1040,9 +1003,5 @@
   }
   .vy3-txt h2 {
     font-size: 22px;
-  }
-  .vy3-more {
-    height: 40px;
-    padding: 0 18px;
   }
 }

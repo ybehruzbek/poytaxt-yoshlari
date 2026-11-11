@@ -9,6 +9,7 @@ import { EventsList } from './EventsList'
 import { DirC, DirsList, ProjC, ResultsB } from './FaViews'
 import { ProjectsList } from './ProjectsList'
 import { fmtDate, TG } from './types'
+import { More } from '@/components/site/MoreBtn'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
@@ -132,8 +133,13 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
                         {e.summary ? ` · ${e.summary}` : ''}
                       </p>
                     </span>
-                    <a href={TG(e.id)} target="_blank" rel="noopener noreferrer">
-                      Batafsil ↗
+                    <a
+                      href={TG(e.id)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="more-btn"
+                    >
+                      <More />
                     </a>
                   </div>
                 )

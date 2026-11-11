@@ -19,6 +19,7 @@ import {
   STATS,
 } from './data'
 import { KgVariants } from './variants'
+import { More } from '@/components/site/MoreBtn'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
@@ -217,7 +218,9 @@ export function KengashPage({ L, crumbs, siblings }: P) {
                   <time>{e.date}</time>
                   <h4>{e.t}</h4>
                   <p>{e.d}</p>
-                  <span>UzA xabari ↗</span>
+                  <span className="more-btn">
+                    <More />
+                  </span>
                 </div>
               </a>
             ))}

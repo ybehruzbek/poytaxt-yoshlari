@@ -186,17 +186,6 @@
 .z5-dz {
   grid-column: 1/-1;
 }
-.z5-duty-btn {
-  border: 0;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font: 700 14px/1 var(--f-head);
-  color: var(--blue);
-}
 .z5-soc .z5-dz {
   margin-left: 8px;
 }
@@ -268,13 +257,6 @@
 /* =====================================================================
    Vazifalar — öngdan çiqadigan yon panel (popover)
    ===================================================================== */
-.z5-duty-btn:hover span {
-  transform: translateX(3px);
-}
-.z5-duty-btn span {
-  font-size: 16px;
-  transition: transform 0.2s;
-}
 
 .z5-drawer {
   position: fixed;

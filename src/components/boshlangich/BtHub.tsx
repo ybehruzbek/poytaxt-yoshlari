@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { OTMS } from './data'
+import { More } from '@/components/site/MoreBtn'
 
 const LED = OTMS.filter((o) => o.leader)
 
@@ -55,8 +56,6 @@ function Stats({ s }: { s: Stat[] }) {
   )
 }
 
-const Arrow = () => <span aria-hidden="true">→</span>
-
 const Shield = () => (
   <svg className="bh-shield" viewBox="0 0 64 72" aria-hidden="true">
     <path d="M32 3 6 13v20c0 17 11 30 26 36 15-6 26-19 26-36V13L32 3z" />
@@ -82,8 +81,8 @@ function Dir({ x, L }: { x: Dir; L: (h: string) => string }) {
           ))}
           {!x.faces.length && <Shield />}
         </span>
-        <span className="bt-hub-go">
-          {x.go} <Arrow />
+        <span className="more-btn">
+          <More>{x.go}</More>
         </span>
       </span>
     </Link>

@@ -95,3 +95,75 @@ button:focus {
 :is(.ev, .opp, .nc):focus-visible {
   outline-offset: 4px;
 }
+
+/* =====================================================================
+   “BATAFSIL” — saytdagi barça kirib ketadigan tugmalar uçun YAGONA köriniş
+   (MoreBtn.tsx → <More />). Asosiy sariq tugmaning ixçam nusxasi.
+   Butun karta havola bölsa, karta ustiga kelganda ham xuddi şunday harakatlanadi.
+   ===================================================================== */
+.more-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+  align-self: flex-start;
+  height: 40px;
+  padding: 0 5px 0 18px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--yellow);
+  font: 700 14px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.more-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--navy);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.more-btn-ic {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+}
+.more-btn-ic svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.35s;
+}
+/* tugmaning özi yoki uni öz ičiga olgan havola (karta) ustiga kelganda */
+:is(.more-btn:hover, .more-btn:focus-visible, a:hover .more-btn, a:focus-visible .more-btn) {
+  color: #fff;
+}
+:is(.more-btn:hover, .more-btn:focus-visible, a:hover .more-btn, a:focus-visible .more-btn)::before {
+  transform: scaleX(1);
+}
+:is(.more-btn:hover, .more-btn:focus-visible, a:hover .more-btn, a:focus-visible .more-btn) .more-btn-ic svg {
+  transform: rotate(-45deg);
+}
+.more-btn:active {
+  transform: scale(0.98);
+}
+/* töq fonda: tugma sariq qoladi, hover'da oq bilan töladi */
+.on-dark .more-btn::before {
+  background: #fff;
+}
+:is(.on-dark .more-btn:hover, .on-dark a:hover .more-btn) {
+  color: var(--navy);
+}

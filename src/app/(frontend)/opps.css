@@ -50,29 +50,12 @@
   font-weight: 700;
 }
 .opp-more {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 20px;
-  border-radius: 99px;
-  background: var(--yellow);
-  color: var(--navy);
-  font: 700 15px/1 var(--f-head);
-}
-.opp-more svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.2s;
+  align-self: flex-start; /* köriniş: .more-btn (buttons.css) */
 }
 .opp:is(:hover, :focus-visible) .opp-info {
   opacity: 1;
   transform: none;
   transition-delay: 0.12s;
-}
-.opp:is(:hover, :focus-visible) .opp-more svg {
-  transform: translateX(3px);
 }
 
 /* ---------- Kompyuter: kartalar bir qatorda, hover'dagi karta kengayadi ---------- */

@@ -7,13 +7,22 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Locale } from '@/i18n/config'
 import { CATEGORY_TONE, NEWS_PAGE_SIZE, type NewsCard, toNewsCard } from '@/lib/news'
 import type { News } from '@/payload-types'
+import { More } from './MoreBtn'
 
 /** Asosiy yangilik necha millisekundda almashadi */
 const INTERVAL = 7000
 const SIDE = 4
 
 const Arrow = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.4"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
     <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 )
@@ -26,7 +35,15 @@ const Arrow = () => (
  * Sichqoncha ustida turganda yoki fokusda to'xtaydi; "to'xtatish" tugmasi bor (WCAG 2.2.2);
  * "harakatni kamaytirish" yoqilgan bo'lsa — avtomatik aylanmaydi.
  */
-export function NewsRotator({ locale, initial, total }: { locale: Locale; initial: NewsCard[]; total: number }) {
+export function NewsRotator({
+  locale,
+  initial,
+  total,
+}: {
+  locale: Locale
+  initial: NewsCard[]
+  total: number
+}) {
   const [items, setItems] = useState<NewsCard[]>(initial)
   const [idx, setIdx] = useState(0)
   const [playing, setPlaying] = useState(true)
@@ -120,19 +137,39 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
           <h3>{main.title}</h3>
           <p>{main.excerpt}</p>
           <div className="na-actions">
-            <Link href={href(main)} className="btn btn-primary">
-              Batafsil öqiş <span className="ic"><Arrow /></span>
+            <Link href={href(main)} className="more-btn">
+              <More />
             </Link>
             {n > 1 && (
               <div className="na-ctrl" role="group" aria-label="Yangiliklarni almaştiriş">
                 <button type="button" onClick={() => go(-1)} aria-label="Oldingi yangilik">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M19 12H5M11 6l-6 6 6 6" />
+                  </svg>
                 </button>
-                <button type="button" onClick={() => setPlaying((p) => !p)} aria-label={playing ? 'Töxtatiş' : 'Davom ettiriş'} aria-pressed={!playing}>
+                <button
+                  type="button"
+                  onClick={() => setPlaying((p) => !p)}
+                  aria-label={playing ? 'Töxtatiş' : 'Davom ettiriş'}
+                  aria-pressed={!playing}
+                >
                   {playing ? (
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.5" /><rect x="14" y="5" width="4" height="14" rx="1.5" /></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <rect x="6" y="5" width="4" height="14" rx="1.5" />
+                      <rect x="14" y="5" width="4" height="14" rx="1.5" />
+                    </svg>
                   ) : (
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" /></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" />
+                    </svg>
                   )}
                 </button>
                 <button type="button" onClick={() => go(1)} aria-label="Keyingi yangilik">
@@ -146,7 +183,11 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
 
       <ul className="na-list">
         {side.map((s, k) => (
-          <li key={`${s.id}-${idx + 1 + k}`} style={{ animationDelay: `${k * 60}ms` }} className={k === 0 ? 'is-next' : undefined}>
+          <li
+            key={`${s.id}-${idx + 1 + k}`}
+            style={{ animationDelay: `${k * 60}ms` }}
+            className={k === 0 ? 'is-next' : undefined}
+          >
             <article>
               {/* navbatdagi karta almashishgacha sariq bilan to'lib boradi */}
               {k === 0 && run && (
@@ -158,14 +199,18 @@ export function NewsRotator({ locale, initial, total }: { locale: Locale; initia
                 />
               )}
               {k === 0 && <span className="pg-next-label">Keyingi</span>}
-              <div className="th"><img className="cover" src={s.image} alt={s.imageAlt} /></div>
+              <div className="th">
+                <img className="cover" src={s.image} alt={s.imageAlt} />
+              </div>
               <div>
                 <div className="meta">
                   <span className={`chip ${CATEGORY_TONE[s.category]}`}>{s.categoryLabel}</span>
                   <time dateTime={s.dateISO}>{s.date}</time>
                 </div>
                 <h3>{s.title}</h3>
-                <Link href={href(s)} className="more">Batafsil öqiş <Arrow /></Link>
+                <Link href={href(s)} className="more-btn">
+                  <More />
+                </Link>
               </div>
             </article>
           </li>

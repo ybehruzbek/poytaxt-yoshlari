@@ -175,8 +175,6 @@ a.nd-b-row:hover {
 }
 .nd-b-open {
   margin-top: 10px;
-  font: 700 13px/1 var(--f-head);
-  color: var(--blue);
 }
 
 .nh-note-sec {

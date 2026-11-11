@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 
 import type { Ev } from './events'
 import { type DirSlug, fmtDate, TG } from './types'
+import { More } from '@/components/site/MoreBtn'
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
@@ -109,8 +110,8 @@ export function EventsList({
               <strong>{e.title}</strong>
               <span className="fa-ev-place">{e.place}</span>
               <span className="fa-ev-sum">{e.summary}</span>
-              <span className="fa-ev-src">
-                Telegramda köriş <span aria-hidden="true">↗</span>
+              <span className="more-btn">
+                <More />
               </span>
             </span>
           </a>

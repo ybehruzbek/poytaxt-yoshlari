@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 
 import type { Announce } from './announcements'
 import { fmtDate, TG } from './types'
+import { More } from '@/components/site/MoreBtn'
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
@@ -79,7 +80,9 @@ export function AnnounceList({ items }: { items: Announce[] }) {
               <strong>{e.title}</strong>
               <span>{e.text}</span>
             </span>
-            <em>Batafsil ↗</em>
+            <span className="more-btn">
+              <More />
+            </span>
           </a>
         ))}
       </div>

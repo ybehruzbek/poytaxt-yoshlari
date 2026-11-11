@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { DIRECTIONS, dirProjects, dirTitle, REPORT_2025, YEARS } from './data'
 import { EVENTS } from './events'
 import { fmtDate, type Project, TG } from './types'
+import { More } from '@/components/site/MoreBtn'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const STATUS = (s: Project['status']) =>
@@ -17,7 +18,6 @@ const Src = ({ id }: { id: number }) => (
 )
 
 const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
-const Arrow = () => <span aria-hidden="true">→</span>
 
 /* ===================== Yönalişlar ===================== */
 
@@ -88,8 +88,8 @@ export function DirsList({ base }: { base: string }) {
                       </>
                     )}
                   </span>
-                  <Link href={`${base}/${d.slug}`} className="vy3-more">
-                    Batafsil <Arrow />
+                  <Link href={`${base}/${d.slug}`} className="more-btn">
+                    <More />
                   </Link>
                 </div>
               </div>

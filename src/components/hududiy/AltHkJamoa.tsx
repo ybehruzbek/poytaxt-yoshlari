@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from 'react'
 
 import { CONTACT } from './data'
 import { IC, Ic, type Member, TEAM } from './team'
+import { More } from '@/components/site/MoreBtn'
 
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 
@@ -77,8 +78,8 @@ function Duties({ m, id }: { m: Member; id: string }) {
   if (!m.duties) return null
   return (
     <div className="z5-dz">
-      <button type="button" className="z5-duty-btn" popoverTarget={id}>
-        Vazifalari <span aria-hidden="true">→</span>
+      <button type="button" className="more-btn z5-duty-btn" popoverTarget={id}>
+        <More>Vazifalari</More>
       </button>
       <div id={id} popover="auto" className="z5-drawer" aria-label={`${m.name} — vazifalari`}>
         <button

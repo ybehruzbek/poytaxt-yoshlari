@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
 import { OPPS, OPP_TYPES, type OppType, deadlineLabel } from '@/lib/opps'
+import { More } from './MoreBtn'
 
 /** Karta kengayganda chiqadigan ma'lumot: qisqa tavsif, faol dasturlar soni, eng yaqin muddat va "Batafsil" */
 function OppInfo({ t }: { t: OppType }) {
@@ -30,19 +31,8 @@ function OppInfo({ t }: { t: OppType }) {
           )}
         </span>
       </div>
-      <span className="opp-more">
-        Batafsil
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
+      <span className="opp-more more-btn">
+        <More />
       </span>
     </div>
   )
@@ -67,13 +57,28 @@ export function Opportunities({ locale }: { locale: Locale }) {
                 <b>Grantlar</b>
                 <span>Taşabbusingizni moliyalaştiring</span>
               </div>
-              <svg className="deco" style={{ left: '20px', top: '320px', width: '72px', transform: 'rotate(-28deg)' }} viewBox="0 0 40 40">
-                <path fill="#532822" d="M20 0l4 13 13-6-6 13 13 4-13 4 6 13-13-6-4 13-4-13-13 6 6-13-13-4 13-4-6-13 13 6z" />
+              <svg
+                className="deco"
+                style={{ left: '20px', top: '320px', width: '72px', transform: 'rotate(-28deg)' }}
+                viewBox="0 0 40 40"
+              >
+                <path
+                  fill="#532822"
+                  d="M20 0l4 13 13-6-6 13 13 4-13 4 6 13-13-6-4 13-4-13-13 6 6-13-13-4 13-4-6-13 13 6z"
+                />
               </svg>
-              <svg className="deco" style={{ left: '100px', top: '300px', width: '160px' }} viewBox="0 0 100 100">
+              <svg
+                className="deco"
+                style={{ left: '100px', top: '300px', width: '160px' }}
+                viewBox="0 0 100 100"
+              >
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#89C0FF" strokeWidth="22" />
               </svg>
-              <svg className="deco" style={{ left: '36px', top: '420px', width: '90px' }} viewBox="0 0 100 100">
+              <svg
+                className="deco"
+                style={{ left: '36px', top: '420px', width: '90px' }}
+                viewBox="0 0 100 100"
+              >
                 <path
                   fill="#FF939A"
                   d="M50 2l8 9 12-4 3 12 12 2-3 12 10 8-9 8 6 11-12 4 1 12-12-1-4 12-11-6-8 9-8-9-11 6-4-12-12 1 1-12-12-4 6-11-9-8 10-8-3-12 12-2 3-12 12 4z"
@@ -86,14 +91,25 @@ export function Opportunities({ locale }: { locale: Locale }) {
             </Link>
             <Link href={`/${locale}/faoliyat/loyihalar`} className="opp o2">
               <p className="name">Stipendiyalar</p>
-              <svg className="deco" style={{ left: '-10px', top: '120px', width: '120px', opacity: '.25' }} viewBox="0 0 100 100">
+              <svg
+                className="deco"
+                style={{ left: '-10px', top: '120px', width: '120px', opacity: '.25' }}
+                viewBox="0 0 100 100"
+              >
                 <path
                   fill="#89C0FF"
                   d="M50 2l8 9 12-4 3 12 12 2-3 12 10 8-9 8 6 11-12 4 1 12-12-1-4 12-11-6-8 9-8-9-11 6-4-12-12 1 1-12-12-4 6-11-9-8 10-8-3-12 12-2 3-12 12 4z"
                 />
               </svg>
-              <svg className="deco" style={{ right: '30px', top: '150px', width: '30px', opacity: '.5' }} viewBox="0 0 40 40">
-                <path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
+              <svg
+                className="deco"
+                style={{ right: '30px', top: '150px', width: '30px', opacity: '.5' }}
+                viewBox="0 0 40 40"
+              >
+                <path
+                  fill="#FF854B"
+                  d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z"
+                />
               </svg>
               <div className="ph">
                 <img className="cover" src="/img/opp-stip.jpg" alt="Stipendiya sohiblari" />
@@ -104,11 +120,23 @@ export function Opportunities({ locale }: { locale: Locale }) {
               <p className="name">Volontyorlik</p>
               <div
                 className="deco leaf"
-                style={{ left: '110px', top: '40px', width: '110px', height: '110px', transform: 'rotate(-32deg)' }}
+                style={{
+                  left: '110px',
+                  top: '40px',
+                  width: '110px',
+                  height: '110px',
+                  transform: 'rotate(-32deg)',
+                }}
               ></div>
               <div
                 className="deco leaf"
-                style={{ left: '18px', top: '270px', width: '36px', height: '36px', transform: 'rotate(28deg)' }}
+                style={{
+                  left: '18px',
+                  top: '270px',
+                  width: '36px',
+                  height: '36px',
+                  transform: 'rotate(28deg)',
+                }}
               ></div>
               <div className="ph">
                 <img className="cover" src="/img/opp-vol.jpg" alt="Volontyorlar" />

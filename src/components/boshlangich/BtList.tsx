@@ -8,6 +8,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 const STEP = 12
 
 import { type Otm, type OtmType, TYPE_LABEL } from './data'
+import { More } from '@/components/site/MoreBtn'
 
 /** F.I.Ş. uç qatorda: familiya / ism / ota ismi (öğli, qizi bilan birga) */
 function nameLines(n: string): [string, string, string] {
@@ -42,12 +43,6 @@ function Name3({ n, className }: { n: string; className: string }) {
   )
 }
 
-const More = () => (
-  <span className="bt-more">
-    Batafsil <span aria-hidden="true">→</span>
-  </span>
-)
-
 /** Yetakçili OTT kartasi — butun karta yetakçi sahifasiga olib boradi */
 function Lead({ o, base, i }: { o: Otm; base: string; i: number }) {
   const L = o.leader!
@@ -59,7 +54,9 @@ function Lead({ o, base, i }: { o: Otm; base: string; i: number }) {
           {o.otm}
         </span>
         <Name3 n={L.name} className="bt-name" />
-        <More />
+        <span className="more-btn">
+          <More />
+        </span>
       </div>
       <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />
     </Link>

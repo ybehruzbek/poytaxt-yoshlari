@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { type Act, GROUPS, INTRO, NOTE } from './data'
+import { More } from '@/components/site/MoreBtn'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -16,8 +17,8 @@ const isPdf = (x: Act) => x.href?.endsWith('.pdf')
 function Open({ x, cls }: { x: Act; cls: string }) {
   if (!x.href) return null
   return (
-    <span className={cls}>
-      {isPdf(x) ? 'PDF faylni oçiş' : 'Matnini oçiş'} <span aria-hidden="true">↗</span>
+    <span className={`more-btn ${cls}`}>
+      <More>{isPdf(x) ? 'PDF faylni oçiş' : 'Matnini oçiş'}</More>
     </span>
   )
 }

@@ -365,14 +365,6 @@
 .bt-faces img + img {
   margin-left: -12px;
 }
-.bt-hub-go {
-  border-radius: 99px;
-  background: var(--yellow);
-  padding: 12px 20px;
-  font: 800 14px/1 var(--f-head);
-  color: var(--navy);
-  white-space: nowrap;
-}
 
 .bt-soon {
   display: flex;
@@ -506,23 +498,7 @@ a.bt-card:hover {
     0 16px 34px rgba(83, 40, 34, 0.1);
   transform: translateY(-2px);
 }
-.bt-more {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: auto;
-  border-radius: 99px;
-  background: var(--yellow);
-  padding: 9px 16px;
-  font: 800 13px/1 var(--f-head);
-  color: var(--navy);
-  transition: gap 0.2s;
-}
-a:hover .bt-more {
-  gap: 12px;
-}
-.bt-txt .bt-more {
+.bt-txt > .more-btn {
   margin-top: auto;
 }
 .bt-txt .bt-name {
@@ -843,4 +819,12 @@ a:hover .bt-more {
   .bt-late:not(.bt-seen) {
     opacity: 1;
   }
+}
+
+/* töq kartada “Sahifaga ötiş” hover'da oq bilan töladi */
+.bt-hub--b .bh-b:first-child .more-btn::before {
+  background: #fff;
+}
+.bt-hub--b .bh-b:first-child:hover .more-btn {
+  color: var(--navy);
 }
