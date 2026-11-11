@@ -77,6 +77,20 @@ def _current_contest(data=None):
     return active_contest()
 
 
+def _has_channel_footprint(entry):
+    """Ishning kanalda izi bormi (post yuborilgan yoki e'lon qilingan).
+
+    Shunday bo'lsa, material hech qanday yo'l bilan o'zgartirilmaydi:
+    kanaldagi post va unga berilgan ovozlar boshqa materialga tegishli
+    bo'lib qolmasligi kerak.
+    """
+    return (
+        Publication.objects.filter(entry=entry)
+        .filter(Q(message_id__isnull=False) | Q(published_at__isnull=False))
+        .exists()
+    )
+
+
 def _fio_error_text(error):
     return (
         f"⚠️ Iltimos, F.I.Sh.ni to'g'ri kiriting ({error}).\n\n"
@@ -372,6 +386,12 @@ async def td_nomination(callback: CallbackQuery, state: FSMContext):
         nomination=nomination,
         defaults={"contest": contest},
     )
+    if _has_channel_footprint(entry):
+        await callback.message.answer(
+            f"⚠️ {entry.code} arizangiz kanalda e'lon qilingan — "
+            "uni o'zgartirib bo'lmaydi."
+        )
+        return
     # Rad etilgan yoki tuzatish so'ralgan ariza qayta to'ldiriladi
     if entry.status in (EntryStatus.REJECTED, EntryStatus.REVISION):
         entry.status = EntryStatus.DRAFT
@@ -481,7 +501,8 @@ async def td_media(message: Message, state: FSMContext):
     with transaction.atomic():
         locked = Entry.objects.select_for_update().filter(id=entry.id).first()
         # Topshirilgan/tasdiqlangan arizaga media qo'shilmasin
-        if locked is None or locked.status not in editable:
+        if (locked is None or locked.status not in editable
+                or _has_channel_footprint(locked)):
             locked = None
         current = EntryMedia.objects.filter(entry_id=entry.id).count()
         over_limit = current >= limit
@@ -558,8 +579,9 @@ async def td_media_reset(callback: CallbackQuery, state: FSMContext):
     if not contest.is_accepting:
         await callback.message.answer(deadline_passed_text(contest))
         return
-    if entry.status not in (EntryStatus.DRAFT, EntryStatus.REVISION,
-                            EntryStatus.REJECTED):
+    if (entry.status not in (EntryStatus.DRAFT, EntryStatus.REVISION,
+                             EntryStatus.REJECTED)
+            or _has_channel_footprint(entry)):
         await callback.answer(
             "Topshirilgan arizani o'zgartirib bo'lmaydi. "
             "«Mening arizam» bo'limidan qayta topshiring.", show_alert=True)
@@ -657,6 +679,12 @@ async def td_submit(callback: CallbackQuery, state: FSMContext):
         await callback.answer()
         await state.clear()
         await callback.message.answer(deadline_passed_text(contest))
+        return
+
+    if _has_channel_footprint(entry):
+        await callback.answer(
+            "Bu ish kanalda e'lon qilingan — uni qayta topshirib bo'lmaydi.",
+            show_alert=True)
         return
 
     # Media va rozilik interfeysga emas, bazaga qarab tekshiriladi
@@ -764,13 +792,7 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
 
     # E'lon qilingan ishni tahrirlab bo'lmaydi: kanaldagi post va unga
     # berilgan ovozlar boshqa materialga ko'chib ketmasligi kerak
-    # Kanalga biror narsa yetib borgan bo'lsa (albom yuborilgan, lekin ovoz
-    # kartochkasi hali yo'q bo'lsa ham) — tahrirlash yopiq: aks holda
-    # kanaldagi post va DB'dagi material bir-biriga mos kelmay qoladi.
-    # Faqat bo'sh bandlik (hech narsa yuborilmagan) to'siq bo'lmaydi.
-    if (Publication.objects.filter(entry=entry)
-            .filter(Q(message_id__isnull=False) |
-                    Q(published_at__isnull=False)).exists()):
+    if _has_channel_footprint(entry):
         await callback.answer(
             "Bu ish kanalda e'lon qilingan — uni o'zgartirib bo'lmaydi.",
             show_alert=True)

@@ -1848,6 +1848,25 @@ async def _run_all(saved_event_ids):
     check("xavfsizlik: kanalga ketgan materialni almashtirib bo'lmadi",
           half.status == EntryStatus.MODERATION
           and any("e'lon qilingan" in a for a in cb.alerts), cb.alerts)
+    # Xuddi shu himoya boshqa yo'llardan ham ishlaydi (nominatsiya, media)
+    Entry.objects.filter(id=half.id).update(status=EntryStatus.REJECTED)
+    st_byp = FakeState()
+    await st_byp.update_data(td_contest_id=contest.id)
+    cb = FakeCallback("td_nom:video", 990077, message=FakeMessage(990077))
+    await contest_handler.td_nomination(cb, st_byp)
+    half.refresh_from_db()
+    check("xavfsizlik: nominatsiya orqali ham chetlab o'tib bo'lmadi",
+          half.status == EntryStatus.REJECTED
+          and "o'zgartirib bo'lmaydi" in cb.message.texts(),
+          cb.message.texts()[:90])
+
+    st_byp2 = FakeState()
+    await st_byp2.update_data(td_contest_id=contest.id, td_entry_id=half.id)
+    cb = FakeCallback("td_media_reset", 990077, message=FakeMessage(990077))
+    await contest_handler.td_media_reset(cb, st_byp2)
+    check("xavfsizlik: kanalga ketgan ish mediasi o'chirilmadi",
+          half.media.count() == 1)
+
     half.delete()
     half_participant.delete()
     contest.stage, contest.submission_deadline = saved_stage, saved_dl
