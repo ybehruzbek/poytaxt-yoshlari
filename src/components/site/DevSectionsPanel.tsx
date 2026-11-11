@@ -7,7 +7,7 @@ import { useEffect, useState, useSyncExternalStore } from 'react'
  * bitta yiğiladigan panelda almaştiriş. Har bölim uçun <html data-{name}="a|b|c|…"> qöyiladi va
  * [data-v="{name}-{k}"] örama körsatiladi (qolganlari yaşiriladi). Tanlov sessionStorage'da saqlanadi.
  */
-export type PanelSection = { name: string; label: string; count: number }
+export type PanelSection = { name: string; label: string; count: number; hints?: string[] }
 
 const listeners = new Set<() => void>()
 const subscribe = (cb: () => void) => {
@@ -79,10 +79,17 @@ export function DevSectionsPanel({ sections }: { sections: PanelSection[] }) {
                 <li key={s.name}>
                   <button type="button" className="dev-panel-name" onClick={() => jump(s.name)} title="Bölimga ötiş">
                     {s.label}
+                    {s.hints && <small>{s.hints[values[i].charCodeAt(0) - 97]}</small>}
                   </button>
                   <span>
                     {letters(s.count).map((k) => (
-                      <button key={k} type="button" className={values[i] === k ? 'on' : undefined} onClick={() => write(s.name, k)}>
+                      <button
+                        key={k}
+                        type="button"
+                        title={s.hints?.[k.charCodeAt(0) - 97]}
+                        className={values[i] === k ? 'on' : undefined}
+                        onClick={() => write(s.name, k)}
+                      >
                         {k.toUpperCase()}
                       </button>
                     ))}

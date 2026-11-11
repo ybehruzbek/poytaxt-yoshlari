@@ -16,6 +16,7 @@ import '../opps.css'
 import '../cta.css'
 import '../footer.css'
 import '../social.css'
+import '../motion.css'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
 // latin-ext: Ö Ğ Ş Ç ’ (yangi alifbo); cyrillic: rus tili.

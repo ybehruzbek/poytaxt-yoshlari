@@ -1,0 +1,478 @@
+/* =====================================================================
+   Bosh sahifa animatsiyalari (Apple uslubi) — HomeMotion.tsx bilan işlaydi.
+   [data-m=…] bölim, .m-in körinişga kirgan, --e/--x/--p/--s skroll progressi,
+   --i/--j/--n/--r element tartibi va çuqurligi. Faqat html.m-ready da (JS bor
+   va “harakatni kamaytiriş” öçiq bölsa).
+   ===================================================================== */
+html.m-ready {
+  --m-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --m-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes m-float {
+  50% {
+    translate: 0 -14px;
+  }
+}
+
+/* ---------------- Boş ekran ---------------- */
+/* A — Keynote kirişi: qatorlar xiradan aniqlaşib köteriladi, kollaj bölaklari prujina bilan çiqadi */
+html.m-ready[data-m-hero='a'] [data-m='m-hero'] .m-i {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.1s var(--m-ease),
+    filter 1s var(--m-ease),
+    scale 0.9s var(--m-spring);
+  transition-delay: calc(var(--i) * 110ms);
+}
+html.m-ready[data-m-hero='a'] [data-m='m-hero'] .collage > .m-i {
+  transition-delay: calc(350ms + var(--j) * 55ms);
+}
+html.m-ready[data-m-hero='a'] [data-m='m-hero']:not(.m-in) .hero-slogan > span {
+  opacity: 0;
+  translate: 0 0.45em;
+  filter: blur(14px);
+}
+html.m-ready[data-m-hero='a'] [data-m='m-hero']:not(.m-in) :is(.lead, .hero-actions) {
+  opacity: 0;
+  translate: 0 28px;
+}
+html.m-ready[data-m-hero='a'] [data-m='m-hero']:not(.m-in) .collage > * {
+  opacity: 0;
+  scale: 0.3;
+}
+html.m-ready[data-m-hero='a'] [data-m='m-hero'] .hero-text {
+  opacity: calc(1 - var(--x, 0) * 1.8);
+  translate: 0 calc(var(--x, 0) * -120px);
+}
+html.m-ready[data-m-hero='a'] [data-m='m-hero'] .collage-fit {
+  translate: 0 calc(var(--x, 0) * 90px);
+  scale: calc(1 - var(--x, 0) * 0.12);
+}
+
+/* B — Çuqurlik qatlamlari: skrollda har bölak öz tezligida suzadi, foto kattalaşadi */
+html.m-ready[data-m-hero='b'] [data-m='m-hero'] .m-i {
+  transition: opacity 1.2s var(--m-ease) calc(var(--i) * 60ms);
+}
+html.m-ready[data-m-hero='b'] [data-m='m-hero']:not(.m-in) .m-i {
+  opacity: 0;
+}
+html.m-ready[data-m-hero='b'] [data-m='m-hero'] .collage > * {
+  translate: 0 calc(var(--x, 0) * (var(--r) * -460px - 60px));
+}
+html.m-ready[data-m-hero='b'] [data-m='m-hero'] .c-photo img {
+  scale: calc(1 + var(--x, 0) * 0.4);
+}
+html.m-ready[data-m-hero='b'] [data-m='m-hero'] .hero-text {
+  translate: 0 calc(var(--x, 0) * 180px);
+  opacity: calc(1 - var(--x, 0) * 1.5);
+}
+
+/* C — Sahna: bölim yopişib turadi, skroll bilan şior qatorlari birin-ketin yorişadi */
+html.m-ready[data-m-hero='c'] [data-m='m-hero'] {
+  height: 240vh;
+}
+html.m-ready[data-m-hero='c'] [data-m='m-hero'] > .wrap {
+  position: sticky;
+  top: clamp(0px, calc(100vh - 680px), 110px);
+}
+html.m-ready[data-m-hero='c'] [data-m='m-hero'] .hero-slogan > span {
+  opacity: clamp(0.14, calc(var(--s, 0) * 3.4 - var(--j) + 1), 1);
+  filter: blur(calc((1 - clamp(0, calc(var(--s, 0) * 3.4 - var(--j) + 1), 1)) * 6px));
+}
+html.m-ready[data-m-hero='c'] [data-m='m-hero'] :is(.lead, .hero-actions) {
+  --k: clamp(0, calc(var(--s, 0) * 4 - 2.4), 1);
+  opacity: var(--k);
+  translate: 0 calc((1 - var(--k)) * 30px);
+}
+html.m-ready[data-m-hero='c'] [data-m='m-hero'] .collage-fit {
+  scale: calc(0.8 + var(--s, 0) * 0.2);
+  rotate: calc((1 - var(--s, 0)) * -5deg);
+}
+html.m-ready[data-m-hero='c'] [data-m='m-hero'] .collage > * {
+  opacity: clamp(0, calc(var(--s, 0) * 4 - var(--r) * 2.6 + 1), 1);
+  scale: clamp(0.5, calc(var(--s, 0) * 4 - var(--r) * 2.6 + 1), 1);
+}
+
+/* ---------------- Yangiliklar ---------------- */
+/* A — Yumşoq köteriliş */
+html.m-ready[data-m-news='a'] [data-m='m-news'] .m-i {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.1s var(--m-ease),
+    filter 1s var(--m-ease);
+  transition-delay: calc(var(--i) * 90ms);
+}
+html.m-ready[data-m-news='a'] [data-m='m-news']:not(.m-in) .m-i {
+  opacity: 0;
+  translate: 0 56px;
+  filter: blur(10px);
+}
+
+/* B — Kino kesimi: asosiy karta ramkadan oçiladi, rasm ičdan kiçrayadi (skroll) */
+html.m-ready[data-m-news='b'] [data-m='m-news'] .na-main {
+  clip-path: inset(
+    calc((1 - var(--e, 1)) * 12%) calc((1 - var(--e, 1)) * 16%) round calc(28px + (1 - var(--e, 1)) * 60px)
+  );
+}
+html.m-ready[data-m-news='b'] [data-m='m-news'] .na-main .im img {
+  scale: calc(1.35 - var(--e, 1) * 0.35);
+}
+html.m-ready[data-m-news='b'] [data-m='m-news'] .na-list > li.m-i {
+  translate: calc((1 - var(--e, 1)) * (var(--j) + 1) * 90px) 0;
+  opacity: calc(var(--e, 1) * 1.6 - 0.4 - var(--j) * 0.15);
+}
+html.m-ready[data-m-news='b'] [data-m='m-news'] .sec-head > .m-i {
+  transition: opacity 1s var(--m-ease);
+}
+html.m-ready[data-m-news='b'] [data-m='m-news']:not(.m-in) .sec-head > .m-i {
+  opacity: 0;
+}
+
+/* C — Ikki tomondan: rasm çapdan, matn öngdan */
+html.m-ready[data-m-news='c'] [data-m='m-news'] :is(.na-main .im, .na-main .bd, .m-i) {
+  transition:
+    opacity 1.1s var(--m-ease),
+    translate 1.2s var(--m-ease);
+  transition-delay: calc(var(--i, 1) * 90ms);
+}
+html.m-ready[data-m-news='c'] [data-m='m-news'] .na-main .bd {
+  transition-delay: 220ms;
+}
+html.m-ready[data-m-news='c'] [data-m='m-news']:not(.m-in) .na-main .im {
+  opacity: 0;
+  translate: -120px 0;
+}
+html.m-ready[data-m-news='c'] [data-m='m-news']:not(.m-in) .na-main .bd {
+  opacity: 0;
+  translate: 120px 0;
+}
+html.m-ready[data-m-news='c'] [data-m='m-news']:not(.m-in) :is(.sec-head > .m-i, .na-list > .m-i) {
+  opacity: 0;
+  translate: 0 50px;
+}
+
+/* ---------------- Tadbirlar ---------------- */
+/* A — Navbat bilan */
+html.m-ready[data-m-ev='a'] [data-m='m-ev'] .m-i {
+  transition:
+    opacity 0.9s var(--m-ease),
+    translate 1.1s var(--m-ease),
+    scale 1.1s var(--m-ease);
+  transition-delay: calc(var(--i) * 100ms);
+}
+html.m-ready[data-m-ev='a'] [data-m='m-ev']:not(.m-in) .m-i {
+  opacity: 0;
+  translate: 0 70px;
+  scale: 0.94;
+}
+
+/* B — Yelpiğ: kartalar markazdagi dastadan skroll bilan yoyiladi */
+html.m-ready[data-m-ev='b'] [data-m='m-ev'] .pt-ticket {
+  --f: calc(1 - var(--e, 1));
+  translate: calc(((var(--n) - 1) / 2 - var(--j)) * var(--f) * 104%) calc(var(--f) * 70px);
+  rotate: calc((var(--j) - (var(--n) - 1) / 2) * var(--f) * 7deg);
+  opacity: calc(0.35 + var(--e, 1) * 0.65);
+}
+html.m-ready[data-m-ev='b'] [data-m='m-ev'] .sec-head > .m-i {
+  transition: opacity 1s var(--m-ease);
+}
+html.m-ready[data-m-ev='b'] [data-m='m-ev']:not(.m-in) .sec-head > .m-i {
+  opacity: 0;
+}
+
+/* C — 3D aylaniş: kartalar yotgan holatdan tikka turadi */
+html.m-ready[data-m-ev='c'] [data-m='m-ev'] .evv-c {
+  perspective: 1400px;
+}
+html.m-ready[data-m-ev='c'] [data-m='m-ev'] .m-i {
+  transform-origin: 50% 0%;
+  transition:
+    opacity 1s var(--m-ease),
+    rotate 1.3s var(--m-ease),
+    translate 1.3s var(--m-ease);
+  transition-delay: calc(var(--i) * 120ms);
+}
+html.m-ready[data-m-ev='c'] [data-m='m-ev']:not(.m-in) .m-i {
+  opacity: 0;
+  translate: 0 40px;
+}
+html.m-ready[data-m-ev='c'] [data-m='m-ev']:not(.m-in) .pt-ticket {
+  rotate: x 70deg;
+}
+
+/* ---------------- Imkoniyatlar ---------------- */
+/* A — Bento: kataklar kiçikdan çiqadi */
+html.m-ready[data-m-opps='a'] [data-m='m-opps'] .m-i {
+  transition:
+    opacity 0.9s var(--m-ease),
+    scale 1.2s var(--m-ease),
+    translate 1.2s var(--m-ease);
+  transition-delay: calc(var(--i) * 110ms);
+}
+html.m-ready[data-m-opps='a'] [data-m='m-opps']:not(.m-in) .m-i {
+  opacity: 0;
+  scale: 0.86;
+}
+html.m-ready[data-m-opps='a'] [data-m='m-opps']:not(.m-in) .opps-title {
+  scale: 1;
+  translate: 0 40px;
+}
+
+/* B — Rasm ičdan kattalaşadi (skroll) */
+html.m-ready[data-m-opps='b'] [data-m='m-opps'] .opp .ph {
+  translate: 0 calc((1 - var(--e, 1)) * 90px);
+}
+html.m-ready[data-m-opps='b'] [data-m='m-opps'] .opp .ph img {
+  scale: calc(1.5 - var(--e, 1) * 0.5);
+}
+html.m-ready[data-m-opps='b'] [data-m='m-opps'] .m-i {
+  transition: opacity 1s var(--m-ease) calc(var(--i) * 80ms);
+}
+html.m-ready[data-m-opps='b'] [data-m='m-opps']:not(.m-in) .m-i {
+  opacity: 0;
+}
+
+/* C — Parda: har katak pastdan yuqoriga oçiladi */
+html.m-ready[data-m-opps='c'] [data-m='m-opps'] .m-i {
+  clip-path: inset(0 0 0 0);
+  transition:
+    clip-path 1.2s var(--m-ease),
+    opacity 1s var(--m-ease);
+  transition-delay: calc(var(--i) * 130ms);
+}
+html.m-ready[data-m-opps='c'] [data-m='m-opps'] .opp .ph img {
+  transition: scale 1.8s var(--m-ease) calc(var(--i) * 130ms);
+}
+html.m-ready[data-m-opps='c'] [data-m='m-opps']:not(.m-in) .m-i {
+  clip-path: inset(100% 0 0 0);
+}
+html.m-ready[data-m-opps='c'] [data-m='m-opps']:not(.m-in) .opps-title {
+  clip-path: inset(0 0 100% 0);
+}
+html.m-ready[data-m-opps='c'] [data-m='m-opps']:not(.m-in) .opp .ph img {
+  scale: 1.3;
+}
+
+/* ---------------- Biz haqimizda ---------------- */
+/* A — Matn sözma-söz yorişadi (skroll) + raqamlar sanaladi */
+html.m-ready[data-m-about='a'] [data-m='m-about'] .m-w {
+  opacity: clamp(0.13, calc((var(--e, 1) - 0.15) * 1.4 * (var(--wn) + 3) - var(--w)), 1);
+  transition: opacity 0.25s linear;
+}
+html.m-ready[data-m-about='a'] [data-m='m-about'] :is(.about-art > *, .ach > div, .about-row .body4) {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.1s var(--m-ease);
+  transition-delay: calc(var(--j) * 120ms + 200ms);
+}
+html.m-ready[data-m-about='a'] [data-m='m-about']:not(.m-in) :is(.about-art > *, .ach > div, .about-row .body4) {
+  opacity: 0;
+  translate: 0 40px;
+}
+
+/* B — Şakllar har tomondan uçib kelib joyiga tuşadi */
+html.m-ready[data-m-about='b'] [data-m='m-about'] .m-i {
+  transition:
+    opacity 0.9s var(--m-ease),
+    translate 1.2s var(--m-ease),
+    scale 1s var(--m-spring),
+    rotate 1.2s var(--m-ease),
+    filter 1s var(--m-ease);
+  transition-delay: calc(var(--i) * 70ms);
+}
+html.m-ready[data-m-about='b'] [data-m='m-about']:not(.m-in) .about-art > * {
+  opacity: 0;
+  scale: 0.2;
+  rotate: calc((var(--r) - 0.5) * 220deg);
+  translate: calc((var(--r) - 0.5) * 320px) 140px;
+}
+html.m-ready[data-m-about='b'] [data-m='m-about']:not(.m-in) :is(.about-head h2, .ach > div, .about-row .body4) {
+  opacity: 0;
+  translate: 0 50px;
+  filter: blur(8px);
+}
+
+/* C — Raqamlar skroll bilan kattalaşadi, şakllar aylanadi */
+html.m-ready[data-m-about='c'] [data-m='m-about'] .ach b {
+  transform-origin: 0 100%;
+  scale: calc(0.5 + var(--e, 1) * 0.5);
+  opacity: calc(var(--e, 1) * 1.5 - 0.3);
+}
+html.m-ready[data-m-about='c'] [data-m='m-about'] .about-art > * {
+  rotate: calc((var(--p, 0.5) - 0.5) * (var(--r) - 0.5) * 160deg);
+  translate: 0 calc((var(--p, 0.5) - 0.5) * (var(--r) * -240px - 30px));
+}
+html.m-ready[data-m-about='c'] [data-m='m-about'] :is(.about-head h2, .about-row .body4) {
+  transition:
+    opacity 1.1s var(--m-ease),
+    translate 1.1s var(--m-ease);
+}
+html.m-ready[data-m-about='c'] [data-m='m-about']:not(.m-in) :is(.about-head h2, .about-row .body4) {
+  opacity: 0;
+  translate: 0 40px;
+}
+
+/* ---------------- Nega qöşiliş ---------------- */
+/* A — Çuqurlik qatlamlari (skroll parallaks) */
+html.m-ready[data-m-ben='a'] [data-m='m-ben'] .ui > * {
+  translate: 0 calc((var(--p, 0.5) - 0.5) * (var(--r) * -300px - 40px));
+}
+html.m-ready[data-m-ben='a'] [data-m='m-ben'] :is(h2, .body4, .values li) {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.1s var(--m-ease);
+  transition-delay: calc(var(--i) * 70ms);
+}
+html.m-ready[data-m-ben='a'] [data-m='m-ben']:not(.m-in) :is(h2, .body4, .values li) {
+  opacity: 0;
+  translate: 0 40px;
+}
+
+/* B — Ketma-ket belgilar: kollaj prujina bilan, bandlar çapdan, belgilar “pop” */
+html.m-ready[data-m-ben='b'] [data-m='m-ben'] .m-i,
+html.m-ready[data-m-ben='b'] [data-m='m-ben'] .values li i {
+  transition:
+    opacity 0.8s var(--m-ease),
+    translate 1s var(--m-ease),
+    scale 0.9s var(--m-spring),
+    rotate 0.9s var(--m-spring);
+  transition-delay: calc(var(--i) * 90ms);
+}
+html.m-ready[data-m-ben='b'] [data-m='m-ben'] .values li i {
+  transition-delay: calc(var(--i) * 90ms + 250ms);
+}
+html.m-ready[data-m-ben='b'] [data-m='m-ben']:not(.m-in) .ui > * {
+  opacity: 0;
+  scale: 0.3;
+}
+html.m-ready[data-m-ben='b'] [data-m='m-ben']:not(.m-in) :is(h2, .body4, .values li) {
+  opacity: 0;
+  translate: -50px 0;
+}
+html.m-ready[data-m-ben='b'] [data-m='m-ben']:not(.m-in) .values li i {
+  scale: 0;
+  rotate: -120deg;
+}
+
+/* C — Sahna: bölim yopişib turadi, bandlar birin-ketin yorişadi */
+@media (min-width: 901px) {
+  html.m-ready[data-m-ben='c'] [data-m='m-ben'] {
+    height: 220vh;
+  }
+  html.m-ready[data-m-ben='c'] [data-m='m-ben'] > .benefit {
+    position: sticky;
+    top: calc(50vh - 300px);
+  }
+}
+html.m-ready[data-m-ben='c'] [data-m='m-ben'] .values li {
+  --k: clamp(0.15, calc(var(--s, 0) * (var(--n) + 1.2) - var(--j)), 1);
+  opacity: var(--k);
+}
+html.m-ready[data-m-ben='c'] [data-m='m-ben'] .values li i {
+  scale: clamp(0.5, calc(var(--s, 0) * 5.2 - var(--j)), 1);
+}
+html.m-ready[data-m-ben='c'] [data-m='m-ben'] .ui > * {
+  scale: calc(0.88 + var(--s, 0) * 0.12);
+}
+html.m-ready[data-m-ben='c'] [data-m='m-ben'] .ui img {
+  scale: calc(1.3 - var(--s, 0) * 0.3);
+}
+
+/* ---------------- Murojaat ---------------- */
+/* A — Yumşoq köteriliş */
+html.m-ready[data-m-cta='a'] [data-m='m-cta'] .m-i {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.1s var(--m-ease);
+  transition-delay: calc(var(--i) * 90ms);
+}
+html.m-ready[data-m-cta='a'] [data-m='m-cta']:not(.m-in) .m-i {
+  opacity: 0;
+  translate: 0 44px;
+}
+
+/* B — Qadamlar raqamlari birin-ketin, forma öngdan */
+html.m-ready[data-m-cta='b'] [data-m='m-cta'] :is(.m-i, .cb-steps li b) {
+  transition:
+    opacity 0.9s var(--m-ease),
+    translate 1.2s var(--m-ease),
+    scale 0.8s var(--m-spring);
+  transition-delay: calc(var(--i) * 140ms);
+}
+html.m-ready[data-m-cta='b'] [data-m='m-cta'] .cb-steps li b {
+  transition-delay: calc(var(--i) * 140ms + 200ms);
+}
+html.m-ready[data-m-cta='b'] [data-m='m-cta'] .cb-form {
+  transition-delay: 150ms;
+}
+html.m-ready[data-m-cta='b'] [data-m='m-cta']:not(.m-in) .cb-txt .m-i {
+  opacity: 0;
+  translate: 0 30px;
+}
+html.m-ready[data-m-cta='b'] [data-m='m-cta']:not(.m-in) .cb-steps li b {
+  scale: 0;
+}
+html.m-ready[data-m-cta='b'] [data-m='m-cta']:not(.m-in) .cb-form {
+  opacity: 0;
+  translate: 120px 0;
+}
+
+/* C — Karta skroll bilan kattalaşadi */
+html.m-ready[data-m-cta='c'] [data-m='m-cta'] .cb {
+  scale: calc(0.86 + var(--e, 1) * 0.14);
+  opacity: calc(0.3 + var(--e, 1) * 0.7);
+}
+html.m-ready[data-m-cta='c'] [data-m='m-cta'] .m-i {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.1s var(--m-ease);
+  transition-delay: calc(300ms + var(--i) * 80ms);
+}
+html.m-ready[data-m-cta='c'] [data-m='m-cta']:not(.m-in) .m-i {
+  opacity: 0;
+  translate: 0 24px;
+}
+
+/* ---------------- Ijtimoiy tarmoqlar ---------------- */
+/* A — Navbat bilan */
+html.m-ready[data-m-sp='a'] [data-m='m-sp'] .m-i {
+  transition:
+    opacity 1s var(--m-ease),
+    translate 1.2s var(--m-ease);
+  transition-delay: calc(var(--i) * 110ms);
+}
+html.m-ready[data-m-sp='a'] [data-m='m-sp']:not(.m-in) .m-i {
+  opacity: 0;
+  translate: 0 90px;
+}
+
+/* B — Yelpiğ: telefonlar dastadan skroll bilan yoyiladi */
+html.m-ready[data-m-sp='b'] [data-m='m-sp'] .sp-phone {
+  --f: calc(1 - var(--e, 1));
+  translate: calc(((var(--n) - 1) / 2 - var(--j)) * var(--f) * 100%) calc(var(--f) * 60px);
+  rotate: calc((var(--j) - (var(--n) - 1) / 2) * var(--f) * -10deg);
+}
+html.m-ready[data-m-sp='b'] [data-m='m-sp'] .sp-head > .m-i {
+  transition: opacity 1s var(--m-ease);
+}
+html.m-ready[data-m-sp='b'] [data-m='m-sp']:not(.m-in) .sp-head > .m-i {
+  opacity: 0;
+}
+
+/* C — Suzib turadi: xiradan çiqadi, keyin yengil tebranadi */
+html.m-ready[data-m-sp='c'] [data-m='m-sp'] .m-i {
+  transition:
+    opacity 1s var(--m-ease),
+    scale 1.2s var(--m-ease),
+    filter 1s var(--m-ease);
+  transition-delay: calc(var(--i) * 110ms);
+}
+html.m-ready[data-m-sp='c'] [data-m='m-sp']:not(.m-in) .m-i {
+  opacity: 0;
+  scale: 0.85;
+  filter: blur(10px);
+}
+html.m-ready[data-m-sp='c'] [data-m='m-sp'].m-in .sp-phone {
+  animation: m-float 6s ease-in-out infinite;
+  animation-delay: calc(var(--j) * -1.5s);
+}

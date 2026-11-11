@@ -3,6 +3,7 @@ import { Benefits } from '@/components/site/Benefits'
 import { Cta } from '@/components/site/Cta'
 import { Events } from '@/components/site/Events'
 import { Hero } from '@/components/site/Hero'
+import { HomeMotion } from '@/components/site/HomeMotion'
 import { News } from '@/components/site/News'
 import { Opportunities } from '@/components/site/Opportunities'
 import { SocialPhones } from '@/components/site/SocialPhones'
@@ -27,6 +28,7 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <Benefits locale={locale} />
       <Cta locale={locale} />
       <SocialPhones />
+      <HomeMotion />
     </>
   )
 }
