@@ -1,7 +1,8 @@
 /**
  * Tadbirlar arxivi — “Poytaxt yoşlari” Telegram kanalidan (2023–2026) yiğilgan va tekşirilgan.
  * Har bir tadbir kanaldagi asl postga bog‘langan: https://t.me/poytaxtyoshlari_yi/{id}
- * Avtomatik yasalgan: scratchpad/tg/gen_events.ts — qölda özgartirilsa, şu faylni tahrirlang.
+ * Avtomatik yasalgan: scratchpad/tg/gen_events.ts. 2026-11-11: 45 ta tadbirning yönalişi qölda tuzatildi
+ * (masalan, “Biznes marafon” sportdan taʼlimga, film premyeralari mediaga) — qayta yasalganda saqlang.
  */
 import type { DirSlug } from './types'
 
@@ -47,7 +48,7 @@ export const EVENTS: Ev[] = [
     type: 'xalqaro almaşinuv',
     summary:
       'ÖzDJTU yoşlar yetakçisi Sevinç Islomova xalqaro yoşlar almaşinuvi dasturida iştirok etdi.',
-    dir: 'yetakchilik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/7009.webp',
   },
   {
@@ -69,7 +70,7 @@ export const EVENTS: Ev[] = [
     type: 'uçraşuv',
     summary:
       'Zamonaviy yetakçilik, şaxsiy rivojlaniş va media vositalari böyiça tavsiyalar berildi.',
-    dir: 'yetakchilik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/6988.webp',
   },
   {
@@ -121,7 +122,7 @@ export const EVENTS: Ev[] = [
     place: 'Alişer Navoiy nomidagi Toşkent davlat özbek tili va adabiyoti universiteti',
     type: 'oçiq muloqot',
     summary: 'Boşlanğiç taşkilot taşabbusi bilan liderlik mavzusida oçiq muloqot.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/6916.webp',
   },
   {
@@ -241,7 +242,7 @@ export const EVENTS: Ev[] = [
     type: 'seminar-trening',
     summary:
       'BMTning 17 ta BRM va yoşlarning örni haqida seminar, interaktiv quizlar, faol iştirokçilar taqdirlandi.',
-    dir: 'intellektual',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/6626.webp',
   },
   {
@@ -305,7 +306,7 @@ export const EVENTS: Ev[] = [
     type: 'taqdimot',
     summary:
       'Talabalarni qöllab-quvvatlaş, liderlik va ijtimoiy faollikni oşirişga qaratilgan rejalar va takliflar taqdim etildi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/6468.webp',
   },
   {
@@ -358,7 +359,7 @@ export const EVENTS: Ev[] = [
     place: 'Yoşlar ijod saroyi boği',
     type: 'marafon',
     summary: '“Taşabbuslar marafoni” doirasida navbatdagi “Biznes marafon” ötkazildi.',
-    dir: 'sport-salomatlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/6348.webp',
   },
   {
@@ -422,7 +423,7 @@ export const EVENTS: Ev[] = [
     type: 'öquv kursi',
     summary:
       '6 kunlik kurs yakunlandi; iştirokçilar loyihalarini taqdim etdi, sertifikatlar berildi.',
-    dir: 'intellektual',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/6219.webp',
   },
   {
@@ -454,7 +455,7 @@ export const EVENTS: Ev[] = [
     type: 'seminar',
     summary:
       'Şerzod Olimov iştirokida ommaviy sport va soğlom turmuş tarzi muhokama qilindi; Olimpiya şaharçasiga ekskursiya.',
-    dir: 'sport-salomatlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/6147.webp',
   },
   {
@@ -547,7 +548,7 @@ export const EVENTS: Ev[] = [
     type: 'tanlov',
     summary:
       'Faol aʼzolarga OTTga imtiyozli qabul tavsiyanomalari beriş tanlovining şahar bosqiçi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/5949.webp',
   },
   {
@@ -622,7 +623,7 @@ export const EVENTS: Ev[] = [
     type: 'yiğiliş',
     summary:
       'OTT boşlanğiç taşkilotlari faoliyati holati, natijalar, kamçiliklar va ustuvor vazifalar muhokama qilindi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/5786.webp',
   },
   {
@@ -738,7 +739,7 @@ export const EVENTS: Ev[] = [
     place: 'Oliy Majlis Senati',
     type: 'taşrif',
     summary: 'TDIU Yoşlar kengaşi aʼzolari va faol talabalari Senatga taşrif buyurdi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/5564.webp',
   },
   {
@@ -760,7 +761,7 @@ export const EVENTS: Ev[] = [
     type: 'oçiq muloqot',
     summary:
       'Markaziy Kengaş raisi Xayrulla Sattarov va Toşkent harbiy okrugi qömondoni polkovnik Zokirjon Sayfutdinov talabalar bilan muloqot qildi.',
-    dir: 'harbiy-vatanparvarlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/5518.webp',
   },
   {
@@ -791,7 +792,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent davlat iqtisodiyot universiteti',
     type: 'tanlov',
     summary: "TDIU Students' Union taşabbusi bilan 14 ta fakultet iştirokida tanlov ötkazildi.",
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'ijod-turizm',
     img: '/img/faoliyat/t/5455.webp',
   },
   {
@@ -802,7 +803,7 @@ export const EVENTS: Ev[] = [
     type: 'taşrif',
     summary:
       'TXVU boşlanğiç taşkiloti Yoşlar kengaşi aʼzolari va faol talabalari Senatga taşrif buyurdi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/5445.webp',
   },
   {
@@ -854,7 +855,7 @@ export const EVENTS: Ev[] = [
     place: 'Profi universiteti',
     type: 'profilaktik tadbir',
     summary: 'Maʼnaviy-maʼrifiy va profilaktik tadbir taşkil etildi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'huquqiy-madaniyat',
     img: '/img/faoliyat/t/5292.webp',
   },
   {
@@ -928,7 +929,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent arxitektura va quriliş universiteti',
     type: 'muloqot',
     summary: 'Kengaş va Toşkent harbiy okrugi qömondonligi hamkorligida uçraşuv.',
-    dir: 'harbiy-vatanparvarlik',
+    dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/4885.webp',
   },
   {
@@ -970,7 +971,7 @@ export const EVENTS: Ev[] = [
     place: 'Rossiya davlat neft va gaz universiteti Toşkent filiali',
     type: 'yarmarka',
     summary: 'Talabalar qöl mehnati mahsulotlari, şirinliklar va sovğalarni namoyiş etdi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'ijod-turizm',
     img: '/img/faoliyat/t/4760.webp',
   },
   {
@@ -1108,7 +1109,7 @@ export const EVENTS: Ev[] = [
     type: 'festival',
     summary:
       '“Milliy Toşkent” loyihasi doirasida konsert, hunarmandçilik va milliy liboslar körgazmasi, milliy sport öyinlari.',
-    dir: 'sport-salomatlik',
+    dir: 'ijod-turizm',
     img: '/img/faoliyat/t/4443.webp',
   },
   {
@@ -1171,7 +1172,7 @@ export const EVENTS: Ev[] = [
     place: '“School 21” raqamli IT maktabi',
     type: 'taşrif',
     summary: 'Şukurulloxon Anvarov 24/7 işlaydigan bepul IT maktab jarayonlari bilan tanişdi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/4279.webp',
   },
   {
@@ -1280,7 +1281,7 @@ export const EVENTS: Ev[] = [
     type: 'hamkorlik',
     summary:
       'Ikki OTT boşlanğiç taşkiloti Kengaşlari madaniy, sport, hayriya-volontyorlik, IT va talabalar almaşinuvi böyiça memorandum imzoladi.',
-    dir: 'volontyorlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/3954.webp',
   },
   {
@@ -1353,7 +1354,7 @@ export const EVENTS: Ev[] = [
     place: 'Orient Village oromgohi',
     type: 'oromgoh',
     summary: '3 kunlik dastur: yetakçilik treninglari, mahorat darslari, sport.',
-    dir: 'sport-salomatlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/3759.webp',
   },
   {
@@ -1364,7 +1365,7 @@ export const EVENTS: Ev[] = [
     type: 'tanlov',
     summary:
       'Harbiy qismlardagi yetakçilarning bilimi va faoliyati baholandi; sovrindorlar taqdirlandi.',
-    dir: 'harbiy-vatanparvarlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/3772.webp',
   },
   {
@@ -1437,7 +1438,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'master-klass',
     summary: '“Talabalar festivali” doirasida master-klass va fikr almaşuvlar.',
-    dir: 'sport-salomatlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/3578.webp',
   },
   {
@@ -1469,7 +1470,7 @@ export const EVENTS: Ev[] = [
     type: 'konferensiya',
     summary:
       '“Talabalar festivali” doirasida “Hamma uçun barqaror dunyo sari” şiori ostida 10–11-may kunlari.',
-    dir: 'ijod-turizm',
+    dir: 'intellektual',
     img: '/img/faoliyat/t/3509.webp',
   },
   {
@@ -1490,7 +1491,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'hamkorlik',
     summary: 'Qöşma loyihalar, madaniy va ilmiy almaşinuvlar, startaplar közda tutilgan.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/3455.webp',
   },
   {
@@ -1678,7 +1679,7 @@ export const EVENTS: Ev[] = [
     type: 'seminar',
     summary:
       '“TDPU Mediaçilar klubi” aʼzolari uçun; Kengaş axborot xizmati boşliği Şoilhom Şoalimov va Oğabek Temirov iştirok etdi.',
-    dir: 'yetakchilik',
+    dir: 'media',
     img: '/img/faoliyat/t/2870.webp',
   },
   {
@@ -1826,7 +1827,7 @@ export const EVENTS: Ev[] = [
     place: 'Geologiya fanlari universiteti',
     type: 'körik-tanlov',
     summary: '1-örin “Minimum”, 2-örin “Daminant”, 3-örin “Yustitsiya” jamoalari.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'intellektual',
     img: '/img/faoliyat/t/2478.webp',
   },
   {
@@ -1859,7 +1860,7 @@ export const EVENTS: Ev[] = [
     type: 'yiğiliş',
     summary:
       'Kengaş tuzilib, boşqaruv raisi etib TDIU katta öqituvçisi Şohrux Boymurodov saylandi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/2235.webp',
   },
   {
@@ -1881,7 +1882,7 @@ export const EVENTS: Ev[] = [
     type: 'taʼsis yiğilişi',
     summary:
       '“Toşkent yoşlarni sevadi” şiori ostida assotsiatsiya tuzildi, rais oçiq ovoz bilan saylandi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'yetakchilik',
     img: '/img/faoliyat/t/2187.webp',
   },
   {
@@ -1947,7 +1948,7 @@ export const EVENTS: Ev[] = [
     type: 'premyera',
     summary:
       'TDIU yoşlar yetakçisi Ş.Baymuradov faoliyati aks etgan film namoyişi; u taşakkurnoma bilan taqdirlandi.',
-    dir: 'yetakchilik',
+    dir: 'media',
     img: '/img/faoliyat/t/1482.webp',
   },
   {
@@ -1957,7 +1958,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'tanlov',
     summary: 'Faollik körsatgan nomzodlar hujjatlari respublika komissiyasiga taqdim etildi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/1469.webp',
   },
   {
@@ -1999,7 +2000,7 @@ export const EVENTS: Ev[] = [
     place: 'Temuriylar tarixi davlat muzeyi',
     type: 'brifing',
     summary: 'Olimlar va muzey xodimlari iştirokida brifing va muzeyga sayohat.',
-    dir: 'ijod-turizm',
+    dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/1335.webp',
   },
   {
@@ -2020,7 +2021,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'konferensiya',
     summary: '3 sessiyali konferensiya, homiylar sovğalari va “iftorlik party”.',
-    dir: 'talim-kasb',
+    dir: 'intellektual',
     img: '/img/faoliyat/t/1192.webp',
   },
   {
@@ -2062,7 +2063,7 @@ export const EVENTS: Ev[] = [
     type: 'ekologik musobaqa',
     summary:
       '“Butunjahon yovvoyi tabiat kuni”ga bağişlangan musobaqada maktab öquvçilari jamoalari bellaşdi. Sana post sanasi.',
-    dir: 'sport-salomatlik',
+    dir: 'ekologiya',
     img: '/img/faoliyat/t/1094.webp',
   },
   {
@@ -2073,7 +2074,7 @@ export const EVENTS: Ev[] = [
     type: 'davra suhbati',
     summary:
       'Sardorlar kengaşi tomonidan “Bahor keldi seni söroqlab” davra suhbati; inşolar tanlovi ğoliblari taqdirlandi.',
-    dir: 'yetakchilik',
+    dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/1057.webp',
   },
   {
@@ -2137,7 +2138,7 @@ export const EVENTS: Ev[] = [
     type: 'uçraşuv',
     summary:
       'General-mayor R.Ataxanov talabalar va sardorlar bilan muloqot qildi; Navoiy tavalludiga bağişlangan keça ötkazildi.',
-    dir: 'yetakchilik',
+    dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/752.webp',
   },
   {
@@ -2147,7 +2148,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'ekologik aksiya',
     summary: 'OTT yoşlar yetakçilari va şahar sardorlari iştirokida ekologik aksiya.',
-    dir: 'yetakchilik',
+    dir: 'ekologiya',
     img: '/img/faoliyat/t/731.webp',
   },
   {
@@ -2222,7 +2223,7 @@ export const EVENTS: Ev[] = [
     place: 'Yoşlar press klubi',
     type: 'premyera',
     summary: 'Tasviriy sanʼatga qiziquvçi iqtidorli öquvçi hayoti haqidagi son namoyiş etildi.',
-    dir: 'ijod-turizm',
+    dir: 'media',
     img: '/img/faoliyat/t/499.webp',
   },
   {
@@ -2265,7 +2266,7 @@ export const EVENTS: Ev[] = [
     place: 'Istirohat boğlari va aholi gavjum joylar',
     type: 'aksiya',
     summary: 'Poytaxt sardorlari yoş-u keksaning köksiga şaraf lentasini taqdi.',
-    dir: 'yetakchilik',
+    dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/281.webp',
   },
   {
@@ -2309,7 +2310,7 @@ export const EVENTS: Ev[] = [
     type: 'sayohat',
     summary:
       'Yuqori sinf öquvçilarini zamonaviy kasb-hunar va özini özi band qiliş bilan taniştiriş.',
-    dir: 'ijod-turizm',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/246.webp',
   },
   {
@@ -2331,7 +2332,7 @@ export const EVENTS: Ev[] = [
     type: 'loyiha',
     summary:
       '“Munozara”, “MultiQuiz”, “Çess Kingdom”, “Möjizaviy möyqalam” va seminar-treninglar ötkazildi.',
-    dir: 'intellektual',
+    dir: 'volontyorlik',
     img: '/img/faoliyat/t/203.webp',
   },
   {
@@ -2385,7 +2386,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'musobaqa',
     summary: 'Öquvçilardan iborat 12 jamoa 5 yönalişda bellaşdi. Sana post sanasi.',
-    dir: 'volontyorlik',
+    dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/127.webp',
   },
   {
@@ -2395,7 +2396,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent davlat yuridik universiteti',
     type: 'sayohat',
     summary: 'Bitiruvçi sinf öquvçilari OTT bilan yaqindan taniştirildi.',
-    dir: 'ijod-turizm',
+    dir: 'talim-kasb',
     img: '/img/faoliyat/t/121.webp',
   },
   {
@@ -2428,7 +2429,7 @@ export const EVENTS: Ev[] = [
     type: 'tarğibot tadbiri',
     summary:
       'Yangi tahrirdagi Konstitutsiya özgarişlari haqida yozuvçi, artist va sportçilar spiker sifatida çiqdi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'huquqiy-madaniyat',
     img: '/img/faoliyat/t/46.webp',
   },
   {
@@ -2439,7 +2440,7 @@ export const EVENTS: Ev[] = [
     type: 'davra suhbati',
     summary:
       'Konstitutsiyaviy islohotlarga bağişlangan davra suhbatida yoşlarga yangilanayotgan Konstitutsiya ahamiyati tuşuntirildi.',
-    dir: 'manaviyat-kitobxonlik',
+    dir: 'huquqiy-madaniyat',
     img: '/img/faoliyat/t/3.webp',
   },
 ]

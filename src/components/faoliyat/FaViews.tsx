@@ -74,8 +74,19 @@ export function DirsList({ base }: { base: string }) {
                   ))}
                 </ul>
                 <div className="vy3-foot">
+                  {/* nol sonlar yozilmaydi (“0 tadbir” emas) */}
                   <span>
-                    <b>{evs.length}</b> tadbir · <b>{nP}</b> loyiha
+                    {evs.length > 0 && (
+                      <>
+                        <b>{evs.length}</b> tadbir
+                      </>
+                    )}
+                    {evs.length > 0 && nP > 0 && ' · '}
+                    {nP > 0 && (
+                      <>
+                        <b>{nP}</b> loyiha
+                      </>
+                    )}
                   </span>
                   <Link href={`${base}/${d.slug}`} className="vy3-more">
                     Batafsil <Arrow />
