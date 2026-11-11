@@ -47,7 +47,7 @@
 /* ---------- Umumiy panel (shisha) ---------- */
 .dd,
 .mdrawer {
-  background: rgba(255, 255, 255, 0.94);
+  background: #fff;
   -webkit-backdrop-filter: blur(20px) saturate(170%);
   backdrop-filter: blur(20px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -123,7 +123,7 @@
   min-width: 260px;
   padding: 10px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.97);
+  background: #fff;
   box-shadow: 0 20px 50px rgba(83, 40, 34, 0.16);
   opacity: 0;
   visibility: hidden;
@@ -272,9 +272,9 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
   .site-head.scrolled .logo img{height:44px}
 }
 
-/* ===== Menyu paneli: tepada — töq şişa (oq yozuv); aylantirganda — oq panel ===== */
-.site-head:not(.scrolled) .dd,.site-head:not(.scrolled) .dd-sub{background:rgba(48,22,18,.58);border:1px solid rgba(255,255,255,.14);
-  -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:0 24px 60px rgba(20,8,6,.35)}
+/* ===== Menyu paneli: tepada — töq (oq yozuv); aylantirganda — oq panel; ikkalasi ham şaffof emas ===== */
+.site-head:not(.scrolled) .dd,.site-head:not(.scrolled) .dd-sub{background:var(--navy);border:1px solid rgba(255,255,255,.08);
+  -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 24px 60px rgba(20,8,6,.35)}
 .site-head:not(.scrolled) .dd a{color:#fff}
 .site-head:not(.scrolled) .dd-list a:hover,.site-head:not(.scrolled) .dd-list a:focus-visible{background:rgba(255,255,255,.12)}
 .site-head:not(.scrolled) .dd-list a.cur{background:rgba(255,255,255,.1);color:var(--yellow)}
