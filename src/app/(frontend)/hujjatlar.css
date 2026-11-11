@@ -159,11 +159,6 @@ a.nd-b-row:hover {
   flex-direction: column;
   min-width: 0;
 }
-.nd-b-meta {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--k);
-}
 .nd-b-txt strong {
   margin-top: 6px;
   font: 800 16px/1.35 var(--f-head);
@@ -214,15 +209,10 @@ a.nd-b-row:hover {
   }
 }
 
-/* ---------- Hujjat kartasi variantlari (A, B, C) ---------- */
+/* ---------- Hujjat kartasi: belgilar, nom, qisqaça mazmuni ---------- */
 .nd-b-txt strong {
   font-size: 15.5px;
   line-height: 1.45;
-}
-.nd-reg {
-  margin-top: 6px;
-  font-size: 12.5px;
-  color: var(--muted);
 }
 /* B — belgilar */
 .nd-tags {
@@ -248,85 +238,4 @@ a.nd-b-row:hover {
 .nd-b .nd-tags + strong {
   margin-top: 10px;
   font-size: 17px;
-}
-.nd-full {
-  margin-top: 6px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
-}
-.nd-b-txt p b {
-  font-weight: 700;
-  color: var(--navy);
-}
-/* C — reyestr */
-.nd-c {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--line);
-}
-.nd-c li {
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: 32px;
-  padding: 26px 0;
-  border-bottom: 1px solid var(--line);
-}
-.nd-c-side {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.nd-c-side b {
-  font: 800 22px/1.15 var(--f-head);
-  color: var(--navy);
-}
-.nd-c-side span {
-  font-size: 14px;
-  color: var(--muted);
-}
-.nd-c-side em {
-  align-self: flex-start;
-  margin-top: 4px;
-  font: 700 11px/1 var(--f-head);
-  font-style: normal;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--k);
-}
-.nd-c-main {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 860px;
-}
-.nd-c-main h3 {
-  font: 700 17px/1.45 var(--f-head);
-  color: var(--navy);
-}
-.nd-c-main p {
-  margin-top: 8px;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-.nd-c-main .more-btn {
-  margin-top: 14px;
-}
-@media (max-width: 640px) {
-  .nd-c li {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 20px 0;
-  }
-  .nd-c-side {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 4px 12px;
-  }
-  .nd-c-side b {
-    font-size: 18px;
-  }
 }
