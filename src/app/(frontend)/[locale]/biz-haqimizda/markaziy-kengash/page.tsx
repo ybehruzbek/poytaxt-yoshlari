@@ -12,7 +12,7 @@ import '../../../kengash-alt1.css'
 import '../../../kengash-alt2.css'
 
 export const metadata: Metadata = {
-  title: 'Markaziy Kengaş — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi',
+  title: 'Markaziy Kengaş — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description: 'Özbekiston yoşlar ittifoqi Markaziy Kengaşi: vakolatlari, tarkibi, rahbariyati, Ijroiya qömitasi va aloqa.',
 }
 

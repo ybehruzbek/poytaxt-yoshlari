@@ -19,7 +19,7 @@ export function Benefits(_props: { locale: Locale }) {
       <div style={{ left: "430px", top: "400px", width: "160px", height: "160px", borderRadius: "50%", overflow: "hidden", border: "8px solid #fff" }}><img className="cover" src="/img/news-3.jpg" alt="" /></div>
     </div>
     <div>
-      <h2 className="h2">Nega Yoşlar Ittifoqiga <span>qöşiliş kerak?</span></h2>
+      <h2 className="h2">Nega Yoşlar ittifoqiga <span>qöşiliş kerak?</span></h2>
       <p className="body4" style={{ marginTop: "16px", maxWidth: "573px" }}>Biz yoşlarga öz kuçini sinab köriş, foydali tanişlar orttiriş va jamiyatga hissa qöşiş uçun maydon yaratamiz.</p>
       <ul className="values">
         <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Grant va tanlovlarda birinçilardan bölib qatnaşiş</li>

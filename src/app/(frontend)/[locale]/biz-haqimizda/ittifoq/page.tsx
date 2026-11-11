@@ -12,7 +12,7 @@ import '../../../ittifoq-flags.css'
 import '../../../ittifoq-centres.css'
 
 export const metadata: Metadata = {
-  title: 'Özbekiston yoşlar ittifoqi — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi',
+  title: 'Özbekiston yoşlar ittifoqi — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description: 'Özbekiston yoşlar ittifoqi: taşkil topişi, maqsad va vazifalari, loyihalari, imtiyozlari va xalqaro hamkorligi.',
 }
 

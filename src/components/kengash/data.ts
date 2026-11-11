@@ -58,7 +58,7 @@ export const MEMBERS = {
     'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahar hududiy kengaşlari raislari',
   ],
   fields: ['Taʼlim', 'Fan', 'Madaniyat va sanʼat', 'Ommaviy axborot vositalari', 'Işlab çiqariş va xizmat', 'Tadbirkorlik va fermerlik', 'Sport', 'Soğliqni saqlaş', 'Ekologiya', 'Qurolli kuçlar', 'Huquq-tartibot organlari'],
-  link: 'Toşkent şahar hududiy kengaşi raisi ham Markaziy Kengaş tarkibiga kiradi — poytaxt yoşlarining ovozi Ittifoqning boşqaruvida şu orqali eşitiladi.',
+  link: 'Toşkent şahar hududiy Kengaşi raisi ham Markaziy Kengaş tarkibiga kiradi — poytaxt yoşlarining ovozi Ittifoqning boşqaruvida şu orqali eşitiladi.',
 }
 
 /* Rahbariyat: rais — UzA xabarlaridan (2025–2026); örinbosarlar NAMUNA — rasmiy maʼlumot kelgaçi almaştiriladi */

@@ -32,7 +32,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug, locale } = await props.params
   const doc = await getNews(slug, locale)
   if (!doc) return {}
-  return { title: `${doc.title} — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi`, description: doc.excerpt }
+  return { title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`, description: doc.excerpt }
 }
 
 /** Bitta yangilik sahifasi ("Batafsil o'qish") */

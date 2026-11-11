@@ -7,15 +7,18 @@ import type { Locale } from '@/i18n/config'
 import { NET_LABEL, NETS } from '@/lib/socials'
 import { getSocials } from '@/lib/socials-server'
 
-import { Arrow } from './SocialPhones'
+import { Arrow, Svg } from './SocialPhones'
 
-const LOGO_ALT = 'Özbekiston Yoşlar Ittifoqi — Toşkent şahar hududiy kengaşi'
-const COPY = '© 2026 Özbekiston Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi'
+const LOGO_ALT = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
+const COPY = '© 2026 Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
 const NOTE = 'Materiallardan foydalanilganda manba körsatilişi şart.'
 const WORD = 'YOŞKENT'
 
-/* Aloqa NAMUNA: rasmiy telefon va pochta bilan almashtiring */
-const PHONE = { v: '+998 (__) ___-__-__', href: 'tel:+998000000000' }
+/* Aloqa: Kengaşning rasmiy telefonlari (pochta — NAMUNA) */
+const PHONES = [
+  { v: '+998 71 246-10-80', href: 'tel:+998712461080' },
+  { v: '+998 71 246-10-90', href: 'tel:+998712461090' },
+]
 const EMAIL = { v: 'info@yoshkent.uz', href: 'mailto:info@yoshkent.uz' }
 
 /** Menyuning barcha bo'limlari ustunlarda (majburiy tuzilma: src/config/nav.ts) */
@@ -92,13 +95,20 @@ export async function Footer({ locale }: { locale: Locale }) {
           <div className="fw-nets">
             {NETS.filter((n) => socials[n]).map((n) => (
               <a key={n} href={socials[n]} target="_blank" rel="noopener noreferrer">
-                {NET_LABEL[n]} <span aria-hidden="true">↗</span>
+                <span className="fw-net-ic">
+                  <Svg net={n} />
+                </span>
+                {NET_LABEL[n]}
               </a>
             ))}
           </div>
           <div className="fw-mail">
             <a href={EMAIL.href}>{EMAIL.v}</a>
-            <a href={PHONE.href}>{PHONE.v}</a>
+            {PHONES.map((p) => (
+              <a key={p.href} href={p.href}>
+                {p.v}
+              </a>
+            ))}
           </div>
         </div>
       </div>

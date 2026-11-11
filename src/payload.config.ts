@@ -24,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' — Yoşlar Ittifoqi admin',
+      titleSuffix: ' — Yoşlar ittifoqi admin',
     },
   },
   // Admin panel tili. Payload'da o'zbekcha tarjima yo'q — hozircha ruscha (asosiy) va inglizcha.

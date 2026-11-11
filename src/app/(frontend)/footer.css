@@ -114,20 +114,38 @@
   gap: 12px 36px;
 }
 .fw-nets a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font: 700 20px/1.2 var(--f-head);
   color: #fff;
   transition: color 0.2s;
 }
-.fw-nets a span {
-  display: inline-block;
+/* tarmoqning öz belgisi — sariq doirada */
+.fw-net-ic {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
   color: var(--yellow);
-  transition: transform 0.25s;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    transform 0.25s;
+}
+.fw-net-ic svg {
+  width: 19px;
+  height: 19px;
 }
 .fw-nets a:hover {
   color: var(--yellow);
 }
-.fw-nets a:hover span {
-  transform: translate(3px, -3px);
+.fw-nets a:hover .fw-net-ic {
+  background: var(--yellow);
+  color: var(--navy);
+  transform: translateY(-2px);
 }
 .fw-mail {
   display: flex;

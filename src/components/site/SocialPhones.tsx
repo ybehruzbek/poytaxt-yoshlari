@@ -96,7 +96,7 @@ function InstagramScreen({ handle }: { handle: string }) {
         </span>
         <span className="ph-ig-name">
           <b>{NAME}</b>
-          <small>Yoşlar Ittifoqi · Toşkent şahar</small>
+          <small>Yoşlar ittifoqi · Toşkent şahar</small>
         </span>
       </div>
       <div className="ph-btn">Obuna böliş</div>

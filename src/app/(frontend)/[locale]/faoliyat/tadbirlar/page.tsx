@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/config'
 import '../../../faoliyat.css'
 
 export const metadata: Metadata = {
-  title: 'Tadbirlar va kalendar — Özbekiston yoşlar ittifoqi Toşkent şahar Kengaşi',
+  title: 'Tadbirlar va kalendar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description: 'Yaqinlaşayotgan tadbirlar va 2023-yildan buyon ötkazilgan tadbirlar arxivi.',
 }
 

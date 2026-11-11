@@ -195,7 +195,7 @@ export const STRUCTURE = {
     { t: 'Markaziy Kengaş', d: 'Qurultoylar oraliğida Ittifoqqa rahbarlik qiladi. Uning tarkibida har bir hududdan kamida ikki nafar yoş vakil böladi.' },
     { t: 'Ijroiya qömitasi', d: 'Kundalik taşkiliy masalalar böyiça tezkor qarorlar qabul qiladi.' },
     { t: 'Nazorat-taftiş komissiyasi', d: 'Ittifoq faoliyati va mablağlarining töğri işlatilişini nazorat qiladi.' },
-    { t: 'Hududiy kengaşlar', d: 'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahrida işlaydi. Toşkent şahar hududiy kengaşi poytaxt yoşlari bilan işlaydi.' },
+    { t: 'Hududiy kengaşlar', d: 'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahrida işlaydi. Toşkent şahar hududiy Kengaşi poytaxt yoşlari bilan işlaydi.' },
     { t: 'Boşlanğiç taşkilotlar', d: 'Öqiş, iş va xizmat joylarida tuziladi. Kamida beş nafar aʼzo bölsa, boşlanğiç taşkilot oçiş mumkin. Uni aʼzolar özlari saylagan yetakçi boşqaradi.' },
   ] as Organ[],
   principles: ['Ixtiyoriylik', 'Qonuniylik', 'Oçiqlik', 'Aʼzolarning teng huquqliligi', 'Özini özi boşqariş'],

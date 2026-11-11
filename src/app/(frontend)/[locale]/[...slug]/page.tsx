@@ -29,7 +29,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug } = await props.params
   const { trail } = findNav('/' + slug.join('/'))
   const page = trail[trail.length - 1]
-  return { title: page ? `${page.label} — Yoşlar Ittifoqi Toşkent şahar hududiy kengaşi` : undefined }
+  return { title: page ? `${page.label} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi` : undefined }
 }
 
 /**

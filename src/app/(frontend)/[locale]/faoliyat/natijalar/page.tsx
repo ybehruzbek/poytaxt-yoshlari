@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/config'
 import '../../../faoliyat.css'
 
 export const metadata: Metadata = {
-  title: 'Natijalar va hisobotlar — Özbekiston yoşlar ittifoqi Toşkent şahar Kengaşi',
+  title: 'Natijalar va hisobotlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description: 'Kengaş faoliyatining yillar kesimidagi asosiy natijalari va hisobotlari.',
 }
 

@@ -32,7 +32,7 @@ export function Hero({ locale }: { locale: Locale }) {
           <div className="c-play"></div>
           <svg className="c-star" viewBox="0 0 40 40"><path fill="#FF854B" d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" /></svg>
           <div className="c-half"></div>
-          <div className="c-tag">Yoşlar Ittifoqi</div>
+          <div className="c-tag">Yoşlar ittifoqi</div>
           <div className="c-circle">
             <i style={{ height: "40px", left: "62px", top: "104px" }}></i><i style={{ height: "24px", left: "62px", top: "128px", borderRadius: "50%" }}></i>
             <i style={{ height: "66px", left: "96px", top: "78px" }}></i><i style={{ height: "96px", left: "130px", top: "52px" }}></i>
