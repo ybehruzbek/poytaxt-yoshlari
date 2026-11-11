@@ -773,11 +773,24 @@ a:hover .bt-more {
   }
 }
 
-/* “Yana … ta yetakçini körsatiş” */
-.bt-more-row {
+/* Pastga aylantirganda keyingi yetakçilar yuklanadi */
+.bt-loading {
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 28px;
+  gap: 10px;
+  padding: 28px 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.bt-spin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--blue);
+  animation: spin 0.8s linear infinite;
 }
 
 /* Telefonda: raqamlar bitta qatorda (son ustida, yozuv ostida), filtrlar yonma-yon suriladi */
@@ -816,4 +829,10 @@ a:hover .bt-more {
   .bt-tools {
     width: 100%;
   }
+}
+
+/* keyin yuklangan yetakçilar: navbat bilan köteriladi (rv-up — reveal.css) */
+.bt-late {
+  animation: rv-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--k, 0) * 60ms);
 }

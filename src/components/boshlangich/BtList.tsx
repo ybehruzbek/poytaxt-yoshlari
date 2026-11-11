@@ -2,9 +2,9 @@
 
 /* eslint-disable @next/next/no-img-element -- yetakçilar suratlari; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
 
-/** Dastlab körinadigan yetakçilar soni (3 ustunda 4 qator); qolgani “Yana körsatiş” bilan */
+/** Bir martada körinadigan yetakçilar soni (3 ustunda 4 qator); qolgani pastga aylantirganda yuklanadi */
 const STEP = 12
 
 import { type Otm, type OtmType, TYPE_LABEL } from './data'
@@ -49,10 +49,16 @@ const More = () => (
 )
 
 /** Yetakçili OTT kartasi — butun karta yetakçi sahifasiga olib boradi */
-function Lead({ o, base }: { o: Otm; base: string }) {
+function Lead({ o, base, i }: { o: Otm; base: string; i: number }) {
   const L = o.leader!
+  // keyin yuklangan kartalar navbat bilan köterilib çiqadi
+  const late = i >= STEP
   return (
-    <Link href={`${base}/${L.slug}`} className="bt-card">
+    <Link
+      href={`${base}/${L.slug}`}
+      className={late ? 'bt-card bt-late' : 'bt-card'}
+      style={late ? ({ '--k': i % STEP } as CSSProperties) : undefined}
+    >
       <div className="bt-txt">
         <span className="bt-otm" title={o.otm}>
           {o.otm}
@@ -96,6 +102,19 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
   }, [otms, type, q])
   const led = list.filter((o) => o.leader)
   const vac = list.filter((o) => !o.leader)
+  const more = led.length > shown
+
+  // röyxat oxiridagi belgi ekranga yaqinlaşganda keyingi 12 ta yetakçi qöşiladi
+  const sentinel = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = sentinel.current
+    if (!el || !more) return
+    const io = new IntersectionObserver((e) => e[0].isIntersecting && setShown((n) => n + STEP), {
+      rootMargin: '0px 0px 600px 0px',
+    })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [more, shown])
 
   return (
     <>
@@ -137,34 +156,19 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
 
       {led.length > 0 && (
         <div className="bt-grid">
-          {led.slice(0, shown).map((o) => (
-            <Lead key={o.otm} o={o} base={base} />
+          {led.slice(0, shown).map((o, i) => (
+            <Lead key={o.otm} o={o} base={base} i={i} />
           ))}
         </div>
       )}
-      {led.length > shown && (
-        <div className="bt-more-row">
-          <button type="button" className="btn btn-outline" onClick={() => setShown(led.length)}>
-            Yana {led.length - shown} ta yetakçini körsatiş
-            <span className="ic" aria-hidden="true">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </span>
-          </button>
+      {more && (
+        <div ref={sentinel} className="bt-loading" role="status">
+          <span className="bt-spin" aria-hidden="true" />
+          Yuklanmoqda…
         </div>
       )}
 
-      {vac.length > 0 && (
+      {!more && vac.length > 0 && (
         <>
           <h2 className="bt-vac-h">
             Vakant boşlanğiç taşkilotlar <span>{vac.length}</span>
