@@ -1,0 +1,250 @@
+/* =====================================================================
+   Maxsus imkoniyatlar (A11yPanel.tsx): köz tugmasi, yon panel va
+   <html data-a11y-*> atributlari orqali butun saytga qöllanadigan rejimlar
+   ===================================================================== */
+.a11y-btn {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(83, 40, 34, 0.06);
+  color: var(--navy);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.a11y-btn:hover {
+  background: rgba(83, 40, 34, 0.12);
+}
+.a11y-btn.on {
+  background: var(--navy);
+  color: #fff;
+}
+body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* panel */
+.a11y {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.a11y.open {
+  pointer-events: auto;
+}
+.a11y-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(48, 22, 18, 0.35);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.a11y.open .a11y-shade {
+  opacity: 1;
+}
+.a11y-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: min(400px, 100vw);
+  overflow-y: auto;
+  padding: 22px 24px 28px;
+  background: #fff;
+  color: var(--grey);
+  box-shadow: -20px 0 60px rgba(48, 22, 18, 0.18);
+  translate: 100% 0;
+  transition: translate 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.a11y.open .a11y-panel {
+  translate: 0 0;
+}
+.a11y-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.a11y-head h2 {
+  font: 800 20px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.a11y-x {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #fff;
+  color: var(--navy);
+  cursor: pointer;
+}
+.a11y-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.a11y-sec h3 {
+  display: flex;
+  justify-content: space-between;
+  font: 700 15px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.a11y-sec output {
+  font-weight: 800;
+  color: var(--orange);
+}
+.a11y-modes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.a11y-modes button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  font: 600 11.5px/1.2 var(--f-body);
+  color: var(--navy);
+  cursor: pointer;
+  text-align: center;
+}
+.a11y-modes button[aria-checked='true'] {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+.a11y-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--navy);
+  cursor: pointer;
+}
+.a11y-check input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--navy);
+}
+.a11y-sec input[type='range'] {
+  width: 100%;
+  accent-color: var(--navy);
+}
+.a11y-read {
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background: #fff;
+  font: 700 15px/1 var(--f-head);
+  color: var(--navy);
+  cursor: pointer;
+}
+.a11y-read.on {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+}
+.a11y-hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.a11y-reset {
+  margin-top: 22px;
+  height: 48px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--yellow);
+  font: 700 15px/1 var(--f-head);
+  color: var(--navy);
+  cursor: pointer;
+}
+.a11y-reset:disabled {
+  background: rgba(83, 40, 34, 0.06);
+  color: var(--muted);
+  cursor: default;
+}
+
+/* ---------- butun saytga qöllanadigan rejimlar ---------- */
+html[data-a11y-mode='gray'] {
+  filter: grayscale(1);
+}
+html[data-a11y-mode='contrast'] {
+  filter: contrast(1.45) saturate(1.15);
+}
+html[data-a11y-mode='invert'] {
+  filter: invert(1) hue-rotate(180deg);
+}
+/* teskari rejimda suratlar asl rangida qoladi */
+html[data-a11y-mode='invert'] :is(img, video, iframe, picture) {
+  filter: invert(1) hue-rotate(180deg);
+}
+html[data-a11y-noimg] main :is(img, video, picture, iframe) {
+  visibility: hidden;
+}
+/* şrift: matn elementlari kattalaşadi (ičma-ič elementlar qayta kattalaşmaydi) */
+html[data-a11y-font]
+  :is(main, footer)
+  :is(
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    dd,
+    dt,
+    td,
+    th,
+    blockquote,
+    label,
+    figcaption,
+    small,
+    li:not(:has(p, li, h3, h2))
+  ) {
+  zoom: var(--a11y-f);
+}
+html[data-a11y-font]
+  :is(main, footer)
+  :is(p, h1, h2, h3, h4, li, dd, td)
+  :is(p, h1, h2, h3, h4, small, label) {
+  zoom: 1;
+}
+/* masştab: butun sahifa */
+html[data-a11y-zoom] :is(main, footer) {
+  zoom: var(--a11y-z);
+}
+/* öqiş rejimi */
+html[data-a11y-read] *,
+html[data-a11y-read] *::before,
+html[data-a11y-read] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-a11y-read] main :is(p, li, dd) {
+  line-height: 1.9 !important;
+  letter-spacing: 0.01em;
+}
+html[data-a11y-read] main a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+html[data-a11y-read] main .rv {
+  opacity: 1 !important;
+}

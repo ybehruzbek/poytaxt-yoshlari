@@ -20,6 +20,7 @@ import '../cta.css'
 import '../footer.css'
 import '../social.css'
 import '../hamkorlar.css'
+import '../a11y.css'
 import '../motion.css'
 import '../reveal.css'
 

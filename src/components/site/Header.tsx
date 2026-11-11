@@ -7,6 +7,7 @@ import { type CSSProperties, type PointerEvent, useCallback, useEffect, useRef, 
 import { NAV, type NavGroup, groupPaths } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
+import { A11yPanel } from './A11yPanel'
 import { LangSwitch } from './LangSwitch'
 
 const Chevron = ({ dir = 'down' }: { dir?: 'down' | 'right' }) => (
@@ -196,6 +197,7 @@ export function Header({ locale }: { locale: Locale }) {
           </nav>
 
           <div className="head-end">
+            <A11yPanel />
             <LangSwitch locale={locale} path={path} />
             <Link href={joinHref} className="btn btn-outline head-cta">
               Aʼzo böliş
