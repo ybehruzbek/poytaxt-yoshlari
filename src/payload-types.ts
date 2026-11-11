@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     appeals: Appeal;
     'appeal-files': AppealFile;
+    'text-errors': TextError;
     users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -83,6 +84,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     appeals: AppealsSelect<false> | AppealsSelect<true>;
     'appeal-files': AppealFilesSelect<false> | AppealFilesSelect<true>;
+    'text-errors': TextErrorsSelect<false> | TextErrorsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -244,6 +246,20 @@ export interface AppealFile {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "text-errors".
+ */
+export interface TextError {
+  id: number;
+  text: string;
+  context?: string | null;
+  comment?: string | null;
+  page: string;
+  status?: ('yangi' | 'tuzatildi' | 'rad') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -309,6 +325,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'appeal-files';
         value: number | AppealFile;
+      } | null)
+    | ({
+        relationTo: 'text-errors';
+        value: number | TextError;
       } | null)
     | ({
         relationTo: 'users';
@@ -457,6 +477,19 @@ export interface AppealFilesSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "text-errors_select".
+ */
+export interface TextErrorsSelect<T extends boolean = true> {
+  text?: T;
+  context?: T;
+  comment?: T;
+  page?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
