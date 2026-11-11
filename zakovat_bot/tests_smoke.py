@@ -1730,6 +1730,18 @@ async def _run_all(saved_event_ids):
     contest.stage = ContestStage.PUBLISHING
     contest.save(update_fields=["stage"])
 
+    # Xavfsizlik: nashr tugmasini ikki marta bosish postni takrorlamaydi
+    pubs_before = Publication.objects.filter(entry__contest=contest).count()
+    await asyncio.gather(
+        contest_admin_handler.tdadm_publish_go(
+            FakeCallback("tdadm_publish_go", SUPER, message=FakeMessage(SUPER))),
+        contest_admin_handler.tdadm_publish_go(
+            FakeCallback("tdadm_publish_go", SUPER, message=FakeMessage(SUPER))),
+    )
+    check("xavfsizlik: parallel nashrda post takrorlanmadi",
+          Publication.objects.filter(entry__contest=contest).count()
+          == pubs_before, pubs_before)
+
     # TZ 9.3: hamma post chiqmaguncha ovoz boshlanmaydi
     extra_entry = Entry.objects.create(
         contest=contest, participant=bad, nomination=Nomination.FOTO,
@@ -1741,6 +1753,20 @@ async def _run_all(saved_event_ids):
     check("TZ9.3: nashr tugamasdan ovoz boshlanmadi",
           "e'lon qilinmagan" in cb.message.texts())
     extra_entry.delete()
+
+    # Xavfsizlik: tasdiq tugmasi to'g'ridan-to'g'ri bosilsa ham shart saqlanadi
+    blocker = Entry.objects.create(
+        contest=contest, participant=bad, nomination=Nomination.FOTO,
+        title="Chiqmagan", status=EntryStatus.APPROVED)
+    EntryMedia.objects.create(entry=blocker, file_id="b1",
+                              file_unique_id="bu1", media_type="photo")
+    cb = FakeCallback("tdadm_vote_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_vote_go(cb)
+    contest.refresh_from_db()
+    check("xavfsizlik: nashr tugamasdan ovoz boshlanmadi (tasdiq tugmasida ham)",
+          contest.voting_start_at is None
+          and any("e'lon qilinmagan" in a for a in cb.alerts), cb.alerts)
+    blocker.delete()
 
     # Ovoz berish boshlanadi
     cb = FakeCallback("tdadm_vote_go", SUPER, message=FakeMessage(SUPER))
@@ -1790,6 +1816,26 @@ async def _run_all(saved_event_ids):
           ventry.votes_count == 1
           and Vote.objects.filter(entry=ventry).count() == 1,
           ventry.votes_count)
+
+    # Xavfsizlik: e'lon qilinmagan ishga ovoz berib bo'lmaydi
+    hidden = Entry.objects.create(
+        contest=contest, participant=bad, nomination=Nomination.FOTO,
+        title="Yashirin", status=EntryStatus.APPROVED)
+    cb = FakeCallback(f"td_vote:{hidden.id}", SUPER, message=FakeMessage(SUPER))
+    await contest_handler.td_vote(cb)
+    hidden.refresh_from_db()
+    check("xavfsizlik: e'lon qilinmagan ishga ovoz berilmadi",
+          hidden.votes_count == 0 and any("topilmadi" in a for a in cb.alerts),
+          cb.alerts)
+    hidden.delete()
+
+    # Xavfsizlik: tanlov o'chirilsa ovoz qabul qilinmaydi
+    contest.is_active = False
+    contest.save(update_fields=["is_active"])
+    check("xavfsizlik: o'chirilgan tanlovda ovoz yopiq",
+          not pub_service.voting_is_open(contest))
+    contest.is_active = True
+    contest.save(update_fields=["is_active"])
 
     # TZ 9: foto va video ovozlari alohida hisoblanadi
     photo_res = pub_service.results(contest, Nomination.FOTO)

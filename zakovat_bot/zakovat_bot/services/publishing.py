@@ -5,7 +5,7 @@ from datetime import timedelta
 from html import escape as esc
 
 from aiogram.exceptions import TelegramRetryAfter
-from django.db import transaction
+from django.db import IntegrityError, transaction
 from django.db.models import F
 from django.utils import timezone
 
@@ -72,14 +72,32 @@ async def publish_entry(bot, contest, entry, channel_username=None):
     1-3 foto bitta albom bo'lib chiqadi va ularga BITTA ovoz kartochkasi
     bog'lanadi — ovoz alohida rasmga emas, ishga beriladi (TZ 8).
     """
-    if Publication.objects.filter(entry=entry).exists():
-        return True, "allaqachon e'lon qilingan"
-
     groups = build_media_group(entry)
     if not groups:
         return False, "media topilmadi"
 
     channel = contest.channel_id
+    # Nashr huquqini avval bazada «band qilamiz»: shu qator yaratilmaguncha
+    # hech narsa yuborilmaydi. Shu sababli bir ish ikki marta joylanmaydi
+    # (tugma ikki marta bosilsa yoki ikki admin bir vaqtda ishga tushirsa).
+    with transaction.atomic():
+        # Faqat Entry qatori qulflanadi (JOIN bilan qulflab bo'lmaydi),
+        # shu bois nashr tekshiruvi qulf ichida alohida bajariladi
+        locked = (
+            Entry.objects.select_for_update()
+            .filter(id=entry.id, status=EntryStatus.APPROVED)
+            .first()
+        )
+        if locked is None:
+            return True, "tasdiqlanmagan yoki o'chirilgan"
+        if Publication.objects.filter(entry=locked).exists():
+            return True, "allaqachon e'lon qilingan"
+        try:
+            pub = Publication.objects.create(
+                entry=locked, channel_id=str(channel))
+        except IntegrityError:
+            return True, "allaqachon e'lon qilingan"
+
     media = groups[0]
     try:
         if len(media) == 1:
@@ -110,17 +128,20 @@ async def publish_entry(bot, contest, entry, channel_username=None):
                 reply_to_message_id=first_id)
             vote_id = card.message_id
     except TelegramRetryAfter as e:
+        pub.delete()  # bandlikni bo'shatamiz — qayta urinish mumkin bo'lsin
         await asyncio.sleep(e.retry_after + 1)
         return False, f"flood-limit ({e.retry_after}s)"
     except Exception as e:
+        pub.delete()
         logger.exception("Nashr xatosi: %s", entry.code)
         return False, str(e)[:200]
 
-    url = build_post_url(channel, channel_username, vote_id)
-    Publication.objects.create(
-        entry=entry, channel_id=str(channel), message_id=first_id,
-        vote_message_id=vote_id, published_at=timezone.now(), post_url=url,
-    )
+    pub.message_id = first_id
+    pub.vote_message_id = vote_id
+    pub.published_at = timezone.now()
+    pub.post_url = build_post_url(channel, channel_username, vote_id)
+    pub.save(update_fields=["message_id", "vote_message_id",
+                            "published_at", "post_url"])
     entry.status = EntryStatus.PUBLISHED
     entry.save(update_fields=["status"])
     return True, ""
@@ -180,7 +201,8 @@ async def _notify_published(bot, entry):
 def voting_is_open(contest):
     now = timezone.now()
     return (
-        contest.stage == ContestStage.VOTING
+        contest.is_active
+        and contest.stage == ContestStage.VOTING
         and contest.voting_start_at is not None
         and contest.voting_end_at is not None
         and contest.voting_start_at <= now < contest.voting_end_at
@@ -247,8 +269,9 @@ async def close_voting_if_due(bot):
     from zakovat_bot.models import Contest, TelegramAdminsID
 
     now = timezone.now()
-    due = Contest.objects.filter(
-        is_active=True, stage=ContestStage.VOTING, voting_end_at__lte=now
+    # O'chirilgan tanlov ham yopiladi — ochiq qolib ketmasin
+    due = Contest.all_objects.filter(
+        stage=ContestStage.VOTING, voting_end_at__lte=now
     )
     for contest in due:
         contest.stage = ContestStage.FINISHED

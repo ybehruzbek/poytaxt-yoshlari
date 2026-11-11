@@ -617,20 +617,47 @@ async def tdadm_publish_ask(callback: CallbackQuery):
     )
 
 
+# Bir vaqtda bitta nashr jarayoni ishlashi uchun
+_publishing_now = set()
+
+
 @dp.callback_query(F.data == "tdadm_publish_go")
 async def tdadm_publish_go(callback: CallbackQuery):
     if not has_role(callback.from_user.id, AdminRole.OPERATOR):
         return await _deny(callback)
-    await callback.answer()
     contest = _current_contest()
-    if contest is None or not contest.channel_id:
+    if contest is None:
+        await callback.answer()
         return
+
+    # Tasdiqdan keyin ham barcha shartlar qayta tekshiriladi
+    if not contest.channel_id:
+        await callback.answer("Avval tanlov kanalini belgilang.", show_alert=True)
+        return
+    if contest.stage not in (ContestStage.ACCEPTING, ContestStage.MODERATION,
+                             ContestStage.PUBLISHING):
+        await callback.answer(
+            "Bu bosqichda nashr qilib bo'lmaydi.", show_alert=True)
+        return
+    if not ready_for_publication(contest).exists():
+        await callback.answer("Nashrga tayyor ish yo'q.", show_alert=True)
+        return
+    if contest.id in _publishing_now:
+        await callback.answer("Nashr allaqachon ketmoqda — kuting.",
+                              show_alert=True)
+        return
+
+    await callback.answer()
+    _publishing_now.add(contest.id)
     contest.stage = ContestStage.PUBLISHING
     contest.save(update_fields=["stage"])
     log_action(callback.from_user.id, "tanlov_nashr_boshlandi", contest.slug)
     await callback.message.answer("📢 E'lon qilish boshlandi…")
 
-    ok, failed, errors = await publish_all(bot, contest)
+    try:
+        ok, failed, errors = await publish_all(bot, contest)
+    finally:
+        _publishing_now.discard(contest.id)
     text = [f"📢 <b>Nashr yakunlandi</b>\n",
             f"✅ E'lon qilindi: {ok}",
             f"❌ Xatolik: {failed}"]
@@ -674,10 +701,20 @@ async def tdadm_vote_ask(callback: CallbackQuery):
 async def tdadm_vote_go(callback: CallbackQuery):
     if not has_role(callback.from_user.id, AdminRole.OPERATOR):
         return await _deny(callback)
-    await callback.answer()
     contest = _current_contest()
     if contest is None or contest.voting_start_at:
+        await callback.answer()
         return
+    # Tasdiqdan keyin ham: barcha ishlar chiqqan bo'lishi shart (TZ 9.3)
+    if ready_for_publication(contest).exists():
+        await callback.answer(
+            "Hali e'lon qilinmagan ishlar bor — avval ularni joylang.",
+            show_alert=True)
+        return
+    if not published_entries(contest).exists():
+        await callback.answer("E'lon qilingan ish yo'q.", show_alert=True)
+        return
+    await callback.answer()
     start_voting(contest)
     log_action(callback.from_user.id, "tanlov_ovoz_boshlandi", contest.slug)
     await callback.message.answer(

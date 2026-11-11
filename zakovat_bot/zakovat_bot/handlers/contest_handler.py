@@ -816,7 +816,16 @@ async def td_vote(callback: CallbackQuery):
         await callback.answer()
         return
 
-    entry = Entry.objects.filter(id=entry_id).select_related("contest").first()
+    # Faqat kanalda e'lon qilingan ishga ovoz berish mumkin
+    entry = (
+        Entry.objects.filter(
+            id=entry_id,
+            status__in=[EntryStatus.PUBLISHED, EntryStatus.FINISHED],
+            publication__isnull=False,
+        )
+        .select_related("contest")
+        .first()
+    )
     if entry is None:
         await callback.answer("Bu ish topilmadi.", show_alert=True)
         return
