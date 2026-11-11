@@ -180,27 +180,149 @@ function Card({ m, id }: { m: Member; id: string }) {
   )
 }
 
+/* ---------- Karta variantlari (vaqtinça, solişiriş uçun) ---------- */
+
+/** Qabul qatori: kun va vaqt, xona (bölsa) */
+function Rec({ m }: { m: Member }) {
+  if (m.reception) {
+    return (
+      <span className="kv-rec">
+        <Ic d={IC.clock} />
+        <span>{m.reception}</span>
+      </span>
+    )
+  }
+  return m.room ? (
+    <span className="kv-rec">
+      <Ic d={IC.pin} />
+      <span>{m.room}</span>
+    </span>
+  ) : null
+}
+
+/** C — Portret: katta surat tepada (yumşoq doira fonida), ostida F.I.Ş., lavozim yorliği, qabul va tugma */
+function CardPortrait({ m, id }: { m: Member; id: string }) {
+  return (
+    <article className="kc">
+      <div className="kc-ph">
+        <img src={m.img} alt={m.name} loading="lazy" />
+      </div>
+      <div className="kc-txt">
+        {m.deptShort && <span className="kc-tag">{m.deptShort}</span>}
+        <Name n={m.name} />
+        <p>{m.role}</p>
+        <Rec m={m} />
+      </div>
+      <Duties m={m} id={id} />
+    </article>
+  )
+}
+
+/** D — Maʼlumotnoma: dumaloq surat çapda, öngda F.I.Ş. va maʼlumotlar; ikki ustunli ixçam röyxat */
+function CardRow({ m, id }: { m: Member; id: string }) {
+  return (
+    <article className="kd">
+      <img className="kd-ph" src={m.img} alt={m.name} loading="lazy" />
+      <div className="kd-txt">
+        <Name n={m.name} />
+        <p>
+          {m.role}
+          {m.deptShort && <span> · {m.deptShort}</span>}
+        </p>
+        <div className="kd-meta">
+          <Rec m={m} />
+          <Duties m={m} id={id} />
+        </div>
+      </div>
+    </article>
+  )
+}
+
+/** E — Töq karta: töq fon, surat öng pastda yumşoq soya bilan, sariq lavozim yorliği */
+function CardDark({ m, id }: { m: Member; id: string }) {
+  return (
+    <article className="ke">
+      <div className="ke-txt">
+        <span className="ke-role">{m.role}</span>
+        <Name n={m.name} />
+        {m.deptShort && <small>{m.deptShort}</small>}
+        <Rec m={m} />
+        <Duties m={m} id={id} />
+      </div>
+      <img className="ke-ph" src={m.img} alt={m.name} loading="lazy" />
+    </article>
+  )
+}
+
 const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
 const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
+/** F — Bölimlar böyiça: har bölim alohida guruh (nomi va xonasi), ičida ixçam portret kartalar */
+function ByDept({ ids }: { ids: string }) {
+  const groups = Array.from(new Set(REST.map((m) => m.deptShort ?? ''))).map((d) => ({
+    d,
+    room: REST.find((m) => m.deptShort === d)?.room,
+    people: REST.filter((m) => (m.deptShort ?? '') === d),
+  }))
+  return (
+    <div className="kf">
+      {groups.map((g, gi) => (
+        <section key={g.d} className="kf-group">
+          <header>
+            <h2>{g.d}</h2>
+            {g.room && <span>{g.room}</span>}
+          </header>
+          <div className="kf-list">
+            {g.people.map((m, i) => (
+              <article key={m.name} className="kf-card">
+                <img src={m.img} alt={m.name} loading="lazy" />
+                <div>
+                  <Name n={m.name} />
+                  <p>{m.role}</p>
+                  {m.reception && <Rec m={m} />}
+                  <Duties m={m} id={`${ids}-${gi}-${i}`} />
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  )
+}
+
+const CARDS = { a: Card, c: CardPortrait, d: CardRow, e: CardDark } as const
+const GRID = { a: 'z5-grid', c: 'kc-grid', d: 'kd-grid', e: 'ke-grid' } as const
+
 /**
  * Kengaş jamoasi (namuna asosida): rais — keng karta (surat çapda, F.I.Ş. va lavozim, öngda aloqa, fonda ingiçka naqş);
- * qolganlar bitta 3 ustunli tarmoqda: F.I.Ş. va lavozim çap yuqorida, surat öng pastda.
- * Rais va birinçi qator xodimlar bitta ekranga siğadi.
+ * qolganlar — `card` variantidagi kartalar (a — asosiy; c, d, e, f — vaqtinça solişiriş uçun).
+ * `ids` — vazifalar paneli id'lari uçun prefiks (bir sahifada bir neçta nusxa bölsa takrorlanmasin).
  */
-export function TeamNamuna() {
+export function TeamNamuna({
+  card = 'a',
+  ids = 'vz',
+}: {
+  card?: keyof typeof CARDS | 'f'
+  ids?: string
+}) {
+  const C = card === 'f' ? null : CARDS[card]
   return (
     <section className="sec">
       <div className="wrap">
         <Head />
         {LEADS.map((m, i) => (
-          <Hero key={m.name} m={m} id={`vz-r${i}`} />
+          <Hero key={m.name} m={m} id={`${ids}-r${i}`} />
         ))}
-        <div className="z5-grid">
-          {REST.map((m, i) => (
-            <Card key={m.name} m={m} id={`vz-${i}`} />
-          ))}
-        </div>
+        {C ? (
+          <div className={GRID[card as keyof typeof GRID]}>
+            {REST.map((m, i) => (
+              <C key={m.name} m={m} id={`${ids}-${i}`} />
+            ))}
+          </div>
+        ) : (
+          <ByDept ids={ids} />
+        )}
       </div>
     </section>
   )
