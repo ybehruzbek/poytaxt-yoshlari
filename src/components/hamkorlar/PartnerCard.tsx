@@ -10,7 +10,7 @@ export function PartnerCard({ p }: { p: Partner }) {
       <div className="pt-card-logo">
         <img src={p.logo} alt="" loading="lazy" />
       </div>
-      <h3>{p.name}</h3>
+      <h4>{p.name}</h4>
       <ul className="pt-dirs">
         {p.dirs.map((d) => (
           <li key={d}>{dirName(d)}</li>
