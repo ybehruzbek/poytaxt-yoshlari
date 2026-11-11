@@ -19,10 +19,50 @@ type Props = {
   skip?: string
   /** qöşimça oçiladigan elementlar (sarlavha va töplamlardan taşqari) */
   extra?: string
+  /** h1/h2 sarlavhalar effekti (masalan, mask — pastdan, wipe — çapdan oçiladi) */
+  head?: Fx
+  /** töplam (kartalar, ro'yxat) elementlari effekti */
+  grid?: Fx
+  /** suratlar effekti: clip (sukut), curtain — pastdan parda, circle — doiradan */
+  img?: Fx
+  /** aniq elementlar uçun effekt: [selektor, effekt] — birinçi mos kelgani olinadi */
+  fx?: ReadonlyArray<readonly [string, Fx]>
 }
 
+/** Effektlar löğati (reveal.css dagi .fx-* bilan) */
+export type Fx =
+  | 'up'
+  | 'pop'
+  | 'drop'
+  | 'side'
+  | 'slide'
+  | 'swing'
+  | 'zoom'
+  | 'skew'
+  | 'paper'
+  | 'tilt'
+  | 'flip'
+  | 'mask'
+  | 'wipe'
+  | 'curtain'
+  | 'circle'
+
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
-const SKIP_TAGS = new Set(['P', 'H2', 'H3', 'SPAN', 'B', 'STRONG', 'EM', 'A', 'BR', 'svg', 'path', 'I', 'SMALL'])
+const SKIP_TAGS = new Set([
+  'P',
+  'H2',
+  'H3',
+  'SPAN',
+  'B',
+  'STRONG',
+  'EM',
+  'A',
+  'BR',
+  'svg',
+  'path',
+  'I',
+  'SMALL',
+])
 
 function splitWords(root: HTMLElement) {
   if (root.dataset.rvSplit) return
@@ -70,7 +110,18 @@ function countUp(el: HTMLElement) {
   requestAnimationFrame(tick)
 }
 
-export function RevealMotion({ root, words, counters, images, skip, extra }: Props) {
+export function RevealMotion({
+  root,
+  words,
+  counters,
+  images,
+  skip,
+  extra,
+  head,
+  grid,
+  img,
+  fx,
+}: Props) {
   // useLayoutEffect: sahifalar orasida ötganda ham yangi mazmun çizilişidan oldin tayyorlanadi
   useLayoutEffect(() => {
     const host = document.querySelector<HTMLElement>(root)
@@ -81,6 +132,7 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
     }
     const skipped = (e: Element) => !!skip && !!e.closest(skip)
     const items = new Set<HTMLElement>()
+    const inGrid = new Set<HTMLElement>()
     const add = (e: HTMLElement, kind = '') => {
       if (items.has(e) || skipped(e) || e.closest('.rv')) return
       e.classList.add('rv')
@@ -102,17 +154,46 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
       const kids = [...e.children] as HTMLElement[]
       if (kids.length < 3 || SKIP_TAGS.has(e.tagName) || e.parentElement?.closest('li')) return
       if (!kids.every((c) => c.tagName === kids[0].tagName)) return
-      kids.forEach((c) => add(c))
+      // butun bölimlar yoki variant örama-lari töplam emas — ularning ičidagi elementlar alohida oçiladi
+      if (kids[0].tagName === 'SECTION' || kids.some((c) => c.classList.contains('vx'))) return
+      kids.forEach((c) => {
+        add(c)
+        inGrid.add(c)
+      })
     })
     // 4) qöşimça elementlar
     if (extra) host.querySelectorAll<HTMLElement>(extra).forEach((e) => add(e))
     // 5) sarlavhalar va qolgan matnlar
     host
-      .querySelectorAll<HTMLElement>('h1, h2, .sec-head, h1 ~ p, h2 ~ p, h1 ~ div, .btn, blockquote, figure')
+      .querySelectorAll<HTMLElement>(
+        'h1, h2, .sec-head, h1 ~ p, h2 ~ p, h1 ~ div, .btn, blockquote, figure',
+      )
       .forEach((e) => {
         if (e.closest('li, article, .rv-words')) return
         add(e)
       })
+
+    // effektlar: aniq selektor > surat > sarlavha > töplam
+    const fxOf = new Map<HTMLElement, string>()
+    items.forEach((e) => {
+      if (e.classList.contains('rv-words')) return
+      const hit = fx?.find(([sel]) => e.matches(sel))?.[1]
+      const name =
+        hit ??
+        (e.classList.contains('rv-img')
+          ? img
+          : /^H[12]$/.test(e.tagName) || e.classList.contains('sec-head')
+            ? head
+            : inGrid.has(e)
+              ? grid
+              : undefined)
+      if (!name || name === 'up') return
+      // juda baland elementlarda (ekranning 3/4 qismidan katta) kuçli harakat ğalati körinadi — oddiy köteriliş qoladi
+      if (!/^(mask|wipe|curtain|circle|zoom)$/.test(name) && e.offsetHeight > innerHeight * 0.75)
+        return
+      e.classList.add(`fx-${name}`)
+      fxOf.set(e, `fx-${name}`)
+    })
 
     html.classList.add('rv-ready')
 
@@ -125,7 +206,12 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
     const update = () => {
       raf = 0
       const vh = innerHeight
-      heads.forEach((h) => h.style.setProperty('--t', clamp((vh * 0.9 - h.getBoundingClientRect().top) / (vh * 0.5)).toFixed(4)))
+      heads.forEach((h) =>
+        h.style.setProperty(
+          '--t',
+          clamp((vh * 0.9 - h.getBoundingClientRect().top) / (vh * 0.5)).toFixed(4),
+        ),
+      )
       if (!pending.length) return
       const show: Array<{ el: HTMLElement; r: DOMRect }> = []
       pending = pending.filter((el) => {
@@ -144,7 +230,12 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
           el.style.setProperty('--d', `${d}ms`)
           el.classList.add('rv-in')
           // çiqib bölgaç animatsiya sinflari olinadi — elementning öz hover/transition uslublari qaytadi
-          timers.push(window.setTimeout(() => el.classList.remove('rv', 'rv-in', 'rv-img'), d + 1500))
+          timers.push(
+            window.setTimeout(
+              () => el.classList.remove('rv', 'rv-in', 'rv-img', fxOf.get(el) ?? 'rv'),
+              d + 1900,
+            ),
+          )
           nums.forEach((n) => (n === el || el.contains(n)) && countUp(n))
         })
     }
@@ -162,10 +253,13 @@ export function RevealMotion({ root, words, counters, images, skip, extra }: Pro
       timers.forEach(clearTimeout)
       removeEventListener('scroll', onScroll)
       removeEventListener('resize', onScroll)
-      items.forEach((e) => e.classList.remove('rv', 'rv-in', 'rv-img', 'rv-words'))
+      items.forEach((e) =>
+        e.classList.remove('rv', 'rv-in', 'rv-img', 'rv-words', fxOf.get(e) ?? 'rv'),
+      )
       html.classList.remove('rv-ready')
     }
-  }, [root, words, counters, images, skip, extra])
+    // fx — PAGES dagi doimiy massiv, havolasi özgarmaydi
+  }, [root, words, counters, images, skip, extra, head, grid, img, fx])
 
   return null
 }

@@ -10,17 +10,126 @@ type Opts = Omit<ComponentProps<typeof RevealMotion>, 'root'>
 /** Hamma sahifada oçilmaydigan qismlar: yöl, variantlar paneli, oçiladigan panellar */
 const SKIP = '.pg-crumbs, .crumbs, [popover], .dev-panel'
 
-/** Alohida sozlamali sahifalar (yöl tilsiz, masalan /biz-haqimizda/ittifoq) */
+/**
+ * Har sahifaning öz “imzosi” — elementlar boşqa-boşqa usulda oçiladi (effektlar: RevealMotion.tsx / reveal.css).
+ * Yöl tilsiz (masalan /biz-haqimizda/ittifoq). Röyxatda yöq sahifalar — UMUMIY.
+ */
+const UMUMIY: Opts = { head: 'mask', grid: 'pop' }
+
 const PAGES: Record<string, Opts> = {
+  /* ---- Biz haqimizda: sarlavhalar pastdan “suzib” çiqadi ---- */
   '/biz-haqimizda/ittifoq': {
     words: '.it-mission',
     counters: '.it-stats b, .it-more b',
     images: '.it-mosaic img',
+    img: 'circle',
+    head: 'mask',
+    grid: 'pop',
+    fx: [
+      ['.it-hist > li', 'side'],
+      ['.ip-b-list > article, .ipr-b > article', 'tilt'],
+      ['.it-steps > li, .it-acts > li', 'drop'],
+    ],
     skip: `${SKIP}, .it-sib, [role=tablist], .fm`,
   },
+  '/biz-haqimizda/markaziy-kengash': {
+    head: 'mask',
+    grid: 'drop',
+    fx: [
+      ['.kg-lead > article, .y2-lc > article', 'flip'],
+      ['.kg-chips > span, .y1-mb-tags > span, .y1-mc-fields > li', 'pop'],
+    ],
+  },
   '/biz-haqimizda/hududiy-kengash': {
+    head: 'mask',
     extra: '.z5-lead, .z5-hero',
     images: '.z5-hero-ph, .z5-card-ph',
+    img: 'curtain',
+    grid: 'pop',
+    fx: [['.z5-hero', 'zoom']],
+  },
+  '/biz-haqimizda/boshlangich-tashkilotlar': {
+    head: 'mask',
+    extra: '.bt-hub-card',
+    grid: 'pop',
+    fx: [['.bt-hub-card', 'side']],
+  },
+  '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim': {
+    head: 'mask',
+    grid: 'pop',
+    fx: [['.bt-chips > button', 'drop']],
+  },
+  '/biz-haqimizda/boshlangich-tashkilotlar/harbiy': {
+    head: 'mask',
+    extra: '.bt-soon',
+    fx: [['.bt-soon', 'zoom']],
+  },
+
+  /* ---- Faoliyat: sarlavhalar çapdan “çizilib” oçiladi, har bölim öz harakati bilan ---- */
+  '/faoliyat/yonalishlar': {
+    head: 'wipe',
+    images: '.vy3-ph',
+    img: 'curtain',
+    grid: 'side',
+    fx: [
+      ['.vy-sum > span', 'pop'],
+      ['.vy3-txt li', 'slide'],
+    ],
+  },
+  '/faoliyat/loyihalar': {
+    head: 'wipe',
+    grid: 'zoom',
+    fx: [['.fa-chips > button', 'drop']],
+  },
+  '/faoliyat/tadbirlar': {
+    head: 'wipe',
+    grid: 'tilt',
+    fx: [['.fa-chips > button', 'drop']],
+  },
+  '/faoliyat/elonlar': {
+    head: 'wipe',
+    grid: 'swing',
+    fx: [['.fa-chips > button', 'drop']],
+  },
+  '/faoliyat/natijalar': {
+    head: 'wipe',
+    grid: 'pop',
+    counters: '.vb-dash-tiles dd',
+    fx: [['.vb-ycols > section', 'skew']],
+  },
+
+  /* ---- Hujjatlar: qoğozlar dastasi ---- */
+  '/hujjatlar/normativ': {
+    head: 'mask',
+    grid: 'paper',
+    fx: [['.nh-jump > a', 'drop']],
+  },
+  '/hujjatlar/kengash': { head: 'mask', grid: 'skew' },
+  '/hujjatlar/namunalar': { head: 'mask', grid: 'skew' },
+
+  /* ---- Axborot xizmati ---- */
+  '/axborot-xizmati/fotogalereya': { head: 'wipe', grid: 'pop', img: 'circle' },
+  '/axborot-xizmati/videogalereya': { head: 'wipe', grid: 'zoom' },
+  '/axborot-xizmati/press-relizlar': { head: 'wipe', grid: 'slide' },
+  '/axborot-xizmati/oav': { head: 'wipe', grid: 'tilt' },
+  '/yangiliklar': { head: 'wipe', grid: 'skew' },
+
+  /* ---- Boğlaniş ---- */
+  '/boglanish/aloqa': {
+    head: 'mask',
+    extra: '.bg-mapcard',
+    grid: 'slide',
+    fx: [
+      ['.bg-mapcard', 'zoom'],
+      ['.bg-week > li', 'flip'],
+      ['.bg-soc > a', 'pop'],
+    ],
+  },
+  '/boglanish/murojaat': {
+    head: 'mask',
+    extra: '.cb-form, .bg-terms',
+    grid: 'drop',
+    fx: [['.cb-form', 'zoom']],
   },
 }
 
@@ -32,6 +141,6 @@ export function PageMotion({ locale }: { locale: string }) {
   const pathname = usePathname()
   const path = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), '') || '/'
   if (path === '/') return null
-  const o = PAGES[path] ?? {}
+  const o = PAGES[path] ?? UMUMIY
   return <RevealMotion key={pathname} root="main" skip={o.skip ?? SKIP} {...o} />
 }
