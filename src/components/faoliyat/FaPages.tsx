@@ -68,7 +68,7 @@ export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string
       <Head
         crumbs={crumbs}
         title="Loyihalar"
-        lead="Kengaş va uning boşlanğiç taşkilotlari amalga oşirgan va amalga oşirayotgan loyihalar. Har bir maʼlumot “Poytaxt yoşlari” kanalidagi asl postlar asosida tayyorlangan."
+        lead="Kengaş va uning boşlanğiç taşkilotlari amalga oşirgan va amalga oşirayotgan loyihalar."
       />
       <section className="sec fa-sec">
         <div className="wrap">
@@ -111,7 +111,7 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
       <Head
         crumbs={crumbs}
         title="Tadbirlar va kalendar"
-        lead="Yaqinlaşayotgan tadbirlar va 2023-yildan buyon ötkazilgan tadbirlar arxivi. Har bir tadbir “Poytaxt yoşlari” kanalidagi asl postga bog‘langan."
+        lead="Yaqinlaşayotgan tadbirlar va 2023-yildan buyon ötkazilgan tadbirlar arxivi."
       />
       <section className="sec fa-sec">
         <div className="wrap">
@@ -170,7 +170,7 @@ export function AnnouncePage({ crumbs }: { crumbs: ReactNode }) {
       <Head
         crumbs={crumbs}
         title="Eʼlonlar"
-        lead="Tanlovlar, röyxatdan ötiş, çellenjlar, sayohatlar va tadbir eʼlonlari bir joyda. Har bir eʼlon “Poytaxt yoşlari” kanalidagi asl postga bog‘langan."
+        lead="Tanlovlar, röyxatdan ötiş, çellenjlar, sayohatlar va tadbir eʼlonlari bir joyda."
       />
       <section className="sec fa-sec">
         <div className="wrap">
@@ -189,7 +189,7 @@ export function ResultsPage({ crumbs }: { crumbs: ReactNode }) {
       <Head
         crumbs={crumbs}
         title="Natijalar va hisobotlar"
-        lead="Kengaş faoliyatining yillar kesimidagi asosiy natijalari. Barça raqamlar Kengaşning rasmiy eʼlonlaridan olingan va asl manbaga bog‘langan."
+        lead="Kengaş faoliyatining yillar kesimidagi asosiy natijalari."
       />
       <ResultsB />
     </div>

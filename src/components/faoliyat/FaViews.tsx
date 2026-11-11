@@ -11,12 +11,6 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
 const STATUS = (s: Project['status']) =>
   s === 'davom etmoqda' ? 'Davom etmoqda' : s === 'har yili' ? 'Har yili' : 'Yakunlangan'
 
-const Src = ({ id }: { id: number }) => (
-  <a className="fa-src" href={TG(id)} target="_blank" rel="noopener noreferrer">
-    manba ↗
-  </a>
-)
-
 const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
 
 /* ===================== Yönalişlar ===================== */
@@ -176,15 +170,6 @@ export function DirC({
 
 /* ===================== Loyiha sahifasi ===================== */
 
-const SrcNote = ({ p }: { p: Project }) => (
-  <p className="fa-src-note">
-    Manba: “Poytaxt yoşlari” Telegram kanali —{' '}
-    <a href={TG(p.posts[0])} target="_blank" rel="noopener noreferrer">
-      {p.posts.length} ta post
-    </a>
-  </p>
-)
-
 /** C — hikoya: keng banner, tor matn ustuni, natijalar kartoçkalarda, gorizontal sanalar */
 export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
   return (
@@ -224,7 +209,6 @@ export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
               <div key={r.text} className="vc-card">
                 <span>{pad(i)}</span>
                 <p>{r.text}</p>
-                <Src id={r.post} />
               </div>
             ))}
           </div>
@@ -235,7 +219,6 @@ export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
               <li key={`${m.date}-${m.text}`}>
                 <time dateTime={m.date}>{fmtDate(m.date)}</time>
                 <p>{m.text}</p>
-                <Src id={m.post} />
               </li>
             ))}
           </ol>
@@ -249,7 +232,6 @@ export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
             ))}
           </div>
         )}
-        <SrcNote p={p} />
         <div className="fa-back">
           <Link href={listHref} className="btn btn-outline">
             Barça loyihalar
@@ -293,7 +275,7 @@ export function ResultsB() {
               <ul>
                 {y.items.map((it) => (
                   <li key={it.text}>
-                    {it.text} <Src id={it.post} />
+                    {it.text}
                   </li>
                 ))}
               </ul>

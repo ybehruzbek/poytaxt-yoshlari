@@ -31,8 +31,6 @@
 .x2-kc-grid small b{color:var(--navy);font-weight:600}
 
 /* ----- Natijalar: manba ----- */
-.x2-src{font-size:13px;font-weight:700;color:var(--blue)}
-.x2-src-mute{color:var(--muted);font-weight:500}
 
 /* ----- Natijalar B: vaqt çiziği ----- */
 
@@ -50,8 +48,6 @@
 .x2-rc li{display:flex;gap:18px;padding:20px 0;border-top:1px solid rgba(255,255,255,.14)}
 .x2-rc li span{flex:none;font:800 18px/1.4 var(--f-head);color:var(--sky);width:32px}
 .x2-rc li p{font-size:17px;line-height:1.6;opacity:.92}
-.x2-rc-sec .x2-src{color:var(--yellow)}
-.x2-rc-sec .x2-src-mute{color:#fff;opacity:.6}
 
 /* ===== 1100px ===== */
 @media (max-width:1100px){

@@ -68,16 +68,6 @@ export function ProjectCardsC() {
 
 /* ================= Natijalar ================= */
 
-function ResSrc({ src }: { src?: string }) {
-  return src ? (
-    <a className="x2-src" href={src} target="_blank" rel="noopener noreferrer">
-      Manba <span aria-hidden="true">↗</span>
-    </a>
-  ) : (
-    <span className="x2-src x2-src-mute">Manba: Ittifoq taqdimoti, 2026</span>
-  )
-}
-
 /** C — töq fon, yillar böyiça almaşuvçi tugmalar va katta raqamli natijalar */
 export function ResultsC() {
   const [y, setY] = useState(RESULTS[RESULTS.length - 1].y)
@@ -114,7 +104,6 @@ export function ResultsC() {
             ))}
           </ol>
         </div>
-        <ResSrc src={r.src} />
       </div>
     </section>
   )
