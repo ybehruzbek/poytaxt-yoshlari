@@ -5,6 +5,7 @@
 .fb {
   position: relative;
   overflow: hidden;
+  overflow: clip; /* hidden emas: skroll animatsiyalari (view()) ekranga nisbatan işlaşi uçun */
   margin-top: 40px;
   background: var(--navy);
   color: #e9d7d2;
@@ -145,6 +146,7 @@
   display: flex;
   justify-content: center;
   overflow: hidden;
+  overflow: clip;
   padding: 40px 0 8px;
   font: 900 15.6vw/0.8 var(--f-head);
   letter-spacing: -0.035em;
@@ -176,6 +178,111 @@
   to {
     transform: none;
     opacity: 1;
+  }
+}
+/* ---------- Footer animatsiyasi (Apple uslubi, skrollga boğlangan; faqat qöllaydigan brauzerlarda) ----------
+   Footer “varaq” bölib kattalaşib köteriladi, keyin ičidagilar xiradan aniqlaşib, navbat bilan çiqadi:
+   logo → şior → tugma, menyu ustunlari çapdan öngga, çiziqlar örtadan yoyiladi. */
+@supports (animation-timeline: view()) {
+  .fb {
+    transform-origin: 50% 0;
+    animation: fw-sheet linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+  .fw-intro > *,
+  .fw-cols > div,
+  .fw-nets a,
+  .fw-mail a,
+  .fb-bot > * {
+    --k: 0;
+    animation: fw-up linear both;
+    animation-timeline: view();
+    animation-range: entry calc(5% + var(--k) * 7%) entry calc(70% + var(--k) * 7%);
+  }
+  .fw-intro > :nth-child(2),
+  .fw-cols > :nth-child(2),
+  .fw-nets a:nth-child(2),
+  .fw-mail a:nth-child(2),
+  .fb-bot > :nth-child(2) {
+    --k: 1;
+  }
+  .fw-intro > :nth-child(3),
+  .fw-cols > :nth-child(3),
+  .fw-nets a:nth-child(3),
+  .fb-bot > :nth-child(3) {
+    --k: 2;
+  }
+  .fw-cols > :nth-child(4),
+  .fw-nets a:nth-child(4) {
+    --k: 3;
+  }
+  .fw-cols > :nth-child(5),
+  .fw-nets a:nth-child(5) {
+    --k: 4;
+  }
+  .fw-line,
+  .fb-bot {
+    position: relative;
+  }
+  .fw-line::before,
+  .fw-line::after,
+  .fb-bot::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--yellow);
+    transform-origin: 50% 50%;
+    animation: fw-line linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 90%;
+    pointer-events: none;
+  }
+  .fw-line::before,
+  .fb-bot::before {
+    top: -1px;
+  }
+  .fw-line::after {
+    bottom: -1px;
+  }
+}
+@keyframes fw-sheet {
+  from {
+    scale: 0.94;
+    border-radius: 140px 140px 0 0;
+  }
+  to {
+    scale: 1;
+    border-radius: 56px 56px 0 0;
+  }
+}
+@keyframes fw-up {
+  from {
+    opacity: 0;
+    translate: 0 36px;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+/* sariq nur çiziq böylab örtadan çetlarga yoyilib, oxirida söniq çiziqqa aylanadi */
+@keyframes fw-line {
+  0% {
+    scale: 0 1;
+    opacity: 1;
+  }
+  70% {
+    scale: 1 1;
+    opacity: 1;
+  }
+  100% {
+    scale: 1 1;
+    opacity: 0;
   }
 }
 .fw .fb-bot {
