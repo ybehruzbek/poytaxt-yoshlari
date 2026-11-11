@@ -105,7 +105,6 @@
 }
 .dd-list a.cur {
   background: var(--soft);
-  box-shadow: inset 3px 0 0 var(--yellow);
 }
 .dd-list .t {
   flex: 1;
