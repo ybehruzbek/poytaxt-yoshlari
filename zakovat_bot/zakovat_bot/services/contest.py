@@ -22,6 +22,24 @@ from zakovat_bot.models import (
 
 logger = logging.getLogger(__name__)
 
+# Ishtirokchi kiritgan matn uchun rasm/hujjat hajmi chegarasi (Telegram
+# fotosi odatda kichik, lekin fayl ko'rinishidagi rasm katta bo'lishi mumkin)
+MAX_PHOTO_MB = 20
+
+
+def safe_cell(value):
+    """Excel formula injection himoyasi (CWE-1236).
+
+    Ishtirokchi `=HYPERLINK(...)` kabi matn yozsa, admin faylni ochganda
+    formula bo'lib bajarilmasligi uchun old qo'shtirnoq qo'yiladi.
+    """
+    if value is None:
+        return ""
+    text = str(value)
+    if text[:1] in ("=", "+", "-", "@", "\t", "\r"):
+        return "'" + text
+    return text
+
 # Moderatsiyadan o'tib, natijaga da'vogar bo'lgan holatlar
 LIVE_STATUSES = [
     EntryStatus.MODERATION,
@@ -143,11 +161,11 @@ def extract_media(message):
     if message.document:
         d = message.document
         mime = (d.mime_type or "").lower()
-        # Sifat saqlansin uchun rasm fayl ko'rinishida ham qabul qilinadi (TZ 5.1)
+        # Sifat saqlansin uchun rasm fayl ko'rinishida ham qabul qilinadi (TZ 5.1).
+        # Video hujjat sifatida qabul qilinmaydi: unda Telegram davomiylikni
+        # bermaydi va cheklovni tekshirib bo'lmaydi.
         if mime.startswith("image/"):
             kind = "document"
-        elif mime.startswith("video/"):
-            kind = "video"
         else:
             return None
         return {
@@ -174,15 +192,23 @@ def validate_media(contest, nomination, info):
         return "Video nominatsiyasida faqat video yuboriladi."
 
     if info["media_type"] == "video":
-        if info.get("duration") and info["duration"] > contest.max_video_seconds:
+        # Davomiylik faqat haqiqiy video xabarda keladi — bo'lmasa rad etamiz
+        if not info.get("duration"):
+            return ("Videoni oddiy video sifatida yuboring (fayl ko'rinishida "
+                    "emas) — aks holda davomiyligini tekshira olmaymiz.")
+        if info["duration"] > contest.max_video_seconds:
             limit = contest.max_video_seconds
             return (f"Video juda uzun ({info['duration']} soniya). "
                     f"Ruxsat etilgan davomiylik: {limit} soniyagacha.")
-        if info.get("file_size"):
-            mb = info["file_size"] / (1024 * 1024)
-            if mb > contest.max_video_mb:
-                return (f"Video hajmi katta ({mb:.1f} MB). "
-                        f"Ruxsat etilgan hajm: {contest.max_video_mb} MB gacha.")
+        max_mb = contest.max_video_mb
+    else:
+        max_mb = MAX_PHOTO_MB
+
+    if info.get("file_size"):
+        mb = info["file_size"] / (1024 * 1024)
+        if mb > max_mb:
+            return (f"Fayl hajmi katta ({mb:.1f} MB). "
+                    f"Ruxsat etilgan hajm: {max_mb} MB gacha.")
     return None
 
 
@@ -190,32 +216,6 @@ def media_limit(contest, nomination):
     return contest.max_photos if nomination == Nomination.FOTO else 1
 
 
-# ==================== OTM qidiruvi ====================
-
-def search_universities(query, limit=6):
-    """OTM nomini kanallar bazasidagi rasmiy nomlardan qidiradi.
-
-    Baza allaqachon 77 ta OTTning rasmiy nomini saqlaydi — ishtirokchi
-    nomni qo'lda yozganda shu ro'yxatdan tanlash taklif qilinadi.
-    """
-    q = (query or "").strip()
-    if len(q) < 2:
-        return []
-    names = (
-        Channel.all_objects.filter(ott_name__icontains=q)
-        .values_list("ott_name", flat=True)
-        .distinct()
-    )
-    seen, out = set(), []
-    for name in names:
-        key = name.strip().lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        out.append(name.strip())
-        if len(out) >= limit:
-            break
-    return out
 
 
 # ==================== Statistika va eksport ====================
@@ -261,15 +261,15 @@ def export_entries_excel(contest):
             i,
             e.code,
             e.get_nomination_display(),
-            p.full_name,
-            p.university,
-            p.faculty or "",
-            p.study_year or "",
-            p.phone,
+            safe_cell(p.full_name),
+            safe_cell(p.university),
+            safe_cell(p.faculty),
+            safe_cell(p.study_year),
+            safe_cell(p.phone),
             p.telegram_id,
-            f"@{p.username}" if p.username else "",
-            e.title or "",
-            e.description or "",
+            safe_cell(f"@{p.username}" if p.username else ""),
+            safe_cell(e.title),
+            safe_cell(e.description),
             e.media.count(),
             e.get_status_display(),
             e.votes_count,
@@ -312,3 +312,111 @@ async def close_submissions_if_due(bot):
                 await bot.send_message(chat_id=admin.tg_id, text=text)
             except Exception:
                 logger.warning("Adminga qabul yopilishi xabari yetmadi: %s", admin.tg_id)
+
+
+# ==================== Moderatsiya (TZ 6) ====================
+
+def pending_queue(contest):
+    """Moderatsiya navbati — eng eski ariza birinchi."""
+    return (
+        Entry.objects.filter(contest=contest, status=EntryStatus.MODERATION)
+        .select_related("participant")
+        .order_by("submitted_at", "id")
+    )
+
+
+def next_pending(contest, after_id=None):
+    """Navbatdagi keyingi ariza (`after_id` dan keyingisi)."""
+    qs = pending_queue(contest)
+    if after_id:
+        qs = qs.filter(id__gt=after_id)
+    return qs.first()
+
+
+def entry_card(entry, for_admin=True):
+    """Ariza kartochkasi (TZ 6: moderator ko'radigan ma'lumotlar).
+
+    Ishtirokchi matnlari HTML sifatida talqin qilinmasligi uchun ekranlanadi.
+    """
+    from html import escape as esc
+
+    p = entry.participant
+    username = f"@{p.username}" if p.username else "—"
+    lines = [
+        f"🆔 <b>{entry.code}</b> — {entry.get_nomination_display()}",
+        f"📌 Holati: <b>{entry.get_status_display()}</b>",
+        "",
+        f"👤 {esc(str(p.full_name))}",
+        f"🎓 {esc(str(p.university))}",
+        f"📚 {esc(str(p.faculty or '—'))} ({esc(str(p.study_year or '—'))})",
+    ]
+    if for_admin:
+        lines += [
+            f"📞 {p.phone}",
+            f"🔖 Telegram: {username} (<code>{p.telegram_id}</code>)",
+        ]
+    lines += [
+        "",
+        f"📝 <b>{esc(str(entry.title or '—'))}</b>",
+        f"✍️ {esc(str(entry.description or '—'))}",
+        f"📎 Media: {entry.media.count()} ta",
+    ]
+    if entry.submitted_at:
+        lines.append(
+            f"🕒 Kelgan vaqt: {timezone.localtime(entry.submitted_at):%d.%m.%Y %H:%M}"
+        )
+    if entry.reject_reason:
+        lines.append(f"\n💬 Oxirgi izoh: {esc(str(entry.reject_reason))}")
+
+    history = entry.moderation_logs.order_by("-id")[:3]
+    if history:
+        lines.append("\n<b>Moderatsiya tarixi:</b>")
+        for log in history:
+            when = timezone.localtime(log.created_datetime)
+            lines.append(f"• {when:%d.%m %H:%M} — {log.get_action_display()}")
+    return "\n".join(lines)
+
+
+def build_media_group(entry):
+    """Ariza mediasini `send_media_group` uchun tayyorlaydi.
+
+    Telegram bir guruhda rasm va hujjatni aralashtirishga ruxsat bermaydi,
+    shuning uchun turlari bo'yicha ajratilgan ro'yxatlar qaytariladi.
+    """
+    from aiogram.types import InputMediaDocument, InputMediaPhoto, InputMediaVideo
+
+    photos, documents, videos = [], [], []
+    for m in entry.media.all():
+        if m.media_type == "photo":
+            photos.append(InputMediaPhoto(media=m.file_id))
+        elif m.media_type == "video":
+            videos.append(InputMediaVideo(media=m.file_id))
+        else:
+            documents.append(InputMediaDocument(media=m.file_id))
+    return [group for group in (photos, videos, documents) if group]
+
+
+async def send_entry_media(bot, chat_id, entry):
+    """Ariza mediasini ko'rsatadi (moderator va nashr uchun).
+
+    Qaytaradi: yuborilgan xabarlar ro'yxati (nashrda message_id kerak bo'ladi).
+    """
+    sent = []
+    for group in build_media_group(entry):
+        try:
+            if len(group) == 1:
+                item = group[0]
+                media_type = entry.media.first().media_type
+                if media_type == "video":
+                    msg = await bot.send_video(chat_id=chat_id, video=item.media)
+                elif media_type == "document":
+                    msg = await bot.send_document(chat_id=chat_id, document=item.media)
+                else:
+                    msg = await bot.send_photo(chat_id=chat_id, photo=item.media)
+                sent.append(msg)
+            else:
+                msgs = await bot.send_media_group(chat_id=chat_id, media=group)
+                sent.extend(msgs)
+        except Exception as e:
+            logger.warning("Media yuborilmadi (ariza %s): %s", entry.id, e)
+    return sent

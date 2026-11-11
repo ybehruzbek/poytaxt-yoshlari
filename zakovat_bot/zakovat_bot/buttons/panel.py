@@ -445,15 +445,6 @@ def nomination_keyboard():
     return kb.as_markup()
 
 
-def university_suggest_keyboard(names, typed):
-    """Qidiruv natijalari + «shu nom bilan davom etish» varianti."""
-    kb = InlineKeyboardBuilder()
-    for i, name in enumerate(names):
-        kb.button(text=name[:60], callback_data=f"td_uni:{i}")
-    kb.button(text=f"✍️ «{typed[:40]}» — shu nomni qoldiraman",
-              callback_data="td_uni:own")
-    kb.adjust(1)
-    return kb.as_markup()
 
 
 def study_year_keyboard():

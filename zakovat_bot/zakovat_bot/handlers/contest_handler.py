@@ -6,11 +6,13 @@ nominatsiya → ish nomi → izoh → rozilik → media → tasdiqlash.
 """
 import asyncio
 import logging
+from html import escape as html_escape
 
 from aiogram import F
 from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
+from django.db import transaction
 from django.utils import timezone
 
 from zakovat_bot.buttons.panel import (
@@ -21,7 +23,6 @@ from zakovat_bot.buttons.panel import (
     my_entry_keyboard,
     nomination_keyboard,
     study_year_keyboard,
-    university_suggest_keyboard,
 )
 from zakovat_bot.buttons.reply import ask_phone_keyboard
 from zakovat_bot.dispatcher import bot, dp
@@ -44,7 +45,6 @@ from zakovat_bot.services.contest import (
     get_participant,
     media_limit,
     participant_entries,
-    search_universities,
     time_left_text,
     validate_media,
 )
@@ -52,6 +52,15 @@ from zakovat_bot.services.validators import normalize_phone, validate_full_name
 from zakovat_bot.state import ContestState
 
 logger = logging.getLogger(__name__)
+
+
+def esc(value):
+    """Ishtirokchi matnini HTML sifatida talqin qilinmasligi uchun ekranlaydi.
+
+    Bot HTML parse_mode bilan ishlaydi: ekranlanmagan `<` xabarni butunlay
+    yuborilmasligiga olib kelishi mumkin.
+    """
+    return html_escape(str(value or ""))
 
 # Albom bo'lib kelgan rasmlarga bitta javob berish uchun debounce
 _media_reply_tasks = {}
@@ -99,7 +108,7 @@ async def _show_menu(message, contest, tg_id, prefix=""):
         status_line = "🔒 Arizalar qabuli yakunlangan."
 
     await message.answer(
-        f"{prefix}🎉 <b>{contest.title}</b>\n"
+        f"{prefix}🎉 <b>{esc(contest.title)}</b>\n"
         "17-noyabr — Xalqaro talabalar kuni!\n\n"
         f"{status_line}",
         reply_markup=contest_main_keyboard(has_entry=has_entry),
@@ -188,7 +197,8 @@ async def td_join(callback: CallbackQuery, state: FSMContext):
     # Anketa allaqachon to'ldirilgan bo'lsa — to'g'ridan-to'g'ri nominatsiyaga
     if participant and participant.full_name and participant.phone:
         await callback.message.answer(
-            f"👤 {participant.full_name}\n🎓 {participant.university}\n"
+            f"👤 {esc(participant.full_name)}\n"
+            f"🎓 {esc(participant.university)}\n"
             f"📞 {participant.phone}\n\n"
             "Nominatsiyani tanlang:",
             reply_markup=nomination_keyboard(),
@@ -220,49 +230,19 @@ async def td_full_name(message: Message, state: FSMContext):
 
 @dp.message(StateFilter(ContestState.university))
 async def td_university(message: Message, state: FSMContext):
-    typed = (message.text or "").strip()
+    """OTM nomini ishtirokchining o'zi yozadi — ro'yxatdan tanlash yo'q."""
+    typed = " ".join((message.text or "").split())
     if len(typed) < 3:
         await message.answer("⚠️ OTM nomini to'liqroq yozing (kamida 3 harf).")
         return
-
-    matches = search_universities(typed)
-    if matches:
-        await state.update_data(td_uni_options=matches, td_uni_typed=typed)
-        await message.answer(
-            "Quyidagilardan birini tanlang:",
-            reply_markup=university_suggest_keyboard(matches, typed),
-        )
+    if len(typed) > 200:
+        await message.answer("⚠️ Nom juda uzun — qisqartirib yozing.")
         return
 
-    await _save_university(message, state, typed)
-
-
-@dp.callback_query(F.data.startswith("td_uni:"))
-async def td_university_pick(callback: CallbackQuery, state: FSMContext):
-    await callback.answer()
-    data = await state.get_data()
-    choice = callback.data.split(":", 1)[1]
-    options = data.get("td_uni_options") or []
-
-    if choice == "own":
-        name = data.get("td_uni_typed", "")
-    else:
-        try:
-            name = options[int(choice)]
-        except (ValueError, IndexError):
-            name = data.get("td_uni_typed", "")
-    if not name:
-        await callback.message.answer("⚠️ OTM nomini qaytadan yozing.")
-        return
-    await callback.message.edit_reply_markup()
-    await _save_university(callback.message, state, name)
-
-
-async def _save_university(message, state, name):
-    await state.update_data(td_university=name)
+    await state.update_data(td_university=typed)
     await state.set_state(ContestState.faculty)
     await message.answer(
-        f"🎓 OTM: <b>{name}</b>\n\n"
+        f"🎓 OTM: <b>{esc(typed)}</b>\n\n"
         "Fakultet yoki ta'lim yo'nalishingizni yozing:"
     )
 
@@ -278,10 +258,16 @@ async def td_faculty(message: Message, state: FSMContext):
     await message.answer("📚 O'qish bosqichini tanlang:", reply_markup=study_year_keyboard())
 
 
+STUDY_YEARS = ("1-kurs", "2-kurs", "3-kurs", "4-kurs", "Magistratura", "Boshqa")
+
+
 @dp.callback_query(F.data.startswith("td_year:"))
 async def td_year(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
-    await state.update_data(td_year=callback.data.split(":", 1)[1])
+    value = callback.data.split(":", 1)[1]
+    if value not in STUDY_YEARS:
+        return
+    await state.update_data(td_year=value)
     await state.set_state(ContestState.phone)
     await callback.message.edit_reply_markup()
     await callback.message.answer(
@@ -318,6 +304,15 @@ async def td_phone(message: Message, state: FSMContext):
     contest = _current_contest(data)
     if contest is None:
         await state.clear()
+        return
+
+    # Oqim buzilgan bo'lsa (F.I.Sh./OTM yo'q) — bazaga bo'sh yozuv tushmasin
+    if not data.get("td_full_name") or not data.get("td_university"):
+        await state.clear()
+        await message.answer(
+            "❗️ Ma'lumotlar to'liq emas. /start bilan qaytadan boshlang.",
+            reply_markup=ReplyKeyboardRemove(),
+        )
         return
 
     participant, _ = ContestParticipant.objects.update_or_create(
@@ -471,8 +466,33 @@ async def td_media(message: Message, state: FSMContext):
         return
 
     limit = media_limit(contest, entry.nomination)
-    current = entry.media.count()
-    if current >= limit:
+    info = extract_media(message)
+    error = validate_media(contest, entry.nomination, info)
+    if error:
+        await message.answer(f"⚠️ {error}")
+        return
+
+    # Albom rasmlari bir vaqtda kelganda cheklov buzilmasligi uchun —
+    # hisoblash va yozish bitta tranzaksiyada, ariza qatori qulflangan holda
+    with transaction.atomic():
+        locked = Entry.objects.select_for_update().filter(id=entry.id).first()
+        current = EntryMedia.objects.filter(entry_id=entry.id).count()
+        over_limit = current >= limit
+        if not over_limit and locked is not None:
+            EntryMedia.objects.get_or_create(
+                entry=locked,
+                file_unique_id=info["file_unique_id"],
+                defaults={
+                    "file_id": info["file_id"],
+                    "media_type": info["media_type"],
+                    "position": current,
+                    "file_size": info.get("file_size"),
+                    "duration": info.get("duration"),
+                    "mime_type": info.get("mime_type"),
+                },
+            )
+
+    if over_limit:
         await message.answer(
             f"⚠️ Siz allaqachon {limit} ta fayl yubordingiz — bundan ortig'i "
             "qabul qilinmaydi.\n\nDavom etish yoki mediani almashtirish uchun "
@@ -480,25 +500,6 @@ async def td_media(message: Message, state: FSMContext):
             reply_markup=media_done_keyboard(current, limit, entry.nomination),
         )
         return
-
-    info = extract_media(message)
-    error = validate_media(contest, entry.nomination, info)
-    if error:
-        await message.answer(f"⚠️ {error}")
-        return
-
-    EntryMedia.objects.get_or_create(
-        entry=entry,
-        file_unique_id=info["file_unique_id"],
-        defaults={
-            "file_id": info["file_id"],
-            "media_type": info["media_type"],
-            "position": current,
-            "file_size": info.get("file_size"),
-            "duration": info.get("duration"),
-            "mime_type": info.get("mime_type"),
-        },
-    )
 
     # Albom bo'lib kelgan rasmlarga bitta umumiy javob (debounce)
     user_id = message.from_user.id
@@ -534,6 +535,18 @@ async def td_media_reset(callback: CallbackQuery, state: FSMContext):
     entry = Entry.objects.filter(id=data.get("td_entry_id")).first()
     contest = _current_contest(data)
     if entry is None or contest is None:
+        return
+    # Topshirilgan arizaning mediasi o'chirilmasin; muddat ham tekshiriladi
+    if entry.participant.telegram_id != callback.from_user.id:
+        return
+    if not contest.is_accepting:
+        await callback.message.answer(deadline_passed_text(contest))
+        return
+    if entry.status not in (EntryStatus.DRAFT, EntryStatus.REVISION,
+                            EntryStatus.REJECTED):
+        await callback.answer(
+            "Topshirilgan arizani o'zgartirib bo'lmaydi. "
+            "«Mening arizam» bo'limidan qayta topshiring.", show_alert=True)
         return
     entry.media.all().delete()
     await state.set_state(ContestState.media)
@@ -579,13 +592,14 @@ async def _show_preview(message, state, contest, entry, data):
     await message.answer(
         f"📋 <b>Arizangizni tekshiring</b>\n\n"
         f"🆔 Ariza: <b>{entry.code}</b>\n"
-        f"👤 F.I.Sh.: {participant.full_name}\n"
-        f"🎓 OTM: {participant.university}\n"
-        f"📚 Fakultet: {participant.faculty or '—'} ({participant.study_year or '—'})\n"
+        f"👤 F.I.Sh.: {esc(participant.full_name)}\n"
+        f"🎓 OTM: {esc(participant.university)}\n"
+        f"📚 Fakultet: {esc(participant.faculty or '—')} "
+        f"({esc(participant.study_year or '—')})\n"
         f"📞 Telefon: {participant.phone}\n"
         f"🏷 Yo'nalish: {entry.get_nomination_display()}\n"
-        f"📝 Material nomi: {title}\n"
-        f"✍️ Izoh: {description}\n"
+        f"📝 Material nomi: {esc(title)}\n"
+        f"✍️ Izoh: {esc(description)}\n"
         f"📎 Media: {media_text}",
         reply_markup=entry_confirm_keyboard(entry),
     )
@@ -605,7 +619,12 @@ async def td_edit(callback: CallbackQuery, state: FSMContext):
 async def td_submit(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     # Ariza tugmadan olinadi — takroriy bosish FSM holatidan qat'i nazar aniqlanadi
-    entry = Entry.objects.filter(id=int(callback.data.split(":")[1])).first()
+    try:
+        entry_id = int(callback.data.split(":")[1])
+    except (IndexError, ValueError):
+        await callback.answer()
+        return
+    entry = Entry.objects.filter(id=entry_id).first()
     if entry is None or entry.participant.telegram_id != callback.from_user.id:
         await callback.answer()
         await callback.message.answer("❗️ Jarayon eskirgan. /start bilan boshlang.")
@@ -622,6 +641,18 @@ async def td_submit(callback: CallbackQuery, state: FSMContext):
         await callback.answer()
         await state.clear()
         await callback.message.answer(deadline_passed_text(contest))
+        return
+
+    # Media va rozilik interfeysga emas, bazaga qarab tekshiriladi
+    media_count = entry.media.count()
+    need = contest.min_photos if entry.nomination == Nomination.FOTO else 1
+    if media_count < need:
+        await callback.answer(
+            f"Avval media yuboring (kamida {need} ta).", show_alert=True)
+        return
+    if entry.participant.consent_at is None:
+        await callback.answer(
+            "Avval tanlov shartlariga rozilik bildiring.", show_alert=True)
         return
 
     await callback.answer()
@@ -652,9 +683,9 @@ async def _notify_moderators(entry):
     text = (
         f"🔔 <b>Yangi ariza {entry.code}</b>\n\n"
         f"🏷 {entry.get_nomination_display()}\n"
-        f"👤 {p.full_name}\n"
-        f"🎓 {p.university}\n"
-        f"📝 {entry.title}\n"
+        f"👤 {esc(p.full_name)}\n"
+        f"🎓 {esc(p.university)}\n"
+        f"📝 {esc(entry.title)}\n"
         f"📎 {entry.media.count()} ta fayl"
     )
     for admin in TelegramAdminsID.objects.all():
@@ -683,13 +714,13 @@ async def td_my(callback: CallbackQuery, state: FSMContext):
         lines = [
             f"🆔 <b>{entry.code}</b>",
             f"🏷 {entry.get_nomination_display()}",
-            f"📝 {entry.title or '—'}",
+            f"📝 {esc(entry.title or '—')}",
             f"📌 Holati: <b>{entry.get_status_display()}</b>",
         ]
         if entry.status == EntryStatus.REJECTED and entry.reject_reason:
-            lines.append(f"\n❌ Sabab: {entry.reject_reason}")
+            lines.append(f"\n❌ Sabab: {esc(entry.reject_reason)}")
         if entry.status == EntryStatus.REVISION and entry.reject_reason:
-            lines.append(f"\n🔄 Tuzatish: {entry.reject_reason}")
+            lines.append(f"\n🔄 Tuzatish: {esc(entry.reject_reason)}")
         if entry.votes_count:
             lines.append(f"❤️ Ovozlar: {entry.votes_count}")
 

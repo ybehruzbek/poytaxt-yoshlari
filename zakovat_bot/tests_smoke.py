@@ -1209,12 +1209,16 @@ async def _run_all(saved_event_ids):
     await contest_handler.td_full_name(m, st)
     check("F.I.Sh. qabul qilindi", "ta'lim tashkiloti" in m.texts())
 
+    m = FakeMessage(USER1, text="TD")
+    await contest_handler.td_university(m, st)
+    check("qisqa OTM nomi rad etildi", "to'liqroq" in m.texts())
+
     m = FakeMessage(USER1, text="Smoke universiteti")
     await contest_handler.td_university(m, st)
-    check("OTM bosqichi o'tdi", "Fakultet" in m.texts() or "tanlang" in m.texts())
-    if "tanlang" in m.texts():
-        cb = FakeCallback("td_uni:own", USER1, message=FakeMessage(USER1))
-        await contest_handler.td_university_pick(cb, st)
+    check("OTM nomi o'zi yozilgan holda qabul qilindi",
+          "Smoke universiteti" in m.texts() and "Fakultet" in m.texts())
+    check("OTM uchun ro'yxat taklif qilinmadi",
+          not any("tanlang" in t.lower() for _, t in m.out if t), m.texts())
 
     m = FakeMessage(USER1, text="Matematika")
     await contest_handler.td_faculty(m, st)
@@ -1344,6 +1348,52 @@ async def _run_all(saved_event_ids):
     await contest_handler.td_my(cb, st2)
     check("«Mening arizam» ikkala arizani ko'rsatdi",
           entry.code in cb.message.texts() and ventry.code in cb.message.texts())
+
+    # Xavfsizlik: mediasiz ariza topshirib bo'lmaydi (server tomonda)
+    saved_media = list(entry.media.all().values("file_id", "file_unique_id",
+                                                "media_type", "position"))
+    entry.media.all().delete()
+    Entry.objects.filter(id=entry.id).update(status=EntryStatus.DRAFT)
+    cb = FakeCallback(f"td_submit:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_submit(cb, st)
+    entry.refresh_from_db()
+    check("xavfsizlik: mediasiz ariza topshirilmadi",
+          entry.status == EntryStatus.DRAFT
+          and any("media yuboring" in a for a in cb.alerts), cb.alerts)
+    for mrow in saved_media:
+        EntryMedia.objects.create(entry=entry, **mrow)
+    Entry.objects.filter(id=entry.id).update(status=EntryStatus.MODERATION)
+    entry.refresh_from_db()
+
+    # Xavfsizlik: topshirilgan arizaning mediasi o'chirilmaydi
+    st_reset = FakeState()
+    await st_reset.update_data(td_contest_id=contest.id, td_entry_id=entry.id)
+    cb = FakeCallback("td_media_reset", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_media_reset(cb, st_reset)
+    check("xavfsizlik: topshirilgan ariza mediasi saqlanib qoldi",
+          entry.media.count() == 3, entry.media.count())
+
+    # Xavfsizlik: HTML teglar xabarni buzmaydi (ekranlanadi)
+    bad = ContestParticipant.objects.create(
+        contest=contest, telegram_id=OBSV, full_name="Test Foydalanuvchi",
+        university="<b>Soxta</b> OTM", phone="+998900000000",
+        consent_at=djtz.now())
+    bad_entry = Entry.objects.create(contest=contest, participant=bad,
+                                     nomination=Nomination.VIDEO,
+                                     title="<script>alert(1)</script>",
+                                     description="izoh")
+    await contest_handler._notify_moderators(bad_entry)
+    notified = [t for k, c, t in fake_bot.calls
+                if k == "send_message" and "Yangi ariza" in str(t)]
+    check("xavfsizlik: HTML teglar ekranlandi",
+          any("&lt;script&gt;" in str(t) for t in notified),
+          str(notified[-1])[:120] if notified else "xabar yo'q")
+
+    # Xavfsizlik: Excel formula injection neytrallashtiriladi
+    from zakovat_bot.services.contest import safe_cell
+    check("xavfsizlik: Excel formulasi neytrallashtirildi",
+          safe_cell("=HYPERLINK(\"http://x\")").startswith("'=")
+          and safe_cell("oddiy matn") == "oddiy matn")
 
     # ---------- 20. Qabul muddati (TZ 7, 16) ----------
     print("20) Tanlov: muddat nazorati")
