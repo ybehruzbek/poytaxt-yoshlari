@@ -366,7 +366,8 @@ async def tdadm_entry(callback: CallbackQuery):
     if entry is None:
         return
     await callback.message.edit_text(
-        entry_card(entry), reply_markup=entry_admin_keyboard(entry)
+        f"{entry_card(entry)}\n\n{_post_preview(entry)}",
+        reply_markup=entry_admin_keyboard(entry),
     )
 
 

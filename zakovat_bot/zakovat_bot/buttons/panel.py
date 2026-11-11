@@ -589,6 +589,10 @@ def entries_list_keyboard(entries, page, total_pages, status_f):
 
 def entry_admin_keyboard(entry):
     kb = InlineKeyboardBuilder()
+    # Kanalga chiqmagan ishlarda matnni tahrirlash mumkin
+    if entry.status in ("moderation_pending", "revision_requested", "approved"):
+        kb.button(text="✏️ Post matnini tahrirlash",
+                  callback_data=f"tdadm_edit:{entry.id}")
     if entry.status in ("moderation_pending", "revision_requested"):
         kb.button(text="✅ Qabul qilish", callback_data=f"tdadm_ok:{entry.id}")
         kb.button(text="❌ Rad etish", callback_data=f"tdadm_no:{entry.id}")
@@ -596,7 +600,7 @@ def entry_admin_keyboard(entry):
         kb.button(text="❌ Tasdiqni bekor qilish", callback_data=f"tdadm_no:{entry.id}")
     kb.button(text="📎 Mediani ko'rish", callback_data=f"tdadm_media:{entry.id}")
     kb.button(text="🔙 Ro'yxatga", callback_data="tdadm_list:1:all")
-    kb.adjust(2, 1, 1)
+    kb.adjust(1, 2, 1, 1)
     return kb.as_markup()
 
 

@@ -1688,6 +1688,11 @@ async def _run_all(saved_event_ids):
     cb = FakeCallback(f"tdadm_entry:{entry.id}", SUPER, message=FakeMessage(SUPER))
     await contest_admin_handler.tdadm_entry(cb)
     check("ariza kartochkasi ochildi", entry.code in cb.message.texts())
+    check("ro'yxat kartochkasida ham tahrirlash tugmasi bor",
+          any("Post matnini tahrirlash" in b for b in cb.message.buttons()),
+          cb.message.buttons())
+    check("kartochkada kanal posti ko'rinishi bor",
+          "Kanalga shu ko'rinishda chiqadi" in cb.message.texts())
 
     cb = FakeCallback("tdadm_stats", OBSV, message=FakeMessage(OBSV))
     await contest_admin_handler.tdadm_stats(cb)
