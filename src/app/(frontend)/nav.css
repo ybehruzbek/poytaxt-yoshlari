@@ -280,20 +280,10 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
 
 /* ===== Til tanlagiç: UZ · RU · EN ===== */
 .head-end{display:flex;align-items:center;gap:12px}
-.lang{display:flex;align-items:center;gap:2px;padding:4px;border-radius:99px;background:rgba(83,40,34,.06)}
-.lang a{min-width:38px;height:34px;padding:0 9px;border-radius:99px;display:grid;place-items:center;
-  font:800 13px/1 var(--f-head);letter-spacing:.4px;color:var(--navy);transition:background .2s,color .2s}
-.lang a:hover{background:rgba(83,40,34,.08)}
-.lang a.on{background:#fff;box-shadow:0 2px 8px rgba(83,40,34,.12)}
-body:has([data-head-dark]) .site-head:not(.scrolled) .lang{background:rgba(255,255,255,.14)}
-body:has([data-head-dark]) .site-head:not(.scrolled) .lang a{color:#fff}
-body:has([data-head-dark]) .site-head:not(.scrolled) .lang a.on{background:#fff;color:var(--navy)}
 @media (max-width:1180px){
   .head-end{margin-left:auto;margin-right:10px}
 }
-@media (max-width:420px){
-  .lang a{min-width:32px;height:30px;padding:0 6px;font-size:12px}
-}
+
 
 /* =====================================================================
    ANIMATSIYALAR (Apple uslubi)
@@ -412,13 +402,9 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
 }
 
 /* =====================================================================
-   TIL TANLAGIÇ — vaqtinça variantlar (LangSwitch.tsx): B kapsula, C globus, D yoyiladigan.
-   Oçiladigan röyxat navbar menyusi bilan bir xil: tepada töq, aylantirganda oq.
+   TIL TANLAGIÇ (LangSwitch.tsx): “UZ ⌄” kapsulasi, bosilganda röyxat.
+   Röyxat navbar menyusi bilan bir xil: tepada töq, aylantirganda oq.
    ===================================================================== */
-.lx-wrap {
-  display: flex;
-  align-items: center;
-}
 .lx {
   position: relative;
 }
@@ -446,10 +432,6 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
 }
 .lx.open .lx-chev {
   transform: rotate(180deg);
-}
-.lx-globe-w .lx-btn {
-  gap: 8px;
-  padding: 0 16px 0 12px;
 }
 .lx-menu {
   list-style: none;
@@ -510,56 +492,3 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .lx-btn {
   color: #fff;
 }
 
-/* D — yoyiladigan kapsula */
-.lx-exp {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px;
-  border-radius: 99px;
-  background: rgba(83, 40, 34, 0.06);
-}
-.lx-cur {
-  width: 38px;
-  height: 34px;
-  border: 0;
-  border-radius: 99px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(83, 40, 34, 0.12);
-  font: 800 13px/1 var(--f-head);
-  letter-spacing: 0.4px;
-  color: var(--navy);
-  cursor: pointer;
-}
-.lx-rest {
-  display: inline-flex;
-  max-width: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition:
-    max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.3s;
-}
-.lx-exp.open .lx-rest {
-  max-width: 100px;
-  opacity: 1;
-}
-.lx-rest a {
-  min-width: 38px;
-  height: 34px;
-  padding: 0 9px;
-  border-radius: 99px;
-  display: grid;
-  place-items: center;
-  font: 800 13px/1 var(--f-head);
-  letter-spacing: 0.4px;
-  color: var(--navy);
-}
-.lx-rest a:hover {
-  background: rgba(83, 40, 34, 0.08);
-}
-body:has([data-head-dark]) .site-head:not(.scrolled) .lx-exp {
-  background: rgba(255, 255, 255, 0.14);
-}
-body:has([data-head-dark]) .site-head:not(.scrolled) .lx-rest a {
-  color: #fff;
-}
