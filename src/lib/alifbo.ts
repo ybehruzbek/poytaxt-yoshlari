@@ -63,6 +63,8 @@ const XORIJIY = [
   'Fashion Show', 'English', 'ChatGPT', 'Chrome', 'Shopify', 'Dashboard', 'Microsoft', 'TikTok', 'WhatsApp',
   // inglizça sözlar: “ch” bu yerda “k” deb öqiladi, ç ga ögirilmaydi (Taşkent Tech, International School of …)
   'Tech', 'Technology', 'Technologies', 'School',
+  // xorijiy taşkilot nomlari
+  'China',
 ]
 const HIMOYA = new RegExp(
   [

@@ -247,3 +247,12 @@
 .pt-track--rev {
   animation-direction: reverse;
 }
+/* logotipi topilmagan xorijiy hamkorlar — davlat bayroği dumaloq körinişda */
+.pt-card-logo img[src*='/flags/'],
+.pt-logo img[src*='/flags/'] {
+  width: auto;
+  aspect-ratio: 1;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--line);
+}
