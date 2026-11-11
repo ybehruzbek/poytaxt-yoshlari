@@ -24,7 +24,7 @@ export const NAV: NavGroup[] = [
   {
     key: 'biz',
     label: 'Biz haqimizda',
-    intro: 'Ittifoq, Markaziy Kengaş va poytaxt Kengaşi bilan tanişing.',
+    intro: 'Ittifoq, Markaziy Kengaş, poytaxt Kengaşi va hamkorlarimiz bilan tanişing.',
     items: [
       { label: 'Özbekiston yoşlar ittifoqi', href: '/biz-haqimizda/ittifoq', desc: 'Taşkilot tarixi, maqsad va vazifalari' },
       { label: 'Markaziy Kengaş', href: '/biz-haqimizda/markaziy-kengash', desc: 'Ittifoqning respublika darajasidagi boşqaruvi' },
@@ -38,6 +38,7 @@ export const NAV: NavGroup[] = [
           { label: 'Harbiy qismlar va muassasalardagi', href: '/biz-haqimizda/boshlangich-tashkilotlar/harbiy' },
         ],
       },
+      { label: 'Hamkorlar', href: '/biz-haqimizda/hamkorlar', desc: 'Birgalikda işlaydigan vazirlik va taşkilotlar' },
     ],
   },
   {

@@ -1,3 +1,4 @@
+import { PartnersStrip } from '@/components/hamkorlar/PartnersStrip'
 import { About } from '@/components/site/About'
 import { Benefits } from '@/components/site/Benefits'
 import { Cta } from '@/components/site/Cta'
@@ -28,6 +29,7 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <Benefits locale={locale} />
       <Cta locale={locale} />
       <SocialPhones />
+      <PartnersStrip locale={locale} />
       <HomeMotion />
     </>
   )
