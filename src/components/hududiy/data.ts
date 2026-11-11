@@ -219,7 +219,7 @@ export const RECEPTION: Reception[] = [
 ]
 
 export const CONTACT = {
-  address: 'Toşkent şahri, Universitet köçasi, 4-uy',
+  address: 'Toşkent şahri, Olmazor tumani, Universitet köçasi, 4-uy',
   map: 'https://yandex.uz/maps/?text=Toshkent%2C%20Universitet%20ko%27chasi%2C%204',
   phone: '+998 71 246-10-70',
   phoneHref: 'tel:+998712461070',

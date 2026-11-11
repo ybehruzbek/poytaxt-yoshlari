@@ -1,0 +1,604 @@
+/* =====================================================================
+   “Boğlaniş” bölimi: Aloqa maʼlumotlari, Manzil va xarita, Elektron murojaat.
+   Prefiks: bg-. Vaqtinça variantlar: data-v="aloqa-a|b|c", "manzil-a|b", "murojaat-a|b".
+   ===================================================================== */
+.bg-sec {
+  padding-top: 28px;
+}
+.bg-sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 40px;
+  margin-bottom: 24px;
+}
+.bg-sec-head .h2 {
+  font-size: clamp(26px, 2.6vw, 36px);
+}
+.bg-sec-head p {
+  max-width: 520px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* belgi doirasi */
+.bg-ic {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--blue);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.bg-ic svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* “Hozir oçiq / yopiq” */
+.bg-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 7px 14px;
+  border-radius: 99px;
+  font: 700 13px/1 var(--f-head);
+}
+.bg-open i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.bg-open.is-open {
+  background: color-mix(in srgb, var(--green) 14%, #fff);
+  color: var(--green);
+}
+.bg-open.is-open i {
+  animation: bg-pulse 1.8s ease-in-out infinite;
+}
+.bg-open.is-closed {
+  background: var(--soft);
+  color: var(--muted);
+}
+@keyframes bg-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ---------- A: tört karta ---------- */
+.bg-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.bg-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 26px;
+  border-radius: var(--r-thumb);
+  background: var(--soft);
+}
+.bg-card h3 {
+  margin: 10px 0 2px;
+  font: 700 14px/1 var(--f-head);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.bg-big,
+.bg-big-t {
+  font: 800 20px/1.3 var(--f-head);
+  color: var(--navy);
+}
+.bg-big:hover {
+  color: var(--blue);
+}
+.bg-mail {
+  font-size: 16px;
+}
+.bg-card small {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.bg-link {
+  margin-top: auto;
+  padding-top: 8px;
+  font: 700 14px/1.3 var(--f-head);
+  color: var(--blue);
+}
+
+/* “Sizga nima kerak?” */
+.bg-topics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.bg-topic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 26px;
+  border-radius: var(--r-thumb);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  transition:
+    box-shadow 0.3s,
+    translate 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bg-topic:hover {
+  translate: 0 -3px;
+  box-shadow: 0 18px 40px rgba(83, 40, 34, 0.1);
+}
+.bg-topic-n {
+  font: 800 13px/1 var(--f-head);
+  color: var(--yellow);
+  -webkit-text-stroke: 0.4px var(--navy);
+}
+.bg-topic h3 {
+  font: 800 20px/1.25 var(--f-head);
+  color: var(--navy);
+}
+.bg-topic p {
+  flex: 1;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.bg-topic .more-btn {
+  margin-top: 8px;
+}
+.bg-topics--big {
+  grid-template-columns: repeat(2, 1fr);
+}
+.bg-topics--big .bg-topic {
+  padding: 32px;
+  background: var(--soft);
+  box-shadow: none;
+}
+.bg-topics--big .bg-topic h3 {
+  font-size: 26px;
+}
+
+/* Qabul jadvali */
+.bg-table {
+  border-radius: var(--r-thumb);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--line);
+}
+.bg-tr {
+  display: grid;
+  grid-template-columns: 160px 150px 1fr 110px;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--navy);
+}
+.bg-th {
+  border-top: 0;
+  background: var(--soft);
+  font: 700 13px/1 var(--f-head);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.bg-tr strong {
+  display: block;
+  font-weight: 700;
+}
+.bg-tr small {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.bg-week {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.bg-week li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border-radius: var(--r-thumb);
+  background: var(--soft);
+}
+.bg-week b {
+  font: 800 18px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.bg-week-time {
+  font: 700 14px/1 var(--f-head);
+  color: var(--blue);
+}
+.bg-week strong {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--navy);
+}
+.bg-week small {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.bg-week em {
+  margin-top: auto;
+  padding-top: 6px;
+  font: 700 13px/1 var(--f-head);
+  font-style: normal;
+  color: var(--navy);
+}
+
+/* Ijtimoiy tarmoqlar */
+.bg-soc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.bg-soc a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px 8px 8px;
+  border-radius: 99px;
+  background: var(--soft);
+  transition: background 0.2s;
+}
+.bg-soc a:hover {
+  background: var(--yellow);
+}
+.bg-soc-ic {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+}
+.bg-soc-ic svg {
+  width: 18px;
+  height: 18px;
+}
+.bg-soc b {
+  display: block;
+  font: 700 15px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.bg-soc small {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- B: ikki ustun ---------- */
+.bg-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+.bg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.bg-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.bg-k {
+  display: block;
+  font: 700 12.5px/1 var(--f-head);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.bg-v {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+  font: 700 19px/1.35 var(--f-head);
+  color: var(--navy);
+}
+.bg-v small {
+  display: block;
+  margin-top: 4px;
+  font: 500 13.5px/1.45 var(--f-body);
+  color: var(--muted);
+}
+.bg-v a:hover {
+  color: var(--blue);
+}
+.bg-mapcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.bg-mapcard .more-btn {
+  align-self: flex-start;
+}
+.bg-map {
+  display: block;
+  width: 100%;
+  min-height: 420px;
+  flex: 1;
+  border: 0;
+  border-radius: var(--r-thumb);
+  background: var(--soft);
+}
+.bg-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 40px 44px;
+  border-radius: var(--r-card);
+  background: var(--navy);
+  color: #fff;
+}
+.bg-cta .h2 {
+  color: #fff;
+}
+.bg-cta p {
+  margin-top: 8px;
+  opacity: 0.85;
+}
+
+/* ---------- C: ixçam aloqa satri ---------- */
+.bg-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.bg-strip > * {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px 6px 6px;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
+  font: 700 14.5px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.bg-strip .bg-ic {
+  width: 34px;
+  height: 34px;
+  box-shadow: none;
+  background: var(--soft);
+}
+.bg-strip .bg-ic svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Manzil ---------- */
+.bg-bigmap {
+  position: relative;
+}
+.bg-bigmap .bg-map {
+  min-height: 560px;
+}
+.bg-addr {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  width: min(380px, calc(100% - 48px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(83, 40, 34, 0.18);
+}
+.bg-addr h2 {
+  font: 800 22px/1.25 var(--f-head);
+  color: var(--navy);
+}
+.bg-addr p {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.bg-maplinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.bg-ways {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.bg-way {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px;
+  border-radius: var(--r-thumb);
+  background: var(--soft);
+}
+.bg-way h3 {
+  margin-top: 6px;
+  font: 800 18px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.bg-way p {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--navy);
+}
+.bg-maps2 {
+  display: grid;
+  gap: 14px;
+}
+.bg-maps2 .bg-map {
+  min-height: 300px;
+}
+
+/* ---------- Murojaat ---------- */
+.bg-split--form {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: start;
+}
+.bg-steps {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.bg-steps li {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--r-thumb);
+  background: var(--soft);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.bg-steps i {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--yellow);
+  font: 800 16px/1 var(--f-head);
+  font-style: normal;
+  color: var(--navy);
+}
+.bg-steps strong {
+  display: block;
+  margin-bottom: 2px;
+  font: 800 17px/1.3 var(--f-head);
+  color: var(--navy);
+}
+.bg-terms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+.bg-terms > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border-radius: var(--r-thumb);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.bg-terms b {
+  font: 800 28px/1 var(--f-head);
+  color: var(--blue);
+}
+.bg-terms span {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.bg-law {
+  grid-column: 1 / -1;
+  font: 700 14px/1.4 var(--f-head);
+  color: var(--blue);
+}
+.bg-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.bg-types > div {
+  padding: 24px;
+  border-radius: var(--r-thumb);
+  background: var(--soft);
+}
+.bg-types h3 {
+  font: 800 22px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.bg-types p {
+  margin-top: 8px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.bg-formwrap {
+  max-width: 760px;
+  margin: 0 auto 8px;
+}
+
+/* ---------- Moslaşuv ---------- */
+@media (max-width: 1100px) {
+  .bg-cards,
+  .bg-topics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bg-week {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bg-split,
+  .bg-split--form {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .bg-cards,
+  .bg-topics,
+  .bg-topics--big,
+  .bg-ways,
+  .bg-types,
+  .bg-terms {
+    grid-template-columns: 1fr;
+  }
+  .bg-week {
+    grid-template-columns: 1fr 1fr;
+  }
+  .bg-tr {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    padding: 14px 16px;
+  }
+  .bg-th {
+    display: none;
+  }
+  .bg-tr > :nth-child(3) {
+    grid-column: 1 / -1;
+  }
+  .bg-bigmap .bg-map {
+    min-height: 420px;
+  }
+  .bg-addr {
+    position: static;
+    width: auto;
+    margin-top: 12px;
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .bg-cta {
+    padding: 28px 24px;
+  }
+}
