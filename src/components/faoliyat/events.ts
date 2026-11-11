@@ -2255,7 +2255,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent şahar yoşlar markazi; Bojxona instituti',
     type: 'seminar',
     summary:
-      '5–6 oktabr kunlari boşlanğiç taşkilotning maqsad va vazifalari mavzusida nazariy va amaliy seminar.',
+      '5–6-oktabr kunlari boşlanğiç taşkilotning maqsad va vazifalari mavzusida nazariy va amaliy seminar.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/418.webp',
   },

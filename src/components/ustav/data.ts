@@ -7,8 +7,8 @@ export type Clause = { no?: string; blocks: Block[] }
 export type Chapter = { n: string; t: string; items: Clause[] }
 
 export const META: string[] = [
-  'Özbekiston Respublikasi Adliya vazirligi tomonidan 2017 yil 5 iyulda 653p-son bilan qayta davlat röyxatiga olingan',
-  'Özbekiston “Kamolot” yoşlar ijtimoiy harakatining 2017 yil 30 iyundagi IV Qurultoyi bayoni qarori bilan tasdiqlangan',
+  'Özbekiston Respublikasi Adliya vazirligi tomonidan 2017-yil 5-iyulda 653p-son bilan qayta davlat röyxatiga olingan',
+  'Özbekiston “Kamolot” yoşlar ijtimoiy harakatining 2017-yil 30-iyundagi IV Qurultoyi bayoni qarori bilan tasdiqlangan',
 ]
 
 export const CHAPTERS: Chapter[] = [
@@ -23,7 +23,7 @@ export const CHAPTERS: Chapter[] = [
             x: 'Özbekiston yoşlar ittifoqi (keyingi örinlarda – Ittifoq deb yuritiladi) jismonan soğlom, maʼnan yetuk va intellektual rivojlangan, mustaqil fikrlaydigan yoş avlodni şakllantiriş, yoşlarni taşqi tahdidlar va “ommaviy madaniyat”ning zararli taʼsiridan muhofaza qiliş, yoşlarning huquq va qonuniy manfaatlarini himoya qilişga har tomonlama kömaklaşiş va şart-şaroitlarni yaratiş maqsadida jismoniy şaxslar tomonidan ittifoq taşkiliy-huquqiy şaklida tuzilgan, Özbekiston yoşlarini birlaştiruvçi nodavlat notijorat taşkilotidir.',
           },
           {
-            x: 'Ittifoq muqaddam Özbekiston “Kamolot” yoşlar ijtimoiy harakati nomi bilan 2012 yil 1 iyun kuni qayta röyxatdan ötkazilgan va unga 653p-sonli guvohnoma berilgan.',
+            x: 'Ittifoq muqaddam Özbekiston “Kamolot” yoşlar ijtimoiy harakati nomi bilan 2012-yil 1-iyun kuni qayta röyxatdan ötkazilgan va unga 653p-sonli guvohnoma berilgan.',
           },
           {
             x: 'Ittifoq Özbekiston “Kamolot” yoşlar ijtimoiy harakatining barça huquq va majburiyati böyiça huquqiy voris hisoblanadi.',

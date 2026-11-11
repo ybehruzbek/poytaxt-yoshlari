@@ -10,6 +10,7 @@
  *   s va h alohida tovush bo'lsa, ular orasidagi tutuq saqlanadi va Ş ga aylanmaydi: Isʼhoq, musʼhaf.
  *   Qo'shtirnoq — faqat “…” (U+201C / U+201D). Ruscha «…» va „…“ ishlatilmaydi: «Yoshlar kuni» → “Yoshlar kuni”.
  *   Atama: oliy ta'lim tashkiloti — OTT (OTM emas).
+ *   Sana: yil va oy nomi raqamga chiziqcha bilan qo'shiladi: 2017-yil, 5-iyulda, 2026–2027-yillarda.
  *
  * Bu fayl — qoidaning yagona manbai: sayt matnlari (scripts/imlo.mjs), admin paneldan saqlanadigan
  * kontent (Payload hook) va tekshiruv shu funksiyalardan foydalanadi.
@@ -41,7 +42,14 @@ const RULES: Array<[RegExp, string]> = [
   [/[«„]/g, '\u201C'],
   [/»/g, '\u201D'],
   // atama: oliy taʼlim taşkiloti — OTT (OTM emas): OTMlarda → OTTlarda
-  [/\bOTM(?!S\b)/g, 'OTT'],
+  [/\bOTM(?!S\b)/g, 'OTT'],  // sana: yil va oy nomi raqamga defis bilan qöşiladi — 2017 yil → 2017-yil, 2026–2027 yillarda →
+  // 2026–2027-yillarda, 5 iyulda → 5-iyulda. Sanoq son bilan “5 yil”, “12 oy” özgarmaydi (faqat
+  // 4 xonali yil — 1800–2099 — va oy nomlari).
+  [/(?<![\p{L}\d])((?:18|19|20)\d{2}) (yil|y\.)/gu, '$1-$2'],
+  [
+    /(?<![\p{L}\d.,])(\d{1,2}) (yanvar|fevral|mart|aprel|may|iyun|iyul|avgust|sentabr|oktabr|noyabr|dekabr)(?=(?:da|dagi|ga|gaça|dan|ning|ida|idagi|idan|i)?(?!\p{L}))/gu,
+    '$1-$2',
+  ],
 ]
 
 /**

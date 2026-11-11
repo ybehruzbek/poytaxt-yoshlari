@@ -7,7 +7,8 @@ import { useEffect } from 'react'
  * - “15-dekabr”, “4-uy”, “28-modda”, “PF-6017”, “2026-2027” — defisda qator bölinmaydi;
  * - “14:00–17:00”, “2026–2027” — raqamlar orasidagi tirega qator bölinmaydi;
  * - “261 ming”, “12 ta”, “15 kun” — raqam keyingi söz bilan bir qatorda qoladi;
- * - “—” tiresi yangi qatorni boşlamaydi.
+ * - “—” tiresi yangi qatorni boşlamaydi;
+ * - sanada defis qöyiladi: “2017 yil 5 iyul” → “2017-yil 5-iyul”.
  * Admin paneldan keladigan matnlarga ham taʼsir qiladi. Tor joylarda (masalan, hujjat raqami)
  * qoidani öçiriş uçun elementga data-typo="off" qöyiladi.
  */
@@ -16,6 +17,13 @@ const WJ = '\u2060' // söz biriktirgiç (qator bölinmaydi)
 const NBSP = '\u00a0'
 
 const RULES: [RegExp, string][] = [
+  // sana: “2017 yil” → “2017-yil”, “5 iyulda” → “5-iyulda” (Telegram va boşqa taşqi matnlar uçun;
+  // sayt matnlarida bu qoidani `pnpm imlo` taʼminlaydi — src/lib/alifbo.ts)
+  [/(?<![\p{L}\d])((?:18|19|20)\d{2}) (yil|y\.)/gu, '$1-$2'],
+  [
+    /(?<![\p{L}\d.,])(\d{1,2}) (yanvar|fevral|mart|aprel|may|iyun|iyul|avgust|sentabr|oktabr|noyabr|dekabr)(?=(?:da|dagi|ga|gaça|dan|ning|ida|idagi|idan|i)?(?!\p{L}))/gu,
+    '$1-$2',
+  ],
   // raqam/katta harf + defis + harf yoki raqam: 15-dekabr, PF-6017, 2026-2027
   [/(\d|\p{Lu})-(?=[\p{L}\d])/gu, `$1${NBH}`],
   // raqamlar orasidagi tire: 14:00–17:00, 2026–2027
