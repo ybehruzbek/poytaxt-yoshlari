@@ -4,6 +4,9 @@
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 
+/** Dastlab körinadigan yetakçilar soni (3 ustunda 4 qator); qolgani “Yana körsatiş” bilan */
+const STEP = 12
+
 import { type Otm, type OtmType, TYPE_LABEL } from './data'
 
 /** F.I.Ş. uç qatorda: familiya / ism / ota ismi (öğli, qizi bilan birga) */
@@ -55,6 +58,11 @@ function Lead({ o, base }: { o: Otm; base: string }) {
           {o.otm}
         </span>
         <Name3 n={L.name} className="bt-name" />
+        {L.role && (
+          <p className="bt-lrole" title={L.role}>
+            {L.role}
+          </p>
+        )}
         <More />
       </div>
       <img className="bt-ph" src={L.img} alt={L.name} loading="lazy" />
@@ -81,6 +89,7 @@ function Vac({ o }: { o: Otm }) {
 export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
   const [type, setType] = useState<'all' | OtmType>('all')
   const [q, setQ] = useState('')
+  const [shown, setShown] = useState(STEP)
 
   const list = useMemo(() => {
     const s = low(q.trim())
@@ -103,7 +112,10 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
               type="button"
               className={type === f.k ? 'on' : undefined}
               aria-pressed={type === f.k}
-              onClick={() => setType(f.k)}
+              onClick={() => {
+                setType(f.k)
+                setShown(STEP)
+              }}
             >
               {f.t}
               <span>{f.k === 'all' ? otms.length : otms.filter((o) => o.type === f.k).length}</span>
@@ -119,7 +131,10 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
           <input
             type="search"
             value={q}
-            onChange={(e) => setQ(e.target.value)}
+            onChange={(e) => {
+              setQ(e.target.value)
+              setShown(STEP)
+            }}
             placeholder="Qidiruv: oliy taʼlim taşkiloti nomi yoki yetakçi F.I.Ş."
           />
         </label>
@@ -127,9 +142,30 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
 
       {led.length > 0 && (
         <div className="bt-grid">
-          {led.map((o) => (
+          {led.slice(0, shown).map((o) => (
             <Lead key={o.otm} o={o} base={base} />
           ))}
+        </div>
+      )}
+      {led.length > shown && (
+        <div className="bt-more-row">
+          <button type="button" className="btn btn-outline" onClick={() => setShown(led.length)}>
+            Yana {led.length - shown} ta yetakçini körsatiş
+            <span className="ic" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </span>
+          </button>
         </div>
       )}
 

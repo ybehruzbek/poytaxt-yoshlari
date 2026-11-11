@@ -30,7 +30,7 @@ export function BoshlangichPage({ crumbs, base }: { crumbs: ReactNode; base: str
               <dd>{LED}</dd>
             </div>
             <div>
-              <dt>Vakant</dt>
+              <dt>Yetakçisi tayinlanmagan</dt>
               <dd>{OTMS.length - LED}</dd>
             </div>
           </dl>
