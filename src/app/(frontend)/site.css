@@ -279,7 +279,7 @@ html,body{overflow-x:clip}
 .crumbs span{opacity:.5}
 /* Fotosiz sahifa boşi (Markaziy Kengaş, hududiy Kengaş jamoasi): oçiq yöl kapsulasi + sarlavha */
 .pg-head{padding-top:112px}
-.pg-crumbs{display:inline-block;margin-bottom:14px;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:8px 18px}
+.pg-crumbs{display:inline-block;margin-bottom:14px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 18px}
 .pg-crumbs .crumbs{margin:0;font-size:14px;font-weight:500;color:var(--navy)}
 .pg-crumbs .crumbs span{opacity:.6}
 .pg-crumbs .crumbs [aria-current]{opacity:1;font-weight:700}
