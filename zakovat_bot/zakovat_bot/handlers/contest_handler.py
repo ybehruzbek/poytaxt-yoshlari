@@ -474,8 +474,12 @@ async def td_media(message: Message, state: FSMContext):
 
     # Albom rasmlari bir vaqtda kelganda cheklov buzilmasligi uchun —
     # hisoblash va yozish bitta tranzaksiyada, ariza qatori qulflangan holda
+    editable = (EntryStatus.DRAFT, EntryStatus.REVISION, EntryStatus.REJECTED)
     with transaction.atomic():
         locked = Entry.objects.select_for_update().filter(id=entry.id).first()
+        # Topshirilgan/tasdiqlangan arizaga media qo'shilmasin
+        if locked is None or locked.status not in editable:
+            locked = None
         current = EntryMedia.objects.filter(entry_id=entry.id).count()
         over_limit = current >= limit
         if not over_limit and locked is not None:
@@ -491,6 +495,15 @@ async def td_media(message: Message, state: FSMContext):
                     "mime_type": info.get("mime_type"),
                 },
             )
+
+    # Holat sababi cheklovdan muhimroq — avval shuni aytamiz
+    if locked is None:
+        await state.clear()
+        await message.answer(
+            "⚠️ Bu ariza allaqachon topshirilgan — mediasini o'zgartirib "
+            "bo'lmaydi.\n\n«Mening arizam» bo'limidan qayta topshiring."
+        )
+        return
 
     if over_limit:
         await message.answer(
@@ -745,6 +758,12 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
     if not contest.is_accepting:
         await callback.message.answer(deadline_passed_text(contest))
         return
+
+    # Qayta topshirilayotgan ariza qoralamaga qaytadi — tasdiqlangan arizaga
+    # media qo'shib moderatsiyani chetlab o'tish mumkin bo'lmasligi uchun
+    if entry.status != EntryStatus.DRAFT:
+        entry.status = EntryStatus.DRAFT
+        entry.save(update_fields=["status"])
 
     await state.clear()
     await state.update_data(

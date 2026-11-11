@@ -1458,6 +1458,54 @@ async def _run_all(saved_event_ids):
     data = contest_service.export_entries_excel(contest)
     check("arizalar Excel eksporti", len(data) > 1000)
 
+    # Qabulni qayta ochamiz (20-bo'lim muddatni o'tkazib yuborgan edi)
+    contest.stage = ContestStage.ACCEPTING
+    contest.submission_deadline = djtz.now() + timedelta(days=1)
+    contest.save(update_fields=["stage", "submission_deadline"])
+
+    # Xavfsizlik: tasdiqlangan arizaga media qo'shib bo'lmaydi
+    Entry.objects.filter(id=entry.id).update(status=EntryStatus.APPROVED)
+    st_lock = FakeState()
+    await st_lock.update_data(td_contest_id=contest.id, td_entry_id=entry.id)
+    await st_lock.set_state("ContestState:media")
+    before_cnt = entry.media.count()
+    m = FakeMessage(USER1, photo=fake_photo())
+    await contest_handler.td_media(m, st_lock)
+    check("xavfsizlik: tasdiqlangan arizaga media qo'shilmadi",
+          entry.media.count() == before_cnt
+          and "o'zgartirib" in m.texts(), m.texts())
+
+    # Qayta topshirish arizani qoralamaga qaytaradi (qayta moderatsiya)
+    Entry.objects.filter(id=entry.id).update(status=EntryStatus.REVISION)
+    cb = FakeCallback(f"td_resubmit:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_resubmit(cb, FakeState())
+    entry.refresh_from_db()
+    check("qayta topshirishda ariza qoralamaga qaytdi",
+          entry.status == EntryStatus.DRAFT)
+
+    # Xavfsizlik: kengaytmasi mos kelmaydigan hujjat rad etiladi
+    bad_doc = SimpleNamespace(file_id="d1", file_unique_id="du1",
+                              mime_type="image/png", file_size=1000,
+                              file_name="zararli.exe")
+    check("xavfsizlik: .exe hujjat rad etildi",
+          contest_service.extract_media(
+              SimpleNamespace(photo=None, video=None, document=bad_doc)) is None)
+    good_doc = SimpleNamespace(file_id="d2", file_unique_id="du2",
+                               mime_type="image/png", file_size=1000,
+                               file_name="surat.png")
+    check("rasm hujjati qabul qilinadi",
+          contest_service.extract_media(
+              SimpleNamespace(photo=None, video=None, document=good_doc)) is not None)
+
+    # Xavfsizlik: hajmi noma'lum fayl rad etiladi
+    nosize = {"media_type": "photo", "file_size": None, "duration": None}
+    check("xavfsizlik: hajmi noma'lum fayl rad etildi",
+          "hajmini aniqlay olmadim" in
+          (contest_service.validate_media(contest, Nomination.FOTO, nosize) or ""))
+
+    Entry.objects.filter(id=entry.id).update(status=EntryStatus.MODERATION)
+    entry.refresh_from_db()
+
     # ---------- 21. Moderatsiya paneli (TZ 6, 12) ----------
     print("21) Tanlov: moderatsiya paneli")
     from zakovat_bot.handlers import contest_admin_handler

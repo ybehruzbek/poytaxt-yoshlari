@@ -26,6 +26,11 @@ logger = logging.getLogger(__name__)
 # fotosi odatda kichik, lekin fayl ko'rinishidagi rasm katta bo'lishi mumkin)
 MAX_PHOTO_MB = 20
 
+# Fayl ko'rinishida yuborilgan rasm uchun ruxsat etilgan kengaytmalar.
+# Telegram'ning mime_type'i mijoz tomonidan beriladi, shuning uchun unga
+# qo'shimcha ravishda fayl nomi ham tekshiriladi.
+ALLOWED_IMAGE_EXT = (".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp")
+
 
 def safe_cell(value):
     """Excel formula injection himoyasi (CWE-1236).
@@ -164,7 +169,8 @@ def extract_media(message):
         # Sifat saqlansin uchun rasm fayl ko'rinishida ham qabul qilinadi (TZ 5.1).
         # Video hujjat sifatida qabul qilinmaydi: unda Telegram davomiylikni
         # bermaydi va cheklovni tekshirib bo'lmaydi.
-        if mime.startswith("image/"):
+        name = (getattr(d, "file_name", "") or "").lower()
+        if mime.startswith("image/") and name.endswith(ALLOWED_IMAGE_EXT):
             kind = "document"
         else:
             return None
@@ -204,11 +210,13 @@ def validate_media(contest, nomination, info):
     else:
         max_mb = MAX_PHOTO_MB
 
-    if info.get("file_size"):
-        mb = info["file_size"] / (1024 * 1024)
-        if mb > max_mb:
-            return (f"Fayl hajmi katta ({mb:.1f} MB). "
-                    f"Ruxsat etilgan hajm: {max_mb} MB gacha.")
+    size = info.get("file_size")
+    if not size:
+        return "Fayl hajmini aniqlay olmadim — iltimos, qaytadan yuboring."
+    mb = size / (1024 * 1024)
+    if mb > max_mb:
+        return (f"Fayl hajmi katta ({mb:.1f} MB). "
+                f"Ruxsat etilgan hajm: {max_mb} MB gacha.")
     return None
 
 
