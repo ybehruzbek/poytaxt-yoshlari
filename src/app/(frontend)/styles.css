@@ -4,7 +4,9 @@
    Shriftlar next/font orqali o'z serverimizdan: --f-head (Montserrat), --f-body (Inter).
    ===================================================================== */
 :root {
-  --navy: #532822; /* Brown: asosiy matn, to'q bloklar */
+  --navy: #532822;
+  --navy-bg: #532822; /* töq bloklar foni (tungi rejimda ham töq qoladi) */
+  --bg: #fff; /* sahifa va kartalar foni */ /* Brown: asosiy matn, to'q bloklar */
   --yellow: #ffd25a; /* asosiy tugma */
   --green: #43a574;
   --green-d: #43a574;
@@ -40,7 +42,7 @@ body {
 body {
   font-family: var(--f-body), system-ui, sans-serif;
   color: var(--grey);
-  background: #fff;
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
 }
 a {

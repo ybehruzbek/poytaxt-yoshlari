@@ -6,14 +6,34 @@ import { createPortal } from 'react-dom'
 /**
  * “Maxsus imkoniyatlar” — köz belgisi (sarlavhada) va yon panel:
  * rang rejimi (odatiy, oq-qora, yuqori kontrast, rasmlarsiz), şrift ölçami, masştab,
- * ekran suhandoni (belgilangan matnni ovoz çiqarib öqiydi) va öqiş rejimi.
+ * ekran suhandoni (belgilangan matnni ovoz çiqarib öqiydi), öqiş rejimi va tungi rejim
+ * (kunduzgi / tungi / qurilma sozlamasi böyiça).
  * Sozlamalar brauzerda saqlanadi va <html> atributlari orqali butun saytga qöllanadi.
  */
 type Mode = 'normal' | 'gray' | 'contrast' | 'invert'
-type S = { mode: Mode; noImg: boolean; font: number; zoom: number; tts: boolean; read: boolean }
+type Theme = 'light' | 'dark' | 'auto'
+type S = {
+  theme: Theme
+  mode: Mode
+  noImg: boolean
+  font: number
+  zoom: number
+  tts: boolean
+  read: boolean
+}
 
-const DEF: S = { mode: 'normal', noImg: false, font: 0, zoom: 0, tts: false, read: false }
+const DEF: S = {
+  theme: 'light',
+  mode: 'normal',
+  noImg: false,
+  font: 0,
+  zoom: 0,
+  tts: false,
+  read: false,
+}
 const KEY = 'a11y'
+/** media-sörov (kod qiymati — imlo tekşiruvi tegmaydi) */
+const DARK_MQ = { code: '(prefers-color-scheme: dark)' }.code
 const FONTS = [1, 1.1, 1.2, 1.3, 1.45, 1.6] // şrift: 0 — odatiy
 const ZOOMS = [1, 1.1, 1.25, 1.4, 1.6] // masştab: 0 — odatiy
 
@@ -28,6 +48,9 @@ const load = (): S => {
 function apply(s: S) {
   const h = document.documentElement
   const set = (k: string, v: string | false) => (v ? h.setAttribute(k, v) : h.removeAttribute(k))
+  const dark =
+    s.theme === 'dark' || (s.theme === 'auto' && matchMedia(DARK_MQ).matches)
+  set('data-theme', dark && 'dark')
   set('data-a11y-mode', s.mode !== 'normal' && s.mode)
   set('data-a11y-noimg', s.noImg && '1')
   set('data-a11y-read', s.read && '1')
@@ -70,6 +93,14 @@ const Ic = ({ d }: { d: string }) => (
     <path d={d} />
   </svg>
 )
+const MOON = 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z'
+const SUN =
+  'M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4'
+const THEMES: { k: Theme; t: string }[] = [
+  { k: 'light', t: 'Kunduzgi' },
+  { k: 'dark', t: 'Tungi' },
+  { k: 'auto', t: 'Qurilma böyiça' },
+]
 const EYE = 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'
 const MODES: { k: Mode; t: string; d: string }[] = [
   {
@@ -131,6 +162,15 @@ export function A11yPanel() {
     }
   }, [s.tts])
 
+  // “avtomatik” rejimda qurilmaning kunduzgi/tungi sozlamasi özgarsa — darhol qöllanadi
+  useEffect(() => {
+    if (s.theme !== 'auto') return
+    const mq = matchMedia(DARK_MQ)
+    const on = () => apply(s)
+    mq.addEventListener('change', on)
+    return () => mq.removeEventListener('change', on)
+  }, [s])
+
   useEffect(() => {
     if (!open) return
     close.current?.focus()
@@ -140,12 +180,27 @@ export function A11yPanel() {
   }, [open])
 
   const changed = JSON.stringify(s) !== JSON.stringify(DEF)
+  const isDark =
+    s.theme === 'dark' ||
+    (s.theme === 'auto' &&
+      typeof window !== 'undefined' &&
+      matchMedia(DARK_MQ).matches)
 
   return (
     <>
       <button
         type="button"
-        className={`a11y-btn${changed ? ' on' : ''}`}
+        className="a11y-btn a11y-moon"
+        aria-label={isDark ? 'Kunduzgi rejim' : 'Tungi rejim'}
+        title={isDark ? 'Kunduzgi rejim' : 'Tungi rejim'}
+        aria-pressed={isDark}
+        onClick={() => upd({ theme: isDark ? 'light' : 'dark' })}
+      >
+        <Ic d={isDark ? SUN : MOON} />
+      </button>
+      <button
+        type="button"
+        className={`a11y-btn${changed && JSON.stringify({ ...s, theme: 'light' }) !== JSON.stringify(DEF) ? ' on' : ''}`}
         aria-label="Maxsus imkoniyatlar"
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
@@ -175,6 +230,23 @@ export function A11yPanel() {
                   <Ic d="M6 6l12 12M18 6L6 18" />
                 </button>
               </header>
+
+              <section className="a11y-sec">
+                <h3>Tungi rejim</h3>
+                <div className="a11y-theme" role="radiogroup" aria-label="Tungi rejim">
+                  {THEMES.map((t) => (
+                    <button
+                      key={t.k}
+                      type="button"
+                      role="radio"
+                      aria-checked={s.theme === t.k}
+                      onClick={() => upd({ theme: t.k })}
+                    >
+                      {t.t}
+                    </button>
+                  ))}
+                </div>
+              </section>
 
               <section className="a11y-sec">
                 <h3>Rang rejimi</h3>

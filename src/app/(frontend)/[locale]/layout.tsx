@@ -21,6 +21,7 @@ import '../footer.css'
 import '../social.css'
 import '../hamkorlar.css'
 import '../a11y.css'
+import '../theme.css'
 import '../motion.css'
 import '../reveal.css'
 

@@ -131,7 +131,7 @@
 }
 .pt-ticket:hover .pt-cta,
 .pt-ticket:focus-visible .pt-cta {
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #fff;
 }
 

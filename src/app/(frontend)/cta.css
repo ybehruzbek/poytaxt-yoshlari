@@ -9,7 +9,7 @@
   align-items: center;
   padding: 56px;
   border-radius: 56px;
-  background: var(--navy);
+  background: var(--navy-bg);
   position: relative;
   overflow: hidden;
 }
@@ -78,7 +78,7 @@
   gap: 14px;
   padding: 32px;
   border-radius: 36px;
-  background: #fff;
+  background: var(--bg);
 }
 .cb-form-title {
   font: 800 24px/1.2 var(--f-head);
@@ -183,13 +183,13 @@
     border-color 0.2s;
 }
 .cb-types input:checked + span {
-  background: var(--navy);
+  background: var(--navy-bg);
   border-color: var(--navy);
   color: #fff;
 }
 .cb-types input:focus-visible + span {
   box-shadow:
-    0 0 0 3px #fff,
+    0 0 0 3px var(--bg),
     0 0 0 6px var(--navy);
 }
 .cb-field [aria-invalid='true'] {

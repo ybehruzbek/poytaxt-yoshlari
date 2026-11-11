@@ -6,9 +6,9 @@
 /* Boşqaruv tizimi */
 .kg-org-sec{background:var(--soft)}
 .kg-org{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:o}
-.kg-org li{position:relative;background:#fff;border-radius:var(--r-thumb);padding:26px;display:flex;flex-direction:column;gap:10px}
-.kg-org li:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);z-index:1;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:13px}
-.kg-org li.on{background:var(--navy);color:#fff}
+.kg-org li{position:relative;background:var(--bg);border-radius:var(--r-thumb);padding:26px;display:flex;flex-direction:column;gap:10px}
+.kg-org li:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);z-index:1;width:26px;height:26px;border-radius:50%;background:var(--navy-bg);color:#fff;display:grid;place-items:center;font-size:13px}
+.kg-org li.on{background:var(--navy-bg);color:#fff}
 .kg-org li.on .it-num{color:var(--yellow)}
 .kg-org h3{font-size:20px;font-weight:800;color:var(--navy);line-height:1.25}
 .kg-org li.on h3{color:var(--soft)}
@@ -31,13 +31,13 @@
 .kg-mem li{padding-left:24px;position:relative;line-height:1.55}
 .kg-mem li::before{content:'';position:absolute;left:0;top:7px;width:12px;height:12px;border-radius:50%;background:var(--green)}
 .kg-chips{display:flex;flex-wrap:wrap;gap:8px}
-.kg-chips span{background:#fff;border-radius:99px;padding:9px 16px;font-weight:600;font-size:14px;color:var(--navy);border:1px solid var(--line)}
-.kg-link{margin-top:24px;background:var(--navy);color:#fff;border-radius:24px;padding:22px 24px;line-height:1.6;font-weight:600}
+.kg-chips span{background:var(--bg);border-radius:99px;padding:9px 16px;font-weight:600;font-size:14px;color:var(--navy);border:1px solid var(--line)}
+.kg-link{margin-top:24px;background:var(--navy-bg);color:#fff;border-radius:24px;padding:22px 24px;line-height:1.6;font-weight:600}
 
 /* Rahbariyat */
 .kg-lead-sec{background:var(--soft)}
 .kg-lead{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kg-lead article{background:#fff;border-radius:var(--r-thumb);padding:28px;text-align:center}
+.kg-lead article{background:var(--bg);border-radius:var(--r-thumb);padding:28px;text-align:center}
 .kg-ava{width:150px;height:150px;margin:0 auto 18px;border-radius:50%;overflow:hidden;background:var(--yellow);display:grid;place-items:center}
 .kg-ava img{width:100%;height:100%;object-fit:cover}
 .kg-ava span{font:800 44px/1 var(--f-head);color:var(--navy)}
@@ -47,7 +47,7 @@
 /* Ijroiya qömitasi va komissiya */
 .kg-bod{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .kg-bod article{border:1px solid var(--line);border-radius:var(--r-card);padding:36px;display:flex;flex-direction:column;gap:12px}
-.kg-bod article:first-child{background:var(--navy);color:#fff;border-color:var(--navy)}
+.kg-bod article:first-child{background:var(--navy-bg);color:#fff;border-color:var(--navy)}
 .kg-bod-meta{align-self:flex-start;background:var(--yellow);color:var(--navy);border-radius:99px;padding:7px 14px;font-weight:700;font-size:13px}
 .kg-bod h3{font-size:clamp(24px,2.2vw,32px);font-weight:800;color:var(--navy)}
 .kg-bod article:first-child h3{color:var(--soft)}
@@ -57,7 +57,7 @@
 .kg-bod li::before{content:'';position:absolute;left:0;top:7px;width:10px;height:10px;border-radius:50%;background:var(--yellow)}
 
 /* Qarorlar */
-.kg-dec{display:flex;align-items:center;justify-content:space-between;gap:32px;background:#fff;border-radius:var(--r-card);padding:44px 48px;border:1px solid var(--line)}
+.kg-dec{display:flex;align-items:center;justify-content:space-between;gap:32px;background:var(--bg);border-radius:var(--r-card);padding:44px 48px;border:1px solid var(--line)}
 .kg-dec p{margin-top:12px;max-width:620px;line-height:1.65}
 .kg-dec .btn{flex:none}
 
@@ -82,7 +82,7 @@
 /* Soʼnggi tadbirlar */
 .kg-ev-title{margin:40px 0 16px;font:800 24px/1.2 var(--f-head);color:var(--navy)}
 .kg-ev{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.kg-ev a{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:#fff;transition:transform .2s,box-shadow .2s}
+.kg-ev a{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:28px;overflow:hidden;background:var(--bg);transition:transform .2s,box-shadow .2s}
 .kg-ev a:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(83,40,34,.12)}
 .kg-ev img{width:100%;height:210px;object-fit:cover}
 .kg-ev div{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1}

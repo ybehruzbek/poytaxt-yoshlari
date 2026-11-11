@@ -9,9 +9,9 @@
 .x3-strb-head p{font-size:18px;line-height:1.65}
 .x3-strb-tree{display:grid;gap:28px;position:relative}
 .x3-strb-tree>article,.x3-strb-row article{position:relative;border-radius:var(--r-thumb);padding:28px 32px}
-.x3-strb-tree>article+article::before,.x3-strb-row::before{content:'';position:absolute;left:50%;top:-28px;width:2px;height:28px;background:var(--navy)}
+.x3-strb-tree>article+article::before,.x3-strb-row::before{content:'';position:absolute;left:50%;top:-28px;width:2px;height:28px;background:var(--navy-bg)}
 .x3-strb-row{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.x3-strb-top{background:var(--navy);color:#fff;text-align:center;max-width:720px;width:100%;margin:0 auto}
+.x3-strb-top{background:var(--navy-bg);color:#fff;text-align:center;max-width:720px;width:100%;margin:0 auto}
 .x3-strb-top .it-num{color:var(--yellow);margin-bottom:12px}
 .x3-strb-top h3{font:800 32px/1.2 var(--f-head);color:var(--soft)}
 .x3-strb-top p{margin-top:10px;opacity:.85;line-height:1.6}
@@ -19,7 +19,7 @@
 .x3-strb-council .it-num{margin-bottom:12px;color:var(--navy)}
 .x3-strb-council h3{font:800 26px/1.2 var(--f-head);color:var(--navy)}
 .x3-strb-council p{margin-top:10px;line-height:1.6;color:var(--navy)}
-.x3-strb-row article{background:#fff;border:1px solid var(--line)}
+.x3-strb-row article{background:var(--bg);border:1px solid var(--line)}
 .x3-strb-row article:last-child{background:var(--green);color:#fff}
 .x3-strb-row article:last-child .it-num{color:rgba(255,255,255,.8)}
 .x3-strb-row article:last-child h3{color:#fff}
@@ -40,9 +40,9 @@
 /* ---------- Hujjatlar C ---------- */
 
 /* ---------- Rasmiy maʼlumotlar B ---------- */
-.x3-offb-card{background:var(--navy);color:#fff;border-radius:var(--r-card);padding:48px;display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:center}
+.x3-offb-card{background:var(--navy-bg);color:#fff;border-radius:var(--r-card);padding:48px;display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:center}
 .x3-offb-head{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
-.x3-offb-head img{width:132px;height:132px;object-fit:contain;background:#fff;border-radius:50%;padding:10px}
+.x3-offb-head img{width:132px;height:132px;object-fit:contain;background:var(--bg);border-radius:50%;padding:10px}
 .x3-offb-head .h2{color:var(--soft)}
 .x3-offb-card dl{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .x3-offb-card dl>div{background:rgba(255,255,255,.07);border-radius:24px;padding:20px 22px}

@@ -24,7 +24,7 @@
   align-items: baseline;
   gap: 10px;
   border-radius: 99px;
-  background: #fff;
+  background: var(--bg);
   padding: 10px 20px;
   border: 1px solid var(--line);
 }
@@ -65,7 +65,7 @@
   gap: 8px;
   border: 1px solid var(--line);
   border-radius: 99px;
-  background: #fff;
+  background: var(--bg);
   padding: 9px 10px 9px 18px;
   font: 600 14px/1 var(--f-body);
   color: var(--navy);
@@ -79,7 +79,7 @@
   height: 26px;
   padding: 0 7px;
   border-radius: 99px;
-  background: #fff;
+  background: var(--bg);
   display: grid;
   place-items: center;
   font-size: 12px;
@@ -90,7 +90,7 @@
   border-color: var(--yellow);
 }
 .bt-chips button.on {
-  background: var(--navy);
+  background: var(--navy-bg);
   border-color: var(--navy);
   color: #fff;
 }
@@ -122,7 +122,7 @@
   height: 48px;
   border: 1.5px solid color-mix(in srgb, var(--navy) 16%, transparent);
   border-radius: 99px;
-  background: #fff;
+  background: var(--bg);
   padding: 0 18px 0 44px;
   font: 500 15px var(--f-body);
   color: var(--navy);
@@ -151,7 +151,7 @@
   min-height: 250px;
   overflow: hidden;
   border-radius: var(--r-thumb);
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 0 0 1px var(--line);
 }
 .bt-txt {
@@ -210,7 +210,7 @@
 .bt-vac {
   position: relative;
   min-height: 200px;
-  background: #fff;
+  background: var(--bg);
   box-shadow: inset 0 0 0 1.5px var(--line);
   background-image: repeating-linear-gradient(
     135deg,
@@ -233,7 +233,7 @@
   align-self: flex-start;
   margin-top: auto;
   border-radius: 99px;
-  background: color-mix(in srgb, var(--blue) 14%, #fff);
+  background: color-mix(in srgb, var(--blue) 14%, var(--bg));
   padding: 6px 14px;
   font: 800 12px/1 var(--f-head);
   letter-spacing: 1.2px;
@@ -306,7 +306,7 @@
   flex-direction: column;
   min-height: 360px;
   border-radius: var(--r-card);
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 0 0 1px var(--line);
   padding: 36px 40px;
   color: var(--grey);
@@ -337,7 +337,7 @@
   color: var(--muted);
 }
 .bt-hub-card .bt-stats div {
-  background: #fff;
+  background: var(--bg);
 }
 .bt-hub-foot {
   display: flex;
@@ -356,8 +356,8 @@
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 12%;
-  background: #fff;
-  box-shadow: 0 0 0 3px #fff;
+  background: var(--bg);
+  box-shadow: 0 0 0 3px var(--bg);
 }
 .bt-faces img + img {
   margin-left: -12px;
@@ -430,7 +430,7 @@
   padding: 44px 46px;
 }
 .bt-hub--b .bh-b:first-child {
-  background: var(--navy);
+  background: var(--navy-bg);
   box-shadow: none;
   color: #fff;
 }
@@ -516,7 +516,7 @@ a.bt-card:hover {
   gap: 44px;
   overflow: hidden;
   border-radius: var(--r-card);
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 0 0 1px var(--line);
   padding: 0 48px;
 }
@@ -557,7 +557,7 @@ a.bt-card:hover {
 }
 .ld-field {
   border-radius: 20px;
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 0 0 1px var(--line);
   padding: 12px 18px;
 }
@@ -587,7 +587,7 @@ a.bt-card:hover {
 }
 .ld-box {
   border-radius: var(--r-thumb);
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 0 0 1px var(--line);
   padding: 28px 30px;
 }
@@ -606,7 +606,7 @@ a.bt-card:hover {
   margin-top: 0;
 }
 .ld-facts--2 .ld-field {
-  background: #fff;
+  background: var(--bg);
   box-shadow: none;
   border: 1px solid var(--line);
 }
@@ -627,7 +627,7 @@ a.bt-card:hover {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: #fff;
+  background: var(--bg);
   color: var(--blue);
   border: 1px solid var(--line);
 }
@@ -682,7 +682,7 @@ a.bt-card:hover {
   justify-self: start;
   max-width: 100%;
   border-radius: 24px;
-  background: #fff;
+  background: var(--bg);
   padding: 12px 18px;
   font-weight: 700;
   color: var(--navy);
@@ -703,7 +703,7 @@ a.bt-card:hover {
 }
 .ld-back {
   border-radius: 99px;
-  background: var(--navy);
+  background: var(--navy-bg);
   padding: 12px 22px;
   font: 800 14px/1 var(--f-head);
   color: #fff;
@@ -826,7 +826,7 @@ a.bt-card:hover {
 
 /* töq kartada “Sahifaga ötiş” hover'da oq bilan töladi */
 .bt-hub--b .bh-b:first-child .more-btn::before {
-  background: #fff;
+  background: var(--bg);
 }
 .bt-hub--b .bh-b:first-child:hover .more-btn {
   color: var(--navy);

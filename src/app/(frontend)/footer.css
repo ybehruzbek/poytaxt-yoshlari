@@ -7,7 +7,7 @@
   overflow: hidden;
   overflow: clip; /* hidden emas: skroll animatsiyalari (view()) ekranga nisbatan işlaşi uçun */
   margin-top: 40px;
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #e9d7d2;
   border-radius: 56px 56px 0 0;
   padding: 64px 0 32px;
@@ -69,7 +69,7 @@
 /* aloqa bandlari: kichik sarlavha + qiymat */
 /* to'q fonda tugma jigarrang emas, oq rangga to'ladi */
 .fb .btn-primary::before {
-  background: #fff;
+  background: var(--bg);
 }
 .fb .btn-primary:hover,
 .fb .btn-primary:focus-visible {
@@ -373,7 +373,7 @@
   padding: 0;
   border: 0;
   border-radius: 28px;
-  background: #fff;
+  background: var(--bg);
   color: var(--grey);
   box-shadow: 0 30px 80px rgba(48, 22, 18, 0.25);
 }
@@ -445,4 +445,11 @@
 }
 .te-x:hover {
   color: var(--navy);
+}
+.te-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }

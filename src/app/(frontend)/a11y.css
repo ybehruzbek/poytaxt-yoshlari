@@ -18,7 +18,7 @@
   background: rgba(83, 40, 34, 0.12);
 }
 .a11y-btn.on {
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #fff;
 }
 body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
@@ -57,7 +57,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
   width: min(400px, 100vw);
   overflow-y: auto;
   padding: 22px 24px 28px;
-  background: #fff;
+  background: var(--bg);
   color: var(--grey);
   box-shadow: -20px 0 60px rgba(48, 22, 18, 0.18);
   translate: 100% 0;
@@ -84,7 +84,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
   height: 40px;
   border: 1px solid var(--line);
   border-radius: 99px;
-  background: #fff;
+  background: var(--bg);
   color: var(--navy);
   cursor: pointer;
 }
@@ -118,7 +118,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
   padding: 12px 4px 10px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: #fff;
+  background: var(--bg);
   font: 600 11.5px/1.2 var(--f-body);
   color: var(--navy);
   cursor: pointer;
@@ -126,7 +126,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
 }
 .a11y-modes button[aria-checked='true'] {
   border-color: var(--navy);
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #fff;
 }
 .a11y-check {
@@ -150,14 +150,14 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
   height: 48px;
   border: 1px solid var(--line);
   border-radius: 99px;
-  background: #fff;
+  background: var(--bg);
   font: 700 15px/1 var(--f-head);
   color: var(--navy);
   cursor: pointer;
 }
 .a11y-read.on {
   border-color: var(--navy);
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #fff;
 }
 .a11y-hint {
@@ -247,4 +247,32 @@ html[data-a11y-read] main a {
 }
 html[data-a11y-read] main .rv {
   opacity: 1 !important;
+}
+
+/* tungi rejim tanlagiçi va sarlavhadagi oy belgisi */
+.a11y-theme {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+}
+.a11y-theme button {
+  height: 38px;
+  border: 0;
+  border-radius: 99px;
+  background: transparent;
+  font: 600 13px/1 var(--f-head);
+  color: var(--navy);
+  cursor: pointer;
+}
+.a11y-theme button[aria-checked='true'] {
+  background: var(--navy-bg);
+  color: #fff;
+}
+@media (max-width: 640px) {
+  .a11y-moon {
+    display: none;
+  }
 }

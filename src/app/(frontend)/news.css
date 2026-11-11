@@ -158,7 +158,7 @@
   height: 48px;
   border-radius: 50%;
   border: 1px solid var(--line);
-  background: #fff;
+  background: var(--bg);
   color: var(--navy);
   display: grid;
   place-items: center;
@@ -358,7 +358,7 @@
   z-index: 2;
   padding: 5px 10px;
   border-radius: 99px;
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #fff;
   font: 700 11px/1 var(--f-body);
   letter-spacing: 0.4px;

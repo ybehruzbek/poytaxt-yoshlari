@@ -34,7 +34,7 @@ button:focus {
 .btn-primary::before,
 .head-cta::before,
 .socials a::before {
-  background: var(--navy);
+  background: var(--navy-bg);
 }
 .btn-primary:hover,
 .btn-primary:focus-visible,
@@ -77,12 +77,12 @@ button:focus {
 :is(a, button):focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 3px #fff,
+    0 0 0 3px var(--bg),
     0 0 0 6px var(--navy);
 }
 .ev:hover .go,
 .ev:focus-visible .go {
-  background: var(--navy);
+  background: var(--navy-bg);
   color: #fff;
   transform: none;
 }
@@ -128,7 +128,7 @@ button:focus {
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: var(--navy);
+  background: var(--navy-bg);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
@@ -139,7 +139,7 @@ button:focus {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--bg);
   color: var(--navy);
 }
 .more-btn-ic svg {
@@ -162,7 +162,7 @@ button:focus {
 }
 /* töq fonda: tugma sariq qoladi, hover'da oq bilan töladi */
 .on-dark .more-btn::before {
-  background: #fff;
+  background: var(--bg);
 }
 :is(.on-dark .more-btn:hover, .on-dark a:hover .more-btn) {
   color: var(--navy);

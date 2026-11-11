@@ -139,7 +139,7 @@
   height: 100%;
   overflow: hidden;
   border-radius: 39px;
-  background: #fff;
+  background: var(--bg);
   padding-top: 42px;
   font: 500 11px/1.4 var(--f-body);
   color: var(--grey);
@@ -164,7 +164,7 @@
   color: var(--navy);
 }
 .sp-phone-go {
-  background: #fff;
+  background: var(--bg);
 }
 .sp-phone .ph {
   box-shadow:

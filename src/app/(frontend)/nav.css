@@ -34,7 +34,7 @@
   background: rgba(83, 40, 34, 0.07);
 }
 .mnav-link.active {
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 2px 10px rgba(83, 40, 34, 0.08);
 }
 .mnav-link .chev {
@@ -47,7 +47,7 @@
 /* ---------- Umumiy panel (shisha) ---------- */
 .dd,
 .mdrawer {
-  background: #fff;
+  background: var(--bg);
   -webkit-backdrop-filter: blur(20px) saturate(170%);
   backdrop-filter: blur(20px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -122,7 +122,7 @@
   min-width: 260px;
   padding: 10px;
   border-radius: 20px;
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 20px 50px rgba(83, 40, 34, 0.16);
   opacity: 0;
   visibility: hidden;
@@ -272,7 +272,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
 }
 
 /* ===== Menyu paneli: tepada — töq (oq yozuv); aylantirganda — oq panel; ikkalasi ham şaffof emas ===== */
-.site-head:not(.scrolled) .dd,.site-head:not(.scrolled) .dd-sub{background:var(--navy);border:1px solid rgba(255,255,255,.08);
+.site-head:not(.scrolled) .dd,.site-head:not(.scrolled) .dd-sub{background:var(--navy-bg);border:1px solid rgba(255,255,255,.08);
   -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 24px 60px rgba(20,8,6,.35)}
 .site-head:not(.scrolled) .dd a{color:#fff}
 .site-head:not(.scrolled) .dd-list a:hover,.site-head:not(.scrolled) .dd-list a:focus-visible{background:rgba(255,255,255,.12)}
@@ -358,7 +358,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
 }
 .mnav-link.active,
 .mnav-link.active:hover {
-  background: #fff;
+  background: var(--bg);
 }
 body:has([data-head-dark]) .site-head:not(.scrolled) .mnav-pill {
   background: rgba(255, 255, 255, 0.14);
@@ -442,7 +442,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
   min-width: 210px;
   padding: 8px;
   border-radius: 20px;
-  background: #fff;
+  background: var(--bg);
   box-shadow: 0 24px 60px rgba(83, 40, 34, 0.18);
   transform-origin: calc(100% - 24px) 0;
   animation: dd-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -472,7 +472,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
 }
 /* tepada (aylantirilmagan): töq panel — navbar menyusidek */
 .site-head:not(.scrolled) .lx-menu {
-  background: var(--navy);
+  background: var(--navy-bg);
   box-shadow: 0 24px 60px rgba(20, 8, 6, 0.35);
 }
 .site-head:not(.scrolled) .lx-menu a {

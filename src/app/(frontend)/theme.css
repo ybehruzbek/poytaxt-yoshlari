@@ -1,0 +1,149 @@
+/* =====================================================================
+   Tungi rejim: <html data-theme="dark">. Ranglar tokenlar orqali almaşadi:
+   --bg (fon), --navy (asosiy matn), --soft, --line, --muted, --grey.
+   Töq bloklar (--navy-bg) töqligiça qoladi. Sariq, havorang, pushti va
+   töq sariq fonli elementlarda matn töq rangda qoladi (pastdagi röyxat —
+   CSS fayllardan avtomatik yiğilgan).
+   ===================================================================== */
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #16100e;
+  --navy: #f3e5dc;
+  --navy-bg: #3a1d18;
+  --soft: #221815;
+  --line: #3a2c27;
+  --muted: #b5a7a1;
+  --grey: #e6dad3;
+  --silver: #5c4f49;
+}
+/* rangli fonlarda matn töq qoladi */
+html[data-theme='dark']
+  :is(
+    .a11y-reset,
+    .bar,
+    .bg-soc a:hover,
+    .bg-steps i,
+    .bt-vac-h span,
+    .btn-ghost:hover,
+    .btn-primary,
+    .btn-primary:focus-visible,
+    .btn-primary:hover,
+    .c-green,
+    .c-o,
+    .c-pill,
+    .c-play,
+    .cb-steps li > b,
+    .dev-panel li span button.on,
+    .dev-switch button.on,
+    .ev .go,
+    .fb-up:hover,
+    .featured .chip,
+    .fw-nets a:hover .fw-net-ic,
+    .go-sm,
+    .head-cta,
+    .head-cta:focus-visible,
+    .head-cta:hover,
+    .ip-b b,
+    .ip-b-badge,
+    .it-city-tag,
+    .it-motto,
+    .it-steps i,
+    .kg-ava,
+    .kg-bod-meta,
+    .kg-org b,
+    .mc.y,
+    .more-btn,
+    .na-ctrl button[aria-pressed='true'],
+    .nav .m-cta,
+    .nh-head > b,
+    .o1,
+    .o4,
+    .pt-cta,
+    .pt-group-head span,
+    .pt-left,
+    .socials a:focus-visible,
+    .socials a:hover,
+    .sp-phone:focus-visible .sp-phone-go,
+    .sp-phone:hover .sp-phone-go,
+    .x2-kc-tabs button.on b,
+    .x2-rc-tabs button.on,
+    .x3-strb-council,
+    .y1-ab-stats > div:nth-child(1),
+    .y1-ab-stats > div:nth-child(3),
+    .y1-ab-stats > div:nth-child(4),
+    .y1-ob-main b,
+    .y1-oc li.on,
+    .y1-pb li:nth-child(7),
+    .y1-pc-list li:nth-child(3n) span,
+    .y1-pc-list li:nth-child(3n + 2) span,
+    .y1-pc-list span,
+    .y1-tp,
+    .y1-ts,
+    .y1-ty,
+    .y2-bc-intro,
+    .y2-cc-addr,
+    .y2-dc-stack i:nth-child(1),
+    .y2-dc-stack i:nth-child(2),
+    .y2-dc-stack i:nth-child(3),
+    .y2-lb-ava,
+    .y2-lb-sm,
+    .y2-lc article.on .y2-lc-arch,
+    .y2-lc-arch,
+    .z5-drawer-x:hover,
+    .z5-soc a:hover .hk-lead-ic
+  ) {
+  --navy: #532822;
+  --grey: #383838;
+  --muted: #6e6662;
+  --bg: #fff;
+  --line: #eee6e0;
+}
+/* yarim şaffof jigarrang tugmalar — tungi rejimda oq tusda */
+html[data-theme='dark'] :is(.lx-btn, .a11y-btn:not(.on), .a11y-reset:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+/* suratlar biroz xiraroq — köz qamaşmasin */
+html[data-theme='dark'] main img:not([src$='.svg']) {
+  filter: brightness(0.92);
+}
+
+/* qolgan oq/yorqin fonlar */
+html[data-theme='dark'] :is(.site-head .header, .site-head.scrolled .header, .nav.open) {
+  background: rgba(28, 20, 17, 0.82);
+}
+html[data-theme='dark'] :is(.na-main, .na-list article, .pt-ticket) {
+  background: var(--soft);
+}
+html[data-theme='dark'] .na-list article:hover {
+  background: #2c201c;
+}
+html[data-theme='dark'] :is(.opp-info, .vc-banner-chips span, .y2-cb-panel, .mc .n) {
+  background: rgba(22, 16, 14, 0.9);
+}
+
+/* töq bloklardagi och krem matn (var(--soft)) tungi rejimda ham och qoladi */
+html[data-theme='dark']
+  :is(
+    .cb-txt .h2,
+    .cta .h2,
+    .featured h2,
+    .icb-palace h3,
+    .ip-b-main h3,
+    .iq-e p,
+    .it-cta .h2,
+    .it-pri-head .h2,
+    .kg-bod article:first-child h3,
+    .kg-org li.on h3,
+    .mc.br,
+    .proof .avs img,
+    .x2-rc-head .h2,
+    .x3-offb-head .h2,
+    .x3-strb-top h3,
+    .y1-ac-lead,
+    .y1-ob-main h3,
+    .y2-db-txt .h2,
+    .y2-lc h3,
+    .y2-lc-h
+  ) {
+  --soft: #fff4e9;
+}
