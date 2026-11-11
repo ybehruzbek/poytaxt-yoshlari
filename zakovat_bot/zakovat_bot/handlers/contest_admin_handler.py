@@ -56,6 +56,27 @@ def _current_contest():
     return active_contest() or Contest.all_objects.order_by("-id").first()
 
 
+def _lookup_entry(callback):
+    """Callback'dagi arizani xavfsiz topadi.
+
+    Faqat joriy tanlovning topshirilgan arizalari — qoralama (hali
+    yuborilmagan) arizalar va boshqa tanlov yozuvlari ko'rsatilmaydi.
+    """
+    try:
+        entry_id = int(callback.data.split(":")[1])
+    except (IndexError, ValueError):
+        return None
+    contest = _current_contest()
+    if contest is None:
+        return None
+    return (
+        Entry.objects.filter(id=entry_id, contest=contest)
+        .exclude(status=EntryStatus.DRAFT)
+        .select_related("participant")
+        .first()
+    )
+
+
 def _menu_text(contest):
     if contest is None:
         return "🏆 <b>Tanlov</b>\n\nFaol tanlov yo'q."
@@ -164,7 +185,7 @@ async def _after_decision(callback, entry):
 async def tdadm_approve(callback: CallbackQuery):
     if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
-    entry = Entry.objects.filter(id=int(callback.data.split(":")[1])).first()
+    entry = _lookup_entry(callback)
     if entry is None:
         await callback.answer()
         return
@@ -195,10 +216,13 @@ async def tdadm_approve(callback: CallbackQuery):
 async def tdadm_reject_ask(callback: CallbackQuery, state: FSMContext):
     if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
+    entry = _lookup_entry(callback)
+    if entry is None:
+        await callback.answer()
+        return
     await callback.answer()
-    entry_id = int(callback.data.split(":")[1])
     await state.set_state(ContestAdminState.reject_reason)
-    await state.update_data(td_mod_entry=entry_id)
+    await state.update_data(td_mod_entry=entry.id)
     await callback.message.answer(
         "❌ Rad etish sababini yozing — u ishtirokchiga yuboriladi:",
         reply_markup=back_to("tdadm_queue", text="❌ Bekor qilish"),
@@ -240,9 +264,13 @@ async def tdadm_reject_save(message: Message, state: FSMContext):
 async def tdadm_revision_ask(callback: CallbackQuery, state: FSMContext):
     if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
+    entry = _lookup_entry(callback)
+    if entry is None:
+        await callback.answer()
+        return
     await callback.answer()
     await state.set_state(ContestAdminState.revision_reason)
-    await state.update_data(td_mod_entry=int(callback.data.split(":")[1]))
+    await state.update_data(td_mod_entry=entry.id)
     await callback.message.answer(
         "🔄 Nimani tuzatish kerakligini yozing — ishtirokchiga yuboriladi:",
         reply_markup=back_to("tdadm_queue", text="❌ Bekor qilish"),
@@ -282,7 +310,7 @@ async def tdadm_revision_save(message: Message, state: FSMContext):
 
 @dp.callback_query(F.data.startswith("tdadm_list:"))
 async def tdadm_list(callback: CallbackQuery):
-    if not is_admin(callback.from_user.id):
+    if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
     await callback.answer()
     _, page_s, status_f = callback.data.split(":")
@@ -314,10 +342,11 @@ async def tdadm_list(callback: CallbackQuery):
 
 @dp.callback_query(F.data.startswith("tdadm_entry:"))
 async def tdadm_entry(callback: CallbackQuery):
-    if not is_admin(callback.from_user.id):
+    # Kartochkada telefon va Telegram ID bor — kuzatuvchiga ko'rsatilmaydi (TZ 12)
+    if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
     await callback.answer()
-    entry = Entry.objects.filter(id=int(callback.data.split(":")[1])).first()
+    entry = _lookup_entry(callback)
     if entry is None:
         return
     await callback.message.edit_text(
@@ -327,12 +356,13 @@ async def tdadm_entry(callback: CallbackQuery):
 
 @dp.callback_query(F.data.startswith("tdadm_media:"))
 async def tdadm_media(callback: CallbackQuery):
-    if not is_admin(callback.from_user.id):
+    if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
-    await callback.answer("Yuborilmoqda…")
-    entry = Entry.objects.filter(id=int(callback.data.split(":")[1])).first()
+    entry = _lookup_entry(callback)
     if entry is None:
+        await callback.answer()
         return
+    await callback.answer("Yuborilmoqda…")
     await send_entry_media(bot, callback.from_user.id, entry)
 
 
@@ -364,7 +394,8 @@ async def tdadm_stats(callback: CallbackQuery):
 
 @dp.callback_query(F.data == "tdadm_export")
 async def tdadm_export(callback: CallbackQuery):
-    if not is_admin(callback.from_user.id):
+    # Eksportda telefon raqamlari bor (TZ 5.3: faqat vakolatli rollar)
+    if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
     await callback.answer("Tayyorlanmoqda…")
     contest = _current_contest()
@@ -443,9 +474,12 @@ async def tdadm_set_channel_save(message: Message, state: FSMContext):
         chat = await bot.get_chat(value)
         member = await bot.get_chat_member(chat.id, bot.id)
         ok = getattr(member, "status", None) in ("administrator", "creator")
-    except Exception as e:
+    except Exception:
+        # Xato matni token yoki ichki ma'lumot o'z ichiga olishi mumkin —
+        # faqat server jurnaliga yoziladi
+        logger.exception("Tanlov kanalini tekshirib bo'lmadi: %s", value)
         await message.answer(
-            f"⚠️ Kanalga ulanib bo'lmadi: {esc(str(e))[:150]}\n\n"
+            "⚠️ Kanalga ulanib bo'lmadi.\n\n"
             "Kanal nomini tekshiring va botni kanalga admin qilib qo'shing.",
             reply_markup=back_to("tdadm_settings", text="❌ Bekor qilish"),
         )

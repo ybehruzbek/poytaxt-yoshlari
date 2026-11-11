@@ -1616,6 +1616,25 @@ async def _run_all(saved_event_ids):
         await contest_admin_handler.tdadm_list(cb)
     check("arizalar ro'yxati va filtrlari ishladi", True)
 
+    # TZ 12: kuzatuvchi shaxsiy ma'lumotlarni ko'ra olmaydi
+    cb = FakeCallback(f"tdadm_entry:{entry.id}", NOBODY, message=FakeMessage(NOBODY))
+    await contest_admin_handler.tdadm_entry(cb)
+    check("TZ12: kuzatuvchiga ariza kartochkasi yopiq",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+    cb = FakeCallback("tdadm_export", NOBODY, message=FakeMessage(NOBODY))
+    await contest_admin_handler.tdadm_export(cb)
+    check("TZ12: kuzatuvchiga eksport yopiq (telefon raqamlari)",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+
+    # Xavfsizlik: qoralama ariza admin panelda ochilmaydi
+    draft = Entry.objects.create(contest=contest, participant=bad,
+                                 nomination=Nomination.FOTO, title="Qoralama")
+    cb = FakeCallback(f"tdadm_entry:{draft.id}", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_entry(cb)
+    check("xavfsizlik: qoralama ariza ochilmadi",
+          "Qoralama" not in cb.message.texts(), cb.message.texts()[:80])
+    draft.delete()
+
     cb = FakeCallback(f"tdadm_entry:{entry.id}", SUPER, message=FakeMessage(SUPER))
     await contest_admin_handler.tdadm_entry(cb)
     check("ariza kartochkasi ochildi", entry.code in cb.message.texts())
