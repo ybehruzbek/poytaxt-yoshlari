@@ -27,6 +27,9 @@ const RULES: Array<[RegExp, string]> = [
   [new RegExp('o' + APOS, 'g'), 'ö'],
   [new RegExp('G' + APOS, 'g'), 'Ğ'],
   [new RegExp('g' + APOS, 'g'), 'ğ'],
+  // boşqa alifbolardagi öxşaş harflar (ruminça ș, turkça ı emas): ș → ş
+  [/ș/g, 'ş'],
+  [/Ș/g, 'Ş'],
   [/SH/g, 'Ş'],
   [/Sh/g, 'Ş'],
   [/sh/g, 'ş'],

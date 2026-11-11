@@ -137,7 +137,7 @@ export const GROUPS: ActGroup[] = [
   {
     id: 'ittifoq',
     t: 'Özbekiston yoşlar ittifoqi faoliyatiga doir normativ-huquqiy hujjatlar',
-    lead: 'Ittifoqning taşkil etiliși, vakolatlari va faoliyatini takomillaştirişga doir hujjatlar.',
+    lead: 'Ittifoqning taşkil etilişi, vakolatlari va faoliyatini takomillaştirişga doir hujjatlar.',
     acts: [
       {
         y: '05.07.2017',

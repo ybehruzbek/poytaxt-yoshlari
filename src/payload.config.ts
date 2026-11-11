@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { AppealFiles, Appeals } from './collections/Appeals'
+import { TextErrors } from './collections/TextErrors'
 import { Socials } from './globals/Socials'
 
 const filename = fileURLToPath(import.meta.url)
@@ -43,7 +44,7 @@ export default buildConfig({
     defaultLocale: 'uz',
     fallback: true,
   },
-  collections: [News, Media, Appeals, AppealFiles, Users],
+  collections: [News, Media, Appeals, AppealFiles, TextErrors, Users],
   globals: [Socials],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

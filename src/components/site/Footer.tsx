@@ -10,8 +10,8 @@ import { getSocials } from '@/lib/socials-server'
 import { Arrow, Svg } from './SocialPhones'
 
 const LOGO_ALT = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
-const COPY = '© 2026 Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
-const NOTE = 'Materiallardan foydalanilganda manba körsatilişi şart.'
+const COPY = `© 2001–${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi. Barça huquqlar himoyalangan.`
+const NOTE = 'Uşbu veb-saytdagi maʼlumotlardan foydalanilganda havola körsatilişi şart.'
 const WORD = 'YOŞKENT'
 
 /* Aloqa: Kengaşning rasmiy telefonlari (pochta — NAMUNA) */
@@ -45,8 +45,14 @@ function SiteMap({ locale, className = 'fb-cols' }: { locale: Locale; className?
 function Bottom() {
   return (
     <div className="fb-bot">
-      <span>{COPY}</span>
-      <span>{NOTE}</span>
+      <div className="fb-legal">
+        <span>{COPY}</span>
+        <span>{NOTE}</span>
+        <span className="fb-typo">
+          <b>Diqqat!</b> Agar siz matnda xatolikni aniqlasangiz, uni belgilab, maʼmuriyatni xabardor qiliş uçun{' '}
+          <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Enter</kbd> tugmalarini bosing.
+        </span>
+      </div>
       <a href="#" className="fb-up">
         Yuqoriga ↑
       </a>
