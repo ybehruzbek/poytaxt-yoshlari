@@ -148,9 +148,6 @@
   font: 800 14px/1 var(--f-head);
   color: #fff;
 }
-.pt-grid--3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
 .pt-dirs {
   display: flex;
   flex-wrap: wrap;
@@ -194,172 +191,18 @@
   font: 800 14px/1 var(--f-head);
   color: var(--navy);
 }
-/* B — yönaliş böyiça saralaş */
-.pt-filter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-.pt-filter-l {
-  margin-right: 4px;
-  font: 600 14px/1 var(--f-body);
-  color: var(--muted);
-}
-.pt-filter button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 8px 0 16px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: #fff;
-  font: 600 14px/1 var(--f-head);
-  color: var(--navy);
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-}
-.pt-filter button b {
-  display: grid;
-  place-items: center;
-  min-width: 26px;
-  height: 26px;
-  padding: 0 6px;
-  border-radius: 99px;
-  background: var(--line);
-  font-size: 12px;
-}
-.pt-filter button:hover {
-  border-color: var(--navy);
-}
-.pt-filter button[aria-pressed='true'] {
-  border-color: var(--navy);
-  background: var(--navy);
-  color: #fff;
-}
-.pt-filter button[aria-pressed='true'] b {
-  background: rgba(255, 255, 255, 0.18);
-}
-/* C — logotiplar devori va röyxat */
-.pt-wall {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-  margin-bottom: 56px;
-}
-.pt-wall-i {
-  display: grid;
-  place-items: center;
-  height: 150px;
-  padding: 20px;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  filter: grayscale(1);
-  opacity: 0.8;
-  transition:
-    filter 0.3s,
-    opacity 0.3s;
-}
-.pt-wall-i:hover {
-  filter: none;
-  opacity: 1;
-}
-.pt-wall-i img {
-  max-width: 100%;
-  max-height: 84px;
-  object-fit: contain;
-}
-.pt-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--line);
-}
-.pt-list > li {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr) 280px 160px;
-  gap: 24px;
-  align-items: center;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--line);
-  scroll-margin-top: 110px;
-}
-.pt-list > li > img {
-  width: 96px;
-  height: 64px;
-  object-fit: contain;
-}
-.pt-list h3 {
-  font: 800 17px/1.3 var(--f-head);
-  color: var(--navy);
-}
-.pt-list p {
-  margin-top: 6px;
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--muted);
-}
-.pt-list .pt-dirs {
-  margin: 0;
-}
-.pt-list .pt-site {
-  margin: 0;
-  padding: 0;
-  justify-self: end;
-}
 @media (max-width: 1100px) {
-  .pt-groups .pt-grid,
-  .pt-grid--3 {
+  .pt-groups .pt-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .pt-wall {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .pt-list > li {
-    grid-template-columns: 80px minmax(0, 1fr);
-  }
-  .pt-list > li > img {
-    width: 80px;
-  }
-  .pt-list .pt-dirs,
-  .pt-list .pt-site {
-    grid-column: 2;
-    justify-self: start;
   }
 }
 @media (max-width: 900px) {
   .pt-groups .pt-grid,
-  .pt-grid--3 {
-    grid-template-columns: 1fr;
-  }
   .pt-grid {
     grid-template-columns: 1fr;
   }
 }
 @media (max-width: 640px) {
-  .pt-wall {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .pt-wall-i {
-    height: 110px;
-  }
-  .pt-filter {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    margin-inline: -16px;
-    padding: 0 16px 4px;
-    scrollbar-width: none;
-  }
-  .pt-filter button,
-  .pt-filter-l {
-    flex: none;
-  }
   .pt-row {
     gap: 20px 36px;
   }
