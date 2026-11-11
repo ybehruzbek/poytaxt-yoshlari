@@ -40,3 +40,19 @@
 .ol-d[data-open] > :nth-child(n + 5) {
   animation: icb-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+
+/* Yirik loyihalar: dastlab 2 qator (kompyuterda 4 ta, telefonda 2 ta), qolgani tugma bilan */
+.x2-kc-main {
+  min-width: 0;
+}
+.x2-kc-grid:not([data-open]) > :nth-child(n + 5) {
+  display: none;
+}
+@media (max-width: 640px) {
+  .x2-kc-grid:not([data-open]) > :nth-child(n + 3) {
+    display: none;
+  }
+}
+.x2-kc-grid[data-open] > :nth-child(n + 3) {
+  animation: icb-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}

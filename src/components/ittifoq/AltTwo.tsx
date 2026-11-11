@@ -2,6 +2,7 @@
 import { useState } from 'react'
 
 import { PROJECT_CARDS, RESULTS } from './data'
+import { ShowMore } from './ShowMore'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const ALL = 'Hammasi'
@@ -31,7 +32,11 @@ export function ProjectCardsC() {
               type="button"
               aria-pressed={a === area}
               className={a === area ? 'on' : undefined}
-              onClick={() => setArea(a)}
+              onClick={() => {
+                // boşqa yönalişga ötilganda röyxat yana 2 qatorga yiğiladi
+                document.getElementById('loyihalar-royxat')?.removeAttribute('data-open')
+                setArea(a)
+              }}
             >
               <span>{a}</span>
               <b>{count(a)}</b>
@@ -39,20 +44,23 @@ export function ProjectCardsC() {
           ))}
         </div>
       </div>
-      <div className="x2-kc-grid">
-        {byArea(area).map((p) => (
-          <article key={p.t}>
-            <strong>{p.reach}</strong>
-            <h4>{p.t}</h4>
-            <p>{p.goal}</p>
-            <footer>
-              <span>{p.area}</span>
-              <small>
-                Iştirokçilar: <b>{p.who}</b>
-              </small>
-            </footer>
-          </article>
-        ))}
+      <div className="x2-kc-main">
+        <div className="x2-kc-grid" id="loyihalar-royxat">
+          {byArea(area).map((p) => (
+            <article key={p.t}>
+              <strong>{p.reach}</strong>
+              <h4>{p.t}</h4>
+              <p>{p.goal}</p>
+              <footer>
+                <span>{p.area}</span>
+                <small>
+                  Iştirokçilar: <b>{p.who}</b>
+                </small>
+              </footer>
+            </article>
+          ))}
+        </div>
+        <ShowMore key={area} target="loyihalar-royxat" noun="loyiha" />
       </div>
     </div>
   )
