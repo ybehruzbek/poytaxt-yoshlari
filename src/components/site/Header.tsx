@@ -37,18 +37,11 @@ export function Header({ locale }: { locale: Locale }) {
   const headerRef = useRef<HTMLElement>(null)
   const closeTimer = useRef<number | undefined>(undefined)
 
-  // pastga aylantirganda navbar yuqoriga yaşirinadi, tepaga qaytganda yana tuşadi (Apple uslubi)
-  const [away, setAway] = useState(false)
-  const lastY = useRef(0)
+  // navbar doim körinib turadi; aylantirilganda faqat oq kapsulaga aylanadi
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY
       setScrolled(y > 8)
-      const dy = y - lastY.current
-      if (Math.abs(dy) > 6) {
-        setAway(dy > 0 && y > 320) // menyu oçiq bölsa render'da hisobga olinadi
-        lastY.current = y
-      }
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -108,7 +101,7 @@ export function Header({ locale }: { locale: Locale }) {
   const joinHref = L('/boglanish/murojaat?mavzu=azo')
 
   return (
-    <div className={`site-head${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}${away && !open && !drawer ? ' away' : ''}`} id="siteHead">
+    <div className={`site-head${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}`} id="siteHead">
       <div className="wrap">
         <header
           className="header"
