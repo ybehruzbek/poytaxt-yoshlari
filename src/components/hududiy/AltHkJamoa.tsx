@@ -134,31 +134,8 @@ function Hero({ m, id }: { m: Member; id: string }) {
       <div className="z5-hero-txt">
         <Name n={m.name} />
         <p>{m.role}</p>
-        {m.reception && (
-          <p className="z5-hero-rec">
-            <Ic d={IC.clock} />
-            <span>
-              <small>Fuqarolar qabuli</small>
-              {m.reception}
-            </span>
-          </p>
-        )}
-        <div className="z5-hero-act">
-          <Duties m={m} id={id} />
-          {m.socials?.map((x) => (
-            <a
-              key={x.net}
-              className="z5-pill"
-              href={x.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={`${x.net}: ${x.handle}`}
-            >
-              <Ic d={IC[x.net]} />
-              <span className="sr-only">{x.net}</span>
-            </a>
-          ))}
-        </div>
+        <Reach m={m} full />
+        <Duties m={m} id={id} />
       </div>
     </article>
   )
