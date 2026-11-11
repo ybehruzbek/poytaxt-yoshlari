@@ -3,7 +3,7 @@
  *
  *  - Murojaat: bitta IP'dan 10 daqiqada 5 ta, butun sayt bo'yicha 60 ta.
  *  - Matndagi xato: bitta IP'dan 10 daqiqada 10 ta, butun sayt bo'yicha 120 ta.
- *  - Ikkalasi birga: butun sayt bo'yicha 10 daqiqada 150 tadan oshmaydi.
+ *  - Har bir funksiyaning hisoblagichi va kalitlari alohida: matndagi xato xabarlari murojaatlar limitini egallay olmaydi.
  *  - IP'dan qat'i nazar qo'yilgan chegaralar
  *    (soxta/ko'p manzil bilan bazani to'ldirishning oldi olinadi).
  *  - Faol (oyna ichidagi) hisoblagichlar xotirani bo'shatish uchun HECH QACHON o'chirilmaydi:
@@ -12,8 +12,8 @@
  *  xotira (masalan, Redis INCR + EXPIRE) kerak bo'ladi.
  */
 const WINDOW = 10 * 60 * 1000
-const MAX_KEYS = 10_000 // barça funksiyalar böyiça jami IP kalitlari
-const TOTAL_LIMIT = 150 // butun sayt böyiça jami (barça funksiyalar) 10 daqiqada
+const MAX_KEYS = 10_000 // har bir funksiya uçun alohida IP kalitlari çegarasi
+const TOTAL_LIMIT = 150 // ikkinçi darajali funksiyalar (matndagi xato) uçun jami; murojaatlarga taʼsir qilmaydi
 let totalAll: number[] = []
 
 /** Har bir funksiya öz hisoblagiçi bilan — biri ikkinçisining limitini egallab qöya olmaydi */
@@ -44,19 +44,17 @@ export function rateLimited(ip: string, scope: 'appeal' | 'text-error' = 'appeal
   const b = scope === 'appeal' ? bucket(scope, 5, 60) : bucket(scope, 10, 120)
   const now = Date.now()
 
-  // 0) butun sayt böyiça jami chegara — barça funksiyalar uçun bitta
+  // 0) jami chegara faqat ikkinçi darajali funksiyalarga — murojaatlar uçun joy doim ajratilgan
   totalAll = totalAll.filter((t) => now - t < WINDOW)
-  if (totalAll.length >= TOTAL_LIMIT) return true
+  if (scope !== 'appeal' && totalAll.length >= TOTAL_LIMIT) return true
 
   // 1) funksiya chegarasi — IP'ga bog'liq emas
   b.all = b.all.filter((t) => now - t < WINDOW)
   if (b.all.length >= b.global) return true
 
   // 2) muddati o'tganlarnigina tozalaymiz; faol hisoblagichlarga tegmaymiz
-  const keys = () => Object.values(BUCKETS).reduce((n, x) => n + x.hits.size, 0)
-  if (now - b.lastSweep > WINDOW || keys() >= MAX_KEYS)
-    Object.values(BUCKETS).forEach((x) => sweep(x, now))
-  if (keys() >= MAX_KEYS && !b.hits.has(ip)) return true // joy yo'q — yangi kalit rad etiladi
+  if (now - b.lastSweep > WINDOW || b.hits.size >= MAX_KEYS) sweep(b, now)
+  if (b.hits.size >= MAX_KEYS && !b.hits.has(ip)) return true // joy yo'q — yangi kalit rad etiladi
 
   const recent = (b.hits.get(ip) ?? []).filter((t) => now - t < WINDOW)
   if (recent.length >= b.limit) {
@@ -66,7 +64,7 @@ export function rateLimited(ip: string, scope: 'appeal' | 'text-error' = 'appeal
   recent.push(now)
   b.hits.set(ip, recent)
   b.all.push(now)
-  totalAll.push(now)
+  if (scope !== 'appeal') totalAll.push(now)
   return false
 }
 
