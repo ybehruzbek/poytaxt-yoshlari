@@ -2,11 +2,10 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { AppealForm } from '@/components/site/AppealForm'
-import { DevSectionsPanel } from '@/components/site/DevSectionsPanel'
 import { More } from '@/components/site/MoreBtn'
 import { Svg } from '@/components/site/SocialPhones'
 
-import { ADDRESS, EMAIL, HOURS, LAW, MAPS, ORG, PHONES, RECEPTIONS, SOCIALS, TOPICS } from './data'
+import { ADDRESS, EMAIL, HOURS, LAW, MAPS, ORG, PHONES, RECEPTIONS, SOCIALS } from './data'
 import { OpenNow } from './OpenNow'
 
 /* ---------- umumiy bölaklar ---------- */
@@ -134,35 +133,6 @@ function Reception({ cards }: { cards?: boolean }) {
   )
 }
 
-function Topics({ L, big }: { L: (h: string) => string; big?: boolean }) {
-  return (
-    <div className={big ? 'bg-topics bg-topics--big' : 'bg-topics'}>
-      {TOPICS.map((t, i) => {
-        const href = t.href.startsWith('/') ? L(t.href) : t.href
-        const Inner = (
-          <>
-            <span className="bg-topic-n">0{i + 1}</span>
-            <h3>{t.t}</h3>
-            <p>{t.d}</p>
-            <span className="more-btn">
-              <More>{t.go}</More>
-            </span>
-          </>
-        )
-        return t.href.startsWith('/') ? (
-          <Link key={t.t} href={href} className="bg-topic">
-            {Inner}
-          </Link>
-        ) : (
-          <a key={t.t} href={href} className="bg-topic">
-            {Inner}
-          </a>
-        )
-      })}
-    </div>
-  )
-}
-
 function MapFrame({
   src,
   title = 'Xarita: Universitet köçasi, 4',
@@ -184,79 +154,7 @@ function MapFrame({
 
 /* ===================== Aloqa maʼlumotlari ===================== */
 
-/** A — Kanallar: tört karta, “Sizga nima kerak?”, qabul jadvali, tarmoqlar */
-function AloqaA({ L }: { L: (h: string) => string }) {
-  return (
-    <>
-      <section className="sec bg-sec">
-        <div className="wrap">
-          <div className="bg-cards">
-            <div className="bg-card">
-              <Ic d={PATH.phone} />
-              <h3>Telefon</h3>
-              {PHONES.map((p) => (
-                <a key={p.href} href={p.href} className="bg-big">
-                  {p.v}
-                </a>
-              ))}
-            </div>
-            <div className="bg-card">
-              <Ic d={PATH.mail} />
-              <h3>Elektron poçta</h3>
-              <a href={`mailto:${EMAIL}`} className="bg-big bg-mail">
-                <Mail />
-              </a>
-              <Link href={L('/boglanish/murojaat')} className="bg-link">
-                Yoki onlayn murojaat yuboring →
-              </Link>
-            </div>
-            <div className="bg-card">
-              <Ic d={PATH.pin} />
-              <h3>Manzil</h3>
-              <p className="bg-big-t">{ADDRESS.line}</p>
-              <small>{ADDRESS.landmark}</small>
-              <Link href={L('/boglanish/manzil')} className="bg-link">
-                Xaritada köriş →
-              </Link>
-            </div>
-            <div className="bg-card">
-              <Ic d={PATH.clock} />
-              <h3>Iş vaqti</h3>
-              <p className="bg-big-t">
-                {HOURS.days}
-                <br />
-                {HOURS.time}
-              </p>
-              <small>{HOURS.off}</small>
-              <OpenNow />
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="sec bg-sec">
-        <div className="wrap">
-          <div className="bg-sec-head">
-            <h2 className="h2">Sizga nima kerak?</h2>
-            <p>Masalangizga mos yöl — kim va qanday yordam beradi.</p>
-          </div>
-          <Topics L={L} />
-        </div>
-      </section>
-      <Reception />
-      <section className="sec bg-sec">
-        <div className="wrap">
-          <div className="bg-sec-head">
-            <h2 className="h2">Ijtimoiy tarmoqlarda</h2>
-            <p>Yangiliklar va eʼlonlar birinçi bölib şu yerda çiqadi.</p>
-          </div>
-          <Socials />
-        </div>
-      </section>
-    </>
-  )
-}
-
-/** B — Ikki ustun: çapda aloqa röyxati, öngda xarita; qabul hafta kunlari kartalarida */
+/** Ikki ustun: çapda aloqa röyxati, öngda xarita; ostida qabul hafta kunlari kartalarida */
 function AloqaB({ L }: { L: (h: string) => string }) {
   const rows = [
     {
@@ -284,6 +182,9 @@ function AloqaB({ L }: { L: (h: string) => string }) {
         <span>
           {ADDRESS.line}
           <small>{ADDRESS.landmark}</small>
+          <small>
+            {ADDRESS.metro.station} — {ADDRESS.metro.walk}
+          </small>
         </span>
       ),
     },
@@ -317,9 +218,7 @@ function AloqaB({ L }: { L: (h: string) => string }) {
           </div>
           <div className="bg-mapcard">
             <MapFrame src={MAPS.yandexEmbed} />
-            <Link href={L('/boglanish/manzil')} className="more-btn">
-              <More>Qanday boriş mumkin</More>
-            </Link>
+            <MapLinks />
           </div>
         </div>
       </section>
@@ -354,40 +253,6 @@ function AloqaB({ L }: { L: (h: string) => string }) {
   )
 }
 
-/** C — Yönaltiruvçi: avval “Sizga nima kerak?”, keyin ixçam aloqa satri va qabul */
-function AloqaC({ L }: { L: (h: string) => string }) {
-  return (
-    <>
-      <section className="sec bg-sec">
-        <div className="wrap">
-          <Topics L={L} big />
-          <div className="bg-strip">
-            {PHONES.map((p) => (
-              <a key={p.href} href={p.href}>
-                <Ic d={PATH.phone} />
-                {p.v}
-              </a>
-            ))}
-            <a href={`mailto:${EMAIL}`}>
-              <Ic d={PATH.mail} />
-              <Mail />
-            </a>
-            <Link href={L('/boglanish/manzil')}>
-              <Ic d={PATH.pin} />
-              {ADDRESS.line}
-            </Link>
-            <span>
-              <Ic d={PATH.clock} />
-              {HOURS.days}, {HOURS.time} · {HOURS.off}
-            </span>
-          </div>
-        </div>
-      </section>
-      <Reception />
-    </>
-  )
-}
-
 export function AloqaPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
   return (
     <div className="bg">
@@ -396,30 +261,12 @@ export function AloqaPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => 
         title="Aloqa maʼlumotlari"
         lead={`${ORG} bilan boğlanişning barça yöllari: telefon, poçta, manzil, iş vaqti va rahbariyatning fuqarolar qabuli.`}
       />
-      <div className="vx" data-v="aloqa-a">
-        <AloqaA L={L} />
-      </div>
-      <div className="vx" data-v="aloqa-b">
-        <AloqaB L={L} />
-      </div>
-      <div className="vx" data-v="aloqa-c">
-        <AloqaC L={L} />
-      </div>
-      <DevSectionsPanel
-        sections={[
-          {
-            name: 'aloqa',
-            label: 'Aloqa maʼlumotlari',
-            count: 3,
-            hints: ['Kanallar kartalari', 'Ikki ustun + xarita', 'Yönaltiruvçi'],
-          },
-        ]}
-      />
+      <AloqaB L={L} />
     </div>
   )
 }
 
-/* ===================== Manzil va xarita ===================== */
+/* ---------- xaritani tashqi ilovada oçiş ---------- */
 
 function MapLinks() {
   return (
@@ -430,135 +277,6 @@ function MapLinks() {
       <a href={MAPS.google} target="_blank" rel="noopener noreferrer" className="more-btn">
         <More>Google Mapsʼda oçiş</More>
       </a>
-    </div>
-  )
-}
-
-function WayCards() {
-  return (
-    <div className="bg-ways">
-      <div className="bg-way">
-        <Ic d={PATH.flag} />
-        <h3>Mölja</h3>
-        <p>{ADDRESS.landmark}.</p>
-      </div>
-      <div className="bg-way">
-        <Ic d={PATH.metro} />
-        <h3>Metro</h3>
-        <p>
-          {ADDRESS.metro.station} — {ADDRESS.metro.walk}.
-        </p>
-      </div>
-      <div className="bg-way">
-        <Ic d={PATH.clock} />
-        <h3>Iş vaqti</h3>
-        <p>
-          {HOURS.days}, {HOURS.time}. {HOURS.off}.
-        </p>
-        <OpenNow />
-      </div>
-    </div>
-  )
-}
-
-/** A — Katta xarita: xarita butun eni böylab, ustida manzil kartasi; ostida yöl kartalari */
-function ManzilA() {
-  return (
-    <section className="sec bg-sec">
-      <div className="wrap">
-        <div className="bg-bigmap">
-          <MapFrame src={MAPS.yandexEmbed} />
-          <div className="bg-addr">
-            <Ic d={PATH.pin} />
-            <h2>{ADDRESS.line}</h2>
-            <p>{ADDRESS.landmark}</p>
-            <MapLinks />
-          </div>
-        </div>
-        <WayCards />
-      </div>
-    </section>
-  )
-}
-
-/** B — Yonma-yon: çapda manzil va yöl, öngda Yandex va Google xaritalari */
-function ManzilB() {
-  return (
-    <section className="sec bg-sec">
-      <div className="wrap bg-split">
-        <div className="bg-list">
-          <div className="bg-row">
-            <Ic d={PATH.pin} />
-            <div>
-              <small className="bg-k">Manzil</small>
-              <div className="bg-v">
-                <span>
-                  {ADDRESS.line}
-                  <small>{ADDRESS.landmark}</small>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="bg-row">
-            <Ic d={PATH.metro} />
-            <div>
-              <small className="bg-k">Metro</small>
-              <div className="bg-v">
-                <span>
-                  {ADDRESS.metro.station}
-                  <small>{ADDRESS.metro.walk}</small>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="bg-row">
-            <Ic d={PATH.clock} />
-            <div>
-              <small className="bg-k">Iş vaqti</small>
-              <div className="bg-v">
-                <span>
-                  {HOURS.days}, {HOURS.time}
-                  <small>{HOURS.off}</small>
-                </span>
-              </div>
-            </div>
-          </div>
-          <OpenNow />
-          <MapLinks />
-        </div>
-        <div className="bg-maps2">
-          <MapFrame src={MAPS.yandexEmbed} title="Yandex xaritasi" />
-          <MapFrame src={MAPS.googleEmbed} title="Google xaritasi" />
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function ManzilPage({ crumbs }: { crumbs: ReactNode }) {
-  return (
-    <div className="bg">
-      <Head
-        crumbs={crumbs}
-        title="Manzil va xarita"
-        lead={`${ADDRESS.full}. ${ADDRESS.landmark}.`}
-      />
-      <div className="vx" data-v="manzil-a">
-        <ManzilA />
-      </div>
-      <div className="vx" data-v="manzil-b">
-        <ManzilB />
-      </div>
-      <DevSectionsPanel
-        sections={[
-          {
-            name: 'manzil',
-            label: 'Manzil va xarita',
-            count: 2,
-            hints: ['Katta xarita', 'Yonma-yon, ikki xarita'],
-          },
-        ]}
-      />
     </div>
   )
 }
@@ -596,7 +314,7 @@ function Terms() {
   )
 }
 
-/** A — Forma va jarayon: çapda qadamlar va muddatlar, öngda forma */
+/** Forma va jarayon: çapda qadamlar va muddatlar, öngda forma */
 function MurojaatA() {
   return (
     <section className="sec bg-sec">
@@ -621,28 +339,6 @@ function MurojaatA() {
   )
 }
 
-/** B — Turlar avval: Qonundagi uç tur kartada, ostida forma, oxirida muddatlar */
-function MurojaatB() {
-  return (
-    <section className="sec bg-sec">
-      <div className="wrap">
-        <div className="bg-types">
-          {LAW.types.map((t) => (
-            <div key={t.t}>
-              <h3>{t.t}</h3>
-              <p>{t.d}</p>
-            </div>
-          ))}
-        </div>
-        <div className="bg-formwrap">
-          <AppealForm />
-        </div>
-        <Terms />
-      </div>
-    </section>
-  )
-}
-
 export function MurojaatPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="bg">
@@ -651,22 +347,7 @@ export function MurojaatPage({ crumbs }: { crumbs: ReactNode }) {
         title="Elektron murojaat"
         lead="Savol, ariza, taklif yoki şikoyatingizni onlayn yuboring. Murojaatlar “Jismoniy va yuridik şaxslarning murojaatlari töğrisida”gi Qonun asosida körib çiqiladi."
       />
-      <div className="vx" data-v="murojaat-a">
-        <MurojaatA />
-      </div>
-      <div className="vx" data-v="murojaat-b">
-        <MurojaatB />
-      </div>
-      <DevSectionsPanel
-        sections={[
-          {
-            name: 'murojaat',
-            label: 'Elektron murojaat',
-            count: 2,
-            hints: ['Forma + jarayon', 'Turlar + forma'],
-          },
-        ]}
-      />
+      <MurojaatA />
     </div>
   )
 }

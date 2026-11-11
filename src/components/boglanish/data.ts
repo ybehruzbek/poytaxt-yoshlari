@@ -54,34 +54,6 @@ export const RECEPTIONS = RECEPTION.map((r) => ({
   dept: r.dept,
 }))
 
-/** “Sizga nima kerak?” — mavzu böyiça yönaltiriş */
-export const TOPICS = [
-  {
-    t: 'Savol yoki murojaat',
-    d: 'Yoşlarga oid masala, ariza yoki şikoyat böyiça — onlayn murojaat qoldiring, masʼul xodim javob beradi.',
-    go: 'Murojaat yuboriş',
-    href: '/boglanish/murojaat',
-  },
-  {
-    t: 'Ittifoqqa aʼzo böliş',
-    d: 'Aʼzolik şartlari va tartibi bilan tanişing, ariza qoldiring — boşlanğiç taşkilotingiz bilan boğlaymiz.',
-    go: 'Aʼzolik arizasi',
-    href: '/boglanish/murojaat?mavzu=azo',
-  },
-  {
-    t: 'Rahbariyat qabuli',
-    d: 'Kengaş raisi va bölim boşliqlari haftaning belgilangan kunlarida fuqarolarni şaxsan qabul qiladi.',
-    go: 'Qabul jadvali',
-    href: '#qabul',
-  },
-  {
-    t: 'Hamkorlik va OAV',
-    d: 'Hamkorlik takliflari, intervyu va axborot sörovlari uçun poçta orqali yozing.',
-    go: 'Poçtaga yoziş',
-    href: `mailto:${CONTACT.email}`,
-  },
-]
-
 /**
  * “Jismoniy va yuridik şaxslarning murojaatlari töğrisida”gi Qonun (ÖRQ-445, 11.09.2017):
  * 3- va 5-moddalar (murojaat turlari), 28-modda (körib çiqiş muddatlari). Manba: lex.uz

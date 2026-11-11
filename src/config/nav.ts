@@ -79,8 +79,7 @@ export const NAV: NavGroup[] = [
     label: 'Boğlaniş',
     intro: 'Savol, taklif yoki murojaatingiz bormi?',
     items: [
-      { label: 'Aloqa maʼlumotlari', href: '/boglanish/aloqa', desc: 'Telefon, poçta, iş vaqti' },
-      { label: 'Manzil va xarita', href: '/boglanish/manzil', desc: 'Bizni qanday topiş mumkin' },
+      { label: 'Aloqa maʼlumotlari', href: '/boglanish/aloqa', desc: 'Telefon, poçta, manzil va xarita' },
       { label: 'Elektron murojaat', href: '/boglanish/murojaat', desc: 'Onlayn murojaat yuboriş' },
     ],
   },
