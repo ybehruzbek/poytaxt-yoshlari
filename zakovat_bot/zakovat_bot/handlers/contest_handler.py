@@ -17,6 +17,7 @@ from django.utils import timezone
 
 from zakovat_bot.buttons.panel import (
     consent_keyboard,
+    vote_keyboard,
     contest_main_keyboard,
     entry_confirm_keyboard,
     media_done_keyboard,
@@ -33,6 +34,7 @@ from zakovat_bot.models import (
     EntryMedia,
     EntryStatus,
     Nomination,
+    Publication,
     TelegramAdminsID,
 )
 from zakovat_bot.services.contest import (
@@ -759,11 +761,32 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
         await callback.message.answer(deadline_passed_text(contest))
         return
 
-    # Qayta topshirilayotgan ariza qoralamaga qaytadi — tasdiqlangan arizaga
-    # media qo'shib moderatsiyani chetlab o'tish mumkin bo'lmasligi uchun
-    if entry.status != EntryStatus.DRAFT:
-        entry.status = EntryStatus.DRAFT
-        entry.save(update_fields=["status"])
+    # E'lon qilingan ishni tahrirlab bo'lmaydi: kanaldagi post va unga
+    # berilgan ovozlar boshqa materialga ko'chib ketmasligi kerak
+    if Publication.objects.filter(entry=entry).exists():
+        await callback.answer(
+            "Bu ish kanalda e'lon qilingan — uni o'zgartirib bo'lmaydi.",
+            show_alert=True)
+        return
+
+    # Qayta topshirilayotgan ariza qoralamaga qaytadi (qayta moderatsiya).
+    # Holat o'qish va yozish qulflangan holda — moderator bir vaqtda
+    # tasdiqlayotgan bo'lsa, ziddiyat yuzaga kelmasligi uchun.
+    resubmittable = (EntryStatus.DRAFT, EntryStatus.REVISION,
+                     EntryStatus.REJECTED, EntryStatus.MODERATION)
+    with transaction.atomic():
+        locked = Entry.objects.select_for_update().filter(id=entry.id).first()
+        if locked is None or locked.status not in resubmittable:
+            allowed = False
+        else:
+            allowed = True
+            if locked.status != EntryStatus.DRAFT:
+                locked.status = EntryStatus.DRAFT
+                locked.save(update_fields=["status"])
+    if not allowed:
+        await callback.answer(
+            "Bu arizani endi o'zgartirib bo'lmaydi.", show_alert=True)
+        return
 
     await state.clear()
     await state.update_data(
@@ -778,3 +801,48 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
         f"✏️ <b>{entry.code}</b> arizasini qayta topshirish.\n\n"
         "📝 Material nomini yozing (o'zgartirmasangiz, eskisini qaytadan yozing):"
     )
+
+
+# ==================== Ovoz berish (TZ 9) ====================
+
+@dp.callback_query(F.data.startswith("td_vote:"))
+async def td_vote(callback: CallbackQuery):
+    """Kanal postidagi ❤️ tugmasi. Bir foydalanuvchi — bir ish, bir ovoz."""
+    from zakovat_bot.services.publishing import register_vote, voting_is_open
+
+    try:
+        entry_id = int(callback.data.split(":")[1])
+    except (IndexError, ValueError):
+        await callback.answer()
+        return
+
+    entry = Entry.objects.filter(id=entry_id).select_related("contest").first()
+    if entry is None:
+        await callback.answer("Bu ish topilmadi.", show_alert=True)
+        return
+
+    contest = entry.contest
+    if not voting_is_open(contest):
+        if contest.voting_end_at and timezone.now() >= contest.voting_end_at:
+            await callback.answer(
+                "Ovoz berish muddati tugagan.", show_alert=True)
+        else:
+            await callback.answer(
+                "Ovoz berish hali boshlanmagan.", show_alert=True)
+        return
+
+    created, count = register_vote(entry.id, callback.from_user.id)
+    if created:
+        await callback.answer("✅ Ovozingiz qabul qilindi. Rahmat!")
+    else:
+        await callback.answer("Siz bu ishga allaqachon ovoz bergansiz.",
+                              show_alert=True)
+        return
+
+    # Tugmadagi hisoblagichni yangilaymiz; xato bo'lsa ovoz baribir saqlangan
+    entry.votes_count = count
+    try:
+        await callback.message.edit_reply_markup(
+            reply_markup=vote_keyboard(entry))
+    except Exception:
+        logger.debug("Ovoz tugmasini yangilab bo'lmadi: %s", entry.id)

@@ -25,8 +25,8 @@ from zakovat_bot.models import (
     AdminRole, Answers, Appeal, AppealStatus, AuditLog, Broadcast,
     BroadcastResult, BroadcastStatus, Channel, ChatEvent, ChatParticipant,
     Contest, ContestParticipant, ContestStage, Entry, EntryMedia, EntryStatus,
-    Nomination, ParticipantStatus, Questions, ReminderLog, TelegramAdminsID,
-    Users, Vote,
+    Nomination, ParticipantStatus, Publication, Questions, ReminderLog,
+    TelegramAdminsID, Users, Vote,
 )
 
 SUPER, OPER, OBSV, NOBODY, USER1 = 990001, 990002, 990003, 990004, 990005
@@ -1677,6 +1677,171 @@ async def _run_all(saved_event_ids):
     local_dl = djtz.localtime(contest.submission_deadline)
     check("qabul muddati o'zgartirildi",
           (local_dl.day, local_dl.hour) == (17, 18), str(local_dl))
+
+    # ---------- 22. Nashr va ovoz berish (TZ 8-10) ----------
+    print("22) Tanlov: nashr va ovoz")
+    from zakovat_bot.services import publishing as pub_service
+
+    # Ikkala arizani tasdiqlaymiz va kanalni belgilaymiz
+    Entry.objects.filter(id__in=[entry.id, ventry.id]).update(
+        status=EntryStatus.APPROVED)
+    entry.refresh_from_db(); ventry.refresh_from_db()
+    contest.channel_id = "-100777"
+    contest.stage = ContestStage.MODERATION
+    contest.save(update_fields=["channel_id", "stage"])
+
+    check("nashrga tayyor ro'yxat to'g'ri",
+          pub_service.ready_for_publication(contest).count() == 2)
+
+    # Kanalga e'lon qilish
+    cb = FakeCallback("tdadm_publish_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_publish_go(cb)
+    entry.refresh_from_db(); ventry.refresh_from_db()
+    check("TZ8: ishlar kanalga e'lon qilindi",
+          entry.status == EntryStatus.PUBLISHED
+          and ventry.status == EntryStatus.PUBLISHED)
+    check("TZ8: albom bitta ovoz kartochkasi bilan joylandi",
+          entry.publication.vote_message_id is not None
+          and entry.publication.message_id is not None)
+    check("TZ8: post havolasi saqlandi",
+          "t.me/c/777/" in (entry.publication.post_url or ""),
+          entry.publication.post_url)
+    check("TZ11: ishtirokchiga post havolasi yuborildi",
+          any(k == "send_message" and c == USER1 and "kanalga joylandi" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # TZ 8.6: takroran joylanmaydi
+    pub_count_before = Publication.objects.filter(entry=entry).count()
+    cb = FakeCallback("tdadm_publish_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_publish_go(cb)
+    check("TZ8.6: ish takroran joylanmadi",
+          Publication.objects.filter(entry=entry).count() == pub_count_before == 1)
+
+    # Xavfsizlik: e'lon qilingan ishni ishtirokchi o'zgartira olmaydi
+    contest.submission_deadline = djtz.now() + timedelta(days=1)
+    contest.stage = ContestStage.ACCEPTING
+    contest.save(update_fields=["submission_deadline", "stage"])
+    cb = FakeCallback(f"td_resubmit:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_resubmit(cb, FakeState())
+    entry.refresh_from_db()
+    check("xavfsizlik: e'lon qilingan ish qayta topshirilmadi",
+          entry.status == EntryStatus.PUBLISHED
+          and any("e'lon qilingan" in a for a in cb.alerts), cb.alerts)
+    contest.stage = ContestStage.PUBLISHING
+    contest.save(update_fields=["stage"])
+
+    # TZ 9.3: hamma post chiqmaguncha ovoz boshlanmaydi
+    extra_entry = Entry.objects.create(
+        contest=contest, participant=bad, nomination=Nomination.FOTO,
+        title="Keyin qo'shilgan", status=EntryStatus.APPROVED)
+    EntryMedia.objects.create(entry=extra_entry, file_id="p9",
+                              file_unique_id="pu9", media_type="photo")
+    cb = FakeCallback("tdadm_vote_start", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_vote_ask(cb)
+    check("TZ9.3: nashr tugamasdan ovoz boshlanmadi",
+          "e'lon qilinmagan" in cb.message.texts())
+    extra_entry.delete()
+
+    # Ovoz berish boshlanadi
+    cb = FakeCallback("tdadm_vote_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_vote_go(cb)
+    contest.refresh_from_db()
+    check("TZ9.3: 48 soatlik ovoz berish boshlandi",
+          contest.stage == ContestStage.VOTING
+          and contest.voting_end_at is not None
+          and round((contest.voting_end_at - contest.voting_start_at)
+                    .total_seconds() / 3600) == 48)
+    check("ovoz berish hamma uchun bir vaqtda", pub_service.voting_is_open(contest))
+
+    # Ovoz berish
+    cb = FakeCallback(f"td_vote:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_vote(cb)
+    entry.refresh_from_db()
+    check("TZ9: ovoz qabul qilindi",
+          entry.votes_count == 1 and any("qabul qilindi" in a for a in cb.alerts))
+
+    # TZ 16: ikkinchi ovoz hisoblanmaydi
+    cb = FakeCallback(f"td_vote:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_vote(cb)
+    entry.refresh_from_db()
+    check("TZ16: bitta foydalanuvchi ikkinchi ovoz bera olmadi",
+          entry.votes_count == 1
+          and any("allaqachon" in a for a in cb.alerts), cb.alerts)
+
+    # Boshqa foydalanuvchilar ovoz beradi
+    for uid in (SUPER, OPER, OBSV):
+        cb = FakeCallback(f"td_vote:{entry.id}", uid, message=FakeMessage(uid))
+        await contest_handler.td_vote(cb)
+    entry.refresh_from_db()
+    check("turli foydalanuvchilar ovozi hisoblandi", entry.votes_count == 4,
+          entry.votes_count)
+    check("ovozlar bazada unikal",
+          Vote.objects.filter(entry=entry).count() == 4)
+
+    # TZ 16: parallel bosishda ovoz ikki marta yozilmaydi
+    await asyncio.gather(*[
+        contest_handler.td_vote(
+            FakeCallback(f"td_vote:{ventry.id}", NOBODY,
+                         message=FakeMessage(NOBODY)))
+        for _ in range(5)
+    ])
+    ventry.refresh_from_db()
+    check("TZ16: parallel bosishda ovoz ko'paymadi",
+          ventry.votes_count == 1
+          and Vote.objects.filter(entry=ventry).count() == 1,
+          ventry.votes_count)
+
+    # TZ 9: foto va video ovozlari alohida hisoblanadi
+    photo_res = pub_service.results(contest, Nomination.FOTO)
+    video_res = pub_service.results(contest, Nomination.VIDEO)
+    check("TZ10: foto va video natijalari alohida",
+          [e.id for e in photo_res] == [entry.id]
+          and [e.id for e in video_res] == [ventry.id])
+
+    # Natijalar paneli
+    cb = FakeCallback("tdadm_results", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_results(cb)
+    check("natijalar paneli ishladi",
+          entry.code in cb.message.texts() and "ovoz" in cb.message.texts())
+
+    # TZ 9.3: muddat tugagach ovoz qabul qilinmaydi
+    contest.voting_end_at = djtz.now() - timedelta(minutes=1)
+    contest.save(update_fields=["voting_end_at"])
+    before_votes = entry.votes_count
+    cb = FakeCallback(f"td_vote:{entry.id}", 123456789,
+                      message=FakeMessage(123456789))
+    await contest_handler.td_vote(cb)
+    entry.refresh_from_db()
+    check("TZ16: muddat tugagach ovoz qabul qilinmadi",
+          entry.votes_count == before_votes
+          and any("muddati tugagan" in a for a in cb.alerts), cb.alerts)
+
+    # Scheduler ovoz berishni yopadi va g'oliblarni hisoblaydi
+    await pub_service.close_voting_if_due(fake_bot)
+    contest.refresh_from_db()
+    check("TZ9.3: ovoz berish avtomatik yopildi",
+          contest.stage == ContestStage.FINISHED)
+    check("TZ10: adminga g'oliblar xabari yuborildi",
+          any(k == "send_message" and "Ovoz berish yakunlandi" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    top_photo, tie = pub_service.winners(contest, Nomination.FOTO)
+    check("TZ10: foto g'olibi eng ko'p ovoz bo'yicha aniqlandi",
+          len(top_photo) == 1 and top_photo[0].id == entry.id and not tie)
+
+    # TZ 10: teng ovozda avtomatik g'olib belgilanmaydi
+    Entry.objects.filter(id=ventry.id).update(votes_count=4)
+    tie_participant = ContestParticipant.objects.create(
+        contest=contest, telegram_id=990099, full_name="Teng Ovozli",
+        university="Smoke OTM", phone="+998905550000", consent_at=djtz.now())
+    tied_entry = Entry.objects.create(
+        contest=contest, participant=tie_participant, nomination=Nomination.VIDEO,
+        title="Teng ovoz", status=EntryStatus.PUBLISHED, votes_count=4)
+    top_video, tie_v = pub_service.winners(contest, Nomination.VIDEO)
+    check("TZ10: teng ovoz administratorga chiqariladi",
+          tie_v and len(top_video) == 2, (tie_v, len(top_video)))
+    tied_entry.delete()
+    tie_participant.delete()
 
     channel_handler.check_bot_is_admin = real_check
     cleanup()

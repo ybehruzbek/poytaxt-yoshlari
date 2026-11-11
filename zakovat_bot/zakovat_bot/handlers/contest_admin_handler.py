@@ -20,15 +20,20 @@ from zakovat_bot.buttons.panel import (
     entries_list_keyboard,
     entry_admin_keyboard,
     moderation_keyboard,
+    publish_confirm_keyboard,
+    publish_menu_keyboard,
+    vote_start_confirm_keyboard,
 )
 from zakovat_bot.dispatcher import bot, dp
 from zakovat_bot.models import (
     AdminRole,
     Contest,
+    ContestStage,
     Entry,
     EntryStatus,
     ModerationAction,
     ModerationLog,
+    Nomination,
 )
 from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.contest import (
@@ -40,6 +45,15 @@ from zakovat_bot.services.contest import (
     next_pending,
     pending_queue,
     send_entry_media,
+)
+from zakovat_bot.services.publishing import (
+    publish_all,
+    published_entries,
+    ready_for_publication,
+    results,
+    start_voting,
+    voting_is_open,
+    winners,
 )
 from zakovat_bot.state import ContestAdminState
 
@@ -542,3 +556,161 @@ async def tdadm_set_deadline_save(message: Message, state: FSMContext):
         f"✅ Qabul muddati yangilandi: <b>{deadline_text(contest)}</b>",
         reply_markup=back_to("tdadm_menu"),
     )
+
+
+# ==================== Nashr va ovoz berish (TZ 8-10) ====================
+
+@dp.callback_query(F.data == "tdadm_pub_menu")
+async def tdadm_pub_menu(callback: CallbackQuery, state: FSMContext):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    await state.clear()
+    contest = _current_contest()
+    if contest is None:
+        return
+    ready = ready_for_publication(contest).count()
+    published = published_entries(contest).count()
+
+    lines = [f"📢 <b>Nashr va ovoz berish</b>\n",
+             f"📢 Kanal: {contest.channel_id or '❗️ belgilanmagan'}",
+             f"✅ Nashrga tayyor: <b>{ready}</b> ta",
+             f"📣 E'lon qilingan: <b>{published}</b> ta"]
+    if contest.voting_start_at and contest.voting_end_at:
+        lines.append(
+            f"\n🗳 Ovoz berish: "
+            f"{timezone.localtime(contest.voting_start_at):%d.%m %H:%M} — "
+            f"{timezone.localtime(contest.voting_end_at):%d.%m %H:%M}"
+        )
+        lines.append("Holati: " + ("🟢 ochiq" if voting_is_open(contest)
+                                   else "🔴 yopiq"))
+    await callback.message.answer(
+        "\n".join(lines),
+        reply_markup=publish_menu_keyboard(ready, published, contest),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_publish")
+async def tdadm_publish_ask(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    if not contest.channel_id:
+        await callback.message.answer(
+            "❗️ Avval tanlov kanalini belgilang (⚙️ Sozlamalar).",
+            reply_markup=back_to("tdadm_settings"),
+        )
+        return
+    ready = ready_for_publication(contest).count()
+    if not ready:
+        await callback.message.answer("Nashrga tayyor ish yo'q.",
+                                      reply_markup=back_to("tdadm_pub_menu"))
+        return
+    await callback.message.answer(
+        f"📢 <b>{ready} ta tasdiqlangan ish</b> kanalga ketma-ket e'lon "
+        "qilinadi.\n\nModerator tasdiqlamagan ishlar chiqmaydi. "
+        "Har bir ish faqat bir marta joylanadi.",
+        reply_markup=publish_confirm_keyboard(ready),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_publish_go")
+async def tdadm_publish_go(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None or not contest.channel_id:
+        return
+    contest.stage = ContestStage.PUBLISHING
+    contest.save(update_fields=["stage"])
+    log_action(callback.from_user.id, "tanlov_nashr_boshlandi", contest.slug)
+    await callback.message.answer("📢 E'lon qilish boshlandi…")
+
+    ok, failed, errors = await publish_all(bot, contest)
+    text = [f"📢 <b>Nashr yakunlandi</b>\n",
+            f"✅ E'lon qilindi: {ok}",
+            f"❌ Xatolik: {failed}"]
+    if errors:
+        text.append("\n<b>Xatoliklar:</b>")
+        text.extend(f"• {esc(e)}" for e in errors[:10])
+        text.append("\n<i>Qayta urinish uchun «E'lon qilish»ni yana bosing — "
+                    "joylangan ishlar takrorlanmaydi.</i>")
+    log_action(callback.from_user.id, "tanlov_nashr_yakunlandi",
+               f"ok={ok} xato={failed}")
+    await callback.message.answer("\n".join(text),
+                                  reply_markup=back_to("tdadm_pub_menu"))
+
+
+@dp.callback_query(F.data == "tdadm_vote_start")
+async def tdadm_vote_ask(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    remaining = ready_for_publication(contest).count()
+    if remaining:
+        await callback.message.answer(
+            f"❗️ Hali {remaining} ta ish e'lon qilinmagan.\n\n"
+            "TZ bo'yicha ovoz berish barcha ishlar joylangandan keyin "
+            "boshlanadi — aks holda oldin chiqqan postlar ustunlik oladi.",
+            reply_markup=back_to("tdadm_pub_menu"),
+        )
+        return
+    await callback.message.answer(
+        f"🗳 Barcha ishtirokchilar uchun bir vaqtda "
+        f"<b>{contest.voting_hours} soatlik</b> ovoz berish boshlanadi.\n\n"
+        "Muddat tugagach ovoz qabul qilish avtomatik to'xtaydi.",
+        reply_markup=vote_start_confirm_keyboard(contest.voting_hours),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_vote_go")
+async def tdadm_vote_go(callback: CallbackQuery):
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None or contest.voting_start_at:
+        return
+    start_voting(contest)
+    log_action(callback.from_user.id, "tanlov_ovoz_boshlandi", contest.slug)
+    await callback.message.answer(
+        f"🗳 Ovoz berish boshlandi!\n\n"
+        f"Tugash vaqti: <b>"
+        f"{timezone.localtime(contest.voting_end_at):%d.%m.%Y %H:%M}</b>",
+        reply_markup=back_to("tdadm_pub_menu"),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_results")
+async def tdadm_results(callback: CallbackQuery):
+    if not is_admin(callback.from_user.id):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    lines = [f"🏆 <b>Natijalar — {esc(contest.title)}</b>"]
+    if voting_is_open(contest):
+        lines.append("<i>Ovoz berish davom etmoqda — natijalar oraliq.</i>")
+    for nom, label in ((Nomination.FOTO, "📸 Foto"),
+                       (Nomination.VIDEO, "🎬 Video")):
+        lines.append(f"\n<b>{label}</b>")
+        ranked = results(contest, nom)
+        if not ranked:
+            lines.append("• ish yo'q")
+            continue
+        for i, e in enumerate(ranked[:10], 1):
+            lines.append(f"{i}. {e.code} — {esc(e.participant.full_name)} "
+                         f"({e.votes_count} ovoz)")
+        _, tie = winners(contest, nom)
+        if tie:
+            lines.append("⚠️ Teng ovoz — g'olibni administrator belgilaydi.")
+    await callback.message.answer("\n".join(lines),
+                                  reply_markup=back_to("tdadm_pub_menu"))

@@ -13,6 +13,7 @@ from zakovat_bot.models import Broadcast, BroadcastStatus
 from zakovat_bot.services.broadcasting import run_broadcast
 from zakovat_bot.services.chat_event import process_due_reminders
 from zakovat_bot.services.contest import close_submissions_if_due
+from zakovat_bot.services.publishing import close_voting_if_due
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,11 @@ async def scheduler_loop(bot):
             await close_submissions_if_due(bot)
         except Exception:
             logger.exception("Tanlov qabulini yopishda xato")
+        # 48 soatlik ovoz berishni yopish (TZ 9.3)
+        try:
+            await close_voting_if_due(bot)
+        except Exception:
+            logger.exception("Ovoz berishni yopishda xato")
         try:
             due = list(
                 Broadcast.objects.filter(

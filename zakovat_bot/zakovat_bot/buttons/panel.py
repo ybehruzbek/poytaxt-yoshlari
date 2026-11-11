@@ -518,6 +518,7 @@ def contest_admin_menu_keyboard(role, pending=0):
     kb.button(text="📊 Statistika", callback_data="tdadm_stats")
     kb.button(text="📥 Eksport (.xlsx)", callback_data="tdadm_export")
     if role in (AdminRole.SUPERADMIN, AdminRole.OPERATOR):
+        kb.button(text="📢 Nashr va ovoz berish", callback_data="tdadm_pub_menu")
         kb.button(text="⚙️ Tanlov sozlamalari", callback_data="tdadm_settings")
     kb.button(text="🔙 Orqaga", callback_data="admin_main_menu")
     kb.adjust(1)
@@ -594,5 +595,39 @@ def contest_settings_keyboard(contest):
     else:
         kb.button(text="🔔 Tanlovni yoqish", callback_data="tdadm_toggle")
     kb.button(text="🔙 Orqaga", callback_data="tdadm_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def publish_menu_keyboard(ready_count, published_count, contest):
+    """Nashr va ovoz berish boshqaruvi (TZ 8-10)."""
+    kb = InlineKeyboardBuilder()
+    if ready_count:
+        kb.button(text=f"📢 Kanalga e'lon qilish ({ready_count} ta)",
+                  callback_data="tdadm_publish")
+    if published_count and not contest.voting_start_at:
+        kb.button(text="🗳 Ovoz berishni boshlash (48 soat)",
+                  callback_data="tdadm_vote_start")
+    if contest.voting_start_at:
+        kb.button(text="🏆 Natijalar", callback_data="tdadm_results")
+    kb.button(text="🔙 Orqaga", callback_data="tdadm_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def publish_confirm_keyboard(count):
+    kb = InlineKeyboardBuilder()
+    kb.button(text=f"✅ Ha, {count} ta ishni e'lon qilish",
+              callback_data="tdadm_publish_go")
+    kb.button(text="❌ Bekor qilish", callback_data="tdadm_pub_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def vote_start_confirm_keyboard(hours):
+    kb = InlineKeyboardBuilder()
+    kb.button(text=f"🗳 Ha, {hours} soatlik ovoz berishni boshlash",
+              callback_data="tdadm_vote_go")
+    kb.button(text="❌ Bekor qilish", callback_data="tdadm_pub_menu")
     kb.adjust(1)
     return kb.as_markup()
