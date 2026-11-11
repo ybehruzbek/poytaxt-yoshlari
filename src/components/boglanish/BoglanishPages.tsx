@@ -378,7 +378,7 @@ function AloqaC({ L }: { L: (h: string) => string }) {
             </Link>
             <span>
               <Ic d={PATH.clock} />
-              {HOURS.days}, {HOURS.time}
+              {HOURS.days}, {HOURS.time} · {HOURS.off}
             </span>
           </div>
         </div>

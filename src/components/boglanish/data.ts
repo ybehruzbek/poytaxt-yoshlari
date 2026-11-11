@@ -41,7 +41,7 @@ export const EMAIL = CONTACT.email
 export const HOURS = {
   days: 'Duşanba — juma',
   time: '09:00 — 18:00',
-  off: 'Şanba, yakşanba — dam oliş',
+  off: 'Şanba, yakşanba — dam oliş kunlari',
 }
 export const SOCIALS = CONTACT.socials
 
