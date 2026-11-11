@@ -616,3 +616,13 @@
     white-space: normal;
   }
 }
+
+/* VAQTINÇA: oldingi körinişdagi farqlar (OldTeam.tsx) */
+.hk-old .z5-card-txt > small {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+.hk-old .z5-hero .z5-dz {
+  grid-column: 1;
+  margin-top: 14px;
+}
