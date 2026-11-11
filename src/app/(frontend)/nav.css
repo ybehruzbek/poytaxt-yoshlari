@@ -410,3 +410,156 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav-link:hover,
 body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-link {
   background: none;
 }
+
+/* =====================================================================
+   TIL TANLAGIÇ — vaqtinça variantlar (LangSwitch.tsx): B kapsula, C globus, D yoyiladigan.
+   Oçiladigan röyxat navbar menyusi bilan bir xil: tepada töq, aylantirganda oq.
+   ===================================================================== */
+.lx-wrap {
+  display: flex;
+  align-items: center;
+}
+.lx {
+  position: relative;
+}
+.lx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 12px 0 16px;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(83, 40, 34, 0.06);
+  font: 800 13px/1 var(--f-head);
+  letter-spacing: 0.4px;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.lx-btn:hover,
+.lx.open .lx-btn {
+  background: rgba(83, 40, 34, 0.12);
+}
+.lx-chev {
+  transition: transform 0.25s;
+}
+.lx.open .lx-chev {
+  transform: rotate(180deg);
+}
+.lx-globe-w .lx-btn {
+  gap: 8px;
+  padding: 0 16px 0 12px;
+}
+.lx-menu {
+  list-style: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+  z-index: 40;
+  min-width: 210px;
+  padding: 8px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(83, 40, 34, 0.18);
+  transform-origin: calc(100% - 24px) 0;
+  animation: dd-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lx-menu a {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  font: 600 15px/1.2 var(--f-body);
+  color: var(--navy);
+}
+.lx-menu b {
+  font: 800 13px/1 var(--f-head);
+  letter-spacing: 0.4px;
+}
+.lx-menu a:hover {
+  background: var(--soft);
+}
+.lx-menu a.on {
+  background: var(--soft);
+}
+.lx-menu svg {
+  color: var(--blue);
+}
+/* tepada (aylantirilmagan): töq panel — navbar menyusidek */
+.site-head:not(.scrolled) .lx-menu {
+  background: var(--navy);
+  box-shadow: 0 24px 60px rgba(20, 8, 6, 0.35);
+}
+.site-head:not(.scrolled) .lx-menu a {
+  color: #fff;
+}
+.site-head:not(.scrolled) .lx-menu a:hover,
+.site-head:not(.scrolled) .lx-menu a.on {
+  background: rgba(255, 255, 255, 0.1);
+}
+.site-head:not(.scrolled) .lx-menu a.on,
+.site-head:not(.scrolled) .lx-menu svg {
+  color: var(--yellow);
+}
+/* töq hero ustida tugma oq */
+body:has([data-head-dark]) .site-head:not(.scrolled) .lx-btn {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* D — yoyiladigan kapsula */
+.lx-exp {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 99px;
+  background: rgba(83, 40, 34, 0.06);
+}
+.lx-cur {
+  width: 38px;
+  height: 34px;
+  border: 0;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(83, 40, 34, 0.12);
+  font: 800 13px/1 var(--f-head);
+  letter-spacing: 0.4px;
+  color: var(--navy);
+  cursor: pointer;
+}
+.lx-rest {
+  display: inline-flex;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.3s;
+}
+.lx-exp.open .lx-rest {
+  max-width: 100px;
+  opacity: 1;
+}
+.lx-rest a {
+  min-width: 38px;
+  height: 34px;
+  padding: 0 9px;
+  border-radius: 99px;
+  display: grid;
+  place-items: center;
+  font: 800 13px/1 var(--f-head);
+  letter-spacing: 0.4px;
+  color: var(--navy);
+}
+.lx-rest a:hover {
+  background: rgba(83, 40, 34, 0.08);
+}
+body:has([data-head-dark]) .site-head:not(.scrolled) .lx-exp {
+  background: rgba(255, 255, 255, 0.14);
+}
+body:has([data-head-dark]) .site-head:not(.scrolled) .lx-rest a {
+  color: #fff;
+}
