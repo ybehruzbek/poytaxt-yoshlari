@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element -- yetakçilar suratlari; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
-import { type CSSProperties, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 /** Bir martada körinadigan yetakçilar soni (3 ustunda 4 qator); qolgani pastga aylantirganda yuklanadi */
 const STEP = 12
@@ -51,14 +51,9 @@ const More = () => (
 /** Yetakçili OTT kartasi — butun karta yetakçi sahifasiga olib boradi */
 function Lead({ o, base, i }: { o: Otm; base: string; i: number }) {
   const L = o.leader!
-  // keyin yuklangan kartalar navbat bilan köterilib çiqadi
-  const late = i >= STEP
+  // keyin yuklangan kartalar ekranga kirganda köterilib çiqadi (BtList dagi kuzatuvçi)
   return (
-    <Link
-      href={`${base}/${L.slug}`}
-      className={late ? 'bt-card bt-late' : 'bt-card'}
-      style={late ? ({ '--k': i % STEP } as CSSProperties) : undefined}
-    >
+    <Link href={`${base}/${L.slug}`} className={i >= STEP ? 'bt-card bt-late' : 'bt-card'}>
       <div className="bt-txt">
         <span className="bt-otm" title={o.otm}>
           {o.otm}
@@ -74,7 +69,7 @@ function Lead({ o, base, i }: { o: Otm; base: string; i: number }) {
 /** Vakant OTT kartasi */
 function Vac({ o }: { o: Otm }) {
   return (
-    <article className="bt-card bt-vac">
+    <article className="bt-card bt-vac bt-late">
       <div className="bt-txt">
         <span className="bt-type">{TYPE_LABEL[o.type]}</span>
         <h3 className="bt-vac-otm">{o.otm}</h3>
@@ -116,8 +111,35 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
     return () => io.disconnect()
   }, [more, shown])
 
+  // keyin qöşilgan kartalar (yetakçilar va vakantlar) ekranga kirgan sari navbat bilan çiqadi
+  const root = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const cards = root.current?.querySelectorAll<HTMLElement>('.bt-late:not(.bt-seen)')
+    if (!cards?.length) return
+    const io = new IntersectionObserver(
+      (ents) => {
+        ents
+          .filter((e) => e.isIntersecting)
+          .sort(
+            (a, b) =>
+              a.boundingClientRect.top - b.boundingClientRect.top ||
+              a.boundingClientRect.left - b.boundingClientRect.left,
+          )
+          .forEach((e, k) => {
+            const el = e.target as HTMLElement
+            el.style.setProperty('--k', String(Math.min(k, 6)))
+            el.classList.add('bt-seen')
+            io.unobserve(el)
+          })
+      },
+      { rootMargin: '0px 0px -6% 0px' },
+    )
+    cards.forEach((c) => io.observe(c))
+    return () => io.disconnect()
+  }, [shown, type, q, more])
+
   return (
-    <>
+    <div ref={root}>
       <div className="bt-tools">
         <div className="bt-chips" role="group" aria-label="Oliy taʼlim taşkiloti turi">
           {FILTERS.map((f) => (
@@ -182,6 +204,6 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
       )}
 
       {list.length === 0 && <p className="bt-empty">Heç narsa topilmadi.</p>}
-    </>
+    </div>
   )
 }

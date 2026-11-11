@@ -831,8 +831,16 @@ a:hover .bt-more {
   }
 }
 
-/* keyin yuklangan yetakçilar: navbat bilan köteriladi (rv-up — reveal.css) */
-.bt-late {
+/* keyin yuklangan kartalar: ekranga kirgan sari navbat bilan köteriladi (rv-up — reveal.css) */
+.bt-late:not(.bt-seen) {
+  opacity: 0;
+}
+.bt-late.bt-seen {
   animation: rv-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: calc(var(--k, 0) * 60ms);
+  animation-delay: calc(var(--k, 0) * 80ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bt-late:not(.bt-seen) {
+    opacity: 1;
+  }
 }
