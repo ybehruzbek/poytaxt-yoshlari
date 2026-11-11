@@ -52,6 +52,7 @@ export const NAV: NavGroup[] = [
       { label: 'Natijalar va hisobotlar', href: '/faoliyat/natijalar', desc: 'Yil yakunlari raqamlarda' },
     ],
   },
+  { key: 'yangiliklar', label: 'Yangiliklar', href: '/yangiliklar' },
   {
     key: 'hujjatlar',
     label: 'Hujjatlar',
@@ -83,7 +84,6 @@ export const NAV: NavGroup[] = [
       { label: 'Elektron murojaat', href: '/boglanish/murojaat', desc: 'Onlayn murojaat yuboriş' },
     ],
   },
-  { key: 'yangiliklar', label: 'Yangiliklar', href: '/yangiliklar' },
 ]
 
 /** Yo'l bo'yicha sahifa nomi va yo'l zanjiri (breadcrumb) */
