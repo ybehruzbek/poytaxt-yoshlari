@@ -96,3 +96,341 @@
     height: 32px;
   }
 }
+
+/* ---------- B — Hilpiraydigan bayroqlar ---------- */
+.fw2 {
+  margin-top: 40px;
+  padding: 34px 0 26px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #eaf4ff, var(--soft));
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.fw2-track {
+  list-style: none;
+  display: flex;
+  width: max-content;
+  animation: fm-move 60s linear infinite;
+}
+.fw2:hover .fw2-track {
+  animation-play-state: paused;
+}
+.fw2-track li {
+  position: relative;
+  flex: none;
+  width: 150px;
+  margin-right: 28px;
+  padding-left: 8px;
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+.fw2-pole {
+  position: absolute;
+  left: 0;
+  top: -6px;
+  width: 5px;
+  height: 128px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #b9a7a2, #fff 45%, #9c8681);
+}
+.fw2-pole::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: -8px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--yellow);
+}
+.fw2-cloth {
+  position: relative;
+  width: 132px;
+  aspect-ratio: 4 / 3;
+  border-radius: 3px 8px 8px 3px;
+  overflow: hidden;
+  transform-origin: 0 50%;
+  box-shadow: 0 10px 20px rgba(83, 40, 34, 0.14);
+  animation: fw2-wave 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--k) * -0.37s);
+}
+.fw2-cloth img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* mato burmalari: yoruğ va soya çiziqlari oqib turadi */
+.fw2-cloth::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.32) 18%,
+    rgba(255, 255, 255, 0) 32%,
+    rgba(0, 0, 0, 0.14) 46%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  background-size: 220% 100%;
+  animation: fw2-fold 2.6s linear infinite;
+  animation-delay: calc(var(--k) * -0.29s);
+  mix-blend-mode: soft-light;
+}
+.fw2-track small {
+  font: 700 14px/1.2 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+}
+@keyframes fw2-wave {
+  0%,
+  100% {
+    transform: perspective(360px) rotateY(-10deg) skewY(1.5deg);
+  }
+  50% {
+    transform: perspective(360px) rotateY(9deg) skewY(-1.5deg);
+  }
+}
+@keyframes fw2-fold {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+/* ---------- C — 3D karusel ---------- */
+.fr {
+  margin-top: 40px;
+  border-radius: 28px;
+  background: radial-gradient(120% 90% at 50% 100%, #fff 0, var(--soft) 60%);
+  padding: 30px 0 26px;
+  overflow: hidden;
+  text-align: center;
+}
+.fr-stage {
+  height: 340px;
+  padding-bottom: 40px;
+  perspective: 2000px;
+  perspective-origin: 50% 0%;
+  display: grid;
+  place-items: center;
+}
+.fr-ring {
+  --r: min(500px, 40vw);
+  list-style: none;
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  animation: fr-spin 46s linear infinite;
+}
+.fr:hover .fr-ring,
+.fr:hover .fr-face {
+  animation-play-state: paused;
+}
+.fr-ring li {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--a)) translateZ(var(--r));
+}
+/* har bayroq halqa bilan teskari aylanib, doim oldga qarab turadi */
+.fr-face {
+  position: absolute;
+  left: -52px;
+  top: -62px;
+  width: 104px;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  animation: fr-face 46s linear infinite;
+}
+.fr-face img {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4px #fff,
+    0 14px 28px rgba(83, 40, 34, 0.18);
+}
+.fr-face small {
+  font: 700 13px/1.2 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+}
+.fr-cap {
+  margin-bottom: 4px;
+  font: 600 16px/1.3 var(--f-body);
+  color: var(--grey);
+}
+.fr-cap b {
+  font: 800 22px/1 var(--f-head);
+  color: var(--navy);
+}
+@keyframes fr-spin {
+  from {
+    transform: rotateX(-8deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-8deg) rotateY(-360deg);
+  }
+}
+@keyframes fr-face {
+  from {
+    transform: rotateY(calc(-1 * var(--a))) rotateX(8deg);
+  }
+  to {
+    transform: rotateY(calc(360deg - var(--a))) rotateX(8deg);
+  }
+}
+
+/* ---------- D — Tölqin ---------- */
+.fv {
+  margin-top: 40px;
+  padding: 46px 0 40px;
+  border-radius: 28px;
+  background: var(--navy);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.fv-track {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: fm-move 50s linear infinite;
+}
+.fv:hover .fv-track {
+  animation-play-state: paused;
+}
+.fv-track li {
+  position: relative;
+  flex: none;
+  margin-right: 26px;
+  animation: fv-bob 4s ease-in-out infinite;
+  animation-delay: calc(var(--k) * -0.33s);
+}
+.fv-track img {
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 5px rgba(255, 255, 255, 0.14),
+    0 18px 30px rgba(0, 0, 0, 0.25);
+  transition: scale 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fv-track li:hover img {
+  scale: 1.12;
+}
+.fv-track li::after {
+  content: attr(data-name);
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 12px);
+  translate: -50% 4px;
+  opacity: 0;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: var(--yellow);
+  font: 700 13px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
+  transition:
+    opacity 0.25s,
+    translate 0.25s;
+}
+.fv-track li:hover::after {
+  opacity: 1;
+  translate: -50% 0;
+}
+@keyframes fv-bob {
+  0%,
+  100% {
+    translate: 0 -14px;
+  }
+  50% {
+    translate: 0 14px;
+  }
+}
+
+/* ---------- E — Aylanuvçi kartalar ---------- */
+.ff {
+  list-style: none;
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  perspective: 1200px;
+}
+.ff li {
+  aspect-ratio: 4 / 3;
+}
+.ff-card {
+  position: relative;
+  display: block;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: ff-flip 18s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation-delay: calc(var(--k) * 1s - 18s);
+}
+.ff li:hover .ff-card {
+  animation-play-state: paused;
+}
+.ff-front,
+.ff-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 10px 24px rgba(83, 40, 34, 0.12);
+}
+.ff-front img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ff-back {
+  transform: rotateY(180deg);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  background: var(--navy);
+  color: #fff;
+  font: 700 15px/1.2 var(--f-head);
+  text-align: center;
+  padding: 8px;
+}
+.ff-back img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+/* har karta 18 soniyada bir marta aylanib, 2 soniya nomini körsatadi */
+@keyframes ff-flip {
+  0%,
+  4% {
+    transform: rotateY(0);
+  }
+  8%,
+  16% {
+    transform: rotateY(180deg);
+  }
+  20%,
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+@media (max-width: 900px) {
+  .ff {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
