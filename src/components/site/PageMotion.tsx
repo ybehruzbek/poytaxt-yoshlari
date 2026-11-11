@@ -17,6 +17,8 @@ const SKIP = '.pg-crumbs, .crumbs, [popover], .dev-panel'
 const UMUMIY: Opts = { head: 'mask', grid: 'pop' }
 
 const PAGES: Record<string, Opts> = {
+  // Ustav — uzun rasmiy matn, animatsiyasiz (hamma narsa darhol körinadi)
+  '/hujjatlar/normativ/ustav': { skip: 'main' },
   /* ---- Biz haqimizda: sarlavhalar pastdan “suzib” çiqadi ---- */
   '/biz-haqimizda/ittifoq': {
     words: '.it-mission',
