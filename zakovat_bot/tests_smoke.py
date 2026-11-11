@@ -1714,6 +1714,22 @@ async def _run_all(saved_event_ids):
     contest.refresh_from_db()
     check("tanlov kanali belgilandi", contest.channel_id == "-100777")
 
+    # Yopiq kanal: post forward qilish orqali belgilash
+    contest.channel_id = None
+    contest.save(update_fields=["channel_id"])
+    st_fw = FakeState()
+    cb = FakeCallback("tdadm_set_ch", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_set_channel(cb, st_fw)
+    check("forward usuli tushuntirildi",
+          "forward qiling" in cb.message.texts())
+    fwd_msg = FakeMessage(SUPER, text=None)
+    fwd_msg.forward_origin = SimpleNamespace(
+        chat=SimpleNamespace(id=-100777, title="Yopiq kanal"))
+    await contest_admin_handler.tdadm_set_channel_save(fwd_msg, st_fw)
+    contest.refresh_from_db()
+    check("yopiq kanal forward orqali belgilandi",
+          contest.channel_id == "-100777", contest.channel_id)
+
     # Muddatni o'zgartirish
     st_dl = FakeState()
     cb = FakeCallback("tdadm_set_dl", SUPER, message=FakeMessage(SUPER))

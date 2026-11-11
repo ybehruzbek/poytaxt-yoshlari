@@ -471,19 +471,44 @@ async def tdadm_set_channel(callback: CallbackQuery, state: FSMContext):
     await callback.answer()
     await state.set_state(ContestAdminState.set_channel)
     await callback.message.answer(
-        "📢 Tanlov ishlari e'lon qilinadigan kanalni yuboring: "
-        "<code>@username</code> yoki <code>-100...</code> ID.\n\n"
-        "Bot o'sha kanalda admin bo'lishi shart.",
+        "📢 <b>Tanlov kanalini belgilash</b>\n\n"
+        "Uch usuldan biri:\n"
+        "1️⃣ <b>Kanaldan istalgan postni shu yerga forward qiling</b> "
+        "— yopiq kanallar uchun eng oson yo'l;\n"
+        "2️⃣ <code>@username</code> (ochiq kanal);\n"
+        "3️⃣ <code>-100...</code> ko'rinishidagi kanal ID.\n\n"
+        "⚠️ Avval botni kanalga <b>administrator</b> qilib qo'shing "
+        "(post yuborish huquqi bilan) — aks holda belgilab bo'lmaydi.",
         reply_markup=back_to("tdadm_settings", text="❌ Bekor qilish"),
     )
 
 
+def _forwarded_chat(message):
+    """Forward qilingan xabardan manba kanalni ajratadi.
+
+    Bot API 7.0 dan keyin `forward_origin` ishlatiladi; eski `forward_from_chat`
+    ham qo'llab-quvvatlanadi.
+    """
+    origin = getattr(message, "forward_origin", None)
+    if origin is not None and getattr(origin, "chat", None) is not None:
+        return origin.chat
+    return getattr(message, "forward_from_chat", None)
+
+
 @dp.message(StateFilter(ContestAdminState.set_channel))
 async def tdadm_set_channel_save(message: Message, state: FSMContext):
-    value = (message.text or "").strip()
     contest = _current_contest()
-    if contest is None or not value:
+    if contest is None:
         await state.clear()
+        return
+
+    # Yopiq kanal: foydalanuvchi post forward qiladi
+    forwarded = _forwarded_chat(message)
+    if forwarded is not None:
+        value = forwarded.id
+    else:
+        value = (message.text or "").strip()
+    if not value:
         return
     # Botning kanalda admin ekanini tekshiramiz
     try:
