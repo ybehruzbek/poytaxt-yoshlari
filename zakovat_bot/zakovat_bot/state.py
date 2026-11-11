@@ -80,6 +80,8 @@ class ContestAdminState(StatesGroup):
     reject_reason = State()
     revision_reason = State()
     broadcast = State()
+    set_channel = State()
+    set_deadline = State()
 
 
 class AppealAdminState(StatesGroup):

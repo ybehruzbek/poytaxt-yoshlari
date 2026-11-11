@@ -58,6 +58,7 @@ class FakeBot:
         self.fail_delete_ids = set()
         self.forbidden_ids = set()  # 403 qaytaradigan chat_id'lar (blok testi)
         self.subscribed_ids = set()  # kanalga a'zo foydalanuvchilar
+        self.chat_admin_ok = True  # bot tanlov kanalida adminmi
 
     async def send_message(self, chat_id, text=None, **kw):
         if chat_id in self.forbidden_ids:
@@ -78,8 +79,18 @@ class FakeBot:
     async def get_me(self):
         return SimpleNamespace(username="yoshlaruchuntanlov_bot", id=1)
 
+    async def get_chat(self, chat_id):
+        return SimpleNamespace(id=-100777, title="Smoke kanal")
+
+    async def send_media_group(self, chat_id, media, **kw):
+        self.calls.append(("send_media_group", chat_id, len(media)))
+        return [SimpleNamespace(message_id=next(_next_id)) for _ in media]
+
     async def get_chat_member(self, chat_id, user_id):
         """Obuna tekshiruvi: subscribed_ids to'plamidagilar a'zo hisoblanadi."""
+        if chat_id == -100777:  # kanal adminligi tekshiruvi
+            return SimpleNamespace(
+                status="administrator" if self.chat_admin_ok else "left")
         status = "member" if user_id in self.subscribed_ids else "left"
         return SimpleNamespace(status=status)
 
@@ -1446,6 +1457,159 @@ async def _run_all(saved_event_ids):
     # Eksport
     data = contest_service.export_entries_excel(contest)
     check("arizalar Excel eksporti", len(data) > 1000)
+
+    # ---------- 21. Moderatsiya paneli (TZ 6, 12) ----------
+    print("21) Tanlov: moderatsiya paneli")
+    from zakovat_bot.handlers import contest_admin_handler
+    contest_admin_handler.bot = fake_bot
+
+    # Tanlovni qayta ochamiz va navbatni tiklaymiz
+    contest.stage = ContestStage.ACCEPTING
+    contest.submission_deadline = djtz.now() + timedelta(days=1)
+    contest.save(update_fields=["stage", "submission_deadline"])
+    Entry.objects.filter(id__in=[entry.id, ventry.id]).update(
+        status=EntryStatus.MODERATION)
+    entry.refresh_from_db(); ventry.refresh_from_db()
+
+    # Moderator roli
+    TelegramAdminsID.objects.filter(tg_id=OBSV).update(role=AdminRole.MODERATOR)
+
+    cb = FakeCallback("tdadm_menu", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_menu(cb, FakeState())
+    check("tanlov admin menyusi", "SMOKE tanlov" in cb.message.texts()
+          and "Moderatsiyada" in cb.message.texts())
+
+    # Navbat: media + kartochka ko'rsatiladi
+    before_calls = len(fake_bot.calls)
+    cb = FakeCallback("tdadm_queue", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_queue(cb, FakeState())
+    sent = [c for c in fake_bot.calls[before_calls:]]
+    check("moderator navbatni ochdi",
+          any(k in ("send_media_group", "send_photo", "send_video")
+              for k, *_ in sent), [k for k, *_ in sent])
+    check("kartochkada aloqa ma'lumotlari bor",
+          any(k == "send_message" and "Telegram:" in str(t) for k, c, t in sent))
+
+    # Kuzatuvchi moderatsiya qila olmaydi
+    TelegramAdminsID.objects.filter(tg_id=NOBODY).update(role=AdminRole.OBSERVER)
+    TelegramAdminsID.objects.get_or_create(
+        tg_id=NOBODY, defaults={"role": AdminRole.OBSERVER})
+    cb = FakeCallback(f"tdadm_ok:{entry.id}", NOBODY, message=FakeMessage(NOBODY))
+    await contest_admin_handler.tdadm_approve(cb)
+    entry.refresh_from_db()
+    check("TZ12: kuzatuvchi arizani tasdiqlay olmaydi",
+          entry.status == EntryStatus.MODERATION
+          and any("huquq" in a for a in cb.alerts), cb.alerts)
+
+    # Moderator sozlamalarga kira olmaydi (TZ 12)
+    cb = FakeCallback("tdadm_settings", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_settings(cb, FakeState())
+    check("TZ12: moderator sozlamalarga kira olmaydi",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+
+    # Qabul qilish
+    cb = FakeCallback(f"tdadm_ok:{entry.id}", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_approve(cb)
+    entry.refresh_from_db()
+    check("moderator arizani qabul qildi", entry.status == EntryStatus.APPROVED)
+    check("qaror jurnalga yozildi",
+          entry.moderation_logs.filter(action="approve").exists())
+    check("TZ15: ishtirokchiga qabul xabari ketdi",
+          any(k == "send_message" and c == USER1 and "qabul qilindi" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Takroriy tasdiqlash
+    cb = FakeCallback(f"tdadm_ok:{entry.id}", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_approve(cb)
+    check("takroriy tasdiqlash rad etildi",
+          any("allaqachon" in a for a in cb.alerts), cb.alerts)
+
+    # Rad etish — sabab bilan
+    st_mod = FakeState()
+    cb = FakeCallback(f"tdadm_no:{ventry.id}", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_reject_ask(cb, st_mod)
+    check("rad etish sababi so'raldi", "sababini yozing" in cb.message.texts())
+
+    m = FakeMessage(OBSV, text="Material mavzuga mos emas.")
+    await contest_admin_handler.tdadm_reject_save(m, st_mod)
+    ventry.refresh_from_db()
+    check("TZ6: ariza sabab bilan rad etildi",
+          ventry.status == EntryStatus.REJECTED
+          and "mavzuga mos emas" in (ventry.reject_reason or ""))
+    check("TZ15: rad etish sababi ishtirokchiga yuborildi",
+          any(k == "send_message" and c == USER1 and "tasdiqlanmadi" in str(t)
+              and "mavzuga mos emas" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Tuzatish so'rash
+    Entry.objects.filter(id=ventry.id).update(status=EntryStatus.MODERATION)
+    st_mod = FakeState()
+    cb = FakeCallback(f"tdadm_rev:{ventry.id}", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_revision_ask(cb, st_mod)
+    m = FakeMessage(OBSV, text="Videoni sifatliroq qayta yuboring.")
+    await contest_admin_handler.tdadm_revision_save(m, st_mod)
+    ventry.refresh_from_db()
+    check("TZ6: tuzatish so'raldi", ventry.status == EntryStatus.REVISION)
+    check("TZ15: tuzatish izohi yuborildi",
+          any(k == "send_message" and c == USER1 and "tuzatish so'raldi" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Ishtirokchi tuzatishdan keyin qayta topshira oladi
+    cb = FakeCallback("td_my", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_my(cb, FakeState())
+    check("ishtirokchi tuzatish izohini ko'rdi",
+          "Tuzatish" in cb.message.texts()
+          and "sifatliroq" in cb.message.texts())
+
+    # Ro'yxat, kartochka, filtr
+    for data_cb in ("tdadm_list:1:all", "tdadm_list:1:approved",
+                    "tdadm_list:1:revision_requested"):
+        cb = FakeCallback(data_cb, SUPER, message=FakeMessage(SUPER))
+        await contest_admin_handler.tdadm_list(cb)
+    check("arizalar ro'yxati va filtrlari ishladi", True)
+
+    cb = FakeCallback(f"tdadm_entry:{entry.id}", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_entry(cb)
+    check("ariza kartochkasi ochildi", entry.code in cb.message.texts())
+
+    cb = FakeCallback("tdadm_stats", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_stats(cb)
+    check("tanlov statistikasi", "Jami arizalar" in cb.message.texts())
+
+    cb = FakeCallback("tdadm_export", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_export(cb)
+    check("arizalar eksporti", any(k == "answer_document" for k, _ in cb.message.out))
+
+    # Kanal belgilash — bot admin bo'lmagan kanal rad etiladi
+    st_ch = FakeState()
+    cb = FakeCallback("tdadm_set_ch", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_set_channel(cb, st_ch)
+    fake_bot.chat_admin_ok = False
+    m = FakeMessage(SUPER, text="@smoke_kanal")
+    await contest_admin_handler.tdadm_set_channel_save(m, st_ch)
+    contest.refresh_from_db()
+    check("bot admin bo'lmagan kanal rad etildi",
+          contest.channel_id is None and "admin emas" in m.texts())
+
+    fake_bot.chat_admin_ok = True
+    m = FakeMessage(SUPER, text="@smoke_kanal")
+    await contest_admin_handler.tdadm_set_channel_save(m, st_ch)
+    contest.refresh_from_db()
+    check("tanlov kanali belgilandi", contest.channel_id == "-100777")
+
+    # Muddatni o'zgartirish
+    st_dl = FakeState()
+    cb = FakeCallback("tdadm_set_dl", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_set_deadline(cb, st_dl)
+    m = FakeMessage(SUPER, text="noto'g'ri")
+    await contest_admin_handler.tdadm_set_deadline_save(m, st_dl)
+    check("noto'g'ri sana rad etildi", "Format noto'g'ri" in m.texts())
+    m = FakeMessage(SUPER, text="17.11.2026 18:00")
+    await contest_admin_handler.tdadm_set_deadline_save(m, st_dl)
+    contest.refresh_from_db()
+    local_dl = djtz.localtime(contest.submission_deadline)
+    check("qabul muddati o'zgartirildi",
+          (local_dl.day, local_dl.hour) == (17, 18), str(local_dl))
 
     channel_handler.check_bot_is_admin = real_check
     cleanup()

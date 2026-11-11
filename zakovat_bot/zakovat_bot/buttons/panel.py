@@ -508,3 +508,91 @@ def vote_keyboard(entry):
     kb.button(text=f"❤️ Ovoz berish — {entry.votes_count}",
               callback_data=f"td_vote:{entry.id}")
     return kb.as_markup()
+
+
+def contest_admin_menu_keyboard(role, pending=0):
+    """Tanlov boshqaruvi (TZ 12)."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text=f"⏳ Moderatsiya navbati ({pending})", callback_data="tdadm_queue")
+    kb.button(text="📋 Barcha arizalar", callback_data="tdadm_list:1:all")
+    kb.button(text="📊 Statistika", callback_data="tdadm_stats")
+    kb.button(text="📥 Eksport (.xlsx)", callback_data="tdadm_export")
+    if role in (AdminRole.SUPERADMIN, AdminRole.OPERATOR):
+        kb.button(text="⚙️ Tanlov sozlamalari", callback_data="tdadm_settings")
+    kb.button(text="🔙 Orqaga", callback_data="admin_main_menu")
+    kb.adjust(1)
+    return kb.as_markup()
+
+
+def moderation_keyboard(entry):
+    """Moderator qarorlari (TZ 6)."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text="✅ Qabul qilish", callback_data=f"tdadm_ok:{entry.id}")
+    kb.button(text="❌ Rad etish", callback_data=f"tdadm_no:{entry.id}")
+    kb.button(text="🔄 Qayta yuborishni so'rash", callback_data=f"tdadm_rev:{entry.id}")
+    kb.button(text="⏳ Keyinroq ko'rish", callback_data=f"tdadm_skip:{entry.id}")
+    kb.button(text="🔙 Menyu", callback_data="tdadm_menu")
+    kb.adjust(2, 1, 1, 1)
+    return kb.as_markup()
+
+
+def entries_list_keyboard(entries, page, total_pages, status_f):
+    kb = InlineKeyboardBuilder()
+    marks = {
+        "moderation_pending": "⏳", "approved": "✅", "rejected": "❌",
+        "revision_requested": "🔄", "published": "📢", "draft": "📝",
+        "finished": "🏆",
+    }
+    for e in entries:
+        mark = marks.get(e.status, "")
+        nom = "📸" if e.nomination == "foto" else "🎬"
+        kb.button(text=f"{mark}{nom} {e.code} {e.participant.full_name[:20]}",
+                  callback_data=f"tdadm_entry:{e.id}")
+    kb.adjust(1)
+
+    filters = [("all", "Barchasi"), ("moderation_pending", "Navbatda"),
+               ("approved", "Tasdiqlangan"), ("rejected", "Rad etilgan")]
+    kb.row(*[
+        InlineKeyboardButton(
+            text=f"{'• ' if status_f == value else ''}{label}",
+            callback_data=f"tdadm_list:1:{value}",
+        )
+        for value, label in filters
+    ])
+    nav = []
+    if page > 1:
+        nav.append(InlineKeyboardButton(
+            text="⬅️ Oldingi", callback_data=f"tdadm_list:{page - 1}:{status_f}"))
+    if page < total_pages:
+        nav.append(InlineKeyboardButton(
+            text="Keyingi ➡️", callback_data=f"tdadm_list:{page + 1}:{status_f}"))
+    if nav:
+        kb.row(*nav)
+    kb.row(InlineKeyboardButton(text="🔙 Orqaga", callback_data="tdadm_menu"))
+    return kb.as_markup()
+
+
+def entry_admin_keyboard(entry):
+    kb = InlineKeyboardBuilder()
+    if entry.status in ("moderation_pending", "revision_requested"):
+        kb.button(text="✅ Qabul qilish", callback_data=f"tdadm_ok:{entry.id}")
+        kb.button(text="❌ Rad etish", callback_data=f"tdadm_no:{entry.id}")
+    if entry.status == "approved":
+        kb.button(text="❌ Tasdiqni bekor qilish", callback_data=f"tdadm_no:{entry.id}")
+    kb.button(text="📎 Mediani ko'rish", callback_data=f"tdadm_media:{entry.id}")
+    kb.button(text="🔙 Ro'yxatga", callback_data="tdadm_list:1:all")
+    kb.adjust(2, 1, 1)
+    return kb.as_markup()
+
+
+def contest_settings_keyboard(contest):
+    kb = InlineKeyboardBuilder()
+    kb.button(text="📅 Qabul muddatini o'zgartirish", callback_data="tdadm_set_dl")
+    kb.button(text="📢 Tanlov kanalini belgilash", callback_data="tdadm_set_ch")
+    if contest.is_active:
+        kb.button(text="🔕 Tanlovni o'chirish", callback_data="tdadm_toggle")
+    else:
+        kb.button(text="🔔 Tanlovni yoqish", callback_data="tdadm_toggle")
+    kb.button(text="🔙 Orqaga", callback_data="tdadm_menu")
+    kb.adjust(1)
+    return kb.as_markup()
