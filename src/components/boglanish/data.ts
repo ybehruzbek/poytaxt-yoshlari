@@ -11,6 +11,9 @@ export const ADDRESS = {
   /** rasmiy manzil */
   full: 'Özbekiston Respublikasi, Toşkent şahri, Olmazor tumani, Universitet köçasi, 4-uy',
   line: 'Toşkent şahri, Olmazor tumani, Universitet köçasi, 4-uy',
+  /** ikki qatorga bölib körsatiş uçun: şahar va tuman / köça va uy */
+  city: 'Toşkent şahri, Olmazor tumani',
+  street: 'Universitet köçasi, 4-uy',
   landmark: 'Toşkent şahar Yoşlar markazi binosi',
   /** jamoat transporti: Yandex Xaritalar maʼlumotiga köra eng yaqin bekat — 760 m */
   metro: { station: '“Beruniy” metro bekati', walk: '760 metr, piyoda taxminan 10 daqiqa' },

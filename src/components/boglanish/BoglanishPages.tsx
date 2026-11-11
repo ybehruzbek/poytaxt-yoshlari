@@ -180,7 +180,15 @@ function AloqaB({ L }: { L: (h: string) => string }) {
       k: 'Manzil',
       v: (
         <span>
-          {ADDRESS.line}
+          <span className="bg-addr-l">
+            {ADDRESS.city.split(', ').map((part, i, all) => (
+              <span key={part} className="bg-addr-p">
+                {part}
+                {i < all.length - 1 ? ', ' : ','}
+              </span>
+            ))}
+          </span>
+          <span className="bg-addr-l">{ADDRESS.street.replace('-', '\u2011')}</span>
           <small>{ADDRESS.landmark}</small>
           <small>
             {ADDRESS.metro.station} — {ADDRESS.metro.walk}

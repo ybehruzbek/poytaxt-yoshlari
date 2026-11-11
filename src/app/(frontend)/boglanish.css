@@ -231,6 +231,17 @@
 .bg-v a:hover {
   color: var(--blue);
 }
+/* manzil ikki qatorda: “şahar, tuman,” / “köça, uy” — qator söz örtasida bölinmaydi */
+.bg-addr-l {
+  display: block;
+  white-space: nowrap;
+}
+/* telefonda “şahar,” va “tuman,” alohida qatorga tuşadi */
+@media (max-width: 480px) {
+  .bg-addr-p {
+    display: block;
+  }
+}
 .bg-mapcard {
   position: relative;
   display: flex;
