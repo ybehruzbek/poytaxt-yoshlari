@@ -1572,6 +1572,15 @@ async def _run_all(saved_event_ids):
     check("tahrir audit-jurnalga yozildi",
           AuditLog.objects.filter(action="tanlov_post_tahriri").exists())
 
+    # Xavfsizlik: qoralama arizani tahrirlab bo'lmaydi
+    draft2 = Entry.objects.create(contest=contest, participant=bad,
+                                  nomination=Nomination.FOTO, title="Qoralama2")
+    cb = FakeCallback(f"tdadm_ed:{draft2.id}:nom", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_edit_ask(cb, FakeState())
+    check("xavfsizlik: qoralama ariza tahrirlanmadi",
+          "Hozirgi qiymat" not in cb.message.texts())
+    draft2.delete()
+
     # Kuzatuvchi matnni tahrirlay olmaydi
     cb = FakeCallback(f"tdadm_ed:{entry.id}:fio", NOBODY,
                       message=FakeMessage(NOBODY))
@@ -1799,6 +1808,34 @@ async def _run_all(saved_event_ids):
           stuck.status == EntryStatus.PUBLISHED
           and stuck.publication.published_at is not None)
     stuck.delete()
+
+    # Xavfsizlik: albom kanalga ketgach ishtirokchi materialni almashtira olmaydi
+    saved_stage, saved_dl = contest.stage, contest.submission_deadline
+    contest.stage = ContestStage.ACCEPTING
+    contest.submission_deadline = djtz.now() + timedelta(days=1)
+    contest.save(update_fields=["stage", "submission_deadline"])
+    half_participant = ContestParticipant.objects.create(
+        contest=contest, telegram_id=990077, full_name="Yarim Nashr",
+        university="Smoke OTM", phone="+998901113344", consent_at=djtz.now())
+    half = Entry.objects.create(
+        contest=contest, participant=half_participant,
+        nomination=Nomination.VIDEO,
+        title="Yarim nashr", status=EntryStatus.MODERATION)
+    EntryMedia.objects.create(entry=half, file_id="h1", file_unique_id="hu1",
+                              media_type="photo")
+    Publication.objects.create(entry=half, channel_id="-100777",
+                               message_id=555)  # media ketgan, karta yo'q
+    cb = FakeCallback(f"td_resubmit:{half.id}", 990077,
+                      message=FakeMessage(990077))
+    await contest_handler.td_resubmit(cb, FakeState())
+    half.refresh_from_db()
+    check("xavfsizlik: kanalga ketgan materialni almashtirib bo'lmadi",
+          half.status == EntryStatus.MODERATION
+          and any("e'lon qilingan" in a for a in cb.alerts), cb.alerts)
+    half.delete()
+    half_participant.delete()
+    contest.stage, contest.submission_deadline = saved_stage, saved_dl
+    contest.save(update_fields=["stage", "submission_deadline"])
 
     # TZ 9.3: hamma post chiqmaguncha ovoz boshlanmaydi
     extra_entry = Entry.objects.create(

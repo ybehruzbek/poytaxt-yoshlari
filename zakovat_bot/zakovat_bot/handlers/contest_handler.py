@@ -13,6 +13,7 @@ from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from django.db import transaction
+from django.db.models import Q
 from django.utils import timezone
 
 from zakovat_bot.buttons.panel import (
@@ -763,10 +764,13 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
 
     # E'lon qilingan ishni tahrirlab bo'lmaydi: kanaldagi post va unga
     # berilgan ovozlar boshqa materialga ko'chib ketmasligi kerak
-    # Faqat haqiqatan joylangan post himoyalanadi (band qilingan, lekin
-    # hali yuborilmagan yozuv to'siq bo'lmasligi kerak)
-    if Publication.objects.filter(entry=entry,
-                                  published_at__isnull=False).exists():
+    # Kanalga biror narsa yetib borgan bo'lsa (albom yuborilgan, lekin ovoz
+    # kartochkasi hali yo'q bo'lsa ham) — tahrirlash yopiq: aks holda
+    # kanaldagi post va DB'dagi material bir-biriga mos kelmay qoladi.
+    # Faqat bo'sh bandlik (hech narsa yuborilmagan) to'siq bo'lmaydi.
+    if (Publication.objects.filter(entry=entry)
+            .filter(Q(message_id__isnull=False) |
+                    Q(published_at__isnull=False)).exists()):
         await callback.answer(
             "Bu ish kanalda e'lon qilingan — uni o'zgartirib bo'lmaydi.",
             show_alert=True)

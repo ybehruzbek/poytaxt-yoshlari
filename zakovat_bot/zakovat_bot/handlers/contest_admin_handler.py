@@ -814,15 +814,15 @@ async def tdadm_edit_ask(callback: CallbackQuery, state: FSMContext):
     if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
     try:
-        _, entry_id, field = callback.data.split(":")
+        _, _entry_id, field = callback.data.split(":")
     except ValueError:
         await callback.answer()
         return
     if field not in _EDIT_FIELDS:
         await callback.answer()
         return
-    entry = Entry.objects.filter(id=int(entry_id)).select_related(
-        "participant").first()
+    # Joriy tanlovning topshirilgan arizasi bo'lishi shart
+    entry = _lookup_entry(callback)
     if entry is None:
         await callback.answer()
         return
@@ -847,8 +847,13 @@ async def tdadm_edit_ask(callback: CallbackQuery, state: FSMContext):
 async def _save_edit(message, state, field):
     data = await state.get_data()
     await state.clear()
-    entry = Entry.objects.filter(id=data.get("td_edit_entry")).select_related(
-        "participant").first()
+    entry = (
+        Entry.objects.filter(id=data.get("td_edit_entry"),
+                             contest=_current_contest())
+        .exclude(status=EntryStatus.DRAFT)
+        .select_related("participant")
+        .first()
+    )
     value = " ".join((message.text or "").split())
     if entry is None or not value:
         await message.answer("❗️ Matn bo'sh bo'lmasin.",
