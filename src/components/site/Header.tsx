@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { type CSSProperties, type PointerEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import { NAV, type NavGroup, groupPaths } from '@/config/nav'
 import { type Locale, localeLabels, locales } from '@/i18n/config'
@@ -56,8 +56,19 @@ export function Header({ locale }: { locale: Locale }) {
   const headerRef = useRef<HTMLElement>(null)
   const closeTimer = useRef<number | undefined>(undefined)
 
+  // pastga aylantirganda navbar yuqoriga yaşirinadi, tepaga qaytganda yana tuşadi (Apple uslubi)
+  const [away, setAway] = useState(false)
+  const lastY = useRef(0)
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 8)
+      const dy = y - lastY.current
+      if (Math.abs(dy) > 6) {
+        setAway(dy > 0 && y > 320) // menyu oçiq bölsa render'da hisobga olinadi
+        lastY.current = y
+      }
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -105,11 +116,18 @@ export function Header({ locale }: { locale: Locale }) {
     closeTimer.current = window.setTimeout(() => setOpen(null), 160)
   }
 
+  // menyu bandlari ustida sirpanib yuradigan yumşoq fon
+  const [pill, setPill] = useState<{ x: number; w: number; on: boolean }>({ x: 0, w: 0, on: false })
+  const pillTo = (e: PointerEvent<HTMLLIElement>) => {
+    const li = e.currentTarget
+    setPill({ x: li.offsetLeft, w: li.offsetWidth, on: true })
+  }
+
   const isActive = (g: NavGroup) => groupPaths(g).some((p) => path === p || path.startsWith(p + '/'))
   const joinHref = L('/boglanish/murojaat?mavzu=azo')
 
   return (
-    <div className={`site-head${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}`} id="siteHead">
+    <div className={`site-head${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}${away && !open && !drawer ? ' away' : ''}`} id="siteHead">
       <div className="wrap">
         <header
           className="header"
@@ -126,16 +144,37 @@ export function Header({ locale }: { locale: Locale }) {
 
           {/* ===== Kompyuter menyusi ===== */}
           <nav className="mnav" aria-label="Asosiy menyu">
-            <ul>
-              {NAV.map((g) =>
+            <ul onPointerLeave={() => setPill((p) => ({ ...p, on: false }))}>
+              <li
+                className={`mnav-pill${pill.on ? ' on' : ''}`}
+                aria-hidden="true"
+                role="presentation"
+                style={{ translate: `${pill.x}px 0`, width: pill.w }}
+              />
+              {NAV.map((g, k) =>
                 g.href ? (
-                  <li key={g.key} onPointerEnter={() => hoverOpen(null)}>
+                  <li
+                    key={g.key}
+                    style={{ '--k': k } as CSSProperties}
+                    onPointerEnter={(e) => {
+                      hoverOpen(null)
+                      pillTo(e)
+                    }}
+                  >
                     <Link href={L(g.href)} className={`mnav-link${isActive(g) ? ' active' : ''}`} aria-current={isActive(g) ? 'page' : undefined}>
                       {g.label}
                     </Link>
                   </li>
                 ) : (
-                  <li key={g.key} className={open === g.key ? 'is-open' : undefined} onPointerEnter={() => hoverOpen(g.key)}>
+                  <li
+                    key={g.key}
+                    className={open === g.key ? 'is-open' : undefined}
+                    style={{ '--k': k } as CSSProperties}
+                    onPointerEnter={(e) => {
+                      hoverOpen(g.key)
+                      pillTo(e)
+                    }}
+                  >
                     <button
                       id={`nb-${g.key}`}
                       type="button"
@@ -149,8 +188,8 @@ export function Header({ locale }: { locale: Locale }) {
 
                     <div className="dd" id={`np-${g.key}`} hidden={open !== g.key}>
                       <ul className="dd-list">
-                        {g.items!.map((it) => (
-                          <li key={it.href} className={it.children ? 'has-sub' : undefined}>
+                        {g.items!.map((it, j) => (
+                          <li key={it.href} className={it.children ? 'has-sub' : undefined} style={{ '--k': j } as CSSProperties}>
                             <Link href={L(it.href)} className={path === it.href ? 'cur' : undefined} aria-current={path === it.href ? 'page' : undefined}>
                               <span className="t">{it.label}</span>
                               {it.children && <Chevron dir="right" />}
