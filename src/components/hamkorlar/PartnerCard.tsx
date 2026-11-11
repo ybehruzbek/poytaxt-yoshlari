@@ -8,7 +8,7 @@ export function PartnerCard({ p }: { p: Partner }) {
   return (
     <article className="pt-card">
       <div className="pt-card-logo">
-        <img src={p.logo} alt="" loading="lazy" />
+        <img src={p.logo} alt="" loading="lazy" style={p.logoH ? { height: p.logoH } : undefined} />
       </div>
       <h4>{p.name}</h4>
       <ul className="pt-dirs">

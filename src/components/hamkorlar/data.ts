@@ -62,6 +62,8 @@ export type Partner = {
   region?: Region
   /** logotip (eni böyiça kengroq bölsa ham bölaveradi — balandlikka moslanadi) */
   logo: string
+  /** logotip kiçik (asl ölçami past) bölsa — kattalaştirmasdan şu balandlikda körsatiladi, px */
+  logoH?: number
   /** rasmiy sayti (aniq bölsa) */
   site?: string
   /** saytning qisqa körinişi */
@@ -436,6 +438,7 @@ export const PARTNERS: Partner[] = [
     group: 'parlament',
     dirs: ['siyosat'],
     logo: '/img/hamkorlar/qonunchilik-palatasi.webp',
+    logoH: 70,
     site: 'https://parliament.gov.uz',
     domain: 'parliament.gov.uz',
     what: 'Yoşlarga oid qonun loyihalarini muhokama qiliş, qonunlar ijrosi yuzasidan parlament nazorati va yoşlar taşabbuslarini qonunçilikka taklif etiş yönalişlarida hamkorlik yölga qöyilgan.',

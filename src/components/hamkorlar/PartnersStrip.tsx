@@ -16,7 +16,12 @@ function Track({ list, locale, reverse }: { list: Partner[]; locale: string; rev
       className="pt-logo"
       title={p.name}
     >
-      <img src={p.logo} alt={p.name} loading="lazy" />
+      <img
+        src={p.logo}
+        alt={p.name}
+        loading="lazy"
+        style={p.logoH ? { height: Math.min(p.logoH, 72) } : undefined}
+      />
     </a>
   ))
   return (
