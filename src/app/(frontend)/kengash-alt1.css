@@ -170,3 +170,6 @@
   .y1-mc-pic img{height:520px}
   .y1-mc-post li{padding:16px 18px}
 }
+
+/* rangli kartalarda kulrang çegara kerak emas */
+.y1-ab-stats>div:nth-child(-n+4),.y1-pb li:nth-child(1),.y1-pb li:nth-child(7){border-color:transparent}

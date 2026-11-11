@@ -151,12 +151,8 @@
   min-height: 250px;
   overflow: hidden;
   border-radius: var(--r-thumb);
-  background: linear-gradient(
-    110deg,
-    #f8f5f3 0%,
-    #fff 45%,
-    color-mix(in srgb, var(--lime) 14%, #fff) 100%
-  );
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
 }
 .bt-txt {
   display: flex;
@@ -310,7 +306,7 @@
   flex-direction: column;
   min-height: 360px;
   border-radius: var(--r-card);
-  background: linear-gradient(110deg, #f8f5f3 0%, #fff 45%, var(--soft) 100%);
+  background: #fff;
   box-shadow: 0 0 0 1px var(--line);
   padding: 36px 40px;
   color: var(--grey);
@@ -342,7 +338,6 @@
 }
 .bt-hub-card .bt-stats div {
   background: #fff;
-  box-shadow: 0 0 0 1px var(--line);
 }
 .bt-hub-foot {
   display: flex;
@@ -456,6 +451,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 0;
+  border: 0;
   background: none;
   box-shadow: none;
 }
@@ -520,7 +516,8 @@ a.bt-card:hover {
   gap: 44px;
   overflow: hidden;
   border-radius: var(--r-card);
-  background: linear-gradient(110deg, #f8f5f3 0%, #fff 45%, var(--soft) 100%);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
   padding: 0 48px;
 }
 .ld-ph {
@@ -635,6 +632,7 @@ a.bt-card:hover {
   border: 1px solid var(--line);
 }
 .ld-ch li.empty .ld-ic {
+  border: 0;
   background: transparent;
   box-shadow: 0 0 0 1px var(--line);
   color: color-mix(in srgb, var(--navy) 25%, transparent);
@@ -832,4 +830,9 @@ a.bt-card:hover {
 }
 .bt-hub--b .bh-b:first-child:hover .more-btn {
   color: var(--navy);
+}
+
+/* faol filtrdagi son belgisi — çegarasiz */
+.bt-chips button.on span {
+  border-color: transparent;
 }

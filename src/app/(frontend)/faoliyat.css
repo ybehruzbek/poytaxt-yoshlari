@@ -1015,3 +1015,8 @@
     font-size: 22px;
   }
 }
+
+/* faol filtrdagi son belgisi — çegarasiz */
+.fa-chips button.on span {
+  border-color: transparent;
+}

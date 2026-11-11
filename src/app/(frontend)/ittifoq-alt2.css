@@ -87,3 +87,5 @@
   .x2-rb ul{grid-template-columns:1fr}
   .x2-rc li p{font-size:15px}
 }
+
+.x2-kc-tabs button.on b{border-color:transparent}

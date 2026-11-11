@@ -412,3 +412,6 @@ html,body{overflow-x:clip}
 .dev-panel li span button{border:none;background:none;border-radius:99px;min-width:30px;padding:7px 8px;font:700 12px/1 var(--f-body);color:var(--navy);cursor:pointer}
 .dev-panel li span button.on{background:var(--yellow)}
 @media (max-width:640px){.dev-panel{right:12px;bottom:12px}.dev-panel ul{width:min(330px,calc(100vw - 24px))}}
+
+/* rangli çiplarda kulrang çegara kerak emas */
+.chip.b,.chip.g,.chip.o,.chip.p,.chip.y,.featured .chip,.oc .im .chip{border-color:transparent}

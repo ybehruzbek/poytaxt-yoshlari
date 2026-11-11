@@ -11,7 +11,8 @@
   grid-template-columns: 44% 1fr;
   align-items: end;
   border-radius: var(--r-card);
-  background: linear-gradient(100deg, #f8f5f3 0%, #fff 38%, var(--soft) 100%);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
 }
 /* Fon naqşi: ingiçka bir rangli yoylar + nuqtalar (öng tomonda, matn ostida) */
 .z5-art {
@@ -92,12 +93,8 @@
   grid-template-columns: 1fr 170px;
   overflow: hidden;
   border-radius: var(--r-thumb);
-  background: linear-gradient(
-    110deg,
-    #f8f5f3 0%,
-    #fff 45%,
-    color-mix(in srgb, var(--lime) 14%, #fff) 100%
-  );
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
 }
 .z5-card-txt {
   padding: 26px 6px 22px 28px;
@@ -165,6 +162,7 @@
 .z5-soc .hk-lead-ic {
   width: 34px;
   height: 34px;
+  border: 0;
   background: #fff;
   box-shadow: 0 0 0 1px var(--line);
   transition: background 0.2s;
@@ -311,12 +309,8 @@
   gap: 20px;
   margin-right: 48px;
   border-radius: var(--r-thumb);
-  background: linear-gradient(
-    110deg,
-    #f8f5f3 0%,
-    #fff 45%,
-    color-mix(in srgb, var(--lime) 14%, #fff) 100%
-  );
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line);
   padding: 24px 24px 0;
   overflow: hidden;
 }
