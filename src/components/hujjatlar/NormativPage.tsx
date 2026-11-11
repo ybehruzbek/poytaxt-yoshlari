@@ -50,7 +50,7 @@ function DocsB({ acts }: { acts: Act[] }) {
         <Wrap key={x.t} x={x} className="nd-b-row">
           <span className="nd-b-thumb" aria-hidden="true">
             <b>{KIND[x.kind]}</b>
-            <span className="nd-b-no">{x.no ?? 'PDF'}</span>
+            <span className="nd-b-no" data-typo="off">{x.no ?? 'PDF'}</span>
             <i />
             <i />
             <i />
