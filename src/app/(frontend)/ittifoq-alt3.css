@@ -19,7 +19,7 @@
 .x3-strb-council .it-num{margin-bottom:12px;color:var(--navy)}
 .x3-strb-council h3{font:800 26px/1.2 var(--f-head);color:var(--navy)}
 .x3-strb-council p{margin-top:10px;line-height:1.6;color:var(--navy)}
-.x3-strb-row article{background:var(--soft)}
+.x3-strb-row article{background:#fff;border:1px solid var(--line)}
 .x3-strb-row article:last-child{background:var(--green);color:#fff}
 .x3-strb-row article:last-child .it-num{color:rgba(255,255,255,.8)}
 .x3-strb-row article:last-child h3{color:#fff}

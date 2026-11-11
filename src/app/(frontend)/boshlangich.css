@@ -24,8 +24,9 @@
   align-items: baseline;
   gap: 10px;
   border-radius: 99px;
-  background: var(--soft);
+  background: #fff;
   padding: 10px 20px;
+  border: 1px solid var(--line);
 }
 .bt-stats dd {
   order: -1;
@@ -78,11 +79,12 @@
   height: 26px;
   padding: 0 7px;
   border-radius: 99px;
-  background: var(--soft);
+  background: #fff;
   display: grid;
   place-items: center;
   font-size: 12px;
   font-weight: 700;
+  border: 1px solid var(--line);
 }
 .bt-chips button:hover {
   border-color: var(--yellow);
@@ -607,8 +609,9 @@ a.bt-card:hover {
   margin-top: 0;
 }
 .ld-facts--2 .ld-field {
-  background: var(--soft);
+  background: #fff;
   box-shadow: none;
+  border: 1px solid var(--line);
 }
 .ld-ch {
   list-style: none;
@@ -627,8 +630,9 @@ a.bt-card:hover {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--soft);
+  background: #fff;
   color: var(--blue);
+  border: 1px solid var(--line);
 }
 .ld-ch li.empty .ld-ic {
   background: transparent;
@@ -680,10 +684,11 @@ a.bt-card:hover {
   justify-self: start;
   max-width: 100%;
   border-radius: 24px;
-  background: var(--soft);
+  background: #fff;
   padding: 12px 18px;
   font-weight: 700;
   color: var(--navy);
+  border: 1px solid var(--line);
 }
 .ld-step small {
   display: block;

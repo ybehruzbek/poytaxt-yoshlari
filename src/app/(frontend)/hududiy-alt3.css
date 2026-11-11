@@ -354,10 +354,11 @@
   display: flex;
   gap: 14px;
   border-radius: 20px;
-  background: var(--soft);
+  background: #fff;
   padding: 14px 18px;
   font-size: 15px;
   line-height: 1.5;
+  border: 1px solid var(--line);
 }
 .z5-drawer ul li::before {
   content: '';

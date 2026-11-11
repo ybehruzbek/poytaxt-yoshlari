@@ -16,13 +16,14 @@
   align-items: center;
   gap: 14px;
   border-radius: 24px;
-  background: var(--soft);
+  background: #fff;
   padding: 16px 18px;
   font-size: 15px;
   font-weight: 600;
   line-height: 1.35;
   color: var(--navy);
   transition: background 0.2s;
+  border: 1px solid var(--line);
 }
 .nh-jump a:hover {
   background: color-mix(in srgb, var(--yellow) 30%, var(--soft));
@@ -109,10 +110,11 @@
   gap: 22px;
   align-items: flex-start;
   border-radius: 28px;
-  background: var(--soft);
+  background: #fff;
   padding: 20px 24px 20px 20px;
   color: var(--grey);
   transition: background 0.2s;
+  border: 1px solid var(--line);
 }
 a.nd-b-row:hover {
   background: color-mix(in srgb, var(--kt) 60%, var(--soft));

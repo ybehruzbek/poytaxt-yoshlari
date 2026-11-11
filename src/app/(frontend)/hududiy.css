@@ -4,7 +4,7 @@
    ===================================================================== */
 
 /* Jamoa: ikonka doirasi (z5- dizayni hududiy-alt3.css da) */
-.hk-lead-ic{flex:none;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--blue);display:grid;place-items:center}
+.hk-lead-ic{flex:none;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--blue);display:grid;place-items:center;border:1px solid var(--line)}
 .hk-lead-ic svg{width:20px;height:20px}
 
 .hk-jamoa .sec{padding-top:0}

@@ -303,7 +303,7 @@ html,body{overflow-x:clip}
 .tab.on{background:var(--navy);border-color:var(--navy);color:#fff}
 [data-cat].hide{display:none!important}
 
-.chip{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:99px;font-size:13px;font-weight:600;background:var(--soft);color:var(--navy)}
+.chip{display:inline-flex;align-items:center;height:30px;padding:0 12px;border-radius:99px;font-size:13px;font-weight:600;background:#fff;color:var(--navy);border:1px solid var(--line)}
 .chip.g{background:#E3F3EA;color:#2F7F57}.chip.o{background:#FFE9DE;color:#B4521F}.chip.b{background:#E4F0FF;color:#2F64A8}.chip.y{background:#FFF3CF;color:#8A6400}.chip.p{background:#FFE6E8;color:#B23A45}
 
 /* imkoniyat kartalari */

@@ -67,11 +67,12 @@
   height: 26px;
   padding: 0 7px;
   border-radius: 99px;
-  background: var(--soft);
+  background: #fff;
   display: grid;
   place-items: center;
   font-size: 12px;
   font-weight: 700;
+  border: 1px solid var(--line);
 }
 .fa-chips button:hover {
   border-color: var(--yellow);
@@ -724,7 +725,8 @@
 .vb-dash-tiles div {
   padding: 24px;
   border-radius: var(--r-thumb);
-  background: var(--soft);
+  background: #fff;
+  border: 1px solid var(--line);
 }
 .vb-dash-tiles dd {
   margin: 0;
@@ -859,9 +861,10 @@
 .vy-sum span {
   padding: 10px 16px;
   border-radius: 999px;
-  background: var(--soft);
+  background: #fff;
   font-size: 14px;
   color: var(--grey);
+  border: 1px solid var(--line);
 }
 .vy-sum b {
   font: 800 16px/1 var(--f-head);

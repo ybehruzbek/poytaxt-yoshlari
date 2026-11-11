@@ -8,7 +8,7 @@
 .y1-ab-txt p:not(.y1-ab-lead){font-size:18px;line-height:1.7;color:var(--grey)}
 .y1-ab-txt p+p:not(.y1-ab-lead){margin-top:14px}
 .y1-ab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:56px}
-.y1-ab-stats>div{border-radius:var(--r-thumb);padding:30px 28px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;background:var(--soft);color:var(--navy)}
+.y1-ab-stats>div{border-radius:var(--r-thumb);padding:30px 28px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;background:#fff;color:var(--navy);border:1px solid var(--line)}
 .y1-ab-stats>div:nth-child(1){background:var(--yellow)}
 .y1-ab-stats>div:nth-child(2){background:var(--navy);color:#fff}
 .y1-ab-stats>div:nth-child(3){background:var(--lime)}
@@ -62,7 +62,7 @@
 
 /* ----- Vakolatlari B: 5×2 kartalar ----- */
 .y1-pb{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.y1-pb li{background:var(--soft);border-radius:28px;padding:26px 24px;min-height:280px;display:flex;flex-direction:column;gap:20px;transition:transform .2s}
+.y1-pb li{background:#fff;border-radius:28px;padding:26px 24px;min-height:280px;display:flex;flex-direction:column;gap:20px;transition:transform .2s;border:1px solid var(--line)}
 .y1-pb li:hover{transform:translateY(-4px)}
 .y1-pb span{font:800 48px/1 var(--f-head);color:var(--blue)}
 .y1-pb p{margin-top:auto;font-size:15px;line-height:1.55;color:var(--navy);font-weight:600}
@@ -104,7 +104,7 @@
 .y1-ts{background:var(--sky)}
 .y1-tg{background:var(--green);color:#fff!important}
 .y1-tc{background:var(--soft)}
-.y1-mb-link{margin-top:14px;display:flex;align-items:center;gap:28px;background:var(--soft);border-radius:var(--r-card);padding:32px 44px}
+.y1-mb-link{margin-top:14px;display:flex;align-items:center;gap:28px;background:#fff;border-radius:var(--r-card);padding:32px 44px;border:1px solid var(--line)}
 .y1-mb-link img{flex:none;width:72px;height:72px;object-fit:contain}
 .y1-mb-link p{font:700 clamp(17px,1.5vw,21px)/1.5 var(--f-head);color:var(--navy)}
 
