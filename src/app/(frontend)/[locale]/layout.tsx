@@ -54,7 +54,13 @@ export default async function LocaleLayout(props: {
   if (!isLocale(locale)) notFound()
 
   return (
-    <html lang={locale} suppressHydrationWarning className={`${head.variable} ${body.variable}`}>
+    // data-scroll-behavior: sahifa almaşganda Next.js silliq aylantirişni vaqtinça öçiradi — yangi sahifa tepadan oçiladi
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+      className={`${head.variable} ${body.variable}`}
+    >
       <body>
         <Header locale={locale} />
         <main>{props.children}</main>
