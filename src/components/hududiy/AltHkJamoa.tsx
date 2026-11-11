@@ -6,10 +6,7 @@ import { IC, Ic, type Member, TEAM } from './team'
 
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 
-/** “Duşanba — juma · 09:00 — 18:00” → “Duşanba–juma, 09:00–18:00” */
-const dash = (t: string) => t.replace(/\s*—\s*/g, '–').replace(' · ', ', ')
-
-/** Sarlavha, qisqa izoh va Kengaşning umumiy aloqa maʼlumotlari (kartalarda takrorlanmaydi) */
+/** Sarlavha va qisqa izoh */
 function Head() {
   return (
     <div className="hk-jm-head">
@@ -20,26 +17,6 @@ function Head() {
         Kengaş raisi, bölim boşliqlari va mutaxassislar. Har bir xodimning vazifalari, qabul kuni va
         xonasi bilan şu yerda tanişişingiz mumkin.
       </p>
-      <ul className="z5-contact" aria-label="Kengaş bilan boğlaniş">
-        <li>
-          <Ic d={IC.phone} />
-          <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-        </li>
-        <li>
-          <Ic d={IC.mail} />
-          <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-        </li>
-        <li>
-          <Ic d={IC.pin} />
-          <a href={CONTACT.map} target="_blank" rel="noopener noreferrer">
-            {CONTACT.address}
-          </a>
-        </li>
-        <li>
-          <Ic d={IC.clock} />
-          <span>{dash(CONTACT.hours)}</span>
-        </li>
-      </ul>
     </div>
   )
 }
