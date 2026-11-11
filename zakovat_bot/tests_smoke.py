@@ -1538,6 +1538,47 @@ async def _run_all(saved_event_ids):
     check("kartochkada aloqa ma'lumotlari bor",
           any(k == "send_message" and "Telegram:" in str(t) for k, c, t in sent))
 
+    # Post matnini moderator tahrirlashi (kanalga bir xil shablonda chiqsin)
+    check("navbatda kanal posti ko'rinishi ko'rsatildi",
+          any(k == "send_message" and "Kanalga shu ko'rinishda chiqadi" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    st_ed = FakeState()
+    cb = FakeCallback(f"tdadm_ed:{entry.id}:fio", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_edit_ask(cb, st_ed)
+    check("tahrirlash uchun hozirgi qiymat ko'rsatildi",
+          "Karimov Aziz" in cb.message.texts())
+    m = FakeMessage(OBSV, text="Karimov Aziz Baxtiyorovich")
+    await contest_admin_handler.tdadm_edit_fio(m, st_ed)
+    check("F.I.Sh. tahrirlandi va post ko'rinishi yangilandi",
+          "Kanalga shu ko'rinishda chiqadi" in m.texts())
+
+    st_ed = FakeState()
+    cb = FakeCallback(f"tdadm_ed:{entry.id}:uni", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_edit_ask(cb, st_ed)
+    m = FakeMessage(OBSV, text="Toshkent davlat yuridik universiteti")
+    await contest_admin_handler.tdadm_edit_uni(m, st_ed)
+    participant.refresh_from_db()
+    check("OTM nomi moderator tomonidan to'g'rilandi",
+          participant.university == "Toshkent davlat yuridik universiteti")
+
+    st_ed = FakeState()
+    cb = FakeCallback(f"tdadm_ed:{entry.id}:nom", OBSV, message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_edit_ask(cb, st_ed)
+    m = FakeMessage(OBSV, text="Talabalik lahzalari — 2026")
+    await contest_admin_handler.tdadm_edit_title(m, st_ed)
+    entry.refresh_from_db()
+    check("ish nomi to'g'rilandi", entry.title == "Talabalik lahzalari — 2026")
+    check("tahrir audit-jurnalga yozildi",
+          AuditLog.objects.filter(action="tanlov_post_tahriri").exists())
+
+    # Kuzatuvchi matnni tahrirlay olmaydi
+    cb = FakeCallback(f"tdadm_ed:{entry.id}:fio", NOBODY,
+                      message=FakeMessage(NOBODY))
+    await contest_admin_handler.tdadm_edit_ask(cb, FakeState())
+    check("kuzatuvchi post matnini tahrirlay olmaydi",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+
     # Kuzatuvchi moderatsiya qila olmaydi
     TelegramAdminsID.objects.filter(tg_id=NOBODY).update(role=AdminRole.OBSERVER)
     TelegramAdminsID.objects.get_or_create(

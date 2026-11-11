@@ -763,7 +763,10 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
 
     # E'lon qilingan ishni tahrirlab bo'lmaydi: kanaldagi post va unga
     # berilgan ovozlar boshqa materialga ko'chib ketmasligi kerak
-    if Publication.objects.filter(entry=entry).exists():
+    # Faqat haqiqatan joylangan post himoyalanadi (band qilingan, lekin
+    # hali yuborilmagan yozuv to'siq bo'lmasligi kerak)
+    if Publication.objects.filter(entry=entry,
+                                  published_at__isnull=False).exists():
         await callback.answer(
             "Bu ish kanalda e'lon qilingan — uni o'zgartirib bo'lmaydi.",
             show_alert=True)

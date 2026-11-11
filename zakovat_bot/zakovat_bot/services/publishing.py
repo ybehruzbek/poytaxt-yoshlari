@@ -104,62 +104,70 @@ async def publish_entry(bot, contest, entry, channel_username=None):
         if pub.published_at is not None:
             return True, "allaqachon e'lon qilingan"
 
+    # Kanal o'zgargan bo'lsa, eski bandlikdagi xabar raqamlari yaroqsiz
+    if pub.channel_id != str(channel):
+        pub.message_id = None
+        pub.vote_message_id = None
+        pub.channel_id = str(channel)
+        pub.save(update_fields=["message_id", "vote_message_id", "channel_id"])
+
     media = groups[0]
     try:
-        if len(media) > 1 and pub.message_id:
-            # Albom oldingi urinishda yuborilgan — faqat ovoz kartochkasi qoldi
-            first_id = pub.message_id
-            card = await bot.send_message(
-                chat_id=channel, text=post_text(entry),
-                reply_markup=vote_keyboard(entry),
-                reply_to_message_id=first_id)
-            vote_id = card.message_id
-        elif len(media) == 1:
-            # Bitta fayl — matn va ovoz tugmasi o'sha xabarning o'zida
-            item = media[0]
-            kind = entry.media.first().media_type
-            if kind == "video":
-                msg = await bot.send_video(
-                    chat_id=channel, video=item.media, caption=post_text(entry),
-                    reply_markup=vote_keyboard(entry))
-            elif kind == "document":
-                msg = await bot.send_document(
-                    chat_id=channel, document=item.media, caption=post_text(entry),
-                    reply_markup=vote_keyboard(entry))
+        # 1-qadam: media. Yuborilgani darhol qayd etiladi, shuning uchun
+        # qayta urinishda ikkinchi marta joylanmaydi
+        if not pub.message_id:
+            if len(media) == 1:
+                item = media[0]
+                kind = entry.media.first().media_type
+                if kind == "video":
+                    msg = await bot.send_video(
+                        chat_id=channel, video=item.media,
+                        caption=post_text(entry),
+                        reply_markup=vote_keyboard(entry))
+                elif kind == "document":
+                    msg = await bot.send_document(
+                        chat_id=channel, document=item.media,
+                        caption=post_text(entry),
+                        reply_markup=vote_keyboard(entry))
+                else:
+                    msg = await bot.send_photo(
+                        chat_id=channel, photo=item.media,
+                        caption=post_text(entry),
+                        reply_markup=vote_keyboard(entry))
+                # Bitta faylda matn va ovoz tugmasi o'sha xabarning o'zida
+                pub.message_id = msg.message_id
+                pub.vote_message_id = msg.message_id
+                pub.save(update_fields=["message_id", "vote_message_id"])
             else:
-                msg = await bot.send_photo(
-                    chat_id=channel, photo=item.media, caption=post_text(entry),
-                    reply_markup=vote_keyboard(entry))
-            first_id, vote_id = msg.message_id, msg.message_id
-        else:
-            # Albom — tugma qo'shib bo'lmaydi, shuning uchun ovoz kartochkasi
-            # alohida xabar sifatida albomga javob qilib yuboriladi
-            msgs = await bot.send_media_group(chat_id=channel, media=media)
-            first_id = msgs[0].message_id if msgs else None
-            # Albom yuborildi — darhol qayd etamiz, qayta urinishda
-            # rasmlar ikkinchi marta joylanmasligi uchun
-            pub.message_id = first_id
-            pub.save(update_fields=["message_id"])
+                msgs = await bot.send_media_group(chat_id=channel, media=media)
+                if not msgs:
+                    raise RuntimeError("albom yuborilmadi")
+                pub.message_id = msgs[0].message_id
+                pub.save(update_fields=["message_id"])
+
+        # 2-qadam: ovoz kartochkasi (albomga tugma qo'shib bo'lmaydi, shuning
+        # uchun u alohida xabar bo'lib albomga javob qilib yuboriladi)
+        if not pub.vote_message_id:
             card = await bot.send_message(
                 chat_id=channel, text=post_text(entry),
                 reply_markup=vote_keyboard(entry),
-                reply_to_message_id=first_id)
-            vote_id = card.message_id
+                reply_to_message_id=pub.message_id)
+            pub.vote_message_id = card.message_id
+            pub.save(update_fields=["vote_message_id"])
     except TelegramRetryAfter as e:
-        # Band qilish saqlanadi: `published_at` bo'sh bo'lgani uchun ish
-        # navbatda qoladi va keyingi urinishda davom ettiriladi
+        if not pub.message_id:
+            pub.delete()  # hech narsa yuborilmadi — bandlikni bo'shatamiz
         await asyncio.sleep(e.retry_after + 1)
         return False, f"flood-limit ({e.retry_after}s)"
     except Exception as e:
+        if not pub.message_id:
+            pub.delete()
         logger.exception("Nashr xatosi: %s", entry.code)
         return False, str(e)[:200]
 
-    pub.message_id = first_id
-    pub.vote_message_id = vote_id
     pub.published_at = timezone.now()
-    pub.post_url = build_post_url(channel, channel_username, vote_id)
-    pub.save(update_fields=["message_id", "vote_message_id",
-                            "published_at", "post_url"])
+    pub.post_url = build_post_url(channel, channel_username, pub.vote_message_id)
+    pub.save(update_fields=["published_at", "post_url"])
     entry.status = EntryStatus.PUBLISHED
     entry.save(update_fields=["status"])
     return True, ""

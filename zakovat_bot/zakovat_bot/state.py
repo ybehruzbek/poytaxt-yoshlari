@@ -82,6 +82,10 @@ class ContestAdminState(StatesGroup):
     broadcast = State()
     set_channel = State()
     set_deadline = State()
+    edit_fio = State()
+    edit_university = State()
+    edit_faculty = State()
+    edit_title = State()
 
 
 class AppealAdminState(StatesGroup):

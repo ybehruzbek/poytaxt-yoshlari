@@ -525,15 +525,29 @@ def contest_admin_menu_keyboard(role, pending=0):
     return kb.as_markup()
 
 
+def post_edit_keyboard(entry):
+    """Kanalga chiqadigan matn maydonlarini tahrirlash."""
+    kb = InlineKeyboardBuilder()
+    kb.button(text="👤 F.I.Sh.", callback_data=f"tdadm_ed:{entry.id}:fio")
+    kb.button(text="🎓 OTM", callback_data=f"tdadm_ed:{entry.id}:uni")
+    kb.button(text="📚 Yo'nalish", callback_data=f"tdadm_ed:{entry.id}:fak")
+    kb.button(text="📝 Ish nomi", callback_data=f"tdadm_ed:{entry.id}:nom")
+    kb.button(text="🔙 Arizaga qaytish", callback_data=f"tdadm_card:{entry.id}")
+    kb.adjust(2, 2, 1)
+    return kb.as_markup()
+
+
 def moderation_keyboard(entry):
     """Moderator qarorlari (TZ 6)."""
     kb = InlineKeyboardBuilder()
+    kb.button(text="✏️ Post matnini tahrirlash",
+              callback_data=f"tdadm_edit:{entry.id}")
     kb.button(text="✅ Qabul qilish", callback_data=f"tdadm_ok:{entry.id}")
     kb.button(text="❌ Rad etish", callback_data=f"tdadm_no:{entry.id}")
     kb.button(text="🔄 Qayta yuborishni so'rash", callback_data=f"tdadm_rev:{entry.id}")
     kb.button(text="⏳ Keyinroq ko'rish", callback_data=f"tdadm_skip:{entry.id}")
     kb.button(text="🔙 Menyu", callback_data="tdadm_menu")
-    kb.adjust(2, 1, 1, 1)
+    kb.adjust(1, 2, 1, 1, 1)
     return kb.as_markup()
 
 
