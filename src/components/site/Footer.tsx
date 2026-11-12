@@ -7,6 +7,7 @@ import { NET_LABEL, NETS } from '@/lib/socials'
 import { getSocials } from '@/lib/socials-server'
 
 import { Arrow, Svg } from './SocialPhones'
+import { WwwUzCounter } from './WwwUzCounter'
 
 const LOGO_ALT = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
 const COPY = `© 2001–${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi. Barça huquqlar himoyalangan.`
@@ -51,9 +52,12 @@ function Bottom() {
           <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Enter</kbd> tugmalarini bosing.
         </span>
       </div>
-      <a href="#" className="fb-up">
-        Yuqoriga ↑
-      </a>
+      <div className="fb-end">
+        <WwwUzCounter />
+        <a href="#" className="fb-up">
+          Yuqoriga ↑
+        </a>
+      </div>
     </div>
   )
 }
