@@ -176,9 +176,9 @@ export interface News {
    */
   tags?: string[] | null;
   /**
-   * Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — bosh sahifadagi “Yaqin tadbirlar”da
+   * Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — boş sahifadagi “Yaqin tadbirlar”da, tabriklar — “Yangiliklar”dagi alohida “Tabriklar” bölimida
    */
-  kind: 'yangilik' | 'elon' | 'tadbir';
+  kind: 'yangilik' | 'elon' | 'tadbir' | 'tabrik';
   eventDate?: string | null;
   eventPlace?: string | null;
   /**

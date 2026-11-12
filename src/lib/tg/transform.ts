@@ -8,7 +8,7 @@ import type { TgPost } from './channel'
 
 export type Block = { p: string } | { h2: string } | { ul: string[] }
 export type NewsCategory = 'kengash' | 'boshlangich' | 'imkoniyat' | 'tadbir'
-export type NewsKind = 'yangilik' | 'elon' | 'tadbir'
+export type NewsKind = 'yangilik' | 'elon' | 'tadbir' | 'tabrik' | 'skip'
 export type Draft = {
   kind?: NewsKind
   eventDate?: string
@@ -89,7 +89,7 @@ function category(text: string, tags: string[]): NewsCategory {
 const MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
 const EVENT_WORDS = /(simpozium|forum|uçraşuv|festival|konsert|tadbir|seminar|trening|kvest|marafon|kecha|keça|şou|ko'rgazma|körgazma|ekskursiya|sayohat|bayram|turnir|musobaqa|kubogi)/
 const FUTURE = /(bölib ötadi|ötkaziladi|ötadi\b|taşrif buyurmoqda|taklif etamiz|taklif qilamiz|kutamiz|kutib qolamiz|iştirok eting|qatnaşing|kelasiz|boşlanadi|kutyapmiz)/
-const CALL = /(tanlov(i|iga|ga)? (start|eʼlon qilin|boşlan)|tanlov(da|ga)? (iştirok|qatnaş)|tanlov talablari|röyxatdan öt|ariza(lar)? (qabul|topşir|yubor)|qabul qilinadi|sinov testlari?|testlar(ni)? taqdim|bepul kurs|kursiga röyxat|grant|stipendiya|vakansiya|çellenj(ga|da)? (qatnaş|qöşiling))/
+const CALL = /(tanlov(i|iga|ga)? (start|eʼlon qilin|boşlan)|tanlov(da|ga)? (iştirok|qatnaş)|tanlov talablari|röyxatdan öt|ariza(lar)? (qabul|topşir|yubor)|qabul qilinadi|sinov testlari?|testlar(ni)? taqdim|bepul kurs|kursiga röyxat|grant(ga|iga)? (ariza|tanlov)|grant tanlovi|stipendiya(ga|siga)? (ariza|tanlov)|vakansiya|çellenj(ga|da)? (qatnaş|qöşiling))/
 
 /**
  * Post turi: kelgusi tadbir (aniq sana posted sanasidan keyin, tadbir sözi va kelasi zamon), eʼlon (tanlov,
@@ -114,14 +114,16 @@ export function classify(text: string, postDate: string, cat: NewsCategory): Pic
       const labeled = text.match(/manzil:?[ \t]*([^\n!?]{3,120})/i)?.[1]?.replace(/\.$/, '')
       const found = text.match(/([\p{Lu}“][^.!?\n:]{2,80}?(?:saroyi|markazi|universiteti|instituti|akademiyasi|zali|oromgohi|parki|muzeyi|teatri|kutubxonasi|majmuasi|arenasi)(?:da|ida|dagi)?)/u)?.[1]
       const place = (labeled ?? found)
-        ?.replace(/^toşkent şahridagi,?\s*/i, '')
+        ?.replace(/\s*\(https?:[^)]*\)/g, '')
+        .replace(/^toşkent şahridagi,?\s*/i, '')
         .replace(/(i)(?:da|dagi)$/, '$1')
         .replace(/(?:da|dagi)$/, '')
         .trim()
       return { kind: 'tadbir', eventDate: when.toISOString(), eventPlace: place }
     }
   }
-  if (cat === 'imkoniyat' || CALL.test(t)) return { kind: 'elon' }
+  void cat
+  if (CALL.test(t)) return { kind: 'elon' }
   return { kind: 'yangilik' }
 }
 
@@ -161,7 +163,8 @@ export function postToDraft(post: TgPost): Draft | null {
     title = `${title} ${ss[1]}`
     used = 2
   }
-  title = clip(title.replace(/[.:;,]+$/, '').replace(/^[!?.\s]+/, ''), 140)
+  const noUrl = (x: string) => x.replace(/\s*\(https?:[^)]*\)?/g, '').replace(/https?:\/\/\S+/g, '').trim()
+  title = clip(noUrl(title).replace(/[.:;,]+$/, '').replace(/^[!?.\s]+/, ''), 140)
   const restFirst = ss.slice(used).join(' ').trim()
 
   // matn bloklari
@@ -179,13 +182,14 @@ export function postToDraft(post: TgPost): Draft | null {
   let excerpt = title
   const first = blocks[0]
   if (first && 'p' in first) {
-    if (first.p.length <= 300) {
+    if (first.p.length <= 300 && !/https?:/.test(first.p)) {
       excerpt = first.p
       blocks.shift()
-    } else excerpt = clip(first.p, 280)
+    } else excerpt = clip(first.p.replace(/\s*\(https?:[^)]*\)?/g, ''), 280)
   }
 
   const cat = category(plain, tags)
+  if (!excerpt.trim()) excerpt = title
   return { title, excerpt, blocks, tags: tags.slice(0, 6), category: cat, ...classify(lines.map((l) => l.txt).join('\n'), post.date, cat) }
 }
 

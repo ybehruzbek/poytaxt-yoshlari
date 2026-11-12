@@ -6,7 +6,7 @@ import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { toYnItems } from '@/components/yangiliklar/data'
 import { YangiliklarPage } from '@/components/yangiliklar/YangiliklarPage'
 import type { Locale } from '@/i18n/config'
-import { NEWS_ONLY, toNewsCard } from '@/lib/news'
+import { NEWS_AND_GREETINGS, toNewsCard } from '@/lib/news'
 
 import '../../yangiliklar.css'
 
@@ -25,10 +25,10 @@ export default async function YangiliklarRoute(props: { params: Promise<{ locale
   const res = await payload.find({
     collection: 'news',
     locale,
-    limit: 200,
+    limit: 2000,
     sort: '-publishedAt',
     depth: 1,
-    where: { and: [{ _status: { equals: 'published' } }, NEWS_ONLY] },
+    where: { and: [{ _status: { equals: 'published' } }, NEWS_AND_GREETINGS] },
   })
   const items = toYnItems(res.docs.map(toNewsCard))
 

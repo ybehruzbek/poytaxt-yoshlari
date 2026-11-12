@@ -59,11 +59,28 @@ function Body({ a }: { a: ArticleData }) {
   ) : null
 }
 
+const TG_ICON = (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M21.5 4.3 2.9 11.5c-1.3.5-1.3 1.2-.2 1.6l4.8 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.4-2.3 4.9 3.6c.9.5 1.5.2 1.8-.8l3.3-15.4c.3-1.3-.5-1.9-1.4-1.4ZM8.9 14.2l9.6-6.1c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4-1.6-4.9Z" />
+  </svg>
+)
+
+/** Asl post: Telegram belgisi bilan kanalga havola (kanalda suratlar va boşqa xabarlar) */
 function Source({ a }: { a: ArticleData }) {
   if (!a.source) return null
   return (
-    <a href={a.source} target="_blank" rel="noopener noreferrer" className="more-btn ar-src">
-      <More>Telegram kanalida öqiş</More>
+    <a href={a.source} target="_blank" rel="noopener noreferrer" className="ar-tg">
+      <span className="ar-tg-ic">{TG_ICON}</span>
+      <span className="ar-tg-t">
+        <b>“Poytaxt yoşlari” Telegram kanali</b>
+        <small>Asl xabar va boşqa suratlarni kanalda köriş</small>
+      </span>
+      <span className="ar-tg-go" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M7 17 17 7M9 7h8v8" />
+        </svg>
+      </span>
+      <span className="sr-only"> (yangi oynada oçiladi)</span>
     </a>
   )
 }

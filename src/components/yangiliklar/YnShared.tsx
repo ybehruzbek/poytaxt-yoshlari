@@ -42,17 +42,20 @@ export type YnCat = 'all' | YnItem['category']
 /** Turkum böyiça saralaş: tanlangan turkum va saralangan röyxat */
 export function useRubric(items: YnItem[]) {
   const [cat, setCat] = useState<YnCat>('all')
-  const list = cat === 'all' ? items : items.filter((it) => it.category === cat)
+  // “Barçasi” — faqat yangiliklar; tabriklar faqat öz rubrikasida
+  const list = cat === 'all' ? items.filter((it) => it.category !== 'tabrik') : items.filter((it) => it.category === cat)
   return { cat, setCat, list }
 }
 
 /** Rubrikalar: “Barçasi” + har turkum (yonida son) */
 export function Rubrics({ items, cat, onPick }: { items: YnItem[]; cat: YnCat; onPick: (k: YnCat) => void }) {
-  const cats = [...new Map(items.map((it) => [it.category, it.categoryLabel])).entries()]
+  const cats = [...new Map(items.map((it) => [it.category, it.categoryLabel])).entries()].sort(
+    ([a], [b]) => Number(a === 'tabrik') - Number(b === 'tabrik'),
+  )
   return (
     <div className="chips yn-rub" role="group" aria-label="Rubrikalar">
       <button type="button" aria-pressed={cat === 'all'} onClick={() => onPick('all')}>
-        Barçasi <span>{items.length}</span>
+        Barçasi <span>{items.filter((it) => it.category !== 'tabrik').length}</span>
       </button>
       {cats.map(([k, label]) => (
         <button key={k} type="button" aria-pressed={cat === k} onClick={() => onPick(k)}>

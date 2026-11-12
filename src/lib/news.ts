@@ -6,7 +6,8 @@ export type NewsCard = {
   slug: string
   title: string
   excerpt: string
-  category: News['category']
+  /** “tabrik” — tabriklar (alohida rubrika) */
+  category: News['category'] | 'tabrik'
   categoryLabel: string
   date: string
   dateISO: string
@@ -20,7 +21,8 @@ const CATEGORY_LABEL: Record<News['category'], string> = {
   imkoniyat: 'Imkoniyatlar',
   tadbir: 'Tadbir',
 }
-export const CATEGORY_TONE: Record<News['category'], 'o' | 'g' | 'b' | 'y'> = {
+export const CATEGORY_TONE: Record<News['category'] | 'tabrik', 'o' | 'g' | 'b' | 'y'> = {
+  tabrik: 'y',
   kengash: 'o',
   boshlangich: 'g',
   imkoniyat: 'y',
@@ -42,8 +44,8 @@ export function toNewsCard(doc: News): NewsCard {
     slug: doc.slug ?? String(doc.id),
     title: doc.title,
     excerpt: doc.excerpt,
-    category: doc.category,
-    categoryLabel: CATEGORY_LABEL[doc.category],
+    category: doc.kind === 'tabrik' ? 'tabrik' : doc.category,
+    categoryLabel: doc.kind === 'tabrik' ? 'Tabriklar' : CATEGORY_LABEL[doc.category],
     date: formatDateUz(doc.publishedAt),
     dateISO: doc.publishedAt,
     image: img?.sizes?.card?.url || img?.url || '',
@@ -56,3 +58,6 @@ export const NEWS_PAGE_SIZE = 5
 
 /** Faqat yangiliklar (kanaldagi eʼlon va kelgusi tadbirlar alohida bölimlarda körsatiladi) */
 export const NEWS_ONLY = { kind: { equals: 'yangilik' as const } }
+
+/** Yangiliklar sahifasi: yangiliklar va tabriklar (tabriklar alohida rubrikada) */
+export const NEWS_AND_GREETINGS = { kind: { in: ['yangilik', 'tabrik'] } }
