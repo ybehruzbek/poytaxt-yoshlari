@@ -20,6 +20,11 @@ const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq', '/biz-haqimizda/markaziy-ke
   '/faoliyat/natijalar',
   '/boglanish/aloqa',
   '/boglanish/murojaat',
+  '/axborot-xizmati/fotogalereya',
+  '/axborot-xizmati/videogalereya',
+  '/axborot-xizmati/press-relizlar',
+  '/axborot-xizmati/oav',
+  '/yangiliklar',
 ])
 
 /** Menyudagi barcha yo'llar oldindan tayyorlanadi */
