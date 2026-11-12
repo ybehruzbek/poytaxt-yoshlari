@@ -9,7 +9,6 @@ import {
   ABOUT,
   BODIES,
   CONTACT,
-  EVENTS,
   IMG,
   LEADERS,
   MEMBERS,
@@ -18,7 +17,6 @@ import {
   STATS,
 } from './data'
 import { KgVariants } from './variants'
-import { More } from '@/components/site/MoreBtn'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
@@ -41,7 +39,6 @@ const PANEL: PanelSection[] = [
   ['kta', 'Tarkibi'],
   ['kra', 'Rahbariyat'],
   ['kij', 'Ijroiya qömitasi va komissiya'],
-  ['kqa', 'Qarorlar va yiğilişlar'],
   ['kal', 'Aloqa'],
 ].map(([name, label]) => ({ name, label, count: 3 }))
 
@@ -213,44 +210,6 @@ export function KengashPage({ L, crumbs, siblings }: P) {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-    ),
-    kqa: (
-      <section className="sec">
-        <div className="wrap">
-          <div className="kg-dec">
-            <div>
-              <h2 className="h2">Qarorlar va yiğilişlar</h2>
-              <p>
-                Markaziy Kengaş yiğilişlarida qabul qilingan qarorlar va hisobotlar “Kengaş hujjatlari”
-                bölimida eʼlon qilinadi.
-              </p>
-            </div>
-            <Link href={L('/hujjatlar/kengash')} className="btn btn-primary">
-              Kengaş hujjatlari{' '}
-              <span className="ic">
-                <Arrow />
-              </span>
-            </Link>
-          </div>
-          <h3 className="kg-ev-title">Sönggi tadbirlar</h3>
-          <div className="kg-ev">
-            {EVENTS.map((e) => (
-              <a key={e.href} href={e.href} target="_blank" rel="noopener noreferrer">
-                <img src={e.img} alt="" loading="lazy" />
-                <div>
-                  <time>{e.date}</time>
-                  <h4>{e.t}</h4>
-                  <p>{e.d}</p>
-                  <span className="more-btn">
-                    <More />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <p className="kg-credit">Suratlar: UzA</p>
         </div>
       </section>
     ),
