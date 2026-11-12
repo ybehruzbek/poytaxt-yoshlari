@@ -81,6 +81,7 @@ export const NAV: NavGroup[] = [
     intro: 'Savol, taklif yoki murojaatingiz bormi?',
     items: [
       { label: 'Aloqa maʼlumotlari', href: '/boglanish/aloqa', desc: 'Telefon, poçta, manzil va xarita' },
+      { label: 'Köp beriladigan savollar', href: '/boglanish/savollar', desc: 'Aʼzolik, imtiyozlar va murojaat haqida' },
       { label: 'Elektron murojaat', href: '/boglanish/murojaat', desc: 'Onlayn murojaat yuboriş' },
     ],
   },

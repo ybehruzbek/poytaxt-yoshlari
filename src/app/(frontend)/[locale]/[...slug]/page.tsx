@@ -20,6 +20,7 @@ const OWN_PAGES = new Set(['/biz-haqimizda/ittifoq', '/biz-haqimizda/markaziy-ke
   '/faoliyat/natijalar',
   '/boglanish/aloqa',
   '/boglanish/murojaat',
+  '/boglanish/savollar',
   '/axborot-xizmati/fotogalereya',
   '/axborot-xizmati/videogalereya',
   '/axborot-xizmati/press-relizlar',
