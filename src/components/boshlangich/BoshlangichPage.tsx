@@ -16,10 +16,6 @@ export function BoshlangichPage({ crumbs, base }: { crumbs: ReactNode; base: str
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar</h1>
-          <p className="pg-lead">
-            Toşkent şahridagi oliy taʼlim taşkilotlarida faoliyat yuritayotgan Özbekiston yoşlar
-            ittifoqi boşlanğiç taşkilotlari va ularning yoşlar yetakçilari.
-          </p>
           <dl className="bt-stats">
             <div>
               <dt>Oliy taʼlim taşkiloti</dt>
@@ -30,7 +26,7 @@ export function BoshlangichPage({ crumbs, base }: { crumbs: ReactNode; base: str
               <dd>{LED}</dd>
             </div>
             <div>
-              <dt>Yetakçisi tayinlanmagan</dt>
+              <dt>Yetakçi lavozimi vakant</dt>
               <dd>{OTMS.length - LED}</dd>
             </div>
           </dl>

@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/config'
 import '../../../../boshlangich.css'
 
 export const metadata: Metadata = {
-  title: 'Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar — Özbekiston yoşlar ittifoqi',
+  title: 'Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description:
     'Toşkent şahridagi harbiy qismlar va muassasalarda faoliyat yuritayotgan Özbekiston yoşlar ittifoqi boşlanğiç taşkilotlari.',
 }

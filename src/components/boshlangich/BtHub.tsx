@@ -22,20 +22,20 @@ const DIRS: Dir[] = [
   {
     n: '01',
     t: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar',
-    d: 'Davlat, nodavlat va xorijiy oliy taʼlim taşkilotlarining filiallaridagi boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
+    d: 'Toşkent şahridagi davlat va nodavlat oliy taʼlim taşkilotlari hamda xorijiy oliy taʼlim taşkilotlarining filiallaridagi boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
     href: '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim',
     go: 'Sahifaga ötiş',
     stats: [
       { v: String(OTMS.length), t: 'Oliy taʼlim taşkiloti' },
       { v: String(LED.length), t: 'Yoşlar yetakçisi' },
-      { v: String(OTMS.length - LED.length), t: 'Vakant', accent: true },
+      { v: String(OTMS.length - LED.length), t: 'Yetakçi lavozimi vakant', accent: true },
     ],
     faces: LED.map((o) => o.leader!.img),
   },
   {
     n: '02',
     t: 'Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar',
-    d: 'Harbiy qismlar va muassasalarda faoliyat yuritayotgan boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
+    d: 'Toşkent şahridagi harbiy qismlar va muassasalarda faoliyat yuritayotgan boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
     href: '/biz-haqimizda/boshlangich-tashkilotlar/harbiy',
     go: 'Sahifaga ötiş',
     stats: [{ v: '—', t: 'Röyxat tayyorlanmoqda' }],
@@ -100,10 +100,6 @@ export function BtHub({ L, crumbs }: { L: (h: string) => string; crumbs: ReactNo
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Boşlanğiç taşkilotlar</h1>
-          <p className="pg-lead">
-            Özbekiston yoşlar ittifoqining Toşkent şahridagi boşlanğiç taşkilotlari — oliy taʼlim
-            taşkilotlarida hamda harbiy qismlar va muassasalarda.
-          </p>
         </div>
       </header>
       <section className="sec bt-sec">

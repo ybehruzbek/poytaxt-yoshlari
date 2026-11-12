@@ -11,10 +11,6 @@ export function HarbiyPage({ crumbs }: { crumbs: ReactNode }) {
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar</h1>
-          <p className="pg-lead">
-            Toşkent şahridagi harbiy qismlar va muassasalarda faoliyat yuritayotgan Özbekiston
-            yoşlar ittifoqi boşlanğiç taşkilotlari va ularning yoşlar yetakçilari.
-          </p>
         </div>
       </header>
       <section className="sec bt-sec">
@@ -28,7 +24,7 @@ export function HarbiyPage({ crumbs }: { crumbs: ReactNode }) {
               <h2>Röyxat tayyorlanmoqda</h2>
               <p>
                 Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar hamda ularning yoşlar
-                yetakçilari haqidagi maʼlumot tez orada şu yerda eʼlon qilinadi.
+                yetakçilari röyxati tayyorlangaç şu sahifada eʼlon qilinadi.
               </p>
             </div>
           </div>

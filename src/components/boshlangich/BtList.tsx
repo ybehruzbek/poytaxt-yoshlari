@@ -190,7 +190,7 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
       {!more && vac.length > 0 && (
         <>
           <h2 className="bt-vac-h">
-            Vakant boşlanğiç taşkilotlar <span>{vac.length}</span>
+            Yetakçi lavozimi vakant bölgan oliy taʼlim taşkilotlari <span>{vac.length}</span>
           </h2>
           <div className="bt-grid">
             {vac.map((o) => (
