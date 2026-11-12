@@ -88,7 +88,7 @@
 }
 .bg-tr {
   display: grid;
-  grid-template-columns: 160px 150px 1fr 110px;
+  grid-template-columns: 160px 150px 1fr;
   gap: 16px;
   align-items: center;
   padding: 16px 24px;
@@ -147,13 +147,6 @@
 .bg-week small {
   font-size: 12.5px;
   color: var(--muted);
-}
-.bg-week em {
-  margin-top: auto;
-  padding-top: 6px;
-  font: 700 13px/1 var(--f-head);
-  font-style: normal;
-  color: var(--navy);
 }
 
 /* Ijtimoiy tarmoqlar */

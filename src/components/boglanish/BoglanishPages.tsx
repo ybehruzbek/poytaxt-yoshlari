@@ -101,7 +101,6 @@ function Reception({ cards }: { cards?: boolean }) {
                 <span className="bg-week-time">{r.time}</span>
                 <strong>{r.name}</strong>
                 <small>{r.dept}</small>
-                <em>{r.room}</em>
               </li>
             ))}
           </ol>
@@ -111,7 +110,6 @@ function Reception({ cards }: { cards?: boolean }) {
               <span role="columnheader">Kun</span>
               <span role="columnheader">Vaqt</span>
               <span role="columnheader">Qabul qiladi</span>
-              <span role="columnheader">Xona</span>
             </div>
             {RECEPTIONS.map((r) => (
               <div className="bg-tr" role="row" key={r.day}>
@@ -123,7 +121,6 @@ function Reception({ cards }: { cards?: boolean }) {
                   <strong>{r.name}</strong>
                   <small>{r.dept}</small>
                 </span>
-                <span role="cell">{r.room}</span>
               </div>
             ))}
           </div>

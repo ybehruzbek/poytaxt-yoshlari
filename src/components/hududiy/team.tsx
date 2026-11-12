@@ -40,21 +40,21 @@ export type Member = {
   /** bölimning rasmiy töliq nomi */
   dept?: string
   room: string
-  /** qabul: “çorşanba, 14:00–17:00 · 9-xona” */
+  /** qabul: “çorşanba, 14:00–17:00” (xona raqami körsatilmaydi) */
   reception?: string
   duties?: string[]
   /** vazifalar şaxsiy emas, bölimniki */
   deptDuties?: boolean
 }
 
-/** “Duşanba”, “14:00 — 17:00”, “11” → “duşanba, 14:00–17:00 · 11-xona” (kun nomi gap ičida kiçik harf bilan) */
-const fmtRec = (day: string, time: string, room?: string) =>
-  // vaqt va xona bölinmas (u2060, nbsp) — qator faqat kun nomidan keyin bölinadi
-  `${day.toLocaleLowerCase('uz')}, ${time.replace(/\s*—\s*/, '\u2060–\u2060')}${room ? `\u00a0·\u00a0${Number(room)}\u2011xona` : ''}`
+/** “Duşanba”, “14:00 — 17:00” → “duşanba, 14:00–17:00” (kun nomi gap ičida kiçik harf bilan) */
+const fmtRec = (day: string, time: string) =>
+  // vaqt bölinmas (u2060) — qator faqat kun nomidan keyin bölinadi
+  `${day.toLocaleLowerCase('uz')}, ${time.replace(/\s*—\s*/, '\u2060–\u2060')}`
 
 const recOf = (name: string) => {
   const r = RECEPTION.find((x) => x.name === name)
-  return r ? fmtRec(r.day, r.time, r.room) : undefined
+  return r ? fmtRec(r.day, r.time) : undefined
 }
 
 /** Jamoa: rais → bölim boşliqlari → mutaxassislar */

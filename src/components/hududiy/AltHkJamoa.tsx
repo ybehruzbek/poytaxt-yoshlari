@@ -19,7 +19,7 @@ function Head() {
 }
 
 /**
- * Aloqa: şaxsiy telefon/poçta (bölsa), qabul kuni va xonasi, ijtimoiy tarmoqlar.
+ * Aloqa: şaxsiy telefon/poçta (bölsa), qabul kuni va vaqti, ijtimoiy tarmoqlar.
  * Kengaşning umumiy telefoni va poçtasi kartalarda takrorlanmaydi (sahifa boşida bir marta) —
  * faqat vazifalar panelida (`full`) körsatiladi.
  */
@@ -30,12 +30,10 @@ function Reach({ m, full, children }: { m: Member; full?: boolean; children?: Re
     <div className="z5-reach">
       {phone && <a href={tel(phone)}>{phone}</a>}
       {email && <a href={`mailto:${email}`}>{email}</a>}
-      {m.reception ? (
+      {m.reception && (
         <span className="z5-rec">
           <b>Qabul:</b> {m.reception}
         </span>
-      ) : (
-        m.room && <span className="z5-rec">{m.room}</span>
       )}
       <div className="z5-soc">
         {m.socials?.map((x) => (
