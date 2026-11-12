@@ -246,10 +246,6 @@ a.nd-b-row:hover {
 
 /* ---------- Imkoniyatlar: yoşlar qatlami böyiça saralaş ---------- */
 .nd-aud {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
   margin-bottom: 22px;
 }
 .nd-aud-l {

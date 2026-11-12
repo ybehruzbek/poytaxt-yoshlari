@@ -201,7 +201,7 @@
 }
 .cb-field [aria-invalid='true'] {
   border-color: #c2410c !important;
-  background: #fff4ef;
+  background: color-mix(in srgb, var(--blue) 8%, var(--bg));
 }
 .cb-err {
   font-size: 13px;
@@ -282,12 +282,19 @@
   font: 500 15px/1.45 var(--f-body);
 }
 .cb-msg.ok {
-  background: #e3f3ea;
+  background: color-mix(in srgb, var(--green) 14%, var(--bg));
   color: #1f6b45;
 }
 .cb-msg.bad {
-  background: #fff1ec;
+  background: color-mix(in srgb, var(--blue) 12%, var(--bg));
   color: #a3361a;
+}
+/* tungi rejim: töq fonda öqiladigan och matn */
+html[data-theme='dark'] .cb-msg.ok {
+  color: #9fdcbc;
+}
+html[data-theme='dark'] :is(.cb-msg.bad, .cb-err) {
+  color: #ffb59a;
 }
 @media (max-width: 640px) {
   .cb-row {

@@ -103,7 +103,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .a11y-btn:not(.on) {
 }
 .a11y-sec output {
   font-weight: 800;
-  color: var(--orange);
+  color: var(--blue);
 }
 .a11y-modes {
   display: grid;

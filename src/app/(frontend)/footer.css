@@ -152,9 +152,13 @@
 .fw-mail {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 28px;
+  gap: 0 28px;
 }
+/* telefonda ham bosiş maydoni kamida 44px */
 .fw-mail a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-weight: 600;
   color: #e9d7d2;
 }
