@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { AppealFiles, Appeals } from './collections/Appeals'
+import { Memberships } from './collections/Memberships'
 import { TextErrors } from './collections/TextErrors'
 import { Socials } from './globals/Socials'
 
@@ -44,7 +45,7 @@ export default buildConfig({
     defaultLocale: 'uz',
     fallback: true,
   },
-  collections: [News, Media, Appeals, AppealFiles, TextErrors, Users],
+  collections: [News, Media, Appeals, AppealFiles, Memberships, TextErrors, Users],
   globals: [Socials],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

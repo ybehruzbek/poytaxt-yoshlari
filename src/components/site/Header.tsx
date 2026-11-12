@@ -98,7 +98,7 @@ export function Header({ locale }: { locale: Locale }) {
   }
 
   const isActive = (g: NavGroup) => groupPaths(g).some((p) => path === p || path.startsWith(p + '/'))
-  const joinHref = L('/boglanish/murojaat?mavzu=azo')
+  const joinHref = L('/boglanish/azo-bolish')
 
   return (
     <div className={`site-head${scrolled ? ' scrolled' : ''}${open ? ' menu-open' : ''}`} id="siteHead">

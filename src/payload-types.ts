@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     appeals: Appeal;
     'appeal-files': AppealFile;
+    memberships: Membership;
     'text-errors': TextError;
     users: User;
     'payload-kv': PayloadKv;
@@ -84,6 +85,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     appeals: AppealsSelect<false> | AppealsSelect<true>;
     'appeal-files': AppealFilesSelect<false> | AppealFilesSelect<true>;
+    memberships: MembershipsSelect<false> | MembershipsSelect<true>;
     'text-errors': TextErrorsSelect<false> | TextErrorsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -246,6 +248,22 @@ export interface AppealFile {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "memberships".
+ */
+export interface Membership {
+  id: number;
+  status: 'yangi' | 'yuborildi' | 'qabul' | 'rad';
+  name: string;
+  birthYear: number;
+  phone: string;
+  email?: string | null;
+  place: string;
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "text-errors".
  */
 export interface TextError {
@@ -325,6 +343,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'appeal-files';
         value: number | AppealFile;
+      } | null)
+    | ({
+        relationTo: 'memberships';
+        value: number | Membership;
       } | null)
     | ({
         relationTo: 'text-errors';
@@ -477,6 +499,21 @@ export interface AppealFilesSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "memberships_select".
+ */
+export interface MembershipsSelect<T extends boolean = true> {
+  status?: T;
+  name?: T;
+  birthYear?: T;
+  phone?: T;
+  email?: T;
+  place?: T;
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

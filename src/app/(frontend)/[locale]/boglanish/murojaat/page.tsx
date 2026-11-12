@@ -8,7 +8,7 @@ import '../../../boglanish.css'
 
 export const metadata: Metadata = {
   title: 'Elektron murojaat — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Savol, ariza, taklif yoki şikoyatni onlayn yuboriş.',
+  description: 'Ariza, taklif yoki şikoyatni onlayn yuboriş.',
 }
 
 /** “Elektron murojaat” sahifasi */

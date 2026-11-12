@@ -83,6 +83,7 @@ export const NAV: NavGroup[] = [
       { label: 'Aloqa maʼlumotlari', href: '/boglanish/aloqa', desc: 'Telefon, poçta, manzil va xarita' },
       { label: 'Köp beriladigan savollar', href: '/boglanish/savollar', desc: 'Aʼzolik, imtiyozlar va murojaat haqida' },
       { label: 'Elektron murojaat', href: '/boglanish/murojaat', desc: 'Onlayn murojaat yuboriş' },
+      { label: 'Aʼzo böliş', href: '/boglanish/azo-bolish', desc: 'Ittifoqqa aʼzolik tartibi va ariza' },
     ],
   },
 ]
