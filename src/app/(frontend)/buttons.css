@@ -167,3 +167,13 @@ button:focus {
 :is(.on-dark .more-btn:hover, .on-dark a:hover .more-btn) {
   color: var(--navy);
 }
+
+/* =====================================================================
+   “Köproq körsatiş” / “Yiğiş” — uzun röyxat ostidagi yagona tugma joyi
+   (MoreToggle / MoreList, src/components/site/MoreToggle.tsx)
+   ===================================================================== */
+.more-toggle {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}

@@ -17,12 +17,6 @@
     translate: 0 30px;
   }
 }
-.it-more-btn {
-  display: flex;
-  justify-content: center;
-  margin-top: 28px;
-}
-
 /* Ittifoq taʼsisçiligidagi taşkilotlar: dastlab 2 qator (5 / 3 / 2 ustunli törga mos), qolgani tugma bilan */
 .ol-d:not([data-open]) > :nth-child(n + 11) {
   display: none;

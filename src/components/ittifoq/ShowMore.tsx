@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 
+import { MoreToggle } from '@/components/site/MoreToggle'
+
 /**
- * Yaşirin qolgan elementlarni oçadigan tugma: nişon elementga data-open qöyadi (CSS yaşirişni olib taşlaydi).
+ * Yaşirin qolgan elementlarni oçadigan tugma (yagona köriniş — MoreToggle): nişon elementga data-open qöyadi (CSS yaşirişni olib taşlaydi).
  * `count` berilmasa, nişon ičidagi yaşirin farzandlar soni ekran eniga qarab özi sanaladi.
  */
 export function ShowMore({ target, count, noun }: { target: string; count?: number; noun: string }) {
@@ -36,15 +38,6 @@ export function ShowMore({ target, count, noun }: { target: string; count?: numb
 
   if (!open && hidden === 0) return null
   return (
-    <div className="it-more-btn">
-      <button type="button" className="btn btn-outline" aria-controls={target} aria-expanded={open} onClick={toggle}>
-        {open ? 'Yiğiş' : `Yana ${hidden} ta ${noun}ni körsatiş`}
-        <span className="ic" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <path d={open ? 'm6 15 6-6 6 6' : 'm6 9 6 6 6-6'} />
-          </svg>
-        </span>
-      </button>
-    </div>
+    <MoreToggle rest={open ? 0 : hidden} noun={noun} controls={target} onMore={toggle} onLess={toggle} />
   )
 }

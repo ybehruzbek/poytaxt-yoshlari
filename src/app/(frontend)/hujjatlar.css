@@ -311,13 +311,3 @@ a.nd-b-row:hover {
     flex: none;
   }
 }
-
-/* uzun röyxat: “Köproq körsatiş” / “Yiğiş” (MoreList) */
-.nd-b {
-  scroll-margin-top: 120px;
-}
-.nd-more {
-  display: flex;
-  justify-content: center;
-  margin-top: 32px;
-}

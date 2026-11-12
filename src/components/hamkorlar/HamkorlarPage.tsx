@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
 
+import { MoreList } from '@/components/site/MoreToggle'
+
 import { PartnerCard } from './PartnerCard'
 import { DOMESTIC, FOREIGN, GROUPS, PARTNERS, REGIONS } from './data'
 
@@ -11,11 +13,12 @@ function Block({ id, title, list }: { id?: string; title: string; list: typeof P
         <h3>{title}</h3>
         <span>{list.length}</span>
       </div>
-      <div className="pt-grid">
+      {/* dastlab 2 qator (6 ta), qolgani “Köproq körsatiş” bilan */}
+      <MoreList className="pt-grid" noun="hamkor">
         {list.map((p) => (
           <PartnerCard key={p.k} p={p} />
         ))}
-      </div>
+      </MoreList>
     </section>
   )
 }

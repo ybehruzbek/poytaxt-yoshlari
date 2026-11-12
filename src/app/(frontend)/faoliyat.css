@@ -127,11 +127,6 @@
   padding: 40px 0;
   color: var(--muted);
 }
-.fa-more-wrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 24px;
-}
 
 /* ---------- Tadbir kartalari ---------- */
 .fa-evs {

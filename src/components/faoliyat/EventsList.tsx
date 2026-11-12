@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react'
 import type { Ev } from './events'
 import { type DirSlug, fmtDate, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
+import { MoreToggle } from '@/components/site/MoreToggle'
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
@@ -119,12 +120,13 @@ export function EventsList({
       </div>
 
       {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
-      {list.length > limit && (
-        <div className="fa-more-wrap">
-          <button type="button" className="btn btn-outline" onClick={() => setLimit((l) => l + 24)}>
-            Yana körsatiş ({list.length - limit})
-          </button>
-        </div>
+      {list.length > 24 && (
+        <MoreToggle
+          rest={Math.max(list.length - limit, 0)}
+          noun="tadbir"
+          onMore={() => setLimit((l) => l + 24)}
+          onLess={() => setLimit(24)}
+        />
       )}
     </>
   )

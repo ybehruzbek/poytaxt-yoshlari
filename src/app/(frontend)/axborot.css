@@ -856,10 +856,9 @@
 .ax-albums.is-f2 .ax-cut.ax-off {
   display: none;
 }
+/* “Köproq körsatiş” (MoreToggle) örami — saralaş/qidiruvda yaşiriladi */
 .ax-showmore {
-  display: flex;
-  justify-content: center;
-  margin-top: 36px;
+  display: block;
 }
 .ax-albums.is-f1 ~ .ax-showmore,
 .ax-albums.is-f2 ~ .ax-showmore {

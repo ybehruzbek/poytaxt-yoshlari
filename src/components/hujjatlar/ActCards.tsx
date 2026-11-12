@@ -2,9 +2,9 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
+import { MoreList } from '@/components/site/MoreToggle'
 
 import { type Act, AUDIENCES } from './data'
-import { MoreList } from './MoreList'
 
 const KIND: Record<Act['kind'], string> = {
   Qonun: 'QONUN',
@@ -91,7 +91,7 @@ function Thumb({ x }: { x: Act }) {
 /** Hujjatlar röyxati (uzun bölsa — “Köproq körsatiş” bilan). Karta: tepada tur, raqam va sana belgilari; sarlavha — hujjat nomi qöştirnoqda; ostida qisqaça mazmuni */
 export function DocsB({ acts, locale }: { acts: Act[]; locale: string }) {
   return (
-    <MoreList className="nd-b">
+    <MoreList className="nd-b" noun="hujjat" first={8}>
       {acts.map((x) => (
         <Wrap key={x.t} x={x} className="nd-b-row" locale={locale}>
           <Thumb x={x} />

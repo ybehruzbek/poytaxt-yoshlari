@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- galereya suratlari statik webp; CMS ulanganda next/image ga ötadi */
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { More } from '@/components/site/MoreBtn'
+import { MoreToggle } from '@/components/site/MoreToggle'
 
 import { ALBUMS, fullDate, photo, thumb } from './data'
 
@@ -238,20 +238,17 @@ export function Search({ target, placeholder }: { target: string; placeholder: s
 
 /** “Köproq körsatiş”: #{target} ičidagi .ax-cut elementlarni oçadi */
 export function ShowMore({ target, rest }: { target: string; rest: number }) {
-  const [done, setDone] = useState(false)
-  if (done || rest <= 0) return null
+  const [open, setOpen] = useState(false)
+  if (rest <= 0) return null
+  const set = (v: boolean) => {
+    const el = document.getElementById(target)
+    el?.classList.toggle('is-all', v)
+    setOpen(v)
+    if (!v) el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
   return (
     <div className="ax-showmore">
-      <button
-        type="button"
-        className="more-btn"
-        onClick={() => {
-          document.getElementById(target)?.classList.add('is-all')
-          setDone(true)
-        }}
-      >
-        <More>Köproq körsatiş · yana {rest} ta albom</More>
-      </button>
+      <MoreToggle rest={open ? 0 : rest} noun="albom" controls={target} onMore={() => set(true)} onLess={() => set(false)} />
     </div>
   )
 }
