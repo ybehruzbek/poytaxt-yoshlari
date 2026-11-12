@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element -- galereya suratlari statik webp; CMS ulanganda next/image ga ötadi */
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 
-import { Lightbox, Pills, Search, ShowMore, VideoModal } from './AxClient'
+import { InlinePlayer, Lightbox, Pills, Search, ShowMore, VideoModal } from './AxClient'
 import {
   ALBUM_TYPES,
   ALBUMS,
@@ -12,17 +13,16 @@ import {
   cover,
   dayMonth,
   fullDate,
-  monthKey,
   photo,
   PRESS_CONTACT,
-  RELEASE_TYPES,
-  RELEASES,
-  type Release,
   type Short,
   shortThumb,
 } from './data'
 import { MEDIA, MEDIA_KINDS, type MediaItem } from './oav'
 import { VideoWatch } from './VideoWatch'
+import { PressDesk, PressRegistry, PressTools } from './PressClient'
+import { PressDoc } from './PressDoc'
+import { ORG, PRESS, type PressItem } from './press'
 import { getYoutubeFeed } from '@/lib/youtube'
 
 /** VAQTINÇA: variantlar faqat işlab çiqiş rejimida; saytda — A */
@@ -53,15 +53,6 @@ function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead?
   )
 }
 
-/** Oy böyiça guruhlaş (sana kamayiş tartibida) */
-function byMonth<T extends { date: string }>(list: T[]) {
-  const m = new Map<string, T[]>()
-  for (const x of list) {
-    const k = monthKey(x.date)
-    m.set(k, [...(m.get(k) ?? []), x])
-  }
-  return [...m.entries()]
-}
 
 const TYPE_PILLS = (Object.keys(ALBUM_TYPES) as AlbumType[])
   .filter((t) => ALBUMS.some((a) => a.type === t))
@@ -218,15 +209,12 @@ export async function VideoPage({ crumbs }: { crumbs: ReactNode }) {
    PRESS-RELIZLAR
    ==================================================================== */
 
-const RT_PILLS = Object.entries(RELEASE_TYPES).map(([v, l]) => ({ v, l }))
-
-function PressContact({ dark = false }: { dark?: boolean }) {
+/** Jurnalistlar uçun aloqa (har variantda bir xil) */
+function PressContact() {
   return (
-    <aside className={`ax-pc${dark ? ' dark' : ''}`}>
-      <h2>Jurnalistlar uçun</h2>
-      <p>
-        Akkreditatsiya, intervyu va izoh söraş uçun Kengaşning {PRESS_CONTACT.unit.toLowerCase()} bilan boğlaning.
-      </p>
+    <aside className="ax-pc dark">
+      <h2>OAV uçun aloqa</h2>
+      <p>Akkreditatsiya, intervyu va rasmiy izoh uçun Kengaş {PRESS_CONTACT.unit.toLowerCase()}.</p>
       <ul>
         <li>
           <span>Telefon</span>
@@ -251,7 +239,7 @@ function MediaKit() {
   return (
     <aside className="ax-kit">
       <h2>Media-töplam</h2>
-      <p>Kengaş logotipi va rasmiy nomi — naşrlarda foydalaniş uçun.</p>
+      <p>Kengaş logotipi — naşrlarda foydalaniş uçun.</p>
       <a className="ax-kit-dl" href="/img/logo-toshkent.png" download>
         <img src="/img/logo-toshkent.png" alt="" />
         <span>
@@ -259,33 +247,76 @@ function MediaKit() {
           <small>Yuklab oliş ↓</small>
         </span>
       </a>
-      <p className="ax-kit-name">Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi</p>
+      <p className="ax-kit-name">{ORG}</p>
     </aside>
   )
 }
 
-/** A — rasmiy reyestr: sana | tur | sarlavha va qisqa mazmun; yon tomonda jurnalistlar uçun */
+const relHref = (L: (h: string) => string, slug: string) => L(`/axborot-xizmati/press-relizlar/${slug}`)
+
+/** A — “Rasmiy blanka”: çapda hujjatlar röyxati, öngda tanlangan relizning rasmiy blankasi */
 function PressA() {
+  return (
+    <section className="sec ax">
+      <div className="wrap">
+        <PressDesk />
+      </div>
+    </section>
+  )
+}
+
+/** B — “Matbuot xonasi”: OAV uçun anonslar, keyin press-relizlar; har biri alohida sahifada töliq */
+function PressB({ L }: { L: (h: string) => string }) {
+  const anons = PRESS.filter((p) => p.kind === 'anons')
+  const rel = PRESS.filter((p) => p.kind === 'reliz')
   return (
     <section className="sec ax">
       <div className="wrap ax-press">
         <div>
-          <div className="ax-tools">
-            <Pills target="pa-list" items={RT_PILLS} label="Xabar turi" />
-          </div>
-          <ol className="ax-reg" id="pa-list">
-            {RELEASES.map((r, i) => (
-              <li key={i} data-f={r.type}>
-                <time dateTime={r.date}>
-                  <b>{dayMonth(r.date).split('-')[0]}</b>
-                  <span>{dayMonth(r.date).split('-')[1]}</span>
-                  <small>{r.date.slice(0, 4)}</small>
-                </time>
-                <div>
-                  <span className={`ax-chip t-${r.type}`}>{RELEASE_TYPES[r.type]}</span>
-                  <h3>{r.title}</h3>
-                  <p>{r.lead}</p>
+          <h2 className="pr-h">OAV uçun anonslar</h2>
+          <ul className="pr-anons">
+            {anons.map((p) => (
+              <li key={p.slug}>
+                <div className="pr-anons-when">
+                  <b>{p.event!.when}</b>
+                  {p.event!.time && <span>soat {p.event!.time}</span>}
                 </div>
+                <div className="pr-anons-b">
+                  <h3>
+                    <Link href={relHref(L, p.slug)}>{p.title}</Link>
+                  </h3>
+                  <p className="pr-anons-place">
+                    <Pin /> {p.event!.place}
+                  </p>
+                  <p>{p.lead}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <h2 className="pr-h">Press-relizlar</h2>
+          <ol className="pr-list">
+            {rel.map((p) => (
+              <li key={p.slug}>
+                <article>
+                  <p className="pr-dateline">Toşkent, {fullDate(p.date)}</p>
+                  <h3>
+                    <Link href={relHref(L, p.slug)}>{p.title}</Link>
+                  </h3>
+                  <p>{p.lead}</p>
+                  {p.facts && (
+                    <ul className="pr-list-facts">
+                      {p.facts.map((f) => (
+                        <li key={f.k}>
+                          <b>{f.v}</b> {f.k}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <Link href={relHref(L, p.slug)} className="more-btn">
+                    <More>Töliq matn</More>
+                  </Link>
+                </article>
               </li>
             ))}
           </ol>
@@ -299,110 +330,26 @@ function PressA() {
   )
 }
 
-/** B — newsroom: eng sönggi xabar katta, qolganlari oylar böyiça kartalar; pastda sariq banner */
-function PressB() {
-  const [lead, ...rest] = RELEASES
+/** C — “Hujjatlar reyestri”: yillar böyiça jadval, tur böyiça saralaş, qidiruv; blanka oyna ičida */
+function PressC({ L }: { L: (h: string) => string }) {
   return (
     <section className="sec ax">
-      <div className="wrap">
-        <article className="ax-plead">
-          <div className="ax-plead-txt">
-            <span className={`ax-chip t-${lead.type}`}>{RELEASE_TYPES[lead.type]}</span>
-            <h2>{lead.title}</h2>
-            <p>{lead.lead}</p>
-            <time dateTime={lead.date}>{fullDate(lead.date)}</time>
-          </div>
-          {lead.img ? (
-            <img src={lead.img} alt="" />
-          ) : (
-            <div className="ax-plead-art" aria-hidden="true">
-              <b>{dayMonth(lead.date).split('-')[0]}</b>
-              <span>{dayMonth(lead.date).split('-')[1]}</span>
-            </div>
-          )}
-        </article>
-        {byMonth(rest).map(([m, list]) => (
-          <section key={m} className="ax-pmonth">
-            <h2 className="ax-tl-h">{m}</h2>
-            <ul className="ax-pcards">
-              {list.map((r, i) => (
-                <li key={i}>
-                  <PCard r={r} />
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
-        <div className="ax-banner">
-          <div>
-            <h2>Jurnalistlar uçun</h2>
-            <p>
-              Akkreditatsiya, intervyu va rasmiy izoh: {PRESS_CONTACT.phone.v} · {PRESS_CONTACT.email.v}
-            </p>
-          </div>
-          <a className="btn btn-primary" href={PRESS_CONTACT.telegram.href} target="_blank" rel="noopener noreferrer">
-            Telegramda kuzatiş
-          </a>
+      <div className="wrap ax-press">
+        <PressRegistry base={L('')} />
+        <div className="ax-side">
+          <PressContact />
+          <MediaKit />
         </div>
       </div>
     </section>
   )
 }
 
-function PCard({ r }: { r: Release }) {
-  return (
-    <article className="ax-pcard">
-      {r.img && <img src={r.img} alt="" loading="lazy" />}
-      <div>
-        <span className={`ax-chip t-${r.type}`}>{RELEASE_TYPES[r.type]}</span>
-        <h3>{r.title}</h3>
-        <p>{r.lead}</p>
-        <time dateTime={r.date}>{fullDate(r.date)}</time>
-      </div>
-    </article>
-  )
-}
-
-/** C — matbuot markazi: qidiruv va tur böyiça saralaş, oçiladigan xabarlar, media-töplam */
-function PressC() {
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <div className="ax-hub-top">
-          <Search target="pc-list" placeholder="Press-relizlardan qidiriş" />
-          <Pills target="pc-list" items={RT_PILLS} label="Xabar turi" />
-        </div>
-        <div className="ax-press">
-          <div className="ax-acc" id="pc-list">
-            {RELEASES.map((r, i) => (
-              <details key={i} data-f={r.type} data-q={`${r.title} ${r.lead}`} open={i === 0}>
-                <summary>
-                  <time dateTime={r.date}>{fullDate(r.date)}</time>
-                  <span className={`ax-chip t-${r.type}`}>{RELEASE_TYPES[r.type]}</span>
-                  <b>{r.title}</b>
-                </summary>
-                <div className="ax-acc-b">
-                  {r.img && <img src={r.img} alt="" loading="lazy" />}
-                  <p>{r.lead}</p>
-                </div>
-              </details>
-            ))}
-          </div>
-          <div className="ax-side">
-            <PressContact dark />
-            <MediaKit />
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function PressPage({ crumbs }: { crumbs: ReactNode }) {
+export function PressPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
   return (
     <div className="ax-page">
       <Head crumbs={crumbs} title="Press-relizlar" />
-      <Variants name="pr" views={[<PressA key="a" />, <PressB key="b" />, <PressC key="c" />]} />
+      <Variants name="pr" views={[<PressA key="a" />, <PressB key="b" L={L} />, <PressC key="c" L={L} />]} />
       {DEV && <DevSectionsPanel sections={PANEL_PRESS} />}
     </div>
   )
@@ -413,10 +360,55 @@ const PANEL_PRESS: PanelSection[] = [
     name: 'pr',
     label: 'Press-relizlar',
     count: 3,
-    hints: ['Rasmiy reyestr + jurnalistlar uçun', 'Newsroom kartalari', 'Matbuot markazi: qidiruv'],
+    hints: ['Rasmiy blanka: röyxat + hujjat', 'Matbuot xonasi: anonslar + relizlar', 'Hujjatlar reyestri: jadval + oyna'],
   },
 ]
 
+/** Bitta press-relizning sahifasi: rasmiy blanka, asboblar, suratlar va video, OAV uçun aloqa */
+export function PressItemPage({ crumbs, p, L }: { crumbs: ReactNode; p: PressItem; L: (h: string) => string }) {
+  const album = p.album ? ALBUMS.find((a) => a.id === p.album) : undefined
+  return (
+    <div className="ax-page">
+      <header className="pg-head">
+        <div className="wrap">{crumbs}</div>
+      </header>
+      <section className="sec ax">
+        <div className="wrap ax-press">
+          <div className="pr-item">
+            <PressTools docId="pr-item-doc" slug={p.slug} />
+            <PressDoc p={p} id="pr-item-doc" />
+            {album && (
+              <div className="pr-media">
+                <h2 className="pr-h">Suratlar</h2>
+                <div className="pr-photos">
+                  {Array.from({ length: Math.min(album.n, 6) }, (_, k) => (
+                    <button key={k} type="button" data-album={album.id} data-i={k + 1} aria-label={`${k + 1}-surat`}>
+                      <img src={photo(album.id, k + 1)} alt="" loading="lazy" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {p.video && (
+              <div className="pr-media">
+                <h2 className="pr-h">Video</h2>
+                <InlinePlayer id={p.video} title={p.title} />
+              </div>
+            )}
+          </div>
+          <div className="ax-side">
+            <PressContact />
+            <MediaKit />
+            <Link href={L('/axborot-xizmati/press-relizlar')} className="more-btn">
+              <More>Barça press-relizlar</More>
+            </Link>
+          </div>
+        </div>
+      </section>
+      {album && <Lightbox />}
+    </div>
+  )
+}
 
 /* ====================================================================
    OAV BIZ HAQIMIZDA

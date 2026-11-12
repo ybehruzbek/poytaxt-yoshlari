@@ -8,11 +8,16 @@ import '../../../axborot.css'
 
 export const metadata: Metadata = {
   title: 'Press-relizlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Kengaşning rasmiy xabarlari, eʼlonlari va tanlovlari; jurnalistlar uçun aloqa.',
+  description: 'Kengaş Axborot xizmatining press-relizlari va OAV uçun anonslari.',
 }
 
-/** “Press-relizlar” sahifasi (mazmun: components/axborot) */
+/** “Press-relizlar” sahifasi (mazmun: components/axborot/press.ts) */
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
-  return <PressPage crumbs={<PageCrumbs locale={locale} path="/axborot-xizmati/press-relizlar" />} />
+  return (
+    <PressPage
+      crumbs={<PageCrumbs locale={locale} path="/axborot-xizmati/press-relizlar" />}
+      L={(h) => `/${locale}${h}`}
+    />
+  )
 }
