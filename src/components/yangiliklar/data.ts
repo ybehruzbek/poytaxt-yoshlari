@@ -1,60 +1,52 @@
 import { CATEGORY_TONE, type NewsCard } from '@/lib/news'
 
-/** Yangiliklar röyxati sahifasi uçun karta: bosh sahifa kartasi + töliq sana va oy guruhi */
+/** Yangiliklar röyxati sahifasi uçun karta: bosh sahifa kartasi + vaqt, kun va guruh kalitlari */
 export type YnItem = NewsCard & {
   tone: (typeof CATEGORY_TONE)[NewsCard['category']]
+  /** “10:00” — Toşkent vaqti */
+  time: string
+  /** “Bugun” / “Keça” / “5-noyabr” (joriy yildan boşqa bölsa “2025-yil 5-noyabr”) */
+  rel: string
   /** “2026-yil 5-noyabr” */
   long: string
-  /** “5-noyabr” */
-  day: string
-  /** “2026-11” — oy böyiça guruhlaş kaliti */
-  month: string
+  /** “05.11.2026” */
+  num: string
+  /** “2026-11-05” — kun böyiça guruhlaş kaliti */
+  dayKey: string
 }
-
-export type YnCat = { value: NewsCard['category']; label: string; count: number }
-export type YnMonth = { value: string; label: string; count: number }
 
 const MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
+const p2 = (n: number) => String(n).padStart(2, '0')
 
 /** Toşkent vaqti (UTC+5) böyiça sana qismlari */
-const parts = (iso: string) => {
-  const d = new Date(new Date(iso).getTime() + 5 * 3600 * 1000)
-  return { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate() }
+const parts = (t: number) => {
+  const d = new Date(t + 5 * 3600 * 1000)
+  return { y: d.getUTCFullYear(), m: d.getUTCMonth(), d: d.getUTCDate(), h: d.getUTCHours(), mi: d.getUTCMinutes() }
 }
+const key = (x: { y: number; m: number; d: number }) => `${x.y}-${p2(x.m + 1)}-${p2(x.d)}`
 
-export function toYnItem(c: NewsCard): YnItem {
-  const { y, m, d } = parts(c.dateISO)
+/** `now` — serverda bir marta olinadi (Bugun/Keça hisoblaş uçun) */
+export function toYnItem(c: NewsCard, now: number): YnItem {
+  const x = parts(new Date(c.dateISO).getTime())
+  const today = parts(now)
+  const yest = parts(now - 86400000)
+  const k = key(x)
+  const day = `${x.d}-${MONTHS[x.m]}`
+  const rel =
+    k === key(today) ? 'Bugun' : k === key(yest) ? 'Keça' : x.y === today.y ? day : `${x.y}-yil ${day}`
   return {
     ...c,
     tone: CATEGORY_TONE[c.category],
-    long: `${y}-yil ${d}-${MONTHS[m]}`,
-    day: `${d}-${MONTHS[m]}`,
-    month: `${y}-${String(m + 1).padStart(2, '0')}`,
+    time: `${p2(x.h)}:${p2(x.mi)}`,
+    rel,
+    long: `${x.y}-yil ${day}`,
+    num: `${p2(x.d)}.${p2(x.m + 1)}.${x.y}`,
+    dayKey: k,
   }
 }
 
-/** “2026-11” → “2026-yil noyabr” */
-export function monthLabel(key: string): string {
-  const [y, m] = key.split('-')
-  return `${y}-yil ${MONTHS[Number(m) - 1]}`
-}
-
-export function catsOf(items: YnItem[]): YnCat[] {
-  const map = new Map<string, YnCat>()
-  for (const it of items) {
-    const c = map.get(it.category) ?? { value: it.category, label: it.categoryLabel, count: 0 }
-    c.count += 1
-    map.set(it.category, c)
-  }
-  return [...map.values()].sort((a, b) => b.count - a.count)
-}
-
-export function monthsOf(items: YnItem[]): YnMonth[] {
-  const map = new Map<string, YnMonth>()
-  for (const it of items) {
-    const g = map.get(it.month) ?? { value: it.month, label: monthLabel(it.month), count: 0 }
-    g.count += 1
-    map.set(it.month, g)
-  }
-  return [...map.values()]
+/** Barça kartalar: “Bugun/Keça” hozirgi vaqtga nisbatan (sahifa har 60 soniyada qayta quriladi) */
+export function toYnItems(cards: NewsCard[]): YnItem[] {
+  const now = Date.now()
+  return cards.map((c) => toYnItem(c, now))
 }

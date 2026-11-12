@@ -1,132 +1,107 @@
-'use client'
-
 import Link from 'next/link'
-import { useDeferredValue, useId, useState } from 'react'
 
-import type { YnCat, YnItem, YnMonth } from './data'
-import { Chip, Empty, Img } from './YnShared'
+import { More } from '@/components/site/MoreBtn'
 
-/** Rasm nisbatlari navbat bilan almaşadi — jurnal (masonry) ritmi */
-const RATIOS = ['r1', 'r2', 'r3', 'r2', 'r1', 'r3']
-
-const norm = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[ʼ‘’'`]/g, '')
+import type { YnItem } from './data'
+import { Chip, Img } from './YnShared'
 
 /**
- * C — jurnal arxivi (kun.uz / The Verge arxivi va gov.uk qidiruvi uslubida):
- * yopişqoq filtr paneli (qidiruv, turkum, oy), natijalar soni va masonry kartalar.
+ * C — UzA (uza.uz) uslubi (rasmiy axborot agentligi). uza.uz bosh sahifasidan olingan:
+ *  - tepada bitta asosiy yangilik (katta rasm, sarlavha, qisqa tavsif);
+ *  - yonida “Sönggi yangiliklar”: turkum, sarlavha va “10:05 / 12.11.2026” körinişidagi vaqt;
+ *  - pastda rubrikalar (UzA'dagi “Siyosat”, “Jamiyat” kabi): har rubrikada bitta katta karta + röyxat.
+ * president.uz röyxatidagi kabi sana raqamli “KK.OO.YYYY” şaklida.
  */
-export function VariantC({
-  items,
-  cats,
-  months,
-  L,
-}: {
-  items: YnItem[]
-  cats: YnCat[]
-  months: YnMonth[]
-  L: string
-}) {
-  const [q, setQ] = useState('')
-  const [cat, setCat] = useState('all')
-  const [month, setMonth] = useState('all')
-  const dq = useDeferredValue(q)
-  const uid = useId()
-
-  const needle = norm(dq.trim())
-  const list = items.filter(
-    (i) =>
-      (cat === 'all' || i.category === cat) &&
-      (month === 'all' || i.month === month) &&
-      (!needle || norm(`${i.title} ${i.excerpt}`).includes(needle)),
+export function VariantC({ items, L }: { items: YnItem[]; L: string }) {
+  const href = (it: YnItem) => `${L}/${it.slug}`
+  const [lead, ...rest] = items
+  const latest = rest.slice(0, 5)
+  const order: string[] = []
+  for (const it of items) if (!order.includes(it.category)) order.push(it.category)
+  const rubrics = order.map((c) => items.filter((i) => i.category === c))
+  const stamp = (it: YnItem) => (
+    <time className="yn-stamp" dateTime={it.dateISO}>
+      {it.time} / {it.num}
+    </time>
   )
-  const reset = () => {
-    setQ('')
-    setCat('all')
-    setMonth('all')
-  }
-  const dirty = q || cat !== 'all' || month !== 'all'
 
   return (
-    <section className="sec yn-c" aria-label="Yangiliklar arxivi">
+    <section className="sec yn-c" aria-label="Yangiliklar">
       <div className="wrap">
-        <form className="yn-c-bar" role="search" onSubmit={(e) => e.preventDefault()}>
-          <label className="yn-c-search">
-            <span className="sr-only">Yangiliklardan qidiriş</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.5-3.5" />
-            </svg>
-            <input
-              type="search"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Sarlavha yoki matndan qidiriş"
-              autoComplete="off"
-            />
-          </label>
-          <label className="yn-c-sel">
-            <span>Turkum</span>
-            <select value={cat} onChange={(e) => setCat(e.target.value)}>
-              <option value="all">Barçasi</option>
-              {cats.map((c) => (
-                <option key={c.value} value={c.value}>
-                  {c.label} ({c.count})
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="yn-c-sel">
-            <span>Oy</span>
-            <select value={month} onChange={(e) => setMonth(e.target.value)}>
-              <option value="all">Barça oylar</option>
-              {months.map((m) => (
-                <option key={m.value} value={m.value}>
-                  {m.label} ({m.count})
-                </option>
-              ))}
-            </select>
-          </label>
-        </form>
+        <div className="yn-c-top">
+          <article className="yn-c-lead">
+            <Link href={href(lead)}>
+              <Img it={lead} />
+              <div className="yn-c-lead-bd">
+                <div className="yn-meta">
+                  <Chip it={lead} />
+                  {stamp(lead)}
+                </div>
+                <h2>{lead.title}</h2>
+                <p>{lead.excerpt}</p>
+                <span className="more-btn">
+                  <More />
+                </span>
+              </div>
+            </Link>
+          </article>
 
-        <div className="yn-c-head">
-          <p id={`${uid}-n`} aria-live="polite">
-            <b>{list.length}</b> ta yangilik
-          </p>
-          {dirty && (
-            <button type="button" className="yn-c-clear" onClick={reset}>
-              Filtrni tozalaş ×
-            </button>
+          {latest.length > 0 && (
+            <aside className="yn-c-latest" aria-labelledby="yn-c-latest-h">
+              <h2 className="yn-kicker" id="yn-c-latest-h">
+                Sönggi yangiliklar
+              </h2>
+              <ul>
+                {latest.map((it) => (
+                  <li key={it.id}>
+                    <Link href={href(it)}>
+                      <span className="yn-cat">{it.categoryLabel}</span>
+                      <span className="yn-c-t">{it.title}</span>
+                      {stamp(it)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </aside>
           )}
         </div>
 
-        {list.length === 0 ? (
-          <Empty onReset={reset} />
-        ) : (
-          <ul className="yn-c-grid" aria-describedby={`${uid}-n`}>
-            {list.map((it, k) => (
-              <li key={it.id}>
-                <article className="yn-c-card">
-                  <Link href={`${L}/${it.slug}`}>
-                    <div className="yn-c-media">
-                      <Img it={it} className={RATIOS[k % RATIOS.length]} />
-                      <Chip it={it} />
-                    </div>
-                    <div className="yn-c-bd">
-                      <time dateTime={it.dateISO}>{it.long}</time>
-                      <h3>{it.title}</h3>
-                      {k % 3 !== 2 && <p>{it.excerpt}</p>}
-                    </div>
+        <div className="yn-c-rubrics">
+          {rubrics.map((list) => {
+            const [first, ...others] = list
+            return (
+              <section key={first.category} className="yn-c-rub" aria-labelledby={`yn-c-${first.category}`}>
+                <h2 id={`yn-c-${first.category}`}>
+                  <span className={`yn-dot ${first.tone}`} aria-hidden="true" />
+                  {first.categoryLabel}
+                  <small>{list.length}</small>
+                </h2>
+                <article className="yn-c-rub-lead">
+                  <Link href={href(first)}>
+                    <Img it={first} />
+                    <h3>{first.title}</h3>
+                    {stamp(first)}
                   </Link>
                 </article>
-              </li>
-            ))}
-          </ul>
-        )}
+                {others.length > 0 && (
+                  <ul>
+                    {others.slice(0, 3).map((it) => (
+                      <li key={it.id}>
+                        <Link href={href(it)}>
+                          <Img it={it} />
+                          <span>
+                            <span className="yn-c-t">{it.title}</span>
+                            {stamp(it)}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

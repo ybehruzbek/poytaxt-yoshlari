@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 import { DevSectionsPanel } from '@/components/site/DevSectionsPanel'
 
-import { catsOf, monthsOf, type YnItem } from './data'
+import type { YnItem } from './data'
 import { VariantA } from './VariantA'
 import { VariantB } from './VariantB'
 import { VariantC } from './VariantC'
@@ -29,8 +29,6 @@ export function YangiliklarPage({
   crumbs: ReactNode
   locale: string
 }) {
-  const cats = catsOf(items)
-  const months = monthsOf(items)
   const L = `/${locale}/yangiliklar`
 
   return (
@@ -54,13 +52,13 @@ export function YangiliklarPage({
       ) : DEV ? (
         <>
           <V k="a">
-            <VariantA items={items} cats={cats} L={L} />
+            <VariantA items={items} L={L} />
           </V>
           <V k="b">
-            <VariantB items={items} cats={cats} months={months} L={L} />
+            <VariantB items={items} L={L} />
           </V>
           <V k="c">
-            <VariantC items={items} cats={cats} months={months} L={L} />
+            <VariantC items={items} L={L} />
           </V>
           <DevSectionsPanel
             sections={[
@@ -69,16 +67,16 @@ export function YangiliklarPage({
                 label: 'Yangiliklar',
                 count: 3,
                 hints: [
-                  'Tahririyat: katta asosiy yangilik + tör',
-                  'Lenta: oylar böyiça, yon panel',
-                  'Jurnal arxivi: qidiruv va filtrlar',
+                  'Daryo.uz uslubi: asosiy yangilik + öngda vaqtli lenta',
+                  'Gazeta.uz uslubi: kunlar böyiça zič lenta, sahifalaş',
+                  'UzA uslubi: asosiy yangilik + rubrikalar',
                 ],
               },
             ]}
           />
         </>
       ) : (
-        <VariantA items={items} cats={cats} L={L} />
+        <VariantA items={items} L={L} />
       )}
     </div>
   )

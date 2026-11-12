@@ -1,112 +1,94 @@
+'use client'
+
 import Link from 'next/link'
+import { useRef, useState } from 'react'
 
-import { CHANNEL } from '@/components/faoliyat/types'
+import { More } from '@/components/site/MoreBtn'
 
-import { monthLabel, type YnCat, type YnItem, type YnMonth } from './data'
+import type { YnItem } from './data'
 import { Chip, Img } from './YnShared'
 
+const PER = 8
+
 /**
- * B — xronologik lenta (UN News / gov.uk yangiliklar röyxati uslubida):
- * oylar böyiça guruhlar, yopişqoq sana sarlavhalari, ixçam qatorlar (kiçik rasm + sarlavha),
- * yon panelda Telegram kanaliga obuna, turkumlar va oylar arxivi.
+ * B — Gazeta.uz uslubi (lenta). gazeta.uz/uz/list/news sahifasidan olingan:
+ *  - qatʼiy xronologik zič röyxat, kunlar böyiça: “Bugun”, “Keça”, “5-noyabr”;
+ *  - har yangilikda vaqt (“12:56”), sarlavha va 1–2 gaplik qisqa matn, kiçik rasm öngda;
+ *  - pastda raqamli sahifalaş: “Avvalgi” / 1 2 3 / “Keyingi”.
+ * Reuters “World” lentasidagi kabi turkum yorliği sarlavha ustida turadi.
  */
-export function VariantB({
-  items,
-  cats,
-  months,
-  L,
-}: {
-  items: YnItem[]
-  cats: YnCat[]
-  months: YnMonth[]
-  L: string
-}) {
-  const groups = months.map((m) => ({ ...m, items: items.filter((i) => i.month === m.value) }))
-  const id = (m: string) => `yn-oy-${m}`
+export function VariantB({ items, L }: { items: YnItem[]; L: string }) {
+  const [page, setPage] = useState(1)
+  const top = useRef<HTMLElement>(null)
+  const pages = Math.max(1, Math.ceil(items.length / PER))
+  const slice = items.slice((page - 1) * PER, page * PER)
+
+  const groups: { key: string; label: string; items: YnItem[] }[] = []
+  for (const it of slice) {
+    const g = groups.at(-1)
+    if (g && g.key === it.dayKey) g.items.push(it)
+    else groups.push({ key: it.dayKey, label: it.rel, items: [it] })
+  }
+
+  const go = (p: number) => {
+    setPage(p)
+    top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
-    <section className="sec yn-b" aria-label="Yangiliklar lentasi">
-      <div className="wrap yn-b-grid">
-        <div className="yn-b-feed">
-          {groups.map((g) => (
-            <section key={g.value} id={id(g.value)} className="yn-b-group" aria-labelledby={`${id(g.value)}-h`}>
-              <h2 className="yn-b-date" id={`${id(g.value)}-h`}>
-                {monthLabel(g.value)}
-                <span>{g.count} ta yangilik</span>
-              </h2>
-              <ol className="yn-b-list">
-                {g.items.map((it) => (
-                  <li key={it.id}>
-                    <article className="yn-b-row">
-                      <Link href={`${L}/${it.slug}`}>
-                        <time className="yn-b-day" dateTime={it.dateISO}>
-                          <b>{it.day.split('-')[0]}</b>
-                          <small>{it.day.split('-')[1]}</small>
-                        </time>
-                        <div className="yn-b-txt">
-                          <div className="yn-meta">
-                            <Chip it={it} />
-                          </div>
-                          <h3>{it.title}</h3>
-                          <p>{it.excerpt}</p>
-                        </div>
-                        <Img it={it} className="yn-b-th" />
-                      </Link>
-                    </article>
-                  </li>
-                ))}
-              </ol>
-            </section>
-          ))}
-        </div>
-
-        <aside className="yn-b-side" aria-label="Qöşimça">
-          <div className="yn-b-tg on-dark">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M21.4 4.3 2.9 11.4c-1.3.5-1.2 1.3-.2 1.6l4.7 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.5-1.9zM8.3 14.2l9.6-6.1c.5-.3.9-.1.5.2l-8 7.3-.3 3.3-1.8-4.7z"
-              />
-            </svg>
-            <b>Yangiliklarni birinçi bölib biling</b>
-            <p>Kengaş yangiliklari, tanlov va imkoniyatlar — Telegram kanalimizda.</p>
-            <a href={CHANNEL} target="_blank" rel="noopener noreferrer" className="btn btn-primary yn-b-tg-btn">
-              Obuna böliş
-              <span className="ic" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 17 17 7M9 7h8v8" />
-                </svg>
-              </span>
-            </a>
-          </div>
-
-          <div className="yn-b-box">
-            <h2>Turkumlar</h2>
-            <ul>
-              {cats.map((c) => (
-                <li key={c.value}>
-                  <span className={`yn-dot ${items.find((i) => i.category === c.value)?.tone}`} aria-hidden="true" />
-                  {c.label}
-                  <b>{c.count}</b>
+    <section className="sec yn-b" aria-label="Yangiliklar lentasi" ref={top}>
+      <div className="wrap yn-b-wrap">
+        {groups.map((g) => (
+          <section key={g.key} className="yn-b-day" aria-labelledby={`yn-b-${g.key}`}>
+            <h2 id={`yn-b-${g.key}`}>{g.label}</h2>
+            <ol>
+              {g.items.map((it) => (
+                <li key={it.id}>
+                  <article className="yn-b-row">
+                    <Link href={`${L}/${it.slug}`}>
+                      <time dateTime={it.dateISO}>{it.time}</time>
+                      <div className="yn-b-txt">
+                        <Chip it={it} />
+                        <h3>{it.title}</h3>
+                        <p>{it.excerpt}</p>
+                      </div>
+                      <Img it={it} className="yn-b-th" />
+                    </Link>
+                  </article>
                 </li>
               ))}
-            </ul>
-          </div>
+            </ol>
+          </section>
+        ))}
 
-          <nav className="yn-b-box" aria-label="Oylar böyiça arxiv">
-            <h2>Arxiv</h2>
-            <ul>
-              {months.map((m) => (
-                <li key={m.value}>
-                  <a href={`#${id(m.value)}`}>
-                    {m.label}
-                    <b>{m.count}</b>
-                  </a>
+        {pages > 1 && (
+          <nav className="yn-b-pager" aria-label="Sahifalar">
+            <button type="button" className="yn-b-prev" onClick={() => go(page - 1)} disabled={page === 1}>
+              ← Avvalgi
+            </button>
+            <ol>
+              {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
+                <li key={p}>
+                  <button
+                    type="button"
+                    onClick={() => go(p)}
+                    aria-current={p === page ? 'page' : undefined}
+                    aria-label={`${p}-sahifa`}
+                  >
+                    {p}
+                  </button>
                 </li>
               ))}
-            </ul>
+            </ol>
+            {page < pages ? (
+              <button type="button" className="more-btn" onClick={() => go(page + 1)}>
+                <More>Keyingi</More>
+              </button>
+            ) : (
+              <span className="yn-b-end">Oxirgi sahifa</span>
+            )}
           </nav>
-        </aside>
+        )}
       </div>
     </section>
   )

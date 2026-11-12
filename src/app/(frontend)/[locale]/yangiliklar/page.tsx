@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
-import { toYnItem } from '@/components/yangiliklar/data'
+import { toYnItems } from '@/components/yangiliklar/data'
 import { YangiliklarPage } from '@/components/yangiliklar/YangiliklarPage'
 import type { Locale } from '@/i18n/config'
 import { toNewsCard } from '@/lib/news'
@@ -30,7 +30,7 @@ export default async function YangiliklarRoute(props: { params: Promise<{ locale
     depth: 1,
     where: { _status: { equals: 'published' } },
   })
-  const items = res.docs.map((d) => toYnItem(toNewsCard(d)))
+  const items = toYnItems(res.docs.map(toNewsCard))
 
   return (
     <YangiliklarPage
