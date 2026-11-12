@@ -251,11 +251,7 @@ function Cam() {
 export function FotoPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="ax-page">
-      <Head
-        crumbs={crumbs}
-        title="Fotogalereya"
-        lead="Kengaş va oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar tadbirlaridan suratlar: uçraşuvlar, forumlar, yiğilişlar va sayohatlar."
-      />
+      <Head crumbs={crumbs} title="Fotogalereya" />
       <Variants name="fg" views={[<FotoA key="a" />, <FotoB key="b" />, <FotoC key="c" />]} />
       <Lightbox />
       {DEV && <DevSectionsPanel sections={PANEL_FOTO} />}
