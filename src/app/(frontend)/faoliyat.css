@@ -1134,6 +1134,15 @@
   border-radius: var(--r-thumb);
   background: var(--bg);
   scroll-margin-top: 110px;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.35s,
+    translate 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.vyc-card:hover {
+  border-color: var(--navy);
+  box-shadow: 0 24px 50px -30px rgba(48, 22, 18, 0.45);
+  translate: 0 -4px;
 }
 .vyc-ph {
   position: relative;
@@ -1141,7 +1150,7 @@
   overflow: hidden;
   background: var(--navy-bg);
 }
-.vyc-ph img {
+.vyc-ph > img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -1149,8 +1158,47 @@
   object-position: 50% 30%;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.vyc-card:hover .vyc-ph img {
-  transform: scale(1.03);
+.vyc-card:hover .vyc-ph > img {
+  transform: scale(1.04);
+}
+/* suratning pastki qismi: sonlar va qöşimça suratlar öqilsin */
+.vyc-ph::after {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(180deg, rgba(20, 10, 8, 0) 0%, rgba(20, 10, 8, 0.62) 100%);
+  pointer-events: none;
+}
+.vyc-meta {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  z-index: 1;
+}
+.vyc-meta .vy-counts,
+.vyc-meta .vy-counts b {
+  color: #fff;
+}
+.vyc-meta .vy-counts {
+  font-size: 14px;
+}
+.vyc-thumbs {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1;
+  display: flex;
+  gap: 8px;
+}
+.vyc-thumbs img {
+  display: block;
+  width: 84px;
+  height: 64px;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border: 2px solid #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.5);
 }
 .vyc-n {
   position: absolute;
@@ -1184,14 +1232,17 @@
   font-size: 15.5px;
   line-height: 1.7;
 }
+/* loyihalar haqidagi jumla — asosiy matndan ingiçka çiziq bilan ajraladi */
+.vyc-txt p + p {
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+  font-size: 15px;
+}
 .vyc-foot {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  justify-content: flex-start;
   margin-top: auto;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
+  padding-top: 6px;
 }
 /* birinçi yönaliş — keng karta: surat çapda, matn öngda */
 .vyc-card.wide {
@@ -1199,9 +1250,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
 }
-.vyc-card.wide .vyc-ph img {
+.vyc-card.wide .vyc-ph > img {
   height: 100%;
-  min-height: 440px;
+  min-height: 460px;
   aspect-ratio: auto;
 }
 .vyc-card.wide .vyc-bd {
@@ -1217,7 +1268,7 @@
   .vyc-card.wide {
     display: flex;
   }
-  .vyc-card.wide .vyc-ph img {
+  .vyc-card.wide .vyc-ph > img {
     min-height: 0;
     height: auto;
     aspect-ratio: 16 / 10;
@@ -1234,15 +1285,29 @@
   .vyc-bd h2 {
     font-size: 20px;
   }
-  .vyc-foot {
-    flex-wrap: wrap;
+  .vyc-thumbs img {
+    width: 60px;
+    height: 46px;
+    border-radius: 10px;
+  }
+  .vyc-meta {
+    left: 16px;
+    bottom: 14px;
+  }
+  .vyc-thumbs {
+    right: 14px;
+    bottom: 14px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .vyc-ph img {
+  .vyc-card,
+  .vyc-ph > img {
     transition: none;
   }
-  .vyc-card:hover .vyc-ph img {
+  .vyc-card:hover {
+    translate: none;
+  }
+  .vyc-card:hover .vyc-ph > img {
     transform: none;
   }
 }

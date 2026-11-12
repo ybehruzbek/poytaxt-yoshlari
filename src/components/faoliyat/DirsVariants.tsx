@@ -93,16 +93,39 @@ export function DirsB({ base, projBase }: { base: string; projBase: string }) {
  * pastga yopişgan sonlar/“Batafsil”. Birinçi yönaliş — keng karta (ikki ustun), ritm beradi.
  */
 export function DirsC({ base, projBase }: { base: string; projBase: string }) {
-  const all = dirsData(1)
+  const all = dirsData(3)
+  const sumE = all.reduce((a, x) => a + x.nE, 0)
+  const sumP = all.reduce((a, x) => a + x.nP, 0)
   return (
     <section className="sec fa-sec">
       <div className="wrap">
+        <div className="vy-sum">
+          <span>
+            <b>{all.length}</b> yönaliş
+          </span>
+          <span>
+            <b>{sumE}</b> tadbir
+          </span>
+          <span>
+            <b>{sumP}</b> loyiha
+          </span>
+        </div>
         <div className="vyc">
           {all.map(({ d, n, nE, nP, pics }, i) => (
             <article key={d.slug} id={d.slug} className={`vyc-card${i === 0 ? ' wide' : ''}`}>
               <Link href={`${base}/${d.slug}`} className="vyc-ph" tabIndex={-1} aria-hidden="true">
                 {pics[0] && <img src={pics[0]} alt="" loading="lazy" />}
                 <span className="vyc-n">{n}</span>
+                {pics.length > 1 && (
+                  <span className="vyc-thumbs">
+                    {pics.slice(1).map((src) => (
+                      <img key={src} src={src} alt="" loading="lazy" />
+                    ))}
+                  </span>
+                )}
+                <span className="vyc-meta">
+                  <Counts nE={nE} nP={nP} />
+                </span>
               </Link>
               <div className="vyc-bd">
                 <h2>
@@ -110,7 +133,6 @@ export function DirsC({ base, projBase }: { base: string; projBase: string }) {
                 </h2>
                 <DirText slug={d.slug} projBase={projBase} className="vyc-txt" />
                 <div className="vyc-foot">
-                  <Counts nE={nE} nP={nP} />
                   <Link href={`${base}/${d.slug}`} className="more-btn">
                     <More />
                   </Link>
