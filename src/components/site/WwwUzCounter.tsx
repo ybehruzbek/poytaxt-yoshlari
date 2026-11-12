@@ -19,11 +19,17 @@ export function WwwUzCounter() {
 
   useEffect(() => {
     if (!ID) return
+    // ortiqça maʼlumot yuborilmaydi: manzil sörov qatorisiz, kelgan sayt — faqat domeni, cookie tekşirilmaydi
+    let ref = ''
+    try {
+      ref = document.referrer ? new URL(document.referrer).origin : ''
+    } catch {
+      /* notöğri manzil — yuborilmaydi */
+    }
     const q =
-      `id=${ID}&r=${encodeURIComponent(document.referrer)}` +
-      `&pg=${encodeURIComponent(location.href)}` +
-      `&c=${document.cookie ? 'Y' : 'N'}&j=N` +
-      `&wh=${screen.width}x${screen.height}&px=${screen.colorDepth}&js=1.3`
+      `id=${ID}&r=${encodeURIComponent(ref)}` +
+      `&pg=${encodeURIComponent(location.origin + location.pathname)}` +
+      `&c=N&j=N&wh=${screen.width}x${screen.height}&px=${screen.colorDepth}&js=1.3`
     // eslint-disable-next-line react-hooks/set-state-in-effect -- manzil faqat brauzerda maʼlum (referrer, ekran)
     setSrc(`https://cnt0.www.uz/counter/collect?${q}${COLORS}`)
   }, [])
@@ -34,10 +40,10 @@ export function WwwUzCounter() {
       className="fb-wwwuz"
       href={`https://www.uz/ru/res/visitor/index?id=${ID}`}
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       aria-label="www.uz reytingi"
     >
-      {src ? <img src={src} width={88} height={31} alt={ALT} /> : <span />}
+      {src ? <img src={src} width={88} height={31} alt={ALT} referrerPolicy="no-referrer" /> : <span />}
     </a>
   )
 }
