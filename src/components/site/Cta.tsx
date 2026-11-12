@@ -2,7 +2,7 @@ import type { Locale } from '@/i18n/config'
 import { AppealForm } from './AppealForm'
 
 /**
- * "Savol, murojaat yoki taklifingiz bormi?" bloki: chapda matn va 3 qadam, o'ngda murojaat shakli.
+ * "Ariza, taklif yoki şikoyatingiz bormi?" bloki: chapda matn va 3 qadam, o'ngda murojaat shakli.
  * Shakl bazaga (admin paneldagi "Murojaatlar") yozadi; fayl biriktirish mumkin.
  */
 export function Cta(_props: { locale: Locale }) {
@@ -12,7 +12,7 @@ export function Cta(_props: { locale: Locale }) {
         <div className="cb">
           <div className="cb-txt">
             <h2 className="h2">
-              Savol, murojaat yoki taklifingiz bormi?
+              Ariza, taklif yoki şikoyatingiz bormi?
             </h2>
             <p>Murojaatlar “Jismoniy va yuridik şaxslarning murojaatlari töğrisida”gi Qonunda belgilangan muddatlarda körib çiqiladi.</p>
             <ol className="cb-steps">

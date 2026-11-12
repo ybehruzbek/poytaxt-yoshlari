@@ -7,7 +7,7 @@ import { type AppealField, type AppealState, submitAppeal } from '@/app/(fronten
 const MAX = 10 * 1024 * 1024
 const ACCEPT = '.pdf,.jpg,.jpeg,.png,.webp,.doc,.docx'
 
-/** "Savol, murojaat yoki taklif" shakli — bazaga (admin paneldagi "Murojaatlar") yozadi */
+/** "Ariza, taklif yoki şikoyat" şakli — bazaga (admin paneldagi "Murojaatlar") yozadi */
 export function AppealForm() {
   const formRef = useRef<HTMLFormElement>(null)
   const [state, setState] = useState<AppealState | null>(null)
@@ -21,7 +21,7 @@ export function AppealForm() {
     const fd = new FormData(form)
     // murojaat turi tanlanmaguniça yuborilmaydi
     if (!fd.get('type')) {
-      setState({ ok: false, errors: { type: 'Murojaat turini tanlang: savol, murojaat yoki taklif.' }, message: 'Iltimos, belgilangan maydonlarni tekşiring.' })
+      setState({ ok: false, errors: { type: 'Murojaat turini tanlang: ariza, taklif yoki şikoyat.' }, message: 'Iltimos, belgilangan maydonlarni tekşiring.' })
       form.querySelector<HTMLInputElement>('input[name="type"]')?.focus()
       return
     }
@@ -71,9 +71,9 @@ export function AppealForm() {
           Murojaat turi <i aria-hidden="true">*</i>
         </legend>
         {[
-          ['savol', 'Savol'],
-          ['murojaat', 'Murojaat'],
+          ['ariza', 'Ariza'],
           ['taklif', 'Taklif'],
+          ['shikoyat', 'Şikoyat'],
         ].map(([v, l]) => (
           <label key={v}>
             <input type="radio" name="type" value={v} required onChange={clearType} />

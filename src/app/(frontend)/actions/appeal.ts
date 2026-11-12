@@ -18,7 +18,7 @@ const ALLOWED_EXT = /\.(pdf|jpe?g|png|webp|docx?)$/i
 
 const str = (fd: FormData, k: string) => String(fd.get(k) ?? '').trim()
 
-/** Saytdagi "Savol, murojaat yoki taklif" shaklini qabul qiladi */
+/** Saytdagi "Ariza, taklif yoki şikoyat" şaklini qabul qiladi */
 export async function submitAppeal(fd: FormData): Promise<AppealState> {
   // bot uchun yashirin maydon to'ldirilgan bo'lsa — jimgina "qabul qilindi" deymiz
   if (str(fd, 'website')) return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
@@ -67,7 +67,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
     await payload.create({
       collection: 'appeals',
       data: {
-        type: type as 'savol' | 'murojaat' | 'taklif',
+        type: type as (typeof APPEAL_TYPES)[number]['value'],
         status: 'yangi',
         name,
         phone,

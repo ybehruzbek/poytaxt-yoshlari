@@ -15,9 +15,9 @@ export const APPEAL_FILE_TYPES = [
 export const APPEAL_FILE_MAX = 10 * 1024 * 1024 // 10 MB
 
 export const APPEAL_TYPES = [
-  { label: 'Savol', value: 'savol' },
-  { label: 'Murojaat', value: 'murojaat' },
+  { label: 'Ariza', value: 'ariza' },
   { label: 'Taklif', value: 'taklif' },
+  { label: 'Şikoyat', value: 'shikoyat' },
 ] as const
 
 /**
@@ -41,7 +41,7 @@ export const AppealFiles: CollectionConfig = {
   },
 }
 
-/** Saytdagi shakl orqali kelgan savol, murojaat va takliflar */
+/** Saytdagi şakl orqali kelgan ariza, taklif va şikoyatlar (Qonun: murojaat turlari) */
 export const Appeals: CollectionConfig = {
   slug: 'appeals',
   labels: { singular: 'Murojaat', plural: 'Murojaatlar' },

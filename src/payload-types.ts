@@ -215,7 +215,7 @@ export interface Media {
  */
 export interface Appeal {
   id: number;
-  type: 'savol' | 'murojaat' | 'taklif';
+  type: 'ariza' | 'taklif' | 'shikoyat';
   status: 'yangi' | 'jarayonda' | 'yopildi';
   name: string;
   phone: string;
