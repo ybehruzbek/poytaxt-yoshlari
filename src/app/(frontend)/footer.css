@@ -421,51 +421,22 @@
   opacity: 0;
 }
 
-/* ---------- Öng çetdagi aylantiriş paneli (ScrollRail) ---------- */
-.srail {
+/* ---------- Sahifa böylab harakatlaniş (ScrollRail): “Halqa” ---------- */
+.sr-a {
   position: fixed;
-  right: 20px;
-  top: 50%;
   z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 6px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 32px -16px rgba(48, 22, 18, 0.35);
   opacity: 0;
   visibility: hidden;
-  translate: 12px -50%;
   transition:
     opacity 0.3s,
     translate 0.3s,
     visibility 0.3s;
 }
-.srail.on {
+.sr-a.on {
   opacity: 1;
   visibility: visible;
-  translate: 0 -50%;
 }
-.srail-b {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--yellow);
-  color: var(--navy-bg);
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    opacity 0.2s;
-}
-.srail-b svg {
+.sr-a-ic svg {
   width: 18px;
   height: 18px;
   fill: none;
@@ -474,26 +445,69 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.srail-b:hover:not(:disabled) {
-  background: var(--navy-bg);
-  color: #fff;
-}
-.srail-b:focus-visible {
+.sr-a-b:focus-visible {
   outline: 3px solid var(--sky);
   outline-offset: 3px;
 }
-.srail-b:disabled {
-  background: transparent;
-  color: var(--muted);
-  opacity: 0.45;
-  cursor: default;
+
+.sr-a {
+  right: 24px;
+  bottom: 24px;
+  translate: 0 12px;
 }
-/* izoh: tugma ustiga kelganda çap tomonda */
-.srail-tip {
+.sr-a.on {
+  translate: 0 0;
+}
+.sr-a-b {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--navy-bg);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 14px 34px -14px rgba(48, 22, 18, 0.55);
+  transition: background 0.2s;
+}
+.sr-a-ring {
   position: absolute;
-  right: calc(100% + 14px);
-  top: 50%;
-  translate: 4px -50%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  rotate: -90deg;
+}
+.sr-a-ring circle {
+  fill: none;
+  stroke-width: 3;
+  stroke: rgba(255, 255, 255, 0.18);
+}
+.sr-a-ring circle + circle {
+  stroke: var(--yellow);
+  stroke-linecap: round;
+  stroke-dasharray: calc(var(--p, 0) * 100) 100;
+}
+.sr-a-ic {
+  display: grid;
+  transition: rotate 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sr-a-ic.dn {
+  rotate: 180deg;
+  animation: sr-nudge 1.8s ease-in-out infinite;
+}
+@keyframes sr-nudge {
+  50% {
+    translate: 0 3px;
+  }
+}
+.sr-a-b:hover {
+  background: #6b352d;
+}
+.sr-a-tip {
+  position: absolute;
+  right: calc(100% + 12px);
   padding: 6px 12px;
   border-radius: 99px;
   background: var(--navy-bg);
@@ -502,63 +516,36 @@
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition:
-    opacity 0.2s,
-    translate 0.2s;
+  transition: opacity 0.2s;
 }
-.srail-b:is(:hover, :focus-visible):not(:disabled) .srail-tip {
+.sr-a-b:is(:hover, :focus-visible) .sr-a-tip {
   opacity: 1;
-  translate: 0 -50%;
 }
-/* sahifadagi örin: çiziq yuqoridan pastga töladi */
-.srail-track {
-  position: relative;
-  width: 4px;
-  height: 72px;
-  border-radius: 4px;
-  background: var(--line);
-  overflow: hidden;
-}
-.srail-fill {
-  position: absolute;
-  inset: 0;
-  border-radius: 4px;
-  background: var(--blue);
-  transform-origin: top;
-  transform: scaleY(var(--p, 0));
-}
+
 @media (max-width: 760px) {
-  .srail {
-    right: 10px;
-    top: auto;
-    bottom: 16px;
-    translate: 0 12px;
-    gap: 6px;
-    padding: 4px;
+  .sr-a {
+    right: 14px;
+    bottom: 14px;
   }
-  .srail.on {
-    translate: 0 0;
+  .sr-a-b {
+    width: 52px;
+    height: 52px;
   }
-  .srail-b {
-    width: 36px;
-    height: 36px;
-  }
-  .srail-track {
-    height: 40px;
-  }
-  .srail-tip {
+  .sr-a-tip {
     display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .srail,
-  .srail-b,
-  .srail-tip {
+  .sr-a,
+  .sr-a-ic {
     transition: none;
+  }
+  .sr-a-ic.dn {
+    animation: none;
   }
 }
 @media print {
-  .srail {
+  .sr-a {
     display: none;
   }
 }

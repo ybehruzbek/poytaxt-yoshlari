@@ -3,14 +3,28 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * Öng çetdagi aylantiriş paneli: ↑ (sahifa boşiga), örtada sahifadagi örinni körsatuvçi çiziq,
- * ↓ (bir ekran pastga). Sahifaning yuqorisida va pastida keraksiz tugma öçadi;
- * sahifa qisqa bölsa panel umuman körinmaydi.
+ * Sahifa böylab harakatlaniş tugmasi (“Halqa”): past öngda dumaloq tugma, atrofidagi halqa sahifaning
+ * qança qismi öqilganini körsatadi. Sahifa boşida ↓ (davomi bor), pastga tuşilgaç ↑ (boşiga qaytiş).
+ * Sahifa qisqa bölsa körinmaydi.
  */
-export function ScrollRail() {
-  const [st, setSt] = useState({ show: false, top: true, end: false })
-  const fill = useRef<HTMLSpanElement>(null)
 
+const smooth = (): ScrollBehavior =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+const up = () => window.scrollTo({ top: 0, behavior: smooth() })
+const down = () => window.scrollBy({ top: Math.round(window.innerHeight * 0.8), behavior: smooth() })
+
+function Up() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
+  )
+}
+
+/** aylantiriş holati: p — 0…1, show — sahifa yetarliça uzun, top/end — boşi va oxiri */
+function useScrollState() {
+  const [st, setSt] = useState({ show: false, top: true, end: false, pct: 0 })
+  const root = useRef<HTMLDivElement>(null)
   useEffect(() => {
     let raf = 0
     const read = () => {
@@ -18,9 +32,16 @@ export function ScrollRail() {
       const max = document.documentElement.scrollHeight - window.innerHeight
       const y = window.scrollY
       const p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0
-      fill.current?.style.setProperty('--p', String(p))
-      const next = { show: max > window.innerHeight * 0.6, top: y < 120, end: y > max - 120 }
-      setSt((s) => (s.show === next.show && s.top === next.top && s.end === next.end ? s : next))
+      root.current?.style.setProperty('--p', p.toFixed(4))
+      const next = {
+        show: max > window.innerHeight * 0.6,
+        top: y < 120,
+        end: y > max - 120,
+        pct: Math.round(p * 100),
+      }
+      setSt((s) =>
+        s.show === next.show && s.top === next.top && s.end === next.end && s.pct === next.pct ? s : next,
+      )
     }
     const on = () => {
       if (!raf) raf = requestAnimationFrame(read)
@@ -37,29 +58,30 @@ export function ScrollRail() {
       if (raf) cancelAnimationFrame(raf)
     }
   }, [])
+  return { st, root }
+}
 
-  const smooth = () =>
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-  const up = () => window.scrollTo({ top: 0, behavior: smooth() })
-  const down = () => window.scrollBy({ top: Math.round(window.innerHeight * 0.8), behavior: smooth() })
+export function ScrollRail() {
+  const { st, root } = useScrollState()
+  const on = st.show ? ' on' : ''
 
   return (
-    <nav className={`srail${st.show ? ' on' : ''}`} aria-label="Sahifa böylab harakatlaniş">
-      <button type="button" className="srail-b" onClick={up} disabled={st.top} aria-label="Sahifa boşiga">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 19V5M5 12l7-7 7 7" />
+    <div ref={root} className={`sr-a${on}`}>
+      <button
+        type="button"
+        className="sr-a-b"
+        onClick={st.top ? down : up}
+        aria-label={st.top ? 'Pastga' : 'Sahifa boşiga'}
+      >
+        <svg className="sr-a-ring" viewBox="0 0 60 60" aria-hidden="true">
+          <circle cx="30" cy="30" r="27" />
+          <circle cx="30" cy="30" r="27" pathLength="100" />
         </svg>
-        <span className="srail-tip">Yuqoriga</span>
+        <span className={`sr-a-ic${st.top ? ' dn' : ''}`}>
+          <Up />
+        </span>
+        <span className="sr-a-tip">{st.top ? 'Pastga' : 'Yuqoriga'}</span>
       </button>
-      <span className="srail-track" aria-hidden="true">
-        <span ref={fill} className="srail-fill" />
-      </span>
-      <button type="button" className="srail-b" onClick={down} disabled={st.end} aria-label="Pastga">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 5v14M5 12l7 7 7-7" />
-        </svg>
-        <span className="srail-tip">Pastga</span>
-      </button>
-    </nav>
+    </div>
   )
 }
