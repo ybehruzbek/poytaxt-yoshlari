@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- logotip PNG; SVG varianti kelganda almashtiriladi */
 import Link from 'next/link'
 
+import { EMAIL as CONTACT_EMAIL, PHONES } from '@/components/boglanish/data'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 import { NET_LABEL, NETS } from '@/lib/socials'
@@ -10,15 +11,11 @@ import { Arrow, Svg } from './SocialPhones'
 import { WwwUzCounter } from './WwwUzCounter'
 
 const LOGO_ALT = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
-const COPY = `© 2001–${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi. Barça huquqlar himoyalangan.`
+const COPY = `© ${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi. Barça huquqlar himoyalangan.`
 const NOTE = 'Uşbu veb-saytdagi maʼlumotlardan foydalanilganda havola körsatilişi şart.'
 
-/* Aloqa: Kengaşning rasmiy telefonlari (pochta — NAMUNA) */
-const PHONES = [
-  { v: '+998 71 246-10-80', href: 'tel:+998712461080' },
-  { v: '+998 71 246-10-90', href: 'tel:+998712461090' },
-]
-const EMAIL = { v: 'info@yoshkent.uz', href: 'mailto:info@yoshkent.uz' }
+/* Aloqa: Kengaşning rasmiy telefonlari va poçtasi — “Aloqa maʼlumotlari” sahifasi bilan bir manbadan */
+const EMAIL = { v: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` }
 
 /** Menyuning barcha bo'limlari ustunlarda (majburiy tuzilma: src/config/nav.ts) */
 function SiteMap({ locale, className = 'fb-cols' }: { locale: Locale; className?: string }) {
@@ -48,8 +45,8 @@ function Bottom() {
         <span>{COPY}</span>
         <span>{NOTE}</span>
         <span className="fb-typo">
-          <b>Diqqat!</b> Agar siz matnda xatolikni aniqlasangiz, uni belgilab, maʼmuriyatni xabardor qiliş uçun{' '}
-          <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Enter</kbd> tugmalarini bosing.
+          Matnda xato topsangiz, uni belgilang va <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>Enter</kbd>{' '}
+          tugmalarini bosing.
         </span>
       </div>
       <div className="fb-end">
@@ -63,7 +60,7 @@ function Bottom() {
 }
 
 /**
- * Sayt pastki qismi — "katta söz" uslubi: logo, şior va murojaat tugmasi, sayt xaritasi,
+ * Sayt pastki qismi — "katta söz" uslubi: logo, sayt nomi va murojaat tugmasi, sayt xaritasi,
  * ijtimoiy tarmoqlar oddiy yozuv bilan, pastda ekran enini egallagan sariq YOŞKENT
  * (footer körinişga kirganda harflar navbat bilan körtariladi).
  */
@@ -79,7 +76,7 @@ export async function Footer({ locale }: { locale: Locale }) {
               <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
             </Link>
             <p>
-              Yoşlar uçun, yoşlar bilan — <span>poytaxt miqyosida.</span>
+              Kengaşning <span>rasmiy veb-sayti</span>
             </p>
             <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
               Murojaat yuboriş{' '}

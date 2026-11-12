@@ -99,7 +99,7 @@ const SUN =
 const THEMES: { k: Theme; t: string }[] = [
   { k: 'light', t: 'Kunduzgi' },
   { k: 'dark', t: 'Tungi' },
-  { k: 'auto', t: 'Qurilma böyiça' },
+  { k: 'auto', t: 'Qurilma sozlamasi' },
 ]
 const EYE = 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'
 const MODES: { k: Mode; t: string; d: string }[] = [
@@ -232,8 +232,8 @@ export function A11yPanel() {
               </header>
 
               <section className="a11y-sec">
-                <h3>Tungi rejim</h3>
-                <div className="a11y-theme" role="radiogroup" aria-label="Tungi rejim">
+                <h3>Ekran rejimi</h3>
+                <div className="a11y-theme" role="radiogroup" aria-label="Ekran rejimi">
                   {THEMES.map((t) => (
                     <button
                       key={t.k}
@@ -306,14 +306,14 @@ export function A11yPanel() {
               </section>
 
               <section className="a11y-sec">
-                <h3>Ekran suhandoni</h3>
+                <h3>Ovozli öqiş</h3>
                 <label className="a11y-check">
                   <input
                     type="checkbox"
                     checked={s.tts}
                     onChange={(e) => upd({ tts: e.target.checked })}
                   />
-                  Yoqiş — belgilangan matn ovoz çiqarib öqiladi
+                  Belgilangan matnni ovoz çiqarib öqiş
                 </label>
               </section>
 

@@ -24,11 +24,11 @@ export const NAV: NavGroup[] = [
   {
     key: 'biz',
     label: 'Biz haqimizda',
-    intro: 'Ittifoq, Markaziy Kengaş, poytaxt Kengaşi va hamkorlarimiz bilan tanişing.',
+    intro: 'Ittifoq, Markaziy Kengaş, Toşkent şahar hududiy Kengaşi, boşlanğiç taşkilotlar va hamkorlar.',
     items: [
       { label: 'Özbekiston yoşlar ittifoqi', href: '/biz-haqimizda/ittifoq', desc: 'Taşkilot tarixi, maqsad va vazifalari' },
       { label: 'Markaziy Kengaş', href: '/biz-haqimizda/markaziy-kengash', desc: 'Ittifoqning respublika darajasidagi boşqaruvi' },
-      { label: 'Toşkent şahar hududiy Kengaşi', href: '/biz-haqimizda/hududiy-kengash', desc: 'Poytaxt Kengaşi jamoasi' },
+      { label: 'Toşkent şahar hududiy Kengaşi', href: '/biz-haqimizda/hududiy-kengash', desc: 'Kengaş rahbariyati va xodimlari' },
       {
         label: 'Boşlanğiç taşkilotlar',
         href: '/biz-haqimizda/boshlangich-tashkilotlar',
@@ -38,7 +38,7 @@ export const NAV: NavGroup[] = [
           { label: 'Harbiy qismlar va muassasalardagi', href: '/biz-haqimizda/boshlangich-tashkilotlar/harbiy' },
         ],
       },
-      { label: 'Hamkorlar', href: '/biz-haqimizda/hamkorlar', desc: 'Birgalikda işlaydigan vazirlik va taşkilotlar' },
+      { label: 'Hamkorlar', href: '/biz-haqimizda/hamkorlar', desc: 'Ittifoqning Özbekistondagi va xalqaro hamkorlari' },
     ],
   },
   {
@@ -49,15 +49,15 @@ export const NAV: NavGroup[] = [
       { label: 'Faoliyat yönalişlari', href: '/faoliyat/yonalishlar', desc: 'Kengaşning ustuvor yönalişlari' },
       { label: 'Loyihalar', href: '/faoliyat/loyihalar', desc: 'Kengaş va hamkorlar loyihalari' },
       { label: 'Tadbirlar va kalendar', href: '/faoliyat/tadbirlar', desc: 'Yaqin tadbirlar taqvimi' },
-      { label: 'Eʼlonlar', href: '/faoliyat/elonlar', desc: 'Tanlovlar, röyxatdan ötiş, çellenjlar' },
-      { label: 'Natijalar va hisobotlar', href: '/faoliyat/natijalar', desc: 'Yil yakunlari raqamlarda' },
+      { label: 'Eʼlonlar', href: '/faoliyat/elonlar', desc: 'Tanlovlar va röyxatdan ötiş haqida eʼlonlar' },
+      { label: 'Natijalar va hisobotlar', href: '/faoliyat/natijalar', desc: 'Kengaş faoliyati yakunlari' },
     ],
   },
   { key: 'yangiliklar', label: 'Yangiliklar', href: '/yangiliklar' },
   {
     key: 'hujjatlar',
     label: 'Hujjatlar',
-    intro: 'Qonunçilik, Kengaş qarorlari va namunalar.',
+    intro: 'Normativ-huquqiy hujjatlar, Kengaş hujjatlari va namunalar.',
     items: [
       { label: 'Normativ-huquqiy hujjatlar', href: '/hujjatlar/normativ', desc: 'Yoşlar siyosatiga oid hujjatlar' },
       { label: 'Kengaş hujjatlari', href: '/hujjatlar/kengash', desc: 'Qarorlar, rejalar, hisobotlar' },
@@ -70,15 +70,15 @@ export const NAV: NavGroup[] = [
     intro: 'Foto, video, press-relizlar va OAVdagi çiqişlar.',
     items: [
       { label: 'Fotogalereya', href: '/axborot-xizmati/fotogalereya', desc: 'Tadbirlardan suratlar' },
-      { label: 'Videogalereya', href: '/axborot-xizmati/videogalereya', desc: 'Video lavhalar' },
-      { label: 'Press-relizlar', href: '/axborot-xizmati/press-relizlar', desc: 'Rasmiy axborotlar' },
-      { label: 'OAV biz haqimizda', href: '/axborot-xizmati/oav', desc: 'Matbuotdagi çiqişlar' },
+      { label: 'Videogalereya', href: '/axborot-xizmati/videogalereya', desc: 'Tadbirlardan video lavhalar' },
+      { label: 'Press-relizlar', href: '/axborot-xizmati/press-relizlar', desc: 'Kengaşning rasmiy axborotlari' },
+      { label: 'OAV biz haqimizda', href: '/axborot-xizmati/oav', desc: 'OAVdagi Kengaş haqidagi materiallar' },
     ],
   },
   {
     key: 'boglanish',
     label: 'Boğlaniş',
-    intro: 'Savol, taklif yoki murojaatingiz bormi?',
+    intro: 'Aloqa maʼlumotlari, köp beriladigan savollar va elektron murojaat.',
     items: [
       { label: 'Aloqa maʼlumotlari', href: '/boglanish/aloqa', desc: 'Telefon, poçta, manzil va xarita' },
       { label: 'Köp beriladigan savollar', href: '/boglanish/savollar', desc: 'Aʼzolik, imtiyozlar va murojaat haqida' },
