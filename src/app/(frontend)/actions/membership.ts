@@ -47,6 +47,18 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
 
   try {
     const payload = await getPayload({ config })
+    // bitta raqamdan 30 kun ičida takroriy ariza qabul qilinmaydi
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+    const dup = await payload.count({
+      collection: 'memberships',
+      where: { and: [{ phone: { equals: phone } }, { createdAt: { greater_than: since } }] },
+      overrideAccess: true,
+    })
+    if (dup.totalDocs > 0)
+      return {
+        ok: false,
+        message: 'Bu telefon raqamidan ariza yaqinda yuborilgan. U körib çiqilmoqda; qöşimça savollar bölsa, Kengaşga murojaat qiling.',
+      }
     const doc = await payload.create({
       collection: 'memberships',
       data: { status: 'yangi', name, birthYear, phone, email: email || undefined, place },

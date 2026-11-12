@@ -135,6 +135,11 @@ export function OnlineForm({ otts, ustavHref }: { otts: string[]; ustavHref: str
       {state && !state.ok && <p className="az-msg">{state.message}</p>}
       <button type="submit" className="btn btn-primary" disabled={pending}>
         {pending ? 'Yuborilmoqda…' : 'Arizani yuboriş'}
+        <span className="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </span>
       </button>
     </form>
   )
