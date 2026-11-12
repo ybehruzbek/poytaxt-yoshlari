@@ -4,29 +4,31 @@
 import { useState } from 'react'
 
 import { InlinePlayer } from './AxClient'
-import { dur, fullDate, thumb, VIDEO_TYPES, VIDEOS } from './data'
+import { dur, fullDate, thumb, type Video, VIDEO_TYPES } from './data'
 
 /** C varianti: çapda pleyer va tavsif, öngda navbatdagi videolar (tanlangani belgilanadi) */
-export function VideoWatch() {
-  const [id, setId] = useState(VIDEOS[0].id)
-  const v = VIDEOS.find((x) => x.id === id)!
+export function VideoWatch({ videos }: { videos: Video[] }) {
+  const [id, setId] = useState(videos[0]?.id)
+  const v = videos.find((x) => x.id === id) ?? videos[0]
+  if (!v) return null
   return (
     <div className="ax-watch">
       <div className="ax-watch-main">
         <InlinePlayer id={v.id} title={v.title} />
-        <span className="ax-chip">{VIDEO_TYPES[v.type]}</span>
+        {v.type && <span className="ax-chip">{VIDEO_TYPES[v.type]}</span>}
         <h2>{v.title}</h2>
         <p className="ax-watch-meta">
-          {fullDate(v.date)} · {dur(v.sec)}
+          {fullDate(v.date)}
+          {v.sec ? ` · ${dur(v.sec)}` : ''}
         </p>
       </div>
       <ol className="ax-watch-list" aria-label="Videolar röyxati">
-        {VIDEOS.map((x) => (
+        {videos.map((x) => (
           <li key={x.id}>
             <button type="button" aria-current={x.id === id ? true : undefined} onClick={() => setId(x.id)}>
               <span className="ax-watch-th">
                 <img src={thumb(x.id)} alt="" loading="lazy" />
-                <span className="ax-dur">{dur(x.sec)}</span>
+                {x.sec ? <span className="ax-dur">{dur(x.sec)}</span> : null}
               </span>
               <span>
                 <b>{x.title}</b>

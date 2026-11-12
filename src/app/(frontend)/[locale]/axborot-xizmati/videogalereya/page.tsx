@@ -6,6 +6,9 @@ import type { Locale } from '@/i18n/config'
 
 import '../../../axborot.css'
 
+/** YouTube kanali har 15 daqiqada qayta tekşiriladi (lib/youtube.ts → REVALIDATE) */
+export const revalidate = 900
+
 export const metadata: Metadata = {
   title: 'Videogalereya — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description: 'Kengaş tadbirlaridan video lavhalar, reportajlar va maxsus körsatuvlar.',

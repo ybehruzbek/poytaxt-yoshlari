@@ -174,8 +174,9 @@ export type Video = {
   id: string
   title: string
   date: string
-  sec: number
-  type: VideoType
+  /** davomiyligi (soniya) — YouTube lentasidan kelgan yangi videolarda bölmaydi */
+  sec?: number
+  type?: VideoType
   /** körsatuv turkumi (playlist) */
   series?: string
 }
@@ -283,8 +284,13 @@ export const SHORTS: Short[] = [
   { id: 'weelp6GIEnE', title: 'IIV akademiyasida “Mening tanlovim — Obod Vatanim”' },
 ]
 
-export const thumb = (id: string) => `/img/axborot/video/${id}.webp`
-export const shortThumb = (id: string) => `/img/axborot/video/s-${id}.webp`
+/** Muqova: arxivdagilar — saytdagi siqilgan nusxa, kanalga yangi joylanganlar — YouTube'dan */
+const LOCAL = new Set([...VIDEOS, ...SHORTS].map((v) => v.id))
+const YTI = { code: 'https://i.ytimg.com/vi/' }.code
+export const thumb = (id: string) =>
+  LOCAL.has(id) ? `/img/axborot/video/${id}.webp` : `${YTI}${id}/hq720.jpg`
+export const shortThumb = (id: string) =>
+  LOCAL.has(id) ? `/img/axborot/video/s-${id}.webp` : `${YTI}${id}/hqdefault.jpg`
 
 /* ============================== PRESS-RELIZLAR ============================== */
 
