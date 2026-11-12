@@ -10,7 +10,7 @@ import '../../../hududiy.css'
 import '../../../hududiy-alt3.css'
 
 export const metadata: Metadata = {
-  title: 'Toşkent şahar hududiy Kengaşi — Özbekiston yoşlar ittifoqi',
+  title: 'Kengaş jamoasi — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description:
     'Toşkent şahar hududiy Kengaşi jamoasi: rais, bölim boşliqlari va mutaxassislar, ularning vazifalari va aloqa maʼlumotlari.',
 }

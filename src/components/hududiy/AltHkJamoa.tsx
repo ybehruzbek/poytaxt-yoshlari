@@ -7,17 +7,13 @@ import { More } from '@/components/site/MoreBtn'
 
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
 
-/** Sarlavha va qisqa izoh */
+/** Sarlavha (qoida: sarlavha ostida izoh paragrafi yöq) */
 function Head() {
   return (
     <div className="hk-jm-head">
       <div className="sec-head">
         <h1 className="h2 pg-title">Toşkent şahar hududiy Kengaşi jamoasi</h1>
       </div>
-      <p className="z5-lead">
-        Kengaş raisi, bölim boşliqlari va mutaxassislar. Har bir xodimning vazifalari, qabul kuni va
-        xonasi bilan şu yerda tanişişingiz mumkin.
-      </p>
     </div>
   )
 }
