@@ -5,7 +5,7 @@ import { AppealForm } from '@/components/site/AppealForm'
 import { More } from '@/components/site/MoreBtn'
 import { Svg } from '@/components/site/SocialPhones'
 
-import { ADDRESS, EMAIL, HOURS, LAW, MAPS, ORG, PHONES, RECEPTIONS, SOCIALS } from './data'
+import { ADDRESS, EMAIL, HOURS, LAW, MAPS, PHONES, RECEPTIONS, SOCIALS } from './data'
 import { OpenNow } from './OpenNow'
 
 /* ---------- umumiy bölaklar ---------- */
@@ -38,13 +38,13 @@ function Ic({ d }: { d: string }) {
   )
 }
 
-function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead: string }) {
+/** Sahifa boşi: yöl va sarlavha (sarlavha ostida izoh matni bölmaydi) */
+function Head({ crumbs, title }: { crumbs: ReactNode; title: string }) {
   return (
     <header className="pg-head">
       <div className="wrap">
         {crumbs}
         <h1 className="h2 pg-title">{title}</h1>
-        <p className="pg-lead">{lead}</p>
       </div>
     </header>
   )
@@ -89,7 +89,7 @@ function Reception({ cards }: { cards?: boolean }) {
         <div className="bg-sec-head">
           <h2 className="h2">Fuqarolar qabuli</h2>
           <p>
-            Kengaş rahbariyati haftaning belgilangan kunlarida fuqarolarni şaxsan qabul qiladi.
+            Kengaş raisi va bölim boşliqlari jadvalda körsatilgan kunlarda fuqarolarni şaxsan qabul qiladi.
             Qabulga oldindan telefon orqali yoziliş tavsiya etiladi.
           </p>
         </div>
@@ -236,23 +236,10 @@ function AloqaB({ L }: { L: (h: string) => string }) {
           <div className="bg-cta">
             <div>
               <h2 className="h2">Savol, taklif yoki şikoyatingiz bormi?</h2>
-              <p>Onlayn murojaat qoldiring — Qonunda belgilangan muddatda javob beriladi.</p>
+              <p>Elektron murojaat yuboring: u qonunda belgilangan muddatda körib çiqiladi.</p>
             </div>
-            <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Murojaat yuboriş{' '}
-              <span className="ic">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </span>
+            <Link href={L('/boglanish/murojaat')} className="more-btn">
+              <More>Murojaat yuboriş</More>
             </Link>
           </div>
         </div>
@@ -264,11 +251,7 @@ function AloqaB({ L }: { L: (h: string) => string }) {
 export function AloqaPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
   return (
     <div className="bg">
-      <Head
-        crumbs={crumbs}
-        title="Aloqa maʼlumotlari"
-        lead={`${ORG} bilan boğlanişning barça yöllari: telefon, poçta, manzil, iş vaqti va rahbariyatning fuqarolar qabuli.`}
-      />
+      <Head crumbs={crumbs} title="Aloqa maʼlumotlari" />
       <AloqaB L={L} />
     </div>
   )
@@ -298,11 +281,11 @@ const STEPS = [
   },
   {
     t: 'Körib çiqiladi',
-    d: 'Murojaat masʼul bölimga yuboriladi va Qonunda belgilangan muddatda örganiladi.',
+    d: 'Murojaat masʼul bölimga yuboriladi va qonunda belgilangan muddatda körib çiqiladi.',
   },
   {
     t: 'Javob beriladi',
-    d: 'Natija haqida siz qoldirgan telefon yoki poçta orqali xabar beriladi.',
+    d: 'Javob siz körsatgan elektron poçta manziliga yuboriladi yoki telefon orqali maʼlum qilinadi.',
   },
 ]
 
@@ -316,7 +299,7 @@ function Terms() {
         </div>
       ))}
       <a href={LAW.href} target="_blank" rel="noopener noreferrer" className="bg-law">
-        {LAW.title} — 28-modda ↗
+        {LAW.title}, 28-modda ↗
       </a>
     </div>
   )
@@ -350,11 +333,7 @@ function MurojaatA() {
 export function MurojaatPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="bg">
-      <Head
-        crumbs={crumbs}
-        title="Elektron murojaat"
-        lead="Savol, ariza, taklif yoki şikoyatingizni onlayn yuboring. Murojaatlar “Jismoniy va yuridik şaxslarning murojaatlari töğrisida”gi Qonun asosida körib çiqiladi."
-      />
+      <Head crumbs={crumbs} title="Elektron murojaat" />
       <MurojaatA />
     </div>
   )

@@ -48,13 +48,17 @@ export const HOURS = {
 }
 export const SOCIALS = CONTACT.socials
 
-/** Fuqarolar qabuli: kun, rahbar, bölim, xona (hududiy Kengaş jadvali) */
+/** Lavozim: “Kengaş raisi” özgarmaydi, bölim nomiga “boşliği” qöşiladi */
+const position = (dept: string) =>
+  dept === 'Kengaş raisi' ? dept : `${dept}${dept.endsWith('bölimi') ? '' : ' bölimi'} boşliği`
+
+/** Fuqarolar qabuli: kun, rahbar, lavozim, xona (hududiy Kengaş jadvali) */
 export const RECEPTIONS = RECEPTION.map((r) => ({
   day: r.day,
   time: r.time.replace(/\s*—\s*/, '–'),
   room: `${Number(r.room)}-xona`,
   name: r.name,
-  dept: r.dept,
+  dept: position(r.dept),
 }))
 
 /**
@@ -65,8 +69,8 @@ export const LAW = {
   title: '“Jismoniy va yuridik şaxslarning murojaatlari töğrisida”gi Qonun',
   href: 'https://lex.uz/uz/docs/-3336169',
   terms: [
-    { v: '15 kun', t: 'ariza va şikoyatlar kelib tuşgan kundan boşlab körib çiqiladi' },
-    { v: '1 oy', t: 'qöşimça örganiş talab qilinsa, şuningdek takliflar uçun' },
+    { v: '15 kun', t: 'ičida ariza va şikoyatlar kelib tuşgan kundan boşlab körib çiqiladi' },
+    { v: '1 oygaça', t: 'qöşimça tekşiriş yoki hujjatlar talab etilsa, şuningdek takliflar körib çiqiladi' },
   ],
   types: [
     { t: 'Ariza', d: 'Huquq, erkinlik va qonuniy manfaatlarni amalga oşirişda kömak söraş.' },
