@@ -6,6 +6,7 @@ import React from 'react'
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
 import { PageMotion } from '@/components/site/PageMotion'
+import { ScrollRail } from '@/components/site/ScrollRail'
 import { TextErrorReport } from '@/components/site/TextErrorReport'
 import { Typograf } from '@/components/site/Typograf'
 import { isLocale, locales } from '@/i18n/config'
@@ -71,6 +72,7 @@ export default async function LocaleLayout(props: {
         <Header locale={locale} />
         <main>{props.children}</main>
         <Footer locale={locale} />
+        <ScrollRail />
         <PageMotion locale={locale} />
         <Typograf />
         <TextErrorReport />

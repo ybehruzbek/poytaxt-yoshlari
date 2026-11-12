@@ -50,9 +50,6 @@ function Bottom() {
       </div>
       <div className="fb-end">
         <WwwUzCounter />
-        <a href="#" className="fb-up">
-          Yuqoriga ↑
-        </a>
       </div>
     </div>
   )
