@@ -30,7 +30,8 @@ export function AudienceFilter({ acts: all, locale }: { acts: Act[]; locale: str
           </button>
         ))}
       </div>
-      <DocsB acts={list} locale={locale} />
+      {/* saralaş özgarganda röyxat yana boşidan (8 ta) körinadi */}
+      <DocsB key={on} acts={list} locale={locale} />
     </>
   )
 }
