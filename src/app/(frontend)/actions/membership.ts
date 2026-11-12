@@ -1,7 +1,9 @@
 'use server'
 
+import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 
+import { clientIp, rateLimited } from '@/lib/rate-limit'
 import config from '@/payload.config'
 
 export type MemberField = 'name' | 'birthYear' | 'phone' | 'email' | 'place' | 'agree'
@@ -17,8 +19,14 @@ const str = (v: FormDataEntryValue | null) => (typeof v === 'string' ? v.trim() 
 
 /** “Aʼzo böliş” şaklini qabul qiladi (Ustav, 4.1–4.2-bandlar) */
 export async function submitMembership(fd: FormData): Promise<MemberState> {
+  // VAQTINCHA: onlayn ariza (B varianti) hali tasdiqlanmagan — production'da qabul qilinmaydi
+  if (process.env.NODE_ENV === 'production')
+    return { ok: false, message: 'Onlayn ariza qabul qiliş hozirça yöqilmagan.' }
   // botlar uçun yaşirin maydon
   if (str(fd.get('website'))) return { ok: true, message: 'Arizangiz qabul qilindi.' }
+  const ip = clientIp(await headers())
+  if (rateLimited(ip, 'membership'))
+    return { ok: false, message: 'Yuboriş urinişlari soni oşib ketdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const name = str(fd.get('name'))
   const phone = str(fd.get('phone'))

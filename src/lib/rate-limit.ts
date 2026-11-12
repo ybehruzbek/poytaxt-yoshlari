@@ -36,10 +36,16 @@ function sweep(b: Bucket, now: number) {
 }
 
 /**
- * @param scope   funksiya nomi: 'appeal' (murojaatlar: 5 / 60), 'text-error' (matndagi xato: 10 / 120)
+ * @param scope   funksiya nomi: 'appeal' (murojaatlar: 5 / 60), 'text-error' (matndagi xato: 10 / 120),
+ *                'membership' (aʼzolik arizalari: 3 / 40)
  */
-export function rateLimited(ip: string, scope: 'appeal' | 'text-error' = 'appeal'): boolean {
-  const b = scope === 'appeal' ? bucket(scope, 5, 60) : bucket(scope, 10, 120)
+export function rateLimited(ip: string, scope: 'appeal' | 'text-error' | 'membership' = 'appeal'): boolean {
+  const b =
+    scope === 'appeal'
+      ? bucket(scope, 5, 60)
+      : scope === 'membership'
+        ? bucket(scope, 3, 40)
+        : bucket(scope, 10, 120)
   const now = Date.now()
 
   // 1) funksiya chegarasi — IP'ga bog'liq emas
