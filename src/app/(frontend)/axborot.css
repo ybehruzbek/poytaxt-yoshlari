@@ -118,17 +118,6 @@
   outline: 2px solid var(--navy);
   outline-offset: 1px;
 }
-.ax-hub-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 14px 20px;
-  margin-bottom: 28px;
-}
-.ax-tl-h {
-  font: 800 22px/1.2 var(--f-head);
-  color: var(--navy);
-}
 
 /* ---------- foto A: albomlar töri ---------- */
 .ax-albums {
@@ -155,28 +144,6 @@
 /* ---------- foto B: xronologiya ---------- */
 
 /* ---------- foto C: haftaning albomi + devor ---------- */
-
-.ax-ostat {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
-}
-.ax-ostat > div {
-  padding: 22px 26px;
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  background: var(--bg);
-}
-.ax-ostat b {
-  display: block;
-  font: 800 44px/1 var(--f-head);
-  color: var(--navy);
-}
-.ax-ostat span {
-  font-size: 15px;
-  color: var(--muted);
-}
 
 /* ---------- lightbox ---------- */
 .ax-lb {
@@ -807,115 +774,6 @@
 .ax-clip .more-btn {
   margin-top: auto;
 }
-.ax-owall {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
-  margin-bottom: 48px;
-}
-.ax-owall li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--bg);
-}
-.ax-owall b {
-  display: block;
-  font: 700 14.5px/1.3 var(--f-head);
-  color: var(--navy);
-}
-.ax-owall small {
-  font-size: 12.5px;
-  color: var(--muted);
-}
-.ax-oyears section {
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  gap: 24px;
-  padding: 24px 0;
-  border-top: 1px solid var(--line);
-}
-.ax-oyears ol {
-  list-style: none;
-  display: grid;
-  gap: 14px;
-}
-.ax-oyears li {
-  display: grid;
-  grid-template-columns: 110px 170px minmax(0, 1fr);
-  gap: 16px;
-  align-items: baseline;
-}
-.ax-oyears time {
-  font: 700 14px/1.3 var(--f-head);
-  color: var(--muted);
-}
-.ax-oy-o {
-  font: 700 14px/1.3 var(--f-head);
-  color: var(--blue);
-}
-.ax-oyears a {
-  font: 600 16px/1.45 var(--f-body);
-  color: var(--navy);
-}
-.ax-oyears a:hover {
-  color: var(--blue);
-}
-.ax-oyears a svg {
-  display: inline;
-  vertical-align: -2px;
-}
-.ax-otl {
-  list-style: none;
-  position: relative;
-  display: grid;
-  gap: 22px;
-}
-.ax-otl::before {
-  content: '';
-  position: absolute;
-  left: 118px;
-  top: 8px;
-  bottom: 8px;
-  width: 2px;
-  background: var(--line);
-}
-.ax-otl > li {
-  display: grid;
-  grid-template-columns: 100px minmax(0, 1fr);
-  gap: 40px;
-}
-.ax-otl time {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-top: 22px;
-}
-.ax-otl time::after {
-  content: '';
-  position: absolute;
-  right: -27px;
-  top: 26px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--yellow);
-  box-shadow: 0 0 0 4px var(--bg);
-}
-.ax-otl time b {
-  font: 800 24px/1 var(--f-head);
-  color: var(--navy);
-}
-.ax-otl time span {
-  margin-top: 4px;
-  font-size: 13.5px;
-  color: var(--muted);
-}
 
 /* =====================  Moslaşuv  ===================== */
 @media (max-width: 1100px) {
@@ -928,55 +786,12 @@
   }
 }
 @media (max-width: 760px) {
-  .ax-ostat {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-  }
-  .ax-ostat > div {
-    padding: 14px;
-    border-radius: 18px;
-  }
-  .ax-ostat b {
-    font-size: 28px;
-  }
-  .ax-ostat span {
-    font-size: 12.5px;
-  }
   .ax-albums,
   .ax-vgrid,
   .ax-watch-list button {
     grid-template-columns: 120px minmax(0, 1fr);
   }
-  .ax-oyears section {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .ax-oyears li {
-    grid-template-columns: 1fr;
-    gap: 2px;
-  }
-  .ax-otl::before {
-    left: 6px;
-  }
-  .ax-otl > li {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding-left: 28px;
-  }
-  .ax-otl time {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 8px;
-    padding-top: 0;
-  }
-  .ax-otl time::after {
-    left: -28px;
-    right: auto;
-    top: 4px;
-  }
-  .ax-otl time b {
-    font-size: 18px;
-  }
+
   .ax-lb-fig {
     padding: 0 8px;
   }
@@ -1426,177 +1241,8 @@
 }
 
 /* ---- B: matbuot xonasi ---- */
-.pr-anons {
-  list-style: none;
-  display: grid;
-  gap: 14px;
-  margin-bottom: 48px;
-}
-.pr-anons > li {
-  display: grid;
-  grid-template-columns: 170px minmax(0, 1fr);
-  border: 1px solid var(--line);
-  border-radius: 26px;
-  background: var(--bg);
-  overflow: hidden;
-}
-.pr-anons-when {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  padding: 22px;
-  background: var(--sky);
-  color: #532822;
-}
-.pr-anons-when b {
-  font: 800 24px/1.1 var(--f-head);
-}
-.pr-anons-when span {
-  font: 700 14px/1 var(--f-head);
-}
-.pr-anons-b {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 22px 26px;
-}
-.pr-anons-b h3,
-.pr-list h3 {
-  font: 700 19px/1.35 var(--f-head);
-  color: var(--navy);
-}
-.pr-anons-b h3 a:hover,
-.pr-list h3 a:hover {
-  color: var(--blue);
-}
-.pr-anons-place {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font: 600 14px/1.3 var(--f-body);
-  color: var(--navy);
-}
-.pr-anons-b p:last-child,
-.pr-list article > p:not(.pr-dateline) {
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--grey);
-}
-.pr-list {
-  list-style: none;
-  border-top: 1px solid var(--line);
-}
-.pr-list article {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 26px 0;
-  border-bottom: 1px solid var(--line);
-}
-.pr-list-facts {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.pr-list-facts li {
-  padding: 6px 12px;
-  border-radius: 99px;
-  background: var(--soft);
-  font-size: 13.5px;
-  color: var(--navy);
-}
 
 /* ---- C: reyestr ---- */
-.pr-reg-top {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px 18px;
-  margin-bottom: 24px;
-}
-.pr-reg-top .ax-search input {
-  width: 300px;
-  height: 42px;
-}
-.pr-none {
-  padding: 30px 0;
-  color: var(--muted);
-}
-.pr-reg-year {
-  margin-bottom: 32px;
-}
-.pr-reg-year h2 {
-  margin-bottom: 10px;
-  font: 800 22px/1.2 var(--f-head);
-  color: var(--navy);
-}
-.pr-reg-year table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.pr-reg-year th {
-  padding: 10px 12px;
-  border-bottom: 2px solid var(--navy);
-  text-align: left;
-  font: 700 12.5px/1 var(--f-body);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.pr-reg-year td {
-  padding: 16px 12px;
-  border-bottom: 1px solid var(--line);
-  vertical-align: middle;
-}
-.pr-reg-d {
-  width: 120px;
-  font: 700 14px/1.2 var(--f-head);
-  color: var(--navy);
-  white-space: nowrap;
-}
-.pr-reg-t {
-  font: 700 16px/1.4 var(--f-head);
-  color: var(--navy);
-}
-.pr-reg-t:hover {
-  color: var(--blue);
-}
-.pr-reg-act {
-  width: 1%;
-  text-align: right;
-}
-.pr-dlg {
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  width: min(860px, calc(100vw - 24px));
-  max-width: none;
-  max-height: calc(100dvh - 24px);
-  padding: 0;
-  border: 0;
-  border-radius: 28px;
-  background: var(--soft);
-  overflow: auto;
-}
-.pr-dlg::backdrop {
-  background: rgba(20, 10, 8, 0.6);
-  backdrop-filter: blur(4px);
-}
-.pr-dlg-in {
-  padding: 18px;
-}
-.pr-dlg-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-}
-.pr-dlg .ax-lb-x {
-  background: var(--navy-bg);
-}
 
 /* ---- bitta reliz sahifasi ---- */
 .pr-media {
@@ -1649,38 +1295,7 @@
     grid-template-columns: 1fr;
     gap: 16px;
   }
-  .pr-anons > li {
-    grid-template-columns: 1fr;
-  }
-  .pr-anons-when {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 12px;
-    padding: 14px 20px;
-  }
-  .pr-reg-top .ax-search,
-  .pr-reg-top .ax-search input {
-    width: 100%;
-  }
-  .pr-reg-year thead {
-    display: none;
-  }
-  .pr-reg-year tr {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 8px 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .pr-reg-year td {
-    padding: 0;
-    border: 0;
-  }
-  .pr-reg-year td:nth-child(3),
-  .pr-reg-year td:nth-child(4) {
-    grid-column: 1 / -1;
-    text-align: left;
-  }
+
   .pr-photos {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1703,10 +1318,5 @@
     padding: 0;
     background: #fff;
     color: #222;
-  }
-  html.pr-printing .pr-dlg {
-    position: static;
-    overflow: visible;
-    max-height: none;
   }
 }

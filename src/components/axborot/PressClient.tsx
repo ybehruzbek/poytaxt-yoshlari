@@ -1,13 +1,10 @@
 'use client'
 
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { More } from '@/components/site/MoreBtn'
-
-import { dayMonth, fullDate } from './data'
+import { fullDate } from './data'
 import { PressDoc } from './PressDoc'
-import { PRESS, PRESS_KINDS, type PressItem } from './press'
+import { PRESS, PRESS_KINDS } from './press'
 
 /** Faqat tanlangan blankani çop etiş (qolgan sahifa yaşiriladi — axborot.css @media print) */
 function printDoc(id: string) {
@@ -69,7 +66,7 @@ function Ic({ d }: { d: string }) {
 }
 
 /* ====================================================================
-   A — “Rasmiy blanka”: çapda hujjatlar röyxati, öngda tanlangan blanka
+   “Rasmiy blanka”: çapda hujjatlar röyxati, öngda tanlangan blanka
    (manzil satrida #slug — havolani ulaşiş mumkin)
    ==================================================================== */
 export function PressDesk() {
@@ -101,106 +98,6 @@ export function PressDesk() {
         <PressTools docId="pr-a-doc" slug={p.slug} />
         <PressDoc p={p} id="pr-a-doc" />
       </div>
-    </div>
-  )
-}
-
-/* ====================================================================
-   C — “Hujjatlar reyestri”: tur va yil böyiça saralaş, qidiruv;
-   “Oçiş” — blanka oyna ičida
-   ==================================================================== */
-export function PressRegistry({ base }: { base: string }) {
-  const [kind, setKind] = useState<'all' | PressItem['kind']>('all')
-  const [q, setQ] = useState('')
-  const [open, setOpen] = useState<PressItem | null>(null)
-  const dlg = useRef<HTMLDialogElement>(null)
-  const s = q.trim().toLowerCase()
-  const list = PRESS.filter(
-    (p) => (kind === 'all' || p.kind === kind) && (!s || `${p.title} ${p.lead}`.toLowerCase().includes(s)),
-  )
-  const years = [...new Set(list.map((p) => p.date.slice(0, 4)))]
-
-  return (
-    <div className="pr-reg">
-      <div className="pr-reg-top">
-        <div className="ax-pills" role="group" aria-label="Hujjat turi">
-          {(['all', 'reliz', 'anons'] as const).map((k) => (
-            <button key={k} type="button" aria-pressed={kind === k} onClick={() => setKind(k)}>
-              {k === 'all' ? 'Barçasi' : PRESS_KINDS[k]}
-              <span className="ax-pill-n">{k === 'all' ? PRESS.length : PRESS.filter((p) => p.kind === k).length}</span>
-            </button>
-          ))}
-        </div>
-        <label className="ax-search">
-          <span className="sr-only">Press-relizlardan qidiriş</span>
-          <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Sarlavha yoki matndan qidiriş" />
-        </label>
-      </div>
-
-      {list.length === 0 && <p className="pr-none">Bu söz böyiça hujjat topilmadi.</p>}
-
-      {years.map((y) => (
-        <section key={y} className="pr-reg-year">
-          <h2>{y}-yil</h2>
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Sana</th>
-                <th scope="col">Turi</th>
-                <th scope="col">Sarlavha</th>
-                <th scope="col">
-                  <span className="sr-only">Amallar</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {list
-                .filter((p) => p.date.startsWith(y))
-                .map((p) => (
-                  <tr key={p.slug}>
-                    <td className="pr-reg-d">
-                      <time dateTime={p.date}>{dayMonth(p.date)}</time>
-                    </td>
-                    <td>
-                      <span className={`pr-kind k-${p.kind}`}>{PRESS_KINDS[p.kind]}</span>
-                    </td>
-                    <td>
-                      <Link href={`${base}/axborot-xizmati/press-relizlar/${p.slug}`} className="pr-reg-t">
-                        {p.title}
-                      </Link>
-                    </td>
-                    <td className="pr-reg-act">
-                      <button
-                        type="button"
-                        className="more-btn"
-                        onClick={() => {
-                          setOpen(p)
-                          dlg.current?.showModal()
-                        }}
-                      >
-                        <More>Oçiş</More>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </section>
-      ))}
-
-      <dialog ref={dlg} className="pr-dlg" aria-label="Press-reliz" onClose={() => setOpen(null)}>
-        {open && (
-          <div className="pr-dlg-in">
-            <div className="pr-dlg-bar">
-              <PressTools docId="pr-c-doc" slug={open.slug} />
-              <button type="button" className="ax-lb-x" onClick={() => dlg.current?.close()} aria-label="Yopiş">
-                ×
-              </button>
-            </div>
-            <PressDoc p={open} id="pr-c-doc" />
-          </div>
-        )}
-      </dialog>
     </div>
   )
 }

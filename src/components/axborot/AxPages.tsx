@@ -3,7 +3,6 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
-import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 
 import { InlinePlayer, Lightbox, Pills, Search, ShowMore, VideoModal } from './AxClient'
 import {
@@ -11,7 +10,6 @@ import {
   ALBUMS,
   type AlbumType,
   cover,
-  dayMonth,
   fullDate,
   photo,
   PRESS_CONTACT,
@@ -20,26 +18,10 @@ import {
 } from './data'
 import { MEDIA, MEDIA_KINDS, type MediaItem } from './oav'
 import { VideoWatch } from './VideoWatch'
-import { PressDesk, PressRegistry, PressTools } from './PressClient'
+import { PressDesk, PressTools } from './PressClient'
 import { PressDoc } from './PressDoc'
-import { ORG, PRESS, type PressItem } from './press'
+import { ORG, type PressItem } from './press'
 import { getYoutubeFeed } from '@/lib/youtube'
-
-/** VAQTINÇA: variantlar faqat işlab çiqiş rejimida; saytda — A */
-const DEV = process.env.NODE_ENV !== 'production'
-
-function Variants({ name, views }: { name: string; views: ReactNode[] }) {
-  if (!DEV) return <>{views[0]}</>
-  return (
-    <>
-      {views.map((v, i) => (
-        <div key={i} className="vx" data-v={`${name}-${String.fromCharCode(97 + i)}`}>
-          {v}
-        </div>
-      ))}
-    </>
-  )
-}
 
 function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead?: string }) {
   return (
@@ -252,9 +234,7 @@ function MediaKit() {
   )
 }
 
-const relHref = (L: (h: string) => string, slug: string) => L(`/axborot-xizmati/press-relizlar/${slug}`)
-
-/** A — “Rasmiy blanka”: çapda hujjatlar röyxati, öngda tanlangan relizning rasmiy blankasi */
+/** “Rasmiy blanka”: çapda hujjatlar röyxati, öngda tanlangan relizning rasmiy blankasi */
 function PressA() {
   return (
     <section className="sec ax">
@@ -265,104 +245,14 @@ function PressA() {
   )
 }
 
-/** B — “Matbuot xonasi”: OAV uçun anonslar, keyin press-relizlar; har biri alohida sahifada töliq */
-function PressB({ L }: { L: (h: string) => string }) {
-  const anons = PRESS.filter((p) => p.kind === 'anons')
-  const rel = PRESS.filter((p) => p.kind === 'reliz')
-  return (
-    <section className="sec ax">
-      <div className="wrap ax-press">
-        <div>
-          <h2 className="pr-h">OAV uçun anonslar</h2>
-          <ul className="pr-anons">
-            {anons.map((p) => (
-              <li key={p.slug}>
-                <div className="pr-anons-when">
-                  <b>{p.event!.when}</b>
-                  {p.event!.time && <span>soat {p.event!.time}</span>}
-                </div>
-                <div className="pr-anons-b">
-                  <h3>
-                    <Link href={relHref(L, p.slug)}>{p.title}</Link>
-                  </h3>
-                  <p className="pr-anons-place">
-                    <Pin /> {p.event!.place}
-                  </p>
-                  <p>{p.lead}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          <h2 className="pr-h">Press-relizlar</h2>
-          <ol className="pr-list">
-            {rel.map((p) => (
-              <li key={p.slug}>
-                <article>
-                  <p className="pr-dateline">Toşkent, {fullDate(p.date)}</p>
-                  <h3>
-                    <Link href={relHref(L, p.slug)}>{p.title}</Link>
-                  </h3>
-                  <p>{p.lead}</p>
-                  {p.facts && (
-                    <ul className="pr-list-facts">
-                      {p.facts.map((f) => (
-                        <li key={f.k}>
-                          <b>{f.v}</b> {f.k}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  <Link href={relHref(L, p.slug)} className="more-btn">
-                    <More>Töliq matn</More>
-                  </Link>
-                </article>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <div className="ax-side">
-          <PressContact />
-          <MediaKit />
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C — “Hujjatlar reyestri”: yillar böyiça jadval, tur böyiça saralaş, qidiruv; blanka oyna ičida */
-function PressC({ L }: { L: (h: string) => string }) {
-  return (
-    <section className="sec ax">
-      <div className="wrap ax-press">
-        <PressRegistry base={L('')} />
-        <div className="ax-side">
-          <PressContact />
-          <MediaKit />
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function PressPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
+export function PressPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="ax-page">
       <Head crumbs={crumbs} title="Press-relizlar" />
-      <Variants name="pr" views={[<PressA key="a" />, <PressB key="b" L={L} />, <PressC key="c" L={L} />]} />
-      {DEV && <DevSectionsPanel sections={PANEL_PRESS} />}
+      <PressA />
     </div>
   )
 }
-
-const PANEL_PRESS: PanelSection[] = [
-  {
-    name: 'pr',
-    label: 'Press-relizlar',
-    count: 3,
-    hints: ['Rasmiy blanka: röyxat + hujjat', 'Matbuot xonasi: anonslar + relizlar', 'Hujjatlar reyestri: jadval + oyna'],
-  },
-]
 
 /** Bitta press-relizning sahifasi: rasmiy blanka, asboblar, suratlar va video, OAV uçun aloqa */
 export function PressItemPage({ crumbs, p, L }: { crumbs: ReactNode; p: PressItem; L: (h: string) => string }) {
@@ -414,16 +304,7 @@ export function PressItemPage({ crumbs, p, L }: { crumbs: ReactNode; p: PressIte
    OAV BIZ HAQIMIZDA
    ==================================================================== */
 
-const OUTLETS = [...new Set(MEDIA.map((m) => m.outlet))]
 const YEARS = [...new Set(MEDIA.map((m) => m.date.slice(0, 4)))]
-
-function Ext() {
-  return (
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
-      <path d="M7 17 17 7M9 7h8v8" />
-    </svg>
-  )
-}
 
 /** Naşr belgisi: naşrning öz saytidagi rasmiy belgisi (favicon) */
 function Badge({ m }: { m: MediaItem }) {
@@ -458,7 +339,7 @@ function Clip({ m, quote = false }: { m: MediaItem; quote?: boolean }) {
   )
 }
 
-/** A — kliping lentasi: naşr, tur va yil böyiça saralaş */
+/** Kliping lentasi: naşr, tur va yil böyiça saralaş */
 function OavA() {
   return (
     <section className="sec ax">
@@ -486,102 +367,11 @@ function OavA() {
   )
 }
 
-/** B — raqamlar va naşrlar devori, pastda yillar böyiça röyxat */
-function OavB() {
-  const byYear = YEARS.map((y) => [y, MEDIA.filter((m) => m.date.startsWith(y))] as const)
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <div className="ax-ostat">
-          <div>
-            <b>{MEDIA.length}</b>
-            <span>material</span>
-          </div>
-          <div>
-            <b>{OUTLETS.length}</b>
-            <span>naşr va sayt</span>
-          </div>
-          <div>
-            <b>{MEDIA.filter((m) => m.kind === 'gov').length}</b>
-            <span>davlat organlari saytlarida</span>
-          </div>
-        </div>
-        <ul className="ax-owall" aria-label="Naşrlar">
-          {OUTLETS.map((o) => {
-            const m = MEDIA.find((x) => x.outlet === o)!
-            return (
-              <li key={o}>
-                <Badge m={m} />
-                <span>
-                  <b>{o}</b>
-                  <small>{MEDIA.filter((x) => x.outlet === o).length} ta material</small>
-                </span>
-              </li>
-            )
-          })}
-        </ul>
-        <div className="ax-oyears">
-          {byYear.map(([y, list]) => (
-            <section key={y}>
-              <h2 className="ax-tl-h">{y}</h2>
-              <ol>
-                {list.map((m) => (
-                  <li key={m.url}>
-                    <time dateTime={m.date}>{dayMonth(m.date)}</time>
-                    <span className="ax-oy-o">{m.outlet}</span>
-                    <a href={m.url} target="_blank" rel="noopener noreferrer">
-                      {m.title} <Ext />
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </section>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C — vaqt çizigi: yil va oy böyiça, har material — sana nuqtasi va karta */
-function OavC() {
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <div className="ax-hub-top">
-          <Search target="oc-list" placeholder="Sarlavha yoki naşr nomi böyiça qidiriş" />
-        </div>
-        <ol className="ax-otl" id="oc-list">
-          {MEDIA.map((m) => (
-            <li key={m.url} data-q={`${m.title} ${m.outlet} ${m.domain}`}>
-              <time dateTime={m.date}>
-                <b>{m.date.slice(0, 4)}</b>
-                <span>{dayMonth(m.date)}</span>
-              </time>
-              <Clip m={m} />
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
-
 export function OavPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="ax-page">
       <Head crumbs={crumbs} title="OAV biz haqimizda" />
-      <Variants name="oa" views={[<OavA key="a" />, <OavB key="b" />, <OavC key="c" />]} />
-      {DEV && <DevSectionsPanel sections={PANEL_OAV} />}
+      <OavA />
     </div>
   )
 }
-
-const PANEL_OAV: PanelSection[] = [
-  {
-    name: 'oa',
-    label: 'OAV biz haqimizda',
-    count: 3,
-    hints: ['Kliping lentasi + saralaş', 'Raqamlar + naşrlar devori', 'Vaqt çizigi + qidiruv'],
-  },
-]
