@@ -8,24 +8,10 @@ import { clientIp, rateLimited } from '@/lib/rate-limit'
 import { REACTIONS, type ReactionKind } from '@/collections/NewsReactions'
 import config from '@/payload.config'
 
-export type RatingStats = { count: number; avg: number }
-export type RateResult = { ok: boolean; message?: string; stats?: RatingStats; mine?: number }
+import { ratingStats, reactionCounts, type ReactionCounts, type RatingStats } from '@/lib/news-votes'
 
-/** Maqola baholari: soni va örtaça (1 xona aniqlik) */
-export async function ratingStats(newsId: number): Promise<RatingStats> {
-  const payload = await getPayload({ config })
-  const res = await payload.find({
-    collection: 'news-ratings',
-    where: { news: { equals: newsId } },
-    pagination: false,
-    select: { value: true },
-    overrideAccess: true,
-  })
-  const vals = res.docs.map((d) => d.value)
-  const count = vals.length
-  const avg = count ? Math.round((vals.reduce((a, b) => a + b, 0) / count) * 10) / 10 : 0
-  return { count, avg }
-}
+export type { ReactionCounts, RatingStats }
+export type RateResult = { ok: boolean; message?: string; stats?: RatingStats; mine?: number }
 
 /** Bitta tomonidan bitta maqolaga bitta baho; qayta baholansa — yangilanadi. IP saqlanmaydi, faqat xeş */
 export async function rateNews(newsId: number, value: number): Promise<RateResult> {
@@ -68,23 +54,7 @@ export async function rateNews(newsId: number, value: number): Promise<RateResul
   }
 }
 
-export type ReactionCounts = Record<ReactionKind, number>
 export type ReactResult = { ok: boolean; message?: string; counts?: ReactionCounts; mine?: ReactionKind | null }
-
-/** Reaksiyalar soni */
-export async function reactionCounts(newsId: number): Promise<ReactionCounts> {
-  const payload = await getPayload({ config })
-  const res = await payload.find({
-    collection: 'news-reactions',
-    where: { news: { equals: newsId } },
-    pagination: false,
-    select: { kind: true },
-    overrideAccess: true,
-  })
-  const c = Object.fromEntries(REACTIONS.map((k) => [k, 0])) as ReactionCounts
-  for (const d of res.docs) c[d.kind as ReactionKind]++
-  return c
-}
 
 /** Bitta tomonidan bitta reaksiya: boşqasini bossa — almaşadi, şuni qayta bossa — olib taşlanadi */
 export async function reactNews(newsId: number, kind: string): Promise<ReactResult> {

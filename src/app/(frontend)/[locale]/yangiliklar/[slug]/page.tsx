@@ -10,7 +10,7 @@ import type { Author, Media, News } from '@/payload-types'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { Article, type ArticleData, type MiniNews } from '@/components/yangiliklar/Article'
 import { toYnItem } from '@/components/yangiliklar/data'
-import { reactionCounts, ratingStats } from '@/app/(frontend)/actions/rating'
+import { reactionCounts, ratingStats } from '@/lib/news-votes'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 

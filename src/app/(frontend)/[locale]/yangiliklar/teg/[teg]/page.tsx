@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
@@ -14,7 +15,16 @@ export const revalidate = 60
 
 type Props = { params: Promise<{ locale: Locale; teg: string }> }
 
-const tagOf = (raw: string) => decodeURIComponent(raw).trim().slice(0, 80)
+/** Next.js parametrni özi dekodlaydi; eski havolalar uçun xavfsiz qayta dekodlaş */
+const tagOf = (raw: string) => {
+  let s = raw
+  try {
+    s = decodeURIComponent(raw)
+  } catch {
+    /* notöğri kodlaş — qanday bölsa şunday */
+  }
+  return s.trim().slice(0, 80)
+}
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { teg } = await props.params
@@ -25,6 +35,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function TagRoute(props: Props) {
   const { locale, teg } = await props.params
   const tag = tagOf(teg)
+  if (!tag) notFound()
   const payload = await getPayload({ config })
   const res = await payload.find({
     collection: 'news',
