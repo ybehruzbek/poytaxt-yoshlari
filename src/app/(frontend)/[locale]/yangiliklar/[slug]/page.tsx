@@ -48,31 +48,29 @@ export default async function NewsPage(props: Props) {
   const hero = img?.sizes?.hero?.url || img?.url || card.image
 
   return (
-    <article>
-      <section className="page-hero">
+    <article className="nw">
+      <header className="pg-head">
         <div className="wrap">
           <PageCrumbs locale={locale} path="/yangiliklar" extra={[{ label: doc.title }]} />
-          <div className="news-sec" style={{ marginBottom: 18 }}>
-            <div className="meta">
-              <span className={`chip ${CATEGORY_TONE[card.category]}`}>{card.categoryLabel}</span>
-              <time dateTime={card.dateISO}>{toYnItem(card, 0).long /* “2026-yil 5-noyabr” — hozirgi vaqtga boğliq emas */}</time>
-            </div>
+          <div className="nw-meta">
+            <span className={`chip ${CATEGORY_TONE[card.category]}`}>{card.categoryLabel}</span>
+            <time dateTime={card.dateISO}>{toYnItem(card, 0).long /* “2026-yil 5-noyabr” — hozirgi vaqtga boğliq emas */}</time>
           </div>
-          <h1 className="h1" style={{ maxWidth: 980 }}>{doc.title}</h1>
-          <p className="lead">{doc.excerpt}</p>
+          <h1 className="h2 pg-title nw-title">{doc.title}</h1>
         </div>
-      </section>
+      </header>
       <section className="sec">
-        <div className="wrap" style={{ display: 'grid', gap: 40, maxWidth: 1040 }}>
-          <div style={{ borderRadius: 40, overflow: 'hidden', aspectRatio: '16 / 9', background: 'var(--soft)' }}>
+        <div className="wrap nw-body">
+          <div className="nw-img">
             <img className="cover" src={hero} alt={card.imageAlt} />
           </div>
+          {doc.excerpt && <p className="nw-lede">{doc.excerpt}</p>}
           {doc.content && (
             <div className="news-body">
               <RichText data={doc.content} />
             </div>
           )}
-          <Link href={`/${locale}/yangiliklar`} className="more-btn" style={{ justifySelf: 'start' }}>
+          <Link href={`/${locale}/yangiliklar`} className="more-btn nw-back">
             <More>Barça yangiliklar</More>
           </Link>
         </div>

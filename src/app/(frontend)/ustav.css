@@ -1,14 +1,6 @@
 /* =====================================================================
    Özbekiston yoşlar ittifoqining Ustavi — töliq matn sahifasi
    ===================================================================== */
-.us-kicker {
-  display: block;
-  margin-bottom: 10px;
-  font: 700 13px/1 var(--f-head);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--orange);
-}
 .us-meta {
   display: flex;
   flex-wrap: wrap;
@@ -24,6 +16,12 @@
   font-size: 13.5px;
   line-height: 1.4;
   color: var(--navy);
+}
+.us-meta .us-kind {
+  border-color: transparent;
+  background: var(--navy-bg);
+  color: #fff;
+  font-weight: 700;
 }
 .us-sec {
   padding-top: 24px;
@@ -55,7 +53,7 @@
   font: 700 13px/1 var(--f-head);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: var(--blue);
 }
 .us-cl {
   scroll-margin-top: 110px;
@@ -96,7 +94,7 @@
   width: 7px;
   height: 2px;
   border-radius: 2px;
-  background: var(--orange);
+  background: var(--blue);
 }
 
 /* A — yopişqoq mundarija */

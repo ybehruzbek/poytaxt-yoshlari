@@ -8,5 +8,6 @@
 .hk-lead-ic svg{width:20px;height:20px}
 
 .hk-jamoa .sec{padding-top:0}
-.hk-jamoa .sec-head{margin-bottom:22px}
+.hk-jamoa .sec-head{margin-bottom:40px}
+@media (max-width:640px){.hk-jamoa .sec-head{margin-bottom:28px}}
 .hk-jm-head{flex-direction:column;align-items:flex-start;gap:6px}

@@ -47,9 +47,9 @@ function Head({ crumbs }: { crumbs: ReactNode }) {
     <header className="pg-head us-head">
       <div className="wrap">
         {crumbs}
-        <span className="us-kicker">Taʼsis hujjati</span>
         <h1 className="h2 pg-title">Özbekiston yoşlar ittifoqining Ustavi</h1>
         <ul className="us-meta">
+          <li className="us-kind">Taʼsis hujjati</li>
           {META.map((m) => (
             <li key={m}>{m}</li>
           ))}

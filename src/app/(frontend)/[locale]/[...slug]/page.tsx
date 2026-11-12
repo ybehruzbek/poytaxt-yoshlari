@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { PageCrumbs } from '@/components/site/PageCrumbs'
+import { SiblingNav } from '@/components/site/SiblingNav'
 import { NAV, findNav } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 
@@ -44,6 +44,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 /**
  * VAQTINCHA umumiy sahifa: menyudagi özining sahifasi hali yöq bölimlar uçun yöl, sarlavha va
  * “Bölim tayyorlanmoqda” xabari (H1 ostida izoh matni berilmaydi — qoida).
+ * Sahifa boşi boşqa sahifalardagi kabi: .pg-head + PageCrumbs + h1.pg-title.
  */
 export default async function SectionPage(props: Props) {
   const { locale, slug } = await props.params
@@ -52,36 +53,23 @@ export default async function SectionPage(props: Props) {
   if (!group || trail.length === 0) notFound()
 
   const page = trail[trail.length - 1]
-  const L = (href: string) => `/${locale}${href}`
-  const siblings = group.items ?? []
 
   return (
     <>
-      <section className="page-hero">
+      <header className="pg-head">
         <div className="wrap">
           <PageCrumbs locale={locale} path={path} />
-          <h1 className="h1">{page.label}</h1>
+          <h1 className="h2 pg-title">{page.label}</h1>
         </div>
-      </section>
+      </header>
 
       <section className="sec">
-        <div className="wrap" style={{ display: 'grid', gap: 32 }}>
-          <div style={{ background: 'var(--soft)', borderRadius: 32, padding: '28px 32px', maxWidth: 760 }}>
-            <p style={{ fontFamily: 'var(--f-head)', fontWeight: 700, fontSize: 22, color: 'var(--navy)' }}>Bölim tayyorlanmoqda</p>
-            <p style={{ marginTop: 8, color: 'var(--muted)' }}>Bölim maʼlumotlari keyinroq joylaştiriladi.</p>
+        <div className="wrap ph-body">
+          <div className="ph-empty" role="status">
+            <p className="ph-empty-h">Bölim tayyorlanmoqda</p>
+            <p>Bölim maʼlumotlari keyinroq joylaştiriladi.</p>
           </div>
-          {siblings.length > 1 && (
-            <div>
-              <p style={{ fontFamily: 'var(--f-head)', fontWeight: 800, fontSize: 20, color: 'var(--navy)', marginBottom: 14 }}>{group.label} bölimida</p>
-              <div className="tabs" style={{ marginBottom: 0 }}>
-                {siblings.map((s) => (
-                  <Link key={s.href} href={L(s.href)} className={`tab${s.href === path || trail[0]?.href === s.href ? ' on' : ''}`} style={{ display: 'inline-flex', alignItems: 'center' }}>
-                    {s.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
+          <SiblingNav locale={locale} path={path} />
         </div>
       </section>
     </>

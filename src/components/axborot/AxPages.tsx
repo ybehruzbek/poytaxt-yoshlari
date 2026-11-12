@@ -266,7 +266,7 @@ export function PressItemPage({ crumbs, p, L }: { crumbs: ReactNode; p: PressIte
         <div className="wrap ax-press">
           <div className="pr-item">
             <PressTools docId="pr-item-doc" slug={p.slug} />
-            <PressDoc p={p} id="pr-item-doc" />
+            <PressDoc p={p} id="pr-item-doc" level={1} />
             {album && (
               <div className="pr-media">
                 <h2 className="pr-h">Suratlar</h2>

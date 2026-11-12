@@ -7,8 +7,10 @@ import { PRESS_CONTACT } from './data'
  * Press-relizning rasmiy blankasi: Kengaş logotipi, tur, sana va şahar, sarlavha,
  * birinçi xatboşi (eng muhim fakt), matn, raqamlar, “Kengaş haqida” va OAV uçun aloqa.
  * Çop etilganda (Ctrl+P / “Çop etiş”) faqat şu blanka qoğozga çiqadi.
+ * `level` — sarlavha darajasi: alohida sahifada 1 (sahifaning H1), röyxat ičida 2.
  */
-export function PressDoc({ p, id }: { p: PressItem; id?: string }) {
+export function PressDoc({ p, id, level = 2 }: { p: PressItem; id?: string; level?: 1 | 2 }) {
+  const Title = level === 1 ? 'h1' : 'h2'
   return (
     <article className={`pr-doc k-${p.kind}`} id={id} data-print-doc="">
       <header className="pr-doc-head">
@@ -22,7 +24,7 @@ export function PressDoc({ p, id }: { p: PressItem; id?: string }) {
       <p className="pr-dateline">
         Toşkent, {fullDate(p.date)}
       </p>
-      <h2 className="pr-doc-title">{p.title}</h2>
+      <Title className="pr-doc-title">{p.title}</Title>
 
       {p.event && (
         <dl className="pr-event">

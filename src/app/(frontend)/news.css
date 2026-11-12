@@ -369,3 +369,44 @@
 .pg-next.paused {
   animation-play-state: paused;
 }
+
+/* ---------- Bitta yangilik sahifasi (yangiliklar/[slug]) ---------- */
+.nw-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.nw-title {
+  max-width: 980px;
+}
+.nw-body {
+  display: grid;
+  gap: 32px;
+  max-width: 1040px;
+}
+.nw-img {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--line);
+}
+.nw-lede {
+  max-width: 760px;
+  font: 600 20px/1.55 var(--f-body);
+  color: var(--navy);
+}
+.nw-back {
+  justify-self: start;
+}
+@media (max-width: 640px) {
+  .nw-img {
+    border-radius: var(--r-thumb);
+  }
+  .nw-lede {
+    font-size: 18px;
+  }
+}

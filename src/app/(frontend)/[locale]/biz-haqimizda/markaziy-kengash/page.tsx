@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 import { KengashPage as Content } from '@/components/kengash/KengashPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
-import { NAV } from '@/config/nav'
+import { SiblingNav } from '@/components/site/SiblingNav'
 import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
@@ -22,22 +21,10 @@ const PATH = '/biz-haqimizda/markaziy-kengash'
 export default async function KengashRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
   const L = (h: string) => `/${locale}${h}`
-  const group = NAV.find((g) => g.key === 'biz')!
 
   const crumbs = <PageCrumbs locale={locale} path={PATH} />
 
-  const siblings = (
-    <div className="it-sib">
-      <p>{group.label} bölimida</p>
-      <div className="tabs">
-        {(group.items ?? []).map((s) => (
-          <Link key={s.href} href={L(s.href)} className={`tab${s.href === PATH ? ' on' : ''}`} style={{ display: 'inline-flex', alignItems: 'center' }}>
-            {s.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  )
+  const siblings = <SiblingNav locale={locale} path={PATH} />
 
   return <Content L={L} crumbs={crumbs} siblings={siblings} />
 }
