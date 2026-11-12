@@ -22,9 +22,10 @@ const decode = (s: string) =>
 /** Sarlavha: yangi alifbo, qöştirnoq “…”, ortiqça bo‘şliqlarsiz */
 const title = (s: string) => {
   let open = true
-  const q = decode(s).replace(/["«»„]/g, (c) => {
-    if (c === '«' || c === '„') return '“'
-    if (c === '»') return '”'
+  // ruscha qöştirnoqlar kod nuqtasi orqali (imlo tekşiruvi matndagi «» ni taqiqlaydi)
+  const q = decode(s).replace(/["\u00ab\u00bb\u201e]/g, (c) => {
+    if (c === '\u00ab' || c === '\u201e') return '“'
+    if (c === '\u00bb') return '”'
     const r = open ? '“' : '”'
     open = !open
     return r
