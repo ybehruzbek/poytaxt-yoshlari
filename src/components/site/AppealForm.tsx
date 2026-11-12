@@ -19,6 +19,12 @@ export function AppealForm() {
     e.preventDefault()
     const form = e.currentTarget
     const fd = new FormData(form)
+    // murojaat turi tanlanmaguniça yuborilmaydi
+    if (!fd.get('type')) {
+      setState({ ok: false, errors: { type: 'Murojaat turini tanlang: savol, murojaat yoki taklif.' }, message: 'Iltimos, murojaat turini tanlang.' })
+      form.querySelector<HTMLInputElement>('input[name="type"]')?.focus()
+      return
+    }
     const f = fd.get('file')
     if (f instanceof File && f.size > MAX) {
       setState({ ok: false, errors: { file: 'Fayl hajmi 10 MB dan oşmasin.' }, message: 'Iltimos, belgilangan maydonlarni tekşiring.' })
@@ -32,6 +38,13 @@ export function AppealForm() {
         setFileName('')
       }
     })
+  }
+
+  // tur tanlanişi bilan uning ogohlantirişi yöqoladi
+  const clearType = () => {
+    if (!state?.errors?.type) return
+    const { type: _t, ...rest } = state.errors
+    setState({ ...state, errors: rest })
   }
 
   const field = (id: AppealField) => ({
@@ -49,18 +62,25 @@ export function AppealForm() {
     <form ref={formRef} className="cb-form" onSubmit={onSubmit} noValidate>
       <p className="cb-form-title">Murojaat yuboriş</p>
 
-      <fieldset className="cb-types">
-        <legend>Murojaat turi</legend>
+      <fieldset
+        className="cb-types"
+        aria-invalid={err('type') ? true : undefined}
+        aria-describedby={err('type') ? 'af-type-err' : undefined}
+      >
+        <legend>
+          Murojaat turi <i aria-hidden="true">*</i>
+        </legend>
         {[
           ['savol', 'Savol'],
           ['murojaat', 'Murojaat'],
           ['taklif', 'Taklif'],
-        ].map(([v, l], i) => (
+        ].map(([v, l]) => (
           <label key={v}>
-            <input type="radio" name="type" value={v} defaultChecked={i === 0} />
+            <input type="radio" name="type" value={v} required onChange={clearType} />
             <span>{l}</span>
           </label>
         ))}
+        {errEl('type')}
       </fieldset>
 
       <label className="cb-field">

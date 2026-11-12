@@ -141,6 +141,7 @@
   align-self: stretch;
 }
 .cb-field span i,
+.cb-types legend i,
 .cb-note i {
   color: #c2410c;
   font-style: normal;
@@ -191,6 +192,12 @@
   box-shadow:
     0 0 0 3px var(--bg),
     0 0 0 6px var(--navy);
+}
+.cb-types[aria-invalid='true'] span {
+  border-color: #c2410c;
+}
+.cb-types .cb-err {
+  flex-basis: 100%;
 }
 .cb-field [aria-invalid='true'] {
   border-color: #c2410c !important;
