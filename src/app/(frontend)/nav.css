@@ -303,14 +303,13 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .burger{color:#fff;border-c
   from {
     opacity: 0;
     translate: 0 -14px;
-    filter: blur(6px);
   }
 }
 .site-head .logo,
 .mnav > ul > li:not(.mnav-pill),
 .head-end > *,
 .burger {
-  animation: nav-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: nav-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 .mnav > ul > li:not(.mnav-pill) {
   animation-delay: calc(120ms + var(--k, 0) * 55ms);
