@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor ölçamda keladi */
 /**
- * Bitta yangilik sahifasi — VAQTINCHA uç dizayn varianti (tanlangaç bittasi qoladi):
- *  A — Klassik (kun.uz uslubi): sarlavha, lid, ulaşiş, keng surat va izoh, tor matn ustuni, galereya, öxşaş yangiliklar.
- *  B — Yon panelli (daryo.uz uslubi): çapda maqola va yopişqoq ulaşiş tugmalari, öngda “Sönggi yangiliklar” lentasi.
- *  C — Keng muqova (long-read): ekran kengligidagi surat ustida sarlavha, keyin yirik şriftli matn va katta galereya.
+ * Bitta yangilik sahifasi (daryo.uz uslubi): çapda maqola — turkum, sana, öqiş vaqti, sarlavha, lid, surat va izoh,
+ * matn yonida birga suriladigan ulaşiş tugmalari, galereya, asl post havolasi; öngda “Sönggi yangiliklar” lentasi;
+ * pastda mavzuga oid yangiliklar.
  */
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
@@ -12,7 +11,7 @@ import type { ReactNode } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
 
-import { ArticleSwitch, Share } from './ArticleClient'
+import { Share } from './ArticleClient'
 
 export type ArticleData = {
   title: string
@@ -34,8 +33,6 @@ export type MiniNews = { href: string; title: string; date: string; image: strin
 
 type P = { a: ArticleData; crumbs: ReactNode; related: MiniNews[]; latest: MiniNews[]; listHref: string }
 
-const DEV = process.env.NODE_ENV !== 'production'
-
 function Meta({ a }: { a: ArticleData }) {
   return (
     <div className="ar-meta">
@@ -55,10 +52,10 @@ function Body({ a }: { a: ArticleData }) {
   ) : null
 }
 
-function Gallery({ a, big = false }: { a: ArticleData; big?: boolean }) {
+function Gallery({ a }: { a: ArticleData }) {
   if (!a.gallery.length) return null
   return (
-    <section className={`ar-gal${big ? ' big' : ''}`} aria-label="Fotogalereya">
+    <section className="ar-gal" aria-label="Fotogalereya">
       <h2 className="ar-h">Fotogalereya</h2>
       <div className="ar-gal-grid">
         {a.gallery.map((g) => (
@@ -108,43 +105,6 @@ function Related({ items, listHref }: { items: MiniNews[]; listHref: string }) {
   )
 }
 
-/* ============ A — Klassik ============ */
-function ArticleA({ a, crumbs, related, listHref }: P) {
-  return (
-    <article className="ar ar-a">
-      <header className="pg-head">
-        <div className="wrap">
-          <div className="ar-col-w">
-            {crumbs}
-            <Meta a={a} />
-            <h1 className="h2 pg-title ar-title">{a.title}</h1>
-            {a.excerpt && <p className="ar-lede">{a.excerpt}</p>}
-            <Share url={a.url} title={a.title} />
-          </div>
-        </div>
-      </header>
-      <section className="sec ar-sec">
-        <div className="wrap">
-          <figure className="ar-fig ar-col-w">
-            <img src={a.hero} alt={a.heroAlt} />
-            {a.caption && <figcaption>{a.caption}</figcaption>}
-          </figure>
-          <div className="ar-col">
-            <Body a={a} />
-            <Gallery a={a} />
-            <div className="ar-end">
-              <Source a={a} />
-              <Share url={a.url} title={a.title} label="Ulaşiş:" />
-            </div>
-          </div>
-          <Related items={related} listHref={listHref} />
-        </div>
-      </section>
-    </article>
-  )
-}
-
-/* ============ B — Yon panelli ============ */
 function ArticleB({ a, crumbs, related, latest, listHref }: P) {
   return (
     <article className="ar ar-b">
@@ -197,43 +157,6 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
   )
 }
 
-/* ============ C — Keng muqova (long-read) ============ */
-function ArticleC({ a, crumbs, related, listHref }: P) {
-  return (
-    <article className="ar ar-c">
-      <section className="sec ar-sec ar-c-sec">
-        <div className="wrap">
-          {crumbs}
-          <figure className="ar-c-cover">
-            <img src={a.hero} alt={a.heroAlt} />
-            <figcaption className="ar-c-cap">
-              <Meta a={a} />
-              <h1 className="ar-c-title">{a.title}</h1>
-            </figcaption>
-          </figure>
-          {a.caption && <p className="ar-c-credit">{a.caption}</p>}
-          <div className="ar-col ar-c-col">
-            {a.excerpt && <p className="ar-lede ar-c-lede">{a.excerpt}</p>}
-            <Body a={a} />
-          </div>
-          <Gallery a={a} big />
-          <div className="ar-col ar-end">
-            <Source a={a} />
-            <Share url={a.url} title={a.title} label="Ulaşiş:" />
-          </div>
-          <Related items={related} listHref={listHref} />
-        </div>
-      </section>
-    </article>
-  )
-}
-
 export function Article(p: P) {
-  return (
-    <ArticleSwitch
-      a={<ArticleA {...p} />}
-      b={DEV ? <ArticleB {...p} /> : undefined}
-      c={DEV ? <ArticleC {...p} /> : undefined}
-    />
-  )
+  return <ArticleB {...p} />
 }

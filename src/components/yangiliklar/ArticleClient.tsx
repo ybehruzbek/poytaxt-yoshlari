@@ -1,21 +1,6 @@
 'use client'
 
-import { type ReactNode, useState } from 'react'
-
-import { DevVariantSwitch, useDevVariant } from '@/components/site/DevVariantSwitch'
-
-/* VAQTINCHA: yangilik sahifasi variantlari — faqat faol variant çiziladi; production'da doim A */
-const TITLES = ['Klassik', 'Yon panelli', 'Keng muqova']
-
-export function ArticleSwitch({ a, b, c }: { a: ReactNode; b?: ReactNode; c?: ReactNode }) {
-  const v = useDevVariant('ar', TITLES.length)
-  return (
-    <>
-      {v === 'b' && b ? b : v === 'c' && c ? c : a}
-      <DevVariantSwitch name="ar" label="Yangilik" titles={TITLES} />
-    </>
-  )
-}
+import { useState } from 'react'
 
 const TG = (
   <svg viewBox="0 0 24 24" aria-hidden="true">
