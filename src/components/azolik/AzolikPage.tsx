@@ -25,14 +25,19 @@ export function AzolikPage({ L, crumbs }: P) {
         </div>
       </header>
       <section className="sec az-sec">
-        <div className="wrap az-split az-split-form">
-          <div className="az-side">
+        {/* kompyuterda: çapda şartlar va tartib, öngda şakl; tor ekranda: şartlar → şakl → tartib */}
+        <div className="wrap az-grid">
+          <div className="az-a">
             <h2 className="h2">Kim aʼzo bölişi mumkin</h2>
             <Conditions L={L} />
+          </div>
+          <div className="az-f">
+            <OnlineForm otts={ottNames()} ustavHref={L('/hujjatlar/normativ/ustav')} />
+          </div>
+          <div className="az-b">
             <h2 className="h2">Ariza qanday körib çiqiladi</h2>
             <Steps L={L} />
           </div>
-          <OnlineForm otts={ottNames()} ustavHref={L('/hujjatlar/normativ/ustav')} />
         </div>
       </section>
     </div>
