@@ -408,6 +408,12 @@ html,body{overflow-x:clip}
 .hero-slogan{font-size:max(32px,min(calc(92px * var(--h-scale)),10.6cqi))}
 .hero-slogan > span{display:block;color:inherit}
 .hero-slogan > .hero-kicker{font-size:max(15px,.25em);line-height:1.35;margin-bottom:.45em;max-width:26em}
+/* töliq rasmiy nom — uzun, şuning uçun sarlavha kiçikroq; “Rasmiy veb-sayt” — kiçik kapsula */
+.hero-name{font-size:max(26px,min(calc(46px * var(--h-scale)),6cqi));line-height:1.12}
+/* nom ikki qatorda: “Özbekiston yoşlar ittifoqi” / “Toşkent şahar hududiy Kengaşi” (tor ekranda erkin bölinadi) */
+@media (min-width:700px){.hero-name > span:not(.hero-kicker){white-space:nowrap}}
+.hero-name > .hero-kicker{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:1.5px solid var(--navy);border-radius:99px;font:700 max(14px,.22em)/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase}
+.hero-name > .hero-kicker::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green)}
 @media (max-width:900px){.hero-text{flex:none;width:100%}}
 
 /* ===== Dizayn variantlarini ko'rib chiqish paneli (DevVariantSwitch, faqat dev) ===== */
@@ -459,3 +465,6 @@ p,li,dd,blockquote,figcaption{text-wrap:pretty}
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+/* hero: ikkinçi tugma oçiq fonda — töq çegara va yozuv (sariq yozuv öqilmaydi) */
+.hero .btn-ghost{color:var(--navy);border-color:var(--navy)}
+.hero .btn-ghost:hover,.hero .btn-ghost:focus-visible{color:var(--navy);border-color:var(--yellow)}
