@@ -8,10 +8,13 @@ export function YangiliklarPage({
   items,
   crumbs,
   locale,
+  title = 'Yangiliklar',
 }: {
   items: YnItem[]
   crumbs: ReactNode
   locale: string
+  /** sahifa sarlavhasi (teg sahifasida — “#Teg”) */
+  title?: string
 }) {
   const L = `/${locale}/yangiliklar`
 
@@ -20,7 +23,7 @@ export function YangiliklarPage({
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Yangiliklar</h1>
+          <h1 className="h2 pg-title">{title}</h1>
         </div>
       </header>
 

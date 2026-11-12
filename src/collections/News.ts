@@ -90,6 +90,20 @@ export const News: CollectionConfig = {
       maxRows: 24,
     },
     {
+      type: 'row',
+      fields: [
+        { name: 'author', label: 'Muallif', type: 'relationship', relationTo: 'authors' },
+        {
+          name: 'tags',
+          label: 'Teglar',
+          type: 'text',
+          hasMany: true,
+          maxRows: 12,
+          admin: { description: 'Har bir tegni alohida kiriting, masalan: Kitobxonlik, Talabalar' },
+        },
+      ],
+    },
+    {
       name: 'source',
       label: 'Manba havolasi (masalan, Telegram post)',
       type: 'text',

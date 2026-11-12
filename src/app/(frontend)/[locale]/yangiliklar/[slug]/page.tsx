@@ -6,10 +6,11 @@ import { cache } from 'react'
 import config from '@payload-config'
 import type { Locale } from '@/i18n/config'
 import { CATEGORY_TONE, toNewsCard } from '@/lib/news'
-import type { Media, News } from '@/payload-types'
+import type { Author, Media, News } from '@/payload-types'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { Article, type ArticleData, type MiniNews } from '@/components/yangiliklar/Article'
 import { toYnItem } from '@/components/yangiliklar/data'
+import { reactionCounts, ratingStats } from '@/app/(frontend)/actions/rating'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
@@ -20,7 +21,7 @@ const getNews = cache(async (slug: string, locale: Locale) => {
   const res = await payload.find({
     collection: 'news',
     locale,
-    depth: 1,
+    depth: 2,
     limit: 1,
     where: { and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }] },
   })
@@ -75,6 +76,17 @@ export default async function NewsPage(props: Props) {
       .filter((g) => g.url),
     source: doc.source,
     url: `/${locale}/yangiliklar/${slug}`,
+    id: doc.id,
+    author: (() => {
+      const au = doc.author && typeof doc.author === 'object' ? (doc.author as Author) : null
+      if (!au) return null
+      const ph = media(au.photo as News['image'])
+      return { name: au.name, position: au.position, photo: ph?.sizes?.thumb?.url || ph?.url || null }
+    })(),
+    tags: (doc.tags ?? []).filter(Boolean),
+    rating: await ratingStats(doc.id),
+    reactions: await reactionCounts(doc.id),
+    tagHref: (t: string) => `/${locale}/yangiliklar/teg/${encodeURIComponent(t)}`,
   }
 
   // öxşaş (şu turkumdan) va sönggi yangiliklar

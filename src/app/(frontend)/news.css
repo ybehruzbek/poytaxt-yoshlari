@@ -397,21 +397,6 @@
   font: 800 22px/1.2 var(--f-head);
   color: var(--navy);
 }
-.ar-fig img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: 50% 30%;
-  border-radius: var(--r-card);
-  background: var(--line);
-}
-.ar-fig figcaption {
-  margin-top: 12px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--muted);
-}
 .ar-body {
   max-width: none;
 }
@@ -482,42 +467,386 @@
   margin-top: 0;
 }
 
-/* galereya */
-.ar-gal {
-  margin-top: 48px;
+/* suratlar slayderi: bitta joyda almaşib turadi */
+.ar-sl {
+  margin: 32px 0;
 }
-.ar-gal-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-}
-/* birinçi surat katta (2×2), qolganlari yonida */
-.ar-gal-grid a:first-child {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.ar-gal-grid a:first-child img {
-  height: 100%;
-}
-.ar-gal-grid a {
-  display: block;
+.ar-sl-stage {
+  position: relative;
   overflow: hidden;
-  border-radius: 18px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-card);
+  background: var(--navy-bg);
 }
-.ar-gal-grid img {
-  display: block;
+.ar-sl-stage img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   object-position: 50% 30%;
-  transition: scale 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity: 0;
+  scale: 1.06;
+  transition:
+    opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+    scale 6.5s linear;
 }
-.ar-gal-grid a:hover img {
-  scale: 1.04;
+.ar-sl-stage img.on {
+  opacity: 1;
+  scale: 1;
 }
-.ar-gal-grid a:focus-visible {
+.ar-sl-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  translate: 0 -50%;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--navy-bg);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.25s,
+    background 0.2s;
+}
+.ar-sl-nav.prev {
+  left: 16px;
+}
+.ar-sl-nav.next {
+  right: 16px;
+}
+.ar-sl-nav svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ar-sl-stage:hover .ar-sl-nav,
+.ar-sl-nav:focus-visible {
+  opacity: 1;
+}
+.ar-sl-nav:hover {
+  background: var(--yellow);
+}
+.ar-sl-nav:focus-visible {
   outline: 3px solid var(--sky);
-  outline-offset: 3px;
+  outline-offset: 2px;
+}
+.ar-sl-count {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(20, 10, 8, 0.6);
+  font: 600 13px/1 var(--f-body);
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+/* avtomatik almaşiş vaqti — pastki ingiçka çiziq */
+.ar-sl-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  height: 4px;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: ar-sl-bar 6s linear forwards;
+}
+@keyframes ar-sl-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+.ar-sl-thumbs {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.ar-sl-thumbs button {
+  flex: none;
+  width: 92px;
+  height: 62px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  background: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s;
+}
+.ar-sl-thumbs button[aria-current='true'] {
+  opacity: 1;
+  border-color: var(--yellow);
+}
+.ar-sl-thumbs button:hover {
+  opacity: 1;
+}
+.ar-sl-thumbs button:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+.ar-sl-thumbs img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ar-sl figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* reaksiyalar paneli */
+.ar-react {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-thumb);
+}
+.ar-react-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ar-react-list button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 18px 0 12px;
+  border: 1.5px solid transparent;
+  border-radius: 99px;
+  background: var(--soft);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    scale 0.15s;
+}
+.ar-react-list span {
+  font-size: 24px;
+  line-height: 1;
+}
+.ar-react-list b {
+  min-width: 1ch;
+  font: 600 16px/1 var(--f-body);
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.ar-react-list button:hover {
+  scale: 1.05;
+}
+.ar-react-list button[aria-pressed='true'] {
+  border-color: var(--yellow);
+  background: color-mix(in srgb, var(--yellow) 35%, var(--bg));
+}
+.ar-react-list button:focus-visible,
+.ar-react-sh:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+.ar-react-share {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ar-react-share .ar-share {
+  margin-top: 0;
+}
+.ar-react-sh {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--soft);
+  font: 700 16px/1 var(--f-head);
+  color: var(--navy);
+  cursor: pointer;
+}
+.ar-react-sh:hover {
+  background: var(--yellow);
+}
+.ar-react-sh svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+html[data-theme='dark'] .ar-react-list button,
+html[data-theme='dark'] .ar-react-sh {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* maqola osti: muallif, teglar, baholar */
+.ar-foot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 32px;
+  align-items: start;
+  margin-top: 32px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-thumb);
+}
+.ar-foot-cell {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  align-content: start;
+}
+/* 1-qator: muallif | teglar (2 ustun); 2-qator: baholaganlar | reyting | baho beriş */
+.ar-foot-author {
+  grid-column: 1;
+}
+.ar-foot-tags {
+  grid-column: 2 / -1;
+}
+.ar-foot-author + .ar-foot-cell:not(.ar-foot-tags),
+.ar-foot-tags + .ar-foot-cell {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.ar-foot > .ar-foot-cell:nth-last-child(-n + 3) {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  justify-self: stretch;
+}
+.ar-foot-l {
+  font: 600 13px/1.2 var(--f-body);
+  color: var(--muted);
+}
+.ar-foot-num {
+  font: 800 26px/1 var(--f-head);
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
+.ar-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ar-author img,
+.ar-author-ini {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ar-author-ini {
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  font: 800 18px/1 var(--f-head);
+  color: var(--navy-bg);
+}
+.ar-author b {
+  display: block;
+  font: 700 17px/1.3 var(--f-head);
+  color: var(--navy);
+}
+.ar-author small {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ar-foot-tags ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ar-foot-tags a {
+  display: inline-flex;
+  padding: 7px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 99px;
+  font: 600 14px/1.2 var(--f-body);
+  color: var(--navy);
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.ar-foot-tags a:hover {
+  border-color: var(--yellow);
+  background: var(--yellow);
+}
+.ar-foot-tags a:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+.ar-stars {
+  display: flex;
+  gap: 2px;
+}
+.ar-stars button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--line);
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    scale 0.15s;
+}
+.ar-stars button.on {
+  color: var(--yellow);
+}
+.ar-stars button:hover {
+  scale: 1.12;
+}
+.ar-stars button:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 1px;
+  border-radius: 8px;
+}
+.ar-stars svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+.ar-stars-msg {
+  min-height: 1em;
+  font-size: 13px;
+  color: var(--green);
 }
 .ar-end {
   display: flex;
@@ -613,9 +942,6 @@
   gap: 56px;
   align-items: start;
 }
-.ar-b-main .ar-fig {
-  margin: 32px 0;
-}
 .ar-b-main .ar-title {
   max-width: none;
 }
@@ -684,12 +1010,26 @@
   .ar-lede {
     font-size: 18px;
   }
-  .ar-fig img {
+  .ar-sl-stage {
     border-radius: var(--r-thumb);
   }
-  .ar-gal-grid,
-  .ar-rel-grid {
+  .ar-sl-nav {
+    opacity: 1;
+    width: 40px;
+    height: 40px;
+  }
+  .ar-sl-thumbs button {
+    width: 70px;
+    height: 48px;
+  }
+  .ar-foot {
+    padding: 22px 20px;
     grid-template-columns: 1fr 1fr;
+  }
+  .ar-foot-author,
+  .ar-foot-tags,
+  .ar-foot > .ar-foot-cell:last-child {
+    grid-column: 1 / -1;
   }
   .ar-rel-grid {
     grid-template-columns: 1fr;
@@ -703,8 +1043,12 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ar-gal-grid img,
-  .ar-rel-img img {
+  .ar-rel-img img,
+  .ar-sl-stage img {
     transition: none;
+    scale: none;
+  }
+  .ar-sl-bar {
+    display: none;
   }
 }

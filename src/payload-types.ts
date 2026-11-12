@@ -68,6 +68,9 @@ export interface Config {
   blocks: {};
   collections: {
     news: News;
+    authors: Author;
+    'news-ratings': NewsRating;
+    'news-reactions': NewsReaction;
     media: Media;
     appeals: Appeal;
     'appeal-files': AppealFile;
@@ -82,6 +85,9 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     news: NewsSelect<false> | NewsSelect<true>;
+    authors: AuthorsSelect<false> | AuthorsSelect<true>;
+    'news-ratings': NewsRatingsSelect<false> | NewsRatingsSelect<true>;
+    'news-reactions': NewsReactionsSelect<false> | NewsReactionsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     appeals: AppealsSelect<false> | AppealsSelect<true>;
     'appeal-files': AppealFilesSelect<false> | AppealFilesSelect<true>;
@@ -164,6 +170,11 @@ export interface News {
     [k: string]: unknown;
   } | null;
   gallery?: (number | Media)[] | null;
+  author?: (number | null) | Author;
+  /**
+   * Har bir tegni alohida kiriting, masalan: Kitobxonlik, Talabalar
+   */
+  tags?: string[] | null;
   source?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -213,6 +224,42 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "authors".
+ */
+export interface Author {
+  id: number;
+  name: string;
+  position?: string | null;
+  photo?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-ratings".
+ */
+export interface NewsRating {
+  id: number;
+  news: number | News;
+  value: number;
+  voter: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-reactions".
+ */
+export interface NewsReaction {
+  id: number;
+  news: number | News;
+  kind: 'like' | 'fire' | 'dislike' | 'angry' | 'laugh';
+  voter: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -336,6 +383,18 @@ export interface PayloadLockedDocument {
         value: number | News;
       } | null)
     | ({
+        relationTo: 'authors';
+        value: number | Author;
+      } | null)
+    | ({
+        relationTo: 'news-ratings';
+        value: number | NewsRating;
+      } | null)
+    | ({
+        relationTo: 'news-reactions';
+        value: number | NewsReaction;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -416,10 +475,45 @@ export interface NewsSelect<T extends boolean = true> {
   excerpt?: T;
   content?: T;
   gallery?: T;
+  author?: T;
+  tags?: T;
   source?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "authors_select".
+ */
+export interface AuthorsSelect<T extends boolean = true> {
+  name?: T;
+  position?: T;
+  photo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-ratings_select".
+ */
+export interface NewsRatingsSelect<T extends boolean = true> {
+  news?: T;
+  value?: T;
+  voter?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-reactions_select".
+ */
+export interface NewsReactionsSelect<T extends boolean = true> {
+  news?: T;
+  kind?: T;
+  voter?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor ölçamda keladi */
 /**
  * Bitta yangilik sahifasi (daryo.uz uslubi): çapda maqola — turkum, sana, öqiş vaqti, sarlavha, lid, surat va izoh,
- * matn yonida birga suriladigan ulaşiş tugmalari, galereya, asl post havolasi; öngda “Sönggi yangiliklar” lentasi;
- * pastda mavzuga oid yangiliklar.
+ * almaşib turadigan suratlar (slayder), matn yonida birga suriladigan ulaşiş tugmalari, asl post havolasi,
+ * muallif, teglar va baholar; öngda “Sönggi yangiliklar” lentasi; pastda mavzuga oid yangiliklar.
  */
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
@@ -11,7 +11,8 @@ import type { ReactNode } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
 
-import { Share } from './ArticleClient'
+import { Reactions, RateStars, Share, Slider } from './ArticleClient'
+import type { ReactionCounts, RatingStats } from '@/app/(frontend)/actions/rating'
 
 export type ArticleData = {
   title: string
@@ -28,6 +29,12 @@ export type ArticleData = {
   gallery: { url: string; alt: string }[]
   source?: string | null
   url: string
+  id: number
+  author?: { name: string; position?: string | null; photo?: string | null } | null
+  tags: string[]
+  rating: RatingStats
+  reactions: ReactionCounts
+  tagHref: (t: string) => string
 }
 export type MiniNews = { href: string; title: string; date: string; image: string; catLabel: string; tone: string }
 
@@ -52,28 +59,65 @@ function Body({ a }: { a: ArticleData }) {
   ) : null
 }
 
-function Gallery({ a }: { a: ArticleData }) {
-  if (!a.gallery.length) return null
-  return (
-    <section className="ar-gal" aria-label="Fotogalereya">
-      <h2 className="ar-h">Fotogalereya</h2>
-      <div className="ar-gal-grid">
-        {a.gallery.map((g) => (
-          <a key={g.url} href={g.url} target="_blank" rel="noopener noreferrer">
-            <img src={g.url} alt={g.alt} loading="lazy" />
-          </a>
-        ))}
-      </div>
-    </section>
-  )
-}
-
 function Source({ a }: { a: ArticleData }) {
   if (!a.source) return null
   return (
     <a href={a.source} target="_blank" rel="noopener noreferrer" className="more-btn ar-src">
       <More>Telegram kanalida öqiş</More>
     </a>
+  )
+}
+
+/** Maqola ostida: muallif, teglar, baholaganlar, reyting, baho beriş */
+function ArticleFoot({ a }: { a: ArticleData }) {
+  return (
+    <section className="ar-foot" aria-label="Maqola haqida">
+      <div className="ar-foot-cell ar-foot-author">
+        <span className="ar-foot-l">Maqola muallifi</span>
+        {a.author ? (
+          <div className="ar-author">
+            {a.author.photo ? (
+              <img src={a.author.photo} alt="" />
+            ) : (
+              <span className="ar-author-ini" aria-hidden="true">
+                {a.author.name
+                  .split(/\s+/)
+                  .slice(0, 2)
+                  .map((w) => w[0])
+                  .join('')
+                  .toLocaleUpperCase('uz')}
+              </span>
+            )}
+            <span>
+              <b>{a.author.name}</b>
+              {a.author.position && <small>{a.author.position}</small>}
+            </span>
+          </div>
+        ) : (
+          <div className="ar-author">
+            <span className="ar-author-ini" aria-hidden="true">
+              AX
+            </span>
+            <span>
+              <b>Axborot xizmati</b>
+            </span>
+          </div>
+        )}
+      </div>
+      {a.tags.length > 0 && (
+        <div className="ar-foot-cell ar-foot-tags">
+          <span className="ar-foot-l">Teglar</span>
+          <ul>
+            {a.tags.map((t) => (
+              <li key={t}>
+                <Link href={a.tagHref(t)}>{t}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <RateStars newsId={a.id} initial={a.rating} />
+    </section>
   )
 }
 
@@ -116,20 +160,18 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
               <Meta a={a} />
               <h1 className="h2 pg-title ar-title">{a.title}</h1>
               {a.excerpt && <p className="ar-lede">{a.excerpt}</p>}
-              <figure className="ar-fig">
-                <img src={a.hero} alt={a.heroAlt} />
-                {a.caption && <figcaption>{a.caption}</figcaption>}
-              </figure>
+              <Slider slides={[{ url: a.hero, alt: a.heroAlt }, ...a.gallery]} caption={a.caption} />
               <div className="ar-b-body">
                 <aside className="ar-b-share">
                   <Share url={a.url} title={a.title} vertical />
                 </aside>
                 <div>
                   <Body a={a} />
-                  <Gallery a={a} />
                   <div className="ar-end">
                     <Source a={a} />
                   </div>
+                  <Reactions newsId={a.id} initial={a.reactions} url={a.url} title={a.title} />
+                  <ArticleFoot a={a} />
                 </div>
               </div>
             </div>
