@@ -42,8 +42,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 /**
- * VAQTINCHA umumiy sahifa: menyudagi har bir bo'lim uchun sarlavha va yo'l zanjiri.
- * Har bir bo'limning haqiqiy sahifasi (kontent admin paneldan) keyingi bosqichlarda yaratiladi.
+ * VAQTINCHA umumiy sahifa: menyudagi özining sahifasi hali yöq bölimlar uçun yöl, sarlavha va
+ * “Bölim tayyorlanmoqda” xabari (H1 ostida izoh matni berilmaydi — qoida).
  */
 export default async function SectionPage(props: Props) {
   const { locale, slug } = await props.params
@@ -61,15 +61,14 @@ export default async function SectionPage(props: Props) {
         <div className="wrap">
           <PageCrumbs locale={locale} path={path} />
           <h1 className="h1">{page.label}</h1>
-          {page.desc && <p className="lead">{page.desc}</p>}
         </div>
       </section>
 
       <section className="sec">
         <div className="wrap" style={{ display: 'grid', gap: 32 }}>
           <div style={{ background: 'var(--soft)', borderRadius: 32, padding: '28px 32px', maxWidth: 760 }}>
-            <p style={{ fontFamily: 'var(--f-head)', fontWeight: 700, fontSize: 22, color: 'var(--navy)' }}>Sahifa tayyorlanmoqda</p>
-            <p style={{ marginTop: 8, color: 'var(--muted)' }}>Bu bölim mazmuni admin panel orqali kiritiladi.</p>
+            <p style={{ fontFamily: 'var(--f-head)', fontWeight: 700, fontSize: 22, color: 'var(--navy)' }}>Bölim tayyorlanmoqda</p>
+            <p style={{ marginTop: 8, color: 'var(--muted)' }}>Bölim maʼlumotlari keyinroq joylaştiriladi.</p>
           </div>
           {siblings.length > 1 && (
             <div>
