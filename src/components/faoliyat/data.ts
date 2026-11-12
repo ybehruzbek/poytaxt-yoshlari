@@ -10,146 +10,80 @@ export { PROJECTS }
 export const DIRECTIONS: Direction[] = [
   {
     slug: 'manaviyat-kitobxonlik',
-    title: 'Maʼnaviy-maʼrifiy işlar va kitobxonlik',
-    lead: 'Kitobxonlikni tarğib qiliş, adabiy uçraşuvlar va maʼnaviy tadbirlar.',
+    title: 'Maʼnaviy-maʼrifiy işlar va kitobxonlikni rivojlantiriş',
+    short: 'Maʼnaviyat va kitobxonlik',
     about:
-      'Yönaliş yoşlarda kitobxonlik madaniyatini, milliy qadriyatlar va tarixiy xotiraga hurmatni şakllantirişga qaratilgan. Tadbirlar Yoşlar ijod saroyi, oliy taʼlim taşkilotlari va harbiy qismlarda ötkaziladi.',
-    works: [
-      'Kitoblar festivali va kitob yarmarkalari',
-      'Badiiy asarlar muhokamasiga bağişlangan davra suhbatlari, adabiy-musiqiy keçalar',
-      'Rahbarlar, faxriylar va yoşlarning oçiq muloqotlari',
-      'Allomalar va adiblar tavalludiga bağişlangan maʼnaviyat tadbirlari',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlar örtasida kitobxonlik madaniyatini yuksaltiriş, milliy va umuminsoniy qadriyatlarga hurmat hamda tarixiy xotirani asraş tuyğusini şakllantiriş böyiça işlarni amalga oşiradi. Xususan, Yoşlar ijod saroyida kitoblar festivallari, badiiy asarlar muhokamasiga bağişlangan davra suhbatlari va adabiy-musiqiy keçalar, oliy taʼlim taşkilotlarida rahbarlar va faxriylarning yoşlar bilan oçiq muloqotlari, allomalar va adiblar tavalludiga bağişlangan maʼnaviy-maʼrifiy tadbirlar ötkaziladi.',
   },
   {
     slug: 'intellektual',
-    title: 'Intellektual rivojlaniş',
-    lead: '“Zakovat”, “Munozara” debatlari va intellektual tanlovlar.',
+    title: 'Yoşlarning intellektual salohiyatini oşiriş',
+    short: 'Intellektual salohiyat',
     about:
-      'Yönaliş yoşlarning tahliliy fikrlaşi, bilimi va jamoada işlaş könikmasini rivojlantiradi. Şahar bosqiçlari ğoliblari respublika bosqiçlarida Toşkent şahri nomidan qatnaşadi.',
-    works: [
-      'Intellektual öyinlar va viktorinalar',
-      'Jamoaviy debat turnirlarining şahar bosqiçlari',
-      'Yoş harbiylar örtasida kitoblar asosidagi intellektual tanlov',
-      'Talabalar uçun BMT modeli konferensiyalari',
-      'Intellektual loyihalar koordinatorlari uçun öquv-seminarlar',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarning tahliliy va tanqidiy fikrlaşini, bilim darajasini va jamoada işlaş könikmalarini rivojlantirişga qaratilgan işlarni amalga oşiradi. Xususan, oliy taʼlim taşkilotlari va harbiy öquv yurtlarida intellektual öyinlar, debat turnirlari va BMT modeli konferensiyalari ötkaziladi, respublika intellektual tanlovlarining Toşkent şahar bosqiçlari taşkil etiladi. Şahar bosqiçlari ğoliblari respublika bosqiçlarida Toşkent şahri nomidan iştirok etadi.',
   },
   {
     slug: 'harbiy-vatanparvarlik',
-    title: 'Harbiy-vatanparvarlik tarbiyasi',
-    lead: 'Harbiy qismlar va muassasalardagi yoşlar bilan işlaş, harbiy-sport musobaqalari.',
+    title: 'Yoşlarni harbiy-vatanparvarlik ruhida tarbiyalaş',
+    short: 'Harbiy-vatanparvarlik',
     about:
-      'Yönaliş yoşlarda Vatanga sadoqat, jismoniy çiniqqanlik va harbiy xizmatga hurmatni tarbiyalaydi. Tadbirlar kuç tuzilmalari, harbiy qismlar va muassasalar bilan hamkorlikda ötkaziladi.',
-    works: [
-      'Harbiy qismda ön kunlik harbiy-vatanparvarlik öquv yiğini',
-      'Harbiy qismlarda oçiq eşiklar kunlari va uçraşuvlar',
-      'Harbiy-sport musobaqalari va kursantlar örtasidagi bellaşuvlar',
-      'Yoş harbiylar forumi, vatanparvarlik böyiça konferensiya va seminarlar',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarni Vatanga sadoqat va harbiy xizmatga hurmat ruhida tarbiyalaş, ularning jismoniy tayyorgarligini oşiriş böyiça işlarni kuç tuzilmalari, harbiy qismlar va muassasalar bilan hamkorlikda amalga oşiradi. Xususan, harbiy qismlarda öquv yiğinlari va oçiq eşiklar kunlari, harbiy-sport musobaqalari, yoş harbiylar forumlari hamda vatanparvarlik tarbiyasiga oid ilmiy-amaliy konferensiya va seminarlar ötkaziladi.',
   },
   {
     slug: 'volontyorlik',
-    title: 'Volontyorlik va xayriya',
-    lead: 'Volontyorlar maktabi va xayriya aksiyalari.',
+    title: 'Volontyorlik va xayriya faoliyatini rivojlantiriş',
+    short: 'Volontyorlik va xayriya',
     about:
-      'Yönaliş yoşlarni ijtimoiy faollikka va yordamga muhtojlarga ğamxörlik qilişga jalb etadi, volontyorlarni tizimli öqitadi.',
-    works: [
-      'Volontyorlar maktabi: loyiha boşqaruvi va volontyorlik böyiça nazariy va amaliy darslar',
-      'Bolalar hospisi, maktab-internat va onkologiya markazida xayriya aksiyalari',
-      'Sardorlar uçun volontyorlik böyiça seminar-treninglar',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarni ijtimoiy faollikka, yordamga muhtoj aholi qatlamlariga ğamxörlik qilişga jalb etiş hamda volontyorlarni tizimli tayyorlaş böyiça işlarni amalga oşiradi. Xususan, volontyorlik va loyiha boşqaruvi böyiça öquv kurslari, sardorlar uçun seminar-treninglar taşkil etiladi, bolalar hospisi, maktab-internat va onkologiya markazida xayriya aksiyalari ötkaziladi.',
   },
   {
     slug: 'sport-salomatlik',
-    title: 'Sport va soğlom turmuş tarzi',
-    lead: 'OTT talabalari örtasida sport musobaqalari, festivallar va marafonlar.',
+    title: 'Jismoniy tarbiya, sport va soğlom turmuş tarzini tarğib qiliş',
+    short: 'Sport va soğlom turmuş',
     about:
-      'Yönaliş talabalar örtasida jismoniy faollik va soğlom turmuş tarzini tarğib qiladi. Musobaqalar OTT boşlanğiç taşkilotlari örtasida ötkaziladi.',
-    works: [
-      'Mini futbol, stol tennisi va şaxmat böyiça musobaqalar',
-      'OTTlar örtasidagi örtoqlik bellaşuvlari',
-      'Talabalar sport festivallari',
-      'Yuriş marafonlari',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlar örtasida jismoniy tarbiya va sportni ommalaştiriş, soğlom turmuş tarzini tarğib qiliş böyiça işlarni amalga oşiradi. Xususan, oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar örtasida mini futbol, stol tennisi va şaxmat böyiça musobaqalar, örtoqlik bellaşuvlari, talabalar sport festivallari va ommaviy yuriş marafonlari ötkaziladi.',
   },
   {
     slug: 'yetakchilik',
-    title: 'Yetakçilik va boşlanğiç taşkilotlar',
-    lead: 'Oliy taʼlim taşkilotlaridagi yoşlar yetakçilari tizimini rivojlantiriş.',
+    title: 'Boşlanğiç taşkilotlar faoliyatini muvofiqlaştiriş va yoşlar yetakçilarini tayyorlaş',
+    short: 'Boşlanğiç taşkilotlar va yetakçilar',
     about:
-      'Yönaliş Kengaş qamrovidagi oliy taʼlim taşkilotlarida boşlanğiç taşkilotlar va yoşlar yetakçilari tizimini rivojlantiradi: yetakçilarni saralaş, öqitiş, faoliyatini baholaş va rağbatlantiriş.',
-    works: [
-      'Yoşlar yetakçilari uçun muntazam öquv-seminarlar',
-      'Boşlanğiç taşkilotlarda hisobot-saylov yiğilişlari',
-      'Yetakçilar forumlari va umumiy yiğilişlar',
-      'Eng ilğor yetakçilar körik-tanlovi va taqdirlaş',
-    ],
+      'Mazkur yönaliş böyiça Kengaş öz qamrovidagi oliy taʼlim taşkilotlarida Ittifoq boşlanğiç taşkilotlari faoliyatini muvofiqlaştiradi, yoşlar yetakçilarini saralaş, öqitiş, faoliyatini baholaş va rağbatlantiriş tizimini yuritadi. Xususan, boşlanğiç taşkilotlarda hisobot-saylov yiğilişlari ötkaziladi, yoşlar yetakçilari uçun muntazam öquv-seminarlar, forumlar va körik-tanlovlar taşkil etiladi.',
   },
   {
     slug: 'huquqiy-madaniyat',
-    title: 'Huquqiy madaniyat va profilaktika',
-    lead: 'Huquqiy savodxonlik, giyohvandlik va korrupsiyaning oldini oliş.',
+    title: 'Yoşlarning huquqiy madaniyatini yuksaltiriş va huquqbuzarliklar profilaktikasi',
+    short: 'Huquqiy madaniyat',
     about:
-      'Yönaliş yoşlarning huquqiy savodxonligini oşiriş hamda huquqbuzarlik, giyohvandlik va korrupsiyaning oldini olişga qaratilgan.',
-    works: [
-      'Saylov qonunçiligini tuşuntiriş böyiça davra suhbatlari',
-      'Giyohvandlik va korrupsiyaning oldini oliş böyiça profilaktik tadbirlar',
-      'Soxta axborotga qarşi immunitet mavzusidagi uçraşuvlar',
-      'Talabalar bilan huquqiy mavzularda oçiq muloqotlar',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarning huquqiy savodxonligini oşiriş, ular örtasida huquqbuzarlik, giyohvandlik va korrupsiyaning oldini oliş böyiça işlarni amalga oşiradi. Xususan, saylov qonunçiligini tuşuntirişga qaratilgan davra suhbatlari, profilaktik tadbirlar hamda soxta axborotga qarşi kurasişga bağişlangan uçraşuvlar ötkaziladi.',
   },
   {
     slug: 'ekologiya',
-    title: 'Ekologiya',
-    lead: 'Ekologik aksiyalar, köçat ekiş va suvni tejaş çellenji.',
+    title: 'Yoşlarning ekologik madaniyatini şakllantiriş',
+    short: 'Ekologiya',
     about:
-      'Yönaliş yoşlarda ekologik madaniyatni şakllantiriş va ularni atrof-muhitni asraş işlariga amaliy jalb etişga qaratilgan.',
-    works: [
-      'Çiqindilarni yiğiş aksiyalari (plogging)',
-      'Daraxt va köçat ekiş',
-      'Suvni tejaşga daʼvat qiluvçi çellenj va tarğibot aksiyalari',
-      'Ekologik kvest musobaqalari',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarda ekologik madaniyatni şakllantiriş va ularni atrof-muhitni muhofaza qiliş işlariga amaliy jalb etiş böyiça işlarni amalga oşiradi. Xususan, daraxt va köçat ekiş, çiqindilarni yiğiş aksiyalari, suv resurslarini tejaşga qaratilgan tarğibot tadbirlari va ekologik musobaqalar ötkaziladi.',
   },
   {
     slug: 'media',
-    title: 'Media va axborot',
-    lead: 'Filmlar, körsatuvlar, podkastlar va kanaldagi rubrikalar.',
+    title: 'Axborot va media faoliyati',
+    short: 'Axborot va media',
     about:
-      'Yönaliş Kengaş faoliyati va yoşlar hayotini media mahsulotlari orqali yoritadi, yoşlarning mediasavodxonligini oşiradi.',
-    works: [
-      'Motivatsion filmlar va instaserial',
-      'Maxsus telekörsatuv va kanaldagi axborot rubrikalari',
-      'Mediasavodxonlik böyiça seminar-treninglar',
-      'Bayram sanalariga bağişlangan videoroliklar tanlovlari',
-    ],
+      'Mazkur yönaliş böyiça Kengaş öz faoliyati va poytaxt yoşlari hayotini ommaviy axborot vositalari va ijtimoiy tarmoqlarda yoritiş, yoşlarning mediasavodxonligini oşiriş böyiça işlarni amalga oşiradi. Xususan, motivatsion filmlar, telekörsatuvlar va videoroliklar tayyorlanadi, “Poytaxt yoşlari” Telegram kanalida axborot rubrikalari yuritiladi, mediasavodxonlik böyiça seminar-treninglar ötkaziladi.',
   },
   {
     slug: 'ijod-turizm',
-    title: 'Ijod, madaniyat va turizm',
-    lead: 'Festivallar, ijodiy tanlovlar va yoşlar sayohatlari.',
+    title: 'Yoşlarning ijodiy salohiyatini qöllab-quvvatlaş, madaniy hordiq va turizm',
+    short: 'Ijod, madaniyat va turizm',
     about:
-      'Yönaliş yoşlarning ijodiy salohiyatini röyobga çiqariş, milliy madaniyatni tarğib qiliş, mazmunli dam oliş va sayohatlarni taşkil etişga qaratilgan.',
-    works: [
-      'Milliylikni tarğib qiluvçi talabalar festivallari',
-      'Milliy liboslar va yoş dizaynerlar ijodi namoyişlari',
-      'Yoşlar uçun içki sayohatlar',
-      'Konsert dasturlari va ijodiy keçalar',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarning ijodiy salohiyatini röyobga çiqariş, milliy madaniyat va qadriyatlarni tarğib qiliş hamda yoşlarning mazmunli hordiğini taşkil etiş böyiça işlarni amalga oşiradi. Xususan, talabalar festivallari, milliy liboslar namoyişlari, konsert dasturlari va ijodiy keçalar ötkaziladi, yoşlar uçun mamlakat böylab sayohatlar taşkil etiladi.',
   },
   {
     slug: 'talim-kasb',
-    title: 'Taʼlim va kasbiy rivojlaniş',
-    lead: 'Til kurslari, biznes va IELTS marafonlari, xalqaro öquv dasturlari.',
+    title: 'Yoşlarning taʼlim olişi, kasbiy rivojlanişi va tadbirkorligini qöllab-quvvatlaş',
+    short: 'Taʼlim va kasbiy rivojlaniş',
     about:
-      'Yönaliş yoşlarning bilim, til va kasbiy könikmalarini oşiriş, tadbirkorlikka qiziqtiriş hamda taʼlim olişdagi imtiyozlardan foydalaniş imkoniyatlarini kengaytirişga qaratilgan.',
-    works: [
-      'Tadbirkorlik va xorijiy tillar böyiça marafonlar, bepul til kurslari',
-      'Liderlik treninglari va yozgi öquv lagerlari',
-      'Talabalar ilmiy-amaliy konferensiyalari',
-      'OTTga imtiyozli qabul tavsiyanomalari tanlovi',
-    ],
+      'Mazkur yönaliş böyiça Kengaş yoşlarning bilim, xorijiy til va kasbiy könikmalarini oşiriş, ularni tadbirkorlikka jalb etiş hamda taʼlim olişdagi imtiyozlardan foydalanişiga kömaklaşiş böyiça işlarni amalga oşiradi. Xususan, tadbirkorlik va xorijiy tillar böyiça marafonlar, liderlik treninglari, talabalar ilmiy-amaliy konferensiyalari ötkaziladi, oliy taʼlim taşkilotlariga imtiyozli qabul uçun tavsiyanomalar tanlovi taşkil etiladi.',
   },
 ]
 

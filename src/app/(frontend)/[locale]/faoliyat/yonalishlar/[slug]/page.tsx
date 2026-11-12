@@ -17,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug } = await props.params
   const d = DIRECTIONS.find((x) => x.slug === slug)
-  return d ? { title: `${d.title} — Faoliyat yönalişlari`, description: d.lead } : {}
+  return d ? { title: `${d.title} — Faoliyat yönalişlari`, description: d.about } : {}
 }
 
 export default async function Route(props: Props) {

@@ -18,13 +18,12 @@ export type DirSlug =
 
 export type Direction = {
   slug: DirSlug
+  /** rasmiy nomi */
   title: string
-  /** qisqa tavsif (meta description) */
-  lead: string
-  /** yönalişning umumiy maqsadi */
+  /** saralaş tugmalari uçun qisqa nomi */
+  short: string
+  /** yönaliş böyiça Kengaş amalga oşiradigan işlar (rasmiy matn) */
   about: string
-  /** yönaliş doirasida qilinadigan işlar */
-  works: string[]
 }
 
 export type Fact = { text: string; post: number }

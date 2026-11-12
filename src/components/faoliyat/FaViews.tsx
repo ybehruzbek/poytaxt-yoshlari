@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element -- kanal suratlari; CMS ulanganda next/image ga o'tadi */
 /** Faoliyat sahifalarining tanlangan körinişlari: yönalişlar, yönaliş, loyiha va natijalar */
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 import { DIRECTIONS, dirProjects, dirTitle, REPORT_2025, YEARS } from './data'
 import { EVENTS } from './events'
-import { fmtDate, type Project, TG } from './types'
+import { type DirSlug, fmtDate, type Project, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
@@ -15,9 +16,54 @@ const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
 
 /* ===================== Yönalişlar ===================== */
 
+/** Ajratiş: “A, B va C” */
+function joinList(items: ReactNode[]) {
+  return items.flatMap((x, i) => (i === 0 ? [x] : [i === items.length - 1 ? ' va ' : ', ', x]))
+}
+
 /**
- * Yönaliş röyxati: navbatma-navbat çap/öng. Har bir yönaliş: umumiy maqsad → suratlar →
- * “Nima qilinadi” → misol sifatida loyihalar.
+ * Yönaliş matni: Kengaş amalga oşiradigan işlar (rasmiy matn) va şu yönaliş doirasidagi loyihalar —
+ * alohida röyxat emas, matnning davomi sifatida (nomlari loyiha sahifasiga havola).
+ */
+export function DirText({ slug, projBase, className }: { slug: DirSlug; projBase: string; className?: string }) {
+  const d = DIRECTIONS.find((x) => x.slug === slug)
+  if (!d) return null
+  const projs = dirProjects(slug)
+  const link = (p: Project) => (
+    <Link key={p.slug} href={`${projBase}/${p.slug}`}>
+      {p.title}
+    </Link>
+  )
+  const active = projs.filter((p) => p.status !== 'yakunlangan')
+  const done = projs.filter((p) => p.status === 'yakunlangan')
+  return (
+    <div className={className}>
+      <p>{d.about}</p>
+      {projs.length > 0 && (
+        <p>
+          {active.length > 0 && (
+            <>
+              Yönaliş doirasida {joinList(active.map(link))}
+              {' amalga oşirilmoqda.'}
+            </>
+          )}
+          {active.length > 0 && done.length > 0 && ' '}
+          {done.length > 0 && (
+            <>
+              {active.length > 0 ? 'Şuningdek, ' : 'Yönaliş doirasida '}
+              {joinList(done.map(link))} amalga oşirildi.
+            </>
+          )}
+        </p>
+      )}
+    </div>
+  )
+}
+
+
+/**
+ * Yönaliş röyxati: navbatma-navbat çap/öng. Har bir yönaliş: suratlar va Kengaşning şu yönaliş
+ * böyiça işlari haqida yaxlit rasmiy matn (loyihalar matn içida).
  */
 export function DirsList({ base, projBase }: { base: string; projBase: string }) {
   const all = DIRECTIONS.map((d, i) => {
@@ -62,25 +108,7 @@ export function DirsList({ base, projBase }: { base: string; projBase: string })
                 <h2>
                   <Link href={`${base}/${d.slug}`}>{d.title}</Link>
                 </h2>
-                <p>{d.about}</p>
-                <h3 className="vy3-h">Nima qilinadi</h3>
-                <ul className="vy3-works">
-                  {d.works.map((w) => (
-                    <li key={w}>{w}</li>
-                  ))}
-                </ul>
-                {projs.length > 0 && (
-                  <>
-                    <h3 className="vy3-h">Loyihalar</h3>
-                    <ul className="vy3-projs">
-                      {projs.map((p) => (
-                        <li key={p.slug}>
-                          <Link href={`${projBase}/${p.slug}`}>{p.title}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
+                <DirText slug={d.slug} projBase={projBase} className="vy3-about" />
                 <div className="vy3-foot">
                   {/* nol sonlar yozilmaydi (“0 tadbir” emas) */}
                   <span>
@@ -131,16 +159,8 @@ export function DirC({
   return (
     <section className="sec fa-sec">
       {dir && (
-        <div className="wrap vc-intro">
-          <p className="fa-dir-body">{dir.about}</p>
-          <div>
-            <h2 className="fa-h2">Nima qilinadi</h2>
-            <ul className="vy3-works">
-              {dir.works.map((w) => (
-                <li key={w}>{w}</li>
-              ))}
-            </ul>
-          </div>
+        <div className="wrap">
+          <DirText slug={dir.slug} projBase={projBase} className="fa-dir-body" />
         </div>
       )}
       <div className="wrap vc-split">

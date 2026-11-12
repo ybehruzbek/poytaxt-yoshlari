@@ -80,7 +80,7 @@ export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string
         <div className="wrap">
           <ProjectsList
             projects={PROJECTS}
-            dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))}
+            dirs={DIRECTIONS.map(({ slug, short }) => ({ slug, title: short }))}
             base={base}
           />
         </div>
@@ -160,7 +160,7 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
             <Link href={annHref}>“Eʼlonlar”</Link> sahifasida joylaştiriladi.
           </p>
           <h2 className="fa-h2">Tadbirlar arxivi</h2>
-          <EventsList events={past} dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))} />
+          <EventsList events={past} dirs={DIRECTIONS.map(({ slug, short }) => ({ slug, title: short }))} />
         </div>
       </section>
     </div>
