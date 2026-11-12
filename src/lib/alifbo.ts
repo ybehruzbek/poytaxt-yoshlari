@@ -61,7 +61,8 @@ const RULES: Array<[RegExp, string]> = [
  */
 const XORIJIY = [
   'Fashion Show', 'English', 'ChatGPT', 'Chrome', 'Shopify', 'Dashboard', 'Microsoft', 'TikTok', 'WhatsApp',
-  'Championship', 'Champions', 'Challenge', 'Cash', 'Show', 'Shorts', 'PowerPoint', 'Photoshop', 'Research', 'Coach', 'Teacher', 'Speech',
+  'Championship', 'Champions', 'Cash', 'Show', 'Shorts', 'PowerPoint', 'Photoshop', 'Research', 'Coach', 'Teacher', 'Speech',
+  'Fashion', 'Exchange', 'Mentorship', 'Internship', 'Tashkent', String.raw`FinTech\w*`, String.raw`[Cc]hallenge\w*`,
   // inglizça sözlar: “ch” bu yerda “k” deb öqiladi, ç ga ögirilmaydi (Taşkent Tech, International School of …)
   'Tech', 'Technology', 'Technologies', 'School',
   // xorijiy taşkilot nomlari

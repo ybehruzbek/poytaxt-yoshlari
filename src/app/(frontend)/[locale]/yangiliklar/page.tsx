@@ -25,7 +25,7 @@ export default async function YangiliklarRoute(props: { params: Promise<{ locale
   const res = await payload.find({
     collection: 'news',
     locale,
-    limit: 2000,
+    limit: 600,
     sort: '-publishedAt',
     depth: 1,
     where: { and: [{ _status: { equals: 'published' } }, NEWS_AND_GREETINGS] },

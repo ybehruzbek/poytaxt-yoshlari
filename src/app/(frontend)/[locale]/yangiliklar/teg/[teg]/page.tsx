@@ -40,7 +40,7 @@ export default async function TagRoute(props: Props) {
   const res = await payload.find({
     collection: 'news',
     locale,
-    limit: 2000,
+    limit: 600,
     sort: '-publishedAt',
     depth: 1,
     where: { and: [{ _status: { equals: 'published' } }, { tags: { contains: tag } }, NEWS_ONLY] },

@@ -110,8 +110,8 @@ export async function importPosts(payload: Payload, posts: TgPost[], log: (s: st
       r.skipped++
       continue
     }
-    // videoli postlar saytga olinmaydi (ular YouTube orqali Videogalereyada)
-    if (!post.photos.length && post.videoThumbs.length) {
+    // videoli postlar saytga olinmaydi (ular YouTube orqali Videogalereyada), qölda tasdiqlanganlaridan taşqari
+    if (!post.photos.length && post.videoThumbs.length && !curated[String(post.id)]?.video) {
       r.skipped++
       continue
     }
@@ -217,7 +217,7 @@ export async function reclassify(payload: Payload, since: string, log: (s: strin
     }
     seen.add(key)
     const cur = curated[String(post.id)]
-    if (cur?.kind === 'skip' || (!post.photos.length && post.videoThumbs.length)) {
+    if (cur?.kind === 'skip' || (!post.photos.length && post.videoThumbs.length && !cur?.video)) {
       await payload.delete({ collection: 'news', id: doc.id, overrideAccess: true })
       log(`- ${post.id} olib taşlandi (video yoki saytga mos emas)`)
       continue

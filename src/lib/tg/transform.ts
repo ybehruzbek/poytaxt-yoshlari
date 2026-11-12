@@ -19,6 +19,8 @@ export type Draft = {
   tags: string[]
   category: NewsCategory
   caption?: string
+  /** videoli post bölsa ham saytga olinsin (muqova surati bilan) — faqat qölda tasdiqlangan maqolalar uçun */
+  video?: boolean
 }
 
 /** Kanal imzosi, obuna çaqiriqlari va texnik qatorlar */
