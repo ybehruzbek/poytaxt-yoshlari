@@ -241,7 +241,7 @@ export const EVENTS: Ev[] = [
     place: 'Ziyo Forum yoşlar markazi',
     type: 'seminar-trening',
     summary:
-      'BMTning 17 ta BRM va yoşlarning örni haqida seminar, interaktiv quizlar, faol iştirokçilar taqdirlandi.',
+      'BMTning 17 ta Barqaror rivojlaniş maqsadi va ularga erişişda yoşlarning örni haqida seminar, interaktiv viktorinalar ötkazildi, faol iştirokçilar taqdirlandi.',
     dir: 'talim-kasb',
     img: '/img/faoliyat/t/6626.webp',
   },
@@ -279,7 +279,7 @@ export const EVENTS: Ev[] = [
   {
     id: 6520,
     date: '2026-07-15',
-    title: '“Yoş diplomat – 2026”da “Liderlik va jamoani samarali boşqariş” treningi',
+    title: '“Yoş diplomat — 2026”da “Liderlik va jamoani samarali boşqariş” treningi',
     place: 'Jahon iqtisodiyoti va diplomatiya universiteti, konferensiyalar zali',
     type: 'trening',
     summary:
@@ -294,7 +294,7 @@ export const EVENTS: Ev[] = [
     place: 'Özbekiston yoşlar ittifoqi Yoşlar ijod saroyi',
     type: 'taqdirlaş marosimi',
     summary:
-      'Vatanparvar va faol yoşlar “Özbekiston belgisi” kökrak nişoni bilan taqdirlandi; poytaxtdan 4 nafar yetakçi hokim tavsiyasi bilan.',
+      'Vatanparvar va faol yoşlar “Özbekiston belgisi” kökrak nişoni bilan taqdirlandi; hokim tavsiyasi bilan poytaxtdan 4 nafar yetakçi ham taqdirlandi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/6491.webp',
   },
@@ -348,7 +348,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent şahri',
     type: 'taqdirlaş',
     summary:
-      'Yoşlar kuni munosabati bilan bir guruh OTT Yoşlar yetakçilari vazir Faxriy yorliği bilan taqdirlandi.',
+      'Yoşlar kuni munosabati bilan bir guruh OTT yoşlar yetakçilari vazir Faxriy yorliği bilan taqdirlandi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/6358.webp',
   },
@@ -375,7 +375,7 @@ export const EVENTS: Ev[] = [
   {
     id: 6325,
     date: '2026-06-25',
-    title: '“Mentorşip – 2026” oromgohida seminar-trening',
+    title: '“Mentorşip — 2026” oromgohida seminar-trening',
     place: 'Yoşlar oromgohi',
     type: 'seminar-trening',
     summary:
@@ -386,7 +386,7 @@ export const EVENTS: Ev[] = [
   {
     id: 6310,
     date: '2026-06-17',
-    title: '“Milliy Fashion Show” Respublika final bosqiçi',
+    title: '“Milliy Fashion Show” respublika final bosqiçi',
     place: 'Yoşlar ijod saroyi',
     type: 'tanlov finali',
     summary:
@@ -407,7 +407,7 @@ export const EVENTS: Ev[] = [
   {
     id: 6244,
     date: '2026-06-03',
-    title: 'Respublika Intellektual haftaligi natijalari',
+    title: 'Respublika intellektual haftaligi natijalari',
     place: 'Respublika',
     type: 'intellektual musobaqa',
     summary:
@@ -443,7 +443,7 @@ export const EVENTS: Ev[] = [
     title: '“Eng ilğor boşlanğiç taşkilot yetakçisi” körik-tanlovi',
     place: 'Mudofaa vazirligi harbiy qismi',
     type: 'körik-tanlov',
-    summary: 'Dastlabki bosqiçda leytenant Arzudinov Şoxrux 1-örinni egalladi.',
+    summary: 'Dastlabki bosqiçda leytenant Şoxrux Arzudinov 1-örinni egalladi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/6199.webp',
   },
@@ -505,7 +505,7 @@ export const EVENTS: Ev[] = [
     title: 'Xotira va qadrlaş kuni: uruş faxriysiga taşrif',
     place: 'Faxriy xonadoni',
     type: 'taşrif',
-    summary: 'TATU Yoşlar Kengaşi aʼzolari uruş faxriysi xonadoniga taşrif buyurdi.',
+    summary: 'TATU Yoşlar kengaşi aʼzolari uruş faxriysi xonadoniga taşrif buyurdi.',
     dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/6056.webp',
   },
@@ -568,7 +568,7 @@ export const EVENTS: Ev[] = [
     place: 'Nizomiy nomidagi ÖzMPU',
     type: 'hisobot-saylov',
     summary:
-      'Kengaş raisi Şukurulloxon Anvarov iştirokida yangi Yoşlar yetakçisi Abdulatipov Azamat saylandi; koordinatorlarga “Işonç yorliqlari” berildi.',
+      'Kengaş raisi Şukurulloxon Anvarov iştirokida yangi yoşlar yetakçisi Azamat Abdulatipov saylandi; koordinatorlarga “Işonç yorliqlari” berildi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/5882.webp',
   },
@@ -600,7 +600,7 @@ export const EVENTS: Ev[] = [
     title: '“Vazir va yoşlar” uçraşuvi',
     place: 'Özbekiston davlat jahon tillari universiteti',
     type: 'uçraşuv',
-    summary: 'Oliy taʼlim, fan va innovatsiyalar vaziri Kongratbay Şaripov bilan uçraşuv.',
+    summary: 'Oliy taʼlim, fan va innovatsiyalar vaziri Qöngiratbay Şaripov bilan uçraşuv.',
     dir: 'talim-kasb',
     img: '/img/faoliyat/t/5841.webp',
   },
@@ -608,7 +608,7 @@ export const EVENTS: Ev[] = [
     id: 5822,
     date: '2026-04-13',
     title: '“Ajdodlar izidan” Toşkent şahar bosqiçi',
-    place: 'Zakovat arena',
+    place: '“Zakovat arena”',
     type: 'intellektual tanlov',
     summary:
       'Kuç tuzilmalari yoş harbiylari bellaşdi; 1-örin IIV akademiyasining “Yuristlar” jamoasi.',
@@ -695,7 +695,7 @@ export const EVENTS: Ev[] = [
     title: 'YUTRIP Tovoqsoy sayohati',
     place: 'Tovoqsoy (Toşkent viloyati)',
     type: 'sayohat',
-    summary: '“YUTRIP” agentligi Tovoqsoy hududiga hiking sayohatini taşkil etdi.',
+    summary: '“YUTRIP” agentligi Tovoqsoy hududiga piyoda sayohatini taşkil etdi.',
     dir: 'ijod-turizm',
     img: '/img/faoliyat/t/5652.webp',
   },
@@ -717,7 +717,7 @@ export const EVENTS: Ev[] = [
     place: 'IIV Qorovul qöşinlari qömondonligi',
     type: 'uçraşuv',
     summary:
-      'Kengaşning harbiy qismlardagi BT faoliyatini muvofiqlaştiriş bölimi boşliği Sarvar Ismoilov yoşlar bilan uçraşdi.',
+      'Kengaşning harbiy qismlardagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiriş bölimi boşliği Sarvar Ismoilov yoşlar bilan uçraşdi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/5603.webp',
   },
@@ -770,7 +770,7 @@ export const EVENTS: Ev[] = [
     title: 'TDŞUda “Rektor va yoşlar” muloqoti',
     place: 'Toşkent davlat şarqşunoslik universiteti',
     type: 'oçiq muloqot',
-    summary: 'Rektor Rixsiyeva Gulçehra faol talaba-yoşlar bilan muloqot ötkazdi.',
+    summary: 'Rektor Gulçehra Rixsiyeva faol talaba-yoşlar bilan muloqot ötkazdi.',
     dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/5507.webp',
   },
@@ -791,7 +791,7 @@ export const EVENTS: Ev[] = [
     title: '“Nations Day” tanlovi',
     place: 'Toşkent davlat iqtisodiyot universiteti',
     type: 'tanlov',
-    summary: "TDIU Students' Union taşabbusi bilan 14 ta fakultet iştirokida tanlov ötkazildi.",
+    summary: 'TDIU talabalar ittifoqi taşabbusi bilan 14 ta fakultet iştirokida tanlov ötkazildi.',
     dir: 'ijod-turizm',
     img: '/img/faoliyat/t/5455.webp',
   },
@@ -820,7 +820,7 @@ export const EVENTS: Ev[] = [
     id: 5373,
     date: '2026-02-27',
     title: 'OTT yoşlar yetakçilari uçun maxsus öquv-seminar',
-    place: 'Yoşlar Press klubi',
+    place: 'Yoşlar press klubi',
     type: 'seminar',
     summary:
       'Prezidentning yoşlar bilan muloqotida eʼlon qilingan imkoniyatlar va loyihalar taqdim etildi; iştirokçilarga sertifikatlar topşirildi.',
@@ -834,7 +834,7 @@ export const EVENTS: Ev[] = [
     place: 'Özbekiston Milliy universiteti',
     type: 'oçiq muloqot',
     summary:
-      '“Payşanba — Yoşlar kuni” doirasida rektor Madjidov Inom Urişeviç faol talabalar bilan muloqot ötkazdi.',
+      '“Payşanba — Yoşlar kuni” doirasida rektor Inom Madjidov faol talabalar bilan muloqot ötkazdi.',
     dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/5398.webp',
   },
@@ -851,7 +851,7 @@ export const EVENTS: Ev[] = [
   {
     id: 5292,
     date: '2026-02-17',
-    title: '“Birgina tanlov – porloq kelajak yoxud ayançli taqdir” profilaktik tadbiri',
+    title: '“Birgina tanlov — porloq kelajak yoxud ayançli taqdir” profilaktik tadbiri',
     place: 'Profi universiteti',
     type: 'profilaktik tadbir',
     summary: 'Maʼnaviy-maʼrifiy va profilaktik tadbir taşkil etildi.',
@@ -893,11 +893,11 @@ export const EVENTS: Ev[] = [
   {
     id: 5166,
     date: '2026-02-06',
-    title: 'Kengaş raisining ÖzMU Yoşlar Kengaşi bilan uçraşuvi',
+    title: 'Kengaş raisining ÖzMU Yoşlar kengaşi bilan uçraşuvi',
     place: 'Özbekiston Milliy universiteti',
     type: 'uçraşuv',
     summary:
-      'Kengaş raisi Şukurulloxon Anvarov ÖzMU boşlanğiç taşkiloti Yoşlar Kengaşi aʼzolari bilan uçraşdi.',
+      'Kengaş raisi Şukurulloxon Anvarov ÖzMU boşlanğiç taşkiloti Yoşlar kengaşi aʼzolari bilan uçraşdi.',
     dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/5166.webp',
   },
@@ -918,15 +918,15 @@ export const EVENTS: Ev[] = [
     place: 'Harbiy xavfsizlik va mudofaa universiteti',
     type: 'harbiy-vatanparvarlik',
     summary:
-      'OTT Yoşlar yetakçilari kvest va sport sinovlarida bellaşdi; 1-örin “Matonat” jamoasi.',
+      'OTT yoşlar yetakçilari kvest va sport sinovlarida bellaşdi; 1-örin “Matonat” jamoasi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/5012.webp',
   },
   {
     id: 4885,
     date: '2025-12-26',
-    title: 'Toşkent arxitektura va quriliş universitetida “Rahbar va yoşlar uçraşuvi”',
-    place: 'Toşkent arxitektura va quriliş universiteti',
+    title: 'Toşkent arxitektura-quriliş universitetida “Rahbar va yoşlar uçraşuvi”',
+    place: 'Toşkent arxitektura-quriliş universiteti',
     type: 'muloqot',
     summary: 'Kengaş va Toşkent harbiy okrugi qömondonligi hamkorligida uçraşuv.',
     dir: 'manaviyat-kitobxonlik',
@@ -939,7 +939,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'taqdirlaş',
     summary:
-      'OTT Yoşlar yetakçilari va faollar vazir K. Şaripov va X. Sattarov nomidan Faxriy yorliqlar bilan taqdirlandi.',
+      'OTT yoşlar yetakçilari va faollar vazir K. Şaripov va X. Sattarov nomidan Faxriy yorliqlar bilan taqdirlandi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/4861.webp',
   },
@@ -991,7 +991,7 @@ export const EVENTS: Ev[] = [
     title: 'Yoşlar yetakçilari uçun Senatda “Oçiq eşiklar kuni”',
     place: 'Özbekiston Respublikasi Oliy Majlis Senati',
     type: 'taşrif',
-    summary: 'Poytaxt OTT Yoşlar yetakçilari Senat faoliyati va yoşlar siyosati bilan tanişdi.',
+    summary: 'Poytaxt OTT yoşlar yetakçilari Senat faoliyati va yoşlar siyosati bilan tanişdi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/4711.webp',
   },
@@ -1019,7 +1019,7 @@ export const EVENTS: Ev[] = [
   {
     id: 4615,
     date: '2025-12-04',
-    title: 'TTYSIʼda guruh sardorlari bilan uçraşuv (kurs qömitalari)',
+    title: 'TTYSIda guruh sardorlari bilan uçraşuv (kurs qömitalari)',
     place: 'Toşkent töqimaçilik va yengil sanoat instituti',
     type: 'uçraşuv',
     summary: 'Talabalar fikrini örganiş uçun kurs qömitalarini şakllantiriş doirasida uçraşuv.',
@@ -1161,7 +1161,7 @@ export const EVENTS: Ev[] = [
     title: 'TDIU boşlanğiç taşkiloti hisobot-saylov yiğilişi',
     place: 'Toşkent davlat iqtisodiyot universiteti',
     type: 'hisobot-saylov',
-    summary: 'Xayrulla Sattarov iştirokida Abduraxmanov Abdulaziz Yoşlar yetakçisi etib saylandi.',
+    summary: 'Xayrulla Sattarov iştirokida Abdulaziz Abduraxmanov yoşlar yetakçisi etib saylandi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/4329.webp',
   },
@@ -1182,7 +1182,7 @@ export const EVENTS: Ev[] = [
     place: 'Yoşlar ijod saroyi',
     type: 'öquv seminar',
     summary:
-      'OTT Yoşlar yetakçilari yetakçilik, kommunikatsiya va taşabbuskorlik böyiça bilim oldi.',
+      'OTT yoşlar yetakçilari yetakçilik, kommunikatsiya va taşabbuskorlik böyiça bilim oldi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/4269.webp',
   },
@@ -1243,7 +1243,7 @@ export const EVENTS: Ev[] = [
   {
     id: 4086,
     date: '2025-08-18',
-    title: '“Yoşlar – giyohvandlikka qarşi” tarğibot tadbiri',
+    title: '“Yoşlar — giyohvandlikka qarşi” tarğibot tadbiri',
     place: 'Çirçiq şahridagi harbiy qism',
     type: 'tarğibot',
     summary:
@@ -1280,7 +1280,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent töqimaçilik va yengil sanoat instituti',
     type: 'hamkorlik',
     summary:
-      'Ikki OTT boşlanğiç taşkiloti Kengaşlari madaniy, sport, hayriya-volontyorlik, IT va talabalar almaşinuvi böyiça memorandum imzoladi.',
+      'Ikki OTT boşlanğiç taşkilotlari madaniy, sport, xayriya-volontyorlik, IT va talabalar almaşinuvi böyiça memorandum imzoladi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/3954.webp',
   },
@@ -1343,7 +1343,7 @@ export const EVENTS: Ev[] = [
     place: 'Qorovul qöşinlari qömondonligi',
     type: 'oçiq eşiklar kuni',
     summary:
-      '“Yangi Özbekiston yoşlari – birlaşaylik” şiori ostida yoşlarni harbiy hayot bilan taniştiriş.',
+      '“Yangi Özbekiston yoşlari — birlaşaylik” şiori ostida yoşlarni harbiy hayot bilan taniştiriş.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/3793.webp',
   },
@@ -1383,7 +1383,7 @@ export const EVENTS: Ev[] = [
     id: 3701,
     date: '2025-06-03',
     title: '“Ajdodlar izidan” intellektual öyinining şahar bosqiçi',
-    place: 'Zakovat Arena',
+    place: '“Zakovat arena”',
     type: 'intellektual öyin',
     summary:
       'Mudofaa, FVV, IIV, Milliy gvardiya, Bojxona va DXX tizimlari böyiça ğoliblar aniqlanib taqdirlandi.',
@@ -1454,8 +1454,8 @@ export const EVENTS: Ev[] = [
   {
     id: 3524,
     date: '2025-05-15',
-    title: 'III Respublika ilmiy-amaliy konferensiyasi “Sifatli taʼlim – taraqqiyot poydevori”',
-    place: 'Toşkent şahar yoşlar markazi',
+    title: 'III Respublika ilmiy-amaliy konferensiyasi “Sifatli taʼlim — taraqqiyot poydevori”',
+    place: 'Toşkent şahar Yoşlar markazi',
     type: 'konferensiya',
     summary:
       'Aniq, tabiiy, ijtimoiy-gumanitar, filologiya, tibbiyot sohalarida maqolalar; “Eng yaxşi maqola” ğoliblari taqdirlandi.',
@@ -1780,7 +1780,7 @@ export const EVENTS: Ev[] = [
     id: 2591,
     date: '2025-01-17',
     title:
-      'Harbiy vatanparvarlik festivali “Yangi Özbekiston armiyasi – mamlakat tayançi, xalqimiz faxri!”',
+      'Harbiy vatanparvarlik festivali “Yangi Özbekiston armiyasi — mamlakat tayançi, xalqimiz faxri!”',
     place: '',
     type: 'festival',
     summary:
@@ -1903,7 +1903,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent davlat şarqşunoslik universiteti',
     type: 'davra suhbati',
     summary:
-      'Kengaş raisi Ş.Anvarov proporsional, majoritar va aralaş saylov tizimlari haqida tuşuntirdi.',
+      'Kengaş raisi Ş. Anvarov proporsional, majoritar va aralaş saylov tizimlari haqida tuşuntirdi.',
     dir: 'huquqiy-madaniyat',
     img: '/img/faoliyat/t/2115.webp',
   },
@@ -1914,7 +1914,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'sport musobaqasi',
     summary:
-      'Otaliqqa olingan mahallalardagi uyuşmagan yoşlar örtasida; ğoliblar diplom va medal bilan taqdirlandi. Sana post sanasi.',
+      'Otaliqqa olingan mahallalardagi uyuşmagan yoşlar örtasida; ğoliblar diplom va medal bilan taqdirlandi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/1824.webp',
   },
@@ -1947,7 +1947,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'premyera',
     summary:
-      'TDIU yoşlar yetakçisi Ş.Baymuradov faoliyati aks etgan film namoyişi; u taşakkurnoma bilan taqdirlandi.',
+      'TDIU yoşlar yetakçisi Ş. Baymuradov faoliyati aks etgan film namoyişi; u taşakkurnoma bilan taqdirlandi.',
     dir: 'media',
     img: '/img/faoliyat/t/1482.webp',
   },
@@ -1979,7 +1979,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'sport musobaqasi',
     summary:
-      '“Vatan tayançi” otryadi öquvçilari örtasida musobaqa; ğoliblarga Kengaş raisi ham sovğa topşirdi. Sana post sanasi.',
+      '“Vatan tayançi” otryadi öquvçilari örtasida musobaqa; ğoliblarga Kengaş raisi ham sovğa topşirdi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/1423.webp',
   },
@@ -2020,7 +2020,7 @@ export const EVENTS: Ev[] = [
     title: '“Birlaşgan millatlar taşkiloti modeli” ilmiy konferensiyasi',
     place: '',
     type: 'konferensiya',
-    summary: '3 sessiyali konferensiya, homiylar sovğalari va “iftorlik party”.',
+    summary: '3 sessiyali konferensiya, homiylar sovğalari va iftorlik dasturi.',
     dir: 'intellektual',
     img: '/img/faoliyat/t/1192.webp',
   },
@@ -2062,14 +2062,14 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'ekologik musobaqa',
     summary:
-      '“Butunjahon yovvoyi tabiat kuni”ga bağişlangan musobaqada maktab öquvçilari jamoalari bellaşdi. Sana post sanasi.',
+      '“Butunjahon yovvoyi tabiat kuni”ga bağişlangan musobaqada maktab öquvçilari jamoalari bellaşdi.',
     dir: 'ekologiya',
     img: '/img/faoliyat/t/1094.webp',
   },
   {
     id: 1057,
     date: '2024-03-01',
-    title: 'Zulfiyaxonim tavalludiga bağişlangan davra suhbati',
+    title: 'Zulfiya tavalludiga bağişlangan davra suhbati',
     place: 'Yoşlar ijod saroyi',
     type: 'davra suhbati',
     summary:
@@ -2084,7 +2084,7 @@ export const EVENTS: Ev[] = [
     place: 'Favqulodda vaziyatlar vazirligi akademiyasi',
     type: 'festival',
     summary:
-      'Harbiy orkestr, qöl jangi körgazmasi, texnika namoyişi va akademiya boşliği kubogi uçun sport musobaqalari. Sana post sanasi.',
+      'Harbiy orkestr, qöl jangi körgazmasi, texnika namoyişi va akademiya boşliği kubogi uçun sport musobaqalari.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/964.webp',
   },
@@ -2106,7 +2106,7 @@ export const EVENTS: Ev[] = [
     place: 'Alişer Navoiy nomidagi özbek tili va adabiyoti universiteti',
     type: 'uçraşuv',
     summary:
-      'Faxriylar va harbiy xizmatçilar yoşlarga tinçlik qadri va vatanparvarlik haqida sözladi. Sana post sanasi.',
+      'Faxriylar va harbiy xizmatçilar yoşlarga tinçlik qadri va vatanparvarlik haqida sözladi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/953.webp',
   },
@@ -2116,7 +2116,7 @@ export const EVENTS: Ev[] = [
     title: '“Oçiq eşiklar kuni” va “Prokuror va yoşlar uçraşuvi”',
     place: 'Qurolli Kuçlar akademiyasi',
     type: 'harbiy-vatanparvarlik',
-    summary: 'Toşkent harbiy prokurori iştirokida harbiy-vatanparvarlik tadbiri. Sana post sanasi.',
+    summary: 'Toşkent harbiy prokurori iştirokida harbiy-vatanparvarlik tadbiri.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/898.webp',
   },
@@ -2126,7 +2126,7 @@ export const EVENTS: Ev[] = [
     title: '“Harbiy sportçilar va yoşlar uçraşuvi”',
     place: 'Toşkent şahar Mudofaa işlari boşqarmasi',
     type: 'uçraşuv',
-    summary: 'Mudofaa vazirligi sportçilari bilan uçraşuv va “Mahorat darslari”. Sana post sanasi.',
+    summary: 'Mudofaa vazirligi sportçilari bilan uçraşuv va “Mahorat darslari”.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/783.webp',
   },
@@ -2137,7 +2137,7 @@ export const EVENTS: Ev[] = [
     place: '“Ğalaba boği” yodgorlik majmuasi',
     type: 'uçraşuv',
     summary:
-      'General-mayor R.Ataxanov talabalar va sardorlar bilan muloqot qildi; Navoiy tavalludiga bağişlangan keça ötkazildi.',
+      'General-mayor R. Ataxanov talabalar va sardorlar bilan muloqot qildi; Navoiy tavalludiga bağişlangan keça ötkazildi.',
     dir: 'manaviyat-kitobxonlik',
     img: '/img/faoliyat/t/752.webp',
   },
@@ -2188,7 +2188,7 @@ export const EVENTS: Ev[] = [
     id: 552,
     date: '2023-12-12',
     title: '“Munozara” intellektual öyini (2023)',
-    place: 'Toşkent şahar yoşlar markazi',
+    place: 'Toşkent şahar Yoşlar markazi',
     type: 'intellektual öyin',
     summary: 'Saralaşda 26 jamoa bellaşdi, 8 jamoa çorak finalga çiqdi; final 14-dekabrda.',
     dir: 'intellektual',
@@ -2233,7 +2233,7 @@ export const EVENTS: Ev[] = [
     place: 'Toşkent davlat şarqşunoslik universiteti',
     type: 'uçraşuv',
     summary:
-      'Kengaş raisi Ş.Anvarov boşlanğiç taşkilot faoliyatini örgandi, yetakçilarning takliflarini tingladi.',
+      'Kengaş raisi Ş. Anvarov boşlanğiç taşkilot faoliyatini örgandi, yetakçilarning takliflarini tingladi.',
     dir: 'yetakchilik',
     img: '/img/faoliyat/t/471.webp',
   },
@@ -2241,7 +2241,7 @@ export const EVENTS: Ev[] = [
     id: 430,
     date: '2023-10-24',
     title: '“Poytaxt sardorlari forumi”',
-    place: 'Toşkent şahar yoşlar markazi',
+    place: 'Toşkent şahar Yoşlar markazi',
     type: 'forum',
     summary:
       'Seminarlar, muhokamalar va “Yengilmas” namoyişi; 14 nafar eng faol öquvçi şahar sardorlari etib saylandi.',
@@ -2251,8 +2251,8 @@ export const EVENTS: Ev[] = [
   {
     id: 418,
     date: '2023-10-05',
-    title: 'Harbiy qismlardagi BT yetakçilari uçun öquv seminar',
-    place: 'Toşkent şahar yoşlar markazi; Bojxona instituti',
+    title: 'Harbiy qismlardagi boşlanğiç taşkilot yetakçilari uçun öquv seminar',
+    place: 'Toşkent şahar Yoşlar markazi; Bojxona instituti',
     type: 'seminar',
     summary:
       '5–6-oktabr kunlari boşlanğiç taşkilotning maqsad va vazifalari mavzusida nazariy va amaliy seminar.',
@@ -2276,7 +2276,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'sport musobaqasi',
     summary:
-      'Professional taʼlim öquvçilari örtasida ilk bor ötkazilgan harbiy-vatanparvarlik sport musobaqasi şahar bosqiçi. Sana post sanasi.',
+      'Professional taʼlim öquvçilari örtasida ilk bor ötkazilgan harbiy-vatanparvarlik sport musobaqasi şahar bosqiçi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/271.webp',
   },
@@ -2328,7 +2328,7 @@ export const EVENTS: Ev[] = [
     id: 203,
     date: '2023-06-17',
     title: '“Yozni Kamalak bilan!” loyihasining starti',
-    place: 'Toşkent şahar yoşlar markazi',
+    place: 'Toşkent şahar Yoşlar markazi',
     type: 'loyiha',
     summary:
       '“Munozara”, “MultiQuiz”, “Çess Kingdom”, “Möjizaviy möyqalam” va seminar-treninglar ötkazildi.',
@@ -2342,7 +2342,7 @@ export const EVENTS: Ev[] = [
     place: 'Özbekiston davlat konservatoriyasi katta sahnasi',
     type: 'madaniy tadbir',
     summary:
-      '“Yoşlar oyligi” doirasida musiqali teatr studiyasi va talabalar tomonidan opera premyerasi. Sana postdagi “kuni keça” asosida.',
+      '“Yoşlar oyligi” doirasida musiqali teatr studiyasi va talabalar tomonidan opera premyerasi.',
     dir: 'ijod-turizm',
     img: '/img/faoliyat/t/193.webp',
   },
@@ -2375,7 +2375,7 @@ export const EVENTS: Ev[] = [
     place: '“Alpomiş” muz saroyi',
     type: 'konsert',
     summary:
-      '“Taşabbusimiz, iqtidorimiz, kuç-qudratimiz - Vatan uçun!” şiori ostida estrada yulduzlari iştirokida bepul talabalar festivali.',
+      '“Taşabbusimiz, iqtidorimiz, kuç-qudratimiz — Vatan uçun!” şiori ostida estrada yulduzlari iştirokida bepul talabalar festivali.',
     dir: 'ijod-turizm',
     img: '/img/faoliyat/t/163.webp',
   },
@@ -2385,7 +2385,7 @@ export const EVENTS: Ev[] = [
     title: '“Yoş qutqaruvçi” musobaqasi Toşkent şahar bosqiçi',
     place: '',
     type: 'musobaqa',
-    summary: 'Öquvçilardan iborat 12 jamoa 5 yönalişda bellaşdi. Sana post sanasi.',
+    summary: 'Öquvçilardan iborat 12 jamoa 5 yönalişda bellaşdi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/127.webp',
   },
@@ -2406,7 +2406,7 @@ export const EVENTS: Ev[] = [
     place: '',
     type: 'intellektual öyin',
     summary:
-      '4 jamoa iştirokida “Şarq” jamoasi 1-örinni egallab, respublika bosqiçiga yöllanma oldi. Sana post sanasi.',
+      '4 jamoa iştirokida “Şarq” jamoasi 1-örinni egallab, respublika bosqiçiga yöllanma oldi.',
     dir: 'harbiy-vatanparvarlik',
     img: '/img/faoliyat/t/92.webp',
   },

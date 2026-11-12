@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
         post: 1447,
       },
       {
-        text: '2026-yilgi şahar bosqiçida 1-örinni Içki işlar vazirligi akademiyasining “Yuristlar”, 2-örinni Toifalangan obʼektlarni qöriqlaş qöşinlari qömondonligining “Temuriylar”, 3-örinni Bojxona institutining “Bojxona instituti” jamoalari egalladi.',
+        text: '2026-yilgi şahar bosqiçida 1-örinni Içki işlar vazirligi akademiyasining “Yuristlar”, 2-örinni Toifalangan obyektlarni qöriqlaş qöşinlari qömondonligining “Temuriylar”, 3-örinni Bojxona institutining “Bojxona instituti” jamoalari egalladi.',
         post: 5822,
       },
       {
@@ -45,7 +45,7 @@ export const PROJECTS: Project[] = [
         text: 'Harbiy tibbiyot akademiyasida şahar bosqiçi: 15 ta jamoa',
         post: 1447,
       },
-      { date: '2025-06-03', text: '“Zakovat Arena”da Toşkent şahar bosqiçi ötkazildi', post: 3681 },
+      { date: '2025-06-03', text: '“Zakovat arena”da Toşkent şahar bosqiçi ötkazildi', post: 3681 },
       {
         date: '2025-10-08',
         text: 'Yoşlar ijod saroyida respublika bosqiçi bölib ötdi',
@@ -85,7 +85,7 @@ export const PROJECTS: Project[] = [
     period: '2023–2026',
     lead: 'Yoşlarning tahliliy va tanqidiy fikrlaşini rivojlantiruvçi jamoaviy debat turnirining Toşkent şahar bosqiçlari.',
     description:
-      'Turnir yoşlarni dolzarb masalalar ustida bahs yuritişga, özgalar fikrini hurmat qilişga örgatadi. 2023–2024-yillarda kengaş şahar miqyosida öyinlar taşkil etgan bölsa, 2025–2026-yillarda oliy taʼlim muassasalari talabalari örtasidagi “Munozara” respublika turnirining Toşkent şahar hududiy bosqiçini ötkazdi. Respublika turniri Oliy taʼlim, fan va innovatsiyalar vazirligi, Talaba va öquvçilarning ijtimoiy faolligini oşiriş markazi hamda Yoşlar işlari agentligi bilan hamkorlikda taşkil etiladi.',
+      'Turnir yoşlarni dolzarb masalalar ustida bahs yuritişga, özgalar fikrini hurmat qilişga örgatadi. 2023–2024-yillarda Kengaş şahar miqyosida öyinlar taşkil etgan bölsa, 2025–2026-yillarda oliy taʼlim muassasalari talabalari örtasidagi “Munozara” respublika turnirining Toşkent şahar hududiy bosqiçini ötkazdi. Respublika turniri Oliy taʼlim, fan va innovatsiyalar vazirligi, Talaba va öquvçilarning ijtimoiy faolligini oşiriş markazi hamda Yoşlar işlari agentligi bilan hamkorlikda taşkil etiladi.',
     audience: 'Oliy taʼlim muassasalari talabalari, maktab öquvçilari (15–18 yoş)',
     partners: [
       'Oliy taʼlim, fan va innovatsiyalar vazirligi',
@@ -173,7 +173,7 @@ export const PROJECTS: Project[] = [
         post: 4175,
       },
       {
-        text: 'Içki işlar xodimlari kuni munosabati bilan “Zakovat Arena”da ötkazilgan öyinda Içki işlar vazirligi akademiyasining 83 ta jamoasi qatnaşdi.',
+        text: 'Içki işlar xodimlari kuni munosabati bilan “Zakovat arena”da ötkazilgan öyinda Içki işlar vazirligi akademiyasining 83 ta jamoasi qatnaşdi.',
         post: 4396,
       },
       {
@@ -300,7 +300,7 @@ export const PROJECTS: Project[] = [
         post: 4354,
       },
       {
-        text: 'Yiğin doirasida “Yoşlar – giyohvandlikka qarşi” tarğibot tadbiri va “DRUG DEALER” filmi namoyişi ötkazildi.',
+        text: 'Yiğin doirasida “Yoşlar — giyohvandlikka qarşi” tarğibot tadbiri va “DRUG DEALER” filmi namoyişi ötkazildi.',
         post: 4086,
       },
     ],
@@ -527,7 +527,7 @@ export const PROJECTS: Project[] = [
     partners: ['Toşkent şahar “Kamalak” bolalar taşkiloti'],
     results: [
       {
-        text: 'Maktabga 1287 nafar nomzod içidan 4 bosqiçli imtihon natijasida 37 nafar rasmiy iştirokçi saralandi.',
+        text: 'Maktabga 1 287 nafar nomzod içidan 4 bosqiçli imtihon natijasida 37 nafar rasmiy iştirokçi saralandi.',
         post: 1533,
       },
       {
@@ -581,7 +581,7 @@ export const PROJECTS: Project[] = [
     ],
     results: [
       {
-        text: '2025-yil 5–6-dekabrdagi festivalda 2 kun davomida 8000 nafardan ortiq yoş iştirok etdi.',
+        text: '2025-yil 5–6-dekabrdagi festivalda 2 kun davomida 8 000 nafardan ortiq yoş iştirok etdi.',
         post: 4684,
       },
       {
@@ -693,7 +693,7 @@ export const PROJECTS: Project[] = [
     ],
     results: [
       {
-        text: '2025-yil 6-sentabrda Yoşlar ijod saroyidagi “Rahbar va yoşlar uçraşuvi”da respublikaning barça OTTlaridan 700 dan ortiq yoş iştirok etdi (respublika miqyosida).',
+        text: '2025-yil 6-sentabrda Yoşlar ijod saroyidagi “Rahbar va yoşlar uçraşuvi”da respublikaning barça OTTlaridan 700 dan ortiq yoş iştirok etdi.',
         post: 4140,
       },
       {
@@ -751,7 +751,7 @@ export const PROJECTS: Project[] = [
     period: '2026',
     lead: 'Kursantlar va talabalar uçun “Soxta axborotlarga qarşi immunitet” mavzusidagi maʼnaviy-maʼrifiy tadbirlar.',
     description:
-      'Loyiha doirasida kengaş Din işlari böyiça qömita va harbiy oliy taʼlim muassasalari bilan hamkorlikda axborot savodxonligiga bağişlangan uçraşuvlar ötkazadi. Harbiy xavfsizlik va mudofaa universitetidagi tadbirda Qömita Axborot xizmati rahbari Ilhom Marupov iştirok etdi. Şu mavzudagi uçraşuv Bojxona institutida ham bölib ötdi.',
+      'Loyiha doirasida Kengaş Din işlari böyiça qömita va harbiy oliy taʼlim muassasalari bilan hamkorlikda axborot savodxonligiga bağişlangan uçraşuvlar ötkazadi. Harbiy xavfsizlik va mudofaa universitetidagi tadbirda Qömita Axborot xizmati rahbari Ilhom Marupov iştirok etdi. Şu mavzudagi uçraşuv Bojxona institutida ham bölib ötdi.',
     audience: 'Kursantlar va talabalar',
     partners: [
       'Özbekiston Respublikasi Din işlari böyiça qömitasi',
@@ -786,7 +786,7 @@ export const PROJECTS: Project[] = [
     ],
     results: [
       {
-        text: 'Toşkent davlat şarqşunoslik universitetidagi tadbirda kengaş raisi Şukurulloxon Anvarov saylov tizimlari va saylov kodeksidagi özgarişlar haqida sözladi.',
+        text: 'Toşkent davlat şarqşunoslik universitetidagi tadbirda Kengaş raisi Şukurulloxon Anvarov saylov tizimlari va saylov kodeksidagi özgarişlar haqida sözladi.',
         post: 2115,
       },
     ],
@@ -868,12 +868,12 @@ export const PROJECTS: Project[] = [
     period: '2023–2026',
     lead: 'Toşkentdagi OTT boşlanğiç taşkilotlarida yetakçilarni saralaş, hisobot-saylov, taqdirlaş va muvofiqlaştiriş tizimi.',
     description:
-      'Har öquv yili boşida kengaş huzuridagi tanlov komissiyasi yoşlar yetakçisi va koordinatorlikka nomzodlar bilan suhbat ötkazadi, söng OTTlarda hisobot-saylov yiğilişlari böladi va saylanganlarga “Işonç yorliği” topşiriladi. Yetakçilar faoliyati reytinglar va tanlovlar orqali baholanadi, yangi talabalar uçun “1-kurs maktabi” va “Taniştiruv haftaligi” tadbirlari ötkaziladi. 2026-yil oktabrdan “Hududiy koordinatorlar instituti” modeli joriy etildi.',
+      'Har öquv yili boşida Kengaş huzuridagi tanlov komissiyasi yoşlar yetakçisi va koordinatorlikka nomzodlar bilan suhbat ötkazadi, söng OTTlarda hisobot-saylov yiğilişlari böladi va saylanganlarga “Işonç yorliği” topşiriladi. Yetakçilar faoliyati reytinglar va tanlovlar orqali baholanadi, yangi talabalar uçun “1-kurs maktabi” va “Taniştiruv haftaligi” tadbirlari ötkaziladi. 2026-yil oktabrdan “Hududiy koordinatorlar instituti” modeli joriy etildi.',
     audience: 'OTT boşlanğiç taşkilotlari yoşlar yetakçilari, koordinatorlar va talabalar',
     partners: [],
     results: [
       {
-        text: '2023-yilda “Yilning eng yaxşi yoşlar yetakçisi - 2023!” tanlovi eʼlon qilindi, ğolib zamonaviy noutbuk bilan taqdirlanişi belgilandi.',
+        text: '2023-yilda “Yilning eng yaxşi yoşlar yetakçisi — 2023!” tanlovi eʼlon qilindi, ğolib zamonaviy noutbuk bilan taqdirlanişi belgilandi.',
         post: 532,
       },
       {
@@ -893,7 +893,7 @@ export const PROJECTS: Project[] = [
       },
       {
         date: '2023-12-12',
-        text: '“Yilning eng yaxşi yoşlar yetakçisi - 2023!” tanlovi',
+        text: '“Yilning eng yaxşi yoşlar yetakçisi — 2023!” tanlovi',
         post: 532,
       },
       { date: '2025-10-09', text: 'Hisobot-saylov yiğilişlarining yangi mavsumi', post: 4232 },
@@ -988,7 +988,7 @@ export const PROJECTS: Project[] = [
     period: '2024',
     lead: 'Poytaxt OTT talabalarining manfaatlarini ifodalaş maqsadida taʼsis etilgan talabalar assotsiatsiyasi.',
     description:
-      'Assotsiatsiyaning birinçi taʼsis yiğilişi “Toşkent yoşlarni sevadi” şiori ostida kengaş, Yoşlar işlari agentligi Toşkent şahar boşqarmasi va Toşkent şahar hokimligi taşabbusi bilan ötkazildi. Yiğilişda OTTlar yoşlar yetakçilari, fakultet koordinatorlari, talabalarning özini özi boşqariş organlari va birlaşmalari rahbarlari qatnaşdi. Assotsiatsiya raisi va yordamçilari oçiq ovoz beriş orqali saylandi.',
+      'Assotsiatsiyaning birinçi taʼsis yiğilişi “Toşkent yoşlarni sevadi” şiori ostida Kengaş, Yoşlar işlari agentligi Toşkent şahar boşqarmasi va Toşkent şahar hokimligi taşabbusi bilan ötkazildi. Yiğilişda OTTlar yoşlar yetakçilari, fakultet koordinatorlari, talabalarning özini özi boşqariş organlari va birlaşmalari rahbarlari qatnaşdi. Assotsiatsiya raisi va yordamçilari oçiq ovoz beriş orqali saylandi.',
     audience: 'Toşkent şahridagi OTT talabalari',
     partners: ['Yoşlar işlari agentligi Toşkent şahar boşqarmasi', 'Toşkent şahar hokimligi'],
     results: [
@@ -1130,7 +1130,7 @@ export const PROJECTS: Project[] = [
         post: 4491,
       },
       {
-        text: '1-örinni Özbekiston jurnalistika va ommaviy kommunikatsiyalar universiteti talabasi Samandarov Sirojiddin, 2- va 3-örinlarni TDIU talabalari Abdurahmonov Oğabek va Jakbarov Ziyodulla egalladi.',
+        text: '1-örinni Özbekiston jurnalistika va ommaviy kommunikatsiyalar universiteti talabasi Sirojiddin Samandarov, 2- va 3-örinlarni TDIU talabalari Oğabek Abdurahmonov va Ziyodulla Jakbarov egalladi.',
         post: 4518,
       },
     ],
@@ -1240,7 +1240,7 @@ export const PROJECTS: Project[] = [
     milestones: [
       { date: '2025-12-07', text: 'Samarqandga bir kunlik sayohat', post: 4627 },
       { date: '2026-01-31', text: 'Çimyon va Amirsoyga qişki sayohat', post: 5123 },
-      { date: '2026-03-15', text: 'Tovoqsoyga hiking sayohati', post: 5652 },
+      { date: '2026-03-15', text: 'Tovoqsoyga piyoda sayohati', post: 5652 },
       { date: '2026-08-12', text: 'Yulduzlar yomğirini kuzatiş uçun tungi sayohat', post: 6622 },
     ],
     posts: [4582, 4627, 4632, 4699, 5123, 5247, 5348, 5356, 5364, 5554, 5608, 5652, 5666, 6622],
@@ -1262,7 +1262,7 @@ export const PROJECTS: Project[] = [
     period: '2025',
     lead: 'Toşkentdagi barça OTTlar yoşlar yetakçilari örtasida mini futbol, stol tennisi va şaxmat böyiça musobaqalar.',
     description:
-      'Musobaqalar kengaş va Toşkent davlat şarqşunoslik universiteti boşlanğiç taşkiloti tomonidan universitetda ötkazildi. Unda kengaş raisi Ş. Anvarov va universitet rektori G. Rixsiyeva iştirok etib, sportning yoşlar hayotidagi örni haqida sözladi. Ğolib va sovrindorlar hamkor taşkilotlarning esdalik sovğalari va sertifikatlari bilan taqdirlandi.',
+      'Musobaqalar Kengaş va Toşkent davlat şarqşunoslik universiteti boşlanğiç taşkiloti tomonidan universitetda ötkazildi. Unda Kengaş raisi Ş. Anvarov va universitet rektori G. Rixsiyeva iştirok etib, sportning yoşlar hayotidagi örni haqida sözladi. Ğolib va sovrindorlar hamkor taşkilotlarning esdalik sovğalari va sertifikatlari bilan taqdirlandi.',
     audience: 'Toşkent şahridagi OTTlar yoşlar yetakçilari',
     partners: ['Toşkent davlat şarqşunoslik universiteti'],
     results: [],
@@ -1319,7 +1319,7 @@ export const PROJECTS: Project[] = [
     period: '2025',
     lead: '2025-yil yozida OTTlarda talabalarning böş vaqtini mazmunli taşkil etişga qaratilgan loyiha.',
     description:
-      'Loyiha barça OTTlarda taşkil etildi: zakovat, munozara, şaxmat va şaşka, sport musobaqalari, onlayn viktorina va çellenjlar ötkazildi. OTT boşlanğiç taşkilotlari doirasida yozgi maktablar va oromgohlar, kasbiy tögaraklar taşkil etildi. Ötkazilgan tadbirlar haftalik infografika va foto-albomlarda jamlandi.',
+      'Loyiha barça OTTlarda taşkil etildi: zakovat, munozara, şaxmat va şaşka, sport musobaqalari, onlayn viktorina va çellenjlar ötkazildi. OTT boşlanğiç taşkilotlari doirasida yozgi maktablar va oromgohlar, kasbiy tögaraklar taşkil etildi. Ötkazilgan tadbirlar haftalik infografika va fotoalbomlarda jamlandi.',
     audience: 'OTT talabalari, abituriyentlar',
     partners: [],
     results: [
@@ -1410,7 +1410,7 @@ export const PROJECTS: Project[] = [
         post: 1469,
       },
       {
-        text: '2024–2026-yillarda Toşkent şahar Ittifoq sardori bölgan Rustamxöjayev Saidamirxon tavsiyanoma asosida Özbekiston Milliy universitetiga qöşimça davlat granti asosida qabul qilindi.',
+        text: '2024–2026-yillarda Toşkent şahar Ittifoq sardori bölgan Saidamirxon Rustamxöjayev tavsiyanoma bilan Özbekiston Milliy universitetiga qöşimça davlat granti asosida qabul qilindi.',
         post: 6753,
       },
     ],
