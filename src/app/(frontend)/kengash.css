@@ -35,7 +35,6 @@
 .kg-link{margin-top:24px;background:var(--navy-bg);color:#fff;border-radius:24px;padding:22px 24px;line-height:1.6;font-weight:600}
 
 /* Rahbariyat */
-.kg-lead-sec{background:var(--soft)}
 .kg-lead{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .kg-lead article{background:var(--bg);border-radius:var(--r-thumb);padding:28px;text-align:center}
 .kg-ava{width:150px;height:150px;margin:0 auto 18px;border-radius:50%;overflow:hidden;background:var(--yellow);display:grid;place-items:center}
@@ -43,6 +42,24 @@
 .kg-ava span{font:800 44px/1 var(--f-head);color:var(--navy)}
 .kg-lead h3{font-size:20px;font-weight:800;color:var(--navy)}
 .kg-lead p{margin-top:6px;color:var(--muted)}
+/* rais: surat + qisqa tarjimai hol */
+.kg-lead .kg-bio{grid-column:1/-1;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:start;text-align:left;padding:36px;border:1px solid var(--line)}
+.kg-bio .kg-ava{width:240px;height:300px;margin:0;border-radius:var(--r-thumb)}
+.kg-bio h3{font-size:calc(clamp(24px,2.4vw,32px) * var(--h-scale));line-height:1.2}
+.kg-lead .kg-bio-role{margin-top:8px;font-weight:600;color:var(--blue)}
+.kg-lead .kg-bio-born{margin-top:16px;color:var(--grey);line-height:1.6}
+.kg-bio h4{margin-top:28px;margin-bottom:12px;font:800 13px/1 var(--f-head);letter-spacing:.06em;text-transform:uppercase;color:var(--navy)}
+.kg-bio-edu{list-style:none;margin:0;padding:0;display:grid;gap:6px;color:var(--grey);line-height:1.55}
+.kg-bio-car{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.kg-bio-car li{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;padding:8px 0 8px 22px;line-height:1.55}
+.kg-bio-car li::before{content:'';position:absolute;left:-6px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px var(--bg)}
+.kg-bio-car b{font:800 15px/1.55 var(--f-head);color:var(--navy);font-variant-numeric:tabular-nums}
+.kg-bio-car span{color:var(--grey)}
+@media (max-width:760px){
+  .kg-lead .kg-bio{grid-template-columns:1fr;gap:24px;padding:24px 20px}
+  .kg-bio .kg-ava{width:200px;height:250px}
+  .kg-bio-car li{grid-template-columns:1fr;gap:2px}
+}
 
 /* Ijroiya qömitasi va komissiya */
 .kg-bod{display:grid;grid-template-columns:1fr 1fr;gap:14px}

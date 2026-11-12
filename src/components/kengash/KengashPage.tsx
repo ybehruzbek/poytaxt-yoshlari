@@ -157,13 +157,39 @@ export function KengashPage({ L, crumbs, siblings }: P) {
             <h2 className="h2">Rahbariyat</h2>
           </div>
           <div className="kg-lead">
-            {LEADERS.map((p, i) => (
-              <article key={i}>
+            {LEADERS.map((p) => (
+              <article key={p.name} className={p.career ? 'kg-bio' : undefined}>
                 <div className="kg-ava">
-                  {p.img ? <img src={p.img} alt={p.name} /> : <span>{initials(p.name)}</span>}
+                  {p.img ? <img src={p.img} alt={p.full ?? p.name} /> : <span>{initials(p.name)}</span>}
                 </div>
-                <h3>{p.name}</h3>
-                <p>{p.role}</p>
+                <div className="kg-bio-txt">
+                  <h3>{p.full ?? p.name}</h3>
+                  <p className="kg-bio-role">{p.role}</p>
+                  {p.born && <p className="kg-bio-born">{p.born}</p>}
+                  {p.edu && (
+                    <>
+                      <h4>Maʼlumoti</h4>
+                      <ul className="kg-bio-edu">
+                        {p.edu.map((x) => (
+                          <li key={x}>{x}</li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                  {p.career && (
+                    <>
+                      <h4>Mehnat faoliyati</h4>
+                      <ol className="kg-bio-car">
+                        {p.career.map((c) => (
+                          <li key={c.y + c.t}>
+                            <b>{c.y}</b>
+                            <span>{c.t}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </>
+                  )}
+                </div>
               </article>
             ))}
           </div>

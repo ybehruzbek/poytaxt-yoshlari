@@ -58,11 +58,39 @@ export const MEMBERS = {
   link: 'Toşkent şahar hududiy Kengaşining raisi lavozimi böyiça Markaziy Kengaş tarkibiga kiradi.',
 }
 
-/* Rahbariyat: rais — UzA xabarlaridan (2025–2026); örinbosarlar rasmiy maʼlumot kelgaç qöşiladi */
-export type Leader = { name: string; role: string; img?: string }
+/* Rahbariyat: rais — Ittifoqning rasmiy sahifasi (yoshlarittifoqi.uz/uz/manage, 2024) va ochiq manbalar */
+export type Leader = {
+  name: string
+  role: string
+  img?: string
+  /** töliq ism-şarif */
+  full?: string
+  born?: string
+  edu?: string[]
+  career?: { y: string; t: string }[]
+}
 
 export const LEADERS: Leader[] = [
-  { name: 'Xayrulla Sattorov', role: 'Markaziy Kengaş raisi' },
+  {
+    name: 'Xayrulla Sattarov',
+    full: 'Sattarov Xayrulla Fayzullayeviç',
+    role: 'Özbekiston yoşlar ittifoqi Markaziy Kengaşi raisi',
+    img: '/img/kengash/sattarov.jpg',
+    born: '1977-yil 21-noyabrda Navoiy şahrida tuğilgan. Iqtisodçi.',
+    edu: [
+      'Navoiy davlat pedagogika instituti (2002)',
+      'Toşkent moliya instituti (2006)',
+      'Vazirlar Mahkamasi huzuridagi Biznes va tadbirkorlik oliy maktabi (2023)',
+    ],
+    career: [
+      { y: '2004', t: '“Tadbirkor” aksiyadorlik tijorat bankida mehnat faoliyatini boşlagan, keyinçalik tijorat banklarida turli lavozimlarda işlagan.' },
+      { y: '2017', t: '“Mikrokreditbank” investitsiya loyihalarini moliyalaştiriş departamenti boşliği.' },
+      { y: '2017–2018', t: '“Xalq banki” ğaznaçilik departamenti boşliği.' },
+      { y: '2019', t: '“Yoşlar kelajagimiz” jamğarmasi direktori. Yoşlarni tadbirkorlikka jalb etiş uçun “Biznes marafon” loyihasini yölga qöygan.' },
+      { y: '2020', t: 'Özbekiston Savdo-sanoat palatasi Rayosati tarkibiga kiritilgan.' },
+      { y: '2024', t: 'Özbekiston yoşlar ittifoqi Markaziy Kengaşi raisi.' },
+    ],
+  },
 ]
 
 /** Ijroiya qömitasi va nazorat-taftiş komissiyasi (Ustav, 5.6–5.7) */
