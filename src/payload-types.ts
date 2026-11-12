@@ -175,6 +175,10 @@ export interface News {
    * Har bir tegni alohida kiriting, masalan: Kitobxonlik, Talabalar
    */
   tags?: string[] | null;
+  /**
+   * Kanaldan avtomatik olingan yangilik
+   */
+  tgId?: number | null;
   source?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -477,6 +481,7 @@ export interface NewsSelect<T extends boolean = true> {
   gallery?: T;
   author?: T;
   tags?: T;
+  tgId?: T;
   source?: T;
   updatedAt?: T;
   createdAt?: T;

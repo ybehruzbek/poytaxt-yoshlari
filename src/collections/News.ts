@@ -104,6 +104,14 @@ export const News: CollectionConfig = {
       ],
     },
     {
+      name: 'tgId',
+      label: 'Telegram post raqami',
+      type: 'number',
+      unique: true,
+      index: true,
+      admin: { position: 'sidebar', readOnly: true, description: 'Kanaldan avtomatik olingan yangilik' },
+    },
+    {
       name: 'source',
       label: 'Manba havolasi (masalan, Telegram post)',
       type: 'text',
