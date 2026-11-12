@@ -134,12 +134,65 @@ button.yn-more {
 .yn-a-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 40px;
+  gap: 48px;
   align-items: start;
 }
+/* rubrikalar */
+.yn-a-rub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.yn-a-rub button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 8px 0 18px;
+  border-radius: 99px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  font: 600 14px/1 var(--f-body);
+  color: var(--navy);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.yn-a-rub button span {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 99px;
+  background: var(--soft);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+.yn-a-rub button:hover {
+  border-color: var(--navy);
+}
+.yn-a-rub button[aria-pressed='true'] {
+  background: var(--navy-bg);
+  border-color: var(--navy-bg);
+  color: #fff;
+}
+.yn-a-rub button[aria-pressed='true'] span {
+  background: var(--yellow);
+  color: #532822;
+}
+.yn-a-rub button:focus-visible,
+.yn-a a:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
+/* asosiy yangilik: keng rasm, ostida matn */
 .yn-a-lead > a {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   gap: 8px;
   padding: 12px;
   border-radius: var(--r-card);
@@ -150,48 +203,59 @@ button.yn-more {
   background: var(--yn-card-h);
 }
 .yn-a-lead .yn-img {
-  aspect-ratio: 4 / 3.4;
+  aspect-ratio: 4 / 3;
   height: 100%;
   border-radius: 38px;
+}
+.yn-a-lead .yn-img img {
+  transition: transform 0.5s;
+}
+.yn-a-lead > a:hover .yn-img img {
+  transform: scale(1.03);
 }
 .yn-a-lead-bd {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 20px 18px;
+  padding: 22px 20px 18px;
 }
 .yn-a-lead h3 {
   font-weight: 800;
-  font-size: calc(clamp(22px, 2vw, 30px) * var(--h-scale));
-  line-height: 1.2;
+  font-size: calc(clamp(21px, 1.7vw, 27px) * var(--h-scale));
+  line-height: 1.22;
 }
 .yn-a-lead p {
-  font-size: 16px;
+  font-size: 15.5px;
   line-height: 1.6;
   color: var(--grey);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .yn-a-lead .more-btn {
   margin-top: auto;
 }
+/* ikkinçi darajali yangiliklar */
 .yn-a-second {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 28px;
-  margin-top: 20px;
+  gap: 0 32px;
+  margin-top: 16px;
 }
 .yn-a-second li {
   border-bottom: 1px solid var(--line);
 }
 .yn-a-second a {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
-  padding: 16px 0;
+  padding: 18px 0;
 }
 .yn-a-second .yn-img {
   aspect-ratio: 1;
-  border-radius: 20px;
+  border-radius: 22px;
 }
 .yn-a-second h3 {
   font-size: 16px;
@@ -205,7 +269,7 @@ button.yn-more {
 }
 .yn-a-second a:hover h3,
 .yn-a-cards a:hover h3,
-.yn-a-feed a:hover span,
+.yn-a-day a:hover span,
 .yn-c a:hover :is(h3, .yn-c-t),
 .yn-b-row a:hover h3 {
   text-decoration: underline;
@@ -213,62 +277,104 @@ button.yn-more {
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
+/* boşqa yangiliklar */
 .yn-a-sub {
-  margin-top: 48px;
+  margin-top: 56px;
 }
 .yn-a-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px 20px;
+  gap: 32px 22px;
 }
 .yn-a-cards a {
   display: grid;
   gap: 12px;
+}
+.yn-a-cards .yn-img {
+  aspect-ratio: 4 / 3;
 }
 .yn-a-cards h3 {
   font-size: 17px;
   font-weight: 700;
   line-height: 1.3;
 }
+.yn-a-cards p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* öngdagi lenta: kunlar böyiça */
 .yn-a-feed {
   position: sticky;
   top: 108px;
-  padding: 24px 24px 12px;
+  padding: 26px 24px 10px;
   border: 1px solid var(--line);
   border-radius: var(--r-thumb);
   max-height: calc(100vh - 128px);
   overflow-y: auto;
   scrollbar-width: thin;
 }
-.yn-a-feed li + li {
-  border-top: 1px solid var(--line);
+.yn-a-feed .yn-kicker {
+  margin-bottom: 6px;
 }
-.yn-a-feed a {
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 14px;
-  padding: 13px 0;
-}
-.yn-a-feed time {
-  display: grid;
-  gap: 3px;
-  align-content: start;
-  font-variant-numeric: tabular-nums;
-}
-.yn-a-feed time b {
-  font: 800 15px/1 var(--f-head);
-  color: var(--navy);
-}
-.yn-a-feed time small {
-  font-size: 11.5px;
+.yn-a-day h3 {
+  position: sticky;
+  top: -26px;
+  z-index: 1;
+  margin: 0 -4px;
+  padding: 14px 4px 8px;
+  background: var(--bg);
+  font: 800 12.5px/1 var(--f-head);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--muted);
 }
-.yn-a-feed span {
+.yn-a-day li + li {
+  border-top: 1px solid var(--line);
+}
+.yn-a-day a {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+}
+.yn-a-day time {
+  padding-top: 2px;
+  font: 800 14.5px/1 var(--f-head);
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+}
+.yn-a-day span {
+  display: grid;
+  gap: 6px;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.4;
   color: var(--navy);
 }
+.yn-a-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.yn-a-dot::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.yn-a-dot.o::before { background: #e8763c; }
+.yn-a-dot.g::before { background: #3c9a68; }
+.yn-a-dot.b::before { background: #3c7fd0; }
+.yn-a-dot.y::before { background: #e3b100; }
 @media (max-width: 1100px) {
   .yn-a-grid {
     grid-template-columns: 1fr;
@@ -277,8 +383,21 @@ button.yn-more {
     position: static;
     max-height: none;
   }
+  .yn-a-day h3 {
+    position: static;
+  }
 }
 @media (max-width: 760px) {
+  .yn-a-rub {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -16px 28px;
+    padding: 0 16px 4px;
+    scrollbar-width: none;
+  }
+  .yn-a-rub button {
+    flex: none;
+  }
   .yn-a-lead > a {
     grid-template-columns: 1fr;
     border-radius: var(--r-thumb);
@@ -294,6 +413,9 @@ button.yn-more {
   .yn-a-second,
   .yn-a-cards {
     grid-template-columns: 1fr;
+  }
+  .yn-a-second a {
+    grid-template-columns: 88px minmax(0, 1fr);
   }
   .yn-a-feed {
     padding: 20px 18px 8px;
