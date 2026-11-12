@@ -940,3 +940,309 @@
 :where(.fa) img {
   object-position: 50% 30%;
 }
+
+/* =====================================================================
+   VAQTINCHA: yönalişlar röyxatining B va C variantlari (DirsVariants.tsx)
+   ===================================================================== */
+.vy-counts {
+  font-size: 14px;
+  color: var(--muted);
+}
+.vy-counts b {
+  font: 800 18px/1 var(--f-head);
+  color: var(--navy);
+}
+:is(.vyb-txt, .vyc-txt) {
+  display: grid;
+  gap: 14px;
+  color: var(--grey);
+}
+:is(.vyb-txt, .vyc-txt) p {
+  margin: 0;
+}
+:is(.vyb-txt, .vyc-txt) a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+:is(.vyb-txt, .vyc-txt) a:hover {
+  color: var(--blue);
+}
+
+/* ---------- B — Mundarija va bölimlar ---------- */
+.vyb {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+.vyb-side {
+  position: sticky;
+  top: 110px;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.vyb-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.vyb-toc a {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 6px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font: 600 14px/1.4 var(--f-head);
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.vyb-toc a span {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.vyb-toc a:hover,
+.vyb-toc a[aria-current] {
+  color: var(--navy);
+}
+.vyb-toc a[aria-current] span {
+  color: var(--blue);
+}
+.vyb-toc a:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+.vyb-sec {
+  scroll-margin-top: 110px;
+}
+.vyb-sec + .vyb-sec {
+  margin-top: 72px;
+  padding-top: 72px;
+  border-top: 1px solid var(--line);
+}
+.vyb-head {
+  display: grid;
+  gap: 10px;
+}
+.vyb-n {
+  font: 800 15px/1 var(--f-head);
+  letter-spacing: 0.08em;
+  color: var(--blue);
+}
+.vyb-head h2 {
+  margin: 0;
+  max-width: 30ch;
+  font: 800 calc(clamp(24px, 2.3vw, 34px) * var(--h-scale)) / 1.18 var(--f-head);
+}
+.vyb-head h2 a {
+  color: var(--navy);
+}
+.vyb-head h2 a:hover {
+  color: var(--blue);
+}
+.vyb-ph {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+  height: 300px;
+  margin: 28px 0;
+}
+.vyb-ph.n2 {
+  grid-template-columns: 1fr 1fr;
+}
+.vyb-ph.n1 {
+  grid-template-columns: 1fr;
+  height: auto;
+  aspect-ratio: 16 / 7;
+}
+.vyb-ph img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: var(--r-thumb);
+}
+.vyb-txt {
+  max-width: 74ch;
+  font-size: 17px;
+  line-height: 1.75;
+}
+.vyb-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 74ch;
+  margin-top: 26px;
+}
+@media (max-width: 1000px) {
+  .vyb {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .vyb-side {
+    display: none;
+  }
+  .vyb-ph {
+    height: 240px;
+  }
+}
+@media (max-width: 640px) {
+  .vyb-sec + .vyb-sec {
+    margin-top: 48px;
+    padding-top: 48px;
+  }
+  .vyb-ph {
+    grid-template-columns: 1fr 1fr;
+    height: auto;
+    margin: 22px 0;
+  }
+  .vyb-ph img {
+    aspect-ratio: 4 / 3;
+  }
+  .vyb-ph img:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
+  .vyb-ph.n2 img {
+    grid-column: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .vyb-txt {
+    font-size: 16px;
+  }
+}
+
+/* ---------- C — Jurnal kartalari ---------- */
+.vyc {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.vyc-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-thumb);
+  background: var(--bg);
+  scroll-margin-top: 110px;
+}
+.vyc-ph {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--navy-bg);
+}
+.vyc-ph img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: 50% 30%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.vyc-card:hover .vyc-ph img {
+  transform: scale(1.03);
+}
+.vyc-n {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: var(--yellow);
+  font: 800 15px/1 var(--f-head);
+  color: var(--navy-bg);
+  font-variant-numeric: tabular-nums;
+}
+.vyc-bd {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 32px 30px;
+}
+.vyc-bd h2 {
+  margin: 0;
+  font: 800 22px/1.28 var(--f-head);
+}
+.vyc-bd h2 a {
+  color: var(--navy);
+}
+.vyc-bd h2 a:hover {
+  color: var(--blue);
+}
+.vyc-txt {
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+.vyc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+/* birinçi yönaliş — keng karta: surat çapda, matn öngda */
+.vyc-card.wide {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+.vyc-card.wide .vyc-ph img {
+  height: 100%;
+  min-height: 440px;
+  aspect-ratio: auto;
+}
+.vyc-card.wide .vyc-bd {
+  padding: 44px 44px 40px;
+}
+.vyc-card.wide h2 {
+  font-size: calc(clamp(24px, 2.2vw, 32px) * var(--h-scale));
+}
+@media (max-width: 900px) {
+  .vyc {
+    grid-template-columns: 1fr;
+  }
+  .vyc-card.wide {
+    display: flex;
+  }
+  .vyc-card.wide .vyc-ph img {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+  .vyc-card.wide .vyc-bd {
+    padding: 28px 32px 30px;
+  }
+}
+@media (max-width: 640px) {
+  .vyc-bd,
+  .vyc-card.wide .vyc-bd {
+    padding: 22px 20px 24px;
+  }
+  .vyc-bd h2 {
+    font-size: 20px;
+  }
+  .vyc-foot {
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vyc-ph img {
+    transition: none;
+  }
+  .vyc-card:hover .vyc-ph img {
+    transform: none;
+  }
+}
