@@ -127,6 +127,14 @@
   padding: 40px 0;
   color: var(--muted);
 }
+/* Yönaliş sahifasi: yönaliş mazmuni (sarlavha ostida emas, bölim boşida) */
+.fa-dir-body {
+  max-width: 820px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--navy);
+}
 
 /* ---------- Tadbir kartalari ---------- */
 .fa-evs {
@@ -685,13 +693,12 @@
 .vb-dash-hero b {
   font: 800 76px/1 var(--f-head);
 }
-.vb-dash-hero span {
+.vb-dash-hero > span {
   font-size: 18px;
 }
-.vb-dash-hero a {
+.vb-dash-hero > .more-btn {
+  align-self: flex-start;
   margin-top: 12px;
-  font-weight: 700;
-  color: var(--yellow);
 }
 .vb-dash-tiles {
   display: grid;

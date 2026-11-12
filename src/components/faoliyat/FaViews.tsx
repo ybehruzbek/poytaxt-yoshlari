@@ -108,6 +108,7 @@ export function DirC({
   listHref: string
 }) {
   const projs = dirProjects(slug as Project['dir'])
+  const body = DIRECTIONS.find((d) => d.slug === slug)?.body
   const evs = dirEvents(slug).slice(0, 14)
   const byYear = [...new Set(evs.map((e) => e.date.slice(0, 4)))].map((y) => ({
     y,
@@ -115,12 +116,17 @@ export function DirC({
   }))
   return (
     <section className="sec fa-sec">
+      {body && (
+        <div className="wrap">
+          <p className="fa-dir-body">{body}</p>
+        </div>
+      )}
       <div className="wrap vc-split">
         <div>
           <h2 className="fa-h2">Tadbirlar xronologiyasi</h2>
           {byYear.length === 0 && (
             <p className="fa-empty">
-              Bu yönaliş böyiça alohida tadbirlar hozirça yöq — yonidagi loyihalar bilan tanişing.
+              Bu yönaliş böyiça tadbirlar haqidagi maʼlumotlar hozirça joylaştirilmagan.
             </p>
           )}
           <div className="vc-tl">
@@ -149,7 +155,7 @@ export function DirC({
         </div>
         <aside className="vc-aside">
           <h2 className="fa-h2">Loyihalar</h2>
-          {projs.length === 0 && <p className="fa-empty">Bu yönalişda alohida loyiha yöq.</p>}
+          {projs.length === 0 && <p className="fa-empty">Bu yönaliş böyiça loyihalar haqidagi maʼlumotlar hozirça joylaştirilmagan.</p>}
           {projs.map((p) => (
             <Link key={p.slug} href={`${projBase}/${p.slug}`} className="vc-mini">
               {p.cover && <img src={p.cover} alt="" loading="lazy" />}
@@ -255,8 +261,13 @@ export function ResultsB() {
             <small>2025-yil yakunlari</small>
             <b>{hero.v}</b>
             <span>{hero.t}</span>
-            <a href={TG(REPORT_2025.post)} target="_blank" rel="noopener noreferrer">
-              Rasmiy hisobot ↗
+            <a
+              href={TG(REPORT_2025.post)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="more-btn"
+            >
+              <More>Hisobot matni</More>
             </a>
           </div>
           <dl className="vb-dash-tiles">

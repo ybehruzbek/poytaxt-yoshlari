@@ -13,13 +13,13 @@ import { More } from '@/components/site/MoreBtn'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
-function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead: string }) {
+/** Sahifa boşi: yöl va sarlavha (qoida: H1 ostida izoh matni yöq) */
+function Head({ crumbs, title }: { crumbs: ReactNode; title: string }) {
   return (
     <header className="pg-head">
       <div className="wrap">
         {crumbs}
         <h1 className="h2 pg-title">{title}</h1>
-        <p className="pg-lead">{lead}</p>
       </div>
     </header>
   )
@@ -33,7 +33,6 @@ export function DirectionsPage({ crumbs, base }: { crumbs: ReactNode; base: stri
       <Head
         crumbs={crumbs}
         title="Faoliyat yönalişlari"
-        lead="Kengaş yoşlar bilan işlaşning 11 ta asosiy yönalişi böyiça faoliyat olib boradi. Har bir yönalişda loyihalar va ötkazilgan tadbirlar bilan tanişişingiz mumkin."
       />
       <DirsList base={base} />
     </div>
@@ -54,7 +53,7 @@ export function DirectionPage({
   const d = DIRECTIONS.find((x) => x.slug === slug)!
   return (
     <div className="fa">
-      <Head crumbs={crumbs} title={d.title} lead={d.body} />
+      <Head crumbs={crumbs} title={d.title} />
       <DirC slug={d.slug} projBase={projBase} listHref={listHref} />
     </div>
   )
@@ -68,7 +67,6 @@ export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string
       <Head
         crumbs={crumbs}
         title="Loyihalar"
-        lead="Kengaş va uning boşlanğiç taşkilotlari amalga oşirgan va amalga oşirayotgan loyihalar."
       />
       <section className="sec fa-sec">
         <div className="wrap">
@@ -95,7 +93,7 @@ export function ProjectPage({
   const p = PROJECTS.find((x) => x.slug === slug)!
   return (
     <div className="fa">
-      <Head crumbs={crumbs} title={p.title} lead={p.lead} />
+      <Head crumbs={crumbs} title={p.title} />
       <ProjC p={p} listHref={listHref} />
     </div>
   )
@@ -111,7 +109,6 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
       <Head
         crumbs={crumbs}
         title="Tadbirlar va kalendar"
-        lead="Yaqinlaşayotgan tadbirlar va 2023-yildan buyon ötkazilgan tadbirlar arxivi."
       />
       <section className="sec fa-sec">
         <div className="wrap">
@@ -147,12 +144,12 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
             </div>
           ) : (
             <p className="fa-empty">
-              Hozirça eʼlon qilingan tadbir yöq. Yangiliklarni kanalimizda kuzatib boring.
+              Hozirça rejalaştirilgan tadbirlar eʼlon qilinmagan.
             </p>
           )}
           <p className="fa-note">
-            Tanlov, röyxatdan ötiş va boşqa eʼlonlar alohida —{' '}
-            <Link href={annHref}>Eʼlonlar sahifasida</Link>.
+            Tanlovlar va röyxatdan ötiş haqidagi xabarlar{' '}
+            <Link href={annHref}>“Eʼlonlar”</Link> sahifasida joylaştiriladi.
           </p>
           <h2 className="fa-h2">Tadbirlar arxivi</h2>
           <EventsList events={past} dirs={DIRECTIONS.map(({ slug, title }) => ({ slug, title }))} />
@@ -170,7 +167,6 @@ export function AnnouncePage({ crumbs }: { crumbs: ReactNode }) {
       <Head
         crumbs={crumbs}
         title="Eʼlonlar"
-        lead="Tanlovlar, röyxatdan ötiş, çellenjlar, sayohatlar va tadbir eʼlonlari bir joyda."
       />
       <section className="sec fa-sec">
         <div className="wrap">
@@ -189,7 +185,6 @@ export function ResultsPage({ crumbs }: { crumbs: ReactNode }) {
       <Head
         crumbs={crumbs}
         title="Natijalar va hisobotlar"
-        lead="Kengaş faoliyatining yillar kesimidagi asosiy natijalari."
       />
       <ResultsB />
     </div>

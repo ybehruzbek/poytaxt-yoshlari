@@ -66,10 +66,10 @@ const MON = [
   'dekabr',
 ]
 
-/** 2025-12-05 → 5-dekabr, 2025 */
+/** 2025-12-05 → 2025-yil 5-dekabr (withYear=false → 5-dekabr) */
 export function fmtDate(iso: string, withYear = true) {
   const [y, m, d] = iso.split('-').map(Number)
   if (!y || !m) return iso
   const base = d ? `${d}-${MON[m - 1]}` : MON[m - 1]
-  return withYear ? `${base}, ${y}` : base
+  return withYear ? `${y}-yil ${base}` : base
 }
