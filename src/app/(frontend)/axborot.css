@@ -15,7 +15,7 @@
 .ax-page .ax-off {
   display: none !important;
 }
-.ax button {
+.ax button:where(:not(.more-btn)) {
   font: inherit;
   color: inherit;
   background: none;
