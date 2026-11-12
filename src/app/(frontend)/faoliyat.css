@@ -870,8 +870,8 @@
 }
 .vys {
   display: grid;
-  grid-template-columns: 380px minmax(0, 1fr);
-  gap: 40px;
+  grid-template-columns: clamp(250px, 30%, 380px) minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 40px);
   align-items: start;
 }
 .vys-list {
@@ -952,11 +952,14 @@
 .vys-foot {
   order: 4;
 }
-.vys-ph img,
-.vys-ph img:first-child {
+.vys-ph img {
+  display: block;
+  width: 100%;
   height: 100%;
   min-height: 0;
-  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border-radius: var(--r-thumb);
 }
 .vys-ph img:first-child {
   grid-column: auto;
@@ -990,10 +993,23 @@
 
 /* ---------- moslaşuvçan ---------- */
 @media (max-width: 1100px) {
+  .vys-list button {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .vys-tl {
+    font-size: 14px;
+  }
+  .vys-ph {
+    height: 300px;
+  }
+}
+/* telefon: nomlar tepada gorizontal tasmada, qisqa nomlar bilan */
+@media (max-width: 760px) {
   .vys {
     grid-template-columns: 1fr;
   }
-  /* nomlar gorizontal tasmada, qisqa nomlar bilan */
   .vys-list {
     position: static;
     display: flex;
@@ -1018,9 +1034,6 @@
     font: 700 14px/1.3 var(--f-head);
     color: var(--navy);
     white-space: nowrap;
-  }
-  .vys-ph {
-    height: 300px;
   }
 }
 @media (max-width: 640px) {
