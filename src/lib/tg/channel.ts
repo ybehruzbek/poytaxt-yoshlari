@@ -30,7 +30,7 @@ const decode = (s: string) =>
 /** Bitta sahifa (≈20 post). `before` — şu raqamdan oldingi postlar */
 export async function fetchPage(before?: number): Promise<TgPost[]> {
   const url = `https://t.me/s/${CHANNEL}${before ? `?before=${before}` : ''}`
-  const res = await fetch(url, { headers: UA, cache: 'no-store' })
+  const res = await fetch(url, { headers: UA, cache: 'no-store', signal: AbortSignal.timeout(30_000) })
   if (!res.ok) throw new Error(`Telegram ${res.status}`)
   const html = await res.text()
   const out: TgPost[] = []

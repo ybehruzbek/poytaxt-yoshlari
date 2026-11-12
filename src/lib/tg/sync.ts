@@ -16,12 +16,50 @@ import { blocksToLexical, type Draft, postToDraft } from './transform'
 const curated = curatedJson as unknown as Record<string, Draft>
 const MAX_PHOTOS = 6
 
-async function upload(payload: Payload, url: string, alt: string, name: string): Promise<number | null> {
+/** Faqat Telegram suratlar serverlari (kanal sahifasidagi manzillar boşqa joyga olib bormasin) */
+const ALLOWED_HOST = /^(?:cdn\d*\.)?(?:telesco\.pe|cdn-telegram\.org)$/
+const MAX_BYTES = 15 * 1024 * 1024
+
+export function isTelegramCdn(u: string): boolean {
   try {
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' }, cache: 'no-store' })
-    if (!res.ok) return null
-    const buf = Buffer.from(await res.arrayBuffer())
-    const data = await sharp(buf).rotate().resize({ width: 1600, withoutEnlargement: true }).webp({ quality: 80 }).toBuffer()
+    const url = new URL(u)
+    return url.protocol === 'https:' && ALLOWED_HOST.test(url.hostname)
+  } catch {
+    return false
+  }
+}
+
+async function upload(payload: Payload, url: string, alt: string, name: string): Promise<number | null> {
+  if (!isTelegramCdn(url)) return null
+  try {
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      cache: 'no-store',
+      redirect: 'error',
+      signal: AbortSignal.timeout(20_000),
+    })
+    if (!res.ok || !res.body) return null
+    if (Number(res.headers.get('content-length') || 0) > MAX_BYTES) return null
+    // hajm çegarasi bilan öqiş
+    const chunks: Uint8Array[] = []
+    let size = 0
+    const reader = res.body.getReader()
+    for (;;) {
+      const { done, value } = await reader.read()
+      if (done) break
+      size += value.byteLength
+      if (size > MAX_BYTES) {
+        await reader.cancel()
+        return null
+      }
+      chunks.push(value)
+    }
+    const buf = Buffer.concat(chunks)
+    const data = await sharp(buf, { limitInputPixels: 60_000_000, failOn: 'error' })
+      .rotate()
+      .resize({ width: 1600, withoutEnlargement: true })
+      .webp({ quality: 80 })
+      .toBuffer()
     const doc = await payload.create({
       collection: 'media',
       data: { alt: alt.slice(0, 200) },
