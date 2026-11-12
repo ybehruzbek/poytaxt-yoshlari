@@ -829,7 +829,7 @@ export const PARTNERS: Partner[] = [
     logo: '/img/hamkorlar/yoshlar-tv.webp',
     site: 'https://yoshlartv.uz',
     domain: 'yoshlartv.uz',
-    what: 'Ittifoq muassisligidagi telekanal bilan yoşlar hayoti, Ittifoq loyihalari va tadbirlarini yoritiş, yoşlarga möljallangan körsatuvlar tayyorlaş yönalişlarida hamkorlik yölga qöyilgan.',
+    what: 'Yoşlar hayoti, Ittifoq loyihalari va tadbirlarini yoritiş, yoşlarga möljallangan körsatuvlar tayyorlaş yönalişlarida hamkorlik yölga qöyilgan.',
   },
   {
     k: 'my5',
@@ -837,7 +837,7 @@ export const PARTNERS: Partner[] = [
     group: 'oav',
     dirs: ['axborot', 'madaniyat'],
     logo: '/img/hamkorlar/my5.webp',
-    what: 'Ittifoq muassisligidagi telekanal bilan yoşlarga oid ijtimoiy loyihalar, maʼrifiy va motivatsion körsatuvlarni efirga uzatiş yönalişlarida hamkorlik qilinadi.',
+    what: 'Yoşlarga oid ijtimoiy loyihalar va maʼrifiy körsatuvlarni efirga uzatiş yönalişlarida hamkorlik qilinadi.',
   },
   {
     k: 'yoshlar-ovozi',

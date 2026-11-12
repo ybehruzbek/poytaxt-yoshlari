@@ -35,12 +35,6 @@ export function HamkorlarPage({ crumbs }: { crumbs: ReactNode }) {
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Hamkorlar</h1>
-          <p className="pg-lead">
-            Özbekiston yoşlar ittifoqi Ustavda belgilangan maqsad va vazifalardan kelib çiqib,
-            yoşlarga oid davlat siyosati sohasida faoliyat yurituvçi vazirlik va idoralar, davlat
-            korxonalari, ilmiy muassasalar, nodavlat notijorat taşkilotlar hamda xorijiy yoşlar
-            taşkilotlari bilan hamkorlik qiladi.
-          </p>
           <ul className="pt-stats">
             <li>
               <b>{DOMESTIC.length}</b>

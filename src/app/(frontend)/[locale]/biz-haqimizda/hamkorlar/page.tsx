@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/config'
 
 export const metadata: Metadata = {
   title: 'Hamkorlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Kengaş yoşlar bilan işlaşda birgalikda faoliyat yurituvçi vazirlik, idora va taşkilotlar.',
+  description: 'Özbekiston yoşlar ittifoqining Özbekistondagi va xalqaro hamkorlari: vazirlik va idoralar, davlat korxonalari, nodavlat notijorat taşkilotlar, OAV va xorijiy yoşlar taşkilotlari.',
 }
 
 /** “Hamkorlar” sahifasi (Biz haqimizda menyusi) */
