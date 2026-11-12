@@ -3,51 +3,36 @@
 import { useLayoutEffect } from 'react'
 
 /**
- * Ički sahifalar uçun umumiy skroll animatsiyasi (Apple uslubi). Sahifa kodiga tegmaydi — elementlarni
- * mavjud teglar va sinflar orqali topadi:
- * – sarlavhalar va izohlar (h1/h2, .sec-head, kiçik matnlar) xiradan aniqlaşib köteriladi;
- * – bir xil elementlardan iborat töplamlar (ro'yxat, kartalar, raqamlar) navbat bilan çiqadi;
- * – `words` sarlavhalari skroll bilan söz-söz yorişadi; `counters` raqamlari 0 dan sanaladi;
- * – `images` suratlari ramkadan oçilib, ičdan kiçrayadi.
- * Har element ekranga kirganda alohida çiqadi; tez aylantirib ötib ketilganlari ham albatta oçiladi.
+ * Saytning yagona skroll animatsiyasi (uslublar: reveal.css). Sahifa kodiga tegmaydi — elementlarni
+ * mavjud teglar va sinflar orqali topadi va faqat sinf / CSS özgaruvçilarini qöyadi (DOM tuzilişi özgarmaydi):
+ * – sarlavha, matn, karta, ro'yxat bandi — fade-up (16px, 600ms), navbat 50ms, eng köpi 6 ta;
+ * – `images` suratlari — img-reveal (800ms);
+ * – `counters` raqamlari 0 dan sanaladi (1.2s);
+ * – `.split-words` (SplitWords) sarlavhalari skroll bilan söz-söz yorişadi.
+ * Birinçi ekrandagi mazmun heç qaçon yaşirilmaydi; “harakatni kamaytiriş” va öqiş rejimida hammasi darhol körinadi.
  */
-type Props = {
+export type RevealOpts = {
   root: string
-  words?: string
+  /** aniq elementlar (berilmasa — avtomatik topiladi) */
+  items?: string
   counters?: string
   images?: string
   skip?: string
-  /** qöşimça oçiladigan elementlar (sarlavha va töplamlardan taşqari) */
-  extra?: string
-  /** h1/h2 sarlavhalar effekti (masalan, mask — pastdan, wipe — çapdan oçiladi) */
-  head?: Fx
-  /** töplam (kartalar, ro'yxat) elementlari effekti */
-  grid?: Fx
-  /** suratlar effekti: clip (sukut), curtain — pastdan parda, circle — doiradan */
-  img?: Fx
-  /** aniq elementlar uçun effekt: [selektor, effekt] — birinçi mos kelgani olinadi */
-  fx?: ReadonlyArray<readonly [string, Fx]>
 }
 
-/** Effektlar löğati (reveal.css dagi .fx-* bilan) */
-export type Fx =
-  | 'up'
-  | 'pop'
-  | 'drop'
-  | 'side'
-  | 'slide'
-  | 'swing'
-  | 'zoom'
-  | 'skew'
-  | 'paper'
-  | 'tilt'
-  | 'flip'
-  | 'mask'
-  | 'wipe'
-  | 'curtain'
-  | 'circle'
+const STAGGER_MS = 50
+const STAGGER_MAX = 5 // 6 ta elementdan keyin navbat ösmaydi
+const FADE_MS = 600
+const IMG_MS = 800
+const COUNT_MS = 1200
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
+
+/** “Harakatni kamaytiriş” yoki A11yPanel öqiş rejimi yoqilganmi */
+export const motionOff = () =>
+  matchMedia('(prefers-reduced-motion: reduce)').matches ||
+  document.documentElement.hasAttribute('data-a11y-read')
+
 const SKIP_TAGS = new Set([
   'P',
   'H2',
@@ -64,202 +49,205 @@ const SKIP_TAGS = new Set([
   'SMALL',
 ])
 
-function splitWords(root: HTMLElement) {
-  if (root.dataset.rvSplit) return
-  root.dataset.rvSplit = '1'
-  let w = 0
-  const walk = (node: Node) => {
-    ;[...node.childNodes].forEach((ch) => {
-      if (ch.nodeType === 3) {
-        const frag = document.createDocumentFragment()
-        ;(ch.textContent || '').split(/(\s+)/).forEach((part) => {
-          if (!part) return
-          if (/^\s+$/.test(part)) frag.append(part)
-          else {
-            const s = document.createElement('span')
-            s.className = 'rv-w'
-            s.style.setProperty('--w', String(w++))
-            s.textContent = part
-            frag.append(s)
-          }
-        })
-        ch.replaceWith(frag)
-      } else walk(ch)
+/** Avtomatik topiş: töplamlar (kamida 3 ta bir xil teg-farzand), sarlavhalar va matnlar */
+function autoItems(host: HTMLElement, add: (e: HTMLElement) => void) {
+  host.querySelectorAll<HTMLElement>('*').forEach((e) => {
+    const kids = [...e.children] as HTMLElement[]
+    if (kids.length < 3 || SKIP_TAGS.has(e.tagName) || e.parentElement?.closest('li')) return
+    if (!kids.every((c) => c.tagName === kids[0].tagName)) return
+    // butun bölimlar yoki variant örama-lari töplam emas
+    if (kids[0].tagName === 'SECTION' || kids.some((c) => c.classList.contains('vx'))) return
+    kids.forEach(add)
+  })
+  host
+    .querySelectorAll<HTMLElement>(
+      'h1, h2, .sec-head, h1 ~ p, h2 ~ p, h1 ~ div, .btn, blockquote, figure',
+    )
+    .forEach((e) => {
+      if (e.closest('li, article') || e.querySelector('.split-words')) return
+      add(e)
     })
-  }
-  walk(root)
-  root.style.setProperty('--wn', String(w))
 }
 
-function countUp(el: HTMLElement) {
-  if (el.dataset.rvCounted) return
-  el.dataset.rvCounted = '1'
-  const orig = el.textContent || ''
-  const m = orig.match(/^(\D*)(\d[\d\s]*)(.*)$/)
+/** Raqamni 0 dan sanaydi — faqat mavjud matn tugunining qiymati özgaradi (React tugunlari joyida qoladi) */
+function countUp(el: HTMLElement, rafs: Set<number>) {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
+  let node: Text | null = null
+  while (walker.nextNode()) {
+    const t = walker.currentNode as Text
+    if (/\d/.test(t.nodeValue || '')) {
+      node = t
+      break
+    }
+  }
+  if (!node) return
+  const text = node
+  const orig = text.nodeValue || ''
+  const m = orig.match(/^(\D*)(\d[\d\s ]*)(.*)$/s)
   if (!m || /^[.,]\d/.test(m[3])) return // kasr sonlar (1,87 mln) sanalmaydi
-  const to = Number(m[2].replace(/\s/g, ''))
-  if (!to || to > 1e7) return
+  const digits = m[2].replace(/[\s ]/g, '')
+  const to = Number(digits)
+  // yillar (2017) sanalmaydi
+  if (!to || to > 1e7 || (/^(19|20)\d\d$/.test(digits) && !m[3].trim())) return
+  const tail = m[2].match(/[\s ]+$/)?.[0] ?? ''
+  const grouped = /\d[\s ]\d/.test(m[2])
+  const fmt = (n: number) => (grouped ? n.toLocaleString('ru-RU') : String(n))
   const t0 = performance.now()
-  const fmt = (n: number) => (/\s/.test(m[2]) ? n.toLocaleString('ru-RU') : String(n))
   const tick = (t: number) => {
-    const k = clamp((t - t0) / 1600)
-    el.textContent = `${m[1]}${fmt(Math.round(to * (1 - Math.pow(1 - k, 4))))}${m[3]}`
-    if (k < 1) requestAnimationFrame(tick)
-    else el.textContent = orig
+    const k = clamp((t - t0) / COUNT_MS)
+    if (k < 1) {
+      text.nodeValue = `${m[1]}${fmt(Math.round(to * (1 - Math.pow(1 - k, 4))))}${tail}${m[3]}`
+      rafs.add(requestAnimationFrame(tick))
+    } else text.nodeValue = orig
   }
-  requestAnimationFrame(tick)
+  text.nodeValue = `${m[1]}0${tail}${m[3]}`
+  rafs.add(requestAnimationFrame(tick))
+  return () => {
+    text.nodeValue = orig
+  }
 }
 
-export function RevealMotion({
-  root,
-  words,
-  counters,
-  images,
-  skip,
-  extra,
-  head,
-  grid,
-  img,
-  fx,
-}: Props) {
-  // useLayoutEffect: sahifalar orasida ötganda ham yangi mazmun çizilişidan oldin tayyorlanadi
-  useLayoutEffect(() => {
-    const host = document.querySelector<HTMLElement>(root)
-    const html = document.documentElement
-    if (!host || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      html.classList.add('motion-on')
-      return
-    }
-    const skipped = (e: Element) => !!skip && !!e.closest(skip)
-    const items = new Set<HTMLElement>()
-    const inGrid = new Set<HTMLElement>()
-    const add = (e: HTMLElement, kind = '') => {
-      if (items.has(e) || skipped(e) || e.closest('.rv')) return
-      e.classList.add('rv')
-      if (kind) e.classList.add(kind)
-      items.add(e)
-    }
+/** Birinçi yuklaniş ötdimi (keyingi işga tuşişlar — sahifalar orasida ötiş) */
+let navigated = false
 
-    // 1) suratlar
-    if (images) host.querySelectorAll<HTMLElement>(images).forEach((e) => add(e, 'rv-img'))
-    // 2) söz-söz yorişadigan sarlavhalar (öz holida turadi, faqat sözlar yorişadi)
-    const heads = words ? [...host.querySelectorAll<HTMLElement>(words)] : []
-    heads.forEach((h) => {
-      splitWords(h)
-      items.add(h)
-      h.classList.add('rv-words')
-    })
-    // 3) töplamlar: kamida 3 ta bir xil teg-farzandli konteynerlar (ičma-ič ro'yxatlar emas)
-    host.querySelectorAll<HTMLElement>('*').forEach((e) => {
-      const kids = [...e.children] as HTMLElement[]
-      if (kids.length < 3 || SKIP_TAGS.has(e.tagName) || e.parentElement?.closest('li')) return
-      if (!kids.every((c) => c.tagName === kids[0].tagName)) return
-      // butun bölimlar yoki variant örama-lari töplam emas — ularning ičidagi elementlar alohida oçiladi
-      if (kids[0].tagName === 'SECTION' || kids.some((c) => c.classList.contains('vx'))) return
-      kids.forEach((c) => {
-        add(c)
-        inGrid.add(c)
-      })
-    })
-    // 4) qöşimça elementlar
-    if (extra) host.querySelectorAll<HTMLElement>(extra).forEach((e) => add(e))
-    // 5) sarlavhalar va qolgan matnlar
-    host
-      .querySelectorAll<HTMLElement>(
-        'h1, h2, .sec-head, h1 ~ p, h2 ~ p, h1 ~ div, .btn, blockquote, figure',
-      )
-      .forEach((e) => {
-        if (e.closest('li, article, .rv-words')) return
-        add(e)
-      })
+/** Animatsiyani işga tuşiradi; töxtatiş funksiyasini qaytaradi */
+export function startReveal(o: RevealOpts): () => void {
+  const html = document.documentElement
+  const host = document.querySelector<HTMLElement>(o.root)
+  if (!host || motionOff()) return () => {}
 
-    // effektlar: aniq selektor > surat > sarlavha > töplam
-    const fxOf = new Map<HTMLElement, string>()
+  const vh0 = innerHeight
+  // Birinçi ekrandan pastdami. Sahifa yuklanişida (mazmun SSR dan allaqaçon çizilgan) — sahifa boşidan
+  // ham, hozirgi körinişdan ham pastda bölsa; sahifalar orasida ötganda (yangi mazmun hali çizilmagan,
+  // skroll esa eski sahifaniki) — faqat sahifa boşiga nisbatan.
+  const nav = navigated
+  const below = (e: Element) => {
+    const r = e.getBoundingClientRect()
+    return r.height > 0 && r.top + scrollY > vh0 && (nav || r.top > vh0)
+  }
+  if (!navigated) setTimeout(() => (navigated = true), 0)
+  const skipped = (e: Element) => !!o.skip && !!e.closest(o.skip)
+
+  const items = new Set<HTMLElement>()
+  const add = (e: HTMLElement, img = false) => {
+    if (items.has(e) || skipped(e) || e.closest('.rv') || !below(e)) return
+    e.classList.add('rv')
+    if (img) e.classList.add('rv-img')
+    items.add(e)
+  }
+  if (o.images) host.querySelectorAll<HTMLElement>(o.images).forEach((e) => add(e, true))
+  if (o.items) host.querySelectorAll<HTMLElement>(o.items).forEach((e) => add(e))
+  else autoItems(host, (e) => add(e))
+
+  const heads = [...host.querySelectorAll<HTMLElement>('.split-words')].filter((h) => !skipped(h))
+  const nums = o.counters
+    ? [...host.querySelectorAll<HTMLElement>(o.counters)].filter((n) => !skipped(n) && below(n))
+    : []
+
+  html.classList.add('rv-ready')
+
+  let pending = [...items]
+  let pendingNums = nums
+  const timers: number[] = []
+  const rafs = new Set<number>()
+  const restores: Array<() => void> = []
+
+  let raf = 0
+  const update = () => {
+    raf = 0
+    const vh = innerHeight
+    heads.forEach((h) =>
+      h.style.setProperty(
+        '--t',
+        clamp((vh * 0.9 - h.getBoundingClientRect().top) / (vh * 0.5)).toFixed(4),
+      ),
+    )
+    // sahifa oxiriga yetilgan bölsa — qolganlarning hammasi oçiladi
+    const end = scrollY + vh >= document.documentElement.scrollHeight - 4
+    const inView = (e: Element) => end || e.getBoundingClientRect().top < vh * 0.92
+    if (pendingNums.length)
+      pendingNums = pendingNums.filter((n) => {
+        if (!inView(n)) return true
+        const r = countUp(n, rafs)
+        if (r) restores.push(r)
+        return false
+      })
+    if (!pending.length) return
+    const show: Array<{ el: HTMLElement; r: DOMRect }> = []
+    pending = pending.filter((el) => {
+      if (!inView(el)) return true
+      show.push({ el, r: el.getBoundingClientRect() })
+      return false
+    })
+    show
+      .sort((x, y) => x.r.top - y.r.top || x.r.left - y.r.left)
+      .forEach(({ el, r }, i) => {
+        // ötib ketilganlari kutmasdan, ekrandagilari navbat bilan
+        const d = r.bottom < 0 ? 0 : Math.min(i, STAGGER_MAX) * STAGGER_MS
+        el.style.setProperty('--d', `${d}ms`)
+        el.classList.add('rv-in')
+        // çiqib bölgaç sinflar olinadi — elementning öz hover/transition uslublari qaytadi
+        const ms = el.classList.contains('rv-img') ? IMG_MS : FADE_MS
+        timers.push(
+          window.setTimeout(() => {
+            el.classList.remove('rv', 'rv-in', 'rv-img')
+            el.style.removeProperty('--d')
+            items.delete(el)
+          }, d + ms + 80),
+        )
+      })
+  }
+  const onScroll = () => {
+    if (!raf) raf = requestAnimationFrame(update)
+  }
+
+  let stopped = false
+  const stop = () => {
+    if (stopped) return
+    stopped = true
+    cancelAnimationFrame(raf)
+    rafs.forEach(cancelAnimationFrame)
+    restores.forEach((r) => r())
+    timers.forEach(clearTimeout)
+    removeEventListener('scroll', onScroll)
+    removeEventListener('resize', onScroll)
+    ro.disconnect()
+    mo.disconnect()
+    mq.removeEventListener('change', onPref)
     items.forEach((e) => {
-      if (e.classList.contains('rv-words')) return
-      const hit = fx?.find(([sel]) => e.matches(sel))?.[1]
-      const name =
-        hit ??
-        (e.classList.contains('rv-img')
-          ? img
-          : /^H[12]$/.test(e.tagName) || e.classList.contains('sec-head')
-            ? head
-            : inGrid.has(e)
-              ? grid
-              : undefined)
-      if (!name || name === 'up') return
-      // juda baland elementlarda (ekranning 3/4 qismidan katta) kuçli harakat ğalati körinadi — oddiy köteriliş qoladi
-      if (!/^(mask|wipe|curtain|circle|zoom)$/.test(name) && e.offsetHeight > innerHeight * 0.75)
-        return
-      e.classList.add(`fx-${name}`)
-      fxOf.set(e, `fx-${name}`)
+      e.classList.remove('rv', 'rv-in', 'rv-img')
+      e.style.removeProperty('--d')
     })
+    heads.forEach((h) => h.style.removeProperty('--t'))
+    html.classList.remove('rv-ready')
+  }
+  // öqiş rejimi yoki “harakatni kamaytiriş” keyin yoqilsa — hammasi darhol körinadi
+  const onPref = () => motionOff() && stop()
+  const mq = matchMedia('(prefers-reduced-motion: reduce)')
+  mq.addEventListener('change', onPref)
+  const mo = new MutationObserver(onPref)
+  mo.observe(html, { attributes: true, attributeFilter: ['data-a11y-read'] })
+  // rasm yuklanib sahifa balandligi özgarsa ham tekşiriladi
+  const ro = new ResizeObserver(onScroll)
+  ro.observe(document.body)
 
-    html.classList.add('rv-ready')
-
-    const nums = counters ? [...host.querySelectorAll<HTMLElement>(counters)] : []
-    let pending = [...items].filter((e) => !e.classList.contains('rv-words'))
-    const timers: number[] = []
-
-    // Har kadrda: ekranga kirgan (yoki allaqaçon ötib ketilgan) elementlar navbat bilan oçiladi
-    let raf = 0
-    const update = () => {
-      raf = 0
-      const vh = innerHeight
-      heads.forEach((h) =>
-        h.style.setProperty(
-          '--t',
-          clamp((vh * 0.9 - h.getBoundingClientRect().top) / (vh * 0.5)).toFixed(4),
-        ),
-      )
-      if (!pending.length) return
-      const show: Array<{ el: HTMLElement; r: DOMRect }> = []
-      pending = pending.filter((el) => {
-        const r = el.getBoundingClientRect()
-        if (r.top < vh * 0.92) {
-          show.push({ el, r })
-          return false
-        }
-        return true
-      })
-      show
-        .sort((x, y) => x.r.top - y.r.top || x.r.left - y.r.left)
-        .forEach(({ el, r }, i) => {
-          // ötib ketilganlari kutmasdan, ekrandagilari navbat bilan
-          const d = r.bottom < 0 ? 0 : Math.min(i, 8) * 70
-          el.style.setProperty('--d', `${d}ms`)
-          el.classList.add('rv-in')
-          // çiqib bölgaç animatsiya sinflari olinadi — elementning öz hover/transition uslublari qaytadi
-          timers.push(
-            window.setTimeout(
-              () => el.classList.remove('rv', 'rv-in', 'rv-img', fxOf.get(el) ?? 'rv'),
-              d + 1900,
-            ),
-          )
-          nums.forEach((n) => (n === el || el.contains(n)) && countUp(n))
-        })
-    }
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update)
-    }
-    // ekrandagi elementlar shu zahoti (çizilişdan oldin) .rv-in oladi — keyframe animatsiya birinçi kadrdan öynaydi
+  try {
     update()
-    html.classList.add('motion-on')
-    addEventListener('scroll', onScroll, { passive: true })
-    addEventListener('resize', onScroll)
+  } catch (err) {
+    stop()
+    throw err
+  }
+  addEventListener('scroll', onScroll, { passive: true })
+  addEventListener('resize', onScroll)
+  return stop
+}
 
-    return () => {
-      cancelAnimationFrame(raf)
-      timers.forEach(clearTimeout)
-      removeEventListener('scroll', onScroll)
-      removeEventListener('resize', onScroll)
-      items.forEach((e) =>
-        e.classList.remove('rv', 'rv-in', 'rv-img', 'rv-words', fxOf.get(e) ?? 'rv'),
-      )
-      html.classList.remove('rv-ready')
-    }
-    // fx — PAGES dagi doimiy massiv, havolasi özgarmaydi
-  }, [root, words, counters, images, skip, extra, head, grid, img, fx])
-
+/** Içki sahifalar uçun (PageMotion orqali) */
+export function RevealMotion({ root, items, counters, images, skip }: RevealOpts) {
+  // useLayoutEffect: yangi mazmun çizilişidan oldin tayyorlanadi
+  useLayoutEffect(
+    () => startReveal({ root, items, counters, images, skip }),
+    [root, items, counters, images, skip],
+  )
   return null
 }

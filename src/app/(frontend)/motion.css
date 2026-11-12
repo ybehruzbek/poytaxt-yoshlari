@@ -1,183 +1,20 @@
 /* =====================================================================
-   Bosh sahifa animatsiyalari (Apple uslubi) — HomeMotion.tsx bilan işlaydi.
-   [data-m=…] bölim, .m-in körinişga kirgan, --x bölimdan çiqiş progressi,
-   --t sarlavhaning skroll progressi, --i/--j element tartibi. Faqat html.m-ready
-   da (JS bor va “harakatni kamaytiriş” öçiq bölsa) işlaydi.
+   Bosh sahifa: boş ekran paralaksi (HomeMotion.tsx bilan). --x — boş ekrandan
+   çiqiş progressi (0→1). Faqat html.m-ready da (JS bor, “harakatni kamaytiriş”
+   va öqiş rejimi öçiq). Bölimlarning paydo böliş animatsiyasi — reveal.css.
    ===================================================================== */
-html.m-ready {
-  --m-ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --m-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-@keyframes m-float {
-  50% {
-    translate: 0 -14px;
-  }
-}
-/* ---------------- Boş ekran ---------------- */
-/* Keynote kirişi: qatorlar xiradan aniqlaşib köteriladi, kollaj bölaklari prujina bilan çiqadi */
-html.m-ready [data-m='m-hero'] .m-i {
-  transition:
-    opacity 1s var(--m-ease),
-    translate 1.1s var(--m-ease),
-    filter 1s var(--m-ease),
-    scale 0.9s var(--m-spring);
-  transition-delay: calc(var(--i) * 110ms);
-}
-html.m-ready [data-m='m-hero'] .collage > .m-i {
-  transition-delay: calc(350ms + var(--j) * 55ms);
-}
-html.m-ready [data-m='m-hero']:not(.m-in) .hero-slogan > span {
-  opacity: 0;
-  translate: 0 0.45em;
-  filter: blur(14px);
-}
-html.m-ready [data-m='m-hero']:not(.m-in) :is(.lead, .hero-actions) {
-  opacity: 0;
-  translate: 0 28px;
-}
-html.m-ready [data-m='m-hero']:not(.m-in) .collage > * {
-  opacity: 0;
-  scale: 0.3;
-}
-html.m-ready [data-m='m-hero'] .hero-text {
+html.m-ready:not([data-a11y-read]) .hero .hero-text {
   opacity: calc(1 - var(--x, 0) * 1.8);
   translate: 0 calc(var(--x, 0) * -120px);
 }
-html.m-ready [data-m='m-hero'] .collage-fit {
+html.m-ready:not([data-a11y-read]) .hero .collage-fit {
   translate: 0 calc(var(--x, 0) * 90px);
   scale: calc(1 - var(--x, 0) * 0.12);
 }
-/* ---------------- Yangiliklar ---------------- */
-/* Yumşoq köteriliş */
-html.m-ready [data-m='m-news'] .m-i {
-  transition:
-    opacity 1s var(--m-ease),
-    translate 1.1s var(--m-ease),
-    filter 1s var(--m-ease);
-  transition-delay: calc(var(--i) * 90ms);
-}
-html.m-ready [data-m='m-news']:not(.m-in) .m-i {
-  opacity: 0;
-  translate: 0 56px;
-  filter: blur(10px);
-}
-/* ---------------- Tadbirlar ---------------- */
-/* Navbat bilan */
-html.m-ready [data-m='m-ev'] .m-i {
-  transition:
-    opacity 0.9s var(--m-ease),
-    translate 1.1s var(--m-ease),
-    scale 1.1s var(--m-ease);
-  transition-delay: calc(var(--i) * 100ms);
-}
-html.m-ready [data-m='m-ev']:not(.m-in) .m-i {
-  opacity: 0;
-  translate: 0 70px;
-  scale: 0.94;
-}
-/* ---------------- Imkoniyatlar ---------------- */
-/* Bento: kataklar kiçikdan çiqadi */
-html.m-ready [data-m='m-opps'] .m-i {
-  transition:
-    opacity 0.9s var(--m-ease),
-    scale 1.2s var(--m-ease),
-    translate 1.2s var(--m-ease);
-  transition-delay: calc(var(--i) * 110ms);
-}
-html.m-ready [data-m='m-opps']:not(.m-in) .m-i {
-  opacity: 0;
-  scale: 0.86;
-}
-html.m-ready [data-m='m-opps']:not(.m-in) .opps-title {
-  scale: 1;
-  translate: 0 40px;
-}
-/* ---------------- Biz haqimizda ---------------- */
-/* --t: sarlavhaning öz progressi; har söz 3 söz kengligidagi yumşoq tölqin bilan yorişadi —
-   töq qism ham, oç (mute) qism ham xira holatdan öz rangiga çiqadi */
-html.m-ready [data-m='m-about'] .m-w {
-  opacity: clamp(0.12, calc((var(--t, 1) * (var(--wn) + 3) - var(--w)) / 3), 1);
-  transition: opacity 0.3s linear;
-}
-html.m-ready [data-m='m-about'] :is(.about-art > *, .ach > div, .about-row .body4) {
-  transition:
-    opacity 1s var(--m-ease),
-    translate 1.1s var(--m-ease);
-  transition-delay: calc(var(--j) * 120ms + 200ms);
-}
-html.m-ready [data-m='m-about']:not(.m-in) :is(.about-art > *, .ach > div, .about-row .body4) {
-  opacity: 0;
-  translate: 0 40px;
-}
-/* ---------------- Nega qöşiliş ---------------- */
-/* Ketma-ket belgilar: kollaj prujina bilan, bandlar çapdan, belgilar “pop” */
-html.m-ready [data-m='m-ben'] .m-i,
-html.m-ready [data-m='m-ben'] .values li i {
-  transition:
-    opacity 0.8s var(--m-ease),
-    translate 1s var(--m-ease),
-    scale 0.9s var(--m-spring),
-    rotate 0.9s var(--m-spring);
-  transition-delay: calc(var(--i) * 90ms);
-}
-html.m-ready [data-m='m-ben'] .values li i {
-  transition-delay: calc(var(--i) * 90ms + 250ms);
-}
-html.m-ready [data-m='m-ben']:not(.m-in) .ui > * {
-  opacity: 0;
-  scale: 0.3;
-}
-html.m-ready [data-m='m-ben']:not(.m-in) :is(h2, .body4, .values li) {
-  opacity: 0;
-  translate: -50px 0;
-}
-html.m-ready [data-m='m-ben']:not(.m-in) .values li i {
-  scale: 0;
-  rotate: -120deg;
-}
-/* ---------------- Murojaat ---------------- */
-/* Yumşoq köteriliş */
-html.m-ready [data-m='m-cta'] .m-i {
-  transition:
-    opacity 1s var(--m-ease),
-    translate 1.1s var(--m-ease);
-  transition-delay: calc(var(--i) * 90ms);
-}
-html.m-ready [data-m='m-cta']:not(.m-in) .m-i {
-  opacity: 0;
-  translate: 0 44px;
-}
-/* ---------------- Ijtimoiy tarmoqlar ---------------- */
-/* Suzib turadi: xiradan çiqadi, keyin yengil tebranadi */
-html.m-ready [data-m='m-sp'] .m-i {
-  transition:
-    opacity 1s var(--m-ease),
-    scale 1.2s var(--m-ease),
-    filter 1s var(--m-ease);
-  transition-delay: calc(var(--i) * 110ms);
-}
-html.m-ready [data-m='m-sp']:not(.m-in) .m-i {
-  opacity: 0;
-  scale: 0.85;
-  filter: blur(10px);
-}
-html.m-ready [data-m='m-sp'].m-in .sp-phone {
-  animation: m-float 6s ease-in-out infinite;
-  animation-delay: calc(var(--j) * -1.5s);
-}
-
-/* Birinçi çiziliş: animatsiya tayyor bölguncha (<html> da .motion-on yöq) mazmun yaşirin —
-   şunda birinçi ekrandagi elementlar ham animatsiya bilan çiqadi. RevealMotion / HomeMotion
-   elementlarni boşlanğiç holatga keltirgaç .motion-on qöyadi. “Harakatni kamaytiriş” yoqilgan
-   bölsa yaşirilmaydi; JS işlamasa yoki kesa — 3 soniyada baribir körinadi. */
-@media (prefers-reduced-motion: no-preference) {
-  html:not(.motion-on) main {
-    opacity: 0;
-    animation: motion-boot-fail 0s 3s forwards;
-  }
-}
-@keyframes motion-boot-fail {
-  to {
-    opacity: 1;
+@media (prefers-reduced-motion: reduce) {
+  .hero :is(.hero-text, .collage-fit) {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
   }
 }
