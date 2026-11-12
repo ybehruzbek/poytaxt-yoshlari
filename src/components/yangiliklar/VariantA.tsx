@@ -1,77 +1,52 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
 
-import { More } from '@/components/site/MoreBtn'
+import { MoreList } from '@/components/site/MoreToggle'
 
 import type { YnItem } from './data'
-import { Chip, Img, When } from './YnShared'
+import { Chip, Day, Img, Read, Rubrics, When, byDay, useRubric } from './YnShared'
 
 /** asosiy + ikkinçi darajali yangiliklar soni */
 const MAIN = 7
-const STEP = 6
 /** öngdagi lentada nečta yangilik */
 const FEED = 12
 
 /**
- * A — Daryo.uz uslubi (portal boşi):
- *  - tepada rubrikalar (turkum böyiça saralaş, har birida son);
- *  - “Asosiy yangiliklar”: keng rasmli bitta katta yangilik va uning ostida 6 ta ikkinçi darajali sarlavha;
- *  - öngda “Sönggi yangiliklar” lentasi: kunlar böyiça guruhlangan, har qatorda vaqt va turkum rangi;
- *  - qolgan yangiliklar pastda, “Köproq körsatiş” bilan oçiladi.
- * Körişlar soni körsatilmaydi (bazada yöq).
+ * A1 — Daryo.uz uslubi, ixçam kartalar:
+ *  - tepada rubrikalar (son bilan);
+ *  - katta asosiy yangilik (rasm + matn + “Öqiş”);
+ *  - 6 ta ikkinçi darajali yangilik — kiçik rasmli ixçam kartalar, har birida “Öqiş”;
+ *  - öngda “Sönggi yangiliklar”: kunlar böyiça guruhlangan sarlavhalar (vaqtsiz);
+ *  - pastda qolgan yangiliklar 3 ustunli kartalarda, “Köproq körsatiş” bilan.
  */
 export function VariantA({ items, L }: { items: YnItem[]; L: string }) {
-  const [cat, setCat] = useState<'all' | YnItem['category']>('all')
-  const [shown, setShown] = useState(STEP)
+  const { cat, setCat, list } = useRubric(items)
   const href = (it: YnItem) => `${L}/${it.slug}`
-
-  const cats = [...new Map(items.map((it) => [it.category, it.categoryLabel])).entries()]
-  const list = cat === 'all' ? items : items.filter((it) => it.category === cat)
   const [lead, ...rest] = list
   const second = rest.slice(0, MAIN - 1)
   const more = rest.slice(MAIN - 1)
 
-  const feed = items.slice(0, FEED)
-  const days = [...new Set(feed.map((it) => it.dayKey))]
-
-  const pick = (k: typeof cat) => {
-    setCat(k)
-    setShown(STEP)
-  }
-
   return (
-    <section className="sec yn-a" aria-label="Yangiliklar">
+    <section className="sec yn-a yn-a1" aria-label="Yangiliklar">
       <div className="wrap yn-a-grid">
         <div className="yn-a-main">
-          <div className="yn-a-rub" role="group" aria-label="Rubrikalar">
-            <button type="button" aria-pressed={cat === 'all'} onClick={() => pick('all')}>
-              Barçasi <span>{items.length}</span>
-            </button>
-            {cats.map(([k, label]) => (
-              <button key={k} type="button" aria-pressed={cat === k} onClick={() => pick(k)}>
-                {label} <span>{items.filter((it) => it.category === k).length}</span>
-              </button>
-            ))}
-          </div>
+          <Rubrics items={items} cat={cat} onPick={setCat} />
 
           {lead && (
             <>
               <h2 className="yn-kicker">{cat === 'all' ? 'Asosiy yangiliklar' : lead.categoryLabel}</h2>
-              <article className="yn-a-lead">
+              <article className="yn-a1-lead">
                 <Link href={href(lead)}>
                   <Img it={lead} />
-                  <div className="yn-a-lead-bd">
+                  <div className="yn-a1-lead-bd">
                     <div className="yn-meta">
                       <Chip it={lead} />
                       <When it={lead} />
                     </div>
                     <h3>{lead.title}</h3>
                     <p>{lead.excerpt}</p>
-                    <span className="more-btn">
-                      <More>Öqiş</More>
-                    </span>
+                    <Read />
                   </div>
                 </Link>
               </article>
@@ -79,18 +54,19 @@ export function VariantA({ items, L }: { items: YnItem[]; L: string }) {
           )}
 
           {second.length > 0 && (
-            <ul className="yn-a-second">
+            <ul className="yn-a1-second">
               {second.map((it) => (
                 <li key={it.id}>
                   <article>
                     <Link href={href(it)}>
                       <Img it={it} />
-                      <div>
-                        <h3>{it.title}</h3>
+                      <div className="yn-a1-second-bd">
                         <div className="yn-meta">
                           <span className="yn-cat">{it.categoryLabel}</span>
                           <When it={it} />
                         </div>
+                        <h3>{it.title}</h3>
+                        <Read />
                       </div>
                     </Link>
                   </article>
@@ -102,8 +78,8 @@ export function VariantA({ items, L }: { items: YnItem[]; L: string }) {
           {more.length > 0 && (
             <>
               <h2 className="yn-kicker yn-a-sub">Boşqa yangiliklar</h2>
-              <ul className="yn-a-cards">
-                {more.slice(0, shown).map((it) => (
+              <MoreList key={cat} as="ul" className="yn-a1-cards" noun="yangilik" first={6} id="yn-a1-more">
+                {more.map((it) => (
                   <li key={it.id}>
                     <article>
                       <Link href={href(it)}>
@@ -114,45 +90,40 @@ export function VariantA({ items, L }: { items: YnItem[]; L: string }) {
                         </div>
                         <h3>{it.title}</h3>
                         <p>{it.excerpt}</p>
+                        <Read />
                       </Link>
                     </article>
                   </li>
                 ))}
-              </ul>
-              {more.length > shown && (
-                <button type="button" className="more-btn yn-more" onClick={() => setShown((s) => s + STEP)}>
-                  <More>Köproq körsatiş</More>
-                </button>
-              )}
+              </MoreList>
             </>
           )}
         </div>
 
-        <aside className="yn-a-feed" aria-labelledby="yn-a-feed-h">
-          <h2 className="yn-kicker" id="yn-a-feed-h">
+        <aside className="yn-a-feed yn-a1-feed" aria-labelledby="yn-a1-feed-h">
+          <h2 className="yn-kicker" id="yn-a1-feed-h">
             Sönggi yangiliklar
           </h2>
-          {days.map((d) => {
-            const day = feed.filter((it) => it.dayKey === d)
-            return (
-              <section key={d} className="yn-a-day">
-                <h3>{day[0].rel}</h3>
-                <ol>
-                  {day.map((it) => (
-                    <li key={it.id}>
-                      <Link href={href(it)}>
-                        <time dateTime={it.dateISO}>{it.time}</time>
-                        <span>
-                          {it.title}
-                          <small className={`yn-a-dot ${it.tone}`}>{it.categoryLabel}</small>
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            )
-          })}
+          {byDay(items.slice(0, FEED)).map((day) => (
+            <section key={day[0].dayKey} className="yn-a1-day">
+              <h3>
+                <Day it={day[0]} className="" />
+              </h3>
+              <ol>
+                {day.map((it) => (
+                  <li key={it.id}>
+                    <Link href={href(it)}>
+                      <i className={`yn-dot ${it.tone}`} aria-hidden="true" />
+                      <span>
+                        {it.title}
+                        <small>{it.categoryLabel}</small>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ))}
         </aside>
       </div>
     </section>

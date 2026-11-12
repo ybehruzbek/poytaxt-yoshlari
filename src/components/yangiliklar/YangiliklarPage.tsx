@@ -4,10 +4,10 @@ import { DevSectionsPanel } from '@/components/site/DevSectionsPanel'
 
 import type { YnItem } from './data'
 import { VariantA } from './VariantA'
-import { VariantB } from './VariantB'
-import { VariantC } from './VariantC'
+import { VariantA2 } from './VariantA2'
+import { VariantA3 } from './VariantA3'
 
-/** VAQTINCHA: dizayn variantlari faqat işlab çiqiş rejimida (productionda faqat A) */
+/** VAQTINCHA: dizayn variantlari faqat işlab çiqiş rejimida (productionda faqat A1) */
 const DEV = process.env.NODE_ENV !== 'production'
 
 function V({ k, children }: { k: string; children: ReactNode }) {
@@ -19,7 +19,7 @@ function V({ k, children }: { k: string; children: ReactNode }) {
   )
 }
 
-/** “Yangiliklar” sahifasi: sarlavha + yangiliklar röyxati (3 ta dizayn varianti) */
+/** “Yangiliklar” sahifasi: sarlavha + yangiliklar röyxati (A uslubining 3 ta nusxasi) */
 export function YangiliklarPage({
   items,
   crumbs,
@@ -55,10 +55,10 @@ export function YangiliklarPage({
             <VariantA items={items} L={L} />
           </V>
           <V k="b">
-            <VariantB items={items} L={L} />
+            <VariantA2 items={items} L={L} />
           </V>
           <V k="c">
-            <VariantC items={items} L={L} />
+            <VariantA3 items={items} L={L} />
           </V>
           <DevSectionsPanel
             sections={[
@@ -67,9 +67,9 @@ export function YangiliklarPage({
                 label: 'Yangiliklar',
                 count: 3,
                 hints: [
-                  'Daryo.uz uslubi: asosiy yangilik + öngda vaqtli lenta',
-                  'Gazeta.uz uslubi: kunlar böyiça zič lenta, sahifalaş',
-                  'UzA uslubi: asosiy yangilik + rubrikalar',
+                  'A1: asosiy yangilik + ixçam kartalar, lenta kunlar böyiça',
+                  'A2: katta asosiy + 2 yordamçi, lentada sana va turkum',
+                  'A3: rasm ustida sarlavha, 3 ustunli kartalar, vaqt çizigi',
                 ],
               },
             ]}
