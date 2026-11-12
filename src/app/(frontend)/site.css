@@ -407,7 +407,7 @@ html,body{overflow-x:clip}
 .hero-text{flex:1 1 0;min-width:0;max-width:640px;container-type:inline-size}
 .hero-slogan{font-size:max(32px,min(calc(92px * var(--h-scale)),10.6cqi))}
 .hero-slogan > span{display:block;color:inherit}
-.hero-slogan > .hero-kicker{font-size:.36em;line-height:1.25;margin-bottom:.35em}
+.hero-slogan > .hero-kicker{font-size:max(15px,.25em);line-height:1.35;margin-bottom:.45em;max-width:26em}
 @media (max-width:900px){.hero-text{flex:none;width:100%}}
 
 /* ===== Dizayn variantlarini ko'rib chiqish paneli (DevVariantSwitch, faqat dev) ===== */
