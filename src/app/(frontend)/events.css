@@ -31,7 +31,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  background: #f8f8f8;
+  background: var(--card);
   border-radius: 32px;
   overflow: hidden;
   transition:

@@ -3,17 +3,6 @@
    Sahifa boşi umumiy: .pg-head / .pg-crumbs / .pg-title / .pg-lead (site.css).
    A — Daryo.uz uslubi: A1, A2, A3 nusxalari (umumiy qism + har biri alohida).
    ===================================================================== */
-.yn {
-  --yn-card: #f8f8f8;
-  --yn-card-h: #f1f1f1;
-}
-html[data-theme='dark'] .yn {
-  --yn-card: var(--soft);
-  --yn-card-h: #2c201c;
-}
-.yn > .sec {
-  padding-top: 40px;
-}
 .yn a {
   color: inherit;
   text-decoration: none;
@@ -134,9 +123,6 @@ html[data-theme='dark'] .yn-cat {
 }
 /* rubrikalar */
 .yn-rub {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   margin-bottom: 36px;
 }
 /* kartadagi “Öqiş” tugmasi — chap tomonda, pastga yopişadi */
@@ -172,10 +158,10 @@ html[data-theme='dark'] .yn-cat {
 }
 
 
-.yn-a3-day li.o::before { background: #e8763c; }
-.yn-a3-day li.g::before { background: #3c9a68; }
-.yn-a3-day li.b::before { background: #3c7fd0; }
-.yn-a3-day li.y::before { background: #e3b100; }
+.yn-a3-day li.o::before { background: var(--blue); }
+.yn-a3-day li.g::before { background: var(--green); }
+.yn-a3-day li.b::before { background: var(--sky); }
+.yn-a3-day li.y::before { background: var(--yellow); }
 
 /* =====================  A3 — rasm ustida sarlavha  ===================== */
 .yn-a3-lead > a {

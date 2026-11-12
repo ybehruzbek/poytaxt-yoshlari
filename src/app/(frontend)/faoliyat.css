@@ -344,7 +344,7 @@
   width: 100%;
   aspect-ratio: 16/10;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: calc(var(--r-thumb) - 10px); /* kartaning ički burçagi (padding 10px) */
 }
 .vc-tl-i > span {
   display: grid;
@@ -384,7 +384,7 @@
   width: 84px;
   height: 64px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: calc(var(--r-thumb) - 10px);
 }
 .vc-mini strong {
   font: 800 14px/1.3 var(--f-head);
@@ -593,7 +593,7 @@
   width: 120px;
   height: 150px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: calc(var(--r-thumb) - 12px);
 }
 .vc-board-t {
   display: grid;
