@@ -1,11 +1,11 @@
 'use client'
 
-import { type ReactNode, useEffect, useState } from 'react'
+import { type KeyboardEvent, type ReactNode, useRef, useState } from 'react'
 
 import { DevVariantSwitch, useDevVariant } from '@/components/site/DevVariantSwitch'
 
 /** VAQTINCHA: yönalişlar sahifasi variantlari — faqat faol variant çiziladi; production'da doim A */
-const TITLES = ['Navbatma-navbat qatorlar', 'Mundarija va bölimlar', 'Jurnal kartalari']
+const TITLES = ['Qatorlar', 'Vitrina', 'Tasmalar']
 
 export function DirsSwitch({ a, b, c }: { a: ReactNode; b?: ReactNode; c?: ReactNode }) {
   const v = useDevVariant('vy', TITLES.length)
@@ -17,35 +17,63 @@ export function DirsSwitch({ a, b, c }: { a: ReactNode; b?: ReactNode; c?: React
   )
 }
 
-/** B: yopişqoq mundarija — ekrandagi bölim belgilanadi (scrollspy) */
-export function DirsToc({ items }: { items: Array<{ slug: string; n: string; title: string }> }) {
-  const [on, setOn] = useState(items[0]?.slug ?? '')
-  useEffect(() => {
-    const els = items
-      .map((x) => document.getElementById(x.slug))
-      .filter((e): e is HTMLElement => !!e)
-    const io = new IntersectionObserver(
-      (es) => {
-        const hit = es.filter((e) => e.isIntersecting).sort((x, y) => x.boundingClientRect.top - y.boundingClientRect.top)[0]
-        if (hit) setOn(hit.target.id)
-      },
-      { rootMargin: '-35% 0px -60% 0px' },
-    )
-    els.forEach((e) => io.observe(e))
-    return () => io.disconnect()
-  }, [items])
+type Item = { slug: string; n: string; title: string; short: string }
+
+/**
+ * B — Vitrina: çapda nomlar (tablist), öngda tanlangan panel. Panellar serverda çizilgan,
+ * körinmaydiganlari `hidden`. Klaviatura: ↑ ↓ (← →), Home, End.
+ */
+export function DirsShowcase({ items, panels }: { items: Item[]; panels: ReactNode[] }) {
+  const [on, setOn] = useState(0)
+  const tabs = useRef<Array<HTMLButtonElement | null>>([])
+  const go = (i: number) => {
+    const k = (i + items.length) % items.length
+    setOn(k)
+    tabs.current[k]?.focus()
+  }
+  const onKey = (e: KeyboardEvent) => {
+    const map: Record<string, number> = { ArrowDown: on + 1, ArrowRight: on + 1, ArrowUp: on - 1, ArrowLeft: on - 1, Home: 0, End: items.length - 1 }
+    if (e.key in map) {
+      e.preventDefault()
+      go(map[e.key])
+    }
+  }
   return (
-    <nav className="vyb-toc" aria-label="Yönalişlar mundarijasi">
-      <ol>
-        {items.map((x) => (
-          <li key={x.slug}>
-            <a href={`#${x.slug}`} aria-current={on === x.slug ? 'true' : undefined}>
-              <span>{x.n}</span>
-              {x.title}
-            </a>
-          </li>
+    <div className="vys">
+      <div className="vys-list" role="tablist" aria-label="Faoliyat yönalişlari" aria-orientation="vertical" onKeyDown={onKey}>
+        {items.map((x, i) => (
+          <button
+            key={x.slug}
+            ref={(el) => {
+              tabs.current[i] = el
+            }}
+            type="button"
+            role="tab"
+            id={`vys-t-${x.slug}`}
+            aria-selected={on === i}
+            aria-controls={`vys-p-${x.slug}`}
+            tabIndex={on === i ? 0 : -1}
+            onClick={() => setOn(i)}
+          >
+            <span className="vys-tn">{x.n}</span>
+            <span className="vys-tl">{x.title}</span>
+            <span className="vys-ts">{x.short}</span>
+          </button>
         ))}
-      </ol>
-    </nav>
+      </div>
+      <div className="vys-stage">
+        {items.map((x, i) => (
+          <div
+            key={x.slug}
+            role="tabpanel"
+            id={`vys-p-${x.slug}`}
+            aria-labelledby={`vys-t-${x.slug}`}
+            hidden={on !== i}
+          >
+            {panels[i]}
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }

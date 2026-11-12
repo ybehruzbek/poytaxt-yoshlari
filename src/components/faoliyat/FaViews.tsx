@@ -30,12 +30,15 @@ export function DirText({
   projBase,
   className,
   lead = false,
+  rest = false,
 }: {
   slug: DirSlug
   projBase: string
   className?: string
   /** birinçi jumla (yönalişning maqsadi) alohida, boş fikr sifatida ajratiladi */
   lead?: boolean
+  /** maqsad jumlasi boşqa joyda körsatilgan — faqat qolgan qismi */
+  rest?: boolean
 }) {
   const d = DIRECTIONS.find((x) => x.slug === slug)
   if (!d) return null
@@ -49,7 +52,9 @@ export function DirText({
   const done = projs.filter((p) => p.status === 'yakunlangan')
   return (
     <div className={className}>
-      {lead && d.about.includes(' Xususan, ') ? (
+      {rest && d.about.includes(' Xususan, ') ? (
+        <p>{d.about.slice(d.about.indexOf(' Xususan, ') + 1)}</p>
+      ) : lead && d.about.includes(' Xususan, ') ? (
         <>
           <p className="dir-lead">{d.about.slice(0, d.about.indexOf(' Xususan, '))}</p>
           <p>{d.about.slice(d.about.indexOf(' Xususan, ') + 1)}</p>
@@ -78,82 +83,6 @@ export function DirText({
   )
 }
 
-
-/**
- * Yönaliş röyxati: navbatma-navbat çap/öng. Har bir yönaliş: suratlar va Kengaşning şu yönaliş
- * böyiça işlari haqida yaxlit rasmiy matn (loyihalar matn içida).
- */
-export function DirsList({ base, projBase }: { base: string; projBase: string }) {
-  const all = DIRECTIONS.map((d, i) => {
-    const evs = dirEvents(d.slug)
-    const projs = dirProjects(d.slug)
-    const pics = [
-      ...projs.map((p) => p.cover),
-      ...evs.map((e) => e.img),
-      ...projs.flatMap((p) => p.gallery),
-    ]
-      .filter(Boolean)
-      .filter((x, k, arr) => arr.indexOf(x) === k)
-      .slice(0, 3)
-    return { d, n: pad(i), evs, projs, pics }
-  })
-  const nE = all.reduce((a, x) => a + x.evs.length, 0)
-  const nP = all.reduce((a, x) => a + x.projs.length, 0)
-  return (
-    <section className="sec fa-sec">
-      <div className="wrap">
-        <div className="vy-sum">
-          <span>
-            <b>{all.length}</b> yönaliş
-          </span>
-          <span>
-            <b>{nE}</b> tadbir
-          </span>
-          <span>
-            <b>{nP}</b> loyiha
-          </span>
-        </div>
-        <div className="vy3">
-          {all.map(({ d, n, evs, projs, pics }) => (
-            <article key={d.slug} className="vy3-row" id={d.slug}>
-              <Link href={`${base}/${d.slug}`} className="vy3-ph" tabIndex={-1} aria-hidden="true">
-                {pics.map((src) => (
-                  <img key={src} src={src} alt="" loading="lazy" />
-                ))}
-              </Link>
-              <div className="vy3-txt">
-                <span className="vy3-n">{n}</span>
-                <h2>
-                  <Link href={`${base}/${d.slug}`}>{d.title}</Link>
-                </h2>
-                <DirText slug={d.slug} projBase={projBase} className="vy3-about" />
-                <div className="vy3-foot">
-                  {/* nol sonlar yozilmaydi (“0 tadbir” emas) */}
-                  <span>
-                    {evs.length > 0 && (
-                      <>
-                        <b>{evs.length}</b> tadbir
-                      </>
-                    )}
-                    {evs.length > 0 && projs.length > 0 && ' · '}
-                    {projs.length > 0 && (
-                      <>
-                        <b>{projs.length}</b> loyiha
-                      </>
-                    )}
-                  </span>
-                  <Link href={`${base}/${d.slug}`} className="more-btn">
-                    <More />
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
 
 /* ===================== Yönaliş sahifasi ===================== */
 

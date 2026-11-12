@@ -73,10 +73,13 @@ const PAGES: Record<string, Opts> = {
   /* ---- Faoliyat: sarlavhalar çapdan “çizilib” oçiladi, har bölim öz harakati bilan ---- */
   '/faoliyat/yonalishlar': {
     head: 'wipe',
-    images: '.vy3-ph img',
+    images: '.vyt-hero > img, .vyt-ph img',
     img: 'curtain',
     grid: 'side',
-    fx: [['.vy-sum > span', 'pop']],
+    fx: [
+      ['.vy-sum > span', 'pop'],
+      ['.vyr > details', 'slide'],
+    ],
   },
   '/faoliyat/loyihalar': { head: 'wipe', grid: 'zoom', fx: [['.chips > button, .fa-chips > button', 'drop']] },
   '/faoliyat/tadbirlar': { head: 'wipe', grid: 'tilt', fx: [['.chips > button, .fa-chips > button', 'drop']] },

@@ -5,10 +5,10 @@ import { ANNOUNCEMENTS } from './announcements'
 import { AnnounceList } from './AnnounceList'
 import { DIRECTIONS, PROJECTS } from './data'
 import { DirsSwitch } from './DirsClient'
-import { DirsB, DirsC } from './DirsVariants'
+import { DirsBands, DirsRows, DirsShow } from './DirsVariants'
 import { EVENTS } from './events'
 import { EventsList } from './EventsList'
-import { DirC, DirsList, ProjC, ResultsB } from './FaViews'
+import { DirC, ProjC, ResultsB } from './FaViews'
 import { ProjectsList } from './ProjectsList'
 import { fmtDate, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
@@ -47,9 +47,9 @@ export function DirectionsPage({
       />
       {/* VAQTINCHA: B va C variantlari faqat ishlab chiqish rejimida */}
       <DirsSwitch
-        a={<DirsList base={base} projBase={projBase} />}
-        b={DEV ? <DirsB base={base} projBase={projBase} /> : undefined}
-        c={DEV ? <DirsC base={base} projBase={projBase} /> : undefined}
+        a={<DirsRows base={base} projBase={projBase} />}
+        b={DEV ? <DirsShow base={base} projBase={projBase} /> : undefined}
+        c={DEV ? <DirsBands base={base} projBase={projBase} /> : undefined}
       />
     </div>
   )
