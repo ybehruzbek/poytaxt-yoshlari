@@ -145,3 +145,10 @@
     filter: saturate(0.5) brightness(0.9);
   }
 }
+
+/* tungi rejim: rangli karta (.o1/.o4) ičidagi töq maʼlumot paneli — matn yana och tusda */
+html[data-theme='dark'] .opp-info {
+  --navy: #f3e5dc;
+  --grey: #e6dad3;
+  --muted: #b5a7a1;
+}

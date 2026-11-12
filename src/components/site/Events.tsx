@@ -18,7 +18,7 @@ const EVENTS: Ev[] = [
   { title: 'Volontyorlar forumi', type: 'Forum', org: 'Şahar kengaşi', start: '2026-11-14T10:00:00+05:00', img: '/img/opp-vol.jpg', color: 'var(--green)' },
   { title: 'Yoş tadbirkorlar uçraşuvi', type: 'Uçraşuv', org: 'Hamkor taşkilotlar bilan', start: '2026-11-20T15:00:00+05:00', img: '/img/about-2.jpg', color: 'var(--blue)' },
   { title: 'Kitobxonlik tanlovi finali', type: 'Tanlov', org: 'OTT boşlanğiç taşkilotlari', start: '2026-11-27T11:00:00+05:00', img: '/img/opp-stip.jpg', color: 'var(--sky)', dark: true },
-  { title: 'IT va startaplar haftaligi', type: 'Haftalik', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy)' },
+  { title: 'IT va startaplar haftaligi', type: 'Haftalik', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy-bg)' },
 ]
 
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
@@ -80,7 +80,7 @@ export function Events({ locale }: { locale: Locale }) {
               </div>
               <div className="pt-cut" aria-hidden="true" />
               <div className="pt-stub">
-                <span className="pt-date" style={{ background: e.color, color: e.dark ? 'var(--navy)' : '#fff' }}>
+                <span className="pt-date" style={{ background: e.color, color: e.dark ? '#532822' : '#fff' }}>
                   <b>{e.p.day}</b>
                   <small>{e.p.mon}</small>
                 </span>

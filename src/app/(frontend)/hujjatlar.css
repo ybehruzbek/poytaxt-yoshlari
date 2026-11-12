@@ -81,18 +81,22 @@
 /* Hujjat turi rangi: Qonun — jigarrang, Farmon — sariq, Qaror — havorang, Ustav — yaşil */
 [data-kind] {
   --k: var(--navy);
+  --kb: var(--navy-bg); /* belgi foni: tungi rejimda ham töq */
   --kt: color-mix(in srgb, var(--navy) 10%, var(--bg));
 }
 [data-kind='Farmon'] {
   --k: #b07a00;
+  --kb: #b07a00;
   --kt: color-mix(in srgb, var(--yellow) 40%, var(--bg));
 }
 [data-kind='Ustav'] {
   --k: var(--green);
+  --kb: var(--green);
   --kt: color-mix(in srgb, var(--green) 22%, var(--bg));
 }
 [data-kind='Qaror'] {
   --k: #2f6fb3;
+  --kb: #2f6fb3;
   --kt: color-mix(in srgb, var(--sky) 30%, var(--bg));
 }
 
@@ -232,7 +236,7 @@ a.nd-b-row:hover {
 }
 .nd-tags span:first-child {
   border-color: transparent;
-  background: var(--k);
+  background: var(--kb);
   color: #fff;
 }
 .nd-b .nd-tags + strong {
