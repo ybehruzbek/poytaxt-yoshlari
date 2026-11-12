@@ -112,7 +112,12 @@ export function DirsC({ base, projBase }: { base: string; projBase: string }) {
         </div>
         <div className="vyc">
           {all.map(({ d, n, nE, nP, pics }, i) => (
-            <article key={d.slug} id={d.slug} className={`vyc-card${i === 0 ? ' wide' : ''}`}>
+            // ritm: keng karta — 2 juft karta — keng karta (surat navbatma-navbat çap / öng)
+            <article
+              key={d.slug}
+              id={d.slug}
+              className={`vyc-card${i % 5 === 0 ? ` wide${(i / 5) % 2 ? ' flip' : ''}` : ''}`}
+            >
               <Link href={`${base}/${d.slug}`} className="vyc-ph" tabIndex={-1} aria-hidden="true">
                 {pics[0] && <img src={pics[0]} alt="" loading="lazy" />}
                 <span className="vyc-n">{n}</span>
@@ -131,7 +136,7 @@ export function DirsC({ base, projBase }: { base: string; projBase: string }) {
                 <h2>
                   <Link href={`${base}/${d.slug}`}>{d.title}</Link>
                 </h2>
-                <DirText slug={d.slug} projBase={projBase} className="vyc-txt" />
+                <DirText slug={d.slug} projBase={projBase} className="vyc-txt" lead />
                 <div className="vyc-foot">
                   <Link href={`${base}/${d.slug}`} className="more-btn">
                     <More />

@@ -1232,8 +1232,13 @@
   font-size: 15.5px;
   line-height: 1.7;
 }
+/* birinçi jumla — yönalişning maqsadi: yirikroq, töq rangda */
+.vyc-txt .dir-lead {
+  font: 600 17px/1.55 var(--f-head);
+  color: var(--navy);
+}
 /* loyihalar haqidagi jumla — asosiy matndan ingiçka çiziq bilan ajraladi */
-.vyc-txt p + p {
+.vyc-txt .dir-projs {
   padding-top: 14px;
   border-top: 1px dashed var(--line);
   font-size: 15px;
@@ -1257,6 +1262,17 @@
 }
 .vyc-card.wide .vyc-bd {
   padding: 44px 44px 40px;
+  justify-content: center;
+}
+.vyc-card.wide .vyc-txt .dir-lead {
+  font-size: 19px;
+}
+/* ikkinçi keng karta — surat öngda */
+.vyc-card.wide.flip {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+}
+.vyc-card.wide.flip .vyc-ph {
+  order: 2;
 }
 .vyc-card.wide h2 {
   font-size: calc(clamp(24px, 2.2vw, 32px) * var(--h-scale));
@@ -1267,6 +1283,9 @@
   }
   .vyc-card.wide {
     display: flex;
+  }
+  .vyc-card.wide.flip .vyc-ph {
+    order: 0;
   }
   .vyc-card.wide .vyc-ph > img {
     min-height: 0;

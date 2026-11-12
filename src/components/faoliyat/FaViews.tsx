@@ -25,7 +25,18 @@ function joinList(items: ReactNode[]) {
  * Yönaliş matni: Kengaş amalga oşiradigan işlar (rasmiy matn) va şu yönaliş doirasidagi loyihalar —
  * alohida röyxat emas, matnning davomi sifatida (nomlari loyiha sahifasiga havola).
  */
-export function DirText({ slug, projBase, className }: { slug: DirSlug; projBase: string; className?: string }) {
+export function DirText({
+  slug,
+  projBase,
+  className,
+  lead = false,
+}: {
+  slug: DirSlug
+  projBase: string
+  className?: string
+  /** birinçi jumla (yönalişning maqsadi) alohida, boş fikr sifatida ajratiladi */
+  lead?: boolean
+}) {
   const d = DIRECTIONS.find((x) => x.slug === slug)
   if (!d) return null
   const projs = dirProjects(slug)
@@ -38,9 +49,16 @@ export function DirText({ slug, projBase, className }: { slug: DirSlug; projBase
   const done = projs.filter((p) => p.status === 'yakunlangan')
   return (
     <div className={className}>
-      <p>{d.about}</p>
+      {lead && d.about.includes(' Xususan, ') ? (
+        <>
+          <p className="dir-lead">{d.about.slice(0, d.about.indexOf(' Xususan, '))}</p>
+          <p>{d.about.slice(d.about.indexOf(' Xususan, ') + 1)}</p>
+        </>
+      ) : (
+        <p>{d.about}</p>
+      )}
       {projs.length > 0 && (
-        <p>
+        <p className="dir-projs">
           {active.length > 0 && (
             <>
               Yönaliş doirasida {joinList(active.map(link))}
