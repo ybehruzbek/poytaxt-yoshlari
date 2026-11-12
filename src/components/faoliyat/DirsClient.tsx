@@ -2,25 +2,10 @@
 
 import { type KeyboardEvent, type ReactNode, useRef, useState } from 'react'
 
-import { DevVariantSwitch, useDevVariant } from '@/components/site/DevVariantSwitch'
-
-/** VAQTINCHA: yönalişlar sahifasi variantlari — faqat faol variant çiziladi; production'da doim A */
-const TITLES = ['Qatorlar', 'Vitrina', 'Tasmalar']
-
-export function DirsSwitch({ a, b, c }: { a: ReactNode; b?: ReactNode; c?: ReactNode }) {
-  const v = useDevVariant('vy', TITLES.length)
-  return (
-    <>
-      {v === 'b' && b ? b : v === 'c' && c ? c : a}
-      <DevVariantSwitch name="vy" label="Yönalişlar" titles={TITLES} />
-    </>
-  )
-}
-
 type Item = { slug: string; n: string; title: string; short: string }
 
 /**
- * B — Vitrina: çapda nomlar (tablist), öngda tanlangan panel. Panellar serverda çizilgan,
+ * Yönalişlar vitrinasi: çapda nomlar (tablist), öngda tanlangan panel. Panellar serverda çizilgan,
  * körinmaydiganlari `hidden`. Klaviatura: ↑ ↓ (← →), Home, End.
  */
 export function DirsShowcase({ items, panels }: { items: Item[]; panels: ReactNode[] }) {

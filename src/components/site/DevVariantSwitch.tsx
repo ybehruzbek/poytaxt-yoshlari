@@ -30,13 +30,6 @@ const write = (key: string, v: string) => {
   listeners.forEach((l) => l())
 }
 
-/** Tanlangan variant harfi (a, b, c, …) — panel bilan bir xil manbadan; production'da doim 'a' */
-export function useDevVariant(name: string, count: number): string {
-  const keysId = Array.from({ length: count }, (_, i) => String.fromCharCode(97 + i)).join('')
-  const v = useSyncExternalStore(subscribe, () => read(`v-${name}`, keysId.split('')), () => 'a')
-  return process.env.NODE_ENV === 'production' ? 'a' : v
-}
-
 export function DevVariantSwitch({
   name,
   label,

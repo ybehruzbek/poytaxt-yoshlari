@@ -4,8 +4,7 @@ import type { ReactNode } from 'react'
 import { ANNOUNCEMENTS } from './announcements'
 import { AnnounceList } from './AnnounceList'
 import { DIRECTIONS, PROJECTS } from './data'
-import { DirsSwitch } from './DirsClient'
-import { DirsBands, DirsRows, DirsShow } from './DirsVariants'
+import { DirsShow } from './DirsShow'
 import { EVENTS } from './events'
 import { EventsList } from './EventsList'
 import { DirC, ProjC, ResultsB } from './FaViews'
@@ -13,7 +12,6 @@ import { ProjectsList } from './ProjectsList'
 import { fmtDate, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
 
-const DEV = process.env.NODE_ENV !== 'production'
 const TODAY = new Date().toISOString().slice(0, 10)
 
 /** Sahifa boşi: yöl va sarlavha (qoida: H1 ostida izoh matni yöq) */
@@ -45,12 +43,7 @@ export function DirectionsPage({
         crumbs={crumbs}
         title="Faoliyat yönalişlari"
       />
-      {/* VAQTINCHA: B va C variantlari faqat ishlab chiqish rejimida */}
-      <DirsSwitch
-        a={<DirsRows base={base} projBase={projBase} />}
-        b={DEV ? <DirsShow base={base} projBase={projBase} /> : undefined}
-        c={DEV ? <DirsBands base={base} projBase={projBase} /> : undefined}
-      />
+      <DirsShow base={base} projBase={projBase} />
     </div>
   )
 }
