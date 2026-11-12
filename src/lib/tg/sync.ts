@@ -13,6 +13,13 @@ import { fetchPage, fetchSince, postUrl, type TgPost } from './channel'
 import curatedJson from './curated.json'
 import { blocksToLexical, type Draft, postToDraft } from './transform'
 
+/** Tahrir qilingan maqolalarda tur körsatilmagan — kanal matnidan aniqlanadi */
+const classifyPost = (post: TgPost, d: Draft) => {
+  const auto = postToDraft(post)
+  if (auto?.kind === 'tadbir') return { kind: auto.kind, eventDate: auto.eventDate, eventPlace: auto.eventPlace }
+  return { kind: auto?.kind === 'elon' || d.category === 'imkoniyat' ? ('elon' as const) : ('yangilik' as const) }
+}
+
 const curated = curatedJson as unknown as Record<string, Draft>
 const MAX_PHOTOS = 6
 
@@ -54,8 +61,10 @@ async function upload(payload: Payload, url: string, alt: string, name: string):
       }
       chunks.push(value)
     }
+    const expected = Number(res.headers.get('content-length') || 0)
+    if (expected && size !== expected) return null // oxirigaça yuklanmagan
     const buf = Buffer.concat(chunks)
-    const data = await sharp(buf, { limitInputPixels: 60_000_000, failOn: 'error' })
+    const data = await sharp(buf, { limitInputPixels: 60_000_000, failOn: 'warning' })
       .rotate()
       .resize({ width: 1600, withoutEnlargement: true })
       .webp({ quality: 80 })
@@ -106,6 +115,13 @@ export async function importPosts(payload: Payload, posts: TgPost[], log: (s: st
       r.skipped++
       continue
     }
+    // kanalda bir xil post qayta joylanğan bölsa — ikkinçisi qöşilmaydi
+    const same = await payload.count({ collection: 'news', where: { title: { equals: draft.title } }, overrideAccess: true })
+    if (same.totalDocs) {
+      r.skipped++
+      continue
+    }
+    const kind = draft.kind ? draft : { ...draft, ...classifyPost(post, draft) }
     try {
       const urls = (post.photos.length ? post.photos : post.videoThumbs).slice(0, MAX_PHOTOS)
       const ids: number[] = []
@@ -127,6 +143,9 @@ export async function importPosts(payload: Payload, posts: TgPost[], log: (s: st
           excerpt: draft.excerpt.slice(0, 320),
           content: blocksToLexical(draft.blocks) as never,
           tags: draft.tags,
+          kind: kind.kind ?? 'yangilik',
+          eventDate: kind.eventDate ?? null,
+          eventPlace: kind.eventPlace ?? null,
           source: postUrl(post.id),
           tgId: post.id,
           _status: 'published',
@@ -162,6 +181,34 @@ export async function applyCurated(payload: Payload): Promise<number> {
       },
       overrideAccess: true,
     })
+    n++
+  }
+  return n
+}
+
+/** Mavjud yangiliklarning turini (yangilik / eʼlon / tadbir) kanal matni böyiça qayta aniqlaydi; takrorlarni öçiradi */
+export async function reclassify(payload: Payload, since: string, log: (s: string) => void = () => {}): Promise<number> {
+  const posts = await fetchSince(since)
+  let n = 0
+  const seen = new Set<string>()
+  for (const post of posts) {
+    const doc = (await payload.find({ collection: 'news', where: { tgId: { equals: post.id } }, limit: 1, depth: 0, overrideAccess: true })).docs[0]
+    if (!doc) continue
+    if (seen.has(doc.title)) {
+      await payload.delete({ collection: 'news', id: doc.id, overrideAccess: true })
+      log(`- takror öçirildi: ${post.id}`)
+      continue
+    }
+    seen.add(doc.title)
+    const cur = curated[String(post.id)]
+    const k = classifyPost(post, cur ?? { title: doc.title, excerpt: '', blocks: [], tags: [], category: doc.category })
+    await payload.update({
+      collection: 'news',
+      id: doc.id,
+      data: { kind: k.kind ?? 'yangilik', eventDate: k.eventDate ?? null, eventPlace: k.eventPlace ?? null },
+      overrideAccess: true,
+    })
+    if (k.kind !== 'yangilik') log(`~ ${post.id} → ${k.kind} ${k.eventDate ?? ''}`)
     n++
   }
   return n

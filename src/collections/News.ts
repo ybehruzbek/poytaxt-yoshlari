@@ -104,6 +104,27 @@ export const News: CollectionConfig = {
       ],
     },
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'kind',
+          label: 'Turi',
+          type: 'select',
+          required: true,
+          defaultValue: 'yangilik',
+          index: true,
+          options: [
+            { label: 'Yangilik', value: 'yangilik' },
+            { label: 'Eʼlon (tanlov, röyxatdan ötiş, kurs)', value: 'elon' },
+            { label: 'Kelgusi tadbir', value: 'tadbir' },
+          ],
+          admin: { description: 'Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — bosh sahifadagi “Yaqin tadbirlar”da' },
+        },
+        { name: 'eventDate', label: 'Tadbir sanasi', type: 'date', index: true, admin: { date: { pickerAppearance: 'dayAndTime' }, condition: (d) => d?.kind === 'tadbir' } },
+        { name: 'eventPlace', label: 'Tadbir joyi', type: 'text', admin: { condition: (d) => d?.kind === 'tadbir' }, hooks: { beforeChange: [imloMatn] } },
+      ],
+    },
+    {
       name: 'tgId',
       label: 'Telegram post raqami',
       type: 'number',

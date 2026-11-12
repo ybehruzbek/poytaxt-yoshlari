@@ -176,6 +176,12 @@ export interface News {
    */
   tags?: string[] | null;
   /**
+   * Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — bosh sahifadagi “Yaqin tadbirlar”da
+   */
+  kind: 'yangilik' | 'elon' | 'tadbir';
+  eventDate?: string | null;
+  eventPlace?: string | null;
+  /**
    * Kanaldan avtomatik olingan yangilik
    */
   tgId?: number | null;
@@ -481,6 +487,9 @@ export interface NewsSelect<T extends boolean = true> {
   gallery?: T;
   author?: T;
   tags?: T;
+  kind?: T;
+  eventDate?: T;
+  eventPlace?: T;
   tgId?: T;
   source?: T;
   updatedAt?: T;

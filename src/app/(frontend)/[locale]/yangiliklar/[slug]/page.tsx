@@ -5,7 +5,7 @@ import { cache } from 'react'
 
 import config from '@payload-config'
 import type { Locale } from '@/i18n/config'
-import { CATEGORY_TONE, toNewsCard } from '@/lib/news'
+import { CATEGORY_TONE, NEWS_ONLY, toNewsCard } from '@/lib/news'
 import type { Author, Media, News } from '@/payload-types'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { Article, type ArticleData, type MiniNews } from '@/components/yangiliklar/Article'
@@ -93,8 +93,8 @@ export default async function NewsPage(props: Props) {
   const payload = await getPayload({ config })
   const base = { collection: 'news' as const, locale, depth: 1, sort: '-publishedAt' }
   const [same, last] = await Promise.all([
-    payload.find({ ...base, limit: 3, where: { and: [{ _status: { equals: 'published' } }, { category: { equals: doc.category } }, { id: { not_equals: doc.id } }] } }),
-    payload.find({ ...base, limit: 7, where: { and: [{ _status: { equals: 'published' } }, { id: { not_equals: doc.id } }] } }),
+    payload.find({ ...base, limit: 3, where: { and: [{ _status: { equals: 'published' } }, { category: { equals: doc.category } }, { id: { not_equals: doc.id } }, NEWS_ONLY] } }),
+    payload.find({ ...base, limit: 7, where: { and: [{ _status: { equals: 'published' } }, { id: { not_equals: doc.id } }, NEWS_ONLY] } }),
   ])
   const mini = (n: News): MiniNews => {
     const c = toNewsCard(n)

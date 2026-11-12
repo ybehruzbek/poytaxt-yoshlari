@@ -1,30 +1,32 @@
 /**
- * “Poytaxt yoşlari” kanalidan yangiliklarni import qiliş.
- *   pnpm sync:tg                        — 2026-yil boşidan barça postlar (borlari ötkazib yuboriladi)
- *   pnpm sync:tg --since 2026-06-01     — şu sanadan
- *   pnpm sync:tg --purge-samples        — kanalga boğlanmagan (namuna) yangiliklarni öçiradi
- *   pnpm sync:tg --curated              — tahrir qilingan maqolalarni (src/lib/tg/curated.json) qayta yozadi
+ * “Poytaxt yoşlari” kanalidan yangiliklarni import qiliş (`payload run` parametr uzatmaydi — muhit özgaruvçilari):
+ *   pnpm sync:tg                              — 2026-yil boşidan barça postlar (borlari ötkazib yuboriladi)
+ *   TG_SINCE=2026-06-01 pnpm sync:tg          — şu sanadan
+ *   TG_PURGE=1 pnpm sync:tg                   — avval kanalga boğlanmagan (namuna) yangiliklarni öçiradi
+ *   TG_ONLY=purge|curated|reclassify pnpm sync:tg
+ *     purge      — faqat öçiriş
+ *     curated    — tahrir qilingan maqolalarni (src/lib/tg/curated.json) qayta yozadi
+ *     reclassify — mavjud yangiliklarning turini (yangilik / eʼlon / tadbir) kanal matni böyiça qayta aniqlaydi
  */
 import { getPayload } from 'payload'
 
 import config from '../src/payload.config'
-import { applyCurated, syncSince } from '../src/lib/tg/sync'
+import { applyCurated, reclassify, syncSince } from '../src/lib/tg/sync'
 
-const args = process.argv.slice(2)
-const arg = (k: string) => {
-  const i = args.indexOf(k)
-  return i >= 0 ? args[i + 1] : undefined
-}
+const env = process.env
 const payload = await getPayload({ config })
+const log = (s: string) => console.log(s)
 
-if (args.includes('--purge-samples')) {
-  const res = await payload.delete({ collection: 'news', where: { tgId: { exists: false } }, overrideAccess: true })
-  payload.logger.info(`Namuna yangiliklar öçirildi: ${res.docs.length} ta`)
+if (env.TG_PURGE === '1' || env.TG_ONLY === 'purge') {
+  const all = await payload.find({ collection: 'news', limit: 5000, depth: 0, pagination: false, select: { tgId: true }, overrideAccess: true })
+  const ids = all.docs.filter((d) => !d.tgId).map((d) => d.id)
+  for (const id of ids) await payload.delete({ collection: 'news', id, overrideAccess: true })
+  log(`Namuna yangiliklar öçirildi: ${ids.length} ta`)
 }
-if (args.includes('--curated')) {
-  payload.logger.info(`Tahrir qilingan maqolalar yangilandi: ${await applyCurated(payload)} ta`)
-} else {
-  const r = await syncSince(payload, arg('--since') ?? '2026-01-01', (s) => console.log(s))
-  payload.logger.info(`Import: ${r.created} ta yaratildi, ${r.skipped} ta ötkazildi, ${r.failed} ta xato`)
+if (env.TG_ONLY === 'curated') log(`Tahrir qilingan maqolalar yangilandi: ${await applyCurated(payload)} ta`)
+else if (env.TG_ONLY === 'reclassify') log(`Turi qayta aniqlandi: ${await reclassify(payload, env.TG_SINCE ?? '2026-01-01', log)} ta`)
+else if (env.TG_ONLY !== 'purge') {
+  const r = await syncSince(payload, env.TG_SINCE ?? '2026-01-01', log)
+  log(`Import: ${r.created} ta yaratildi, ${r.skipped} ta ötkazildi, ${r.failed} ta xato`)
 }
 process.exit(0)

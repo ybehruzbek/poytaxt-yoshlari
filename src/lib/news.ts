@@ -53,3 +53,6 @@ export function toNewsCard(doc: News): NewsCard {
 
 /** Bir sahifada nechta yangilik olinadi: 1 ta asosiy + 4 ta yon karta */
 export const NEWS_PAGE_SIZE = 5
+
+/** Faqat yangiliklar (kanaldagi eʼlon va kelgusi tadbirlar alohida bölimlarda körsatiladi) */
+export const NEWS_ONLY = { kind: { equals: 'yangilik' as const } }

@@ -1,25 +1,53 @@
-/* eslint-disable @next/next/no-img-element -- namuna rasmlar; CMS ulanganda next/image ga o'tadi */
+/* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor ölçamda keladi */
 import Link from 'next/link'
+import { getPayload } from 'payload'
+
+import config from '@payload-config'
+import { toNewsCard } from '@/lib/news'
 
 import type { Locale } from '@/i18n/config'
 
 type Ev = {
   title: string
   type: string // tadbir turi
-  org: string
-  start: string // ISO, Toshkent vaqti
+  org: string // joyi
+  start: string // ISO
   img: string
+  href: string
   color: string
   dark?: boolean // rang ustida matn to'q bo'lsinmi
 }
 
-/** NAMUNA tadbirlar — keyin admin paneldagi "Tadbirlar" bo'limidan keladi. */
-const EVENTS: Ev[] = [
-  { title: 'Volontyorlar forumi', type: 'Forum', org: 'Şahar kengaşi', start: '2026-11-14T10:00:00+05:00', img: '/img/opp-vol.jpg', color: 'var(--green)' },
-  { title: 'Yoş tadbirkorlar uçraşuvi', type: 'Uçraşuv', org: 'Hamkor taşkilotlar bilan', start: '2026-11-20T15:00:00+05:00', img: '/img/about-2.jpg', color: 'var(--blue)' },
-  { title: 'Kitobxonlik tanlovi finali', type: 'Tanlov', org: 'OTT boşlanğiç taşkilotlari', start: '2026-11-27T11:00:00+05:00', img: '/img/opp-stip.jpg', color: 'var(--sky)', dark: true },
-  { title: 'IT va startaplar haftaligi', type: 'Haftalik', org: 'Poytaxt miqyosida', start: '2026-12-04T09:30:00+05:00', img: '/img/news-2.jpg', color: 'var(--navy-bg)' },
-]
+const COLORS: Array<[string, boolean?]> = [['var(--green)'], ['var(--blue)'], ['var(--sky)', true], ['var(--navy-bg)']]
+
+/** Kanaldan kelgan kelgusi tadbirlar (admin panelda turi “Kelgusi tadbir”), eng yaqini birinçi */
+async function upcoming(locale: Locale): Promise<Ev[]> {
+  const payload = await getPayload({ config })
+  const res = await payload.find({
+    collection: 'news',
+    locale,
+    depth: 1,
+    limit: 4,
+    sort: 'eventDate',
+    where: {
+      and: [{ _status: { equals: 'published' } }, { kind: { equals: 'tadbir' } }, { eventDate: { greater_than_equal: new Date().toISOString() } }],
+    },
+  })
+  return res.docs.map((d, i) => {
+    const c = toNewsCard(d)
+    const [color, dark] = COLORS[i % COLORS.length]
+    return {
+      title: c.title,
+      type: 'Tadbir',
+      org: d.eventPlace || 'Toşkent şahri',
+      start: d.eventDate as string,
+      img: c.image,
+      href: `/${locale}/yangiliklar/${c.slug}`,
+      color,
+      dark,
+    }
+  })
+}
 
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
 const WD = ['Yakşanba', 'Duşanba', 'Seşanba', 'Çorşanba', 'Payşanba', 'Juma', 'Şanba']
@@ -55,11 +83,13 @@ const Org = () => (
 
 /**
  * Yaqin tadbirlar — "chipta" ko'rinishi: tepada rasm va qolgan kunlar, o'yilgan chiziq,
- * pastda sana, vaqt, tashkilotchi va "Ro'yxatdan o'tish".
+ * pastda sana, vaqt, joyi va “Batafsil”. Maʼlumot “Poytaxt yoşlari” kanalidan (kelgusi tadbirlar).
  */
-export function Events({ locale }: { locale: Locale }) {
+export async function Events({ locale }: { locale: Locale }) {
   const href = `/${locale}/faoliyat/tadbirlar`
-  const items = EVENTS.map((e) => ({ ...e, p: parts(e.start), left: daysLeft(e.start) }))
+  const items = (await upcoming(locale)).map((e) => ({ ...e, p: parts(e.start), left: daysLeft(e.start) }))
+  // kelgusi tadbir bölmasa — bölim körsatilmaydi (namuna maʼlumot qöyilmaydi)
+  if (!items.length) return null
 
   return (
     <section className="sec ev-sec" id="tadbirlar" aria-labelledby="ev-title">
@@ -72,7 +102,7 @@ export function Events({ locale }: { locale: Locale }) {
         {/* Chipta ko'rinishi */}
         <div className="evv-c">
           {items.map((e) => (
-            <Link key={e.title} href={href} className="pt-ticket">
+            <Link key={e.href} href={e.href} className="pt-ticket">
               <div className="pt-img">
                 <img className="cover" src={e.img} alt="" />
                 <span className="pa-type">{e.type}</span>
@@ -90,7 +120,7 @@ export function Events({ locale }: { locale: Locale }) {
                   <p><Org /> {e.org}</p>
                 </div>
               </div>
-              <span className="pt-cta">Röyxatdan ötiş <Arrow /></span>
+              <span className="pt-cta">Batafsil <Arrow /></span>
             </Link>
           ))}
         </div>

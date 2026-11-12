@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import type { Locale } from '@/i18n/config'
-import { NEWS_PAGE_SIZE, toNewsCard } from '@/lib/news'
+import { NEWS_ONLY, NEWS_PAGE_SIZE, toNewsCard } from '@/lib/news'
 import { NewsRotator } from './NewsRotator'
 
 /**
@@ -18,7 +18,7 @@ export async function News({ locale }: { locale: Locale }) {
     limit: NEWS_PAGE_SIZE,
     sort: '-publishedAt',
     depth: 1,
-    where: { _status: { equals: 'published' } },
+    where: { and: [{ _status: { equals: 'published' } }, NEWS_ONLY] },
   })
   if (!res.totalDocs) return null
 

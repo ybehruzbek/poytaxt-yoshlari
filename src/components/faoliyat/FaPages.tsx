@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { ANNOUNCEMENTS } from './announcements'
+import { type Announce, ANNOUNCEMENTS } from './announcements'
 import { AnnounceList } from './AnnounceList'
 import { DIRECTIONS, PROJECTS } from './data'
 import { DirsShow } from './DirsShow'
@@ -170,7 +170,11 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
 
 /* ===================== Eʼlonlar ===================== */
 
-export function AnnouncePage({ crumbs }: { crumbs: ReactNode }) {
+export function AnnouncePage({ crumbs, extra = [] }: { crumbs: ReactNode; extra?: Announce[] }) {
+  // kanaldan kelgan eʼlonlar + oldin yiğilganlar (bir xil post takrorlanmaydi), yangisi tepada
+  const items = [...extra, ...ANNOUNCEMENTS.filter((a) => !extra.some((x) => x.id === a.id))].sort((a, b) =>
+    b.date.localeCompare(a.date),
+  )
   return (
     <div className="fa">
       <Head
@@ -179,7 +183,7 @@ export function AnnouncePage({ crumbs }: { crumbs: ReactNode }) {
       />
       <section className="sec fa-sec">
         <div className="wrap">
-          <AnnounceList items={ANNOUNCEMENTS} />
+          <AnnounceList items={items} />
         </div>
       </section>
     </div>

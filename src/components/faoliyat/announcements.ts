@@ -2,7 +2,7 @@
  * Eʼlonlar — tanlovlar, röyxatdan ötiş, çellenjlar, sayohat va tadbir eʼlonlari, natija posterlari.
  * “Poytaxt yoşlari” kanalidan yiğilgan (2023–2026), har biri asl postga bog‘langan. Yangi eʼlonlar şu röyxat boşiga qöşiladi.
  */
-export type Announce = { id: number; date: string; title: string; text: string; img: string }
+export type Announce = { id: number; date: string; title: string; text: string; img: string; /** saytdagi töliq maqola (kanaldan import qilingan eʼlonlar) */ href?: string }
 
 export const ANNOUNCEMENTS: Announce[] = [
   {

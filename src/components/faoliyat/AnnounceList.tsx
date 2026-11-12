@@ -72,7 +72,11 @@ export function AnnounceList({ items }: { items: Announce[] }) {
 
       <div className="vc-board">
         {list.slice(0, limit).map((e) => (
-          <a key={e.id} href={TG(e.id)} target="_blank" rel="noopener noreferrer">
+          <a
+            key={e.id}
+            href={e.href ?? TG(e.id)}
+            {...(e.href ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
+          >
             <img src={e.img} alt="" loading="lazy" />
             <span className="vc-board-t">
               <time dateTime={e.date}>{fmtDate(e.date)}</time>
