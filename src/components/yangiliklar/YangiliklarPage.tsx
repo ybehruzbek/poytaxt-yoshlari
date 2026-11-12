@@ -39,10 +39,6 @@ export function YangiliklarPage({
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Yangiliklar</h1>
-          <p className="pg-lead">
-            Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi faoliyati, OTT boşlanğiç taşkilotlari,
-            tadbirlar va yoşlar uçun imkoniyatlar haqidagi sönggi xabarlar.
-          </p>
         </div>
       </header>
 

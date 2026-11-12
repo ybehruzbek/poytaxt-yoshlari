@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- galereya suratlari statik webp; CMS ulanganda next/image ga ötadi */
 import type { ReactNode } from 'react'
 
+import { More } from '@/components/site/MoreBtn'
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 
 import { Lightbox, Pills, Search, ShowMore, VideoModal } from './AxClient'
@@ -456,9 +457,10 @@ function Clip({ m, quote = false }: { m: MediaItem; quote?: boolean }) {
       </header>
       <h3>{m.title}</h3>
       {quote ? <p className="ax-clip-q">{m.sum}</p> : <p>{m.sum}</p>}
-      <a href={m.url} target="_blank" rel="noopener noreferrer" className="ax-clip-a">
-        Naşrda öqiş <Ext />
-        <span className="sr-only"> (yangi oynada oçiladi)</span>
+      <a href={m.url} target="_blank" rel="noopener noreferrer" className="more-btn ax-clip-a">
+        <More>
+          Naşrda öqiş<span className="sr-only"> (yangi oynada oçiladi)</span>
+        </More>
       </a>
     </article>
   )

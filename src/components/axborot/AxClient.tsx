@@ -3,6 +3,8 @@
 /* eslint-disable @next/next/no-img-element -- galereya suratlari statik webp; CMS ulanganda next/image ga ötadi */
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { More } from '@/components/site/MoreBtn'
+
 import { ALBUMS, fullDate, photo, thumb } from './data'
 
 /* ============================================================
@@ -242,13 +244,13 @@ export function ShowMore({ target, rest }: { target: string; rest: number }) {
     <div className="ax-showmore">
       <button
         type="button"
-        className="ax-more-btn"
+        className="more-btn"
         onClick={() => {
           document.getElementById(target)?.classList.add('is-all')
           setDone(true)
         }}
       >
-        Köproq körsatiş · yana {rest} ta albom
+        <More>Köproq körsatiş · yana {rest} ta albom</More>
       </button>
     </div>
   )

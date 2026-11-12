@@ -1021,17 +1021,8 @@
 .ax-clip-q {
   font-style: italic;
 }
-.ax-clip-a {
+.ax-clip .more-btn {
   margin-top: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  font: 700 14.5px/1 var(--f-head);
-  color: var(--blue);
-}
-.ax-clip-a:hover {
-  color: var(--navy);
 }
 .ax-owall {
   list-style: none;
@@ -1308,23 +1299,6 @@
 .ax-albums.is-f1 ~ .ax-showmore,
 .ax-albums.is-f2 ~ .ax-showmore {
   display: none;
-}
-.ax .ax-more-btn {
-  height: 52px;
-  padding: 0 28px;
-  border-radius: 99px;
-  border: 1.5px solid var(--navy);
-  background: var(--bg);
-  font: 700 15.5px/1 var(--f-head);
-  color: var(--navy);
-  text-align: center;
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-.ax .ax-more-btn:hover {
-  background: var(--navy-bg);
-  color: #fff;
 }
 .ax-empty {
   display: none;

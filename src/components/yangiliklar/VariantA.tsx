@@ -112,8 +112,8 @@ export function VariantA({ items, cats, L }: { items: YnItem[]; cats: YnCat[]; L
 
             {grid.length > shown && (
               <div className="yn-a-more">
-                <button type="button" className="btn btn-outline" onClick={() => setShown((s) => s + STEP)}>
-                  Köproq körsatiş
+                <button type="button" className="more-btn" onClick={() => setShown((s) => s + STEP)}>
+                  <More>Köproq körsatiş</More>
                 </button>
                 <span>
                   {shown + 3} / {list.length}
