@@ -37,10 +37,13 @@ export const MAPS = {
 }
 
 export const PHONES = [
+  { v: '+998 71 246-10-70', href: 'tel:+998712461070' },
   { v: '+998 71 246-10-80', href: 'tel:+998712461080' },
   { v: '+998 71 246-10-90', href: 'tel:+998712461090' },
 ]
 export const EMAIL = CONTACT.email
+/** Rasmiy poçta manzillari: Kengaş poçtasi va yoshkent.uz domenidagi poçta */
+export const EMAILS = [CONTACT.email, 'info@yoshkent.uz']
 export const HOURS = {
   days: 'Duşanba — juma',
   time: '09:00 — 18:00',

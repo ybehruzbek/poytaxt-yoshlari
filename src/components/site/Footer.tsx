@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- logotip PNG; SVG varianti kelganda almashtiriladi */
 import Link from 'next/link'
 
-import { EMAIL as CONTACT_EMAIL, PHONES } from '@/components/boglanish/data'
+import { EMAILS, PHONES } from '@/components/boglanish/data'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 import { NET_LABEL, NETS } from '@/lib/socials'
@@ -15,7 +15,6 @@ const COPY = `© ${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşke
 const NOTE = 'Uşbu veb-saytdagi maʼlumotlardan foydalanilganda havola körsatilişi şart.'
 
 /* Aloqa: Kengaşning rasmiy telefonlari va poçtasi — “Aloqa maʼlumotlari” sahifasi bilan bir manbadan */
-const EMAIL = { v: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` }
 
 /** Menyuning barcha bo'limlari ustunlarda (majburiy tuzilma: src/config/nav.ts) */
 function SiteMap({ locale, className = 'fb-cols' }: { locale: Locale; className?: string }) {
@@ -99,7 +98,11 @@ export async function Footer({ locale }: { locale: Locale }) {
             ))}
           </div>
           <div className="fw-mail">
-            <a href={EMAIL.href}>{EMAIL.v}</a>
+            {EMAILS.map((m) => (
+              <a key={m} href={`mailto:${m}`}>
+                {m}
+              </a>
+            ))}
             {PHONES.map((p) => (
               <a key={p.href} href={p.href}>
                 {p.v}

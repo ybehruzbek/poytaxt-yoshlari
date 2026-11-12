@@ -5,7 +5,7 @@ import { AppealForm } from '@/components/site/AppealForm'
 import { More } from '@/components/site/MoreBtn'
 import { Svg } from '@/components/site/SocialPhones'
 
-import { ADDRESS, EMAIL, HOURS, LAW, MAPS, PHONES, RECEPTIONS, SOCIALS } from './data'
+import { ADDRESS, EMAILS, HOURS, LAW, MAPS, PHONES, RECEPTIONS, SOCIALS } from './data'
 import { OpenNow } from './OpenNow'
 
 /* ---------- umumiy bölaklar ---------- */
@@ -51,8 +51,8 @@ function Head({ crumbs, title }: { crumbs: ReactNode; title: string }) {
 }
 
 /** Poçta manzili: qator faqat “@” dan keyin bölinadi */
-function Mail() {
-  const [u, d] = EMAIL.split('@')
+function Mail({ to }: { to: string }) {
+  const [u, d] = to.split('@')
   return (
     <>
       {u}@<wbr />
@@ -169,11 +169,11 @@ function AloqaB({ L }: { L: (h: string) => string }) {
     {
       d: PATH.mail,
       k: 'Elektron poçta',
-      v: (
-        <a href={`mailto:${EMAIL}`}>
-          <Mail />
+      v: EMAILS.map((m) => (
+        <a key={m} href={`mailto:${m}`}>
+          <Mail to={m} />
         </a>
-      ),
+      )),
     },
     {
       d: PATH.pin,
