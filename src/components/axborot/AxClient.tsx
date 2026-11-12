@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- galereya suratlari statik webp; CMS ulanganda next/image ga ötadi */
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { ALBUMS, fullDate, photo, VIDEOS, SHORTS } from './data'
+import { ALBUMS, fullDate, photo, thumb } from './data'
 
 /* ============================================================
    Fotolar oynasi (lightbox): sahifadagi istalgan [data-album] tugma
@@ -47,6 +47,7 @@ export function Lightbox() {
     return () => document.removeEventListener('keydown', onKey)
   }, [st, go])
 
+  const sx = useRef(0)
   // tanlangan kiçik surat körinadigan joyga suriladi
   const strip = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -68,8 +69,17 @@ export function Lightbox() {
               ×
             </button>
           </header>
-          <figure className="ax-lb-fig">
-            <img src={photo(album.id, st.i)} alt={`${album.title} — ${st.i}-surat`} />
+          <figure
+            className="ax-lb-fig"
+            onPointerDown={(e) => (sx.current = e.clientX)}
+            onPointerUp={(e) => {
+              const d = e.clientX - sx.current
+              if (Math.abs(d) > 50) go(d < 0 ? 1 : -1)
+            }}
+          >
+            <img key={st.i} src={photo(album.id, st.i)} alt={`${album.title} — ${st.i}-surat`} draggable={false} />
+            {/* qöşni suratlar oldindan yuklanadi — almaştirişda kutiş bölmaydi */}
+            <link rel="preload" as="image" href={photo(album.id, (st.i % album.n) + 1)} />
             <button type="button" className="ax-lb-nav prev" onClick={() => go(-1)} aria-label="Oldingi surat">
               ‹
             </button>
@@ -113,16 +123,14 @@ const ALLOW = { code: 'accelerometer; autoplay; encrypted-media; gyroscope; pict
 
 export function VideoModal() {
   const dlg = useRef<HTMLDialogElement>(null)
-  const [id, setId] = useState<string | null>(null)
-  const v = VIDEOS.find((x) => x.id === id)
-  const s = SHORTS.find((x) => x.id === id)
+  const [st, setSt] = useState<{ id: string; title: string; short: boolean } | null>(null)
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const el = (e.target as Element).closest<HTMLElement>('[data-video]')
       if (!el) return
       e.preventDefault()
-      setId(el.dataset.video!)
+      setSt({ id: el.dataset.video!, title: el.dataset.title ?? 'Video', short: 'short' in el.dataset })
       dlg.current?.showModal()
     }
     document.addEventListener('click', onClick)
@@ -130,14 +138,14 @@ export function VideoModal() {
   }, [])
 
   return (
-    <dialog ref={dlg} className={`ax-vm${s ? ' is-short' : ''}`} aria-label="Video" onClose={() => setId(null)}>
-      {id && (
+    <dialog ref={dlg} className={`ax-vm${st?.short ? ' is-short' : ''}`} aria-label="Video" onClose={() => setSt(null)}>
+      {st && (
         <div className="ax-vm-in">
           <div className="ax-vm-frame">
-            <iframe src={`${YT}${id}?autoplay=1&rel=0`} title={v?.title ?? s?.title ?? 'Video'} allow={ALLOW} allowFullScreen />
+            <iframe src={`${YT}${st.id}?autoplay=1&rel=0`} title={st.title} allow={ALLOW} allowFullScreen />
           </div>
           <div className="ax-vm-bar">
-            <p>{v?.title ?? s?.title}</p>
+            <p>{st.title}</p>
             <button type="button" className="ax-lb-x" onClick={() => dlg.current?.close()} aria-label="Yopiş">
               ×
             </button>
@@ -163,7 +171,7 @@ export function InlinePlayer({ id, title }: { id: string; title: string }) {
         <iframe src={`${YT}${id}?autoplay=1&rel=0`} title={title} allow={ALLOW} allowFullScreen />
       ) : (
         <button type="button" className="ax-ip-cover" onClick={() => setOn(true)} aria-label={`Köriş: ${title}`}>
-          <img src={`/img/axborot/video/${id}.webp`} alt="" />
+          <img src={thumb(id)} alt="" />
           <span className="ax-play" aria-hidden="true" />
         </button>
       )}
@@ -181,11 +189,13 @@ export function Pills({
   label,
 }: {
   target: string
-  items: { v: string; l: string }[]
+  items: { v: string; l: string; n?: number }[]
   label: string
 }) {
   const [cur, setCur] = useState('all')
   useEffect(() => {
+    // saralanganda “Köproq körsatiş” bilan yaşirilganlar ham körinadi
+    document.getElementById(target)?.classList.toggle('is-f1', cur !== 'all')
     document.querySelectorAll<HTMLElement>(`#${target} [data-f]`).forEach((el) => {
       el.hidden = cur !== 'all' && !el.dataset.f!.split(' ').includes(cur)
     })
@@ -196,9 +206,10 @@ export function Pills({
   }, [cur, target])
   return (
     <div className="ax-pills" role="group" aria-label={label}>
-      {[{ v: 'all', l: 'Barçasi' }, ...items].map((it) => (
+      {[{ v: 'all', l: 'Barçasi', n: undefined as number | undefined }, ...items].map((it) => (
         <button key={it.v} type="button" aria-pressed={cur === it.v} onClick={() => setCur(it.v)}>
           {it.l}
+          {it.n !== undefined && <span className="ax-pill-n">{it.n}</span>}
         </button>
       ))}
     </div>
@@ -210,6 +221,7 @@ export function Search({ target, placeholder }: { target: string; placeholder: s
   const [q, setQ] = useState('')
   useEffect(() => {
     const s = q.trim().toLowerCase()
+    document.getElementById(target)?.classList.toggle('is-f2', !!s)
     document.querySelectorAll<HTMLElement>(`#${target} [data-q]`).forEach((el) => {
       el.classList.toggle('ax-off', !!s && !el.dataset.q!.toLowerCase().includes(s))
     })
@@ -219,5 +231,25 @@ export function Search({ target, placeholder }: { target: string; placeholder: s
       <span className="sr-only">{placeholder}</span>
       <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={placeholder} />
     </label>
+  )
+}
+
+/** “Köproq körsatiş”: #{target} ičidagi .ax-cut elementlarni oçadi */
+export function ShowMore({ target, rest }: { target: string; rest: number }) {
+  const [done, setDone] = useState(false)
+  if (done || rest <= 0) return null
+  return (
+    <div className="ax-showmore">
+      <button
+        type="button"
+        className="ax-more-btn"
+        onClick={() => {
+          document.getElementById(target)?.classList.add('is-all')
+          setDone(true)
+        }}
+      >
+        Köproq körsatiş · yana {rest} ta albom
+      </button>
+    </div>
   )
 }

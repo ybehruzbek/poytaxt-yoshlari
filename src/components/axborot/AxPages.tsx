@@ -3,14 +3,13 @@ import type { ReactNode } from 'react'
 
 import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 
-import { InlinePlayer, Lightbox, Pills, Search, VideoModal } from './AxClient'
+import { Lightbox, Pills, Search, ShowMore, VideoModal } from './AxClient'
 import {
   ALBUM_TYPES,
   ALBUMS,
   type AlbumType,
   cover,
   dayMonth,
-  dur,
   fullDate,
   monthKey,
   photo,
@@ -18,16 +17,12 @@ import {
   RELEASE_TYPES,
   RELEASES,
   type Release,
-  SERIES,
-  SHORTS,
+  type Short,
   shortThumb,
-  thumb,
-  VIDEO_TYPES,
-  VIDEOS,
-  type Video,
 } from './data'
 import { MEDIA, MEDIA_KINDS, type MediaItem } from './oav'
 import { VideoWatch } from './VideoWatch'
+import { getYoutubeFeed } from '@/lib/youtube'
 
 /** VAQTINÇA: variantlar faqat işlab çiqiş rejimida; saytda — A */
 const DEV = process.env.NODE_ENV !== 'production'
@@ -45,13 +40,13 @@ function Variants({ name, views }: { name: string; views: ReactNode[] }) {
   )
 }
 
-function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead: string }) {
+function Head({ crumbs, title, lead }: { crumbs: ReactNode; title: string; lead?: string }) {
   return (
     <header className="pg-head">
       <div className="wrap">
         {crumbs}
         <h1 className="h2 pg-title">{title}</h1>
-        <p className="pg-lead">{lead}</p>
+        {lead && <p className="pg-lead">{lead}</p>}
       </div>
     </header>
   )
@@ -77,138 +72,170 @@ const TOTAL_PHOTOS = ALBUMS.reduce((s, a) => s + a.n, 0)
    FOTOGALEREYA
    ==================================================================== */
 
-/** A — albomlar töri: muqova, suratlar soni, sana, tur böyiça saralaş */
+const FIRST = 9
+
+/** Albomlar uçun umumiy asboblar: tur (sonlari bilan), qidiruv, jami */
+function FotoTools({ target }: { target: string }) {
+  return (
+    <div className="ax-tools ax-ftools">
+      <Pills
+        target={target}
+        label="Albom turi"
+        items={TYPE_PILLS.map((t) => ({ ...t, n: ALBUMS.filter((a) => a.type === t.v).length }))}
+      />
+      <div className="ax-ftools-r">
+        <Search target={target} placeholder="Tadbir yoki OTT nomi" />
+        <p className="ax-total">
+          {ALBUMS.length} ta albom · {TOTAL_PHOTOS} ta surat
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function Pin() {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </svg>
+  )
+}
+
+/** Kartaning umumiy atributlari: saralaş, qidiruv, “Köproq körsatiş” */
+const liAttrs = (a: (typeof ALBUMS)[number], i: number) => ({
+  'data-f': a.type,
+  'data-q': `${a.title} ${a.place} ${ALBUM_TYPES[a.type]}`,
+  className: i >= FIRST ? 'ax-cut' : undefined,
+})
+
+/** A — albomlar töri (takomillaşgan): birinçi albom katta, kartada albomdan 3 ta kiçik surat */
 function FotoA() {
   return (
     <section className="sec ax">
       <div className="wrap">
-        <div className="ax-tools">
-          <Pills target="fa-grid" items={TYPE_PILLS} label="Albom turi" />
-          <p className="ax-total">
-            {ALBUMS.length} ta albom · {TOTAL_PHOTOS} ta surat
-          </p>
-        </div>
-        <ul className="ax-albums" id="fa-grid">
-          {ALBUMS.map((a) => (
-            <li key={a.id} data-f={a.type}>
-              <button type="button" className="ax-album" data-album={a.id}>
-                <span className="ax-album-ph">
-                  <img src={cover(a)} alt="" loading="lazy" />
+        <FotoTools target="fa-grid" />
+        <ul className="ax-albums ax-a2" id="fa-grid">
+          {ALBUMS.map((a, i) => (
+            <li key={a.id} {...liAttrs(a, i)} data-lead={i === 0 ? '' : undefined}>
+              <article className="ax-album">
+                <button type="button" className="ax-album-ph" data-album={a.id} aria-label={`Albomni oçiş: ${a.title}`}>
+                  <img src={cover(a)} alt="" loading={i < 4 ? 'eager' : 'lazy'} />
+                  <span className="ax-album-n">
+                    <Cam /> {a.n} surat
+                  </span>
+                  <span className="ax-date">{dayMonth(a.date)}</span>
+                </button>
+                <div className="ax-mini">
+                  {[2, 3, 4].map((k) => (
+                    <button key={k} type="button" data-album={a.id} data-i={k} aria-label={`${k}-surat`}>
+                      <img src={photo(a.id, k)} alt="" loading="lazy" />
+                      {k === 4 && a.n > 4 && <span className="ax-more-n">+{a.n - 4}</span>}
+                    </button>
+                  ))}
+                </div>
+                <div className="ax-album-b">
+                  <span className="ax-chip">{ALBUM_TYPES[a.type]}</span>
+                  <h2>
+                    <button type="button" data-album={a.id}>
+                      {a.title}
+                    </button>
+                  </h2>
+                  <small>
+                    <Pin /> {a.place}
+                  </small>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+        <p className="ax-empty">Bu söz böyiça albom topilmadi.</p>
+        <ShowMore target="fa-grid" rest={ALBUMS.length - FIRST} />
+      </div>
+    </section>
+  )
+}
+
+/** B — albom stopkasi: muqova ortida yana 2 surat; sičqonça olib borilganda yelpiğiçdek oçiladi */
+function FotoB() {
+  return (
+    <section className="sec ax">
+      <div className="wrap">
+        <FotoTools target="fb-grid" />
+        <ul className="ax-albums ax-stack-grid" id="fb-grid">
+          {ALBUMS.map((a, i) => (
+            <li key={a.id} {...liAttrs(a, i)}>
+              <button type="button" className="ax-stack" data-album={a.id}>
+                <span className="ax-stack-ph">
+                  <img className="s3" src={photo(a.id, 3)} alt="" loading="lazy" />
+                  <img className="s2" src={photo(a.id, 2)} alt="" loading="lazy" />
+                  <img className="s1" src={cover(a)} alt="" loading={i < 3 ? 'eager' : 'lazy'} />
                   <span className="ax-album-n">
                     <Cam /> {a.n}
                   </span>
-                  <span className="ax-date">{dayMonth(a.date)}</span>
                 </span>
-                <span className="ax-album-b">
-                  <span className="ax-chip">{ALBUM_TYPES[a.type]}</span>
+                <span className="ax-stack-b">
+                  <span className="ax-stack-meta">
+                    <time dateTime={a.date}>{fullDate(a.date)}</time>
+                    <span className="ax-chip">{ALBUM_TYPES[a.type]}</span>
+                  </span>
                   <b>{a.title}</b>
-                  <small>{a.place}</small>
+                  <small>
+                    <Pin /> {a.place}
+                  </small>
                 </span>
               </button>
             </li>
           ))}
         </ul>
+        <p className="ax-empty">Bu söz böyiça albom topilmadi.</p>
+        <ShowMore target="fb-grid" rest={ALBUMS.length - FIRST} />
       </div>
     </section>
   )
 }
 
-/** B — oylar böyiça xronologiya: har tadbir — qator va suratlar tasmasi */
-function FotoB() {
+/** C — jonli muqova: sičqonça olib borilganda albom suratlari almaşadi (tepada hikoya çiziqlari) */
+function FotoC() {
   return (
     <section className="sec ax">
       <div className="wrap">
-        <div className="ax-tl">
-          {byMonth(ALBUMS).map(([m, list]) => (
-            <section key={m} className="ax-tl-m">
-              <h2 className="ax-tl-h">{m}</h2>
-              <ol>
-                {list.map((a) => (
-                  <li key={a.id} className="ax-tl-row">
-                    <div className="ax-tl-txt">
-                      <time dateTime={a.date}>{dayMonth(a.date)}</time>
-                      <b>{a.title}</b>
-                      <small>
-                        {ALBUM_TYPES[a.type]} · {a.place}
-                      </small>
-                    </div>
-                    <div className="ax-tl-strip">
-                      {Array.from({ length: Math.min(a.n, 5) }, (_, k) => (
-                        <button key={k} type="button" data-album={a.id} data-i={k + 1} aria-label={`${a.title}: ${k + 1}-surat`}>
-                          <img src={photo(a.id, k + 1)} alt="" loading="lazy" />
-                          {k === 4 && a.n > 5 && <span className="ax-more-n">+{a.n - 5}</span>}
-                        </button>
-                      ))}
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </section>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** C — tahririyat uslubi: haftaning albomi (mozaika), keyin “devor” */
-function FotoC() {
-  const [lead, ...rest] = ALBUMS
-  return (
-    <>
-      <section className="ax-feat">
-        <div className="wrap ax-feat-in">
-          <div className="ax-feat-txt">
-            <span className="ax-chip on-dark">Haftaning albomi</span>
-            <h2>{lead.title}</h2>
-            <p>
-              {fullDate(lead.date)} · {lead.place}
-            </p>
-            <button type="button" className="btn btn-primary" data-album={lead.id}>
-              Albomni oçiş · {lead.n} surat
-            </button>
-          </div>
-          <div className="ax-mosaic">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <button key={i} type="button" data-album={lead.id} data-i={i} aria-label={`${i}-surat`}>
-                <img src={photo(lead.id, i)} alt="" />
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="sec ax">
-        <div className="wrap">
-          <div className="ax-stats">
-            <div>
-              <b>{ALBUMS.length}</b>
-              <span>albom</span>
-            </div>
-            <div>
-              <b>{TOTAL_PHOTOS}</b>
-              <span>surat</span>
-            </div>
-            <div>
-              <b>{new Set(ALBUMS.map((a) => a.place)).size}</b>
-              <span>maskan</span>
-            </div>
-          </div>
-          <div className="ax-wall">
-            {rest.map((a, i) => (
-              <button key={a.id} type="button" className={`ax-wall-it${i % 3 === 0 ? ' tall' : ''}`} data-album={a.id}>
-                <img src={cover(a)} alt="" loading="lazy" />
-                <span className="ax-wall-cap">
+        <FotoTools target="fc-grid" />
+        <ul className="ax-albums ax-live-grid" id="fc-grid">
+          {ALBUMS.map((a, i) => (
+            <li key={a.id} {...liAttrs(a, i)}>
+              <button type="button" className="ax-live" data-album={a.id}>
+                <span className="ax-live-ph">
+                  {[1, 2, 3, 4].map((k) => (
+                    <img key={k} src={photo(a.id, k)} alt="" loading={i < 3 && k === 1 ? 'eager' : 'lazy'} style={{ ['--k' as string]: k - 1 }} />
+                  ))}
+                  <span className="ax-live-bars" aria-hidden="true">
+                    {[0, 1, 2, 3].map((k) => (
+                      <i key={k} style={{ ['--k' as string]: k }} />
+                    ))}
+                  </span>
+                  <span className="ax-live-cap">
+                    <span className="ax-chip on-dark">{ALBUM_TYPES[a.type]}</span>
+                    <b>{a.title}</b>
+                  </span>
+                </span>
+                <span className="ax-live-b">
+                  <time dateTime={a.date}>{fullDate(a.date)}</time>
+                  <span>
+                    <Cam /> {a.n} surat
+                  </span>
                   <small>
-                    {dayMonth(a.date)} · {a.n} surat
+                    <Pin /> {a.place}
                   </small>
-                  <b>{a.title}</b>
                 </span>
               </button>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+            </li>
+          ))}
+        </ul>
+        <p className="ax-empty">Bu söz böyiça albom topilmadi.</p>
+        <ShowMore target="fc-grid" rest={ALBUMS.length - FIRST} />
+      </div>
+    </section>
   )
 }
 
@@ -241,7 +268,7 @@ const PANEL_FOTO: PanelSection[] = [
     name: 'fg',
     label: 'Fotogalereya',
     count: 3,
-    hints: ['Albomlar töri + saralaş', 'Oylar böyiça xronologiya', 'Haftaning albomi + devor'],
+    hints: ['A: katta birinçi albom + kiçik suratlar', 'A: albom stopkasi (yelpiğiç)', 'A: jonli muqova (suratlar almaşadi)'],
   },
 ]
 
@@ -249,34 +276,17 @@ const PANEL_FOTO: PanelSection[] = [
    VIDEOGALEREYA
    ==================================================================== */
 
-function VCard({ v }: { v: Video }) {
-  return (
-    <button type="button" className="ax-vc" data-video={v.id}>
-      <span className="ax-vc-ph">
-        <img src={thumb(v.id)} alt="" loading="lazy" />
-        <span className="ax-play sm" aria-hidden="true" />
-        <span className="ax-dur">{dur(v.sec)}</span>
-      </span>
-      <span className="ax-vc-b">
-        <span className="ax-chip">{VIDEO_TYPES[v.type]}</span>
-        <b>{v.title}</b>
-        <small>{fullDate(v.date)}</small>
-      </span>
-    </button>
-  )
-}
-
-function ShortsRail() {
+function ShortsRail({ shorts }: { shorts: Short[] }) {
   return (
     <div className="ax-shorts">
       <div className="ax-row-h">
         <h2>Qisqa videolar</h2>
-        <span>{SHORTS.length} ta</span>
+        <span>{shorts.length} ta</span>
       </div>
       <ul className="ax-rail">
-        {SHORTS.map((s) => (
+        {shorts.map((s) => (
           <li key={s.id}>
-            <button type="button" className="ax-short" data-video={s.id}>
+            <button type="button" className="ax-short" data-video={s.id} data-title={s.title} data-short="">
               <img src={shortThumb(s.id)} alt="" loading="lazy" />
               <span className="ax-play sm" aria-hidden="true" />
               <b>{s.title}</b>
@@ -288,109 +298,23 @@ function ShortsRail() {
   )
 }
 
-/** A — asosiy pleyer + videolar töri, tur böyiça saralaş */
-function VideoA() {
-  const [lead, ...rest] = VIDEOS
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <div className="ax-vlead">
-          <InlinePlayer id={lead.id} title={lead.title} />
-          <div className="ax-vlead-txt">
-            <span className="ax-chip">Yangi video · {VIDEO_TYPES[lead.type]}</span>
-            <h2>{lead.title}</h2>
-            <p>
-              {fullDate(lead.date)} · {dur(lead.sec)}
-            </p>
-          </div>
-        </div>
-        <div className="ax-tools">
-          <Pills
-            target="va-grid"
-            label="Video turi"
-            items={Object.entries(VIDEO_TYPES).map(([v, l]) => ({ v, l }))}
-          />
-        </div>
-        <ul className="ax-vgrid" id="va-grid">
-          {rest.map((v) => (
-            <li key={v.id} data-f={v.type}>
-              <VCard v={v} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )
-}
-
-/** B — qisqa videolar tasmasi + turkumlar (playlist) böyiça qatorlar */
-function VideoB() {
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <ShortsRail />
-        {SERIES.map((s) => {
-          const list = VIDEOS.filter((v) => v.series === s.key)
-          return (
-            <div key={s.key} className="ax-series">
-              <div className="ax-row-h">
-                <div>
-                  <h2>{s.title}</h2>
-                  <p>{s.note}</p>
-                </div>
-                <span>{list.length} ta video</span>
-              </div>
-              <ul className="ax-rail wide">
-                {list.map((v) => (
-                  <li key={v.id}>
-                    <VCard v={v} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )
-        })}
-      </div>
-    </section>
-  )
-}
-
-/** C — tomoşa sahifasi: çapda pleyer va tavsif, öngda navbatdagi videolar röyxati */
-function VideoC() {
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <VideoWatch />
-        <ShortsRail />
-      </div>
-    </section>
-  )
-}
-
-
-export function VideoPage({ crumbs }: { crumbs: ReactNode }) {
+/** Videogalereya (tasdiqlangan C varianti): çapda pleyer, öngda videolar röyxati, pastda qisqa videolar.
+ *  Videolar Kengaşning rasmiy YouTube kanalidan avtomatik olinadi (lib/youtube.ts). */
+export async function VideoPage({ crumbs }: { crumbs: ReactNode }) {
+  const { videos, shorts } = await getYoutubeFeed()
   return (
     <div className="ax-page">
-      <Head
-        crumbs={crumbs}
-        title="Videogalereya"
-        lead="Kengaş tadbirlaridan video lavhalar, reportajlar va “Istiqlol farzandlari” kabi maxsus körsatuvlar."
-      />
-      <Variants name="vg" views={[<VideoA key="a" />, <VideoB key="b" />, <VideoC key="c" />]} />
+      <Head crumbs={crumbs} title="Videogalereya" />
+      <section className="sec ax">
+        <div className="wrap">
+          <VideoWatch videos={videos} />
+          <ShortsRail shorts={shorts} />
+        </div>
+      </section>
       <VideoModal />
-      {DEV && <DevSectionsPanel sections={PANEL_VIDEO} />}
     </div>
   )
 }
-
-const PANEL_VIDEO: PanelSection[] = [
-  {
-    name: 'vg',
-    label: 'Videogalereya',
-    count: 3,
-    hints: ['Asosiy pleyer + tör', 'Qisqa videolar + turkumlar', 'Tomoşa sahifasi + röyxat'],
-  },
-]
 
 /* ====================================================================
    PRESS-RELIZLAR
