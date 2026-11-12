@@ -11,7 +11,6 @@ import {
   CONTACT,
   EVENTS,
   IMG,
-  INTRO,
   LEADERS,
   MEMBERS,
   ORGANS,
@@ -161,7 +160,7 @@ export function KengashPage({ L, crumbs, siblings }: P) {
             {LEADERS.map((p, i) => (
               <article key={i}>
                 <div className="kg-ava">
-                  {p.img ? <img src={p.img} alt={p.name} /> : <span>{initials(p.role)}</span>}
+                  {p.img ? <img src={p.img} alt={p.name} /> : <span>{initials(p.name)}</span>}
                 </div>
                 <h3>{p.name}</h3>
                 <p>{p.role}</p>
@@ -198,8 +197,8 @@ export function KengashPage({ L, crumbs, siblings }: P) {
             <div>
               <h2 className="h2">Qarorlar va yiğilişlar</h2>
               <p>
-                Markaziy Kengaş yiğilişlari, qabul qilingan qarorlar va hisobotlar şu yerda eʼlon
-                qilinadi.
+                Markaziy Kengaş yiğilişlarida qabul qilingan qarorlar va hisobotlar “Kengaş hujjatlari”
+                bölimida eʼlon qilinadi.
               </p>
             </div>
             <Link href={L('/hujjatlar/kengash')} className="btn btn-primary">
@@ -235,7 +234,6 @@ export function KengashPage({ L, crumbs, siblings }: P) {
           <div>
             <h2 className="h2">Aloqa</h2>
             <p className="kg-con-addr">{CONTACT.address}</p>
-            <p className="kg-con-note">{CONTACT.note}</p>
             <div className="it-btns">
               <a
                 href={CONTACT.map}
@@ -265,7 +263,6 @@ export function KengashPage({ L, crumbs, siblings }: P) {
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Markaziy Kengaş</h1>
-          <p className="pg-lead">{INTRO}</p>
         </div>
       </header>
 

@@ -3,9 +3,6 @@
  * Manba: Özbekiston yoşlar ittifoqining Ustavi (V bob, 5.1–5.7-bandlar). Keyinçalik admin paneldan boşqariladi.
  */
 
-export const INTRO =
-  'Qurultoylar oraliğida Özbekiston yoşlar ittifoqiga rahbarlik qiluvçi organ. Kengaş Qurultoy qarorlari ijrosini taʼminlaydi, Ittifoqning asosiy yönalişlari, rejasi va byudjetini belgilaydi.'
-
 export const ABOUT = {
   lead: 'Markaziy Kengaş — Qurultoylar oraliğida Ittifoqning rahbar organi.',
   paras: [
@@ -27,7 +24,7 @@ export type Organ = { t: string; d: string; meta?: string }
 
 /** Ittifoq rahbar organlari (Ustav, 5.1) */
 export const ORGANS: Organ[] = [
-  { t: 'Qurultoy', d: 'Ittifoqning oliy rahbar organi. Ustav va Dasturni tasdiqlaydi, Markaziy Kengaş, uning raisi va örinbosarlarini saylaydi.', meta: 'Yilda kamida bir marta' },
+  { t: 'Qurultoy', d: 'Ittifoqning oliy rahbar organi. Ustavni tasdiqlaydi, Markaziy Kengaş va Markaziy nazorat-taftiş komissiyasi tarkibini, ularning raislarini saylaydi.', meta: 'Hisobot Qurultoyi — yilda kamida bir marta' },
   { t: 'Markaziy Kengaş', d: 'Qurultoylar oraliğida Ittifoqqa rahbarlik qiladi, Qurultoy qarorlari va dasturiy vazifalar ijrosini taʼminlaydi.', meta: '5 yilga, kamida 61 kişi' },
   { t: 'Ijroiya qömitasi', d: 'Markaziy Kengaş aʼzolari orasidan saylanadi va taşkiliy masalalar böyiça tezkor qarorlar qabul qiladi.', meta: '5 yilga, kamida 15 kişi' },
   { t: 'Markaziy nazorat-taftiş komissiyasi', d: 'Ittifoq va uning tuzilmalari moliyaviy-xöjalik faoliyatini va Ustavga rioya qilinişini nazorat qiladi.', meta: '5 yilga, kamida 11 kişi' },
@@ -52,22 +49,20 @@ export const MEMBERS = {
   lead: 'Kengaş tarkibi turli sohalarda band bölgan yoşlarning turli toifalari hisobidan şakllantiriladi.',
   byPost: [
     'Markaziy Kengaş raisi va uning örinbosarlari',
-    'Markaziy Kengaş apparati boşqarma va bölim rahbarlari',
-    'Yoşlar muammolarini örganiş va istiqbolli kadrlarni tayyorlaş instituti rektori',
-    'Ittifoq naşrlari va “Yoşlar” teleradiokanali rahbarlari',
+    'Markaziy Kengaş apparatining moliya-iqtisod va taşkiliy-kadrlar bölimlari mudirlari',
+    'Yoşlar muammolarini örganiş va istiqbolli kadrlarni tayyorlaş instituti direktori',
+    'Ittifoq muassisligidagi markaziy gazetalar boş muharriri va “Yoşlar” teleradiokanali direktori',
     'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahar hududiy kengaşlari raislari',
   ],
   fields: ['Taʼlim', 'Fan', 'Madaniyat va sanʼat', 'Ommaviy axborot vositalari', 'Işlab çiqariş va xizmat', 'Tadbirkorlik va fermerlik', 'Sport', 'Soğliqni saqlaş', 'Ekologiya', 'Qurolli kuçlar', 'Huquq-tartibot organlari'],
-  link: 'Toşkent şahar hududiy Kengaşi raisi ham Markaziy Kengaş tarkibiga kiradi — poytaxt yoşlarining ovozi Ittifoqning boşqaruvida şu orqali eşitiladi.',
+  link: 'Toşkent şahar hududiy Kengaşining raisi lavozimi böyiça Markaziy Kengaş tarkibiga kiradi.',
 }
 
-/* Rahbariyat: rais — UzA xabarlaridan (2025–2026); örinbosarlar NAMUNA — rasmiy maʼlumot kelgaçi almaştiriladi */
+/* Rahbariyat: rais — UzA xabarlaridan (2025–2026); örinbosarlar rasmiy maʼlumot kelgaç qöşiladi */
 export type Leader = { name: string; role: string; img?: string }
 
 export const LEADERS: Leader[] = [
   { name: 'Xayrulla Sattorov', role: 'Markaziy Kengaş raisi' },
-  { name: 'Maʼlumot tez orada', role: 'Rais örinbosari' },
-  { name: 'Maʼlumot tez orada', role: 'Rais örinbosari' },
 ]
 
 /** Ijroiya qömitasi va nazorat-taftiş komissiyasi (Ustav, 5.6–5.7) */
@@ -99,7 +94,6 @@ export const BODIES = [
 export const CONTACT = {
   address: 'Toşkent şahri, Alişer Navoiy köçasi, 11-uy',
   map: 'https://yandex.uz/maps/?text=Toshkent%2C%20Alisher%20Navoiy%20ko%27chasi%2C%2011',
-  note: 'Telefon, elektron poçta va qabul kunlari rasmiy maʼlumot kelgaçi qöşiladi.',
 }
 
 export const IMG = {
@@ -131,7 +125,7 @@ export const EVENTS: KgEvent[] = [
   {
     date: '23.12.2024',
     t: 'Yoşlar yetakçilari forumi',
-    d: 'Oliy taʼlim muassasalaridagi boşlanğiç taşkilotlarning faol yetakçilari taqdirlandi.',
+    d: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlarning faol yetakçilari taqdirlandi.',
     img: '/img/kengash/forum-2024.jpg',
     href: 'https://uza.uz/oz/posts/faol-yoshlar-yetakchilari-taqdirlandi_671313',
   },

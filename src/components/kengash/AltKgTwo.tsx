@@ -187,7 +187,6 @@ export function ContactB({ L }: P) {
           <div className="y2-cb-panel">
             <h2 className="h2">Aloqa</h2>
             <p className="y2-cb-addr">{CONTACT.address}</p>
-            <p className="y2-cb-note">{CONTACT.note}</p>
             <div className="y2-btns">
               <a
                 href={CONTACT.map}
@@ -236,7 +235,6 @@ export function ContactC({ L }: P) {
           </div>
           <img src={IMG.building} alt={BUILDING_ALT} />
           <div className="y2-cc-note">
-            <p>{CONTACT.note}</p>
             <Link href={L('/boglanish/murojaat')} className="btn btn-outline">
               Murojaat yuboriş
             </Link>
