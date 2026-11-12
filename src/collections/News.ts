@@ -118,7 +118,7 @@ export const News: CollectionConfig = {
             { label: 'Eʼlon (tanlov, röyxatdan ötiş, kurs)', value: 'elon' },
             { label: 'Kelgusi tadbir', value: 'tadbir' },
           ],
-          admin: { description: 'Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — bosh sahifadagi “Yaqin tadbirlar”da' },
+          admin: { description: 'Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — boş sahifadagi “Yaqin tadbirlar”da' },
         },
         { name: 'eventDate', label: 'Tadbir sanasi', type: 'date', index: true, admin: { date: { pickerAppearance: 'dayAndTime' }, condition: (d) => d?.kind === 'tadbir' } },
         { name: 'eventPlace', label: 'Tadbir joyi', type: 'text', admin: { condition: (d) => d?.kind === 'tadbir' }, hooks: { beforeChange: [imloMatn] } },
