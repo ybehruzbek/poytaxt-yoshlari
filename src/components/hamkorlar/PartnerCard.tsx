@@ -1,4 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- logotiplar kiçik, öz ölçamida */
+import { More } from '@/components/site/MoreBtn'
+
 import { DIRS, type Partner } from './data'
 
 const dirName = (k: string) => DIRS.find((d) => d.k === k)?.t ?? k
@@ -18,8 +20,11 @@ export function PartnerCard({ p }: { p: Partner }) {
       </ul>
       <p>{p.what}</p>
       {p.site && (
-        <a href={p.site} target="_blank" rel="noopener noreferrer" className="pt-site">
-          {p.domain} <span aria-hidden="true">↗</span>
+        <a href={p.site} target="_blank" rel="noopener noreferrer" className="more-btn pt-site">
+          <More>
+            {p.domain}
+            <span className="sr-only"> (yangi oynada oçiladi)</span>
+          </More>
         </a>
       )}
     </article>

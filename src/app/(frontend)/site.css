@@ -432,3 +432,13 @@ html,body{overflow-x:clip}
 /* ---------- Qator bölinişi: sarlavhada yolğiz söz qolmaydi, matnda qatorlar tekisroq ---------- */
 h1,h2,h3,h4,h5,.h1,.h2{text-wrap:balance}
 p,li,dd,blockquote,figcaption{text-wrap:pretty}
+
+/* faqat ekran öquvçi uçun matn (masalan, “yangi oynada oçiladi”) — butun saytda */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
