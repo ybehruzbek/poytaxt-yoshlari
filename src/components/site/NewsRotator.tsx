@@ -198,7 +198,6 @@ export function NewsRotator({
                   aria-hidden="true"
                 />
               )}
-              {k === 0 && <span className="pg-next-label">Keyingi</span>}
               <div className="th">
                 <img className="cover" src={s.image} alt={s.imageAlt} />
               </div>

@@ -336,7 +336,7 @@
   position: relative;
   overflow: hidden;
 }
-.na-list article > :not(.pg-next):not(.pg-next-label) {
+.na-list article > :not(.pg-next) {
   position: relative;
   z-index: 1;
 }
@@ -349,20 +349,6 @@
   transform: scaleX(0);
   transform-origin: left;
   animation: pg-fill linear forwards;
-}
-.pg-next-label {
-  display: block;
-  position: absolute;
-  right: 16px;
-  bottom: 14px;
-  z-index: 2;
-  padding: 5px 10px;
-  border-radius: 99px;
-  background: var(--navy-bg);
-  color: #fff;
-  font: 700 11px/1 var(--f-body);
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
 }
 .na-list li.is-next article {
   box-shadow: inset 0 0 0 2px var(--yellow);
