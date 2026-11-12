@@ -768,7 +768,7 @@ export const PARTNERS: Partner[] = [
     name: '“Özbektelekom” aksiyadorlik kompaniyasi',
     group: 'korxona',
     dirs: ['raqamli', 'bandlik'],
-    logo: '/img/hamkorlar/uztelecom.webp',
+    logo: '/img/hamkorlar/uztelecom.svg',
     site: 'https://uztelecom.uz',
     domain: 'uztelecom.uz',
     what: 'Yoşlarning raqamli savodxonligini oşiriş va axborot-kommunikatsiya sohasidagi yoş mutaxassislarni qöllab-quvvatlaş yönalişlarida hamkorlik qilinadi.',
