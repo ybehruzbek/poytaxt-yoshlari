@@ -79,7 +79,7 @@ export function TextErrorReport() {
             <p className="te-l">Siz belgilagan matn:</p>
             <blockquote className="te-q">{sel?.text}</blockquote>
             <label className="te-l" htmlFor="te-c">
-              Izoh (ixtiyoriy): qanday yozilişi kerak?
+              Töğri variant yoki izoh (ixtiyoriy)
             </label>
             <textarea
               id="te-c"

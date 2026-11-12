@@ -21,7 +21,7 @@ export function AppealForm() {
     const fd = new FormData(form)
     // murojaat turi tanlanmaguniça yuborilmaydi
     if (!fd.get('type')) {
-      setState({ ok: false, errors: { type: 'Murojaat turini tanlang: savol, murojaat yoki taklif.' }, message: 'Iltimos, murojaat turini tanlang.' })
+      setState({ ok: false, errors: { type: 'Murojaat turini tanlang: savol, murojaat yoki taklif.' }, message: 'Iltimos, belgilangan maydonlarni tekşiring.' })
       form.querySelector<HTMLInputElement>('input[name="type"]')?.focus()
       return
     }
@@ -84,8 +84,8 @@ export function AppealForm() {
       </fieldset>
 
       <label className="cb-field">
-        <span>Ism-familiya <i aria-hidden="true">*</i></span>
-        <input name="name" autoComplete="name" required maxLength={120} placeholder="Ism-familiya" {...field('name')} />
+        <span>Familiya, ism, otasining ismi <i aria-hidden="true">*</i></span>
+        <input name="name" autoComplete="name" required maxLength={120} {...field('name')} />
         {errEl('name')}
       </label>
       <div className="cb-row">
@@ -102,7 +102,7 @@ export function AppealForm() {
       </div>
       <label className="cb-field">
         <span>Xabar <i aria-hidden="true">*</i></span>
-        <textarea name="message" rows={3} required maxLength={4000} placeholder="Savolingiz, murojaatingiz yoki taklifingizni yozing" {...field('message')} />
+        <textarea name="message" rows={3} required maxLength={4000} placeholder="Murojaat mazmunini bayon qiling" {...field('message')} />
         {errEl('message')}
       </label>
 
@@ -135,7 +135,7 @@ export function AppealForm() {
           </svg>
         </span>
       </button>
-      <p className="cb-note"><i aria-hidden="true">*</i> — töldirilişi şart bölgan maydonlar</p>
+      <p className="cb-note"><i aria-hidden="true">*</i> — töldirilişi majburiy maydonlar</p>
 
       {state?.message && (
         <p className={`cb-msg ${state.ok ? 'ok' : 'bad'}`} role={state.ok ? 'status' : 'alert'}>

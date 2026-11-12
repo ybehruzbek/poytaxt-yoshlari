@@ -34,7 +34,7 @@ export async function reportTextError(input: {
     .slice(0, 300)
   const ip = clientIp(await headers())
   if (rateLimited(ip, 'text-error'))
-    return { ok: false, message: 'Juda köp uriniş. Iltimos, birozdan keyin qayta yuboring.' }
+    return { ok: false, message: 'Yuboriş urinişlari soni oşib ketdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const bad = { ok: false, message: 'Xabarni yuborib bölmadi. Iltimos, matnni qayta belgilang.' }
   if (!text || text.length > 300 || !page.startsWith('/')) return bad

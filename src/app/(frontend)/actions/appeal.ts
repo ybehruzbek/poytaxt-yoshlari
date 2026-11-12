@@ -21,10 +21,10 @@ const str = (fd: FormData, k: string) => String(fd.get(k) ?? '').trim()
 /** Saytdagi "Savol, murojaat yoki taklif" shaklini qabul qiladi */
 export async function submitAppeal(fd: FormData): Promise<AppealState> {
   // bot uchun yashirin maydon to'ldirilgan bo'lsa — jimgina "qabul qilindi" deymiz
-  if (str(fd, 'website')) return { ok: true, message: 'Rahmat! Murojaatingiz qabul qilindi.' }
+  if (str(fd, 'website')) return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
 
   const ip = clientIp(await headers())
-  if (rateLimited(ip)) return { ok: false, message: 'Juda köp uriniş. Iltimos, birozdan keyin qayta yuboring.' }
+  if (rateLimited(ip)) return { ok: false, message: 'Yuboriş urinişlari soni oşib ketdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const type = str(fd, 'type')
   const name = str(fd, 'name')
@@ -35,7 +35,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
 
   const errors: AppealState['errors'] = {}
   if (!APPEAL_TYPES.some((t) => t.value === type)) errors.type = 'Murojaat turini tanlang.'
-  if (name.length < 3 || name.length > 120) errors.name = 'Ism-familiyangizni töliq kiriting.'
+  if (name.length < 3 || name.length > 120) errors.name = 'Familiya, ism va otasining ismini töliq kiriting.'
   const digits = phone.replace(/\D/g, '')
   if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160) errors.email = 'Elektron poçta manzilini töğri kiriting.'
@@ -77,7 +77,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
       },
       overrideAccess: true,
     })
-    return { ok: true, message: 'Rahmat! Murojaatingiz qabul qilindi — tez orada siz bilan boğlanamiz.' }
+    return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
   } catch (err) {
     console.error('[murojaat] saqlaşda xato:', err)
     return { ok: false, message: 'Murojaatni saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
