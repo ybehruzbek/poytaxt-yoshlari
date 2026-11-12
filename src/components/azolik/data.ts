@@ -34,14 +34,7 @@ export const STEPS = [
   },
 ]
 
-/** Ariza namunasi — Ustavning 4.1-bandida közda tutilgan “tegişli mazmundagi ariza” */
-export const ARIZA = {
-  to: (org: string) => `Özbekiston yoşlar ittifoqi ${org || '__________________'} boşlanğiç taşkiloti yetakçisiga`,
-  from: (name: string) => (name ? `${name}dan` : '______________________ dan'),
-  body: 'Meni Özbekiston yoşlar ittifoqi aʼzoligiga qabul qilişingizni söyrayman. Ittifoq Ustavi bilan tanişdim, uning maqsadlarini qöllab-quvvatlayman, Ustav talablariga rioya qiliş va aʼzolik majburiyatlarini bajarişni zimmamga olaman.',
-}
-
-/** B — onlayn ariza yuborilgaç: keyingi bosqiçlar */
+/** Onlayn ariza yuborilgaç: keyingi bosqiçlar */
 export const AFTER = [
   'Ariza Kengaşda röyxatga olinadi va siz körsatgan öqiş yoki iş joyidagi Ittifoq boşlanğiç taşkilotiga yuboriladi.',
   'Ariza boşlanğiç taşkilotning Umumiy yiğilişida (Kengaş yiğilişida) körib çiqiladi (Ustavning 4.4-bandi).',

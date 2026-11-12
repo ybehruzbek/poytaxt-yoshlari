@@ -1,7 +1,7 @@
-/** “Aʼzo böliş” sahifasining umumiy qismlari (serverda çiziladi) */
+/** “Aʼzo böliş” sahifasining qismlari: şartlar va tartib (serverda çiziladi) */
 import Link from 'next/link'
 
-import { ARIZA, CONDITIONS, STEPS } from './data'
+import { CONDITIONS, STEPS } from './data'
 
 const USTAV = (L: (h: string) => string, band: string) => L(`/hujjatlar/normativ/ustav#band-${band}`)
 
@@ -39,23 +39,5 @@ export function Steps({ L }: { L: (h: string) => string }) {
         </li>
       ))}
     </ol>
-  )
-}
-
-/** Ariza hujjati (namuna yoki töldirilgan) — çop etişga tayyor */
-export function ArizaDoc({ org = '', name = '', date = '' }: { org?: string; name?: string; date?: string }) {
-  return (
-    <article className="az-doc" aria-label="Ariza">
-      <div className="az-doc-to">
-        <p>{ARIZA.to(org)}</p>
-        <p>{ARIZA.from(name)}</p>
-      </div>
-      <h3>ARIZA</h3>
-      <p className="az-doc-body">{ARIZA.body}</p>
-      <div className="az-doc-sign">
-        <span>Sana: {date || '“____” ______________ 20___-yil'}</span>
-        <span>Imzo: ______________</span>
-      </div>
-    </article>
   )
 }

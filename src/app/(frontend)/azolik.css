@@ -1,6 +1,6 @@
 /* =====================================================================
-   “AʼZO BÖLİŞ” sahifasi (components/azolik/*): şartlar, tartib, ariza namunasi,
-   onlayn ariza şakli, bosqiçma-bosqiç ariza. Ranglar faqat tokenlar orqali.
+   “AʼZO BÖLİŞ” sahifasi (components/azolik/*): aʼzolik şartlari, arizani körib çiqiş
+   tartibi va onlayn ariza şakli. Ranglar faqat tokenlar orqali.
    ===================================================================== */
 .az-sec + .az-sec {
   padding-top: 0;
@@ -109,56 +109,7 @@
   align-items: start;
 }
 
-/* ---------- ariza hujjati ---------- */
-.az-doc-wrap .h2 {
-  margin-bottom: 24px;
-}
-.az-doc {
-  padding: 48px 52px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: #fff;
-  color: #1c1c1c;
-  font: 400 16px/1.7 var(--f-body);
-  box-shadow: 0 24px 50px -36px rgba(48, 22, 18, 0.5);
-}
-.az-doc-to {
-  margin-left: auto;
-  max-width: 300px;
-  display: grid;
-  gap: 6px;
-}
-.az-doc-to p,
-.az-doc-body {
-  margin: 0;
-}
-.az-doc h3 {
-  margin: 36px 0 20px;
-  text-align: center;
-  font: 800 18px/1 var(--f-head);
-  letter-spacing: 0.2em;
-  color: #1c1c1c;
-}
-.az-doc-body {
-  text-indent: 2em;
-  text-align: justify;
-}
-.az-doc-sign {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-}
-.az-doc-acts {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-/* ---------- maydonlar (B, C) ---------- */
+/* ---------- ariza şakli ---------- */
 .az-form {
   display: flex;
   flex-direction: column;
@@ -250,16 +201,14 @@
   color: #b4361a;
   font-weight: 600;
 }
-.az-form .btn,
-.az-wiz .btn {
+.az-form .btn {
   border: none;
   cursor: pointer;
 }
 .az-form .btn {
   align-self: flex-start;
 }
-.az-form .btn:disabled,
-.az-wiz .btn:disabled {
+.az-form .btn:disabled {
   opacity: 0.5;
   cursor: default;
 }
@@ -277,7 +226,7 @@
   font-size: 24px;
 }
 
-/* ---------- natija (B) ---------- */
+/* ---------- natija ---------- */
 .az-result {
   display: grid;
   gap: 16px;
@@ -330,114 +279,6 @@
   color: rgba(255, 255, 255, 0.88);
 }
 
-/* ---------- C: bosqiçlar ---------- */
-.az-wiz-wrap {
-  max-width: 880px;
-}
-.az-wiz-bar {
-  list-style: none;
-  margin: 0 0 28px;
-  padding: 0;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.az-wiz-bar li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 18px 8px 8px;
-  border: 1.5px solid var(--line);
-  border-radius: 99px;
-  font: 700 14.5px/1 var(--f-head);
-  color: var(--muted);
-}
-.az-wiz-bar span {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--line);
-  color: var(--navy);
-}
-.az-wiz-bar li.on {
-  border-color: var(--navy-bg);
-  background: var(--navy-bg);
-  color: #fff;
-}
-.az-wiz-bar li.on span {
-  background: var(--yellow);
-  color: var(--navy-bg);
-}
-.az-wiz-bar li.done {
-  color: var(--navy);
-}
-.az-wiz-bar li.done span {
-  background: var(--green);
-  color: #fff;
-}
-.az-wiz-card {
-  display: grid;
-  gap: 20px;
-  padding: 40px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  background: var(--bg);
-  animation: az-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@keyframes az-in {
-  from {
-    opacity: 0;
-    translate: 0 12px;
-  }
-}
-.az-wiz-card h2 {
-  margin: 0;
-  font: 800 calc(clamp(22px, 2.2vw, 30px) * var(--h-scale)) / 1.2 var(--f-head);
-  color: var(--navy);
-}
-.az-wiz-note {
-  margin: 0;
-  line-height: 1.6;
-  color: var(--grey);
-}
-.az-verdict {
-  margin: 0;
-  padding: 16px 20px;
-  border-radius: 18px;
-  background: color-mix(in srgb, #b4361a 10%, transparent);
-  color: #b4361a;
-  font-weight: 600;
-  line-height: 1.55;
-}
-.az-verdict.ok {
-  background: color-mix(in srgb, var(--green) 14%, transparent);
-  color: #2b7550;
-}
-.az-wiz-nav {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.az-foot-note {
-  margin-top: 20px;
-  font-size: 14px;
-  color: var(--muted);
-}
-.az-foot-note a {
-  color: var(--navy);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--yellow);
-}
-
-html[data-theme='dark'] .az-verdict {
-  color: #ff9d8f;
-}
-html[data-theme='dark'] .az-verdict.ok {
-  color: #7fd3a5;
-}
 
 @media (max-width: 1000px) {
   .az-split {
@@ -456,42 +297,12 @@ html[data-theme='dark'] .az-verdict.ok {
   .az-row {
     grid-template-columns: 1fr;
   }
-  .az-doc {
-    padding: 28px 22px;
-    font-size: 15px;
-  }
   .az-form,
-  .az-wiz-card,
   .az-result {
     padding: 24px 20px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .az-wiz-card {
-    animation: none;
-  }
-}
 
-/* ---------- çop etiş: faqat ariza ---------- */
-@media print {
-  body * {
-    visibility: hidden;
-  }
-  .az-print,
-  .az-print * {
-    visibility: visible;
-  }
-  .az-print {
-    position: absolute;
-    inset: 0 0 auto;
-  }
-  .az-doc {
-    border: 0;
-    box-shadow: none;
-    padding: 20mm 15mm;
-    font-size: 14pt;
-  }
-}
 html[data-theme='dark'] :is(.az-err, .az-msg) {
   color: #ffb59a;
 }
