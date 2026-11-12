@@ -109,55 +109,9 @@ const liAttrs = (a: (typeof ALBUMS)[number], i: number) => ({
   className: i >= FIRST ? 'ax-cut' : undefined,
 })
 
-/** A — albomlar töri (takomillaşgan): birinçi albom katta, kartada albomdan 3 ta kiçik surat */
-function FotoA() {
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <FotoTools target="fa-grid" />
-        <ul className="ax-albums ax-a2" id="fa-grid">
-          {ALBUMS.map((a, i) => (
-            <li key={a.id} {...liAttrs(a, i)} data-lead={i === 0 ? '' : undefined}>
-              <article className="ax-album">
-                <button type="button" className="ax-album-ph" data-album={a.id} aria-label={`Albomni oçiş: ${a.title}`}>
-                  <img src={cover(a)} alt="" loading={i < 4 ? 'eager' : 'lazy'} />
-                  <span className="ax-album-n">
-                    <Cam /> {a.n} surat
-                  </span>
-                  <span className="ax-date">{dayMonth(a.date)}</span>
-                </button>
-                <div className="ax-mini">
-                  {[2, 3, 4].map((k) => (
-                    <button key={k} type="button" data-album={a.id} data-i={k} aria-label={`${k}-surat`}>
-                      <img src={photo(a.id, k)} alt="" loading="lazy" />
-                      {k === 4 && a.n > 4 && <span className="ax-more-n">+{a.n - 4}</span>}
-                    </button>
-                  ))}
-                </div>
-                <div className="ax-album-b">
-                  <span className="ax-chip">{ALBUM_TYPES[a.type]}</span>
-                  <h2>
-                    <button type="button" data-album={a.id}>
-                      {a.title}
-                    </button>
-                  </h2>
-                  <small>
-                    <Pin /> {a.place}
-                  </small>
-                </div>
-              </article>
-            </li>
-          ))}
-        </ul>
-        <p className="ax-empty">Bu söz böyiça albom topilmadi.</p>
-        <ShowMore target="fa-grid" rest={ALBUMS.length - FIRST} />
-      </div>
-    </section>
-  )
-}
-
-/** B — albom stopkasi: muqova ortida yana 2 surat; sičqonça olib borilganda yelpiğiçdek oçiladi */
-function FotoB() {
+/** Fotogalereya (tasdiqlangan B varianti — albom stopkasi): muqova ortida yana 2 surat,
+ *  sičqonça olib borilganda yelpiğiçdek oçiladi */
+function FotoStack() {
   return (
     <section className="sec ax">
       <div className="wrap">
@@ -195,50 +149,6 @@ function FotoB() {
   )
 }
 
-/** C — jonli muqova: sičqonça olib borilganda albom suratlari almaşadi (tepada hikoya çiziqlari) */
-function FotoC() {
-  return (
-    <section className="sec ax">
-      <div className="wrap">
-        <FotoTools target="fc-grid" />
-        <ul className="ax-albums ax-live-grid" id="fc-grid">
-          {ALBUMS.map((a, i) => (
-            <li key={a.id} {...liAttrs(a, i)}>
-              <button type="button" className="ax-live" data-album={a.id}>
-                <span className="ax-live-ph">
-                  {[1, 2, 3, 4].map((k) => (
-                    <img key={k} src={photo(a.id, k)} alt="" loading={i < 3 && k === 1 ? 'eager' : 'lazy'} style={{ ['--k' as string]: k - 1 }} />
-                  ))}
-                  <span className="ax-live-bars" aria-hidden="true">
-                    {[0, 1, 2, 3].map((k) => (
-                      <i key={k} style={{ ['--k' as string]: k }} />
-                    ))}
-                  </span>
-                  <span className="ax-live-cap">
-                    <span className="ax-chip on-dark">{ALBUM_TYPES[a.type]}</span>
-                    <b>{a.title}</b>
-                  </span>
-                </span>
-                <span className="ax-live-b">
-                  <time dateTime={a.date}>{fullDate(a.date)}</time>
-                  <span>
-                    <Cam /> {a.n} surat
-                  </span>
-                  <small>
-                    <Pin /> {a.place}
-                  </small>
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-        <p className="ax-empty">Bu söz böyiça albom topilmadi.</p>
-        <ShowMore target="fc-grid" rest={ALBUMS.length - FIRST} />
-      </div>
-    </section>
-  )
-}
-
 function Cam() {
   return (
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -252,21 +162,12 @@ export function FotoPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="ax-page">
       <Head crumbs={crumbs} title="Fotogalereya" />
-      <Variants name="fg" views={[<FotoA key="a" />, <FotoB key="b" />, <FotoC key="c" />]} />
+      <FotoStack />
       <Lightbox />
-      {DEV && <DevSectionsPanel sections={PANEL_FOTO} />}
     </div>
   )
 }
 
-const PANEL_FOTO: PanelSection[] = [
-  {
-    name: 'fg',
-    label: 'Fotogalereya',
-    count: 3,
-    hints: ['A: katta birinçi albom + kiçik suratlar', 'A: albom stopkasi (yelpiğiç)', 'A: jonli muqova (suratlar almaşadi)'],
-  },
-]
 
 /* ====================================================================
    VIDEOGALEREYA
@@ -499,11 +400,7 @@ function PressC() {
 export function PressPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="ax-page">
-      <Head
-        crumbs={crumbs}
-        title="Press-relizlar"
-        lead="Kengaşning rasmiy xabarlari, eʼlonlari va tanlovlari. Jurnalistlar uçun aloqa va media-töplam şu sahifada."
-      />
+      <Head crumbs={crumbs} title="Press-relizlar" />
       <Variants name="pr" views={[<PressA key="a" />, <PressB key="b" />, <PressC key="c" />]} />
       {DEV && <DevSectionsPanel sections={PANEL_PRESS} />}
     </div>
@@ -679,11 +576,7 @@ function OavC() {
 export function OavPage({ crumbs }: { crumbs: ReactNode }) {
   return (
     <div className="ax-page">
-      <Head
-        crumbs={crumbs}
-        title="OAV biz haqimizda"
-        lead="Kengaş faoliyati haqida ommaviy axborot vositalari va davlat organlari saytlarida eʼlon qilingan materiallar."
-      />
+      <Head crumbs={crumbs} title="OAV biz haqimizda" />
       <Variants name="oa" views={[<OavA key="a" />, <OavB key="b" />, <OavC key="c" />]} />
       {DEV && <DevSectionsPanel sections={PANEL_OAV} />}
     </div>
