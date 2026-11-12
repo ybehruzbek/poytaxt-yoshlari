@@ -5,10 +5,24 @@ import { useLayoutEffect } from 'react'
 import { motionOff, startReveal } from './RevealMotion'
 
 /**
- * Bosh sahifa animatsiyasi: bölimlar elementlari RevealMotion bilan bir xil fade-up bilan çiqadi
- * (birinçi ekran — boş ekran — yaşirilmaydi), “Biz haqimizda” raqamlari sanaladi, sarlavha
- * (SplitWords) söz-söz yorişadi. Boş ekranga faqat skroll paralaksi (--x, motion.css).
+ * Bosh sahifa animatsiyasi: har bölim öz harakati bilan oçiladi (RevealMotion effektlari):
+ * yangiliklar — yumşoq köteriliş, tadbirlar — navbat bilan, imkoniyatlar — bento kataklari kattalaşadi,
+ * “Biz haqimizda” — raqamlar sanaladi va sarlavha (SplitWords) söz-söz yorişadi, “Nega qöşiliş” — çapdan,
+ * belgilar “sakrab”, murojaat şakli — kattadan, ijtimoiy tarmoqlar — kiçikdan.
+ * Boş ekran yuklanişda CSS bilan oçiladi (reveal.css), skrollda paralaks (--x, motion.css).
  */
+const FX = [
+  ['.news-sec .na-main, .news-sec .na-list > li', 'rise'],
+  ['.ev-sec .pt-ticket', 'tilt'],
+  ['#imkoniyatlar .opp', 'grow'],
+  ['#imkoniyatlar .opps-title', 'mask'],
+  ['#biz-haqimizda .ach > div', 'pop'],
+  ['.benefit h2, .benefit .body4, .benefit .values li', 'slide'],
+  ['#murojaat .cb-steps li', 'side'],
+  ['#murojaat .cb-form', 'zoom'],
+  ['.sp .sp-phone', 'pop'],
+  ['.sec-head > h2', 'mask'],
+] as const
 const ITEMS = [
   '.news-sec .sec-head > *',
   '.news-sec .na-main',
@@ -35,7 +49,7 @@ const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
 
 export function HomeMotion() {
   useLayoutEffect(() => {
-    const stop = startReveal({ root: 'main', items: ITEMS, counters: '#biz-haqimizda .ach b' })
+    const stop = startReveal({ root: 'main', items: ITEMS, counters: '#biz-haqimizda .ach b', fx: FX })
     const hero = document.querySelector<HTMLElement>('.hero')
     if (!hero || motionOff()) return stop
 

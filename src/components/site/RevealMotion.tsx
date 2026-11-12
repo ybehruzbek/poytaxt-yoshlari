@@ -3,14 +3,36 @@
 import { useLayoutEffect } from 'react'
 
 /**
- * Saytning yagona skroll animatsiyasi (uslublar: reveal.css). Sahifa kodiga tegmaydi — elementlarni
+ * Saytning skroll animatsiyasi (uslublar: reveal.css). Sahifa kodiga tegmaydi — elementlarni
  * mavjud teglar va sinflar orqali topadi va faqat sinf / CSS özgaruvçilarini qöyadi (DOM tuzilişi özgarmaydi):
- * – sarlavha, matn, karta, ro'yxat bandi — fade-up (16px, 600ms), navbat 50ms, eng köpi 6 ta;
- * – `images` suratlari — img-reveal (800ms);
- * – `counters` raqamlari 0 dan sanaladi (1.2s);
+ * – sarlavha, matn, karta, ro'yxat bandi — ekranga kirganda çiqadi; har sahifa öz “imzosi” bilan
+ *   (effektlar löğati: head — sarlavhalar, grid — töplamlar, img — suratlar, fx — aniq elementlar);
+ * – `counters` raqamlari 0 dan sanaladi;
  * – `.split-words` (SplitWords) sarlavhalari skroll bilan söz-söz yorişadi.
- * Birinçi ekrandagi mazmun heç qaçon yaşirilmaydi; “harakatni kamaytiriş” va öqiş rejimida hammasi darhol körinadi.
+ * Birinçi ekrandagi mazmun heç qaçon yaşirilmaydi (u CSS bilan, yuklanişda oçiladi — reveal.css);
+ * “harakatni kamaytiriş” va öqiş rejimida hammasi darhol körinadi.
  */
+
+/** Effektlar löğati (reveal.css dagi .fx-* bilan) */
+export type Fx =
+  | 'up'
+  | 'rise'
+  | 'grow'
+  | 'pop'
+  | 'drop'
+  | 'side'
+  | 'slide'
+  | 'swing'
+  | 'zoom'
+  | 'skew'
+  | 'paper'
+  | 'tilt'
+  | 'flip'
+  | 'mask'
+  | 'wipe'
+  | 'curtain'
+  | 'circle'
+
 export type RevealOpts = {
   root: string
   /** aniq elementlar (berilmasa — avtomatik topiladi) */
@@ -18,13 +40,24 @@ export type RevealOpts = {
   counters?: string
   images?: string
   skip?: string
+  /** qöşimça oçiladigan elementlar (avtomatik topilganlardan taşqari) */
+  extra?: string
+  /** h1/h2 va .sec-head effekti */
+  head?: Fx
+  /** töplam (kartalar, ro'yxat) elementlari effekti */
+  grid?: Fx
+  /** suratlar effekti (sukut — ramkadan oçiliş) */
+  img?: Fx
+  /** aniq elementlar uçun effekt: [selektor, effekt] — birinçi mos kelgani olinadi */
+  fx?: ReadonlyArray<readonly [string, Fx]>
 }
 
-const STAGGER_MS = 50
-const STAGGER_MAX = 5 // 6 ta elementdan keyin navbat ösmaydi
-const FADE_MS = 600
-const IMG_MS = 800
-const COUNT_MS = 1200
+const STAGGER_MS = 80
+const STAGGER_MAX = 7 // 8 ta elementdan keyin navbat ösmaydi
+const ANIM_MS = 1400 // eng uzun effekt (curtain/circle/swing) + zaxira
+const COUNT_MS = 1600
+/** juda baland elementlarda kuçli harakat ğalati körinadi — ular uçun faqat yumşoq effektlar */
+const SOFT = /^(up|rise|mask|wipe|curtain|circle|zoom)$/
 
 const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v)
 
@@ -50,14 +83,14 @@ const SKIP_TAGS = new Set([
 ])
 
 /** Avtomatik topiş: töplamlar (kamida 3 ta bir xil teg-farzand), sarlavhalar va matnlar */
-function autoItems(host: HTMLElement, add: (e: HTMLElement) => void) {
+function autoItems(host: HTMLElement, add: (e: HTMLElement, grid?: boolean) => void) {
   host.querySelectorAll<HTMLElement>('*').forEach((e) => {
     const kids = [...e.children] as HTMLElement[]
     if (kids.length < 3 || SKIP_TAGS.has(e.tagName) || e.parentElement?.closest('li')) return
     if (!kids.every((c) => c.tagName === kids[0].tagName)) return
     // butun bölimlar yoki variant örama-lari töplam emas
     if (kids[0].tagName === 'SECTION' || kids.some((c) => c.classList.contains('vx'))) return
-    kids.forEach(add)
+    kids.forEach((k) => add(k, true))
   })
   host
     .querySelectorAll<HTMLElement>(
@@ -129,15 +162,43 @@ export function startReveal(o: RevealOpts): () => void {
   const skipped = (e: Element) => !!o.skip && !!e.closest(o.skip)
 
   const items = new Set<HTMLElement>()
-  const add = (e: HTMLElement, img = false) => {
+  const inGrid = new Set<HTMLElement>()
+  const add = (e: HTMLElement, grid = false, img = false) => {
     if (items.has(e) || skipped(e) || e.closest('.rv') || !below(e)) return
     e.classList.add('rv')
     if (img) e.classList.add('rv-img')
+    if (grid) inGrid.add(e)
     items.add(e)
   }
-  if (o.images) host.querySelectorAll<HTMLElement>(o.images).forEach((e) => add(e, true))
+  if (o.images) host.querySelectorAll<HTMLElement>(o.images).forEach((e) => add(e, false, true))
   if (o.items) host.querySelectorAll<HTMLElement>(o.items).forEach((e) => add(e))
-  else autoItems(host, (e) => add(e))
+  else autoItems(host, add)
+  if (o.extra) host.querySelectorAll<HTMLElement>(o.extra).forEach((e) => add(e))
+
+  // effekt: aniq selektor > surat > sarlavha > töplam
+  const fxOf = new Map<HTMLElement, string>()
+  items.forEach((e) => {
+    const hit = o.fx?.find(([sel]) => e.matches(sel))?.[1]
+    const name =
+      hit ??
+      (e.classList.contains('rv-img')
+        ? o.img
+        : /^H[12]$/.test(e.tagName) || e.classList.contains('sec-head')
+          ? o.head
+          : inGrid.has(e)
+            ? o.grid
+            : undefined)
+    if (!name || name === 'up') return
+    if (!SOFT.test(name) && e.offsetHeight > innerHeight * 0.75) return
+    e.classList.add(`fx-${name}`)
+    fxOf.set(e, `fx-${name}`)
+  })
+  const clean = (el: HTMLElement) => {
+    el.classList.remove('rv', 'rv-in', 'rv-img')
+    const f = fxOf.get(el)
+    if (f) el.classList.remove(f)
+    el.style.removeProperty('--d')
+  }
 
   const heads = [...host.querySelectorAll<HTMLElement>('.split-words')].filter((h) => !skipped(h))
   const nums = o.counters
@@ -187,13 +248,11 @@ export function startReveal(o: RevealOpts): () => void {
         el.style.setProperty('--d', `${d}ms`)
         el.classList.add('rv-in')
         // çiqib bölgaç sinflar olinadi — elementning öz hover/transition uslublari qaytadi
-        const ms = el.classList.contains('rv-img') ? IMG_MS : FADE_MS
         timers.push(
           window.setTimeout(() => {
-            el.classList.remove('rv', 'rv-in', 'rv-img')
-            el.style.removeProperty('--d')
+            clean(el)
             items.delete(el)
-          }, d + ms + 80),
+          }, d + ANIM_MS),
         )
       })
   }
@@ -214,10 +273,7 @@ export function startReveal(o: RevealOpts): () => void {
     ro.disconnect()
     mo.disconnect()
     mq.removeEventListener('change', onPref)
-    items.forEach((e) => {
-      e.classList.remove('rv', 'rv-in', 'rv-img')
-      e.style.removeProperty('--d')
-    })
+    items.forEach(clean)
     heads.forEach((h) => h.style.removeProperty('--t'))
     html.classList.remove('rv-ready')
   }
@@ -243,11 +299,11 @@ export function startReveal(o: RevealOpts): () => void {
 }
 
 /** Içki sahifalar uçun (PageMotion orqali) */
-export function RevealMotion({ root, items, counters, images, skip }: RevealOpts) {
-  // useLayoutEffect: yangi mazmun çizilişidan oldin tayyorlanadi
+export function RevealMotion({ root, items, counters, images, skip, extra, head, grid, img, fx }: RevealOpts) {
+  // useLayoutEffect: yangi mazmun çizilişidan oldin tayyorlanadi; fx — doimiy massiv (havolasi özgarmaydi)
   useLayoutEffect(
-    () => startReveal({ root, items, counters, images, skip }),
-    [root, items, counters, images, skip],
+    () => startReveal({ root, items, counters, images, skip, extra, head, grid, img, fx }),
+    [root, items, counters, images, skip, extra, head, grid, img, fx],
   )
   return null
 }
