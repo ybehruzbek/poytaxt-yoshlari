@@ -34,7 +34,7 @@ export function HamkorlarPage({ crumbs }: { crumbs: ReactNode }) {
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Hamkorlar</h1>
+          <h1 className="h2 pg-title">Özbekiston yoşlar ittifoqining hamkorlari</h1>
           <ul className="pt-stats">
             <li>
               <b>{DOMESTIC.length}</b>
