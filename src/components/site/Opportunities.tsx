@@ -49,13 +49,13 @@ export function Opportunities({ locale }: { locale: Locale }) {
       <section className="sec" id="imkoniyatlar">
         <div className="wrap">
           <h2 className="h2 opps-title">
-            Siz uçun <span>imkoniyatlar</span>
+            Yoşlar uçun <span>imkoniyatlar</span>
           </h2>
           <div className="opps">
             <Link href={`/${locale}/faoliyat/loyihalar`} className="opp big o1">
               <div className="title">
                 <b>Grantlar</b>
-                <span>Taşabbusingizni moliyalaştiring</span>
+                <span>Yoşlar taşabbuslarini moliyalaştiriş</span>
               </div>
               <svg
                 className="deco"

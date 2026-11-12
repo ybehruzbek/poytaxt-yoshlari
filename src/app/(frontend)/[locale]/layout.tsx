@@ -44,7 +44,7 @@ const body = Inter({
 export const metadata: Metadata = {
   title: 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description:
-    'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşining rasmiy veb-sayti: kengaş faoliyati, boşlanğiç taşkilotlar hayoti, yoşlar uçun imkoniyatlar va yangiliklar.',
+    'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşining rasmiy veb-sayti: Kengaş faoliyati, boşlanğiç taşkilotlar, yoşlar uçun imkoniyatlar, hujjatlar va yangiliklar.',
   icons: { icon: '/img/logo-toshkent.png' },
 }
 

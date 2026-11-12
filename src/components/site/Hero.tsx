@@ -14,8 +14,8 @@ export function Hero({ locale }: { locale: Locale }) {
     <div className="hero-content">
       <div className="hero-text">
         <div>
-          <h1 className="h1 hero-slogan"><span>Orzu qil.</span> <span>Harakat qil.</span> <span>Biz yoningdamiz.</span></h1>
-          <p className="lead">Taʼlim, sport, ijod, tadbirkorlik va volontyorlik yönalişlarida poytaxt yoşlari uçun doimiy dasturlar. Yangiliklarni ötkazib yubormang.</p>
+          <h1 className="h1 hero-slogan"><span className="hero-kicker">Özbekiston yoşlar ittifoqi</span> <span>Toşkent şahar</span> <span>hududiy Kengaşi</span></h1>
+          <p className="lead">Kengaş poytaxtda Ittifoq boşlanğiç taşkilotlari faoliyatini muvofiqlaştiradi, yoşlar taşabbuslarini qöllab-quvvatlaydi, yoşlarning huquq va qonuniy manfaatlarini himoya qiladi.</p>
         </div>
         <div className="hero-actions">
           <Link href={`/${locale}/faoliyat/loyihalar`} className="btn btn-primary">Imkoniyatlarni köriş

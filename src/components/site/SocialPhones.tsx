@@ -68,9 +68,9 @@ export async function SocialPhones() {
       <div className="wrap">
         <div className="sec-head sp-head">
           <h2 className="h2">
-            Bizni <span>kuzatib boring</span>
+            Ijtimoiy <span>tarmoqlar</span>
           </h2>
-          <p className="body4">Yangiliklar, eʼlonlar va tadbirlar — birinçi bölib ijtimoiy tarmoqlarimizda.</p>
+          <p className="body4">Kengaşning rasmiy sahifalari: yangiliklar, eʼlonlar va tadbirlar haqida xabarlar.</p>
         </div>
         <div className="sp-phones">
           {nets.map((net) => {

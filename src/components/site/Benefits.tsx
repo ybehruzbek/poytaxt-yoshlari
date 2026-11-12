@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- prototip rasmlari; CMS ulanganda next/image ga o'tadi */
 import type { Locale } from '@/i18n/config'
 
-/** Nega qo‘shilish kerak. ittifoq/index.html prototipidan avtomatik ko'chirilgan — dizaynni o'zgartirmang. */
+/** Ittifoq orqali beriladigan imtiyozlar (tekşirilgan: components/faq/data.ts, components/ittifoq/data.ts). ittifoq/index.html prototipidan avtomatik ko'chirilgan — dizaynni o'zgartirmang. */
 export function Benefits(_props: { locale: Locale }) {
   return (
     <>
@@ -19,13 +19,13 @@ export function Benefits(_props: { locale: Locale }) {
       <div style={{ left: "430px", top: "400px", width: "160px", height: "160px", borderRadius: "50%", overflow: "hidden", border: "8px solid #fff" }}><img className="cover" src="/img/news-3.jpg" alt="" /></div>
     </div>
     <div>
-      <h2 className="h2">Nega Yoşlar ittifoqiga <span>qöşiliş kerak?</span></h2>
-      <p className="body4" style={{ marginTop: "16px", maxWidth: "573px" }}>Biz yoşlarga öz kuçini sinab köriş, foydali tanişlar orttiriş va jamiyatga hissa qöşiş uçun maydon yaratamiz.</p>
+      <h2 className="h2">Ittifoq orqali beriladigan imtiyozlar</h2>
+      <p className="body4" style={{ marginTop: "16px", maxWidth: "573px" }}>Imtiyozlar qonun hujjatlari va Ittifoq qarorlarida belgilangan tartibda beriladi.</p>
       <ul className="values">
-        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Grant va tanlovlarda birinçilardan bölib qatnaşiş</li>
-        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Mentorlar va tajribali mutaxassislar bilan muloqot</li>
-        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Volontyorlik orqali tajriba va sertifikat</li>
-        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Oliygoh va jamoangizdagi boşlanğiç taşkilot safida faol böliş</li>
+        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Oliy taʼlimning pedagogika yönalişlariga test sinovlarisiz, davlat granti asosida qabul uçun tavsiyanoma</li>
+        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Harbiy xizmatdan keyin kontrakt asosida öqiyotgan talabalar uçun kontrakt summasining 35 foizini tölab beriş</li>
+        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>Sudda javob berayotgan yoşlar uçun Ittifoq kafilligi</li>
+        <li><i><svg viewBox="0 0 40 40"><path fill="#43A574" d="M20 2l4.5 3.3 5.5-.4 1.7 5.3 4.6 3-1.7 5.3 1.7 5.3-4.6 3-1.7 5.3-5.5-.4L20 38l-4.5-3.3-5.5.4-1.7-5.3-4.6-3 1.7-5.3-1.7-5.3 4.6-3 1.7-5.3 5.5.4z" /><path d="M13.5 20.5l4.5 4.5 8.5-9" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></i>“Özbekiston belgisi” kökrak nişoni</li>
       </ul>
     </div>
   </div>
