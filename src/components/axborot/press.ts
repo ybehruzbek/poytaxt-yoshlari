@@ -38,10 +38,10 @@ export const PRESS: PressItem[] = [
     kind: 'reliz',
     date: '2026-10-12',
     title: 'Poytaxtning 70 dan ortiq yoşlar yetakçisi respublika forumida qatnaşdi',
-    lead: '9–11-oktabr kunlari Markaziy Kengaş tomonidan ötkazilgan “Oliy taʼlim yetakçilarining forumi”da Toşkent şahridagi oliy taʼlim taşkilotlarining 70 dan ortiq yoşlar yetakçisi faol iştirok etdi.',
+    lead: '9–11-oktabr kunlari Özbekiston yoşlar ittifoqi Markaziy Kengaşi tomonidan ötkazilgan “Oliy taʼlim yetakçilarining forumi”da Toşkent şahridagi oliy taʼlim taşkilotlarining 70 dan ortiq yoşlar yetakçisi qatnaşdi.',
     body: [
       'Poytaxt vakillari respublikaning turli hududlaridan kelgan yoşlar yetakçilari bilan tajriba almaşdi, boşlanğiç taşkilotlar faoliyatidagi samarali yondaşuvlar va ilğor loyihalar bilan tanişdi.',
-      'Forum yoşlar yetakçilarining bilim va könikmalarini boyitiş hamda oliy taʼlim taşkilotlari örtasidagi hamkorlikni mustahkamlaşga xizmat qildi. Orttirilgan tajriba va yangi hamkorlik aloqalari talaba-yoşlar taşabbuslarini qöllab-quvvatlaş, sohaviy va brend loyihalarni birgalikda amalga oşirişda qöllaniladi.',
+      'Forumda orttirilgan tajriba va yangi hamkorlik aloqalari talaba-yoşlar taşabbuslarini qöllab-quvvatlaş hamda oliy taʼlim taşkilotlari bilan sohaviy va brend loyihalarni birgalikda amalga oşirişda qöllaniladi.',
     ],
     facts: [
       { v: '70+', k: 'poytaxt yoşlar yetakçisi' },
@@ -55,10 +55,9 @@ export const PRESS: PressItem[] = [
     kind: 'reliz',
     date: '2026-10-08',
     title: 'Toşkent şahrida “Hududiy koordinatorlar instituti” modeli joriy etiladi',
-    lead: 'Kengaş poytaxtdagi oliy taʼlim taşkilotlari yoşlar yetakçilari bilan hamkorlikni yanada yaqinlaştiriş maqsadida yangi taşkiliy model — “Hududiy koordinatorlar instituti”ni joriy etmoqda.',
+    lead: 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi poytaxtdagi oliy taʼlim taşkilotlari yoşlar yetakçilari bilan işni muvofiqlaştiriş uçun yangi taşkiliy model — “Hududiy koordinatorlar instituti”ni joriy etmoqda.',
     body: [
-      'Kengaş qamrovida 98 ta oliy taʼlim taşkiloti faoliyat yuritadi, ular şaharning turli hududlarida joylaşgan. Yoşlar yetakçilari bilan yanada yaqin va samarali hamkorlikni taşkil etiş zarurati yangi taşkiliy yondaşuvni taqozo etdi.',
-      'Model doirasida oliy taʼlim taşkilotlari hududiy joylaşuviga köra 9 ta guruhga birlaştirildi, 10 nafar yoşlar yetakçisi hududiy koordinator etib belgilandi. Hududdagi tayanç oliy taʼlim taşkilotining yoşlar yetakçisi koordinator vazifasini bajaradi: biriktirilgan taşkilotlar yoşlar yetakçilarining hamkorligini muvofiqlaştiradi, istiqbolli taşabbuslarni birlaştiradi va qöşma loyihalarni amalga oşirişga kömaklaşadi.',
+      'Model doirasida Kengaş qamrovidagi 98 ta oliy taʼlim taşkiloti hududiy joylaşuviga köra 9 ta guruhga birlaştirildi, 10 nafar yoşlar yetakçisi hududiy koordinator etib belgilandi. Hududdagi tayanç oliy taʼlim taşkilotining yoşlar yetakçisi koordinator vazifasini bajaradi: biriktirilgan taşkilotlar yoşlar yetakçilarining hamkorligini muvofiqlaştiradi, istiqbolli taşabbuslarni birlaştiradi va qöşma loyihalarni amalga oşirişga kömaklaşadi.',
       'Yangi institutning ustuvor yönalişi — oliy taʼlim taşkilotlaridagi eng salohiyatli va taşabbuskor yoşlarni aniqlaş, ularning bilim va könikmalarini rivojlantiriş hamda yirik loyihalarga jalb etiş. Taşkilotlarning ixtisoslaşuvi va ilmiy salohiyatidan kelib çiqib, bir neçta oliy taʼlim taşkiloti hamkorligida brend loyihalar yaratişga alohida eʼtibor qaratiladi.',
     ],
     facts: [
@@ -72,9 +71,9 @@ export const PRESS: PressItem[] = [
     kind: 'reliz',
     date: '2026-10-08',
     title: 'OTT yoşlar yetakçilarining yangi öquv yilidagi birinçi umumiy yiğilişi bölib ötdi',
-    lead: '7-oktabr kuni Toşkent arxitektura-quriliş universitetida Kengaş tomonidan poytaxtdagi oliy taʼlim taşkilotlari boşlanğiç taşkilotlari yoşlar yetakçilarining 2026/2027-öquv yilidagi birinçi umumiy yiğilişi ötkazildi.',
+    lead: '7-oktabr kuni Toşkent arxitektura-quriliş universitetida Kengaş poytaxtdagi oliy taʼlim taşkilotlari boşlanğiç taşkilotlarining yoşlar yetakçilari uçun 2026/2027-öquv yilidagi birinçi umumiy yiğilişni ötkazdi.',
     body: [
-      'Kengaytirilgan yiğilişda boşlanğiç taşkilotlar oldida 2026–2027-öquv yilida turgan ustuvor maqsad va vazifalar belgilab olindi, ularning faoliyatini takomillaştiriş va yoşlar bilan işlaş samaradorligini oşiriş masalalari körib çiqildi.',
+      'Kengaytirilgan yiğilişda boşlanğiç taşkilotlar oldida 2026/2027-öquv yilida turgan ustuvor maqsad va vazifalar belgilab olindi, ularning faoliyatini takomillaştiriş va yoşlar bilan işlaş samaradorligini oşiriş masalalari körib çiqildi.',
     ],
     album: 6822,
   },
@@ -83,14 +82,14 @@ export const PRESS: PressItem[] = [
     kind: 'anons',
     date: '2026-10-08',
     title: 'Oliy taʼlim taşkilotlari yoşlar yetakçilarining respublika forumi',
-    lead: 'Markaziy Kengaş tomonidan ötkaziladigan forumda respublikadan 200 nafardan ortiq yoşlar yetakçisi, jumladan, Toşkent şahridagi 91 ta oliy taʼlim taşkilotining yoşlar yetakçilari qatnaşadi.',
+    lead: 'Özbekiston yoşlar ittifoqi Markaziy Kengaşi tomonidan ötkaziladigan forumda respublikadan 200 nafardan ortiq yoşlar yetakçisi, jumladan, Toşkent şahridagi 91 ta oliy taʼlim taşkilotining yoşlar yetakçilari qatnaşadi.',
     body: [
       'Uç kunlik forumda yoşlar yetakçilarining huquq va majburiyatlari, faoliyatni samarali taşkil etiş, şaxsiy brendni şakllantiriş, notiqlik mahorati, zamonaviy raqamli texnologiyalardan foydalaniş va yoşlar bilan işlaşning ilğor usullariga bağişlangan seminar-treninglar va amaliy maşğulotlar ötkaziladi.',
       'Forum doirasida “IELTS Marafon”, “Suvni birgalikda asraymiz”, “Yölovçi” va “Kitob-top” loyihalari taqdimoti, hududlararo tajriba almaşiş, intellektual öyinlar, sport musobaqalari hamda madaniy-maʼrifiy tadbirlar rejalaştirilgan.',
     ],
     facts: [
       { v: '200+', k: 'yoşlar yetakçisi' },
-      { v: '91', k: 'poytaxt OTTsi' },
+      { v: '91', k: 'poytaxt OTTsidan yetakçilar' },
     ],
     event: { when: '9–11-oktabr', place: 'Yoşlar oromgohi, Toşkent viloyati' },
   },

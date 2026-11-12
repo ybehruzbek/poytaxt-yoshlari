@@ -109,7 +109,7 @@ export const ALBUMS: Album[] = [
   },
   {
     id: 6930,
-    title: 'Şarqşunoslik universiteti talabalari qadimiy Samarqandda',
+    title: 'Toşkent davlat şarqşunoslik universiteti talabalarining Samarqandga sayohati',
     date: '2026-10-20',
     type: 'sayohat',
     place: 'Samarqand şahri',
@@ -133,10 +133,10 @@ export const ALBUMS: Album[] = [
   },
   {
     id: 6890,
-    title: '“Oliy taʼlim yetakçilarining forumi”: poytaxtning 70 dan ortiq yoşlar yetakçisi',
+    title: '“Oliy taʼlim yetakçilarining forumi”: poytaxtdan 70 dan ortiq yoşlar yetakçisi qatnaşdi',
     date: '2026-10-12',
     type: 'forum',
-    place: 'Yoşlar oromgohi',
+    place: 'Yoşlar oromgohi, Toşkent viloyati',
     n: 10,
   },
   {
@@ -266,7 +266,7 @@ export const VIDEOS: Video[] = [
 
 export const SERIES: { key: string; title: string; note: string }[] = [
   { key: 'istiqlol', title: '“Istiqlol farzandlari”', note: 'Mustaqillik yillarida ulğaygan yoşlar haqida maxsus körsatuv' },
-  { key: 'forum', title: 'Oliy taʼlim yetakçilarining forumi', note: 'Poytaxt OTT yoşlar yetakçilari respublika forumida' },
+  { key: 'forum', title: '“Oliy taʼlim yetakçilarining forumi”', note: 'Poytaxt OTT yoşlar yetakçilari respublika forumida' },
   { key: 'tadbir', title: 'Tadbirlardan lavhalar', note: 'Uçraşuvlar, tanlovlar va forumlar' },
 ]
 
@@ -274,9 +274,9 @@ export type Short = { id: string; title: string }
 
 export const SHORTS: Short[] = [
   { id: '07PwcXp8XWw', title: 'OTT boşlanğiç taşkilot yetakçilari yiğilişi' },
-  { id: '2fQp5UzUSrQ', title: 'Toşkent şahar Yoş öqituvçi va olimlar kengaşining 1-taʼsis yiğilişi' },
+  { id: '2fQp5UzUSrQ', title: 'Toşkent şahar Yoş öqituvçi va olimlar kengaşining birinçi taʼsis yiğilişi' },
   { id: '7S2siUrmzuQ', title: '“Toşkent talabalar assotsiatsiyasi”ning ilk taʼsis yiğilişi' },
-  { id: 'eRFMEc8yZv0', title: 'Toşkent şahar bolalar taşkilotining 1-konferensiyasi' },
+  { id: 'eRFMEc8yZv0', title: 'Toşkent şahar bolalar taşkilotining birinçi konferensiyasi' },
   { id: 'vfO43mtjgag', title: 'Özbekiston davlat jahon tillari universitetida “Işonç yorliği” topşirildi' },
   { id: 'smseGi--tNw', title: 'Toşkent töqimaçilik va yengil sanoat institutida “Işonç yorliği” topşirildi' },
   { id: 'V8C7Kf5KeNU', title: 'Harbiy tibbiyot akademiyasida “Saylov va yoşlar” davra suhbati' },

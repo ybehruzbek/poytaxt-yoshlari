@@ -116,7 +116,7 @@ function FotoStack() {
             </li>
           ))}
         </ul>
-        <p className="ax-empty">Bu söz böyiça albom topilmadi.</p>
+        <p className="ax-empty">Tanlangan tur yoki söz böyiça albom topilmadi.</p>
         <ShowMore target="fb-grid" rest={ALBUMS.length - FIRST} />
       </div>
     </section>
@@ -196,7 +196,7 @@ function PressContact() {
   return (
     <aside className="ax-pc dark">
       <h2>OAV uçun aloqa</h2>
-      <p>Akkreditatsiya, intervyu va rasmiy izoh uçun Kengaş {PRESS_CONTACT.unit.toLowerCase()}.</p>
+      <p>Akkreditatsiya, intervyu va rasmiy izoh uçun Kengaşning {PRESS_CONTACT.unit}ga murojaat qiling.</p>
       <ul>
         <li>
           <span>Telefon</span>

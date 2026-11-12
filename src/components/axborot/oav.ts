@@ -31,7 +31,7 @@ export const MEDIA: MediaItem[] = [
     title: 'Harbiy qobiliyat va liderlik sinovi',
     date: '2026-01-15',
     url: 'https://gov.uz/oz/mudofaa/news/view/120352',
-    sum: 'Kengaş Harbiy xavfsizlik va mudofaa universiteti bilan hamkorlikda OTT yoşlar yetakçilari uçun “Vatanparvar liderlar” harbiy-vatanparvarlik kvestini ötkazdi.',
+    sum: 'Kengaş Harbiy xavfsizlik va mudofaa universiteti bilan hamkorlikda poytaxt OTTlari talaba va yoşlar yetakçilari uçun “Vatanparvar liderlar” harbiy-vatanparvarlik kvestini ötkazdi.',
   },
   {
     outlet: 'Toşkent töqimaçilik va yengil sanoat instituti',
@@ -41,7 +41,7 @@ export const MEDIA: MediaItem[] = [
     title: 'TTYSI Yoşlar ittifoqi boşlanğiç taşkilotining hisobot-saylov yiğilişi bölib ötdi',
     date: '2025-10-10',
     url: 'https://ttysi.uz/oz/leads/report-and-election-meeti',
-    sum: 'Boşlanğiç taşkilotning hisobot-saylov yiğilişida Kengaş raisi va masʼul xodimlari iştirok etdi.',
+    sum: 'Institut boşlanğiç taşkilotining hisobot-saylov yiğilişida yangi yoşlar yetakçisi saylandi. Yiğilişda Kengaş raisi va masʼul xodimlari qatnaşdi.',
   },
   {
     outlet: 'ÖzA',
@@ -51,7 +51,7 @@ export const MEDIA: MediaItem[] = [
     title: 'Bugun Yoşlar ittifoqi faoliyati qançalik samarali?',
     date: '2025-01-15',
     url: 'https://uza.uz/oz/posts/bugun-yoshlar-ittifoqi-faoliyati-qanchalik-samarali_677908',
-    sum: 'Milliy axborot agentligi Kengaş bölim boşliği bilan taşkilot faoliyati samaradorligi haqida suhbat eʼlon qildi.',
+    sum: 'Özbekiston milliy axborot agentligi Kengaş bölim boşliği bilan Ittifoq faoliyati samaradorligi haqidagi suhbatni eʼlon qildi.',
   },
   {
     outlet: 'Yoşlar işlari agentligi',
@@ -101,7 +101,7 @@ export const MEDIA: MediaItem[] = [
     title: 'Toşkent şahrida 168 ta yoş oilaga “Yoşlar uylari” topşirildi',
     date: '2019-12-28',
     url: 'https://daryo.uz/2019/12/28/toshkent-shahrida-168-ta-yosh-oilaga-yoshlar-uylari-topshirildi-foto/',
-    sum: 'Yoş oilalarga uy topşiriş tadbirida Kengaş faollari qatnaşdi; nomzodlar hujjatlari Kengaş orqali qabul qilingan.',
+    sum: 'Yoş oilalarga uy topşiriş tadbirida Kengaş faollari qatnaşdi. Uylar Kengaş tizimiga murojaat qilgan nomzodlarga berildi, boşlanğiç badalni Ittifoq tölab beradi.',
   },
   {
     outlet: 'Gazeta.uz',
@@ -131,7 +131,7 @@ export const MEDIA: MediaItem[] = [
     title: 'Toşkentdagi eng yaxşi kitob dökoni qaysiligini bilasizmi?',
     date: '2018-03-18',
     url: 'https://xabar.uz/uz/madaniyat/toshkentdagi-eng-yaxshi-kitob-dokoni-qaysiligini-bilasizmi',
-    sum: 'Poytaxtning eng yaxşi kitob dökoni tanlovi hokimlik, Yozuvçilar uyuşmasi va Kengaş hamkorligida taşkil etildi.',
+    sum: '“Namunali kitob dökoni” şahar tanlovi hokimlik, şahar matbuot va axborot boşqarmasi, Kengaş va Yozuvçilar uyuşmasi hamkorligida ötkazildi.',
   },
   {
     outlet: 'Gazeta.uz',
@@ -171,6 +171,6 @@ export const MEDIA: MediaItem[] = [
     title: 'Руководителем ташкентского союза молодежи избран Элбек Шукуров',
     date: '2017-07-11',
     url: 'https://uznews.uz/ru/news/47025',
-    sum: 'Kengaş raisi Prezident farmoniga köra poytaxt hokimining yoşlar masalalari böyiça maslahatçisi maqomida.',
+    sum: 'Kengaş yiğilişida yangi rais saylandi. Xabarda Prezident farmoniga köra Kengaş raisi şahar hokimining yoşlar masalalari böyiça maslahatçisi bölişi qayd etilgan.',
   },
 ]
