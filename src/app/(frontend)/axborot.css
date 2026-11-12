@@ -15,7 +15,7 @@
 .ax-page .ax-off {
   display: none !important;
 }
-.ax button:where(:not(.more-btn)) {
+.ax button:where(:not(.more-btn, .chips > button)) {
   font: inherit;
   color: inherit;
   background: none;
@@ -69,34 +69,6 @@
   font-size: 14.5px;
   color: var(--muted);
 }
-.ax-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.ax-pills button {
-  height: 40px;
-  padding: 0 18px;
-  border-radius: 99px;
-  border: 1.5px solid var(--line);
-  background: var(--bg);
-  font: 600 14px/1 var(--f-body);
-  color: var(--navy);
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    border-color 0.2s,
-    color 0.2s;
-}
-.ax-pills button:hover {
-  border-color: var(--navy);
-}
-.ax-pills button[aria-pressed='true'] {
-  background: var(--navy-bg);
-  border-color: var(--navy-bg);
-  color: #fff;
-}
-.ax-pills button:focus-visible,
 .ax button:focus-visible,
 .ax a:focus-visible {
   outline: 3px solid var(--sky);
@@ -827,22 +799,6 @@
   width: 300px;
   height: 42px;
 }
-.ax-pill-n {
-  display: inline-grid;
-  place-items: center;
-  min-width: 22px;
-  height: 22px;
-  margin-left: 8px;
-  padding: 0 6px;
-  border-radius: 99px;
-  background: var(--soft);
-  font: 700 12px/1 var(--f-body);
-  color: var(--navy);
-}
-.ax-pills button[aria-pressed='true'] .ax-pill-n {
-  background: var(--yellow);
-  color: #532822;
-}
 /* “Köproq körsatiş”: dastlab 9 ta albom; saralaş/qidiruvda hammasi */
 .ax-albums .ax-cut {
   display: none;
@@ -987,16 +943,6 @@
   .ax-ftools .ax-search input,
   .ax-ftools-r {
     width: 100%;
-  }
-  .ax-ftools .ax-pills {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    margin-inline: -16px;
-    padding-inline: 16px;
-    scrollbar-width: none;
-  }
-  .ax-ftools .ax-pills button {
-    flex: none;
   }
   /* telefonda sičqonça yöq — stopka biroz oçiq turadi */
   .ax-stack-ph .s3 {

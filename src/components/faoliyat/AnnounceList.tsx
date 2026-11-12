@@ -32,10 +32,9 @@ export function AnnounceList({ items }: { items: Announce[] }) {
   return (
     <>
       <div className="fa-tools">
-        <div className="fa-chips" role="group" aria-label="Yil">
+        <div className="chips fa-chips" role="group" aria-label="Yil">
           <button
             type="button"
-            className={year === 'all' ? 'on' : undefined}
             aria-pressed={year === 'all'}
             onClick={() => setYear('all')}
           >
@@ -45,7 +44,6 @@ export function AnnounceList({ items }: { items: Announce[] }) {
             <button
               key={y}
               type="button"
-              className={year === y ? 'on' : undefined}
               aria-pressed={year === y}
               onClick={() => setYear(y)}
             >

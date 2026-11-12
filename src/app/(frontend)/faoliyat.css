@@ -37,46 +37,6 @@
   flex: 1 1 420px;
   justify-content: flex-end;
 }
-.fa-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.fa-chips button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--line);
-  border-radius: 99px;
-  background: var(--bg);
-  padding: 9px 10px 9px 18px;
-  font: 600 14px/1 var(--f-body);
-  color: var(--navy);
-  cursor: pointer;
-}
-.fa-chips button span {
-  min-width: 26px;
-  height: 26px;
-  padding: 0 7px;
-  border-radius: 99px;
-  background: var(--bg);
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1px solid var(--line);
-}
-.fa-chips button:hover {
-  border-color: var(--yellow);
-}
-.fa-chips button.on {
-  background: var(--navy-bg);
-  border-color: var(--navy);
-  color: #fff;
-}
-.fa-chips button.on span {
-  background: rgba(255, 255, 255, 0.16);
-}
 .fa-select select,
 .fa-search input {
   height: 48px;
@@ -1000,7 +960,3 @@
   }
 }
 
-/* faol filtrdagi son belgisi — çegarasiz */
-.fa-chips button.on span {
-  border-color: transparent;
-}

@@ -50,7 +50,7 @@ export function useRubric(items: YnItem[]) {
 export function Rubrics({ items, cat, onPick }: { items: YnItem[]; cat: YnCat; onPick: (k: YnCat) => void }) {
   const cats = [...new Map(items.map((it) => [it.category, it.categoryLabel])).entries()]
   return (
-    <div className="yn-rub" role="group" aria-label="Rubrikalar">
+    <div className="chips yn-rub" role="group" aria-label="Rubrikalar">
       <button type="button" aria-pressed={cat === 'all'} onClick={() => onPick('all')}>
         Barçasi <span>{items.length}</span>
       </button>

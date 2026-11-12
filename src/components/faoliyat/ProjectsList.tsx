@@ -44,12 +44,11 @@ export function ProjectsList({
   return (
     <>
       <div className="fa-tools">
-        <div className="fa-chips" role="group" aria-label="Holati">
+        <div className="chips fa-chips" role="group" aria-label="Holati">
           {(['all', 'davom etmoqda', 'har yili', 'yakunlangan'] as const).map((k) => (
             <button
               key={k}
               type="button"
-              className={st === k ? 'on' : undefined}
               aria-pressed={st === k}
               onClick={() => setSt(k)}
             >

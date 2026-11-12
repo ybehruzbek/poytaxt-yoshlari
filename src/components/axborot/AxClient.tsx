@@ -207,7 +207,7 @@ export function Pills({
     })
   }, [cur, target])
   return (
-    <div className="ax-pills" role="group" aria-label={label}>
+    <div className="chips ax-pills" role="group" aria-label={label}>
       {[{ v: 'all', l: 'Barçasi', n: undefined as number | undefined }, ...items].map((it) => (
         <button key={it.v} type="button" aria-pressed={cur === it.v} onClick={() => setCur(it.v)}>
           {it.l}

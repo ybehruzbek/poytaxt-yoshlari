@@ -177,3 +177,102 @@ button:focus {
   justify-content: center;
   margin-top: 32px;
 }
+
+/* =====================================================================
+   SARALAŞ TUGMALARI (.chips) — barça sahifalarda yagona körinişda:
+   yangiliklar rubrikalari, savollar mavzulari, axborot xizmati, hujjatlar,
+   boşlanğiç taşkilotlar, faoliyat va bölim havolalari.
+   Belgilaş: <div class="chips" role="group"> ičida <button aria-pressed>
+   (yoki <a aria-current="page">), son belgisi — ički <span>/<b>.
+   ===================================================================== */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.chips > :is(button, a) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 99px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  font: 600 14px/1 var(--f-body);
+  color: var(--navy);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.chips > :is(button, a):has(> :is(span, b)) {
+  padding-right: 8px;
+}
+.chips > :is(button, a) > :is(span, b) {
+  display: grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  margin: 0;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 99px;
+  background: var(--line);
+  font: 700 12.5px/1 var(--f-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.chips > :is(button, a):hover {
+  border-color: var(--navy);
+}
+.chips > :is(button[aria-pressed='true'], a[aria-current]) {
+  background: var(--navy-bg);
+  border-color: var(--navy-bg);
+  color: #fff;
+}
+.chips > :is(button[aria-pressed='true'], a[aria-current]) > :is(span, b) {
+  background: var(--yellow);
+  color: #532822;
+}
+.chips > :is(button, a):focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+/* telefonda bir qatorda, gorizontal aylantiriladi; ong çetda xiralaşadi */
+@media (max-width: 760px) {
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: -40px;
+    padding: 4px 40px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  }
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+  .chips > * {
+    flex: none;
+  }
+}
+@media (max-width: 640px) {
+  .chips {
+    margin-inline: -20px;
+    padding-inline: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chips > :is(button, a),
+  .chips > :is(button, a) > :is(span, b) {
+    transition: none;
+  }
+}

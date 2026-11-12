@@ -138,12 +138,11 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
   return (
     <div ref={root}>
       <div className="bt-tools">
-        <div className="bt-chips" role="group" aria-label="Oliy taʼlim taşkiloti turi">
+        <div className="chips bt-chips" role="group" aria-label="Oliy taʼlim taşkiloti turi">
           {FILTERS.map((f) => (
             <button
               key={f.k}
               type="button"
-              className={type === f.k ? 'on' : undefined}
               aria-pressed={type === f.k}
               onClick={() => {
                 setType(f.k)

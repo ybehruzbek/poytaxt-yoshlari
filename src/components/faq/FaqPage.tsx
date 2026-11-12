@@ -36,7 +36,7 @@ export function FaqPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
       <section className="sec faq-sec">
         <div className="wrap">
           <div className="faq-tools">
-            <div className="faq-rub" role="group" aria-label="Mavzular">
+            <div className="chips faq-rub" role="group" aria-label="Mavzular">
               <button type="button" aria-pressed={cat === 'all'} onClick={() => setCat('all')}>
                 Barçasi <span>{FAQ.length}</span>
               </button>
