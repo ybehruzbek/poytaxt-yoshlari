@@ -12,78 +12,144 @@ export const DIRECTIONS: Direction[] = [
     slug: 'manaviyat-kitobxonlik',
     title: 'Maʼnaviy-maʼrifiy işlar va kitobxonlik',
     lead: 'Kitobxonlikni tarğib qiliş, adabiy uçraşuvlar va maʼnaviy tadbirlar.',
-    body: 'Kengaş Yoşlar ijod saroyida “Adabiyot gulşani” davra suhbatlari va “Kitob olami” kitoblar festivalini ötkazadi, kuç tuzilmalari bilan birga yoş harbiylar örtasida “Eng yaxşi yoş kitobxon” körik-tanlovini taşkil etadi. Rahbarlar va faxriylarning yoşlar bilan uçraşuvlari ham şu yönaliş doirasida ötkaziladi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarda kitobxonlik madaniyatini, milliy qadriyatlar va tarixiy xotiraga hurmatni şakllantirişga qaratilgan. Tadbirlar Yoşlar ijod saroyi, oliy taʼlim taşkilotlari va harbiy qismlarda ötkaziladi.',
+    works: [
+      'Kitoblar festivali va kitob yarmarkalari',
+      'Badiiy asarlar muhokamasiga bağişlangan davra suhbatlari, adabiy-musiqiy keçalar',
+      'Rahbarlar, faxriylar va yoşlarning oçiq muloqotlari',
+      'Allomalar va adiblar tavalludiga bağişlangan maʼnaviyat tadbirlari',
+    ],
   },
   {
     slug: 'intellektual',
     title: 'Intellektual rivojlaniş',
     lead: '“Zakovat”, “Munozara” debatlari va intellektual tanlovlar.',
-    body: 'Kengaş “Zakovat” öyinlari, “Munozara” debat turniri va “Ajdodlar izidan” intellektual tanlovining Toşkent şahar bosqiçlarini ötkazadi; ğolib jamoalar respublika bosqiçida Toşkent şahri nomidan qatnaşadi. Talabalar uçun BMT modeli konferensiyalari ham taşkil etiladi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarning tahliliy fikrlaşi, bilimi va jamoada işlaş könikmasini rivojlantiradi. Şahar bosqiçlari ğoliblari respublika bosqiçlarida Toşkent şahri nomidan qatnaşadi.',
+    works: [
+      'Intellektual öyinlar va viktorinalar',
+      'Jamoaviy debat turnirlarining şahar bosqiçlari',
+      'Yoş harbiylar örtasida kitoblar asosidagi intellektual tanlov',
+      'Talabalar uçun BMT modeli konferensiyalari',
+      'Intellektual loyihalar koordinatorlari uçun öquv-seminarlar',
+    ],
   },
   {
     slug: 'harbiy-vatanparvarlik',
     title: 'Harbiy-vatanparvarlik tarbiyasi',
     lead: 'Harbiy qismlar va muassasalardagi yoşlar bilan işlaş, harbiy-sport musobaqalari.',
-    body: 'Kengaş kuç tuzilmalari bilan hamkorlikda yoş harbiylar va öquvçilar uçun harbiy-sport musobaqalari, “Jasorat maktabi” öquv yiğinlari, harbiy qismlarda oçiq eşiklar kunlari va uçraşuvlar ötkazadi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarda Vatanga sadoqat, jismoniy çiniqqanlik va harbiy xizmatga hurmatni tarbiyalaydi. Tadbirlar kuç tuzilmalari, harbiy qismlar va muassasalar bilan hamkorlikda ötkaziladi.',
+    works: [
+      'Harbiy qismda ön kunlik harbiy-vatanparvarlik öquv yiğini',
+      'Harbiy qismlarda oçiq eşiklar kunlari va uçraşuvlar',
+      'Harbiy-sport musobaqalari va kursantlar örtasidagi bellaşuvlar',
+      'Yoş harbiylar forumi, vatanparvarlik böyiça konferensiya va seminarlar',
+    ],
   },
   {
     slug: 'volontyorlik',
     title: 'Volontyorlik va xayriya',
     lead: 'Volontyorlar maktabi va xayriya aksiyalari.',
-    body: '2024-yilda “Universe” volontyorlar maktabida saralangan 37 nafar yoş ikki oy davomida volontyorlik va loyiha boşqaruvi böyiça öqidi. Boşlanğiç taşkilotlar bolalar hospisi, maktab-internat va onkologiya markazida xayriya aksiyalarini ötkazadi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarni ijtimoiy faollikka va yordamga muhtojlarga ğamxörlik qilişga jalb etadi, volontyorlarni tizimli öqitadi.',
+    works: [
+      'Volontyorlar maktabi: loyiha boşqaruvi va volontyorlik böyiça nazariy va amaliy darslar',
+      'Bolalar hospisi, maktab-internat va onkologiya markazida xayriya aksiyalari',
+      'Sardorlar uçun volontyorlik böyiça seminar-treninglar',
+    ],
   },
   {
     slug: 'sport-salomatlik',
     title: 'Sport va soğlom turmuş tarzi',
     lead: 'OTT talabalari örtasida sport musobaqalari, festivallar va marafonlar.',
-    body: 'OTT boşlanğiç taşkilotlari örtasida mini futbol, stol tennisi va şaxmat böyiça musobaqalar (“Vazir kubogi”, “Döstlik öyini”), sport festivallari va “Salomatlik uçun 5000 qadam” kabi yuriş marafonlari ötkaziladi.',
-    projects: [],
+    about:
+      'Yönaliş talabalar örtasida jismoniy faollik va soğlom turmuş tarzini tarğib qiladi. Musobaqalar OTT boşlanğiç taşkilotlari örtasida ötkaziladi.',
+    works: [
+      'Mini futbol, stol tennisi va şaxmat böyiça musobaqalar',
+      'OTTlar örtasidagi örtoqlik bellaşuvlari',
+      'Talabalar sport festivallari',
+      'Yuriş marafonlari',
+    ],
   },
   {
     slug: 'yetakchilik',
     title: 'Yetakçilik va boşlanğiç taşkilotlar',
     lead: 'Oliy taʼlim taşkilotlaridagi yoşlar yetakçilari tizimini rivojlantiriş.',
-    body: 'Kengaş qamrovida 98 ta oliy taʼlim taşkiloti bor. Ulardagi boşlanğiç taşkilotlarda hisobot-saylov yiğilişlari ötkaziladi, yoşlar yetakçilari uçun “Yangi avlod yetakçilari” maktabining öquv seminarlari va forumlar taşkil etiladi.',
-    projects: [],
+    about:
+      'Yönaliş Kengaş qamrovidagi oliy taʼlim taşkilotlarida boşlanğiç taşkilotlar va yoşlar yetakçilari tizimini rivojlantiradi: yetakçilarni saralaş, öqitiş, faoliyatini baholaş va rağbatlantiriş.',
+    works: [
+      'Yoşlar yetakçilari uçun muntazam öquv-seminarlar',
+      'Boşlanğiç taşkilotlarda hisobot-saylov yiğilişlari',
+      'Yetakçilar forumlari va umumiy yiğilişlar',
+      'Eng ilğor yetakçilar körik-tanlovi va taqdirlaş',
+    ],
   },
   {
     slug: 'huquqiy-madaniyat',
     title: 'Huquqiy madaniyat va profilaktika',
     lead: 'Huquqiy savodxonlik, giyohvandlik va korrupsiyaning oldini oliş.',
-    body: '“Saylov va yoşlar” davra suhbatlari, “Jaholatga qarşi maʼrifat” loyihasi doirasidagi uçraşuvlar hamda giyohvandlik, korrupsiya va soxta axborot tarqalişining oldini olişga qaratilgan profilaktik tadbirlar ötkaziladi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarning huquqiy savodxonligini oşiriş hamda huquqbuzarlik, giyohvandlik va korrupsiyaning oldini olişga qaratilgan.',
+    works: [
+      'Saylov qonunçiligini tuşuntiriş böyiça davra suhbatlari',
+      'Giyohvandlik va korrupsiyaning oldini oliş böyiça profilaktik tadbirlar',
+      'Soxta axborotga qarşi immunitet mavzusidagi uçraşuvlar',
+      'Talabalar bilan huquqiy mavzularda oçiq muloqotlar',
+    ],
   },
   {
     slug: 'ekologiya',
     title: 'Ekologiya',
     lead: 'Ekologik aksiyalar, köçat ekiş va suvni tejaş çellenji.',
-    body: '“Plogging” aksiyalari, daraxt va köçat ekiş tadbirlari hamda “Suvni birgalikda asraymiz” çellenji orqali yoşlar atrof-muhitni asraşga jalb qilinadi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarda ekologik madaniyatni şakllantiriş va ularni atrof-muhitni asraş işlariga amaliy jalb etişga qaratilgan.',
+    works: [
+      'Çiqindilarni yiğiş aksiyalari (plogging)',
+      'Daraxt va köçat ekiş',
+      'Suvni tejaşga daʼvat qiluvçi çellenj va tarğibot aksiyalari',
+      'Ekologik kvest musobaqalari',
+    ],
   },
   {
     slug: 'media',
     title: 'Media va axborot',
     lead: 'Filmlar, körsatuvlar, podkastlar va kanaldagi rubrikalar.',
-    body: 'Kengaş “Yengilmas” va “YETAKÇI” filmlarini, “DRUG DEALER” instaserialini va “Istiqlol farzandlari” körsatuvini tayyorlagan; “Poytaxt yoşlari” Telegram kanalida “Bugun poytaxtda” dayjesti yuritiladi.',
-    projects: [],
+    about:
+      'Yönaliş Kengaş faoliyati va yoşlar hayotini media mahsulotlari orqali yoritadi, yoşlarning mediasavodxonligini oşiradi.',
+    works: [
+      'Motivatsion filmlar va instaserial',
+      'Maxsus telekörsatuv va kanaldagi axborot rubrikalari',
+      'Mediasavodxonlik böyiça seminar-treninglar',
+      'Bayram sanalariga bağişlangan videoroliklar tanlovlari',
+    ],
   },
   {
     slug: 'ijod-turizm',
     title: 'Ijod, madaniyat va turizm',
     lead: 'Festivallar, ijodiy tanlovlar va yoşlar sayohatlari.',
-    body: '“Toşkent yoşlari milliylikni sevadi!” festivali, “Milliy Fashion Show” modalar namoyişi, videoroliklar tanlovlari, ijodiy keçalar hamda “YUTRIP” agentligi taşkil etadigan sayohatlar ötkaziladi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarning ijodiy salohiyatini röyobga çiqariş, milliy madaniyatni tarğib qiliş, mazmunli dam oliş va sayohatlarni taşkil etişga qaratilgan.',
+    works: [
+      'Milliylikni tarğib qiluvçi talabalar festivallari',
+      'Milliy liboslar va yoş dizaynerlar ijodi namoyişlari',
+      'Yoşlar uçun içki sayohatlar',
+      'Konsert dasturlari va ijodiy keçalar',
+    ],
   },
   {
     slug: 'talim-kasb',
     title: 'Taʼlim va kasbiy rivojlaniş',
     lead: 'Til kurslari, biznes va IELTS marafonlari, xalqaro öquv dasturlari.',
-    body: 'Bepul til kurslari, “Biznes marafon” va “IELTS Marafon” tadbirlari, talabalar ilmiy-amaliy konferensiyalari va xalqaro öquv dasturlari orqali yoşlarning bilim va kasbiy könikmalari rivojlantiriladi.',
-    projects: [],
+    about:
+      'Yönaliş yoşlarning bilim, til va kasbiy könikmalarini oşiriş, tadbirkorlikka qiziqtiriş hamda taʼlim olişdagi imtiyozlardan foydalaniş imkoniyatlarini kengaytirişga qaratilgan.',
+    works: [
+      'Tadbirkorlik va xorijiy tillar böyiça marafonlar, bepul til kurslari',
+      'Liderlik treninglari va yozgi öquv lagerlari',
+      'Talabalar ilmiy-amaliy konferensiyalari',
+      'OTTga imtiyozli qabul tavsiyanomalari tanlovi',
+    ],
   },
 ]
 

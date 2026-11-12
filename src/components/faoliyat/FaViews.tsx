@@ -15,22 +15,26 @@ const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
 
 /* ===================== Yönalişlar ===================== */
 
-/** Yönaliş röyxati: navbatma-navbat çap/öng, surat kollaji, sönggi 3 tadbir (tadbir yöq bölsa — loyihalar) */
-export function DirsList({ base }: { base: string }) {
+/**
+ * Yönaliş röyxati: navbatma-navbat çap/öng. Har bir yönaliş: umumiy maqsad → suratlar →
+ * “Nima qilinadi” → misol sifatida loyihalar.
+ */
+export function DirsList({ base, projBase }: { base: string; projBase: string }) {
   const all = DIRECTIONS.map((d, i) => {
     const evs = dirEvents(d.slug)
     const projs = dirProjects(d.slug)
     const pics = [
-      ...evs.filter((e) => e.img).map((e) => e.img),
-      ...projs.flatMap((p) => [p.cover, ...p.gallery]).filter(Boolean),
-    ].slice(0, 3)
-    const items = evs.length
-      ? evs.slice(0, 3).map((e) => ({ k: String(e.id), top: fmtDate(e.date), t: e.title }))
-      : projs.slice(0, 3).map((p) => ({ k: p.slug, top: `Loyiha · ${p.period}`, t: p.title }))
-    return { d, n: pad(i), evs, nP: projs.length, pics, items }
+      ...projs.map((p) => p.cover),
+      ...evs.map((e) => e.img),
+      ...projs.flatMap((p) => p.gallery),
+    ]
+      .filter(Boolean)
+      .filter((x, k, arr) => arr.indexOf(x) === k)
+      .slice(0, 3)
+    return { d, n: pad(i), evs, projs, pics }
   })
   const nE = all.reduce((a, x) => a + x.evs.length, 0)
-  const nP = all.reduce((a, x) => a + x.nP, 0)
+  const nP = all.reduce((a, x) => a + x.projs.length, 0)
   return (
     <section className="sec fa-sec">
       <div className="wrap">
@@ -46,8 +50,8 @@ export function DirsList({ base }: { base: string }) {
           </span>
         </div>
         <div className="vy3">
-          {all.map(({ d, n, evs, nP, pics, items }) => (
-            <article key={d.slug} className="vy3-row">
+          {all.map(({ d, n, evs, projs, pics }) => (
+            <article key={d.slug} className="vy3-row" id={d.slug}>
               <Link href={`${base}/${d.slug}`} className="vy3-ph" tabIndex={-1} aria-hidden="true">
                 {pics.map((src) => (
                   <img key={src} src={src} alt="" loading="lazy" />
@@ -58,15 +62,25 @@ export function DirsList({ base }: { base: string }) {
                 <h2>
                   <Link href={`${base}/${d.slug}`}>{d.title}</Link>
                 </h2>
-                <p>{d.lead}</p>
-                <ul>
-                  {items.map((it) => (
-                    <li key={it.k}>
-                      <time>{it.top}</time>
-                      <span>{it.t}</span>
-                    </li>
+                <p>{d.about}</p>
+                <h3 className="vy3-h">Nima qilinadi</h3>
+                <ul className="vy3-works">
+                  {d.works.map((w) => (
+                    <li key={w}>{w}</li>
                   ))}
                 </ul>
+                {projs.length > 0 && (
+                  <>
+                    <h3 className="vy3-h">Loyihalar</h3>
+                    <ul className="vy3-projs">
+                      {projs.map((p) => (
+                        <li key={p.slug}>
+                          <Link href={`${projBase}/${p.slug}`}>{p.title}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
                 <div className="vy3-foot">
                   {/* nol sonlar yozilmaydi (“0 tadbir” emas) */}
                   <span>
@@ -75,10 +89,10 @@ export function DirsList({ base }: { base: string }) {
                         <b>{evs.length}</b> tadbir
                       </>
                     )}
-                    {evs.length > 0 && nP > 0 && ' · '}
-                    {nP > 0 && (
+                    {evs.length > 0 && projs.length > 0 && ' · '}
+                    {projs.length > 0 && (
                       <>
-                        <b>{nP}</b> loyiha
+                        <b>{projs.length}</b> loyiha
                       </>
                     )}
                   </span>
@@ -108,7 +122,7 @@ export function DirC({
   listHref: string
 }) {
   const projs = dirProjects(slug as Project['dir'])
-  const body = DIRECTIONS.find((d) => d.slug === slug)?.body
+  const dir = DIRECTIONS.find((d) => d.slug === slug)
   const evs = dirEvents(slug).slice(0, 14)
   const byYear = [...new Set(evs.map((e) => e.date.slice(0, 4)))].map((y) => ({
     y,
@@ -116,9 +130,17 @@ export function DirC({
   }))
   return (
     <section className="sec fa-sec">
-      {body && (
-        <div className="wrap">
-          <p className="fa-dir-body">{body}</p>
+      {dir && (
+        <div className="wrap vc-intro">
+          <p className="fa-dir-body">{dir.about}</p>
+          <div>
+            <h2 className="fa-h2">Nima qilinadi</h2>
+            <ul className="vy3-works">
+              {dir.works.map((w) => (
+                <li key={w}>{w}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
       <div className="wrap vc-split">

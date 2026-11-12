@@ -27,14 +27,22 @@ function Head({ crumbs, title }: { crumbs: ReactNode; title: string }) {
 
 /* ===================== Faoliyat yönalişlari ===================== */
 
-export function DirectionsPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
+export function DirectionsPage({
+  crumbs,
+  base,
+  projBase,
+}: {
+  crumbs: ReactNode
+  base: string
+  projBase: string
+}) {
   return (
     <div className="fa">
       <Head
         crumbs={crumbs}
         title="Faoliyat yönalişlari"
       />
-      <DirsList base={base} />
+      <DirsList base={base} projBase={projBase} />
     </div>
   )
 }

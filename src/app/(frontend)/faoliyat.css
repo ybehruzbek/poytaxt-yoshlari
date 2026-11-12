@@ -875,46 +875,83 @@
   color: var(--blue);
 }
 .vy3-txt p {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
 }
-/* sönggi tadbirlar — fonsiz, ingiçka ajratgiçli röyxat: sana çapda, nomi öngda */
-.vy3-txt ul {
-  margin: 4px 0 0;
+/* “Nima qilinadi” — yaşil nuqtali röyxat; “Loyihalar” — havola kapsulalari */
+.vy3-h {
+  margin: 8px 0 0;
+  font: 800 13px/1 var(--f-head);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.vy3-works {
+  margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--line);
-}
-.vy3-txt li {
   display: grid;
-  grid-template-columns: 132px minmax(0, 1fr);
-  gap: 16px;
-  align-items: baseline;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
+  gap: 8px;
 }
-.vy3-txt li time {
-  font: 500 13px/1.4 var(--f-body);
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+.vy3-works li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--grey);
 }
-.vy3-txt li span {
-  overflow: hidden;
-  font: 600 15px/1.4 var(--f-head);
+.vy3-works li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.vy3-projs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.vy3-projs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  font: 600 14px/1.3 var(--f-head);
   color: var(--navy);
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  transition: border-color 0.2s, background 0.2s;
 }
-@media (max-width: 640px) {
-  .vy3-txt li {
+.vy3-projs a:hover {
+  border-color: var(--navy);
+}
+.vy3-projs a:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
+/* yönaliş sahifasi: maqsad va “Nima qilinadi” yonma-yon */
+.vc-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+.vc-intro .fa-dir-body {
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .vc-intro {
     grid-template-columns: 1fr;
-    gap: 2px;
+    gap: 24px;
   }
 }
 /* pastki qator har doim kartaning tagida — tugmalar bir çiziqda turadi */

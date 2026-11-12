@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
   const L = (h: string) => `/${locale}${h}`
-  void L
   return (
     <DirectionsPage
       crumbs={<PageCrumbs locale={locale} path="/faoliyat/yonalishlar" />}
       base={L('/faoliyat/yonalishlar')}
+      projBase={L('/faoliyat/loyihalar')}
     />
   )
 }

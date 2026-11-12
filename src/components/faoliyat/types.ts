@@ -19,9 +19,12 @@ export type DirSlug =
 export type Direction = {
   slug: DirSlug
   title: string
+  /** qisqa tavsif (meta description) */
   lead: string
-  body: string
-  projects: string[]
+  /** yönalişning umumiy maqsadi */
+  about: string
+  /** yönaliş doirasida qilinadigan işlar */
+  works: string[]
 }
 
 export type Fact = { text: string; post: number }
