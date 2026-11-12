@@ -3,19 +3,19 @@
    Umumiy klasslar (it-hero, it-who, it-stats, it-btns …) ittifoq.css dan.
    ===================================================================== */
 
-/* Boşqaruv tizimi */
-.kg-org-sec{background:var(--soft)}
-.kg-org{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:o}
-.kg-org li{position:relative;background:var(--bg);border-radius:var(--r-thumb);padding:26px;display:flex;flex-direction:column;gap:10px}
-.kg-org li:not(:last-child)::after{content:'→';position:absolute;right:-13px;top:50%;transform:translateY(-50%);z-index:1;width:26px;height:26px;border-radius:50%;background:var(--navy-bg);color:#fff;display:grid;place-items:center;font-size:13px}
-.kg-org li.on{background:var(--navy-bg);color:#fff}
-.kg-org li.on .it-num{color:var(--yellow)}
-.kg-org h3{font-size:20px;font-weight:800;color:var(--navy);line-height:1.25}
-.kg-org li.on h3{color:var(--soft)}
-.kg-org p{font-size:15px;line-height:1.55;flex:1}
-.kg-org li.on p{opacity:.85}
-.kg-org b{align-self:flex-start;background:var(--yellow);color:var(--navy);border-radius:99px;padding:7px 12px;font-size:13px}
-.kg-org .it-num{margin-bottom:6px}
+/* Boşqaruv tizimi: qatorlar, Markaziy Kengaş sariq tasmada */
+.y1-oc{list-style:none;border-top:1px solid var(--line)}
+.y1-oc li{display:grid;grid-template-columns:72px 1fr 1.4fr 220px;gap:28px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line)}
+.y1-oc-num{font:800 18px/1 var(--f-head);color:var(--blue)}
+.y1-oc h3{font-size:22px;font-weight:800;color:var(--navy);line-height:1.25}
+.y1-oc p{font-size:16px;line-height:1.6;color:var(--grey)}
+.y1-oc b{justify-self:end;text-align:right;font-size:14px;color:var(--muted);font-weight:600}
+.y1-oc li.on{background:var(--yellow);border-radius:var(--r-card);border-bottom-color:transparent;padding:48px 40px;margin:12px 0;position:relative}
+.y1-oc li.on .y1-oc-num{color:var(--navy);font-size:44px}
+.y1-oc li.on h3{font-size:clamp(28px,2.8vw,40px);line-height:1.1}
+.y1-oc li.on p{font-size:18px;color:var(--navy)}
+.y1-oc li.on b{background:var(--navy-bg);color:#fff;border-radius:99px;padding:10px 16px;text-align:center}
+
 
 /* Vakolatlari */
 .kg-pow{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px;border-top:1px solid var(--line)}
@@ -82,12 +82,17 @@
 .kg-con img{width:100%;height:380px;object-fit:cover;border-radius:var(--r-card)}
 
 @media (max-width:1100px){
-  .kg-org{grid-template-columns:repeat(2,1fr)}
-  .kg-org li::after{display:none}
+  .y1-oc li{grid-template-columns:56px 1fr;gap:12px 20px}
+  .y1-oc p,.y1-oc b{grid-column:2}
+  .y1-oc b{justify-self:start;text-align:left}
   .kg-pow,.kg-mem,.kg-bod,.kg-con{grid-template-columns:1fr}
 }
 @media (max-width:640px){
-  .kg-org,.kg-lead{grid-template-columns:1fr}
+  .y1-oc li{grid-template-columns:1fr;gap:10px}
+  .y1-oc p,.y1-oc b{grid-column:auto}
+  .y1-oc li.on{padding:32px 22px}
+  .y1-oc li.on .y1-oc-num{font-size:32px}
+  .kg-lead{grid-template-columns:1fr}
   .kg-bod article{padding:26px 22px}
   .kg-con img{height:240px}
 }

@@ -2,7 +2,6 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { DevSectionsPanel, type PanelSection } from '@/components/site/DevSectionsPanel'
 import { Arrow } from '@/components/site/SocialPhones'
 
 import {
@@ -16,31 +15,11 @@ import {
   POWERS,
   STATS,
 } from './data'
-import { KgVariants } from './variants'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
-/** VAQTINCHA: bölimlar variantlari faqat ishlab chiqish rejimida */
-const DEV = process.env.NODE_ENV !== 'production'
-
-function V({ name, k, children }: { name: string; k: string; children: ReactNode }) {
-  if (!DEV) return <>{children}</>
-  return (
-    <div className="vx" data-v={`${name}-${k}`}>
-      {children}
-    </div>
-  )
-}
-
-const PANEL: PanelSection[] = [
-  ['kab', 'Kengaş haqida'],
-  ['kor', 'Boşqaruv tizimi'],
-  ['kva', 'Vakolatlari'],
-  ['kta', 'Tarkibi'],
-  ['kra', 'Rahbariyat'],
-  ['kij', 'Ijroiya qömitasi va komissiya'],
-  ['kal', 'Aloqa'],
-].map(([name, label]) => ({ name, label, count: 3 }))
+/** Bölimlar tartibi */
+const ORDER = ['kab', 'kor', 'kva', 'kta', 'kra', 'kij', 'kal'] as const
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const initials = (s: string) =>
@@ -83,15 +62,16 @@ export function KengashPage({ L, crumbs, siblings }: P) {
       </section>
     ),
     kor: (
-      <section className="sec kg-org-sec">
+      <section className="sec">
         <div className="wrap">
           <div className="sec-head">
             <h2 className="h2">Ittifoqning boşqaruv tizimi</h2>
           </div>
-          <ol className="kg-org">
+          {/* Markaziy Kengaş (2-örin) sariq tasmada ajratiladi */}
+          <ol className="y1-oc">
             {ORGANS.map((o, i) => (
               <li key={o.t} className={i === 1 ? 'on' : undefined}>
-                <span className="it-num">{pad(i)}</span>
+                <span className="y1-oc-num">{pad(i)}</span>
                 <h3>{o.t}</h3>
                 <p>{o.d}</p>
                 {o.meta && <b>{o.meta}</b>}
@@ -251,27 +231,15 @@ export function KengashPage({ L, crumbs, siblings }: P) {
         </div>
       </header>
 
-      {PANEL.map(({ name }) => (
+      {ORDER.map((name) => (
         <div key={name} style={{ display: 'contents' }}>
-          <V name={name} k="a">
-            {sections[name]}
-          </V>
-          {DEV &&
-            (['b', 'c'] as const).map((k) => {
-              const C = KgVariants[`${name}-${k}`]
-              return C ? (
-                <V key={k} name={name} k={k}>
-                  <C L={L} />
-                </V>
-              ) : null
-            })}
+          {sections[name]}
         </div>
       ))}
 
       <section className="sec">
         <div className="wrap">{siblings}</div>
       </section>
-      {DEV && <DevSectionsPanel sections={PANEL} />}
     </div>
   )
 }
