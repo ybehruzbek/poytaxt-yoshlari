@@ -31,7 +31,7 @@ export function YnList({ items, L }: { items: YnItem[]; L: string }) {
 
           {lead && (
             <>
-              <h2 className="yn-kicker">{cat === 'all' ? 'Asosiy yangiliklar' : lead.categoryLabel}</h2>
+              <h2 className="yn-kicker">{cat === 'all' ? 'Asosiy yangilik' : lead.categoryLabel}</h2>
               <article className="yn-a3-lead">
                 <Link href={href(lead)}>
                   <Img it={lead} />

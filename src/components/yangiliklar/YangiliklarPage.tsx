@@ -29,7 +29,7 @@ export function YangiliklarPage({
           <div className="wrap">
             <div className="yn-empty" role="status">
               <b>Hozirça yangiliklar yöq</b>
-              <p>Tez orada şu yerda Kengaş yangiliklari paydo böladi.</p>
+              <p>Kengaş yangiliklari eʼlon qilinişi bilan şu sahifada körsatiladi.</p>
             </div>
           </div>
         </section>

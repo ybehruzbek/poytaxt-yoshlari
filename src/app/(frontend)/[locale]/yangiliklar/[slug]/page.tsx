@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- rasm Payload'dan tayyor o'lchamda keladi */
+/* eslint-disable @next/next/no-img-element -- rasm Payload'dan tayyor ölçamda keladi */
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -10,7 +10,9 @@ import config from '@payload-config'
 import type { Locale } from '@/i18n/config'
 import { CATEGORY_TONE, toNewsCard } from '@/lib/news'
 import type { Media } from '@/payload-types'
+import { More } from '@/components/site/MoreBtn'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
+import { toYnItem } from '@/components/yangiliklar/data'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
@@ -35,7 +37,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return { title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`, description: doc.excerpt }
 }
 
-/** Bitta yangilik sahifasi ("Batafsil o'qish") */
+/** Bitta yangilik sahifasi (“Batafsil”) */
 export default async function NewsPage(props: Props) {
   const { slug, locale } = await props.params
   const doc = await getNews(slug, locale)
@@ -53,7 +55,7 @@ export default async function NewsPage(props: Props) {
           <div className="news-sec" style={{ marginBottom: 18 }}>
             <div className="meta">
               <span className={`chip ${CATEGORY_TONE[card.category]}`}>{card.categoryLabel}</span>
-              <time dateTime={card.dateISO}>{card.date}</time>
+              <time dateTime={card.dateISO}>{toYnItem(card, 0).long /* “2026-yil 5-noyabr” — hozirgi vaqtga boğliq emas */}</time>
             </div>
           </div>
           <h1 className="h1" style={{ maxWidth: 980 }}>{doc.title}</h1>
@@ -70,8 +72,8 @@ export default async function NewsPage(props: Props) {
               <RichText data={doc.content} />
             </div>
           )}
-          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost" style={{ justifySelf: 'start', color: 'var(--navy)' }}>
-            ← Barça yangiliklar
+          <Link href={`/${locale}/yangiliklar`} className="more-btn" style={{ justifySelf: 'start' }}>
+            <More>Barça yangiliklar</More>
           </Link>
         </div>
       </section>
