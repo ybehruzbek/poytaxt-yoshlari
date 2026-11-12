@@ -37,6 +37,8 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
   if (!birthYear || age < 14 || age > 30)
     errors.birthYear = 'Ittifoqqa 14 yoşga tölgan va 30 yoşdan oşmagan şaxslar aʼzo bölişi mumkin (Ustavning 4.2-bandi).'
   const digits = phone.replace(/\D/g, '')
+  // yagona şakl: +998901234567 (takror tekşiruvi va saqlaş uçun)
+  const phoneNorm = `+${digits}`
   if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
   if (email && (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160))
     errors.email = 'Elektron poçta manzilini töğri kiriting.'
@@ -47,21 +49,17 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
 
   try {
     const payload = await getPayload({ config })
-    // bitta raqamdan 30 kun ičida takroriy ariza qabul qilinmaydi
+    // takroriy ariza bloklanmaydi (boşqa odam raqamini band qila olmasin) — xodimlar uçun “Takroriy” belgisi qöyiladi;
+    // foydalanuvçiga javob bir xil (raqam bazada bor-yöqligi oşkor qilinmaydi)
     const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
     const dup = await payload.count({
       collection: 'memberships',
-      where: { and: [{ phone: { equals: phone } }, { createdAt: { greater_than: since } }] },
+      where: { and: [{ phone: { equals: phoneNorm } }, { createdAt: { greater_than: since } }] },
       overrideAccess: true,
     })
-    if (dup.totalDocs > 0)
-      return {
-        ok: false,
-        message: 'Bu telefon raqamidan ariza yaqinda yuborilgan. U körib çiqilmoqda; qöşimça savollar bölsa, Kengaşga murojaat qiling.',
-      }
     const doc = await payload.create({
       collection: 'memberships',
-      data: { status: 'yangi', name, birthYear, phone, email: email || undefined, place },
+      data: { status: dup.totalDocs > 0 ? 'takror' : 'yangi', name, birthYear, phone: phoneNorm, email: email || undefined, place },
       overrideAccess: true,
     })
     const no = `A-${new Date().getFullYear()}-${String(doc.id).padStart(5, '0')}`

@@ -252,7 +252,7 @@ export interface AppealFile {
  */
 export interface Membership {
   id: number;
-  status: 'yangi' | 'yuborildi' | 'qabul' | 'rad';
+  status: 'yangi' | 'takror' | 'yuborildi' | 'qabul' | 'rad';
   name: string;
   birthYear: number;
   phone: string;

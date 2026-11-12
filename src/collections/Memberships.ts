@@ -31,6 +31,7 @@ export const Memberships: CollectionConfig = {
       defaultValue: 'yangi',
       options: [
         { label: 'Yangi', value: 'yangi' },
+        { label: 'Takroriy (30 kun ičida şu raqamdan)', value: 'takror' },
         { label: 'Boşlanğiç taşkilotga yuborildi', value: 'yuborildi' },
         { label: 'Qabul qilindi', value: 'qabul' },
         { label: 'Rad etildi', value: 'rad' },
