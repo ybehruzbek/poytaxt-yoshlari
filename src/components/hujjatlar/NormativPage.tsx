@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 import { DocsB } from './ActCards'
 import { AudienceFilter } from './AudienceFilter'
-import { GROUPS, INTRO, NOTE } from './data'
+import { GROUPS, NOTE } from './data'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -17,7 +17,6 @@ export function NormativPage({ crumbs, locale }: { crumbs: ReactNode; locale: st
         <div className="wrap">
           {crumbs}
           <h1 className="h2 pg-title">Normativ-huquqiy hujjatlar</h1>
-          <p className="pg-lead">{INTRO}</p>
           <nav className="nh-jump" aria-label="Toifalar">
             {GROUPS.map((g, i) => (
               <a key={g.id} href={`#${g.id}`}>

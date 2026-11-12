@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/config'
 import '../../../hujjatlar.css'
 
 export const metadata: Metadata = {
-  title: 'Normativ-huquqiy hujjatlar — Özbekiston yoşlar ittifoqi',
+  title: 'Normativ-huquqiy hujjatlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description:
     'Yoşlarga oid davlat siyosati, Özbekiston yoşlar ittifoqi faoliyati hamda yoşlarga yaratilgan imkoniyat va imtiyozlarga doir normativ-huquqiy hujjatlar.',
 }

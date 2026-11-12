@@ -43,9 +43,6 @@ export type Act = {
 }
 export type ActGroup = { id: string; t: string; lead: string; acts: Act[] }
 
-export const INTRO =
-  'Yoşlarga oid davlat siyosati, Özbekiston yoşlar ittifoqi faoliyati hamda yoşlarga yaratilgan imkoniyat va imtiyozlarga doir asosiy hujjatlar.'
-
 export const GROUPS: ActGroup[] = [
   {
     id: 'davlat-siyosati',
@@ -55,7 +52,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '14.09.2016',
         t: '“Yoşlarga oid davlat siyosati töğrisida”gi Qonun (ÖRQ-406)',
-        d: 'Yoşlar siyosatining asosiy qonuni; yoşlar nodavlat taşkilotlarini davlat qöllab-quvvatlaşini belgilaydi.',
+        d: 'Yoşlarga oid davlat siyosatining maqsadlari, asosiy yönalişlari va uni amalga oşiruvçi organlarni, yoşlar nodavlat notijorat taşkilotlarini davlat tomonidan qöllab-quvvatlaş kafolatlarini belgilaydi.',
         href: 'https://lex.uz/docs/-3026246',
         kind: 'Qonun',
         org: 'Özbekiston Respublikasining Qonuni',
@@ -95,7 +92,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '03.02.2021',
         t: 'Prezidentning PF-6155-son Farmoni',
-        d: '2021-yil yoşlarni qöllab-quvvatlaş yili deb belgilanib, yoşlarga oid çora-tadbirlarni öz içiga olgan davlat dasturi tasdiqlandi.',
+        d: 'Harakatlar strategiyasini “Yoşlarni qöllab-quvvatlaş va aholi salomatligini mustahkamlaş yili”da amalga oşirişga oid davlat dasturi tasdiqlandi.',
         href: 'https://lex.uz/docs/-5260791',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
@@ -105,22 +102,22 @@ export const GROUPS: ActGroup[] = [
       {
         y: '21.02.2024',
         t: 'Prezidentning PF-37-son Farmoni',
-        d: '2024-yil davlat dasturi: yoşlar bandligi, tadbirkorligi va taʼlimini qöllab-quvvatlaş vazifalari belgilandi.',
+        d: '“Yoşlar va biznesni qöllab-quvvatlaş yili” davlat dasturi tasdiqlandi: yoşlar bandligi, tadbirkorligi va taʼlimini qöllab-quvvatlaş vazifalari belgilandi.',
         href: 'https://lex.uz/docs/-6811936',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
         no: 'PF-37',
-        name: '“Özbekiston-2030” strategiyasini “Yoşlar va biznesni qöllab-quvvatlaş yili”da amalga oşirişga oid davlat dasturi töğrisida',
+        name: '“Özbekiston — 2030” strategiyasini “Yoşlar va biznesni qöllab-quvvatlaş yili”da amalga oşirişga oid davlat dasturi töğrisida',
       },
       {
         y: '20.04.2026',
         t: 'Prezidentning PF-66-son Farmoni',
-        d: '2026–2030-yillarga möljallangan birinçi kompleks yoşlar strategiyasi tasdiqlandi; yoş oilalar uçun imtiyozli ipoteka ham joriy etiladi.',
+        d: '“Yangi Özbekiston yoşlari — 2030” strategiyasi tasdiqlandi; 2027-yil 1-yanvardan uy-joyga muhtoj yoş oilalarga ipoteka kreditlari ajratiladi, foizlarning bir qismi davlat budjetidan qoplanadi.',
         href: 'https://lex.uz/docs/-8155028',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
         no: 'PF-66',
-        name: '“Yangi Özbekiston yoşlari-2030” strategiyasini tasdiqlaş hamda yoşlarni har tomonlama qöllab-quvvatlaş çora-tadbirlari töğrisida',
+        name: '“Yangi Özbekiston yoşlari — 2030” strategiyasini tasdiqlaş hamda yoşlarni har tomonlama qöllab-quvvatlaş çora-tadbirlari töğrisida',
       },
       {
         y: '20.04.2026',
@@ -130,7 +127,7 @@ export const GROUPS: ActGroup[] = [
         kind: 'Qaror',
         org: 'Özbekiston Respublikasi Prezidentining qarori',
         no: 'PQ-148',
-        name: '“Yangi Özbekiston yoşlari-2030” strategiyasini 2026-2027-yillarda amalga oşiriş hamda yoşlar bandligini taʼminlaş böyiça qöşimça çora-tadbirlar töğrisida',
+        name: '“Yangi Özbekiston yoşlari — 2030” strategiyasini 2026-2027-yillarda amalga oşiriş hamda yoşlar bandligini taʼminlaş böyiça qöşimça çora-tadbirlar töğrisida',
       },
     ],
   },
@@ -151,7 +148,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '05.07.2017',
         t: 'Prezidentning PF-5106-son Farmoni',
-        d: 'Ittifoq taşkil etilgani qabul qilindi, 30-iyun “Yoşlar kuni” deb eʼlon qilindi, 12 ta ustuvor yönaliş belgilandi.',
+        d: 'Ittifoq taşkil etilgani maʼlumot uçun qabul qilindi, 30-iyun “Yoşlar kuni” deb eʼlon qilindi, Ittifoq faoliyatining 12 ta ustuvor yönalişi belgilandi.',
         href: 'https://lex.uz/docs/-3255680',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
@@ -229,12 +226,12 @@ export const GROUPS: ActGroup[] = [
   {
     id: 'imkoniyatlar',
     t: 'Yoşlarga yaratilgan imkoniyat va imtiyozlarga doir normativ-huquqiy hujjatlar',
-    lead: 'Davlat mukofotlari va stipendiyalar, taʼlim kreditlari, ijtimoiy yordam, bandlik va tadbirkorlikni qöllab-quvvatlaş — yoşlarning har bir qatlami uçun.',
+    lead: 'Davlat mukofotlari va stipendiyalar, taʼlim kreditlari, ijtimoiy yordam, bandlik va tadbirkorlikni qöllab-quvvatlaşga doir hujjatlar.',
     acts: [
       {
         y: '06.11.2026',
         t: 'Prezidentning PF-240-son Farmoni',
-        d: '“Fidoyi volontyor” kökrak nişoni taʼsis etildi, volontyorlik grantlari, talabalar uçun “Kasbiy volontyorlik” dasturi va kadrlar zaxirasiga kiritiş.',
+        d: 'Volontyorlikni ommalaştiriş çoralari belgilandi: “Fidoyi volontyor” kökrak nişonini taʼsis etiş, volontyorlik grantlari, talabalar uçun “Kasbiy volontyorlik” dasturi va faol volontyorlarni kadrlar zaxirasiga kiritiş.',
         href: 'https://lex.uz/uz/docs/-8575159',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
@@ -256,7 +253,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '19.05.2026',
         t: 'Vazirlar Mahkamasining 257-son qarori',
-        d: 'Nikohlanuvçi yoşlar va yangi oilalar uçun oilaviy hayotga tayyorlaş va oilaviy maslahat maskanlari taşkil etiladi.',
+        d: 'Yoşlarni oilaviy hayotga tayyorlaş markazlari negizida Oila va xotin-qizlar markazlari taşkil etiladi: nikohlanuvçi yoşlarni öqitiş, psixologik, huquqiy va tibbiy maslahat xizmatlari.',
         href: 'https://lex.uz/uz/docs/-8210355',
         kind: 'Qaror',
         org: 'Vazirlar Mahkamasining qarori',
@@ -509,7 +506,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '24.09.2021',
         t: 'Vazirlar Mahkamasining 605-son qarori',
-        d: 'Ijarada yaşaydigan kunduzgi talabalarga oylik ijara tölovining bir qismi budjetdan qoplanadi: Toşkent şahrida 1 BHM.',
+        d: 'Ijarada yaşaydigan kunduzgi talabalarga oylik ijara tölovining bir qismi budjetdan qoplanadi: Toşkent şahrida bir bazaviy hisoblaş miqdori.',
         href: 'https://lex.uz/uz/docs/-5657191',
         kind: 'Qaror',
         org: 'Vazirlar Mahkamasining qarori',
@@ -597,7 +594,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '10.06.1999',
         t: 'Prezidentning PF-2326-son Farmoni',
-        d: 'Taʼlim, fan, sanʼat, sport va boşqa sohalarda yutuqqa erişgan 14–30 yoşli qizlar uçun Zulfiya nomidagi davlat mukofoti taʼsis etildi.',
+        d: 'Taʼlim, fan, sanʼat, sport va boşqa sohalarda yutuqqa erişgan 14–30 yoşli qizlar uçun Zulfiya nomidagi Davlat mukofoti taʼsis etildi.',
         href: 'https://lex.uz/docs/-213812',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
@@ -608,7 +605,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '21.11.2017',
         t: 'Prezidentning PQ-3402-son qarori',
-        d: '“Mard öğlon” davlat mukofotini har yili har bir hududdan 2 nafar yigitga topşiriş haqidagi Ittifoq taklifi maʼqullandi.',
+        d: '“Mard öğlon” davlat mukofotini har yili Yoşlar kuni arafasida Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahridan 2 nafardan yigitga topşiriş haqidagi Ittifoq Markaziy Kengaşining taklifi maʼqullandi.',
         href: 'https://lex.uz/docs/-3418697',
         kind: 'Qaror',
         org: 'Özbekiston Respublikasi Prezidentining qarori',
@@ -663,7 +660,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '20.11.2025',
         t: 'Prezidentning PF-222-son Farmoni',
-        d: 'Kontrakt summasining 50 foizigaça qoplanadi, haydovçilik kursi uçun subsidiya va eng faol 1000 yoşga har yili pul mukofoti beriladi.',
+        d: '“Yoşlar daftari” orqali öqiş kontrakt summasining 50 foizigaça qismi qoplanadi, haydovçilik kursi uçun subsidiya, eng faol 1 000 nafar yoşga har yili pul mukofoti beriladi.',
         href: 'https://lex.uz/docs/-7850416',
         kind: 'Farmon',
         org: 'Özbekiston Respublikasi Prezidentining Farmoni',
@@ -674,7 +671,7 @@ export const GROUPS: ActGroup[] = [
       {
         y: '01.06.2026',
         t: 'Prezidentning PQ-210-son qarori',
-        d: '2026–2028-yillarda “Yoşlar biznesi” va “Kelajakka qadam” dasturlari orqali 31 yoşgaça bölganlarga imtiyozli kreditlar va startaplarga investitsiya beriladi.',
+        d: '“Yoşlar biznesi” va “Kelajakka qadam” dasturlari orqali 31 yoşga tölmagan yoşlarga imtiyozli kreditlar va mikroqarzlar ajratiladi.',
         href: 'https://lex.uz/docs/-8239691',
         kind: 'Qaror',
         org: 'Özbekiston Respublikasi Prezidentining qarori',
@@ -687,4 +684,4 @@ export const GROUPS: ActGroup[] = [
 ]
 
 export const NOTE =
-  'Ittifoq faoliyati, şuningdek, Özbekiston Respublikasi Konstitutsiyasi, nodavlat notijorat taşkilotlari töğrisidagi qonunlar va Ittifoq Ustaviga asoslanadi.'
+  'Ittifoq öz faoliyatini Özbekiston Respublikasi Konstitutsiyasi, “Nodavlat notijorat taşkilotlari töğrisida”gi, “Nodavlat notijorat taşkilotlari faoliyatining kafolatlari töğrisida”gi va “Yoşlarga oid davlat siyosati töğrisida”gi qonunlar hamda Ittifoq Ustaviga muvofiq yuritadi.'

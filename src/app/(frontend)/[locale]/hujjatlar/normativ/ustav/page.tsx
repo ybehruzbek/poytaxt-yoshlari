@@ -7,7 +7,7 @@ import type { Locale } from '@/i18n/config'
 import '../../../../ustav.css'
 
 export const metadata: Metadata = {
-  title: 'Özbekiston yoşlar ittifoqining Ustavi — Özbekiston yoşlar ittifoqi',
+  title: 'Özbekiston yoşlar ittifoqining Ustavi — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description:
     'Özbekiston yoşlar ittifoqining Adliya vazirligida davlat röyxatidan ötkazilgan Ustavi: maqsad va vazifalar, aʼzolik, rahbar organlari, tuzilmasi va mulki.',
 }
