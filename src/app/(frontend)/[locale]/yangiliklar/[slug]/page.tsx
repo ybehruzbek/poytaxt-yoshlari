@@ -1,7 +1,4 @@
-/* eslint-disable @next/next/no-img-element -- rasm Payload'dan tayyor ölçamda keladi */
-import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import { cache } from 'react'
@@ -9,9 +6,9 @@ import { cache } from 'react'
 import config from '@payload-config'
 import type { Locale } from '@/i18n/config'
 import { CATEGORY_TONE, toNewsCard } from '@/lib/news'
-import type { Media } from '@/payload-types'
-import { More } from '@/components/site/MoreBtn'
+import type { Media, News } from '@/payload-types'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
+import { Article, type ArticleData, type MiniNews } from '@/components/yangiliklar/Article'
 import { toYnItem } from '@/components/yangiliklar/data'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
@@ -37,6 +34,18 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return { title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`, description: doc.excerpt }
 }
 
+/** Matndagi sözlar soni (lexical JSON) — öqiş vaqti uçun */
+function words(node: unknown): number {
+  if (!node || typeof node !== 'object') return 0
+  const n = node as { text?: string; children?: unknown[]; root?: unknown }
+  let c = typeof n.text === 'string' ? n.text.split(/\s+/).filter(Boolean).length : 0
+  if (n.root) c += words(n.root)
+  if (Array.isArray(n.children)) for (const ch of n.children) c += words(ch)
+  return c
+}
+
+const media = (m: News['image'] | number | null | undefined) => (m && typeof m === 'object' ? (m as Media) : null)
+
 /** Bitta yangilik sahifasi (“Batafsil”) */
 export default async function NewsPage(props: Props) {
   const { slug, locale } = await props.params
@@ -44,37 +53,51 @@ export default async function NewsPage(props: Props) {
   if (!doc) notFound()
 
   const card = toNewsCard(doc)
-  const img = (typeof doc.image === 'object' ? doc.image : null) as Media | null
-  const hero = img?.sizes?.hero?.url || img?.url || card.image
+  const img = media(doc.image)
+  const total = words(doc.content) + (doc.excerpt ? doc.excerpt.split(/\s+/).length : 0)
+
+  const a: ArticleData = {
+    title: doc.title,
+    catLabel: card.categoryLabel,
+    tone: CATEGORY_TONE[card.category],
+    date: toYnItem(card, 0).long,
+    dateISO: card.dateISO,
+    readMin: Math.max(1, Math.round(total / 180)),
+    hero: img?.sizes?.hero?.url || img?.url || card.image,
+    heroAlt: img?.alt || card.imageAlt,
+    caption: doc.imageCaption,
+    excerpt: doc.excerpt,
+    content: doc.content,
+    gallery: (doc.gallery ?? [])
+      .map((g) => media(g as News['image']))
+      .filter((m): m is Media => !!m)
+      .map((m) => ({ url: m.sizes?.hero?.url || m.url || '', alt: m.alt || '' }))
+      .filter((g) => g.url),
+    source: doc.source,
+    url: `/${locale}/yangiliklar/${slug}`,
+  }
+
+  // öxşaş (şu turkumdan) va sönggi yangiliklar
+  const payload = await getPayload({ config })
+  const base = { collection: 'news' as const, locale, depth: 1, sort: '-publishedAt' }
+  const [same, last] = await Promise.all([
+    payload.find({ ...base, limit: 3, where: { and: [{ _status: { equals: 'published' } }, { category: { equals: doc.category } }, { id: { not_equals: doc.id } }] } }),
+    payload.find({ ...base, limit: 7, where: { and: [{ _status: { equals: 'published' } }, { id: { not_equals: doc.id } }] } }),
+  ])
+  const mini = (n: News): MiniNews => {
+    const c = toNewsCard(n)
+    return { href: `/${locale}/yangiliklar/${c.slug}`, title: c.title, date: toYnItem(c, 0).long, image: c.image, catLabel: c.categoryLabel, tone: CATEGORY_TONE[c.category] }
+  }
+  // turkumda 3 ta bölmasa — sönggilari bilan töldiriladi
+  const related = [...same.docs, ...last.docs.filter((n) => !same.docs.some((x) => x.id === n.id))].slice(0, 3).map(mini)
 
   return (
-    <article className="nw">
-      <header className="pg-head">
-        <div className="wrap">
-          <PageCrumbs locale={locale} path="/yangiliklar" extra={[{ label: doc.title }]} />
-          <div className="nw-meta">
-            <span className={`chip ${CATEGORY_TONE[card.category]}`}>{card.categoryLabel}</span>
-            <time dateTime={card.dateISO}>{toYnItem(card, 0).long /* “2026-yil 5-noyabr” — hozirgi vaqtga boğliq emas */}</time>
-          </div>
-          <h1 className="h2 pg-title nw-title">{doc.title}</h1>
-        </div>
-      </header>
-      <section className="sec">
-        <div className="wrap nw-body">
-          <div className="nw-img">
-            <img className="cover" src={hero} alt={card.imageAlt} />
-          </div>
-          {doc.excerpt && <p className="nw-lede">{doc.excerpt}</p>}
-          {doc.content && (
-            <div className="news-body">
-              <RichText data={doc.content} />
-            </div>
-          )}
-          <Link href={`/${locale}/yangiliklar`} className="more-btn nw-back">
-            <More>Barça yangiliklar</More>
-          </Link>
-        </div>
-      </section>
-    </article>
+    <Article
+      a={a}
+      crumbs={<PageCrumbs locale={locale} path="/yangiliklar" extra={[{ label: doc.title }]} />}
+      related={related}
+      latest={last.docs.slice(0, 6).map(mini)}
+      listHref={`/${locale}/yangiliklar`}
+    />
   )
 }

@@ -65,6 +65,13 @@ export const News: CollectionConfig = {
     },
     { name: 'image', label: 'Asosiy rasm', type: 'upload', relationTo: 'media', required: true },
     {
+      name: 'imageCaption',
+      label: 'Rasm izohi (ixtiyoriy)',
+      type: 'text',
+      localized: true,
+      hooks: { beforeChange: [imloMatn] },
+    },
+    {
       name: 'excerpt',
       label: 'Qisqa matn (boş sahifa uçun)',
       type: 'textarea',
@@ -74,5 +81,20 @@ export const News: CollectionConfig = {
       hooks: { beforeChange: [imloMatn] },
     },
     { name: 'content', label: 'Töliq matn', type: 'richText', localized: true, hooks: { beforeChange: [imloRichText] } },
+    {
+      name: 'gallery',
+      label: 'Fotogalereya (ixtiyoriy)',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: true,
+      maxRows: 24,
+    },
+    {
+      name: 'source',
+      label: 'Manba havolasi (masalan, Telegram post)',
+      type: 'text',
+      validate: (v: unknown) =>
+        !v || (typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v)) || 'Havola https:// bilan boşlansin',
+    },
   ],
 }

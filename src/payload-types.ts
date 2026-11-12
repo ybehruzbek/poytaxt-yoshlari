@@ -146,6 +146,7 @@ export interface News {
   category: 'kengash' | 'boshlangich' | 'imkoniyat' | 'tadbir';
   publishedAt: string;
   image: number | Media;
+  imageCaption?: string | null;
   excerpt: string;
   content?: {
     root: {
@@ -162,6 +163,8 @@ export interface News {
     };
     [k: string]: unknown;
   } | null;
+  gallery?: (number | Media)[] | null;
+  source?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -409,8 +412,11 @@ export interface NewsSelect<T extends boolean = true> {
   category?: T;
   publishedAt?: T;
   image?: T;
+  imageCaption?: T;
   excerpt?: T;
   content?: T;
+  gallery?: T;
+  source?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
