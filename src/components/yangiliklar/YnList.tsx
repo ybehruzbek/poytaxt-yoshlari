@@ -11,19 +11,17 @@ import { Chip, Day, Img, Read, Rubrics, When, byDay, useRubric } from './YnShare
 const FEED = 12
 
 /**
- * A3 — Kun.uz/Daryo.uz uslubi, rasm ustida sarlavha:
+ * Yangiliklar röyxati (tasdiqlangan köriniş):
  *  - tepada rubrikalar (son bilan);
- *  - asosiy yangilik — butun rasm ustida sarlavha va “Öqiş” (pastki qorayiş);
- *  - 6 ta ikkinçi darajali yangilik — 3 ustunli rasmli kartalar, har birida “Öqiş”;
- *  - öngda “Sönggi yangiliklar”: kunlar böyiça vaqt çizigi (vaqtsiz, faqat sana);
- *  - pastda qolganlari keng qatorlar (rasm, sarlavha, qisqa matn, “Öqiş”), “Köproq körsatiş” bilan.
+ *  - asosiy yangilik — rasm ustida sarlavha va “Batafsil”;
+ *  - qolgan barça yangiliklar — bitta 3 ustunli röyxat, har birida “Batafsil”;
+ *    dastlab 6 ta, qolgani “Köproq körsatiş” / “Yiğiş” bilan yiğilib-oçiladi;
+ *  - öngda “Sönggi yangiliklar”: kunlar böyiça vaqt çizigi (faqat sana).
  */
-export function VariantA3({ items, L }: { items: YnItem[]; L: string }) {
+export function YnList({ items, L }: { items: YnItem[]; L: string }) {
   const { cat, setCat, list } = useRubric(items)
   const href = (it: YnItem) => `${L}/${it.slug}`
   const [lead, ...rest] = list
-  const second = rest.slice(0, 6)
-  const more = rest.slice(6)
 
   return (
     <section className="sec yn-a yn-a3" aria-label="Yangiliklar">
@@ -50,9 +48,9 @@ export function VariantA3({ items, L }: { items: YnItem[]; L: string }) {
             </>
           )}
 
-          {second.length > 0 && (
-            <ul className="yn-a3-second">
-              {second.map((it) => (
+          {rest.length > 0 && (
+            <MoreList key={cat} as="ul" className="yn-a3-second" noun="yangilik" first={6} id="yn-royxat">
+              {rest.map((it) => (
                 <li key={it.id}>
                   <article>
                     <Link href={href(it)}>
@@ -67,33 +65,7 @@ export function VariantA3({ items, L }: { items: YnItem[]; L: string }) {
                   </article>
                 </li>
               ))}
-            </ul>
-          )}
-
-          {more.length > 0 && (
-            <>
-              <h2 className="yn-kicker yn-a-sub">Boşqa yangiliklar</h2>
-              <MoreList key={cat} as="ul" className="yn-a3-rows" noun="yangilik" first={6} id="yn-a3-more">
-                {more.map((it) => (
-                  <li key={it.id}>
-                    <article>
-                      <Link href={href(it)}>
-                        <Img it={it} />
-                        <div className="yn-a3-rows-bd">
-                          <div className="yn-meta">
-                            <Chip it={it} />
-                            <When it={it} />
-                          </div>
-                          <h3>{it.title}</h3>
-                          <p>{it.excerpt}</p>
-                          <Read />
-                        </div>
-                      </Link>
-                    </article>
-                  </li>
-                ))}
-              </MoreList>
-            </>
+            </MoreList>
           )}
         </div>
 

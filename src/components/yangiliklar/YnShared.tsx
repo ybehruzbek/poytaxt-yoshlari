@@ -63,11 +63,11 @@ export function Rubrics({ items, cat, onPick }: { items: YnItem[]; cat: YnCat; o
   )
 }
 
-/** Yagona “Öqiş” belgisi — butun karta havolasi ičida */
+/** Yagona “Batafsil” belgisi — butun karta havolasi ičida */
 export function Read() {
   return (
     <span className="more-btn">
-      <More>Öqiş</More>
+      <More />
     </span>
   )
 }
