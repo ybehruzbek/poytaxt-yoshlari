@@ -60,24 +60,46 @@ async function peek(messageId: number): Promise<Msg | null> {
 
 async function download(fileId: string): Promise<Buffer | null> {
   const f = await call<{ file_path?: string; file_size?: number }>('getFile', { file_id: fileId })
-  if (!f.file_path || (f.file_size ?? 0) > MAX_BYTES) return null
+  if (!f.file_path || !f.file_size || f.file_size > MAX_BYTES) return null
   const res = await fetch(`https://api.telegram.org/file/bot${TOKEN()}/${f.file_path}`, {
     cache: 'no-store',
+    redirect: 'error',
     signal: AbortSignal.timeout(60_000),
   })
-  if (!res.ok) return null
-  const buf = Buffer.from(await res.arrayBuffer())
-  return buf.length <= MAX_BYTES ? buf : null
+  if (!res.ok || !res.body) return null
+  if (Number(res.headers.get('content-length') || 0) > MAX_BYTES) return null
+  // hajm çegarasi bilan öqiş: çegaradan oşsa darhol toxtatiladi
+  const chunks: Uint8Array[] = []
+  let size = 0
+  const reader = res.body.getReader()
+  for (;;) {
+    const { done, value } = await reader.read()
+    if (done) break
+    size += value.byteLength
+    if (size > MAX_BYTES) {
+      await reader.cancel()
+      return null
+    }
+    chunks.push(value)
+  }
+  return Buffer.concat(chunks)
 }
 
+export type FullPhoto = { buf: Buffer; width: number; height: number; group?: string }
+
 /** Bitta xabardagi suratning asl nusxasi (xabarda surat bölmasa — null) */
-export async function fullPhoto(messageId: number): Promise<Buffer | null> {
+export async function fullPhoto(messageId: number): Promise<FullPhoto | null> {
   if (!botEnabled()) return null
   const m = await peek(messageId)
   if (!m?.photo?.length) return null
   const best = [...m.photo].sort((a, b) => b.width * b.height - a.width * a.height)[0]
-  return download(best.file_id)
+  const buf = await download(best.file_id)
+  return buf ? { buf, width: best.width, height: best.height, group: m.media_group_id } : null
 }
+
+/** Ikki suratning tomonlar nisbati bir xilmi (asl nusxa va kanal sahifasidagi kiçraytirilgani) */
+export const sameShape = (w1: number, h1: number, w2: number, h2: number) =>
+  w1 > 0 && h1 > 0 && w2 > 0 && h2 > 0 && Math.abs(w1 / h1 - w2 / h2) < 0.03
 
 /**
  * Post suratlarining asl nusxalari, albomdagi tartibda. Kanal sahifasida albom post ID si birinçi
@@ -88,10 +110,14 @@ export async function fullPhotos(postId: number, count: number): Promise<Buffer[
   if (!botEnabled() || count < 1) return null
   try {
     const out: Buffer[] = []
+    let group: string | undefined
     for (let k = 0; k < count; k++) {
-      const buf = await fullPhoto(postId + k)
-      if (!buf) return null
-      out.push(buf)
+      const p = await fullPhoto(postId + k)
+      if (!p) return null
+      // albomdagi barça suratlar bitta guruhdan bölişi şart — aks holda boşqa postning surati tuşib qoladi
+      if (k === 0) group = p.group
+      else if (!group || p.group !== group) return null
+      out.push(p.buf)
     }
     return out
   } catch (err) {

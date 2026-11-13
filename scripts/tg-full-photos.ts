@@ -8,7 +8,7 @@
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
-import { botCheck, botEnabled, fullPhoto } from '@/lib/tg/bot'
+import { botCheck, botEnabled, fullPhoto, sameShape } from '@/lib/tg/bot'
 import { toWebp } from '@/lib/tg/sync'
 
 const MIN_WIDTH = 1000
@@ -35,12 +35,13 @@ let same = 0
 let miss = 0
 for (const d of LIMIT ? docs.slice(0, LIMIT) : docs) {
   const [, post, k] = d.filename!.match(/^tg-(\d+)-(\d+)/)!
-  const buf = await fullPhoto(Number(post) + Number(k)).catch(() => null)
-  if (!buf) {
+  const p = await fullPhoto(Number(post) + Number(k)).catch(() => null)
+  // surat topilmasa yoki şakli saytdagisiga mos kelmasa (boşqa xabar) — tegilmaydi
+  if (!p || !sameShape(p.width, p.height, d.width ?? 0, d.height ?? 0)) {
     miss++
     continue
   }
-  const data = await toWebp(buf)
+  const data = await toWebp(p.buf)
   const w = (await import('sharp')).default(data)
   const { width = 0 } = await w.metadata()
   if (width <= (d.width ?? 0)) {
@@ -57,5 +58,5 @@ for (const d of LIMIT ? docs.slice(0, LIMIT) : docs) {
   done++
   console.log(`${d.filename}: ${d.width} → ${width} px`)
 }
-console.log(`Tayyor: ${done} ta yangilandi, ${same} tasida kattaroq nusxa yöq, ${miss} tasi olinmadi (video muqovasi yoki öçirilgan post).`)
+console.log(`Tayyor: ${done} ta yangilandi, ${same} tasida kattaroq nusxa yöq, ${miss} tasi olinmadi yoki mos kelmadi (video muqovasi, öçirilgan post).`)
 process.exit(0)
