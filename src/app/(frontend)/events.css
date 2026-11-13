@@ -90,6 +90,8 @@
   display: grid;
   place-content: center;
   text-align: center;
+  background: var(--navy-bg);
+  color: #fff;
 }
 .pt-date b {
   font: 800 28px/1 var(--f-head);
@@ -117,24 +119,8 @@
   color: var(--muted);
 }
 .pt-cta {
+  justify-self: start;
   margin: 8px 18px 18px;
-  height: 46px;
-  border-radius: 99px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: var(--yellow);
-  color: var(--navy);
-  font: 700 15px/1 var(--f-head);
-  transition:
-    background 0.2s,
-    color 0.2s;
-}
-.pt-ticket:hover .pt-cta,
-.pt-ticket:focus-visible .pt-cta {
-  background: var(--navy-bg);
-  color: #fff;
 }
 
 /* =====================  Moslashuv  ===================== */
@@ -146,5 +132,46 @@
 @media (max-width: 640px) {
   .evv-c {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Tadbir soni kam bölganda: keng chipta — rasm çapda, maʼlumot öngda ===== */
+@media (min-width: 860px) {
+  .evv-wide {
+    grid-template-columns: repeat(auto-fit, minmax(460px, 580px));
+  }
+  .evv-wide .pt-ticket {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: 1fr auto;
+    -webkit-mask: none;
+    mask: none;
+  }
+  .evv-wide .pt-img {
+    grid-row: 1 / 3;
+    height: 100%;
+    min-height: 260px;
+  }
+  .evv-wide .pt-stub {
+    grid-column: 2;
+  }
+  .evv-wide .pt-cta {
+    grid-column: 2;
+    justify-self: start;
+    margin: 0 24px 22px;
+  }
+  .evv-wide .pt-cut {
+    display: none;
+  }
+  .evv-wide .pt-stub {
+    grid-template-columns: 72px 1fr;
+    gap: 16px;
+    padding: 22px 24px 10px;
+  }
+  .evv-wide .pt-txt h3 {
+    font-size: 19px;
+  }
+  .evv-wide .pt-cta {
+    margin: 0 22px 22px;
   }
 }

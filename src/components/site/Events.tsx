@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
+import { More } from '@/components/site/MoreBtn'
 import { toNewsCard } from '@/lib/news'
 
 import type { Locale } from '@/i18n/config'
@@ -14,11 +15,7 @@ type Ev = {
   start: string // ISO
   img: string
   href: string
-  color: string
-  dark?: boolean // rang ustida matn to'q bo'lsinmi
 }
-
-const COLORS: Array<[string, boolean?]> = [['var(--green)'], ['var(--blue)'], ['var(--sky)', true], ['var(--navy-bg)']]
 
 /** Kanaldan kelgan kelgusi tadbirlar (admin panelda turi “Kelgusi tadbir”), eng yaqini birinçi */
 async function upcoming(locale: Locale): Promise<Ev[]> {
@@ -33,9 +30,8 @@ async function upcoming(locale: Locale): Promise<Ev[]> {
       and: [{ _status: { equals: 'published' } }, { kind: { equals: 'tadbir' } }, { eventDate: { greater_than_equal: new Date().toISOString() } }],
     },
   })
-  return res.docs.map((d, i) => {
+  return res.docs.map((d) => {
     const c = toNewsCard(d)
-    const [color, dark] = COLORS[i % COLORS.length]
     return {
       title: c.title,
       type: 'Tadbir',
@@ -43,8 +39,6 @@ async function upcoming(locale: Locale): Promise<Ev[]> {
       start: d.eventDate as string,
       img: c.image,
       href: `/${locale}/yangiliklar/${c.slug}`,
-      color,
-      dark,
     }
   })
 }
@@ -70,11 +64,6 @@ function daysLeft(iso: string) {
 }
 const leftLabel = (n: number) => (n === 0 ? 'Bugun' : n === 1 ? 'Ertaga' : `${n} kun qoldi`)
 
-const Arrow = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14M13 6l6 6-6 6" />
-  </svg>
-)
 const Org = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" />
@@ -102,7 +91,7 @@ export async function Events({ locale }: { locale: Locale }) {
         </div>
 
         {/* Chipta ko'rinishi */}
-        <div className="evv-c">
+        <div className={`evv-c${items.length < 3 ? ' evv-wide' : ''}`}>
           {items.map((e) => (
             <Link key={e.href} href={e.href} className="pt-ticket">
               <div className="pt-img">
@@ -112,7 +101,7 @@ export async function Events({ locale }: { locale: Locale }) {
               </div>
               <div className="pt-cut" aria-hidden="true" />
               <div className="pt-stub">
-                <span className="pt-date" style={{ background: e.color, color: e.dark ? '#532822' : '#fff' }}>
+                <span className="pt-date">
                   <b>{e.p.day}</b>
                   <small>{e.p.mon}</small>
                 </span>
@@ -122,7 +111,7 @@ export async function Events({ locale }: { locale: Locale }) {
                   <p><Org /> {e.org}</p>
                 </div>
               </div>
-              <span className="pt-cta">Batafsil <Arrow /></span>
+              <span className="more-btn pt-cta"><More /></span>
             </Link>
           ))}
         </div>
