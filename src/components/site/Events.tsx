@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor ölçamda keladi */
 import Link from 'next/link'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
-import { EventsViews } from '@/components/site/EventsViews'
+import { More } from '@/components/site/MoreBtn'
 import { toNewsCard } from '@/lib/news'
 
 import type { Locale } from '@/i18n/config'
@@ -61,6 +62,18 @@ function parts(iso: string) {
 function daysLeft(iso: string) {
   return Math.max(0, Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000))
 }
+const Org = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" />
+  </svg>
+)
+const Clock = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v5l3 2" />
+  </svg>
+)
+
 const leftLabel = (n: number) => (n === 0 ? 'Bugun' : n === 1 ? 'Ertaga' : `${n} kun qoldi`)
 
 
@@ -84,7 +97,29 @@ export async function Events({ locale }: { locale: Locale }) {
           </Link>
         </div>
 
-        <EventsViews items={items.map((e) => ({ title: e.title, type: e.type, org: e.org, img: e.img, href: e.href, left: leftLabel(e.left), day: e.p.day, mon: e.p.mon, wd: e.p.wd, full: e.p.full, time: e.p.time }))} />
+        {/* Kalendar qator: çapda sana, örtada sarlavha, öngda rasm va “Batafsil” */}
+        <ol className="ev-rows">
+          {items.map((e) => (
+            <li key={e.href}>
+              <Link href={e.href}>
+                <span className="ev-row-d">
+                  <b>{e.p.day}</b>
+                  <small>{e.p.mon}</small>
+                </span>
+                <span className="ev-row-t">
+                  <strong>{e.title}</strong>
+                  <span className="ev-row-m">
+                    <span><Clock /> {e.p.wd}, {e.p.time}</span>
+                    <span><Org /> {e.org}</span>
+                  </span>
+                </span>
+                <img src={e.img} alt="" />
+                <span className="ev-row-l">{leftLabel(e.left)}</span>
+                <span className="more-btn"><More /></span>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   )

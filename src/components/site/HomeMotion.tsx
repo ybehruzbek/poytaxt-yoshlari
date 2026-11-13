@@ -13,7 +13,7 @@ import { motionOff, startReveal } from './RevealMotion'
  */
 const FX = [
   ['.news-sec .na-main, .news-sec .na-list > li', 'rise'],
-  ['.ev-sec .pt-ticket', 'tilt'],
+  ['.ev-sec .ev-rows > li', 'tilt'],
   ['#imkoniyatlar .opp', 'grow'],
   ['#imkoniyatlar .opps-title', 'mask'],
   ['#biz-haqimizda .ach > div', 'pop'],
@@ -28,7 +28,7 @@ const ITEMS = [
   '.news-sec .na-main',
   '.news-sec .na-list > li',
   '.ev-sec .sec-head > *',
-  '.ev-sec .pt-ticket',
+  '.ev-sec .ev-rows > li',
   '#imkoniyatlar .opps-title',
   '#imkoniyatlar .opp',
   '#biz-haqimizda .about-art > *',
