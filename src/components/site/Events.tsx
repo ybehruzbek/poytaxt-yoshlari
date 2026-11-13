@@ -1,9 +1,8 @@
-/* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor ölçamda keladi */
 import Link from 'next/link'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
-import { More } from '@/components/site/MoreBtn'
+import { EventsViews } from '@/components/site/EventsViews'
 import { toNewsCard } from '@/lib/news'
 
 import type { Locale } from '@/i18n/config'
@@ -64,11 +63,6 @@ function daysLeft(iso: string) {
 }
 const leftLabel = (n: number) => (n === 0 ? 'Bugun' : n === 1 ? 'Ertaga' : `${n} kun qoldi`)
 
-const Org = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6" />
-  </svg>
-)
 
 /**
  * Yaqin tadbirlar — "chipta" ko'rinishi: tepada rasm va qolgan kunlar, o'yilgan chiziq,
@@ -90,31 +84,7 @@ export async function Events({ locale }: { locale: Locale }) {
           </Link>
         </div>
 
-        {/* Chipta ko'rinishi */}
-        <div className={`evv-c${items.length < 3 ? ' evv-wide' : ''}`}>
-          {items.map((e) => (
-            <Link key={e.href} href={e.href} className="pt-ticket">
-              <div className="pt-img">
-                <img className="cover" src={e.img} alt="" />
-                <span className="pa-type">{e.type}</span>
-                <span className="pt-left">{leftLabel(e.left)}</span>
-              </div>
-              <div className="pt-cut" aria-hidden="true" />
-              <div className="pt-stub">
-                <span className="pt-date">
-                  <b>{e.p.day}</b>
-                  <small>{e.p.mon}</small>
-                </span>
-                <div className="pt-txt">
-                  <h3>{e.title}</h3>
-                  <p>{e.p.wd}, {e.p.full} · {e.p.time}</p>
-                  <p><Org /> {e.org}</p>
-                </div>
-              </div>
-              <span className="more-btn pt-cta"><More /></span>
-            </Link>
-          ))}
-        </div>
+        <EventsViews items={items.map((e) => ({ title: e.title, type: e.type, org: e.org, img: e.img, href: e.href, left: leftLabel(e.left), day: e.p.day, mon: e.p.mon, wd: e.p.wd, full: e.p.full, time: e.p.time }))} />
       </div>
     </section>
   )
