@@ -41,7 +41,7 @@ h1,h2,h3,.rh{font-family:var(--f-head)}
 .btn-primary .ic svg{width:20px;height:20px;color:var(--navy)}
 .btn-outline{border:1px solid var(--navy);color:var(--navy);padding:8px 32px;justify-content:center}
 .btn-outline:hover{background:var(--navy-bg);color:#fff}
-.btn-ghost{border:1px solid var(--yellow);color:var(--yellow);padding:8px 8px 8px 32px;justify-content:center}
+.btn-ghost{border:1px solid var(--yellow);color:var(--yellow);gap:48px;padding:8px 8px 8px 32px;justify-content:center}
 .btn-ghost .ic{width:48px;height:48px;border-radius:50%;background:var(--bg);display:grid;place-items:center;border:1px solid var(--line)}
 .btn-ghost .ic svg{width:20px;height:20px;color:var(--navy);transition:transform .35s}
 
