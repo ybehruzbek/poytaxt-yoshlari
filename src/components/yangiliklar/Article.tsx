@@ -11,7 +11,7 @@ import type { ReactNode } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
 
-import { Reactions, RateStars, Share, Slider } from './ArticleClient'
+import { BackBtn, Reactions, RateStars, Share, Slider } from './ArticleClient'
 import type { ReactionCounts, RatingStats } from '@/app/(frontend)/actions/rating'
 
 export type ArticleData = {
@@ -171,6 +171,7 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
       <section className="sec ar-sec ar-b-sec">
         <div className="wrap">
           {crumbs}
+          <BackBtn href={listHref} label="Yangiliklarga qaytiş" />
           <div className="ar-b-grid">
             <div className="ar-b-main">
               <Meta a={a} />

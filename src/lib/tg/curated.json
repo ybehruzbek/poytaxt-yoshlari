@@ -9224,37 +9224,7 @@
   ]
  },
  "6928": {
-  "kind": "yangilik",
-  "title": "Poytaxt yoşlari: haftaning muhim voqealari — forum, hisobot-saylov yiğilişlari va oçiq muloqotlar",
-  "excerpt": "Ötgan hafta poytaxt yoşlari hayotida yetakçilik, taʼlim, yangi taşabbuslar va hamkorlik yönalişlarida qator muhim voqealar bölib ötdi. Kengaş haftaning asosiy yangiliklarini jamladi.",
-  "category": "kengash",
-  "tags": [
-   "hafta dayjesti",
-   "OTT",
-   "Yoşlar yetakçisi",
-   "hisobot-saylov"
-  ],
-  "caption": "Haftaning muhim voqealari",
-  "blocks": [
-   {
-    "p": "Hafta davomida poytaxtdagi oliy taʼlim taşkilotlarida Yoşlar ittifoqi boşlanğiç taşkilotlarining yiğilişlari, hisobot-saylov jarayonlari va talabalar bilan muloqotlar faol davom etdi."
-   },
-   {
-    "h2": "Haftaning asosiy yangiliklari"
-   },
-   {
-    "ul": [
-     "Poytaxtning 70 dan ortiq Yoşlar yetakçisi respublika forumida iştirok etdi.",
-     "Toşkent xalqaro ijtimoiy innovatsiyalar universitetida Yoşlar ittifoqi boşlanğiç taşkilotining ilk yiğilişi ötkazildi.",
-     "Toşkent farmatsevtika institutida hisobot-saylov yiğilişi bölib ötdi.",
-     "Alişer Navoiy nomidagi Toşkent davlat özbek tili va adabiyoti universitetida “Talabalikdan liderlikkaça” mavzusida oçiq muloqot taşkil etildi.",
-     "Fan va texnologiyalar universitetida Yoşlar ittifoqining hisobot-saylov yiğilişi ötkazildi."
-    ]
-   },
-   {
-    "p": "Haftaning muhim yangiliklari bilan “Yoşlar ovozi” gazetasida ham tanişiş mumkin."
-   }
-  ]
+  "kind": "skip"
  },
  "6940": {
   "kind": "yangilik",

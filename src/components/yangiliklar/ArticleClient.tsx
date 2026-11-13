@@ -22,6 +22,35 @@ const LINK = (
   </svg>
 )
 
+/** Röyxatga qaytiş: öqib kelingan bölsa — öşa joyga, aks holda yangiliklar sahifasiga */
+export function BackBtn({ href, label }: { href: string; label: string }) {
+  const [canGoBack, setCanGoBack] = useState(false)
+  useEffect(() => {
+    try {
+      const ref = document.referrer
+      setCanGoBack(!!ref && new URL(ref).origin === window.location.origin && new URL(ref).pathname.startsWith(href))
+    } catch {
+      /* referrer öqilmadi — oddiy havola qoladi */
+    }
+  }, [href])
+  return (
+    <a
+      className="ar-back"
+      href={href}
+      onClick={(e) => {
+        if (!canGoBack) return
+        e.preventDefault()
+        window.history.back()
+      }}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 5 8 12l7 7" />
+      </svg>
+      {label}
+    </a>
+  )
+}
+
 /** Ulaşiş tugmalari: Telegram, Facebook, havolani nusxalaş */
 export function Share({ url, title, label, vertical = false }: { url: string; title: string; label?: string; vertical?: boolean }) {
   const [copied, setCopied] = useState(false)

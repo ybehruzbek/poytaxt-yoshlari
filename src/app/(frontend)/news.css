@@ -1116,3 +1116,41 @@ html[data-theme='dark'] .ar-react-sh {
     display: none;
   }
 }
+
+/* maqoladan röyxatga qaytiş */
+.ar-back {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  padding: 8px 16px 8px 11px;
+  border: 1.5px solid var(--line);
+  border-radius: 99px;
+  font: 600 14.5px/1 var(--f-body);
+  color: var(--navy);
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.ar-back:hover {
+  background: var(--yellow);
+  border-color: var(--yellow);
+}
+.ar-back:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+.ar-back svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ar-b-sec .pg-crumbs {
+  margin-bottom: 14px;
+}
