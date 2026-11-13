@@ -23,8 +23,10 @@
 }
 /* =====================  Chipta  ===================== */
 .evv-c {
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  /* tadbirlar soni kam bölsa — qator markazda turadi, çetda böş joy qolmaydi */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 280px));
+  justify-content: center;
+  gap: 24px;
 }
 .pt-ticket {
   --notch: 14px;
