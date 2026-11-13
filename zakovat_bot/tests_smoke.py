@@ -1598,6 +1598,27 @@ async def _run_all(saved_event_ids):
     entry.post_text_override = custom
     entry.save(update_fields=["post_text_override"])
 
+    # Xavfsizlik: uzun «&» matni xabarni buzmaydi (ekranlash kengayishi)
+    from zakovat_bot.services.contest import entry_card as _card, safe_html
+    long_bad = ContestParticipant.objects.create(
+        contest=contest, telegram_id=990055, full_name="A" * 60,
+        university="&" * 200, faculty="<" * 150,
+        phone="+998905551122", consent_at=djtz.now())
+    long_entry = Entry.objects.create(
+        contest=contest, participant=long_bad, nomination=Nomination.FOTO,
+        title="&" * 250, description="&" * 800,
+        status=EntryStatus.MODERATION)
+    card_text = _card(long_entry)
+    check("uzun ekranlangan kartochka chegaradan oshmadi",
+          len(card_text) < 4000, len(card_text))
+    preview = contest_admin_handler._post_preview(long_entry)
+    check("post ko'rinishi ham chegarada",
+          len(card_text) + len(preview) < 4096,
+          len(card_text) + len(preview))
+    check("safe_html kesilganini bildiradi",
+          safe_html("&" * 500, 100).endswith("…"))
+    long_entry.delete(); long_bad.delete()
+
     # Kuzatuvchi matnni tahrirlay olmaydi
     cb = FakeCallback(f"tdadm_edit:{entry.id}", NOBODY,
                       message=FakeMessage(NOBODY))

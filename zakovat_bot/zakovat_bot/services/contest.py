@@ -32,6 +32,21 @@ MAX_PHOTO_MB = 20
 ALLOWED_IMAGE_EXT = (".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp")
 
 
+def safe_html(value, limit=400):
+    """Matnni HTML uchun ekranlaydi va xavfsiz uzunlikda kesadi.
+
+    Ekranlashda `&` → `&amp;` kabi almashinuvlar matnni 5 barobargacha
+    uzaytiradi; cheklov qo'yilmasa xabar Telegram chegarasidan oshib,
+    moderatorga umuman yetib bormasligi mumkin.
+    """
+    from html import escape as _esc
+
+    text = _esc(str(value or ""))
+    if len(text) > limit:
+        return text[:limit] + "…"
+    return text
+
+
 def safe_cell(value):
     """Excel formula injection himoyasi (CWE-1236).
 
@@ -346,17 +361,15 @@ def entry_card(entry, for_admin=True):
 
     Ishtirokchi matnlari HTML sifatida talqin qilinmasligi uchun ekranlanadi.
     """
-    from html import escape as esc
-
     p = entry.participant
     username = f"@{p.username}" if p.username else "—"
     lines = [
         f"🆔 <b>{entry.code}</b> — {entry.get_nomination_display()}",
         f"📌 Holati: <b>{entry.get_status_display()}</b>",
         "",
-        f"👤 {esc(str(p.full_name))}",
-        f"🎓 {esc(str(p.university))}",
-        f"📚 {esc(str(p.faculty or '—'))} ({esc(str(p.study_year or '—'))})",
+        f"👤 {safe_html(p.full_name, 120)}",
+        f"🎓 {safe_html(p.university, 200)}",
+        f"📚 {safe_html(p.faculty or '—', 150)} ({safe_html(p.study_year or '—', 50)})",
     ]
     if for_admin:
         lines += [
@@ -365,8 +378,8 @@ def entry_card(entry, for_admin=True):
         ]
     lines += [
         "",
-        f"📝 <b>{esc(str(entry.title or '—'))}</b>",
-        f"✍️ {esc(str(entry.description or '—'))}",
+        f"📝 <b>{safe_html(entry.title or '—', 250)}</b>",
+        f"✍️ {safe_html(entry.description or '—', 700)}",
         f"📎 Media: {entry.media.count()} ta",
     ]
     if entry.submitted_at:
@@ -374,7 +387,7 @@ def entry_card(entry, for_admin=True):
             f"🕒 Kelgan vaqt: {timezone.localtime(entry.submitted_at):%d.%m.%Y %H:%M}"
         )
     if entry.reject_reason:
-        lines.append(f"\n💬 Oxirgi izoh: {esc(str(entry.reject_reason))}")
+        lines.append(f"\n💬 Oxirgi izoh: {safe_html(entry.reject_reason, 300)}")
 
     history = entry.moderation_logs.order_by("-id")[:3]
     if history:

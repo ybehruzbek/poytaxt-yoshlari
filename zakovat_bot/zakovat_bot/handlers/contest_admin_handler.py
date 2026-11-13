@@ -43,6 +43,7 @@ from zakovat_bot.models import (
 from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
 from zakovat_bot.services.contest import (
     active_contest,
+    safe_html,
     contest_stats,
     deadline_text,
     entry_card,
@@ -135,13 +136,28 @@ async def tdadm_menu(callback: CallbackQuery, state: FSMContext):
 # ==================== Moderatsiya navbati (TZ 6) ====================
 
 async def _show_for_moderation(chat_id, entry):
-    """Mediani va kartochkani moderatorga ko'rsatadi."""
+    """Mediani va kartochkani moderatorga ko'rsatadi.
+
+    Bitta nosoz ariza butun navbatni to'xtatib qo'ymasligi uchun yuborish
+    xatosi ushlanadi va qisqartirilgan ko'rinish yuboriladi.
+    """
     await send_entry_media(bot, chat_id, entry)
-    await bot.send_message(
-        chat_id=chat_id,
-        text=f"{entry_card(entry)}\n\n{_post_preview(entry)}",
-        reply_markup=moderation_keyboard(entry),
-    )
+    try:
+        await bot.send_message(
+            chat_id=chat_id,
+            text=f"{entry_card(entry)}\n\n{_post_preview(entry)}",
+            reply_markup=moderation_keyboard(entry),
+        )
+    except Exception:
+        logger.exception("Kartochkani yuborib bo'lmadi: %s", entry.code)
+        await bot.send_message(
+            chat_id=chat_id,
+            text=(f"🆔 <b>{entry.code}</b> — {entry.get_nomination_display()}\n"
+                  f"📌 {entry.get_status_display()}\n\n"
+                  "⚠️ Ariza matni juda uzun yoki nosoz — to'liq ko'rinishni "
+                  "ko'rsatib bo'lmadi. Qaror qabul qilishingiz mumkin."),
+            reply_markup=moderation_keyboard(entry),
+        )
 
 
 @dp.callback_query(F.data == "tdadm_queue")
@@ -803,7 +819,7 @@ def _post_preview(entry):
     """Kanalda qanday ko'rinishini aynan ko'rsatadi."""
     return ("📢 <b>Kanalga shu ko'rinishda chiqadi:</b>\n\n"
             "➖➖➖➖➖➖➖➖➖➖\n"
-            f"{esc(post_text(entry))}\n"
+            f"{safe_html(post_text(entry), 1200)}\n"
             "➖➖➖➖➖➖➖➖➖➖\n"
             "<i>(ostida ❤️ ovoz tugmasi bo'ladi)</i>")
 
