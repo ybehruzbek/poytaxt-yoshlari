@@ -239,3 +239,19 @@
   white-space: nowrap;
 }
 
+/* “Batafsil” qator örtasida tekis tursin (umumiy qoidada u yuqoriga tortiladi) */
+.ev-rows .more-btn {
+  justify-self: start;
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+  .ev-rows > li > a {
+    grid-template-columns: 64px 1fr;
+    gap: 14px;
+  }
+  .ev-rows img,
+  .ev-row-l {
+    display: none;
+  }
+}
