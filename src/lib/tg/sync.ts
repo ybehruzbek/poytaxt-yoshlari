@@ -68,7 +68,7 @@ async function upload(payload: Payload, url: string, alt: string, name: string):
     const data = await sharp(buf, { limitInputPixels: 60_000_000, failOn: 'warning' })
       .rotate()
       .resize({ width: 1600, withoutEnlargement: true })
-      .webp({ quality: 80 })
+      .webp({ quality: 92 })
       .toBuffer()
     const doc = await payload.create({
       collection: 'media',

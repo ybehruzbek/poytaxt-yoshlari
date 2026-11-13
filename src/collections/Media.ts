@@ -31,6 +31,6 @@ export const Media: CollectionConfig = {
       { name: 'card', width: 800, height: 500, position: 'centre' },
       { name: 'hero', width: 1600 },
     ],
-    formatOptions: { format: 'webp', options: { quality: 82 } },
+    formatOptions: { format: 'webp', options: { quality: 90 } },
   },
 }

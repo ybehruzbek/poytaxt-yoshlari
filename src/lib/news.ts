@@ -48,7 +48,7 @@ export function toNewsCard(doc: News): NewsCard {
     categoryLabel: doc.kind === 'tabrik' ? 'Tabriklar' : CATEGORY_LABEL[doc.category],
     date: formatDateUz(doc.publishedAt),
     dateISO: doc.publishedAt,
-    image: img?.sizes?.card?.url || img?.url || '',
+    image: img?.url || img?.sizes?.card?.url || '', // asl nusxa: kanal rasmlari 800 px, kesilgan nusxa yana siqilib xiralaşadi
     imageAlt: img?.alt || '',
   }
 }
