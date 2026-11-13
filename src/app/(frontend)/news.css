@@ -1051,11 +1051,11 @@ html[data-theme='dark'] .ar-react-sh {
   font: 600 12px/1.2 var(--f-body);
   color: var(--muted);
 }
-.ar-b-side span {
+.ar-b-side li span {
   font: 500 15px/1.4 var(--f-body);
   color: var(--navy);
 }
-.ar-b-side a:hover span {
+.ar-b-side li a:hover span {
   text-decoration: underline;
   text-decoration-color: var(--yellow);
   text-decoration-thickness: 2px;
