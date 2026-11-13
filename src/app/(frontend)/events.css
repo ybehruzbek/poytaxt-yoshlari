@@ -30,6 +30,7 @@
 }
 .pt-ticket {
   --notch: 14px;
+  --cut: 220px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -41,11 +42,11 @@
     box-shadow 0.3s;
   /* chipta "teshiklari": rasm va stub chegarasida yon tomondan o'yilgan */
   -webkit-mask:
-    radial-gradient(circle var(--notch) at 0 220px, #0000 98%, #000) left / 51% 100% no-repeat,
-    radial-gradient(circle var(--notch) at 100% 220px, #0000 98%, #000) right / 51% 100% no-repeat;
+    radial-gradient(circle var(--notch) at 0 var(--cut), #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% var(--cut), #0000 98%, #000) right / 51% 100% no-repeat;
   mask:
-    radial-gradient(circle var(--notch) at 0 220px, #0000 98%, #000) left / 51% 100% no-repeat,
-    radial-gradient(circle var(--notch) at 100% 220px, #0000 98%, #000) right / 51% 100% no-repeat;
+    radial-gradient(circle var(--notch) at 0 var(--cut), #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% var(--cut), #0000 98%, #000) right / 51% 100% no-repeat;
 }
 .pt-ticket:hover,
 .pt-ticket:focus-visible {
@@ -53,7 +54,7 @@
 }
 .pt-img {
   position: relative;
-  height: 220px;
+  height: var(--cut);
   flex-shrink: 0;
 }
 .pt-img .pa-type {
@@ -135,43 +136,27 @@
   }
 }
 
-/* ===== Tadbir soni kam bölganda: keng chipta — rasm çapda, maʼlumot öngda ===== */
+/* ===== Tadbir soni kam bölganda: afişa köriniş — keng rasm, pastda maʼlumot ===== */
 @media (min-width: 860px) {
   .evv-wide {
-    grid-template-columns: repeat(auto-fit, minmax(460px, 580px));
+    grid-template-columns: repeat(auto-fit, minmax(440px, 560px));
   }
   .evv-wide .pt-ticket {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    grid-template-rows: 1fr auto;
-    -webkit-mask: none;
-    mask: none;
-  }
-  .evv-wide .pt-img {
-    grid-row: 1 / 3;
-    height: 100%;
-    min-height: 260px;
+    --cut: 300px;
   }
   .evv-wide .pt-stub {
-    grid-column: 2;
-  }
-  .evv-wide .pt-cta {
-    grid-column: 2;
-    justify-self: start;
-    margin: 0 24px 22px;
-  }
-  .evv-wide .pt-cut {
-    display: none;
-  }
-  .evv-wide .pt-stub {
-    grid-template-columns: 72px 1fr;
-    gap: 16px;
-    padding: 22px 24px 10px;
+    grid-template-columns: 78px 1fr;
+    gap: 18px;
+    padding: 22px 26px 12px;
   }
   .evv-wide .pt-txt h3 {
-    font-size: 19px;
+    font-size: 21px;
+    line-height: 1.3;
+  }
+  .evv-wide .pt-txt p {
+    font-size: 14.5px;
   }
   .evv-wide .pt-cta {
-    margin: 0 22px 22px;
+    margin: 10px 26px 24px;
   }
 }
