@@ -2,11 +2,10 @@
 /* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor o'lchamda (WebP) keladi */
 
 import Link from 'next/link'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import type { Locale } from '@/i18n/config'
-import { CATEGORY_TONE, NEWS_PAGE_SIZE, type NewsCard, toNewsCard } from '@/lib/news'
-import type { News } from '@/payload-types'
+import { CATEGORY_TONE, type NewsCard } from '@/lib/news'
 import { More } from './MoreBtn'
 
 /** Asosiy yangilik necha millisekundda almashadi */
@@ -28,30 +27,18 @@ const Arrow = () => (
 )
 
 /**
- * Aylanuvchi yangiliklar:
+ * Aylanuvchi yangiliklar: faqat sönggi 5 ta yangilik aylanadi (qolgani “Barça yangiliklar”da).
  *  - har INTERVAL'da yon ro'yxatdagi birinchi yangilik asosiy joyga o'tadi, ro'yxat bir pog'ona suriladi;
- *  - navbat tugashiga yaqin keyingi yangiliklar bazadan (Payload REST API) yuklanadi;
- *  - bazada boshqa yangilik qolmasa — boshidan aylanadi.
+ *  - ro'yxat tugasa — boshidan aylanadi.
  * Sichqoncha ustida turganda yoki fokusda to'xtaydi; "to'xtatish" tugmasi bor (WCAG 2.2.2);
  * "harakatni kamaytirish" yoqilgan bo'lsa — avtomatik aylanmaydi.
  */
-export function NewsRotator({
-  locale,
-  initial,
-  total,
-}: {
-  locale: Locale
-  initial: NewsCard[]
-  total: number
-}) {
-  const [items, setItems] = useState<NewsCard[]>(initial)
+export function NewsRotator({ locale, initial }: { locale: Locale; initial: NewsCard[] }) {
+  const items = initial
   const [idx, setIdx] = useState(0)
   const [playing, setPlaying] = useState(true)
   const [hover, setHover] = useState(false)
   const [reduced, setReduced] = useState(false)
-  const page = useRef(1)
-  const loading = useRef(false)
-  const hasMore = items.length < total
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -61,45 +48,14 @@ export function NewsRotator({
     return () => mq.removeEventListener('change', on)
   }, [])
 
-  // Navbatda asosiy + 4 ta yon karta + 1 ta zaxira bo'lmasa — keyingi sahifani bazadan olamiz
-  const ensure = useCallback(
-    async (nextIdx: number) => {
-      if (loading.current || !hasMore || items.length > nextIdx + SIDE + 1) return
-      loading.current = true
-      try {
-        const q = new URLSearchParams({
-          locale,
-          limit: String(NEWS_PAGE_SIZE),
-          page: String(page.current + 1),
-          sort: '-publishedAt',
-          depth: '1',
-        })
-        const res = await fetch(`/api/news?${q}`)
-        if (!res.ok) return
-        const data: { docs: News[] } = await res.json()
-        page.current += 1
-        setItems((prev) => {
-          const seen = new Set(prev.map((p) => p.id))
-          return [...prev, ...data.docs.map(toNewsCard).filter((d) => !seen.has(d.id))]
-        })
-      } catch {
-        /* tarmoq xatosi — keyingi aylanishda qayta urinadi */
-      } finally {
-        loading.current = false
-      }
-    },
-    [hasMore, items.length, locale],
-  )
-
   const go = useCallback(
     (step: number) => {
       setIdx((i) => {
         const next = i + step
-        void ensure(next)
         return next < 0 ? items.length - 1 : next
       })
     },
-    [ensure, items.length],
+    [items.length],
   )
 
   // Avtomatik almashish navbatdagi kartaning "to'lish" animatsiyasiga bog'langan:

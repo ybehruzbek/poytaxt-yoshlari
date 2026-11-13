@@ -8,7 +8,7 @@ import { NewsRotator } from './NewsRotator'
 
 /**
  * So'nggi yangiliklar — hero ostida.
- * Birinchi 5 ta yangilik serverda bazadan olinadi; keyingilarini NewsRotator brauzerda o'zi yuklaydi.
+ * Faqat sönggi 5 ta yangilik olinadi va aylanib turadi; qolgani “Barça yangiliklar” sahifasida.
  */
 export async function News({ locale }: { locale: Locale }) {
   const payload = await getPayload({ config })
@@ -31,7 +31,7 @@ export async function News({ locale }: { locale: Locale }) {
             <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
           </Link>
         </div>
-        <NewsRotator locale={locale} initial={res.docs.map(toNewsCard)} total={res.totalDocs} />
+        <NewsRotator locale={locale} initial={res.docs.map(toNewsCard)} />
       </div>
     </section>
   )
