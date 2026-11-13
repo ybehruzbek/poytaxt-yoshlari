@@ -9,6 +9,7 @@ import sharp from 'sharp'
 
 import { slugifyUz } from '@/lib/slugify'
 
+import { fullPhotos } from './bot'
 import { fetchPage, fetchSince, postUrl, type TgPost } from './channel'
 import curatedJson from './curated.json'
 import { blocksToLexical, type Draft, postToDraft } from './transform'
@@ -35,6 +36,26 @@ export function isTelegramCdn(u: string): boolean {
   } catch {
     return false
   }
+}
+
+/** Suratni webp ga ögirib (eng köpi 2400 px) Media'ga yozadi */
+export async function toWebp(buf: Buffer): Promise<Buffer> {
+  return sharp(buf, { limitInputPixels: 60_000_000, failOn: 'warning' })
+    .rotate()
+    .resize({ width: 2400, height: 2400, fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: 90 })
+    .toBuffer()
+}
+
+async function saveImage(payload: Payload, buf: Buffer, alt: string, name: string): Promise<number> {
+  const data = await toWebp(buf)
+  const doc = await payload.create({
+    collection: 'media',
+    data: { alt: alt.slice(0, 200) },
+    file: { data, mimetype: 'image/webp', name: `${name}.webp`, size: data.length },
+    overrideAccess: true,
+  })
+  return doc.id as number
 }
 
 async function upload(payload: Payload, url: string, alt: string, name: string): Promise<number | null> {
@@ -64,19 +85,7 @@ async function upload(payload: Payload, url: string, alt: string, name: string):
     }
     const expected = Number(res.headers.get('content-length') || 0)
     if (expected && size !== expected) return null // oxirigaça yuklanmagan
-    const buf = Buffer.concat(chunks)
-    const data = await sharp(buf, { limitInputPixels: 60_000_000, failOn: 'warning' })
-      .rotate()
-      .resize({ width: 1600, withoutEnlargement: true })
-      .webp({ quality: 92 })
-      .toBuffer()
-    const doc = await payload.create({
-      collection: 'media',
-      data: { alt: alt.slice(0, 200) },
-      file: { data, mimetype: 'image/webp', name: `${name}.webp`, size: data.length },
-      overrideAccess: true,
-    })
-    return doc.id as number
+    return await saveImage(payload, Buffer.concat(chunks), alt, name)
   } catch {
     return null
   }
@@ -135,8 +144,13 @@ export async function importPosts(payload: Payload, posts: TgPost[], log: (s: st
     try {
       const urls = (post.photos.length ? post.photos : post.videoThumbs).slice(0, MAX_PHOTOS)
       const ids: number[] = []
+      // bot ulangan bölsa — asl suratlar; aks holda kanal sahifasidagi 800 px li nusxalar
+      const full = post.photos.length ? await fullPhotos(post.id, urls.length) : null
       for (let k = 0; k < urls.length; k++) {
-        const id = await upload(payload, urls[k], draft.title, `tg-${post.id}-${k}`)
+        const name = `tg-${post.id}-${k}`
+        const id = full
+          ? await saveImage(payload, full[k], draft.title, name).catch(() => null)
+          : await upload(payload, urls[k], draft.title, name)
         if (id) ids.push(id)
       }
       if (!ids.length) ids.push((fallback ??= await fallbackImage(payload)))
