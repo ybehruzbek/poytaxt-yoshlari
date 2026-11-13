@@ -77,7 +77,9 @@ export function AnnounceList({ items }: { items: Announce[] }) {
             href={e.href ?? TG(e.id)}
             {...(e.href ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
           >
-            <img src={e.img} alt="" loading="lazy" />
+            <span className="vc-board-ph">
+              <img src={e.img} alt="" loading="lazy" />
+            </span>
             <span className="vc-board-t">
               <time dateTime={e.date}>{fmtDate(e.date)}</time>
               <strong>{e.title}</strong>
