@@ -8,7 +8,7 @@
 export type OtmType = 'davlat' | 'xorijiy' | 'nodavlat'
 /**
  * Aloqa maydonlari — ŞABLON: qiymatni yozsangiz kartada tegişli tugma özi faollaşadi.
- * phone: '+998 90 123-45-67', email: 'nom@pochta.uz', telegram / instagram / facebook: töliq havola (https://…).
+ * phone — faqat taşkilotning rasmiy iş telefoni (şaxsiy mobil raqam yozilmaydi), masalan '+998 71 123-45-67'; email: 'nom@pochta.uz', telegram / instagram / facebook: töliq havola (https://…).
  */
 export type Contacts = {
   phone: string
@@ -61,7 +61,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs magistranti',
 
       spec: 'Estrada orkestri dirijyorligi',
-      phone: '+998 93 121-44-55',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -86,7 +86,7 @@ export const OTMS: Otm[] = [
       role: 'Talabalar turar joyi tarbiyaçi-uslubçisi (Özbekiston Milliy universiteti 2-kurs magistranti)',
 
       spec: 'Geologiya (faoliyat sohasi böyiça)',
-      phone: '+998 93 311-11-49',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -111,7 +111,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Iqtisodiyot',
-      phone: '+998 94 954-90-54',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -136,7 +136,7 @@ export const OTMS: Otm[] = [
       role: 'Iqtidorli talabalarning ilmiy-tadqiqot faoliyatini taşkil etiş bölimi boşliği',
 
       spec: 'Tarixçi',
-      phone: '+998 94 846-07-64',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -161,7 +161,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Xorijiy til va adabiyoti (ingliz tili)',
-      phone: '+998 93 148-08-51',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -186,7 +186,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs magistranti',
 
       spec: 'Akademik xor dirijyorligi',
-      phone: '+998 88 333-51-13',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -211,7 +211,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs magistranti',
 
       spec: 'Xalq ijodiyoti (folklor va etnografiya)',
-      phone: '+998 94 151-82-32',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -236,7 +236,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs magistranti',
 
       spec: 'Sanʼatşunoslik',
-      phone: '+998 93 737-03-80',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -261,7 +261,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs magistranti',
 
       spec: 'Xalqaro jurnalistika',
-      phone: '+998 90 409-66-80',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -286,7 +286,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Milliy ğoya, maʼnaviyat asoslari va huquq taʼlimi',
-      phone: '+998 93 517-49-39',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -311,7 +311,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs magistranti',
 
       spec: 'Geologiya (faoliyat sohasi böyiça)',
-      phone: '+998 94 261-01-08',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -336,7 +336,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs magistranti',
 
       spec: 'Xalqaro munosabatlar',
-      phone: '+998 33 001-85-23',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -361,7 +361,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs magistranti',
 
       spec: 'Qişloq xöjaligi hayvonlarining seleksiyasi va naslçilik',
-      phone: '+998 90 132-31-03',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -386,7 +386,7 @@ export const OTMS: Otm[] = [
       role: 'Yoşlar masalalari va maʼnaviy-maʼrifiy işlar boşqarmasi yetakçi mutaxassisi',
 
       spec: 'Uy-joy kommunal xöjaligini taşkil etiş va boşqariş',
-      phone: '+998 97 656-19-95',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -411,7 +411,7 @@ export const OTMS: Otm[] = [
       role: 'Maʼnaviyat va maʼrifat bölimi xodimi',
 
       spec: 'Mobil aloqa tizimlari',
-      phone: '+998 99 467-30-03',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -436,7 +436,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs magistranti',
 
       spec: 'Iqtisodiyot (tarmoqlar va sohalar böyiça)',
-      phone: '+998 94 794-68-86',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -461,7 +461,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Matnşunoslik va adabiy manbaşunoslik',
-      phone: '+998 99 107-75-17',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -486,7 +486,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Antropologiya',
-      phone: '+998 90 813-07-73',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -511,7 +511,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Menejment',
-      phone: '+998 90 798-79-90',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -536,7 +536,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs magistranti',
 
       spec: 'Travmatologiya, ortopediya va harbiy-dala jarrohligi',
-      phone: '+998 77 008-96-96',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -561,7 +561,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs magistranti',
 
       spec: 'Uçiş apparatlari dvigatellari va energetik qurilmalari',
-      phone: '+998 99 678-40-17',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -586,7 +586,7 @@ export const OTMS: Otm[] = [
       role: 'Tyutor',
 
       spec: 'Yurist',
-      phone: '+998 99 799-95-30',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -611,7 +611,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Sanoat farmatsiyasi',
-      phone: '+998 93 726-00-56',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -636,7 +636,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Yurisprudensiya',
-      phone: '+998 97 350-11-07',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -661,7 +661,7 @@ export const OTMS: Otm[] = [
       role: 'Yoşlar bilan işlaş, maʼnaviyat va maʼrifat bölimi uslubçisi',
 
       spec: 'Texnolog',
-      phone: '+998 99 804-85-40',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -686,7 +686,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Tikuv buyumlari texnologiyasi',
-      phone: '+998 93 680-80-20',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -711,7 +711,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Iqtisodiyot va maʼlumotlar tahlili',
-      phone: '+998 99 888-51-45',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -736,7 +736,7 @@ export const OTMS: Otm[] = [
       role: 'Talabalar amaliyoti bölimi boş mutaxassisi',
 
       spec: 'Aktyorlik sanʼati (qöğirçoq teatri aktyorligi)',
-      phone: '+998 93 248-14-45',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -761,7 +761,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Sport faoliyati (suziş)',
-      phone: '+998 97 156-40-56',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -786,7 +786,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Ekologiya va davlat boşqaruvi',
-      phone: '+998 33 292-20-00',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -813,7 +813,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Soliqlar va soliqqa tortiş',
-      phone: '+998 95 755-60-40',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -839,7 +839,7 @@ export const OTMS: Otm[] = [
       role: 'Monitoring va içki nazorat sektori boş mutaxassisi',
 
       spec: 'Taʼlim muassasalarini boşqariş',
-      phone: '+998 99 120-20-55',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -864,7 +864,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Jahon iqtisodiyoti va jahon savdosi',
-      phone: '+998 90 130-09-12',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -889,7 +889,7 @@ export const OTMS: Otm[] = [
       role: 'Matbuot kotibi',
 
       spec: 'Filologiya (lingvistika)',
-      phone: '+998 90 283-80-75',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -914,7 +914,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Iqtisodiyot',
-      phone: '+998 93 788-87-15',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -939,7 +939,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Issiqlik energetikasi va issiqlik texnikasi',
-      phone: '+998 99 538-25-38',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -964,7 +964,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Psixologiya',
-      phone: '+998 90 810-14-92',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -999,7 +999,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Elektrotexnika va kompyuter muhandisligi',
-      phone: '+998 93 511-68-25',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1024,7 +1024,7 @@ export const OTMS: Otm[] = [
       role: 'Yoşlar bilan işlaş, maʼnaviyat va maʼrifat bölimi uslubçisi',
 
       spec: 'Filologiya va tillarni öqitiş (rus tili)',
-      phone: '+998 91 785-99-23',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1049,7 +1049,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Iqtisodiyot',
-      phone: '+998 90 911-04-10',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1074,7 +1074,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Kompyuter va dasturiy injiniring',
-      phone: '+998 91 460-20-27',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1099,7 +1099,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Menejment',
-      phone: '+998 90 000-94-49',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1124,7 +1124,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Kinooperator',
-      phone: '+998 90 124-32-79',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1149,7 +1149,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Bank işi va moliya',
-      phone: '+998 90 777-25-00',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1174,7 +1174,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Aviatsiya muhandisligi',
-      phone: '+998 90 131-58-55',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1199,7 +1199,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Iqtisodiyot',
-      phone: '+998 93 644-51-61',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1224,7 +1224,7 @@ export const OTMS: Otm[] = [
       role: 'Yoşlar masalalari böyiça bölim boş mutaxassisi',
 
       spec: 'Moliya',
-      phone: '+998 33 715-33-55',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1249,7 +1249,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Iqtisodiyot',
-      phone: '+998 90 933-11-23',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1279,7 +1279,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Kosmetologiya',
-      phone: '+998 97 101-86-68',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1304,7 +1304,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Grafik dizayner',
-      phone: '+998 95 642-44-47',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1329,7 +1329,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Xalqaro biznes',
-      phone: '+998 77 288-99-99',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1354,7 +1354,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Yurisprudensiya',
-      phone: '+998 90 451-53-05',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1379,7 +1379,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Menejment',
-      phone: '+998 91 827-88-81',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1405,7 +1405,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Kiberxavfsizlik',
-      phone: '+998 70 122-09-05',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1430,7 +1430,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Yurisprudensiya',
-      phone: '+998 95 685-34-39',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1455,7 +1455,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Filologiya va tillarni öqitiş (arab tili)',
-      phone: '+998 90 013-32-33',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1480,7 +1480,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Xalqaro biznes va moliya',
-      phone: '+998 95 933-11-77',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1506,7 +1506,7 @@ export const OTMS: Otm[] = [
       role: 'Yoşlar masalalari va maʼnaviy-maʼrifiy işlar bölimi mutaxassisi',
 
       spec: 'Boşlanğiç taʼlim öqituvçisi',
-      phone: '+998 94 105-35-86',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1532,7 +1532,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Sanoat farmatsiyasi',
-      phone: '+998 94 946-35-99',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1557,7 +1557,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Filologiya va tillarni öqitiş (ingliz tili)',
-      phone: '+998 94 300-51-21',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1582,7 +1582,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Xalqaro munosabatlar',
-      phone: '+998 91 610-45-95',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1607,7 +1607,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs magistranti',
 
       spec: 'Xorijiy til va adabiyoti',
-      phone: '+998 77 577-55-05',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1633,7 +1633,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Tarix',
-      phone: '+998 93 775-00-69',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1658,7 +1658,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Dasturiy taʼminot işlab çiqiş va dasturlaş',
-      phone: '+998 93 225-20-27',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1683,7 +1683,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Xorijiy til va adabiyoti',
-      phone: '+998 90 307-43-02',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1708,7 +1708,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Biznes',
-      phone: '+998 90 808-59-96',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1733,7 +1733,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Xorijiy til va adabiyoti',
-      phone: '+998 99 346-29-06',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1758,7 +1758,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Xalqaro munosabatlar',
-      phone: '+998 90 695-17-05',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1783,7 +1783,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Moliya va moliyaviy texnologiyalar',
-      phone: '+998 97 999-64-00',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1808,7 +1808,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Kiberxavfsizlik',
-      phone: '+998 20 006-33-06',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1833,7 +1833,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Menejment',
-      phone: '+998 90 069-60-79',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1858,7 +1858,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Dasturiy injiniring',
-      phone: '+998 90 877-77-65',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1883,7 +1883,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Iqtisodiyot',
-      phone: '+998 90 954-54-99',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1908,7 +1908,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Bank işi va audit',
-      phone: '+998 99 643-47-74',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1933,7 +1933,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Ingliz tili filologiyasi',
-      phone: '+998 93 349-32-00',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1958,7 +1958,7 @@ export const OTMS: Otm[] = [
       role: '4-kurs talabasi',
 
       spec: 'Xalqaro munosabatlar',
-      phone: '+998 20 000-32-82',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -1983,7 +1983,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Kompyuter injiniringi',
-      phone: '+998 94 007-24-59',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2008,7 +2008,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Kompyuter ilmlari',
-      phone: '+998 94 009-36-27',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2033,7 +2033,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Huquqşunoslik',
-      phone: '+998 99 468-25-35',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2058,7 +2058,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Yurisprudensiya',
-      phone: '+998 95 534-41-41',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2083,7 +2083,7 @@ export const OTMS: Otm[] = [
       role: '2-kurs talabasi',
 
       spec: 'Xalqaro savdo',
-      phone: '+998 97 725-48-50',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2109,7 +2109,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Filologiya va tillarni öqitiş (arab tili)',
-      phone: '+998 99 500-05-10',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2134,7 +2134,7 @@ export const OTMS: Otm[] = [
       role: '3-kurs talabasi',
 
       spec: 'Filologiya va tillarni öqitiş (ingliz tili)',
-      phone: '+998 77 701-80-83',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
@@ -2160,7 +2160,7 @@ export const OTMS: Otm[] = [
       role: '1-kurs talabasi',
 
       spec: 'Yurisprudensiya',
-      phone: '+998 97 860-22-00',
+      phone: '',
       email: '',
       telegram: '',
       instagram: '',
