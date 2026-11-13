@@ -1538,51 +1538,68 @@ async def _run_all(saved_event_ids):
     check("kartochkada aloqa ma'lumotlari bor",
           any(k == "send_message" and "Telegram:" in str(t) for k, c, t in sent))
 
-    # Post matnini moderator tahrirlashi (kanalga bir xil shablonda chiqsin)
+    # Post matnini moderator to'liq o'zi yozadi (bitta erkin maydon)
+    from zakovat_bot.services import publishing as pub_service
     check("navbatda kanal posti ko'rinishi ko'rsatildi",
           any(k == "send_message" and "Kanalga shu ko'rinishda chiqadi" in str(t)
               for k, c, t in fake_bot.calls if k == "send_message"))
 
     st_ed = FakeState()
-    cb = FakeCallback(f"tdadm_ed:{entry.id}:fio", OBSV, message=FakeMessage(OBSV))
+    cb = FakeCallback(f"tdadm_edit:{entry.id}", OBSV, message=FakeMessage(OBSV))
     await contest_admin_handler.tdadm_edit_ask(cb, st_ed)
-    check("tahrirlash uchun hozirgi qiymat ko'rsatildi",
-          "Karimov Aziz" in cb.message.texts())
-    m = FakeMessage(OBSV, text="Karimov Aziz Baxtiyorovich")
-    await contest_admin_handler.tdadm_edit_fio(m, st_ed)
-    check("F.I.Sh. tahrirlandi va post ko'rinishi yangilandi",
-          "Kanalga shu ko'rinishda chiqadi" in m.texts())
+    check("matn yozish so'raldi",
+          "post matni" in cb.message.texts().lower()
+          and "aynan shu ko'rinishda" in cb.message.texts())
 
-    st_ed = FakeState()
-    cb = FakeCallback(f"tdadm_ed:{entry.id}:uni", OBSV, message=FakeMessage(OBSV))
-    await contest_admin_handler.tdadm_edit_ask(cb, st_ed)
-    m = FakeMessage(OBSV, text="Toshkent davlat yuridik universiteti")
-    await contest_admin_handler.tdadm_edit_uni(m, st_ed)
-    participant.refresh_from_db()
-    check("OTM nomi moderator tomonidan to'g'rilandi",
-          participant.university == "Toshkent davlat yuridik universiteti")
-
-    st_ed = FakeState()
-    cb = FakeCallback(f"tdadm_ed:{entry.id}:nom", OBSV, message=FakeMessage(OBSV))
-    await contest_admin_handler.tdadm_edit_ask(cb, st_ed)
-    m = FakeMessage(OBSV, text="Talabalik lahzalari — 2026")
-    await contest_admin_handler.tdadm_edit_title(m, st_ed)
+    custom = ("Talabalik davrim — 2026\n\n"
+              "Karimov Aziz, Toshkent davlat yuridik universiteti\n"
+              "«Talabalik lahzalari»\n\n"
+              "Qo'llab-quvvatlash uchun ovoz bering!")
+    m = FakeMessage(OBSV, text=custom)
+    await contest_admin_handler.tdadm_edit_save(m, st_ed)
     entry.refresh_from_db()
-    check("ish nomi to'g'rilandi", entry.title == "Talabalik lahzalari — 2026")
-    check("tahrir audit-jurnalga yozildi",
-          AuditLog.objects.filter(action="tanlov_post_tahriri").exists())
+    check("moderator yozgan matn saqlandi",
+          entry.post_text_override == custom)
+    check("post aynan shu matn bilan chiqadi",
+          pub_service.post_text(entry) == custom)
+    check("moderator matni HTML sifatida talqin qilinmaydi",
+          pub_service.post_parse_mode(entry) is None)
 
-    # Xavfsizlik: qoralama arizani tahrirlab bo'lmaydi
-    draft2 = Entry.objects.create(contest=contest, participant=bad,
-                                  nomination=Nomination.FOTO, title="Qoralama2")
-    cb = FakeCallback(f"tdadm_ed:{draft2.id}:nom", OBSV, message=FakeMessage(OBSV))
-    await contest_admin_handler.tdadm_edit_ask(cb, FakeState())
-    check("xavfsizlik: qoralama ariza tahrirlanmadi",
-          "Hozirgi qiymat" not in cb.message.texts())
-    draft2.delete()
+    # Matn ichidagi < > belgilari xabarni buzmaydi
+    st_ed2 = FakeState()
+    await st_ed2.update_data(td_edit_entry=entry.id)
+    m = FakeMessage(OBSV, text="Ish nomi: <Talabalik> & do'stlik")
+    await contest_admin_handler.tdadm_edit_save(m, st_ed2)
+    entry.refresh_from_db()
+    check("maxsus belgilar saqlandi va ko'rinishda ekranlandi",
+          entry.post_text_override == "Ish nomi: <Talabalik> & do'stlik"
+          and "&lt;Talabalik&gt;" in m.texts())
+
+    # Bo'sh va juda uzun matn rad etiladi
+    st_ed3 = FakeState()
+    await st_ed3.update_data(td_edit_entry=entry.id)
+    m = FakeMessage(OBSV, text="   ")
+    await contest_admin_handler.tdadm_edit_save(m, st_ed3)
+    check("bo'sh matn rad etildi", "bo'sh bo'lmasin" in m.texts())
+    m = FakeMessage(OBSV, text="A" * 1100)
+    await contest_admin_handler.tdadm_edit_save(m, st_ed3)
+    check("juda uzun matn rad etildi", "juda uzun" in m.texts())
+
+    # Standart shablonga qaytarish
+    cb = FakeCallback(f"tdadm_edit_reset:{entry.id}", OBSV,
+                      message=FakeMessage(OBSV))
+    await contest_admin_handler.tdadm_edit_reset(cb, FakeState())
+    entry.refresh_from_db()
+    check("standart matnga qaytarildi",
+          not entry.post_text_override
+          and "Ishtirokchi:" in pub_service.post_text(entry))
+
+    # Moderator matnini qaytarib qo'yamiz (nashr sinovida ishlatiladi)
+    entry.post_text_override = custom
+    entry.save(update_fields=["post_text_override"])
 
     # Kuzatuvchi matnni tahrirlay olmaydi
-    cb = FakeCallback(f"tdadm_ed:{entry.id}:fio", NOBODY,
+    cb = FakeCallback(f"tdadm_edit:{entry.id}", NOBODY,
                       message=FakeMessage(NOBODY))
     await contest_admin_handler.tdadm_edit_ask(cb, FakeState())
     check("kuzatuvchi post matnini tahrirlay olmaydi",
@@ -1751,7 +1768,6 @@ async def _run_all(saved_event_ids):
 
     # ---------- 22. Nashr va ovoz berish (TZ 8-10) ----------
     print("22) Tanlov: nashr va ovoz")
-    from zakovat_bot.services import publishing as pub_service
 
     # Ikkala arizani tasdiqlaymiz va kanalni belgilaymiz
     Entry.objects.filter(id__in=[entry.id, ventry.id]).update(

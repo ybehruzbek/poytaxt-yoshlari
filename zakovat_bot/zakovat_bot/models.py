@@ -336,6 +336,9 @@ class Entry(SafeBaseModel):
     )
     submitted_at = models.DateTimeField(null=True, blank=True)
     reject_reason = models.TextField(blank=True, null=True)
+    # Moderator yozgan post matni. Bo'sh bo'lsa standart shablon ishlatiladi;
+    # to'ldirilgan bo'lsa kanalga aynan shu matn chiqadi (oddiy matn sifatida).
+    post_text_override = models.TextField(blank=True, null=True)
     # Ovozlar soni — tugmada tez ko'rsatish uchun; haqiqiy manba `votes` jadvali
     votes_count = models.IntegerField(default=0)
 

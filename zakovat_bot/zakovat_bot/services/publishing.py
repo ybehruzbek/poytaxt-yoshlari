@@ -48,6 +48,15 @@ def published_entries(contest):
 
 
 def post_text(entry):
+    """Kanalga chiqadigan matn.
+
+    Moderator o'z matnini yozgan bo'lsa — aynan o'sha matn (hech qanday
+    o'zgarishsiz); aks holda standart shablon.
+    """
+    override = (entry.post_text_override or "").strip()
+    if override:
+        return override
+
     p = entry.participant
     nomination = "📸 Foto" if entry.nomination == Nomination.FOTO else "🎬 Video"
     return (
@@ -59,6 +68,11 @@ def post_text(entry):
         f"🆔 Ariza: {entry.code}\n\n"
         "❤️ Ushbu ishni qo'llab-quvvatlash uchun ovoz bering!"
     )
+
+
+def post_parse_mode(entry):
+    """Moderator matni aynan ko'rinishi uchun HTML talqin qilinmaydi."""
+    return None if (entry.post_text_override or "").strip() else "HTML"
 
 
 def build_post_url(channel_id, channel_username, message_id):
@@ -123,16 +137,19 @@ async def publish_entry(bot, contest, entry, channel_username=None):
                     msg = await bot.send_video(
                         chat_id=channel, video=item.media,
                         caption=post_text(entry),
+                        parse_mode=post_parse_mode(entry),
                         reply_markup=vote_keyboard(entry))
                 elif kind == "document":
                     msg = await bot.send_document(
                         chat_id=channel, document=item.media,
                         caption=post_text(entry),
+                        parse_mode=post_parse_mode(entry),
                         reply_markup=vote_keyboard(entry))
                 else:
                     msg = await bot.send_photo(
                         chat_id=channel, photo=item.media,
                         caption=post_text(entry),
+                        parse_mode=post_parse_mode(entry),
                         reply_markup=vote_keyboard(entry))
                 # Bitta faylda matn va ovoz tugmasi o'sha xabarning o'zida
                 pub.message_id = msg.message_id
@@ -150,6 +167,7 @@ async def publish_entry(bot, contest, entry, channel_username=None):
         if not pub.vote_message_id:
             card = await bot.send_message(
                 chat_id=channel, text=post_text(entry),
+                parse_mode=post_parse_mode(entry),
                 reply_markup=vote_keyboard(entry),
                 reply_to_message_id=pub.message_id)
             pub.vote_message_id = card.message_id

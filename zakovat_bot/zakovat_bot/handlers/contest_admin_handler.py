@@ -795,23 +795,17 @@ async def tdadm_results(callback: CallbackQuery):
 
 # ============ Kanalga chiqadigan matnni tahrirlash ============
 #
-# Ishtirokchi yozgan ma'lumot to'g'ridan-to'g'ri kanalga chiqmasin:
-# moderator uni tasdiqlashdan oldin bir xil shablonga keltiradi.
-
-_EDIT_FIELDS = {
-    "fio": ("F.I.Sh.", ContestAdminState.edit_fio),
-    "uni": ("OTM nomi", ContestAdminState.edit_university),
-    "fak": ("yo'nalish/fakultet", ContestAdminState.edit_faculty),
-    "nom": ("ish nomi", ContestAdminState.edit_title),
-}
+# Moderator post matnini to'liq o'zi yozadi: nima yozsa, rasm/video tagida
+# aynan o'sha matn chiqadi, ostida esa faqat ovoz tugmasi bo'ladi.
 
 
 def _post_preview(entry):
     """Kanalda qanday ko'rinishini aynan ko'rsatadi."""
     return ("📢 <b>Kanalga shu ko'rinishda chiqadi:</b>\n\n"
             "➖➖➖➖➖➖➖➖➖➖\n"
-            f"{post_text(entry)}\n"
-            "➖➖➖➖➖➖➖➖➖➖")
+            f"{esc(post_text(entry))}\n"
+            "➖➖➖➖➖➖➖➖➖➖\n"
+            "<i>(ostida ❤️ ovoz tugmasi bo'ladi)</i>")
 
 
 @dp.callback_query(F.data.startswith("tdadm_card:"))
@@ -831,59 +825,54 @@ async def tdadm_card(callback: CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query(F.data.startswith("tdadm_edit:"))
-async def tdadm_edit_menu(callback: CallbackQuery, state: FSMContext):
+async def tdadm_edit_ask(callback: CallbackQuery, state: FSMContext):
+    """Post matnini yozish — bitta erkin maydon."""
     if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
-    await callback.answer()
-    await state.clear()
     entry = _lookup_entry(callback)
     if entry is None:
+        await callback.answer()
         return
+    await callback.answer()
+    await state.set_state(ContestAdminState.edit_post)
+    await state.update_data(td_edit_entry=entry.id)
+
+    # Hozirgi matn alohida xabar bilan yuboriladi — moderator uni nusxalab,
+    # tahrirlab qaytarishi oson bo'lsin
     await callback.message.answer(
-        f"✏️ <b>{entry.code}</b> — qaysi maydonni tahrirlaysiz?\n\n"
-        f"{_post_preview(entry)}",
+        f"✏️ <b>{entry.code} — post matni</b>\n\n"
+        "Kanalga chiqadigan matnni to'liq yozib yuboring. "
+        "Siz yozgan matn rasm/video tagida <b>aynan shu ko'rinishda</b> "
+        "chiqadi, ostida faqat ❤️ ovoz tugmasi bo'ladi.\n\n"
+        "Quyidagi xabarni nusxalab, tahrirlab yuborishingiz mumkin:",
         reply_markup=post_edit_keyboard(entry),
     )
+    await callback.message.answer(post_text(entry), parse_mode=None)
 
 
-@dp.callback_query(F.data.startswith("tdadm_ed:"))
-async def tdadm_edit_ask(callback: CallbackQuery, state: FSMContext):
+@dp.callback_query(F.data.startswith("tdadm_edit_reset:"))
+async def tdadm_edit_reset(callback: CallbackQuery, state: FSMContext):
+    """Standart shablonga qaytarish."""
     if not has_role(callback.from_user.id, AdminRole.MODERATOR):
         return await _deny(callback)
-    try:
-        _, _entry_id, field = callback.data.split(":")
-    except ValueError:
-        await callback.answer()
-        return
-    if field not in _EDIT_FIELDS:
-        await callback.answer()
-        return
-    # Joriy tanlovning topshirilgan arizasi bo'lishi shart
     entry = _lookup_entry(callback)
     if entry is None:
         await callback.answer()
         return
-
-    await callback.answer()
-    label, st = _EDIT_FIELDS[field]
-    current = {
-        "fio": entry.participant.full_name,
-        "uni": entry.participant.university,
-        "fak": entry.participant.faculty or "—",
-        "nom": entry.title or "—",
-    }[field]
-    await state.set_state(st)
-    await state.update_data(td_edit_entry=entry.id)
+    await callback.answer("Standart matn qaytarildi")
+    await state.clear()
+    entry.post_text_override = None
+    entry.save(update_fields=["post_text_override"])
+    log_action(callback.from_user.id, "tanlov_post_matni",
+               f"{entry.code}: standart")
     await callback.message.answer(
-        f"✏️ <b>{label}</b> uchun yangi matnni yozing.\n\n"
-        f"Hozirgi qiymat:\n<code>{esc(current)}</code>",
-        reply_markup=back_to(f"tdadm_card:{entry.id}", text="❌ Bekor qilish"),
+        _post_preview(entry), reply_markup=moderation_keyboard(entry)
     )
 
 
-async def _save_edit(message, state, field):
+@dp.message(StateFilter(ContestAdminState.edit_post))
+async def tdadm_edit_save(message: Message, state: FSMContext):
     data = await state.get_data()
-    await state.clear()
     entry = (
         Entry.objects.filter(id=data.get("td_edit_entry"),
                              contest=_current_contest())
@@ -891,53 +880,30 @@ async def _save_edit(message, state, field):
         .select_related("participant")
         .first()
     )
-    value = " ".join((message.text or "").split())
-    if entry is None or not value:
-        await message.answer("❗️ Matn bo'sh bo'lmasin.",
-                             reply_markup=back_to("tdadm_queue"))
+    text = (message.text or "").strip()
+    if entry is None:
+        await state.clear()
+        await message.answer("Ariza topilmadi.", reply_markup=back_to("tdadm_queue"))
+        return
+    if not text:
+        await message.answer(
+            "❗️ Matn bo'sh bo'lmasin. Post matnini yozib yuboring.")
+        return
+    if len(text) > 1000:
+        await message.answer(
+            f"❗️ Matn juda uzun ({len(text)} belgi). Telegram rasm tagidagi "
+            "izohga 1024 belgigacha ruxsat beradi — qisqartiring.")
         return
 
-    p = entry.participant
-    if field == "fio":
-        p.full_name = value[:120]
-        p.save(update_fields=["full_name"])
-    elif field == "uni":
-        p.university = value[:255]
-        p.save(update_fields=["university"])
-    elif field == "fak":
-        p.faculty = value[:255]
-        p.save(update_fields=["faculty"])
-    else:
-        entry.title = value[:255]
-        entry.save(update_fields=["title"])
-
-    log_action(message.from_user.id, "tanlov_post_tahriri",
-               f"{entry.code} {field}: {value[:60]}")
-    entry.refresh_from_db()
+    await state.clear()
+    entry.post_text_override = text
+    entry.save(update_fields=["post_text_override"])
+    log_action(message.from_user.id, "tanlov_post_matni",
+               f"{entry.code}: {text[:60]}")
     await message.answer(
-        f"✅ Yangilandi.\n\n{_post_preview(entry)}",
+        f"✅ Post matni saqlandi.\n\n{_post_preview(entry)}",
         reply_markup=moderation_keyboard(entry),
     )
-
-
-@dp.message(StateFilter(ContestAdminState.edit_fio))
-async def tdadm_edit_fio(message: Message, state: FSMContext):
-    await _save_edit(message, state, "fio")
-
-
-@dp.message(StateFilter(ContestAdminState.edit_university))
-async def tdadm_edit_uni(message: Message, state: FSMContext):
-    await _save_edit(message, state, "uni")
-
-
-@dp.message(StateFilter(ContestAdminState.edit_faculty))
-async def tdadm_edit_fak(message: Message, state: FSMContext):
-    await _save_edit(message, state, "fak")
-
-
-@dp.message(StateFilter(ContestAdminState.edit_title))
-async def tdadm_edit_title(message: Message, state: FSMContext):
-    await _save_edit(message, state, "nom")
 
 
 # ============ Bosqichni boshqarish va sinovni tozalash ============

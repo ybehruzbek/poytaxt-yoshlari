@@ -526,14 +526,13 @@ def contest_admin_menu_keyboard(role, pending=0):
 
 
 def post_edit_keyboard(entry):
-    """Kanalga chiqadigan matn maydonlarini tahrirlash."""
+    """Post matnini yozish bosqichidagi yordamchi tugmalar."""
     kb = InlineKeyboardBuilder()
-    kb.button(text="👤 F.I.Sh.", callback_data=f"tdadm_ed:{entry.id}:fio")
-    kb.button(text="🎓 OTM", callback_data=f"tdadm_ed:{entry.id}:uni")
-    kb.button(text="📚 Yo'nalish", callback_data=f"tdadm_ed:{entry.id}:fak")
-    kb.button(text="📝 Ish nomi", callback_data=f"tdadm_ed:{entry.id}:nom")
-    kb.button(text="🔙 Arizaga qaytish", callback_data=f"tdadm_card:{entry.id}")
-    kb.adjust(2, 2, 1)
+    if (entry.post_text_override or "").strip():
+        kb.button(text="♻️ Standart matnga qaytarish",
+                  callback_data=f"tdadm_edit_reset:{entry.id}")
+    kb.button(text="❌ Bekor qilish", callback_data=f"tdadm_card:{entry.id}")
+    kb.adjust(1)
     return kb.as_markup()
 
 
