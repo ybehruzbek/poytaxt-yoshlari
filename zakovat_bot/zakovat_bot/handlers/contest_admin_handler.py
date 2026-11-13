@@ -722,10 +722,17 @@ async def tdadm_vote_ask(callback: CallbackQuery):
             reply_markup=back_to("tdadm_pub_menu"),
         )
         return
+    old_votes = Vote.objects.filter(entry__contest=contest).count()
+    warn = ""
+    if old_votes:
+        warn = (f"\n\n⚠️ <b>Diqqat:</b> bazada oldingi bosqichdan "
+                f"{old_votes} ta ovoz bor va ular saqlanib qoladi — yangi "
+                "ovoz berish ular ustiga qo'shiladi.\nToza boshlash uchun "
+                "avval «🧹 Sinov ma'lumotlarini tozalash»ni ishlating.")
     await callback.message.answer(
         f"🗳 Barcha ishtirokchilar uchun bir vaqtda "
         f"<b>{contest.voting_hours} soatlik</b> ovoz berish boshlanadi.\n\n"
-        "Muddat tugagach ovoz qabul qilish avtomatik to'xtaydi.",
+        "Muddat tugagach ovoz qabul qilish avtomatik to'xtaydi." + warn,
         reply_markup=vote_start_confirm_keyboard(contest.voting_hours),
     )
 
@@ -956,10 +963,14 @@ async def tdadm_vote_stop_ask(callback: CallbackQuery):
 async def tdadm_vote_stop_go(callback: CallbackQuery):
     if not has_role(callback.from_user.id, AdminRole.OPERATOR):
         return await _deny(callback)
-    await callback.answer()
     contest = _current_contest()
     if contest is None:
+        await callback.answer()
         return
+    if contest.stage != ContestStage.VOTING or not contest.voting_start_at:
+        await callback.answer("Ovoz berish ketmayapti.", show_alert=True)
+        return
+    await callback.answer()
     contest.stage = ContestStage.FINISHED
     contest.voting_end_at = timezone.now()
     contest.save(update_fields=["stage", "voting_end_at"])
@@ -998,16 +1009,25 @@ async def tdadm_reopen_ask(callback: CallbackQuery):
 async def tdadm_reopen_go(callback: CallbackQuery):
     if not has_role(callback.from_user.id, AdminRole.OPERATOR):
         return await _deny(callback)
-    await callback.answer()
     contest = _current_contest()
     if contest is None:
+        await callback.answer()
         return
+    # Tasdiqdan keyin ham holat qayta tekshiriladi
+    if contest.stage == ContestStage.ACCEPTING:
+        await callback.answer("Tanlov allaqachon qabul bosqichida.",
+                              show_alert=True)
+        return
+    if voting_is_open(contest):
+        await callback.answer("Avval ovoz berishni to'xtating.",
+                              show_alert=True)
+        return
+    await callback.answer()
     contest.stage = ContestStage.ACCEPTING
     contest.voting_start_at = None
     contest.voting_end_at = None
-    contest.is_active = True
-    contest.save(update_fields=["stage", "voting_start_at", "voting_end_at",
-                                "is_active"])
+    # `is_active` atayin tegilmaydi — tanlovni yoqish/o'chirish alohida amal
+    contest.save(update_fields=["stage", "voting_start_at", "voting_end_at"])
     log_action(callback.from_user.id, "tanlov_qabul_qayta_ochildi", contest.slug)
     status = ("✅ Arizalar qabul qilinmoqda."
               if contest.is_accepting else

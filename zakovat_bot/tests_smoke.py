@@ -2043,6 +2043,12 @@ async def _run_all(saved_event_ids):
     check("berilgan ovozlar saqlandi",
           Vote.objects.filter(entry__contest=contest).exists())
 
+    # Ovoz ketmayotganda to'xtatib bo'lmaydi
+    cb = FakeCallback("tdadm_vote_stop_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_vote_stop_go(cb)
+    check("ovoz ketmayotganda to'xtatish rad etildi",
+          any("ketmayapti" in a for a in cb.alerts), cb.alerts)
+
     # Qabulni qayta ochish — sinovdan keyin eng kerakli amal
     check("qayta ochishdan oldin qabul yopiq", not contest.is_accepting)
     contest.submission_deadline = djtz.now() + timedelta(days=3)
@@ -2056,6 +2062,12 @@ async def _run_all(saved_event_ids):
     check("foydalanuvchiga qabul ochiq ko'rinadi",
           "qabul qilinmoqda" in cb.message.texts().lower()
           or contest.is_accepting)
+
+    # Allaqachon qabul bosqichida bo'lsa, qayta ochib bo'lmaydi
+    cb = FakeCallback("tdadm_reopen_go", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_reopen_go(cb)
+    check("ikkinchi marta qayta ochish rad etildi",
+          any("allaqachon" in a for a in cb.alerts), cb.alerts)
 
     # Qayta ochilgandan keyin yangi ariza topshirish mumkin
     st_new = FakeState()
