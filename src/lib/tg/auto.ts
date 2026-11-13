@@ -8,7 +8,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { locales } from '@/i18n/config'
 
-import { syncLatest } from './sync'
+import { expireEvents, syncLatest } from './sync'
 
 let running = false
 
@@ -19,7 +19,9 @@ export function startTgSync(minutes: number) {
     try {
       const payload = await getPayload({ config })
       const r = await syncLatest(payload)
-      if (r.created) {
+      const expired = await expireEvents(payload)
+      if (expired) payload.logger.info(`[telegram] ${expired} ta ötgan tadbir eʼlonlarga ötkazildi`)
+      if (r.created || expired) {
         payload.logger.info(`[telegram] ${r.created} ta yangi post saytga qöşildi`)
         // keşni yangilaş: boş sahifa va yangiliklar röyxati darhol yangi holatni körsatsin
         for (const l of locales) {

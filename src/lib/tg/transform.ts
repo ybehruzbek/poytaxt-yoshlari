@@ -129,6 +129,75 @@ export function classify(text: string, postDate: string, cat: NewsCategory): Pic
   return { kind: 'yangilik' }
 }
 
+/**
+ * Saytga olinmaydigan yoki tabrik bölgan postlar — kanalning asl matnidan (heşteglar bilan) aniqlanadi.
+ * Qoidalar qölda belgilangan 519 ta post asosida tuzilgan va sinalgan (scripts/eval-classify.ts).
+ */
+const N = (s: string) =>
+  s
+    .toLocaleLowerCase('uz')
+    .replace(/[ʻ‘’`ʼ']/g, '')
+    .replace(/o‘|oʻ/g, 'o')
+    .replace(/ö/g, 'o')
+    .replace(/ğ/g, 'g')
+    .replace(/ş/g, 'sh')
+    .replace(/ç/g, 'ch')
+
+/** Voqea haqidagi xabar belgilari: bular bölsa — post yangilik, tabrik emas */
+const REPORT = /(bolib otdi|otkazildi|tashkil etildi|taqdirlandi|saylandi|tayinlandi|golib boldi|golib chiqdi|qolga kiritdi|egalladi|ishtirok etdi|uchrashdi|uchrashuv otkazdi|tantanali topshirildi|sohibi boldi|yakuniga yetdi|yakunlandi|natijalari|reytingi|top-?10)/
+
+const SKIP_RULES: [RegExp, string][] = [
+  // şaxsiy tuğilgan kun tabriklari — saytga olinmaydi (tarixiy siymolar yubileyi bundan mustasno)
+  [/(tavallud kun|tugilgan kun|tavallud ayyom|yoshga tolgan)(?![\s\S]*(yilligi|yubiley))/, 'tuğilgan kun'],
+  // “Yoşlar ovozi” gazetasi dayjestlari va haftalik dayjestlar
+  [/(yoshlarovozigazetasi|yoshlar ovozi gazetasi|dayjest|haftaning muhim voqealari)/, 'dayjest'],
+  // “Zakovat” onlayn viktorinasining savol-javob postlari
+  [/(^|\n)\W*\d{1,3}\s*-?\s*savol\b|savolining javobi|savol(ining)? goliblari? aniqlandi|savol golibi/, 'viktorina savoli'],
+  // jonli efir eslatmalari
+  [/(#live\b|jonli efir|efirga ulaning|live eslatma)/, 'jonli efir'],
+  // “bilasizmi”, “fakt” turidagi postlar
+  [/(#fakt\b|#bilasizmi|^\W*bilasizmi\??|qiziqarli fakt)/, 'fakt'],
+  // obunaçilarni jalb qiluvçi postlar: sörovnoma, izoh, obuna, ovoz beriş, savol-javob
+  [/(izohlarda|izohda yozing|sorovnoma boshlandi|instagram sahifamizda|obuna boling|ovoz bering|qollab-quvvatlaymiz!|taassurotlaringiz|qaysi [^.?!\n]{0,60}tahsil olasiz)/, 'jalb qiluvçi post'],
+]
+
+/** Xotira va bayram kunlari (tarixiy siymolar yubileyi, davlat bayramlari, kasb kunlari) */
+const MEMORIAL = /(tavallud(ining|iga) \d+[^\n]{0,12}(yilligi|yil toldi)|(^|\n)\W*(bugun,?\s*)?\d{1,2}\s*-?\s*(yanvar|fevral|mart|aprel|may|iyun|iyul|avgust|sentabr|sentyabr|oktabr|noyabr|dekabr)\s*[-—–]|oquv yili muborak|xotira va qadrlash kuni|mustaqillik kuni|bayrami muborak)/
+
+/** Eʼlon belgilari (sanasi aniq tadbir topilmaganda) */
+const ELON = /(diqqatiga|diqqat,|taklif (etamiz|qilamiz)|barchangizni [^.!\n]{0,40}taklif|sayohat(i|iga|imiz)\b|imkoniyati!|qatnashing|ishtirok eting|yuting|royxatdan oting|royxatdan otish|davom etmoqda!|uchun muhim savol|chellenj|challenge)/
+
+const TABRIK = /(chin dildan tabriklaymiz|tabriklaymiz|tabriklayman|tabriklab qolamiz|muborak bolsin|muborakbod etamiz|bayrami(ngiz)? muborak|bayrami bilan tabrik|kuni bilan tabrik|kuni muborak|hayiti muborak|qutlaymiz)/
+
+/** Kanal imzosi, heşteg, havola va taşkilot nomi olib taşlangandan keyin qolgan mazmun uzunligi */
+const substance = (t: string) =>
+  t
+    .replace(/#[\p{L}\p{N}_]+/gu, ' ')
+    .replace(/https?:\/\/\S+|\(https?:[^)]*\)/g, ' ')
+    .replace(/ozbekiston yoshlar ittifoqi( toshkent shahar( hududiy)? kengashi)?/g, ' ')
+    .replace(/(bizni kuzatishda davom eting|bizning sahifalarimiz)[\s\S]*$/, ' ')
+    .replace(/telegram|instagram|facebook|youtube|you tube/g, ' ')
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim().length
+
+/** Asl matndan oldindan aniqlanadigan tur (skip yoki tabrik); aniqlanmasa — null */
+export function preClassify(text: string): { kind: 'skip' | 'tabrik'; why: string } | null {
+  const t = N(text)
+  for (const [re, why] of SKIP_RULES) if (re.test(t)) return { kind: 'skip', why }
+  // faqat havola yoki taşkilot nomidan iborat qayta joylaş
+  if (substance(t) < 70) return { kind: 'skip', why: 'mazmunsiz' }
+  // ritorik savol yoki iqtibos bilan boşlanadigan motivatsion post (voqea haqida emas)
+  const first = t.replace(/^[^\p{L}\p{N}“"]+/u, '').split('\n')[0]
+  if (/\?\s*$/.test(first) && !REPORT.test(t) && !/(royxat|ariza|qabul|tanlov|sana:|manzil:)/.test(t)) return { kind: 'skip', why: 'ritorik savol' }
+  // bayram sanasi tilga olingan bölsa ham, tanlov, röyxat yoki tadbir eʼloni — tabrik emas
+  const callish = /(tanlov|royxat|ariza|qabul qilinadi|sana:|manzil:|konsert|festival|forum|seminar|musobaqa|ishtirok eting|taklif (etamiz|qilamiz)|qatnashing|yuboring|joylang|kutib qolamiz|otkazib yubormang)/.test(t)
+  if ((TABRIK.test(t) || MEMORIAL.test(t)) && !REPORT.test(t) && !callish) return { kind: 'tabrik', why: 'tabrik' }
+  return null
+}
+
+/** Sanasi aniq tadbir bölmagan, lekin eʼlon belgisi bor post */
+export const looksLikeElon = (text: string) => ELON.test(N(text))
+
 /** Postni yangilik qoralamasiga aylantiradi; mazmuni yetarli bölmasa — null */
 export function postToDraft(post: TgPost): Draft | null {
   const tags: string[] = []
@@ -192,7 +261,12 @@ export function postToDraft(post: TgPost): Draft | null {
 
   const cat = category(plain, tags)
   if (!excerpt.trim()) excerpt = title
-  return { title, excerpt, blocks, tags: tags.slice(0, 6), category: cat, ...classify(lines.map((l) => l.txt).join('\n'), post.date, cat) }
+  const pre = preClassify(post.text)
+  let kind: Pick<Draft, 'kind' | 'eventDate' | 'eventPlace'> = pre
+    ? { kind: pre.kind }
+    : classify(lines.map((l) => l.txt).join('\n'), post.date, cat)
+  if (kind.kind === 'yangilik' && !REPORT.test(N(post.text)) && looksLikeElon(post.text)) kind = { kind: 'elon' }
+  return { title, excerpt, blocks, tags: tags.slice(0, 6), category: cat, ...kind }
 }
 
 /** Lexical (Payload richText) JSON */

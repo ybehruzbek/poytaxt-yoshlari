@@ -13,11 +13,12 @@ import { fetchPage, fetchSince, postUrl, type TgPost } from './channel'
 import curatedJson from './curated.json'
 import { blocksToLexical, type Draft, postToDraft } from './transform'
 
-/** Post turi (yangilik / eʼlon / tadbir) — har doim kanalning asl matnidan aniqlanadi */
+/** Post turi (yangilik / eʼlon / tadbir / tabrik) — har doim kanalning asl matnidan aniqlanadi */
 const classifyPost = (post: TgPost) => {
   const auto = postToDraft(post)
   if (auto?.kind === 'tadbir') return { kind: auto.kind, eventDate: auto.eventDate, eventPlace: auto.eventPlace }
-  return { kind: auto?.kind === 'elon' ? ('elon' as const) : ('yangilik' as const) }
+  if (auto?.kind === 'elon' || auto?.kind === 'tabrik') return { kind: auto.kind }
+  return { kind: 'yangilik' as const }
 }
 
 const curated = curatedJson as unknown as Record<string, Draft>
@@ -269,4 +270,22 @@ export async function syncSince(payload: Payload, since: string, log?: (s: strin
 export async function syncLatest(payload: Payload, log?: (s: string) => void) {
   const posts = (await fetchPage()).sort((a, b) => a.id - b.id)
   return importPosts(payload, posts, log)
+}
+
+/**
+ * Sanasi ötib ketgan tadbirlar eʼlonlar bölimiga ötkaziladi (“Yaqin tadbirlar”da faqat kelgusi tadbirlar turadi).
+ * Avtomatik ulaniş har safar çaqiradi; neçta özgargani qaytariladi.
+ */
+export async function expireEvents(payload: Payload): Promise<number> {
+  const res = await payload.find({
+    collection: 'news',
+    where: { and: [{ kind: { equals: 'tadbir' } }, { eventDate: { less_than: new Date().toISOString() } }] },
+    limit: 200,
+    depth: 0,
+    overrideAccess: true,
+  })
+  for (const d of res.docs) {
+    await payload.update({ collection: 'news', id: d.id, data: { kind: 'elon' }, overrideAccess: true })
+  }
+  return res.docs.length
 }
