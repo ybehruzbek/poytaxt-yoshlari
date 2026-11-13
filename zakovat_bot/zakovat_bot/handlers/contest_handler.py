@@ -266,9 +266,12 @@ async def td_university(message: Message, state: FSMContext):
 
 @dp.message(StateFilter(ContestState.faculty))
 async def td_faculty(message: Message, state: FSMContext):
-    value = (message.text or "").strip()
+    value = " ".join((message.text or "").split())
     if len(value) < 2:
         await message.answer("⚠️ Fakultet yoki yo'nalish nomini yozing.")
+        return
+    if len(value) > 200:
+        await message.answer("⚠️ Nom juda uzun — qisqartirib yozing.")
         return
     await state.update_data(td_faculty=value)
     await state.set_state(None)

@@ -550,6 +550,22 @@ def moderation_keyboard(entry):
     return kb.as_markup()
 
 
+def moderation_limited_keyboard(entry):
+    """Kartochkani to'liq ko'rsatib bo'lmaganda — tasdiqlashsiz tugmalar.
+
+    Moderator ko'rmagan materialni tasdiqlab yubormasligi uchun «Qabul
+    qilish» taklif etilmaydi.
+    """
+    kb = InlineKeyboardBuilder()
+    kb.button(text="🔄 Qayta yuborishni so'rash",
+              callback_data=f"tdadm_rev:{entry.id}")
+    kb.button(text="❌ Rad etish", callback_data=f"tdadm_no:{entry.id}")
+    kb.button(text="⏳ Keyinroq ko'rish", callback_data=f"tdadm_skip:{entry.id}")
+    kb.button(text="🔙 Menyu", callback_data="tdadm_menu")
+    kb.adjust(1, 2, 1)
+    return kb.as_markup()
+
+
 def entries_list_keyboard(entries, page, total_pages, status_f):
     kb = InlineKeyboardBuilder()
     marks = {

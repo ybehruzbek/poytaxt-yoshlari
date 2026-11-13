@@ -21,6 +21,7 @@ from zakovat_bot.buttons.panel import (
     entry_admin_keyboard,
     confirm_action_keyboard,
     moderation_keyboard,
+    moderation_limited_keyboard,
     post_edit_keyboard,
     publish_confirm_keyboard,
     publish_menu_keyboard,
@@ -150,13 +151,21 @@ async def _show_for_moderation(chat_id, entry):
         )
     except Exception:
         logger.exception("Kartochkani yuborib bo'lmadi: %s", entry.code)
+        p = entry.participant
+        # Oddiy matn sifatida yuboramiz — hech qanday talqin qilinmaydi
         await bot.send_message(
             chat_id=chat_id,
-            text=(f"🆔 <b>{entry.code}</b> — {entry.get_nomination_display()}\n"
-                  f"📌 {entry.get_status_display()}\n\n"
-                  "⚠️ Ariza matni juda uzun yoki nosoz — to'liq ko'rinishni "
-                  "ko'rsatib bo'lmadi. Qaror qabul qilishingiz mumkin."),
-            reply_markup=moderation_keyboard(entry),
+            text=(f"{entry.code} — {entry.get_nomination_display()}\n"
+                  f"Holati: {entry.get_status_display()}\n\n"
+                  f"F.I.Sh.: {p.full_name[:120]}\n"
+                  f"OTM: {p.university[:200]}\n"
+                  f"Ish nomi: {(entry.title or '—')[:250]}\n"
+                  f"Izoh: {(entry.description or '—')[:600]}\n\n"
+                  "⚠️ To'liq ko'rinishni ko'rsatib bo'lmadi. Materialni "
+                  "ko'rmasdan tasdiqlamaslik uchun «Qabul qilish» tugmasi "
+                  "berilmadi — tuzatish so'rang yoki rad eting."),
+            parse_mode=None,
+            reply_markup=moderation_limited_keyboard(entry),
         )
 
 
@@ -819,7 +828,7 @@ def _post_preview(entry):
     """Kanalda qanday ko'rinishini aynan ko'rsatadi."""
     return ("📢 <b>Kanalga shu ko'rinishda chiqadi:</b>\n\n"
             "➖➖➖➖➖➖➖➖➖➖\n"
-            f"{safe_html(post_text(entry), 1200)}\n"
+            f"{safe_html(post_text(entry), 1100, 1000)}\n"
             "➖➖➖➖➖➖➖➖➖➖\n"
             "<i>(ostida ❤️ ovoz tugmasi bo'ladi)</i>")
 

@@ -1231,6 +1231,9 @@ async def _run_all(saved_event_ids):
     check("OTM uchun ro'yxat taklif qilinmadi",
           not any("tanlang" in t.lower() for _, t in m.out if t), m.texts())
 
+    m = FakeMessage(USER1, text="F" * 250)
+    await contest_handler.td_faculty(m, st)
+    check("juda uzun fakultet nomi rad etildi", "juda uzun" in m.texts())
     m = FakeMessage(USER1, text="Matematika")
     await contest_handler.td_faculty(m, st)
     cb = FakeCallback("td_year:2-kurs", USER1, message=FakeMessage(USER1))
@@ -1615,8 +1618,14 @@ async def _run_all(saved_event_ids):
     check("post ko'rinishi ham chegarada",
           len(card_text) + len(preview) < 4096,
           len(card_text) + len(preview))
-    check("safe_html kesilganini bildiradi",
-          safe_html("&" * 500, 100).endswith("…"))
+    check("safe_html kesilganini ochiq bildiradi",
+          safe_html("&" * 500, 100).endswith("…(qisqartirildi)"))
+    check("oddiy matnda to'liq oyna ko'rsatiladi",
+          safe_html("A" * 100, 100) == "A" * 100
+          and safe_html("A" * 150, 100).startswith("A" * 100))
+    check("qisqa matn o'zgarmaydi", safe_html("oddiy matn", 100) == "oddiy matn")
+    check("entity o'rtasidan kesilmaydi",
+          not safe_html("&" * 500, 100, 50).split(" …")[0].endswith("&amp"))
     long_entry.delete(); long_bad.delete()
 
     # Kuzatuvchi matnni tahrirlay olmaydi
