@@ -702,9 +702,9 @@
   gap: 10px;
   height: 46px;
   padding: 0 18px 0 12px;
-  border: 1.5px solid transparent;
+  border: 1.5px solid var(--line);
   border-radius: 99px;
-  background: var(--soft);
+  background: var(--bg);
   cursor: pointer;
   transition:
     background 0.2s,
@@ -744,22 +744,26 @@
 .ar-react-sh {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  height: 48px;
-  padding: 0 22px;
-  border: 0;
-  border-radius: 16px;
-  background: var(--soft);
-  font: 700 16px/1 var(--f-head);
+  gap: 8px;
+  height: 46px;
+  padding: 0 20px 0 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 99px;
+  background: var(--bg);
+  font: 600 14.5px/1 var(--f-body);
   color: var(--navy);
   cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 .ar-react-sh:hover {
   background: var(--yellow);
+  border-color: var(--yellow);
 }
 .ar-react-sh svg {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2.4;
@@ -768,7 +772,7 @@
 }
 html[data-theme='dark'] .ar-react-list button,
 html[data-theme='dark'] .ar-react-sh {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
 }
 
 /* maqola osti: muallif, teglar, baholar */
