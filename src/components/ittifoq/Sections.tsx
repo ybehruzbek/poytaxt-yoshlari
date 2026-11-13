@@ -4,32 +4,51 @@ import { FlagsMarquee } from './FlagsMarquee'
 
 /* ======================= Mukofot va imtiyozlar ======================= */
 
-/** B — çapda katta nişon va birinçi mukofot, öngda qolgan uçtasi kiçik suratlar bilan */
-export function PrivilegesB() {
-  const [first, ...rest] = PRIVILEGES
+function Card({ p }: { p: (typeof PRIVILEGES)[number] }) {
   return (
-    <div className="ip-b">
-      <article className="ip-b-main">
-        <div className="ip-b-badge">
-          <img src={first.img} alt={first.t} />
+    <article>
+      <img src={p.img} alt="" />
+      <div>
+        <h3>{p.t}</h3>
+        <p>{p.text}</p>
+        <b>{p.fact}</b>
+      </div>
+    </article>
+  )
+}
+
+/**
+ * Ikki guruh: 1) Ittifoqning özi beradigan imtiyozlar (çapda katta nişon, öngda qolganlari);
+ * 2) Ittifoq taklifi bilan taʼsis etilgan davlat mukofotlari.
+ */
+export function PrivilegesB() {
+  const [first, ...rest] = PRIVILEGES.filter((p) => p.group === 'ittifoq')
+  const state = PRIVILEGES.filter((p) => p.group === 'davlat')
+  return (
+    <>
+      <h3 className="ip-grp">Ittifoq beradigan imtiyozlar</h3>
+      <div className="ip-b">
+        <article className="ip-b-main">
+          <div className="ip-b-badge">
+            <img src={first.img} alt={first.t} />
+          </div>
+          <h3>{first.t}</h3>
+          <p>{first.text}</p>
+          <b>{first.fact}</b>
+        </article>
+        <div className="ip-b-list">
+          {rest.map((p) => (
+            <Card key={p.t} p={p} />
+          ))}
         </div>
-        <h3>{first.t}</h3>
-        <p>{first.text}</p>
-        <b>{first.fact}</b>
-      </article>
-      <div className="ip-b-list">
-        {rest.map((p) => (
-          <article key={p.t}>
-            <img src={p.img} alt="" />
-            <div>
-              <h3>{p.t}</h3>
-              <p>{p.text}</p>
-              <b>{p.fact}</b>
-            </div>
-          </article>
+      </div>
+      <h3 className="ip-grp">Ittifoq taklifi bilan taʼsis etilgan davlat mukofotlari</h3>
+      <div className="ip-b-list ip-b-state">
+        {state.map((p) => (
+          <Card key={p.t} p={p} />
         ))}
       </div>
-    </div>
+    </>
   )
 }
 

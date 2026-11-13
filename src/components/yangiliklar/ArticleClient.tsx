@@ -207,6 +207,8 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
       }}
     >
       <div className="ar-sl-stage">
+        {/* orqa fon — öşa suratning xiralaştirilgan nusxasi: tik poster kesilmay töliq körinadi */}
+        <img className="ar-sl-bg" src={slides[i].url} alt="" aria-hidden="true" />
         {slides.map((s, k) => (
           <img
             key={s.url}

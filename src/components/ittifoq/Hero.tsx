@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 
 import { Arrow } from '@/components/site/SocialPhones'
 
-import { IMG, INTRO } from './data'
+import { IMG } from './data'
 
 type H = { L: (h: string) => string; crumbs: ReactNode }
 
@@ -21,9 +21,8 @@ export function Hero({ L, crumbs }: H) {
       <div className="wrap">
         <div className="it-crumbs">{crumbs}</div>
         <h1 className="h1">Özbekiston yoşlar ittifoqi</h1>
-        <p className="lead">{INTRO}</p>
         <div className="it-btns">
-          <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
+          <Link href={L('/boglanish/azo-bolish')} className="btn btn-primary">
             Aʼzo böliş{' '}
             <span className="ic">
               <Arrow />

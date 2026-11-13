@@ -4,35 +4,32 @@
  * Keyinçalik admin paneldan (Payload) boşqariladi.
  */
 
-/** Sahifa boşidagi qisqa matn */
-export const INTRO =
-  'Mamlakat yoşlarini birlaştiruvçi eng katta taşkilot. Biz yoşlarning ovozini eşitamiz, ğoyalarini qöllab-quvvatlaymiz va ularni real natijaga aylantirişga yordam beramiz.'
-
 /** Biz kimmiz */
 export const WHO = {
   paras: [
     'Özbekiston yoşlar ittifoqi — mamlakat yoşlarini birlaştiruvçi nodavlat notijorat taşkilot. U 2017-yil 30-iyunda taşkil etilgan. Şu kun har yili butun mamlakatda “Yoşlar kuni” sifatida nişonlanadi.',
-    'Ittifoqqa 14 yoşdan 30 yoşgaça bölgan har bir yigit-qiz öz xohişi bilan aʼzo bölişi mumkin. Bizda heç kim majburlab yozilmaydi: kimdir sport bilan, kimdir ilm bilan, kimdir volontyorlik yoki öz biznesi bilan keladi. Barçamizni bitta maqsad birlaştiradi — özimiz va yurtimiz uçun foydali iş qiliş.',
+    'Ittifoqqa 14 yoşga tölgan va 30 yoşdan oşmagan Özbekiston Respublikasi fuqarolari hamda Özbekistonda muntazam yaşab kelayotgan fuqaroligi bölmagan şaxslar ixtiyoriy ravişda aʼzo bölişi mumkin. Ittifoq faoliyati ixtiyoriylik, qonuniylik, oşkoralik, aʼzolarning teng huquqliligi va özini özi boşqariş tamoyillariga asoslanadi.',
   ],
   motto: 'Yoşlar — kelajak bunyodkori',
 }
 
 /** Maqsadimiz (katta sarlavha) */
+/**
+ * Maqsadimiz — Ustavning 2.1-bandi va Prezidentning 2017-yil 5-iyuldagi PF-5106-son Farmoni asosida, bitta jumlada.
+ * Butun jumla bir xil rangda (bitta maqsad — qismlarga ajratilmaydi).
+ */
 export const MISSION = {
-  lead: 'Biz yoşlar öz kuçiga işonadigan, bilim va kasb egallaydigan, öz örnini topadigan va mamlakat hayotida faol qatnaşadigan muhit yaratamiz.',
-  rest: ' Sizda ğoya bölsa — biz uni amalga oşirişga yordam beramiz. Sizga yordam kerak bölsa — biz yoningizdamiz.',
-  charter:
-    'Ustavimizda bu şunday yozilgan: Ittifoqning maqsadi — yigit-qizlarning huquq va manfaatlarini himoya qiliş, ularning maʼnaviy va kasbiy saviyasini oşiriş, intellektual va ijodiy salohiyatini röyobga çiqarişga kömaklaşiş, yoşlarni mamlakatdagi islohotlarga va Özbekistonning rivojiga faol jalb qiliş.',
+  text: 'Yoşlarning huquq va qonuniy manfaatlarini himoya qiliş, ularni mamlakatdagi islohotlarga faol jalb etiş, yigit-qizlarning maʼnaviy va kasbiy saviyasini yuksaltiriş hamda intellektual va ijodiy salohiyatini röyobga çiqarişga kömaklaşiş.',
 }
 
 export type Milestone = { y: string; t: string }
 
 /** Qisqa tarix */
 export const HISTORY: Milestone[] = [
-  { y: '2001', t: '“Kamolot” yoşlar ijtimoiy harakati taşkil etildi. U ön olti yil davomida yoşlar bilan işlab, katta tajriba töpladi.' },
-  { y: '30.06.2017', t: 'Toşkentdagi Simpoziumlar saroyida “Kamolot”ning IV qurultoyi bölib ötdi. Delegatlar uning negizida yangi taşkilot — Özbekiston yoşlar ittifoqini tuziş taklifini qöllab-quvvatladi.' },
-  { y: '05.07.2017', t: 'Prezidentning PF-5106-son Farmoni qabul qilindi: Ittifoqning ustuvor yönalişlari belgilandi, 30-iyun “Yoşlar kuni” deb eʼlon qilindi.' },
-  { y: 'Bugun', t: 'Ittifoq “Kamolot”ning huquqiy vorisi sifatida butun mamlakat böylab işlaydi: Qoraqalpoğiston Respublikasi, barça viloyatlar va Toşkent şahrida hududiy kengaşlari, taʼlim muassasalari, korxonalar va harbiy qismlarda boşlanğiç taşkilotlari bor.' },
+  { y: '2001', t: '“Kamolot” yoşlar ijtimoiy harakati taşkil etildi.' },
+  { y: '30.06.2017', t: 'Toşkentdagi Simpoziumlar saroyida “Kamolot” yoşlar ijtimoiy harakatining IV qurultoyi bölib ötdi. Qurultoy delegatlari “Kamolot” negizida Özbekiston yoşlar ittifoqini tuziş taklifini qöllab-quvvatladi.' },
+  { y: '05.07.2017', t: 'Özbekiston yoşlar ittifoqi faoliyatining ustuvor yönalişlari belgilandi, 30-iyun “Yoşlar kuni” deb eʼlon qilindi.' },
+  { y: 'Bugun', t: 'Ittifoqning Qoraqalpoğiston Respublikasi, barça viloyatlar va Toşkent şahrida hududiy kengaşlari, taʼlim muassasalari, korxonalar va harbiy qismlarda boşlanğiç taşkilotlari faoliyat yuritadi.' },
 ]
 
 export const QUOTE = {
@@ -51,50 +48,64 @@ export const STATS: Stat[] = [
 ]
 
 export const MORE_STATS: Stat[] = [
-  { v: '12 273', l: 'maʼnaviy-maʼrifiy, sport va boşqa tadbirlar' },
+  { v: '12 273', l: 'bir yilda ötkazilgan maʼnaviy-maʼrifiy, sport va boşqa tadbirlar' },
   { v: '1,87 mln', l: 'yoş loyihalarga qamrab olindi' },
   { v: '81 198', l: 'yoş harbiy xizmatçi kuç tuzilmalaridagi taşkilotlarda' },
-  { v: '36', l: 'taşkilot ittifoq tizimida faoliyat yuritadi' },
+  { v: '36', l: 'taşkilot Ittifoq tizimida faoliyat yuritadi' },
 ]
 
-export type Privilege = { t: string; text: string; fact: string; img: string; badge?: boolean }
+/**
+ * Mukofot va imtiyozlar. Faktlar rasmiy manbalar böyiça tekşirilgan (2026-yil noyabr):
+ * “Özbekiston belgisi” — PF-1822 (1997), Nizom PF-3290 (2003); tavsiyanoma — VM 914-son qaror (2017, amaldagi tahriri);
+ * harbiy xizmatdan keyingi kontrakt — Markaziy Kengaş amaliyoti (35 foiz); kafillik — Oliy sud bilan memorandum;
+ * “Mard öğlon” — PQ-3402 (2017), hozir nomzodlarni Yoşlar işlari agentligi taqdim etadi (PF-226, 2024);
+ * “Kelajak bunyodkori” — ÖRQ-451 (2017).
+ * `group`: `ittifoq` — Ittifoqning özi beradigan imtiyozlar; `davlat` — Ittifoq taklifi bilan taʼsis etilgan davlat mukofotlari.
+ */
+export type Privilege = { t: string; text: string; fact: string; img: string; badge?: boolean; group: 'ittifoq' | 'davlat' }
 
 export const PRIVILEGES: Privilege[] = [
   {
+    group: 'ittifoq',
     t: '“Özbekiston belgisi” kökrak nişoni',
-    text: 'Prezidentning 2003-yil 4-avgustdagi PF-3290-son Farmoniga asosan Vatan şaʼnini yuksaltirişga xizmat qilayotgan faol yoşlar taqdirlanadi.',
-    fact: '2003-yildan buyon 1 198 nafar yoş taqdirlangan',
+    text: 'Vatan şaʼnini yuksaltirişga munosib hissa qöşgan faol yoşlar Ittifoq Markaziy Kengaşining qarori bilan şu nişon bilan taqdirlanadi.',
+    fact: '1997-yilda taʼsis etilgan',
     img: '/img/ittifoq/belgi.png',
     badge: true,
   },
   {
-    t: 'Tavsiyanoma beriş',
-    text: 'Vazirlar Mahkamasining 2017-yil 14-noyabrdagi 914-son qaroriga asosan Ittifoq tizimidagi sardorlar, boşlanğiç taşkilotlardagi yönaliş yetakçilari va ikki yillik stajga ega fidoyi yoşlarga oliy taʼlim muassasalariga imtiyozli qabul uçun tavsiyanoma beriladi.',
-    fact: 'Har bir hududdan 1 nafardan',
+    group: 'ittifoq',
+    t: 'Oliy taʼlimga tavsiyanoma',
+    text: 'Ittifoq tizimidagi sardorlar, yönaliş yetakçilari va tizimda ikki yil faoliyat yuritgan yoşlar Ittifoq tavsiyanomasi bilan doimiy yaşaş joyidagi oliy taʼlim taşkilotining pedagogika yönalişlariga test sinovlarisiz, davlat granti asosida qabul qilinadi.',
+    fact: 'Har yili har bir hududdan 1 nafar',
     img: '/img/ittifoq/kitobxonlar.jpg',
   },
   {
-    t: 'Ikkinçi imkoniyat',
-    text: 'Oliy sud bilan imzolangan memorandum asosida adaşib qolgan yoşlarga Ittifoq kafillik xatini beradi — bu ularga töğri yölga qaytiş imkonini beradi.',
-    fact: 'Yoşlar sud zalidan ozod etilmoqda',
-    img: '/img/ittifoq/seminar.jpg',
-  },
-  {
-    t: 'Kontrakt tölovi',
-    text: 'PQ-213-son qarorga muvofiq muddatli harbiy xizmatni tugatgan talabalarning kontrakt tölovi qoplab beriladi.',
-    fact: '2018–2024-yillarda 17 009 talabaga 53,77 mlrd söm',
+    group: 'ittifoq',
+    t: 'Harbiy xizmatdan keyin — kontrakt tölovi',
+    text: 'Muddatli harbiy xizmatni ötab, harbiy qism qömondonligining tavsiyanomasi bilan oliy taʼlim taşkilotiga tölov-kontrakt asosida qabul qilingan talabalarning kontrakt tölovi qisman Ittifoq tomonidan tölab beriladi.',
+    fact: 'Kontrakt summasining 35 foizi',
     img: '/img/ittifoq/harbiy.jpg',
   },
   {
+    group: 'ittifoq',
+    t: 'Ikkinçi imkoniyat — Ittifoq kafilligi',
+    text: 'Jinoyat sodir etib, sudda javob berayotgan yoş Ittifoq kafilligi bilan ozodlikdan mahrum etilmasligi mumkin. Bunda Ittifoq bir yil davomida uning xulq-atvorini kuzatib boradi va jamiyat uçun foydali işlarga jalb etadi.',
+    fact: 'Oliy sud bilan memorandum asosida',
+    img: '/img/ittifoq/seminar.jpg',
+  },
+  {
+    group: 'davlat',
     t: '“Mard öğlon” davlat mukofoti',
-    text: 'PQ-3402-son qarorga köra Ittifoq Markaziy Kengaşining taklifi bilan har yili “Yoşlar kuni” arafasida har bir hududdan 2 nafar iqtidorli yigit şu mukofot bilan taqdirlanadi.',
-    fact: 'Ittifoq taklifi bilan taʼsis etilgan',
+    text: 'Ittifoq Markaziy Kengaşining taklifi bilan taʼsis etilgan. Har yili “Yoşlar kuni” arafasida har bir hududdan 2 nafar yigit taqdirlanadi.',
+    fact: 'Hozir nomzodlarni Yoşlar işlari agentligi taqdim etadi',
     img: '/img/ittifoq/yetakchilar.jpg',
   },
   {
+    group: 'davlat',
     t: '“Kelajak bunyodkori” medali',
-    text: 'Öqiş, mehnat va jamoat işlarida faol iştirok etayotgan 14–30 yoşli yoşlarni taqdirlaş uçun Ittifoq taklifi asosida taʼsis etilgan davlat mukofoti.',
-    fact: '2017-yil 28-dekabrdagi ZRU-451-son Qonun',
+    text: 'Ittifoq taklifi bilan taʼsis etilgan. Öqiş, mehnat va jamoat işlarida faol 14–30 yoşli yoşlar Prezident tomonidan mukofotlanadi.',
+    fact: '2017-yildan beri beriladi',
     img: '/img/ittifoq/volontyorlar.jpg',
   },
 ]
@@ -115,14 +126,14 @@ export const PROJECTS: Direction[] = [
 ]
 
 export const INTL = {
-  text: 'Ittifoq xalqaro va çet eldagi mahalliy yoşlar taşkilotlari bilan faol hamkorlik qiladi: forumlar va sammitlar, amaliyot va almaşinuv dasturlari, uçraşuv va konferensiyalar.',
-  assoc: 'Ittifoq qoşida Özbekiston yoşlar umumjahon assotsiatsiyasi taşkil etilgan — u xorijda öqiyotgan va işlayotgan özbekistonlik yoşlarni qöllab-quvvatlaydi.',
+  text: 'Ittifoq xalqaro taşkilotlar va xorijiy davlatlarning yoşlar taşkilotlari bilan hamkorlik qiladi. Hamkorlik şakllari:',
+  assoc: 'Ittifoq qoşida Özbekiston yoşlari umumjahon assotsiatsiyasi taşkil etilgan. Assotsiatsiya xorijda öqiyotgan va işlayotgan özbekistonlik yoşlarni qöllab-quvvatlaydi.',
   facts: [
     { v: '20+', l: 'hamkor mamlakat' },
     { v: '25', l: 'davlatda assotsiatsiya vakillari' },
     { v: '100 000', l: 'yoş xalqaro loyihalarda' },
   ] as Stat[],
-  forms: ['Hamkorlikda forumlar va sammitlar', 'Amaliyot va almaşinuv dasturlari', 'Uçraşuv va konferensiyalar'],
+  forms: ['Forumlar va sammitlar', 'Amaliyot va almaşinuv dasturlari', 'Uçraşuvlar va konferensiyalar'],
   projects: ['Milliy dialog', 'Yoş diplomatlar', 'Turkiy dunyo yoşlar harakati', 'BMT modeli', 'Isteʼdodli yoşlar', 'Taʼlim Expo', 'TDT modeli', 'Xorijdagi vatandoşlar biznes marafoni'],
   partners: '/img/ittifoq/hamkorlar.png',
   flags: '/img/ittifoq/bayroqlar.png',
@@ -149,7 +160,7 @@ export const IMG = {
 export const PALACE = {
   name: 'Yoşlar ijod saroyi',
   org: 'Özbekiston yoşlar ittifoqi',
-  text: 'Poytaxtdagi yoşlar uçun oçiq ijod maskani. Saroyda xalqimizning sanʼat sohasidagi bebaho merosini namoyiş qiliş, uning milliy va umumbaşariy madaniyat taraqqiyotidagi örnini keng tarğib qiliş uçun körgazmalar taşkil etiladi.',
+  text: 'Toşkent şahridagi Yoşlar ijod saroyida xalqimizning sanʼat merosini namoyiş etuvçi körgazmalar, ijodiy tadbirlar va uçraşuvlar ötkaziladi.',
   features: ['“Kitoblar olami” kitobxonlik maydoni', 'Podkast studiyasi', 'Kovorking va uçraşuv xonalari', 'Körgazmalar va ijodiy tadbirlar'],
   img: '/img/markazlar/ijod-saroyi.jpg',
   gallery: ['/img/markazlar/ijod-kitoblar-olami.jpg', '/img/markazlar/ijod-podkast.jpg', '/img/markazlar/ijod-davr-bizniki.jpg'],
@@ -158,7 +169,7 @@ export const PALACE = {
 /* Toşkent şahar markazi: matn NAMUNA — manzil, ish vaqti va rasmiy tavsif kelgaçi almaştiriladi */
 export const CITY_CENTRE = {
   name: 'Toşkent şahar Yoşlar markazi',
-  text: 'Poytaxt yoşlarining asosiy uçraşuv maydoni: tadbirlar, tögaraklar, uçraşuvlar va yoşlar taşabbuslari şu yerda boşlanadi.',
+  text: 'Toşkent şahridagi Yoşlar markazida yoşlar uçun tadbirlar, tögaraklar va uçraşuvlar ötkaziladi.',
   facts: ['Tadbir va uçraşuvlar zali', 'Tögaraklar va örganiş xonalari', 'Yoşlar taşabbuslarini qöllab-quvvatlaş'],
   img: '/img/markazlar/toshkent-shahar.jpg',
 }
@@ -187,34 +198,121 @@ export const CENTRES: Centre[] = [
 
 export type Organ = { t: string; d: string }
 
-/** Qanday tuzilganmiz */
+/**
+ * Qanday tuzilganmiz — Ittifoq Ustavi asosida (5-bob “Rahbar organlar”, 6-bob “Tuzilma”, 1-bob tamoyillar).
+ * Raqam va muddatlar Ustavdagi kabi; matnni özgartirişda Ustavga solişturing.
+ */
+export type Body = { t: string; d: string; meta: string[] }
+
 export const STRUCTURE = {
-  lead: 'Ittifoq demokratik tamoyillar asosida işlaydi: rahbarlar aʼzolar tomonidan saylanadi, qarorlar oçiq muhokama qilinadi.',
-  organs: [
-    { t: 'Qurultoy', d: 'Ittifoqning oliy organi. U Ustavni tasdiqlaydi, Markaziy Kengaş va uning raisini saylaydi.' },
-    { t: 'Markaziy Kengaş', d: 'Qurultoylar oraliğida Ittifoqqa rahbarlik qiladi. Uning tarkibida har bir hududdan kamida ikki nafar yoş vakil böladi.' },
-    { t: 'Ijroiya qömitasi', d: 'Kundalik taşkiliy masalalar böyiça tezkor qarorlar qabul qiladi.' },
-    { t: 'Nazorat-taftiş komissiyasi', d: 'Ittifoq faoliyati va mablağlarining töğri işlatilişini nazorat qiladi.' },
-    { t: 'Hududiy kengaşlar', d: 'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahrida işlaydi. Toşkent şahar hududiy Kengaşi poytaxt yoşlari bilan işlaydi.' },
-    { t: 'Boşlanğiç taşkilotlar', d: 'Öqiş, iş va xizmat joylarida tuziladi. Kamida beş nafar aʼzo bölsa, boşlanğiç taşkilot oçiş mumkin. Uni aʼzolar özlari saylagan yetakçi boşqaradi.' },
-  ] as Organ[],
-  principles: ['Ixtiyoriylik', 'Qonuniylik', 'Oçiqlik', 'Aʼzolarning teng huquqliligi', 'Özini özi boşqariş'],
+  /** 5.1–5.7: rahbar organlar */
+  qurultoy: {
+    t: 'Qurultoy',
+    d: 'Ittifoqning oliy rahbar organi. Ustavni tasdiqlaydi, Markaziy Kengaş va Markaziy nazorat-taftiş komissiyasini saylaydi, ularning hisobotlarini tinglaydi.',
+    meta: ['Hisobot Qurultoyi — yilda kamida bir marta', 'Vakolatli Qurultoy — 5 yilda kamida bir marta', 'Delegatlar hududiy kengaşlar konferensiyalarida saylanadi'],
+  } as Body,
+  council: {
+    t: 'Markaziy Kengaş',
+    d: 'Qurultoylar oraliğida Ittifoqqa rahbarlik qiladi: Qurultoy qarorlari ijrosini taʼminlaydi, yillik iş reja va byudjetni tasdiqlaydi.',
+    meta: ['Kamida 61 kişi', '5 yil muddatga', 'Har hududdan kamida 2 nafar yoş vakil'],
+  } as Body,
+  chair: {
+    t: 'Markaziy Kengaş raisi',
+    d: 'Markaziy Kengaş, Ijroiya qömitasi va apparat faoliyatiga rahbarlik qiladi.',
+    meta: ['Qurultoy 5 yilga saylaydi'],
+  } as Body,
+  exec: {
+    t: 'Ijroiya qömitasi',
+    d: 'Ittifoq faoliyatini taşkil etiş böyiça tezkor qarorlar qabul qiladi, hududiy kengaşlar faoliyatini muvofiqlaştiradi.',
+    meta: ['Markaziy Kengaş aʼzolaridan', 'Kamida 15 kişi', '5 yil muddatga'],
+  } as Body,
+  audit: {
+    t: 'Markaziy nazorat-taftiş komissiyasi',
+    d: 'Ittifoqning markaziy nazorat organi: byudjet ijrosi va moliyaviy-xöjalik faoliyatini tekşiradi.',
+    meta: ['Kamida 11 kişi', '5 yil muddatga', 'Qurultoyga hisobot beradi'],
+  } as Body,
+  /** 6.1–6.3: taşkiliy tuzilma (yuqoridan pastga) */
+  levels: [
+    {
+      t: 'Hududiy kengaşlar',
+      d: 'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahrida işlaydi. Yuqori organi — Konferensiya, u Kengaş, rais va nazorat-taftiş komissiyasini saylaydi.',
+      meta: ['Konferensiya 2,5 yilda kamida bir marta', 'Kengaş kamida 21 kişi'],
+    },
+    {
+      t: 'Mahalliy kengaşlar',
+      d: 'Maʼmuriy-hududiy bölinişga muvofiq tuziladi. Yuqori organi — Konferensiya; boşlanğiç taşkilotlar şu yerga delegat saylaydi.',
+      meta: ['Konferensiya 2,5 yilda kamida bir marta', 'Kengaş yiğilişi 6 oyda kamida bir marta'],
+    },
+    {
+      t: 'Boşlanğiç taşkilotlar',
+      d: 'Öqiş, iş va xizmat joylarida tuziladi. Yuqori organi — aʼzolarning Umumiy yoki Hisobot-saylov yiğilişi; taşkilotga aʼzolar saylagan yetakçi rahbarlik qiladi.',
+      meta: ['Kamida 5 nafar aʼzo', 'Yetakçi 2,5 yilga saylanadi', '100 dan ortiq aʼzoda — kamida 7 kişilik Kengaş'],
+    },
+  ] as Body[],
+  /** 1-bob: faoliyat tamoyillari */
+  principles: ['Ixtiyoriylik', 'Qonuniylik', 'Oşkoralik', 'Aʼzolarning teng huquqliligi', 'Özini özi boşqariş'],
 }
 
-/** Qanday aʼzo böliş mumkin */
+/**
+ * Qanday aʼzo böliş mumkin — Ustavning IV bobi (“Ittifoqqa aʼzolik”) asosida.
+ * `band` — Ustavdagi band raqami (Ustav sahifasidagi #band-4.2 kabi havolaga ulanadi).
+ */
 export const JOIN = {
+  /** jismoniy şaxslar uçun tartib (4.1, 4.2, 4.4, 4.5-bandlar) */
   steps: [
-    { t: 'Yoşingiz 14 dan 30 gaça bölsin', d: 'Özbekiston fuqarosi yoki mamlakatda doimiy yaşaydigan şaxs bölsangiz kifoya.' },
-    { t: 'Ariza yozing', d: 'Öqiş yoki iş joyingizdagi boşlanğiç taşkilotga yoki saytimiz orqali murojaat qiling.' },
-    { t: 'Boşlanğiç taşkilot qaror qabul qiladi', d: 'Uning qarori yakuniy — yuqori taşkilot tasdiği talab qilinmaydi.' },
-    { t: 'Faol böling', d: 'Loyihalarda qatnaşing, öz ğoyangizni taklif qiling, yetakçi yoki sardor böling.' },
-  ] as Organ[],
-  rights: ['Fikringizni erkin bildirasiz', 'Rahbar organlarga saylaysiz va saylanasiz', 'Ittifoq faoliyati haqida maʼlumot olasiz', 'Istalgan rahbar organga taklif bilan murojaat qilasiz'],
-  perks: [
-    'Faol aʼzo, örtaça özlaştirişi 86 foiz va undan yuqori bölgan bakalavr va magistrlarga kontrakt tölovining 35 foizi Ittifoq jamğarmasi hisobidan tölab beriladi.',
-    'Respublika va xalqaro forumlar, tanlovlar, sport musobaqalari, intellektual öyinlar va almaşinuv dasturlarida qatnaşiş imkoniyati.',
+    {
+      band: '4.2',
+      t: 'Talablarga mos kelişingiz',
+      d: '14 yoşga tölgan va 30 yoşdan oşmagan, Ittifoq maqsadini qöllab-quvvatlaş istagini bildirgan Özbekiston Respublikasi fuqarosi yoki Özbekistonda muntazam yaşab kelayotgan fuqaroligi bölmagan şaxs aʼzo bölişi mumkin.',
+    },
+    {
+      band: '4.1',
+      t: 'Ariza taqdim etiş',
+      d: 'Aʼzolikka qabul qiliniş uçun öqiş yoki iş joyingizdagi Ittifoq boşlanğiç taşkilotiga tegişli mazmundagi ariza taqdim etiladi.',
+    },
+    {
+      band: '4.4',
+      t: 'Boşlanğiç taşkilotda körib çiqiş',
+      d: 'Aʼzolikka qabul qiliş boşlanğiç taşkilotning Umumiy yiğilişi, Kengaş şakllantirilgan bölsa — boşlanğiç taşkilot Kengaşining yiğilişi tomonidan amalga oşiriladi.',
+    },
+    {
+      band: '4.5',
+      t: 'Qaror yakuniy hisoblanadi',
+      d: 'Boşlanğiç taşkilotning qabul qiliş töğrisidagi qarori yakuniy hisoblanadi va Ittifoqning yuqori organlari tomonidan tasdiqlaniş talab qilinmaydi.',
+    },
   ],
-  cta: { t: 'Kelajakni birga quramiz', d: 'Sizning ğoyangiz, bilimingiz va ğayratingiz yurtimiz uçun kerak. Özbekiston yoşlar ittifoqiga qöşiling — tengdoşlaringiz bilan birga örganing, yarating va öz hissangizni qöşing.' },
+  /** 4.10-band */
+  rights: [
+    'Umumiy yiğilişlar, konferensiyalar, Qurultoy va rahbar organlar yiğilişlarida öz fikrini erkin ifoda etiş',
+    'Şaxsan yoki vakili orqali saylanadigan organlar qarorlarini işlab çiqişda iştirok etiş',
+    'Saylanadigan rahbar organlar va nazorat-taftiş organlariga saylaş va saylaniş',
+    'Ittifoq organlari faoliyati töğrisida maʼlumot oliş',
+    'Ittifoqning har qanday rahbar organiga ariza va takliflar bilan murojaat etiş',
+  ],
+  /** 4.11-band */
+  duties: [
+    'Ittifoqning Ustav maqsadlarini amalga oşirişda qatnaşiş',
+    'Yoşlar örtasida va jamiyatda Ittifoqning taʼsiri va nufuzini oşiriş',
+    'Rahbar organlar, boşlanğiç taşkilot umumiy yiğilişlari va Kengaşi qarorlarini bajariş',
+    'Boşlanğiç taşkilot faoliyati va Ittifoqning barça yönalişlarida faol iştirok etiş',
+  ],
+  /** 4.7, 4.8-bandlar */
+  legal: {
+    d: 'Yoşlar sohasidagi nodavlat notijorat taşkilotlari, korxona, muassasa va taşkilotlar, markazlar, klublar hamda taʼsis hujjatlari Ittifoq Ustaviga zid bölmagan boşqa yuridik şaxslar aʼzo bölişi mumkin.',
+    how: 'Qabul qiliş Ittifoq Markaziy Kengaşi Ijroiya qömitasining qarori asosida amalga oşiriladi.',
+  },
+  /** 4.3-band */
+  note: 'Ittifoqning rahbar organlariga saylangan aʼzolarga 30 yoşlik çeklov qöllanilmaydi.',
+  /** 4.6-band: jismoniy şaxslar aʼzoligining bekor qilinişi */
+  ends: [
+    'aʼzoning arizasiga köra',
+    'aʼzoning yoşi 30 dan oşgaç (rahbar organlarga saylanganlar bundan mustasno)',
+    'Ustavga zid xatti-harakatlarga yöl qöyilganda',
+    'boşqa davlat fuqaroligi olinganda',
+    'sud tomonidan muomalaga layoqatsiz deb topilganda yoki vafot etganda',
+    'Ittifoq faoliyati tugatilganda',
+  ],
+  cta: { t: 'Ittifoqqa aʼzo böliş', d: 'Ariza öqiş yoki iş joyingizdagi Ittifoq boşlanğiç taşkilotiga taqdim etiladi. Arizani saytda onlayn yuboriş ham mumkin: Kengaş uni tegişli boşlanğiç taşkilotga yetkazadi.' },
 }
 
 /** Rasmiy maʼlumotlar */
@@ -236,8 +334,6 @@ export const OFFICIAL = {
  * (asl matn qisqartirib, maʼnosi saqlangan holda berilgan). Manba: https://lex.uz/docs/-3255680
  */
 export const PRIORITIES = {
-  source: 'Prezidentning 2017-yil 5-iyuldagi PF-5106-son Farmoni',
-  href: 'https://lex.uz/docs/-3255680',
   items: [
     'Yoşlarga oid davlat siyosatini amalga oşirişda davlat organlari, nodavlat notijorat taşkilotlari va fuqarolik jamiyati institutlari bilan samarali hamkorlikni taʼminlovçi, “Yoşlar — kelajak bunyodkori” şiori ostida professional işlaydigan tuzilmaga aylaniş.',
     'Yoşlarning huquqlari, erkinliklari va qonuniy manfaatlarini himoya qiliş, ularni milliy va umuminsoniy qadriyatlarga hurmat, Vatanga muhabbat ruhida tarbiyalaş, turli mafkuraviy tahdidlardan asraş.',
@@ -254,92 +350,12 @@ export const PRIORITIES = {
   ],
 }
 
-/* ---------------- Loyihalar: batafsil kartalar (taqdimotdan) ---------------- */
-
-export type ProjectCard = { t: string; goal: string; reach: string; who: string; area: string }
-
-/** Yirik loyihalar — taqdimotdagi “Loyihadan maqsad / Qamrov / Iştirokçilar” maʼlumotlari */
-export const PROJECT_CARDS: ProjectCard[] = [
-  { area: 'Boşlanğiç taşkilotlar', t: '“Munozara” respublika turniri', goal: 'Taʼlim muassasalaridagi yoşlar örtasida nutq madaniyati va tahliliy fikrlaşni rivojlantiriş.', reach: '5 000 nafar yoş', who: 'Öquvçi va talabalar' },
-  { area: 'Boşlanğiç taşkilotlar', t: '“Talabalar festivali”', goal: 'Talabalar örtasida milliy qadriyat va anʼanalarimizni tarğib qiliş.', reach: '1,5 mln yoş', who: 'Oliy taʼlim muassasalaridagi faol talabalar' },
-  { area: 'Boşlanğiç taşkilotlar', t: '“Yetakçilar forumi”', goal: 'Yetakçilar faoliyatini qöllab-quvvatlaş va ularga uslubiy kömak beriş.', reach: '2 500 yetakçi', who: 'Oliy taʼlim va kasbiy taʼlim muassasalari yetakçilari' },
-  { area: 'Boşlanğiç taşkilotlar', t: '“Milliy Fashion Show”', goal: 'Yoşlar örtasida milliy liboslarimizni tarğib qiliş, yoş dizaynerlarni qöllab-quvvatlaş.', reach: '100 000 yoş', who: 'Oliy taʼlim va kasbiy taʼlim talabalari' },
-  { area: 'Boşlanğiç taşkilotlar', t: '“Kitob festivali”', goal: 'Yoşlarni kitobxonlikka keng jalb qiliş.', reach: '500 000 yoş', who: 'Talaba yoşlar va barça uçun' },
-  { area: 'Boşlanğiç taşkilotlar', t: '“Ittifoq Quiz”', goal: 'Yoşlarning bilim salohiyatini rivojlantiriş.', reach: '100 000 yoş', who: 'Oliy taʼlim va kasbiy taʼlim talabalari' },
-  { area: 'Harbiy vatanparvarlik', t: '“Universal” harbiy-sport musobaqasi', goal: 'Kuç tuzilmalaridagi yoş harbiy xizmatçilar örtasida harbiy birodarlikni tarğib qiliş.', reach: '55 000 yoş', who: 'Yoş harbiy xizmatçilar' },
-  { area: 'Harbiy vatanparvarlik', t: '“Harbiy qismda bir kunim”', goal: 'Yoşlarni vatanparvarlik ruhida tarbiyalaş, harbiy xizmatga qiziqişini oşiriş.', reach: '11 250 yoş', who: 'Kuç tuzilmalaridagi yoşlar' },
-  { area: 'Harbiy vatanparvarlik', t: '“Ajdodlar izidan” intellektual tanlovi', goal: 'Harbiy qismlardagi yoşlar örtasida kitobxonlikni tarğib qiliş.', reach: '25 000 yoş', who: 'Yoş harbiy xizmatçilar' },
-  { area: 'Harbiy vatanparvarlik', t: '“Harbiylar köpkuraşi”', goal: 'Yoş harbiy xizmatçilar örtasida soğlom turmuş tarzini tarğib qiliş.', reach: '45 000 yoş', who: 'Yoş harbiy xizmatçilar' },
-  { area: 'Harbiy vatanparvarlik', t: '“Vatanparvarlik karvoni” festivali', goal: 'Yoşlarni milliy ğoya va Vatanga sadoqat ruhida tarbiyalaş.', reach: '40 000 yoş', who: 'Yoş harbiy xizmatçilar' },
-  { area: 'Harbiy vatanparvarlik', t: '“Ezgu amal”', goal: 'Kuç tuzilmalarida faoliyat olib borayotgan yoşlarni qöllab-quvvatlaş.', reach: '50 000 yoş', who: 'Yoş harbiy xizmatçilar' },
-  { area: 'Tizim taşkilotlari', t: 'Germaniya amaliyot dasturi', goal: 'Çet eldagi yoşlar taşkilotlari bilan hamkorlikda talabalarni amaliyotga yuboriş.', reach: '1 500 yoş', who: 'Oliy taʼlim talabalari va isteʼdodli yoşlar' },
-  { area: 'Tizim taşkilotlari', t: '“Ustoz AI” platformasi', goal: 'Taʼlim muassasalarining 10–30 foizini qamrab oliş uçun şaroit yaratiş.', reach: '530 000 yoş', who: 'Zamonaviy kasblarda faoliyat yuritayotgan yoşlar' },
-  { area: 'Tizim taşkilotlari', t: '“Parlament FM” podkasti', goal: 'Oliy Majlisda qabul qilinayotgan qonunlar va islohotlar mazmunini yoritiş.', reach: '19 000 yoş', who: 'Yoşlar va fuqarolar' },
-  { area: 'Tizim taşkilotlari', t: 'Yuridik laboratoriya', goal: 'Yoşlarning huquqiy faolligini oşiriş, qonunçilik böyiça bilimlarini mustahkamlaş.', reach: '1 000 yoş', who: 'Talabalar, maktab va kollej öquvçilari' },
-  { area: 'Tizim taşkilotlari', t: '“Biznes taʼlim” platformasi', goal: 'Yoşlarning biznes sohasidagi bilimlarini oşiriş.', reach: '20 000 yoş', who: 'Talabalar va yoş tadbirkorlar' },
-  { area: 'Tizim taşkilotlari', t: 'Xorijdagi yoşlar uçun “Musofir” platformasi', goal: 'Xorijda öqiyotgan va işlayotgan yoşlar bilan muntazam muloqot qiliş.', reach: '2 000 yoş', who: 'Xorijdagi talabalar va yoşlar' },
-  { area: 'Tizim taşkilotlari', t: '“Yoş ijodkorlar” körik tanlovi', goal: 'Yoşlarning innovatsion ğoyalarini qöllab-quvvatlaş.', reach: '50 000 yoş', who: 'Talabalar va iqtidorli yoşlar' },
-]
-
-/* ---------------- Normativ-huquqiy hujjatlar ---------------- */
-
-export type Act = { y: string; t: string; d: string; href?: string }
-
-/** Ittifoq faoliyatiga doir asosiy hujjatlar (lex.uz va president.uz da tekşirilgan) */
-export const ACTS: Act[] = [
-  { y: '14.09.2016', t: '“Yoşlarga oid davlat siyosati töğrisida”gi Qonun (ÖRQ-406)', d: 'Yoşlar siyosatining asosiy qonuni; yoşlar nodavlat taşkilotlarini davlat qöllab-quvvatlaşini belgilaydi.', href: 'https://lex.uz/docs/-3026246' },
-  { y: '05.07.2017', t: 'Prezidentning PF-5106-son Farmoni', d: 'Ittifoq taşkil etilgani qabul qilindi, 30-iyun “Yoşlar kuni” deb eʼlon qilindi, 12 ta ustuvor yönaliş belgilandi.', href: 'https://lex.uz/docs/-3255680' },
-  { y: '18.07.2017', t: 'Prezidentning PQ-3138-son qarori', d: 'Ittifoq faoliyatini takomillaştirişga doir kompleks çora-tadbirlar dasturi tasdiqlandi.', href: 'https://president.uz/oz/lists/view/795' },
-  { y: '14.11.2017', t: 'Vazirlar Mahkamasining 914-son qarori', d: 'Ittifoqning faol aʼzolariga oliy taʼlim muassasalariga imtiyozli qabul uçun tavsiyanoma beriş tartibi joriy etildi.', href: 'https://lex.uz/mact/-3409650' },
-  { y: '21.11.2017', t: 'Prezidentning PQ-3402-son qarori', d: '“Mard öğlon” davlat mukofotini har yili har bir hududdan 2 nafar yigitga topşiriş haqidagi Ittifoq taklifi maʼqullandi.', href: 'https://lex.uz/docs/-3418697' },
-  { y: '28.12.2017', t: 'ZRU-451-son Qonun', d: '14–30 yoşli faol yoşlar uçun “Kelajak bunyodkori” medali taʼsis etildi.', href: 'https://lex.uz/docs/3479567' },
-  { y: '10.01.2018', t: 'Oliy taʼlim va Moliya vazirliklarining qarori (röyxat raqami 2961)', d: 'Faol aʼzo talabalarning yillik kontrakt tölovining 35 foizini Ittifoq tölab beriş tartibi tasdiqlandi.', href: 'https://lex.uz/docs/-3497684' },
-  { y: '30.06.2020', t: 'Prezidentning PF-6017-son Farmoni va PQ-4768-son qarori', d: 'Yoşlar işlari agentligi taşkil etildi: yoşlarga oid davlat siyosatini amalga oşiriş agentlikka ötdi, Ittifoq esa nodavlat notijorat taşkilot sifatida işini davom ettirmoqda.', href: 'https://lex.uz/docs/-4880189' },
-]
-
-/* ---------------- Natijalar ---------------- */
-
-export type YearResult = { y: string; items: string[]; src?: string }
-
-export const RESULTS: YearResult[] = [
-  {
-    y: '2018',
-    items: [
-      'Yoşlar taşabbusi bilan 26 ta taşkilot tuzildi, jumladan Yoşlar naşriyot uyi va Yoş olimlar kengaşi',
-      '1 066 nafar yoş fermerga 52 mlrd söm, 4 300 yoş tadbirkor loyihasiga 226,6 mlrd söm ajratildi',
-      '848 ta yoş oilaga “Yoşlar uylari” kalitlari topşirildi',
-      'Ittifoq ŞHT Yoşlar kengaşining töla huquqli aʼzosi böldi',
-    ],
-    src: 'https://kun.uz/news/2019/01/19/ozbekiston-yoshlar-ittifoqining-2018-yildagi-faoliyati-sarhisob-qilindi',
-  },
-  {
-    y: '2023',
-    items: [
-      '11 915 ta boşlanğiç taşkilot: 210 tasi oliy taʼlim muassasalarida, 703 tasi kollejlarda, 517 tasi korxonalarda, 309 tasi harbiy qismlarda',
-      'Taxminan 5,7 mln yoş birlaşgan, 35 384 ta loyiha va tadbir ötkazildi',
-      '2 199 nafar talabaning kontrakt tölovi uçun 7,3 mlrd söm tölab berildi',
-      '“Kamalak” bolalar taşkiloti 10–14 yoşli 3 mln dan ortiq bola bilan işladi',
-    ],
-    src: 'https://uza.uz/oz/posts/joriy-yilda-2-ming-199-nafar-talaba-yoshlarning-73-milliard-somlik-shartnoma-mablaglari-tolab-berildi_550506',
-  },
-  {
-    y: '2025–2026',
-    items: [
-      '59 974 nafar yoşlar yetakçisi va koordinatori faoliyat yuritmoqda',
-      '26 ta yirik loyiha va 12 273 ta tadbir, 1,87 mln yoş qamrab olindi',
-      '951 nafar talabaning kontrakt tölovi (3,4 mlrd söm) tölab berildi',
-      '13 nafar yoş 914-son qaror asosida bakalavriatga qabul qilindi',
-      '164 ta vazirlik va idora bilan qöşma dasturlar imzolandi',
-    ],
-  },
-]
-
 /* ---------------- Ittifoq taʼsisçiligidagi taşkilotlar ---------------- */
 
 export type Org = { t: string; d: string; logo?: string }
 
 export const ORGS = {
-  lead: 'Ittifoq tizimida 36 ta taşkilot faoliyat yuritadi: 19 tasi nodavlat notijorat taşkilot, 14 tasi tijorat taşkiloti. Ularda 228 kişi işlaydi.',
+  lead: 'Ittifoq tizimida 36 ta taşkilot faoliyat yuritadi, jumladan 19 ta nodavlat notijorat taşkilot va 14 ta tijorat taşkiloti. Ularda 228 kişi işlaydi.',
   ngos: [
     { t: 'Yetakçilar akademiyasi', d: 'Mahallalar, taʼlim muassasalari, vazirlik va taşkilotlardagi yoşlar yetakçilarining iş samaradorligini oşiradi.', logo: '/img/tashkilotlar/yetakchilar.png' },
     { t: 'Özbekiston quvnoqlar va zukkolar assotsiatsiyasi', d: 'Mustaqil fikrlaydigan yoşlarni şakllantiradi, iqtidorli yoşlarni izlab topib, isteʼdodini röyobga çiqarişga yordam beradi.', logo: '/img/tashkilotlar/qvz.png' },

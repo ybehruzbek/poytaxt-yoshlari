@@ -1,108 +1,23 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
 import type { ReactNode } from 'react'
-import { DevVariantSwitch } from '@/components/site/DevVariantSwitch'
+import { FaqBlock } from '@/components/faq/FaqBlock'
+import { FAQ_AZOLIK } from '@/components/faq/data'
+import { More } from '@/components/site/MoreBtn'
+import { SplitWords } from '@/components/site/SplitWords'
 import { Arrow } from '@/components/site/SocialPhones'
 import { CompaniesA } from './Companies'
 import { CentresB } from './CentresAlt'
-import { Acc, AccHead, GroupPanel, type AccMeta } from './Accordion'
-import { GroupDeck } from './GroupDeck'
 import { Hero } from './Hero'
-import { ProjectCardsC, ResultsC } from './AltTwo'
-import { OfficialB, StructureB } from './AltThree'
+import { OfficialB } from './AltThree'
+import { Structure } from './Structure'
 import { OrgsD } from './OrgsLogos'
 import { QuoteE } from './QuotePhoto'
-import { ACTS, HISTORY, IMG, JOIN, MISSION, MORE_STATS, PRIORITIES, STATS, WHO } from './data'
+import { HISTORY, IMG, JOIN, MISSION, MORE_STATS, PRIORITIES, STATS, WHO } from './data'
 import { IntlB, PrivilegesB, ProjectsB } from './Sections'
 
-/** VAQTINCHA: akkordeon körinişi variantlari faqat ishlab chiqish rejimida */
-const DEV = process.env.NODE_ENV !== 'production'
-
-/** Akkordeon bölimlari: nomi, qisqa izohi va guruhi */
-const ACC: Record<string, AccMeta> = {
-  'biz-kimmiz': {
-    id: 'biz-kimmiz',
-    title: 'Biz kimmiz',
-    sub: 'Taşkilot haqida qisqaça va asosiy raqamlar',
-    g: 'biz',
-  },
-  suratlar: {
-    id: 'suratlar',
-    title: 'Suratlarda Ittifoq',
-    sub: 'Tadbirlardan lavhalar va yana 4 ta raqam',
-    g: 'biz',
-  },
-  tarix: { id: 'tarix', title: 'Qisqa tarix', sub: '2001-yildan bugungaça', g: 'biz' },
-  maqsad: { id: 'maqsad', title: 'Maqsadimiz', sub: 'Biz nimaga intilamiz', g: 'biz' },
-  ustuvor: {
-    id: 'ustuvor',
-    title: 'Ustuvor yönalişlar',
-    sub: 'PF-5106-son Farmondagi 12 ta yönaliş',
-    g: 'biz',
-  },
-  iqtibos: { id: 'iqtibos', title: 'Prezident iqtibosi', sub: 'Yoşlarga murojaat', g: 'biz' },
-  imtiyozlar: {
-    id: 'imtiyozlar',
-    title: 'Mukofot va imtiyozlar',
-    sub: '6 ta mukofot va imtiyoz',
-    g: 'faol',
-  },
-  loyihalar: {
-    id: 'loyihalar',
-    title: 'Loyihalar',
-    sub: '10 ta yönaliş va 19 ta yirik loyiha',
-    g: 'faol',
-  },
-  natijalar: {
-    id: 'natijalar',
-    title: 'Natijalar',
-    sub: '2018, 2023 va 2025–2026-yillar',
-    g: 'faol',
-  },
-  xalqaro: {
-    id: 'xalqaro',
-    title: 'Xalqaro hamkorlik',
-    sub: '20 dan ziyod hamkor mamlakat',
-    g: 'faol',
-  },
-  markazlar: {
-    id: 'markazlar',
-    title: 'Yoşlar markazlari',
-    sub: 'Yoşlar ijod saroyi va 14 ta hudud',
-    g: 'tizim',
-  },
-  taskilotlar: {
-    id: 'taskilotlar',
-    title: 'Ittifoq taʼsisçiligidagi taşkilotlar',
-    sub: '19 ta nodavlat notijorat taşkilot',
-    g: 'tizim',
-  },
-  media: {
-    id: 'media',
-    title: 'Media, naşriyot va xizmat taşkilotlari',
-    sub: '11 ta taşkilot va Ittifoq uluşi',
-    g: 'tizim',
-  },
-  tuzilma: {
-    id: 'tuzilma',
-    title: 'Qanday tuzilganmiz',
-    sub: 'Qurultoydan boşlanğiç taşkilotgaça',
-    g: 'tizim',
-  },
-  azolik: {
-    id: 'azolik',
-    title: 'Qanday aʼzo böliş mumkin',
-    sub: '4 ta qadam va aʼzolar imkoniyatlari',
-    g: 'azo',
-  },
-  hujjatlar: {
-    id: 'hujjatlar',
-    title: 'Normativ-huquqiy hujjatlar',
-    sub: '8 ta asosiy hujjat',
-    g: 'azo',
-  },
-  rasmiy: { id: 'rasmiy', title: 'Rasmiy maʼlumotlar', sub: 'Nomi, sanasi va manzili', g: 'azo' },
-}
+/** Ustav matnidagi band havolasi: /hujjatlar/normativ/ustav#band-4.2 */
+const USTAV = (L: (h: string) => string, band: string) => L(`/hujjatlar/normativ/ustav#band-${band}`)
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
@@ -115,276 +30,218 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
  */
 export function IttifoqPage({ L, crumbs, siblings }: P) {
   return (
-    <div className="it it-accs">
+    <div className="it">
       <Hero L={L} crumbs={crumbs} />
 
-      <AccHead />
-      {DEV && (
-        <DevVariantSwitch
-          name="acc"
-          label="Akkordeon"
-          titles={[
-            'A · Röyxat',
-            'B · Kartalar',
-            'C · Guruhlar',
-            'D · Töq çiziqlar',
-            'E · Yonga oçiladigan çiziqlar',
-          ]}
-        />
-      )}
-      <GroupDeck>
-        <GroupPanel g="biz" label="Biz haqimizda" n={1}>
-          <Acc meta={ACC['biz-kimmiz']} n={1} open>
-            <section className="sec">
-              <div className="wrap">
-                <div className="it-who">
-                  <div>
-                    <h2 className="h2">Biz kimmiz</h2>
-                    <p className="it-motto">«{WHO.motto}»</p>
-                  </div>
-                  <div className="it-who-txt">
-                    {WHO.paras.map((t) => (
-                      <p key={t}>{t}</p>
-                    ))}
-                  </div>
-                </div>
-                <div className="it-stats">
-                  {STATS.map((s) => (
-                    <div key={s.l}>
-                      <b>{s.v}</b>
-                      <span>{s.l}</span>
-                    </div>
-                  ))}
-                </div>
+      <section className="sec">
+        <div className="wrap">
+          <div className="it-who">
+            <div>
+              <h2 className="h2">Biz kimmiz</h2>
+              <p className="it-motto">“{WHO.motto}”</p>
+            </div>
+            <div className="it-who-txt">
+              {WHO.paras.map((t) => (
+                <p key={t}>{t}</p>
+              ))}
+            </div>
+          </div>
+          <div className="it-stats">
+            {STATS.map((s) => (
+              <div key={s.l}>
+                <b>{s.v}</b>
+                <span>{s.l}</span>
               </div>
-            </section>
-          </Acc>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <Acc meta={ACC['suratlar']} n={2}>
-            <section className="sec">
-              <div className="wrap">
-                <div className="it-mosaic">
-                  <img src={IMG.girls} alt="Kitob olami festivalida milliy liboslardagi qizlar" />
-                  <img src={IMG.seminar} alt="Boşlanğiç taşkilot yetakçilari seminari" />
-                  <img src={IMG.volunteers} alt="Volontyorlar" />
-                  <img src={IMG.books} alt="Yoşlar ijod saroyida kitobxonlar" />
-                  <img src={IMG.leaders} alt="Yoşlar yetakçilari forumi iştirokçilari" />
-                </div>
-                <div className="it-more">
-                  {MORE_STATS.map((s) => (
-                    <div key={s.l}>
-                      <b>{s.v}</b>
-                      <span>{s.l}</span>
-                    </div>
-                  ))}
-                </div>
+      <section className="sec">
+        <div className="wrap">
+          <div className="it-mosaic">
+            <img src={IMG.girls} alt="Kitob olami festivalida milliy liboslardagi qizlar" />
+            <img src={IMG.seminar} alt="Boşlanğiç taşkilot yetakçilari seminari" />
+            <img src={IMG.volunteers} alt="Volontyorlar" />
+            <img src={IMG.books} alt="Yoşlar ijod saroyida kitobxonlar" />
+            <img src={IMG.leaders} alt="Yoşlar yetakçilari forumi iştirokçilari" />
+          </div>
+          <div className="it-more">
+            {MORE_STATS.map((s) => (
+              <div key={s.l}>
+                <b>{s.v}</b>
+                <span>{s.l}</span>
               </div>
-            </section>
-          </Acc>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <Acc meta={ACC['tarix']} n={3}>
-            <section className="sec">
-              <div className="wrap">
-                <div className="sec-head">
-                  <h2 className="h2">Qisqa tarix</h2>
-                </div>
-                <ol className="it-hist">
-                  {HISTORY.map((m) => (
-                    <li key={m.y}>
-                      <b>{m.y}</b>
-                      <p>{m.t}</p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </section>
-          </Acc>
+      <section className="sec">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Qisqa tarix</h2>
+          </div>
+          <ol className="it-hist">
+            {HISTORY.map((m) => (
+              <li key={m.y}>
+                <b>{m.y}</b>
+                <p>{m.t}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-          <Acc meta={ACC['maqsad']} n={4}>
-            <section className="sec">
-              <div className="wrap">
-                <p className="it-kick">Maqsadimiz</p>
-                <h2 className="h2 it-mission">
-                  {MISSION.lead}
-                  <span className="mute">{MISSION.rest}</span>
-                </h2>
-                <p className="it-charter">{MISSION.charter}</p>
-              </div>
-            </section>
-          </Acc>
+      <section className="sec">
+        <div className="wrap">
+          <p className="it-kick">Maqsadimiz</p>
+          <h2 className="h2 it-mission">
+            <SplitWords text={MISSION.text} />
+          </h2>
+        </div>
+      </section>
 
-          <Acc meta={ACC['ustuvor']} n={5}>
-            <section className="sec it-pri-sec">
-              <div className="wrap">
-                <div className="it-pri-head">
-                  <h2 className="h2">Davlat belgilagan ustuvor yönalişlar</h2>
-                  <p>
-                    <a href={PRIORITIES.href} target="_blank" rel="noopener noreferrer">
-                      {PRIORITIES.source} <span aria-hidden="true">↗</span>
-                    </a>{' '}
-                    Ittifoq faoliyatining 12 ta ustuvor yönalişini belgilab bergan.
-                  </p>
-                </div>
-                <ol className="it-pri">
-                  {PRIORITIES.items.map((x, i) => (
-                    <li key={x}>
-                      <span>{pad(i)}</span>
-                      <p>{x}</p>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </section>
-          </Acc>
+      <section className="sec it-pri-sec">
+        <div className="wrap">
+          <div className="it-pri-head">
+            <h2 className="h2">
+              <span>Özbekiston yoşlar ittifoqining</span> <span>ustuvor yönalişlari</span>
+            </h2>
+          </div>
+          <ol className="it-pri">
+            {PRIORITIES.items.map((x, i) => (
+              <li key={x}>
+                <span>{pad(i)}</span>
+                <p>{x}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-          <Acc meta={ACC['iqtibos']} n={6}>
-            <QuoteE />
-          </Acc>
-        </GroupPanel>
-        <GroupPanel g="faol" label="Faoliyat va natijalar" n={2}>
-          <Acc meta={ACC['imtiyozlar']} n={7}>
-            <section className="sec">
-              <div className="wrap">
-                <div className="sec-head">
-                  <h2 className="h2">Mukofot va imtiyozlar</h2>
-                </div>
+      <QuoteE />
 
-                <PrivilegesB />
-              </div>
-            </section>
-          </Acc>
+      <section className="sec" id="mukofotlar">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Mukofot va imtiyozlar</h2>
+          </div>
 
-          <Acc meta={ACC['loyihalar']} n={8}>
-            <section className="sec">
-              <div className="wrap">
-                <div className="sec-head">
-                  <h2 className="h2">Loyihalar yönalişlari</h2>
-                </div>
+          <PrivilegesB />
+        </div>
+      </section>
 
-                <ProjectsB />
+      <section className="sec">
+        <div className="wrap">
+          <div className="sec-head">
+            <h2 className="h2">Loyihalar yönalişlari</h2>
+          </div>
 
-                <ProjectCardsC />
-              </div>
-            </section>
-          </Acc>
+          <ProjectsB />
+        </div>
+      </section>
 
-          <Acc meta={ACC['natijalar']} n={9}>
-            <ResultsC />
-          </Acc>
+      <section className="sec">
+        <div className="wrap">
+          <IntlB />
+        </div>
+      </section>
 
-          <Acc meta={ACC['xalqaro']} n={10}>
-            <section className="sec">
-              <div className="wrap">
-                <IntlB />
-              </div>
-            </section>
-          </Acc>
-        </GroupPanel>
-        <GroupPanel g="tizim" label="Tizim va taşkilotlar" n={3}>
-          <Acc meta={ACC['markazlar']} n={11}>
-            <CentresB />
-          </Acc>
+      <CentresB />
 
-          <Acc meta={ACC['taskilotlar']} n={12}>
-            <OrgsD />
-          </Acc>
+      <OrgsD />
 
-          <Acc meta={ACC['media']} n={13}>
-            <CompaniesA />
-          </Acc>
+      <CompaniesA />
 
-          <Acc meta={ACC['tuzilma']} n={14}>
-            <StructureB />
-          </Acc>
-        </GroupPanel>
-        <GroupPanel g="azo" label="Aʼzolik va hujjatlar" n={4}>
-          <Acc meta={ACC['azolik']} n={15}>
-            <section className="sec it-join-sec" id="azo-bolish">
-              <div className="wrap">
-                <div className="sec-head">
-                  <h2 className="h2">Qanday aʼzo böliş mumkin</h2>
-                </div>
-                <ol className="it-steps">
-                  {JOIN.steps.map((st, i) => (
-                    <li key={st.t}>
-                      <i>{i + 1}</i>
-                      <h3>{st.t}</h3>
-                      <p>{st.d}</p>
-                    </li>
-                  ))}
-                </ol>
-                <div className="it-join-grid">
-                  <div>
-                    <h3>Aʼzo sifatida siz</h3>
-                    <ul>
-                      {JOIN.rights.map((x) => (
-                        <li key={x}>{x}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3>Qöşimça imkoniyatlar</h3>
-                    <ul>
-                      {JOIN.perks.map((x) => (
-                        <li key={x}>{x}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="it-cta">
-                  <div>
-                    <h2 className="h2">{JOIN.cta.t}</h2>
-                    <p>{JOIN.cta.d}</p>
-                  </div>
-                  <Link href={L('/boglanish/murojaat?mavzu=azo')} className="btn btn-primary">
-                    Aʼzo böliş{' '}
-                    <span className="ic">
-                      <Arrow />
-                    </span>
+      <Structure L={L} />
+
+      <section className="sec it-join-sec" id="azo-bolish">
+        <div className="wrap">
+          <div className="sec-head it-join-head">
+            <h2 className="h2">Qanday aʼzo böliş mumkin</h2>
+            <Link href={USTAV(L, '4.1')} className="more-btn">
+              <More>Ustavning IV bobi</More>
+            </Link>
+          </div>
+
+          <ol className="it-steps">
+            {JOIN.steps.map((st, i) => (
+              <li key={st.t}>
+                <div className="it-step-top">
+                  <i>{i + 1}</i>
+                  <Link href={USTAV(L, st.band)} className="it-band">
+                    {st.band}-band
                   </Link>
                 </div>
-              </div>
-            </section>
-          </Acc>
+                <h3>{st.t}</h3>
+                <p>{st.d}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="it-join-note">
+            <b>4.3-band.</b> {JOIN.note}
+          </p>
 
-          <Acc meta={ACC['hujjatlar']} n={16}>
-            <section className="sec">
-              <div className="wrap">
-                <div className="sec-head">
-                  <h2 className="h2">Normativ-huquqiy hujjatlar</h2>
-                </div>
-                <ol className="it-acts">
-                  {ACTS.map((x) => (
-                    <li key={x.t}>
-                      <time>{x.y}</time>
-                      <div>
-                        <h3>
-                          {x.href ? (
-                            <a href={x.href} target="_blank" rel="noopener noreferrer">
-                              {x.t} <span aria-hidden="true">↗</span>
-                            </a>
-                          ) : (
-                            x.t
-                          )}
-                        </h3>
-                        <p>{x.d}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-                <p className="it-acts-note">
-                  Ittifoq faoliyati, şuningdek, Özbekiston Respublikasi Konstitutsiyasi, nodavlat
-                  notijorat taşkilotlari töğrisidagi qonunlar va Ittifoq Ustaviga asoslanadi.
-                </p>
-              </div>
-            </section>
-          </Acc>
+          <div className="it-join-grid">
+            <div>
+              <h3>
+                Aʼzoning huquqlari <span className="it-band">4.10-band</span>
+              </h3>
+              <ul>
+                {JOIN.rights.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3>
+                Aʼzoning majburiyatlari <span className="it-band">4.11-band</span>
+              </h3>
+              <ul className="it-duties">
+                {JOIN.duties.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3>
+                Yuridik şaxslar aʼzoligi <span className="it-band">4.7–4.8-bandlar</span>
+              </h3>
+              <p>{JOIN.legal.d}</p>
+              <p className="it-join-how">{JOIN.legal.how}</p>
+            </div>
+            <div>
+              <h3>
+                Aʼzolik qaysi hollarda bekor qilinadi <span className="it-band">4.6-band</span>
+              </h3>
+              <ul className="it-ends">
+                {JOIN.ends.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
-          <Acc meta={ACC['rasmiy']} n={17}>
-            <OfficialB />
-          </Acc>
-        </GroupPanel>
-      </GroupDeck>
+          <div className="it-cta">
+            <div>
+              <h2 className="h2">{JOIN.cta.t}</h2>
+              <p>{JOIN.cta.d}</p>
+            </div>
+            <Link href={L('/boglanish/azo-bolish')} className="btn btn-primary">
+              Aʼzo böliş{' '}
+              <span className="ic">
+                <Arrow />
+              </span>
+            </Link>
+          </div>
+          <div className="it-join-faq">
+            <FaqBlock ids={FAQ_AZOLIK} base={L('')} title="Aʼzolik haqida savollar" section={false} />
+          </div>
+        </div>
+      </section>
+
+      <OfficialB />
 
       <section className="sec">
         <div className="wrap">{siblings}</div>
