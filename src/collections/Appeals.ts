@@ -1,5 +1,7 @@
 import type { Access, CollectionConfig } from 'payload'
 
+import { notifyOnCreate } from '@/lib/notify'
+
 /** Murojaatlarni faqat admin va operator ko'radi/o'zgartiradi */
 const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.role === 'operator'
 
@@ -45,6 +47,18 @@ export const AppealFiles: CollectionConfig = {
 export const Appeals: CollectionConfig = {
   slug: 'appeals',
   labels: { singular: 'Murojaat', plural: 'Murojaatlar' },
+  hooks: {
+    afterChange: [
+      notifyOnCreate({
+        subject: (d) => `Saytga yangi murojaat keldi: ${APPEAL_TYPES.find((t) => t.value === d.type)?.label ?? d.type}`,
+        lines: (d) => [
+          ['Turi', APPEAL_TYPES.find((t) => t.value === d.type)?.label],
+          ['Murojaatçi', d.name as string],
+          ['Xabar', String(d.message ?? '').slice(0, 300)],
+        ],
+      }),
+    ],
+  },
   admin: {
     group: 'Murojaatlar',
     useAsTitle: 'name',
