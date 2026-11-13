@@ -70,16 +70,15 @@ function Source({ a }: { a: ArticleData }) {
   if (!a.source) return null
   return (
     <a href={a.source} target="_blank" rel="noopener noreferrer" className="ar-tg">
-      <span className="ar-tg-ic">{TG_ICON}</span>
-      <span className="ar-tg-t">
-        <b>“Poytaxt yoşlari” Telegram kanali</b>
-        <small>Asl xabar va boşqa suratlarni kanalda köriş</small>
+      <span className="ar-tg-ic" aria-hidden="true">
+        {TG_ICON}
       </span>
-      <span className="ar-tg-go" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path d="M7 17 17 7M9 7h8v8" />
-        </svg>
+      <span>
+        Asl xabar <b>“Poytaxt yoşlari”</b> Telegram kanalida
       </span>
+      <svg className="ar-tg-go" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 17 17 7M9 7h8v8" />
+      </svg>
       <span className="sr-only"> (yangi oynada oçiladi)</span>
     </a>
   )
@@ -180,7 +179,7 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
               <Slider slides={[{ url: a.hero, alt: a.heroAlt }, ...a.gallery]} caption={a.caption} />
               <div className="ar-b-body">
                 <aside className="ar-b-share">
-                  <Share url={a.url} title={a.title} vertical />
+                  <Share url={a.url} title={a.title} label="Ulaşiş" vertical />
                 </aside>
                 <div>
                   <Body a={a} />
