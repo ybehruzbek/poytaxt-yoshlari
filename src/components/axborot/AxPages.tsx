@@ -222,8 +222,8 @@ function MediaKit() {
     <aside className="ax-kit">
       <h2>Media-töplam</h2>
       <p>Kengaş logotipi — naşrlarda foydalaniş uçun.</p>
-      <a className="ax-kit-dl" href="/img/logo-toshkent.png" download>
-        <img src="/img/logo-toshkent.png" alt="" />
+      <a className="ax-kit-dl" href="/img/logo-uz.png" download>
+        <img src="/img/logo-uz.png" alt="" />
         <span>
           <b>Logotip (PNG)</b>
           <small>Yuklab oliş ↓</small>

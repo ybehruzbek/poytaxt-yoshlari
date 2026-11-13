@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   title: 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
   description:
     'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşining rasmiy veb-sayti: Kengaş faoliyati, boşlanğiç taşkilotlar, yoşlar uçun imkoniyatlar, hujjatlar va yangiliklar.',
-  icons: { icon: '/img/logo-toshkent.png' },
+  icons: { icon: '/img/logo-uz.png' },
 }
 
 export function generateStaticParams() {

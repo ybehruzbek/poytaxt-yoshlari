@@ -113,7 +113,7 @@ export function Header({ locale }: { locale: Locale }) {
         >
           <Link href={`/${locale}`} className="logo" aria-label="Boş sahifa">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo-toshkent.png" alt="Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi" />
+            <img src={`/img/logo-${locale}.png`} alt="Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi" />
           </Link>
 
           {/* ===== Kompyuter menyusi ===== */}

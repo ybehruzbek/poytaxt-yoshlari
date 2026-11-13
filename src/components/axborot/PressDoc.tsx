@@ -14,7 +14,7 @@ export function PressDoc({ p, id, level = 2 }: { p: PressItem; id?: string; leve
   return (
     <article className={`pr-doc k-${p.kind}`} id={id} data-print-doc="">
       <header className="pr-doc-head">
-        <img src="/img/logo-toshkent.png" alt={ORG} />
+        <img src="/img/logo-uz.png" alt={ORG} />
         <div>
           <b>{PRESS_KINDS[p.kind].toUpperCase()}</b>
           <span>Axborot xizmati</span>

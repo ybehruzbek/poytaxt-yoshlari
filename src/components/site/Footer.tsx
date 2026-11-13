@@ -69,7 +69,7 @@ export async function Footer({ locale }: { locale: Locale }) {
         <div className="fw-top">
           <div className="fw-intro">
             <Link href={L('')} className="fw-logo">
-              <img src="/img/logo-toshkent.png" alt={LOGO_ALT} />
+              <img src={`/img/logo-${locale}.png`} alt={LOGO_ALT} />
             </Link>
             <p>
               Kengaşning <span>rasmiy veb-sayti</span>
