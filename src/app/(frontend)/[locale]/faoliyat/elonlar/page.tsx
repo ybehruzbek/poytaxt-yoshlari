@@ -31,7 +31,17 @@ export default async function Route(props: { params: Promise<{ locale: Locale }>
   })
   const extra: Announce[] = res.docs.map((d) => {
     const c = toNewsCard(d)
-    return { id: d.tgId ?? d.id, date: c.dateISO.slice(0, 10), title: c.title, text: c.excerpt, img: c.image, href: `/${locale}/yangiliklar/${c.slug}` }
+    // poster kesilmasligi uçun asl nisbatdagi rasm olinadi (card ölçami 800×500 qilib kesadi)
+    const m = typeof d.image === 'object' && d.image ? d.image : null
+    const poster = m?.sizes?.hero?.url || m?.url || c.image
+    return {
+      id: d.tgId ?? d.id,
+      date: c.dateISO.slice(0, 10),
+      title: c.title,
+      text: c.excerpt,
+      img: poster,
+      href: `/${locale}/yangiliklar/${c.slug}`,
+    }
   })
   return <AnnouncePage crumbs={<PageCrumbs locale={locale} path="/faoliyat/elonlar" />} extra={extra} />
 }
