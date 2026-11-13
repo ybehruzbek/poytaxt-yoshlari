@@ -24,21 +24,21 @@ const LINK = (
 
 /** Röyxatga qaytiş: öqib kelingan bölsa — öşa joyga, aks holda yangiliklar sahifasiga */
 export function BackBtn({ href, label }: { href: string; label: string }) {
-  const [canGoBack, setCanGoBack] = useState(false)
-  useEffect(() => {
+  /** röyxatdan kelingan bölsa — brauzer tarixi böyiça öşa joyga qaytamiz */
+  const cameFromList = () => {
     try {
       const ref = document.referrer
-      setCanGoBack(!!ref && new URL(ref).origin === window.location.origin && new URL(ref).pathname.startsWith(href))
+      return !!ref && new URL(ref).origin === window.location.origin && new URL(ref).pathname.startsWith(href)
     } catch {
-      /* referrer öqilmadi — oddiy havola qoladi */
+      return false
     }
-  }, [href])
+  }
   return (
     <a
       className="ar-back"
       href={href}
       onClick={(e) => {
-        if (!canGoBack) return
+        if (!cameFromList()) return
         e.preventDefault()
         window.history.back()
       }}
