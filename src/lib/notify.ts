@@ -1,7 +1,7 @@
 import type { CollectionAfterChangeHook } from 'payload'
 
 /**
- * Yangi murojaat va aʼzolik arizasi kelganda Kengaş xodimlariga elektron poçta orqali xabar beriş.
+ * Saytga yangi murojaat kelganda Kengaş xodimlariga elektron poçta orqali xabar beriş.
  * Qabul qiluvçi manzil(lar) — NOTIFY_EMAIL (vergul bilan bir neçta). Böş bölsa xabar yuborilmaydi.
  * Xatda arizaçining telefoni va poçtasi yozilmaydi: xodim töliq maʼlumotni admin paneldan köradi.
  */

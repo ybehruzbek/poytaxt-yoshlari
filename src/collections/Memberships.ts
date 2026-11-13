@@ -1,7 +1,5 @@
 import type { Access, CollectionConfig } from 'payload'
 
-import { notifyOnCreate } from '@/lib/notify'
-
 /** Aʼzolik arizalarini faqat admin va operator köradi / özgartiradi */
 const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.role === 'operator'
 
@@ -12,18 +10,6 @@ const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.rol
 export const Memberships: CollectionConfig = {
   slug: 'memberships',
   labels: { singular: 'Aʼzolik arizasi', plural: 'Aʼzolik arizalari' },
-  hooks: {
-    afterChange: [
-      notifyOnCreate({
-        subject: (d) => `Saytga yangi aʼzolik arizasi keldi${d.status === 'takror' ? ' (takroriy)' : ''}`,
-        lines: (d) => [
-          ['Ariza raqami', `A-${new Date(String(d.createdAt)).getFullYear()}-${String(d.id).padStart(5, '0')}`],
-          ['Arizaçi', d.name as string],
-          ['Öqiş yoki iş joyi', d.place as string],
-        ],
-      }),
-    ],
-  },
   admin: {
     group: 'Murojaatlar',
     useAsTitle: 'name',
