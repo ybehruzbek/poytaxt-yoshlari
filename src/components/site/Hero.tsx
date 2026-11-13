@@ -21,7 +21,9 @@ export function Hero({ locale }: { locale: Locale }) {
           <Link href={`/${locale}/boglanish/azo-bolish`} className="btn btn-primary">Aʼzo böliş
             <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
           </Link>
-          <Link href={`/${locale}/boglanish/murojaat`} className="btn btn-ghost">Murojaat yuboriş</Link>
+          <Link href={`/${locale}/boglanish/murojaat`} className="btn btn-ghost">Murojaat yuboriş
+            <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+          </Link>
         </div>
       </div>
 

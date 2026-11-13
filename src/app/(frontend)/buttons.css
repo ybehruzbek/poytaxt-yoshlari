@@ -54,19 +54,23 @@ button:focus {
 .head-cta:hover {
   border-color: var(--navy);
 }
-/* chiziqli (sariq chegara) → sariq to'ladi */
+/* chiziqli tugma ham asosiy tugma kabi jigarrang to'ladi — hamma tugma bir xil */
 .btn-ghost::before {
-  background: var(--yellow);
+  background: var(--navy-bg);
 }
 .btn-ghost:hover,
 .btn-ghost:focus-visible {
   background: transparent;
-  color: var(--navy);
+  color: #fff;
+  border-color: var(--navy-bg);
 }
 .btn-primary .ic svg,
+.btn-ghost .ic svg,
 .ev .go svg {
   transition: transform 0.35s;
 }
+.btn-ghost:hover .ic svg,
+.btn-ghost:focus-visible .ic svg,
 .btn-primary:hover .ic svg,
 .btn-primary:focus-visible .ic svg {
   transform: rotate(-45deg);

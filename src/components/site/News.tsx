@@ -27,7 +27,9 @@ export async function News({ locale }: { locale: Locale }) {
       <div className="wrap">
         <div className="sec-head">
           <h2 className="h2" id="news-title">Sönggi yangiliklar</h2>
-          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost">Barça yangiliklar</Link>
+          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost">Barça yangiliklar
+            <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+          </Link>
         </div>
         <NewsRotator locale={locale} initial={res.docs.map(toNewsCard)} total={res.totalDocs} />
       </div>

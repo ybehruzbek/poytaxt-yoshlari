@@ -96,7 +96,9 @@ export async function Events({ locale }: { locale: Locale }) {
       <div className="wrap">
         <div className="sec-head">
           <h2 className="h2" id="ev-title">Yaqin tadbirlar</h2>
-          <Link href={href} className="btn btn-ghost">Barça tadbirlar</Link>
+          <Link href={href} className="btn btn-ghost">Barça tadbirlar
+            <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+          </Link>
         </div>
 
         {/* Chipta ko'rinishi */}

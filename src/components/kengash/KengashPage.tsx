@@ -213,6 +213,9 @@ export function KengashPage({ L, crumbs, siblings }: P) {
               </a>
               <Link href={L('/boglanish/murojaat')} className="btn btn-ghost it-ghost">
                 Murojaat yuboriş
+                <span className="ic">
+                  <Arrow />
+                </span>
               </Link>
             </div>
           </div>
