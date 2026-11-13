@@ -6078,30 +6078,7 @@
   ]
  },
  "6517": {
-  "kind": "elon",
-  "eventDate": "2026-07-15T11:00:00+05:00",
-  "eventPlace": "JIDU, Konferensiyalar zali",
-  "title": "JIDUda Kengaş raisi iştirokida talabalar uçun oçiq muloqot ötkaziladi",
-  "excerpt": "Jahon iqtisodiyoti va diplomatiya universitetida “Yoş diplomat – 2026” yozgi oromgoh-maktabi doirasida Kengaş raisi iştirokida oçiq muloqot 15-iyul kuni soat 11:00 da ötkaziladi.",
-  "category": "tadbir",
-  "tags": [
-   "JIDU",
-   "Yoş diplomat",
-   "oçiq muloqot",
-   "Şukurulloxon Anvarov"
-  ],
-  "caption": "“Yoş diplomat – 2026” oromgoh-maktabi doirasidagi oçiq muloqot eʼlon qilindi",
-  "blocks": [
-   {
-    "p": "Oçiq muloqot Jahon iqtisodiyoti va diplomatiya universitetida ötkazilayotgan “Yoş diplomat – 2026” yozgi oromgoh-maktabi doirasida taşkil etiladi. Uçraşuvda Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi raisi Şukurulloxon Anvarov iştirok etadi."
-   },
-   {
-    "p": "Muloqot davomida yoşlar siyosati, liderlik könikmalarini rivojlantiriş, yoşlar taşabbuslarini qöllab-quvvatlaş hamda ijtimoiy faollikni oşiriş masalalari yuzasidan fikr almaşiladi."
-   },
-   {
-    "p": "Uçraşuv 15-iyul kuni soat 11:00 da universitetning konferensiyalar zalida ötkaziladi. Iştirok uçun oldindan röyxatdan ötiş talab etiladi."
-   }
-  ]
+  "kind": "skip"
  },
  "6518": {
   "kind": "skip"

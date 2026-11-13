@@ -62,13 +62,6 @@ export const ANNOUNCEMENTS: Announce[] = [
     img: '/img/faoliyat/e/6600.webp',
   },
   {
-    id: 6517,
-    date: '2026-07-14',
-    title: '“Yoş diplomat — 2026” doirasida Kengaş raisi bilan oçiq muloqotga röyxatdan ötiş',
-    text: 'Telegram orqali röyxatdan ötiş.',
-    img: '/img/faoliyat/e/6517.webp',
-  },
-  {
     id: 6282,
     date: '2026-06-12',
     title: 'Milliy terma jamoani qöllab-quvvatlaş çellenji',
