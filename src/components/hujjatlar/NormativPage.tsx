@@ -2,7 +2,8 @@ import type { ReactNode } from 'react'
 
 import { DocsB } from './ActCards'
 import { AudienceFilter } from './AudienceFilter'
-import { GROUPS, NOTE } from './data'
+import { NOTE } from './data'
+import { getActGroups } from '@/lib/cms/hujjatlar'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
@@ -10,7 +11,8 @@ const pad = (i: number) => String(i + 1).padStart(2, '0')
  * “Normativ-huquqiy hujjatlar” sahifasi: yöl va sarlavha, toifalar böyiça tezkor havolalar,
  * uç toifa — davlat siyosati, Ittifoq faoliyati, yoşlarga yaratilgan imkoniyatlar.
  */
-export function NormativPage({ crumbs, locale }: { crumbs: ReactNode; locale: string }) {
+export async function NormativPage({ crumbs, locale }: { crumbs: ReactNode; locale: string }) {
+  const GROUPS = await getActGroups(locale)
   return (
     <div className="nh">
       <header className="pg-head">

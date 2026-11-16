@@ -12,8 +12,26 @@ const KIND: Record<Act['kind'], string> = {
   Qaror: 'QAROR',
   Ustav: 'USTAV',
 }
-const MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
-const TYPE: Record<Act['kind'], string> = { Qonun: 'Qonun', Farmon: 'Farmon', Qaror: 'Qaror', Ustav: 'Ustav' }
+const MONTHS = [
+  'yanvar',
+  'fevral',
+  'mart',
+  'aprel',
+  'may',
+  'iyun',
+  'iyul',
+  'avgust',
+  'sentabr',
+  'oktabr',
+  'noyabr',
+  'dekabr',
+]
+const TYPE: Record<Act['kind'], string> = {
+  Qonun: 'Qonun',
+  Farmon: 'Farmon',
+  Qaror: 'Qaror',
+  Ustav: 'Ustav',
+}
 
 /** “30.06.2020” → “2020-yil 30-iyun” */
 const dateWords = (y: string) => {
@@ -31,7 +49,10 @@ function Open({ x, cls }: { x: Act; cls: string }) {
   if (!x.href) return null
   return (
     <span className={`more-btn ${cls}`}>
-      <More>{isPdf(x) ? 'PDF faylni oçiş' : 'Matnini oçiş'}</More>
+      <More>
+        Batafsil
+        <span className="sr-only">{`: ${isPdf(x) ? 'PDF faylni oçiş' : 'Matnini oçiş'}`}</span>
+      </More>
     </span>
   )
 }

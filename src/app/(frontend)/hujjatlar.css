@@ -263,3 +263,74 @@ a.nd-b-row:hover {
     flex: none;
   }
 }
+
+/* ---------- Yuklab olinadigan hujjatlar (Kengaş hujjatlari, namunalar) ---------- */
+.hj-files {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.hj-files li {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 20px;
+  align-items: center;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--bg);
+}
+.hj-ext {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 64px;
+  border-radius: 14px;
+  background: rgba(255, 210, 90, 0.35);
+  font: 800 13px/1 var(--f-head);
+  color: var(--navy);
+}
+.hj-bd {
+  grid-row: span 2;
+  min-width: 0;
+}
+.hj-meta {
+  font: 700 12px/1.4 var(--f-body);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.hj-bd h2 {
+  margin: 4px 0 0;
+  font: 800 17px/1.3 var(--f-head);
+  color: var(--navy);
+}
+.hj-bd p {
+  margin: 6px 0 0;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.hj-files .more-btn {
+  justify-self: end;
+}
+.hj-size {
+  justify-self: end;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+@media (max-width: 640px) {
+  .hj-files li {
+    grid-template-columns: 48px minmax(0, 1fr);
+    row-gap: 12px;
+  }
+  .hj-files .more-btn,
+  .hj-size {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
