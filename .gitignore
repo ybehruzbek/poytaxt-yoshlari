@@ -51,3 +51,6 @@ node_modules/
 
 # murojaatlarga biriktirilgan maxfiy fayllar
 /private-uploads
+
+# serverga köçiriş uçun eksport (scripts/deploy/eksport.sh)
+/deploy-eksport
