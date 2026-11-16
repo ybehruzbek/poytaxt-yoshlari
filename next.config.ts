@@ -35,6 +35,22 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(dirname),
   },
+  // Xavfsizlik sarlavhalari: sayt boşqa saytlar içiga (iframe) joylanmaydi, fayl turi taxmin qilinmaydi,
+  // taşqi saytlarga faqat domen uzatiladi, kamera/mikrofon/joylaşuvdan foydalanilmaydi
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+          { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
+        ],
+      },
+    ]
+  },
   // “Faoliyat”dagi yetakçilar va boşlanğiç taşkilotlar bandlari olib taşlandi: ular endi “Biz haqimizda → Boşlanğiç taşkilotlar” da
   async redirects() {
     // til qismi faqat saytdagi tillar bilan cheklangan — tekşirilmagan qiymat Location ga tuşmaydi
