@@ -1,0 +1,436 @@
+/*
+ * Admin panel mavzusi — sayt dizayni bilan bir xil: jigarrang (#532822) matn, sariq (#FFD25A) asosiy tugma,
+ * iliq kulrang fonlar, Montserrat (sarlavhalar) va Inter (matn), kapsula şaklidagi tugmalar.
+ * Payload uslublari @layer içida — bu yerdagi qatlamsiz qoidalar ulardan ustun turadi.
+ */
+@import './admin-icons';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap');
+
+:root {
+  /* iliq kulrang şkala: oqdan saytning jigarrang rangigaça (Payload barça fon, çiziq va matnlarni şundan oladi) */
+  --color-base-0: #ffffff;
+  --color-base-50: #fbf8f5;
+  --color-base-100: #f5efe9;
+  --color-base-150: #eee6e0;
+  --color-base-200: #e3d9d2;
+  --color-base-250: #d5cac2;
+  --color-base-300: #c4b7ae;
+  --color-base-350: #b2a49a;
+  --color-base-400: #9f9087;
+  --color-base-450: #8b7c74;
+  --color-base-500: #786a63;
+  --color-base-550: #6e6662;
+  --color-base-600: #644f49;
+  --color-base-650: #5c433d;
+  --color-base-700: #573631;
+  --color-base-750: #552e29;
+  --color-base-800: #532822;
+  --color-base-850: #43201b;
+  --color-base-900: #321813;
+  --color-base-950: #21100d;
+  --color-base-1000: #140a08;
+
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --style-radius-s: 10px;
+  --style-radius-m: 14px;
+  --style-radius-l: 22px;
+
+  /* sayt ranglari */
+  --ittifoq-yellow: #ffd25a;
+  --ittifoq-yellow-h: #ffc62e;
+  --ittifoq-brown: #532822;
+  --ittifoq-soft: #fff4e9;
+  --ittifoq-line: #eee6e0;
+  --ittifoq-green: #43a574;
+
+  --theme-success-500: var(--ittifoq-green);
+  --accessibility-outline: 2px solid var(--ittifoq-brown);
+}
+
+/* sarlavhalar — saytdagi kabi Montserrat */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.card__title,
+.collection-list__header h1,
+.doc-header__title,
+.render-title,
+.nav-group__label {
+  font-family: 'Montserrat', var(--font-body);
+}
+h1,
+.render-title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- tugmalar: saytdagi kapsula ---------- */
+.btn {
+  border-radius: 999px;
+  font-family: 'Montserrat', var(--font-body);
+  font-weight: 700;
+}
+.btn--style-primary {
+  --bg-color: var(--ittifoq-yellow);
+  --color: var(--ittifoq-brown);
+  --hover-bg: var(--ittifoq-brown);
+  --hover-color: #fff;
+}
+.btn--style-primary.btn--disabled {
+  --bg-color: var(--theme-elevation-150);
+  --color: var(--theme-elevation-500);
+  --hover-bg: var(--bg-color);
+  --hover-color: var(--color);
+}
+.btn--style-secondary {
+  --color: var(--ittifoq-brown);
+  --hover-color: var(--ittifoq-brown);
+  --bg-color: transparent;
+  --hover-bg: var(--ittifoq-soft);
+  box-shadow: inset 0 0 0 1px var(--ittifoq-line);
+}
+.btn--style-pill {
+  --bg-color: var(--ittifoq-soft);
+  --color: var(--ittifoq-brown);
+  --hover-bg: var(--ittifoq-yellow);
+}
+
+/* ---------- kiriş va birinçi foydalanuvçi sahifalari ---------- */
+.template-minimal {
+  background:
+    radial-gradient(60% 50% at 100% 0%, rgba(255, 210, 90, 0.35), transparent 70%),
+    radial-gradient(50% 45% at 0% 100%, rgba(137, 192, 255, 0.25), transparent 70%),
+    var(--ittifoq-soft);
+}
+.template-minimal__wrap {
+  padding: 40px 36px;
+  border-radius: 32px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(83, 40, 34, 0.12);
+}
+.login__brand {
+  margin-bottom: 28px;
+}
+
+/* ---------- yon menyu ---------- */
+.nav {
+  background: var(--ittifoq-soft);
+  border-right: 1px solid var(--ittifoq-line);
+}
+.nav-group__label,
+.nav-group__toggle {
+  color: var(--theme-elevation-500);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+}
+/* menyu havolasi: çapda ikonka (admin-icons.scss → --adm-ic), faol band — sariq kapsula */
+.nav__link {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--ittifoq-brown);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav__link::before {
+  content: '';
+  flex: none;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  opacity: 0.8;
+  -webkit-mask: var(--adm-ic, none) center / contain no-repeat;
+  mask: var(--adm-ic, none) center / contain no-repeat;
+}
+a.nav__link:hover {
+  background: rgba(255, 210, 90, 0.35);
+}
+div.nav__link {
+  background: var(--ittifoq-yellow);
+  font-weight: 700;
+}
+div.nav__link::before {
+  opacity: 1;
+}
+.nav__link-indicator {
+  display: none !important;
+}
+.nav-group {
+  margin-bottom: 6px;
+}
+.browse-by-folder-button {
+  border-radius: 999px !important;
+}
+
+/* ---------- boş sahifa kartalari va jadvallar ---------- */
+.card {
+  border-radius: 22px;
+  border: 1px solid var(--ittifoq-line);
+  box-shadow: none;
+  transition:
+    border-color 0.2s,
+    transform 0.3s;
+}
+.card:hover {
+  border-color: var(--ittifoq-yellow);
+  transform: translateY(-2px);
+}
+.table table thead th {
+  font-weight: 700;
+  color: var(--theme-elevation-500);
+}
+.table tbody tr:nth-child(odd) {
+  background: var(--theme-elevation-50);
+}
+
+/* maydonlar */
+input,
+textarea,
+.react-select .rs__control,
+.field-type input,
+.field-type textarea {
+  border-radius: var(--style-radius-s);
+}
+input:focus,
+textarea:focus {
+  border-color: var(--ittifoq-brown);
+}
+
+/* ---------- boş sahifa: kutib oliş bloki (components/admin/AdminWelcome.tsx) ---------- */
+.adm-welcome {
+  margin: 8px 0 40px;
+  padding: 32px 36px;
+  border-radius: 32px;
+  color: #fff;
+  background:
+    radial-gradient(70% 120% at 100% 0%, rgba(255, 210, 90, 0.28), transparent 60%),
+    var(--ittifoq-brown);
+}
+.adm-welcome__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.adm-welcome__kicker {
+  margin: 0 0 6px;
+  font: 700 12px/1.3 var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.65);
+}
+.adm-welcome__title {
+  margin: 0;
+  font: 800 32px/1.15 'Montserrat', var(--font-body);
+  color: #fff;
+}
+.adm-welcome__org {
+  margin: 8px 0 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+}
+.adm-welcome__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.adm-welcome__btn {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font: 700 14px/1 'Montserrat', var(--font-body);
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.adm-welcome__btn:hover {
+  background: #fff;
+  color: var(--ittifoq-brown);
+}
+.adm-welcome__btn--main {
+  border-color: var(--ittifoq-yellow);
+  background: var(--ittifoq-yellow);
+  color: var(--ittifoq-brown);
+}
+.adm-welcome__stats {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+}
+.adm-welcome__stats a {
+  display: grid;
+  gap: 4px;
+  height: 100%;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.adm-welcome__stats a:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.adm-welcome__stats b {
+  font: 800 30px/1 'Montserrat', var(--font-body);
+}
+.adm-welcome__stats span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+}
+.adm-welcome__stats a.is-hot b {
+  color: var(--ittifoq-yellow);
+}
+
+/* boş sahifa kartalari — saytdagi oq kartalar */
+.card {
+  background: #fff;
+  min-height: 84px;
+}
+.card__title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ittifoq-brown);
+}
+.card__actions .btn {
+  background: var(--ittifoq-soft);
+}
+.card:hover .card__actions .btn {
+  background: var(--ittifoq-yellow);
+}
+
+
+/* ---------- röyxat sahifasi ---------- */
+.list-header__title {
+  font-weight: 800;
+}
+.list-create-new-doc__create-new-button.btn--style-pill {
+  --bg-color: var(--ittifoq-yellow);
+  --color: var(--ittifoq-brown);
+  --hover-bg: var(--ittifoq-brown);
+  --hover-color: #fff;
+  padding-inline: 14px;
+  font-weight: 700;
+}
+.custom-view-description {
+  color: var(--theme-elevation-500);
+  max-width: 70ch;
+}
+.table table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table tbody td a {
+  color: var(--ittifoq-brown);
+  font-weight: 600;
+  text-decoration: none;
+}
+.table tbody tr:hover td {
+  background: rgba(255, 210, 90, 0.18);
+}
+.table tbody td a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--ittifoq-yellow);
+  text-decoration-thickness: 2px;
+}
+.search-filter {
+  border-radius: 999px;
+}
+
+/* ---------- boş sahifa kartalari: ikonka, nom, “+” ---------- */
+.card {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px !important;
+}
+.card::before {
+  content: '';
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--adm-img, none) center / 22px no-repeat rgba(255, 210, 90, 0.35);
+}
+.card__title {
+  flex: 1;
+  margin: 0 !important;
+}
+.card__actions {
+  position: static !important;
+  margin: 0 !important;
+}
+
+/* “Boş sahifa” guruhi faqat globaldan iborat — Payload uni röyxat oxiriga qöyadi; menyu va boş sahifada birinçi turadi */
+.nav__wrap > .browse-by-folder-button {
+  order: -2;
+}
+.nav__wrap > .nav-group:has(#nav-global-bosh-sahifa),
+.collections__wrap > .collections__group:has(#card-bosh-sahifa) {
+  order: -1;
+}
+
+/* Röyxatlarda holat belgisi: eʼlon qilingan — yaşil, qoralama — kulrang, özgarişlari bor — sariq kapsula */
+.cell-_status > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--color-base-100);
+  color: var(--color-base-600);
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+}
+.cell-_status > .selected--published {
+  background: #e3f3ea;
+  color: #23784e;
+}
+.cell-_status > .selected--changed {
+  background: #fff3cf;
+  color: #8a5a00;
+}
+
+/* Röyxatdagi kiçik rasm (ThumbCell) */
+.adm-thumb {
+  display: block;
+  width: 56px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--color-base-100);
+}
+.adm-thumb--none {
+  border: 1px dashed var(--color-base-250);
+}
+td[class*='cell-logo'] .adm-thumb {
+  object-fit: contain;
+  background: #fff;
+}
