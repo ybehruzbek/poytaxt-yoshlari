@@ -75,3 +75,19 @@ export function fmtDate(iso: string, withYear = true) {
   const base = d ? `${d}-${MON[m - 1]}` : MON[m - 1]
   return withYear ? `${y}-yil ${base}` : base
 }
+
+/** Tadbir (arxiv) */
+export type Ev = {
+  id: number
+  date: string
+  title: string
+  place: string
+  type: string
+  summary: string
+  dir: DirSlug
+  img: string
+  upcoming?: boolean
+}
+
+/** Eʼlon kartasi */
+export type Announce = { id: number; date: string; title: string; text: string; img: string; /** saytdagi töliq maqola */ href?: string }

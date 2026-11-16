@@ -3,9 +3,10 @@ import type { ReactNode } from 'react'
 import { MoreList } from '@/components/site/MoreToggle'
 
 import { PartnerCard } from './PartnerCard'
-import { DOMESTIC, FOREIGN, GROUPS, PARTNERS, REGIONS } from './data'
+import { GROUPS, type Partner, REGIONS } from './data'
+import { getPartners } from '@/lib/cms/biz'
 
-function Block({ id, title, list }: { id?: string; title: string; list: typeof PARTNERS }) {
+function Block({ id, title, list }: { id?: string; title: string; list: Partner[] }) {
   if (!list.length) return null
   return (
     <section className="pt-group" id={id}>
@@ -27,7 +28,8 @@ function Block({ id, title, list }: { id?: string; title: string; list: typeof P
  * “Hamkorlar” sahifasi: avval Özbekistondagi hamkorlar (toifalar böyiça), keyin alohida bölimda
  * xalqaro hamkorlar (mintaqa va hamkorlik doirasi böyiça: BMT, MDH, TDT, ŞHT, Markaziy Osiyo, Xitoy…).
  */
-export function HamkorlarPage({ crumbs }: { crumbs: ReactNode }) {
+export async function HamkorlarPage({ crumbs, locale = 'uz' }: { crumbs: ReactNode; locale?: string }) {
+  const { all: PARTNERS, domestic: DOMESTIC, foreign: FOREIGN } = await getPartners(locale)
   const home = GROUPS.filter((g) => g.k !== 'xalqaro')
   return (
     <div className="pt">

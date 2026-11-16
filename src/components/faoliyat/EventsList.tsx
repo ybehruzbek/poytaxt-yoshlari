@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- kanal suratlari; CMS ulanganda next/image ga o'tadi */
 import { useMemo, useState } from 'react'
 
-import type { Ev } from './events'
+import type { Ev } from './types'
 import { type DirSlug, fmtDate, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
 import { MoreToggle } from '@/components/site/MoreToggle'
@@ -44,20 +44,11 @@ export function EventsList({
     <>
       <div className="fa-tools">
         <div className="chips fa-chips" role="group" aria-label="Yil">
-          <button
-            type="button"
-            aria-pressed={year === 'all'}
-            onClick={() => setYear('all')}
-          >
+          <button type="button" aria-pressed={year === 'all'} onClick={() => setYear('all')}>
             Barçasi <span>{events.length}</span>
           </button>
           {years.map((y) => (
-            <button
-              key={y}
-              type="button"
-              aria-pressed={year === y}
-              onClick={() => setYear(y)}
-            >
+            <button key={y} type="button" aria-pressed={year === y} onClick={() => setYear(y)}>
               {y} <span>{events.filter((e) => e.date.startsWith(y)).length}</span>
             </button>
           ))}
@@ -117,7 +108,7 @@ export function EventsList({
         ))}
       </div>
 
-      {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
+      {list.length === 0 && <p className="fa-empty">Qidiruv böyiça natija topilmadi.</p>}
       {list.length > 24 && (
         <MoreToggle
           rest={Math.max(list.length - limit, 0)}

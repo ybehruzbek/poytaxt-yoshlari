@@ -18,6 +18,7 @@ export default async function BtHubRoute(props: { params: Promise<{ locale: Loca
   const L = (h: string) => `/${locale}${h}`
   return (
     <Content
+      locale={locale}
       L={L}
       crumbs={<PageCrumbs locale={locale} path="/biz-haqimizda/boshlangich-tashkilotlar" />}
     />

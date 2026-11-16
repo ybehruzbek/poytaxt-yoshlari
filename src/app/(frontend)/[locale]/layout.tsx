@@ -26,6 +26,8 @@ import '../a11y.css'
 import '../theme.css'
 import '../motion.css'
 import '../reveal.css'
+import { MiqdorProvider } from '@/components/site/MiqdorProvider'
+import { getMiqdorlar } from '@/lib/cms/miqdorlar'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
 // latin-ext: Ö Ğ Ş Ç ’ (yangi alifbo); cyrillic: rus tili.
@@ -42,11 +44,29 @@ const body = Inter({
   display: 'swap',
 })
 
+const SITE_NAME = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
+
 export const metadata: Metadata = {
-  title: 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
+  title: SITE_NAME,
   description:
     'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşining rasmiy veb-sayti: Kengaş faoliyati, boşlanğiç taşkilotlar, yoşlar uçun imkoniyatlar, hujjatlar va yangiliklar.',
-  icons: { icon: '/img/logo-uz.png' },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32 48x48' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  // ijtimoiy tarmoqlarda ulaşilganda: sahifa öz sarlavhasi va tavsifini beradi, rasm — Kengaş logotipi
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    locale: 'uz_UZ',
+    images: [{ url: '/og.jpg', width: 1200, height: 630, alt: SITE_NAME }],
+  },
+  twitter: { card: 'summary_large_image' },
 }
 
 export function generateStaticParams() {
@@ -59,6 +79,8 @@ export default async function LocaleLayout(props: {
 }) {
   const { locale } = await props.params
   if (!isLocale(locale)) notFound()
+  // pul miqdorlari (BHM, stipendiya) — brauzerdagi kalkulyatorlar ham admin paneldagi joriy qiymatdan hisoblaydi
+  const miqdor = await getMiqdorlar(locale)
 
   return (
     // data-scroll-behavior: sahifa almaşganda Next.js silliq aylantirişni vaqtinça öçiradi — yangi sahifa tepadan oçiladi
@@ -70,7 +92,9 @@ export default async function LocaleLayout(props: {
     >
       <body>
         <Header locale={locale} />
-        <main>{props.children}</main>
+        <MiqdorProvider value={miqdor}>
+          <main>{props.children}</main>
+        </MiqdorProvider>
         <Footer locale={locale} />
         <ScrollRail />
         <PageMotion locale={locale} />

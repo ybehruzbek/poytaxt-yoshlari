@@ -30,7 +30,7 @@ export const ANNOUNCEMENTS: Announce[] = [
     id: 6737,
     date: '2026-09-11',
     title: '“Men — Özbekiston yoşlar ittifoqi aʼzosiman!” çellenji',
-    text: 'Yoşlar öz suratlari bilan çellenjda iştirok etişga va döstlarini çorlaşga taklif qilindi.',
+    text: 'Yoşlar çellenjda öz suratlari bilan iştirok etişga va tengdoşlarini jalb etişga taklif qilindi.',
     img: '/img/faoliyat/e/6737.webp',
   },
   {
@@ -184,7 +184,7 @@ export const ANNOUNCEMENTS: Announce[] = [
     id: 4626,
     date: '2025-12-04',
     title: '“Kitob olami” kitoblar festivaliga taklif (iştirok bepul)',
-    text: '5–6-dekabr kunlari Yoşlar ijod saroyiga keliş.',
+    text: 'Festival 5–6-dekabr kunlari Yoşlar ijod saroyida ötkaziladi.',
     img: '/img/faoliyat/e/4626.webp',
   },
   {
@@ -205,7 +205,7 @@ export const ANNOUNCEMENTS: Announce[] = [
     id: 4516,
     date: '2025-11-17',
     title: 'Xalqaro talabalar kuni Instagram tanlovi',
-    text: 'Suratlar/videolarni Instagramga joylab @yoshlar.uzb ni belgilaş; ğoliblarga esdalik sovğalari.',
+    text: 'Surat va videolar Instagram ijtimoiy tarmoğida @yoshlar.uzb sahifasi belgilangan holda joylaştiriladi; ğoliblar esdalik sovğalari bilan taqdirlanadi.',
     img: '/img/faoliyat/e/4516.webp',
   },
   {
@@ -303,7 +303,7 @@ export const ANNOUNCEMENTS: Announce[] = [
     id: 2962,
     date: '2025-02-26',
     title: 'Zulfiya tavalludining 110 yilligiga bağişlangan ijodiy keça',
-    text: 'Yoşlar press klubiga keliş.',
+    text: 'Tadbir Yoşlar press klubida ötkaziladi.',
     img: '/img/faoliyat/e/2962.webp',
   },
   {
@@ -345,7 +345,7 @@ export const ANNOUNCEMENTS: Announce[] = [
     id: 1480,
     date: '2024-05-08',
     title: '“Toşkent bitiruvçi va talaba-yoşlar” şou-konserti',
-    text: '“Yoşlik” talabalar şaharçasiga keliş; iştirok bepul.',
+    text: 'Tadbir “Yoşlik” talabalar şaharçasida ötkaziladi; iştirok bepul.',
     img: '/img/faoliyat/e/1480.webp',
   },
   {
@@ -408,7 +408,7 @@ export const ANNOUNCEMENTS: Announce[] = [
     id: 201,
     date: '2023-06-13',
     title: '“Yozni Kamalak bilan!” loyihalariga taklif',
-    text: 'Toşkent şahar Yoşlar markaziga keliş.',
+    text: 'Tadbir Toşkent şahar Yoşlar markazida ötkaziladi.',
     img: '/img/faoliyat/e/201.webp',
   },
   {

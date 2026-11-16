@@ -1,5 +1,5 @@
 /**
- * “OAV biz haqimizda”: Kengaş haqida OAV va davlat organlari saytlaridagi materiallar.
+ * “OAVda Kengaş haqida”: Kengaş haqida OAV va davlat organlari saytlaridagi materiallar.
  * Har bir havola oçib tekşirilgan (2026-yil 12-noyabr). Sarlavha — naşrdagi asl nomi
  * (özbekçasi yangi alifboda), qisqa mazmun — Axborot xizmati tayyorlagan.
  */
@@ -58,10 +58,10 @@ export const MEDIA: MediaItem[] = [
     domain: 'gov.uz',
     kind: 'gov',
     lang: 'uz',
-    title: '“Özbekiston belgisi” körkak nişoni topşirildi',
+    title: '“Özbekiston belgisi” kökrak nişoni topşirildi',
     date: '2024-12-24',
     url: 'https://gov.uz/oz/yoshlar/news/view/31316',
-    sum: '“Özbekiston belgisi” körkak nişoni bilan taqdirlanganlar orasida Kengaş bölim boşliği ham bor.',
+    sum: '“Özbekiston belgisi” kökrak nişoni bilan taqdirlanganlar orasida Kengaş bölim boşliği ham bor.',
   },
   {
     outlet: 'Oliy Majlis Senati',

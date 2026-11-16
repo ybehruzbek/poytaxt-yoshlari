@@ -5,14 +5,14 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MoreToggle } from '@/components/site/MoreToggle'
 
-import { ALBUMS, fullDate, photo, thumb } from './data'
+import { type Album, fullDate, photo, thumb } from './data'
 
 /* ============================================================
    Fotolar oynasi (lightbox): sahifadagi istalgan [data-album] tugma
    bosilganda oçiladi; data-i — boşlanğiç surat (1 dan).
    Klaviatura: ← → — almaştiriş, Esc — yopiş.
    ============================================================ */
-export function Lightbox() {
+export function Lightbox({ albums: ALBUMS }: { albums: Album[] }) {
   const dlg = useRef<HTMLDialogElement>(null)
   const [st, setSt] = useState<{ id: number; i: number } | null>(null)
   const album = st ? ALBUMS.find((a) => a.id === st.id) : null
@@ -36,7 +36,7 @@ export function Lightbox() {
         const n = ALBUMS.find((a) => a.id === s.id)?.n ?? 1
         return { ...s, i: ((s.i - 1 + d + n) % n) + 1 }
       }),
-    [],
+    [ALBUMS],
   )
 
   useEffect(() => {
@@ -79,9 +79,9 @@ export function Lightbox() {
               if (Math.abs(d) > 50) go(d < 0 ? 1 : -1)
             }}
           >
-            <img key={st.i} src={photo(album.id, st.i)} alt={`${album.title} — ${st.i}-surat`} draggable={false} />
+            <img key={st.i} src={photo(album, st.i)} alt={`${album.title} — ${st.i}-surat`} draggable={false} />
             {/* qöşni suratlar oldindan yuklanadi — almaştirişda kutiş bölmaydi */}
-            <link rel="preload" as="image" href={photo(album.id, (st.i % album.n) + 1)} />
+            <link rel="preload" as="image" href={photo(album, (st.i % album.n) + 1)} />
             <button type="button" className="ax-lb-nav prev" onClick={() => go(-1)} aria-label="Oldingi surat">
               ‹
             </button>
@@ -102,11 +102,11 @@ export function Lightbox() {
                   aria-label={`${k + 1}-surat`}
                   onClick={() => setSt({ id: album.id, i: k + 1 })}
                 >
-                  <img src={photo(album.id, k + 1)} alt="" loading="lazy" />
+                  <img src={photo(album, k + 1)} alt="" loading="lazy" />
                 </button>
               ))}
             </div>
-            <a className="ax-lb-dl" href={photo(album.id, st.i)} download>
+            <a className="ax-lb-dl" href={photo(album, st.i)} download>
               Yuklab oliş ↓
             </a>
           </div>

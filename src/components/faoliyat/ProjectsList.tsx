@@ -46,12 +46,7 @@ export function ProjectsList({
       <div className="fa-tools">
         <div className="chips fa-chips" role="group" aria-label="Holati">
           {(['all', 'davom etmoqda', 'har yili', 'yakunlangan'] as const).map((k) => (
-            <button
-              key={k}
-              type="button"
-              aria-pressed={st === k}
-              onClick={() => setSt(k)}
-            >
+            <button key={k} type="button" aria-pressed={st === k} onClick={() => setSt(k)}>
               {k === 'all' ? 'Barçasi' : STATUS[k]}{' '}
               <span>
                 {k === 'all' ? projects.length : projects.filter((p) => p.status === k).length}
@@ -107,7 +102,7 @@ export function ProjectsList({
         ))}
       </div>
 
-      {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
+      {list.length === 0 && <p className="fa-empty">Qidiruv böyiça natija topilmadi.</p>}
     </>
   )
 }

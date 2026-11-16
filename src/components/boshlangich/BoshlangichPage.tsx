@@ -1,15 +1,16 @@
 import type { ReactNode } from 'react'
 
 import { BtList } from './BtList'
-import { OTMS } from './data'
+import { getOtts } from '@/lib/cms/biz'
 
-const LED = OTMS.filter((o) => o.leader).length
 
 /**
  * «Boşlanğiç taşkilotlar» sahifasi: yöl va sarlavha, raqamlar, OTT turi böyiça saralaş va qidiruv,
  * yetakçilar kartalari (surat, F.I.Ş., OTT, aloqa şabloni), oxirida vakant OTTlar.
  */
-export function BoshlangichPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
+export async function BoshlangichPage({ crumbs, base, locale = 'uz' }: { crumbs: ReactNode; base: string; locale?: string }) {
+  const OTMS = await getOtts(locale)
+  const LED = OTMS.filter((o) => o.leader).length
   return (
     <div className="bt">
       <header className="pg-head">

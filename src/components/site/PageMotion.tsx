@@ -27,8 +27,11 @@ const PAGES: Record<string, Opts> = {
     head: 'mask',
     grid: 'pop',
     fx: [
-      ['.it-hist > li', 'side'],
-      ['.ip-b-list > article, .ipr-b > article', 'tilt'],
+      ['.ihs-b > li', 'side'],
+      ['.pv-c li', 'tilt'],
+      ['.og3-c > li', 'flip'],
+      ['.cm3-b > li', 'swing'],
+      ['.of-c li', 'pop'],
       ['.it-steps > li', 'drop'],
     ],
     skip: `${SKIP}, .it-sib, [role=tablist], .fm`,
@@ -76,9 +79,21 @@ const PAGES: Record<string, Opts> = {
     grid: 'side',
     fx: [['.vy-sum > span', 'pop']],
   },
-  '/faoliyat/loyihalar': { head: 'wipe', grid: 'zoom', fx: [['.chips > button, .fa-chips > button', 'drop']] },
-  '/faoliyat/tadbirlar': { head: 'wipe', grid: 'tilt', fx: [['.chips > button, .fa-chips > button', 'drop']] },
-  '/faoliyat/elonlar': { head: 'wipe', grid: 'swing', fx: [['.chips > button, .fa-chips > button', 'drop']] },
+  '/faoliyat/loyihalar': {
+    head: 'wipe',
+    grid: 'zoom',
+    fx: [['.chips > button, .fa-chips > button', 'drop']],
+  },
+  '/faoliyat/tadbirlar': {
+    head: 'wipe',
+    grid: 'tilt',
+    fx: [['.chips > button, .fa-chips > button', 'drop']],
+  },
+  '/faoliyat/elonlar': {
+    head: 'wipe',
+    grid: 'swing',
+    fx: [['.chips > button, .fa-chips > button', 'drop']],
+  },
   '/faoliyat/natijalar': {
     head: 'wipe',
     grid: 'pop',

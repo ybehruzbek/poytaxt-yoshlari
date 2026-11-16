@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- kanal posterlari; CMS ulanganda next/image ga o'tadi */
 import { useMemo, useState } from 'react'
 
-import type { Announce } from './announcements'
+import type { Announce } from './types'
 import { fmtDate, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
 import { MoreToggle } from '@/components/site/MoreToggle'
@@ -13,21 +13,32 @@ const low = (s: string) => s.toLocaleLowerCase('uz')
 /** Eʼlon turi — sarlavha va matndagi kalit sözlardan aniqlanadi */
 const TURLAR = [
   { id: 'challenge', label: 'Çellenjlar', re: /çellenj|challenge/i },
-  { id: 'tanlov', label: 'Tanlovlar', re: /tanlov|musobaqa|olimpiada|viktorina|quiz|turnir|bellaşuv|çempionat/i },
+  {
+    id: 'tanlov',
+    label: 'Tanlovlar',
+    re: /tanlov|musobaqa|olimpiada|viktorina|quiz|turnir|bellaşuv|çempionat/i,
+  },
   {
     id: 'trening',
     label: 'Trening va seminarlar',
     re: /seminar|trening|master|masterklass|vebinar|kurs|maktab|dars|konferensiya|forum|muloqot/i,
   },
   { id: 'sayohat', label: 'Sayohat va oromgoh', re: /sayohat|hiking|oromgoh|lager|ekskursiya/i },
-  { id: 'grant', label: 'Stipendiya va grant', re: /stipendiya|grant|subsidiya|imtiyoz|mukofot|çegirma/i },
+  {
+    id: 'grant',
+    label: 'Stipendiya va grant',
+    re: /stipendiya|grant|subsidiya|imtiyoz|mukofot|çegirma/i,
+  },
 ] as const
 
 const turi = (e: Announce) => TURLAR.find((t) => t.re.test(`${e.title} ${e.text}`))?.id ?? 'boshqa'
 
 /** Eʼlonlar doskasi: har bir poster öz şaklida (tik yoki yotiq) turadi, kesilmaydi */
 export function AnnounceList({ items }: { items: Announce[] }) {
-  const years = useMemo(() => [...new Set(items.map((e) => e.date.slice(0, 4)))].sort().reverse(), [items])
+  const years = useMemo(
+    () => [...new Set(items.map((e) => e.date.slice(0, 4)))].sort().reverse(),
+    [items],
+  )
   const [year, setYear] = useState('all')
   const [tur, setTur] = useState('all')
   const [q, setQ] = useState('')
@@ -80,7 +91,12 @@ export function AnnounceList({ items }: { items: Announce[] }) {
         {TURLAR.map((t) => {
           const n = items.filter((e) => turi(e) === t.id).length
           return n ? (
-            <button key={t.id} type="button" aria-pressed={tur === t.id} onClick={() => setTur(t.id)}>
+            <button
+              key={t.id}
+              type="button"
+              aria-pressed={tur === t.id}
+              onClick={() => setTur(t.id)}
+            >
               {t.label} <span>{n}</span>
             </button>
           ) : null
@@ -111,7 +127,7 @@ export function AnnounceList({ items }: { items: Announce[] }) {
         ))}
       </div>
 
-      {list.length === 0 && <p className="fa-empty">Heç narsa topilmadi.</p>}
+      {list.length === 0 && <p className="fa-empty">Qidiruv böyiça natija topilmadi.</p>}
       {list.length > 24 && (
         <MoreToggle
           rest={Math.max(list.length - limit, 0)}

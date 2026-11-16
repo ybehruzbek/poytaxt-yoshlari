@@ -36,9 +36,22 @@ export type ArticleData = {
   reactions: ReactionCounts
   tagHref: (t: string) => string
 }
-export type MiniNews = { href: string; title: string; date: string; image: string; catLabel: string; tone: string }
+export type MiniNews = {
+  href: string
+  title: string
+  date: string
+  image: string
+  catLabel: string
+  tone: string
+}
 
-type P = { a: ArticleData; crumbs: ReactNode; related: MiniNews[]; latest: MiniNews[]; listHref: string }
+type P = {
+  a: ArticleData
+  crumbs: ReactNode
+  related: MiniNews[]
+  latest: MiniNews[]
+  listHref: string
+}
 
 function Meta({ a }: { a: ArticleData }) {
   return (
@@ -144,14 +157,18 @@ function Related({ items, listHref }: { items: MiniNews[]; listHref: string }) {
       <div className="ar-rel-head">
         <h2 className="ar-h">Mavzuga oid yangiliklar</h2>
         <Link href={listHref} className="more-btn">
-          <More>Barça yangiliklar</More>
+          <More>
+            Batafsil<span className="sr-only">: Barça yangiliklar</span>
+          </More>
         </Link>
       </div>
       <ul className="ar-rel-grid">
         {items.map((n) => (
           <li key={n.href}>
             <Link href={n.href}>
-              <span className="ar-rel-img">{n.image && <img src={n.image} alt="" loading="lazy" />}</span>
+              <span className="ar-rel-img">
+                {n.image && <img src={n.image} alt="" loading="lazy" />}
+              </span>
               <span className="ar-rel-meta">
                 <span className={`chip ${n.tone}`}>{n.catLabel}</span>
                 <time>{n.date}</time>
@@ -177,7 +194,10 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
               <Meta a={a} />
               <h1 className="h2 pg-title ar-title">{a.title}</h1>
               {a.excerpt && <p className="ar-lede">{a.excerpt}</p>}
-              <Slider slides={[{ url: a.hero, alt: a.heroAlt }, ...a.gallery]} caption={a.caption} />
+              <Slider
+                slides={[{ url: a.hero, alt: a.heroAlt }, ...a.gallery]}
+                caption={a.caption}
+              />
               <div className="ar-b-body">
                 <aside className="ar-b-share">
                   <Share url={a.url} title={a.title} label="Ulaşiş" vertical />
@@ -205,7 +225,9 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
                 ))}
               </ol>
               <Link href={listHref} className="more-btn">
-                <More>Barça yangiliklar</More>
+                <More>
+                  Batafsil<span className="sr-only">: Barça yangiliklar</span>
+                </More>
               </Link>
             </aside>
           </div>

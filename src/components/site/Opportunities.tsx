@@ -2,24 +2,30 @@
 import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
-import { OPPS, OPP_TYPES, type OppType, deadlineLabel } from '@/lib/opps'
+import { getContests, getGrants, getStipends, getVolDirs } from '@/lib/cms/imkoniyatlar'
+import { OPP_TYPES, type OppType, daysTo, deadlineLabel } from '@/lib/opps'
+import { type BoshData, getBosh } from '@/lib/cms/sahifalar'
 import { More } from './MoreBtn'
 
 /** Karta kengayganda chiqadigan ma'lumot: qisqa tavsif, faol dasturlar soni, eng yaqin muddat va "Batafsil" */
-function OppInfo({ t }: { t: OppType }) {
-  const type = OPP_TYPES.find((x) => x.key === t)!
-  const list = OPPS.filter((o) => o.type === t)
+type Lists = Record<OppType, Array<{ deadline?: string }>>
+
+function OppInfo({ t, lists, O }: { t: OppType; lists: Lists; O: BoshData['opps'] }) {
+  const type = { ...OPP_TYPES.find((x) => x.key === t)!, ...Object.fromEntries(Object.entries(O[t]).filter(([, v]) => v)) }
+  // haqiqiy röyxatlardan (admin panel): grantlar, stipendiyalar, tanlovlar va volontyorlik yönalişlari
+  const real = lists[t]
+  const list = real.map((g) => ({ deadline: g.deadline ?? null }))
   const next =
     list
       .map((o) => o.deadline)
-      .filter(Boolean)
+      .filter((d): d is string => !!d && (daysTo(d) ?? 0) > 0)
       .sort()[0] ?? null
   return (
     <div className="opp-info">
       <p>{type.desc}</p>
       <div className="opp-meta">
         <span>
-          <b>{list.length}</b> ta faol dastur
+          <b>{list.length}</b> {t === 'vol' ? 'ta yönaliş' : 'ta dastur'}
         </span>
         <span>
           {next ? (
@@ -27,7 +33,7 @@ function OppInfo({ t }: { t: OppType }) {
               Eng yaqin muddat: <b>{deadlineLabel(next)}</b>
             </>
           ) : (
-            <b>Doimiy qabul</b>
+            <b>{t === 'grant' || t === 'vol' ? 'Doimiy qabul' : 'Har yili tanlov'}</b>
           )}
         </span>
       </div>
@@ -43,19 +49,21 @@ function OppInfo({ t }: { t: OppType }) {
  * Rangli kartalar: sichqoncha (yoki klaviatura fokusi) kelgan karta kengayadi, qolganlari torayadi;
  * kengaygan kartada qisqa tavsif, faol dasturlar soni va eng yaqin muddat chiqadi.
  */
-export function Opportunities({ locale }: { locale: Locale }) {
+export async function Opportunities({ locale }: { locale: Locale }) {
+  const [grant, stip, tanlov, vol, { opps: O }] = await Promise.all([getGrants(locale), getStipends(locale), getContests(locale), getVolDirs(locale), getBosh(locale)])
+  const lists = { grant, stip, tanlov, vol: vol.map(() => ({})) } as Lists
   return (
     <>
       <section className="sec" id="imkoniyatlar">
         <div className="wrap">
           <h2 className="h2 opps-title">
-            Yoşlar uçun <span>imkoniyatlar</span>
+            {O.title} <span>{O.accent}</span>
           </h2>
           <div className="opps">
-            <Link href={`/${locale}/faoliyat/loyihalar`} className="opp big o1">
+            <Link href={`/${locale}/faoliyat/grantlar`} className="opp big o1">
               <div className="title">
                 <b>Grantlar</b>
-                <span>Yoşlar taşabbuslarini moliyalaştiriş</span>
+                <span>{O.grant.lead || OPP_TYPES[0].lead}</span>
               </div>
               <svg
                 className="deco"
@@ -87,9 +95,9 @@ export function Opportunities({ locale }: { locale: Locale }) {
               <div className="ph">
                 <img className="cover" src="/img/opp-grant.jpg" alt="Grant tanlovi iştirokçilari" />
               </div>
-              <OppInfo t="grant" />
+              <OppInfo t="grant" lists={lists} O={O} />
             </Link>
-            <Link href={`/${locale}/faoliyat/loyihalar`} className="opp o2">
+            <Link href={`/${locale}/faoliyat/stipendiyalar`} className="opp o2">
               <p className="name">Stipendiyalar</p>
               <svg
                 className="deco"
@@ -114,9 +122,9 @@ export function Opportunities({ locale }: { locale: Locale }) {
               <div className="ph">
                 <img className="cover" src="/img/opp-stip.jpg" alt="Stipendiya sohiblari" />
               </div>
-              <OppInfo t="stip" />
+              <OppInfo t="stip" lists={lists} O={O} />
             </Link>
-            <Link href={`/${locale}/faoliyat/loyihalar`} className="opp o3">
+            <Link href={`/${locale}/faoliyat/volontyorlik`} className="opp o3">
               <p className="name">Volontyorlik</p>
               <div
                 className="deco leaf"
@@ -141,9 +149,9 @@ export function Opportunities({ locale }: { locale: Locale }) {
               <div className="ph">
                 <img className="cover" src="/img/opp-vol.jpg" alt="Volontyorlar" />
               </div>
-              <OppInfo t="vol" />
+              <OppInfo t="vol" lists={lists} O={O} />
             </Link>
-            <Link href={`/${locale}/faoliyat/loyihalar`} className="opp o4">
+            <Link href={`/${locale}/faoliyat/tanlovlar`} className="opp o4">
               <p className="name">Tanlovlar</p>
               <div
                 className="deco"
@@ -181,7 +189,7 @@ export function Opportunities({ locale }: { locale: Locale }) {
               <div className="ph">
                 <img className="cover" src="/img/news-1.jpg" alt="Tanlov iştirokçilari" />
               </div>
-              <OppInfo t="tanlov" />
+              <OppInfo t="tanlov" lists={lists} O={O} />
             </Link>
           </div>
         </div>

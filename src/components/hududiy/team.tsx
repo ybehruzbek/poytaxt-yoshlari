@@ -1,5 +1,6 @@
 /* Jamoa bölimi uçun umumiy maʼlumot va belgilar (A va B variantlari) */
-import { CHAIR, DEPTS, RECEPTION, type Social } from './data'
+import type { Reception, Social } from './data'
+import type { Hududiy } from '@/lib/cms/biz'
 
 /* Rahbariyat kartasi uçun çiziqli belgilar (24×24) */
 export const IC = {
@@ -52,13 +53,16 @@ const fmtRec = (day: string, time: string) =>
   // vaqt bölinmas (u2060) — qator faqat kun nomidan keyin bölinadi
   `${day.toLocaleLowerCase('uz')}, ${time.replace(/\s*—\s*/, '\u2060–\u2060')}`
 
-const recOf = (name: string) => {
+const recOf = (RECEPTION: Reception[], name: string) => {
   const r = RECEPTION.find((x) => x.name === name)
   return r ? fmtRec(r.day, r.time) : undefined
 }
 
 /** Jamoa: rais → bölim boşliqlari → mutaxassislar */
-export const TEAM: { title: string; lead?: boolean; people: Member[] }[] = [
+export type Team = { title: string; lead?: boolean; people: Member[] }[]
+
+/** Jamoa admin paneldagi xodimlar va bölimlardan yiğiladi (Biz haqimizda → Kengaş xodimlari) */
+export const teamOf = ({ CHAIR, DEPTS, RECEPTION }: Hududiy): Team => [
   {
     title: 'Rais',
     lead: true,
@@ -66,7 +70,7 @@ export const TEAM: { title: string; lead?: boolean; people: Member[] }[] = [
       {
         ...CHAIR,
         room: CHAIR.room,
-        reception: recOf(CHAIR.name),
+        reception: recOf(RECEPTION, CHAIR.name),
         duties: CHAIR.duties,
       },
     ],
@@ -80,7 +84,7 @@ export const TEAM: { title: string; lead?: boolean; people: Member[] }[] = [
           ...x,
           dept: d.t,
           room: d.room,
-          reception: recOf(x.name),
+          reception: recOf(RECEPTION, x.name),
           duties: x.duties ?? d.tasks,
           deptDuties: !x.duties,
         })),

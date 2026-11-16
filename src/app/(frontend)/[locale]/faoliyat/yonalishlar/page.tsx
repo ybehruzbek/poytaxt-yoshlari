@@ -16,6 +16,7 @@ export default async function Route(props: { params: Promise<{ locale: Locale }>
   const L = (h: string) => `/${locale}${h}`
   return (
     <DirectionsPage
+      locale={locale}
       crumbs={<PageCrumbs locale={locale} path="/faoliyat/yonalishlar" />}
       base={L('/faoliyat/yonalishlar')}
       projBase={L('/faoliyat/loyihalar')}

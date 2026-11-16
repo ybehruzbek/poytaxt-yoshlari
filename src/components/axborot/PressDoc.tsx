@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- blanka logotipi statik PNG */
 import { fullDate } from './data'
 import { ABOUT, ORG, PRESS_KINDS, type PressItem } from './press'
-import { PRESS_CONTACT } from './data'
+import type { PressContactT } from '@/lib/cms/aloqa'
 
 /**
  * Press-relizning rasmiy blankasi: Kengaş logotipi, tur, sana va şahar, sarlavha,
@@ -9,7 +9,7 @@ import { PRESS_CONTACT } from './data'
  * Çop etilganda (Ctrl+P / “Çop etiş”) faqat şu blanka qoğozga çiqadi.
  * `level` — sarlavha darajasi: alohida sahifada 1 (sahifaning H1), röyxat ičida 2.
  */
-export function PressDoc({ p, id, level = 2 }: { p: PressItem; id?: string; level?: 1 | 2 }) {
+export function PressDoc({ p, id, level = 2, contact: PRESS_CONTACT }: { p: PressItem; id?: string; level?: 1 | 2; contact: PressContactT }) {
   const Title = level === 1 ? 'h1' : 'h2'
   return (
     <article className={`pr-doc k-${p.kind}`} id={id} data-print-doc="">

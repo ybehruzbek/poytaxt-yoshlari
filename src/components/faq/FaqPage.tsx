@@ -5,16 +5,16 @@ import { type ReactNode, useState } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
 
-import { FAQ, FAQ_CATS, type FaqCat } from './data'
+import { type Faq, FAQ_CATS, type FaqCat } from './data'
 import { FaqItem } from './FaqItem'
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
 
 /**
  * “Köp beriladigan savollar” sahifasi: mavzu böyiça saralaş (son bilan), qidiruv,
- * mavzular böyiça guruhlangan savollar va pastda “Javob topmadingizmi?” bloki.
+ * mavzular böyiça guruhlangan savollar va pastda “Boşqa savollar böyiça murojaat” bloki.
  */
-export function FaqPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
+export function FaqPage({ crumbs, base, faqs: FAQ }: { crumbs: ReactNode; base: string; faqs: Faq[] }) {
   const [cat, setCat] = useState<'all' | FaqCat>('all')
   const [q, setQ] = useState('')
   const s = low(q.trim())
@@ -41,7 +41,12 @@ export function FaqPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
                 Barçasi <span>{FAQ.length}</span>
               </button>
               {FAQ_CATS.map((c) => (
-                <button key={c.k} type="button" aria-pressed={cat === c.k} onClick={() => setCat(c.k)}>
+                <button
+                  key={c.k}
+                  type="button"
+                  aria-pressed={cat === c.k}
+                  onClick={() => setCat(c.k)}
+                >
                   {c.t} <span>{FAQ.filter((f) => f.cat === c.k).length}</span>
                 </button>
               ))}
@@ -52,13 +57,19 @@ export function FaqPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-4-4" />
               </svg>
-              <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Savol yoki kalit söz" />
+              <input
+                type="search"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Savol yoki kalit söz"
+              />
             </label>
           </div>
 
           {list.length === 0 && (
             <p className="faq-none" role="status">
-              Bu söz böyiça savol topilmadi. Savolingizni pastdagi murojaat orqali yuboring.
+              Kiritilgan söz böyiça savol topilmadi. Savolingizni quyidagi murojaat şakli orqali
+              yuborişingiz mumkin.
             </p>
           )}
 
@@ -79,11 +90,16 @@ export function FaqPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
 
           <aside className="faq-ask">
             <div>
-              <h2>Javob topmadingizmi?</h2>
-              <p>Savolingizni yozib yuboring — masʼul xodim körib çiqib, siz bilan boğlanadi.</p>
+              <h2>Boşqa savollar böyiça murojaat</h2>
+              <p>
+                Savolingizni murojaat şakli orqali yuborişingiz mumkin. Masʼul xodim uni körib
+                çiqqaç, siz bilan boğlanadi.
+              </p>
             </div>
             <Link href={`${base}/boglanish/murojaat`} className="more-btn">
-              <More>Murojaat yuboriş</More>
+              <More>
+                Batafsil<span className="sr-only">: Murojaat yuboriş</span>
+              </More>
             </Link>
           </aside>
         </div>

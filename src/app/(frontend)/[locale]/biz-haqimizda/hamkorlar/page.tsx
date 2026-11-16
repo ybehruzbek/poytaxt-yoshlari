@@ -13,5 +13,5 @@ export const metadata: Metadata = {
 /** “Hamkorlar” sahifasi (Biz haqimizda menyusi) */
 export default async function HamkorlarRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
-  return <HamkorlarPage crumbs={<PageCrumbs locale={locale} path="/biz-haqimizda/hamkorlar" />} />
+  return <HamkorlarPage locale={locale} crumbs={<PageCrumbs locale={locale} path="/biz-haqimizda/hamkorlar" />} />
 }

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- logotip PNG; SVG varianti kelganda almashtiriladi */
 import Link from 'next/link'
 
-import { EMAILS, PHONES } from '@/components/boglanish/data'
+import { getAloqa } from '@/lib/cms/aloqa'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
 import { NET_LABEL, NETS } from '@/lib/socials'
@@ -61,7 +61,7 @@ function Bottom() {
  * (footer körinişga kirganda harflar navbat bilan körtariladi).
  */
 export async function Footer({ locale }: { locale: Locale }) {
-  const socials = await getSocials()
+  const [socials, { EMAILS, PHONES }] = await Promise.all([getSocials(), getAloqa(locale)])
   const L = (h: string) => `/${locale}${h}`
   return (
     <footer className="fb fw">

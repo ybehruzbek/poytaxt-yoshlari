@@ -4,7 +4,6 @@ import { useRef, useState, useTransition } from 'react'
 
 import { type MemberField, type MemberState, submitMembership } from '@/app/(frontend)/actions/membership'
 
-import { AFTER } from './data'
 
 const MAX_YEAR = new Date().getFullYear() - 14
 const MIN_YEAR = new Date().getFullYear() - 30
@@ -45,7 +44,7 @@ function PlaceField({ otts, err }: { otts: string[]; err?: string }) {
 }
 
 /* ---------------- Onlayn ariza ---------------- */
-export function OnlineForm({ otts, ustavHref }: { otts: string[]; ustavHref: string }) {
+export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; ustavHref: string; after: string[] }) {
   const [state, setState] = useState<MemberState | null>(null)
   const [pending, start] = useTransition()
   const top = useRef<HTMLDivElement>(null)

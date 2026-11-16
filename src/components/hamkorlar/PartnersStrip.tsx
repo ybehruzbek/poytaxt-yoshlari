@@ -4,7 +4,8 @@ import type { CSSProperties } from 'react'
 
 import { More } from '@/components/site/MoreBtn'
 
-import { DOMESTIC, FOREIGN, type Partner } from './data'
+import type { Partner } from './data'
+import { getPartners } from '@/lib/cms/biz'
 
 /** Bitta aylanuvçi tasma: logotiplar berilgan tartibda, cheksiz takrorlanadi */
 function Track({ list, locale, reverse }: { list: Partner[]; locale: string; reverse?: boolean }) {
@@ -40,19 +41,22 @@ function Track({ list, locale, reverse }: { list: Partner[]; locale: string; rev
 }
 
 /**
- * Boş sahifa: “Hamkorlarimiz” — ikki aylanuvçi tasma: Özbekistondagi hamkorlar (toifalar tartibida)
+ * Boş sahifa: “Hamkor taşkilotlar” — ikki aylanuvçi tasma: Özbekistondagi hamkorlar (toifalar tartibida)
  * va xalqaro hamkorlar (mintaqalar tartibida). Logotip bosilsa hamkorning saytiga ötiladi.
  */
-export function PartnersStrip({ locale }: { locale: string }) {
+export async function PartnersStrip({ locale }: { locale: string }) {
+  const { domestic: DOMESTIC, foreign: FOREIGN } = await getPartners(locale)
   return (
     <section className="sec pt-strip" aria-labelledby="pt-strip-h">
       <div className="wrap pt-strip-in">
         <div className="pt-strip-head">
           <h2 id="pt-strip-h" className="h2">
-            Hamkorlarimiz
+            Hamkor taşkilotlar
           </h2>
           <Link href={`/${locale}/biz-haqimizda/hamkorlar`} className="more-btn">
-            <More>Barça hamkorlar</More>
+            <More>
+              Batafsil<span className="sr-only">: Barça hamkorlar</span>
+            </More>
           </Link>
         </div>
         <p className="pt-strip-l">Özbekistondagi hamkorlar</p>

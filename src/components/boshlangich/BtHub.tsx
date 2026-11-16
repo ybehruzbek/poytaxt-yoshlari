@@ -2,10 +2,9 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { OTMS } from './data'
+import type { Otm } from './data'
 import { More } from '@/components/site/MoreBtn'
-
-const LED = OTMS.filter((o) => o.leader)
+import { getOtts } from '@/lib/cms/biz'
 
 type Stat = { v: string; t: string; accent?: boolean }
 type Dir = {
@@ -18,7 +17,8 @@ type Dir = {
   faces: string[]
 }
 
-const DIRS: Dir[] = [
+/** Ikki yönaliş kartasi: OTT raqamlari admin paneldagi röyxatdan */
+const dirsOf = (OTMS: Otm[], LED = OTMS.filter((o) => o.leader)): Dir[] => [
   {
     n: '01',
     t: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar',
@@ -82,7 +82,9 @@ function Dir({ x, L }: { x: Dir; L: (h: string) => string }) {
           {!x.faces.length && <Shield />}
         </span>
         <span className="more-btn">
-          <More>{x.go}</More>
+          <More>
+            Batafsil<span className="sr-only">{`: ${x.go}`}</span>
+          </More>
         </span>
       </span>
     </Link>
@@ -93,7 +95,8 @@ function Dir({ x, L }: { x: Dir; L: (h: string) => string }) {
  * “Boşlanğiç taşkilotlar” umumiy sahifasi: ikki yönaliş — oliy taʼlim taşkilotlari
  * hamda harbiy qismlar va muassasalar. Har karta öz sahifasiga olib boradi.
  */
-export function BtHub({ L, crumbs }: { L: (h: string) => string; crumbs: ReactNode }) {
+export async function BtHub({ L, crumbs, locale = 'uz' }: { L: (h: string) => string; crumbs: ReactNode; locale?: string }) {
+  const DIRS = dirsOf(await getOtts(locale))
   return (
     <div className="bt">
       <header className="pg-head">

@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
       'Turnir yoşlarni dolzarb masalalar ustida bahs yuritişga, özgalar fikrini hurmat qilişga örgatadi. 2023–2024-yillarda Kengaş şahar miqyosida öyinlar taşkil etgan bölsa, 2025–2026-yillarda oliy taʼlim muassasalari talabalari örtasidagi “Munozara” respublika turnirining Toşkent şahar hududiy bosqiçini ötkazdi. Respublika turniri Oliy taʼlim, fan va innovatsiyalar vazirligi, Talaba va öquvçilarning ijtimoiy faolligini oşiriş markazi hamda Yoşlar işlari agentligi bilan hamkorlikda taşkil etiladi.',
     audience: 'Oliy taʼlim muassasalari talabalari, maktab öquvçilari (15–18 yoş)',
     partners: [
-      'Oliy taʼlim, fan va innovatsiyalar vazirligi',
+      'Taʼlim va ilm-fan vazirligi',
       'Talaba va öquvçilarning ijtimoiy faolligini oşiriş markazi',
       'Yoşlar işlari agentligi',
     ],
@@ -177,7 +177,7 @@ export const PROJECTS: Project[] = [
         post: 4396,
       },
       {
-        text: 'Onlayn viktorinada 62 ta savol orqali 50 nafar finalçi saralandi; 2026-yil 5-martdagi final 20 ta savoldan iborat böldi.',
+        text: 'Onlayn viktorinada 62 ta savol orqali 50 nafar finalçi saralandi; 2026-yil 5-martdagi final 20 ta savoldan iborat bölib ötdi.',
         post: 5552,
       },
       {
@@ -282,7 +282,7 @@ export const PROJECTS: Project[] = [
     period: '2023–2026',
     lead: 'Toşkent şahrida yaşovçi yoşlar uçun harbiy qismda ötkaziladigan ön kunlik harbiy-vatanparvarlik öquv yiğini.',
     description:
-      'Yiğin davomida iştirokçilar harbiyça kiyinib, qatʼiy kun tartibi asosida maşğulotlarda qatnaşadi, kasb-hunar könikmalarini va ilk harbiy tayyorgarlik asoslarini örganadi. Dasturda maʼnaviy-maʼrifiy darslar, “Zakovat” öyini, viktorinalar va sport musobaqalari bor. Kengaş yiğinlarda uçraşuvlar, davra suhbatlari va tarğibot tadbirlarini taşkil etadi.',
+      'Yiğin davomida iştirokçilar harbiy kiyimda qatʼiy kun tartibi asosida maşğulotlarda qatnaşadi, kasb-hunar könikmalarini va ilk harbiy tayyorgarlik asoslarini örganadi. Dasturda maʼnaviy-maʼrifiy darslar, “Zakovat” öyini, viktorinalar va sport musobaqalari bor. Kengaş yiğinlarda uçraşuvlar, davra suhbatlari va tarğibot tadbirlarini taşkil etadi.',
     audience:
       'Toşkent şahrida istiqomat qiluvçi yoşlar, jumladan profilaktik hisobdagi va probatsiya nazoratidagi yoşlar',
     partners: [
@@ -478,7 +478,7 @@ export const PROJECTS: Project[] = [
       'Umumtaʼlim maktablari, akademik litseylar va professional taʼlim muassasalari öquvçilari',
     partners: [
       'Favqulodda vaziyatlar vazirligi Toşkent şahar boşqarmasi',
-      'Maktabgaça va maktab taʼlimi vazirligi',
+      'Taʼlim va ilm-fan vazirligi',
       'Favqulodda vaziyatlar vazirligi akademiyasi',
     ],
     results: [

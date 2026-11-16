@@ -1067,7 +1067,8 @@ html[data-theme='dark'] .ar-react-sh {
 /* ---------- moslaşuvçan ---------- */
 @media (max-width: 1100px) {
   .ar-b-grid {
-    grid-template-columns: 1fr;
+    /* minmax(0,…) — içidagi slayder ustunni ekrandan kengaytirib yubormasin */
+    grid-template-columns: minmax(0, 1fr);
   }
   .ar-b-side {
     position: static;

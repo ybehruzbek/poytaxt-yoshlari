@@ -199,7 +199,7 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
         </>
       )}
 
-      {list.length === 0 && <p className="bt-empty">Heç narsa topilmadi.</p>}
+      {list.length === 0 && <p className="bt-empty">Qidiruv böyiça natija topilmadi.</p>}
     </div>
   )
 }

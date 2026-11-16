@@ -17,6 +17,7 @@ export default async function Route(props: { params: Promise<{ locale: Locale }>
   void L
   return (
     <ProjectsPage
+      locale={locale}
       crumbs={<PageCrumbs locale={locale} path="/faoliyat/loyihalar" />}
       base={L('/faoliyat/loyihalar')}
     />

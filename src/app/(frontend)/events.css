@@ -171,7 +171,8 @@
 }
 .ev-rows > li > a {
   display: grid;
-  grid-template-columns: 76px 1fr 120px auto auto;
+  /* rasm, yorliq va tugma ustunlari qatʼiy kenglikda — barça qatorlarda bir çiziqda turadi */
+  grid-template-columns: 76px 1fr 120px 112px auto;
   align-items: center;
   gap: 20px;
   padding: 14px 18px 14px 14px;
@@ -237,6 +238,8 @@
   color: var(--navy);
   font: 800 12.5px/1 var(--f-head);
   white-space: nowrap;
+  text-align: center;
+  justify-self: stretch;
 }
 
 /* “Batafsil” qator örtasida tekis tursin (umumiy qoidada u yuqoriga tortiladi) */

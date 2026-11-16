@@ -5,19 +5,18 @@
  */
 import Link from 'next/link'
 
-import { DIRECTIONS, dirProjects } from './data'
 import { DirsShowcase } from './DirsClient'
-import { EVENTS } from './events'
 import { DirText } from './FaViews'
 import { More } from '@/components/site/MoreBtn'
+import { dirProjects, type Faoliyat } from '@/lib/cms/faoliyat'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 
 /** Har yönaliş uçun: suratlar (loyiha muqovalari, keyin tadbir suratlari), sonlar */
-function dirsData(nPics: number) {
-  return DIRECTIONS.map((d, i) => {
-    const evs = EVENTS.filter((e) => e.dir === d.slug)
-    const projs = dirProjects(d.slug)
+function dirsData(f: Faoliyat, nPics: number) {
+  return f.directions.map((d, i) => {
+    const evs = f.events.filter((e) => e.dir === d.slug)
+    const projs = dirProjects(f, d.slug)
     const pics = [...projs.map((p) => p.cover), ...evs.map((e) => e.img), ...projs.flatMap((p) => p.gallery)]
       .filter(Boolean)
       .filter((x, k, arr) => arr.indexOf(x) === k)
@@ -73,13 +72,13 @@ function Pics({ pics, className }: { pics: string[]; className: string }) {
   )
 }
 
-type P = { base: string; projBase: string }
+type P = { f: Faoliyat; base: string; projBase: string }
 
 /* Çapda 11 ta rasmiy nom, öngda tanlangan yönalişning paneli: katta surat, ikki kiçik surat, matn.
  * Barça panellar serverda çiziladi (qidiruv tizimlari uçun), körinmaydiganlari `hidden`.
  */
-export function DirsShow({ base, projBase }: P) {
-  const all = dirsData(3)
+export function DirsShow({ f, base, projBase }: P) {
+  const all = dirsData(f, 3)
   return (
     <section className="sec fa-sec">
       <div className="wrap">
@@ -94,7 +93,7 @@ export function DirsShow({ base, projBase }: P) {
                 <h2>
                   <Link href={`${base}/${d.slug}`}>{d.title}</Link>
                 </h2>
-                <DirText slug={d.slug} projBase={projBase} className="vy-prose" lead />
+                <DirText f={f} slug={d.slug} projBase={projBase} className="vy-prose" lead />
                 <div className="vys-foot">
                   <Counts nE={nE} nP={nP} />
                   <Link href={`${base}/${d.slug}`} className="more-btn">

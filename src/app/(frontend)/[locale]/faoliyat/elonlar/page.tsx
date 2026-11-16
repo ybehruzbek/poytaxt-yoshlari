@@ -3,7 +3,7 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import { AnnouncePage } from '@/components/faoliyat/FaPages'
-import type { Announce } from '@/components/faoliyat/announcements'
+import type { Announce } from '@/components/faoliyat/types'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 import { toNewsCard } from '@/lib/news'

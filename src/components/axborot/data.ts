@@ -54,8 +54,10 @@ export type Album = {
   date: string
   type: AlbumType
   place: string
-  /** suratlar soni: /img/axborot/foto/{id}/{1..n}.webp */
+  /** suratlar soni */
   n: number
+  /** suratlar manzillari (admin panel → Fotoalbomlar); bölmasa — /img/axborot/foto/{id}/{i}.webp */
+  photos?: string[]
 }
 
 export const ALBUMS: Album[] = [
@@ -157,8 +159,9 @@ export const ALBUMS: Album[] = [
   },
 ]
 
-export const photo = (id: number, i: number) => `/img/axborot/foto/${id}/${i}.webp`
-export const cover = (a: Album) => photo(a.id, 1)
+/** Albomning i-surati (1 dan boşlab) */
+export const photo = (a: Pick<Album, 'id' | 'photos'>, i: number) => a.photos?.[i - 1] ?? `/img/axborot/foto/${a.id}/${i}.webp`
+export const cover = (a: Album) => photo(a, 1)
 
 /* ============================== VIDEO ============================== */
 

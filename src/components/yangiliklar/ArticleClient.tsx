@@ -3,7 +3,12 @@
 
 import { useEffect, useState, useSyncExternalStore, useTransition } from 'react'
 
-import { type ReactionCounts, type RatingStats, rateNews, reactNews } from '@/app/(frontend)/actions/rating'
+import {
+  type ReactionCounts,
+  type RatingStats,
+  rateNews,
+  reactNews,
+} from '@/app/(frontend)/actions/rating'
 import type { ReactionKind } from '@/collections/NewsReactions'
 
 const TG = (
@@ -17,7 +22,14 @@ const FB = (
   </svg>
 )
 const LINK = (
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+  >
     <path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" />
   </svg>
 )
@@ -28,7 +40,11 @@ export function BackBtn({ href, label }: { href: string; label: string }) {
   const cameFromList = () => {
     try {
       const ref = document.referrer
-      return !!ref && new URL(ref).origin === window.location.origin && new URL(ref).pathname.startsWith(href)
+      return (
+        !!ref &&
+        new URL(ref).origin === window.location.origin &&
+        new URL(ref).pathname.startsWith(href)
+      )
     } catch {
       return false
     }
@@ -52,17 +68,43 @@ export function BackBtn({ href, label }: { href: string; label: string }) {
 }
 
 /** Ulaşiş tugmalari: Telegram, Facebook, havolani nusxalaş */
-export function Share({ url, title, label, vertical = false }: { url: string; title: string; label?: string; vertical?: boolean }) {
+export function Share({
+  url,
+  title,
+  label,
+  vertical = false,
+}: {
+  url: string
+  title: string
+  label?: string
+  vertical?: boolean
+}) {
   const [copied, setCopied] = useState(false)
-  const full = () => (typeof window === 'undefined' ? url : new URL(url, window.location.origin).href)
-  const open = (href: string) => window.open(href, '_blank', 'noopener,noreferrer,width=640,height=560')
+  const full = () =>
+    typeof window === 'undefined' ? url : new URL(url, window.location.origin).href
+  const open = (href: string) =>
+    window.open(href, '_blank', 'noopener,noreferrer,width=640,height=560')
   return (
     <div className={`ar-share${vertical ? ' v' : ''}`} role="group" aria-label="Ulaşiş">
       {label && <span className="ar-share-l">{label}</span>}
-      <button type="button" aria-label="Telegramʼda ulaşiş" onClick={() => open(`https://t.me/share/url?url=${encodeURIComponent(full())}&text=${encodeURIComponent(title)}`)}>
+      <button
+        type="button"
+        aria-label="Telegramʼda ulaşiş"
+        onClick={() =>
+          open(
+            `https://t.me/share/url?url=${encodeURIComponent(full())}&text=${encodeURIComponent(title)}`,
+          )
+        }
+      >
         {TG}
       </button>
-      <button type="button" aria-label="Facebookʼda ulaşiş" onClick={() => open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(full())}`)}>
+      <button
+        type="button"
+        aria-label="Facebookʼda ulaşiş"
+        onClick={() =>
+          open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(full())}`)
+        }
+      >
         {FB}
       </button>
       <button
@@ -90,7 +132,7 @@ export function Share({ url, title, label, vertical = false }: { url: string; ti
 const noSub = () => () => {}
 
 /**
- * “Maqolaga baho bering”: 5 ta yulduz. Baho serverda saqlanadi (bir tomonidan bitta, qayta bosilsa yangilanadi);
+ * “Maqolaga baho beriş”: 5 ta yulduz. Baho serverda saqlanadi (bir tomonidan bitta, qayta bosilsa yangilanadi);
  * soni va örtaça baho darhol yangilanadi. Tanlangan baho şu brauzerda eslab qolinadi.
  */
 export function RateStars({ newsId, initial }: { newsId: number; initial: RatingStats }) {
@@ -121,7 +163,7 @@ export function RateStars({ newsId, initial }: { newsId: number; initial: Rating
       if (r.ok && r.stats) {
         setStats(r.stats)
         setMine(v)
-        setMsg('Bahoyingiz uçun rahmat')
+        setMsg('Bahoyingiz qabul qilindi')
         try {
           localStorage.setItem(key, String(v))
         } catch {
@@ -142,9 +184,14 @@ export function RateStars({ newsId, initial }: { newsId: number; initial: Rating
       </div>
       <div className="ar-foot-cell">
         <span className="ar-foot-l" id={`rate-${newsId}`}>
-          Maqolaga baho bering
+          Maqolaga baho beriş
         </span>
-        <div className="ar-stars" role="radiogroup" aria-labelledby={`rate-${newsId}`} onMouseLeave={() => setHover(0)}>
+        <div
+          className="ar-stars"
+          role="radiogroup"
+          aria-labelledby={`rate-${newsId}`}
+          onMouseLeave={() => setHover(0)}
+        >
           {[1, 2, 3, 4, 5].map((v) => (
             <button
               key={v}
@@ -221,12 +268,22 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
         ))}
         {n > 1 && (
           <>
-            <button type="button" className="ar-sl-nav prev" aria-label="Oldingi surat" onClick={() => go(i - 1)}>
+            <button
+              type="button"
+              className="ar-sl-nav prev"
+              aria-label="Oldingi surat"
+              onClick={() => go(i - 1)}
+            >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M15 5l-7 7 7 7" />
               </svg>
             </button>
-            <button type="button" className="ar-sl-nav next" aria-label="Keyingi surat" onClick={() => go(i + 1)}>
+            <button
+              type="button"
+              className="ar-sl-nav next"
+              aria-label="Keyingi surat"
+              onClick={() => go(i + 1)}
+            >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M9 5l7 7-7 7" />
               </svg>
@@ -241,7 +298,13 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
       {n > 1 && (
         <div className="ar-sl-thumbs" role="group" aria-label="Suratni tanlaş">
           {slides.map((s, k) => (
-            <button key={s.url} type="button" aria-label={`${k + 1}-surat`} aria-current={k === i} onClick={() => go(k)}>
+            <button
+              key={s.url}
+              type="button"
+              aria-label={`${k + 1}-surat`}
+              aria-current={k === i}
+              onClick={() => go(k)}
+            >
               <img src={s.url} alt="" loading="lazy" />
             </button>
           ))}
@@ -253,18 +316,28 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
 }
 
 const EMOJI: Array<[ReactionKind, string, string]> = [
-  ['like', '👍', 'Yoqdi'],
-  ['fire', '🔥', 'Ajoyib'],
-  ['dislike', '👎', 'Yoqmadi'],
-  ['angry', '😡', 'Jahlim çiqdi'],
-  ['laugh', '😁', 'Kulgili'],
+  ['like', '👍', 'Maʼqul'],
+  ['fire', '🔥', 'Aʼlo'],
+  ['dislike', '👎', 'Maʼqul emas'],
+  ['angry', '😡', 'Norozilik'],
+  ['laugh', '😁', 'Quvonç'],
 ]
 
 /**
  * Reaksiyalar paneli: bitta tomonidan bitta reaksiya (boşqasini bossa almaşadi, şuni qayta bossa olib taşlanadi)
  * va “Ulaşiş” — telefonda tizimning ulaşiş oynasi, kompyuterda Telegram / Facebook / havola tugmalari.
  */
-export function Reactions({ newsId, initial, url, title }: { newsId: number; initial: ReactionCounts; url: string; title: string }) {
+export function Reactions({
+  newsId,
+  initial,
+  url,
+  title,
+}: {
+  newsId: number
+  initial: ReactionCounts
+  url: string
+  title: string
+}) {
   const key = `reaksiya-${newsId}`
   const stored = useSyncExternalStore(
     noSub,

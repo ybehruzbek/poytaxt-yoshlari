@@ -124,7 +124,9 @@ button:focus {
   white-space: nowrap;
   cursor: pointer;
   text-decoration: none;
-  transition: color 0.3s;
+  transition:
+    color 0.3s,
+    background-color 0s;
 }
 .more-btn::before {
   content: '';
@@ -154,6 +156,11 @@ button:focus {
 /* tugmaning özi yoki uni öz ičiga olgan havola (karta) ustiga kelganda */
 :is(.more-btn:hover, .more-btn:focus-visible, a:hover .more-btn, a:focus-visible .more-btn) {
   color: #fff;
+  /* töldiriş tugagaç fon ham şu rangga ötadi — kapsula çetida sariq hoşiya qolmaydi */
+  background-color: var(--navy-bg);
+  transition:
+    color 0.3s,
+    background-color 0s 0.35s;
 }
 :is(.more-btn:hover, .more-btn:focus-visible, a:hover .more-btn, a:focus-visible .more-btn)::before {
   transform: scaleX(1);
@@ -170,6 +177,7 @@ button:focus {
 }
 :is(.on-dark .more-btn:hover, .on-dark a:hover .more-btn) {
   color: var(--navy);
+  background-color: var(--bg);
 }
 
 /* =====================================================================

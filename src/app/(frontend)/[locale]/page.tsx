@@ -1,5 +1,4 @@
 import { FaqBlock } from '@/components/faq/FaqBlock'
-import { FAQ_HOME } from '@/components/faq/data'
 import { PartnersStrip } from '@/components/hamkorlar/PartnersStrip'
 import { About } from '@/components/site/About'
 import { Benefits } from '@/components/site/Benefits'
@@ -29,7 +28,7 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <Opportunities locale={locale} />
       <About locale={locale} />
       <Benefits locale={locale} />
-      <FaqBlock ids={FAQ_HOME} base={`/${locale}`} />
+      <FaqBlock pick="home" base={`/${locale}`} />
       <Cta locale={locale} />
       <SocialPhones />
       <PartnersStrip locale={locale} />

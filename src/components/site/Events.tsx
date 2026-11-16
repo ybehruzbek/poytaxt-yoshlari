@@ -1,5 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor ölçamda keladi */
 import Link from 'next/link'
+
+import { getBosh } from '@/lib/cms/sahifalar'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
@@ -86,12 +88,13 @@ export async function Events({ locale }: { locale: Locale }) {
   const items = (await upcoming(locale)).map((e) => ({ ...e, p: parts(e.start), left: daysLeft(e.start) }))
   // kelgusi tadbir bölmasa — bölim körsatilmaydi (namuna maʼlumot qöyilmaydi)
   if (!items.length) return null
+  const { heads } = await getBosh(locale)
 
   return (
     <section className="sec ev-sec" id="tadbirlar" aria-labelledby="ev-title">
       <div className="wrap">
         <div className="sec-head">
-          <h2 className="h2" id="ev-title">Yaqin tadbirlar</h2>
+          <h2 className="h2" id="ev-title">{heads.events || 'Yaqin tadbirlar'}</h2>
           <Link href={href} className="btn btn-ghost">Barça tadbirlar
             <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
           </Link>

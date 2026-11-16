@@ -32,7 +32,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { slug, locale } = await props.params
   const doc = await getNews(slug, locale)
   if (!doc) return {}
-  return { title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`, description: doc.excerpt }
+  const img = typeof doc.image === 'object' && doc.image?.url ? doc.image.url : undefined
+  return {
+    title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`,
+    description: doc.excerpt,
+    // ulaşilganda maqolaning öz surati va sarlavhasi körinadi
+    openGraph: {
+      type: 'article',
+      title: doc.title,
+      description: doc.excerpt ?? undefined,
+      publishedTime: doc.publishedAt ?? undefined,
+      ...(img ? { images: [{ url: img }] } : {}),
+    },
+  }
 }
 
 /** Matndagi sözlar soni (lexical JSON) — öqiş vaqti uçun */

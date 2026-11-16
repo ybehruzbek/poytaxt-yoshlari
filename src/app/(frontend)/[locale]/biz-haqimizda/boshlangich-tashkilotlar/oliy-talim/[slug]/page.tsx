@@ -1,26 +1,31 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { OTMS } from '@/components/boshlangich/data'
 import { LeaderPage } from '@/components/boshlangich/LeaderPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
+import { getOtts } from '@/lib/cms/biz'
 
 import '../../../../../boshlangich.css'
 
-const LED = OTMS.filter((o) => o.leader)
+/** Yetakçisi bor OTTlar (admin panel → Biz haqimizda → OTT boşlanğiç taşkilotlari) */
+const leaders = async (locale = 'uz') => (await getOtts(locale)).filter((o) => o.leader)
 const LIST = '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
-/** 84 ta yetakçi sahifasi oldindan tayyorlanadi */
-export function generateStaticParams() {
-  return LED.map((o) => ({ slug: o.leader!.slug }))
+/** Yetakçi sahifalari oldindan tayyorlanadi */
+export async function generateStaticParams() {
+  try {
+    return (await leaders()).map((o) => ({ slug: o.leader!.slug }))
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { slug } = await props.params
-  const o = LED.find((x) => x.leader!.slug === slug)
+  const { locale, slug } = await props.params
+  const o = (await leaders(locale)).find((x) => x.leader!.slug === slug)
   if (!o) return {}
   return {
     title: `${o.leader!.name} — ${o.otm} boşlanğiç taşkiloti yoşlar yetakçisi`,
@@ -31,6 +36,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 /** Yetakçining alohida sahifasi (mazmun: components/boshlangich/data.ts) */
 export default async function LeaderRoute(props: Props) {
   const { locale, slug } = await props.params
+  const LED = await leaders(locale)
   const i = LED.findIndex((x) => x.leader!.slug === slug)
   if (i < 0) notFound()
   const o = LED[i]

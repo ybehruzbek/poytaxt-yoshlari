@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 /** “Fotogalereya” sahifasi (mazmun: components/axborot) */
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
-  return <FotoPage crumbs={<PageCrumbs locale={locale} path="/axborot-xizmati/fotogalereya" />} />
+  return <FotoPage locale={locale} crumbs={<PageCrumbs locale={locale} path="/axborot-xizmati/fotogalereya" />} />
 }

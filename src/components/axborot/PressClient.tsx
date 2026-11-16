@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 
 import { fullDate } from './data'
 import { PressDoc } from './PressDoc'
-import { PRESS, PRESS_KINDS } from './press'
+import type { PressContactT } from '@/lib/cms/aloqa'
+import { PRESS_KINDS, type PressItem } from './press'
 
 /** Faqat tanlangan blankani çop etiş (qolgan sahifa yaşiriladi — axborot.css @media print) */
 function printDoc(id: string) {
@@ -69,14 +70,14 @@ function Ic({ d }: { d: string }) {
    “Rasmiy blanka”: çapda hujjatlar röyxati, öngda tanlangan blanka
    (manzil satrida #slug — havolani ulaşiş mumkin)
    ==================================================================== */
-export function PressDesk() {
+export function PressDesk({ press: PRESS, contact }: { press: PressItem[]; contact: PressContactT }) {
   const [slug, setSlug] = useState(PRESS[0].slug)
   useEffect(() => {
     const h = decodeURIComponent(location.hash.slice(1))
     // manzildagi #slug böyiça hujjat oçiladi
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hash faqat brauzerda maʼlum
     if (PRESS.some((p) => p.slug === h)) setSlug(h)
-  }, [])
+  }, [PRESS])
   const p = PRESS.find((x) => x.slug === slug)!
   const pick = (s: string) => {
     setSlug(s)
@@ -96,7 +97,7 @@ export function PressDesk() {
       </nav>
       <div className="pr-desk-doc" id="pr-desk-doc">
         <PressTools docId="pr-a-doc" slug={p.slug} />
-        <PressDoc p={p} id="pr-a-doc" />
+        <PressDoc p={p} id="pr-a-doc" contact={contact} />
       </div>
     </div>
   )

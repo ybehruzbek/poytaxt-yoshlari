@@ -3,16 +3,15 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { DIRECTIONS, dirProjects, dirTitle, REPORT_2025, YEARS } from './data'
-import { EVENTS } from './events'
 import { type DirSlug, fmtDate, type Project, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
+import { dirProjects, dirTitle, type Faoliyat } from '@/lib/cms/faoliyat'
 
 const pad = (i: number) => String(i + 1).padStart(2, '0')
 const STATUS = (s: Project['status']) =>
   s === 'davom etmoqda' ? 'Davom etmoqda' : s === 'har yili' ? 'Har yili' : 'Yakunlangan'
 
-const dirEvents = (slug: string) => EVENTS.filter((e) => e.dir === slug)
+const dirEvents = (f: Faoliyat, slug: string) => f.events.filter((e) => e.dir === slug)
 
 /* ===================== Yönalişlar ===================== */
 
@@ -26,12 +25,14 @@ function joinList(items: ReactNode[]) {
  * alohida röyxat emas, matnning davomi sifatida (nomlari loyiha sahifasiga havola).
  */
 export function DirText({
+  f,
   slug,
   projBase,
   className,
   lead = false,
   rest = false,
 }: {
+  f: Faoliyat
   slug: DirSlug
   projBase: string
   className?: string
@@ -40,9 +41,9 @@ export function DirText({
   /** maqsad jumlasi boşqa joyda körsatilgan — faqat qolgan qismi */
   rest?: boolean
 }) {
-  const d = DIRECTIONS.find((x) => x.slug === slug)
+  const d = f.directions.find((x) => x.slug === slug)
   if (!d) return null
-  const projs = dirProjects(slug)
+  const projs = dirProjects(f, slug)
   const link = (p: Project) => (
     <Link key={p.slug} href={`${projBase}/${p.slug}`}>
       {p.title}
@@ -83,22 +84,23 @@ export function DirText({
   )
 }
 
-
 /* ===================== Yönaliş sahifasi ===================== */
 
 /** C — xronologiya: tadbirlar yillar böyiça vertikal çiziqda, loyihalar yon ustunda */
 export function DirC({
+  f,
   slug,
   projBase,
   listHref,
 }: {
+  f: Faoliyat
   slug: string
   projBase: string
   listHref: string
 }) {
-  const projs = dirProjects(slug as Project['dir'])
-  const dir = DIRECTIONS.find((d) => d.slug === slug)
-  const evs = dirEvents(slug).slice(0, 14)
+  const projs = dirProjects(f, slug as Project['dir'])
+  const dir = f.directions.find((d) => d.slug === slug)
+  const evs = dirEvents(f, slug).slice(0, 14)
   const byYear = [...new Set(evs.map((e) => e.date.slice(0, 4)))].map((y) => ({
     y,
     items: evs.filter((e) => e.date.startsWith(y)),
@@ -107,7 +109,7 @@ export function DirC({
     <section className="sec fa-sec">
       {dir && (
         <div className="wrap">
-          <DirText slug={dir.slug} projBase={projBase} className="fa-dir-body" />
+          <DirText f={f} slug={dir.slug} projBase={projBase} className="fa-dir-body" />
         </div>
       )}
       <div className="wrap vc-split">
@@ -144,7 +146,11 @@ export function DirC({
         </div>
         <aside className="vc-aside">
           <h2 className="fa-h2">Loyihalar</h2>
-          {projs.length === 0 && <p className="fa-empty">Bu yönaliş böyiça loyihalar haqidagi maʼlumotlar hozirça joylaştirilmagan.</p>}
+          {projs.length === 0 && (
+            <p className="fa-empty">
+              Bu yönaliş böyiça loyihalar haqidagi maʼlumotlar hozirça joylaştirilmagan.
+            </p>
+          )}
           {projs.map((p) => (
             <Link key={p.slug} href={`${projBase}/${p.slug}`} className="vc-mini">
               {p.cover && <img src={p.cover} alt="" loading="lazy" />}
@@ -166,7 +172,7 @@ export function DirC({
 /* ===================== Loyiha sahifasi ===================== */
 
 /** C — hikoya: keng banner, tor matn ustuni, natijalar kartoçkalarda, gorizontal sanalar */
-export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
+export function ProjC({ f, p, listHref }: { f: Faoliyat; p: Project; listHref: string }) {
   return (
     <section className="sec fa-sec">
       <div className="wrap">
@@ -174,7 +180,7 @@ export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
           <div className="vc-banner">
             <img src={p.cover} alt={p.title} />
             <span className="vc-banner-chips">
-              <span>{dirTitle(p.dir)}</span>
+              <span>{dirTitle(f, p.dir)}</span>
               <span>{p.period}</span>
               <span>{STATUS(p.status)}</span>
               {p.national && <span>Respublika loyihasi</span>}
@@ -220,9 +226,9 @@ export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
         )}
         {p.gallery.length > 0 && (
           <div className="vc-mas">
-            {p.gallery.map((g) => (
+            {p.gallery.map((g, i) => (
               <a key={g} href={g} target="_blank" rel="noopener noreferrer">
-                <img src={g} alt="" loading="lazy" />
+                <img src={g} alt={`${p.title} — ${i + 1}-surat`} loading="lazy" />
               </a>
             ))}
           </div>
@@ -240,23 +246,29 @@ export function ProjC({ p, listHref }: { p: Project; listHref: string }) {
 /* ===================== Natijalar ===================== */
 
 /** B — panel: asosiy raqam katta, qolganlari plitkalarda, yillar ustunlarda */
-export function ResultsB() {
-  const [hero, ...rest] = [REPORT_2025.nums[1], ...REPORT_2025.nums.filter((_, i) => i !== 1)]
+export function ResultsB({ f }: { f: Faoliyat }) {
+  const R = f.report
+  if (!R.nums.length) return null
+  // ikkinçi raqam (qamrab olingan yoşlar) asosiy — katta körsatiladi
+  const hi = R.nums.length > 1 ? 1 : 0
+  const [hero, ...rest] = [R.nums[hi], ...R.nums.filter((_, i) => i !== hi)]
   return (
     <section className="sec fa-sec">
       <div className="wrap">
         <div className="vb-dash">
           <div className="vb-dash-hero">
-            <small>2025-yil yakunlari</small>
+            <small>{R.label}</small>
             <b>{hero.v}</b>
             <span>{hero.t}</span>
             <a
-              href={TG(REPORT_2025.post)}
+              href={TG(R.post)}
               target="_blank"
               rel="noopener noreferrer"
               className="more-btn"
             >
-              <More>Hisobot matni</More>
+              <More>
+                Batafsil<span className="sr-only">: Hisobot matni</span>
+              </More>
             </a>
           </div>
           <dl className="vb-dash-tiles">
@@ -269,14 +281,12 @@ export function ResultsB() {
           </dl>
         </div>
         <div className="vb-ycols">
-          {YEARS.map((y) => (
+          {f.years.map((y) => (
             <section key={y.y}>
               <h3>{y.y}</h3>
               <ul>
                 {y.items.map((it) => (
-                  <li key={it.text}>
-                    {it.text}
-                  </li>
+                  <li key={it.text}>{it.text}</li>
                 ))}
               </ul>
             </section>

@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 /** “Elektron murojaat” sahifasi */
 export default async function MurojaatRoute(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params
-  return <MurojaatPage crumbs={<PageCrumbs locale={locale} path="/boglanish/murojaat" />} />
+  return <MurojaatPage crumbs={<PageCrumbs locale={locale} path="/boglanish/murojaat" />} locale={locale} />
 }

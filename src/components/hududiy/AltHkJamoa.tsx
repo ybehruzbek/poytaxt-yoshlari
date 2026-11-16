@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element -- xodimlar suratlari; CMS ulanganda next/image ga o'tadi */
 import type { CSSProperties, ReactNode } from 'react'
 
-import { CONTACT } from './data'
-import { IC, Ic, type Member, TEAM } from './team'
+import { IC, Ic, type Member, teamOf } from './team'
+import { getHududiy } from '@/lib/cms/biz'
+import { getAloqa } from '@/lib/cms/aloqa'
 import { More } from '@/components/site/MoreBtn'
 
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`
@@ -23,7 +24,8 @@ function Head() {
  * Kengaşning umumiy telefoni va poçtasi kartalarda takrorlanmaydi (sahifa boşida bir marta) —
  * faqat vazifalar panelida (`full`) körsatiladi.
  */
-function Reach({ m, full, children }: { m: Member; full?: boolean; children?: ReactNode }) {
+async function Reach({ m, full, children }: { m: Member; full?: boolean; children?: ReactNode }) {
+  const { CONTACT } = await getAloqa()
   const phone = m.phone ?? (full ? CONTACT.phone : undefined)
   const email = m.email ?? (full ? CONTACT.email : undefined)
   return (
@@ -73,7 +75,9 @@ function Duties({ m, id }: { m: Member; id: string }) {
   return (
     <div className="z5-dz">
       <button type="button" className="more-btn z5-duty-btn" popoverTarget={id}>
-        <More>Vazifalari</More>
+        <More>
+          Batafsil<span className="sr-only">: Vazifalari</span>
+        </More>
       </button>
       <div id={id} popover="auto" className="z5-drawer" aria-label={`${m.name} — vazifalari`}>
         <button
@@ -156,14 +160,15 @@ function Card({ m, id }: { m: Member; id: string }) {
   )
 }
 
-const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
-const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
 
 /**
  * Kengaş jamoasi (namuna asosida): rais — keng karta (surat çapda, F.I.Ş. va lavozim, öngda aloqa, fonda ingiçka naqş);
  * qolganlar bitta 3 ustunli tarmoqda: F.I.Ş. va lavozim çap yuqorida, surat öng pastda.
  */
-export function TeamNamuna() {
+export async function TeamNamuna({ locale = 'uz' }: { locale?: string } = {}) {
+  const TEAM = teamOf(await getHududiy(locale))
+  const LEADS = TEAM.filter((g) => g.lead).flatMap((g) => g.people)
+  const REST = TEAM.filter((g) => !g.lead).flatMap((g) => g.people)
   return (
     <section className="sec">
       <div className="wrap">

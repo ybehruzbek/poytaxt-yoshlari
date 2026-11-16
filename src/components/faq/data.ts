@@ -45,19 +45,19 @@ export const FAQ: Faq[] = [
   {
     id: 'qanday-azo-bolaman',
     cat: 'azolik',
-    q: 'Qanday qilib aʼzo bölaman?',
-    a: ['Öqiş yoki iş joyingizdagi Ittifoq boşlanğiç taşkilotiga ariza taqdim etasiz.'],
+    q: 'Ittifoqqa aʼzo böliş tartibi qanday?',
+    a: ['Ariza öqiş yoki iş joyidagi Ittifoq boşlanğiç taşkilotiga taqdim etiladi.'],
     li: [
       'Arizani boşlanğiç taşkilotning Umumiy yiğilişi yoki, Kengaş şakllantirilgan bölsa, boşlanğiç taşkilot Kengaşi körib çiqadi.',
       'Qabul qiliş töğrisidagi qaror yakuniy hisoblanadi, yuqori organlar tasdiği talab qilinmaydi.',
-      'Qaysi boşlanğiç taşkilotga murojaat qilişni bilmasangiz, saytdagi “Aʼzo böliş” tugmasi orqali Kengaşga murojaat yuboring.',
+      'Boşlanğiç taşkilot aniqlanmagan hollarda ariza saytdagi “Aʼzo böliş” şakli orqali Kengaşga yuborilişi mumkin.',
     ],
     more: { href: '/biz-haqimizda/ittifoq#azo-bolish', label: 'Aʼzolik tartibi' },
   },
   {
     id: 'azolik-badali',
     cat: 'azolik',
-    q: 'Aʼzolik pullikmi, aʼzolik badali bormi?',
+    q: 'Aʼzolik badali undiriladimi?',
     a: [
       'Ittifoq Ustavida aʼzolik badali közda tutilmagan. Ittifoq mulki ixtiyoriy mulkiy badallar va ehsonlar, tadbirkorlik faoliyatidan olingan daromadlar, grant, subsidiya va ijtimoiy buyurtma mablağlari, bosma naşrlardan tuşumlar hamda qonun hujjatlarida taqiqlanmagan boşqa tuşumlar hisobidan şakllanadi.',
     ],
@@ -66,7 +66,7 @@ export const FAQ: Faq[] = [
   {
     id: '30-yoshdan-keyin',
     cat: 'azolik',
-    q: '30 yoşdan keyin aʼzolik nima böladi?',
+    q: 'Aʼzo 30 yoşdan oşgaç uning aʼzoligi qanday hal etiladi?',
     a: [
       'Aʼzoning yoşi 30 dan oşgaç uning aʼzoligi bekor qilinişi mumkin. Ittifoqning rahbar organlariga saylangan aʼzolarga bu yoş çeklovi qöllanilmaydi.',
     ],
@@ -88,9 +88,9 @@ export const FAQ: Faq[] = [
   {
     id: 'yuridik-shaxslar',
     cat: 'azolik',
-    q: 'Taşkilotlar ham aʼzo bölişi mumkinmi?',
+    q: 'Yuridik şaxslar Ittifoqqa aʼzo bölişi mumkinmi?',
     a: [
-      'Ha. Yoşlar sohasidagi nodavlat notijorat taşkilotlari, korxona, muassasa va taşkilotlar, markazlar, klublar hamda taʼsis hujjatlari Ittifoqning Ustav maqsadlari, vazifalari va dasturiy hujjatlariga zid bölmagan boşqa yuridik şaxslar aʼzo bölişi mumkin. Ular Ittifoq Markaziy Kengaşi Ijroiya qömitasining qarori bilan aʼzolikka qabul qilinadi.',
+      'Mumkin. Yoşlar sohasidagi nodavlat notijorat taşkilotlari, korxona, muassasa va taşkilotlar, markazlar, klublar hamda taʼsis hujjatlari Ittifoqning Ustav maqsadlari, vazifalari va dasturiy hujjatlariga zid bölmagan boşqa yuridik şaxslar aʼzo bölişi mumkin. Ular Ittifoq Markaziy Kengaşi Ijroiya qömitasining qarori bilan aʼzolikka qabul qilinadi.',
     ],
     more: { href: USTAV('4.7'), label: 'Ustavning 4.7 va 4.8-bandlari' },
   },
@@ -141,7 +141,7 @@ export const FAQ: Faq[] = [
   {
     id: 'ott-yetakchisi',
     cat: 'taskilot',
-    q: 'Öz OTTimdagi yoşlar yetakçisini qanday topaman?',
+    q: 'Oliy taʼlim taşkilotidagi yoşlar yetakçisi haqidagi maʼlumotni qayerdan oliş mumkin?',
     a: [
       'Toşkent şahridagi oliy taʼlim taşkilotlari boşlanğiç taşkilotlarining yoşlar yetakçilari röyxati “OTT yoşlar yetakçilari” sahifasida berilgan. Unda OTT nomi yoki yetakçining ismi böyiça qidiriş mumkin.',
     ],
@@ -152,7 +152,7 @@ export const FAQ: Faq[] = [
   {
     id: 'tadbirda-qatnashish',
     cat: 'tadbir',
-    q: 'Tadbir va tanlovlarda qanday qatnaşaman?',
+    q: 'Tadbir va tanlovlarda iştirok etiş tartibi qanday?',
     a: [
       'Tanlovlar, röyxatdan ötiş va çellenjlar “Eʼlonlar” sahifasida, rejalaştirilgan tadbirlar “Tadbirlar va kalendar” sahifasida eʼlon qilinadi. Har bir eʼlonda qatnaşiş şartlari körsatiladi.',
     ],
@@ -161,9 +161,9 @@ export const FAQ: Faq[] = [
   {
     id: 'loyiha-taklif',
     cat: 'tadbir',
-    q: 'Öz loyiha ğoyamni qanday taklif qilaman?',
+    q: 'Loyiha ğoyasini qanday taklif etiş mumkin?',
     a: [
-      '“Elektron murojaat” sahifasida murojaat turi sifatida “Taklif”ni tanlang va ğoyangizni bayon qiling. Hujjat yoki taqdimot faylini (PDF, Word, rasm, 10 MB gaça) biriktiriş mumkin.',
+      '“Elektron murojaat” sahifasida murojaat turi sifatida “Taklif” tanlanadi va ğoya bayon etiladi. Hujjat yoki taqdimot faylini (PDF, Word, rasm, 10 MB gaça) biriktiriş mumkin.',
     ],
     more: { href: '/boglanish/murojaat', label: 'Elektron murojaat' },
   },
@@ -185,7 +185,7 @@ export const FAQ: Faq[] = [
   {
     id: 'murojaat-muddati',
     cat: 'murojaat',
-    q: 'Murojaatim qança vaqtda körib çiqiladi?',
+    q: 'Murojaatlar qanday muddatda körib çiqiladi?',
     a: [
       `${LAW.title}ning 28-moddasiga köra ariza va şikoyatlar kelib tuşgan kundan boşlab 15 kun ičida, qöşimça tekşiriş yoki hujjatlar talab etilsa, bir oygaça muddatda körib çiqiladi. Takliflar bir oygaça muddatda körib çiqiladi.`,
     ],

@@ -28,7 +28,9 @@ export function FaqItem({ f, base }: { f: Faq; base: string }) {
         )}
         {f.more && (
           <Link href={`${base}${f.more.href}`} className="more-btn">
-            <More>{f.more.label}</More>
+            <More>
+              Batafsil<span className="sr-only">{`: ${f.more.label}`}</span>
+            </More>
           </Link>
         )}
       </div>

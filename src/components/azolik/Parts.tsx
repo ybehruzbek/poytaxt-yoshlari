@@ -1,12 +1,14 @@
 /** “Aʼzo böliş” sahifasining qismlari: şartlar va tartib (serverda çiziladi) */
 import Link from 'next/link'
 
-import { CONDITIONS, STEPS } from './data'
+import type { getAzolik } from '@/lib/cms/sahifalar'
+
+type AZ = Awaited<ReturnType<typeof getAzolik>>
 
 const USTAV = (L: (h: string) => string, band: string) => L(`/hujjatlar/normativ/ustav#band-${band}`)
 
 /** Kim aʼzo bölişi mumkin — uç şart */
-export function Conditions({ L }: { L: (h: string) => string }) {
+export function Conditions({ L, CONDITIONS }: { L: (h: string) => string; CONDITIONS: AZ['CONDITIONS'] }) {
   return (
     <ul className="az-cond">
       {CONDITIONS.map((c) => (
@@ -23,7 +25,7 @@ export function Conditions({ L }: { L: (h: string) => string }) {
 }
 
 /** Qabul qiliş tartibi — uç bosqiç */
-export function Steps({ L }: { L: (h: string) => string }) {
+export function Steps({ L, STEPS }: { L: (h: string) => string; STEPS: AZ['STEPS'] }) {
   return (
     <ol className="az-steps">
       {STEPS.map((s, i) => (

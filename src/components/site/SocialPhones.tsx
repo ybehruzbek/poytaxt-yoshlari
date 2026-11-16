@@ -16,7 +16,16 @@ export const Icon: Record<Net, ReactNode> = {
   ),
   instagram: (
     <>
-      <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
+      <rect
+        x="3"
+        y="3"
+        width="18"
+        height="18"
+        rx="5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
       <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
       <circle cx="17.5" cy="6.5" r="1.2" />
     </>
@@ -53,10 +62,10 @@ export const Arrow = () => (
  * dark — ekran töq (holat satri oq yoziladi).
  */
 const PHONES: Record<Net, { aria: string; dark: boolean }> = {
-  telegram: { aria: 'Telegram kanalimiz', dark: true },
-  instagram: { aria: 'Instagram sahifamiz', dark: true },
-  facebook: { aria: 'Facebook sahifamiz', dark: false },
-  youtube: { aria: 'YouTube kanalimiz', dark: true },
+  telegram: { aria: 'Kengaşning Telegram kanali', dark: true },
+  instagram: { aria: 'Kengaşning Instagram sahifasi', dark: true },
+  facebook: { aria: 'Kengaşning Facebook sahifasi', dark: false },
+  youtube: { aria: 'Kengaşning YouTube kanali', dark: true },
 }
 
 export async function SocialPhones() {
@@ -70,7 +79,9 @@ export async function SocialPhones() {
           <h2 className="h2">
             Ijtimoiy <span>tarmoqlar</span>
           </h2>
-          <p className="body4">Kengaşning rasmiy sahifalari: yangiliklar, eʼlonlar va tadbirlar haqida xabarlar.</p>
+          <p className="body4">
+            Kengaşning rasmiy sahifalari: yangiliklar, eʼlonlar va tadbirlar haqida xabarlar.
+          </p>
         </div>
         <div className="sp-phones">
           {nets.map((net) => {
@@ -91,7 +102,13 @@ export async function SocialPhones() {
                     <i />
                   </span>
                   <span className="ph-scr ph-shot">
-                    <img src={`/img/socials/${net}.webp`} alt="" loading="lazy" width={390} height={844} />
+                    <img
+                      src={`/img/socials/${net}.webp`}
+                      alt=""
+                      loading="lazy"
+                      width={390}
+                      height={844}
+                    />
                   </span>
                 </span>
                 <span className="sp-phone-label">

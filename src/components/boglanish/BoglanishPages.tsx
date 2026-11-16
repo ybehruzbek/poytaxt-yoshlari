@@ -5,7 +5,8 @@ import { AppealForm } from '@/components/site/AppealForm'
 import { More } from '@/components/site/MoreBtn'
 import { Svg } from '@/components/site/SocialPhones'
 
-import { ADDRESS, EMAILS, HOURS, LAW, MAPS, PHONES, RECEPTIONS, SOCIALS } from './data'
+import { type AloqaData, getAloqa } from '@/lib/cms/aloqa'
+
 import { OpenNow } from './OpenNow'
 
 /* ---------- umumiy bölaklar ---------- */
@@ -63,7 +64,8 @@ function Mail({ to }: { to: string }) {
 
 const net = (n: string) => n.toLowerCase() as 'telegram' | 'instagram' | 'facebook'
 
-function Socials() {
+function Socials({ A }: { A: AloqaData }) {
+  const { SOCIALS } = A
   return (
     <div className="bg-soc">
       {SOCIALS.map((s) => (
@@ -82,15 +84,16 @@ function Socials() {
 }
 
 /** Fuqarolar qabuli jadvali */
-function Reception({ cards }: { cards?: boolean }) {
+function Reception({ A, cards }: { A: AloqaData; cards?: boolean }) {
+  const { RECEPTIONS } = A
   return (
     <section className="sec bg-sec" id="qabul">
       <div className="wrap">
         <div className="bg-sec-head">
           <h2 className="h2">Fuqarolar qabuli</h2>
           <p>
-            Kengaş raisi va bölim boşliqlari jadvalda körsatilgan kunlarda fuqarolarni şaxsan qabul qiladi.
-            Qabulga oldindan telefon orqali yoziliş tavsiya etiladi.
+            Kengaş raisi va bölim boşliqlari jadvalda körsatilgan kunlarda fuqarolarni şaxsan qabul
+            qiladi. Qabulga oldindan telefon orqali yoziliş tavsiya etiladi.
           </p>
         </div>
         {cards ? (
@@ -152,7 +155,8 @@ function MapFrame({
 /* ===================== Aloqa maʼlumotlari ===================== */
 
 /** Ikki ustun: çapda aloqa röyxati, öngda xarita; ostida qabul hafta kunlari kartalarida */
-function AloqaB({ L }: { L: (h: string) => string }) {
+function AloqaB({ A, L }: { A: AloqaData; L: (h: string) => string }) {
+  const { ADDRESS, EMAILS, HOURS, MAPS, PHONES } = A
   const rows = [
     {
       d: PATH.phone,
@@ -219,24 +223,26 @@ function AloqaB({ L }: { L: (h: string) => string }) {
                 </div>
               </div>
             ))}
-            <Socials />
+            <Socials A={A} />
           </div>
           <div className="bg-mapcard">
             <MapFrame src={MAPS.yandexEmbed} />
-            <MapLinks />
+            <MapLinks A={A} />
           </div>
         </div>
       </section>
-      <Reception cards />
+      <Reception A={A} cards />
       <section className="sec bg-sec">
         <div className="wrap">
           <div className="bg-cta">
             <div>
-              <h2 className="h2">Savol, taklif yoki şikoyatingiz bormi?</h2>
+              <h2 className="h2">Savol, taklif va şikoyatlar</h2>
               <p>Elektron murojaat yuboring: u qonunda belgilangan muddatda körib çiqiladi.</p>
             </div>
             <Link href={L('/boglanish/murojaat')} className="more-btn">
-              <More>Murojaat yuboriş</More>
+              <More>
+                Batafsil<span className="sr-only">: Murojaat yuboriş</span>
+              </More>
             </Link>
           </div>
         </div>
@@ -245,25 +251,31 @@ function AloqaB({ L }: { L: (h: string) => string }) {
   )
 }
 
-export function AloqaPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
+export async function AloqaPage({ crumbs, L }: { crumbs: ReactNode; L: (h: string) => string }) {
+  const A = await getAloqa(L('').split('/')[1] || 'uz')
   return (
     <div className="bg">
       <Head crumbs={crumbs} title="Aloqa maʼlumotlari" />
-      <AloqaB L={L} />
+      <AloqaB A={A} L={L} />
     </div>
   )
 }
 
 /* ---------- xaritani tashqi ilovada oçiş ---------- */
 
-function MapLinks() {
+function MapLinks({ A }: { A: AloqaData }) {
+  const { MAPS } = A
   return (
     <div className="bg-maplinks">
       <a href={MAPS.yandex} target="_blank" rel="noopener noreferrer" className="more-btn">
-        <More>Yandex Xaritalarda oçiş</More>
+        <More>
+          Batafsil<span className="sr-only">: Yandex Xaritalarda oçiş</span>
+        </More>
       </a>
       <a href={MAPS.google} target="_blank" rel="noopener noreferrer" className="more-btn">
-        <More>Google Mapsʼda oçiş</More>
+        <More>
+          Batafsil<span className="sr-only">: Google Mapsʼda oçiş</span>
+        </More>
       </a>
     </div>
   )
@@ -273,8 +285,8 @@ function MapLinks() {
 
 const STEPS = [
   {
-    t: 'Yozing',
-    d: 'Murojaat turini tanlang, masalani bayon qiling, kerak bölsa fayl biriktiring.',
+    t: 'Yuboriladi',
+    d: 'Murojaat turi tanlanadi, masala bayon etiladi, zarur hollarda fayl biriktiriladi.',
   },
   {
     t: 'Körib çiqiladi',
@@ -286,7 +298,8 @@ const STEPS = [
   },
 ]
 
-function Terms() {
+function Terms({ A }: { A: AloqaData }) {
+  const { LAW } = A
   return (
     <div className="bg-terms">
       {LAW.terms.map((t) => (
@@ -303,7 +316,7 @@ function Terms() {
 }
 
 /** Forma va jarayon: çapda qadamlar va muddatlar, öngda forma */
-function MurojaatA() {
+function MurojaatA({ A }: { A: AloqaData }) {
   return (
     <section className="sec bg-sec">
       <div className="wrap bg-split bg-split--form">
@@ -319,7 +332,7 @@ function MurojaatA() {
               </li>
             ))}
           </ol>
-          <Terms />
+          <Terms A={A} />
         </div>
         <AppealForm />
       </div>
@@ -327,11 +340,12 @@ function MurojaatA() {
   )
 }
 
-export function MurojaatPage({ crumbs }: { crumbs: ReactNode }) {
+export async function MurojaatPage({ crumbs, locale = 'uz' }: { crumbs: ReactNode; locale?: string }) {
+  const A = await getAloqa(locale)
   return (
     <div className="bg">
       <Head crumbs={crumbs} title="Elektron murojaat" />
-      <MurojaatA />
+      <MurojaatA A={A} />
     </div>
   )
 }

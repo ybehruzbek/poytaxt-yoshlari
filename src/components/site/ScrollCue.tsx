@@ -24,11 +24,11 @@ export function ScrollCue() {
   }
 
   return (
-    <button type="button" className="cue" ref={root} onClick={go} aria-label="Pastga suring">
+    <button type="button" className="cue" ref={root} onClick={go} aria-label="Sahifa davomiga ötiş">
       <span className="cue-mouse" aria-hidden="true">
         <i />
       </span>
-      <span className="cue-t">Pastga suring</span>
+      <span className="cue-t">Davomi</span>
     </button>
   )
 }

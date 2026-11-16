@@ -1,18 +1,18 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
-import { type Announce, ANNOUNCEMENTS } from './announcements'
+import type { Announce } from './types'
 import { AnnounceList } from './AnnounceList'
-import { DIRECTIONS, PROJECTS } from './data'
 import { DirsShow } from './DirsShow'
-import { EVENTS } from './events'
 import { EventsList } from './EventsList'
 import { DirC, ProjC, ResultsB } from './FaViews'
 import { ProjectsList } from './ProjectsList'
 import { fmtDate, TG } from './types'
 import { More } from '@/components/site/MoreBtn'
+import { getFaoliyat } from '@/lib/cms/faoliyat'
 
-const TODAY = new Date().toISOString().slice(0, 10)
+/** Bugungi sana (Toşkent vaqti) — yaqin va ötgan tadbirlarni ajratiş uçun */
+const today = () => new Date(Date.now() + 5 * 3600_000).toISOString().slice(0, 10)
 
 /** Sahifa boşi: yöl va sarlavha (qoida: H1 ostida izoh matni yöq) */
 function Head({ crumbs, title }: { crumbs: ReactNode; title: string }) {
@@ -28,49 +28,57 @@ function Head({ crumbs, title }: { crumbs: ReactNode; title: string }) {
 
 /* ===================== Faoliyat yönalişlari ===================== */
 
-export function DirectionsPage({
+export async function DirectionsPage({
   crumbs,
   base,
   projBase,
+  locale = 'uz',
 }: {
   crumbs: ReactNode
   base: string
   projBase: string
+  locale?: string
 }) {
+  const f = await getFaoliyat(locale)
   return (
     <div className="fa">
       <Head
         crumbs={crumbs}
         title="Faoliyat yönalişlari"
       />
-      <DirsShow base={base} projBase={projBase} />
+      <DirsShow f={f} base={base} projBase={projBase} />
     </div>
   )
 }
 
-export function DirectionPage({
+export async function DirectionPage({
   slug,
   crumbs,
   projBase,
   listHref,
+  locale = 'uz',
 }: {
   slug: string
   crumbs: ReactNode
   projBase: string
   listHref: string
+  locale?: string
 }) {
-  const d = DIRECTIONS.find((x) => x.slug === slug)!
+  const f = await getFaoliyat(locale)
+  const d = f.directions.find((x) => x.slug === slug)
+  if (!d) return null
   return (
     <div className="fa">
       <Head crumbs={crumbs} title={d.title} />
-      <DirC slug={d.slug} projBase={projBase} listHref={listHref} />
+      <DirC f={f} slug={d.slug} projBase={projBase} listHref={listHref} />
     </div>
   )
 }
 
 /* ===================== Loyihalar ===================== */
 
-export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string }) {
+export async function ProjectsPage({ crumbs, base, locale = 'uz' }: { crumbs: ReactNode; base: string; locale?: string }) {
+  const f = await getFaoliyat(locale)
   return (
     <div className="fa">
       <Head
@@ -80,8 +88,8 @@ export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string
       <section className="sec fa-sec">
         <div className="wrap">
           <ProjectsList
-            projects={PROJECTS}
-            dirs={DIRECTIONS.map(({ slug, short }) => ({ slug, title: short }))}
+            projects={f.projects}
+            dirs={f.directions.map(({ slug, short }) => ({ slug, title: short }))}
             base={base}
           />
         </div>
@@ -90,29 +98,35 @@ export function ProjectsPage({ crumbs, base }: { crumbs: ReactNode; base: string
   )
 }
 
-export function ProjectPage({
+export async function ProjectPage({
   slug,
   crumbs,
   listHref,
+  locale = 'uz',
 }: {
   slug: string
   crumbs: ReactNode
   listHref: string
+  locale?: string
 }) {
-  const p = PROJECTS.find((x) => x.slug === slug)!
+  const f = await getFaoliyat(locale)
+  const p = f.projects.find((x) => x.slug === slug)
+  if (!p) return null
   return (
     <div className="fa">
       <Head crumbs={crumbs} title={p.title} />
-      <ProjC p={p} listHref={listHref} />
+      <ProjC f={f} p={p} listHref={listHref} />
     </div>
   )
 }
 
 /* ===================== Tadbirlar va kalendar ===================== */
 
-export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: string }) {
-  const up = EVENTS.filter((e) => e.date >= TODAY).sort((a, b) => a.date.localeCompare(b.date))
-  const past = EVENTS.filter((e) => e.date < TODAY)
+export async function EventsPage({ crumbs, annHref, locale = 'uz' }: { crumbs: ReactNode; annHref: string; locale?: string }) {
+  const f = await getFaoliyat(locale)
+  const t = today()
+  const up = f.events.filter((e) => e.date >= t).sort((a, b) => a.date.localeCompare(b.date))
+  const past = f.events.filter((e) => e.date < t)
   return (
     <div className="fa">
       <Head
@@ -161,7 +175,7 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
             <Link href={annHref}>“Eʼlonlar”</Link> sahifasida joylaştiriladi.
           </p>
           <h2 className="fa-h2">Tadbirlar arxivi</h2>
-          <EventsList events={past} dirs={DIRECTIONS.map(({ slug, short }) => ({ slug, title: short }))} />
+          <EventsList events={past} dirs={f.directions.map(({ slug, short }) => ({ slug, title: short }))} />
         </div>
       </section>
     </div>
@@ -171,10 +185,8 @@ export function EventsPage({ crumbs, annHref }: { crumbs: ReactNode; annHref: st
 /* ===================== Eʼlonlar ===================== */
 
 export function AnnouncePage({ crumbs, extra = [] }: { crumbs: ReactNode; extra?: Announce[] }) {
-  // kanaldan kelgan eʼlonlar + oldin yiğilganlar (bir xil post takrorlanmaydi), yangisi tepada
-  const items = [...extra, ...ANNOUNCEMENTS.filter((a) => !extra.some((x) => x.id === a.id))].sort((a, b) =>
-    b.date.localeCompare(a.date),
-  )
+  // barça eʼlonlar bazada (admin panel → Yangiliklar, turi “Eʼlon”), yangisi tepada
+  const items = [...extra].sort((a, b) => b.date.localeCompare(a.date))
   return (
     <div className="fa">
       <Head
@@ -192,14 +204,15 @@ export function AnnouncePage({ crumbs, extra = [] }: { crumbs: ReactNode; extra?
 
 /* ===================== Natijalar va hisobotlar ===================== */
 
-export function ResultsPage({ crumbs }: { crumbs: ReactNode }) {
+export async function ResultsPage({ crumbs, locale = 'uz' }: { crumbs: ReactNode; locale?: string }) {
+  const f = await getFaoliyat(locale)
   return (
     <div className="fa">
       <Head
         crumbs={crumbs}
         title="Natijalar va hisobotlar"
       />
-      <ResultsB />
+      <ResultsB f={f} />
     </div>
   )
 }
