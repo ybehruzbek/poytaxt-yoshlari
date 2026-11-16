@@ -1,0 +1,106 @@
+/* ===== Volontyorlik sahifasi ===== */
+.vl-ic{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:10px;border-radius:14px;background:rgba(255,210,90,.35);color:var(--navy)}
+.vl-ic svg{width:100%;height:100%}
+
+/* raqamlar */
+.vl-stats{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vl-stats li{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:24px;background:var(--navy-bg);color:#fff}
+.vl-stats b{flex:none;font:800 clamp(30px,3vw,42px)/1 var(--f-head);color:var(--yellow);white-space:nowrap}
+.vl-stats span{font-size:14px;line-height:1.45;color:rgba(255,255,255,.8)}
+
+/* yönalişlar: çapda plitkalar, öngda tanlangan yönaliş */
+.vl-dirs{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:start}
+.vl-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.vl-tile{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:20px;background:var(--bg);text-align:left;font:700 14.5px/1.3 var(--f-body);color:var(--navy);cursor:pointer;transition:border-color .2s,background .2s,transform .35s cubic-bezier(.34,1.56,.64,1)}
+.vl-tile:hover{transform:translateY(-2px);border-color:var(--yellow)}
+.vl-tile[aria-selected=true]{background:var(--navy-bg);border-color:var(--navy-bg);color:#fff}
+.vl-tile[aria-selected=true] .vl-ic{background:var(--yellow)}
+.vl-card{position:sticky;top:110px;display:flex;flex-direction:column;padding:28px;border:1px solid var(--line);border-radius:30px;background:var(--bg)}
+.vl-card-head{display:flex;align-items:center;gap:16px}
+.vl-card-head .vl-ic{width:56px;height:56px;padding:13px;border-radius:18px;background:var(--yellow)}
+.vl-card h3{margin:0;font:800 21px/1.25 var(--f-head);color:var(--navy)}
+.vl-age{display:inline-block;margin-top:6px;padding:5px 11px;border-radius:99px;background:rgba(127,200,160,.3);font:700 12.5px/1 var(--f-body);color:var(--navy)}
+.vl-card > p{margin:18px 0 0;font-size:15px;line-height:1.6;color:var(--muted)}
+.vl-card h4{margin:20px 0 10px;font:700 12.5px/1.4 var(--f-body);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.vl-card ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vl-card li{position:relative;padding-left:22px;font-size:15px;line-height:1.5;color:var(--navy)}
+.vl-card li::before{content:'';position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:50%;background:var(--yellow)}
+.vl-ex{margin:20px 0 0!important;padding:14px 16px;border-radius:16px;background:rgba(255,210,90,.16);color:var(--navy)!important;font-size:14px!important}
+.vl-card .more-btn{margin-top:22px;align-self:flex-start;border:0;cursor:pointer}
+
+/* test */
+.vl-quiz{max-width:880px;margin:0 auto;padding:32px;border-radius:32px;background:radial-gradient(100% 120% at 100% 0%,rgba(255,210,90,.16),transparent 55%),var(--navy-bg);color:#fff}
+.vl-quiz-bar{display:flex;gap:6px;margin-bottom:22px}
+.vl-quiz-bar i{flex:1;height:6px;border-radius:99px;background:rgba(255,255,255,.15);transition:background .3s}
+.vl-quiz-bar i.on{background:var(--yellow)}
+.vl-quiz-n{margin:0;font:700 12.5px/1.4 var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.6)}
+.vl-quiz h3{margin:8px 0 20px;font:800 clamp(22px,2.2vw,28px)/1.25 var(--f-head);color:#fff}
+.vl-quiz-a{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vl-quiz-a button{padding:16px 18px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.05);text-align:left;font:700 15px/1.35 var(--f-body);color:#fff;cursor:pointer;transition:background .2s,border-color .2s}
+.vl-quiz-a button:hover{background:var(--yellow);border-color:var(--yellow);color:var(--navy)}
+.vl-quiz-back{margin-top:16px;padding:0;border:0;background:none;font:700 14px/1.4 var(--f-body);color:rgba(255,255,255,.75);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.vl-quiz-top{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vl-quiz-top > div{display:grid;gap:8px;padding:18px;border-radius:20px;background:rgba(255,255,255,.06)}
+.vl-quiz-top > div.first{background:rgba(255,210,90,.16);box-shadow:inset 0 0 0 1px var(--yellow)}
+.vl-quiz-top b{font:800 17px/1.3 var(--f-head)}
+.vl-quiz-top small{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.75)}
+.vl-quiz-act{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:22px}
+.vl-quiz-act .vl-quiz-back{margin:0}
+.vl-quiz .more-btn{border:0;cursor:pointer}
+
+/* tartib */
+.vl-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;counter-reset:s}
+.vl-steps li{position:relative;padding:24px 20px;border:1px solid var(--line);border-radius:26px;background:var(--bg)}
+.vl-steps li::after{content:'';position:absolute;top:44px;right:-15px;width:16px;height:2px;background:var(--line)}
+.vl-steps li:last-child::after{display:none}
+.vl-steps span{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--yellow);font:800 17px/1 var(--f-head);color:var(--navy)}
+.vl-steps h3{margin:16px 0 6px;font:800 17px/1.25 var(--f-head);color:var(--navy)}
+.vl-steps p{margin:0;font-size:14px;line-height:1.55;color:var(--muted)}
+
+/* ariza */
+.vl-form-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
+.vl-form-side p{margin:16px 0 0;font-size:16px;line-height:1.65;color:var(--muted)}
+.vl-pick{border:0;margin:0;padding:0;min-width:0}
+.vl-pick legend{margin-bottom:10px;font:700 14px/1.3 var(--f-body);color:var(--navy)}
+.vl-pick legend i{color:#d33;font-style:normal}
+.vl-pick > div{display:flex;flex-wrap:wrap;gap:8px}
+.vl-pill{position:relative;cursor:pointer}
+.vl-pill input{position:absolute;opacity:0;pointer-events:none}
+.vl-pill span{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:99px;font:700 13.5px/1.2 var(--f-body);color:var(--navy);transition:background .2s,border-color .2s}
+.vl-pill input:checked + span{background:var(--yellow);border-color:var(--yellow)}
+.vl-pill input:focus-visible + span{outline:2px solid var(--navy);outline-offset:2px}
+.vl-form textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:14px;font:inherit;resize:vertical}
+
+/* huquqlar */
+.vl-law{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vl-law > div{padding:28px;border:1px solid var(--line);border-radius:30px;background:var(--bg)}
+.vl-law h3{margin:0 0 14px;font:800 19px/1.25 var(--f-head);color:var(--navy)}
+.vl-law ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.vl-law li{position:relative;padding-left:26px;font-size:15px;line-height:1.55;color:var(--navy)}
+.vl-law li::before{content:'✓';position:absolute;left:0;top:0;font-weight:800;color:var(--green)}
+.vl-law > div:nth-child(2) li::before{content:'•';color:var(--blue);font-size:20px;line-height:1.1}
+.vl-law-src{grid-column:1/-1;margin:0;font-size:13.5px;color:var(--muted)}
+.vl-law-src a{color:var(--navy);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+
+/* tadbirlar: dastlab 6 ta, qolganlari “Köproq körsatiş” bilan oçiladi */
+.vl-ev:not([data-open]) > li:nth-child(n+7){display:none}
+.vl-ev-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.vl-ev{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.vl-ev a{display:grid;grid-template-rows:auto auto auto 1fr;height:100%;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:var(--bg);color:inherit;text-decoration:none;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+.vl-ev a:hover{transform:translateY(-3px);box-shadow:0 18px 36px rgba(83,40,34,.1)}
+.vl-ev img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.vl-ev time{margin:16px 20px 0;font:700 13px/1 var(--f-body);color:var(--muted)}
+.vl-ev h3{margin:8px 20px 0;font:800 17px/1.3 var(--f-head);color:var(--navy)}
+.vl-ev p{margin:8px 20px 20px;font-size:14px;line-height:1.55;color:var(--muted)}
+
+@media (max-width:1100px){
+  .vl-dirs,.vl-form-wrap{grid-template-columns:1fr}
+  .vl-card{position:static}
+  .vl-steps{grid-template-columns:repeat(2,1fr)}
+  .vl-steps li::after{display:none}
+  .vl-ev{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  .vl-stats,.vl-tiles,.vl-quiz-a,.vl-quiz-top,.vl-steps,.vl-law,.vl-ev{grid-template-columns:1fr}
+  .vl-quiz{padding:22px}
+}
