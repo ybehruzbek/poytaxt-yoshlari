@@ -23,6 +23,53 @@
 .kg-pow span{flex:none;width:40px;font:800 20px/1.3 var(--f-head);color:var(--blue)}
 .kg-pow p{line-height:1.6}
 
+/* Vakolatlari — uç mavzu guruhi */
+.kv-b{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.kv-b-col{position:relative;border:1px solid var(--line);border-radius:30px;background:var(--bg);overflow:hidden}
+.kv-b-col header{padding:24px 24px 18px;border-bottom:1px solid var(--line)}
+.kv-b-col h3{margin:0;font:800 18px/1.25 var(--f-head);color:var(--navy)}
+.kv-b-col ol{list-style:none;margin:0;padding:8px 24px 14px}
+.kv-b-col li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--line)}
+.kv-b-col li:first-child{border-top:0}
+.kv-ic{display:grid;place-items:center;flex:none;width:30px;height:30px;color:var(--navy)}
+.kv-ic svg{width:100%;height:100%}
+.kv p{margin:0;font-size:15px;line-height:1.55;color:var(--navy)}
+@media (max-width:1180px){.kv-b{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){.kv-b{grid-template-columns:1fr}}
+
+/* Kengaş tarkibi — tuzilma sxemasi */
+.km-ic{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:10px;border-radius:14px;background:rgba(255,210,90,.35);color:var(--navy)}
+.km-ic svg,.km-link-ic svg,.km-c-root-ic svg{width:100%;height:100%}
+.km-link{display:flex;align-items:center;gap:14px;margin:18px 0 0;padding:18px 22px;border-radius:22px;background:var(--navy-bg);color:#fff;font:700 15px/1.5 var(--f-body)}
+.km-link-ic{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:10px;border-radius:50%;background:var(--yellow);color:var(--navy)}
+.km ul,.km ol{list-style:none;margin:0;padding:0}
+.km-c{display:grid}
+/* ikki tarmoq bir setkada: belgi, röyxat va pastki blok har ikki tomonda bir çiziqda va bir xil balandlikda */
+.km-c-branches{grid-template-rows:auto 1fr auto;row-gap:0}
+.km-c-branches section{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
+.km-c-branches section > :last-child{display:flex;align-items:center;margin-top:18px}
+.km-extra{margin:18px 0 0;padding:18px 22px;border-radius:22px;background:rgba(127,200,160,.14);font-size:14.5px;line-height:1.55;color:var(--navy)}
+.km-c-facts{display:flex!important;flex-wrap:wrap;gap:8px;margin-top:14px!important}
+.km-c-facts li{padding:7px 12px;border-radius:99px;background:rgba(255,255,255,.1);font:700 13px/1.2 var(--f-body);color:var(--yellow)}
+/* C */
+.km-c{gap:0;justify-items:center}
+.km-c-root{position:relative;display:flex;align-items:center;gap:18px;max-width:720px;padding:22px 28px;border-radius:26px;background:var(--navy-bg);color:#fff}
+.km-c-root-ic{display:grid;place-items:center;flex:none;width:56px;height:56px;padding:13px;border-radius:18px;background:var(--yellow);color:var(--navy)}
+.km-c-root b{display:block;font:800 20px/1.2 var(--f-head);color:var(--yellow)}
+.km-c-root span{display:block;margin-top:4px;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.8)}
+.km-c-branches{position:relative;display:grid;grid-template-columns:1fr 1.2fr;gap:24px;width:100%;margin-top:56px}
+.km-c-branches::before{content:'';position:absolute;left:calc((100% - 24px) / 2.2 / 2);right:calc((100% - 24px) * 1.2 / 2.2 / 2);top:-28px;height:28px;border:2px solid rgba(83,40,34,.2);border-bottom:0;border-radius:18px 18px 0 0}
+.km-c-branches::after{content:'';position:absolute;left:50%;top:-56px;height:28px;border-left:2px solid rgba(83,40,34,.2)}
+.km-c-branches section{padding:24px;border:1px solid var(--line);border-radius:28px;background:var(--bg)}
+.km-c-tag{display:inline-block;align-self:start;justify-self:start;margin:0 0 16px;padding:8px 14px;border-radius:99px;background:var(--yellow);font:800 14px/1 var(--f-head);color:var(--navy)}
+.km-c-branches ol{display:grid;gap:12px}
+.km-c-branches ol li{display:flex;align-items:center;gap:14px;font-size:15px;line-height:1.45;color:var(--navy)}
+.km-c-branches ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.km-c-branches ul li{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;background:rgba(83,40,34,.04);font:700 13.5px/1.3 var(--f-body);color:var(--navy)}
+.km-c-branches ul .km-ic{width:36px;height:36px;padding:8px;border-radius:11px;background:rgba(127,200,160,.3)}
+@media (max-width:1180px){.km-c-branches{grid-template-columns:1fr;margin-top:24px}.km-c-branches section+section{margin-top:18px}.km-c-branches::before,.km-c-branches::after{display:none}}
+@media (max-width:640px){.km-c-branches ul{grid-template-columns:1fr 1fr}.km-c-root{flex-direction:column;align-items:flex-start}}
+
 /* Tarkibi */
 .kg-mem{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .kg-mem-lead{font-size:18px;line-height:1.65;margin-bottom:24px}

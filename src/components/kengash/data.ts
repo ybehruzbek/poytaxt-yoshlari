@@ -56,6 +56,10 @@ export const MEMBERS = {
   ],
   fields: ['Taʼlim', 'Fan', 'Madaniyat va sanʼat', 'Ommaviy axborot vositalari', 'Işlab çiqariş va xizmat', 'Tadbirkorlik va fermerlik', 'Sport', 'Soğliqni saqlaş', 'Ekologiya', 'Qurolli kuçlar', 'Huquq-tartibot organlari'],
   link: 'Toşkent şahar hududiy Kengaşining raisi lavozimi böyiça Markaziy Kengaş tarkibiga kiradi.',
+  /** Ustav, 5.5.1-band, 2-xatboşi */
+  extra: 'Markaziy Kengaş tarkibiga Ittifoqning hamkor taşkilotlari vakillari hamda katta tajribaga ega bölgan şaxslar ham kiritilişi mumkin.',
+  /** Ustav, 5.5-band va 5.5.1-band, 3-xatboşi */
+  facts: ['Kamida 61 nafar aʼzo', '5 yil muddatga saylanadi', 'Har bir hududdan kamida 2 nafar yoşlar vakili'],
 }
 
 /* Rahbariyat: rais — Ittifoqning rasmiy sahifasi (yoshlarittifoqi.uz/uz/manage, 2024) va ochiq manbalar */

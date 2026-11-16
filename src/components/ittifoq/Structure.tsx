@@ -2,9 +2,9 @@ import Link from 'next/link'
 
 import { More } from '@/components/site/MoreBtn'
 
-import { type Body, STRUCTURE } from './data'
+import { type Body } from './data'
+import type { IttifoqData } from '@/lib/cms/sahifalar'
 
-const S = STRUCTURE
 
 function Meta({ items }: { items: string[] }) {
   return (
@@ -28,18 +28,21 @@ function Card({ b, cls, tag }: { b: Body; cls: string; tag?: string }) {
 }
 
 /**
- * “Qanday tuzilganmiz” — Ittifoq Ustavi asosida:
+ * “Taşkiliy tuzilma” — Ittifoq Ustavi asosida:
  * 1) rahbar organlar va kim kimni saylaşi (5-bob), 2) taşkiliy tuzilma darajalari va
  * delegatlar saylov zanjiri (6-bob), 3) faoliyat tamoyillari (1-bob).
  */
-export function Structure({ L }: { L: (h: string) => string }) {
+export function Structure({ L, D }: { L: (h: string) => string; D: IttifoqData }) {
+  const { STRUCTURE: S } = D
   return (
     <section className="sec st">
       <div className="wrap">
         <div className="sec-head st-head">
-          <h2 className="h2">Qanday tuzilganmiz</h2>
+          <h2 className="h2">Taşkiliy tuzilma</h2>
           <Link href={L('/hujjatlar/normativ/ustav')} className="more-btn">
-            <More>Ustav matni</More>
+            <More>
+              Batafsil<span className="sr-only">: Ustav matni</span>
+            </More>
           </Link>
         </div>
 
@@ -80,8 +83,9 @@ export function Structure({ L }: { L: (h: string) => string }) {
                   <Meta items={l.meta} />
                   {i === 0 && (
                     <p className="st-us">
-                      <b>Toşkent şahar hududiy Kengaşi</b> — poytaxt yoşlari, oliy taʼlim taşkilotlari hamda
-                      harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar bilan işlaydi.
+                      <b>Toşkent şahar hududiy Kengaşi</b> — poytaxt yoşlari, oliy taʼlim
+                      taşkilotlari hamda harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar
+                      bilan işlaydi.
                     </p>
                   )}
                 </div>
@@ -96,7 +100,10 @@ export function Structure({ L }: { L: (h: string) => string }) {
               <li>Hududiy kengaş konferensiyasi</li>
               <li>Qurultoy</li>
             </ol>
-            <p>Har bir daraja yuqori darajadagi konferensiyaga yoki Qurultoyga delegatlarni özi saylaydi.</p>
+            <p>
+              Har bir daraja yuqori darajadagi konferensiyaga yoki Qurultoyga delegatlarni özi
+              saylaydi.
+            </p>
           </aside>
         </div>
 

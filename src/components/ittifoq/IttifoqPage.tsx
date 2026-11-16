@@ -2,43 +2,45 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { FaqBlock } from '@/components/faq/FaqBlock'
-import { FAQ_AZOLIK } from '@/components/faq/data'
 import { More } from '@/components/site/MoreBtn'
 import { SplitWords } from '@/components/site/SplitWords'
 import { Arrow } from '@/components/site/SocialPhones'
 import { CompaniesA } from './Companies'
 import { CentresB } from './CentresAlt'
 import { Hero } from './Hero'
+import { History } from './History'
+import { Priorities } from './Priorities'
 import { OfficialB } from './AltThree'
 import { Structure } from './Structure'
 import { OrgsD } from './OrgsLogos'
 import { QuoteE } from './QuotePhoto'
-import { HISTORY, IMG, JOIN, MISSION, MORE_STATS, PRIORITIES, STATS, WHO } from './data'
-import { IntlB, PrivilegesB, ProjectsB } from './Sections'
+import { getIttifoq } from '@/lib/cms/sahifalar'
+import { IntlB, PrivilegesB } from './Sections'
 
 /** Ustav matnidagi band havolasi: /hujjatlar/normativ/ustav#band-4.2 */
-const USTAV = (L: (h: string) => string, band: string) => L(`/hujjatlar/normativ/ustav#band-${band}`)
+const USTAV = (L: (h: string) => string, band: string) =>
+  L(`/hujjatlar/normativ/ustav#band-${band}`)
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
-const pad = (i: number) => String(i + 1).padStart(2, '0')
-
 /**
  * "Özbekiston yoşlar ittifoqi" sahifasi (matn: docs/matnlar/ittifoq-haqida.md): hero, biz kimmiz, raqamlar,
- * qisqa tarix, maqsad, nima qilamiz, iqtibos, imtiyozlar, loyihalar, xalqaro hamkorlik, Yoşlar markazlari,
+ * qisqa tarix, maqsad, nima qilamiz, iqtibos, imtiyozlar, xalqaro hamkorlik, Yoşlar markazlari,
  * tuzilma, aʼzolik va rasmiy maʼlumotlar.
  */
-export function IttifoqPage({ L, crumbs, siblings }: P) {
+export async function IttifoqPage({ L, crumbs, siblings }: P) {
+  // sahifa mazmuni admin paneldan (Biz haqimizda → Ittifoq haqida sahifasi)
+  const D = await getIttifoq(L('').split('/')[1] || 'uz')
+  const { IMG, JOIN, MISSION, MORE_STATS, STATS, WHO } = D
   return (
     <div className="it">
-      <Hero L={L} crumbs={crumbs} />
+      <Hero D={D} L={L} crumbs={crumbs} />
 
       <section className="sec">
         <div className="wrap">
           <div className="it-who">
             <div>
-              <h2 className="h2">Biz kimmiz</h2>
-              <p className="it-motto">“{WHO.motto}”</p>
+              <h2 className="h2">Ittifoq haqida</h2>
             </div>
             <div className="it-who-txt">
               {WHO.paras.map((t) => (
@@ -77,19 +79,12 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
         </div>
       </section>
 
-      <section className="sec">
+      <section className="sec it-hsec">
         <div className="wrap">
           <div className="sec-head">
             <h2 className="h2">Qisqa tarix</h2>
           </div>
-          <ol className="it-hist">
-            {HISTORY.map((m) => (
-              <li key={m.y}>
-                <b>{m.y}</b>
-                <p>{m.t}</p>
-              </li>
-            ))}
-          </ol>
+          <History D={D} />
         </div>
       </section>
 
@@ -109,18 +104,11 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
               <span>Özbekiston yoşlar ittifoqining</span> <span>ustuvor yönalişlari</span>
             </h2>
           </div>
-          <ol className="it-pri">
-            {PRIORITIES.items.map((x, i) => (
-              <li key={x}>
-                <span>{pad(i)}</span>
-                <p>{x}</p>
-              </li>
-            ))}
-          </ol>
+          <Priorities D={D} />
         </div>
       </section>
 
-      <QuoteE />
+      <QuoteE D={D} />
 
       <section className="sec" id="mukofotlar">
         <div className="wrap">
@@ -128,40 +116,32 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             <h2 className="h2">Mukofot va imtiyozlar</h2>
           </div>
 
-          <PrivilegesB />
+          <PrivilegesB D={D} awardsHref={L('/faoliyat/davlat-mukofotlari')} locale={L('').split('/')[1] || 'uz'} />
         </div>
       </section>
 
       <section className="sec">
         <div className="wrap">
-          <div className="sec-head">
-            <h2 className="h2">Loyihalar yönalişlari</h2>
-          </div>
-
-          <ProjectsB />
+          <IntlB D={D} />
         </div>
       </section>
 
-      <section className="sec">
-        <div className="wrap">
-          <IntlB />
-        </div>
-      </section>
+      <CentresB D={D} />
 
-      <CentresB />
+      <OrgsD D={D} />
 
-      <OrgsD />
+      <CompaniesA D={D} />
 
-      <CompaniesA />
-
-      <Structure L={L} />
+      <Structure D={D} L={L} />
 
       <section className="sec it-join-sec" id="azo-bolish">
         <div className="wrap">
           <div className="sec-head it-join-head">
-            <h2 className="h2">Qanday aʼzo böliş mumkin</h2>
+            <h2 className="h2">Aʼzolikka qabul qiliş tartibi</h2>
             <Link href={USTAV(L, '4.1')} className="more-btn">
-              <More>Ustavning IV bobi</More>
+              <More>
+                Batafsil<span className="sr-only">: Ustavning IV bobi</span>
+              </More>
             </Link>
           </div>
 
@@ -213,7 +193,7 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </div>
             <div>
               <h3>
-                Aʼzolik qaysi hollarda bekor qilinadi <span className="it-band">4.6-band</span>
+                Aʼzolikni bekor qiliş asoslari <span className="it-band">4.6-band</span>
               </h3>
               <ul className="it-ends">
                 {JOIN.ends.map((x) => (
@@ -236,12 +216,17 @@ export function IttifoqPage({ L, crumbs, siblings }: P) {
             </Link>
           </div>
           <div className="it-join-faq">
-            <FaqBlock ids={FAQ_AZOLIK} base={L('')} title="Aʼzolik haqida savollar" section={false} />
+            <FaqBlock
+              pick="azolik"
+              base={L('')}
+              title="Aʼzolik haqida savollar"
+              section={false}
+            />
           </div>
         </div>
       </section>
 
-      <OfficialB />
+      <OfficialB D={D} locale={L('').replace('/', '')} />
 
       <section className="sec">
         <div className="wrap">{siblings}</div>

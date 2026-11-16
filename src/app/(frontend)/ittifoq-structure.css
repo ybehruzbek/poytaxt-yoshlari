@@ -1,0 +1,398 @@
+/* =====================================================================
+   “Taşkiliy tuzilma” — Ittifoq Ustavi asosidagi sxema (Structure.tsx)
+   ===================================================================== */
+.st-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-bottom: 40px;
+}
+.st-h {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 22px;
+  font: 800 22px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.st-h span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--yellow);
+  font-size: 16px;
+  color: #532822;
+}
+
+/* ---- kartalar ---- */
+.st-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--bg);
+  color: var(--grey);
+}
+.st-card h4 {
+  font: 800 22px/1.25 var(--f-head);
+  color: var(--navy);
+}
+.st-card p {
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.st-tag {
+  align-self: flex-start;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: var(--yellow);
+  font: 700 12px/1 var(--f-body);
+  color: #532822;
+}
+.st-meta {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.st-meta li {
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  font: 600 13px/1.2 var(--f-body);
+  color: var(--navy);
+}
+.st-card.is-top {
+  align-items: center;
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--navy-bg);
+  border-color: var(--navy-bg);
+}
+.st-card.is-top h4 {
+  font-size: clamp(28px, 3vw, 38px);
+  color: #fff;
+}
+.st-card.is-top p {
+  color: #ecdcd7;
+}
+.st-card.is-top .st-tag {
+  align-self: center;
+}
+.st-card.is-top .st-meta {
+  justify-content: center;
+}
+.st-card.is-top .st-meta li {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+.st-card.is-council {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: #532822;
+}
+.st-card.is-council h4 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  color: #532822;
+}
+.st-card.is-council .st-meta li {
+  border-color: rgba(83, 40, 34, 0.25);
+  color: #532822;
+}
+.st-card.is-mini {
+  padding: 20px 22px;
+  border-radius: 22px;
+}
+.st-card.is-mini h4 {
+  font-size: 18px;
+}
+.st-card.is-mini p {
+  font-size: 14.5px;
+}
+.st-card.is-audit {
+  border: 2px dashed var(--navy);
+}
+
+/* ---- rahbar organlar: daraxt ---- */
+.st-org {
+  margin-bottom: 64px;
+}
+.st-elect {
+  position: relative;
+  height: 76px;
+}
+.st-elect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 44px;
+  background: var(--navy);
+}
+/* Qurultoydan Markaziy Kengaş (çap ustun markazi) va nazorat komissiyasiga (öng ustun markazi) tarmoq */
+.st-br {
+  position: absolute;
+  top: 44px;
+  bottom: 0;
+  left: calc((100% - 20px) / 3);
+  right: calc((100% - 20px) / 6);
+  border: 2px solid var(--navy);
+  border-bottom: 0;
+  border-radius: 14px 14px 0 0;
+}
+.st-elect span {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1;
+  padding: 5px 14px;
+  border-radius: 99px;
+  border: 1.5px solid var(--navy);
+  background: var(--bg);
+  font: 700 12.5px/1 var(--f-body);
+  color: var(--navy);
+}
+.st-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.st-col {
+  display: grid;
+  gap: 0;
+}
+.st-sub {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-top: 28px;
+}
+/* Markaziy Kengaşdan rais va Ijroiya qömitasiga çiziq */
+.st-sub::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 14px;
+  border: 2px solid var(--navy);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  translate: 0 14px;
+}
+.st-sub::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 14px;
+  background: var(--navy);
+}
+
+/* ---- taşkiliy tuzilma: zinapoya ---- */
+.st-ladder {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+.st-levels {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.st-level {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 24px;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--bg);
+}
+.st-level.l2 {
+  margin-left: 40px;
+}
+.st-level.l3 {
+  margin-left: 80px;
+  background: #45a874;
+  border-color: #45a874;
+  color: #fff;
+}
+.st-level + .st-level::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 60px;
+  width: 2px;
+  height: 15px;
+  background: var(--navy);
+}
+.st-step {
+  align-self: start;
+  font: 800 15px/1.2 var(--f-head);
+  color: var(--blue);
+}
+.st-level.l3 .st-step {
+  color: #fff;
+  opacity: 0.85;
+}
+.st-level-b {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.st-level h4 {
+  font: 800 22px/1.25 var(--f-head);
+  color: var(--navy);
+}
+.st-level p {
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+.st-level.l3 h4,
+.st-level.l3 p {
+  color: #fff;
+}
+.st-level.l3 .st-meta li {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+.st-us {
+  margin-top: 4px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--yellow);
+  color: #532822;
+  font-size: 14.5px !important;
+}
+.st-chain {
+  position: sticky;
+  top: 120px;
+  padding: 24px;
+  border-radius: 28px;
+  background: var(--navy-bg);
+  color: #ecdcd7;
+}
+.st-chain > b {
+  display: block;
+  margin-bottom: 14px;
+  font: 800 18px/1.2 var(--f-head);
+  color: #fff;
+}
+.st-chain ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 26px;
+  counter-reset: none;
+}
+.st-chain li {
+  position: relative;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  font: 600 14.5px/1.3 var(--f-body);
+  color: #fff;
+}
+.st-chain li:last-child {
+  background: var(--yellow);
+  color: #532822;
+  font-weight: 800;
+}
+/* pastdan yuqoriga strelka */
+.st-chain li:not(:first-child)::after {
+  content: '↑';
+  position: absolute;
+  left: 50%;
+  bottom: -24px;
+  translate: -50% 0;
+  font: 800 16px/1 var(--f-head);
+  color: var(--yellow);
+}
+.st-chain p {
+  margin-top: 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+/* ---- tamoyillar ---- */
+.st-princ {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.st-princ b {
+  font: 800 16px/1.2 var(--f-head);
+  color: var(--navy);
+}
+.st-princ ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.st-princ li {
+  padding: 10px 20px;
+  border-radius: 99px;
+  border: 2px solid var(--navy);
+  font: 700 15px/1 var(--f-head);
+  color: var(--navy);
+}
+
+@media (max-width: 1100px) {
+  .st-row,
+  .st-ladder {
+    grid-template-columns: 1fr;
+  }
+  .st-br {
+    display: none;
+  }
+  .st-elect::before {
+    height: 100%;
+  }
+  .st-chain {
+    position: static;
+  }
+}
+@media (max-width: 760px) {
+  .st-sub {
+    grid-template-columns: 1fr;
+  }
+  .st-sub::before {
+    display: none;
+  }
+  .st-level,
+  .st-level.l2,
+  .st-level.l3 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-left: 0;
+    padding: 22px 20px;
+  }
+  .st-level + .st-level::before {
+    left: 50%;
+  }
+  .st-card {
+    padding: 22px 20px;
+  }
+}

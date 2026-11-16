@@ -1,0 +1,146 @@
+/* ===== Taʼsisçilikdagi taşkilotlar va media: belgili kartalar ===== */
+.og3-c,.cm3-b,.of-c ul{list-style:none;margin:0;padding:0}
+
+/* sarlavha va raqamlar */
+.og-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:40px}
+.og-head .h2{max-width:none}
+.og-facts{display:flex;flex-wrap:wrap;gap:20px clamp(48px,7vw,112px)}
+.og-facts b{display:block;font:800 clamp(34px,3.4vw,52px)/1 var(--f-head);color:var(--navy)}
+.og-facts span{display:block;margin-top:12px;font-size:15px;color:var(--muted);white-space:nowrap;line-height:1.35}
+
+/* umumiy logotip qutisi */
+.og3-logo,.cm3-logo{display:grid;place-items:center;flex:none;width:48px;height:48px;border:1px solid var(--line);border-radius:14px;padding:6px;background:#fff}
+.og3-logo img,.cm3-logo img{max-width:100%;max-height:100%;object-fit:contain}
+.og3-logo-lg{width:72px;height:72px;border-radius:20px;padding:9px}
+
+/* Taşkilot kartalari: çapda yirik logotip, öngda nom, maqom va faoliyat */
+.og3-c{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.og3-c li{border:1px solid var(--line);border-radius:28px;padding:22px 26px 22px 22px;background:var(--bg);display:grid;grid-template-columns:112px 1fr;gap:22px;align-items:start}
+.og3-logo-xl{width:112px;height:112px;border-radius:26px;padding:12px}
+.og3-c-bd{display:flex;flex-direction:column;min-width:0}
+.og3-c h3{margin:2px 0 0;font:800 18px/1.3 var(--f-head);color:var(--navy)}
+.og3-c small{margin-top:6px;font:700 12px/1 var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.og3-c p{margin:12px 0 0;font-size:15px;line-height:1.6;color:var(--muted)}
+
+/* Media kartalari: çapda yirik logotip, öngda nom, yönaliş, faoliyat turi va uluş */
+.cm3-b{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.cm3-b li{border:1px solid var(--line);border-radius:28px;padding:22px 26px 22px 22px;background:var(--bg);display:grid;grid-template-columns:112px 1fr;gap:22px;align-items:start}
+.cm3-logo-xl{width:112px;height:112px;border-radius:26px;padding:12px}
+.cm3-b-bd{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.cm3-b h3{margin:2px 0 0;font:800 18px/1.3 var(--f-head);color:var(--navy)}
+.cm3-b small{margin-top:6px;font:700 12px/1 var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.cm3-b p{margin:12px 0 0;font-size:15px;line-height:1.6;color:var(--muted)}
+.cm3-b-bd > b{margin-top:14px;font:700 13px/1 var(--f-body);color:var(--navy);background:var(--yellow);border-radius:99px;padding:8px 14px}
+
+/* Rasmiy maʼlumotlar: belgili kartalar */
+.of-c-head{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:28px}
+.of-c-logo img{width:200px;height:auto}
+.of-c ul{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.of-c li{border:1px solid var(--line);border-radius:28px;padding:24px;background:var(--bg);display:flex;flex-direction:column;gap:8px}
+.of-c-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--yellow);margin-bottom:8px}
+.of-c-ic svg{width:22px;height:22px;fill:none;stroke:var(--navy);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.of-c small{font:700 12px/1 var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.of-c b{font:800 17px/1.35 var(--f-head);color:var(--navy)}
+.of-c a{margin-top:4px;font:700 14px/1 var(--f-body);color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+
+@media (max-width:1100px){
+  .og3-c,.cm3-b{grid-template-columns:1fr}
+  .of-c ul{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  .og-facts{gap:20px 32px}
+  .og-facts span{white-space:normal}
+  .og3-c li,.cm3-b li{grid-template-columns:76px 1fr;gap:16px;padding:18px}
+  .og3-logo-xl,.cm3-logo-xl{width:76px;height:76px;border-radius:20px;padding:8px}
+  .of-c ul{grid-template-columns:1fr}
+  .of-c-head{flex-direction:column;align-items:flex-start}
+}
+
+/* ===== Mukofot va imtiyozlar: suratli kartalar ===== */
+.pv-c ul{list-style:none;margin:0;padding:0}
+.pv-c small{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font:700 13px/1.35 var(--f-body);color:var(--navy)}
+.pv-c small::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--yellow)}
+
+/* C · suratli kartalar */
+.pv-c{display:grid;gap:44px}
+.pv-c ul{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pv-c > div:last-child ul{grid-template-columns:repeat(2,1fr)}
+.pv-c li{border:1px solid var(--line);border-radius:30px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.pv-c-ph{position:relative;aspect-ratio:16/10;overflow:hidden}
+.pv-c-ph img{width:100%;height:100%;object-fit:cover}
+/* barça suratlar kvadrat ramkada: istalgan ölçamdagi surat bir xil körinadi */
+.pv-c .pv-c-ph{aspect-ratio:1/1}
+.pv-c-ph span{position:absolute;left:14px;bottom:14px;background:var(--yellow);color:var(--navy);border-radius:99px;padding:8px 14px;font:800 15px/1 var(--f-head)}
+.pv-c-bd{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+.pv-c h4{margin:0;font:800 17px/1.3 var(--f-head);color:var(--navy)}
+.pv-c p{margin:8px 0 0;font-size:14px;line-height:1.6;color:var(--muted);flex:1}
+
+@media (max-width:1100px){
+  .pv-c ul{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:700px){
+  .pv-c ul,.pv-c > div:last-child ul{grid-template-columns:1fr}
+}
+
+/* Ittifoq taklifi bilan taʼsis etilgan davlat mukofotlari — töq vitrina */
+.sa h4{margin:0;font:800 19px/1.25 var(--f-head);color:var(--navy)}
+.sa p{margin:8px 0 0;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.sa small{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font:700 13px/1.35 var(--f-body);color:var(--navy)}
+.sa small::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--yellow)}
+/* panel */
+.sa-panel{display:flex;flex-direction:column;padding:30px;border-radius:30px;background:radial-gradient(120% 120% at 100% 0%,rgba(255,210,90,.14),transparent 55%),var(--navy-bg);color:#fff}
+.sa-panel h4{color:#fff;font-size:22px}
+.sa-panel p{color:rgba(255,255,255,.75)}
+.sa .sa-panel p{flex:none}
+/* röyxat panelning böş joyini teng taqsimlab töldiradi */
+.sa .sa-panel ul{display:flex;flex-direction:column;flex:1;list-style:none;margin:22px 0 26px;padding:0}
+.sa .sa-panel li{flex:1;display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:16px;padding:15px 0;border:0;border-top:1px solid rgba(255,255,255,.14);border-radius:0;background:none;overflow:visible;font-size:14.5px;line-height:1.35}
+.sa .sa-panel li small{display:block;margin:5px 0 0;font:500 13px/1.4 var(--f-body);color:rgba(255,255,255,.6)}
+.sa .sa-panel li small::before{display:none}
+.sa-panel li b{flex:none;color:var(--yellow);font:800 15px/1.35 var(--f-head);white-space:nowrap}
+.sa-panel .more-btn{margin-top:auto;align-self:flex-start}
+/* C — töq vitrina */
+.sa-c{display:grid;grid-template-columns:1.6fr 1fr;gap:0;border-radius:34px;overflow:hidden;background:var(--navy-bg)}
+.sa-c-medals{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding:30px;background:radial-gradient(90% 80% at 50% 0%,rgba(255,210,90,.18),transparent 70%)}
+.sa-c figure{margin:0}
+.sa-c figure img{display:block;width:100%;aspect-ratio:1567/2000;height:auto;object-fit:cover;border-radius:22px;box-shadow:0 22px 44px rgba(0,0,0,.4)}
+.sa-c figcaption{margin-top:16px}
+.sa-c figcaption h4{color:#fff}
+.sa-c figcaption p{color:rgba(255,255,255,.72);font-size:14px}
+.sa-c .sa-panel{border-radius:0;background:rgba(255,255,255,.04);border-left:1px solid rgba(255,255,255,.1)}
+@media (max-width:1100px){
+  .sa-c{grid-template-columns:1fr}
+  .sa-c .sa-panel{border-left:0;border-top:1px solid rgba(255,255,255,.1)}
+}
+@media (max-width:640px){
+  .sa-c-medals{grid-template-columns:1fr}
+}
+
+/* mukofot tasviri va taqdirlanganlar kollaji */
+.pv-col{margin:18px 0 0}
+/* markazdagi umumiy surat 3×2 katakni egallaydi, atrofida 14 ta surat */
+.pv-col-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;grid-auto-flow:dense}
+/* suratlar 4:3 şaklida tayyorlangan — katak ham 4:3, şuning uçun kesilmaydi */
+.pv-col-grid img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:center;border-radius:20px}
+.pv-col-grid img.center{grid-column:2 / span 3;grid-row:2 / span 2;height:100%;aspect-ratio:auto;object-position:center 55%;border-radius:28px;box-shadow:0 24px 50px rgba(83,40,34,.25)}
+.pv-col figcaption{margin-top:12px;font-size:13px;color:var(--muted)}
+@media (max-width:1100px){.pv-col-grid{grid-template-columns:repeat(3,1fr)}.pv-col-grid img.center{grid-column:1 / span 3;grid-row:1;height:auto;aspect-ratio:5/3}}
+@media (max-width:700px){.pv-col-grid{grid-template-columns:repeat(2,1fr)}.pv-col-grid img.center{grid-column:1 / span 2;grid-row:1}}
+
+/* ===== Taşkilot va media kartalari: sičqonça olib borilganda karta oldinga “döppayib” çiqadi ===== */
+.og3-c li,.cm3-b li{position:relative;transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s,border-color .3s}
+.og3-c li:hover,.cm3-b li:hover,.og3-c li:focus-within,.cm3-b li:focus-within{z-index:2;transform:scale(1.035);border-color:rgba(255,210,90,.9);box-shadow:0 28px 60px rgba(83,40,34,.16),0 6px 16px rgba(83,40,34,.08)}
+.og3-c .og3-logo,.cm3-b .cm3-logo{transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.og3-c li:hover .og3-logo,.cm3-b li:hover .cm3-logo{transform:scale(1.06)}
+.cm3-b-bd > b{transition:background .3s,color .3s}
+.cm3-b li:hover .cm3-b-bd > b{background:var(--navy-bg);color:#fff}
+@media (prefers-reduced-motion:reduce){
+  .og3-c li,.cm3-b li,.og3-c .og3-logo,.cm3-b .cm3-logo{transition:none}
+  .og3-c li:hover,.cm3-b li:hover,.og3-c li:hover .og3-logo,.cm3-b li:hover .cm3-logo{transform:none}
+}
+
+/* “Köproq körsatiş”: dastlab 6 ta karta (telefonda 4 ta), qolganlari tugma bilan oçiladi */
+.og3-c:not([data-open]) > :nth-child(n + 7){display:none}
+@media (max-width:700px){.og3-c:not([data-open]) > :nth-child(n + 5){display:none}}
+.cm3-b:not([data-open]) > :nth-child(n + 7){display:none}
+@media (max-width:700px){.cm3-b:not([data-open]) > :nth-child(n + 5){display:none}}

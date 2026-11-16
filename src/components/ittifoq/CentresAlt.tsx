@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan suratlar; CMS ulanganda next/image ga o'tadi */
-import { CENTRES, CITY_CENTRE, PALACE } from './data'
+import type { IttifoqData } from '@/lib/cms/sahifalar'
 import { ShowMore } from './ShowMore'
 
-const REGIONAL = CENTRES.slice(1)
-/** Dastlab Buxoro viloyatigaça körinadi, qolganlari tugma bilan oçiladi */
-const FIRST = REGIONAL.findIndex((c) => c.region.startsWith('Buxoro')) + 1
 
 function Head() {
   return (
@@ -18,7 +15,11 @@ function Head() {
 }
 
 /** B — keng Yoşlar ijod saroyi lentasi, Toşkent şahar markazi va barça hududlar suratli toʼrda */
-export function CentresB() {
+export function CentresB({ D }: { D: IttifoqData }) {
+  const { CENTRES, CITY_CENTRE, PALACE } = D
+  const REGIONAL = CENTRES.slice(1)
+  // dastlab Buxoro viloyatigaça körinadi, qolganlari tugma bilan oçiladi
+  const FIRST = REGIONAL.findIndex((c) => c.region.startsWith('Buxoro')) + 1
   return (
     <section className="sec" id="yoshlar-markazlari-b">
       <div className="wrap">

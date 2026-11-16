@@ -4,17 +4,9 @@ import type { ReactNode } from 'react'
 
 import { Arrow } from '@/components/site/SocialPhones'
 
-import {
-  ABOUT,
-  BODIES,
-  CONTACT,
-  IMG,
-  LEADERS,
-  MEMBERS,
-  ORGANS,
-  POWERS,
-  STATS,
-} from './data'
+import { getKengash } from '@/lib/cms/sahifalar'
+import { Members } from './Members'
+import { Powers } from './Powers'
 
 type P = { L: (h: string) => string; crumbs: ReactNode; siblings: ReactNode }
 
@@ -34,7 +26,8 @@ const initials = (s: string) =>
  * yöl va sarlavha, kengaş haqida, boşqaruv tizimi, vakolatlari, tarkibi, rahbariyat, ijroiya qömitasi va komissiya,
  * qarorlar va yiğilişlar, aloqa.
  */
-export function KengashPage({ L, crumbs, siblings }: P) {
+export async function KengashPage({ L, crumbs, siblings }: P) {
+  const { ABOUT, BODIES, CONTACT, IMG, LEADERS, ORGANS, STATS, MEMBERS, POWERS } = await getKengash(L('').split('/')[1] || 'uz')
   const sections: Record<string, ReactNode> = {
     kab: (
       <section className="sec">
@@ -87,14 +80,7 @@ export function KengashPage({ L, crumbs, siblings }: P) {
           <div className="sec-head">
             <h2 className="h2">Vakolatlari</h2>
           </div>
-          <ol className="kg-pow">
-            {POWERS.map((x, i) => (
-              <li key={x}>
-                <span>{pad(i)}</span>
-                <p>{x}</p>
-              </li>
-            ))}
-          </ol>
+          <Powers POWERS={POWERS} />
         </div>
       </section>
     ),
@@ -104,26 +90,7 @@ export function KengashPage({ L, crumbs, siblings }: P) {
           <div className="sec-head">
             <h2 className="h2">Kengaş tarkibi</h2>
           </div>
-          <div className="kg-mem">
-            <div>
-              <p className="kg-mem-lead">{MEMBERS.lead}</p>
-              <h3>Lavozimi böyiça kiradi</h3>
-              <ul>
-                {MEMBERS.byPost.map((x) => (
-                  <li key={x}>{x}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3>Soha vakillari</h3>
-              <div className="kg-chips">
-                {MEMBERS.fields.map((x) => (
-                  <span key={x}>{x}</span>
-                ))}
-              </div>
-              <p className="kg-link">{MEMBERS.link}</p>
-            </div>
-          </div>
+          <Members MEMBERS={MEMBERS} />
         </div>
       </section>
     ),
@@ -137,7 +104,11 @@ export function KengashPage({ L, crumbs, siblings }: P) {
             {LEADERS.map((p) => (
               <article key={p.name} className={p.career ? 'kg-bio' : undefined}>
                 <div className="kg-ava">
-                  {p.img ? <img src={p.img} alt={p.full ?? p.name} /> : <span>{initials(p.name)}</span>}
+                  {p.img ? (
+                    <img src={p.img} alt={p.full ?? p.name} />
+                  ) : (
+                    <span>{initials(p.name)}</span>
+                  )}
                 </div>
                 <div className="kg-bio-txt">
                   <h3>{p.full ?? p.name}</h3>

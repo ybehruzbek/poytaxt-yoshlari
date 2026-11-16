@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element -- president.uz suratlari; CMS ulanganda next/image ga o'tadi */
-import { IMG, QUOTE } from './data'
+import type { IttifoqData } from '@/lib/cms/sahifalar'
 
 const CREDIT = 'Surat: Özbekiston Respublikasi Prezidentining matbuot xizmati'
 
 /** E — töq bölim: çapda iqtibos, öngda surat (Prezident surat öng tomonida) */
-export function QuoteE() {
+export function QuoteE({ D }: { D: IttifoqData }) {
+  const { IMG, QUOTE } = D
   return (
     <section className="sec iq-e-sec">
       <div className="wrap iq-e">
