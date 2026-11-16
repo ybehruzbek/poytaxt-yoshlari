@@ -1,4 +1,5 @@
 import { revalidatePath } from 'next/cache'
+import { G } from '@/admin/groups'
 import type { GlobalConfig, TextField } from 'payload'
 
 import { checkSocialUrl, cleanSocialUrl, DEFAULT_SOCIALS, NET_LABEL, NETS, type Net } from '../lib/socials'
@@ -19,7 +20,7 @@ const urlField = (net: Net): TextField => ({
 export const Socials: GlobalConfig = {
   slug: 'socials',
   label: 'Ijtimoiy tarmoqlar',
-  admin: { group: 'Sayt sozlamalari' },
+  admin: { group: G.sozlamalar },
   access: {
     read: () => true,
     update: ({ req: { user } }) => !!user && user.role !== 'operator',

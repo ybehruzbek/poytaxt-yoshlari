@@ -67,34 +67,88 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    otts: Ott;
+    partners: Partner;
+    departments: Department;
+    staff: Staff;
+    directions: Direction;
+    projects: Project;
+    events: Event;
+    grants: Grant;
+    stipends: Stipend;
+    contests: Contest;
+    awards: Award;
+    benefits: Benefit;
+    'vol-directions': VolDirection;
     news: News;
     authors: Author;
     'news-ratings': NewsRating;
     'news-reactions': NewsReaction;
-    media: Media;
+    'act-groups': ActGroup;
+    acts: Act;
+    'kengash-docs': KengashDoc;
+    templates: Template;
+    press: Press;
+    albums: Album;
+    videos: Video;
+    oav: Oav;
+    faqs: Faq;
     appeals: Appeal;
     'appeal-files': AppealFile;
     memberships: Membership;
+    volunteers: Volunteer;
     'text-errors': TextError;
+    media: Media;
+    files: File;
     users: User;
     'payload-kv': PayloadKv;
+    'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'payload-folders': {
+      documentsAndFolders: 'payload-folders' | 'media';
+    };
+  };
   collectionsSelect: {
+    otts: OttsSelect<false> | OttsSelect<true>;
+    partners: PartnersSelect<false> | PartnersSelect<true>;
+    departments: DepartmentsSelect<false> | DepartmentsSelect<true>;
+    staff: StaffSelect<false> | StaffSelect<true>;
+    directions: DirectionsSelect<false> | DirectionsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    grants: GrantsSelect<false> | GrantsSelect<true>;
+    stipends: StipendsSelect<false> | StipendsSelect<true>;
+    contests: ContestsSelect<false> | ContestsSelect<true>;
+    awards: AwardsSelect<false> | AwardsSelect<true>;
+    benefits: BenefitsSelect<false> | BenefitsSelect<true>;
+    'vol-directions': VolDirectionsSelect<false> | VolDirectionsSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     'news-ratings': NewsRatingsSelect<false> | NewsRatingsSelect<true>;
     'news-reactions': NewsReactionsSelect<false> | NewsReactionsSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
+    'act-groups': ActGroupsSelect<false> | ActGroupsSelect<true>;
+    acts: ActsSelect<false> | ActsSelect<true>;
+    'kengash-docs': KengashDocsSelect<false> | KengashDocsSelect<true>;
+    templates: TemplatesSelect<false> | TemplatesSelect<true>;
+    press: PressSelect<false> | PressSelect<true>;
+    albums: AlbumsSelect<false> | AlbumsSelect<true>;
+    videos: VideosSelect<false> | VideosSelect<true>;
+    oav: OavSelect<false> | OavSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
     appeals: AppealsSelect<false> | AppealsSelect<true>;
     'appeal-files': AppealFilesSelect<false> | AppealFilesSelect<true>;
     memberships: MembershipsSelect<false> | MembershipsSelect<true>;
+    volunteers: VolunteersSelect<false> | VolunteersSelect<true>;
     'text-errors': TextErrorsSelect<false> | TextErrorsSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    files: FilesSelect<false> | FilesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -104,9 +158,25 @@ export interface Config {
   };
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('uz' | 'ru' | 'en') | ('uz' | 'ru' | 'en')[];
   globals: {
+    'bosh-sahifa': BoshSahifa;
+    'ittifoq-sahifa': IttifoqSahifa;
+    'markaziy-kengash': MarkaziyKengash;
+    natijalar: Natijalar;
+    'volontyorlik-sahifa': VolontyorlikSahifa;
+    aloqa: Aloqa;
+    'azolik-sahifa': AzolikSahifa;
+    miqdorlar: Miqdorlar;
     socials: Social;
   };
   globalsSelect: {
+    'bosh-sahifa': BoshSahifaSelect<false> | BoshSahifaSelect<true>;
+    'ittifoq-sahifa': IttifoqSahifaSelect<false> | IttifoqSahifaSelect<true>;
+    'markaziy-kengash': MarkaziyKengashSelect<false> | MarkaziyKengashSelect<true>;
+    natijalar: NatijalarSelect<false> | NatijalarSelect<true>;
+    'volontyorlik-sahifa': VolontyorlikSahifaSelect<false> | VolontyorlikSahifaSelect<true>;
+    aloqa: AloqaSelect<false> | AloqaSelect<true>;
+    'azolik-sahifa': AzolikSahifaSelect<false> | AzolikSahifaSelect<true>;
+    miqdorlar: MiqdorlarSelect<false> | MiqdorlarSelect<true>;
     socials: SocialsSelect<false> | SocialsSelect<true>;
   };
   locale: 'uz' | 'ru' | 'en';
@@ -136,6 +206,677 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * Saytdagi “Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar” sahifasi va har bir yetakçining sahifasi. Yetakçi saylanmagan bölsa, “Yoşlar yetakçisi” bölimini böş qoldiring — saytda “vakant” deb körsatiladi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "otts".
+ */
+export interface Ott {
+  id: number;
+  _order?: string | null;
+  otm: string;
+  type: 'davlat' | 'xorijiy' | 'nodavlat';
+  /**
+   * Şaxsiy maʼlumotlar (pasport, manzil, tuğilgan sana, şaxsiy telefon) yozilmaydi.
+   */
+  leader?: {
+    name?: string | null;
+    img?: (number | null) | Media;
+    role?: string | null;
+    spec?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    telegram?: string | null;
+    instagram?: string | null;
+    facebook?: string | null;
+    about?: string | null;
+    elected?: string | null;
+    members?: string | null;
+    reception?: string | null;
+    achievements?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Ismdan avtomatik yasaladi.
+     */
+    slug?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi barça rasmlar. Papkalar böyiça tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qöşilganda kiçik nusxalari özi yaratiladi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumb?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders".
+ */
+export interface FolderInterface {
+  id: number;
+  name: string;
+  folder?: (number | null) | FolderInterface;
+  documentsAndFolders?: {
+    docs?: (
+      | {
+          relationTo?: 'payload-folders';
+          value: number | FolderInterface;
+        }
+      | {
+          relationTo?: 'media';
+          value: number | Media;
+        }
+    )[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  folderType?: 'media'[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Hamkorlar” sahifasi va boş sahifadagi hamkorlar lentasi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: number;
+  _order?: string | null;
+  name: string;
+  group: 'davlat' | 'korxona' | 'huquq' | 'parlament' | 'ilmiy' | 'nnt' | 'oav' | 'xalqaro';
+  region?: ('bmt' | 'mdh' | 'tdt' | 'sht' | 'osiyo' | 'xitoy' | 'boshqa') | null;
+  dirs?:
+    | (
+        | 'siyosat'
+        | 'kafillik'
+        | 'profilaktika'
+        | 'huquq'
+        | 'talim'
+        | 'sport'
+        | 'madaniyat'
+        | 'fuqarolik'
+        | 'vatandosh'
+        | 'tahlil'
+        | 'vatanparvarlik'
+        | 'bandlik'
+        | 'oila'
+        | 'raqamli'
+        | 'xalqaro'
+        | 'axborot'
+        | 'ekologiya'
+      )[]
+    | null;
+  what: string;
+  logo: number | Media;
+  /**
+   * Odatda böş qoldiriladi.
+   */
+  logoH?: number | null;
+  site?: string | null;
+  domain?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Toşkent şahar hududiy Kengaşi apparatining bölimlari (sahifadagi tuzilma va vazifalar).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "departments".
+ */
+export interface Department {
+  id: number;
+  _order?: string | null;
+  short: string;
+  t: string;
+  room?: string | null;
+  tasks?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Hududiy Kengaş rahbariyati va xodimlari. Qabul kuni körsatilsa, xodim “Fuqarolarni qabul qiliş jadvali”da çiqadi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff".
+ */
+export interface Staff {
+  id: number;
+  _order?: string | null;
+  name: string;
+  role: string;
+  dept?: (number | null) | Department;
+  chair?: boolean | null;
+  img: number | Media;
+  phone?: string | null;
+  email?: string | null;
+  qabul?: {
+    day?: ('Duşanba' | 'Seşanba' | 'Çorşanba' | 'Payşanba' | 'Juma' | 'Şanba') | null;
+    time?: string | null;
+    room?: string | null;
+  };
+  duties?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  socials?:
+    | {
+        net: 'Telegram' | 'Instagram' | 'Facebook';
+        handle?: string | null;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Faoliyat yönalişlari” sahifasi. Tartibni sudrab özgartiriş mumkin — saytda şu tartibda çiqadi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "directions".
+ */
+export interface Direction {
+  id: number;
+  _order?: string | null;
+  title: string;
+  /**
+   * Saralaş tugmalari va kartalarda körinadi.
+   */
+  short: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  /**
+   * Kengaş şu yönaliş böyiça qanday işlarni amalga oşirişi — rasmiy uslubda.
+   */
+  about: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Loyihalar” sahifasi va har bir loyihaning alohida sahifasi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  _order?: string | null;
+  title: string;
+  dir: number | Direction;
+  holat: 'davom etmoqda' | 'har yili' | 'yakunlangan';
+  period?: string | null;
+  /**
+   * Röyxat kartasida va sahifa tepasida çiqadi (1–2 gap).
+   */
+  lead: string;
+  description?: string | null;
+  audience?: string | null;
+  national?: boolean | null;
+  partners?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  results?:
+    | {
+        text: string;
+        post?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  milestones?:
+    | {
+        date: string;
+        text: string;
+        post?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Loyihaga oid qöşimça postlar raqamlari.
+   */
+  posts?:
+    | {
+        n: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Röyxatda va sahifa tepasida çiqadi. Gorizontal rasm tavsiya etiladi.
+   */
+  cover: number | Media;
+  /**
+   * Sahifa pastidagi suratlar. Bir neçtasini birdaniga tanlaş mumkin.
+   */
+  gallery?: (number | Media)[] | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Saytdagi “Tadbirlar va kalendar” sahifasi (arxiv va yaqin tadbirlar). Yangi tadbir qöşilsa, röyxat boşida sanasi böyiça çiqadi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  date: string;
+  dir: number | Direction;
+  type?: string | null;
+  place?: string | null;
+  summary: string;
+  img: number | Media;
+  /**
+   * Belgilansa, boş sahifadagi “Yaqin tadbirlar”da çiqadi.
+   */
+  upcoming?: boolean | null;
+  /**
+   * “Poytaxt yoşlari” Telegram kanalidagi post raqami (havolaning oxiridagi son, masalan 6230). Saytda manba havolasi bölib çiqadi.
+   */
+  post?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Grantlar” sahifasi va boş sahifadagi “Imkoniyatlar” bloki.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "grants".
+ */
+export interface Grant {
+  id: number;
+  _order?: string | null;
+  t: string;
+  cat: 'startap' | 'talim' | 'ilm' | 'ijtimoiy' | 'ekologiya' | 'ijod';
+  origin?: ('mahalliy' | 'xorijiy') | null;
+  org: string;
+  /**
+   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   */
+  amount: string;
+  who: string;
+  text: string;
+  /**
+   * Aniq bölsa. Saytda “N kun qoldi” bölib çiqadi.
+   */
+  deadline?: string | null;
+  cycle?: string | null;
+  /**
+   * Masalan: “Nizom loyihasi”. Kartada belgi bölib çiqadi.
+   */
+  note?: string | null;
+  url: string;
+  source?: string | null;
+  img?: (number | null) | Media;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Stipendiyalar” sahifasi: davlat va xorijiy stipendiyalar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stipends".
+ */
+export interface Stipend {
+  id: number;
+  _order?: string | null;
+  t: string;
+  /**
+   * Stipendiya sahifaning qaysi blokida çiqişi.
+   */
+  turi: 'prezident' | 'nomli' | 'idoraviy' | 'xorij';
+  icon?:
+    | (
+        | 'yulduz'
+        | 'kitob'
+        | 'globus'
+        | 'oy'
+        | 'tishli'
+        | 'tibbiyot'
+        | 'yurak'
+        | 'qalpoq'
+        | 'atom'
+        | 'medal'
+        | 'qalqon'
+        | 'qalam'
+        | 'pero'
+        | 'kalendar'
+      )
+    | null;
+  flag?: ('uz' | 'gb' | 'us' | 'de' | 'hu' | 'tr' | 'kr' | 'jp' | 'eu' | 'cn') | null;
+  /**
+   * Nomli stipendiyalar setkasida nom ostida çiqadi.
+   */
+  soha?: string | null;
+  org: string;
+  /**
+   * Davlat stipendiyalari uçun. Summa “Miqdorlar” sozlamasidan avtomatik hisoblanadi.
+   */
+  rates?:
+    | {
+        l?: string | null;
+        base: 'prezident' | 'nomli' | 'alo' | 'stip' | 'bhm';
+        k?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  badge?: {
+    l?: string | null;
+    v?: string | null;
+  };
+  who: string;
+  /**
+   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   */
+  perk: string;
+  cycle: string;
+  text?: string | null;
+  deadline?: string | null;
+  url: string;
+  source?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Tanlovlar” sahifasi: yoşlar uçun sohaviy tanlovlar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contests".
+ */
+export interface Contest {
+  id: number;
+  _order?: string | null;
+  t: string;
+  cat: 'ilm' | 'raqamli' | 'madaniyat' | 'adabiyot' | 'tibbiyot' | 'sport';
+  org: string;
+  badge?: {
+    /**
+     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     */
+    l?: string | null;
+    /**
+     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     */
+    v?: string | null;
+  };
+  who: string;
+  /**
+   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   */
+  prize: string;
+  text: string;
+  /**
+   * Aniq bölsa. Saytda “N kun qoldi” bölib çiqadi.
+   */
+  deadline?: string | null;
+  cycle?: string | null;
+  /**
+   * Ariza qabul qilinadigan davr: boşlaniş va tugaş sanalari.
+   */
+  window?: {
+    from?: string | null;
+    to?: string | null;
+  };
+  url: string;
+  source?: string | null;
+  img?: (number | null) | Media;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Yoşlar uçun davlat mukofotlari” sahifasi va Ittifoq sahifasidagi mukofotlar bloki.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awards".
+ */
+export interface Award {
+  id: number;
+  _order?: string | null;
+  t: string;
+  basis: string;
+  img?: (number | null) | Media;
+  prize: {
+    base: 'bhm' | 'stip';
+    k: number;
+  };
+  who: string;
+  perks: string;
+  how: string;
+  count: string;
+  short: string;
+  fact1: string;
+  fact2: string;
+  when: string;
+  /**
+   * Oy raqamlari 1–12. “Topşiriş” belgilansa, jadvalda alohida rangda çiqadi.
+   */
+  timeline?:
+    | {
+        from: number;
+        to: number;
+        t: string;
+        end?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  url: string;
+  source?: string | null;
+  extraT?: string | null;
+  extraUrl?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Imtiyozlar” sahifasi: talabalar, öquvçilar va yoşlar uçun imtiyozlar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "benefits".
+ */
+export interface Benefit {
+  id: number;
+  _order?: string | null;
+  t: string;
+  cat: 'talaba' | 'oquvchi' | 'yosh';
+  icon:
+    | 'uy'
+    | 'kontrakt'
+    | 'til'
+    | 'avto'
+    | 'kurs'
+    | 'yotoq'
+    | 'magistr'
+    | 'kitob'
+    | 'bank'
+    | 'sertifikat'
+    | 'avtobus'
+    | 'sovga'
+    | 'nota'
+    | 'vaucher'
+    | 'yulduz'
+    | 'qalqon';
+  badge?: {
+    /**
+     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     */
+    l?: string | null;
+    /**
+     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     */
+    v?: string | null;
+  };
+  who: string;
+  /**
+   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   */
+  amount: string;
+  how: string;
+  basis: string;
+  from?: string | null;
+  url: string;
+  source?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Volontyorlik” sahifasidagi yönalişlar, test va ariza şaklidagi tanlovlar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vol-directions".
+ */
+export interface VolDirection {
+  id: number;
+  _order?: string | null;
+  t: string;
+  icon: 'qol' | 'yurak' | 'barg' | 'gumbaz' | 'bayroq' | 'qalqon' | 'kitob' | 'ekran';
+  age: '16' | '18';
+  text: string;
+  tasks?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  example?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -192,51 +933,6 @@ export interface News {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumb?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    card?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    hero?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "authors".
  */
 export interface Author {
@@ -268,6 +964,258 @@ export interface NewsReaction {
   news: number | News;
   kind: 'like' | 'fire' | 'dislike' | 'angry' | 'laugh';
   voter: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * “Normativ-huquqiy hujjatlar” sahifasidagi bölimlar (masalan, “Yoşlarga oid davlat siyosati”).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "act-groups".
+ */
+export interface ActGroup {
+  id: number;
+  _order?: string | null;
+  t: string;
+  lead?: string | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Normativ-huquqiy hujjatlar” sahifasi. Har bir hujjat lex.uz dagi rasmiy matniga havola bilan.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "acts".
+ */
+export interface Act {
+  id: number;
+  _order?: string | null;
+  grp: number | ActGroup;
+  kind: 'Qonun' | 'Farmon' | 'Qaror' | 'Ustav';
+  y?: string | null;
+  t: string;
+  d: string;
+  org: string;
+  no?: string | null;
+  name?: string | null;
+  href?: string | null;
+  /**
+   * “Yoşlarga yaratilgan imkoniyatlar” guruhidagi saralaş uçun.
+   */
+  for?: ('barcha' | 'talaba' | 'iqtidor' | 'qiz' | 'oila' | 'himoya' | 'bandlik' | 'tadbirkor' | 'harbiy')[] | null;
+  by?: string | null;
+  kw?: string | null;
+  reg?: string | null;
+  noT?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Kengaş hujjatlari” sahifasi: qarorlar, rejalar, hisobotlar. Fayl (PDF yoki Word) yuklanadi, fuqarolar uni yuklab oladi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kengash-docs".
+ */
+export interface KengashDoc {
+  id: number;
+  t: string;
+  kind: 'qaror' | 'farmoyish' | 'reja' | 'hisobot' | 'nizom' | 'boshqa';
+  date: string;
+  no?: string | null;
+  d?: string | null;
+  file: number | File;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdan yuklab olinadigan PDF, Word va Excel fayllar. Hujjat qöşişda fayl şu yerdan tanlanadi yoki yangisi yuklanadi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "files".
+ */
+export interface File {
+  id: number;
+  title: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * Saytdagi “Hujjat namunalari” sahifasi: ariza va blanka namunalari (yuklab olinadi).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "templates".
+ */
+export interface Template {
+  id: number;
+  _order?: string | null;
+  t: string;
+  cat: 'azolik' | 'murojaat' | 'boshlangich' | 'boshqa';
+  d?: string | null;
+  file: number | File;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Press-relizlar” sahifasi: rasmiy axborotlar va OAV uçun anonslar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "press".
+ */
+export interface Press {
+  id: number;
+  title: string;
+  kind: 'reliz' | 'anons';
+  date: string;
+  lead: string;
+  body?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  facts?:
+    | {
+        v: string;
+        k: string;
+        id?: string | null;
+      }[]
+    | null;
+  event?: {
+    when?: string | null;
+    time?: string | null;
+    place?: string | null;
+  };
+  album?: (number | null) | Album;
+  video?: (number | null) | Video;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * Saytdagi “Fotogalereya” sahifasi. Suratlarni birdaniga bir neçtasini tanlab yuklaş mumkin; birinçi surat — albom muqovasi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "albums".
+ */
+export interface Album {
+  id: number;
+  title: string;
+  date: string;
+  type: 'uchrashuv' | 'yigilish' | 'forum' | 'taqdimot' | 'sayohat' | 'sport';
+  place?: string | null;
+  /**
+   * Tartibni sudrab özgartiriş mumkin. Birinçi uçta surat albom kartasida körinadi.
+   */
+  photos: (number | Media)[];
+  /**
+   * Telegram kanaldagi asl post (bölsa).
+   */
+  post?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Videogalereya” sahifasi. YouTube kanaldagi yangi videolar özi çiqadi; bu yerda — arxiv, turkum va turini belgilaş uçun.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos".
+ */
+export interface Video {
+  id: number;
+  title: string;
+  /**
+   * Havoladagi “v=” dan keyingi qism; qisqa videoda — havolaning oxirgi qismi.
+   */
+  youtubeId: string;
+  short?: boolean | null;
+  date?: string | null;
+  type?: ('korsatuv' | 'reportaj' | 'tadbir') | null;
+  series?: ('istiqlol' | 'forum' | 'tadbir') | null;
+  sec?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “OAVda Kengaş haqida” sahifasi: boşqa naşr va saytlardagi materiallarga havolalar.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "oav".
+ */
+export interface Oav {
+  id: number;
+  title: string;
+  outlet: string;
+  domain?: string | null;
+  date: string;
+  kind: 'online' | 'gov';
+  lang: 'uz' | 'ru';
+  url: string;
+  sum: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Saytdagi “Köp beriladigan savollar” sahifasi. Javobda {TELEFONLAR}, {POÇTA}, {MANZIL}, {MÖLJAL}, {IŞ_VAQTI} yozilsa, “Aloqa maʼlumotlari”dagi joriy qiymat qöyiladi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  _order?: string | null;
+  q: string;
+  cat: 'azolik' | 'imtiyoz' | 'taskilot' | 'tadbir' | 'murojaat';
+  a?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  li?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  more?: {
+    href?: string | null;
+    label?: string | null;
+  };
+  home?: boolean | null;
+  azolik?: boolean | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  /**
+   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   */
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -318,6 +1266,24 @@ export interface Membership {
   phone: string;
   email?: string | null;
   place: string;
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteers".
+ */
+export interface Volunteer {
+  id: number;
+  status: 'yangi' | 'takror' | 'suhbat' | 'qabul' | 'rad';
+  name: string;
+  birthYear: number;
+  phone: string;
+  place: string;
+  dirs: string;
+  time?: string | null;
+  about?: string | null;
   note?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -389,6 +1355,58 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'otts';
+        value: number | Ott;
+      } | null)
+    | ({
+        relationTo: 'partners';
+        value: number | Partner;
+      } | null)
+    | ({
+        relationTo: 'departments';
+        value: number | Department;
+      } | null)
+    | ({
+        relationTo: 'staff';
+        value: number | Staff;
+      } | null)
+    | ({
+        relationTo: 'directions';
+        value: number | Direction;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'grants';
+        value: number | Grant;
+      } | null)
+    | ({
+        relationTo: 'stipends';
+        value: number | Stipend;
+      } | null)
+    | ({
+        relationTo: 'contests';
+        value: number | Contest;
+      } | null)
+    | ({
+        relationTo: 'awards';
+        value: number | Award;
+      } | null)
+    | ({
+        relationTo: 'benefits';
+        value: number | Benefit;
+      } | null)
+    | ({
+        relationTo: 'vol-directions';
+        value: number | VolDirection;
+      } | null)
+    | ({
         relationTo: 'news';
         value: number | News;
       } | null)
@@ -405,8 +1423,40 @@ export interface PayloadLockedDocument {
         value: number | NewsReaction;
       } | null)
     | ({
-        relationTo: 'media';
-        value: number | Media;
+        relationTo: 'act-groups';
+        value: number | ActGroup;
+      } | null)
+    | ({
+        relationTo: 'acts';
+        value: number | Act;
+      } | null)
+    | ({
+        relationTo: 'kengash-docs';
+        value: number | KengashDoc;
+      } | null)
+    | ({
+        relationTo: 'templates';
+        value: number | Template;
+      } | null)
+    | ({
+        relationTo: 'press';
+        value: number | Press;
+      } | null)
+    | ({
+        relationTo: 'albums';
+        value: number | Album;
+      } | null)
+    | ({
+        relationTo: 'videos';
+        value: number | Video;
+      } | null)
+    | ({
+        relationTo: 'oav';
+        value: number | Oav;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
       } | null)
     | ({
         relationTo: 'appeals';
@@ -421,12 +1471,28 @@ export interface PayloadLockedDocument {
         value: number | Membership;
       } | null)
     | ({
+        relationTo: 'volunteers';
+        value: number | Volunteer;
+      } | null)
+    | ({
         relationTo: 'text-errors';
         value: number | TextError;
       } | null)
     | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'files';
+        value: number | File;
+      } | null)
+    | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'payload-folders';
+        value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -469,6 +1535,384 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "otts_select".
+ */
+export interface OttsSelect<T extends boolean = true> {
+  _order?: T;
+  otm?: T;
+  type?: T;
+  leader?:
+    | T
+    | {
+        name?: T;
+        img?: T;
+        role?: T;
+        spec?: T;
+        phone?: T;
+        email?: T;
+        telegram?: T;
+        instagram?: T;
+        facebook?: T;
+        about?: T;
+        elected?: T;
+        members?: T;
+        reception?: T;
+        achievements?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        slug?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners_select".
+ */
+export interface PartnersSelect<T extends boolean = true> {
+  _order?: T;
+  name?: T;
+  group?: T;
+  region?: T;
+  dirs?: T;
+  what?: T;
+  logo?: T;
+  logoH?: T;
+  site?: T;
+  domain?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "departments_select".
+ */
+export interface DepartmentsSelect<T extends boolean = true> {
+  _order?: T;
+  short?: T;
+  t?: T;
+  room?: T;
+  tasks?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staff_select".
+ */
+export interface StaffSelect<T extends boolean = true> {
+  _order?: T;
+  name?: T;
+  role?: T;
+  dept?: T;
+  chair?: T;
+  img?: T;
+  phone?: T;
+  email?: T;
+  qabul?:
+    | T
+    | {
+        day?: T;
+        time?: T;
+        room?: T;
+      };
+  duties?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  socials?:
+    | T
+    | {
+        net?: T;
+        handle?: T;
+        href?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "directions_select".
+ */
+export interface DirectionsSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  short?: T;
+  generateSlug?: T;
+  slug?: T;
+  about?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  _order?: T;
+  title?: T;
+  dir?: T;
+  holat?: T;
+  period?: T;
+  lead?: T;
+  description?: T;
+  audience?: T;
+  national?: T;
+  partners?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  results?:
+    | T
+    | {
+        text?: T;
+        post?: T;
+        id?: T;
+      };
+  milestones?:
+    | T
+    | {
+        date?: T;
+        text?: T;
+        post?: T;
+        id?: T;
+      };
+  posts?:
+    | T
+    | {
+        n?: T;
+        id?: T;
+      };
+  cover?: T;
+  gallery?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  dir?: T;
+  type?: T;
+  place?: T;
+  summary?: T;
+  img?: T;
+  upcoming?: T;
+  post?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "grants_select".
+ */
+export interface GrantsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  cat?: T;
+  origin?: T;
+  org?: T;
+  amount?: T;
+  who?: T;
+  text?: T;
+  deadline?: T;
+  cycle?: T;
+  note?: T;
+  url?: T;
+  source?: T;
+  img?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stipends_select".
+ */
+export interface StipendsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  turi?: T;
+  icon?: T;
+  flag?: T;
+  soha?: T;
+  org?: T;
+  rates?:
+    | T
+    | {
+        l?: T;
+        base?: T;
+        k?: T;
+        id?: T;
+      };
+  badge?:
+    | T
+    | {
+        l?: T;
+        v?: T;
+      };
+  who?: T;
+  perk?: T;
+  cycle?: T;
+  text?: T;
+  deadline?: T;
+  url?: T;
+  source?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contests_select".
+ */
+export interface ContestsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  cat?: T;
+  org?: T;
+  badge?:
+    | T
+    | {
+        l?: T;
+        v?: T;
+      };
+  who?: T;
+  prize?: T;
+  text?: T;
+  deadline?: T;
+  cycle?: T;
+  window?:
+    | T
+    | {
+        from?: T;
+        to?: T;
+      };
+  url?: T;
+  source?: T;
+  img?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "awards_select".
+ */
+export interface AwardsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  basis?: T;
+  img?: T;
+  prize?:
+    | T
+    | {
+        base?: T;
+        k?: T;
+      };
+  who?: T;
+  perks?: T;
+  how?: T;
+  count?: T;
+  short?: T;
+  fact1?: T;
+  fact2?: T;
+  when?: T;
+  timeline?:
+    | T
+    | {
+        from?: T;
+        to?: T;
+        t?: T;
+        end?: T;
+        id?: T;
+      };
+  url?: T;
+  source?: T;
+  extraT?: T;
+  extraUrl?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "benefits_select".
+ */
+export interface BenefitsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  cat?: T;
+  icon?: T;
+  badge?:
+    | T
+    | {
+        l?: T;
+        v?: T;
+      };
+  who?: T;
+  amount?: T;
+  how?: T;
+  basis?: T;
+  from?: T;
+  url?: T;
+  source?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vol-directions_select".
+ */
+export interface VolDirectionsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  icon?: T;
+  age?: T;
+  text?: T;
+  tasks?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  example?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -531,55 +1975,181 @@ export interface NewsReactionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "act-groups_select".
  */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
+export interface ActGroupsSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  lead?: T;
+  generateSlug?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "acts_select".
+ */
+export interface ActsSelect<T extends boolean = true> {
+  _order?: T;
+  grp?: T;
+  kind?: T;
+  y?: T;
+  t?: T;
+  d?: T;
+  org?: T;
+  no?: T;
+  name?: T;
+  href?: T;
+  for?: T;
+  by?: T;
+  kw?: T;
+  reg?: T;
+  noT?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "kengash-docs_select".
+ */
+export interface KengashDocsSelect<T extends boolean = true> {
+  t?: T;
+  kind?: T;
+  date?: T;
+  no?: T;
+  d?: T;
+  file?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "templates_select".
+ */
+export interface TemplatesSelect<T extends boolean = true> {
+  _order?: T;
+  t?: T;
+  cat?: T;
+  d?: T;
+  file?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "press_select".
+ */
+export interface PressSelect<T extends boolean = true> {
+  title?: T;
+  kind?: T;
+  date?: T;
+  lead?: T;
+  body?:
     | T
     | {
-        thumb?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        card?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        hero?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
+        t?: T;
+        id?: T;
       };
+  facts?:
+    | T
+    | {
+        v?: T;
+        k?: T;
+        id?: T;
+      };
+  event?:
+    | T
+    | {
+        when?: T;
+        time?: T;
+        place?: T;
+      };
+  album?: T;
+  video?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "albums_select".
+ */
+export interface AlbumsSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  type?: T;
+  place?: T;
+  photos?: T;
+  post?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "videos_select".
+ */
+export interface VideosSelect<T extends boolean = true> {
+  title?: T;
+  youtubeId?: T;
+  short?: T;
+  date?: T;
+  type?: T;
+  series?: T;
+  sec?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "oav_select".
+ */
+export interface OavSelect<T extends boolean = true> {
+  title?: T;
+  outlet?: T;
+  domain?: T;
+  date?: T;
+  kind?: T;
+  lang?: T;
+  url?: T;
+  sum?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  _order?: T;
+  q?: T;
+  cat?: T;
+  a?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  li?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  more?:
+    | T
+    | {
+        href?: T;
+        label?: T;
+      };
+  home?: T;
+  azolik?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -631,6 +2201,23 @@ export interface MembershipsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteers_select".
+ */
+export interface VolunteersSelect<T extends boolean = true> {
+  status?: T;
+  name?: T;
+  birthYear?: T;
+  phone?: T;
+  place?: T;
+  dirs?: T;
+  time?: T;
+  about?: T;
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "text-errors_select".
  */
 export interface TextErrorsSelect<T extends boolean = true> {
@@ -641,6 +2228,77 @@ export interface TextErrorsSelect<T extends boolean = true> {
   status?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  folder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumb?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "files_select".
+ */
+export interface FilesSelect<T extends boolean = true> {
+  title?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -677,6 +2335,18 @@ export interface PayloadKvSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders_select".
+ */
+export interface PayloadFoldersSelect<T extends boolean = true> {
+  name?: T;
+  folder?: T;
+  documentsAndFolders?: T;
+  folderType?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -708,6 +2378,760 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Saytning boş sahifasidagi sarlavha va matnlar. Yangiliklar, tadbirlar, OTTlar va hamkorlar soni, savollar özi tegişli bölimlardan olinadi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bosh-sahifa".
+ */
+export interface BoshSahifa {
+  id: number;
+  /**
+   * Sarlavhada Kengaşning töliq nomi özgarmaydi.
+   */
+  hero: {
+    kicker: string;
+    lead: string;
+  };
+  /**
+   * OTTdagi boşlanğiç taşkilotlar va hamkorlar soni röyxatlardan özi hisoblanadi.
+   */
+  about: {
+    title: string;
+    text: string;
+    year?: string | null;
+    yearLabel?: string | null;
+    ottLabel?: string | null;
+    partnersLabel?: string | null;
+  };
+  /**
+   * Faol dasturlar soni va eng yaqin muddat tegişli röyxatlardan özi hisoblanadi.
+   */
+  opps: {
+    title?: string | null;
+    accent?: string | null;
+    grant: {
+      lead: string;
+      desc: string;
+    };
+    stip: {
+      lead: string;
+      desc: string;
+    };
+    vol: {
+      lead: string;
+      desc: string;
+    };
+    tanlov: {
+      lead: string;
+      desc: string;
+    };
+  };
+  benefits: {
+    title: string;
+    lead: string;
+    roles?:
+      | {
+          icon: 'faol' | 'yetakchi' | 'volontyor' | 'himoya';
+          t: string;
+          h: string;
+          items?:
+            | {
+                t: string;
+                id?: string | null;
+              }[]
+            | null;
+          href: string;
+          more?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  cta: {
+    title: string;
+    text?: string | null;
+    steps?:
+      | {
+          t: string;
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  heads?: {
+    news?: string | null;
+    events?: string | null;
+    faq?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Saytdagi “Özbekiston yoşlar ittifoqi” sahifasi. Har bir tab sahifadagi bölimlarga mos.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ittifoq-sahifa".
+ */
+export interface IttifoqSahifa {
+  id: number;
+  who?: {
+    paras?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    motto?: string | null;
+  };
+  mission: {
+    text: string;
+  };
+  quote?: {
+    text?: string | null;
+    author?: string | null;
+    role?: string | null;
+  };
+  stats?:
+    | {
+        v: string;
+        l: string;
+        id?: string | null;
+      }[]
+    | null;
+  moreStats?:
+    | {
+        v: string;
+        l: string;
+        id?: string | null;
+      }[]
+    | null;
+  history?:
+    | {
+        y: string;
+        d?: string | null;
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  privileges?:
+    | {
+        group: 'ittifoq' | 'davlat';
+        t: string;
+        text: string;
+        fact?: string | null;
+        num?: string | null;
+        numL?: string | null;
+        img?: (number | null) | Media;
+        medal?: (number | null) | Media;
+        badge?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  intl?: {
+    text?: string | null;
+    assoc?: string | null;
+    facts?:
+      | {
+          v?: string | null;
+          l?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    forms?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    projects?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    partners?: (number | null) | Media;
+    flags?: (number | null) | Media;
+  };
+  palace?: {
+    name?: string | null;
+    org?: string | null;
+    text?: string | null;
+    features?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    img?: (number | null) | Media;
+    gallery?: (number | Media)[] | null;
+  };
+  cityCentre?: {
+    name?: string | null;
+    text?: string | null;
+    facts?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    img?: (number | null) | Media;
+  };
+  centres?:
+    | {
+        region: string;
+        img?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  structure: {
+    qurultoy: {
+      t: string;
+      d: string;
+      meta?:
+        | {
+            t: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    council: {
+      t: string;
+      d: string;
+      meta?:
+        | {
+            t: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    chair: {
+      t: string;
+      d: string;
+      meta?:
+        | {
+            t: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    exec: {
+      t: string;
+      d: string;
+      meta?:
+        | {
+            t: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    audit: {
+      t: string;
+      d: string;
+      meta?:
+        | {
+            t: string;
+            id?: string | null;
+          }[]
+        | null;
+    };
+    levels?:
+      | {
+          t: string;
+          d?: string | null;
+          meta?:
+            | {
+                t: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+    principles?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  official?:
+    | {
+        k: string;
+        v: string;
+        id?: string | null;
+      }[]
+    | null;
+  priorities?:
+    | {
+        title: string;
+        item: string;
+        id?: string | null;
+      }[]
+    | null;
+  join?: {
+    steps?:
+      | {
+          band?: string | null;
+          t: string;
+          d?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    rights?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    duties?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    legal?: {
+      d?: string | null;
+      how?: string | null;
+    };
+    note?: string | null;
+    ends?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    cta?: {
+      t?: string | null;
+      d?: string | null;
+    };
+  };
+  orgs?: {
+    lead?: string | null;
+    ngos?:
+      | {
+          t: string;
+          g: 'talim' | 'ijod' | 'ijtimoiy' | 'iqtisod';
+          d?: string | null;
+          logo?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+    companies?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  companies?:
+    | {
+        kind: 'Media' | 'Naşriyot' | 'Xizmat';
+        t: string;
+        share?: string | null;
+        d?: string | null;
+        logo?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  img?: {
+    team?: (number | null) | Media;
+    collage?: (number | null) | Media;
+    collageSm?: (number | null) | Media;
+    leaders?: (number | null) | Media;
+    presYouth1?: (number | null) | Media;
+    presYouth2?: (number | null) | Media;
+    seminar?: (number | null) | Media;
+    girls?: (number | null) | Media;
+    readers?: (number | null) | Media;
+    books?: (number | null) | Media;
+    volunteers?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Saytdagi “Markaziy Kengaş” sahifasi. Matnlar Ittifoq Ustavining V bobi asosida.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "markaziy-kengash".
+ */
+export interface MarkaziyKengash {
+  id: number;
+  about: {
+    lead: string;
+    paras?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  stats?:
+    | {
+        v: string;
+        l: string;
+        id?: string | null;
+      }[]
+    | null;
+  organs?:
+    | {
+        t: string;
+        d: string;
+        meta?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Tartibi muhim: sahifada vakolatlar mavzu guruhlariga şu tartib böyiça ajratiladi (1–4, 5–7, 8–10).
+   */
+  powers?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  members: {
+    lead: string;
+    facts?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    byPost?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    fields?:
+      | {
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    link?: string | null;
+    extra?: string | null;
+  };
+  leaders?:
+    | {
+        name: string;
+        full?: string | null;
+        role: string;
+        img?: (number | null) | Media;
+        born?: string | null;
+        edu?:
+          | {
+              t: string;
+              id?: string | null;
+            }[]
+          | null;
+        career?:
+          | {
+              y: string;
+              t: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  bodies?:
+    | {
+        t: string;
+        meta?: string | null;
+        d?: string | null;
+        items?:
+          | {
+              t: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  events?:
+    | {
+        date: string;
+        t: string;
+        d?: string | null;
+        img: number | Media;
+        href?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  images?: {
+    building?: (number | null) | Media;
+    delegates?: (number | null) | Media;
+  };
+  contact: {
+    address: string;
+    map?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Saytdagi “Natijalar va hisobotlar” sahifasi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "natijalar".
+ */
+export interface Natijalar {
+  id: number;
+  report?: {
+    /**
+     * Telegram kanaldagi yillik hisobot posti.
+     */
+    post?: number | null;
+    nums?:
+      | {
+          v: string;
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  years?:
+    | {
+        y: string;
+        items?:
+          | {
+              text: string;
+              post?: number | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Saytdagi “Volontyorlik” sahifasi matnlari. Yönalişlar — “Volontyorlik yönalişlari” bölimida, kelgan arizalar — “Murojaatlar → Volontyorlar”.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volontyorlik-sahifa".
+ */
+export interface VolontyorlikSahifa {
+  id: number;
+  /**
+   * Raqam örnida {TADBIRLAR} yozilsa, saytdagi volontyorlik tadbirlari soni özi qöyiladi.
+   */
+  stats?:
+    | {
+        v: string;
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  steps?:
+    | {
+        t: string;
+        d: string;
+        id?: string | null;
+      }[]
+    | null;
+  times?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  law: {
+    t: string;
+    no?: string | null;
+    url?: string | null;
+  };
+  rights?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  duties?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Har bir javob tanlangan yönalişlarga bir ball beradi; eng köp ball olgan yönalişlar natijada körsatiladi.
+   */
+  quiz?:
+    | {
+        q: string;
+        a?:
+          | {
+              t: string;
+              dirs: (number | VolDirection)[];
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Manzil, telefonlar, poçta va iş vaqti. Özgartirilsa, “Boğlaniş” sahifalari, sayt pastki qismi va “Köp beriladigan savollar” javoblari özi yangilanadi.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aloqa".
+ */
+export interface Aloqa {
+  id: number;
+  address: {
+    full: string;
+    line: string;
+    city?: string | null;
+    street?: string | null;
+    landmark?: string | null;
+    metro?: string | null;
+    walk?: string | null;
+  };
+  /**
+   * Yandex yoki Google xaritadan olingan koordinata (masalan, 41.35214 va 69.20496).
+   */
+  coords: {
+    lat: number;
+    lon: number;
+  };
+  phones?:
+    | {
+        v: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Birinçisi — asosiy poçta.
+   */
+  emails?:
+    | {
+        v: string;
+        id?: string | null;
+      }[]
+    | null;
+  hours?: {
+    days?: string | null;
+    time?: string | null;
+    off?: string | null;
+  };
+  /**
+   * Boğlaniş sahifasida körinadigan nomlar (havolalarning özi “Ijtimoiy tarmoqlar” sozlamasida).
+   */
+  socials?:
+    | {
+        net: 'Telegram' | 'Instagram' | 'Facebook';
+        handle?: string | null;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  press?: {
+    unit?: string | null;
+    phone?: string | null;
+    email?: string | null;
+    telegram?: string | null;
+  };
+  law: {
+    title: string;
+    href?: string | null;
+    terms?:
+      | {
+          v: string;
+          t: string;
+          id?: string | null;
+        }[]
+      | null;
+    types?:
+      | {
+          t: string;
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Saytdagi “Aʼzo böliş” sahifasi matnlari. Kelgan arizalar “Murojaatlar → Aʼzolik arizalari” bölimida.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "azolik-sahifa".
+ */
+export interface AzolikSahifa {
+  id: number;
+  conditions?:
+    | {
+        k: string;
+        t?: string | null;
+        /**
+         * Ustav sahifasidagi şu bandga havola qöyiladi.
+         */
+        band?: string | null;
+        d: string;
+        id?: string | null;
+      }[]
+    | null;
+  steps?:
+    | {
+        t: string;
+        /**
+         * Ustav sahifasidagi şu bandga havola qöyiladi.
+         */
+        band?: string | null;
+        d: string;
+        id?: string | null;
+      }[]
+    | null;
+  after?:
+    | {
+        t: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Saytdagi barça summalar şu qiymatlardan hisoblanadi. Yangi farmon yoki qaror çiqqanda faqat şu yerni yangilang.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "miqdorlar".
+ */
+export interface Miqdorlar {
+  id: number;
+  bhm: {
+    v: number;
+    from?: string | null;
+    act?: string | null;
+  };
+  stip: {
+    v: number;
+    from?: string | null;
+    source?: string | null;
+    url?: string | null;
+  };
+  /**
+   * Taʼlim va ilm-fan vazirligi jadvalidagi summalar. Koeffitsientlar şulardan avtomatik hisoblanadi.
+   */
+  stipSum: {
+    prezident: number;
+    nomli: number;
+    alo: number;
+  };
+  mb: {
+    v: number;
+    from?: string | null;
+    url?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "socials".
  */
@@ -731,6 +3155,789 @@ export interface Social {
   youtube?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bosh-sahifa_select".
+ */
+export interface BoshSahifaSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        kicker?: T;
+        lead?: T;
+      };
+  about?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        year?: T;
+        yearLabel?: T;
+        ottLabel?: T;
+        partnersLabel?: T;
+      };
+  opps?:
+    | T
+    | {
+        title?: T;
+        accent?: T;
+        grant?:
+          | T
+          | {
+              lead?: T;
+              desc?: T;
+            };
+        stip?:
+          | T
+          | {
+              lead?: T;
+              desc?: T;
+            };
+        vol?:
+          | T
+          | {
+              lead?: T;
+              desc?: T;
+            };
+        tanlov?:
+          | T
+          | {
+              lead?: T;
+              desc?: T;
+            };
+      };
+  benefits?:
+    | T
+    | {
+        title?: T;
+        lead?: T;
+        roles?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              h?: T;
+              items?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+              href?: T;
+              more?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        steps?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  heads?:
+    | T
+    | {
+        news?: T;
+        events?: T;
+        faq?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ittifoq-sahifa_select".
+ */
+export interface IttifoqSahifaSelect<T extends boolean = true> {
+  who?:
+    | T
+    | {
+        paras?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        motto?: T;
+      };
+  mission?:
+    | T
+    | {
+        text?: T;
+      };
+  quote?:
+    | T
+    | {
+        text?: T;
+        author?: T;
+        role?: T;
+      };
+  stats?:
+    | T
+    | {
+        v?: T;
+        l?: T;
+        id?: T;
+      };
+  moreStats?:
+    | T
+    | {
+        v?: T;
+        l?: T;
+        id?: T;
+      };
+  history?:
+    | T
+    | {
+        y?: T;
+        d?: T;
+        t?: T;
+        id?: T;
+      };
+  privileges?:
+    | T
+    | {
+        group?: T;
+        t?: T;
+        text?: T;
+        fact?: T;
+        num?: T;
+        numL?: T;
+        img?: T;
+        medal?: T;
+        badge?: T;
+        id?: T;
+      };
+  intl?:
+    | T
+    | {
+        text?: T;
+        assoc?: T;
+        facts?:
+          | T
+          | {
+              v?: T;
+              l?: T;
+              id?: T;
+            };
+        forms?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        projects?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        partners?: T;
+        flags?: T;
+      };
+  palace?:
+    | T
+    | {
+        name?: T;
+        org?: T;
+        text?: T;
+        features?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        img?: T;
+        gallery?: T;
+      };
+  cityCentre?:
+    | T
+    | {
+        name?: T;
+        text?: T;
+        facts?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        img?: T;
+      };
+  centres?:
+    | T
+    | {
+        region?: T;
+        img?: T;
+        id?: T;
+      };
+  structure?:
+    | T
+    | {
+        qurultoy?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              meta?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+            };
+        council?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              meta?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+            };
+        chair?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              meta?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+            };
+        exec?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              meta?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+            };
+        audit?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              meta?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+            };
+        levels?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              meta?:
+                | T
+                | {
+                    t?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        principles?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+      };
+  official?:
+    | T
+    | {
+        k?: T;
+        v?: T;
+        id?: T;
+      };
+  priorities?:
+    | T
+    | {
+        title?: T;
+        item?: T;
+        id?: T;
+      };
+  join?:
+    | T
+    | {
+        steps?:
+          | T
+          | {
+              band?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+        rights?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        duties?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        legal?:
+          | T
+          | {
+              d?: T;
+              how?: T;
+            };
+        note?: T;
+        ends?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        cta?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+            };
+      };
+  orgs?:
+    | T
+    | {
+        lead?: T;
+        ngos?:
+          | T
+          | {
+              t?: T;
+              g?: T;
+              d?: T;
+              logo?: T;
+              id?: T;
+            };
+        companies?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+      };
+  companies?:
+    | T
+    | {
+        kind?: T;
+        t?: T;
+        share?: T;
+        d?: T;
+        logo?: T;
+        id?: T;
+      };
+  img?:
+    | T
+    | {
+        team?: T;
+        collage?: T;
+        collageSm?: T;
+        leaders?: T;
+        presYouth1?: T;
+        presYouth2?: T;
+        seminar?: T;
+        girls?: T;
+        readers?: T;
+        books?: T;
+        volunteers?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "markaziy-kengash_select".
+ */
+export interface MarkaziyKengashSelect<T extends boolean = true> {
+  about?:
+    | T
+    | {
+        lead?: T;
+        paras?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+      };
+  stats?:
+    | T
+    | {
+        v?: T;
+        l?: T;
+        id?: T;
+      };
+  organs?:
+    | T
+    | {
+        t?: T;
+        d?: T;
+        meta?: T;
+        id?: T;
+      };
+  powers?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  members?:
+    | T
+    | {
+        lead?: T;
+        facts?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        byPost?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        fields?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        link?: T;
+        extra?: T;
+      };
+  leaders?:
+    | T
+    | {
+        name?: T;
+        full?: T;
+        role?: T;
+        img?: T;
+        born?: T;
+        edu?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        career?:
+          | T
+          | {
+              y?: T;
+              t?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  bodies?:
+    | T
+    | {
+        t?: T;
+        meta?: T;
+        d?: T;
+        items?:
+          | T
+          | {
+              t?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  events?:
+    | T
+    | {
+        date?: T;
+        t?: T;
+        d?: T;
+        img?: T;
+        href?: T;
+        id?: T;
+      };
+  images?:
+    | T
+    | {
+        building?: T;
+        delegates?: T;
+      };
+  contact?:
+    | T
+    | {
+        address?: T;
+        map?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "natijalar_select".
+ */
+export interface NatijalarSelect<T extends boolean = true> {
+  report?:
+    | T
+    | {
+        post?: T;
+        nums?:
+          | T
+          | {
+              v?: T;
+              t?: T;
+              id?: T;
+            };
+      };
+  years?:
+    | T
+    | {
+        y?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              post?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volontyorlik-sahifa_select".
+ */
+export interface VolontyorlikSahifaSelect<T extends boolean = true> {
+  stats?:
+    | T
+    | {
+        v?: T;
+        t?: T;
+        id?: T;
+      };
+  steps?:
+    | T
+    | {
+        t?: T;
+        d?: T;
+        id?: T;
+      };
+  times?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  law?:
+    | T
+    | {
+        t?: T;
+        no?: T;
+        url?: T;
+      };
+  rights?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  duties?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  quiz?:
+    | T
+    | {
+        q?: T;
+        a?:
+          | T
+          | {
+              t?: T;
+              dirs?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aloqa_select".
+ */
+export interface AloqaSelect<T extends boolean = true> {
+  address?:
+    | T
+    | {
+        full?: T;
+        line?: T;
+        city?: T;
+        street?: T;
+        landmark?: T;
+        metro?: T;
+        walk?: T;
+      };
+  coords?:
+    | T
+    | {
+        lat?: T;
+        lon?: T;
+      };
+  phones?:
+    | T
+    | {
+        v?: T;
+        id?: T;
+      };
+  emails?:
+    | T
+    | {
+        v?: T;
+        id?: T;
+      };
+  hours?:
+    | T
+    | {
+        days?: T;
+        time?: T;
+        off?: T;
+      };
+  socials?:
+    | T
+    | {
+        net?: T;
+        handle?: T;
+        href?: T;
+        id?: T;
+      };
+  press?:
+    | T
+    | {
+        unit?: T;
+        phone?: T;
+        email?: T;
+        telegram?: T;
+      };
+  law?:
+    | T
+    | {
+        title?: T;
+        href?: T;
+        terms?:
+          | T
+          | {
+              v?: T;
+              t?: T;
+              id?: T;
+            };
+        types?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "azolik-sahifa_select".
+ */
+export interface AzolikSahifaSelect<T extends boolean = true> {
+  conditions?:
+    | T
+    | {
+        k?: T;
+        t?: T;
+        band?: T;
+        d?: T;
+        id?: T;
+      };
+  steps?:
+    | T
+    | {
+        t?: T;
+        band?: T;
+        d?: T;
+        id?: T;
+      };
+  after?:
+    | T
+    | {
+        t?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "miqdorlar_select".
+ */
+export interface MiqdorlarSelect<T extends boolean = true> {
+  bhm?:
+    | T
+    | {
+        v?: T;
+        from?: T;
+        act?: T;
+      };
+  stip?:
+    | T
+    | {
+        v?: T;
+        from?: T;
+        source?: T;
+        url?: T;
+      };
+  stipSum?:
+    | T
+    | {
+        prezident?: T;
+        nomli?: T;
+        alo?: T;
+      };
+  mb?:
+    | T
+    | {
+        v?: T;
+        from?: T;
+        url?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

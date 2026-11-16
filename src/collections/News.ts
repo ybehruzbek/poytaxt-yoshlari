@@ -1,4 +1,6 @@
 import { type CollectionConfig, slugField } from 'payload'
+import { kontentYashirin } from '@/admin/access'
+import { G } from '@/admin/groups'
 
 import { imloMatn, imloRichText } from '../lib/imlo-hook'
 import { slugifyUz } from '../lib/slugify'
@@ -15,7 +17,8 @@ export const News: CollectionConfig = {
   slug: 'news',
   labels: { singular: 'Yangilik', plural: 'Yangiliklar' },
   admin: {
-    group: 'Kontent',
+    group: G.yangiliklar,
+    hidden: kontentYashirin,
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'publishedAt', '_status'],
   },

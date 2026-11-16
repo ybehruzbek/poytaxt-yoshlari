@@ -65,8 +65,8 @@ const XORIJIY = [
   'Fashion', 'Exchange', 'Mentorship', 'Internship', 'Tashkent', String.raw`FinTech\w*`, String.raw`[Cc]hallenge\w*`,
   // inglizça sözlar: “ch” bu yerda “k” deb öqiladi, ç ga ögirilmaydi (Taşkent Tech, International School of …)
   'Tech', 'Technology', 'Technologies', 'School',
-  // xorijiy taşkilot nomlari
-  'China',
+  // xorijiy taşkilot va dastur nomlari
+  'China', 'Chevening', 'Scholarship', 'BellashAIlik', 'UPSHIFT',
 ]
 const HIMOYA = new RegExp(
   [

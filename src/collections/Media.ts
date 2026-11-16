@@ -1,11 +1,18 @@
 import type { CollectionConfig } from 'payload'
+import { kontentYashirin } from '@/admin/access'
+import { G } from '@/admin/groups'
 
 import { imloMatn } from '../lib/imlo-hook'
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  labels: { singular: 'Rasm / fayl', plural: 'Media' },
-  admin: { group: 'Kontent' },
+  labels: { singular: 'Rasm', plural: 'Rasmlar kutubxonasi' },
+  admin: {
+    group: G.sozlamalar,
+    hidden: kontentYashirin,
+    description: 'Saytdagi barça rasmlar. Papkalar böyiça tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qöşilganda kiçik nusxalari özi yaratiladi.',
+  },
+  folders: true,
   access: {
     read: () => true,
     create: ({ req: { user } }) => !!user && user.role !== 'operator',

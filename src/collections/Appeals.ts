@@ -1,4 +1,6 @@
 import type { Access, CollectionConfig } from 'payload'
+import { murojaatYashirin } from '@/admin/access'
+import { G } from '@/admin/groups'
 
 import { notifyOnCreate } from '@/lib/notify'
 
@@ -29,7 +31,7 @@ export const APPEAL_TYPES = [
 export const AppealFiles: CollectionConfig = {
   slug: 'appeal-files',
   labels: { singular: 'Murojaat fayli', plural: 'Murojaat fayllari' },
-  admin: { group: 'Murojaatlar', hidden: ({ user }) => user?.role !== 'admin' },
+  admin: { group: G.murojaatlar, hidden: ({ user }) => user?.role !== 'admin' },
   access: {
     read: staff,
     create: () => false, // faqat server action orqali (overrideAccess)
@@ -39,7 +41,8 @@ export const AppealFiles: CollectionConfig = {
   fields: [],
   upload: {
     staticDir: 'private-uploads/appeal-files',
-    mimeTypes: APPEAL_FILE_TYPES,
+    // eski Word (.doc) fayli baytlari böyiça application/x-cfb deb aniqlanadi — usiz .doc rad etilardi
+    mimeTypes: [...APPEAL_FILE_TYPES, 'application/x-cfb'],
   },
 }
 
@@ -60,7 +63,8 @@ export const Appeals: CollectionConfig = {
     ],
   },
   admin: {
-    group: 'Murojaatlar',
+    group: G.murojaatlar,
+    hidden: murojaatYashirin,
     useAsTitle: 'name',
     defaultColumns: ['name', 'type', 'status', 'createdAt'],
   },

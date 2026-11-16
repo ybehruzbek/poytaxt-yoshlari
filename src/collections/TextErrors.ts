@@ -1,4 +1,6 @@
 import type { Access, CollectionConfig } from 'payload'
+import { murojaatYashirin } from '@/admin/access'
+import { G } from '@/admin/groups'
 
 const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.role === 'operator'
 
@@ -10,7 +12,8 @@ export const TextErrors: CollectionConfig = {
   slug: 'text-errors',
   labels: { singular: 'Matndagi xato', plural: 'Matndagi xatolar' },
   admin: {
-    group: 'Murojaatlar',
+    group: G.murojaatlar,
+    hidden: murojaatYashirin,
     useAsTitle: 'text',
     defaultColumns: ['text', 'page', 'status', 'createdAt'],
   },

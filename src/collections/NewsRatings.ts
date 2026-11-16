@@ -1,4 +1,5 @@
 import type { Access, CollectionConfig } from 'payload'
+import { G } from '@/admin/groups'
 
 const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.role === 'operator'
 
@@ -9,7 +10,7 @@ const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.rol
 export const NewsRatings: CollectionConfig = {
   slug: 'news-ratings',
   labels: { singular: 'Baho', plural: 'Maqola baholari' },
-  admin: { group: 'Kontent', hidden: ({ user }) => user?.role !== 'admin', defaultColumns: ['news', 'value', 'createdAt'] },
+  admin: { group: G.yangiliklar, hidden: ({ user }) => user?.role !== 'admin', defaultColumns: ['news', 'value', 'createdAt'] },
   access: { read: staff, create: () => false, update: () => false, delete: ({ req: { user } }) => user?.role === 'admin' },
   fields: [
     { name: 'news', label: 'Yangilik', type: 'relationship', relationTo: 'news', required: true, index: true },

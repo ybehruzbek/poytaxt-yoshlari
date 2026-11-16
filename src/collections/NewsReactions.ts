@@ -1,4 +1,5 @@
 import type { Access, CollectionConfig } from 'payload'
+import { G } from '@/admin/groups'
 
 const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.role === 'operator'
 
@@ -12,7 +13,7 @@ export type ReactionKind = (typeof REACTIONS)[number]
 export const NewsReactions: CollectionConfig = {
   slug: 'news-reactions',
   labels: { singular: 'Reaksiya', plural: 'Maqola reaksiyalari' },
-  admin: { group: 'Kontent', hidden: ({ user }) => user?.role !== 'admin', defaultColumns: ['news', 'kind', 'createdAt'] },
+  admin: { group: G.yangiliklar, hidden: ({ user }) => user?.role !== 'admin', defaultColumns: ['news', 'kind', 'createdAt'] },
   access: { read: staff, create: () => false, update: () => false, delete: ({ req: { user } }) => user?.role === 'admin' },
   fields: [
     { name: 'news', label: 'Yangilik', type: 'relationship', relationTo: 'news', required: true, index: true },
@@ -22,11 +23,11 @@ export const NewsReactions: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
-        { label: '👍 Yoqdi', value: 'like' },
-        { label: '🔥 Ajoyib', value: 'fire' },
-        { label: '👎 Yoqmadi', value: 'dislike' },
-        { label: '😡 Jahlim çiqdi', value: 'angry' },
-        { label: '😁 Kulgili', value: 'laugh' },
+        { label: '👍 Maʼqul', value: 'like' },
+        { label: '🔥 Aʼlo', value: 'fire' },
+        { label: '👎 Maʼqul emas', value: 'dislike' },
+        { label: '😡 Norozilik', value: 'angry' },
+        { label: '😁 Quvonç', value: 'laugh' },
       ],
     },
     { name: 'voter', label: 'Foydalanuvçi (xeş)', type: 'text', required: true, index: true },

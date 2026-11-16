@@ -1,4 +1,6 @@
 import type { Access, CollectionConfig } from 'payload'
+import { murojaatYashirin } from '@/admin/access'
+import { G } from '@/admin/groups'
 
 /** Aʼzolik arizalarini faqat admin va operator köradi / özgartiradi */
 const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.role === 'operator'
@@ -11,7 +13,8 @@ export const Memberships: CollectionConfig = {
   slug: 'memberships',
   labels: { singular: 'Aʼzolik arizasi', plural: 'Aʼzolik arizalari' },
   admin: {
-    group: 'Murojaatlar',
+    group: G.murojaatlar,
+    hidden: murojaatYashirin,
     useAsTitle: 'name',
     defaultColumns: ['name', 'place', 'status', 'createdAt'],
   },

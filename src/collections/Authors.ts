@@ -1,4 +1,6 @@
 import type { CollectionConfig } from 'payload'
+import { kontentYashirin } from '@/admin/access'
+import { G } from '@/admin/groups'
 
 import { imloMatn } from '../lib/imlo-hook'
 
@@ -6,7 +8,7 @@ import { imloMatn } from '../lib/imlo-hook'
 export const Authors: CollectionConfig = {
   slug: 'authors',
   labels: { singular: 'Muallif', plural: 'Mualliflar' },
-  admin: { group: 'Kontent', useAsTitle: 'name', defaultColumns: ['name', 'position'] },
+  admin: { group: G.yangiliklar, hidden: kontentYashirin, useAsTitle: 'name', defaultColumns: ['name', 'position'] },
   access: {
     read: () => true,
     create: ({ req: { user } }) => !!user && user.role !== 'operator',

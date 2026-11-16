@@ -1,4 +1,6 @@
 import type { Access, CollectionConfig } from 'payload'
+import { imloMatn } from '@/lib/imlo-hook'
+import { G } from '@/admin/groups'
 
 /** Rollar: admin — hammasi; muharrir — kontent; operator — faqat murojaatlar. */
 export const ROLES = ['admin', 'muharrir', 'operator'] as const
@@ -14,7 +16,7 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'email', 'role'],
-    group: 'Tizim',
+    group: G.tizim,
   },
   auth: true,
   hooks: {
@@ -36,7 +38,7 @@ export const Users: CollectionConfig = {
     delete: isAdmin,
   },
   fields: [
-    { name: 'name', label: 'Ism-familiya', type: 'text', required: true },
+    { name: 'name', label: 'Ism-familiya', type: 'text', required: true, hooks: { beforeChange: [imloMatn] } },
     {
       name: 'role',
       label: 'Rol',
