@@ -1,4 +1,5 @@
-import { SHORTS, VIDEOS, type Short, type Video } from '@/components/axborot/data'
+import type { Short, Video } from '@/components/axborot/data'
+import { getVideoArchive } from '@/lib/cms/axborot'
 import { toYangiAlifbo } from '@/lib/alifbo'
 
 /**
@@ -56,6 +57,8 @@ export async function getYoutubeFeed(): Promise<{ videos: Video[]; shorts: Short
     // YouTube vaqtinça javob bermasa — sahifa arxiv bilan oçiladi
     console.error(err)
   }
+  // arxiv admin paneldan (Axborot xizmati → Videolar)
+  const { videos: VIDEOS, shorts: SHORTS } = await getVideoArchive()
   const knownV = new Map(VIDEOS.map((v) => [v.id, v]))
   const knownS = new Map(SHORTS.map((s) => [s.id, s]))
 
