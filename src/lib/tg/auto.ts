@@ -2,11 +2,9 @@
  * Avtomatik ulaniş: sayt serveri işlayotganda har N daqiqada “Poytaxt yoşlari” kanalining sönggi
  * postlarini tekşiradi va yangilarini saytga yangilik sifatida qöşadi (instrumentation.ts dan işga tuşadi).
  */
-import { revalidatePath } from 'next/cache'
 import { getPayload } from 'payload'
 
 import config from '@/payload.config'
-import { locales } from '@/i18n/config'
 
 import { expireEvents, syncLatest } from './sync'
 
@@ -22,13 +20,9 @@ export function startTgSync(minutes: number) {
       const expired = await expireEvents(payload)
       if (expired) payload.logger.info(`[telegram] ${expired} ta ötgan tadbir eʼlonlarga ötkazildi`)
       if (r.created || expired) {
+        // keş alohida yangilanmaydi: revalidatePath söröv taşqarisida (taymerda) işlamaydi va xato beradi;
+        // sahifalar `revalidate = 60` bilan bir daqiqa içida yangi holatni körsatadi
         payload.logger.info(`[telegram] ${r.created} ta yangi post saytga qöşildi`)
-        // keşni yangilaş: boş sahifa va yangiliklar röyxati darhol yangi holatni körsatsin
-        for (const l of locales) {
-          revalidatePath(`/${l}`)
-          revalidatePath(`/${l}/yangiliklar`)
-          revalidatePath(`/${l}/faoliyat/elonlar`)
-        }
       }
     } catch (err) {
       console.error('[telegram] ulanişda xato:', (err as Error).message)

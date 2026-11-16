@@ -21,7 +21,7 @@ const MAX_BYTES = 20 * 1024 * 1024 // Bot API getFile çegarasi
 
 export const botEnabled = () => Boolean(TOKEN() && STASH())
 
-async function call<T>(method: string, body: Record<string, unknown>): Promise<T> {
+async function call<T>(method: string, body: Record<string, unknown>, attempt = 0): Promise<T> {
   const res = await fetch(`https://api.telegram.org/bot${TOKEN()}/${method}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -30,9 +30,10 @@ async function call<T>(method: string, body: Record<string, unknown>): Promise<T
     signal: AbortSignal.timeout(30_000),
   })
   const json = (await res.json()) as { ok: boolean; result?: T; description?: string; parameters?: { retry_after?: number } }
-  if (!json.ok && json.parameters?.retry_after) {
-    await new Promise((r) => setTimeout(r, (json.parameters!.retry_after! + 1) * 1000))
-    return call(method, body)
+  // “juda köp söröv” javobida kutib qayta urinadi, lekin 3 martadan oşmaydi (sinxronizatsiya qulfi uzoq ilinib qolmasin)
+  if (!json.ok && json.parameters?.retry_after && attempt < 3) {
+    await new Promise((r) => setTimeout(r, Math.min(json.parameters!.retry_after! + 1, 60) * 1000))
+    return call(method, body, attempt + 1)
   }
   if (!json.ok) throw new Error(`Telegram ${method}: ${json.description}`)
   return json.result as T

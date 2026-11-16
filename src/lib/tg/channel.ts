@@ -16,6 +16,9 @@ export type TgPost = {
 
 const UA = { 'User-Agent': 'Mozilla/5.0 (compatible; ittifoq-sayt/1.0)' }
 
+/** Raqamli HTML belgisi; yaroqsiz qiymat (0x10FFFF dan katta) butun sinxronizatsiyani töxtatmasin */
+const codePoint = (n: number) => (Number.isInteger(n) && n >= 0 && n <= 0x10ffff ? String.fromCodePoint(n) : '\uFFFD')
+
 const decode = (s: string) =>
   s
     .replace(/&nbsp;/g, ' ')
@@ -23,8 +26,8 @@ const decode = (s: string) =>
     .replace(/&#39;/g, "'")
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
-    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#(\d+);/g, (_, n) => codePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => codePoint(parseInt(n, 16)))
     .replace(/&amp;/g, '&')
 
 /** Bitta sahifa (≈20 post). `before` — şu raqamdan oldingi postlar */
