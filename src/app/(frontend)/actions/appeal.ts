@@ -6,6 +6,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { APPEAL_FILE_MAX, APPEAL_FILE_TYPES, APPEAL_TYPES } from '@/collections/Appeals'
 import { clientIp, rateLimited } from '@/lib/rate-limit'
+import { logError } from '@/lib/log-error'
 
 export type AppealField = 'type' | 'name' | 'phone' | 'email' | 'message' | 'file'
 export type AppealState = {
@@ -24,7 +25,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
   if (str(fd, 'website')) return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
 
   const ip = clientIp(await headers())
-  if (rateLimited(ip)) return { ok: false, message: 'Yuboriş urinişlari soni oşib ketdi. Iltimos, birozdan keyin qayta yuboring.' }
+  if (rateLimited(ip)) return { ok: false, message: 'Yuboriş urinişlari soni belgilangan çegaradan oşdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const type = str(fd, 'type')
   const name = str(fd, 'name')
@@ -37,7 +38,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
   if (!APPEAL_TYPES.some((t) => t.value === type)) errors.type = 'Murojaat turini tanlang.'
   if (name.length < 3 || name.length > 120) errors.name = 'Familiya, ism va otasining ismini töliq kiriting.'
   const digits = phone.replace(/\D/g, '')
-  if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
+  if (phone.length > 32 || digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160) errors.email = 'Elektron poçta manzilini töğri kiriting.'
   if (message.length < 10 || message.length > 4000) errors.message = 'Xabar kamida 10 ta belgidan iborat bölsin.'
 
@@ -51,9 +52,9 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
 
   if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekşiring.' }
 
+  let fileId: number | undefined
   try {
     const payload = await getPayload({ config })
-    let fileId: number | undefined
     if (upload) {
       const data = Buffer.from(await upload.arrayBuffer())
       const doc = await payload.create({
@@ -70,7 +71,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
         type: type as (typeof APPEAL_TYPES)[number]['value'],
         status: 'yangi',
         name,
-        phone,
+        phone: `+${digits}`,
         email,
         message,
         ...(fileId ? { file: fileId } : {}),
@@ -79,7 +80,12 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
     })
     return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
   } catch (err) {
-    console.error('[murojaat] saqlaşda xato:', err)
+    logError('murojaat', err)
+    // murojaat saqlanmasa, biriktirilgan maxfiy fayl egasiz qolmasin
+    if (fileId) {
+      const payload = await getPayload({ config })
+      await payload.delete({ collection: 'appeal-files', id: fileId, overrideAccess: true }).catch(() => {})
+    }
     return { ok: false, message: 'Murojaatni saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
   }
 }

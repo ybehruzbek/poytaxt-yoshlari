@@ -9,6 +9,7 @@ import { REACTIONS, type ReactionKind } from '@/collections/NewsReactions'
 import config from '@/payload.config'
 
 import { ratingStats, reactionCounts, type ReactionCounts, type RatingStats } from '@/lib/news-votes'
+import { logError } from '@/lib/log-error'
 
 export type { ReactionCounts, RatingStats }
 export type RateResult = { ok: boolean; message?: string; stats?: RatingStats; mine?: number }
@@ -19,7 +20,7 @@ export async function rateNews(newsId: number, value: number): Promise<RateResul
     return { ok: false, message: 'Baho 1 dan 5 gaça bölişi kerak.' }
 
   const ip = clientIp(await headers())
-  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Juda köp urinişlar. Birozdan keyin qayta urinib köring.' }
+  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Urinişlar soni belgilangan çegaradan oşdi. Iltimos, birozdan söng qayta urinib köring.' }
 
   try {
     const payload = await getPayload({ config })
@@ -49,7 +50,7 @@ export async function rateNews(newsId: number, value: number): Promise<RateResul
     }
     return { ok: true, stats: await ratingStats(newsId), mine: value }
   } catch (err) {
-    console.error('[baho] saqlaşda xato:', err)
+    logError('baho', err)
     return { ok: false, message: 'Bahoni saqlab bölmadi. Keyinroq qayta urinib köring.' }
   }
 }
@@ -61,7 +62,7 @@ export async function reactNews(newsId: number, kind: string): Promise<ReactResu
   if (!Number.isInteger(newsId) || newsId < 1 || !REACTIONS.includes(kind as ReactionKind))
     return { ok: false, message: 'Notöğri reaksiya.' }
   const ip = clientIp(await headers())
-  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Juda köp urinişlar. Birozdan keyin qayta urinib köring.' }
+  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Urinişlar soni belgilangan çegaradan oşdi. Iltimos, birozdan söng qayta urinib köring.' }
   try {
     const payload = await getPayload({ config })
     const pub = await payload.find({
@@ -90,7 +91,7 @@ export async function reactNews(newsId: number, kind: string): Promise<ReactResu
     }
     return { ok: true, counts: await reactionCounts(newsId), mine }
   } catch (err) {
-    console.error('[reaksiya] saqlaşda xato:', err)
+    logError('reaksiya', err)
     return { ok: false, message: 'Reaksiyani saqlab bölmadi.' }
   }
 }

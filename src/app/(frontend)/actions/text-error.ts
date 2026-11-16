@@ -17,7 +17,7 @@ export async function reportTextError(input: {
   /** botlar uçun yaşirin maydon — to'ldirilgan bölsa xabar jimgina taşlab yuboriladi */
   website?: string
 }): Promise<{ ok: boolean; message: string }> {
-  const done = { ok: true, message: 'Rahmat! Xabaringiz maʼmuriyatga yuborildi.' }
+  const done = { ok: true, message: 'Xabaringiz sayt maʼmuriyatiga yuborildi. Eʼtiboringiz uçun minnatdorçilik bildiramiz.' }
   if (String(input.website ?? '')) return done
 
   const text = String(input.text ?? '')

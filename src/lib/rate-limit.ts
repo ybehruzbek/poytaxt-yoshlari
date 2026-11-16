@@ -39,11 +39,11 @@ function sweep(b: Bucket, now: number) {
  * @param scope   funksiya nomi: 'appeal' (murojaatlar: 5 / 60), 'text-error' (matndagi xato: 10 / 120),
  *                'membership' (aʼzolik arizalari: 3 / 40), 'rating' (maqola baholari: 20 / 600)
  */
-export function rateLimited(ip: string, scope: 'appeal' | 'text-error' | 'membership' | 'rating' = 'appeal'): boolean {
+export function rateLimited(ip: string, scope: 'appeal' | 'text-error' | 'membership' | 'volunteer' | 'rating' = 'appeal'): boolean {
   const b =
     scope === 'appeal'
       ? bucket(scope, 5, 60)
-      : scope === 'membership'
+      : scope === 'membership' || scope === 'volunteer'
         ? bucket(scope, 3, 40)
         : scope === 'rating'
           ? bucket(scope, 20, 600)
@@ -84,5 +84,19 @@ export function clientIp(h: Headers): string {
     .filter(Boolean)
   if (chain.length < hops) return 'unknown'
   const ip = chain[chain.length - hops].toLowerCase()
-  return /^[0-9a-f:.]{3,45}$/.test(ip) ? ip : 'unknown'
+  return /^[0-9a-f:.]{3,45}$/.test(ip) ? v6Prefix(ip) : 'unknown'
+}
+
+/**
+ * IPv6 manzil /64 tarmoq qismi böyiça hisoblanadi: bitta abonentga butun /64 beriladi, aks holda
+ * bir kişi undagi manzillarni almaştirib, limitni çetlab öta oladi. IPv4 (va ::ffff:IPv4) özgarmaydi.
+ */
+function v6Prefix(ip: string): string {
+  if (!ip.includes(':') || ip.includes('.')) return ip
+  const [head, tail = ''] = ip.split('::')
+  const h = head ? head.split(':') : []
+  const t = tail ? tail.split(':') : []
+  const full = ip.includes('::') ? [...h, ...Array(Math.max(0, 8 - h.length - t.length)).fill('0'), ...t] : h
+  if (full.length !== 8) return ip
+  return `${full.slice(0, 4).map((x) => x.replace(/^0+(?=.)/, '')).join(':')}::/64`
 }

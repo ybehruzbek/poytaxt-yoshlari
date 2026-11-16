@@ -4,6 +4,7 @@ import { headers } from 'next/headers'
 import { getPayload } from 'payload'
 
 import { clientIp, rateLimited } from '@/lib/rate-limit'
+import { logError } from '@/lib/log-error'
 import config from '@/payload.config'
 
 export type MemberField = 'name' | 'birthYear' | 'phone' | 'email' | 'place' | 'agree'
@@ -23,13 +24,14 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
   if (str(fd.get('website'))) return { ok: true, message: 'Arizangiz qabul qilindi.' }
   const ip = clientIp(await headers())
   if (rateLimited(ip, 'membership'))
-    return { ok: false, message: 'Yuboriş urinişlari soni oşib ketdi. Iltimos, birozdan keyin qayta yuboring.' }
+    return { ok: false, message: 'Yuboriş urinişlari soni belgilangan çegaradan oşdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const name = str(fd.get('name'))
   const phone = str(fd.get('phone'))
   const email = str(fd.get('email'))
   const place = str(fd.get('place')) === 'boshqa' ? str(fd.get('placeOther')) : str(fd.get('place'))
-  const birthYear = Number(str(fd.get('birthYear')))
+  const yearRaw = str(fd.get('birthYear'))
+  const birthYear = /^\d{4}$/.test(yearRaw) ? Number(yearRaw) : 0
   const age = new Date().getFullYear() - birthYear
 
   const errors: MemberState['errors'] = {}
@@ -65,7 +67,7 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
     const no = `A-${new Date().getFullYear()}-${String(doc.id).padStart(5, '0')}`
     return { ok: true, no, message: 'Arizangiz qabul qilindi.' }
   } catch (err) {
-    console.error('[aʼzolik] saqlaşda xato:', err)
+    logError('aʼzolik', err)
     return { ok: false, message: 'Arizani saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
   }
 }
