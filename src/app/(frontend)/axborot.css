@@ -183,6 +183,20 @@
   max-height: 100%;
   object-fit: contain;
   border-radius: 12px;
+  transition: opacity var(--dur-ui) ease;
+}
+/* surat yuklanayotganda: töq fon ustida yumşoq skelet, surat tayyor bölgaç xiradan çiqadi */
+.ax-lb-fig[data-wait] img {
+  opacity: 0;
+}
+.ax-lb-fig .ax-lb-sk {
+  position: absolute;
+  inset: 8% 72px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.ax-lb-fig .ax-lb-sk::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
 }
 .ax-lb-nav {
   position: absolute;
@@ -766,6 +780,9 @@
     grid-template-columns: 120px minmax(0, 1fr);
   }
 
+  .ax-lb-fig .ax-lb-sk {
+    inset: 8% 8px;
+  }
   .ax-lb-fig {
     padding: 0 8px;
   }

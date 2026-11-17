@@ -17,6 +17,9 @@ export function Lightbox({ albums: ALBUMS }: { albums: Album[] }) {
   const dlg = useRef<HTMLDialogElement>(null)
   const [st, setSt] = useState<{ id: number; i: number } | null>(null)
   const album = st ? ALBUMS.find((a) => a.id === st.id) : null
+  // joriy surat yuklanguncha örnida skelet turadi (surat almaşganda boş ekran körinmaydi)
+  const [ready, setReady] = useState('')
+  const cur = st ? `${st.id}-${st.i}` : ''
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
@@ -74,13 +77,22 @@ export function Lightbox({ albums: ALBUMS }: { albums: Album[] }) {
           </header>
           <figure
             className="ax-lb-fig"
+            data-wait={ready !== cur || undefined}
             onPointerDown={(e) => (sx.current = e.clientX)}
             onPointerUp={(e) => {
               const d = e.clientX - sx.current
               if (Math.abs(d) > 50) go(d < 0 ? 1 : -1)
             }}
           >
-            <img key={st.i} src={photo(album, st.i)} alt={`${album.title} — ${st.i}-surat`} draggable={false} />
+            {ready !== cur && <span className="sk ax-lb-sk" aria-hidden="true" />}
+            <img
+              key={st.i}
+              src={photo(album, st.i)}
+              alt={`${album.title} — ${st.i}-surat`}
+              draggable={false}
+              onLoad={() => setReady(cur)}
+              onError={() => setReady(cur)}
+            />
             {/* qöşni suratlar oldindan yuklanadi — almaştirişda kutiş bölmaydi */}
             <link rel="preload" as="image" href={photo(album, (st.i % album.n) + 1)} />
             <button type="button" className="ax-lb-nav prev" onClick={() => go(-1)} aria-label="Oldingi surat">

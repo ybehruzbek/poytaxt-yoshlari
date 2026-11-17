@@ -90,4 +90,15 @@ export type Ev = {
 }
 
 /** Eʼlon kartasi */
-export type Announce = { id: number; date: string; title: string; text: string; img: string; /** saytdagi töliq maqola */ href?: string }
+export type Announce = {
+  id: number
+  date: string
+  title: string
+  text: string
+  img: string
+  /** posterning asl ölçami — rasm yuklanguncha joyi band turadi (sahifa sakramaydi) */
+  w?: number
+  h?: number
+  /** saytdagi töliq maqola */
+  href?: string
+}

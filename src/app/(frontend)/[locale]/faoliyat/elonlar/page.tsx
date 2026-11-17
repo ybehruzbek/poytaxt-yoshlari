@@ -33,13 +33,18 @@ export default async function Route(props: { params: Promise<{ locale: Locale }>
     const c = toNewsCard(d)
     // poster kesilmasligi uçun asl nisbatdagi rasm olinadi (card ölçami 800×500 qilib kesadi)
     const m = typeof d.image === 'object' && d.image ? d.image : null
-    const poster = m?.sizes?.hero?.url || m?.url || c.image
+    const hero = m?.sizes?.hero?.url ? m.sizes.hero : null
+    const poster = hero?.url || m?.url || c.image
+    const w = (hero ? hero.width : m?.width) ?? undefined
+    const h = (hero ? hero.height : m?.height) ?? undefined
     return {
       id: d.tgId ?? d.id,
       date: c.dateISO.slice(0, 10),
       title: c.title,
       text: c.excerpt,
       img: poster,
+      w,
+      h,
       href: `/${locale}/yangiliklar/${c.slug}`,
     }
   })
