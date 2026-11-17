@@ -92,13 +92,12 @@ Ilova `Dockerfile` orqali yiğiladi (Next.js standalone). Dokploy'da ilova turi 
 |---|---|
 | `NEXT_PUBLIC_SERVER_URL` | Saytning töliq manzili, masalan `https://domen.uz` (majburiy) |
 | `NEXT_PUBLIC_WWWUZ_ID` | www.uz hisoblagiçi raqami (ixtiyoriy) |
-| `DATABASE_URL` | Ixtiyoriy. Build konteyneri bazaga ulana olsa berilsin: sahifalar oldindan yiğiladi va keşdan beriladi (eng tez rejim). Berilmasa, ilova bazasiz yiğiladi va sahifalar har sörovda tayyorlanadi; katta sahifalar maʼlumoti server keşida saqlanadi |
+
+**Build secret** (ixtiyoriy): `database_url` — bazaga ulaniş satri. Build konteyneri bazaga ulana olsa berilsin: sahifalar oldindan yiğiladi va keşdan beriladi (eng tez rejim). Secret image'ga va jurnalga yozilmaydi; unga faqat öqiş huquqli alohida baza foydalanuvçisi berilsin. Berilmasa, ilova bazasiz yiğiladi va sahifalar har sörovda tayyorlanadi; katta sahifalar maʼlumoti server keşida saqlanadi. Baza paroli build arg sifatida berilmaydi — u image tarixida qoladi.
 
 **Environment** (işlaş paytida): `DATABASE_URL`, `PAYLOAD_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL`, `TRUSTED_PROXY_HOPS=1`, `NOTIFY_EMAIL`, `SMTP_*`, `TG_*` (`.env.example` ga qarang).
 
 **Volumes (majburiy):** konteynerdagi `/app/media` va `/app/private-uploads` papkalari doimiy diskka (Dokploy → Advanced → Volumes) ulanadi. Aks holda qayta joylaştirişda yuklangan rasmlar va murojaat fayllari yöqoladi. Nomli volume (Volume Mount) tavsiya etiladi. Server papkasi ulanadigan bölsa (Bind Mount), unga ilova foydalanuvçisi yoza olişi kerak: `chown -R 1001:1001 <papka>`.
-
-`DATABASE_URL` build arg sifatida berilsa, u Dokploy'ning build jurnalida körinadi — bu jurnal faqat administratorlarga oçiq bölsin.
 
 **Baza tuzilmasi** migratsiyalar orqali yaratiladi (`src/migrations`): ilova işga tuşganda migratsiyalar özi bajariladi. Kolleksiya yoki maydon özgartirilsa: `pnpm payload migrate:create <nom>` va yangi migratsiya commit qilinadi.
 

@@ -1,11 +1,12 @@
+# syntax=docker/dockerfile:1
 # Production image: Next.js 16 (standalone) + Payload CMS 3 + PostgreSQL.
 #
 # Sukut böyiça build bazaga ULANMAYDI (--experimental-build-mode compile): Dokploy build konteyneri bazani
 # körmasa ham yiğiladi. Baza tuzilmasi ilova işga tuşganda migratsiyalar bilan yaratiladi (payload.config.ts → prodMigrations).
 #
 # Dokploy sozlamalari (docs/admin-qollanma.md, 8-bölim):
-#   Build args:  NEXT_PUBLIC_SERVER_URL=https://domen.uz  (NEXT_PUBLIC_WWWUZ_ID — ixtiyoriy;
-#                DATABASE_URL — ixtiyoriy, berilsa sahifalar oldindan yiğiladi, pastga qarang)
+#   Build args:  NEXT_PUBLIC_SERVER_URL=https://domen.uz  (NEXT_PUBLIC_WWWUZ_ID — ixtiyoriy)
+#   Build secret (ixtiyoriy): database_url — berilsa sahifalar oldindan yiğiladi, pastga qarang
 #   Env:         DATABASE_URL, PAYLOAD_SECRET, NEXT_PUBLIC_SERVER_URL, TRUSTED_PROXY_HOPS=1, SMTP_*, TG_*
 #   Volumes:     /app/media  va  /app/private-uploads  — doimiy disk (aks holda yuklangan fayllar yöqoladi)
 
@@ -30,13 +31,15 @@ ARG NEXT_PUBLIC_SERVER_URL=http://localhost:3000
 ARG NEXT_PUBLIC_WWWUZ_ID=
 ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL NEXT_PUBLIC_WWWUZ_ID=$NEXT_PUBLIC_WWWUZ_ID
 # Ikki rejim:
-#  – DATABASE_URL build arg BERILSA (build konteyneri bazaga ulana olsa): sahifalar oldindan yiğiladi —
-#    eng tez variant, sahifalar keşdan beriladi;
+#  – `database_url` BUILD SECRET berilsa (build konteyneri bazaga ulana olsa): sahifalar oldindan yiğiladi —
+#    eng tez variant, sahifalar keşdan beriladi. Secret image qatlamlariga, tarixiga va jurnalga yozilmaydi
+#    (build arg'dan farqli). Faqat öqiş huquqli alohida baza foydalanuvçisi tavsiya etiladi.
+#      docker build --secret id=database_url,env=DATABASE_URL .
 #  – BERILMASA: bazasiz yiğiş (compile), sahifalar har sörovda serverda tayyorlanadi; katta sahifalar
 #    maʼlumoti server keşida saqlanadi (lib/cms/sahifalar.ts), şuning uçun bu rejim ham tez işlaydi.
 # PAYLOAD_SECRET faqat yiğiş uçun vaqtinçalik; haqiqiysi runtime env'dan keladi.
-ARG DATABASE_URL=
-RUN if [ -n "$DATABASE_URL" ]; then MODE=""; DB="$DATABASE_URL"; \
+RUN --mount=type=secret,id=database_url,required=false \
+    if [ -s /run/secrets/database_url ]; then MODE=""; DB="$(cat /run/secrets/database_url)"; \
     else MODE="--experimental-build-mode compile"; DB="postgres://build:build@127.0.0.1:1/build"; fi; \
     echo "next build ${MODE:-(oldindan yiğiş bilan)}"; \
     PAYLOAD_SECRET=build-time-only DATABASE_URL="$DB" \
