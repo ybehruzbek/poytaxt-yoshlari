@@ -7,6 +7,7 @@ import { submitVolunteer, type VolField, type VolState } from '@/app/(frontend)/
 
 import type { VolDir } from './data'
 import type { VolSahifa } from '@/lib/cms/sahifalar'
+import { NET_ERR, safeCall } from '@/lib/net'
 
 type Page = Pick<VolSahifa, 'LAW' | 'QUIZ' | 'TIMES'>
 const PageCtx = createContext<Page>({ LAW: { t: '', no: '', url: '' }, QUIZ: [], TIMES: [] })
@@ -230,7 +231,7 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
       onSubmit={(e) => {
         e.preventDefault()
         const fd = new FormData(e.currentTarget)
-        start(async () => setState(await submitVolunteer(fd)))
+        start(async () => setState(await safeCall(() => submitVolunteer(fd), { ok: false, message: NET_ERR })))
       }}
     >
       <p className="az-form-title">Volontyorlikka ariza</p>

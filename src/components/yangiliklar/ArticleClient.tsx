@@ -10,6 +10,7 @@ import {
   reactNews,
 } from '@/app/(frontend)/actions/rating'
 import type { ReactionKind } from '@/collections/NewsReactions'
+import { NET_ERR, safeCall } from '@/lib/net'
 
 const TG = (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -159,7 +160,7 @@ export function RateStars({ newsId, initial }: { newsId: number; initial: Rating
 
   const rate = (v: number) =>
     start(async () => {
-      const r = await rateNews(newsId, v)
+      const r = await safeCall(() => rateNews(newsId, v), { ok: false, message: NET_ERR })
       if (r.ok && r.stats) {
         setStats(r.stats)
         setMine(v)
@@ -264,6 +265,7 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
             className={k === i ? 'on' : undefined}
             aria-hidden={k !== i}
             loading={k === 0 ? 'eager' : 'lazy'}
+            decoding="async"
           />
         ))}
         {n > 1 && (
@@ -358,7 +360,7 @@ export function Reactions({
 
   const react = (k: ReactionKind) =>
     start(async () => {
-      const r = await reactNews(newsId, k)
+      const r = await safeCall(() => reactNews(newsId, k), { ok: false })
       if (!r.ok || !r.counts) return
       setCounts(r.counts)
       setPicked(r.mine ?? '')

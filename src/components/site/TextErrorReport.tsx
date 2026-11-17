@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { reportTextError } from '@/app/(frontend)/actions/text-error'
+import { NET_ERR, safeCall } from '@/lib/net'
 
 type Sel = { text: string; context: string }
 
@@ -44,12 +45,16 @@ export function TextErrorReport() {
   const send = async () => {
     if (!sel) return
     setPending(true)
-    const res = await reportTextError({
-      ...sel,
-      comment,
-      page: location.pathname,
-      website: trap.current?.value,
-    })
+    const res = await safeCall(
+      () =>
+        reportTextError({
+          ...sel,
+          comment,
+          page: location.pathname,
+          website: trap.current?.value,
+        }),
+      { ok: false, message: NET_ERR },
+    )
     setPending(false)
     setState(res)
   }

@@ -3,6 +3,7 @@
 import { useRef, useState, useTransition } from 'react'
 
 import { type MemberField, type MemberState, submitMembership } from '@/app/(frontend)/actions/membership'
+import { NET_ERR, safeCall } from '@/lib/net'
 
 
 const MAX_YEAR = new Date().getFullYear() - 14
@@ -78,7 +79,7 @@ export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; 
       onSubmit={(e) => {
         e.preventDefault()
         const fd = new FormData(e.currentTarget)
-        start(async () => setState(await submitMembership(fd)))
+        start(async () => setState(await safeCall(() => submitMembership(fd), { ok: false, message: NET_ERR })))
       }}
     >
       <p className="az-form-title">Aʼzolikka ariza</p>

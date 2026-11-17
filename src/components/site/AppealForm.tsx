@@ -3,6 +3,7 @@
 import { useRef, useState, useTransition } from 'react'
 
 import { type AppealField, type AppealState, submitAppeal } from '@/app/(frontend)/actions/appeal'
+import { NET_ERR, safeCall } from '@/lib/net'
 
 const MAX = 10 * 1024 * 1024
 const ACCEPT = '.pdf,.jpg,.jpeg,.png,.webp,.doc,.docx'
@@ -31,7 +32,7 @@ export function AppealForm() {
       return
     }
     start(async () => {
-      const res = await submitAppeal(fd)
+      const res = await safeCall(() => submitAppeal(fd), { ok: false, message: NET_ERR })
       setState(res)
       if (res.ok) {
         form.reset()
