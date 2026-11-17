@@ -75,7 +75,7 @@ async function inbox(payload: Payload): Promise<{ tabs: InboxTab[]; today: numbe
 }
 
 async function content(payload: Payload) {
-  const { oy, start, prev } = oyChegaralari()
+  const { oy, prevOy, kun, start, prev, prevSame } = oyChegaralari()
   const pub = { _status: { equals: 'published' } } as const
   const card = { title: true, category: true, publishedAt: true, updatedAt: true, image: true, _status: true } as const
   const [thisMonth, lastMonth, drafts, recent, draftList, changed] = await Promise.all([
@@ -83,7 +83,7 @@ async function content(payload: Payload) {
     safeCount(
       payload.count({
         collection: 'news',
-        where: { and: [pub, { publishedAt: { greater_than_equal: prev } }, { publishedAt: { less_than: start } }] },
+        where: { and: [pub, { publishedAt: { greater_than_equal: prev } }, { publishedAt: { less_than: prevSame } }] },
         overrideAccess: true,
       }),
     ),
@@ -92,7 +92,7 @@ async function content(payload: Payload) {
     payload.find({ collection: 'news', where: { _status: { equals: 'draft' } }, sort: 'updatedAt', limit: 3, depth: 1, select: card, overrideAccess: true }),
     payload.find({ collection: 'news', sort: '-updatedAt', limit: 4, depth: 0, select: { title: true, updatedAt: true, createdAt: true, _status: true }, overrideAccess: true }),
   ])
-  return { oy, thisMonth, lastMonth, drafts, recent: recent.docs, draftList: draftList.docs, changed: changed.docs }
+  return { oy, prevOy, kun, thisMonth, lastMonth, drafts, recent: recent.docs, draftList: draftList.docs, changed: changed.docs }
 }
 
 export default async function Dashboard() {
@@ -166,11 +166,17 @@ export default async function Dashboard() {
                   <b>{ct.thisMonth}</b>
                   <span>{`${oyNomi(ct.oy)[0].toLocaleUpperCase('uz')}${oyNomi(ct.oy).slice(1)}da eʼlon qilingan yangiliklar`}</span>
                   <small>
-                    <em className={diff < 0 ? 'down' : undefined}>
-                      {diff > 0 ? '+' : ''}
-                      {diff}
-                    </em>{' '}
-                    ötgan oyga nisbatan
+                    {diff === 0 ? (
+                      `1–${ct.kun}-${oyNomi(ct.prevOy)} bilan teng`
+                    ) : (
+                      <>
+                        <em className={diff < 0 ? 'down' : undefined}>
+                          {diff > 0 ? '+' : '−'}
+                          {Math.abs(diff)}
+                        </em>{' '}
+                        <span className="nb">{ct.kun === 1 ? `1-${oyNomi(ct.prevOy)}ga` : `1–${ct.kun}-${oyNomi(ct.prevOy)}ga`}</span> nisbatan
+                      </>
+                    )}
                   </small>
                 </div>
               </Link>

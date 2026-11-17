@@ -40,12 +40,21 @@ export function kunOldin(iso: string | Date, now = new Date()) {
   return Math.max(0, Math.floor((now.getTime() - new Date(iso).getTime()) / 86400000))
 }
 
-/** Joriy va ötgan oyning boşi (Toşkent vaqti böyiça, UTC ISO satri) */
+/** Joriy va ötgan oyning boşi hamda ötgan oyning şu davri oxiri (Toşkent vaqti böyiça, UTC ISO satri) */
 export function oyChegaralari(now = new Date()) {
   const d = tk(now)
   const start = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1) - TZ
   const prev = Date.UTC(d.getUTCFullYear(), d.getUTCMonth() - 1, 1) - TZ
-  return { oy: d.getUTCMonth(), start: new Date(start).toISOString(), prev: new Date(prev).toISOString() }
+  // ötgan oyning şu davri: masalan, 17-noyabrda — 1–17-oktabr (töliq oy bilan solişturiş notöğri natija beradi)
+  const prevSame = Math.min(prev + (now.getTime() - start), start)
+  return {
+    oy: d.getUTCMonth(),
+    prevOy: (d.getUTCMonth() + 11) % 12,
+    kun: d.getUTCDate(),
+    start: new Date(start).toISOString(),
+    prev: new Date(prev).toISOString(),
+    prevSame: new Date(prevSame).toISOString(),
+  }
 }
 
 /** Bugunning boşi (Toşkent vaqti) */
