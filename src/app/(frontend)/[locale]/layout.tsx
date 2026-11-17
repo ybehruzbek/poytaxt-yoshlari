@@ -32,15 +32,17 @@ import { MiqdorProvider } from '@/components/site/MiqdorProvider'
 import { getMiqdorlar } from '@/lib/cms/miqdorlar'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
-// latin-ext: Ö Ğ Ş Ç ’ (yangi alifbo); cyrillic: rus tili.
+// `subsets` — faqat OLDINDAN yuklanadigan qismlar: latin va latin-ext (Ö Ğ Ş Ç ʼ, yangi alifbo).
+// Kirill qismi CSS da bor (unicode-range), lekin faqat ruşça matn çiqqan sahifada yuklanadi —
+// özbekça sahifalar 40 KB ortiqça şriftni kutmaydi.
 const head = Montserrat({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['500', '600', '700', '800'],
   variable: '--f-head',
   display: 'swap',
 })
 const body = Inter({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600', '700'],
   variable: '--f-body',
   display: 'swap',
