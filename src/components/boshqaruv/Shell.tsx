@@ -6,6 +6,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { COLLAPSE_COOKIE, type CountKey, type MenuGroup, type MenuLink, type Pinned } from '@/lib/boshqaruv/menu'
 
+import { chiqish } from '@/lib/boshqaruv/session'
+
 import { Icon } from './Icon'
 
 type Props = {
@@ -38,7 +40,6 @@ function NavLink({ l, path, children }: { l: MenuLink; path: string; children: R
 /** Menyu, yiğiş tugmasi, qidiruv oynasi va asosiy panel. Sahifalar öz sarlavhasini <Top/> bilan beradi. */
 export function Shell({ initialCollapsed, menu, pinned, counts, user, children }: Props) {
   const path = usePathname()
-  const router = useRouter()
   const [collapsed, setCollapsed] = useState(initialCollapsed)
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState(false)
@@ -77,14 +78,6 @@ export function Shell({ initialCollapsed, menu, pinned, counts, user, children }
     return () => window.removeEventListener('keydown', h)
   }, [])
 
-  const logout = async () => {
-    try {
-      await fetch('/api/users/logout', { method: 'POST', credentials: 'include' })
-    } finally {
-      router.replace('/boshqaruv/kirish')
-      router.refresh()
-    }
-  }
 
   return (
     <div className={open ? 'bq is-menu' : 'bq'} data-collapsed={collapsed ? '1' : '0'} onClick={(e) => {
@@ -165,9 +158,11 @@ export function Shell({ initialCollapsed, menu, pinned, counts, user, children }
             <b>{user.name}</b>
             <small>{user.role}</small>
           </div>
-          <button type="button" onClick={logout} title="Çiqiş">
-            <Icon name="logout" size={18} />
-          </button>
+          <form action={chiqish}>
+            <button type="submit" title="Çiqiş">
+              <Icon name="logout" size={18} />
+            </button>
+          </form>
         </div>
       </aside>
 

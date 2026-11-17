@@ -383,8 +383,10 @@ svg.i {
   font-size: 12.5px;
   color: var(--muted);
 }
-.me button {
+.me form {
   margin-left: auto;
+}
+.me button {
   width: 34px;
   height: 34px;
   flex: none;
@@ -399,7 +401,7 @@ svg.i {
 }
 
 /* yiğilgan menyu: faqat ikonkalar */
-.bq[data-collapsed='1'] :is(.brand__t, .nav__t, .nav__lbl, .cnt, .chev, .eski, .search span, .search kbd, .pin span:not(.letter), .me__t, .me button, .sub) {
+.bq[data-collapsed='1'] :is(.brand__t, .nav__t, .nav__lbl, .cnt, .chev, .eski, .search span, .search kbd, .pin span:not(.letter), .me__t, .me form, .sub) {
   display: none;
 }
 .bq[data-collapsed='1'] .brand {
@@ -1038,7 +1040,7 @@ a.news:hover {
     transform: none;
     box-shadow: 0 0 0 100vmax rgba(40, 20, 16, 0.4);
   }
-  .bq[data-collapsed='1'] :is(.brand__t, .nav__t, .nav__lbl, .cnt, .chev, .search span, .search kbd, .pin span:not(.letter), .me__t, .me button) {
+  .bq[data-collapsed='1'] :is(.brand__t, .nav__t, .nav__lbl, .cnt, .chev, .search span, .search kbd, .pin span:not(.letter), .me__t, .me form) {
     display: revert;
   }
   .collapse {
