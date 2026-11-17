@@ -115,6 +115,29 @@ html.rv-ready .rv.rv-in.fx-zoom {
   html:not([data-a11y-read]):not([data-lite]) .pg-head + * {
     animation: ld-up var(--dur-enter) var(--ease-out) 0.22s backwards;
   }
+  /* blok “körinmas örama” (display: contents) bölsa — animatsiya uning birinçi bölimiga qöyiladi */
+  html:not([data-a11y-read]):not([data-lite]) .pg-head + :is([style*='contents'], .vx-wrap, div:not([class])) > :first-child {
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.22s backwards;
+  }
+  /* yangilik sahifasi boşi: yöl, orqaga tugmasi, turkum, sarlavha, qisqa matn, surat, yon ustun — navbat bilan */
+  html:not([data-a11y-read]):not([data-lite]) .ar-b-sec :is(.pg-crumbs, .ar-back) {
+    animation: ld-fade var(--dur-reveal) var(--ease-out) backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ar-b-main > .ar-meta {
+    animation: ld-up var(--dur-reveal) var(--ease-out) 0.05s backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ar-b-main > .ar-title {
+    animation: fx-head var(--dur-enter) var(--ease-out) 0.1s backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ar-b-main > .ar-lede {
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.2s backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ar-b-main > .ar-sl {
+    animation: fx-zoom var(--dur-enter) var(--ease-out) 0.28s backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ar-b-side {
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.36s backwards;
+  }
   /* “Ittifoq haqida” sahifasi boşi: yöl, logotip, şior, suratlar lentasi va tugmalar navbat bilan */
   html:not([data-a11y-read]):not([data-lite]) .ith .it-crumbs {
     animation: ld-fade var(--dur-reveal) var(--ease-out) backwards;
