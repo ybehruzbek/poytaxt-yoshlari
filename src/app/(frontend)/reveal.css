@@ -111,6 +111,29 @@ html.rv-ready .rv.rv-in.fx-zoom {
   html:not([data-a11y-read]):not([data-lite]) .pg-head .pg-title ~ * {
     animation: ld-up var(--dur-reveal) var(--ease-out) 0.12s backwards;
   }
+  /* sarlavha ostidagi birinçi blok (birinçi ekran mazmuni) ham suzib çiqadi */
+  html:not([data-a11y-read]):not([data-lite]) .pg-head + * {
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.22s backwards;
+  }
+  /* “Ittifoq haqida” sahifasi boşi: yöl, logotip, şior, suratlar lentasi va tugmalar navbat bilan */
+  html:not([data-a11y-read]):not([data-lite]) .ith .it-crumbs {
+    animation: ld-fade var(--dur-reveal) var(--ease-out) backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ith .ith-brand > * {
+    animation: fx-head var(--dur-enter) var(--ease-out) calc(0.08s + var(--i, 0) * 0.1s) backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ith .ith-brand > :first-child {
+    animation-name: fx-pop;
+    animation-timing-function: var(--ease-spring);
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ith .ith-brand > :nth-child(2) { --i: 1; }
+  html:not([data-a11y-read]):not([data-lite]) .ith .ith-brand > :nth-child(3) { --i: 2; }
+  html:not([data-a11y-read]):not([data-lite]) .ith .ith-strip {
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.35s backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .ith .ith-btns {
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.5s backwards;
+  }
   /* bosh sahifa: boş ekran — şior qatorlari navbat bilan suzib çiqadi, kollaj bölaklari birma-bir “sakraydi” */
   html:not([data-a11y-read]):not([data-lite]) .hero .hero-slogan > span {
     animation: fx-head var(--dur-enter) var(--ease-out) backwards;
@@ -151,6 +174,13 @@ html.rv-ready .rv.rv-in.fx-zoom {
     opacity: 0;
     translate: 0 24px;
   }
+}
+
+/* sahifa fonda oçilgan bölsa (inline-scripts.ts → LOAD_GATE): yuklaniş animatsiyalari foydalanuvçi qaraguncha kutadi */
+html.ld-wait *,
+html.ld-wait *::before,
+html.ld-wait *::after {
+  animation-play-state: paused !important;
 }
 
 /* söz-söz yorişadigan sarlavha (SplitWords): --t — skroll progressi, --w — söz tartibi */

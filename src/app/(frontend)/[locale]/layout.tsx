@@ -29,7 +29,7 @@ import '../motion.css'
 import '../reveal.css'
 import '../skeleton.css'
 import { MiqdorProvider } from '@/components/site/MiqdorProvider'
-import { IMG_ERR, LITE } from '@/lib/inline-scripts'
+import { IMG_ERR, LITE, LOAD_GATE } from '@/lib/inline-scripts'
 import { getMiqdorlar } from '@/lib/cms/miqdorlar'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
@@ -98,6 +98,7 @@ export default async function LocaleLayout(props: {
       <head>
         <script dangerouslySetInnerHTML={{ __html: LITE }} />
         <script dangerouslySetInnerHTML={{ __html: IMG_ERR }} />
+        <script dangerouslySetInnerHTML={{ __html: LOAD_GATE }} />
       </head>
       <body>
         <Header locale={locale} />

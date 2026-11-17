@@ -14,3 +14,10 @@ export const LITE = `try{var n=navigator,c=n.connection,m=n.deviceMemory,h=n.har
  * (kartaning rangli foni) qoladi. Tinglovçi sahifa çizilişidan oldin qöyiladi — birinçi rasmlarni ham ushlaydi.
  */
 export const IMG_ERR = `document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG')t.setAttribute('data-broken','')},true)`
+
+/**
+ * Sahifa körinmay turib oçilsa (fondagi yangi tab, yopiq panel), yuklaniş animatsiyalari pauzada turadi
+ * va foydalanuvçi sahifaga qaraganda boşlanadi — aks holda ular u körmay turib tugab qoladi.
+ * JS işlamasa sinf qöyilmaydi va heç narsa töxtatilmaydi.
+ */
+export const LOAD_GATE = `(function(){if(document.visibilityState!=='hidden')return;var d=document.documentElement;d.classList.add('ld-wait');function go(){if(document.visibilityState==='visible'){d.classList.remove('ld-wait');document.removeEventListener('visibilitychange',go)}}document.addEventListener('visibilitychange',go)})()`
