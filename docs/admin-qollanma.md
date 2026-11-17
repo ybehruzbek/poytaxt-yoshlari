@@ -84,7 +84,30 @@ Yangi murojaat va arizalar soni boş sahifadagi kutib oliş blokida körsatiladi
 
 ## 8. Serverga joylaştiriş (dasturçi uçun)
 
-- Baza tuzilmasi migratsiyalar orqali yaratiladi (`src/migrations`). Production rejimida ilova işga tuşganda migratsiyalar özi bajariladi.
-- Kolleksiya yoki maydon özgartirilsa: `pnpm payload migrate:create <nom>` va yangi migratsiya commit qilinadi.
-- Lokal kontentni serverga köçiriş: `sh scripts/deploy/eksport.sh` → `deploy-eksport/malumot.sql` va `deploy-eksport/media.tar.gz`. Serverda ilova bir marta işga tuşgaç: `psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f malumot.sql`, söng arxiv ilova papkasida oçiladi (`media/`, `private-uploads/`). Maʼlumot tiklangandan keyin ilova qayta yiğiladi (redeploy): oldindan yiğilgan sahifalar yangi maʼlumot bilan qayta yaratiladi.
-- `media/` va `private-uploads/` papkalari serverda doimiy disk (volume) bölişi şart, aks holda qayta joylaştirişda yuklangan fayllar yöqoladi.
+Ilova `Dockerfile` orqali yiğiladi (Next.js standalone). Dokploy'da ilova turi — Dockerfile.
+
+**Build args** (yiğiş paytida kodga yoziladi):
+
+| Nom | Qiymat |
+|---|---|
+| `NEXT_PUBLIC_SERVER_URL` | Saytning töliq manzili, masalan `https://domen.uz` (majburiy) |
+| `NEXT_PUBLIC_WWWUZ_ID` | www.uz hisoblagiçi raqami (ixtiyoriy) |
+| `DATABASE_URL` | Ixtiyoriy. Build konteyneri bazaga ulana olsa berilsin: sahifalar oldindan yiğiladi va keşdan beriladi (eng tez rejim). Berilmasa, ilova bazasiz yiğiladi va sahifalar har sörovda tayyorlanadi; katta sahifalar maʼlumoti server keşida saqlanadi |
+
+**Environment** (işlaş paytida): `DATABASE_URL`, `PAYLOAD_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL`, `TRUSTED_PROXY_HOPS=1`, `NOTIFY_EMAIL`, `SMTP_*`, `TG_*` (`.env.example` ga qarang).
+
+**Volumes (majburiy):** konteynerdagi `/app/media` va `/app/private-uploads` papkalari doimiy diskka (Dokploy → Advanced → Volumes) ulanadi. Aks holda qayta joylaştirişda yuklangan rasmlar va murojaat fayllari yöqoladi. Nomli volume (Volume Mount) tavsiya etiladi. Server papkasi ulanadigan bölsa (Bind Mount), unga ilova foydalanuvçisi yoza olişi kerak: `chown -R 1001:1001 <papka>`.
+
+`DATABASE_URL` build arg sifatida berilsa, u Dokploy'ning build jurnalida körinadi — bu jurnal faqat administratorlarga oçiq bölsin.
+
+**Baza tuzilmasi** migratsiyalar orqali yaratiladi (`src/migrations`): ilova işga tuşganda migratsiyalar özi bajariladi. Kolleksiya yoki maydon özgartirilsa: `pnpm payload migrate:create <nom>` va yangi migratsiya commit qilinadi.
+
+**Lokal kontentni serverga köçiriş:**
+
+1. Lokal kompyuterda: `sh scripts/deploy/eksport.sh` → `deploy-eksport/malumot.sql` va `deploy-eksport/media.tar.gz`.
+2. Ilova serverda bir marta işga tuşadi (migratsiya jadvallarni yaratadi).
+3. Maʼlumot tiklanadi: `psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f malumot.sql`.
+4. Arxiv volume'larga oçiladi: `media/` → `/app/media`, `private-uploads/` → `/app/private-uploads`.
+5. Ilova qayta işga tuşiriladi (oldindan yiğiş rejimida — qayta yiğiladi): keşdagi sahifalar yangi maʼlumot bilan qayta tayyorlanadi.
+
+**Admin paroli:** maʼlumot bilan birga lokal foydalanuvçilar ham köçadi — serverda birinçi kirişdan keyin administrator parolini darhol almaştiring.
