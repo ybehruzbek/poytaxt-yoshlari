@@ -38,12 +38,13 @@ ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL NEXT_PUBLIC_WWWUZ_ID=$NEXT_PU
 #  – BERILMASA: bazasiz yiğiş (compile), sahifalar har sörovda serverda tayyorlanadi; katta sahifalar
 #    maʼlumoti server keşida saqlanadi (lib/cms/sahifalar.ts), şuning uçun bu rejim ham tez işlaydi.
 # PAYLOAD_SECRET faqat yiğiş uçun vaqtinçalik; haqiqiysi runtime env'dan keladi.
+# Xotira: keşsiz bazasiz yiğiş ~500 MB işlatdi (ölçangan); 2 GB çegara 4 GB serverni himoya qiladi.
 RUN --mount=type=secret,id=database_url,required=false \
     if [ -s /run/secrets/database_url ]; then MODE=""; DB="$(cat /run/secrets/database_url)"; \
     else MODE="--experimental-build-mode compile"; DB="postgres://build:build@127.0.0.1:1/build"; fi; \
     echo "next build ${MODE:-(oldindan yiğiş bilan)}"; \
     PAYLOAD_SECRET=build-time-only DATABASE_URL="$DB" \
-    NODE_OPTIONS="--no-deprecation --max-old-space-size=4096" \
+    NODE_OPTIONS="--no-deprecation --max-old-space-size=2048" \
     pnpm exec next build $MODE
 
 # ═══ 3. Işga tuşiriş ═══

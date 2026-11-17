@@ -97,7 +97,7 @@ Ilova `Dockerfile` orqali yiğiladi (Next.js standalone). Dokploy'da ilova turi 
 
 **Environment** (işlaş paytida): `DATABASE_URL`, `PAYLOAD_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL`, `TRUSTED_PROXY_HOPS=1`, `NOTIFY_EMAIL`, `SMTP_*`, `TG_*` (`.env.example` ga qarang).
 
-**Resurslar:** ilova konteyneriga 512 MB xotira limiti qöyiladi (Dokploy → Advanced → Resources). Sinovda barça sahifalar va 400 ta parallel sörov 170–280 MB da işladi. Yiğiş (build) uçun esa Node'ga 4 GB gaça xotira ajratilgan (Dockerfile), aniq ehtiyoç serverda ölçanmagan: server kiçik bölsa, image boşqa joyda (masalan, GitHub Actions) yiğilib, Dokploy uni tayyor holda oladi.
+**Resurslar:** ilova konteyneriga 512 MB xotira limiti qöyiladi (Dokploy → Advanced → Resources). Sinovda barça sahifalar va 400 ta parallel sörov 170–280 MB da işladi. Keşsiz yiğiş (build) taxminan 500 MB qöşimça xotira işlatadi (ölçangan), çegarasi — 2 GB. 4 GB serverda yiğiş Dokploy'ning özida bajariladi; 2 GB dan kiçik serverda image boşqa joyda (masalan, GitHub Actions) yiğilib, Dokploy uni tayyor holda oladi. Zaxira uçun serverda 2 GB swap fayli bölişi tavsiya etiladi.
 
 **Volumes (majburiy):** konteynerdagi `/app/media` va `/app/private-uploads` papkalari doimiy diskka (Dokploy → Advanced → Volumes) ulanadi. Aks holda qayta joylaştirişda yuklangan rasmlar va murojaat fayllari yöqoladi. Nomli volume (Volume Mount) tavsiya etiladi. Server papkasi ulanadigan bölsa (Bind Mount), unga ilova foydalanuvçisi yoza olişi kerak: `chown -R 1001:1001 <papka>`.
 
