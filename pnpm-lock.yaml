@@ -8,6 +8,27 @@ importers:
 
   .:
     dependencies:
+      '@lexical/history':
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
+      '@lexical/link':
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
+      '@lexical/list':
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
+      '@lexical/react':
+        specifier: 0.50.0
+        version: 0.50.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.7.3)(yjs@13.6.33)
+      '@lexical/rich-text':
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
+      '@lexical/selection':
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
+      '@lexical/utils':
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
       '@payloadcms/db-postgres':
         specifier: 3.93.0
         version: 3.93.0(payload@3.93.0(graphql@16.15.0)(typescript@5.7.3))
@@ -35,6 +56,9 @@ importers:
       graphql:
         specifier: ^16.8.1
         version: 16.15.0
+      lexical:
+        specifier: 0.50.0
+        version: 0.50.0(typescript@5.7.3)
       next:
         specifier: 16.3.3
         version: 16.3.3(@babel/core@7.29.13)(@playwright/test@1.63.0)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4)
