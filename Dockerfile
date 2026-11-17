@@ -51,6 +51,9 @@ FROM node:24-alpine AS runner
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
+# Node xotirasi çeklanadi: çeklovsiz Node RAM'ni keç tozalaydi va 800 MB gaça ösadi. Sinovda 512 MB konteyner
+# çeklovi bilan barça sahifalar va 400 ta parallel sörov 170–280 MB da işladi. Dokploy'da xotira limiti: 512 MB.
+ENV NODE_OPTIONS=--max-old-space-size=320
 
 RUN addgroup -S -g 1001 nodejs && adduser -S -u 1001 -G nodejs nextjs
 
