@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { MoreToggle } from '@/components/site/MoreToggle'
 
 import { type Album, fullDate, photo, thumb } from './data'
+import { smoothScroll } from '@/lib/scroll'
 
 /* ============================================================
    Fotolar oynasi (lightbox): sahifadagi istalgan [data-album] tugma
@@ -244,7 +245,7 @@ export function ShowMore({ target, rest }: { target: string; rest: number }) {
     const el = document.getElementById(target)
     el?.classList.toggle('is-all', v)
     setOpen(v)
-    if (!v) el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (!v) smoothScroll(el, { block: 'start' })
   }
   return (
     <div className="ax-showmore">

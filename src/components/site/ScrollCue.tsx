@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { smoothScroll } from '@/lib/scroll'
 
 /**
  * Hero pastidagi “pastga suring” belgisi (siçqonça): bosilganda keyingi bölimga silliq tuşadi,
@@ -20,7 +21,7 @@ export function ScrollCue() {
 
   const go = () => {
     const next = root.current?.closest('section')?.nextElementSibling
-    next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    smoothScroll(next, { block: 'start' })
   }
 
   return (

@@ -6,6 +6,7 @@ import { fullDate } from './data'
 import { PressDoc } from './PressDoc'
 import type { PressContactT } from '@/lib/cms/aloqa'
 import { PRESS_KINDS, type PressItem } from './press'
+import { smoothScroll } from '@/lib/scroll'
 
 /** Faqat tanlangan blankani çop etiş (qolgan sahifa yaşiriladi — axborot.css @media print) */
 function printDoc(id: string) {
@@ -82,7 +83,7 @@ export function PressDesk({ press: PRESS, contact }: { press: PressItem[]; conta
   const pick = (s: string) => {
     setSlug(s)
     history.replaceState(null, '', `#${s}`)
-    document.getElementById('pr-desk-doc')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    smoothScroll(document.getElementById('pr-desk-doc'), { block: 'start' })
   }
   return (
     <div className="pr-desk">

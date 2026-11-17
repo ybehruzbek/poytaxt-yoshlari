@@ -8,6 +8,7 @@ import { submitVolunteer, type VolField, type VolState } from '@/app/(frontend)/
 import type { VolDir } from './data'
 import type { VolSahifa } from '@/lib/cms/sahifalar'
 import { NET_ERR, safeCall } from '@/lib/net'
+import { smoothScroll } from '@/lib/scroll'
 
 type Page = Pick<VolSahifa, 'LAW' | 'QUIZ' | 'TIMES'>
 const PageCtx = createContext<Page>({ LAW: { t: '', no: '', url: '' }, QUIZ: [], TIMES: [] })
@@ -383,7 +384,7 @@ export function VolInteractive({ steps, dirs, page }: { steps: ReactNode; dirs: 
   const formRef = useRef<HTMLElement>(null)
   const pick = (id: string) => {
     setPicked((p) => (p.includes(id) ? p : [...p, id]))
-    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    smoothScroll(formRef.current, { block: 'start' })
   }
   return (
     <PageCtx.Provider value={page}>

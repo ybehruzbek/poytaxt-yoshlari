@@ -78,11 +78,10 @@ button:focus {
 .btn:active {
   transform: scale(0.98);
 }
+/* fokus halqasi outline bilan: Windows yuqori kontrast rejimida ham körinadi va kartaning overflow:hidden i uni kesmaydi */
 :is(a, button):focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 3px var(--bg),
-    0 0 0 6px var(--navy);
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
 }
 .ev:hover .go,
 .ev:focus-visible .go {

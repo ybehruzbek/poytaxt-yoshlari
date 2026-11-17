@@ -15,6 +15,7 @@ import {
   type GrantCat,
   type GrantOrigin,
 } from './data'
+import { smoothScroll } from '@/lib/scroll'
 
 const catTitle = (c: GrantCat) => GRANT_CATS.find((x) => x.key === c)!.t
 
@@ -157,9 +158,7 @@ export function GrantsList({ grants: GRANTS }: { grants: Grant[] }) {
           onMore={() => setLimit((l) => l + STEP)}
           onLess={() => {
             setLimit(STEP)
-            document
-              .getElementById('grantlar-royxat')
-              ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            smoothScroll(document.getElementById('grantlar-royxat'), { block: 'start' })
           }}
         />
       )}

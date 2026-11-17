@@ -150,6 +150,7 @@ html[data-theme='dark'] .yn-cat {
   border: 1px solid var(--line);
   border-radius: var(--r-thumb);
   max-height: calc(100vh - 128px);
+  max-height: calc(100dvh - 128px); /* iOS: brauzer paneli hisobga olinadi */
   overflow-y: auto;
   scrollbar-width: thin;
 }

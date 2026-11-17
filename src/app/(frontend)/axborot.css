@@ -108,6 +108,7 @@
   padding: 7px 12px;
   border-radius: 99px;
   background: rgba(30, 14, 11, 0.62);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   font: 700 13px/1 var(--f-body);
   color: #fff;
@@ -554,6 +555,7 @@
 }
 .ax-vm::backdrop {
   background: rgba(20, 10, 8, 0.82);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
 .ax-vm-frame {

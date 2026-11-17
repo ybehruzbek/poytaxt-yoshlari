@@ -40,6 +40,7 @@
 /* 6 tadan köp hamkor — cheksiz aylanuvçi tasma */
 .pt-marquee {
   overflow: clip;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 .pt-track {

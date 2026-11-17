@@ -8,6 +8,7 @@ import { nbsp } from '@/lib/nbsp'
 
 import { BENEFIT_ICONS } from './BenefitCalc'
 import { BENEFIT_CATS, type Benefit, type BenefitCat } from './data'
+import { smoothScroll } from '@/lib/scroll'
 
 const catTitle = (c: BenefitCat) => BENEFIT_CATS.find((x) => x.key === c)!.t
 
@@ -101,9 +102,7 @@ export function BenefitsList({ benefits: BENEFITS }: { benefits: Benefit[] }) {
           onMore={() => setLimit((l) => l + STEP)}
           onLess={() => {
             setLimit(STEP)
-            document
-              .getElementById('imtiyozlar-royxat')
-              ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            smoothScroll(document.getElementById('imtiyozlar-royxat'), { block: 'start' })
           }}
         />
       )}

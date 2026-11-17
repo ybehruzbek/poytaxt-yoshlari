@@ -3,6 +3,7 @@
 import { Children, type ReactNode, useRef, useState } from 'react'
 
 import { More } from './MoreBtn'
+import { smoothScroll } from '@/lib/scroll'
 
 /**
  * Saytdagi BARÇA uzun röyxatlar uçun yagona “Köproq körsatiş” tugmasi (qoida: hamma joyda bir xil).
@@ -90,7 +91,7 @@ export function MoreList({
           onMore={() => setShown((s) => (all.length - s - step === 1 ? all.length : s + step))}
           onLess={() => {
             setShown(first)
-            box.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            smoothScroll(box.current, { block: 'start' })
           }}
         />
       )}

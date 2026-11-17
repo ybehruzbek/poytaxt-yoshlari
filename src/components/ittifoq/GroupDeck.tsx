@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type MouseEvent, type ReactNode } from 'react'
+import { smoothScroll } from '@/lib/scroll'
 
 /**
  * Guruh panellari to'plami: tik çiziqni (gp-strip) bosganda şu guruh faol bo'ladi.
@@ -17,7 +18,7 @@ export function GroupDeck({ children }: { children: ReactNode }) {
       deck
         .querySelector<HTMLElement>(`.gp[data-g="${strip.dataset.g}"] .gp-body`)
         ?.scrollTo({ top: 0 })
-      deck.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      smoothScroll(deck, { block: 'start' })
     })
   }
   return (

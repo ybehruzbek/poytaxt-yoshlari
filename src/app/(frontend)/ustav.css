@@ -108,6 +108,7 @@
   position: sticky;
   top: 110px;
   max-height: calc(100vh - 130px);
+  max-height: calc(100dvh - 130px); /* iOS: brauzer paneli hisobga olinadi */
   overflow: auto;
   padding-right: 6px;
 }

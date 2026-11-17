@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { MoreToggle } from '@/components/site/MoreToggle'
+import { smoothScroll } from '@/lib/scroll'
 
 /**
  * Yaşirin qolgan elementlarni oçadigan tugma (yagona köriniş — MoreToggle): nişon elementga data-open qöyadi (CSS yaşirişni olib taşlaydi).
@@ -31,9 +32,7 @@ export function ShowMore({ target, count, noun }: { target: string; count?: numb
     const next = !open
     el.toggleAttribute('data-open', next)
     setOpen(next)
-    // skroll animatsiyasi yangi körinişga kelgan elementlarni darhol oçsin
-    requestAnimationFrame(() => window.dispatchEvent(new Event('scroll')))
-    if (!next) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (!next) smoothScroll(el, { block: 'start' })
   }
 
   if (!open && hidden === 0) return null

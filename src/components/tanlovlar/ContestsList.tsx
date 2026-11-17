@@ -9,6 +9,7 @@ import { nbsp } from '@/lib/nbsp'
 import { daysTo, deadlineLabel } from '@/lib/opps'
 
 import { CONTEST_CATS, type Contest, type ContestCat } from './data'
+import { smoothScroll } from '@/lib/scroll'
 
 const catTitle = (c: ContestCat) => CONTEST_CATS.find((x) => x.key === c)!.t
 const isOpen = (s: Contest) => !!s.deadline && (daysTo(s.deadline) ?? 0) > 0
@@ -126,9 +127,7 @@ export function ContestsList({ contests: CONTESTS }: { contests: Contest[] }) {
           onMore={() => setLimit((l) => l + STEP)}
           onLess={() => {
             setLimit(STEP)
-            document
-              .getElementById('tanlovlar-royxat')
-              ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            smoothScroll(document.getElementById('tanlovlar-royxat'), { block: 'start' })
           }}
         />
       )}
