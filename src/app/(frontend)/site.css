@@ -322,6 +322,10 @@ html,body{overflow-x:clip}
 .pg-head + .sec,.pg-head + section,.pg-head + * > :is(.sec,section):first-child,.pg-head + * > .vx:first-child > .sec:first-child{padding-top:0}
 /* faqat yöl kapsulasi bölgan sahifa boşi (tafsilot sahifalari): kapsula ostida ham şu oraliq */
 .pg-head:not(:has(h1)) .wrap > .pg-crumbs:last-child{margin-bottom:0;vertical-align:top}
+/* xato va 404 sahifalari (ErrorView): qisqa izoh va tugmalar */
+.err-box p{max-width:640px;font-size:18px;line-height:1.6;color:var(--muted);margin:0 0 28px}
+.err-acts{display:flex;flex-wrap:wrap;gap:12px}
+.err-acts button.more-btn{font:inherit;border:0;cursor:pointer}
 .pg-crumbs{display:inline-block;margin-bottom:14px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:8px 18px}
 .pg-crumbs .crumbs{margin:0;font-size:14px;font-weight:500;color:var(--navy)}
 .pg-crumbs .crumbs span{opacity:.6}
