@@ -121,7 +121,7 @@ export default async function Dashboard() {
           Saytni oçiş
         </a>
         {isContent && (
-          <Link className="btn btn-primary" href="/admin/collections/news/create" prefetch={false}>
+          <Link className="btn btn-primary" href="/boshqaruv/yangiliklar/yangi" prefetch={false}>
             <Icon name="plus" size={18} />
             <span>Yangilik qöşiş</span>
           </Link>
@@ -158,7 +158,7 @@ export default async function Dashboard() {
           )}
           {ct && (
             <>
-              <Link className="stat" href="/admin/collections/news" prefetch={false}>
+              <Link className="stat" href="/boshqaruv/yangiliklar" prefetch={false}>
                 <span className="stat__ic ic-green">
                   <Icon name="news" size={24} />
                 </span>
@@ -180,7 +180,7 @@ export default async function Dashboard() {
                   </small>
                 </div>
               </Link>
-              <Link className="stat" href="/admin/collections/news?where[_status][equals]=draft" prefetch={false}>
+              <Link className="stat" href="/boshqaruv/yangiliklar?holat=draft" prefetch={false}>
                 <span className="stat__ic ic-yellow">
                   <Icon name="pen" size={24} />
                 </span>
@@ -227,7 +227,7 @@ export default async function Dashboard() {
               <section className="card">
                 <div className="card__head">
                   <h2>Oxirgi yangiliklar</h2>
-                  <Link className="more" href="/admin/collections/news" prefetch={false}>
+                  <Link className="more" href="/boshqaruv/yangiliklar" prefetch={false}>
                     Barçasi
                     <Icon name="chev" size={16} />
                   </Link>
@@ -235,7 +235,7 @@ export default async function Dashboard() {
                 <ul className="list">
                   {ct.recent.map((n) => (
                     <li key={n.id}>
-                      <Link className="news" href={`/admin/collections/news/${n.id}`} prefetch={false}>
+                      <Link className="news" href={`/boshqaruv/yangiliklar/${n.id}`} prefetch={false}>
                         {thumb(n.image) ? <img src={thumb(n.image)!} alt="" loading="lazy" /> : <span className="ph" />}
                         <div>
                           <b>{n.title}</b>
@@ -258,7 +258,7 @@ export default async function Dashboard() {
                   <h2>Tezkor amallar</h2>
                 </div>
                 <div className="quick">
-                  <Link href="/admin/collections/news/create" prefetch={false}>
+                  <Link href="/boshqaruv/yangiliklar/yangi" prefetch={false}>
                     <span className="stat__ic ic-green">
                       <Icon name="news" size={18} />
                     </span>
@@ -289,7 +289,7 @@ export default async function Dashboard() {
                 <div className="card__head">
                   <h2>Qoralamalar</h2>
                   {ct.drafts > 0 && (
-                    <Link className="more" href="/admin/collections/news?where[_status][equals]=draft" prefetch={false}>
+                    <Link className="more" href="/boshqaruv/yangiliklar?holat=draft" prefetch={false}>
                       Barçasi
                       <Icon name="chev" size={16} />
                     </Link>
@@ -301,7 +301,7 @@ export default async function Dashboard() {
                   <ul className="list">
                     {ct.draftList.map((n) => (
                       <li key={n.id}>
-                        <Link className="news" href={`/admin/collections/news/${n.id}`} prefetch={false}>
+                        <Link className="news" href={`/boshqaruv/yangiliklar/${n.id}`} prefetch={false}>
                           {thumb(n.image) ? <img src={thumb(n.image)!} alt="" loading="lazy" /> : <span className="ph" />}
                           <div>
                             <b>{n.title || 'Sarlavhasiz qoralama'}</b>

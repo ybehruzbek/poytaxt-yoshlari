@@ -39,7 +39,7 @@ export const MENU: MenuGroup[] = [
     t: 'Sayt kontenti',
     roles: KONTENT,
     items: [
-      { t: 'Yangiliklar', href: c('news'), eski: true, icon: 'news' },
+      { t: 'Yangiliklar', href: '/boshqaruv/yangiliklar', icon: 'news' },
       {
         t: 'Faoliyat',
         icon: 'flag',
