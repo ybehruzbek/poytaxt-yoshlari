@@ -35,7 +35,8 @@ const Arrow = () => (
  */
 export function NewsRotator({ locale, initial }: { locale: Locale; initial: NewsCard[] }) {
   const items = initial
-  const [idx, setIdx] = useState(0)
+  // prev — avvalgi asosiy yangilik: uning surati yangisi ostida turadi, almaşişda blok böş qolmaydi
+  const [{ idx, prev }, setPos] = useState({ idx: 0, prev: -1 })
   const [playing, setPlaying] = useState(true)
   const [hover, setHover] = useState(false)
   const [reduced, setReduced] = useState(false)
@@ -60,9 +61,9 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
 
   const go = useCallback(
     (step: number) => {
-      setIdx((i) => {
+      setPos(({ idx: i }) => {
         const next = i + step
-        return next < 0 ? items.length - 1 : next
+        return { idx: next < 0 ? items.length - 1 : next, prev: i }
       })
     },
     [items.length],
@@ -77,6 +78,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
   const n = items.length
   const at = (k: number) => items[((k % n) + n) % n]
   const main = at(idx)
+  const back = prev >= 0 ? at(prev) : null
   // yon ro'yxat: asosiydan keyingi 4 ta (bazada tugasa — boshidan)
   const side = Array.from({ length: Math.min(SIDE, n - 1) }, (_, k) => at(idx + 1 + k))
   const href = (s: NewsCard) => `/${locale}/yangiliklar/${s.slug}`
@@ -92,11 +94,22 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setHover(false)
       }}
     >
-      <article className="na-main" key={main.id} aria-roledescription="asosiy yangilik">
+      {/* maqola özi qayta yaratilmaydi: yangi surat eskisining ustida xiradan çiqadi (miltillamaydi) */}
+      <article className="na-main" aria-roledescription="asosiy yangilik">
         <div className="im">
-          <img className="cover" src={main.image} alt={main.imageAlt} loading="lazy" decoding="async" />
+          {back && back.image !== main.image && (
+            <img className="cover na-back" src={back.image} alt="" aria-hidden="true" decoding="async" />
+          )}
+          <img
+            key={main.id}
+            className={`cover${back ? ' na-in' : ''}`}
+            src={main.image}
+            alt={main.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-        <div className="bd">
+        <div className="bd" key={main.id}>
           <div className="meta">
             <span className={`chip ${CATEGORY_TONE[main.category]}`}>{main.categoryLabel}</span>
             <time dateTime={main.dateISO}>{main.date}</time>
