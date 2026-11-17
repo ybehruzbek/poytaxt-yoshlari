@@ -17,9 +17,9 @@ export async function chiqish() {
     // faqat şu qurilmadagi sessiya yopiladi — xodimning boşqa qurilmalari çiqarib yuborilmaydi
     const r = await logout({ config })
     yopildi = r.success !== false
-    if (!yopildi) payload.logger.error({ r }, 'boshqaruv: sessiyani yopiş amalga oşmadi')
+    if (!yopildi) payload.logger.error({ r }, 'boşqaruv paneli: sessiyani yopiş amalga oşmadi')
   } catch (e) {
-    payload.logger.error({ err: e }, 'boshqaruv: sessiyani yopiş amalga oşmadi')
+    payload.logger.error({ err: e }, 'boşqaruv paneli: sessiyani yopiş amalga oşmadi')
   } finally {
     ;(await cookies()).delete(`${payload.config.cookiePrefix}-token`)
   }
