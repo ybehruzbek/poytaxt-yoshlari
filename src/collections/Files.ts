@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { kontent, kontentYashirin } from '@/admin/access'
 import { G } from '@/admin/groups'
 import { imloMatn } from '@/lib/imlo-hook'
+import { relativeUrls } from '@/lib/relative-url'
 
 /**
  * Saytda yuklab olinadigan hujjat fayllari (PDF, Word, Excel): Kengaş hujjatlari, hujjat namunalari.
@@ -11,6 +12,7 @@ import { imloMatn } from '@/lib/imlo-hook'
 export const Files: CollectionConfig = {
   slug: 'files',
   labels: { singular: 'Fayl', plural: 'Hujjat fayllari' },
+  hooks: { afterRead: [relativeUrls] },
   admin: {
     group: G.sozlamalar,
     useAsTitle: 'title',
