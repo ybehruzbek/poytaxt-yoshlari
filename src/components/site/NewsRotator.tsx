@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element -- rasmlar Payload'dan tayyor o'lchamda (WebP) keladi */
 
 import Link from 'next/link'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import type { Locale } from '@/i18n/config'
 import { CATEGORY_TONE, type NewsCard } from '@/lib/news'
@@ -39,6 +39,16 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
   const [playing, setPlaying] = useState(true)
   const [hover, setHover] = useState(false)
   const [reduced, setReduced] = useState(false)
+  // blok ekrandan çiqsa aylaniş töxtaydi — körinmayotgan joyda işlov bajarilmaydi
+  const box = useRef<HTMLDivElement>(null)
+  const [away, setAway] = useState(false)
+  useEffect(() => {
+    const el = box.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(([e]) => setAway(!e.isIntersecting))
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -73,6 +83,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
 
   return (
     <div
+      ref={box}
       className="nv-a"
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
@@ -148,7 +159,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
               {/* navbatdagi karta almashishgacha sariq bilan to'lib boradi */}
               {k === 0 && run && (
                 <span
-                  className={`pg-next${hover ? ' paused' : ''}`}
+                  className={`pg-next${hover || away ? ' paused' : ''}`}
                   style={{ animationDuration: `${INTERVAL}ms` }}
                   onAnimationEnd={() => go(1)}
                   aria-hidden="true"

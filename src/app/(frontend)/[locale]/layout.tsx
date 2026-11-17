@@ -5,6 +5,7 @@ import React from 'react'
 
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
+import { LoopGuard } from '@/components/site/LoopGuard'
 import { PageMotion } from '@/components/site/PageMotion'
 import { ScrollRail } from '@/components/site/ScrollRail'
 import { TextErrorReport } from '@/components/site/TextErrorReport'
@@ -43,6 +44,13 @@ const body = Inter({
   variable: '--f-body',
   display: 'swap',
 })
+
+/**
+ * Kuçsiz qurilma yoki “trafikni tejaş” rejimi: sahifa çizilişidan oldin <html data-lite> qöyiladi —
+ * skroll animatsiyalari, cheksiz lentalar va şişa (blur) effektlari öçadi, mazmun darhol körinadi.
+ * Mezon: tejaş rejimi, 2 GB gaça xotira yoki 2 ta yadro, yoki 4 GB va 4 yadrogaça birga.
+ */
+const LITE = `try{var n=navigator,c=n.connection,m=n.deviceMemory,h=n.hardwareConcurrency;if((c&&c.saveData)||(m&&m<=2)||(h&&h<=2)||(m&&h&&m<=4&&h<=4))document.documentElement.setAttribute('data-lite','')}catch(e){}`
 
 const SITE_NAME = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
 
@@ -90,6 +98,9 @@ export default async function LocaleLayout(props: {
       data-scroll-behavior="smooth"
       className={`${head.variable} ${body.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: LITE }} />
+      </head>
       <body>
         <Header locale={locale} />
         <MiqdorProvider value={miqdor}>
@@ -98,6 +109,7 @@ export default async function LocaleLayout(props: {
         <Footer locale={locale} />
         <ScrollRail />
         <PageMotion locale={locale} />
+        <LoopGuard />
         <Typograf />
         <TextErrorReport />
       </body>
