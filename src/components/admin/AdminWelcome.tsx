@@ -47,6 +47,9 @@ export async function AdminWelcome({ payload, user }: Props) {
           <Link className="adm-welcome__btn adm-welcome__btn--main" href="/admin/collections/news/create">
             Yangilik qöşiş
           </Link>
+          <Link className="adm-welcome__btn" href="/boshqaruv">
+            Yangi panelga ötiş
+          </Link>
           <a className="adm-welcome__btn" href="/uz" target="_blank" rel="noopener noreferrer">
             Saytni oçiş
           </a>

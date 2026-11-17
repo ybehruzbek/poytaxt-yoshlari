@@ -36,6 +36,6 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // admin, api, Next ichki fayllari va kengaytmali fayllar (rasm, favicon...) chiqarib tashlanadi
-  matcher: ['/((?!admin|api|_next|.*\\..*).*)', '/admin', '/admin/:path*'],
+  // admin, boshqaruv (yangi panel), api, Next ichki fayllari va kengaytmali fayllar (rasm, favicon...) chiqarib tashlanadi
+  matcher: ['/((?!admin|boshqaruv|api|_next|.*\\..*).*)', '/admin', '/admin/:path*'],
 }
