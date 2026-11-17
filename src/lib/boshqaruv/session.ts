@@ -12,12 +12,17 @@ import { getPayload } from 'payload'
  */
 export async function chiqish() {
   const payload = await getPayload({ config })
+  let yopildi = false
   try {
-    await logout({ config })
+    // faqat şu qurilmadagi sessiya yopiladi — xodimning boşqa qurilmalari çiqarib yuborilmaydi
+    const r = await logout({ config })
+    yopildi = r.success !== false
+    if (!yopildi) payload.logger.error({ r }, 'boshqaruv: sessiyani yopiş amalga oşmadi')
   } catch (e) {
     payload.logger.error({ err: e }, 'boshqaruv: sessiyani yopiş amalga oşmadi')
   } finally {
     ;(await cookies()).delete(`${payload.config.cookiePrefix}-token`)
   }
-  redirect('/boshqaruv/kirish')
+  // sessiya serverda yopilmagan bölsa, xodim buni kiriş sahifasida köradi
+  redirect(yopildi ? '/boshqaruv/kirish' : '/boshqaruv/kirish?xato=sessiya')
 }
