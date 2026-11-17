@@ -22,6 +22,12 @@
   --r-card: 48px;
   --r-thumb: 32px;
   --h-scale: 0.94;
+  /* harakat tokenlari: saytdagi barça animatsiya va ötişlar şu qiymatlardan oladi */
+  --dur-fast: 150ms; /* hover, rang */
+  --dur-ui: 250ms; /* menyu, oçiladigan panel, tugmalar */
+  --dur-reveal: 500ms; /* elementning ekranga çiqişi */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-std: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 *,
@@ -32,8 +38,13 @@
   padding: 0;
 }
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 120px;
+}
+/* silliq aylantiriş faqat “harakatni kamaytiriş” öçiq bölsa */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 html,
 body {
@@ -73,9 +84,36 @@ h3 {
     padding: 0 20px;
   }
 }
+/* “Harakatni kamaytiriş” va kuçsiz qurilmalar uçun yengil rejim (html[data-lite]): harakat yöq, psevdo-elementlarda ham */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation: none !important;
     transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+html[data-lite] *,
+html[data-lite] *::before,
+html[data-lite] *::after {
+  animation: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+/* ekrandan çiqqan cheksiz animatsiya pauzada (LoopGuard.tsx) */
+[data-away],
+[data-away]::before,
+[data-away]::after {
+  animation-play-state: paused !important;
+}
+/* çop etişda hali oçilmagan bölimlar ham töliq çiqadi */
+@media print {
+  .rv,
+  .rv-img,
+  .rv-w {
+    opacity: 1 !important;
+    translate: none !important;
+    animation: none !important;
   }
 }

@@ -1,20 +1,37 @@
 /* =====================================================================
-   Bosh sahifa: boş ekran paralaksi (HomeMotion.tsx bilan). --x — boş ekrandan
-   çiqiş progressi (0→1). Faqat html.m-ready da (JS bor, “harakatni kamaytiriş”
-   va öqiş rejimi öçiq). Bölimlarning paydo böliş animatsiyasi — reveal.css.
+   Bosh sahifa: boş ekran paralaksi — faqat CSS (scroll-driven animation), JavaScript işlatmaydi:
+   skroll paytida brauzer animatsiyani özi, asosiy oqimni band qilmasdan hisoblaydi.
+   Qöllamaydigan brauzerlarda, “harakatni kamaytiriş”, öqiş va yengil rejimda paralaks bölmaydi.
    ===================================================================== */
-html.m-ready:not([data-a11y-read]) .hero .hero-text {
-  opacity: calc(1 - var(--x, 0) * 1.8);
-  translate: 0 calc(var(--x, 0) * -120px);
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      view-timeline: --hero block;
+    }
+    html:not([data-a11y-read]):not([data-lite]) .hero .hero-text {
+      animation: hero-text-out linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+    html:not([data-a11y-read]):not([data-lite]) .hero .collage-fit {
+      animation: hero-art-out linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+  }
 }
-html.m-ready:not([data-a11y-read]) .hero .collage-fit {
-  translate: 0 calc(var(--x, 0) * 90px);
-  scale: calc(1 - var(--x, 0) * 0.12);
+@keyframes hero-text-out {
+  55% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+    translate: 0 -120px;
+  }
 }
-@media (prefers-reduced-motion: reduce) {
-  .hero :is(.hero-text, .collage-fit) {
-    opacity: 1 !important;
-    translate: none !important;
-    scale: none !important;
+@keyframes hero-art-out {
+  to {
+    translate: 0 90px;
+    scale: 0.88;
   }
 }

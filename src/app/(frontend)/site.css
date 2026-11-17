@@ -24,7 +24,7 @@
 /* tungi rejimda kartalar töq (theme.css bilan bir xil palitra) */
 html[data-theme='dark']{--card:#221815;--card-h:#2c201c}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:120px}
+html{scroll-padding-top:120px}
 body{font-family:var(--f-body);color:var(--grey);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -278,7 +278,6 @@ html,body{overflow-x:clip}
   .sec-head{flex-wrap:wrap}
   .sec-head .btn{height:52px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* =====================================================================
    NAVBAR — B · Kapsula, shaffof (shisha) fon. Ekran tepasida suzib turadi.
