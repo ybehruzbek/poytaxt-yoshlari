@@ -49,6 +49,11 @@ const nextConfig: NextConfig = {
           { key: 'Strict-Transport-Security', value: 'max-age=31536000' },
         ],
       },
+      {
+        // public/ dagi rasmlar: bir kun keşdan olinadi, keyin fonda tekşiriladi (deploy'da yangilangan rasm bir kun içida körinadi)
+        source: '/img/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' }],
+      },
     ]
   },
   // “Faoliyat”dagi yetakçilar va boşlanğiç taşkilotlar bandlari olib taşlandi: ular endi “Biz haqimizda → Boşlanğiç taşkilotlar” da

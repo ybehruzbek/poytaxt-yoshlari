@@ -39,5 +39,11 @@ export const Media: CollectionConfig = {
       { name: 'hero', width: 1600 },
     ],
     formatOptions: { format: 'webp', options: { quality: 90 } },
+    // brauzer rasmni bir hafta keşda saqlaydi, keyingi oçilişlarda qayta yuklamaydi;
+    // muddat tugagaç ham eski nusxa darhol körsatiladi va fonda yangilanadi
+    modifyResponseHeaders: ({ headers }) => {
+      headers.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400')
+      return headers
+    },
   },
 }
