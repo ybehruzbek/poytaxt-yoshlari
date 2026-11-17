@@ -44,12 +44,11 @@
   transform: rotate(180deg);
 }
 
-/* ---------- Umumiy panel (shisha) ---------- */
+/* ---------- Umumiy panel ----------
+   Fon töliq (oq / tungi rejimda töq), şuning uçun orqa xiralaştiriş (backdrop-filter) körinmaydi va işlatilmaydi */
 .dd,
 .mdrawer {
   background: var(--bg);
-  -webkit-backdrop-filter: blur(20px) saturate(170%);
-  backdrop-filter: blur(20px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 24px 60px rgba(83, 40, 34, 0.16);
 }
@@ -167,6 +166,7 @@
     top: calc(100% + 8px);
     z-index: 30;
     max-height: calc(100vh - 120px);
+    max-height: calc(100dvh - 120px); /* iOS: brauzer paneli hisobga olinadi */
     overflow: auto;
     padding: 12px;
     border-radius: 28px;

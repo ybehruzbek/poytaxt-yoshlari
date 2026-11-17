@@ -278,28 +278,21 @@
   }
 }
 
-/* =====================  Almashish animatsiyasi: "Kattalashish"  =====================
-   Rasm kichik kartadan kattalashib chiqqandek paydo bo'ladi, ko'rsatilayotganda sekin yaqinlashadi. */
-.na-main .im img {
-  transform-origin: center;
-  animation: c-kenburns 7.5s linear both;
-}
+/* =====================  Almaşiş animatsiyasi  =====================
+   Yangi rasm xiradan sal kattalaşib paydo böladi. */
 .na-main .im {
-  animation: c-img 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: c-img var(--dur-reveal) var(--ease-std) both;
 }
 .na-main .bd {
-  animation: c-txt 0.6s 0.15s ease both;
+  animation: c-txt var(--dur-reveal) 0.1s ease both;
 }
 .na-list > li {
-  animation: c-side 0.5s ease both;
+  animation: c-side var(--dur-reveal) ease both;
 }
+/* faqat opacity va scale — videokarta bajaradi, xiralaştiriş (blur) yöq */
 @keyframes c-img {
-  from { opacity: 0; transform: scale(0.86); filter: blur(6px); }
-  to { opacity: 1; transform: none; filter: none; }
-}
-@keyframes c-kenburns {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: none; }
 }
 @keyframes c-txt {
   from { opacity: 0; }

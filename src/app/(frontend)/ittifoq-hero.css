@@ -15,7 +15,9 @@
 .ith-strip{display:grid;gap:14px;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .ith-row{display:flex;gap:14px;width:max-content;animation:ith-run 110s linear infinite}
 .ith-row.rev{animation-direction:reverse;margin-left:-160px}
-.ith-strip:hover .ith-row{animation-play-state:paused}
+.ith-strip:is(:hover,:focus-within) .ith-row{animation-play-state:paused}
+/* telefonda bitta qator: videokarta xotirasi ikki baravar kam işlatiladi */
+@media (max-width:640px){.ith-row.rev{display:none}}
 .ith-row img{width:240px;height:150px;object-fit:cover;border-radius:24px;flex:none}
 @keyframes ith-run{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.ith-row{animation:none}}
