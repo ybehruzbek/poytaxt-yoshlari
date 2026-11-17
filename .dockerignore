@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.env
+.env.*
+!.env.example
+test.env
+media
+private-uploads
+deploy-eksport
+coverage
+tests
+playwright-report
+test-results
+*.tsbuildinfo
+.DS_Store

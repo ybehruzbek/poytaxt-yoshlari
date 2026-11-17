@@ -9,6 +9,8 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  // Docker image uçun: server.js va faqat kerakli node_modules (.next/standalone) — Dockerfile'ga qarang
+  output: 'standalone',
   experimental: {
     // murojaat shaklidagi fayl (10 MB gacha) uchun
     serverActions: { bodySizeLimit: '11mb' },

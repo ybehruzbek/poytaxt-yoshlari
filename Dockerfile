@@ -1,71 +1,63 @@
-# To use this Dockerfile, you have to set `output: 'standalone'` in your next.config.mjs file.
-# From https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
+# Production image: Next.js 16 (standalone) + Payload CMS 3 + PostgreSQL.
+#
+# Sukut böyiça build bazaga ULANMAYDI (--experimental-build-mode compile): Dokploy build konteyneri bazani
+# körmasa ham yiğiladi. Baza tuzilmasi ilova işga tuşganda migratsiyalar bilan yaratiladi (payload.config.ts → prodMigrations).
+#
+# Dokploy sozlamalari (docs/admin-qollanma.md, 8-bölim):
+#   Build args:  NEXT_PUBLIC_SERVER_URL=https://domen.uz  (NEXT_PUBLIC_WWWUZ_ID — ixtiyoriy;
+#                DATABASE_URL — ixtiyoriy, berilsa sahifalar oldindan yiğiladi, pastga qarang)
+#   Env:         DATABASE_URL, PAYLOAD_SECRET, NEXT_PUBLIC_SERVER_URL, TRUSTED_PROXY_HOPS=1, SMTP_*, TG_*
+#   Volumes:     /app/media  va  /app/private-uploads  — doimiy disk (aks holda yuklangan fayllar yöqoladi)
 
-FROM node:22.23.4-alpine AS base
-
-# Install dependencies only when needed
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+FROM node:24-alpine AS base
 RUN apk add --no-cache libc6-compat
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN corepack enable && corepack prepare pnpm@10.15.1 --activate
+
+# ═══ 1. Bog'liqliklar ═══
+FROM base AS deps
 WORKDIR /app
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-
-# Rebuild the source code only when needed
+# ═══ 2. Yiğiş ═══
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# NEXT_PUBLIC_* qiymatlari yiğişda kodga yoziladi — Dokploy'da build arg sifatida beriladi
+ARG NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+ARG NEXT_PUBLIC_WWWUZ_ID=
+ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL NEXT_PUBLIC_WWWUZ_ID=$NEXT_PUBLIC_WWWUZ_ID
+# Ikki rejim:
+#  – DATABASE_URL build arg BERILSA (build konteyneri bazaga ulana olsa): sahifalar oldindan yiğiladi —
+#    eng tez variant, sahifalar keşdan beriladi;
+#  – BERILMASA: bazasiz yiğiş (compile), sahifalar har sörovda serverda tayyorlanadi; katta sahifalar
+#    maʼlumoti server keşida saqlanadi (lib/cms/sahifalar.ts), şuning uçun bu rejim ham tez işlaydi.
+# PAYLOAD_SECRET faqat yiğiş uçun vaqtinçalik; haqiqiysi runtime env'dan keladi.
+ARG DATABASE_URL=
+RUN if [ -n "$DATABASE_URL" ]; then MODE=""; DB="$DATABASE_URL"; \
+    else MODE="--experimental-build-mode compile"; DB="postgres://build:build@127.0.0.1:1/build"; fi; \
+    echo "next build ${MODE:-(oldindan yiğiş bilan)}"; \
+    PAYLOAD_SECRET=build-time-only DATABASE_URL="$DB" \
+    NODE_OPTIONS="--no-deprecation --max-old-space-size=4096" \
+    pnpm exec next build $MODE
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Production image, copy all the files and run next
-FROM base AS runner
+# ═══ 3. Işga tuşiriş ═══
+FROM node:24-alpine AS runner
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
 
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
+RUN addgroup -S -g 1001 nodejs && adduser -S -u 1001 -G nodejs nextjs
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Remove this line if you do not have this folder
-COPY --from=builder /app/public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+# yuklangan rasmlar va murojaat fayllari — Dokploy'da shu papkalarga volume ulanadi
+RUN mkdir -p media/files private-uploads/appeal-files && chown -R nextjs:nodejs media private-uploads .next
 
 USER nextjs
-
 EXPOSE 3000
-
-ENV PORT 3000
-
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD ["node", "server.js"]
