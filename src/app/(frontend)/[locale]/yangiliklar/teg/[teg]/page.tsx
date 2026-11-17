@@ -7,7 +7,8 @@ import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { toYnItems } from '@/components/yangiliklar/data'
 import { YangiliklarPage } from '@/components/yangiliklar/YangiliklarPage'
 import type { Locale } from '@/i18n/config'
-import { NEWS_ONLY, toNewsCard } from '@/lib/news'
+import type { News } from '@/payload-types'
+import { NEWS_CARD_SELECT, NEWS_ONLY, toNewsCard } from '@/lib/news'
 
 import '../../../../yangiliklar.css'
 
@@ -46,13 +47,14 @@ export default async function TagRoute(props: Props) {
     collection: 'news',
     locale,
     limit: 600,
+    select: NEWS_CARD_SELECT,
     sort: '-publishedAt',
     depth: 1,
     where: { and: [{ _status: { equals: 'published' } }, { tags: { contains: tag } }, NEWS_ONLY] },
   })
   return (
     <YangiliklarPage
-      items={toYnItems(res.docs.map(toNewsCard))}
+      items={toYnItems(res.docs.map((d) => toNewsCard(d as News)))}
       locale={locale}
       title={`#${tag}`}
       crumbs={<PageCrumbs locale={locale} path="/yangiliklar" extra={[{ label: `#${tag}` }]} />}

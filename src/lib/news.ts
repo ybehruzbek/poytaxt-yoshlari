@@ -37,6 +37,20 @@ export function formatDateUz(iso: string): string {
   return `${d.getUTCDate()}-${MONTHS[d.getUTCMonth()]}, ${d.getUTCFullYear()}`
 }
 
+/**
+ * Karta uçun kerakli maydonlar: röyxat sörovlari maqola matnini (content) va boşqa ağir maydonlarni
+ * bazadan olmaydi va brauzerga yubormaydi.
+ */
+export const NEWS_CARD_SELECT = {
+  title: true,
+  slug: true,
+  excerpt: true,
+  kind: true,
+  category: true,
+  publishedAt: true,
+  image: true,
+} as const
+
 export function toNewsCard(doc: News): NewsCard {
   const img = (typeof doc.image === 'object' ? doc.image : null) as Media | null
   return {
