@@ -1,4 +1,4 @@
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, GlobalAfterChangeHook } from 'payload'
 
 import { locales } from '@/i18n/config'
@@ -36,7 +36,13 @@ export function yangilash(paths: string[], layout = false) {
 
 /** Yagona sahifa (global) uçun */
 export function yangilashGlobal(paths: string[], layout = false) {
-  const afterChange: GlobalAfterChangeHook = ({ doc }) => {
+  const afterChange: GlobalAfterChangeHook = ({ doc, global }) => {
+    // server keşidagi maʼlumot (lib/cms/sahifalar.ts) — keyingi sörovda bazadan qayta olinadi
+    try {
+      revalidateTag(`global:${global.slug}`, { expire: 0 })
+    } catch {
+      /* söröv taşqarisida — keş bir soatda özi yangilanadi */
+    }
     run(paths, layout)
     return doc
   }

@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { unstable_cache } from 'next/cache'
 import { getPayload } from 'payload'
 import { cache } from 'react'
 
@@ -14,10 +15,25 @@ type Doc = Record<string, unknown>
 const str = (v: unknown) => (typeof v === 'string' ? v : '')
 const ts = (v: unknown) => ((v as { t?: string }[]) ?? []).map((x) => x.t ?? '').filter(Boolean)
 
-async function global(slug: string, locale: string) {
-  const payload = await getPayload({ config })
-  return (await payload.findGlobal({ slug: slug as 'natijalar', locale: locale as 'uz', fallbackLocale: 'uz', depth: 1 })) as unknown as Doc
-}
+/**
+ * Yagona sahifa maʼlumoti server keşida saqlanadi: “Ittifoq haqida” va “Markaziy Kengaş” kabi katta
+ * sahifalarning bazadan olinişi 0,5–1,3 soniya davom etadi — har sörovda takrorlanmasin.
+ * Admin panelda saqlanganda keş darhol yangilanadi (revalidate.ts → `global:<slug>` tegi), aks holda bir soatda.
+ */
+const global = (slug: string, locale: string) =>
+  unstable_cache(
+    async () => {
+      const payload = await getPayload({ config })
+      return (await payload.findGlobal({
+        slug: slug as 'natijalar',
+        locale: locale as 'uz',
+        fallbackLocale: 'uz',
+        depth: 1,
+      })) as unknown as Doc
+    },
+    ['cms-global', slug, locale],
+    { tags: ['cms-global', `global:${slug}`], revalidate: 3600 },
+  )()
 
 export type KengashData = {
   ABOUT: typeof K.ABOUT
