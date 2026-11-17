@@ -27,6 +27,7 @@ import '../a11y.css'
 import '../theme.css'
 import '../motion.css'
 import '../reveal.css'
+import '../skeleton.css'
 import { MiqdorProvider } from '@/components/site/MiqdorProvider'
 import { getMiqdorlar } from '@/lib/cms/miqdorlar'
 
@@ -51,6 +52,12 @@ const body = Inter({
  * Mezon: tejaş rejimi, 2 GB gaça xotira yoki 2 ta yadro, yoki 4 GB va 4 yadrogaça birga.
  */
 const LITE = `try{var n=navigator,c=n.connection,m=n.deviceMemory,h=n.hardwareConcurrency;if((c&&c.saveData)||(m&&m<=2)||(h&&h<=2)||(m&&h&&m<=4&&h<=4))document.documentElement.setAttribute('data-lite','')}catch(e){}`
+
+/**
+ * Yuklanmagan (singan) rasm: brauzerning singan rasm belgisi va alt matni örniga rasm örni
+ * (kartaning rangli foni) qoladi. Tinglovçi sahifa çizilişidan oldin qöyiladi — birinçi rasmlarni ham ushlaydi.
+ */
+const IMG_ERR = `document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG')t.setAttribute('data-broken','')},true)`
 
 const SITE_NAME = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
 
@@ -100,6 +107,7 @@ export default async function LocaleLayout(props: {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: LITE }} />
+        <script dangerouslySetInnerHTML={{ __html: IMG_ERR }} />
       </head>
       <body>
         <Header locale={locale} />

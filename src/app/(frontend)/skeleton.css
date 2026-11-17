@@ -1,0 +1,78 @@
+/* =====================================================================
+   Yuklaniş skeleti (Skeleton.tsx): mazmun örnidagi oçiq bloklar va ular böylab yuguruvçi yorug' çiziq.
+   – faqat transform animatsiya qilinadi (videokarta bajaradi);
+   – javob 250 ms dan tez kelsa, skelet umuman körinmaydi (miltillamaydi);
+   – “harakatni kamaytiriş”, öqiş va yengil rejimda — harakatsiz blok.
+   Ranglar sayt tokenlaridan, tungi rejimda özi moslaşadi.
+   ===================================================================== */
+.sk-region {
+  animation: sk-in var(--dur-ui) ease 250ms both;
+}
+@keyframes sk-in {
+  from {
+    opacity: 0;
+  }
+}
+.sk {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--navy) 8%, var(--bg));
+}
+.sk-thumb {
+  border-radius: var(--r-thumb);
+}
+.sk-card {
+  border-radius: var(--r-card);
+}
+.sk-pill {
+  border-radius: var(--r-pill);
+}
+.sk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--bg) 60%, transparent), transparent);
+  animation: sk-sweep 1.4s ease-in-out infinite;
+}
+@keyframes sk-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+.sk-lines {
+  display: grid;
+  gap: 0.55em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk::after {
+    display: none;
+  }
+}
+html:is([data-a11y-read], [data-lite]) .sk::after {
+  display: none;
+}
+
+/* yangiliklar röyxati (teg sahifasi) skeleti */
+.sk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 32px 24px;
+}
+.sk-card-item {
+  display: grid;
+  gap: 14px;
+}
+/* maqola skeleti: tor ekranda yon ustun pastga tuşadi — skeletda u körsatilmaydi (birinçi ekranda bölmaydi) */
+@media (max-width: 1100px) {
+  .sk-side {
+    display: none;
+  }
+}
+
+/* singan (yuklanmagan) rasm — körinmaydi, örnida kartaning foni qoladi (layout.tsx dagi IMG_ERR) */
+img[data-broken] {
+  visibility: hidden;
+}
