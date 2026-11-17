@@ -27,9 +27,17 @@ export type RevealOpts = {
   extra?: string
 }
 
-const STAGGER_MS = 40
-const STAGGER_MAX = 5 // 6 ta elementdan keyin navbat ösmaydi
-const ANIM_MS = 700 // reveal.css dagi eng uzun effekt + zaxira
+const STAGGER_MS = 70
+const STAGGER_MAX = 6 // 7 ta elementdan keyin navbat ösmaydi
+const ANIM_MS = 1100 // reveal.css dagi eng uzun effekt + zaxira
+
+/**
+ * Effekt elementning VAZIFASIGA qarab tanlanadi (sahifaga emas) — sayt böyiça izçil, lekin xilma-xil:
+ * head — sarlavha pastki çiziqdan “suzib” çiqadi; rise — karta pastdan kattalaşib köteriladi;
+ * side — bir ustunli röyxat qatori çapdan sirpanadi; pop — kiçik plitka (raqam, belgi) “sakrab” çiqadi;
+ * zoom — surat kiçikdan kattalaşib aniqlaşadi. Qolganlari (matn, tugma) — yumşoq köteriliş.
+ */
+type Fx = 'head' | 'rise' | 'side' | 'pop' | 'zoom'
 const COUNT_MS = 1200
 /** element ekranning pastki 8% qismidan yuqoriga çiqqanda oçiladi */
 const MARGIN = '0px 0px -8% 0px'
@@ -144,8 +152,14 @@ export function startReveal(o: RevealOpts): () => void {
   const sy = scrollY
   const nav = navigated
   if (!navigated) setTimeout(() => (navigated = true), 0)
+  const rects = new Map<Element, DOMRect>()
+  const R = (e: Element) => {
+    let r = rects.get(e)
+    if (!r) rects.set(e, (r = e.getBoundingClientRect()))
+    return r
+  }
   const below = (e: Element) => {
-    const r = e.getBoundingClientRect()
+    const r = R(e)
     return r.height > 0 && r.top + sy > vh && (nav || r.top > vh)
   }
   const low = new Set([...cand].filter(below))
@@ -155,11 +169,27 @@ export function startReveal(o: RevealOpts): () => void {
     return true
   })
   const nums = numsAll.filter(below)
+  const fxOf = (e: HTMLElement): Fx | null => {
+    if (imgs.has(e) || e.tagName === 'IMG' || e.tagName === 'FIGURE') return 'zoom'
+    if (/^H[12]$/.test(e.tagName) || e.classList.contains('sec-head')) return 'head'
+    const r = R(e)
+    if (r.height > vh * 0.75) return null // juda baland elementda kuçli harakat ğalati körinadi
+    const kids = e.parentElement?.children
+    if (!kids || kids.length < 3 || kids[1].tagName !== kids[0].tagName) return null
+    const a = R(kids[0])
+    const b = R(kids[1])
+    if (Math.abs(a.left - b.left) < 2 && b.top > a.top) return 'side'
+    if (r.height <= 140 && r.width <= 360) return 'pop'
+    return 'rise'
+  }
+  const fx = new Map(items.map((e) => [e, fxOf(e)] as const))
 
   // 3) yozuv bosqiçi: yaşiriş sinflari bir yöla qöyiladi
   for (const e of items) {
     e.classList.add('rv')
     if (imgs.has(e)) e.classList.add('rv-img')
+    const f = fx.get(e)
+    if (f) e.classList.add(`fx-${f}`)
   }
   html.classList.add('rv-ready')
 
@@ -168,6 +198,8 @@ export function startReveal(o: RevealOpts): () => void {
   const restores: Array<() => void> = []
   const clean = (el: HTMLElement) => {
     el.classList.remove('rv', 'rv-in', 'rv-img')
+    const f = fx.get(el)
+    if (f) el.classList.remove(`fx-${f}`)
     el.style.removeProperty('--d')
   }
 

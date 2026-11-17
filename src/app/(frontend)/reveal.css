@@ -1,8 +1,9 @@
 /* =====================================================================
-   Animatsiyalar (RevealMotion.tsx / PageMotion.tsx / HomeMotion.tsx bilan) — saytda YAGONA uslub:
+   Animatsiyalar (RevealMotion.tsx / PageMotion.tsx / HomeMotion.tsx bilan):
    – birinçi ekran (boş ekran, sahifa sarlavhasi) — yuklanişda CSS bilan oçiladi, JS kutilmaydi;
-   – qolganlari ekranga kirganda: xiradan sal köteriliş (suratlar — faqat xiradan);
-   – faqat opacity va translate animatsiya qilinadi (videokarta bajaradi, sahifa qayta çizilmaydi);
+   – qolganlari ekranga kirganda, element VAZIFASIGA qarab 5 xil effekt (.fx-*): sarlavha, karta,
+     röyxat qatori, kiçik plitka, surat — har biri butun saytda bir xil;
+   – asosan opacity / translate / scale (videokarta bajaradi); clip-path faqat sarlavhalarda (kiçik maydon);
    – vaqt va egri çiziq — styles.css dagi --dur-* / --ease-* tokenlari.
    Yaşiriş faqat html.rv-ready da (JS elementni birinçi ekrandan pastda deb belgilagan bölsa).
    SSR HTML da hamma narsa körinadi; JS işlamasa ham.
@@ -16,7 +17,7 @@ html.rv-ready .rv.rv-in {
 @keyframes rv-fade-up {
   from {
     opacity: 0;
-    translate: 0 16px;
+    translate: 0 24px;
   }
 }
 /* suratlar — faqat xiradan */
@@ -28,6 +29,69 @@ html.rv-ready .rv-img.rv-in {
     opacity: 0;
   }
 }
+/* ---- effektlar löğati (RevealMotion.tsx → Fx) ---- */
+html.rv-ready .rv.rv-in:is(.fx-head, .fx-rise, .fx-side, .fx-zoom) {
+  animation-duration: var(--dur-enter);
+}
+/* head — sarlavha pastki çiziqdan “suzib” çiqadi */
+html.rv-ready .rv.rv-in.fx-head {
+  animation-name: fx-head;
+}
+@keyframes fx-head {
+  from {
+    opacity: 0;
+    translate: 0 0.55em;
+    clip-path: inset(0 -6% 100% -6%);
+  }
+  to {
+    clip-path: inset(-30% -6% -30% -6%);
+  }
+}
+/* rise — karta pastdan sal kattalaşib köteriladi */
+html.rv-ready .rv.rv-in.fx-rise {
+  animation-name: fx-rise;
+}
+@keyframes fx-rise {
+  from {
+    opacity: 0;
+    translate: 0 48px;
+    scale: 0.95;
+  }
+}
+/* side — bir ustunli röyxat qatori çapdan sirpanib keladi */
+html.rv-ready .rv.rv-in.fx-side {
+  animation-name: fx-side;
+}
+@keyframes fx-side {
+  from {
+    opacity: 0;
+    translate: -40px 0;
+  }
+}
+/* pop — kiçik plitka (raqam, belgi, çip) “sakrab” çiqadi */
+html.rv-ready .rv.rv-in.fx-pop {
+  animation: fx-pop 0.7s var(--ease-spring) var(--d, 0ms) both;
+}
+@keyframes fx-pop {
+  from {
+    opacity: 0;
+    scale: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+/* zoom — surat kiçikdan kattalaşib aniqlaşadi (öz ramkasidan çiqmaydi) */
+html.rv-ready .rv.rv-in.fx-zoom {
+  animation-name: fx-zoom;
+}
+@keyframes fx-zoom {
+  from {
+    opacity: 0;
+    scale: 0.92;
+  }
+}
+
 /* sanalayotgan raqam: kengligi JS da qotirilgan, raqamlar bir qatorda qoladi */
 .rv-count {
   white-space: nowrap;
@@ -42,27 +106,40 @@ html.rv-ready .rv-img.rv-in {
     animation: ld-fade var(--dur-reveal) var(--ease-out) backwards;
   }
   html:not([data-a11y-read]):not([data-lite]) .pg-head .pg-title {
-    animation: ld-up var(--dur-reveal) var(--ease-out) 0.06s backwards;
+    animation: fx-head var(--dur-enter) var(--ease-out) 0.06s backwards;
   }
   html:not([data-a11y-read]):not([data-lite]) .pg-head .pg-title ~ * {
     animation: ld-up var(--dur-reveal) var(--ease-out) 0.12s backwards;
   }
-  /* bosh sahifa: boş ekran — qatorlar navbat bilan, kollaj bir butun bölib */
+  /* bosh sahifa: boş ekran — şior qatorlari navbat bilan suzib çiqadi, kollaj bölaklari birma-bir “sakraydi” */
   html:not([data-a11y-read]):not([data-lite]) .hero .hero-slogan > span {
-    animation: ld-up var(--dur-reveal) var(--ease-out) backwards;
+    animation: fx-head var(--dur-enter) var(--ease-out) backwards;
   }
   html:not([data-a11y-read]):not([data-lite]) .hero .hero-slogan > span:nth-child(2) {
-    animation-delay: 0.06s;
+    animation-delay: 0.08s;
   }
   html:not([data-a11y-read]):not([data-lite]) .hero .hero-slogan > span:nth-child(3) {
-    animation-delay: 0.12s;
+    animation-delay: 0.16s;
   }
   html:not([data-a11y-read]):not([data-lite]) .hero :is(.lead, .hero-actions) {
-    animation: ld-up var(--dur-reveal) var(--ease-out) 0.18s backwards;
+    animation: ld-up var(--dur-enter) var(--ease-out) 0.28s backwards;
   }
-  html:not([data-a11y-read]):not([data-lite]) .hero .collage {
-    animation: ld-fade var(--dur-reveal) var(--ease-out) 0.2s backwards;
+  html:not([data-a11y-read]):not([data-lite]) .hero .hero-actions {
+    animation-delay: 0.36s;
   }
+  /* .c-blob özi aylanib turadi — uning animatsiyasi buzilmasin */
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :not(.c-blob) {
+    animation: fx-pop 0.75s var(--ease-spring) calc(0.3s + var(--i, 0) * 0.045s) backwards;
+  }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(2) { --i: 1; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(3) { --i: 2; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(4) { --i: 3; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(5) { --i: 4; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(6) { --i: 5; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(7) { --i: 6; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(8) { --i: 7; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(9) { --i: 8; }
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(n + 10) { --i: 9; }
 }
 @keyframes ld-fade {
   from {
@@ -72,7 +149,7 @@ html.rv-ready .rv-img.rv-in {
 @keyframes ld-up {
   from {
     opacity: 0;
-    translate: 0 16px;
+    translate: 0 24px;
   }
 }
 
