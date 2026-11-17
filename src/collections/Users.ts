@@ -18,7 +18,8 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email', 'role'],
     group: G.tizim,
   },
-  auth: true,
+  // 5 marta notöğri parol kiritilsa, hisob 15 daqiqaga bloklanadi (parolni terib topişning oldi olinadi)
+  auth: { maxLoginAttempts: 5, lockTime: 15 * 60 * 1000 },
   hooks: {
     // Birinchi yaratilgan foydalanuvchi har doim admin bo'ladi
     beforeChange: [
