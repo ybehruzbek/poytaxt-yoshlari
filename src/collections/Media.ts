@@ -46,7 +46,7 @@ export const Media: CollectionConfig = {
     // brauzer rasmni bir hafta keşda saqlaydi, keyingi oçilişlarda qayta yuklamaydi;
     // muddat tugagaç ham eski nusxa darhol körsatiladi va fonda yangilanadi
     modifyResponseHeaders: ({ headers }) => {
-      headers.set('Cache-Control', 'public, max-age=604800, stale-while-revalidate=86400')
+      headers.set('cache-control', 'public, max-age=604800, stale-while-revalidate=86400')
       return headers
     },
   },

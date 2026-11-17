@@ -41,6 +41,8 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
           >
             Qayta urinib köriş
           </button>
+          {/* oddiy havola ataylab: sayt karkasi buzilgan, sahifa töliq qayta yuklanişi kerak */}
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/uz" style={{ color: '#532822', fontWeight: 700 }}>
             Boş sahifaga qaytiş
           </a>

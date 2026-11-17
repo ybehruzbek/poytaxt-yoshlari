@@ -21,6 +21,7 @@ const SKIP_FILES = [
   'src/payload-types.ts',
   'src/lib/alifbo.ts',
   'src/lib/slugify.ts',
+  'src/lib/inline-scripts.ts',
   'src/app/(payload)',
   'src/migrations',
 ]
