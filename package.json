@@ -19,6 +19,7 @@
     "sync:tg": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/sync-tg.ts",
     "imlo": "tsx scripts/imlo.ts",
     "imlo:fix": "tsx scripts/imlo.ts --fix",
+    "parol": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/parol.ts",
     "imlo:db": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/imlo-db.ts"
   },
   "dependencies": {
