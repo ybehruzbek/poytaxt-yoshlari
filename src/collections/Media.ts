@@ -3,6 +3,7 @@ import { kontentYashirin } from '@/admin/access'
 import { G } from '@/admin/groups'
 
 import { imloMatn } from '../lib/imlo-hook'
+import { relativeUrls } from '../lib/relative-url'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -13,6 +14,7 @@ export const Media: CollectionConfig = {
     description: 'Saytdagi barça rasmlar. Papkalar böyiça tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qöşilganda kiçik nusxalari özi yaratiladi.',
   },
   folders: true,
+  hooks: { afterRead: [relativeUrls] },
   access: {
     read: () => true,
     create: ({ req: { user } }) => !!user && user.role !== 'operator',
@@ -33,6 +35,8 @@ export const Media: CollectionConfig = {
     // Fayllar VPS diskida saqlanadi (O'zbekistonda)
     staticDir: 'media',
     mimeTypes: ['image/*'],
+    // telefondan olingan katta surat (4000+ px) saytga şu hajmda çiqmasin: asl nusxa 2000 px gaça kiçraytiriladi
+    resizeOptions: { width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true },
     imageSizes: [
       { name: 'thumb', width: 400, height: 300, position: 'centre' },
       { name: 'card', width: 800, height: 500, position: 'centre' },
