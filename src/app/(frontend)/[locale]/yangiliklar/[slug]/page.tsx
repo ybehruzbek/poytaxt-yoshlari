@@ -16,6 +16,14 @@ type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
 export const revalidate = 60
 
+/**
+ * Yangilik sahifalari oldindan yiğilmaydi, lekin birinçi oçilişda tayyorlanib keşga olinadi
+ * va har 60 soniyada fonda yangilanadi: keyingi foydalanuvçilar sahifani darhol oladi.
+ */
+export function generateStaticParams() {
+  return []
+}
+
 const getNews = cache(async (slug: string, locale: Locale) => {
   const payload = await getPayload({ config })
   const res = await payload.find({
@@ -69,6 +77,16 @@ export default async function NewsPage(props: Props) {
   const img = media(doc.image)
   const total = words(doc.content) + (doc.excerpt ? doc.excerpt.split(/\s+/).length : 0)
 
+  // öxşaş (şu turkumdan) va sönggi yangiliklar, baho va reaksiyalar — bir vaqtda söraladi
+  const payload = await getPayload({ config })
+  const base = { collection: 'news' as const, locale, depth: 1, sort: '-publishedAt' }
+  const [rating, reactions, same, last] = await Promise.all([
+    ratingStats(doc.id),
+    reactionCounts(doc.id),
+    payload.find({ ...base, limit: 3, where: { and: [{ _status: { equals: 'published' } }, { category: { equals: doc.category } }, { id: { not_equals: doc.id } }, NEWS_ONLY] } }),
+    payload.find({ ...base, limit: 7, where: { and: [{ _status: { equals: 'published' } }, { id: { not_equals: doc.id } }, NEWS_ONLY] } }),
+  ])
+
   const a: ArticleData = {
     title: doc.title,
     catLabel: card.categoryLabel,
@@ -96,18 +114,11 @@ export default async function NewsPage(props: Props) {
       return { name: au.name, position: au.position, photo: ph?.sizes?.thumb?.url || ph?.url || null }
     })(),
     tags: (doc.tags ?? []).filter(Boolean),
-    rating: await ratingStats(doc.id),
-    reactions: await reactionCounts(doc.id),
+    rating,
+    reactions,
     tagHref: (t: string) => `/${locale}/yangiliklar/teg/${encodeURIComponent(t)}`,
   }
 
-  // öxşaş (şu turkumdan) va sönggi yangiliklar
-  const payload = await getPayload({ config })
-  const base = { collection: 'news' as const, locale, depth: 1, sort: '-publishedAt' }
-  const [same, last] = await Promise.all([
-    payload.find({ ...base, limit: 3, where: { and: [{ _status: { equals: 'published' } }, { category: { equals: doc.category } }, { id: { not_equals: doc.id } }, NEWS_ONLY] } }),
-    payload.find({ ...base, limit: 7, where: { and: [{ _status: { equals: 'published' } }, { id: { not_equals: doc.id } }, NEWS_ONLY] } }),
-  ])
   const mini = (n: News): MiniNews => {
     const c = toNewsCard(n)
     return { href: `/${locale}/yangiliklar/${c.slug}`, title: c.title, date: toYnItem(c, 0).long, image: c.image, catLabel: c.categoryLabel, tone: CATEGORY_TONE[c.category] }

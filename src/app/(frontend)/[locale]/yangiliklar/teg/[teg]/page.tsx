@@ -13,6 +13,11 @@ import '../../../../yangiliklar.css'
 
 export const revalidate = 60
 
+/** Teg sahifalari birinçi oçilişda tayyorlanib keşga olinadi (har 60 soniyada fonda yangilanadi) */
+export function generateStaticParams() {
+  return []
+}
+
 type Props = { params: Promise<{ locale: Locale; teg: string }> }
 
 /** Next.js parametrni özi dekodlaydi; eski havolalar uçun xavfsiz qayta dekodlaş */
