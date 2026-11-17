@@ -113,10 +113,7 @@ svg.i {
   width: 40px;
   height: 40px;
   flex: none;
-  border-radius: 12px;
-  background: #fff;
-  padding: 3px;
-  box-shadow: 0 0 0 1px var(--line);
+  object-fit: contain;
 }
 .brand__t {
   min-width: 0;
