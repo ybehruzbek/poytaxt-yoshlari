@@ -83,7 +83,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
     >
       <article className="na-main" key={main.id} aria-roledescription="asosiy yangilik">
         <div className="im">
-          <img className="cover" src={main.image} alt={main.imageAlt} />
+          <img className="cover" src={main.image} alt={main.imageAlt} loading="lazy" decoding="async" />
         </div>
         <div className="bd">
           <div className="meta">
@@ -155,7 +155,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
                 />
               )}
               <div className="th">
-                <img className="cover" src={s.image} alt={s.imageAlt} />
+                <img className="cover" src={s.image} alt={s.imageAlt} loading="lazy" decoding="async" />
               </div>
               <div>
                 <div className="meta">

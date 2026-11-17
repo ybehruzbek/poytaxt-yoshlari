@@ -173,7 +173,7 @@ export function InlinePlayer({ id, title }: { id: string; title: string }) {
         <iframe src={`${YT}${id}?autoplay=1&rel=0`} title={title} allow={ALLOW} allowFullScreen />
       ) : (
         <button type="button" className="ax-ip-cover" onClick={() => setOn(true)} aria-label={`Köriş: ${title}`}>
-          <img src={thumb(id)} alt="" />
+          <img src={thumb(id)} alt="" loading="lazy" decoding="async" />
           <span className="ax-play" aria-hidden="true" />
         </button>
       )}

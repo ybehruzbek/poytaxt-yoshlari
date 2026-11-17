@@ -23,6 +23,8 @@ export function QuoteE({ D }: { D: IttifoqData }) {
           <img
             src={IMG.presYouth2}
             alt="Prezident Şavkat Mirziyoyev talabalar bilan suhbatlaşmoqda"
+            loading="lazy"
+            decoding="async"
           />
           <figcaption>{CREDIT}</figcaption>
         </figure>

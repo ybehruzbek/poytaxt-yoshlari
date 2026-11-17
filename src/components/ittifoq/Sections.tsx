@@ -20,6 +20,8 @@ function Awardees() {
           src={AWARDEES.center}
           alt="“Yangi Özbekistonni yoşlar quradi”: davlat mukofotlari bilan taqdirlangan yoşlar Prezident bilan"
           className="center"
+          loading="lazy"
+          decoding="async"
         />
         {AWARDEES.around.map((src) => (
           <img key={src} src={src} alt="" loading="lazy" />
@@ -59,7 +61,7 @@ export async function PrivilegesB({ awardsHref, locale = 'uz', D }: { awardsHref
               {by(g.key).map((p) => (
                 <li key={p.t} className={p.badge ? 'badge' : undefined}>
                   <div className="pv-c-ph">
-                    <img src={p.img} alt="" />
+                    <img src={p.img} alt="" loading="lazy" decoding="async" />
                     <span>{p.num}</span>
                   </div>
                   <div className="pv-c-bd">
@@ -116,7 +118,7 @@ function StateAwards({ items, awardsHref, awards, M }: { items: IttifoqData['PRI
         <div className="sa-c-medals">
           {items.map((p) => (
             <figure key={p.t}>
-              <img src={p.medal} alt={`${p.t} tasviri`} />
+              <img src={p.medal} alt={`${p.t} tasviri`} loading="lazy" decoding="async" />
               <figcaption>
                 <h4>{p.t}</h4>
                 <p>{p.text}</p>
@@ -157,7 +159,7 @@ export function IntlB({ D }: { D: IttifoqData }) {
         </div>
         <div className="ix-b-card">
           <span>Hamkor taşkilotlar</span>
-          <img src={INTL.partners} alt="Hamkor xalqaro taşkilotlar logotiplari" />
+          <img src={INTL.partners} alt="Hamkor xalqaro taşkilotlar logotiplari" loading="lazy" decoding="async" />
           <p>{INTL.assoc}</p>
         </div>
       </div>

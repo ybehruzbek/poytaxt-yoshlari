@@ -248,7 +248,7 @@ function MediaKit() {
       <h2>Media-töplam</h2>
       <p>Kengaş logotipi — naşrlarda foydalaniş uçun.</p>
       <a className="ax-kit-dl" href="/img/logo-uz.png" download>
-        <img src="/img/logo-uz.png" alt="" />
+        <img src="/img/logo-uz.webp" width={322} height={180} alt="" loading="lazy" decoding="async" />
         <span>
           <b>Logotip (PNG)</b>
           <small>Yuklab oliş ↓</small>

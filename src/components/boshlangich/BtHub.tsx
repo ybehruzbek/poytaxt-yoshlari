@@ -77,7 +77,7 @@ function Dir({ x, L }: { x: Dir; L: (h: string) => string }) {
       <span className="bt-hub-foot">
         <span className="bt-faces" aria-hidden="true">
           {x.faces.slice(0, 8).map((f) => (
-            <img key={f} src={f} alt="" />
+            <img key={f} src={f} alt="" loading="lazy" decoding="async" />
           ))}
           {!x.faces.length && <Shield />}
         </span>

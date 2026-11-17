@@ -91,7 +91,7 @@ export async function Hero({ locale }: { locale: Locale }) {
                 <div className="c-green"></div>
                 <div className="c-bottom"></div>
                 <div className="c-photo">
-                  <img className="cover" src="/img/hero-tk.jpg" alt="" />
+                  <img className="cover" src="/img/hero-tk.jpg" alt="" fetchPriority="high" />
                 </div>
                 <div className="c-o"></div>
               </div>

@@ -25,7 +25,7 @@ export function OfficialB({ locale = 'uz', D }: { locale?: string; D: IttifoqDat
             <h2 className="h2">Rasmiy maʼlumotlar</h2>
             <div className="of-c-logo">
               <img
-                src={`/img/ittifoq-logo-${locale}.png`}
+                src={`/img/ittifoq-logo-${locale}.webp`}
                 alt="Özbekiston yoşlar ittifoqi logotipi"
                 width={520}
                 height={215}

@@ -25,7 +25,7 @@ export function CentresB({ D }: { D: IttifoqData }) {
       <div className="wrap">
         <Head />
         <article className="icb-palace">
-          <img src={PALACE.img} alt={`${PALACE.org} ${PALACE.name} binosi`} />
+          <img src={PALACE.img} alt={`${PALACE.org} ${PALACE.name} binosi`} loading="lazy" decoding="async" />
           <div>
             <span className="it-city-tag">{PALACE.org}</span>
             <h3>{PALACE.name}</h3>
@@ -39,7 +39,7 @@ export function CentresB({ D }: { D: IttifoqData }) {
         </article>
         <div className="icb-grid" id="markazlar-royxat">
           <article className="icb-city">
-            <img src={CITY_CENTRE.img} alt={`${CITY_CENTRE.name} binosi`} />
+            <img src={CITY_CENTRE.img} alt={`${CITY_CENTRE.name} binosi`} loading="lazy" decoding="async" />
             <div>
               <span className="it-city-tag">Poytaxtda</span>
               <h3>{CITY_CENTRE.name}</h3>
@@ -48,7 +48,7 @@ export function CentresB({ D }: { D: IttifoqData }) {
           </article>
           {REGIONAL.map((c, i) => (
             <figure key={c.region} className={i < FIRST ? 'icb-card' : 'icb-card icb-more'}>
-              <img src={c.img} alt={`${c.region} Yoşlar markazi binosi`} />
+              <img src={c.img} alt={`${c.region} Yoşlar markazi binosi`} loading="lazy" decoding="async" />
               <figcaption>
                 <b>{c.region}</b>
                 <span>Yoşlar markazi</span>

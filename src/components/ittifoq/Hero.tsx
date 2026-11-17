@@ -43,7 +43,7 @@ export function Hero({ L, crumbs, D }: H & { D: IttifoqData }) {
         <div className="ith-brand">
           <h1 className="ith-logo">
             <img
-              src={`/img/ittifoq-logo-${lc}.png`}
+              src={`/img/ittifoq-logo-${lc}.webp`}
               alt={LOGO_NAME[lc]}
               width={1040}
               height={LOGO_H[lc]}
@@ -61,7 +61,7 @@ export function Hero({ L, crumbs, D }: H & { D: IttifoqData }) {
         {ROWS.map((photos, row) => (
           <div key={row} className={`ith-row${row ? ' rev' : ''}`}>
             {[...photos, ...photos].map((s, i) => (
-              <img key={i} src={s} alt="" loading={i < 8 ? 'eager' : 'lazy'} />
+              <img key={i} src={s} alt="" loading={i < 5 ? 'eager' : 'lazy'} decoding="async" />
             ))}
           </div>
         ))}

@@ -46,7 +46,7 @@ const FLAG: Record<string, string> = {
   csc: 'cn',
 }
 const Flag = ({ id, flag }: { id: string; flag?: string }) => (
-  <img className="sx-flag" src={`/img/bayroqlar/${flag ?? FLAG[id] ?? 'uz'}.png`} alt="" />
+  <img className="sx-flag" src={`/img/bayroqlar/${flag ?? FLAG[id] ?? 'uz'}.png`} alt="" loading="lazy" decoding="async" />
 )
 
 /* ikonkalar (24×24, çiziqli) */

@@ -33,7 +33,7 @@ function Row({ items, speed, reverse }: { items: readonly C[]; speed: number; re
           items.map(([code, name]) => (
             <li key={`${copy}-${code}`} className="fm-chip" aria-hidden={copy === 1 || undefined}>
               <span className="fm-flag">
-                <img src={`/img/flags/${code}.svg`} alt="" width={40} height={40} />
+                <img src={`/img/flags/${code}.svg`} alt="" width={40} height={40} loading="lazy" decoding="async" />
               </span>
               {name}
             </li>

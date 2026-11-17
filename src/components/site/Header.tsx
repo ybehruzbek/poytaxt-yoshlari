@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { type CSSProperties, type PointerEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import { NAV, type NavGroup, groupPaths } from '@/config/nav'
+import { logo } from '@/lib/logo'
 import type { Locale } from '@/i18n/config'
 
 import { A11yPanel } from './A11yPanel'
@@ -113,7 +114,7 @@ export function Header({ locale }: { locale: Locale }) {
         >
           <Link href={`/${locale}`} className="logo" aria-label="Boş sahifa">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/img/logo-${locale}.png`} alt="Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi" />
+            <img {...logo(locale)} alt="Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi" />
           </Link>
 
           {/* ===== Kompyuter menyusi ===== */}

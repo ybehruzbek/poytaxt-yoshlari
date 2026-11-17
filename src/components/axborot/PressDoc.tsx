@@ -14,7 +14,7 @@ export function PressDoc({ p, id, level = 2, contact: PRESS_CONTACT }: { p: Pres
   return (
     <article className={`pr-doc k-${p.kind}`} id={id} data-print-doc="">
       <header className="pr-doc-head">
-        <img src="/img/logo-uz.png" alt={ORG} />
+        <img src="/img/logo-uz.webp" width={322} height={180} alt={ORG} />
         <div>
           <b>{PRESS_KINDS[p.kind].toUpperCase()}</b>
           <span>Axborot xizmati</span>

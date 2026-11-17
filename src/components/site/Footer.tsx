@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getAloqa } from '@/lib/cms/aloqa'
 import { NAV } from '@/config/nav'
 import type { Locale } from '@/i18n/config'
+import { logo } from '@/lib/logo'
 import { NET_LABEL, NETS } from '@/lib/socials'
 import { getSocials } from '@/lib/socials-server'
 
@@ -69,7 +70,7 @@ export async function Footer({ locale }: { locale: Locale }) {
         <div className="fw-top">
           <div className="fw-intro">
             <Link href={L('')} className="fw-logo">
-              <img src={`/img/logo-${locale}.png`} alt={LOGO_ALT} />
+              <img {...logo(locale)} alt={LOGO_ALT} loading="lazy" decoding="async" />
             </Link>
             <p>
               Kengaşning <span>rasmiy veb-sayti</span>

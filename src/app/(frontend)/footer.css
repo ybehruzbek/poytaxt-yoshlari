@@ -76,6 +76,7 @@
 .fw-logo img {
   display: block;
   height: 56px;
+  width: auto;
   filter: brightness(0) invert(1);
 }
 .fw-intro p {

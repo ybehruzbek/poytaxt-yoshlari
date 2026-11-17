@@ -105,7 +105,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
               <article key={p.name} className={p.career ? 'kg-bio' : undefined}>
                 <div className="kg-ava">
                   {p.img ? (
-                    <img src={p.img} alt={p.full ?? p.name} />
+                    <img src={p.img} alt={p.full ?? p.name} loading="lazy" decoding="async" />
                   ) : (
                     <span>{initials(p.name)}</span>
                   )}
@@ -190,7 +190,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
               </Link>
             </div>
           </div>
-          <img src={IMG.building} alt="Özbekiston yoşlar ittifoqi Markaziy Kengaşi binosi" />
+          <img src={IMG.building} alt="Özbekiston yoşlar ittifoqi Markaziy Kengaşi binosi" loading="lazy" decoding="async" />
         </div>
       </section>
     ),

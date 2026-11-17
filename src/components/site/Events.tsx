@@ -116,7 +116,7 @@ export async function Events({ locale }: { locale: Locale }) {
                     <span><Org /> {e.org}</span>
                   </span>
                 </span>
-                <img src={e.img} alt="" />
+                <img src={e.img} alt="" loading="lazy" decoding="async" />
                 <span className="ev-row-l">{leftLabel(e.left)}</span>
                 <span className="more-btn"><More /></span>
               </Link>

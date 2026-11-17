@@ -106,7 +106,7 @@ function ArticleFoot({ a }: { a: ArticleData }) {
         {a.author ? (
           <div className="ar-author">
             {a.author.photo ? (
-              <img src={a.author.photo} alt="" />
+              <img src={a.author.photo} alt="" loading="lazy" decoding="async" />
             ) : (
               <span className="ar-author-ini" aria-hidden="true">
                 {a.author.name

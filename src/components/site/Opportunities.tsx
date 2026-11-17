@@ -93,7 +93,7 @@ export async function Opportunities({ locale }: { locale: Locale }) {
                 />
               </svg>
               <div className="ph">
-                <img className="cover" src="/img/opp-grant.jpg" alt="Grant tanlovi iştirokçilari" />
+                <img className="cover" src="/img/opp-grant.jpg" alt="Grant tanlovi iştirokçilari" loading="lazy" decoding="async" />
               </div>
               <OppInfo t="grant" lists={lists} O={O} />
             </Link>
@@ -120,7 +120,7 @@ export async function Opportunities({ locale }: { locale: Locale }) {
                 />
               </svg>
               <div className="ph">
-                <img className="cover" src="/img/opp-stip.jpg" alt="Stipendiya sohiblari" />
+                <img className="cover" src="/img/opp-stip.jpg" alt="Stipendiya sohiblari" loading="lazy" decoding="async" />
               </div>
               <OppInfo t="stip" lists={lists} O={O} />
             </Link>
@@ -147,7 +147,7 @@ export async function Opportunities({ locale }: { locale: Locale }) {
                 }}
               ></div>
               <div className="ph">
-                <img className="cover" src="/img/opp-vol.jpg" alt="Volontyorlar" />
+                <img className="cover" src="/img/opp-vol.jpg" alt="Volontyorlar" loading="lazy" decoding="async" />
               </div>
               <OppInfo t="vol" lists={lists} O={O} />
             </Link>
@@ -187,7 +187,7 @@ export async function Opportunities({ locale }: { locale: Locale }) {
                 }}
               ></div>
               <div className="ph">
-                <img className="cover" src="/img/news-1.jpg" alt="Tanlov iştirokçilari" />
+                <img className="cover" src="/img/news-1.jpg" alt="Tanlov iştirokçilari" loading="lazy" decoding="async" />
               </div>
               <OppInfo t="tanlov" lists={lists} O={O} />
             </Link>

@@ -62,11 +62,11 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
       <section className="sec">
         <div className="wrap">
           <div className="it-mosaic">
-            <img src={IMG.girls} alt="Kitob olami festivalida milliy liboslardagi qizlar" />
-            <img src={IMG.seminar} alt="Boşlanğiç taşkilot yetakçilari seminari" />
-            <img src={IMG.volunteers} alt="Volontyorlar" />
-            <img src={IMG.books} alt="Yoşlar ijod saroyida kitobxonlar" />
-            <img src={IMG.leaders} alt="Yoşlar yetakçilari forumi iştirokçilari" />
+            <img src={IMG.girls} alt="Kitob olami festivalida milliy liboslardagi qizlar" loading="lazy" decoding="async" />
+            <img src={IMG.seminar} alt="Boşlanğiç taşkilot yetakçilari seminari" loading="lazy" decoding="async" />
+            <img src={IMG.volunteers} alt="Volontyorlar" loading="lazy" decoding="async" />
+            <img src={IMG.books} alt="Yoşlar ijod saroyida kitobxonlar" loading="lazy" decoding="async" />
+            <img src={IMG.leaders} alt="Yoşlar yetakçilari forumi iştirokçilari" loading="lazy" decoding="async" />
           </div>
           <div className="it-more">
             {MORE_STATS.map((s) => (
