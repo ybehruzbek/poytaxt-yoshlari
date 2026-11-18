@@ -93,7 +93,8 @@
   align-items: flex-start;
 }
 #imkoniyatlar .opp .title b {
-  font: 800 26px/1.1 var(--f-head);
+  /* tor kartada (1280px atrofida) uzun nom karta çetiga tegmasin */
+  font: 800 min(26px, 10.6cqw) / 1.1 var(--f-head);
   transition: font-size 0.4s var(--ease-out);
 }
 #imkoniyatlar .opp .title span {
@@ -112,19 +113,25 @@
 #imkoniyatlar .o4 .title b {
   color: var(--navy);
 }
-/* odam: yopiq kartada çetdan möralab turadi, oçilganda töliq çiqadi */
+/* odam: yopiq kartada markazda, karta kengligiga sığadi (--ar = suratning eni/böyi, 92cqw = karta enining 92%);
+   oçilganda kattalaşib karta çetiga suriladi */
+#imkoniyatlar .opp {
+  container-type: inline-size;
+}
 #imkoniyatlar .opp .opp-cut {
   position: absolute;
   z-index: 2;
   left: auto;
-  right: 0;
+  right: 50%;
   bottom: 0;
-  height: 84%;
+  height: min(84%, calc(92cqw / var(--ar, 0.6)));
   width: auto;
   max-width: none;
-  translate: 36% 0;
+  translate: 50% 0;
   transition:
+    right 0.6s var(--ease-out),
     translate 0.6s var(--ease-out),
+    height 0.6s var(--ease-out),
     filter 0.4s;
 }
 @media (min-width: 1241px) {
@@ -170,6 +177,8 @@
   }
   #imkoniyatlar .opps:not(:has(.opp:hover, .opp:focus-visible)) .opp.big .opp-cut,
   #imkoniyatlar .opp:is(:hover, :focus-visible) .opp-cut {
+    right: 0;
+    height: 84%;
     translate: 0 0;
   }
   #imkoniyatlar .opps:not(:has(.opp:hover, .opp:focus-visible)) .opp.big .th-i,
@@ -184,6 +193,8 @@
     translate: none;
   }
   #imkoniyatlar .opp .opp-cut {
+    right: 0;
+    height: 84%;
     translate: 0 0;
   }
   #imkoniyatlar .opp .th-i {
