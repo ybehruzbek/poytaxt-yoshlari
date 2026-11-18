@@ -73,8 +73,8 @@ await payload.updateGlobal({
       lead: 'Saytda Kengaş faoliyati, loyihalar va tadbirlar, eʼlonlar hamda normativ hujjatlar bilan tanişiş, Ittifoqqa aʼzolik uçun ariza yoki Kengaşga elektron murojaat yuboriş mumkin.',
     },
     about: {
-      title: 'Kengaş Toşkent şahridagi yoşlar bilan Özbekiston yoşlar ittifoqi Ustavi asosida işlaydi.',
-      text: 'Saytda Kengaş faoliyati, OTT va harbiy qismlardagi boşlanğiç taşkilotlar, yoşlar uçun grant, stipendiya va tanlovlar, Ittifoq hujjatlari haqida rasmiy maʼlumotlar berib boriladi.',
+      title: 'Özbekiston yoşlar ittifoqi poytaxtda Toşkent şahar hududiy Kengaşi orqali faoliyat yuritadi.',
+      text: 'Kengaş Ittifoq Ustavi asosida işlaydi: oliy taʼlim taşkilotlari va harbiy qismlardagi boşlanğiç taşkilotlar orqali poytaxt yoşlari bilan işlaydi, ularga grant, stipendiya va tanlovlar haqida rasmiy maʼlumot beradi.',
       year: '2017',
       yearLabel: 'Ittifoq taşkil etilgan yil',
       ottLabel: 'OTTdagi boşlanğiç taşkilotlar',

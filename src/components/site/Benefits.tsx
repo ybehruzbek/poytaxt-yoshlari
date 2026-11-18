@@ -2,6 +2,7 @@
 import type { Locale } from '@/i18n/config'
 
 import { getBosh } from '@/lib/cms/sahifalar'
+import { ittifoqLogo } from '@/lib/logo'
 
 import { BenefitsTabs } from './BenefitsTabs'
 
@@ -23,9 +24,6 @@ const Spark = ({ className }: { className: string }) => (
     <path d="M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z" />
   </svg>
 )
-
-/** Ittifoq logotiplarining balandligi (eni 760 px) */
-const LOGO_H: Record<Locale, number> = { uz: 314, ru: 252, en: 325 }
 
 /** “Ittifoq yoşlarga nima beradi”: çapda prototip kollaji, öngda faoliyat turiga qarab imkoniyatlar (BenefitsTabs). */
 export async function Benefits({ locale }: { locale: Locale }) {
@@ -60,7 +58,7 @@ export async function Benefits({ locale }: { locale: Locale }) {
       <div style={{ left: "459px", top: "160px", width: "100px", height: "100px", borderRadius: "50%", border: "5px solid #fff", display: "grid", placeItems: "center" }}><span style={{ borderLeft: "26px solid #fff", borderTop: "16px solid transparent", borderBottom: "16px solid transparent", marginLeft: "8px" }}></span></div>
       <div style={{ left: "480px", top: "285px", width: "57px", height: "94px", borderRadius: "136px", background: "var(--blue)" }}></div>
       {/* Ittifoq logotipi — sayt qaysi tilda oçilsa, öşa tildagi logotip */}
-      <div className="bnf-logo"><img src={`/img/ittifoq-logo-${locale}.webp`} width={760} height={LOGO_H[locale]} alt="" loading="lazy" decoding="async" /></div>
+      <div className="bnf-logo"><img {...ittifoqLogo(locale)} alt="" loading="lazy" decoding="async" /></div>
       <div className="vx" data-v="bnf-a">
         {CHIPS.map((t, k) => (
           <span key={t} className={`bnf-chip bnf-chip--${k + 1}`}>
