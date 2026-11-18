@@ -5,6 +5,9 @@ import { getBosh } from '@/lib/cms/sahifalar'
 
 import { BenefitsTabs } from './BenefitsTabs'
 
+/** Ittifoq logotiplarining balandligi (eni 760 px) */
+const LOGO_H: Record<Locale, number> = { uz: 314, ru: 252, en: 325 }
+
 /** “Ittifoq yoşlarga nima beradi”: çapda prototip kollaji, öngda faoliyat turiga qarab imkoniyatlar (BenefitsTabs). */
 export async function Benefits({ locale }: { locale: Locale }) {
   const { benefits: B } = await getBosh(locale)
@@ -28,7 +31,8 @@ export async function Benefits({ locale }: { locale: Locale }) {
       <div style={{ left: "6px", top: "300px", width: "220px", height: "58px", borderRadius: "20px", background: "var(--blue)", transform: "rotate(6.7deg)", display: "grid", placeItems: "center", fontFamily: "var(--f-head)", fontWeight: "600", fontSize: "24px", color: "#fff" }}>#YoşlarBilan</div>
       <div style={{ left: "459px", top: "160px", width: "100px", height: "100px", borderRadius: "50%", border: "5px solid #fff", display: "grid", placeItems: "center" }}><span style={{ borderLeft: "26px solid #fff", borderTop: "16px solid transparent", borderBottom: "16px solid transparent", marginLeft: "8px" }}></span></div>
       <div style={{ left: "480px", top: "285px", width: "57px", height: "94px", borderRadius: "136px", background: "var(--blue)" }}></div>
-      <div style={{ left: "430px", top: "400px", width: "160px", height: "160px", borderRadius: "50%", overflow: "hidden", border: "8px solid #fff" }}><img className="cover" src="/img/news-3.jpg" alt="" loading="lazy" decoding="async" /></div>
+      {/* Ittifoq logotipi — sayt qaysi tilda oçilsa, öşa tildagi logotip */}
+      <div className="bnf-logo"><img src={`/img/ittifoq-logo-${locale}.webp`} width={760} height={LOGO_H[locale]} alt="" loading="lazy" decoding="async" /></div>
     </div>
     <div>
       <h2 className="h2">{B.title}</h2>
