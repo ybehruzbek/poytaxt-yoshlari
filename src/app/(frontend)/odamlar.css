@@ -27,69 +27,14 @@
   max-width: none;
 }
 
-/* A — Orbita */
-.hxo-sun {
-  left: 60px;
-  top: 170px;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
-  background: var(--blue);
-}
-.hxo-ring {
-  left: 0;
-  top: 0;
-  width: 600px;
-  height: 700px;
-  transform-origin: 300px 410px;
-  animation: spin 80s linear infinite;
-  font: 700 17px/1 var(--f-head);
-  letter-spacing: 3.2px;
-  fill: var(--navy);
-}
-/* tepasi oçiq, pastki yarmi doira böyiça */
-.hxo-slot {
-  clip-path: path('M60 -100H540V410A240 240 0 0 1 60 410Z');
-}
-.hxo-qiz {
-  left: 76px;
-  top: 214px;
-  height: 470px;
-}
-.hxo-yigit {
-  left: 232px;
-  top: 166px;
-  height: 520px;
-}
-.hxo-bubble {
-  left: 384px;
-  top: 92px;
-  z-index: 4;
-}
-.hxo-star {
-  left: 40px;
-  top: 92px;
-}
-.hxo-star2 {
-  left: 520px;
-  top: 600px;
-  width: 34px;
-  height: 34px;
-}
-.hxo-play {
-  left: 18px;
-  top: 470px;
-  z-index: 4;
-}
-
-/* B — Polaroid */
+/* Polaroid */
 .hxp-blob {
   left: 410px;
   top: 10px;
 }
 .hxp-wave {
-  left: 20px;
-  top: 70px;
+  left: 116px;
+  top: 0;
 }
 .hxp-card {
   padding: 14px 14px 58px;
@@ -156,11 +101,6 @@
   font: 700 22px/1 var(--f-head);
   color: var(--navy);
 }
-.hxp-bubble {
-  left: 300px;
-  top: 64px;
-  z-index: 5;
-}
 .hxp-star {
   left: 236px;
   top: 150px;
@@ -173,72 +113,7 @@
   height: 30px;
 }
 
-/* C — Katta söz */
-.hxw-word {
-  left: 0;
-  top: 24px;
-  width: 600px;
-  display: grid;
-  justify-items: center;
-  font: 800 132px/0.92 var(--f-head);
-  letter-spacing: -2px;
-}
-.hxw-word span:first-child {
-  /* kontur: harf içidagi ortiqça çiziqlarni fon rangidagi töldiriş yopadi */
-  color: var(--soft);
-  -webkit-text-stroke: 5px var(--navy);
-  paint-order: stroke fill;
-}
-.hxw-word span:last-child {
-  color: var(--yellow);
-}
-.hxw-arch {
-  left: 70px;
-  top: 340px;
-  width: 460px;
-  height: 340px;
-  border-radius: 230px 230px 40px 40px;
-  background: var(--navy-bg);
-}
-.hxw-slot {
-  clip-path: path('M70 -100H530V640Q530 680 490 680H110Q70 680 70 640Z');
-}
-.hxw-qiz {
-  left: 96px;
-  top: 262px;
-  height: 428px;
-}
-.hxw-yigit {
-  left: 270px;
-  top: 226px;
-  height: 464px;
-}
-.hxw-bubble {
-  left: 0;
-  top: 300px;
-  z-index: 4;
-}
-.hxw-star {
-  left: 520px;
-  top: 330px;
-  z-index: 4;
-}
-.hxw-play {
-  left: 0;
-  top: 520px;
-  z-index: 4;
-}
-.hxw-o {
-  left: 520px;
-  top: 520px;
-  z-index: 4;
-}
-
-/* D — Ikki doira */
-.hxc-wave {
-  left: 30px;
-  top: 40px;
-}
+/* Ikki doira */
 .hxc-dot {
   border-radius: 50%;
 }
@@ -272,11 +147,6 @@
   left: 278px;
   top: 90px;
   height: 480px;
-}
-.hxc-bubble {
-  left: 360px;
-  top: 40px;
-  z-index: 4;
 }
 .hxc-tag {
   left: 40px;
@@ -366,7 +236,7 @@
 .o4 .th {
   color: var(--navy);
 }
-/* a — çiziqli belgilar: yopiq kartada xira, oçilganda navbat bilan çiqadi */
+/* çiziqli belgilar: yopiq kartada xira, oçilganda navbat bilan çiqadi */
 .th-i {
   position: absolute;
   opacity: 0.14;
@@ -375,54 +245,6 @@
     opacity 0.4s ease,
     scale 0.55s var(--ease-spring);
   transition-delay: calc(var(--k, 0) * 45ms);
-}
-/* b — bitta katta siluet */
-.th-big {
-  position: absolute;
-  left: 2%;
-  top: 30%;
-  width: 66%;
-  height: auto;
-  aspect-ratio: 1;
-  stroke-width: 1.1;
-  opacity: 0.1;
-  scale: 0.85;
-  rotate: -16deg;
-  transition:
-    opacity 0.45s ease,
-    scale 0.6s var(--ease-out),
-    rotate 0.6s var(--ease-out);
-}
-/* c — stikerlar */
-.th-st {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px 8px 10px;
-  border-radius: 99px;
-  background: var(--bg);
-  color: var(--navy);
-  font: 700 15px/1 var(--f-head);
-  white-space: nowrap;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
-  opacity: 0;
-  scale: 0.6;
-  transition:
-    opacity 0.35s ease,
-    scale 0.55s var(--ease-spring);
-  transition-delay: calc(0.1s + var(--k, 0) * 70ms);
-}
-.th-st svg {
-  width: 22px;
-  height: 22px;
-  color: var(--blue);
-}
-.o2 .th-st svg {
-  color: var(--navy);
-}
-.o3 .th-st svg {
-  color: var(--green);
 }
 
 @media (min-width: 1241px) {
@@ -444,17 +266,6 @@
     opacity: 0.7;
     scale: 1;
   }
-  #imkoniyatlar .opps:not(:has(.opp:hover, .opp:focus-visible)) .opp.big .th-big,
-  #imkoniyatlar .opp:is(:hover, :focus-visible) .th-big {
-    opacity: 0.2;
-    scale: 1;
-    rotate: -6deg;
-  }
-  #imkoniyatlar .opps:not(:has(.opp:hover, .opp:focus-visible)) .opp.big .th-st,
-  #imkoniyatlar .opp:is(:hover, :focus-visible) .th-st {
-    opacity: 1;
-    scale: 1;
-  }
 }
 @media (max-width: 1240px) {
   #imkoniyatlar .opp .title span {
@@ -466,15 +277,6 @@
   }
   #imkoniyatlar .opp .th-i {
     opacity: 0.7;
-    scale: 1;
-  }
-  #imkoniyatlar .opp .th-big {
-    opacity: 0.2;
-    scale: 1;
-    rotate: -6deg;
-  }
-  #imkoniyatlar .opp .th-st {
-    opacity: 1;
     scale: 1;
   }
 }
@@ -496,7 +298,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  #imkoniyatlar :is(.opp-cut, .title b, .title span, .th-i, .th-big, .th-st) {
+  #imkoniyatlar :is(.opp-cut, .title b, .title span, .th-i) {
     transition: none !important;
   }
 }
@@ -510,11 +312,6 @@
   width: 328px;
   border-radius: 164px;
   background: var(--green);
-}
-.bnf-pill--in {
-  top: 0;
-  height: 592px;
-  overflow: hidden;
 }
 .bnf-pill--low {
   top: 96px;
@@ -534,9 +331,6 @@
   width: auto;
   max-width: none;
   translate: -50% 0;
-}
-.bnf-pill--in .bnf-cut {
-  height: 90%;
 }
 .bnf-slot .bnf-cut {
   height: 119%;
@@ -558,7 +352,212 @@
   width: 122px;
   height: auto;
 }
-/* stikerlar (c) odam ustida turadi — tor kartada ham yaşirinmaydi */
-.th-c {
+
+/* ---------- Boş ekran: almaşadigan gap stikeri (HeroBubbles.tsx) ---------- */
+.collage .hb {
+  position: absolute;
+  z-index: 5;
+  /* örami ölçamsiz — kenglik matnga qarab, 300 px dan oşsa ikki qatorga bölinadi */
+  width: max-content;
+  max-width: 300px;
+  padding: 12px 22px;
+  font-size: 20px;
+  line-height: 1.25;
+  white-space: normal;
+  transform-origin: 20% 100%;
+}
+.hb-pol {
+  left: 300px;
+  top: 52px;
+}
+.hb-circ {
+  left: 296px;
+  top: 4px;
+}
+/* suhbat: qiz tomoni (çapda) va yigit tomoni (öngda, dumi öngga qaragan) */
+.hb-pol-g {
+  left: 0;
+  top: 104px;
+}
+.hb-pol-b {
+  left: 330px;
+  top: 40px;
+}
+.hb-circ-g {
+  left: 0;
+  top: 52px;
+}
+.hb-circ-b {
+  left: 330px;
+  top: 2px;
+}
+.collage .hb-r {
+  transform: rotate(6deg);
+  transform-origin: 80% 100%;
+}
+.hb-r::after {
+  left: auto;
+  right: 30px;
+  border-right: 0;
+  border-left: 11px solid transparent;
+}
+/* a — yozilib boradi */
+.hb--type {
+  min-width: 64px;
+  min-height: calc(1.25em + 24px);
+}
+.hb-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: currentColor;
+  animation: hb-blink 1s steps(1) infinite;
+}
+@keyframes hb-blink {
+  50% {
+    opacity: 0;
+  }
+}
+/* b — almaşadi */
+.hb--swap .hb-t {
+  display: block;
+  animation: hb-in 0.5s var(--ease-spring) both;
+}
+@keyframes hb-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+    scale: 0.9;
+  }
+}
+/* c — suhbat */
+.hb--talk {
+  transition:
+    opacity 0.3s ease,
+    scale 0.5s var(--ease-spring);
+}
+.hb--talk:not(.on) {
+  opacity: 0;
+  scale: 0.6;
+}
+
+/* ---------- “Ittifoq yoşlarga nima beradi”: orqa bezaklar ---------- */
+/* A — imtiyoz stikerlari: aylanuvçi punktir halqa, uçqunlar, belgili yorliqlar */
+.bnf-ring {
+  left: 24px;
+  top: 109px;
+  width: 470px;
+  height: 470px;
+  border-radius: 50%;
+  border: 2px dashed rgba(83, 40, 34, 0.25);
+  animation: spin 70s linear infinite;
+}
+.bnf-spark {
+  width: 40px;
+  height: 40px;
+}
+.bnf-spark--1 {
+  left: 40px;
+  top: 60px;
+  width: 48px;
+  height: 48px;
+  fill: var(--yellow);
+}
+.bnf-spark--2 {
+  left: 560px;
+  top: 40px;
+  width: 34px;
+  height: 34px;
+  fill: var(--green);
+}
+.bnf-spark--3 {
+  left: 392px;
+  top: 520px;
+  width: 30px;
+  height: 30px;
+  fill: var(--lime);
+}
+.bnf-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 10px;
+  border-radius: 99px;
+  background: #fff;
+  box-shadow: 0 14px 30px rgba(83, 40, 34, 0.14);
+  font: 700 17px/1 var(--f-head);
+  color: var(--navy);
+  white-space: nowrap;
   z-index: 3;
+  animation: bnf-float 6s ease-in-out infinite;
+}
+.bnf-chip svg {
+  width: 26px;
+  height: 26px;
+  fill: var(--green);
+}
+.bnf-chip--1 {
+  left: 352px;
+  top: 34px;
+  rotate: 6deg;
+}
+.bnf-chip--2 {
+  left: 0;
+  top: 196px;
+  rotate: -6deg;
+  animation-delay: -2s;
+}
+.bnf-chip--3 {
+  left: 236px;
+  top: 540px;
+  rotate: 4deg;
+  animation-delay: -4s;
+}
+@keyframes bnf-float {
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+/* B — rozetka va konfetti */
+.bnf-dots {
+  left: 470px;
+  top: 560px;
+  width: 140px;
+  height: 36px;
+  background: radial-gradient(circle, rgba(83, 40, 34, 0.28) 2px, transparent 2.5px) 0 0 / 18px 18px;
+}
+.bnf-sun {
+  left: 26px;
+  top: 56px;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  background: var(--yellow);
+}
+.bnf-conf {
+  width: 14px;
+  height: 30px;
+  border-radius: 7px;
+}
+.bnf-seal {
+  left: 452px;
+  top: -24px;
+  width: 150px;
+  height: 150px;
+  z-index: 3;
+  animation: spin 40s linear infinite;
+  font: 700 13px/1 var(--f-head);
+  letter-spacing: 1.2px;
+}
+.bnf-seal circle {
+  fill: var(--navy-bg);
+}
+.bnf-seal text {
+  fill: #fff;
+}
+.bnf-seal-star {
+  fill: var(--yellow);
 }

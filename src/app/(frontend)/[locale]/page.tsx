@@ -39,9 +39,9 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       {/* VAQTINÇA: fonsiz suratlar bilan dizayn variantlari — tanlangaç olib taşlanadi */}
       <DevSectionsPanel
         sections={[
-          { name: 'hero', label: 'Boş ekran', count: 4, hints: ['Orbita: doira va aylanuvçi yozuv', 'Polaroid kartoçkalar', 'Katta söz: YOŞLAR BILAN', 'Ikki doira'] },
-          { name: 'opps', label: 'Imkoniyatlar: orqa fon belgilari', count: 3, hints: ['Çiziqli belgilar', 'Bitta katta siluet', 'Stikerlar'] },
-          { name: 'bnf', label: 'Ittifoq yoşlarga nima beradi', count: 2, hints: ['Kapsula içida', 'Boşi kapsuladan çiqadi'] },
+          { name: 'hero', label: 'Boş ekran', count: 2, hints: ['B — Polaroid', 'D — Ikki doira'] },
+          { name: 'bubble', label: 'Gap stikeri', count: 3, hints: ['Yozilib boradi', 'Almaşadi', 'Suhbat: qiz va yigit'] },
+          { name: 'bnf', label: 'Ittifoq yoşlarga nima beradi: bezaklar', count: 2, hints: ['Imtiyoz stikerlari', 'Rozetka va konfetti'] },
         ]}
       />
     </>
