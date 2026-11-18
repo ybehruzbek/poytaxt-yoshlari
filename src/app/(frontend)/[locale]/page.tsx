@@ -9,7 +9,6 @@ import { HomeMotion } from '@/components/site/HomeMotion'
 import { News } from '@/components/site/News'
 import { Opportunities } from '@/components/site/Opportunities'
 import { SocialPhones } from '@/components/site/SocialPhones'
-import { DevSectionsPanel } from '@/components/site/DevSectionsPanel'
 import type { Locale } from '@/i18n/config'
 
 import '../odamlar.css'
@@ -36,12 +35,6 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <SocialPhones />
       <PartnersStrip locale={locale} />
       <HomeMotion />
-      {/* VAQTINÇA: fonsiz suratlar bilan dizayn variantlari — tanlangaç olib taşlanadi */}
-      <DevSectionsPanel
-        sections={[
-          { name: 'about', label: 'Biz haqimizda: rasm', count: 3, hints: ['Logo orbitasi', 'Foto-töplam', 'Nişonlar'] },
-        ]}
-      />
     </>
   )
 }

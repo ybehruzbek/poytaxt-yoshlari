@@ -113,7 +113,6 @@ export async function Hero({ locale }: { locale: Locale }) {
 
             <div className="collage-fit">
               <CollageScaler />
-              {/* VAQTINÇA: 3 ta dizayn varianti (DevSectionsPanel orqali tanlanadi), tasdiqlangaç bittasi qoladi */}
               <CollagePolaroid />
             </div>
           </div>

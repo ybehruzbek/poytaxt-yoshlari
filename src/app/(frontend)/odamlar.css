@@ -1,14 +1,9 @@
 /* =====================================================================
    Fonsiz odamlar suratlari (public/img/odamlar) — bosh sahifa: hero, imkoniyatlar, “Ittifoq yoşlarga nima beradi”.
-   VAQTINÇA dizayn variantlari (.vx[data-v], DevSectionsPanel): tasdiqlangaç keraksizlari öçiriladi.
    Suratlarning pastki çeti tekis kesilgan — u har doim şaklning tekis pastki çetiga tuşadi yoki ostida yaşirinadi.
    ===================================================================== */
 
-/* ---------- HERO: kollaj variantlari bir xil 600×700 kanvasda ---------- */
-.collage-fit > .vx {
-  position: absolute;
-  inset: 0;
-}
+/* ---------- HERO: polaroid kollaji, 600×700 kanvas ---------- */
 .collage img {
   max-width: none;
 }
@@ -244,9 +239,6 @@
 }
 
 /* ---------- “ITTIFOQ YOŞLARGA NIMA BERADI” (Benefits.tsx, .ui kanvasi 635×592) ---------- */
-.ui > .vx > * {
-  position: absolute;
-}
 .bnf-pill {
   left: 95px;
   width: 328px;
@@ -372,9 +364,6 @@
 }
 
 /* ---------- “Biz haqimizda” (About.tsx): Ittifoq mavzusidagi kompozitsiya, kanvas 404×377 ---------- */
-.about-art > .vx > * {
-  position: absolute;
-}
 .about-art img {
   max-width: none;
 }
@@ -388,81 +377,16 @@
   width: 140px;
   height: auto;
 }
-/* A — logo orbitasi */
-.ab-ring {
-  left: 52px;
-  top: 28px;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  border: 2px dashed rgba(83, 40, 34, 0.28);
-  animation: spin 60s linear infinite;
-}
-.ab-logo--orbit {
-  left: 122px;
-  top: 98px;
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-}
-.ab-ph {
-  width: 96px;
-  height: 96px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 6px solid #fff;
-  box-shadow: 0 12px 28px rgba(83, 40, 34, 0.16);
-  background: var(--soft);
-}
-.ab-ph img,
-.ab-card img,
-.ab-badge img,
-.ab-medal img {
+.ab-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.ab-ph--1 {
-  left: 18px;
-  top: 30px;
-}
-.ab-ph--2 {
-  left: 306px;
-  top: 64px;
-  width: 84px;
-  height: 84px;
-}
-.ab-ph--3 {
-  left: 250px;
-  top: 270px;
-  width: 104px;
-  height: 104px;
 }
 .ab-spark {
   width: 34px;
   height: 34px;
 }
-.ab-spark--g {
-  left: 52px;
-  top: 262px;
-  fill: var(--green);
-}
-.ab-spark--b {
-  left: 338px;
-  top: 0;
-  width: 26px;
-  height: 26px;
-  fill: var(--sky);
-}
-.ab-burst {
-  left: 0;
-  top: 160px;
-  width: 64px;
-  height: 64px;
-  fill: var(--blue);
-  rotate: 18deg;
-}
-/* B — foto-töplam */
+/* foto-töplam */
 .ab-card {
   width: 160px;
   height: 200px;
@@ -526,63 +450,7 @@
   top: 30px;
   fill: var(--green);
 }
-/* C — nişonlar */
-.ab-green {
-  left: 0;
-  top: 0;
-  width: 170px;
-  height: 170px;
-}
-.ab-badge {
-  left: 30px;
-  top: 30px;
-  width: 110px;
-  height: 110px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 5px solid #fff;
-}
-.ab-medal {
-  width: 104px;
-  height: 136px;
-  overflow: hidden;
-  border-radius: 26px;
-  border: 6px solid #fff;
-  box-shadow: 0 16px 34px rgba(83, 40, 34, 0.18);
-}
-.ab-medal--1 {
-  left: 176px;
-  top: 92px;
-  rotate: -8deg;
-}
-.ab-medal--2 {
-  left: 290px;
-  top: 40px;
-  rotate: 9deg;
-}
-.ab-logo--c {
-  left: 120px;
-  top: 270px;
-  rotate: 3deg;
-}
-.ab-spark--b2 {
-  left: 40px;
-  top: 220px;
-  fill: var(--sky);
-  width: 44px;
-  height: 44px;
-}
-.ab-burst--c {
-  left: 330px;
-  top: 220px;
-  width: 70px;
-  height: 70px;
-  fill: var(--lime);
-}
 /* “Biz haqimizda” suratlari: asosiy qismi (talabalar, kursantlar, peşlavha) markazda */
 .about-art img[src$='harbiy.webp'] {
   object-position: 62% 40%;
-}
-.about-art img[src$='tashkilot.webp'] {
-  object-position: 58% 35%;
 }
