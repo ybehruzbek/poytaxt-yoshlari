@@ -3,105 +3,30 @@
    Suratlarning pastki çeti tekis kesilgan — u har doim şaklning tekis pastki çetiga tuşadi yoki ostida yaşirinadi.
    ===================================================================== */
 
-/* ---------- HERO: polaroid kollaji, 600×700 kanvas ---------- */
+/* ---------- HERO: InsightPod namunasi asosidagi kollaj (600×700 kanvas, site.css dagi .c-* detallar) ---------- */
 .collage img {
   max-width: none;
 }
-
-/* umumiy: odam “slot” içida — slot butun kanvasni egallaydi, kesiş şakli clip-path: path() bilan (kanvas koordinatalarida) */
-.hx .hx-slot {
-  left: 0;
-  top: 0;
-  width: 600px;
-  height: 700px;
-  z-index: 2;
+/* tepada: qiz sariq kapsula içida (pastki çeti kapsula tubiga tuşadi) */
+.c-pill--cut {
+  overflow: hidden;
 }
-.hx .hx-p {
+.c-pill .c-cut-in {
   position: absolute;
-  width: auto;
-  max-width: none;
-}
-
-/* Polaroid */
-.hxp-blob {
-  left: 410px;
-  top: 10px;
-}
-.hxp-card {
-  padding: 14px 14px 58px;
-  border-radius: 26px;
-  background: #fff;
-  box-shadow: 0 24px 50px rgba(83, 40, 34, 0.18);
-}
-.hxp-card--y {
-  left: 26px;
-  top: 236px;
-  width: 280px;
-  height: 430px;
-  rotate: -6deg;
-  z-index: 3;
-}
-.hxp-card--b {
-  left: 284px;
-  top: 168px;
-  width: 290px;
-  height: 470px;
-  rotate: 5deg;
-  z-index: 2;
-}
-.hxp-card > * {
-  position: absolute;
-}
-.hxp-in {
-  left: 14px;
-  right: 14px;
-  top: 14px;
-  bottom: 58px;
-  border-radius: 16px;
-}
-.hxp-card--y .hxp-in {
-  background: var(--yellow);
-}
-.hxp-card--b .hxp-in {
-  background: var(--sky);
-}
-/* odam içki ramka ölçamida, tepasi oçiq — boşi oq ramka ustidan çiqadi */
-.hxp-slot {
-  left: 14px;
-  right: 14px;
-  top: 14px;
-  bottom: 58px;
-  clip-path: inset(-60% 0 0 0 round 0 0 16px 16px);
-}
-.hxp-slot .hx-p {
   left: 50%;
   bottom: 0;
+  height: 82%;
+  width: auto;
   translate: -50% 0;
 }
-.hxp-card--y .hx-p {
-  height: 112%;
-}
-.hxp-card--b .hx-p {
-  height: 110%;
-}
-.hxp-cap {
-  left: 0;
-  right: 0;
-  bottom: 14px;
-  text-align: center;
-  font: 700 22px/1 var(--f-head);
-  color: var(--navy);
-}
-.hxp-star {
-  left: 236px;
-  top: 150px;
-  z-index: 4;
-}
-.hxp-star2 {
-  left: 560px;
-  top: 640px;
-  width: 30px;
-  height: 30px;
+/* pastda: yigit jigarrang kapsula ustida, qölları şakldan çiqib turadi; kesik çeti kapsulaning tekis tubida */
+.collage .c-cut-b {
+  /* namunadagidek: boşi yuqori kapsula tagidan boşlanadi, örtada */
+  left: 196px;
+  top: 348px;
+  height: 326px;
+  width: auto;
+  z-index: 2;
 }
 
 /* ---------- IMKONIYATLAR (Opportunities.tsx, OppThemes.tsx) ----------
@@ -313,19 +238,21 @@
   opacity: 1;
   scale: 1;
 }
-.hp--girl {
-  left: 54px;
-  top: 112px;
+.collage .hp--girl {
+  /* namunadagi “Hello!” örni — kapsula tepasida */
+  left: 284px;
+  top: 28px;
 }
 .collage .hp--boy {
-  left: 360px;
-  top: 48px;
+  left: 352px;
+  top: 300px;
   transform: rotate(6deg);
+  z-index: 6;
 }
 /* umumiy gap: örtada, ikki dum — çapi qizga, öngi yigitga */
 .collage .hp--both {
-  left: 140px;
-  top: 6px;
+  left: 150px;
+  top: 4px;
   max-width: 320px;
   text-align: center;
   transform: rotate(-3deg);
@@ -453,4 +380,11 @@
 /* “Biz haqimizda” suratlari: asosiy qismi (talabalar, kursantlar, peşlavha) markazda */
 .about-art img[src$='harbiy.webp'] {
   object-position: 62% 40%;
+}
+
+/* telefon va planşetda kollaj ekran tagiga tuşadi — “Davomi” belgisi uning ustiga çiqmasin */
+@media (max-width: 900px) {
+  .cue {
+    display: none;
+  }
 }

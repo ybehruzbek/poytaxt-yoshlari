@@ -35,28 +35,48 @@ const Cut = ({ p, className }: { p: Person; className: string }) => (
   <img className={className} src={p.src} width={p.w} height={p.h} alt="" fetchPriority="high" decoding="async" />
 )
 
-/** “Polaroid”: ikki qiyşaygan kartoçka, odamlarning boşi oq ramka ustidan çiqadi, tagida yozuv */
-function CollagePolaroid() {
+const Wave = () => (
+  <div className="c-wave">
+    <b style={{ height: '28px' }}></b>
+    <b style={{ height: '41px' }}></b>
+    <b style={{ height: '51px' }}></b>
+    <b style={{ height: '41px' }}></b>
+    <b style={{ height: '28px' }}></b>
+  </div>
+)
+const Bars = () => (
+  <div className="c-circle">
+    <i style={{ height: '21px', left: '35px', top: '78px', borderRadius: '50%' }}></i>
+    <i style={{ height: '31px', left: '45px', top: '102px' }}></i>
+    <i style={{ height: '70px', left: '68px', top: '56px' }}></i>
+    <i style={{ height: '92px', left: '106px', top: '34px' }}></i>
+  </div>
+)
+
+/**
+ * InsightPod namunasi asosidagi kollaj: tepada qiz sariq kapsula içida, pastda yigit jigarrang kapsula ustida
+ * turadi (işora qilayotgan qöllari şakldan çiqib turadi); atrofida namunadagi barça detallar.
+ * Suhbat: qiz — “Xuş kelibsiz!”, yigit — “Salom, yoşlar!”, keyin ikkalasi birga (HeroBubbles).
+ */
+function CollageInsight() {
   return (
-    <div className="collage hx hx-pol" aria-hidden="true">
-      <Blob className="c-blob hxp-blob" />
-      <div className="hxp-card hxp-card--b">
-        <div className="hxp-in"></div>
-        <div className="hxp-slot">
-          <Cut p={PEOPLE.yigit} className="hx-p" />
-        </div>
-        <span className="hxp-cap">Yoşlar ittifoqi</span>
+    <div className="collage hx-ins" aria-hidden="true">
+      <Wave />
+      <div className="c-pill c-pill--cut">
+        <Cut p={PEOPLE.qiz} className="c-cut-in" />
       </div>
-      <div className="hxp-card hxp-card--y">
-        <div className="hxp-in"></div>
-        <div className="hxp-slot">
-          <Cut p={PEOPLE.qiz} className="hx-p" />
-        </div>
-        <span className="hxp-cap">#YoşlarBilan</span>
-      </div>
+      <Blob />
+      <div className="c-play"></div>
+      <Star />
+      <div className="c-half"></div>
+      <div className="c-tag">Yoşlar ittifoqi</div>
+      <Bars />
+      <Star2 />
+      <div className="c-green"></div>
+      <div className="c-bottom"></div>
+      <Cut p={PEOPLE.yigit} className="c-cut-b" />
+      <div className="c-o"></div>
       <HeroBubbles />
-      <Star className="c-star hxp-star" />
-      <Star2 className="c-star2 hxp-star2" />
     </div>
   )
 }
@@ -113,7 +133,7 @@ export async function Hero({ locale }: { locale: Locale }) {
 
             <div className="collage-fit">
               <CollageScaler />
-              <CollagePolaroid />
+              <CollageInsight />
             </div>
           </div>
         </div>
