@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { Locale } from '@/i18n/config'
 import { getBosh } from '@/lib/cms/sahifalar'
 import { CollageScaler } from './CollageScaler'
+import { HeroBubbles } from './HeroBubbles'
 import { ScrollCue } from './ScrollCue'
 
 const PEOPLE = {
@@ -51,34 +52,7 @@ const Cut = ({ p, className }: { p: Person; className: string }) => (
   <img className={className} src={p.src} width={p.w} height={p.h} alt="" fetchPriority="high" decoding="async" />
 )
 
-/** A — “Orbita”: katta doira, atrofida aylanuvçi yozuv; ikkala odam doiradan çiqib turadi (pastki qismi doira yoyi böyiça kesilgan) */
-function CollageOrbit() {
-  return (
-    <div className="collage hx hx-orbit" aria-hidden="true">
-      <div className="hxo-sun"></div>
-      <svg className="hxo-ring" viewBox="0 0 600 700">
-        <defs>
-          <path id="hxoPath" d="M30 410a270 270 0 1 1 540 0a270 270 0 1 1-540 0" />
-        </defs>
-        <text>
-          <textPath href="#hxoPath">
-            ÖZBEKISTON YOŞLAR ITTIFOQI · TOŞKENT ŞAHAR KENGAŞI · ÖZBEKISTON YOŞLAR ITTIFOQI · TOŞKENT ŞAHAR KENGAŞI ·
-          </textPath>
-        </text>
-      </svg>
-      <div className="hx-slot hxo-slot">
-        <Cut p={PEOPLE.qiz} className="hx-p hxo-qiz" />
-        <Cut p={PEOPLE.yigit} className="hx-p hxo-yigit" />
-      </div>
-      <div className="c-bubble hxo-bubble">Xuş kelibsiz!</div>
-      <Star className="c-star hxo-star" />
-      <Star2 className="c-star2 hxo-star2" />
-      <div className="c-play hxo-play"></div>
-    </div>
-  )
-}
-
-/** B — “Polaroid”: ikki qiyşaygan kartoçka, odamlarning boşi oq ramka ustidan çiqadi, tagida yozuv */
+/** “Polaroid”: ikki qiyşaygan kartoçka, odamlarning boşi oq ramka ustidan çiqadi, tagida yozuv */
 function CollagePolaroid() {
   return (
     <div className="collage hx hx-pol" aria-hidden="true">
@@ -98,39 +72,17 @@ function CollagePolaroid() {
         </div>
         <span className="hxp-cap">#YoşlarBilan</span>
       </div>
-      <div className="c-bubble hxp-bubble">Xuş kelibsiz!</div>
+      <HeroBubbles at="pol" />
       <Star className="c-star hxp-star" />
       <Star2 className="c-star2 hxp-star2" />
     </div>
   )
 }
 
-/** C — “Katta söz”: orqada ulkan YOŞLAR / BILAN yozuvi, oldida bitta arkda ikkala odam */
-function CollageWord() {
-  return (
-    <div className="collage hx hx-word" aria-hidden="true">
-      <div className="hxw-word">
-        <span>YOŞLAR</span>
-        <span>BILAN</span>
-      </div>
-      <div className="hxw-arch"></div>
-      <div className="hx-slot hxw-slot">
-        <Cut p={PEOPLE.qiz} className="hx-p hxw-qiz" />
-        <Cut p={PEOPLE.yigit} className="hx-p hxw-yigit" />
-      </div>
-      <div className="c-bubble hxw-bubble">Xuş kelibsiz!</div>
-      <Star className="c-star hxw-star" />
-      <div className="c-play hxw-play"></div>
-      <div className="c-o hxw-o"></div>
-    </div>
-  )
-}
-
-/** D — “Ikki doira”: bir-biriga kirgan sariq va kök doira, har biridan bittadan odam çiqib turadi */
+/** “Ikki doira”: bir-biriga kirgan sariq va kök doira, har biridan bittadan odam çiqib turadi */
 function CollageCircles() {
   return (
     <div className="collage hx hx-circ" aria-hidden="true">
-      <Wave className="c-wave hxc-wave" />
       <div className="hxc-dot hxc-dot--b"></div>
       <div className="hxc-dot hxc-dot--y"></div>
       <div className="hx-slot hxc-slot--b">
@@ -139,7 +91,7 @@ function CollageCircles() {
       <div className="hx-slot hxc-slot--y">
         <Cut p={PEOPLE.qiz} className="hx-p hxc-qiz" />
       </div>
-      <div className="c-bubble hxc-bubble">Xuş kelibsiz!</div>
+      <HeroBubbles at="circ" />
       <div className="c-tag hxc-tag">#YoşlarBilan</div>
       <Star className="c-star hxc-star" />
       <Bars />
@@ -200,16 +152,11 @@ export async function Hero({ locale }: { locale: Locale }) {
             <div className="collage-fit">
               <CollageScaler />
               {/* VAQTINÇA: 3 ta dizayn varianti (DevSectionsPanel orqali tanlanadi), tasdiqlangaç bittasi qoladi */}
+              {/* VAQTINÇA: tanlangan ikki variant — B (polaroid) va D (ikki doira) */}
               <div className="vx" data-v="hero-a">
-                <CollageOrbit />
-              </div>
-              <div className="vx" data-v="hero-b">
                 <CollagePolaroid />
               </div>
-              <div className="vx" data-v="hero-c">
-                <CollageWord />
-              </div>
-              <div className="vx" data-v="hero-d">
+              <div className="vx" data-v="hero-b">
                 <CollageCircles />
               </div>
             </div>
