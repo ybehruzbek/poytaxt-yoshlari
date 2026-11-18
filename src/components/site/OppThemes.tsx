@@ -6,7 +6,6 @@ import type { OppType } from '@/lib/opps'
  * “Yoşlar uçun imkoniyatlar” kartalari orqasidagi mavzuli bezaklar: karta oçilganda (hover/fokus)
  * yönalişning öz belgilari çiqadi — grantlar: tanga, pul, ösiş; stipendiyalar: qalpoq, kitob, diplom;
  * volontyorlik: yurak, qöl, barg; tanlovlar: kubok, medal, yulduz.
- * VAQTINÇA 3 uslub (DevSectionsPanel → opps): a — çiziqli belgilar, b — bitta katta siluet, c — stikerlar.
  */
 
 type Icon = { d: ReactNode; label?: string }
@@ -33,12 +32,12 @@ const I: Record<string, Icon> = {
   target: { d: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.5" /></> },
 }
 
-/** Har yönaliş: çiziqli belgilar (a), katta siluet (b) va stikerlar (c) */
-const SET: Record<OppType, { line: string[]; big: string; stickers: Array<[string, string]> }> = {
-  grant: { line: ['coin', 'chart', 'note', 'bulb', 'coins', 'coin', 'chart'], big: 'coins', stickers: [['coins', 'Moliya'], ['bulb', 'Ğoya'], ['chart', 'Ösiş']] },
-  stip: { line: ['cap', 'book', 'aplus', 'diploma', 'pencil', 'cap', 'book'], big: 'cap', stickers: [['cap', 'Taʼlim'], ['aplus', 'Aʼlo'], ['book', 'Bilim']] },
-  vol: { line: ['heart', 'hand', 'leaf', 'globe', 'smile', 'heart', 'leaf'], big: 'heart', stickers: [['heart', 'Mehr'], ['hand', 'Yordam'], ['globe', 'Jamiyat']] },
-  tanlov: { line: ['trophy', 'star', 'medal', 'target', 'podium', 'star', 'trophy'], big: 'trophy', stickers: [['trophy', 'Ğalaba'], ['medal', '1-örin'], ['star', 'Iqtidor']] },
+/** Har yönaliş uçun çiziqli belgilar */
+const SET: Record<OppType, { line: string[] }> = {
+  grant: { line: ['coin', 'chart', 'note', 'bulb', 'coins', 'coin', 'chart'] },
+  stip: { line: ['cap', 'book', 'aplus', 'diploma', 'pencil', 'cap', 'book'] },
+  vol: { line: ['heart', 'hand', 'leaf', 'globe', 'smile', 'heart', 'leaf'] },
+  tanlov: { line: ['trophy', 'star', 'medal', 'target', 'podium', 'star', 'trophy'] },
 }
 
 /** Belgilar joyi (karta ölçamiga nisbatan, %) — odam öngda, sarlavha çap tepada, maʼlumot paneli pastda */
@@ -52,12 +51,6 @@ const POS: Array<[number, number, number, number]> = [
   [26, 68, 64, -10],
   [50, 62, 38, 20],
 ]
-const STICK: Array<[number, number, number]> = [
-  [6, 35, -8],
-  [30, 45, 6],
-  [8, 55, -4],
-]
-
 const Svg = ({ name, style, className }: { name: string; style?: CSSProperties; className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} style={style} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
     {I[name].d}
@@ -68,26 +61,10 @@ export function OppTheme({ t }: { t: OppType }) {
   const s = SET[t]
   return (
     <>
-      <span className="vx th th-a" data-v="opps-a" aria-hidden="true">
+      <span className="th th-a" aria-hidden="true">
         {s.line.map((n, k) => {
           const [l, top, size, r] = POS[k]
           return <Svg key={k} name={n} className="th-i" style={{ left: `${l}%`, top: `${top}%`, width: size, height: size, rotate: `${r}deg`, '--k': k } as CSSProperties} />
-        })}
-      </span>
-      <span className="vx th th-b" data-v="opps-b" aria-hidden="true">
-        <Svg name={s.big} className="th-big" />
-        <Svg name={s.line[1]} className="th-i" style={{ left: '10%', top: '40%', width: 40, height: 40, rotate: '-14deg', '--k': 1 } as CSSProperties} />
-        <Svg name={s.line[2]} className="th-i" style={{ left: '30%', top: '60%', width: 34, height: 34, rotate: '12deg', '--k': 2 } as CSSProperties} />
-      </span>
-      <span className="vx th th-c" data-v="opps-c" aria-hidden="true">
-        {s.stickers.map(([n, label], k) => {
-          const [l, top, r] = STICK[k]
-          return (
-            <span key={k} className="th-st" style={{ left: `${l}%`, top: `${top}%`, rotate: `${r}deg`, '--k': k } as CSSProperties}>
-              <Svg name={n} />
-              {label}
-            </span>
-          )
         })}
       </span>
     </>
