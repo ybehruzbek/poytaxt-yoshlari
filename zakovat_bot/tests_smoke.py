@@ -60,6 +60,7 @@ class FakeBot:
         self.subscribed_ids = set()  # kanalga a'zo foydalanuvchilar
         self.chat_admin_ok = True  # bot tanlov kanalida adminmi
         self.channel_members = set()  # tanlov kanaliga a'zolar
+        self.file_payload = None  # download_file nima qaytarsin
 
     async def send_message(self, chat_id, text=None, **kw):
         if chat_id in self.forbidden_ids:
@@ -102,7 +103,7 @@ class FakeBot:
         return SimpleNamespace(file_path="fake/path")
 
     async def download_file(self, file_path):
-        return BytesIO(self.excel_bytes)
+        return BytesIO(self.file_payload or self.excel_bytes)
 
     def __getattr__(self, name):
         # send_message, send_photo, send_document va h.k. — generik yozuvchi
@@ -1856,6 +1857,7 @@ async def _run_all(saved_event_ids):
     EntryMedia.objects.create(entry=doc_entry, file_id="docf1",
                               file_unique_id="docu1", media_type="document",
                               mime_type="image/png", file_size=500_000)
+    fake_bot.file_payload = b"\x89PNG\r\n\x1a\n" + b"0" * 200  # haqiqiy PNG
     before = len(fake_bot.calls)
     ok_cnt, fail_cnt, _errs = await pub_service.publish_all(fake_bot, contest)
     sent_kinds = [k for k, *_ in fake_bot.calls[before:]]
@@ -1883,6 +1885,24 @@ async def _run_all(saved_event_ids):
           any(k == "send_message" and c == 990066 and "Havola" in str(t)
               and "Ovoz berish" in str(t)
               for k, c, t in fake_bot.calls if k == "send_message"))
+
+    # Nosoz fayl rasmga aylantirilmaydi (nashr to'xtab qolmasin)
+    from zakovat_bot.services.contest import _looks_like_image
+    check("nosoz fayl rasm deb qabul qilinmaydi",
+          not _looks_like_image(b"PK\x03\x04" + b"0" * 50)
+          and _looks_like_image(b"\xff\xd8\xff" + b"0" * 50))
+    fake_bot.file_payload = b"PK\x03\x04" + b"0" * 200  # rasm emas
+    bad_media = EntryMedia(entry=doc_entry, file_id="badf",
+                           file_unique_id="badu", media_type="document",
+                           mime_type="image/png", file_size=1000)
+    check("rasm bo'lmagan fayl aylantirilmadi",
+          await _document_as_photo(fake_bot, bad_media) is None)
+    check("hajmi noma'lum fayl aylantirilmadi",
+          await _document_as_photo(
+              fake_bot, EntryMedia(entry=doc_entry, file_id="x",
+                                   file_unique_id="xu", media_type="document",
+                                   mime_type="image/png")) is None)
+    fake_bot.file_payload = None
 
     doc_entry.delete(); doc_participant.delete()
 

@@ -413,6 +413,35 @@ def entry_card(entry, for_admin=True):
 
 # sendPhoto orqali yuklash chegarasi (Telegram): 10 MB
 PHOTO_UPLOAD_LIMIT = 10 * 1024 * 1024
+# Bitta ariza uchun yuklab olinadigan umumiy hajm chegarasi
+CONVERT_BUDGET = 20 * 1024 * 1024
+
+
+# Ruxsat etilgan rasm turlari va ularning fayl kengaytmasi
+_IMAGE_EXT = {
+    "image/jpeg": "jpg", "image/jpg": "jpg", "image/png": "png",
+    "image/webp": "webp", "image/heic": "heic", "image/heif": "heif",
+}
+
+
+def _looks_like_image(data):
+    """Yuklangan baytlar haqiqatan rasmmi (sarlavha bo'yicha).
+
+    Mijoz bergan `mime_type` ga ishonib bo'lmaydi: nosoz fayl rasm sifatida
+    yuborilsa, Telegram uni rad etadi va nashr har safar shu arizada
+    to'xtab qolardi.
+    """
+    if len(data) < 12:
+        return False
+    if data[:3] == b"\xff\xd8\xff":                     # JPEG
+        return True
+    if data[:8] == b"\x89PNG\r\n\x1a\n":                 # PNG
+        return True
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":     # WEBP
+        return True
+    if data[4:8] == b"ftyp":                              # HEIC/HEIF
+        return True
+    return False
 
 
 async def _document_as_photo(bot, media):
@@ -425,22 +454,32 @@ async def _document_as_photo(bot, media):
     """
     from aiogram.types import BufferedInputFile, InputMediaPhoto
 
-    if media.file_size and media.file_size > PHOTO_UPLOAD_LIMIT:
-        logger.info("Rasm fayli katta (%s bayt) — fayl ko'rinishida qoladi",
-                    media.file_size)
+    # Hajmi noma'lum fayl ham aylantirilmaydi — xotira cheklovini
+    # chetlab o'tmasligi uchun
+    if not media.file_size or media.file_size > PHOTO_UPLOAD_LIMIT:
         return None
     try:
         info = await bot.get_file(media.file_id)
         buf = await bot.download_file(info.file_path)
         data = buf.read() if hasattr(buf, "read") else bytes(buf)
-        if not data:
-            return None
-        ext = (media.mime_type or "image/jpeg").rsplit("/", 1)[-1][:8] or "jpg"
-        return InputMediaPhoto(
-            media=BufferedInputFile(data, filename=f"photo.{ext}"))
     except Exception as e:
-        logger.warning("Faylni rasmga aylantirib bo'lmadi: %s", e)
+        # Xato matnida yuklab olish havolasi (va u bilan bot tokeni)
+        # bo'lishi mumkin — faqat xato turi yoziladi
+        logger.warning("Faylni yuklab bo'lmadi (media=%s): %s",
+                       media.file_unique_id, type(e).__name__)
         return None
+
+    if not data or len(data) > PHOTO_UPLOAD_LIMIT:
+        return None
+    if not _looks_like_image(data):
+        logger.warning("Fayl rasm emas (media=%s) — fayl ko'rinishida qoladi",
+                       media.file_unique_id)
+        return None
+
+    ext = _IMAGE_EXT.get((media.mime_type or "").lower().split(";")[0].strip(),
+                         "jpg")
+    return InputMediaPhoto(
+        media=BufferedInputFile(data, filename=f"photo.{ext}"))
 
 
 async def prepare_media(bot, entry):
@@ -454,12 +493,17 @@ async def prepare_media(bot, entry):
     from aiogram.types import InputMediaDocument, InputMediaPhoto, InputMediaVideo
 
     photos, documents, videos = [], [], []
+    budget = CONVERT_BUDGET  # bir arizada yuklab olinadigan umumiy hajm
     for m in entry.media.all():
         if m.media_type == "photo":
             photos.append(InputMediaPhoto(media=m.file_id))
         elif m.media_type == "video":
             videos.append(InputMediaVideo(media=m.file_id))
         else:
+            if (m.file_size or 0) > budget:
+                documents.append(InputMediaDocument(media=m.file_id))
+                continue
+            budget -= (m.file_size or 0)
             converted = await _document_as_photo(bot, m)
             if converted is not None:
                 photos.append(converted)

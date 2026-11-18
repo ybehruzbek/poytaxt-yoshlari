@@ -92,8 +92,7 @@ async def publish_entry(bot, contest, entry, channel_username=None):
     1-3 foto bitta albom bo'lib chiqadi va ularga BITTA ovoz kartochkasi
     bog'lanadi — ovoz alohida rasmga emas, ishga beriladi (TZ 8).
     """
-    groups = await prepare_media(bot, entry)
-    if not groups:
+    if not entry.media.exists():
         return False, "media topilmadi"
 
     channel = contest.channel_id
@@ -125,6 +124,11 @@ async def publish_entry(bot, contest, entry, channel_username=None):
         pub.channel_id = str(channel)
         pub.save(update_fields=["message_id", "vote_message_id", "channel_id"])
 
+    # Fayllarni yuklab olish band qilingandan keyin — takroriy bosishda
+    # bir xil fayl ikki marta yuklanmasligi uchun
+    groups = await prepare_media(bot, entry)
+    if not groups:
+        return False, "media tayyorlab bo'lmadi"
     media = groups[0]
     try:
         # 1-qadam: media. Yuborilgani darhol qayd etiladi, shuning uchun
