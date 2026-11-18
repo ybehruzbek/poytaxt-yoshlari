@@ -841,7 +841,8 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
 async def td_vote(callback: CallbackQuery):
     """Kanal postidagi ❤️ tugmasi. Bir foydalanuvchi — bir ish, bir ovoz."""
     from zakovat_bot.services.publishing import (
-        is_subscribed_to_channel, register_vote, voting_is_open)
+        check_channel_membership, notify_subscription_problem, register_vote,
+        voting_is_open)
 
     try:
         entry_id = int(callback.data.split(":")[1])
@@ -874,14 +875,27 @@ async def td_vote(callback: CallbackQuery):
         return
 
     # Majburiy obuna: a'zo bo'lmaganga ovoz berdirmaymiz
-    if contest.require_vote_subscription and contest.channel_id:
-        subscribed, _checked = await is_subscribed_to_channel(
+    if contest.require_vote_subscription:
+        membership = await check_channel_membership(
             bot, contest.channel_id, callback.from_user.id)
-        if not subscribed:
+        if membership == "not_member":
             await callback.answer(
                 "❗️ Ovoz berish uchun avval kanalga a'zo bo'ling.\n\n"
                 "A'zo bo'lgach, ❤️ tugmasini qaytadan bosing.",
                 show_alert=True)
+            return
+        if membership == "transient":
+            await callback.answer(
+                "Hozir a'zolikni tekshirib bo'lmadi. "
+                "Bir oz kutib, qaytadan urinib ko'ring.", show_alert=True)
+            return
+        if membership == "config":
+            # Tekshirib bo'lmadi — ovoz hisoblanmaydi, adminlar xabardor qilinadi
+            await notify_subscription_problem(bot, contest)
+            await callback.answer(
+                "Texnik nosozlik tufayli ovoz qabul qilinmadi. "
+                "Tashkilotchilar xabardor qilindi — birozdan keyin urinib "
+                "ko'ring.", show_alert=True)
             return
 
     created, count = register_vote(entry.id, callback.from_user.id)

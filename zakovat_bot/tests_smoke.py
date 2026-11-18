@@ -1991,6 +1991,24 @@ async def _run_all(saved_event_ids):
     check("obunasizda ovoz bazaga yozilmadi",
           not Vote.objects.filter(entry=entry, voter_user_id=USER1).exists())
 
+    # Texnik nosozlikda ovoz hisoblanmaydi (fail-closed)
+    class _Broken:
+        def __getattr__(self, name):
+            async def boom(*a, **kw):
+                from aiogram.exceptions import TelegramBadRequest
+                raise TelegramBadRequest(method=None, message="bot is not a member")
+            return boom
+    import zakovat_bot.handlers.contest_handler as _ch_mod
+    real_bot = _ch_mod.bot
+    _ch_mod.bot = _Broken()
+    cb = FakeCallback(f"td_vote:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_vote(cb)
+    entry.refresh_from_db()
+    check("tekshirib bo'lmaganda ovoz qabul qilinmadi",
+          entry.votes_count == 0
+          and any("nosozlik" in a for a in cb.alerts), cb.alerts)
+    _ch_mod.bot = real_bot
+
     # A'zo bo'lgach ovoz o'tadi
     fake_bot.channel_members.add(USER1)
     cb = FakeCallback(f"td_vote:{entry.id}", USER1, message=FakeMessage(USER1))

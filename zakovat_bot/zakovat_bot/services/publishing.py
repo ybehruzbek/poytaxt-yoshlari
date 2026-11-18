@@ -245,25 +245,71 @@ async def _notify_published(bot, entry):
 SUBSCRIBED_STATUSES = {"member", "administrator", "creator"}
 
 
-async def is_subscribed_to_channel(bot, channel_id, user_id):
+# Sozlama nosozligi haqida adminlarni bezovta qilmaslik uchun (contest_id → vaqt)
+_sub_alert_sent = {}
+SUB_ALERT_INTERVAL = 3600  # soniya
+
+
+async def check_channel_membership(bot, channel_id, user_id):
     """Foydalanuvchi tanlov kanaliga a'zomi.
 
-    Qaytaradi: (a'zomi, tekshirildimi). Texnik xato bo'lsa (bot kanalda
-    admin emas, tarmoq uzilishi) ovoz berishga to'sqinlik qilmaymiz —
-    aks holda nosozlik barcha ovoz beruvchilarni bloklab qo'yadi.
+    Qaytaradi: "member" | "not_member" | "config" | "transient".
+
+    Tekshirib bo'lmagan holat hech qachon «a'zo» deb hisoblanmaydi:
+    aks holda bot kanalda admin bo'lmay qolsa, obuna sharti jimgina
+    ishlamay qo'yardi. Sozlama nosozligi («config») alohida ajratiladi —
+    bu holatda adminlarga xabar beriladi.
     """
+    from aiogram.exceptions import (
+        TelegramBadRequest, TelegramForbiddenError, TelegramRetryAfter,
+    )
+
     if not channel_id:
-        return True, False
+        return "config"
     try:
         member = await bot.get_chat_member(chat_id=channel_id, user_id=user_id)
+    except TelegramRetryAfter:
+        return "transient"
+    except (TelegramBadRequest, TelegramForbiddenError) as e:
+        logger.error("A'zolikni tekshirib bo'lmadi — sozlama (%s): %s",
+                     channel_id, e)
+        return "config"
     except Exception as e:
-        logger.warning("A'zolikni tekshirib bo'lmadi (%s): %s", channel_id, e)
-        return True, False
+        logger.warning("A'zolikni tekshirishda vaqtinchalik xato (%s): %s",
+                       channel_id, e)
+        return "transient"
+
     status = getattr(member, "status", None)
     if status == "restricted":
         # Cheklangan a'zo kanalda qolgan bo'lsa, a'zo hisoblanadi
-        return bool(getattr(member, "is_member", False)), True
-    return status in SUBSCRIBED_STATUSES, True
+        return "member" if getattr(member, "is_member", False) else "not_member"
+    return "member" if status in SUBSCRIBED_STATUSES else "not_member"
+
+
+async def notify_subscription_problem(bot, contest):
+    """Obuna tekshiruvi buzilganini adminlarga bildiradi (soatiga bir marta)."""
+    import time
+
+    from zakovat_bot.models import TelegramAdminsID
+
+    now = time.time()
+    if now - _sub_alert_sent.get(contest.id, 0) < SUB_ALERT_INTERVAL:
+        return
+    _sub_alert_sent[contest.id] = now
+
+    text = (
+        "⚠️ <b>Ovoz berish to'xtab turibdi</b>\n\n"
+        "Kanalga a'zolikni tekshirib bo'lmayapti — ehtimol bot tanlov "
+        "kanalida admin emas yoki kanal noto'g'ri belgilangan.\n\n"
+        "Botni kanalga admin qilib qo'shing yoki ⚙️ Sozlamalardan "
+        "obuna shartini vaqtincha o'chiring."
+    )
+    for admin in TelegramAdminsID.objects.all():
+        try:
+            await bot.send_message(chat_id=admin.tg_id, text=text)
+        except Exception:
+            logger.warning("Adminga obuna ogohlantirishi yetmadi: %s",
+                           admin.tg_id)
 
 
 def voting_is_open(contest):
