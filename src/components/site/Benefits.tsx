@@ -14,7 +14,14 @@ export async function Benefits({ locale }: { locale: Locale }) {
   <div className="wrap benefit">
     <div className="ui" aria-hidden="true">
       <div style={{ left: "421px", top: "116px", width: "175px", height: "412px", borderRadius: "136px", background: "var(--sky)" }}></div>
-      <div style={{ left: "95px", top: "0", width: "328px", height: "592px", borderRadius: "164px", overflow: "hidden", background: "var(--green)" }}><img className="cover" src="/img/about-2.jpg" alt="" loading="lazy" decoding="async" style={{ objectPosition: "62% 50%" }} /></div>
+      {/* VAQTINÇA: 2 ta variant (DevSectionsPanel) — A: odam kapsula içida, B: boşi kapsuladan çiqadi */}
+      <div className="vx" data-v="bnf-a">
+        <div className="bnf-pill bnf-pill--in"><img className="bnf-cut" src="/img/odamlar/ittifoq-beradi.webp" width={713} height={1200} alt="" loading="lazy" decoding="async" /></div>
+      </div>
+      <div className="vx" data-v="bnf-b">
+        <div className="bnf-pill bnf-pill--low"></div>
+        <div className="bnf-slot"><img className="bnf-cut" src="/img/odamlar/ittifoq-beradi.webp" width={713} height={1200} alt="" loading="lazy" decoding="async" /></div>
+      </div>
       <div style={{ left: "30px", top: "452px", width: "190px", height: "96px", borderRadius: "50px", background: "#fff", transform: "rotate(-10deg)", boxShadow: "0 10px 30px rgba(83,40,34,.1)", display: "flex", alignItems: "center", justifyContent: "center", gap: "9px" }}>
         <i className="bar" style={{ height: "34px" }}></i><i className="bar" style={{ height: "46px" }}></i><i className="bar" style={{ height: "60px" }}></i><i className="bar" style={{ height: "46px" }}></i><i className="bar" style={{ height: "34px" }}></i>
       </div>

@@ -1,0 +1,448 @@
+/* =====================================================================
+   Fonsiz odamlar suratlari (public/img/odamlar) — bosh sahifa: hero, imkoniyatlar, “Ittifoq yoşlarga nima beradi”.
+   VAQTINÇA dizayn variantlari (.vx[data-v], DevSectionsPanel): tasdiqlangaç keraksizlari öçiriladi.
+   Suratlarning pastki çeti tekis kesilgan — u har doim şaklning tekis pastki çetiga tuşadi yoki ostida yaşirinadi.
+   ===================================================================== */
+
+/* ---------- HERO: kollaj variantlari bir xil 600×700 kanvasda ---------- */
+.collage-fit > .vx {
+  position: absolute;
+  inset: 0;
+}
+.collage img {
+  max-width: none;
+}
+
+/* A / B — InsightPod namunasi: yuqorida kapsula içidagi odam, pastda kapsula ustida turgan odam */
+.c-pill--cut {
+  overflow: hidden;
+}
+.c-pill .c-cut-in {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 80%;
+  width: auto;
+  translate: -50% 0;
+}
+.c-cut-b {
+  left: 146px;
+  top: 334px;
+  height: 340px;
+  width: auto;
+  z-index: 2;
+}
+
+/* C — ikki ark */
+.hc-arch {
+  border-radius: 140px 140px 44px 44px;
+}
+.hc-arch--b {
+  left: 296px;
+  top: 150px;
+  width: 266px;
+  height: 520px;
+  background: var(--sky);
+}
+.hc-arch--y {
+  left: 38px;
+  top: 236px;
+  width: 266px;
+  height: 434px;
+  background: var(--yellow);
+}
+/* odam ark ölçamida, lekin tepasi oçiq: boş ark ustidan çiqadi, yon va pastki çetlar ark böyiça kesiladi */
+.hc-slot {
+  z-index: 2;
+  clip-path: inset(-60% 0 0 0 round 0 0 44px 44px);
+}
+.hc-slot--b {
+  left: 296px;
+  top: 150px;
+  width: 266px;
+  height: 520px;
+}
+.hc-slot--y {
+  left: 38px;
+  top: 236px;
+  width: 266px;
+  height: 434px;
+  z-index: 3;
+}
+.hc-p {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: auto;
+  translate: -50% 0;
+}
+.hc-slot--b .hc-p {
+  height: 106%;
+}
+.hc-slot--y .hc-p {
+  height: 106%;
+}
+.hc-blob {
+  left: 430px;
+  top: 6px;
+  width: 150px;
+  height: 150px;
+}
+.hc-wave {
+  left: 30px;
+  top: 40px;
+}
+.hc-star {
+  left: 312px;
+  top: 64px;
+}
+.hc-bubble {
+  left: 34px;
+  top: 168px;
+  transform: rotate(-8deg);
+  z-index: 4;
+}
+.hc-tag {
+  left: 18px;
+  top: 590px;
+  background: var(--blue);
+  transform: rotate(-7deg);
+  z-index: 4;
+}
+.hc-play {
+  left: 214px;
+  top: 34px;
+  width: 70px;
+  height: 70px;
+  z-index: 4;
+}
+.hc-star2 {
+  left: 268px;
+  top: 196px;
+  width: 30px;
+  height: 30px;
+}
+.hc-o {
+  left: 520px;
+  top: 560px;
+  z-index: 4;
+}
+
+/* ---------- IMKONIYATLAR ---------- */
+.opp-cut,
+.ob-p,
+.oc-p {
+  max-width: none;
+  width: auto;
+}
+
+/* A — namuna: rangli karta, odam karta tagida turadi (kengayiş va maʼlumot paneli opps.css da) */
+.opp .opp-cut {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 0;
+  height: 68%;
+  translate: -50% 0;
+  transform-origin: 50% 100%;
+  transition:
+    scale 0.5s var(--ease-out),
+    filter 0.4s;
+}
+.opp.big .opp-cut {
+  left: auto;
+  right: 3%;
+  translate: none;
+  height: 86%;
+}
+.opp:is(:hover, :focus-visible) .opp-cut {
+  scale: 1.05;
+}
+@media (min-width: 1241px) {
+  .opps:has(.opp:hover, .opp:focus-visible) .opp:not(:hover):not(:focus-visible) .opp-cut {
+    filter: saturate(0.6) brightness(0.92);
+  }
+}
+
+/* B — boş karta ustidan çiqadi; pastdagi oq panel suratning kesik çetini yopadi */
+.ob {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 84px;
+}
+.ob-card {
+  position: relative;
+  display: block;
+  height: 400px;
+  border-radius: var(--r-card);
+  isolation: isolate;
+}
+.ob-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  background: var(--c, var(--blue));
+}
+.ob-bg i {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+.ob-bg i:first-child {
+  width: 220px;
+  height: 220px;
+  right: -60px;
+  top: -40px;
+}
+.ob-bg i:last-child {
+  width: 90px;
+  height: 90px;
+  left: 18px;
+  top: 120px;
+  border-radius: 28px;
+  rotate: 18deg;
+}
+.ob-p {
+  position: absolute;
+  left: 50%;
+  bottom: 70px;
+  height: calc(100% - 70px + 84px);
+  translate: -50% 0;
+  transform-origin: 50% 100%;
+  transition:
+    scale 0.5s var(--ease-out),
+    translate 0.5s var(--ease-out);
+}
+.ob-card:is(:hover, :focus-visible) .ob-p {
+  translate: -50% -10px;
+  scale: 1.04;
+}
+.ob-info {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 14px 14px 20px;
+  border-radius: 30px;
+  background: var(--bg);
+  color: var(--navy);
+  box-shadow: 0 12px 30px rgba(83, 40, 34, 0.14);
+}
+.ob-txt {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.ob-txt b {
+  font: 800 22px/1.15 var(--f-head);
+}
+.ob-txt small {
+  font-size: 13.5px;
+  line-height: 1.3;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.ob-info .more-btn .more-btn-t {
+  display: none;
+}
+
+/* C — stikerlar devori */
+.osw {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.oc-card {
+  position: relative;
+  display: block;
+  height: 470px;
+  overflow: hidden;
+  border-radius: var(--r-card);
+  background: var(--c, var(--blue));
+  color: #fff;
+  transition:
+    rotate 0.45s var(--ease-spring),
+    translate 0.45s var(--ease-out);
+}
+.oc-card:nth-child(even) {
+  margin-top: 56px;
+}
+.oc-card:is(:hover, :focus-visible) {
+  rotate: -1.5deg;
+  translate: 0 -6px;
+}
+.oc-card:nth-child(even):is(:hover, :focus-visible) {
+  rotate: 1.5deg;
+}
+.oc-shape {
+  position: absolute;
+  left: 50%;
+  bottom: -70px;
+  width: 300px;
+  height: 300px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.o2 .oc-shape {
+  border-radius: 46% 54% 42% 58% / 50% 44% 56% 50%;
+  background: rgba(255, 147, 154, 0.35);
+}
+.o3 .oc-shape {
+  border-radius: 64px;
+  rotate: 22deg;
+}
+.o4 .oc-shape {
+  background: none;
+  border: 34px solid rgba(255, 255, 255, 0.5);
+}
+.oc-name {
+  position: absolute;
+  z-index: 3;
+  left: 26px;
+  right: 26px;
+  top: 26px;
+  font: 800 30px/1.1 var(--f-head);
+}
+.oc-sticker {
+  position: absolute;
+  z-index: 3;
+  right: 18px;
+  top: 80px;
+  padding: 8px 14px;
+  border-radius: 99px;
+  background: var(--bg);
+  color: var(--navy);
+  font: 700 14px/1 var(--f-head);
+  rotate: 8deg;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: rotate 0.45s var(--ease-spring);
+}
+.oc-card:is(:hover, :focus-visible) .oc-sticker {
+  rotate: -6deg;
+}
+.oc-p {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 0;
+  height: 74%;
+  translate: -50% 0;
+  transform-origin: 50% 100%;
+  transition: scale 0.5s var(--ease-out);
+}
+.oc-card:is(:hover, :focus-visible) .oc-p {
+  scale: 1.06;
+}
+.oc-foot {
+  position: absolute;
+  z-index: 3;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 10px 10px 18px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--navy);
+}
+.oc-foot small {
+  font: 600 13.5px/1.2 var(--f-body);
+}
+.oc-foot .more-btn .more-btn-t {
+  display: none;
+}
+
+/* kartalar ranglari (A dagi .o1–.o4 bilan bir xil) */
+:is(.ob-card, .oc-card).o1 {
+  --c: var(--blue);
+}
+:is(.ob-card, .oc-card).o2 {
+  --c: var(--navy-bg);
+}
+:is(.ob-card, .oc-card).o3 {
+  --c: var(--green);
+}
+:is(.ob-card, .oc-card).o4 {
+  --c: var(--yellow);
+}
+.oc-card.o4 {
+  color: var(--navy);
+}
+
+@media (max-width: 1100px) {
+  .ob,
+  .osw {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ob {
+    row-gap: 104px;
+  }
+}
+@media (max-width: 640px) {
+  .ob,
+  .osw {
+    grid-template-columns: 1fr;
+  }
+  .oc-card:nth-child(even) {
+    margin-top: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.opp-cut, .ob-p, .oc-p, .oc-card, .oc-sticker) {
+    transition: none !important;
+  }
+}
+
+/* ---------- “ITTIFOQ YOŞLARGA NIMA BERADI” (Benefits.tsx, .ui kanvasi 635×592) ---------- */
+.ui > .vx > * {
+  position: absolute;
+}
+.bnf-pill {
+  left: 95px;
+  width: 328px;
+  border-radius: 164px;
+  background: var(--green);
+}
+.bnf-pill--in {
+  top: 0;
+  height: 592px;
+  overflow: hidden;
+}
+.bnf-pill--low {
+  top: 96px;
+  height: 496px;
+}
+.bnf-slot {
+  left: 95px;
+  top: 96px;
+  width: 328px;
+  height: 496px;
+  clip-path: inset(-40% 0 0 0 round 0 0 164px 164px);
+}
+.bnf-cut {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: auto;
+  max-width: none;
+  translate: -50% 0;
+}
+.bnf-pill--in .bnf-cut {
+  height: 90%;
+}
+.bnf-slot .bnf-cut {
+  height: 119%;
+}
