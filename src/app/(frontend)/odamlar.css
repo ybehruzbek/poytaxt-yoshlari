@@ -20,13 +20,765 @@
   translate: -50% 0;
 }
 /* pastda: yigit jigarrang kapsula ustida, qölları şakldan çiqib turadi; kesik çeti kapsulaning tekis tubida */
-.collage .c-cut-b {
-  /* namunadagidek: boşi yuqori kapsula tagidan boşlanadi, örtada */
-  left: 196px;
-  top: 348px;
-  height: 326px;
-  width: auto;
+/* InsightPod namunasi (A): qiz tepada sariq kapsulada, yigit pastda jigarrang kapsuladan çiqadi */
+.hx-ins .c-pill {
+  left: 236px;
+  top: 24px;
+  width: 190px;
+  height: 300px;
+  border-radius: 95px;
+}
+.hx-ins .c-pill .c-cut-in {
+  height: 86%;
+}
+.hx-ins .c-bottom {
+  left: 44px;
+  top: 520px;
+  width: 436px;
+  height: 154px;
+  border-radius: 77px;
+}
+.hx .hxi-slot {
+  clip-path: path('M44 -100H480V597A77 77 0 0 1 403 674H121A77 77 0 0 1 44 597Z');
+}
+.hxi-yigit {
+  left: 118px;
+  top: 300px;
+  height: 450px;
+}
+/* stiker uslubi: oq çegara va yumşoq soya — yigit fonga “yopiştirilgan” körinadi */
+.hx-ins .hxi-yigit {
+  filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 16px 20px rgba(83, 40, 34, 0.25));
+}
+.hx-ins .c-tag {
+  left: 40px;
+  top: 236px;
+  rotate: -16deg;
+}
+.hx-ins .c-half {
+  left: 470px;
+  top: 318px;
+  rotate: -70deg;
+  scale: 0.7;
+}
+.hx-ins .c-circle {
+  left: 430px;
+  top: 196px;
+  scale: 0.78;
+}
+.hx-ins .c-green {
+  left: 44px;
+  top: 392px;
+  width: 92px;
+  height: 92px;
+}
+.hx-ins .c-star2 {
+  left: 448px;
+  top: 470px;
+}
+.collage.hx-ins .hp--girl {
+  left: 330px;
+  top: 0;
+}
+.collage.hx-ins .hp--boy {
+  left: 360px;
+  top: 300px;
+}
+.collage.hx-ins .hp--both {
+  left: 120px;
+  top: 2px;
+}
+
+/* umumiy: odam “slot” içida — slot butun kanvasni egallaydi, kesiş şakli clip-path: path() bilan (kanvas koordinatalarida) */
+.hx .hx-slot {
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 700px;
   z-index: 2;
+}
+.hx .hx-p {
+  position: absolute;
+  width: auto;
+  max-width: none;
+}
+
+/* Orbita */
+.hxo-sun {
+  left: 60px;
+  top: 170px;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+.hxo-ring {
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 700px;
+  transform-origin: 300px 410px;
+  animation: spin 80s linear infinite;
+  font: 700 17px/1 var(--f-head);
+  letter-spacing: 3.2px;
+  fill: var(--navy);
+}
+/* tepasi oçiq, pastki yarmi doira böyiça */
+.hxo-slot {
+  clip-path: path('M60 -100H540V410A240 240 0 0 1 60 410Z');
+}
+.hxo-qiz {
+  left: 76px;
+  top: 214px;
+  height: 470px;
+}
+.hxo-yigit {
+  left: 232px;
+  top: 166px;
+  height: 520px;
+}
+.hxo-star {
+  left: 40px;
+  top: 92px;
+}
+.hxo-star2 {
+  left: 520px;
+  top: 600px;
+  width: 34px;
+  height: 34px;
+}
+.hxo-play {
+  left: 18px;
+  top: 470px;
+  z-index: 4;
+}
+
+/* Polaroid */
+.hxp-blob {
+  left: 410px;
+  top: 10px;
+}
+.hxp-card {
+  padding: 14px 14px 58px;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 24px 50px rgba(83, 40, 34, 0.18);
+}
+.hxp-card--y {
+  left: 26px;
+  top: 236px;
+  width: 280px;
+  height: 430px;
+  rotate: -6deg;
+  z-index: 3;
+}
+.hxp-card--b {
+  left: 284px;
+  top: 168px;
+  width: 290px;
+  height: 470px;
+  rotate: 5deg;
+  z-index: 2;
+}
+.hxp-card > * {
+  position: absolute;
+}
+.hxp-in {
+  left: 14px;
+  right: 14px;
+  top: 14px;
+  bottom: 58px;
+  border-radius: 16px;
+}
+.hxp-card--y .hxp-in {
+  background: var(--yellow);
+}
+.hxp-card--b .hxp-in {
+  background: var(--sky);
+}
+/* odam içki ramka ölçamida, tepasi oçiq — boşi oq ramka ustidan çiqadi */
+.hxp-slot {
+  left: 14px;
+  right: 14px;
+  top: 14px;
+  bottom: 58px;
+  clip-path: inset(-60% 0 0 0 round 0 0 16px 16px);
+}
+.hxp-slot .hx-p {
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+}
+.hxp-card--y .hx-p {
+  height: 112%;
+}
+.hxp-card--b .hx-p {
+  height: 110%;
+}
+.hxp-cap {
+  left: 0;
+  right: 0;
+  bottom: 14px;
+  text-align: center;
+  font: 700 22px/1 var(--f-head);
+  color: var(--navy);
+}
+.hxp-star {
+  left: 236px;
+  top: 150px;
+  z-index: 4;
+}
+.hxp-star2 {
+  left: 560px;
+  top: 640px;
+  width: 30px;
+  height: 30px;
+}
+
+/* Katta söz */
+.hxw-word {
+  left: 0;
+  top: 24px;
+  width: 600px;
+  display: grid;
+  justify-items: center;
+  font: 800 132px/0.92 var(--f-head);
+  letter-spacing: -2px;
+}
+.hxw-word span:first-child {
+  /* kontur: harf içidagi ortiqça çiziqlarni fon rangidagi töldiriş yopadi */
+  color: var(--soft);
+  -webkit-text-stroke: 5px var(--navy);
+  paint-order: stroke fill;
+}
+.hxw-word span:last-child {
+  color: var(--yellow);
+}
+.hxw-arch {
+  left: 70px;
+  top: 340px;
+  width: 460px;
+  height: 340px;
+  border-radius: 230px 230px 40px 40px;
+  background: var(--navy-bg);
+}
+.hxw-slot {
+  clip-path: path('M70 -100H530V640Q530 680 490 680H110Q70 680 70 640Z');
+}
+.hxw-qiz {
+  left: 96px;
+  top: 262px;
+  height: 428px;
+}
+.hxw-yigit {
+  left: 270px;
+  top: 226px;
+  height: 464px;
+}
+.hxw-star {
+  left: 520px;
+  top: 330px;
+  z-index: 4;
+}
+.hxw-play {
+  left: 0;
+  top: 520px;
+  z-index: 4;
+}
+.hxw-o {
+  left: 520px;
+  top: 520px;
+  z-index: 4;
+}
+
+/* Ikki doira */
+.hxc-dot {
+  border-radius: 50%;
+}
+.hxc-dot--y {
+  left: 20px;
+  top: 270px;
+  width: 310px;
+  height: 310px;
+  background: var(--yellow);
+}
+.hxc-dot--b {
+  left: 262px;
+  top: 220px;
+  width: 330px;
+  height: 330px;
+  background: var(--sky);
+}
+.hxc-slot--y {
+  clip-path: path('M20 -100H330V425A155 155 0 0 1 20 425Z');
+  z-index: 3;
+}
+.hxc-slot--b {
+  clip-path: path('M262 -100H592V385A165 165 0 0 1 262 385Z');
+}
+.hxc-qiz {
+  left: 26px;
+  top: 150px;
+  height: 450px;
+}
+.hxc-yigit {
+  left: 278px;
+  top: 90px;
+  height: 480px;
+}
+.hxc-tag {
+  left: 40px;
+  top: 600px;
+  background: var(--blue);
+  transform: rotate(-6deg);
+  z-index: 4;
+}
+.hxc-star {
+  left: 230px;
+  top: 150px;
+}
+.hx-circ .c-circle {
+  left: 470px;
+  top: 540px;
+  width: 120px;
+  height: 120px;
+  scale: 0.7;
+  transform-origin: 0 0;
+  z-index: 4;
+}
+
+/* Sahna — aylanuvçi quyoş nurlari, konfetti, odamlar sahna ustida */
+.hxs-sun {
+  left: 10px;
+  top: 70px;
+  width: 580px;
+  height: 580px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, var(--yellow) 0deg 9deg, #ffe7a6 9deg 18deg);
+  animation: spin 90s linear infinite;
+}
+.hxs-ring {
+  left: 110px;
+  top: 170px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.55);
+}
+.hxs-conf {
+  top: -24px;
+  width: 10px;
+  height: 18px;
+  border-radius: 4px;
+  z-index: 1;
+  animation: hxs-fall 5s linear infinite;
+}
+.hxs-conf--0 {
+  background: var(--lime);
+}
+.hxs-conf--1 {
+  background: var(--sky);
+}
+.hxs-conf--2 {
+  background: var(--green);
+}
+.hxs-conf--3 {
+  background: var(--navy-bg);
+}
+@keyframes hxs-fall {
+  0% {
+    translate: 0 0;
+    rotate: 0deg;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    translate: 30px 640px;
+    rotate: 540deg;
+    opacity: 0;
+  }
+}
+.hxs-qiz {
+  left: 48px;
+  top: 200px;
+  height: 470px;
+  z-index: 2;
+}
+.hxs-yigit {
+  left: 252px;
+  top: 150px;
+  height: 520px;
+  z-index: 2;
+}
+.hxs-floor {
+  left: 20px;
+  top: 604px;
+  width: 560px;
+  height: 92px;
+  border-radius: 46px;
+  background: var(--navy-bg);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 40px rgba(83, 40, 34, 0.25);
+}
+.hxs-floor span {
+  font: 800 26px/1 var(--f-head);
+  letter-spacing: 2px;
+  color: var(--yellow);
+}
+.hxs-star {
+  left: 24px;
+  top: 64px;
+  fill: var(--sky);
+}
+.hxs-star2 {
+  left: 548px;
+  top: 112px;
+  width: 30px;
+  height: 30px;
+}
+
+/* Telefon ekrani — story, odamlar ramkadan çiqadi, yonda yuraklar */
+.hxf-blob {
+  left: 410px;
+  top: 40px;
+  fill: var(--yellow);
+}
+.hxf-phone {
+  left: 120px;
+  top: 210px;
+  width: 360px;
+  height: 480px;
+  border-radius: 52px;
+  background: var(--navy-bg);
+  box-shadow: 0 30px 60px rgba(83, 40, 34, 0.28);
+}
+.hxf-screen {
+  position: absolute;
+  inset: 12px;
+  border-radius: 42px;
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--sky), #e3efff);
+}
+.hxf-bars {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 18px;
+  display: flex;
+  gap: 6px;
+}
+.hxf-bars i {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.hxf-bars i.on {
+  background: #fff;
+}
+.hxf-bars i.run {
+  background:
+    linear-gradient(#fff, #fff) no-repeat 0 0 / 0% 100%,
+    rgba(255, 255, 255, 0.5);
+  animation: hxf-run 6s linear infinite;
+}
+@keyframes hxf-run {
+  to {
+    background-size:
+      100% 100%,
+      auto;
+  }
+}
+.hxf-slot {
+  clip-path: path('M132 -100H468V638Q468 678 428 678H172Q132 678 132 638Z');
+}
+.hxf-qiz {
+  left: 96px;
+  top: 190px;
+  height: 490px;
+}
+.hxf-yigit {
+  left: 254px;
+  top: 116px;
+  height: 564px;
+}
+.hxf-btn {
+  left: 190px;
+  top: 604px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 10px 22px;
+  border-radius: 99px;
+  background: #fff;
+  font: 700 18px/1 var(--f-head);
+  color: var(--navy);
+  box-shadow: 0 12px 26px rgba(83, 40, 34, 0.2);
+}
+.hxf-btn b {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--yellow);
+  font-size: 22px;
+}
+.hxf-heart {
+  left: 506px;
+  top: 560px;
+  width: 34px;
+  height: 34px;
+  fill: #ff5a6e;
+  z-index: 4;
+  opacity: 0;
+  animation: hxf-up 4.5s ease-out infinite;
+}
+.hxf-heart--1 {
+  left: 540px;
+  width: 26px;
+  height: 26px;
+  fill: var(--lime);
+  animation-delay: 0.9s;
+}
+.hxf-heart--2 {
+  left: 520px;
+  width: 40px;
+  height: 40px;
+  animation-delay: 1.8s;
+}
+.hxf-heart--3 {
+  left: 552px;
+  width: 24px;
+  height: 24px;
+  fill: var(--blue);
+  animation-delay: 2.7s;
+}
+.hxf-heart--4 {
+  left: 500px;
+  width: 30px;
+  height: 30px;
+  fill: var(--lime);
+  animation-delay: 3.6s;
+}
+@keyframes hxf-up {
+  0% {
+    opacity: 0;
+    translate: 0 0;
+    scale: 0.6;
+  }
+  15% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: -18px -300px;
+    scale: 1.1;
+  }
+}
+.hxf-star {
+  left: 40px;
+  top: 220px;
+  fill: var(--green);
+}
+
+/* Mozaika — rangli plitkalar */
+.hxb-tile {
+  border-radius: 44px;
+}
+.hxb-tile--y,
+.hx .hxb-slot--y {
+  left: 20px;
+  top: 250px;
+  width: 280px;
+  height: 430px;
+}
+.hxb-tile--y {
+  background: var(--yellow);
+}
+.hxb-tile--b,
+.hx .hxb-slot--b {
+  left: 316px;
+  top: 170px;
+  width: 264px;
+  height: 340px;
+}
+.hxb-tile--b {
+  background: var(--sky);
+}
+.hx .hxb-slot--y,
+.hx .hxb-slot--b {
+  clip-path: inset(-70% 0 0 0 round 0 0 44px 44px);
+}
+.hxb-slot--y .hx-p,
+.hxb-slot--b .hx-p {
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+}
+.hxb-slot--y .hx-p {
+  height: 112%;
+}
+.hxb-slot--b .hx-p {
+  height: 118%;
+}
+.hxb-tile--logo {
+  left: 316px;
+  top: 526px;
+  width: 164px;
+  height: 154px;
+  border-radius: 36px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 16px 34px rgba(83, 40, 34, 0.14);
+}
+.hxb-tile--logo img {
+  width: 128px;
+  height: auto;
+}
+.hxb-tile--play {
+  left: 496px;
+  top: 526px;
+  width: 84px;
+  height: 154px;
+  border-radius: 42px;
+  background: var(--blue);
+  display: grid;
+  place-items: center;
+}
+.hxb-tile--play::after {
+  content: '';
+  width: 26px;
+  height: 30px;
+  margin-left: 6px;
+  background: #fff;
+  clip-path: polygon(10% 4%, 96% 50%, 10% 96%);
+  border-radius: 4px;
+}
+.hxb-tag {
+  left: 36px;
+  top: 616px;
+  z-index: 4;
+  padding: 12px 26px;
+  border-radius: 20px;
+  background: var(--green);
+  color: #fff;
+  font: 700 24px/1 var(--f-head);
+  rotate: -6deg;
+}
+.hxb-star {
+  left: 256px;
+  top: 140px;
+  fill: var(--blue);
+}
+.hxb-star2 {
+  left: 560px;
+  top: 100px;
+  width: 30px;
+  height: 30px;
+}
+
+/* VAQTINÇA: variantlar örami (DevSectionsPanel → hero) */
+.collage-fit > .vx {
+  position: absolute;
+  inset: 0;
+}
+
+/* suhbat stikerlari joyi: har variantda qiz va yigitning boşi yonida, umumiy gap — tepada */
+.collage.hx-pol .hp--girl {
+  left: 54px;
+  top: 112px;
+}
+.collage.hx-pol .hp--boy {
+  left: 360px;
+  top: 48px;
+}
+.collage.hx-pol .hp--both {
+  left: 140px;
+  top: 6px;
+}
+.collage.hx-circ .hp--girl {
+  left: 0;
+  top: 52px;
+}
+.collage.hx-circ .hp--boy {
+  left: 330px;
+  top: 2px;
+}
+.collage.hx-circ .hp--both {
+  left: 120px;
+  top: 0;
+}
+.collage.hx-orbit .hp--girl {
+  left: 0;
+  top: 150px;
+}
+.collage.hx-orbit .hp--boy {
+  left: 384px;
+  top: 92px;
+}
+.collage.hx-orbit .hp--both {
+  left: 150px;
+  top: 40px;
+}
+.collage.hx-word .hp--girl {
+  left: 0;
+  top: 300px;
+}
+.collage.hx-word .hp--boy {
+  left: 404px;
+  top: 250px;
+}
+.collage.hx-word .hp--both {
+  left: 0;
+  top: 290px;
+}
+.collage.hx-stage .hp--girl {
+  left: 0;
+  top: 128px;
+}
+.collage.hx-stage .hp--boy {
+  left: 392px;
+  top: 70px;
+}
+.collage.hx-stage .hp--both {
+  left: 140px;
+  top: 2px;
+}
+.collage.hx-phone .hp--girl {
+  left: 0;
+  top: 130px;
+}
+.collage.hx-phone .hp--boy {
+  left: 396px;
+  top: 30px;
+}
+.collage.hx-phone .hp--both {
+  left: 110px;
+  top: 0;
+}
+.collage.hx-bento .hp--girl {
+  left: 0;
+  top: 140px;
+}
+.collage.hx-bento .hp--boy {
+  left: 400px;
+  top: 40px;
+}
+.collage.hx-bento .hp--both {
+  left: 110px;
+  top: 0;
 }
 
 /* ---------- IMKONIYATLAR (Opportunities.tsx, OppThemes.tsx) ----------
@@ -80,7 +832,10 @@
     filter 0.4s;
 }
 @media (min-width: 1241px) {
-  #imkoniyatlar .opps:has(.opp:hover, .opp:focus-visible) .opp:not(:hover):not(:focus-visible) .opp-cut {
+  #imkoniyatlar
+    .opps:has(.opp:hover, .opp:focus-visible)
+    .opp:not(:hover):not(:focus-visible)
+    .opp-cut {
     filter: saturate(0.6) brightness(0.92);
   }
 }

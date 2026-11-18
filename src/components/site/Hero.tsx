@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
 import { getBosh } from '@/lib/cms/sahifalar'
+import { logo as kengashLogo } from '@/lib/logo'
 import { CollageScaler } from './CollageScaler'
 import { HeroBubbles } from './HeroBubbles'
 import { ScrollCue } from './ScrollCue'
@@ -35,8 +36,8 @@ const Cut = ({ p, className }: { p: Person; className: string }) => (
   <img className={className} src={p.src} width={p.w} height={p.h} alt="" fetchPriority="high" decoding="async" />
 )
 
-const Wave = () => (
-  <div className="c-wave">
+const Wave = ({ className = 'c-wave' }: { className?: string }) => (
+  <div className={className}>
     <b style={{ height: '28px' }}></b>
     <b style={{ height: '41px' }}></b>
     <b style={{ height: '51px' }}></b>
@@ -60,7 +61,7 @@ const Bars = () => (
  */
 function CollageInsight() {
   return (
-    <div className="collage hx-ins" aria-hidden="true">
+    <div className="collage hx hx-ins" aria-hidden="true">
       <Wave />
       <div className="c-pill c-pill--cut">
         <Cut p={PEOPLE.qiz} className="c-cut-in" />
@@ -74,8 +75,194 @@ function CollageInsight() {
       <Star2 />
       <div className="c-green"></div>
       <div className="c-bottom"></div>
-      <Cut p={PEOPLE.yigit} className="c-cut-b" />
+      {/* yigit pastki kapsuladan çiqib turadi: kesilgan joyi kapsulaning yumaloq tagida yaşirin */}
+      <div className="hx-slot hxi-slot">
+        <Cut p={PEOPLE.yigit} className="hx-p hxi-yigit" />
+      </div>
       <div className="c-o"></div>
+      <HeroBubbles />
+    </div>
+  )
+}
+
+/** “Orbita”: katta doira, atrofida aylanuvçi yozuv; ikkala odam doiradan çiqib turadi (pastki qismi doira yoyi böyiça kesilgan) */
+function CollageOrbit() {
+  return (
+    <div className="collage hx hx-orbit" aria-hidden="true">
+      <div className="hxo-sun"></div>
+      <svg className="hxo-ring" viewBox="0 0 600 700">
+        <defs>
+          <path id="hxoPath" d="M30 410a270 270 0 1 1 540 0a270 270 0 1 1-540 0" />
+        </defs>
+        <text>
+          <textPath href="#hxoPath">
+            ÖZBEKISTON YOŞLAR ITTIFOQI · TOŞKENT ŞAHAR KENGAŞI · ÖZBEKISTON YOŞLAR ITTIFOQI · TOŞKENT ŞAHAR KENGAŞI ·
+          </textPath>
+        </text>
+      </svg>
+      <div className="hx-slot hxo-slot">
+        <Cut p={PEOPLE.qiz} className="hx-p hxo-qiz" />
+        <Cut p={PEOPLE.yigit} className="hx-p hxo-yigit" />
+      </div>
+      <Star className="c-star hxo-star" />
+      <Star2 className="c-star2 hxo-star2" />
+      <div className="c-play hxo-play"></div>
+      <HeroBubbles />
+    </div>
+  )
+}
+
+
+/** “Polaroid”: ikki qiyşaygan kartoçka, odamlarning boşi oq ramka ustidan çiqadi, tagida yozuv */
+function CollagePolaroid() {
+  return (
+    <div className="collage hx hx-pol" aria-hidden="true">
+      <Blob className="c-blob hxp-blob" />
+      <div className="hxp-card hxp-card--b">
+        <div className="hxp-in"></div>
+        <div className="hxp-slot">
+          <Cut p={PEOPLE.yigit} className="hx-p" />
+        </div>
+        <span className="hxp-cap">Yoşlar ittifoqi</span>
+      </div>
+      <div className="hxp-card hxp-card--y">
+        <div className="hxp-in"></div>
+        <div className="hxp-slot">
+          <Cut p={PEOPLE.qiz} className="hx-p" />
+        </div>
+        <span className="hxp-cap">#YoşlarBilan</span>
+      </div>
+      <Star className="c-star hxp-star" />
+      <Star2 className="c-star2 hxp-star2" />
+      <HeroBubbles />
+    </div>
+  )
+}
+
+
+/** “Katta söz”: orqada ulkan YOŞLAR / BILAN yozuvi, oldida bitta arkda ikkala odam */
+function CollageWord() {
+  return (
+    <div className="collage hx hx-word" aria-hidden="true">
+      <div className="hxw-word">
+        <span>YOŞLAR</span>
+        <span>BILAN</span>
+      </div>
+      <div className="hxw-arch"></div>
+      <div className="hx-slot hxw-slot">
+        <Cut p={PEOPLE.qiz} className="hx-p hxw-qiz" />
+        <Cut p={PEOPLE.yigit} className="hx-p hxw-yigit" />
+      </div>
+      <Star className="c-star hxw-star" />
+      <div className="c-play hxw-play"></div>
+      <div className="c-o hxw-o"></div>
+      <HeroBubbles />
+    </div>
+  )
+}
+
+
+/** “Ikki doira”: bir-biriga kirgan sariq va kök doira, har biridan bittadan odam çiqib turadi */
+function CollageCircles() {
+  return (
+    <div className="collage hx hx-circ" aria-hidden="true">
+      <div className="hxc-dot hxc-dot--b"></div>
+      <div className="hxc-dot hxc-dot--y"></div>
+      <div className="hx-slot hxc-slot--b">
+        <Cut p={PEOPLE.yigit} className="hx-p hxc-yigit" />
+      </div>
+      <div className="hx-slot hxc-slot--y">
+        <Cut p={PEOPLE.qiz} className="hx-p hxc-qiz" />
+      </div>
+      <div className="c-tag hxc-tag">#YoşlarBilan</div>
+      <Star className="c-star hxc-star" />
+      <Bars />
+      <HeroBubbles />
+    </div>
+  )
+}
+
+const Heart = ({ className }: { className: string }) => (
+  <svg className={className} viewBox="0 0 24 24">
+    <path d="M12 21s-7.5-4.6-9.6-9.5A5.4 5.4 0 0 1 12 6.1a5.4 5.4 0 0 1 9.6 5.4C19.5 16.4 12 21 12 21z" />
+  </svg>
+)
+
+/** “Sahna”: orqada aylanuvçi quyoş nurlari, ikkalasi sahnada, tepadan konfetti yoğadi */
+function CollageStage() {
+  return (
+    <div className="collage hx hx-stage" aria-hidden="true">
+      <div className="hxs-sun hx-loop"></div>
+      <div className="hxs-ring"></div>
+      {[...Array(12)].map((_, k) => (
+        <i
+          key={k}
+          className={`hxs-conf hxs-conf--${k % 4} hx-loop`}
+          // manfiy keçikiş: sahifa oçilganda konfetti allaqaçon yoğib turgan bölsin
+          style={{ left: `${30 + k * 46}px`, animationDelay: `-${(k * 0.83) % 5}s`, animationDuration: `${4 + (k % 3)}s` }}
+        />
+      ))}
+      <Cut p={PEOPLE.qiz} className="hx-p hxs-qiz" />
+      <Cut p={PEOPLE.yigit} className="hx-p hxs-yigit" />
+      <div className="hxs-floor">
+        <span>#YoşlarBilan</span>
+      </div>
+      <Star className="c-star hxs-star" />
+      <Star2 className="c-star2 hxs-star2" />
+      <HeroBubbles />
+    </div>
+  )
+}
+
+/** “Telefon ekrani”: story formatidagi ekran, odamlarning boşi telefon ramkasidan çiqib turadi, yonda yuraklar köteriladi */
+function CollagePhone() {
+  return (
+    <div className="collage hx hx-phone" aria-hidden="true">
+      <Blob className="c-blob hxf-blob" />
+      <div className="hxf-phone">
+        <div className="hxf-screen">
+          <span className="hxf-bars">
+            <i className="on" />
+            <i className="on" />
+            <i className="run" />
+          </span>
+        </div>
+      </div>
+      <div className="hx-slot hxf-slot">
+        <Cut p={PEOPLE.qiz} className="hx-p hxf-qiz" />
+        <Cut p={PEOPLE.yigit} className="hx-p hxf-yigit" />
+      </div>
+      <span className="hxf-btn">
+        Aʼzo böliş <b>+</b>
+      </span>
+      {[0, 1, 2, 3, 4].map((k) => (
+        <Heart key={k} className={`hxf-heart hxf-heart--${k} hx-loop`} />
+      ))}
+      <Star className="c-star hxf-star" />
+      <HeroBubbles />
+    </div>
+  )
+}
+
+/** “Mozaika”: rangli plitkalar, har odam öz plitkasidan çiqib turadi, yonida logotip va belgilar */
+function CollageBento({ locale }: { locale: Locale }) {
+  return (
+    <div className="collage hx hx-bento" aria-hidden="true">
+      <div className="hxb-tile hxb-tile--y"></div>
+      <div className="hxb-tile hxb-tile--b"></div>
+      <div className="hx-slot hxb-slot--y">
+        <Cut p={PEOPLE.qiz} className="hx-p" />
+      </div>
+      <div className="hx-slot hxb-slot--b">
+        <Cut p={PEOPLE.yigit} className="hx-p" />
+      </div>
+      <div className="hxb-tile hxb-tile--logo">
+        <img {...kengashLogo(locale)} alt="" />
+      </div>
+      <div className="hxb-tile hxb-tile--play"></div>
+      <div className="hxb-tag">#YoşlarBilan</div>
+      <Star className="c-star hxb-star" />
+      <Star2 className="c-star2 hxb-star2" />
       <HeroBubbles />
     </div>
   )
@@ -133,7 +320,31 @@ export async function Hero({ locale }: { locale: Locale }) {
 
             <div className="collage-fit">
               <CollageScaler />
-              <CollageInsight />
+              {/* VAQTINÇA: barça variantlar (DevSectionsPanel → hero), tanlangaç bittasi qoladi */}
+              <div className="vx" data-v="hero-a">
+                <CollageInsight />
+              </div>
+              <div className="vx" data-v="hero-b">
+                <CollagePolaroid />
+              </div>
+              <div className="vx" data-v="hero-c">
+                <CollageCircles />
+              </div>
+              <div className="vx" data-v="hero-d">
+                <CollageOrbit />
+              </div>
+              <div className="vx" data-v="hero-e">
+                <CollageWord />
+              </div>
+              <div className="vx" data-v="hero-f">
+                <CollageStage />
+              </div>
+              <div className="vx" data-v="hero-g">
+                <CollagePhone />
+              </div>
+              <div className="vx" data-v="hero-h">
+                <CollageBento locale={locale} />
+              </div>
             </div>
           </div>
         </div>
