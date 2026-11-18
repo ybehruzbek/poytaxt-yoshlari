@@ -411,11 +411,45 @@ def entry_card(entry, for_admin=True):
     return "\n".join(lines)
 
 
-def build_media_group(entry):
-    """Ariza mediasini `send_media_group` uchun tayyorlaydi.
+# sendPhoto orqali yuklash chegarasi (Telegram): 10 MB
+PHOTO_UPLOAD_LIMIT = 10 * 1024 * 1024
 
-    Telegram bir guruhda rasm va hujjatni aralashtirishga ruxsat bermaydi,
-    shuning uchun turlari bo'yicha ajratilgan ro'yxatlar qaytariladi.
+
+async def _document_as_photo(bot, media):
+    """Fayl ko'rinishida yuborilgan rasmni oddiy rasmga aylantiradi.
+
+    Telegram hujjatning `file_id`sini sendPhoto bilan qayta ishlatishga
+    ruxsat bermaydi, shuning uchun fayl yuklab olinib, rasm sifatida qayta
+    yuboriladi. Hajmi katta bo'lsa yoki yuklab bo'lmasa, fayl ko'rinishida
+    qoladi va post baribir chiqadi.
+    """
+    from aiogram.types import BufferedInputFile, InputMediaPhoto
+
+    if media.file_size and media.file_size > PHOTO_UPLOAD_LIMIT:
+        logger.info("Rasm fayli katta (%s bayt) — fayl ko'rinishida qoladi",
+                    media.file_size)
+        return None
+    try:
+        info = await bot.get_file(media.file_id)
+        buf = await bot.download_file(info.file_path)
+        data = buf.read() if hasattr(buf, "read") else bytes(buf)
+        if not data:
+            return None
+        ext = (media.mime_type or "image/jpeg").rsplit("/", 1)[-1][:8] or "jpg"
+        return InputMediaPhoto(
+            media=BufferedInputFile(data, filename=f"photo.{ext}"))
+    except Exception as e:
+        logger.warning("Faylni rasmga aylantirib bo'lmadi: %s", e)
+        return None
+
+
+async def prepare_media(bot, entry):
+    """Ariza mediasini yuborishga tayyorlaydi.
+
+    Fayl ko'rinishidagi rasmlar oddiy rasmga aylantiriladi — kanalda
+    yuklab olinadigan fayl emas, ochiq surat bo'lib ko'rinsin.
+    Telegram bir guruhda turli tur mediani aralashtirishga ruxsat
+    bermaydi, shuning uchun turlar bo'yicha ajratiladi.
     """
     from aiogram.types import InputMediaDocument, InputMediaPhoto, InputMediaVideo
 
@@ -426,8 +460,26 @@ def build_media_group(entry):
         elif m.media_type == "video":
             videos.append(InputMediaVideo(media=m.file_id))
         else:
-            documents.append(InputMediaDocument(media=m.file_id))
+            converted = await _document_as_photo(bot, m)
+            if converted is not None:
+                photos.append(converted)
+            else:
+                documents.append(InputMediaDocument(media=m.file_id))
     return [group for group in (photos, videos, documents) if group]
+
+
+async def send_single_media(bot, chat_id, item, caption=None,
+                            parse_mode=None, reply_markup=None):
+    """Bitta mediani turiga qarab yuboradi."""
+    from aiogram.types import InputMediaPhoto, InputMediaVideo
+
+    kwargs = {"chat_id": chat_id, "caption": caption,
+              "parse_mode": parse_mode, "reply_markup": reply_markup}
+    if isinstance(item, InputMediaVideo):
+        return await bot.send_video(video=item.media, **kwargs)
+    if isinstance(item, InputMediaPhoto):
+        return await bot.send_photo(photo=item.media, **kwargs)
+    return await bot.send_document(document=item.media, **kwargs)
 
 
 async def send_entry_media(bot, chat_id, entry):
@@ -436,18 +488,10 @@ async def send_entry_media(bot, chat_id, entry):
     Qaytaradi: yuborilgan xabarlar ro'yxati (nashrda message_id kerak bo'ladi).
     """
     sent = []
-    for group in build_media_group(entry):
+    for group in await prepare_media(bot, entry):
         try:
             if len(group) == 1:
-                item = group[0]
-                media_type = entry.media.first().media_type
-                if media_type == "video":
-                    msg = await bot.send_video(chat_id=chat_id, video=item.media)
-                elif media_type == "document":
-                    msg = await bot.send_document(chat_id=chat_id, document=item.media)
-                else:
-                    msg = await bot.send_photo(chat_id=chat_id, photo=item.media)
-                sent.append(msg)
+                sent.append(await send_single_media(bot, chat_id, group[0]))
             else:
                 msgs = await bot.send_media_group(chat_id=chat_id, media=group)
                 sent.extend(msgs)

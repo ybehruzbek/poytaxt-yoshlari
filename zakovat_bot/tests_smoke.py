@@ -1845,6 +1845,47 @@ async def _run_all(saved_event_ids):
           any(k == "send_message" and c == USER1 and "kanalga joylandi" in str(t)
               for k, c, t in fake_bot.calls if k == "send_message"))
 
+    # Fayl ko'rinishidagi rasm kanalga ODDIY RASM bo'lib chiqadi
+    doc_participant = ContestParticipant.objects.create(
+        contest=contest, telegram_id=990066, full_name="Fayl Yuboruvchi",
+        university="Smoke OTM", phone="+998905554433", consent_at=djtz.now())
+    doc_entry = Entry.objects.create(
+        contest=contest, participant=doc_participant,
+        nomination=Nomination.FOTO, title="Fayl ko'rinishidagi rasm",
+        status=EntryStatus.APPROVED)
+    EntryMedia.objects.create(entry=doc_entry, file_id="docf1",
+                              file_unique_id="docu1", media_type="document",
+                              mime_type="image/png", file_size=500_000)
+    before = len(fake_bot.calls)
+    ok_cnt, fail_cnt, _errs = await pub_service.publish_all(fake_bot, contest)
+    sent_kinds = [k for k, *_ in fake_bot.calls[before:]]
+    check("fayl rasmi nashrda rasm sifatida yuborildi",
+          ok_cnt == 1 and fail_cnt == 0 and "send_photo" in sent_kinds
+          and "send_document" not in sent_kinds, sent_kinds)
+    doc_entry.refresh_from_db()
+    check("fayl rasmli ariza e'lon qilindi",
+          doc_entry.status == EntryStatus.PUBLISHED)
+
+    # Katta fayl rasmga aylantirilmaydi — fayl ko'rinishida qoladi
+    big = EntryMedia(entry=doc_entry, file_id="big", file_unique_id="bigu",
+                     media_type="document", mime_type="image/png",
+                     file_size=15 * 1024 * 1024)
+    from zakovat_bot.services.contest import _document_as_photo
+    check("katta rasm fayli yuklanmaydi (fayl bo'lib qoladi)",
+          await _document_as_photo(fake_bot, big) is None)
+
+    # Ishtirokchiga «kanalga chiqdi» xabari boradi
+    check("muallifga nashr haqida xabar yuborildi",
+          any(k == "send_message" and c == 990066
+              and "kanalga chiqdi" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+    check("xabarda havola va ovoz vaqti bor",
+          any(k == "send_message" and c == 990066 and "Havola" in str(t)
+              and "Ovoz berish" in str(t)
+              for k, c, t in fake_bot.calls if k == "send_message"))
+
+    doc_entry.delete(); doc_participant.delete()
+
     # TZ 8.6: takroran joylanmaydi
     pub_count_before = Publication.objects.filter(entry=entry).count()
     cb = FakeCallback("tdadm_publish_go", SUPER, message=FakeMessage(SUPER))

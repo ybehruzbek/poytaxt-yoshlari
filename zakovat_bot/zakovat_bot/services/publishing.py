@@ -18,7 +18,7 @@ from zakovat_bot.models import (
     Publication,
     Vote,
 )
-from zakovat_bot.services.contest import build_media_group
+from zakovat_bot.services.contest import prepare_media, send_single_media
 
 logger = logging.getLogger(__name__)
 
@@ -92,7 +92,7 @@ async def publish_entry(bot, contest, entry, channel_username=None):
     1-3 foto bitta albom bo'lib chiqadi va ularga BITTA ovoz kartochkasi
     bog'lanadi — ovoz alohida rasmga emas, ishga beriladi (TZ 8).
     """
-    groups = build_media_group(entry)
+    groups = await prepare_media(bot, entry)
     if not groups:
         return False, "media topilmadi"
 
@@ -131,26 +131,11 @@ async def publish_entry(bot, contest, entry, channel_username=None):
         # qayta urinishda ikkinchi marta joylanmaydi
         if not pub.message_id:
             if len(media) == 1:
-                item = media[0]
-                kind = entry.media.first().media_type
-                if kind == "video":
-                    msg = await bot.send_video(
-                        chat_id=channel, video=item.media,
-                        caption=post_text(entry),
-                        parse_mode=post_parse_mode(entry),
-                        reply_markup=vote_keyboard(entry))
-                elif kind == "document":
-                    msg = await bot.send_document(
-                        chat_id=channel, document=item.media,
-                        caption=post_text(entry),
-                        parse_mode=post_parse_mode(entry),
-                        reply_markup=vote_keyboard(entry))
-                else:
-                    msg = await bot.send_photo(
-                        chat_id=channel, photo=item.media,
-                        caption=post_text(entry),
-                        parse_mode=post_parse_mode(entry),
-                        reply_markup=vote_keyboard(entry))
+                msg = await send_single_media(
+                    bot, channel, media[0],
+                    caption=post_text(entry),
+                    parse_mode=post_parse_mode(entry),
+                    reply_markup=vote_keyboard(entry))
                 # Bitta faylda matn va ovoz tugmasi o'sha xabarning o'zida
                 pub.message_id = msg.message_id
                 pub.vote_message_id = msg.message_id
@@ -231,10 +216,13 @@ async def _notify_published(bot, entry):
     try:
         await bot.send_message(
             chat_id=entry.participant.telegram_id,
-            text=(f"📢 Tanlov ishingiz kanalga joylandi!\n\n"
+            text=(f"📢 <b>Tanlov ishingiz kanalga chiqdi!</b>\n\n"
+                  f"Arizangiz moderatsiyadan o'tdi va ovoz berish uchun "
+                  f"kanalga joylandi.\n\n"
                   f"🆔 Ish raqami: {entry.code}\n"
                   f"🔗 Havola: {link}\n"
-                  f"🗳 Ovoz berish: {window}"),
+                  f"🗳 Ovoz berish: {window}\n\n"
+                  f"Do'stlaringizni qo'llab-quvvatlashga taklif qiling! ❤️"),
         )
     except Exception:
         logger.warning("Nashr xabari yetmadi: %s", entry.participant.telegram_id)
