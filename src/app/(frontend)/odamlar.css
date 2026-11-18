@@ -113,8 +113,8 @@
 #imkoniyatlar .o4 .title b {
   color: var(--navy);
 }
-/* odam: yopiq kartada markazda, karta kengligiga sığadi (--ar = suratning eni/böyi, 92cqw = karta enining 92%);
-   oçilganda kattalaşib karta çetiga suriladi */
+/* odam: yopiq kartada markazda va hamma kartada bir xil böyda — balandlik eng keng surat (volontyorlik, 764×1200)
+   karta enining 92% iga sığadigan qilib olinadi (92cqw / 0.637); oçilganda kattalaşib karta çetiga suriladi */
 #imkoniyatlar .opp {
   container-type: inline-size;
 }
@@ -124,7 +124,7 @@
   left: auto;
   right: 50%;
   bottom: 0;
-  height: min(84%, calc(92cqw / var(--ar, 0.6)));
+  height: min(84%, calc(92cqw / 0.637));
   width: auto;
   max-width: none;
   translate: 50% 0;

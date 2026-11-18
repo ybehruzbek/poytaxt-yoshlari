@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- fonsiz suratlar tayyor ölçamda (WebP) */
 import Link from 'next/link'
-import type { CSSProperties } from 'react'
 
 import type { Locale } from '@/i18n/config'
 import { getContests, getGrants, getStipends, getVolDirs } from '@/lib/cms/imkoniyatlar'
@@ -86,16 +85,7 @@ export async function Opportunities({ locale }: { locale: Locale }) {
                   <b>{c.name}</b>
                   <span>{lead}</span>
                 </div>
-                <img
-                  className="opp-cut"
-                  src={`/img/odamlar/${c.img}.webp`}
-                  width={c.w}
-                  height={1200}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  style={{ '--ar': c.w / 1200 } as CSSProperties}
-                />
+                <img className="opp-cut" src={`/img/odamlar/${c.img}.webp`} width={c.w} height={1200} alt="" loading="lazy" decoding="async" />
                 <OppInfo t={c.t} lists={lists} desc={desc} />
               </Link>
             )
