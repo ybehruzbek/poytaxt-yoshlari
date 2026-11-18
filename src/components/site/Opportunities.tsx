@@ -12,8 +12,9 @@ import { OppTheme } from './OppThemes'
 const CARDS: Array<{ t: OppType; href: string; name: string; img: string; w: number; cls: string }> = [
   { t: 'grant', href: '/faoliyat/grantlar', name: 'Grantlar', img: 'grantlar', w: 714, cls: 'o1' },
   { t: 'stip', href: '/faoliyat/stipendiyalar', name: 'Stipendiyalar', img: 'stipendiyalar', w: 727, cls: 'o2' },
-  { t: 'vol', href: '/faoliyat/volontyorlik', name: 'Volontyorlik', img: 'volontyorlik', w: 764, cls: 'o3' },
-  { t: 'tanlov', href: '/faoliyat/tanlovlar', name: 'Tanlovlar', img: 'tanlovlar', w: 666, cls: 'o4' },
+  // yigit, qiz, yigit, qiz — navbatma-navbat
+  { t: 'tanlov', href: '/faoliyat/tanlovlar', name: 'Tanlovlar', img: 'tanlovlar', w: 666, cls: 'o3' },
+  { t: 'vol', href: '/faoliyat/volontyorlik', name: 'Volontyorlik', img: 'volontyorlik', w: 764, cls: 'o4' },
 ]
 
 /** Karta oçilganda çiqadigan maʼlumot: qisqa tavsif, faol dasturlar soni, eng yaqin muddat va “Batafsil” */
