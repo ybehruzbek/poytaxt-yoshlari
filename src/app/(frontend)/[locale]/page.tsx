@@ -3,7 +3,6 @@ import { PartnersStrip } from '@/components/hamkorlar/PartnersStrip'
 import { About } from '@/components/site/About'
 import { Benefits } from '@/components/site/Benefits'
 import { Cta } from '@/components/site/Cta'
-import { DevSectionsPanel } from '@/components/site/DevSectionsPanel'
 import { Events } from '@/components/site/Events'
 import { Hero } from '@/components/site/Hero'
 import { HomeMotion } from '@/components/site/HomeMotion'
@@ -36,8 +35,6 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <SocialPhones />
       <PartnersStrip locale={locale} />
       <HomeMotion />
-      {/* VAQTINÇA: boş ekran variantlarini taqqoslaş */}
-      <DevSectionsPanel sections={[{ name: 'hero', label: 'Boş ekran', count: 8, hints: ['InsightPod namunasi', 'Polaroid', 'Ikki doira', 'Orbita', 'Katta söz', 'Sahna', 'Telefon ekrani', 'Mozaika'] }]} />
     </>
   )
 }

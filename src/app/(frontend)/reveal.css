@@ -173,8 +173,8 @@ html.rv-ready .rv.rv-in.fx-zoom {
   html:not([data-a11y-read]):not([data-lite]) .hero .hero-actions {
     animation-delay: 0.36s;
   }
-  /* .c-blob va .hx-loop (aylanuvçi nurlar, konfetti, yuraklar) özi harakatlanadi — ularning animatsiyasi buzilmasin */
-  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :not(.c-blob, .hx-loop) {
+  /* .c-blob özi aylanib turadi — uning animatsiyasi buzilmasin */
+  html:not([data-a11y-read]):not([data-lite]) .hero .collage > :not(.c-blob) {
     animation: fx-pop 0.75s var(--ease-spring) calc(0.3s + var(--i, 0) * 0.045s) backwards;
   }
   html:not([data-a11y-read]):not([data-lite]) .hero .collage > :nth-child(2) { --i: 1; }
