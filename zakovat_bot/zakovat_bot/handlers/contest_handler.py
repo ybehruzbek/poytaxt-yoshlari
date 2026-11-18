@@ -840,7 +840,8 @@ async def td_resubmit(callback: CallbackQuery, state: FSMContext):
 @dp.callback_query(F.data.startswith("td_vote:"))
 async def td_vote(callback: CallbackQuery):
     """Kanal postidagi ❤️ tugmasi. Bir foydalanuvchi — bir ish, bir ovoz."""
-    from zakovat_bot.services.publishing import register_vote, voting_is_open
+    from zakovat_bot.services.publishing import (
+        is_subscribed_to_channel, register_vote, voting_is_open)
 
     try:
         entry_id = int(callback.data.split(":")[1])
@@ -871,6 +872,17 @@ async def td_vote(callback: CallbackQuery):
             await callback.answer(
                 "Ovoz berish hali boshlanmagan.", show_alert=True)
         return
+
+    # Majburiy obuna: a'zo bo'lmaganga ovoz berdirmaymiz
+    if contest.require_vote_subscription and contest.channel_id:
+        subscribed, _checked = await is_subscribed_to_channel(
+            bot, contest.channel_id, callback.from_user.id)
+        if not subscribed:
+            await callback.answer(
+                "❗️ Ovoz berish uchun avval kanalga a'zo bo'ling.\n\n"
+                "A'zo bo'lgach, ❤️ tugmasini qaytadan bosing.",
+                show_alert=True)
+            return
 
     created, count = register_vote(entry.id, callback.from_user.id)
     if created:

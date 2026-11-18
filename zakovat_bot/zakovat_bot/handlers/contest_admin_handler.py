@@ -471,7 +471,9 @@ async def tdadm_settings(callback: CallbackQuery, state: FSMContext):
         f"📸 Foto: {contest.min_photos}-{contest.max_photos} ta\n"
         f"🎬 Video: {contest.max_video_seconds} soniya, "
         f"{contest.max_video_mb} MB gacha\n"
-        f"⏱ Ovoz berish: {contest.voting_hours} soat",
+        f"⏱ Ovoz berish: {contest.voting_hours} soat\n"
+        f"🔔 Ovoz uchun obuna: "
+        f"{'majburiy' if contest.require_vote_subscription else 'talab qilinmaydi'}",
         reply_markup=contest_settings_keyboard(contest),
     )
 
@@ -491,6 +493,28 @@ async def tdadm_toggle(callback: CallbackQuery):
     holat = "🟢 yoqildi" if contest.is_active else "🔴 o'chirildi"
     await callback.message.answer(
         f"⚙️ Tanlov {holat}.", reply_markup=contest_settings_keyboard(contest)
+    )
+
+
+@dp.callback_query(F.data == "tdadm_sub_toggle")
+async def tdadm_sub_toggle(callback: CallbackQuery):
+    """Ovoz berish uchun kanalga a'zolik talabini yoqish/o'chirish."""
+    if not has_role(callback.from_user.id, AdminRole.OPERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+    contest.require_vote_subscription = not contest.require_vote_subscription
+    contest.save(update_fields=["require_vote_subscription"])
+    log_action(callback.from_user.id, "tanlov_ovoz_obuna",
+               "yoqildi" if contest.require_vote_subscription else "ochirildi")
+    holat = ("🔔 <b>yoqildi</b> — ovoz berish uchun kanalga a'zolik talab "
+             "qilinadi" if contest.require_vote_subscription else
+             "🔕 <b>o'chirildi</b> — a'zo bo'lmaganlar ham ovoz bera oladi")
+    await callback.message.answer(
+        f"Ovoz uchun majburiy obuna {holat}.",
+        reply_markup=contest_settings_keyboard(contest),
     )
 
 

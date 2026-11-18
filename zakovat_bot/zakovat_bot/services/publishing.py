@@ -242,6 +242,30 @@ async def _notify_published(bot, entry):
 
 # ==================== Ovoz berish (TZ 9) ====================
 
+SUBSCRIBED_STATUSES = {"member", "administrator", "creator"}
+
+
+async def is_subscribed_to_channel(bot, channel_id, user_id):
+    """Foydalanuvchi tanlov kanaliga a'zomi.
+
+    Qaytaradi: (a'zomi, tekshirildimi). Texnik xato bo'lsa (bot kanalda
+    admin emas, tarmoq uzilishi) ovoz berishga to'sqinlik qilmaymiz —
+    aks holda nosozlik barcha ovoz beruvchilarni bloklab qo'yadi.
+    """
+    if not channel_id:
+        return True, False
+    try:
+        member = await bot.get_chat_member(chat_id=channel_id, user_id=user_id)
+    except Exception as e:
+        logger.warning("A'zolikni tekshirib bo'lmadi (%s): %s", channel_id, e)
+        return True, False
+    status = getattr(member, "status", None)
+    if status == "restricted":
+        # Cheklangan a'zo kanalda qolgan bo'lsa, a'zo hisoblanadi
+        return bool(getattr(member, "is_member", False)), True
+    return status in SUBSCRIBED_STATUSES, True
+
+
 def voting_is_open(contest):
     now = timezone.now()
     return (

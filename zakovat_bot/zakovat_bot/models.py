@@ -264,6 +264,9 @@ class Contest(SafeBaseModel):
     max_video_seconds = models.IntegerField(default=180)
     max_video_mb = models.IntegerField(default=50)
 
+    # Ovoz berish uchun tanlov kanaliga a'zolik majburiymi
+    require_vote_subscription = models.BooleanField(default=True)
+
     # Nizom parametrlari (TZ 1)
     allow_both_nominations = models.BooleanField(default=True)
     winners_per_nomination = models.IntegerField(default=1)

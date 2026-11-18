@@ -623,6 +623,12 @@ def contest_settings_keyboard(contest):
     kb = InlineKeyboardBuilder()
     kb.button(text="📅 Qabul muddatini o'zgartirish", callback_data="tdadm_set_dl")
     kb.button(text="📢 Tanlov kanalini belgilash", callback_data="tdadm_set_ch")
+    if contest.require_vote_subscription:
+        kb.button(text="🔔 Ovoz uchun obuna: YOQILGAN (o'chirish)",
+                  callback_data="tdadm_sub_toggle")
+    else:
+        kb.button(text="🔕 Ovoz uchun obuna: O'CHIRILGAN (yoqish)",
+                  callback_data="tdadm_sub_toggle")
     if contest.stage != "accepting":
         kb.button(text="🔄 Arizalar qabulini qayta ochish",
                   callback_data="tdadm_reopen")

@@ -59,6 +59,7 @@ class FakeBot:
         self.forbidden_ids = set()  # 403 qaytaradigan chat_id'lar (blok testi)
         self.subscribed_ids = set()  # kanalga a'zo foydalanuvchilar
         self.chat_admin_ok = True  # bot tanlov kanalida adminmi
+        self.channel_members = set()  # tanlov kanaliga a'zolar
 
     async def send_message(self, chat_id, text=None, **kw):
         if chat_id in self.forbidden_ids:
@@ -91,6 +92,9 @@ class FakeBot:
         if chat_id == -100777:  # kanal adminligi tekshiruvi
             return SimpleNamespace(
                 status="administrator" if self.chat_admin_ok else "left")
+        if str(chat_id) == "-100777":  # tanlov kanaliga a'zolik
+            return SimpleNamespace(
+                status="member" if user_id in self.channel_members else "left")
         status = "member" if user_id in self.subscribed_ids else "left"
         return SimpleNamespace(status=status)
 
@@ -1782,6 +1786,20 @@ async def _run_all(saved_event_ids):
     check("yopiq kanal forward orqali belgilandi",
           contest.channel_id == "-100777", contest.channel_id)
 
+    # Obuna shartini o'chirish/yoqish
+    cb = FakeCallback("tdadm_sub_toggle", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_sub_toggle(cb)
+    contest.refresh_from_db()
+    check("obuna sharti o'chirildi", not contest.require_vote_subscription)
+    cb = FakeCallback("tdadm_sub_toggle", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_sub_toggle(cb)
+    contest.refresh_from_db()
+    check("obuna sharti qayta yoqildi", contest.require_vote_subscription)
+    cb = FakeCallback("tdadm_sub_toggle", NOBODY, message=FakeMessage(NOBODY))
+    await contest_admin_handler.tdadm_sub_toggle(cb)
+    check("kuzatuvchi obuna shartini o'zgartira olmaydi",
+          any("huquq" in a for a in cb.alerts), cb.alerts)
+
     # Muddatni o'zgartirish
     st_dl = FakeState()
     cb = FakeCallback("tdadm_set_dl", SUPER, message=FakeMessage(SUPER))
@@ -1960,11 +1978,25 @@ async def _run_all(saved_event_ids):
                     .total_seconds() / 3600) == 48)
     check("ovoz berish hamma uchun bir vaqtda", pub_service.voting_is_open(contest))
 
-    # Ovoz berish
+    # Majburiy obuna: a'zo bo'lmagan ovoz bera olmaydi
+    check("obuna sharti yoqilgan (sukut bo'yicha)",
+          contest.require_vote_subscription)
+    fake_bot.channel_members.clear()
     cb = FakeCallback(f"td_vote:{entry.id}", USER1, message=FakeMessage(USER1))
     await contest_handler.td_vote(cb)
     entry.refresh_from_db()
-    check("TZ9: ovoz qabul qilindi",
+    check("obunasiz ovoz berib bo'lmadi",
+          entry.votes_count == 0
+          and any("a'zo bo'ling" in a for a in cb.alerts), cb.alerts)
+    check("obunasizda ovoz bazaga yozilmadi",
+          not Vote.objects.filter(entry=entry, voter_user_id=USER1).exists())
+
+    # A'zo bo'lgach ovoz o'tadi
+    fake_bot.channel_members.add(USER1)
+    cb = FakeCallback(f"td_vote:{entry.id}", USER1, message=FakeMessage(USER1))
+    await contest_handler.td_vote(cb)
+    entry.refresh_from_db()
+    check("TZ9: a'zo bo'lgach ovoz qabul qilindi",
           entry.votes_count == 1 and any("qabul qilindi" in a for a in cb.alerts))
 
     # TZ 16: ikkinchi ovoz hisoblanmaydi
@@ -1976,6 +2008,7 @@ async def _run_all(saved_event_ids):
           and any("allaqachon" in a for a in cb.alerts), cb.alerts)
 
     # Boshqa foydalanuvchilar ovoz beradi
+    fake_bot.channel_members.update({SUPER, OPER, OBSV, NOBODY, 123456789})
     for uid in (SUPER, OPER, OBSV):
         cb = FakeCallback(f"td_vote:{entry.id}", uid, message=FakeMessage(uid))
         await contest_handler.td_vote(cb)
