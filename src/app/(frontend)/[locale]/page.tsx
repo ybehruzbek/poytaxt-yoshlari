@@ -40,7 +40,6 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       <DevSectionsPanel
         sections={[
           { name: 'about', label: 'Biz haqimizda: rasm', count: 3, hints: ['Logo orbitasi', 'Foto-töplam', 'Nişonlar'] },
-          { name: 'bnf', label: 'Ittifoq yoşlarga nima beradi: bezaklar', count: 2, hints: ['Imtiyoz stikerlari', 'Rozetka va konfetti'] },
         ]}
       />
     </>

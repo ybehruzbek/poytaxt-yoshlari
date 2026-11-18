@@ -3,16 +3,20 @@ import { getOtts, getPartners } from '@/lib/cms/biz'
 import { SplitWords } from '@/components/site/SplitWords'
 import { getBosh } from '@/lib/cms/sahifalar'
 import type { Locale } from '@/i18n/config'
-import { ittifoqLogo } from '@/lib/logo'
+import { logo as kengashLogo } from '@/lib/logo'
 
 const SPARK = 'M20 0c2 12 8 18 20 20-12 2-18 8-20 20-2-12-8-18-20-20 12-2 18-8 20-20z'
+/** “2017” muhri — 20 uçli muntazam yulduz (hisoblab çizilgan) */
+const SEAL =
+  'M50.0 1.0L56.9 6.5L65.1 3.4L70.0 10.8L78.8 10.4L81.1 18.9L89.6 21.2L89.2 30.0L96.6 34.9L93.5 43.1L99.0 50.0L93.5 56.9L96.6 65.1L89.2 70.0L89.6 78.8L81.1 81.1L78.8 89.6L70.0 89.2L65.1 96.6L56.9 93.5L50.0 99.0L43.1 93.5L34.9 96.6L30.0 89.2L21.2 89.6L18.9 81.1L10.4 78.8L10.8 70.0L3.4 65.1L6.5 56.9L1.0 50.0L6.5 43.1L3.4 34.9L10.8 30.0L10.4 21.2L18.9 18.9L21.2 10.4L30.0 10.8L34.9 3.4L43.1 6.5Z'
 const BURST =
   'M50 2l8 9 12-4 3 12 12 2-3 12 10 8-9 8 6 11-12 4 1 12-12-1-4 12-11-6-8 9-8-9-11 6-4-12-12 1 1-12-12-4 6-11-9-8 10-8-3-12 12-2 3-12 12 4z'
 
 /** Biz haqimizda va raqamlar: Ittifoq va uning poytaxtdagi Kengaşi; öngda Ittifoq mavzusidagi kompozitsiya. */
 export async function About({ locale }: { locale: Locale }) {
   const [OTMS, { all: PARTNERS }, { about: A }] = await Promise.all([getOtts(locale), getPartners(locale), getBosh(locale)])
-  const logo = ittifoqLogo(locale)
+  // Toşkent şahar hududiy Kengaşining logotipi (sayt boşidagi bilan bir xil, tanlangan tilda)
+  const logo = kengashLogo(locale)
   return (
     <>
 <section className="sec" id="biz-haqimizda">
@@ -24,20 +28,20 @@ export async function About({ locale }: { locale: Locale }) {
         <div className="vx" data-v="about-a">
           <div className="ab-ring"></div>
           <div className="ab-logo ab-logo--orbit"><img {...logo} alt="" loading="lazy" decoding="async" /></div>
-          <span className="ab-ph ab-ph--1"><img src="/img/ittifoq/lenta/1-01.webp" alt="" loading="lazy" decoding="async" /></span>
-          <span className="ab-ph ab-ph--2"><img src="/img/ittifoq/lenta/1-05.webp" alt="" loading="lazy" decoding="async" /></span>
-          <span className="ab-ph ab-ph--3"><img src="/img/ittifoq/lenta/2-06.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="ab-ph ab-ph--1"><img src="/img/biz/ott.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="ab-ph ab-ph--2"><img src="/img/biz/harbiy.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="ab-ph ab-ph--3"><img src="/img/biz/tashkilot.webp" alt="" loading="lazy" decoding="async" /></span>
           <svg className="ab-spark ab-spark--g" viewBox="0 0 40 40"><path d={SPARK} /></svg>
           <svg className="ab-spark ab-spark--b" viewBox="0 0 40 40"><path d={SPARK} /></svg>
           <svg className="ab-burst" viewBox="0 0 100 100"><path d={BURST} /></svg>
         </div>
         <div className="vx" data-v="about-b">
-          <span className="ab-card ab-card--1"><img src="/img/ittifoq/lenta/1-01.webp" alt="" loading="lazy" decoding="async" /></span>
-          <span className="ab-card ab-card--2"><img src="/img/ittifoq/lenta/2-02.webp" alt="" loading="lazy" decoding="async" /></span>
-          <span className="ab-card ab-card--3"><img src="/img/ittifoq/lenta/1-05.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="ab-card ab-card--1"><img src="/img/biz/ott.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="ab-card ab-card--2"><img src="/img/biz/tashkilot.webp" alt="" loading="lazy" decoding="async" /></span>
+          <span className="ab-card ab-card--3"><img src="/img/biz/harbiy.webp" alt="" loading="lazy" decoding="async" /></span>
           <div className="ab-logo ab-logo--pill"><img {...logo} alt="" loading="lazy" decoding="async" /></div>
           <span className="ab-seal">
-            <svg viewBox="0 0 100 100"><path d={BURST} /></svg>
+            <svg viewBox="0 0 100 100"><path d={SEAL} /></svg>
             <b>{A.year}</b>
           </span>
           <svg className="ab-spark ab-spark--g2" viewBox="0 0 40 40"><path d={SPARK} /></svg>
