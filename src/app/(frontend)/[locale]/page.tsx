@@ -39,8 +39,8 @@ export default async function Home(props: { params: Promise<{ locale: Locale }> 
       {/* VAQTINÇA: fonsiz suratlar bilan dizayn variantlari — tanlangaç olib taşlanadi */}
       <DevSectionsPanel
         sections={[
-          { name: 'hero', label: 'Boş ekran', count: 3, hints: ['Namuna: yigit kapsulada, qiz pastda', 'Namuna: qiz kapsulada, yigit pastda', 'Ikki ark, boşlari tepadan çiqqan'] },
-          { name: 'opps', label: 'Imkoniyatlar', count: 3, hints: ['Namuna: rangli kartalar, kengayadi', 'Boşi karta ustidan çiqadi', 'Stikerlar devori'] },
+          { name: 'hero', label: 'Boş ekran', count: 4, hints: ['Orbita: doira va aylanuvçi yozuv', 'Polaroid kartoçkalar', 'Katta söz: YOŞLAR BILAN', 'Ikki doira'] },
+          { name: 'opps', label: 'Imkoniyatlar: orqa fon belgilari', count: 3, hints: ['Çiziqli belgilar', 'Bitta katta siluet', 'Stikerlar'] },
           { name: 'bnf', label: 'Ittifoq yoşlarga nima beradi', count: 2, hints: ['Kapsula içida', 'Boşi kapsuladan çiqadi'] },
         ]}
       />
