@@ -42,6 +42,7 @@ from zakovat_bot.models import (
     Vote,
 )
 from zakovat_bot.permissions import get_admin, has_role, is_admin, log_action
+from zakovat_bot.services.broadcasting import clamp_lines
 from zakovat_bot.services.contest import (
     active_contest,
     safe_html,
@@ -54,6 +55,7 @@ from zakovat_bot.services.contest import (
     send_entry_media,
 )
 from zakovat_bot.services.publishing import (
+    check_post_texts,
     post_text,
     publish_all,
     published_entries,
@@ -668,6 +670,57 @@ async def tdadm_pub_menu(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer(
         "\n".join(lines),
         reply_markup=publish_menu_keyboard(ready, published, contest),
+    )
+
+
+@dp.callback_query(F.data == "tdadm_check_texts")
+async def tdadm_check_texts(callback: CallbackQuery):
+    """Tasdiqlangan ishlarning post matnlari bir xilmi — tekshirib beradi."""
+    if not has_role(callback.from_user.id, AdminRole.MODERATOR):
+        return await _deny(callback)
+    await callback.answer()
+    contest = _current_contest()
+    if contest is None:
+        return
+
+    r = check_post_texts(contest)
+    if not r["total"]:
+        await callback.message.answer("Tasdiqlangan ish yo'q.",
+                                      reply_markup=back_to("tdadm_pub_menu"))
+        return
+
+    lines = [
+        "🔍 <b>Post matnlari tekshiruvi</b>\n",
+        f"Tasdiqlangan ishlar: <b>{r['total']}</b> ta",
+        f"✍️ O'z matningiz yozilgan: <b>{len(r['custom'])}</b> ta",
+        f"⚙️ Standart shablon bilan chiqadi: <b>{len(r['default_list'])}</b> ta",
+    ]
+
+    if r["default_list"]:
+        lines.append("\n⚠️ <b>Matn yozilmaganlar:</b>")
+        for e in r["default_list"][:25]:
+            lines.append(f"• {e.code} — {safe_html(e.participant.full_name, 40)}")
+        if len(r["default_list"]) > 25:
+            lines.append(f"… va yana {len(r['default_list']) - 25} ta")
+
+    if r["matching"]:
+        lines.append(f"\n✅ <b>{len(r['matching'])} ta ish bir xil yakun bilan:</b>")
+        lines.append(f"<i>…{safe_html(r['standard_tail'], 90)}</i>")
+
+    if r["outliers"]:
+        lines.append(f"\n⚠️ <b>Yakuni boshqacha — {len(r['outliers'])} ta:</b>")
+        for e, tail in r["outliers"][:15]:
+            lines.append(f"\n• <b>{e.code}</b> — "
+                         f"{safe_html(e.participant.full_name, 40)}")
+            lines.append(f"  <i>…{safe_html(tail, 90)}</i>")
+        if len(r["outliers"]) > 15:
+            lines.append(f"\n… va yana {len(r['outliers']) - 15} ta")
+
+    if not r["default_list"] and not r["outliers"]:
+        lines.append("\n✅ Hammasi bir xil — nashrga tayyor.")
+
+    await callback.message.answer(
+        clamp_lines(lines), reply_markup=back_to("tdadm_pub_menu")
     )
 
 

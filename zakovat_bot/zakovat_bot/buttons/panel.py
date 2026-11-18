@@ -646,6 +646,8 @@ def contest_settings_keyboard(contest):
 def publish_menu_keyboard(ready_count, published_count, contest):
     """Nashr va ovoz berish boshqaruvi (TZ 8-10)."""
     kb = InlineKeyboardBuilder()
+    kb.button(text="🔍 Post matnlarini tekshirish",
+              callback_data="tdadm_check_texts")
     if ready_count:
         kb.button(text=f"📢 Kanalga e'lon qilish ({ready_count} ta)",
                   callback_data="tdadm_publish")

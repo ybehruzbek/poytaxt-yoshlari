@@ -403,3 +403,54 @@ async def close_voting_if_due(bot):
                 await bot.send_message(chat_id=admin.tg_id, text=text)
             except Exception:
                 logger.warning("Adminga natija yetmadi: %s", admin.tg_id)
+
+
+# ==================== Post matnlarini tekshirish ====================
+
+TEXT_TAIL_LEN = 40  # matn oxiridan solishtiriladigan qism (imzo/chaqiriq)
+
+
+def check_post_texts(contest):
+    """Tasdiqlangan ishlarning post matnlarini solishtiradi.
+
+    Matnlar ism/OTM bilan boshlanib, bir xil yakun (chaqiriq, muddat) bilan
+    tugashi kutiladi. Shuning uchun matn oxiri bo'yicha solishtiriladi:
+    eng ko'p uchragan yakun «standart» deb olinadi, undan farq qilganlar
+    alohida ko'rsatiladi.
+    """
+    from collections import Counter
+
+    entries = list(
+        Entry.objects.filter(
+            contest=contest,
+            status__in=[EntryStatus.APPROVED, EntryStatus.PUBLISHED,
+                        EntryStatus.FINISHED],
+        ).select_related("participant").order_by("id")
+    )
+
+    custom, default_list, tails = [], [], {}
+    for e in entries:
+        text = (e.post_text_override or "").strip()
+        if not text:
+            default_list.append(e)
+            continue
+        custom.append(e)
+        tails[e.id] = " ".join(text.split())[-TEXT_TAIL_LEN:]
+
+    standard_tail, matching, outliers = "", [], []
+    if tails:
+        standard_tail = Counter(tails.values()).most_common(1)[0][0]
+        for e in custom:
+            if tails[e.id] == standard_tail:
+                matching.append(e)
+            else:
+                outliers.append((e, tails[e.id]))
+
+    return {
+        "total": len(entries),
+        "custom": custom,
+        "default_list": default_list,
+        "standard_tail": standard_tail,
+        "matching": matching,
+        "outliers": outliers,
+    }

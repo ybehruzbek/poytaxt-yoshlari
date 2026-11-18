@@ -2002,6 +2002,54 @@ async def _run_all(saved_event_ids):
     contest.stage, contest.submission_deadline = saved_stage, saved_dl
     contest.save(update_fields=["stage", "submission_deadline"])
 
+    # Post matnlarini tekshirish: bir xilmi, qaysilari bo'sh
+    half_p2, half_p3, half_p4 = [
+        ContestParticipant.objects.create(
+            contest=contest, telegram_id=990100 + i,
+            full_name=f"Tekshiruv {i}", university="Smoke OTM",
+            phone=f"+99890555{i:04d}", consent_at=djtz.now())
+        for i in (2, 3, 4)
+    ]
+    tail = "Muddat 48 soat. Yoqqan bo'lsa ❤️ bosing!"
+    same1 = Entry.objects.create(
+        contest=contest, participant=bad, nomination=Nomination.FOTO,
+        title="A", status=EntryStatus.APPROVED,
+        post_text_override=f"Ishtirokchi: Aliyev\n{tail}")
+    same2 = Entry.objects.create(
+        contest=contest, participant=half_p2, nomination=Nomination.FOTO,
+        title="B", status=EntryStatus.APPROVED,
+        post_text_override=f"Ishtirokchi: Valiyev\n{tail}")
+    other = Entry.objects.create(
+        contest=contest, participant=half_p3, nomination=Nomination.FOTO,
+        title="C", status=EntryStatus.APPROVED,
+        post_text_override="Butunlay boshqacha yakun bilan tugaydigan matn")
+    empty = Entry.objects.create(
+        contest=contest, participant=half_p4, nomination=Nomination.FOTO,
+        title="D", status=EntryStatus.APPROVED)
+
+    r = pub_service.check_post_texts(contest)
+    check("tekshiruv matnsizlarni topdi",
+          empty.id in [e.id for e in r["default_list"]])
+    check("bir xil yakunli ishlar aniqlandi",
+          {same1.id, same2.id} == {e.id for e in r["matching"]},
+          [e.code for e in r["matching"]])
+    check("boshqacha yakunli ish ajratildi",
+          other.id in [e.id for e, _t in r["outliers"]],
+          [(e.code, t[-30:]) for e, t in r["outliers"]])
+
+    cb = FakeCallback("tdadm_check_texts", SUPER, message=FakeMessage(SUPER))
+    await contest_admin_handler.tdadm_check_texts(cb)
+    txt = cb.message.texts()
+    check("hisobotda matnsizlar ko'rsatildi",
+          "Matn yozilmaganlar" in txt and empty.code in txt)
+    check("hisobotda farqli matn ko'rsatildi",
+          "Yakuni boshqacha" in txt and other.code in txt)
+
+    for e in (same1, same2, other, empty):
+        e.delete()
+    for pp in (half_p2, half_p3, half_p4):
+        pp.delete()
+
     # TZ 9.3: hamma post chiqmaguncha ovoz boshlanmaydi
     extra_entry = Entry.objects.create(
         contest=contest, participant=bad, nomination=Nomination.FOTO,
