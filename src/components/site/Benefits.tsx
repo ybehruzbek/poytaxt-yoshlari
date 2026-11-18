@@ -11,7 +11,7 @@ const CONFETTI: Array<[string, string, number, string]> = [
   ['36px', '40px', 24, 'var(--yellow)'],
   ['250px', '70px', -18, 'var(--lime)'],
   ['20px', '220px', 60, 'var(--sky)'],
-  ['560px', '90px', 12, 'var(--green)'],
+  ['56px', '520px', 12, 'var(--green)'],
   ['600px', '330px', -36, 'var(--yellow)'],
   ['380px', '560px', 40, 'var(--lime)'],
   ['250px', '575px', -8, 'var(--sky)'],
@@ -35,7 +35,8 @@ export async function Benefits({ locale }: { locale: Locale }) {
       {/* odam: boşi yaşil kapsuladan çiqib turadi */}
       <div className="bnf-pill bnf-pill--low"></div>
       <div className="bnf-slot"><img className="bnf-cut" src="/img/odamlar/ittifoq-beradi.webp" width={713} height={1200} alt="" loading="lazy" decoding="async" /></div>
-      <div style={{ left: "30px", top: "452px", width: "190px", height: "96px", borderRadius: "50px", background: "#fff", transform: "rotate(-10deg)", boxShadow: "0 10px 30px rgba(83,40,34,.1)", display: "flex", alignItems: "center", justifyContent: "center", gap: "9px" }}>
+      {/* ovoz tölqini: yuqori öngda, havorang kapsula ustida — qizning qöllarini töşmaydi */}
+      <div style={{ left: "418px", top: "14px", width: "190px", height: "96px", borderRadius: "50px", background: "#fff", transform: "rotate(8deg)", boxShadow: "0 10px 30px rgba(83,40,34,.1)", display: "flex", alignItems: "center", justifyContent: "center", gap: "9px" }}>
         <i className="bar" style={{ height: "34px" }}></i><i className="bar" style={{ height: "46px" }}></i><i className="bar" style={{ height: "60px" }}></i><i className="bar" style={{ height: "46px" }}></i><i className="bar" style={{ height: "34px" }}></i>
       </div>
       <div style={{ left: "6px", top: "300px", width: "220px", height: "58px", borderRadius: "20px", background: "var(--blue)", transform: "rotate(6.7deg)", display: "grid", placeItems: "center", fontFamily: "var(--f-head)", fontWeight: "600", fontSize: "24px", color: "#fff" }}>#YoşlarBilan</div>
