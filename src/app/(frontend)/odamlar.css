@@ -98,7 +98,8 @@
   transition: font-size 0.4s var(--ease-out);
 }
 #imkoniyatlar .opp .title span {
-  max-width: 300px;
+  /* izoh kapsulasi odamning boşiga tegmasin: odam karta öng çetida ~260px egallaydi, boşi uning çap çetidan ~80px içkarida */
+  max-width: min(300px, calc(100cqw - 220px));
   padding: 8px 18px;
   border-radius: 32px;
   background: var(--bg);
@@ -216,6 +217,9 @@
     font-size: 36px;
   }
   #imkoniyatlar .opp .title span {
+    /* telefonda odam kiçikroq (~220px), boşi kapsuladan önroqda boşlanadi */
+    max-width: max(150px, calc(100cqw - 180px));
+    padding: 8px 14px;
     font-size: 17px;
   }
 }
