@@ -20,8 +20,6 @@ const KONTENT: Role[] = ['admin', 'muharrir']
 const KIRUVCHI: Role[] = ['admin', 'operator']
 
 const c = (slug: string) => `/admin/collections/${slug}`
-const g = (slug: string) => `/admin/globals/${slug}`
-const old = (t: string, href: string): MenuLink => ({ t, href, eski: true })
 
 export const MENU: MenuGroup[] = [
   { items: [{ t: 'Boşqaruv paneli', href: '/boshqaruv', icon: 'home' }] },
@@ -44,49 +42,49 @@ export const MENU: MenuGroup[] = [
         t: 'Faoliyat',
         icon: 'flag',
         sub: [
-          old('Yönalişlar', c('directions')),
-          old('Loyihalar', c('projects')),
-          old('Tadbirlar', c('events')),
-          old('Grantlar', c('grants')),
-          old('Stipendiyalar', c('stipends')),
-          old('Tanlovlar', c('contests')),
-          old('Imtiyozlar', c('benefits')),
-          old('Davlat mukofotlari', c('awards')),
-          old('Volontyorlik yönalişlari', c('vol-directions')),
+          { t: 'Yönalişlar', href: '/boshqaruv/bolim/directions' },
+          { t: 'Loyihalar', href: '/boshqaruv/bolim/projects' },
+          { t: 'Tadbirlar', href: '/boshqaruv/bolim/events' },
+          { t: 'Grantlar', href: '/boshqaruv/bolim/grants' },
+          { t: 'Stipendiyalar', href: '/boshqaruv/bolim/stipends' },
+          { t: 'Tanlovlar', href: '/boshqaruv/bolim/contests' },
+          { t: 'Imtiyozlar', href: '/boshqaruv/bolim/benefits' },
+          { t: 'Davlat mukofotlari', href: '/boshqaruv/bolim/awards' },
+          { t: 'Volontyorlik yönalişlari', href: '/boshqaruv/bolim/vol-directions' },
         ],
       },
       {
         t: 'Axborot xizmati',
         icon: 'image',
         sub: [
-          old('Fotoalbomlar', c('albums')),
-          old('Videolar', c('videos')),
-          old('Press-relizlar', c('press')),
-          old('OAVda Kengaş haqida', c('oav')),
+          { t: 'Fotoalbomlar', href: '/boshqaruv/bolim/albums' },
+          { t: 'Videolar', href: '/boshqaruv/bolim/videos' },
+          { t: 'Press-relizlar', href: '/boshqaruv/bolim/press' },
+          { t: 'OAVda Kengaş haqida', href: '/boshqaruv/bolim/oav' },
         ],
       },
       {
         t: 'Biz haqimizda',
         icon: 'users',
         sub: [
-          old('OTT boşlanğiç taşkilotlari', c('otts')),
-          old('Kengaş bölimlari', c('departments')),
-          old('Kengaş xodimlari', c('staff')),
-          old('Hamkorlar', c('partners')),
+          { t: 'OTT boşlanğiç taşkilotlari', href: '/boshqaruv/bolim/otts' },
+          { t: 'Kengaş bölimlari', href: '/boshqaruv/bolim/departments' },
+          { t: 'Kengaş xodimlari', href: '/boshqaruv/bolim/staff' },
+          { t: 'Hamkorlar', href: '/boshqaruv/bolim/partners' },
         ],
       },
       {
         t: 'Hujjatlar',
         icon: 'file',
         sub: [
-          old('Normativ hujjatlar', c('acts')),
-          old('Hujjatlar guruhlari', c('act-groups')),
-          old('Kengaş hujjatlari', c('kengash-docs')),
-          old('Hujjat namunalari', c('templates')),
+          { t: 'Normativ hujjatlar', href: '/boshqaruv/bolim/acts' },
+          { t: 'Hujjatlar guruhlari', href: '/boshqaruv/bolim/act-groups' },
+          { t: 'Kengaş hujjatlari', href: '/boshqaruv/bolim/kengash-docs' },
+          { t: 'Hujjat namunalari', href: '/boshqaruv/bolim/templates' },
         ],
       },
-      { t: 'Savol va javoblar', href: c('faqs'), eski: true, icon: 'help' },
-      { t: 'Mualliflar', href: c('authors'), eski: true, icon: 'pen' },
+      { t: 'Savol va javoblar', href: '/boshqaruv/bolim/faqs', icon: 'help' },
+      { t: 'Mualliflar', href: '/boshqaruv/bolim/authors', icon: 'pen' },
     ],
   },
   {
@@ -97,21 +95,21 @@ export const MENU: MenuGroup[] = [
         t: 'Sahifalar',
         icon: 'layout',
         sub: [
-          old('Boş sahifa', g('bosh-sahifa')),
-          old('Ittifoq haqida', g('ittifoq-sahifa')),
-          old('Markaziy Kengaş', g('markaziy-kengash')),
-          old('Aʼzo böliş', g('azolik-sahifa')),
-          old('Volontyorlik', g('volontyorlik-sahifa')),
-          old('Natijalar va hisobotlar', g('natijalar')),
+          { t: 'Boş sahifa', href: '/boshqaruv/sahifa/bosh-sahifa' },
+          { t: 'Ittifoq haqida', href: '/boshqaruv/sahifa/ittifoq-sahifa' },
+          { t: 'Markaziy Kengaş', href: '/boshqaruv/sahifa/markaziy-kengash' },
+          { t: 'Aʼzo böliş', href: '/boshqaruv/sahifa/azolik-sahifa' },
+          { t: 'Volontyorlik', href: '/boshqaruv/sahifa/volontyorlik-sahifa' },
+          { t: 'Natijalar va hisobotlar', href: '/boshqaruv/sahifa/natijalar' },
         ],
       },
       {
         t: 'Sayt sozlamalari',
         icon: 'settings',
         sub: [
-          old('Aloqa maʼlumotlari', g('aloqa')),
-          old('Ijtimoiy tarmoqlar', g('socials')),
-          old('Miqdorlar (BHM, stipendiya)', g('miqdorlar')),
+          { t: 'Aloqa maʼlumotlari', href: '/boshqaruv/sahifa/aloqa' },
+          { t: 'Ijtimoiy tarmoqlar', href: '/boshqaruv/sahifa/socials' },
+          { t: 'Miqdorlar (BHM, stipendiya)', href: '/boshqaruv/sahifa/miqdorlar' },
         ],
       },
     ],
@@ -144,9 +142,19 @@ export const ROLE_LABEL: Record<Role, string> = {
 /** Menyu ostidagi “Mahkamlangan” bandlar: eng köp oçiladigan sahifalar, rangli harf belgisi bilan */
 export type Pinned = MenuLink & { color: 'yellow' | 'orange' | 'green' | 'pink' | 'blue'; roles?: Role[] }
 export const PINNED: Pinned[] = [
-  { t: 'Boş sahifa matnlari', href: g('bosh-sahifa'), eski: true, color: 'yellow', roles: KONTENT },
-  { t: 'Tadbirlar', href: c('events'), eski: true, color: 'green', roles: KONTENT },
-  { t: 'Aloqa maʼlumotlari', href: g('aloqa'), eski: true, color: 'blue', roles: KONTENT },
+  { t: 'Boş sahifa matnlari', href: '/boshqaruv/sahifa/bosh-sahifa', color: 'yellow', roles: KONTENT },
+  { t: 'Tadbirlar', href: '/boshqaruv/bolim/events', color: 'green', roles: KONTENT },
+  { t: 'Aloqa maʼlumotlari', href: '/boshqaruv/sahifa/aloqa', color: 'blue', roles: KONTENT },
   { t: 'Murojaatlar', href: '/boshqaruv/kiruvchi/murojaatlar', color: 'orange', roles: ['operator'] },
 ]
 export const pinnedFor = (role: Role) => PINNED.filter((p) => ok(p.roles, role))
+
+/** Manzil qaysi menyu guruhiga tegişli (yöl uçun): “Faoliyat”, “Sahifa matnlari”… */
+export function groupOf(href: string): string | null {
+  for (const g of MENU)
+    for (const it of g.items) {
+      if (it.sub?.some((x) => x.href === href)) return it.t
+      if (it.href === href) return g.t ?? null
+    }
+  return null
+}
