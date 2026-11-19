@@ -33,6 +33,8 @@ export const Users: CollectionConfig = {
     ],
   },
   access: {
+    // eski Payload paneliga (/admin) faqat administrator kiradi — xodimlar yangi panelda (/boshqaruv) işlaydi
+    admin: ({ req: { user } }) => user?.role === 'admin',
     read: isAdminOrSelf,
     create: isAdmin,
     update: isAdminOrSelf,

@@ -11,9 +11,32 @@ import { defaultLocale, isLive, isLocale } from './i18n/config'
 /** Admin panel tili: foydalanuvçi tanlamagan bölsa (cookie yöq) — özbekça; brauzer tiliga qaralmaydi */
 const ADMIN_LNG = 'payload-lng'
 
+/**
+ * Sessiya tokenidagi rol (faqat yönaltiriş uçun, imzo tekşirilmaydi). Haqiqiy taqiq Payload'da:
+ * Users.access.admin — eski panelga faqat administrator kiradi.
+ */
+function tokenRole(request: NextRequest): string | null {
+  const t = request.cookies.get('payload-token')?.value
+  if (!t) return null
+  try {
+    const part = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')
+    return (JSON.parse(atob(part)) as { role?: string }).role ?? null
+  } catch {
+    return null
+  }
+}
+
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
   if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    // kirgan, lekin administrator bölmagan xodim yangi panelga ötkaziladi
+    const role = tokenRole(request)
+    if (role && role !== 'admin') {
+      const url = request.nextUrl.clone()
+      url.pathname = '/boshqaruv'
+      url.search = ''
+      return NextResponse.redirect(url)
+    }
     if (request.cookies.has(ADMIN_LNG)) return NextResponse.next()
     // şu söröv ham özbekça çizilsin: cookie söröv sarlavhasiga qöşiladi, javobda esa brauzerga saqlanadi
     const headers = new Headers(request.headers)
