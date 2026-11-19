@@ -29,10 +29,10 @@ export const MENU: MenuGroup[] = [
     t: 'Kiruvçi xabarlar',
     roles: KIRUVCHI,
     items: [
-      { t: 'Murojaatlar', href: c('appeals'), eski: true, icon: 'inbox', count: 'appeals' },
-      { t: 'Aʼzolik arizalari', href: c('memberships'), eski: true, icon: 'user-plus', count: 'memberships' },
-      { t: 'Volontyorlik arizalari', href: c('volunteers'), eski: true, icon: 'heart', count: 'volunteers' },
-      { t: 'Matn xatolari', href: c('text-errors'), eski: true, icon: 'type', count: 'text-errors' },
+      { t: 'Murojaatlar', href: '/boshqaruv/kiruvchi/murojaatlar', icon: 'inbox', count: 'appeals' },
+      { t: 'Aʼzolik arizalari', href: '/boshqaruv/kiruvchi/azolik', icon: 'user-plus', count: 'memberships' },
+      { t: 'Volontyorlik arizalari', href: '/boshqaruv/kiruvchi/volontyorlik', icon: 'heart', count: 'volunteers' },
+      { t: 'Matn xatolari', href: '/boshqaruv/kiruvchi/matn-xatolari', icon: 'type', count: 'text-errors' },
     ],
   },
   {
@@ -147,6 +147,6 @@ export const PINNED: Pinned[] = [
   { t: 'Boş sahifa matnlari', href: g('bosh-sahifa'), eski: true, color: 'yellow', roles: KONTENT },
   { t: 'Tadbirlar', href: c('events'), eski: true, color: 'green', roles: KONTENT },
   { t: 'Aloqa maʼlumotlari', href: g('aloqa'), eski: true, color: 'blue', roles: KONTENT },
-  { t: 'Murojaatlar', href: c('appeals'), eski: true, color: 'orange', roles: ['operator'] },
+  { t: 'Murojaatlar', href: '/boshqaruv/kiruvchi/murojaatlar', color: 'orange', roles: ['operator'] },
 ]
 export const pinnedFor = (role: Role) => PINNED.filter((p) => ok(p.roles, role))

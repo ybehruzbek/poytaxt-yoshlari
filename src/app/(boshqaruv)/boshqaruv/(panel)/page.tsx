@@ -42,32 +42,32 @@ async function inbox(payload: Payload): Promise<{ tabs: InboxTab[]; today: numbe
         key: 'appeals',
         t: 'Murojaatlar',
         total: a.totalDocs,
-        href: '/admin/collections/appeals',
+        href: '/boshqaruv/kiruvchi/murojaatlar',
         items: a.docs.map((d) =>
-          it({ id: d.id, name: d.name, text: d.message, when: qisqaVaqt(d.createdAt), tag: APPEAL_TYPE[d.type], href: `/admin/collections/appeals/${d.id}` }),
+          it({ id: d.id, name: d.name, text: d.message, when: qisqaVaqt(d.createdAt), tag: APPEAL_TYPE[d.type], href: `/boshqaruv/kiruvchi/murojaatlar?id=${d.id}` }),
         ),
       },
       {
         key: 'memberships',
         t: 'Aʼzolik',
         total: m.totalDocs,
-        href: '/admin/collections/memberships',
-        items: m.docs.map((d) => it({ id: d.id, name: d.name, text: d.place, when: qisqaVaqt(d.createdAt), href: `/admin/collections/memberships/${d.id}` })),
+        href: '/boshqaruv/kiruvchi/azolik',
+        items: m.docs.map((d) => it({ id: d.id, name: d.name, text: d.place, when: qisqaVaqt(d.createdAt), href: `/boshqaruv/kiruvchi/azolik?id=${d.id}` })),
       },
       {
         key: 'volunteers',
         t: 'Volontyorlik',
         total: v.totalDocs,
-        href: '/admin/collections/volunteers',
-        items: v.docs.map((d) => it({ id: d.id, name: d.name, text: d.dirs, when: qisqaVaqt(d.createdAt), href: `/admin/collections/volunteers/${d.id}` })),
+        href: '/boshqaruv/kiruvchi/volontyorlik',
+        items: v.docs.map((d) => it({ id: d.id, name: d.name, text: d.dirs, when: qisqaVaqt(d.createdAt), href: `/boshqaruv/kiruvchi/volontyorlik?id=${d.id}` })),
       },
       {
         key: 'text-errors',
         t: 'Matn xatolari',
         total: e.totalDocs,
-        href: '/admin/collections/text-errors',
+        href: '/boshqaruv/kiruvchi/matn-xatolari',
         items: e.docs.map((d) =>
-          it({ id: d.id, name: `“${d.text.slice(0, 60)}”`, text: d.page, when: qisqaVaqt(d.createdAt), href: `/admin/collections/text-errors/${d.id}`, noAva: true }),
+          it({ id: d.id, name: `“${d.text.slice(0, 60)}”`, text: d.page, when: qisqaVaqt(d.createdAt), href: `/boshqaruv/kiruvchi/matn-xatolari?id=${d.id}`, noAva: true }),
         ),
       },
     ],
@@ -132,7 +132,7 @@ export default async function Dashboard() {
         <div className="stats">
           {ib && (
             <>
-              <Link className="stat" href="/admin/collections/appeals" prefetch={false}>
+              <Link className="stat" href="/boshqaruv/kiruvchi/murojaatlar" prefetch={false}>
                 <span className="stat__ic ic-orange">
                   <Icon name="inbox" size={24} />
                 </span>
@@ -142,7 +142,7 @@ export default async function Dashboard() {
                   <small>{ib.today > 0 ? <em>+{ib.today} bugun</em> : 'bugun yangi murojaat yöq'}</small>
                 </div>
               </Link>
-              <Link className="stat" href="/admin/collections/memberships" prefetch={false}>
+              <Link className="stat" href="/boshqaruv/kiruvchi/azolik" prefetch={false}>
                 <span className="stat__ic ic-blue">
                   <Icon name="user-plus" size={24} />
                 </span>
@@ -196,7 +196,7 @@ export default async function Dashboard() {
           )}
           {ib && !ct && (
             <>
-              <Link className="stat" href="/admin/collections/volunteers" prefetch={false}>
+              <Link className="stat" href="/boshqaruv/kiruvchi/volontyorlik" prefetch={false}>
                 <span className="stat__ic ic-green">
                   <Icon name="heart" size={24} />
                 </span>
@@ -206,7 +206,7 @@ export default async function Dashboard() {
                   <small>holati “yangi”</small>
                 </div>
               </Link>
-              <Link className="stat" href="/admin/collections/text-errors" prefetch={false}>
+              <Link className="stat" href="/boshqaruv/kiruvchi/matn-xatolari" prefetch={false}>
                 <span className="stat__ic ic-yellow">
                   <Icon name="type" size={24} />
                 </span>
