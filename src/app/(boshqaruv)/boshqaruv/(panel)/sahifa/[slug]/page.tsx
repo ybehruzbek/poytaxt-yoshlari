@@ -35,7 +35,7 @@ export default async function Sahifa({ params }: P) {
           updatedAt={(doc.updatedAt as string | undefined) ?? null}
           rel={rel}
           isAdmin={user.role === 'admin'}
-          oldHref={`/admin/globals/${slug}`}
+          oldHref={user.role === 'admin' ? `/admin/globals/${slug}` : null}
           siteHref={site}
           backHref="/boshqaruv"
         />

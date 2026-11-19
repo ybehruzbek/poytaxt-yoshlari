@@ -272,15 +272,19 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                 <div className="note">
                   <Icon name="alert" size={18} />
                   <p>
-                    Bu matnda yangi muharrir hali qöllamaydigan blok bor. Matnni hozirça{' '}
+                    Bu matnda yangi muharrir hali qöllamaydigan blok bor.{' '}
                     {oldAdminHref ? (
-                      <a href={oldAdminHref} target="_blank" rel="noopener noreferrer">
-                        eski panelda
-                      </a>
+                      <>
+                        Matnni hozirça{' '}
+                        <a href={oldAdminHref} target="_blank" rel="noopener noreferrer">
+                          eski panelda
+                        </a>{' '}
+                        tahrirlang
+                      </>
                     ) : (
-                      'eski panelda'
+                      'Matnni özgartiriş uçun administratorga murojaat qiling'
                     )}{' '}
-                    tahrirlang — qolgan maydonlarni şu yerda özgartiriş mumkin.
+                    — qolgan maydonlarni şu yerda özgartiriş mumkin.
                   </p>
                 </div>
               ) : (

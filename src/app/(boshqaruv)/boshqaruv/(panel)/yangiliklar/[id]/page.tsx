@@ -33,7 +33,7 @@ export default async function YangilikTahrir({ params }: P) {
           authors={authors}
           versions={versions}
           isAdmin={user.role === 'admin'}
-          oldAdminHref={`/admin/collections/news/${doc.id}`}
+          oldAdminHref={user.role === 'admin' ? `/admin/collections/news/${doc.id}` : null}
         />
       </div>
     </>

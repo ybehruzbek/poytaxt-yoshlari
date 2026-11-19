@@ -240,7 +240,7 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
                     eski panelda tahrirlang
                   </a>
                 ) : (
-                  'eski panelda tahrirlang'
+                  'özgartiriş uçun administratorga murojaat qiling'
                 )}
                 .
               </p>

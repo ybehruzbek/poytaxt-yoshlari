@@ -45,7 +45,7 @@ export default async function BolimTahrir({ params }: P) {
           updatedAt={(doc?.updatedAt as string | undefined) ?? null}
           rel={rel}
           isAdmin={user.role === 'admin'}
-          oldHref={isNew ? null : `/admin/collections/${slug}/${id}`}
+          oldHref={isNew || user.role !== 'admin' ? null : `/admin/collections/${slug}/${id}`}
           siteHref={site}
           backHref={base}
         />
