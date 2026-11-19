@@ -34,20 +34,25 @@ const fileItem = (f: FileDoc): MediaItem => ({ id: f.id, url: f.url ?? '', thumb
 const canEdit = (role?: string) => role === 'admin' || role === 'muharrir'
 
 /** Kutubxona: oxirgi yuklanganlar; rasm — tavsif (alt), hujjat — nomi böyiça qidiruv */
-export async function searchMedia(q: string, page = 1, col: LibCol = 'media'): Promise<{ items: MediaItem[]; hasMore: boolean }> {
+export async function searchMedia(qIn: unknown, pageIn: unknown = 1, colIn: unknown = 'media'): Promise<{ items: MediaItem[]; hasMore: boolean }> {
   const user = await getUser()
   if (!user || !canEdit(user.role)) return { items: [], hasMore: false }
+  // server action argumentlari brauzerdan keladi — TS turiga işonilmaydi: faqat ruxsat etilgan ikki töplam
+  const col: LibCol = colIn === 'files' ? 'files' : 'media'
+  const q = typeof qIn === 'string' ? qIn.trim().slice(0, 200) : ''
+  const page = Math.min(1000, Math.max(1, Math.floor(Number(pageIn)) || 1))
   const payload = await getPayloadClient()
   const key = col === 'files' ? 'title' : 'alt'
   const r = await payload.find({
     collection: col,
-    where: q.trim() ? { [key]: { like: q.trim() } } : {},
+    where: q ? { [key]: { like: q } } : {},
     sort: '-createdAt',
     limit: 30,
     page,
     depth: 0,
     locale: 'uz',
-    overrideAccess: true,
+    user,
+    overrideAccess: false, // Payload'ning öz ruxsatlari ham tekşiradi
   })
   return { items: col === 'files' ? (r.docs as FileDoc[]).map(fileItem) : (r.docs as Media[]).map(toItem), hasMore: r.hasNextPage }
 }

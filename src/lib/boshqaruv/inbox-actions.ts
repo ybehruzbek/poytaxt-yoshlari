@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 
 import { getPayloadClient, getUser } from './auth'
+import { isId, str } from './guard'
 import { kindBySlug } from './inbox-config'
 
 type R = { ok: boolean; message: string }
@@ -19,6 +20,7 @@ const refresh = () => {
 }
 
 export async function setInboxStatus(slug: string, id: number, status: string): Promise<R> {
+  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
   const user = await staff()
   const kind = kindBySlug(slug)
   if (!user || !kind) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
@@ -34,7 +36,9 @@ export async function setInboxStatus(slug: string, id: number, status: string): 
   }
 }
 
-export async function saveInboxNote(slug: string, id: number, note: string): Promise<R> {
+export async function saveInboxNote(slug: string, id: number, noteIn: string): Promise<R> {
+  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  const note = str(noteIn, 5000)
   const user = await staff()
   const kind = kindBySlug(slug)
   if (!user || !kind || kind.slug === 'text-errors') return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
@@ -50,6 +54,7 @@ export async function saveInboxNote(slug: string, id: number, note: string): Pro
 
 /** Öçiriş — faqat administrator; murojaat bilan birga unga biriktirilgan maxfiy fayl ham öçiriladi */
 export async function deleteInboxItem(slug: string, id: number): Promise<R> {
+  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
   const user = await getUser()
   const kind = kindBySlug(slug)
   if (!user || user.role !== 'admin' || !kind) return { ok: false, message: 'Öçiriş faqat administratorga ruxsat etilgan.' }

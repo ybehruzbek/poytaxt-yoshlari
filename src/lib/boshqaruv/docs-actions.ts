@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { ValidationError } from 'payload'
 
 import { getPayloadClient, getUser } from './auth'
+import { isId } from './guard'
 import { collectionSchema, globalSchema, toSaveData } from './schema'
 
 export type DocSaveResult =
@@ -28,6 +29,7 @@ function fromError(e: unknown): DocSaveResult {
  * Qoralamali bölimlarda `draft` — saytga çiqmaydi, `publish` — çiqadi.
  */
 export async function saveDoc(slug: string, id: number | null, values: Record<string, unknown>, mode: 'draft' | 'publish'): Promise<DocSaveResult> {
+  if ((id !== null && !isId(id)) || !values || typeof values !== 'object') return { ok: false, message: 'Notöğri söröv.' }
   const user = await getUser()
   if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
   const schema = await collectionSchema(slug)
@@ -47,6 +49,7 @@ export async function saveDoc(slug: string, id: number | null, values: Record<st
 }
 
 export async function saveGlobalDoc(slug: string, values: Record<string, unknown>, mode: 'draft' | 'publish'): Promise<DocSaveResult> {
+  if (!values || typeof values !== 'object') return { ok: false, message: 'Notöğri söröv.' }
   const user = await getUser()
   if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
   const schema = await globalSchema(slug)
@@ -64,6 +67,7 @@ export async function saveGlobalDoc(slug: string, values: Record<string, unknown
 
 /** Öçiriş — faqat administrator */
 export async function deleteDoc(slug: string, id: number): Promise<{ ok: boolean; message: string }> {
+  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
   const user = await getUser()
   if (!user || user.role !== 'admin') return { ok: false, message: 'Öçiriş faqat administratorga ruxsat etilgan.' }
   if (!(await collectionSchema(slug))) return { ok: false, message: 'Bunday bölim yöq.' }

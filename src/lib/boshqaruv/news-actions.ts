@@ -6,6 +6,7 @@ import { ValidationError } from 'payload'
 import type { News } from '@/payload-types'
 
 import { getPayloadClient, getUser } from './auth'
+import { ids as toIds, isId } from './guard'
 
 /** Shakldan keladigan maʼlumot (faqat uz tili; ruşça/inglizça tarjima keyinroq) */
 export type NewsInput = {
@@ -61,6 +62,7 @@ function fromError(e: unknown): SaveResult {
  * Payload'ning ruxsatlari, imlo hook'lari va versiyalar tarixi işlaydi (user bilan, overrideAccess: false).
  */
 export async function saveNews(id: number | null, input: NewsInput, mode: 'draft' | 'publish'): Promise<SaveResult> {
+  if ((id !== null && !isId(id)) || !input || typeof input !== 'object') return { ok: false, message: 'Notöğri söröv.' }
   const user = await getUser()
   if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
   const payload = await getPayloadClient()
@@ -98,7 +100,9 @@ export async function saveNews(id: number | null, input: NewsInput, mode: 'draft
 }
 
 /** Saytdan oliş: eʼlon qilingan yangilik qoralamaga qaytadi */
-export async function unpublishNews(ids: number[]): Promise<{ ok: boolean; message: string }> {
+export async function unpublishNews(idsIn: number[]): Promise<{ ok: boolean; message: string }> {
+  const ids = toIds(idsIn)
+  if (!ids.length) return { ok: false, message: 'Heç narsa tanlanmagan.' }
   const user = await getUser()
   if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
   const payload = await getPayloadClient()
@@ -115,7 +119,9 @@ export async function unpublishNews(ids: number[]): Promise<{ ok: boolean; messa
 }
 
 /** Eʼlon qiliş (röyxatdan bir neçtasini birdan) */
-export async function publishNews(ids: number[]): Promise<{ ok: boolean; message: string }> {
+export async function publishNews(idsIn: number[]): Promise<{ ok: boolean; message: string }> {
+  const ids = toIds(idsIn)
+  if (!ids.length) return { ok: false, message: 'Heç narsa tanlanmagan.' }
   const user = await getUser()
   if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
   const payload = await getPayloadClient()
@@ -132,7 +138,9 @@ export async function publishNews(ids: number[]): Promise<{ ok: boolean; message
 }
 
 /** Öçiriş — faqat administrator (Payload ruxsati ham şuni talab qiladi) */
-export async function deleteNews(ids: number[]): Promise<{ ok: boolean; message: string }> {
+export async function deleteNews(idsIn: number[]): Promise<{ ok: boolean; message: string }> {
+  const ids = toIds(idsIn)
+  if (!ids.length) return { ok: false, message: 'Heç narsa tanlanmagan.' }
   const user = await getUser()
   if (!user || user.role !== 'admin') return { ok: false, message: 'Öçiriş faqat administratorga ruxsat etilgan.' }
   const payload = await getPayloadClient()
