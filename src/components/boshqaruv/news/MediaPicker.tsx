@@ -2,17 +2,18 @@
 
 import { useCallback, useEffect, useRef, useState, useTransition } from 'react'
 
-import { type MediaItem, searchMedia, uploadMedia } from '@/lib/boshqaruv/media-actions'
+import { type LibCol, type MediaItem, searchMedia, uploadMedia } from '@/lib/boshqaruv/media-actions'
 
 import { Icon } from '../Icon'
 
-type Props = { multiple?: boolean; title: string; onPick: (items: MediaItem[]) => void; onClose: () => void }
+type Props = { multiple?: boolean; title: string; col?: LibCol; onPick: (items: MediaItem[]) => void; onClose: () => void }
 
 /**
  * Rasm tanlaş oynasi: kompyuterdan yuklaş (tugma yoki sudrab taşlaş, bir neçta fayl birdan) va
  * kutubxonadan qidirib tanlaş. Yuklangan rasm darhol tanlangan bölib turadi.
  */
-export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
+export function MediaPicker({ multiple, title, col = 'media', onPick, onClose }: Props) {
+  const isFile = col === 'files'
   const [items, setItems] = useState<MediaItem[]>([])
   const [hasMore, setHasMore] = useState(false)
   const [page, setPage] = useState(1)
@@ -26,12 +27,12 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
 
   const load = useCallback((query: string, p: number) => {
     start(async () => {
-      const r = await searchMedia(query, p)
+      const r = await searchMedia(query, p, col)
       setItems((old) => (p === 1 ? r.items : [...old, ...r.items]))
       setHasMore(r.hasMore)
       setPage(p)
     })
-  }, [])
+  }, [col])
 
   useEffect(() => {
     const t = setTimeout(() => load(q, 1), q ? 300 : 0)
@@ -60,6 +61,7 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
     for (const f of list) {
       const fd = new FormData()
       fd.set('file', f)
+      fd.set('col', col)
       const r = await uploadMedia(fd)
       setBusy((b) => b - 1)
       if (!r.ok) {
@@ -95,7 +97,7 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
         <div className="mp__tools">
           <label className="field-search">
             <Icon name="search" size={18} />
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Rasm tavsifi böyiça qidiriş" />
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={isFile ? 'Fayl nomi böyiça qidiriş' : 'Rasm tavsifi böyiça qidiriş'} />
           </label>
           <button type="button" className="btn btn-dark" onClick={() => fileRef.current?.click()}>
             <Icon name="upload" size={18} />
@@ -104,7 +106,7 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
           <input
             ref={fileRef}
             type="file"
-            accept="image/*"
+            accept={isFile ? '.pdf,.doc,.docx,.xls,.xlsx' : 'image/*'}
             multiple={multiple}
             hidden
             onChange={(e) => {
@@ -119,7 +121,7 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
             {err}
           </p>
         )}
-        <div className="mp__grid">
+        <div className={isFile ? 'mp__grid is-files' : 'mp__grid'}>
           {Array.from({ length: busy }).map((_, i) => (
             <div key={`u${i}`} className="mp__cell is-loading">
               <span>Yuklanmoqda…</span>
@@ -129,12 +131,22 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
             const n = picked.findIndex((x) => x.id === m.id)
             return (
               <button key={m.id} type="button" className={n >= 0 ? 'mp__cell is-on' : 'mp__cell'} onClick={() => toggle(m)} onDoubleClick={() => !multiple && onPick([m])} title={m.alt}>
-                <img src={m.thumb} alt="" loading="lazy" />
+                {isFile ? (
+                  <span className="mp__doc">
+                    <Icon name="file" size={22} />
+                    <b>{m.alt || m.name}</b>
+                    <small>
+                      {m.name} · {m.size}
+                    </small>
+                  </span>
+                ) : (
+                  <img src={m.thumb} alt="" loading="lazy" />
+                )}
                 {n >= 0 && <span className="mp__n">{multiple ? n + 1 : <Icon name="check" size={14} />}</span>}
               </button>
             )
           })}
-          {!loading && items.length === 0 && busy === 0 && <p className="empty">Rasm topilmadi</p>}
+          {!loading && items.length === 0 && busy === 0 && <p className="empty">{isFile ? 'Fayl topilmadi' : 'Rasm topilmadi'}</p>}
           {hasMore && (
             <button type="button" className="btn btn-ghost mp__more" disabled={loading} onClick={() => load(q, page + 1)}>
               {loading ? 'Yuklanmoqda…' : 'Yana körsatiş'}
@@ -142,12 +154,12 @@ export function MediaPicker({ multiple, title, onPick, onClose }: Props) {
           )}
         </div>
         <div className="mp__foot">
-          <span className="mp__hint">Rasmni şu oynaga sudrab taşlaş ham mumkin</span>
+          <span className="mp__hint">{isFile ? 'Faylni' : 'Rasmni'} şu oynaga sudrab taşlaş ham mumkin</span>
           <button type="button" className="btn btn-ghost" onClick={onClose}>
             Bekor qiliş
           </button>
           <button type="button" className="btn btn-primary" disabled={!picked.length || busy > 0} onClick={() => onPick(picked)}>
-            {multiple && picked.length > 1 ? `${picked.length} ta rasmni qöşiş` : 'Tanlaş'}
+            {multiple && picked.length > 1 ? `${picked.length} tasini qöşiş` : 'Tanlaş'}
           </button>
         </div>
       </div>
