@@ -2430,3 +2430,340 @@ select.inp {
 :is(.aside, .edit-main) .f-row .f {
   margin-top: 0;
 }
+
+/* ============ KIRUVÇI XABARLAR ============ */
+.t-yellow {
+  background: #fff6dc;
+  color: #8a5a00;
+}
+.inbox {
+  display: grid;
+  grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.inbox__list {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  position: sticky;
+  top: 92px;
+  max-height: calc(100vh - 108px);
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+}
+.inbox__list .seg {
+  overflow-x: auto;
+}
+.inbox__list .seg a {
+  height: 34px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+.inbox__list .field-search {
+  min-width: 0;
+}
+.inbox__list .empty-state {
+  padding: 40px 12px;
+}
+.inbox__rows {
+  overflow-y: auto;
+  margin: 0 -8px;
+  padding: 0 8px;
+  scrollbar-width: thin;
+}
+.inbox__rows > li + li {
+  border-top: 0;
+}
+.irow {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: background var(--dur), border-color var(--dur);
+}
+.irow:hover {
+  background: var(--field);
+}
+.irow.is-act {
+  background: #fffaf0;
+  border-color: #ffe6a3;
+}
+.irow__top {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.irow b {
+  flex: 1;
+  min-width: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--brown);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.irow.is-new b::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  vertical-align: middle;
+}
+.irow__when {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.irow p {
+  font-size: 13.5px;
+  color: #5c5350;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.irow__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.irow__tags .pill {
+  height: 22px;
+  font-size: 11.5px;
+}
+.inbox__list .pager {
+  margin-top: 0;
+}
+.inbox__pick span {
+  font-size: 14px;
+}
+.ix {
+  padding: 26px 28px;
+}
+.ix__back {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ix__head h2 {
+  font: 700 22px/1.3 var(--f-head);
+  color: var(--brown);
+  overflow-wrap: anywhere;
+}
+.ix__head p {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.ix__status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 20px 0 4px;
+  padding: 6px;
+  border-radius: 14px;
+  background: var(--field);
+}
+.ix__status button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+  transition: background var(--dur), color var(--dur);
+}
+.ix__status button:hover:not(.is-act) {
+  background: #fff;
+  color: var(--brown);
+}
+.ix__status button.is-act {
+  box-shadow: 0 1px 3px rgba(56, 40, 34, 0.1);
+}
+.ix__fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--line);
+}
+.ix__fields > div {
+  padding: 12px 14px;
+  background: #fff;
+}
+.ix__fields dt {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.ix__fields dd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--brown);
+  overflow-wrap: anywhere;
+}
+.ix__fields dd a:hover {
+  text-decoration: underline;
+}
+.ix__copy {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+.ix__copy:hover {
+  background: var(--field);
+  color: var(--brown);
+}
+.ix__block {
+  margin-top: 22px;
+}
+.ix__block h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+  font: 700 15px var(--f-head);
+  color: var(--brown);
+}
+.ix__block h3 small {
+  font: 500 12.5px var(--f-body);
+  color: var(--muted);
+}
+.ix__block h3 + .ix__body + h3 {
+  margin-top: 16px;
+}
+.ix__body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--grey);
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #fdfbf9;
+  border: 1px solid var(--line);
+}
+.ix__te {
+  margin-bottom: 12px;
+}
+.ix__block .ix__body + .btn,
+.ix__block .ix__te + .btn {
+  margin-top: 12px;
+}
+.ix__te mark {
+  background: #ffe0d1;
+  color: #8f3410;
+  padding: 1px 3px;
+  border-radius: 4px;
+  text-decoration: underline wavy #e9825a;
+  text-underline-offset: 3px;
+}
+.ix__file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  color: var(--brown);
+  transition: background var(--dur), border-color var(--dur);
+}
+.ix__file:hover {
+  background: var(--field);
+  border-color: var(--silver);
+}
+.ix__file span {
+  flex: 1;
+  min-width: 0;
+}
+.ix__file b {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ix__file small {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.ix__note-acts {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+.ix__foot {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.ix__del {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #b4461a;
+  border: 1px solid var(--line);
+}
+.ix__del:hover {
+  background: #fff3ee;
+  border-color: #ffc7b0;
+}
+@media (max-width: 1100px) {
+  .inbox {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .inbox__list {
+    position: static;
+    max-height: none;
+  }
+  .inbox__pick {
+    display: none;
+  }
+  .inbox.has-item .inbox__list {
+    display: none;
+  }
+  .ix__back {
+    display: inline-flex;
+  }
+}
+@media (max-width: 640px) {
+  .ix {
+    padding: 18px;
+  }
+  .ix__head h2 {
+    font-size: 19px;
+  }
+}
