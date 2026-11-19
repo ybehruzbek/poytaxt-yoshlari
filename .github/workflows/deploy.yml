@@ -19,10 +19,11 @@ permissions:
 
 jobs:
   build:
+    # faqat v2 dan (qöl bilan işga tuşirilganda ham boşqa tarmoq production'ga çiqmaydi)
+    if: github.ref == 'refs/heads/v2'
     runs-on: ubuntu-latest
     env:
       IMAGE: ghcr.io/ybehruzbek/poytaxt-yoshlari
-      DOKPLOY_WEBHOOK: ${{ secrets.DOKPLOY_WEBHOOK }}
     steps:
       - uses: actions/checkout@v4
 
@@ -47,10 +48,12 @@ jobs:
             ${{ env.IMAGE }}:${{ github.sha }}
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=deploy-v2
+          cache-to: type=gha,mode=min,scope=deploy-v2
 
       - name: Dokploy'da yangilaş
-        if: env.DOKPLOY_WEBHOOK != ''
+        env:
+          DOKPLOY_WEBHOOK: ${{ secrets.DOKPLOY_WEBHOOK }}
         run: |
+          if [ -z "$DOKPLOY_WEBHOOK" ]; then echo "DOKPLOY_WEBHOOK yöq — faqat yiğildi"; exit 0; fi
           curl -fsS -X POST -H 'Content-Type: application/json' -d '{}' "$DOKPLOY_WEBHOOK"
