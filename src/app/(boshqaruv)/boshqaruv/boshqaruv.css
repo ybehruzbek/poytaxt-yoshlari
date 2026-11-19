@@ -3230,3 +3230,377 @@ a.drow:hover {
     color: var(--muted);
   }
 }
+
+/* ============ KUTUBXONA ============ */
+.lib {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.lib.has-item {
+  grid-template-columns: minmax(0, 1fr) 380px;
+}
+.lib__drop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border: 1.5px dashed var(--silver);
+  border-radius: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  transition: border-color var(--dur), background var(--dur);
+}
+.lib__drop.is-drag {
+  border-color: var(--brown);
+  background: var(--natural);
+}
+.lib__drop button {
+  font-weight: 700;
+  color: var(--brown);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lib__drop em {
+  flex-basis: 100%;
+  font-style: normal;
+  font-weight: 600;
+  color: #2e7d55;
+}
+.lib__drop em.is-bad {
+  color: #b4461a;
+}
+.lib__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.lib__cell {
+  display: block;
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--field);
+  outline: 3px solid transparent;
+  outline-offset: -3px;
+  transition: outline-color var(--dur);
+}
+.lib__cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lib__cell:hover {
+  outline-color: var(--silver);
+}
+.lib__cell.is-act {
+  outline-color: var(--brown);
+}
+.lib__files {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.lib__file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--brown);
+}
+.lib__file:hover {
+  background: var(--field);
+}
+.lib__file.is-act {
+  border-color: #ffe6a3;
+  background: #fffaf0;
+}
+.lib__file span {
+  min-width: 0;
+}
+.lib__file b,
+.lib__file small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lib__file b {
+  font-size: 14.5px;
+}
+.lib__file small {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.lib__side {
+  position: sticky;
+  top: 92px;
+}
+.libd {
+  padding: 18px;
+}
+.libd__img {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--field);
+}
+.libd__img img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+}
+.libd__doc {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 26px 16px;
+  border-radius: 14px;
+  background: var(--field);
+  color: var(--brown);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.libd__doc span {
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+.libd .f {
+  margin-top: 16px;
+}
+.libd__meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px 12px;
+  margin-top: 16px;
+  font-size: 13.5px;
+}
+.libd__meta dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.libd__meta dd {
+  color: var(--brown);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.libd__copy {
+  margin-top: 14px;
+}
+.libd__use {
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.libd__use a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+.libd__use a:hover {
+  background: var(--field);
+}
+.libd__use small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.libd__use b {
+  display: block;
+  font-size: 14px;
+  color: var(--brown);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 1100px) {
+  .lib.has-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lib.has-item .lib__main {
+    display: none;
+  }
+  .lib__side {
+    position: static;
+  }
+}
+@media (max-width: 640px) {
+  .lib__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+}
+.lib__side,
+.lib__main,
+.libd,
+.libd__use li {
+  min-width: 0;
+}
+.libd__use a {
+  overflow: hidden;
+}
+
+/* ============ FOYDALANUVÇILAR VA HISOBIM ============ */
+.users-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  max-width: 980px;
+}
+.users {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  max-width: 980px;
+}
+.users > li {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+}
+.users > li.is-open {
+  border-color: var(--silver);
+}
+.urow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  text-align: left;
+  border-radius: 16px;
+}
+.urow:hover {
+  background: #fdfbf9;
+}
+.urow__t {
+  flex: 1;
+  min-width: 0;
+}
+.urow__t b,
+.urow__t small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.urow__t b {
+  font-size: 15px;
+  color: var(--brown);
+}
+.urow__t b em {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--muted);
+}
+.urow__t small {
+  font-size: 13px;
+  color: var(--muted);
+}
+.uedit {
+  padding: 4px 18px 18px;
+}
+section.uedit {
+  max-width: 980px;
+  margin-bottom: 16px;
+  padding: 22px;
+}
+.uedit h2,
+.acct__h {
+  font: 700 18px var(--f-head);
+  color: var(--brown);
+  margin-bottom: 6px;
+}
+.uedit .f,
+.acct .f {
+  margin-top: 16px;
+}
+.uedit__acts {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+.uedit__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.roles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.roles button {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  text-align: left;
+  transition: border-color var(--dur), background var(--dur);
+}
+.roles button:hover {
+  border-color: var(--silver);
+}
+.roles button.is-act {
+  border-color: var(--brown);
+  background: #fdfaf7;
+}
+.roles b {
+  font-size: 14px;
+  color: var(--brown);
+}
+.roles small {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.pw-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.pw-row .inp {
+  flex: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.02em;
+}
+.acct {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  max-width: 1040px;
+}
+.acct .switch-row {
+  margin-top: 14px;
+}
+@media (max-width: 900px) {
+  .acct,
+  .roles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .urow .pill {
+    display: none;
+  }
+}

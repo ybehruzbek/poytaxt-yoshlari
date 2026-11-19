@@ -19,7 +19,6 @@ export type MenuGroup = { t?: string; roles?: Role[]; items: (MenuItem | MenuFol
 const KONTENT: Role[] = ['admin', 'muharrir']
 const KIRUVCHI: Role[] = ['admin', 'operator']
 
-const c = (slug: string) => `/admin/collections/${slug}`
 
 export const MENU: MenuGroup[] = [
   { items: [{ t: 'Boşqaruv paneli', href: '/boshqaruv', icon: 'home' }] },
@@ -117,9 +116,9 @@ export const MENU: MenuGroup[] = [
   {
     t: 'Tizim',
     items: [
-      { t: 'Rasmlar', href: c('media'), eski: true, icon: 'folder', roles: KONTENT },
-      { t: 'Fayllar', href: c('files'), eski: true, icon: 'file', roles: KONTENT },
-      { t: 'Foydalanuvçilar', href: c('users'), eski: true, icon: 'shield', roles: ['admin'] },
+      { t: 'Rasmlar', href: '/boshqaruv/kutubxona', icon: 'folder', roles: KONTENT },
+      { t: 'Hujjat fayllari', href: '/boshqaruv/kutubxona?tur=fayl', icon: 'file', roles: KONTENT },
+      { t: 'Foydalanuvçilar', href: '/boshqaruv/foydalanuvchilar', icon: 'shield', roles: ['admin'] },
     ],
   },
 ]

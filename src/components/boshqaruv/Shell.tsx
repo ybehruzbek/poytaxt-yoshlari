@@ -154,10 +154,10 @@ export function Shell({ initialCollapsed, menu, pinned, counts, user, children }
 
         <div className="me">
           <span className="ava">{user.initials}</span>
-          <div className="me__t">
+          <Link href="/boshqaruv/hisob" className="me__t" title="Hisobim">
             <b>{user.name}</b>
             <small>{user.role}</small>
-          </div>
+          </Link>
           <form action={chiqish}>
             <button type="submit" title="Çiqiş">
               <Icon name="logout" size={18} />
