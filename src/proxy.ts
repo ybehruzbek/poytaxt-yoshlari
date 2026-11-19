@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-import { defaultLocale, isLocale } from './i18n/config'
+import { defaultLocale, isLive, isLocale } from './i18n/config'
 
 /**
  * Til ko'rsatilmagan manzillarni /uz/... ga yo'naltiradi. Admin, API va fayllarga tegmaydi.
@@ -23,9 +23,11 @@ export function proxy(request: NextRequest) {
     return res
   }
   const first = pathname.split('/')[1]
-  if (isLocale(first)) return NextResponse.next()
+  if (isLocale(first) && isLive(first)) return NextResponse.next()
 
-  const target = `/${defaultLocale}${pathname === '/' ? '' : pathname}${search}`
+  // til yöq — /uz qöşiladi; tarjimasi tayyor bölmagan til (/ru, /en) — vaqtinça özbekça nusxasiga
+  const rest = isLocale(first) ? pathname.slice(first.length + 1) : pathname
+  const target = `/${defaultLocale}${rest === '/' ? '' : rest}${search}`
   const base = process.env.NEXT_PUBLIC_SERVER_URL
   if (base) return NextResponse.redirect(new URL(target, base))
   // Ishonchli domen sozlanmagan (faqat lokal ishlab chiqishda kutiladi) — joriy so'rov manzili ishlatiladi.

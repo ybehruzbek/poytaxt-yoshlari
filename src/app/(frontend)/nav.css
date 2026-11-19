@@ -434,7 +434,7 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
   right: 0;
   top: calc(100% + 12px);
   z-index: 40;
-  min-width: 210px;
+  min-width: 250px;
   padding: 8px;
   border-radius: 20px;
   background: var(--bg);
@@ -465,6 +465,31 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
 .lx-menu svg {
   color: var(--blue);
 }
+/* tarjimasi hali tayyor emas: xira, bosilmaydi, öngda “Tez orada” belgisi */
+.lx-menu .lx-soon {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  font: 600 15px/1.2 var(--f-body);
+  color: var(--navy);
+  cursor: default;
+}
+/* xiralik — rangni emas, şaffoflikni pasaytiradi: tungi rejimda ham töğri körinadi */
+.lx-soon > :is(b, span) {
+  opacity: 0.45;
+}
+.lx-soon em {
+  padding: 5px 9px;
+  border-radius: 99px;
+  background: var(--soft);
+  font: 700 11.5px/1 var(--f-head);
+  font-style: normal;
+  white-space: nowrap;
+  color: var(--navy);
+}
 /* tepada (aylantirilmagan): töq panel — navbar menyusidek */
 .site-head:not(.scrolled) .lx-menu {
   background: var(--navy-bg);
@@ -479,6 +504,13 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .mnav li.is-open > .mnav-li
 }
 .site-head:not(.scrolled) .lx-menu a.on,
 .site-head:not(.scrolled) .lx-menu svg {
+  color: var(--yellow);
+}
+.site-head:not(.scrolled) .lx-menu .lx-soon {
+  color: #fff;
+}
+.site-head:not(.scrolled) .lx-soon em {
+  background: rgba(255, 255, 255, 0.1);
   color: var(--yellow);
 }
 /* töq hero ustida tugma oq */

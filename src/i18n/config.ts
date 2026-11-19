@@ -9,6 +9,10 @@ export const localeLabels: Record<Locale, string> = {
   en: 'English',
 }
 
+/** Hali tarjima qilinmagan tillar: til tanlagiçda “Tez orada” deb öçiq turadi, manzillari /uz ga yönaltiriladi */
+export const soonLocales: readonly Locale[] = ['ru', 'en']
+export const isLive = (l: Locale) => !soonLocales.includes(l)
+
 export function isLocale(value: string | undefined): value is Locale {
   return !!value && (locales as readonly string[]).includes(value)
 }

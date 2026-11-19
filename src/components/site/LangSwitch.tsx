@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
-import { type Locale, localeLabels, locales } from '@/i18n/config'
+import { type Locale, isLive, localeLabels, locales } from '@/i18n/config'
 
 type P = { locale: Locale; path: string }
 
@@ -78,18 +78,27 @@ export function LangSwitch({ locale, path }: P) {
         <ul className="lx-menu">
           {locales.map((l) => (
             <li key={l}>
-              <Link
-                href={hrefOf(l, path)}
-                hrefLang={l}
-                lang={l}
-                className={l === locale ? 'on' : undefined}
-                aria-current={l === locale ? 'true' : undefined}
-                onClick={() => setOpen(false)}
-              >
-                <b>{l.toUpperCase()}</b>
-                <span>{localeLabels[l]}</span>
-                {l === locale && <Check />}
-              </Link>
+              {isLive(l) ? (
+                <Link
+                  href={hrefOf(l, path)}
+                  hrefLang={l}
+                  lang={l}
+                  className={l === locale ? 'on' : undefined}
+                  aria-current={l === locale ? 'true' : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  <b>{l.toUpperCase()}</b>
+                  <span>{localeLabels[l]}</span>
+                  {l === locale && <Check />}
+                </Link>
+              ) : (
+                // tarjimasi hali tayyor emas — bosilmaydi
+                <span className="lx-soon" aria-disabled="true">
+                  <b>{l.toUpperCase()}</b>
+                  <span lang={l}>{localeLabels[l]}</span>
+                  <em>Tez orada</em>
+                </span>
+              )}
             </li>
           ))}
         </ul>
