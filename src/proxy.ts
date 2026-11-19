@@ -32,10 +32,9 @@ export function proxy(request: NextRequest) {
     // kirgan, lekin administrator bölmagan xodim yangi panelga ötkaziladi
     const role = tokenRole(request)
     if (role && role !== 'admin') {
-      const url = request.nextUrl.clone()
-      url.pathname = '/boshqaruv'
-      url.search = ''
-      return NextResponse.redirect(url)
+      // manzil Host sarlavhasidan emas, ishonçli domendan quriladi (pastdagi qoida bilan bir xil)
+      const base = process.env.NEXT_PUBLIC_SERVER_URL
+      return NextResponse.redirect(new URL('/boshqaruv', base || request.nextUrl.origin))
     }
     if (request.cookies.has(ADMIN_LNG)) return NextResponse.next()
     // şu söröv ham özbekça çizilsin: cookie söröv sarlavhasiga qöşiladi, javobda esa brauzerga saqlanadi
