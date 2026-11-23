@@ -36,6 +36,27 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Yiğiş va ghcr.io ga joylaş
+        id: build1
+        # GitHub serverida vaqti-vaqti bilan tarmoq uzilişi (masalan, Google şriftlarini yuklaş) yiğişni
+        # yiqitadi — bunda keyingi qadam bir marta qayta urinadi
+        continue-on-error: true
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          build-args: |
+            NEXT_PUBLIC_SERVER_URL=https://yoshkent.uz
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+          cache-from: type=gha,scope=deploy-v2
+          cache-to: type=gha,mode=min,scope=deploy-v2
+
+      - name: Yiğiş — qayta uriniş
+        if: steps.build1.outcome == 'failure'
         uses: docker/build-push-action@v6
         with:
           context: .
