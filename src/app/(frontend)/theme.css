@@ -107,6 +107,11 @@ html[data-theme='dark'] :is(.lx-btn, .a11y-btn:not(.on), .a11y-reset:disabled) {
 html[data-theme='dark'] main img:not([src$='.svg']) {
   filter: brightness(0.92);
 }
+/* oq fonli odam suratlari va logotiplar kunduzi multiply bilan kartaga singadi; töq fonda multiply suratni
+   qop-qora qiladi — tungi rejimda surat öz holiça körsatiladi (yetakçilar, Kengaş jamoasi, hamkorlar) */
+html[data-theme='dark'] img {
+  mix-blend-mode: normal !important;
+}
 
 /* qolgan oq/yorqin fonlar */
 html[data-theme='dark'] :is(.site-head .header, .site-head.scrolled .header, .nav.open) {
