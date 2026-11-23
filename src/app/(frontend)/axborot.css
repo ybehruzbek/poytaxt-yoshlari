@@ -137,6 +137,8 @@
 }
 .ax-lb-in {
   display: grid;
+  /* ustun ekran kengligidan oşmaydi — aks holda katta surat ustunni öz kengligigaça (1280px) çözib yuboradi */
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   height: 100%;
 }
@@ -145,6 +147,9 @@
   justify-content: space-between;
   gap: 20px;
   padding: 18px 24px;
+}
+.ax-lb-top > div {
+  min-width: 0;
 }
 .ax-lb-top h2 {
   font: 700 18px/1.35 var(--f-head);
@@ -173,6 +178,7 @@
 .ax-lb-fig {
   position: relative;
   display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
   min-height: 0;
   margin: 0;
