@@ -32,6 +32,9 @@ const DEF: S = {
   read: false,
 }
 const KEY = 'a11y'
+/** Tungi rejim vaqtinça öçiq (suratlar va ranglar qayta işlanmoqda): tugma va “Ekran rejimi” bölimi körsatilmaydi,
+ *  avval tanlangan tungi sozlama qöllanmaydi. Qayta yoqiş uçun — true */
+const TUNGI_REJIM = false
 /** media-sörov (kod qiymati — imlo tekşiruvi tegmaydi) */
 const DARK_MQ = { code: '(prefers-color-scheme: dark)' }.code
 const FONTS = [1, 1.1, 1.2, 1.3, 1.45, 1.6] // şrift: 0 — odatiy
@@ -49,7 +52,7 @@ function apply(s: S) {
   const h = document.documentElement
   const set = (k: string, v: string | false) => (v ? h.setAttribute(k, v) : h.removeAttribute(k))
   const dark =
-    s.theme === 'dark' || (s.theme === 'auto' && matchMedia(DARK_MQ).matches)
+    TUNGI_REJIM && (s.theme === 'dark' || (s.theme === 'auto' && matchMedia(DARK_MQ).matches))
   set('data-theme', dark && 'dark')
   set('data-a11y-mode', s.mode !== 'normal' && s.mode)
   set('data-a11y-noimg', s.noImg && '1')
@@ -181,23 +184,24 @@ export function A11yPanel() {
 
   const changed = JSON.stringify(s) !== JSON.stringify(DEF)
   const isDark =
-    s.theme === 'dark' ||
-    (s.theme === 'auto' &&
-      typeof window !== 'undefined' &&
-      matchMedia(DARK_MQ).matches)
+    TUNGI_REJIM &&
+    (s.theme === 'dark' ||
+      (s.theme === 'auto' && typeof window !== 'undefined' && matchMedia(DARK_MQ).matches))
 
   return (
     <>
-      <button
-        type="button"
-        className="a11y-btn a11y-moon"
-        aria-label={isDark ? 'Kunduzgi rejim' : 'Tungi rejim'}
-        title={isDark ? 'Kunduzgi rejim' : 'Tungi rejim'}
-        aria-pressed={isDark}
-        onClick={() => upd({ theme: isDark ? 'light' : 'dark' })}
-      >
-        <Ic d={isDark ? SUN : MOON} />
-      </button>
+      {TUNGI_REJIM && (
+        <button
+          type="button"
+          className="a11y-btn a11y-moon"
+          aria-label={isDark ? 'Kunduzgi rejim' : 'Tungi rejim'}
+          title={isDark ? 'Kunduzgi rejim' : 'Tungi rejim'}
+          aria-pressed={isDark}
+          onClick={() => upd({ theme: isDark ? 'light' : 'dark' })}
+        >
+          <Ic d={isDark ? SUN : MOON} />
+        </button>
+      )}
       <button
         type="button"
         className={`a11y-btn${changed && JSON.stringify({ ...s, theme: 'light' }) !== JSON.stringify(DEF) ? ' on' : ''}`}
@@ -231,22 +235,24 @@ export function A11yPanel() {
                 </button>
               </header>
 
-              <section className="a11y-sec">
-                <h3>Ekran rejimi</h3>
-                <div className="a11y-theme" role="radiogroup" aria-label="Ekran rejimi">
-                  {THEMES.map((t) => (
-                    <button
-                      key={t.k}
-                      type="button"
-                      role="radio"
-                      aria-checked={s.theme === t.k}
-                      onClick={() => upd({ theme: t.k })}
-                    >
-                      {t.t}
-                    </button>
-                  ))}
-                </div>
-              </section>
+              {TUNGI_REJIM && (
+                <section className="a11y-sec">
+                  <h3>Ekran rejimi</h3>
+                  <div className="a11y-theme" role="radiogroup" aria-label="Ekran rejimi">
+                    {THEMES.map((t) => (
+                      <button
+                        key={t.k}
+                        type="button"
+                        role="radio"
+                        aria-checked={s.theme === t.k}
+                        onClick={() => upd({ theme: t.k })}
+                      >
+                        {t.t}
+                      </button>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               <section className="a11y-sec">
                 <h3>Rang rejimi</h3>
