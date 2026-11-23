@@ -32,8 +32,8 @@ const DEF: S = {
   read: false,
 }
 const KEY = 'a11y'
-/** Tungi rejim vaqtinça öçiq (suratlar va ranglar qayta işlanmoqda): tugma va “Ekran rejimi” bölimi körsatilmaydi,
- *  avval tanlangan tungi sozlama qöllanmaydi. Qayta yoqiş uçun — true */
+/** Tungi rejim vaqtinça öçiq (suratlar va ranglar qayta işlanmoqda): oy tugmasi va “Ekran rejimi” bölimi
+ *  “Tez orada” holatida körinadi, avval tanlangan tungi sozlama qöllanmaydi. Qayta yoqiş uçun — true */
 const TUNGI_REJIM = false
 /** media-sörov (kod qiymati — imlo tekşiruvi tegmaydi) */
 const DARK_MQ = { code: '(prefers-color-scheme: dark)' }.code
@@ -125,6 +125,14 @@ export function A11yPanel() {
   const [s, setS] = useState<S>(DEF)
   const [ready, setReady] = useState(false)
   const close = useRef<HTMLButtonElement>(null)
+  // oy tugmasi bosilganda qisqa “Tez orada” yozuvi
+  const [soon, setSoon] = useState(false)
+  const soonT = useRef<number>(undefined)
+  const showSoon = () => {
+    setSoon(true)
+    window.clearTimeout(soonT.current)
+    soonT.current = window.setTimeout(() => setSoon(false), 2600)
+  }
 
   // saqlangan sozlamalar sahifa çizilişidan oldin qöllanadi
   useLayoutEffect(() => {
@@ -190,7 +198,7 @@ export function A11yPanel() {
 
   return (
     <>
-      {TUNGI_REJIM && (
+      {TUNGI_REJIM ? (
         <button
           type="button"
           className="a11y-btn a11y-moon"
@@ -200,6 +208,22 @@ export function A11yPanel() {
           onClick={() => upd({ theme: isDark ? 'light' : 'dark' })}
         >
           <Ic d={isDark ? SUN : MOON} />
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="a11y-btn a11y-moon is-soon"
+          aria-label="Tungi rejim — tez orada"
+          title="Tungi rejim — tez orada"
+          aria-disabled="true"
+          onClick={showSoon}
+        >
+          <Ic d={MOON} />
+          {soon && (
+            <span className="a11y-tip" role="status">
+              Tungi rejim tez orada
+            </span>
+          )}
         </button>
       )}
       <button
@@ -235,24 +259,26 @@ export function A11yPanel() {
                 </button>
               </header>
 
-              {TUNGI_REJIM && (
-                <section className="a11y-sec">
-                  <h3>Ekran rejimi</h3>
-                  <div className="a11y-theme" role="radiogroup" aria-label="Ekran rejimi">
-                    {THEMES.map((t) => (
-                      <button
-                        key={t.k}
-                        type="button"
-                        role="radio"
-                        aria-checked={s.theme === t.k}
-                        onClick={() => upd({ theme: t.k })}
-                      >
-                        {t.t}
-                      </button>
-                    ))}
-                  </div>
-                </section>
-              )}
+              <section className="a11y-sec">
+                <h3>
+                  Ekran rejimi
+                  {!TUNGI_REJIM && <em className="a11y-soon">Tez orada</em>}
+                </h3>
+                <div className="a11y-theme" role="radiogroup" aria-label="Ekran rejimi">
+                  {THEMES.map((t) => (
+                    <button
+                      key={t.k}
+                      type="button"
+                      role="radio"
+                      aria-checked={(TUNGI_REJIM ? s.theme : 'light') === t.k}
+                      disabled={!TUNGI_REJIM}
+                      onClick={() => upd({ theme: t.k })}
+                    >
+                      {t.t}
+                    </button>
+                  ))}
+                </div>
+              </section>
 
               <section className="a11y-sec">
                 <h3>Rang rejimi</h3>

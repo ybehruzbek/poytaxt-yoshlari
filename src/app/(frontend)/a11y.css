@@ -271,6 +271,42 @@ html[data-a11y-read] main .rv {
   background: var(--navy-bg);
   color: #fff;
 }
+/* tungi rejim vaqtinça öçiq (TUNGI_REJIM, A11yPanel.tsx): oy tugmasi turadi, bosilsa “Tez orada” yozuvi çiqadi */
+.a11y-moon {
+  position: relative;
+}
+.a11y-moon.is-soon {
+  cursor: help;
+}
+.a11y-tip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 50;
+  padding: 9px 13px;
+  border-radius: 12px;
+  background: var(--navy-bg);
+  box-shadow: 0 14px 34px rgba(83, 40, 34, 0.22);
+  font: 600 13px/1 var(--f-body);
+  white-space: nowrap;
+  color: #fff;
+  pointer-events: none;
+  animation: dd-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.a11y-soon {
+  align-self: center;
+  padding: 5px 9px;
+  border-radius: 99px;
+  background: var(--soft);
+  font: 700 11.5px/1 var(--f-head);
+  font-style: normal;
+  color: var(--navy);
+}
+.a11y-theme button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 @media (max-width: 640px) {
   .a11y-moon {
     display: none;
