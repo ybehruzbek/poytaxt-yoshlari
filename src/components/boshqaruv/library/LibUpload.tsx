@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 
 import { uploadMedia } from '@/lib/boshqaruv/media-actions'
+import { siqish } from '@/lib/boshqaruv/siqish'
 
 import { Icon } from '../Icon'
 
@@ -25,7 +26,8 @@ export function LibUpload({ kind }: { kind: 'media' | 'files' }) {
     const bad: string[] = []
     for (const f of list) {
       const fd = new FormData()
-      fd.set('file', f)
+      // rasm brauzerda siqiladi (2000 px, 2 MB gaça) — yuboriş va serverdagi işlov tezlaşadi
+      fd.set('file', isFile ? f : await siqish(f))
       fd.set('col', kind)
       const r = await uploadMedia(fd)
       setBusy((b) => b - 1)

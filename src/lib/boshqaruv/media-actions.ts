@@ -8,7 +8,9 @@ import { getPayloadClient, getUser } from './auth'
 export type MediaItem = { id: number; url: string; thumb: string; alt: string; w?: number | null; h?: number | null; name?: string; size?: string }
 export type LibCol = 'media' | 'files'
 
-const MAX = 10 * 1024 * 1024 // 10 MB — server action çegarasi 11 MB (next.config.ts); server rasmni 2000 px gaça kiçraytiradi
+const MAX = 10 * 1024 * 1024 // hujjatlar: 10 MB — server action çegarasi 11 MB (next.config.ts)
+/** rasmlar brauzerda siqib yuboriladi (lib/boshqaruv/siqish.ts) — serverga 2 MB dan katta rasm kelmasligi kerak */
+const RASM_MAX = 2 * 1024 * 1024
 const TYPES: Record<LibCol, string[]> = {
   media: ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif', 'image/heic', 'image/heif'],
   files: [
@@ -68,6 +70,8 @@ export async function uploadMedia(fd: FormData): Promise<{ ok: true; item: Media
   const file = fd.get('file')
   if (!(file instanceof File) || file.size === 0) return { ok: false, message: 'Fayl tanlanmadi.' }
   if (file.size > MAX) return { ok: false, message: 'Fayl juda katta (10 MB dan oşmasin).' }
+  if (col === 'media' && file.size > RASM_MAX)
+    return { ok: false, message: 'Rasm juda katta (2 MB dan oşmasin). Boşqa formatda (JPG yoki PNG) saqlab qayta yuklang.' }
   if (!TYPES[col].includes(file.type))
     return { ok: false, message: col === 'files' ? 'Faqat PDF, Word yoki Excel fayl yuklaş mumkin.' : 'Faqat rasm yuklaş mumkin (JPG, PNG, WebP).' }
   const name = String(fd.get('alt') ?? '').trim() || file.name.replace(/\.[a-z0-9]+$/i, '').replace(/[-_]+/g, ' ')

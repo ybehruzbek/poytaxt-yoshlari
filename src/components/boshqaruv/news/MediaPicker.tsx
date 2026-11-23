@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState, useTransition } from 'react'
 
 import { type LibCol, type MediaItem, searchMedia, uploadMedia } from '@/lib/boshqaruv/media-actions'
+import { siqish } from '@/lib/boshqaruv/siqish'
 
 import { Icon } from '../Icon'
 
@@ -60,7 +61,8 @@ export function MediaPicker({ multiple, title, col = 'media', onPick, onClose }:
     setBusy((b) => b + list.length)
     for (const f of list) {
       const fd = new FormData()
-      fd.set('file', f)
+      // rasm brauzerda siqiladi (2000 px, 2 MB gaça) — yuboriş va serverdagi işlov tezlaşadi
+      fd.set('file', col === 'files' ? f : await siqish(f))
       fd.set('col', col)
       const r = await uploadMedia(fd)
       setBusy((b) => b - 1)

@@ -42,7 +42,8 @@ export const Media: CollectionConfig = {
       { name: 'card', width: 800, height: 500, position: 'centre' },
       { name: 'hero', width: 1600 },
     ],
-    formatOptions: { format: 'webp', options: { quality: 90 } },
+    // 82 — közga farqi sezilmaydi, fayl ~35% yengil: sayt tezroq oçiladi, server rasmni tezroq tayyorlaydi
+    formatOptions: { format: 'webp', options: { quality: 82 } },
     // brauzer rasmni bir hafta keşda saqlaydi, keyingi oçilişlarda qayta yuklamaydi;
     // muddat tugagaç ham eski nusxa darhol körsatiladi va fonda yangilanadi
     modifyResponseHeaders: ({ headers }) => {
