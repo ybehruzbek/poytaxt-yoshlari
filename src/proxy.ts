@@ -50,13 +50,16 @@ export function proxy(request: NextRequest) {
   // til yöq — /uz qöşiladi; tarjimasi tayyor bölmagan til (/ru, /en) — vaqtinça özbekça nusxasiga
   const rest = isLocale(first) ? pathname.slice(first.length + 1) : pathname
   const target = `/${defaultLocale}${rest === '/' ? '' : rest}${search}`
+  // til körsatilmagan manzil doimiy (308) — qidiruv tizimlari /uz ni asosiy deb biladi;
+  // /ru va /en vaqtinça (307) — tarjima tayyor bölganda öz manzillari qaytadi
+  const status = isLocale(first) ? 307 : 308
   const base = process.env.NEXT_PUBLIC_SERVER_URL
-  if (base) return NextResponse.redirect(new URL(target, base))
+  if (base) return NextResponse.redirect(new URL(target, base), status)
   // Ishonchli domen sozlanmagan (faqat lokal ishlab chiqishda kutiladi) — joriy so'rov manzili ishlatiladi.
   // Serverda NEXT_PUBLIC_SERVER_URL ALBATTA sozlanishi kerak.
   const url = request.nextUrl.clone()
   url.pathname = `/${defaultLocale}${pathname === '/' ? '' : pathname}`
-  return NextResponse.redirect(url)
+  return NextResponse.redirect(url, status)
 }
 
 export const config = {

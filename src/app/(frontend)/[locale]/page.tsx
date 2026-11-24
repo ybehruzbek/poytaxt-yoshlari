@@ -13,6 +13,9 @@ import type { Locale } from '@/i18n/config'
 
 import '../odamlar.css'
 
+/** Boş sahifaning yagona rasmiy manzili (yoshkent.uz ham şu yerga yönaltiriladi) */
+export const metadata = { alternates: { canonical: '/uz' } }
+
 /** Bosh sahifa har 60 soniyada yangilanadi (yangi yangiliklar shu orqali ko'rinadi) */
 export const revalidate = 60
 
