@@ -3,6 +3,7 @@ import { Inter, Montserrat } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+import { CfBeacon } from '@/components/site/CfBeacon'
 import { Footer } from '@/components/site/Footer'
 import { Header } from '@/components/site/Header'
 import { LoopGuard } from '@/components/site/LoopGuard'
@@ -111,6 +112,7 @@ export default async function LocaleLayout(props: {
         <LoopGuard />
         <Typograf />
         <TextErrorReport />
+        <CfBeacon />
       </body>
     </html>
   )
