@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
 import { findNav } from '@/config/nav'
+import { breadcrumbLd } from '@/lib/seo'
+import { JsonLd } from './JsonLd'
 
 type Extra = { label: string; href?: string }
 
@@ -26,8 +28,17 @@ export function PageCrumbs({
     ...trail.map((t) => ({ label: t.label, href: t.href })),
     ...extra,
   ]
+  // qidiruv tizimlari uçun: manzili bor bandlar va oxirgi (joriy) sahifa
+  const ld = breadcrumbLd([
+    { name: 'Boş sahifa', url: L('') },
+    ...items
+      .map((it, i) => ({ name: it.label, url: it.href ? L(it.href) : undefined, last: i === items.length - 1 }))
+      .filter((it) => it.url || it.last)
+      .map(({ name, url }) => ({ name, url })),
+  ])
   return (
     <div className="pg-crumbs">
+      <JsonLd data={ld} />
       <nav className="crumbs" aria-label="Yöl">
         <Link href={L('')}>Boş sahifa</Link>
         {items.map((it, i) => {

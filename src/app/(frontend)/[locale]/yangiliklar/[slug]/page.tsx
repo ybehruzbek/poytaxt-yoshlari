@@ -11,6 +11,8 @@ import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { Article, type ArticleData, type MiniNews } from '@/components/yangiliklar/Article'
 import { toYnItem } from '@/components/yangiliklar/data'
 import { reactionCounts, ratingStats } from '@/lib/news-votes'
+import { JsonLd } from '@/components/site/JsonLd'
+import { newsArticleLd } from '@/lib/seo'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
@@ -44,6 +46,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   return {
     title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`,
     description: doc.excerpt,
+    // yagona rasmiy manzil: söröv parametrli nusxalar shu sahifaga birlaşadi
+    alternates: { canonical: `/uz/yangiliklar/${slug}` },
     // ulaşilganda maqolaning öz surati va sarlavhasi körinadi
     openGraph: {
       type: 'article',
@@ -127,12 +131,25 @@ export default async function NewsPage(props: Props) {
   const related = [...same.docs, ...last.docs.filter((n) => !same.docs.some((x) => x.id === n.id))].slice(0, 3).map(mini)
 
   return (
-    <Article
+    <>
+      <JsonLd
+        data={newsArticleLd({
+          url: a.url,
+          title: doc.title,
+          description: doc.excerpt,
+          image: img?.sizes?.hero?.url || img?.url || null,
+          published: doc.publishedAt,
+          modified: doc.updatedAt,
+          author: a.author?.name,
+        })}
+      />
+      <Article
       a={a}
       crumbs={<PageCrumbs locale={locale} path="/yangiliklar" extra={[{ label: doc.title }]} />}
       related={related}
       latest={last.docs.slice(0, 6).map(mini)}
       listHref={`/${locale}/yangiliklar`}
-    />
+      />
+    </>
   )
 }

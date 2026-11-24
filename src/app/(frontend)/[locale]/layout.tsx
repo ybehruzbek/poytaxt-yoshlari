@@ -32,6 +32,9 @@ import '../skeleton.css'
 import { MiqdorProvider } from '@/components/site/MiqdorProvider'
 import { IMG_ERR, LITE, LOAD_GATE } from '@/lib/inline-scripts'
 import { getMiqdorlar } from '@/lib/cms/miqdorlar'
+import { getSocials } from '@/lib/socials-server'
+import { organizationLd, SITE_DESC, SITE_NAME } from '@/lib/seo'
+import { JsonLd } from '@/components/site/JsonLd'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
 // `subsets` — faqat OLDINDAN yuklanadigan qismlar: latin va latin-ext (Ö Ğ Ş Ç ʼ, yangi alifbo).
@@ -50,13 +53,10 @@ const body = Inter({
   display: 'swap',
 })
 
-const SITE_NAME = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
-
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
   title: SITE_NAME,
-  description:
-    'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşining rasmiy veb-sayti: Kengaş faoliyati, boşlanğiç taşkilotlar, yoşlar uçun imkoniyatlar, hujjatlar va yangiliklar.',
+  description: SITE_DESC,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32 48x48' },
@@ -86,7 +86,7 @@ export default async function LocaleLayout(props: {
   const { locale } = await props.params
   if (!isLocale(locale)) notFound()
   // pul miqdorlari (BHM, stipendiya) — brauzerdagi kalkulyatorlar ham admin paneldagi joriy qiymatdan hisoblaydi
-  const miqdor = await getMiqdorlar(locale)
+  const [miqdor, socials] = await Promise.all([getMiqdorlar(locale), getSocials()])
 
   return (
     // data-scroll-behavior: sahifa almaşganda Next.js silliq aylantirişni vaqtinça öçiradi — yangi sahifa tepadan oçiladi
@@ -113,6 +113,7 @@ export default async function LocaleLayout(props: {
         <Typograf />
         <TextErrorReport />
         <CfBeacon />
+        <JsonLd data={organizationLd(Object.values(socials).filter(Boolean))} />
       </body>
     </html>
   )
