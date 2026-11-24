@@ -102,7 +102,10 @@ function Royxat({ title, rows, by = 'koris', limit = 8, bosh }: { title: string;
   )
 }
 
-/** Eng köp oçilgan sahifalar: menyu sahifasi nomi yoki yangilik sarlavhasi */
+/** “//boşqa.sayt” yoki “javascript:” kabi manzillar havola bölmaydi */
+const XAVFSIZ_YOL = /^\/(?![/\\])[A-Za-z0-9._~\-/%]*$/
+
+/** Eng köp oçilgan sahifalar: menyu sahifasi nomi yoki yangilik sarlavhasi (faqat eʼlon qilinganlari) */
 async function sahifaQatorlari(list: Qator[]): Promise<Row[]> {
   const rows = sahifalar(list).slice(0, 10)
   const slugs = rows.map((r) => yangilikSlug(r.k)).filter((s): s is string => Boolean(s))
@@ -112,7 +115,7 @@ async function sahifaQatorlari(list: Qator[]): Promise<Row[]> {
       const payload = await getPayloadClient()
       const r = await payload.find({
         collection: 'news',
-        where: { slug: { in: slugs } },
+        where: { and: [{ slug: { in: slugs } }, { _status: { equals: 'published' } }] },
         select: { title: true, slug: true },
         limit: slugs.length,
         depth: 0,
@@ -126,6 +129,8 @@ async function sahifaQatorlari(list: Qator[]): Promise<Row[]> {
   return rows.map((r) => {
     const slug = yangilikSlug(r.k)
     const name = (slug && titles.get(slug)) || menyuNomi(r.k) || r.k
+    // manzil Cloudflare'ga brauzerdan keladi: faqat öz saytimizdagi oddiy yöl havolaga aylanadi
+    if (!XAVFSIZ_YOL.test(r.k)) return { ...r, nom: name }
     return {
       ...r,
       nom: (
