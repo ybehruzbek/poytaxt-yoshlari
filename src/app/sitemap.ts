@@ -3,6 +3,9 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import { NAV } from '@/config/nav'
+import { getPress } from '@/lib/cms/axborot'
+import { getOtts } from '@/lib/cms/biz'
+import { getFaoliyat } from '@/lib/cms/faoliyat'
 
 const SITE = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/$/, '')
 // RU va EN tarjimalari hali tayyor emas — xaritada faqat özbekça sahifalar
@@ -10,9 +13,10 @@ const L = 'uz'
 
 export const revalidate = 3600
 
-/** Sayt xaritasi: menyudagi barça sahifalar va eʼlon qilingan yangiliklar */
+/** Sayt xaritasi: menyudagi barça sahifalar, içki sahifalar (OTT yetakçilari, loyihalar, yönalişlar,
+ * press-relizlar, Ustav) va eʼlon qilingan yangiliklar */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const paths = new Set<string>([''])
+  const paths = new Set<string>(['', '/hujjatlar/normativ/ustav'])
   for (const g of NAV) {
     if (g.href) paths.add(g.href)
     for (const i of g.items ?? []) {
@@ -20,6 +24,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       for (const c of i.children ?? []) paths.add(c.href)
     }
   }
+  // içki sahifalar: har biri alohida qidiruv natijasi (masalan, “TATU yoshlar ittifoqi”); baza vaqtinça
+  // mavjud bölmasa ham qolganlari qaytariladi
+  const ichki = await Promise.allSettled([
+    getOtts(L).then((l) => l.filter((o) => o.leader).map((o) => `/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim/${o.leader!.slug}`)),
+    getFaoliyat(L).then((f) => [
+      ...f.projects.map((p) => `/faoliyat/loyihalar/${p.slug}`),
+      ...f.directions.map((d) => `/faoliyat/yonalishlar/${d.slug}`),
+    ]),
+    getPress(L).then((l) => l.map((p) => `/axborot-xizmati/press-relizlar/${p.slug}`)),
+  ])
+  for (const r of ichki) if (r.status === 'fulfilled') for (const p of r.value) paths.add(p)
+
   const pages: MetadataRoute.Sitemap = [...paths].map((p) => ({ url: `${SITE}/${L}${p}` }))
 
   try {
