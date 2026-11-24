@@ -12,6 +12,8 @@ const DATASET = 'rumPageloadEventsAdaptiveGroups'
 /** Toşkent vaqti (UTC+5, yozgi vaqt yöq) */
 export const TZ = 5 * 3600 * 1000
 const DAY = 86400 * 1000
+/** bir sörovdagi eng uzun oraliq (namunasiz, töliq maʼlumot) */
+const BOLAK = 3 * DAY
 
 const HOST = new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://yoshkent.uz').hostname
 
@@ -61,8 +63,9 @@ async function gql<T>(query: string): Promise<T> {
 const account = () => (process.env.CF_ACCOUNT_ID ?? '').toLowerCase()
 const wrap = (body: string) => `{ viewer { accounts(filter: { accountTag: "${account()}" }) { ${body} } } }`
 const iso = (t: number) => new Date(t).toISOString().replace(/\.\d{3}Z$/, 'Z')
+// bot: 0 — Cloudflare bot deb aniqlagan körişlar sanalmaydi
 const filter = (from: number, to: number) =>
-  `{ AND: [{ datetime_geq: "${iso(from)}" }, { datetime_lt: "${iso(to)}" }, { requestHost: "${HOST}" }] }`
+  `{ AND: [{ datetime_geq: "${iso(from)}" }, { datetime_lt: "${iso(to)}" }, { requestHost: "${HOST}" }, { bot: 0 }] }`
 
 /* ---------- qisqa xotira ---------- */
 
@@ -157,14 +160,17 @@ export function davrStat(davr: Davr): Promise<Stat> {
     const want = kunBoshi(now) - (davr - 1) * DAY
     const oldest = now - lim.notOlderThan * 1000 + 60e3
     const from = Math.max(want, oldest)
-    const step = Math.max(3600e3, lim.maxDuration * 1000)
+    // Cloudflare bir haftadan uzun oraliqni ~10% namuna böyiça beradi va kam taşrifli saytda raqamlar
+    // yöqolib qoladi (2026-11-24 da serverda tekşirildi: 72 soat — töliq, 10 kun — namuna). Şuning uçun
+    // davr 3 kunlik bölaklarga bölinadi; har bölak — barça kesimlar bilan bitta sörov
+    const step = Math.max(3600e3, Math.min(lim.maxDuration * 1000, BOLAK))
 
     const ranges: [number, number][] = []
     for (let a = from; a < to; a += step) ranges.push([a, Math.min(a + step, to)])
-    // bir vaqtda köpi bilan 3 ta sörov
+    // bir vaqtda köpi bilan 5 ta sörov (90 kun — 30 ta sörov; çeklov: 5 daqiqada 300 ta)
     const parts: Bolak[] = []
-    for (let i = 0; i < ranges.length; i += 3) {
-      parts.push(...(await Promise.all(ranges.slice(i, i + 3).map(([a, b]) => bolak(a, b)))))
+    for (let i = 0; i < ranges.length; i += 5) {
+      parts.push(...(await Promise.all(ranges.slice(i, i + 5).map(([a, b]) => bolak(a, b)))))
     }
 
     const qadam = davr === 1 ? 'soat' : 'kun'
