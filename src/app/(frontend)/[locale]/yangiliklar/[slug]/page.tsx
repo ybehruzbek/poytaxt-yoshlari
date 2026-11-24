@@ -12,7 +12,7 @@ import { Article, type ArticleData, type MiniNews } from '@/components/yangilikl
 import { toYnItem } from '@/components/yangiliklar/data'
 import { reactionCounts, ratingStats } from '@/lib/news-votes'
 import { JsonLd } from '@/components/site/JsonLd'
-import { newsArticleLd } from '@/lib/seo'
+import { ichkiMeta, lotin, newsArticleLd } from '@/lib/seo'
 
 type Props = { params: Promise<{ locale: Locale; slug: string }> }
 
@@ -43,16 +43,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const doc = await getNews(slug, locale)
   if (!doc) return {}
   const img = typeof doc.image === 'object' && doc.image?.url ? doc.image.url : undefined
+  // sarlavha va tavsif qidiruv uçun joriy lotin yozuvida; yagona rasmiy manzil — söröv parametrlari birlaşadi
+  const m = ichkiMeta({ title: doc.title, description: doc.excerpt, path: `/uz/yangiliklar/${slug}` })
   return {
-    title: `${doc.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`,
-    description: doc.excerpt,
-    // yagona rasmiy manzil: söröv parametrli nusxalar shu sahifaga birlaşadi
-    alternates: { canonical: `/uz/yangiliklar/${slug}` },
+    ...m,
     // ulaşilganda maqolaning öz surati va sarlavhasi körinadi
     openGraph: {
+      ...m.openGraph,
       type: 'article',
-      title: doc.title,
-      description: doc.excerpt ?? undefined,
+      title: lotin(doc.title),
       publishedTime: doc.publishedAt ?? undefined,
       ...(img ? { images: [{ url: img }] } : {}),
     },

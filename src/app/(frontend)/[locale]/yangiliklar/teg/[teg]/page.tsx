@@ -9,6 +9,7 @@ import { YangiliklarPage } from '@/components/yangiliklar/YangiliklarPage'
 import type { Locale } from '@/i18n/config'
 import type { News } from '@/payload-types'
 import { NEWS_CARD_SELECT, NEWS_ONLY, toNewsCard } from '@/lib/news'
+import { ichkiMeta } from '@/lib/seo'
 
 import '../../../../yangiliklar.css'
 
@@ -34,7 +35,7 @@ const tagOf = (raw: string) => {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { teg } = await props.params
-  return { title: `#${tagOf(teg)} — Yangiliklar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi` }
+  return ichkiMeta({ title: `#${tagOf(teg)} — Yangiliklar`, path: `/uz/yangiliklar/teg/${teg}` })
 }
 
 /** Teg böyiça yangiliklar: /yangiliklar/teg/Kitobxonlik */

@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
@@ -9,13 +8,11 @@ import type { Locale } from '@/i18n/config'
 import { toNewsCard } from '@/lib/news'
 
 import '../../../faoliyat.css'
+import { sahifaMeta } from '@/lib/seo'
 
 export const revalidate = 60
 
-export const metadata: Metadata = {
-  title: 'Eʼlonlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Tanlovlar, röyxatdan ötiş, çellenjlar va tadbir eʼlonlari.',
-}
+export const metadata = sahifaMeta('/faoliyat/elonlar')
 
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params

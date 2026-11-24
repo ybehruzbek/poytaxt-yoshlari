@@ -5,6 +5,7 @@ import { ProjectPage } from '@/components/faoliyat/FaPages'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 import { getFaoliyat } from '@/lib/cms/faoliyat'
+import { ichkiMeta } from '@/lib/seo'
 
 import '../../../../faoliyat.css'
 
@@ -21,7 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { locale, slug } = await props.params
   const p = (await getFaoliyat(locale)).projects.find((x) => x.slug === slug)
-  return p ? { title: `${p.title} — Loyihalar`, description: p.lead } : {}
+  return p ? ichkiMeta({ title: `${p.title} — Yoşlar loyihalari`, description: p.lead, path: `/uz/faoliyat/loyihalar/${slug}` }) : {}
 }
 
 export default async function Route(props: Props) {

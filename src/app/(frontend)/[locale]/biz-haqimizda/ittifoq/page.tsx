@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 
 import { IttifoqPage as Content } from '@/components/ittifoq/IttifoqPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
@@ -14,11 +13,9 @@ import '../../../ittifoq-hero.css'
 import '../../../ittifoq-history.css'
 import '../../../ittifoq-priorities.css'
 import '../../../ittifoq-orgs.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Özbekiston yoşlar ittifoqi — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Özbekiston yoşlar ittifoqi: taşkil topişi, maqsad va vazifalari, loyihalari, imtiyozlari va xalqaro hamkorligi.',
-}
+export const metadata = sahifaMeta('/biz-haqimizda/ittifoq')
 
 const PATH = '/biz-haqimizda/ittifoq'
 

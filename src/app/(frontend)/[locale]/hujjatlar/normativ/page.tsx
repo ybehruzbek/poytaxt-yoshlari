@@ -1,16 +1,12 @@
-import type { Metadata } from 'next'
 
 import { NormativPage as Content } from '@/components/hujjatlar/NormativPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
 import '../../../hujjatlar.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Normativ-huquqiy hujjatlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description:
-    'Yoşlarga oid davlat siyosati, Özbekiston yoşlar ittifoqi faoliyati hamda yoşlarga yaratilgan imkoniyat va imtiyozlarga doir normativ-huquqiy hujjatlar.',
-}
+export const metadata = sahifaMeta('/hujjatlar/normativ')
 
 /** “Normativ-huquqiy hujjatlar” sahifasi (mazmun: components/hujjatlar/data.ts) */
 export default async function NormativRoute(props: { params: Promise<{ locale: Locale }> }) {

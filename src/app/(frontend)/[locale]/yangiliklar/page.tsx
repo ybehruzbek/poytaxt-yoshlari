@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
@@ -10,14 +9,11 @@ import type { News } from '@/payload-types'
 import { NEWS_AND_GREETINGS, NEWS_CARD_SELECT, toNewsCard } from '@/lib/news'
 
 import '../../yangiliklar.css'
+import { sahifaMeta } from '@/lib/seo'
 
 export const revalidate = 60
 
-export const metadata: Metadata = {
-  title: 'Yangiliklar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description:
-    'Kengaş faoliyati, OTT boşlanğiç taşkilotlari, tadbirlar va yoşlar uçun imkoniyatlar haqidagi sönggi yangiliklar.',
-}
+export const metadata = sahifaMeta('/yangiliklar')
 
 /** “Yangiliklar” sahifasi: barça eʼlon qilingan yangiliklar (Payload → news) */
 export default async function YangiliklarRoute(props: { params: Promise<{ locale: Locale }> }) {

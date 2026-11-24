@@ -5,6 +5,7 @@ import { PressItemPage } from '@/components/axborot/AxPages'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 import { getPress } from '@/lib/cms/axborot'
+import { ichkiMeta } from '@/lib/seo'
 
 import '../../../../axborot.css'
 
@@ -21,9 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { locale, slug } = await props.params
   const p = (await getPress(locale)).find((x) => x.slug === slug)
-  return p
-    ? { title: `${p.title} — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi`, description: p.lead }
-    : {}
+  return p ? ichkiMeta({ title: p.title, description: p.lead, path: `/uz/axborot-xizmati/press-relizlar/${slug}` }) : {}
 }
 
 /** Bitta press-reliz yoki OAV uçun anons (rasmiy blanka) */

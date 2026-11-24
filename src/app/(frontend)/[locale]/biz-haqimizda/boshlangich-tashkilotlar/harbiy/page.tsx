@@ -1,16 +1,12 @@
-import type { Metadata } from 'next'
 
 import { HarbiyPage as Content } from '@/components/boshlangich/HarbiyPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
 import '../../../../boshlangich.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description:
-    'Toşkent şahridagi harbiy qismlar va muassasalarda faoliyat yuritayotgan Özbekiston yoşlar ittifoqi boşlanğiç taşkilotlari.',
-}
+export const metadata = sahifaMeta('/biz-haqimizda/boshlangich-tashkilotlar/harbiy')
 
 /** “Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar” sahifasi */
 export default async function HarbiyRoute(props: { params: Promise<{ locale: Locale }> }) {

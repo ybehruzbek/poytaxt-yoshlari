@@ -5,6 +5,7 @@ import { LeaderPage } from '@/components/boshlangich/LeaderPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 import { getOtts } from '@/lib/cms/biz'
+import { ichkiMeta } from '@/lib/seo'
 
 import '../../../../../boshlangich.css'
 
@@ -27,10 +28,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { locale, slug } = await props.params
   const o = (await leaders(locale)).find((x) => x.leader!.slug === slug)
   if (!o) return {}
-  return {
-    title: `${o.leader!.name} — ${o.otm} boşlanğiç taşkiloti yoşlar yetakçisi`,
-    description: `${o.otm} boşlanğiç taşkiloti yoşlar yetakçisi ${o.leader!.name}: aloqa va faoliyat.`,
-  }
+  return ichkiMeta({
+    title: `${o.otm} — Yoşlar ittifoqi boşlanğiç taşkiloti, yoşlar yetakçisi ${o.leader!.name}`,
+    description: `${o.otm} Yoşlar ittifoqi boşlanğiç taşkiloti yoşlar yetakçisi ${o.leader!.name}: qabul kunlari, aloqa maʼlumotlari va faoliyati.`,
+    path: `/uz${LIST}/${slug}`,
+  })
 }
 
 /** Yetakçining alohida sahifasi (mazmun: components/boshlangich/data.ts) */

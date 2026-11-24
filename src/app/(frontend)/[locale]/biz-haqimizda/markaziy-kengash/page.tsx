@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 
 import { KengashPage as Content } from '@/components/kengash/KengashPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
@@ -7,11 +6,9 @@ import type { Locale } from '@/i18n/config'
 
 import '../../../ittifoq.css'
 import '../../../kengash.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Markaziy Kengaş — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Özbekiston yoşlar ittifoqi Markaziy Kengaşi: vakolatlari, tarkibi, rahbariyati, Ijroiya qömitasi va aloqa.',
-}
+export const metadata = sahifaMeta('/biz-haqimizda/markaziy-kengash')
 
 const PATH = '/biz-haqimizda/markaziy-kengash'
 

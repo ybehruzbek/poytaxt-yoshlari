@@ -1,15 +1,12 @@
-import type { Metadata } from 'next'
 
 import { ProjectsPage } from '@/components/faoliyat/FaPages'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
 import '../../../faoliyat.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Loyihalar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Kengaş amalga oşirgan va amalga oşirayotgan loyihalar.',
-}
+export const metadata = sahifaMeta('/faoliyat/loyihalar')
 
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params

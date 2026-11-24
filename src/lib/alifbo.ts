@@ -96,3 +96,24 @@ export function toYangiAlifbo(text: string): string {
 export function eskiImlo(text: string): boolean {
   return toYangiAlifbo(text) !== text
 }
+
+/**
+ * Teskari ögiriş: yangi alifbo → joriy (eski) lotin yozuvi. FAQAT qidiruv tizimlariga körinadigan qatlam uçun
+ * (sahifa <title>, meta tavsif, JSON-LD, ulaşiş kartasi): odamlar Google'da “yoshlar”, “o'zbekiston” deb qidiradi,
+ * “yoşlar” deb emas. Sayt sahifasidagi matn yangi alifboda qoladi (foydalanuvçi qarori, 2026-11-24).
+ *   Ö ö → O‘ o‘   Ğ ğ → G‘ g‘   Ş ş → Sh sh   Ç ç → Ch ch   ʼ → ’
+ */
+export function eskiLotin(text: string): string {
+  return text
+    .replace(/Ş(?=[A-ZÖĞŞÇ])/g, 'SH')
+    .replace(/Ç(?=[A-ZÖĞŞÇ])/g, 'CH')
+    .replace(/Ş/g, 'Sh')
+    .replace(/ş/g, 'sh')
+    .replace(/Ç/g, 'Ch')
+    .replace(/ç/g, 'ch')
+    .replace(/Ö/g, 'O‘')
+    .replace(/ö/g, 'o‘')
+    .replace(/Ğ/g, 'G‘')
+    .replace(/ğ/g, 'g‘')
+    .replace(/ʼ/g, '’')
+}

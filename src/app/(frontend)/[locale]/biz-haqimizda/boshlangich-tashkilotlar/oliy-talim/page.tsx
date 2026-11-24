@@ -1,16 +1,12 @@
-import type { Metadata } from 'next'
 
 import { BoshlangichPage as Content } from '@/components/boshlangich/BoshlangichPage'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
 import '../../../../boshlangich.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description:
-    'Toşkent şahridagi oliy taʼlim taşkilotlaridagi Özbekiston yoşlar ittifoqi boşlanğiç taşkilotlari va ularning yoşlar yetakçilari.',
-}
+export const metadata = sahifaMeta('/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim')
 
 /** “Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar” sahifasi (mazmun: components/boshlangich/data.ts) */
 export default async function BoshlangichRoute(props: { params: Promise<{ locale: Locale }> }) {

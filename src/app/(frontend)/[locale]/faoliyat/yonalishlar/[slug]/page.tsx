@@ -5,6 +5,7 @@ import { DirectionPage } from '@/components/faoliyat/FaPages'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 import { getFaoliyat } from '@/lib/cms/faoliyat'
+import { ichkiMeta } from '@/lib/seo'
 
 import '../../../../faoliyat.css'
 
@@ -21,7 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { locale, slug } = await props.params
   const d = (await getFaoliyat(locale)).directions.find((x) => x.slug === slug)
-  return d ? { title: `${d.title} — Faoliyat yönalişlari`, description: d.about } : {}
+  return d ? ichkiMeta({ title: `${d.title} — Faoliyat yönalişlari`, description: d.about, path: `/uz/faoliyat/yonalishlar/${slug}` }) : {}
 }
 
 export default async function Route(props: Props) {

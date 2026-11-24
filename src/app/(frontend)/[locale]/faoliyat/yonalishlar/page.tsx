@@ -1,15 +1,12 @@
-import type { Metadata } from 'next'
 
 import { DirectionsPage } from '@/components/faoliyat/FaPages'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
 import '../../../faoliyat.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Faoliyat yönalişlari — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Kengaş faoliyatining 11 ta asosiy yönalişi.',
-}
+export const metadata = sahifaMeta('/faoliyat/yonalishlar')
 
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params

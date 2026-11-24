@@ -10,11 +10,12 @@ import { News } from '@/components/site/News'
 import { Opportunities } from '@/components/site/Opportunities'
 import { SocialPhones } from '@/components/site/SocialPhones'
 import type { Locale } from '@/i18n/config'
+import { bashMeta } from '@/lib/seo'
 
 import '../odamlar.css'
 
 /** Boş sahifaning yagona rasmiy manzili (yoshkent.uz ham şu yerga yönaltiriladi) */
-export const metadata = { alternates: { canonical: '/uz' } }
+export const metadata = bashMeta()
 
 /** Bosh sahifa har 60 soniyada yangilanadi (yangi yangiliklar shu orqali ko'rinadi) */
 export const revalidate = 60

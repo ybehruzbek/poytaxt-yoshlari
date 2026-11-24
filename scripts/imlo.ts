@@ -20,6 +20,8 @@ const FIX = process.argv.includes('--fix')
 const SKIP_FILES = [
   'src/payload-types.ts',
   'src/lib/alifbo.ts',
+  // qidiruv tizimlari uçun matnlar ataylab joriy lotin yozuvida (foydalanuvçi qarori, 2026-11-24)
+  'src/config/seo-lotin.ts',
   'src/lib/slugify.ts',
   'src/lib/inline-scripts.ts',
   'src/app/(payload)',

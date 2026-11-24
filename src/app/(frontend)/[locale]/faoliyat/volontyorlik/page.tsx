@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { VolPage } from '@/components/volontyorlik/VolPage'
@@ -7,12 +6,9 @@ import type { Locale } from '@/i18n/config'
 import '../../../azolik.css'
 import '../../../faoliyat.css'
 import '../../../volontyorlik.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Volontyorlik — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description:
-    'Volontyorlik yönalişlari, mos yönalişni aniqlaş testi, volontyor böliş tartibi, onlayn ariza hamda volontyorning qonun bilan belgilangan huquq va majburiyatlari.',
-}
+export const metadata = sahifaMeta('/faoliyat/volontyorlik')
 
 export default async function Route(props: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await props.params

@@ -1,15 +1,12 @@
-import type { Metadata } from 'next'
 
 import { EventsPage } from '@/components/faoliyat/FaPages'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import type { Locale } from '@/i18n/config'
 
 import '../../../faoliyat.css'
+import { sahifaMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-  title: 'Tadbirlar va kalendar — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
-  description: 'Yaqinlaşayotgan tadbirlar va 2023-yildan buyon ötkazilgan tadbirlar arxivi.',
-}
+export const metadata = sahifaMeta('/faoliyat/tadbirlar')
 
 // “Yaqin tadbirlar” sana böyiça ajratiladi — sahifa har soatda yangilanadi
 export const revalidate = 3600

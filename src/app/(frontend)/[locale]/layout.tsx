@@ -33,7 +33,7 @@ import { MiqdorProvider } from '@/components/site/MiqdorProvider'
 import { IMG_ERR, LITE, LOAD_GATE } from '@/lib/inline-scripts'
 import { getMiqdorlar } from '@/lib/cms/miqdorlar'
 import { getSocials } from '@/lib/socials-server'
-import { organizationLd, SITE_DESC, SITE_NAME } from '@/lib/seo'
+import { organizationLd, SITE_DESC, SITE_NAME, SITE_TITLE } from '@/lib/seo'
 import { JsonLd } from '@/components/site/JsonLd'
 
 // Shriftlar build paytida yuklab olinadi va o'z serverimizdan beriladi (Google'ga so'rov ketmaydi).
@@ -55,7 +55,8 @@ const body = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'),
-  title: SITE_NAME,
+  // qidiruvga körinadigan qatlam joriy lotin yozuvida (config/seo-lotin.ts); sahifadagi matn — yangi alifboda
+  title: SITE_TITLE,
   description: SITE_DESC,
   icons: {
     icon: [
