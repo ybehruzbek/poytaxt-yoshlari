@@ -55,6 +55,7 @@ const P = {
   alert: '<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>',
   arrowdown: '<path d="M12 5v14M19 12l-7 7-7-7"/>',
   arrowup: '<path d="M12 19V5M5 12l7-7 7 7"/>',
+  chart: '<path d="M3 3v18h18"/><path d="M7 16v-4M12 16V7M17 16v-8"/>',
 } as const
 
 export type IconName = keyof typeof P

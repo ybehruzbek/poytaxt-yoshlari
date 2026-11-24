@@ -21,7 +21,12 @@ const KIRUVCHI: Role[] = ['admin', 'operator']
 
 
 export const MENU: MenuGroup[] = [
-  { items: [{ t: 'Boşqaruv paneli', href: '/boshqaruv', icon: 'home' }] },
+  {
+    items: [
+      { t: 'Boşqaruv paneli', href: '/boshqaruv', icon: 'home' },
+      { t: 'Statistika', href: '/boshqaruv/statistika', icon: 'chart' },
+    ],
+  },
   {
     t: 'Kiruvçi xabarlar',
     roles: KIRUVCHI,
