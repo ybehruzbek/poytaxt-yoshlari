@@ -20,7 +20,7 @@
     "imlo": "tsx scripts/imlo.ts",
     "imlo:fix": "tsx scripts/imlo.ts --fix",
     "parol": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/parol.ts",
-    "imlo:db": "cross-env NODE_OPTIONS=--no-deprecation payload run scripts/imlo-db.ts"
+    "imlo:db": "tsx scripts/imlo-db.ts"
   },
   "dependencies": {
     "@lexical/history": "0.50.0",
