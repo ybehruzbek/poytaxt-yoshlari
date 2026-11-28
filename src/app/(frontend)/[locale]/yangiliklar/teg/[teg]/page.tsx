@@ -6,7 +6,7 @@ import config from '@payload-config'
 import { PageCrumbs } from '@/components/site/PageCrumbs'
 import { toYnItems } from '@/components/yangiliklar/data'
 import { YangiliklarPage } from '@/components/yangiliklar/YangiliklarPage'
-import type { Locale } from '@/i18n/config'
+import { type Locale, isLocale } from '@/i18n/config'
 import { toJoriyAlifbo } from '@/lib/alifbo'
 import type { News } from '@/payload-types'
 import { NEWS_CARD_SELECT, NEWS_ONLY, toNewsCard } from '@/lib/news'
@@ -43,10 +43,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function TagRoute(props: Props) {
   const { locale, teg } = await props.params
   const tag = tagOf(teg)
-  if (!tag) notFound()
+  if (!tag || !isLocale(locale)) notFound()
   // teglar joriy alifboda (2026-11-28): eski yangi alifbodagi havola (teg/Yoşlar) → teg/Yoshlar
   const joriy = toJoriyAlifbo(tag)
-  if (joriy !== tag) permanentRedirect(`/${locale}/yangiliklar/teg/${encodeURIComponent(joriy)}`)
+  if (joriy !== tag) permanentRedirect(`/${encodeURIComponent(locale)}/yangiliklar/teg/${encodeURIComponent(joriy)}`)
   const payload = await getPayload({ config })
   const res = await payload.find({
     collection: 'news',

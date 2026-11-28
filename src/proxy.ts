@@ -62,8 +62,8 @@ export function proxy(request: NextRequest) {
     const joriy = '/' + segs.join('/').replace(/^\/+/, '')
     const origin = new URL(process.env.NEXT_PUBLIC_SERVER_URL || request.nextUrl.origin).origin
     const target = new URL(joriy + search, origin)
-    if (target.origin === origin) return NextResponse.redirect(target, 308)
-    return NextResponse.next()
+    // o'girib bo'lmaydigan bo'lak (masalan, himoyalangan havola) — manzil o'zgarmaydi, yo'naltirish halqasi bo'lmasin
+    if (target.origin === origin && target.pathname !== pathname) return NextResponse.redirect(target, 308)
   }
 
   const first = pathname.split('/')[1]
