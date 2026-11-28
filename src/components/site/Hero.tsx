@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- prototip rasmlari; CMS ulanganda next/image ga o'tadi */
 import Link from 'next/link'
 
+import { BREND } from '@/config/seo-lotin'
 import type { Locale } from '@/i18n/config'
 import { getBosh } from '@/lib/cms/sahifalar'
 import { CollageScaler } from './CollageScaler'
@@ -95,7 +96,8 @@ export async function Hero({ locale }: { locale: Locale }) {
             <div className="hero-text">
               <div>
                 <h1 className="h1 hero-slogan hero-name">
-                  <span className="hero-kicker">{hero.kicker}</span>{' '}
+                  {/* kicker — qidiruv so‘zi joriy lotinda (Google “yoşlar”ni “yoshlar” deb tanimaydi; foydalanuvçi qarori 2026-11-28) */}
+                  <span className="hero-kicker">{locale === 'uz' ? BREND : hero.kicker}</span>{' '}
                   <span>Özbekiston yoşlar ittifoqi</span> <span>Toşkent şahar hududiy Kengaşi</span>
                 </h1>
                 <p className="lead">{hero.lead}</p>
