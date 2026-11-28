@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 
 import { type Locale, isLive, localeLabels, locales } from '@/i18n/config'
 
+import { type AlifboTur, getAlifbo, setAlifbo } from './Alifbo'
+
 type P = { locale: Locale; path: string }
 
 const hrefOf = (l: Locale, path: string) => `/${l}${path === '/' ? '' : path}`
@@ -48,7 +50,14 @@ const Check = () => (
  */
 export function LangSwitch({ locale, path }: P) {
   const [open, setOpen] = useState(false)
+  // menyu faqat bosilganda chiziladi — serverdagi HTML bilan farq qilmaydi
+  const [abc, setAbc] = useState<AlifboTur>(() => (typeof window === 'undefined' ? 'joriy' : getAlifbo()))
   const ref = useRef<HTMLDivElement>(null)
+
+  const pick = (v: AlifboTur) => {
+    setAbc(v)
+    setAlifbo(v)
+  }
 
   useEffect(() => {
     if (!open) return
@@ -101,6 +110,20 @@ export function LangSwitch({ locale, path }: P) {
               )}
             </li>
           ))}
+          {locale === 'uz' && (
+            // namunalar (o‘/ö) o'zgarmasin — data-alifbo="off"
+            <li className="lx-abc" data-alifbo="off">
+              <span id="lx-abc-t">Alifbo</span>
+              <div className="lx-abc-seg" role="group" aria-labelledby="lx-abc-t">
+                <button type="button" aria-pressed={abc === 'joriy'} onClick={() => pick('joriy')}>
+                  Joriy<small>o‘ g‘ sh ch</small>
+                </button>
+                <button type="button" aria-pressed={abc === 'yangi'} onClick={() => pick('yangi')}>
+                  Yangi<small>ö ğ ş ç</small> {/* imlo-ok: yangi alifbo namunasi */}
+                </button>
+              </div>
+            </li>
+          )}
         </ul>
       )}
     </div>

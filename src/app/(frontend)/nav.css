@@ -553,3 +553,79 @@ body:has([data-head-dark]) .site-head:not(.scrolled) .lx-btn {
     margin-right: 6px;
   }
 }
+
+/* =====================================================================
+   ALIFBO TANLOVI (LangSwitch.tsx → Alifbo.tsx): til ro'yxati ostida “Joriy / Yangi”.
+   html.abc-wait — yangi alifbo tanlangan, matn hali o'girilmagan: sahifa bir lahza yashirin
+   (JS ishlamasa 1,5 soniyadan keyin baribir ko'rinadi).
+   ===================================================================== */
+html.abc-wait body {
+  opacity: 0;
+  animation: abc-show 0s 1.5s forwards;
+}
+@keyframes abc-show {
+  to {
+    opacity: 1;
+  }
+}
+.lx-abc {
+  margin-top: 6px;
+  padding: 12px 12px 6px;
+  border-top: 1px solid rgba(83, 40, 34, 0.1);
+}
+.lx-abc > span {
+  display: block;
+  margin-bottom: 8px;
+  font: 600 12px/1 var(--f-body);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.lx-abc-seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--soft);
+}
+.lx-abc-seg button {
+  display: grid;
+  gap: 3px;
+  justify-items: center;
+  padding: 9px 6px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  font: 700 14px/1 var(--f-body);
+  color: var(--navy);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.lx-abc-seg button small {
+  font: 500 12px/1 var(--f-body);
+  color: var(--muted);
+}
+.lx-abc-seg button[aria-pressed='true'] {
+  background: var(--bg);
+  box-shadow: 0 2px 8px rgba(83, 40, 34, 0.12);
+}
+/* tepada (aylantirilmagan) — to'q panelda */
+.site-head:not(.scrolled) .lx-abc {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+.site-head:not(.scrolled) .lx-abc > span,
+.site-head:not(.scrolled) .lx-abc-seg button small {
+  color: rgba(255, 255, 255, 0.6);
+}
+.site-head:not(.scrolled) .lx-abc-seg {
+  background: rgba(255, 255, 255, 0.08);
+}
+.site-head:not(.scrolled) .lx-abc-seg button {
+  color: #fff;
+}
+.site-head:not(.scrolled) .lx-abc-seg button[aria-pressed='true'] {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: none;
+  color: var(--yellow);
+}

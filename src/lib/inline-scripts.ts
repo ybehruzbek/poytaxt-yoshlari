@@ -21,3 +21,10 @@ export const IMG_ERR = `document.addEventListener('error',function(e){var t=e.ta
  * JS işlamasa sinf qöyilmaydi va heç narsa töxtatilmaydi.
  */
 export const LOAD_GATE = `(function(){if(document.visibilityState!=='hidden')return;var d=document.documentElement;d.classList.add('ld-wait');function go(){if(document.visibilityState==='visible'){d.classList.remove('ld-wait');document.removeEventListener('visibilitychange',go)}}document.addEventListener('visibilitychange',go)})()`
+
+/**
+ * Alifbo tanlovi (components/site/Alifbo.tsx): tashrif buyuruvchi yangi alifboni tanlagan bo'lsa, matn
+ * o'girilguncha sahifa bir lahza yashiriladi (“abc-wait”) — joriy alifbodagi matn ko'rinib qolmaydi.
+ * Faqat o'zbekcha sahifalarda qo'yiladi. JS ishlamasa yoki xato bo'lsa CSS 1,5 soniyadan keyin baribir ko'rsatadi.
+ */
+export const ALIFBO_GATE = `try{if(localStorage.getItem('alifbo')==='yangi'){var d=document.documentElement;d.classList.add('abc-wait');d.setAttribute('data-alifbo','yangi')}}catch(e){}`

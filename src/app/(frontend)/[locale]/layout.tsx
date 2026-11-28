@@ -10,6 +10,7 @@ import { LoopGuard } from '@/components/site/LoopGuard'
 import { PageMotion } from '@/components/site/PageMotion'
 import { ScrollRail } from '@/components/site/ScrollRail'
 import { TextErrorReport } from '@/components/site/TextErrorReport'
+import { Alifbo } from '@/components/site/Alifbo'
 import { Typograf } from '@/components/site/Typograf'
 import { isLocale, locales } from '@/i18n/config'
 import '../styles.css'
@@ -30,7 +31,7 @@ import '../motion.css'
 import '../reveal.css'
 import '../skeleton.css'
 import { MiqdorProvider } from '@/components/site/MiqdorProvider'
-import { IMG_ERR, LITE, LOAD_GATE } from '@/lib/inline-scripts'
+import { ALIFBO_GATE, IMG_ERR, LITE, LOAD_GATE } from '@/lib/inline-scripts'
 import { getMiqdorlar } from '@/lib/cms/miqdorlar'
 import { getSocials } from '@/lib/socials-server'
 import { organizationLd, SITE_DESC, SITE_NAME, SITE_TITLE } from '@/lib/seo'
@@ -101,6 +102,7 @@ export default async function LocaleLayout(props: {
         <script dangerouslySetInnerHTML={{ __html: LITE }} />
         <script dangerouslySetInnerHTML={{ __html: IMG_ERR }} />
         <script dangerouslySetInnerHTML={{ __html: LOAD_GATE }} />
+        {locale === 'uz' && <script dangerouslySetInnerHTML={{ __html: ALIFBO_GATE }} />}
       </head>
       <body>
         <Header locale={locale} />
@@ -112,6 +114,7 @@ export default async function LocaleLayout(props: {
         <PageMotion locale={locale} />
         <LoopGuard />
         <Typograf />
+        {locale === 'uz' && <Alifbo />}
         <TextErrorReport />
         <CfBeacon />
         <JsonLd data={organizationLd(Object.values(socials).filter(Boolean))} />
