@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 import { defaultLocale, isLive, isLocale } from './i18n/config'
+import { toJoriyAlifbo } from './lib/alifbo'
 
 /**
  * Til ko'rsatilmagan manzillarni /uz/... ga yo'naltiradi. Admin, API va fayllarga tegmaydi.
@@ -44,6 +45,22 @@ export function proxy(request: NextRequest) {
     res.cookies.set(ADMIN_LNG, 'uz', { path: '/', sameSite: 'lax', maxAge: 60 * 60 * 24 * 365 })
     return res
   }
+  // Manzilda yangi alifbo harfi (eski teg havolasi: /uz/yangiliklar/teg/Yoşlar) — matn 2026-11-28 dan joriy
+  // alifboda, shuning uchun joriy shakliga doimiy (308) yo'naltiriladi; qidiruv tizimlari eski manzilni almashtiradi
+  let decoded = pathname
+  try {
+    decoded = decodeURIComponent(pathname)
+  } catch {
+    /* noto'g'ri kodlash — o'zgarishsiz */
+  }
+  if (/[ÖöĞğŞşÇçʼ]/.test(decoded)) {
+    const joriy = toJoriyAlifbo(decoded)
+      .split('/')
+      .map((p) => encodeURIComponent(p))
+      .join('/')
+    return NextResponse.redirect(new URL(joriy + search, process.env.NEXT_PUBLIC_SERVER_URL || request.nextUrl.origin), 308)
+  }
+
   const first = pathname.split('/')[1]
   if (isLocale(first) && isLive(first)) return NextResponse.next()
 
