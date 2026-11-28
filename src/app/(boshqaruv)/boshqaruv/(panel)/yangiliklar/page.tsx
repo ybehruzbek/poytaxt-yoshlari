@@ -43,8 +43,8 @@ export default async function Yangiliklar({ searchParams }: P) {
   }))
 
   const tabs = [
-    { k: '', t: 'Barçasi', n: r.counts.all },
-    { k: 'published', t: 'Eʼlon qilingan', n: r.counts.published },
+    { k: '', t: 'Barchasi', n: r.counts.all },
+    { k: 'published', t: 'E’lon qilingan', n: r.counts.published },
     { k: 'draft', t: 'Qoralama', n: r.counts.draft },
   ]
   const from = r.totalDocs ? (r.page! - 1) * PER_PAGE + 1 : 0
@@ -60,10 +60,10 @@ export default async function Yangiliklar({ searchParams }: P) {
 
   return (
     <>
-      <Top title="Yangiliklar" sub="Saytdagi barça yangilik, eʼlon, tadbir va tabriklar" crumbs={[{ t: 'Sayt kontenti' }, { t: 'Yangiliklar' }]}>
+      <Top title="Yangiliklar" sub="Saytdagi barcha yangilik, e’lon, tadbir va tabriklar" crumbs={[{ t: 'Sayt kontenti' }, { t: 'Yangiliklar' }]}>
         <Link className="btn btn-primary" href="/boshqaruv/yangiliklar/yangi">
           <Icon name="plus" size={18} />
-          <span>Yangilik qöşiş</span>
+          <span>Yangilik qo‘shish</span>
         </Link>
       </Top>
 
@@ -84,14 +84,14 @@ export default async function Yangiliklar({ searchParams }: P) {
         {rows.length === 0 ? (
           <div className="card empty-state">
             <Icon name="news" size={32} />
-            <b>{filtered ? 'Bu filtr böyiça yangilik topilmadi' : 'Hozirça yangilik yöq'}</b>
+            <b>{filtered ? 'Bu filtr bo‘yicha yangilik topilmadi' : 'Hozircha yangilik yo‘q'}</b>
             {filtered ? (
               <Link className="btn btn-ghost" href="/boshqaruv/yangiliklar">
-                Filtrni tozalaş
+                Filtrni tozalash
               </Link>
             ) : (
               <Link className="btn btn-primary" href="/boshqaruv/yangiliklar/yangi">
-                Birinçi yangilikni qöşiş
+                Birinchi yangilikni qo‘shish
               </Link>
             )}
           </div>

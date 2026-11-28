@@ -51,15 +51,15 @@ export async function PartnersStrip({ locale }: { locale: string }) {
       <div className="wrap pt-strip-in">
         <div className="pt-strip-head">
           <h2 id="pt-strip-h" className="h2">
-            Hamkor taşkilotlar
+            Hamkor tashkilotlar
           </h2>
           <Link href={`/${locale}/biz-haqimizda/hamkorlar`} className="more-btn">
             <More>
-              Batafsil<span className="sr-only">: Barça hamkorlar</span>
+              Batafsil<span className="sr-only">: Barcha hamkorlar</span>
             </More>
           </Link>
         </div>
-        <p className="pt-strip-l">Özbekistondagi hamkorlar</p>
+        <p className="pt-strip-l">O‘zbekistondagi hamkorlar</p>
         <Track list={DOMESTIC} locale={locale} />
         <p className="pt-strip-l">Xalqaro hamkorlar</p>
         <Track list={FOREIGN} locale={locale} reverse />

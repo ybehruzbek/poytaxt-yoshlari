@@ -31,8 +31,8 @@ export function YangiliklarPage({
         <section className="sec">
           <div className="wrap">
             <div className="yn-empty" role="status">
-              <b>Yangiliklar hali eʼlon qilinmagan</b>
-              <p>Kengaş yangiliklari eʼlon qilinişi bilan şu sahifada körsatiladi.</p>
+              <b>Yangiliklar hali e’lon qilinmagan</b>
+              <p>Kengash yangiliklari e’lon qilinishi bilan shu sahifada ko‘rsatiladi.</p>
             </div>
           </div>
         </section>

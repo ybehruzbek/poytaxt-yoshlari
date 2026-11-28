@@ -1,7 +1,7 @@
 /** Boşqaruv paneli uçun sana va vaqt (Toşkent vaqti, UTC+5, yangi alifbo) */
 
 const OY = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
-const KUN = ['yakşanba', 'duşanba', 'seşanba', 'çorşanba', 'payşanba', 'juma', 'şanba']
+const KUN = ['yakshanba', 'dushanba', 'seshanba', 'chorshanba', 'payshanba', 'juma', 'shanba']
 const TZ = 5 * 3600 * 1000
 const NBSP = ' '
 
@@ -24,7 +24,7 @@ export function qisqaVaqt(iso: string | Date, now = new Date()) {
   const n = tk(now)
   const y = tk(now.getTime() - 86400000)
   if (dayKey(d) === dayKey(n)) return `bugun, ${hm(d)}`
-  if (dayKey(d) === dayKey(y)) return `keça, ${hm(d)}`
+  if (dayKey(d) === dayKey(y)) return `kecha, ${hm(d)}`
   const base = `${d.getUTCDate()}-${OY[d.getUTCMonth()]}`.replace('-', '-⁠')
   return d.getUTCFullYear() === n.getUTCFullYear() ? base : `${base},${NBSP}${d.getUTCFullYear()}`
 }

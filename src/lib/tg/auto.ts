@@ -18,14 +18,14 @@ export function startTgSync(minutes: number) {
       const payload = await getPayload({ config })
       const r = await syncLatest(payload)
       const expired = await expireEvents(payload)
-      if (expired) payload.logger.info(`[telegram] ${expired} ta ötgan tadbir eʼlonlarga ötkazildi`)
+      if (expired) payload.logger.info(`[telegram] ${expired} ta o‘tgan tadbir e’lonlarga o‘tkazildi`)
       if (r.created || expired) {
         // keş alohida yangilanmaydi: revalidatePath söröv taşqarisida (taymerda) işlamaydi va xato beradi;
         // sahifalar `revalidate = 60` bilan bir daqiqa içida yangi holatni körsatadi
-        payload.logger.info(`[telegram] ${r.created} ta yangi post saytga qöşildi`)
+        payload.logger.info(`[telegram] ${r.created} ta yangi post saytga qo‘shildi`)
       }
     } catch (err) {
-      console.error('[telegram] ulanişda xato:', (err as Error).message)
+      console.error('[telegram] ulanishda xato:', (err as Error).message)
     } finally {
       running = false
     }

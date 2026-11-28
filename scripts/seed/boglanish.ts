@@ -31,9 +31,9 @@ console.log('aloqa: yangilandi')
 // javoblardagi aloqa maʼlumotlari belgilarga qaytariladi — “Aloqa maʼlumotlari” özgarsa, javob ham yangilanadi
 const tok = (s: string) =>
   s
-    .replace(EMAILS[0], '{POÇTA}')
+    .replace(EMAILS[0], '{POCHTA}')
     .replace(PHONES.map((p) => p.v).join(', '), '{TELEFONLAR}')
-    .replace(`${ADDRESS.line} (${ADDRESS.landmark}). Iş vaqti: ${HOURS.days.toLowerCase()}, ${HOURS.time}. ${HOURS.off}.`, '{MANZIL} ({MÖLJAL}). Iş vaqti: {IŞ_VAQTI}.')
+    .replace(`${ADDRESS.line} (${ADDRESS.landmark}). Ish vaqti: ${HOURS.days.toLowerCase()}, ${HOURS.time}. ${HOURS.off}.`, '{MANZIL} ({MO‘LJAL}). Ish vaqti: {ISH_VAQTI}.')
 for (const f of FAQ) {
   await upsert(payload, 'faqs', { slug: { equals: f.id } }, {
     slug: f.id, generateSlug: false, q: f.q, cat: f.cat, a: f.a.map((t) => ({ t: tok(t) })), li: (f.li ?? []).map((t) => ({ t: tok(t) })),

@@ -107,7 +107,7 @@ export async function getInboxItem(kind: InboxKind, id: number): Promise<InboxIt
   const base = { id, slug: kind.slug, created: sanaVaqt(d.createdAt as string), status: String(d.status ?? 'yangi') }
   const contact = (x: { phone?: string | null; email?: string | null }): Field[] => [
     ...(x.phone ? [{ t: 'Telefon', v: x.phone, href: tel(x.phone), copy: true }] : []),
-    ...(x.email ? [{ t: 'Elektron poçta', v: x.email, href: `mailto:${x.email}`, copy: true }] : []),
+    ...(x.email ? [{ t: 'Elektron pochta', v: x.email, href: `mailto:${x.email}`, copy: true }] : []),
   ]
 
   if (kind.slug === 'appeals') {
@@ -129,7 +129,7 @@ export async function getInboxItem(kind: InboxKind, id: number): Promise<InboxIt
       ...base,
       title: m.name,
       note: m.note ?? '',
-      fields: [...contact(m), { t: 'Tuğilgan yili', v: String(m.birthYear) }, { t: 'Öqiş yoki iş joyi', v: m.place }],
+      fields: [...contact(m), { t: 'Tug‘ilgan yili', v: String(m.birthYear) }, { t: 'O‘qish yoki ish joyi', v: m.place }],
     }
   }
   if (kind.slug === 'volunteers') {
@@ -140,12 +140,12 @@ export async function getInboxItem(kind: InboxKind, id: number): Promise<InboxIt
       note: v.note ?? '',
       fields: [
         ...contact(v),
-        { t: 'Tuğilgan yili', v: String(v.birthYear) },
-        { t: 'Öqiş yoki iş joyi', v: v.place },
-        { t: 'Yönalişlar', v: v.dirs },
+        { t: 'Tug‘ilgan yili', v: String(v.birthYear) },
+        { t: 'O‘qish yoki ish joyi', v: v.place },
+        { t: 'Yo‘nalishlar', v: v.dirs },
         ...(v.time ? [{ t: 'Bandlik vaqti', v: v.time }] : []),
       ],
-      body: v.about ? { t: 'Tajriba va qiziqişlar', v: v.about } : undefined,
+      body: v.about ? { t: 'Tajriba va qiziqishlar', v: v.about } : undefined,
     }
   }
   const t = d as unknown as TextError

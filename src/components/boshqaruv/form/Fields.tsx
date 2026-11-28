@@ -90,7 +90,7 @@ function Tags({ value, onChange, id, placeholder }: { value: string[]; onChange:
       {value.map((x) => (
         <span key={x}>
           {x}
-          <button type="button" aria-label={`${x}: olib taşlaş`} onClick={() => onChange(value.filter((y) => y !== x))}>
+          <button type="button" aria-label={`${x}: olib tashlash`} onClick={() => onChange(value.filter((y) => y !== x))}>
             <Icon name="x" size={12} />
           </button>
         </span>
@@ -214,7 +214,7 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
             </div>
           ) : (
             <select id={id} className={cls('inp select')} value={String(value ?? '')} onChange={(e) => set(e.target.value || null)}>
-              <option value="">{f.required ? 'Tanlang…' : 'Körsatilmagan'}</option>
+              <option value="">{f.required ? 'Tanlang…' : 'Ko‘rsatilmagan'}</option>
               {f.options.map((o) => (
                 <option key={o.v} value={o.v}>
                   {o.t}
@@ -234,13 +234,13 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
             <div className="note">
               <Icon name="alert" size={18} />
               <p>
-                Bu matnda yangi muharrir hali qöllamaydigan blok bor —{' '}
+                Bu matnda yangi muharrir hali qo‘llamaydigan blok bor —{' '}
                 {ctx.oldHref ? (
                   <a href={ctx.oldHref} target="_blank" rel="noopener noreferrer">
                     eski panelda tahrirlang
                   </a>
                 ) : (
-                  'özgartiriş uçun administratorga murojaat qiling'
+                  'o‘zgartirish uchun administratorga murojaat qiling'
                 )}
                 .
               </p>
@@ -258,11 +258,11 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
           <Label f={f} htmlFor={id} />
           <div className={err ? 'slug has-err' : 'slug'}>
             {auto ? <b>{String(value ?? '') || 'sarlavhadan yasaladi'}</b> : <input id={id} value={String(value ?? '')} onChange={(e) => set(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))} />}
-            <button type="button" title={auto ? 'Qöl bilan özgartiriş' : 'Sarlavhadan avtomatik yasaş'} onClick={() => (sib.__setSib as (k: string, v: unknown) => void)('generateSlug', !auto)}>
+            <button type="button" title={auto ? 'Qo‘l bilan o‘zgartirish' : 'Sarlavhadan avtomatik yasash'} onClick={() => (sib.__setSib as (k: string, v: unknown) => void)('generateSlug', !auto)}>
               <Icon name={auto ? 'lock' : 'unlock'} size={16} />
             </button>
           </div>
-          {err ? <p className="f-err">{err}</p> : <p className="help">{auto ? 'Saqlanganda sarlavhadan avtomatik yasaladi.' : 'Faqat lotin kiçik harflari, raqam va çiziqça.'}</p>}
+          {err ? <p className="f-err">{err}</p> : <p className="help">{auto ? 'Saqlanganda sarlavhadan avtomatik yasaladi.' : 'Faqat lotin kichik harflari, raqam va chiziqcha.'}</p>}
         </div>
       )
     }
@@ -300,7 +300,7 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
                         <Icon name="chev" size={14} className="flip" />
                       </button>
                     )}
-                    <button type="button" title="Olib taşlaş" onClick={() => set(items.filter((x) => x.id !== g.id))}>
+                    <button type="button" title="Olib tashlash" onClick={() => set(items.filter((x) => x.id !== g.id))}>
                       <Icon name="x" size={14} />
                     </button>
                   </div>
@@ -313,7 +313,7 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
                   onClick={() => ctx.pick({ col, multiple: true, title: f.label ?? '', onPick: (add) => set([...items, ...add.filter((x) => !items.some((y) => y.id === x.id))].slice(0, max)) })}
                 >
                   <Icon name="plus" />
-                  Qöşiş
+                  Qo‘shish
                 </button>
               )}
             </div>
@@ -334,9 +334,9 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
                   <small>{it.name}</small>
                 </a>
                 <button type="button" onClick={() => ctx.pick({ col, multiple: false, title: f.label ?? '', onPick: (x) => set(x[0]) })}>
-                  Almaştiriş
+                  Almashtirish
                 </button>
-                <button type="button" onClick={() => set(null)} aria-label="Olib taşlaş">
+                <button type="button" onClick={() => set(null)} aria-label="Olib tashlash">
                   <Icon name="x" size={16} />
                 </button>
               </div>
@@ -345,10 +345,10 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
                 <img src={it.url || it.thumb} alt="" />
                 <div className="cover__acts">
                   <button type="button" onClick={() => ctx.pick({ col, multiple: false, title: f.label ?? '', onPick: (x) => set(x[0]) })}>
-                    Almaştiriş
+                    Almashtirish
                   </button>
                   <button type="button" onClick={() => set(null)}>
-                    Olib taşlaş
+                    Olib tashlash
                   </button>
                 </div>
               </div>
@@ -356,8 +356,8 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
           ) : (
             <button type="button" className={err ? 'cover-empty has-err' : isFile ? 'cover-empty is-file' : 'cover-empty'} onClick={() => ctx.pick({ col, multiple: false, title: f.label ?? '', onPick: (x) => set(x[0]) })}>
               <Icon name={isFile ? 'file' : 'image'} size={26} />
-              <b>{isFile ? 'Fayl tanlaş yoki yuklaş' : 'Rasm tanlaş yoki yuklaş'}</b>
-              <span>{isFile ? 'PDF, Word yoki Excel, 10 MB gaça' : 'JPG, PNG yoki WebP, 10 MB gaça'}</span>
+              <b>{isFile ? 'Fayl tanlash yoki yuklash' : 'Rasm tanlash yoki yuklash'}</b>
+              <span>{isFile ? 'PDF, Word yoki Excel, 10 MB gacha' : 'JPG, PNG yoki WebP, 10 MB gacha'}</span>
             </button>
           )}
           {errEl}
@@ -387,7 +387,7 @@ function FieldInput({ f, value, set, path, ctx, sib }: { f: SField; value: unkno
         <div className="f">
           <Label f={f} htmlFor={id} />
           <select id={id} className={cls('inp select')} value={value == null ? '' : String(idOf(value))} onChange={(e) => set(e.target.value ? Number(e.target.value) : null)}>
-            <option value="">{f.required ? 'Tanlang…' : 'Körsatilmagan'}</option>
+            <option value="">{f.required ? 'Tanlang…' : 'Ko‘rsatilmagan'}</option>
             {opts.map((o) => (
               <option key={o.id} value={o.id}>
                 {o.t}
@@ -423,7 +423,7 @@ function ArrayField({ f, value, set, path, ctx }: { f: Extract<SField, { type: '
         </span>
         {rows.length > 1 && (
           <button type="button" className="arr__toggle" onClick={() => setClosed(Object.values(closed).some(Boolean) ? {} : Object.fromEntries(rows.map((_, i) => [i, true])))}>
-            {Object.values(closed).some(Boolean) ? 'Barçasini oçiş' : 'Barçasini yiğiş'}
+            {Object.values(closed).some(Boolean) ? 'Barchasini ochish' : 'Barchasini yig‘ish'}
           </button>
         )}
       </div>
@@ -452,7 +452,7 @@ function ArrayField({ f, value, set, path, ctx }: { f: Extract<SField, { type: '
                   <button type="button" title="Nusxa" disabled={rows.length >= max} onClick={() => set([...rows.slice(0, i + 1), { ...structuredClone(row), id: undefined }, ...rows.slice(i + 1)])}>
                     <Icon name="copy" size={15} />
                   </button>
-                  <button type="button" title="Olib taşlaş" className="is-red" onClick={() => set(rows.filter((_, j) => j !== i))}>
+                  <button type="button" title="Olib tashlash" className="is-red" onClick={() => set(rows.filter((_, j) => j !== i))}>
                     <Icon name="trash" size={15} />
                   </button>
                 </div>
@@ -469,7 +469,7 @@ function ArrayField({ f, value, set, path, ctx }: { f: Extract<SField, { type: '
       {rows.length < max && (
         <button type="button" className="arr__add" onClick={() => set([...rows, {}])}>
           <Icon name="plus" size={16} />
-          {f.singular} qöşiş
+          {f.singular} qo‘shish
         </button>
       )}
     </div>

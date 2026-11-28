@@ -10,7 +10,7 @@ export type PressKind = 'reliz' | 'anons'
 
 export const PRESS_KINDS: Record<PressKind, string> = {
   reliz: 'Press-reliz',
-  anons: 'OAV uçun anons',
+  anons: 'OAV uchun anons',
 }
 
 export type PressItem = {
@@ -37,14 +37,14 @@ export const PRESS: PressItem[] = [
     slug: 'oliy-talim-yetakchilari-forumi-yakunlari',
     kind: 'reliz',
     date: '2026-10-12',
-    title: 'Poytaxtning 70 dan ortiq yoşlar yetakçisi respublika forumida qatnaşdi',
-    lead: '9–11-oktabr kunlari Özbekiston yoşlar ittifoqi Markaziy Kengaşi tomonidan ötkazilgan “Oliy taʼlim yetakçilarining forumi”da Toşkent şahridagi oliy taʼlim taşkilotlarining 70 dan ortiq yoşlar yetakçisi qatnaşdi.',
+    title: 'Poytaxtning 70 dan ortiq yoshlar yetakchisi respublika forumida qatnashdi',
+    lead: '9–11-oktabr kunlari O‘zbekiston yoshlar ittifoqi Markaziy Kengashi tomonidan o‘tkazilgan “Oliy ta’lim yetakchilarining forumi”da Toshkent shahridagi oliy ta’lim tashkilotlarining 70 dan ortiq yoshlar yetakchisi qatnashdi.',
     body: [
-      'Poytaxt vakillari respublikaning turli hududlaridan kelgan yoşlar yetakçilari bilan tajriba almaşdi, boşlanğiç taşkilotlar faoliyatidagi samarali yondaşuvlar va ilğor loyihalar bilan tanişdi.',
-      'Forumda orttirilgan tajriba va yangi hamkorlik aloqalari talaba-yoşlar taşabbuslarini qöllab-quvvatlaş hamda oliy taʼlim taşkilotlari bilan sohaviy va brend loyihalarni birgalikda amalga oşirişda qöllaniladi.',
+      'Poytaxt vakillari respublikaning turli hududlaridan kelgan yoshlar yetakchilari bilan tajriba almashdi, boshlang‘ich tashkilotlar faoliyatidagi samarali yondashuvlar va ilg‘or loyihalar bilan tanishdi.',
+      'Forumda orttirilgan tajriba va yangi hamkorlik aloqalari talaba-yoshlar tashabbuslarini qo‘llab-quvvatlash hamda oliy ta’lim tashkilotlari bilan sohaviy va brend loyihalarni birgalikda amalga oshirishda qo‘llaniladi.',
     ],
     facts: [
-      { v: '70+', k: 'poytaxt yoşlar yetakçisi' },
+      { v: '70+', k: 'poytaxt yoshlar yetakchisi' },
       { v: '3', k: 'kun davom etdi' },
     ],
     album: 6890,
@@ -54,14 +54,14 @@ export const PRESS: PressItem[] = [
     slug: 'hududiy-koordinatorlar-instituti',
     kind: 'reliz',
     date: '2026-10-08',
-    title: 'Toşkent şahrida “Hududiy koordinatorlar instituti” modeli joriy etiladi',
-    lead: 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi poytaxtdagi oliy taʼlim taşkilotlari yoşlar yetakçilari bilan işni muvofiqlaştiriş uçun yangi taşkiliy model — “Hududiy koordinatorlar instituti”ni joriy etmoqda.',
+    title: 'Toshkent shahrida “Hududiy koordinatorlar instituti” modeli joriy etiladi',
+    lead: 'O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi poytaxtdagi oliy ta’lim tashkilotlari yoshlar yetakchilari bilan ishni muvofiqlashtirish uchun yangi tashkiliy model — “Hududiy koordinatorlar instituti”ni joriy etmoqda.',
     body: [
-      'Model doirasida Kengaş qamrovidagi 98 ta oliy taʼlim taşkiloti hududiy joylaşuviga köra 9 ta guruhga birlaştirildi, 10 nafar yoşlar yetakçisi hududiy koordinator etib belgilandi. Hududdagi tayanç oliy taʼlim taşkilotining yoşlar yetakçisi koordinator vazifasini bajaradi: biriktirilgan taşkilotlar yoşlar yetakçilarining hamkorligini muvofiqlaştiradi, istiqbolli taşabbuslarni birlaştiradi va qöşma loyihalarni amalga oşirişga kömaklaşadi.',
-      'Yangi institutning ustuvor yönalişi — oliy taʼlim taşkilotlaridagi eng salohiyatli va taşabbuskor yoşlarni aniqlaş, ularning bilim va könikmalarini rivojlantiriş hamda yirik loyihalarga jalb etiş. Taşkilotlarning ixtisoslaşuvi va ilmiy salohiyatidan kelib çiqib, bir neçta oliy taʼlim taşkiloti hamkorligida brend loyihalar yaratişga alohida eʼtibor qaratiladi.',
+      'Model doirasida Kengash qamrovidagi 98 ta oliy ta’lim tashkiloti hududiy joylashuviga ko‘ra 9 ta guruhga birlashtirildi, 10 nafar yoshlar yetakchisi hududiy koordinator etib belgilandi. Hududdagi tayanch oliy ta’lim tashkilotining yoshlar yetakchisi koordinator vazifasini bajaradi: biriktirilgan tashkilotlar yoshlar yetakchilarining hamkorligini muvofiqlashtiradi, istiqbolli tashabbuslarni birlashtiradi va qo‘shma loyihalarni amalga oshirishga ko‘maklashadi.',
+      'Yangi institutning ustuvor yo‘nalishi — oliy ta’lim tashkilotlaridagi eng salohiyatli va tashabbuskor yoshlarni aniqlash, ularning bilim va ko‘nikmalarini rivojlantirish hamda yirik loyihalarga jalb etish. Tashkilotlarning ixtisoslashuvi va ilmiy salohiyatidan kelib chiqib, bir nechta oliy ta’lim tashkiloti hamkorligida brend loyihalar yaratishga alohida e’tibor qaratiladi.',
     ],
     facts: [
-      { v: '98', k: 'oliy taʼlim taşkiloti' },
+      { v: '98', k: 'oliy ta’lim tashkiloti' },
       { v: '9', k: 'hududiy guruh' },
       { v: '10', k: 'hududiy koordinator' },
     ],
@@ -70,10 +70,10 @@ export const PRESS: PressItem[] = [
     slug: 'ott-yetakchilari-birinchi-umumiy-yigilishi',
     kind: 'reliz',
     date: '2026-10-08',
-    title: 'OTT yoşlar yetakçilarining yangi öquv yilidagi birinçi umumiy yiğilişi bölib ötdi',
-    lead: '7-oktabr kuni Toşkent arxitektura-quriliş universitetida Kengaş poytaxtdagi oliy taʼlim taşkilotlari boşlanğiç taşkilotlarining yoşlar yetakçilari uçun 2026/2027-öquv yilidagi birinçi umumiy yiğilişni ötkazdi.',
+    title: 'OTT yoshlar yetakchilarining yangi o‘quv yilidagi birinchi umumiy yig‘ilishi bo‘lib o‘tdi',
+    lead: '7-oktabr kuni Toshkent arxitektura-qurilish universitetida Kengash poytaxtdagi oliy ta’lim tashkilotlari boshlang‘ich tashkilotlarining yoshlar yetakchilari uchun 2026/2027-o‘quv yilidagi birinchi umumiy yig‘ilishni o‘tkazdi.',
     body: [
-      'Kengaytirilgan yiğilişda boşlanğiç taşkilotlar oldida 2026/2027-öquv yilida turgan ustuvor maqsad va vazifalar belgilab olindi, ularning faoliyatini takomillaştiriş va yoşlar bilan işlaş samaradorligini oşiriş masalalari körib çiqildi.',
+      'Kengaytirilgan yig‘ilishda boshlang‘ich tashkilotlar oldida 2026/2027-o‘quv yilida turgan ustuvor maqsad va vazifalar belgilab olindi, ularning faoliyatini takomillashtirish va yoshlar bilan ishlash samaradorligini oshirish masalalari ko‘rib chiqildi.',
     ],
     album: 6822,
   },
@@ -81,43 +81,43 @@ export const PRESS: PressItem[] = [
     slug: 'oliy-talim-yetakchilari-forumi-anons',
     kind: 'anons',
     date: '2026-10-08',
-    title: 'Oliy taʼlim taşkilotlari yoşlar yetakçilarining respublika forumi',
-    lead: 'Özbekiston yoşlar ittifoqi Markaziy Kengaşi tomonidan ötkaziladigan forumda respublikadan 200 nafardan ortiq yoşlar yetakçisi, jumladan, Toşkent şahridagi 91 ta oliy taʼlim taşkilotining yoşlar yetakçilari qatnaşadi.',
+    title: 'Oliy ta’lim tashkilotlari yoshlar yetakchilarining respublika forumi',
+    lead: 'O‘zbekiston yoshlar ittifoqi Markaziy Kengashi tomonidan o‘tkaziladigan forumda respublikadan 200 nafardan ortiq yoshlar yetakchisi, jumladan, Toshkent shahridagi 91 ta oliy ta’lim tashkilotining yoshlar yetakchilari qatnashadi.',
     body: [
-      'Uç kunlik forumda yoşlar yetakçilarining huquq va majburiyatlari, faoliyatni samarali taşkil etiş, şaxsiy brendni şakllantiriş, notiqlik mahorati, zamonaviy raqamli texnologiyalardan foydalaniş va yoşlar bilan işlaşning ilğor usullariga bağişlangan seminar-treninglar va amaliy maşğulotlar ötkaziladi.',
-      'Forum doirasida “IELTS Marafon”, “Suvni birgalikda asraymiz”, “Yölovçi” va “Kitob-top” loyihalari taqdimoti, hududlararo tajriba almaşiş, intellektual öyinlar, sport musobaqalari hamda madaniy-maʼrifiy tadbirlar rejalaştirilgan.',
+      'Uch kunlik forumda yoshlar yetakchilarining huquq va majburiyatlari, faoliyatni samarali tashkil etish, shaxsiy brendni shakllantirish, notiqlik mahorati, zamonaviy raqamli texnologiyalardan foydalanish va yoshlar bilan ishlashning ilg‘or usullariga bag‘ishlangan seminar-treninglar va amaliy mashg‘ulotlar o‘tkaziladi.',
+      'Forum doirasida “IELTS Marafon”, “Suvni birgalikda asraymiz”, “Yo‘lovchi” va “Kitob-top” loyihalari taqdimoti, hududlararo tajriba almashish, intellektual o‘yinlar, sport musobaqalari hamda madaniy-ma’rifiy tadbirlar rejalashtirilgan.',
     ],
     facts: [
-      { v: '200+', k: 'yoşlar yetakçisi' },
-      { v: '91', k: 'poytaxt OTTsidan yetakçilar' },
+      { v: '200+', k: 'yoshlar yetakchisi' },
+      { v: '91', k: 'poytaxt OTTsidan yetakchilar' },
     ],
-    event: { when: '9–11-oktabr', place: 'Yoşlar oromgohi, Toşkent viloyati' },
+    event: { when: '9–11-oktabr', place: 'Yoshlar oromgohi, Toshkent viloyati' },
   },
   {
     slug: 'ajdodlar-izidan-respublika-bosqichi',
     kind: 'anons',
     date: '2026-10-16',
-    title: '“Ajdodlar izidan” intellektual tanlovining respublika bosqiçi',
-    lead: '24-oktabr kuni Yoşlar ijod saroyida yoş harbiy xizmatçilar va kursantlar örtasida “Ajdodlar izidan” intellektual tanlovining respublika bosqiçi bölib ötadi.',
+    title: '“Ajdodlar izidan” intellektual tanlovining respublika bosqichi',
+    lead: '24-oktabr kuni Yoshlar ijod saroyida yosh harbiy xizmatchilar va kursantlar o‘rtasida “Ajdodlar izidan” intellektual tanlovining respublika bosqichi bo‘lib o‘tadi.',
     body: [
-      'Tanlovning maqsadi — yoş harbiylarda kitobxonlik madaniyatini yuksaltiriş, ajdodlarimizning boy maʼnaviy va harbiy merosini çuqur örganiş, milliy qadriyatlarga hurmat va vatanparvarlik tuyğularini mustahkamlaş.',
+      'Tanlovning maqsadi — yosh harbiylarda kitobxonlik madaniyatini yuksaltirish, ajdodlarimizning boy ma’naviy va harbiy merosini chuqur o‘rganish, milliy qadriyatlarga hurmat va vatanparvarlik tuyg‘ularini mustahkamlash.',
     ],
-    event: { when: '24-oktabr', time: '09:00', place: 'Yoşlar ijod saroyi, Toşkent şahri' },
+    event: { when: '24-oktabr', time: '09:00', place: 'Yoshlar ijod saroyi, Toshkent shahri' },
   },
   {
     slug: 'talaba-va-kursantlar-sport-musobaqalari',
     kind: 'reliz',
     date: '2026-09-29',
-    title: 'Talaba va kursantlar örtasida döstlik sport musobaqalari ötkazildi',
-    lead: '25–26-sentabr kunlari Harbiy xavfsizlik va mudofaa universitetida Öqituvçi va murabbiylar kuniga bağişlangan döstlik sport musobaqalari bölib ötdi. Unda 10 ta oliy va oliy harbiy taʼlim muassasasidan 340 nafar yoş sportçi qatnaşdi.',
+    title: 'Talaba va kursantlar o‘rtasida do‘stlik sport musobaqalari o‘tkazildi',
+    lead: '25–26-sentabr kunlari Harbiy xavfsizlik va mudofaa universitetida O‘qituvchi va murabbiylar kuniga bag‘ishlangan do‘stlik sport musobaqalari bo‘lib o‘tdi. Unda 10 ta oliy va oliy harbiy ta’lim muassasasidan 340 nafar yosh sportchi qatnashdi.',
     body: [
-      'Tadbir ikki tomonlama imzolangan hamkorlik memorandumlari ijrosi doirasida taşkil etildi. Musobaqada Harbiy xavfsizlik va mudofaa universiteti, Jamoat xavfsizligi universiteti, Islom Karimov nomidagi Toşkent davlat texnika universiteti, Toşkent davlat transport universiteti, Muhammad al-Xorazmiy nomidagi Toşkent axborot texnologiyalari universiteti, Çirçiq davlat pedagogika universiteti, Jahon iqtisodiyoti va diplomatiya universiteti, Bojxona instituti, Içki işlar vazirligi Akademiyasi hamda Favqulodda vaziyatlar vazirligi Akademiyasi jamoalari iştirok etdi.',
-      'Ikki kun davomida mini futbol, voleybol, arqon tortiş va 100 metrga estafeta yuguriş böyiça bellaşuvlar bölib ötdi. Musobaqalar Özbekiston davlat jismoniy tarbiya va sport universiteti hakamlari hamda Harbiy xavfsizlik va mudofaa universitetining Jismoniy tayyorgarlik va sport kafedrasi mutaxassislari nazorati ostida ötkazildi.',
-      'Ğolib jamoalarga Kengaş va hamkor taşkilotlarning sovğalari, medallar, faxriy yorliqlar hamda kitoblar töplami topşirildi.',
+      'Tadbir ikki tomonlama imzolangan hamkorlik memorandumlari ijrosi doirasida tashkil etildi. Musobaqada Harbiy xavfsizlik va mudofaa universiteti, Jamoat xavfsizligi universiteti, Islom Karimov nomidagi Toshkent davlat texnika universiteti, Toshkent davlat transport universiteti, Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti, Chirchiq davlat pedagogika universiteti, Jahon iqtisodiyoti va diplomatiya universiteti, Bojxona instituti, Ichki ishlar vazirligi Akademiyasi hamda Favqulodda vaziyatlar vazirligi Akademiyasi jamoalari ishtirok etdi.',
+      'Ikki kun davomida mini futbol, voleybol, arqon tortish va 100 metrga estafeta yugurish bo‘yicha bellashuvlar bo‘lib o‘tdi. Musobaqalar O‘zbekiston davlat jismoniy tarbiya va sport universiteti hakamlari hamda Harbiy xavfsizlik va mudofaa universitetining Jismoniy tayyorgarlik va sport kafedrasi mutaxassislari nazorati ostida o‘tkazildi.',
+      'G‘olib jamoalarga Kengash va hamkor tashkilotlarning sovg‘alari, medallar, faxriy yorliqlar hamda kitoblar to‘plami topshirildi.',
     ],
     facts: [
-      { v: '340', k: 'yoş sportçi' },
-      { v: '10', k: 'taʼlim muassasasi' },
+      { v: '340', k: 'yosh sportchi' },
+      { v: '10', k: 'ta’lim muassasasi' },
       { v: '4', k: 'sport turi' },
     ],
     album: 6784,
@@ -126,6 +126,6 @@ export const PRESS: PressItem[] = [
 
 /** “Kengaş haqida” — har bir reliz oxiridagi doimiy band */
 export const ABOUT =
-  'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi poytaxtdagi oliy taʼlim taşkilotlari, harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar faoliyatini muvofiqlaştiradi, yoşlarning taşabbuslarini qöllab-quvvatlaydi va ularning manfaatlarini ifodalaydi.'
+  'O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi poytaxtdagi oliy ta’lim tashkilotlari, harbiy qismlar va muassasalardagi boshlang‘ich tashkilotlar faoliyatini muvofiqlashtiradi, yoshlarning tashabbuslarini qo‘llab-quvvatlaydi va ularning manfaatlarini ifodalaydi.'
 
-export const ORG = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
+export const ORG = 'O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi'

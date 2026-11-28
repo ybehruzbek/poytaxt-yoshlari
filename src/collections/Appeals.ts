@@ -21,7 +21,7 @@ export const APPEAL_FILE_MAX = 10 * 1024 * 1024 // 10 MB
 export const APPEAL_TYPES = [
   { label: 'Ariza', value: 'ariza' },
   { label: 'Taklif', value: 'taklif' },
-  { label: 'Şikoyat', value: 'shikoyat' },
+  { label: 'Shikoyat', value: 'shikoyat' },
 ] as const
 
 /**
@@ -56,7 +56,7 @@ export const Appeals: CollectionConfig = {
         subject: (d) => `Saytga yangi murojaat keldi: ${APPEAL_TYPES.find((t) => t.value === d.type)?.label ?? d.type}`,
         lines: (d) => [
           ['Turi', APPEAL_TYPES.find((t) => t.value === d.type)?.label],
-          ['Murojaatçi', d.name as string],
+          ['Murojaatchi', d.name as string],
           ['Xabar', String(d.message ?? '').slice(0, 300)],
         ],
       }),
@@ -88,7 +88,7 @@ export const Appeals: CollectionConfig = {
           defaultValue: 'yangi',
           options: [
             { label: 'Yangi', value: 'yangi' },
-            { label: 'Körib çiqilmoqda', value: 'jarayonda' },
+            { label: 'Ko‘rib chiqilmoqda', value: 'jarayonda' },
             { label: 'Yopildi', value: 'yopildi' },
           ],
         },
@@ -99,12 +99,12 @@ export const Appeals: CollectionConfig = {
       fields: [
         { name: 'name', label: 'Ism-familiya', type: 'text', required: true },
         { name: 'phone', label: 'Telefon', type: 'text', required: true },
-        { name: 'email', label: 'Elektron poçta', type: 'email', required: true },
+        { name: 'email', label: 'Elektron pochta', type: 'email', required: true },
       ],
     },
     { name: 'message', label: 'Xabar', type: 'textarea', required: true },
     { name: 'file', label: 'Biriktirilgan fayl', type: 'upload', relationTo: 'appeal-files' },
-    { name: 'note', label: 'Içki izoh (faqat xodimlar uçun)', type: 'textarea' },
+    { name: 'note', label: 'Ichki izoh (faqat xodimlar uchun)', type: 'textarea' },
   ],
   timestamps: true,
 }

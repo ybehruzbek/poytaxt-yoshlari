@@ -9,7 +9,7 @@ const urlField = (net: Net): TextField => ({
   label: NET_LABEL[net],
   type: 'text',
   defaultValue: DEFAULT_SOCIALS[net],
-  admin: { description: 'Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.' },
+  admin: { description: 'To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.' },
   validate: (value: string | null | undefined) => checkSocialUrl(net, (value ?? '').trim()) ?? true,
   hooks: {
     beforeChange: [({ value }) => (typeof value === 'string' && value.trim() ? cleanSocialUrl(value.trim()) : '')],

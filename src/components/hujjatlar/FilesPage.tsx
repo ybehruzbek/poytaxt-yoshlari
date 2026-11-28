@@ -59,7 +59,7 @@ export function FilesPage({
                   </div>
                   <a className="more-btn" href={d.url} target="_blank" rel="noopener noreferrer" download>
                     <More>
-                      Yuklab oliş<span className="sr-only">: {d.t}</span>
+                      Yuklab olish<span className="sr-only">: {d.t}</span>
                     </More>
                   </a>
                   <small className="hj-size">{d.size ? size(d.size) : ''}</small>
@@ -68,8 +68,8 @@ export function FilesPage({
             </ul>
           ) : (
             <div className="ph-empty" role="status">
-              <p className="ph-empty-h">Hujjatlar joylaştirilmoqda</p>
-              <p>Bölim hujjatlari tez orada şu yerda yuklab oliş uçun joylaştiriladi.</p>
+              <p className="ph-empty-h">Hujjatlar joylashtirilmoqda</p>
+              <p>Bo‘lim hujjatlari tez orada shu yerda yuklab olish uchun joylashtiriladi.</p>
             </div>
           )}
           <SiblingNav locale={locale} path={path} />

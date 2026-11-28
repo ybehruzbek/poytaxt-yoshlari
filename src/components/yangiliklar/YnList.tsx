@@ -71,7 +71,7 @@ export function YnList({ items, L }: { items: YnItem[]; L: string }) {
 
         <aside className="yn-a-feed yn-a3-feed" aria-labelledby="yn-a3-feed-h">
           <h2 className="yn-kicker" id="yn-a3-feed-h">
-            Sönggi yangiliklar
+            So‘nggi yangiliklar
           </h2>
           {byDay(items.slice(0, FEED)).map((day) => (
             <section key={day[0].dayKey} className="yn-a3-day">

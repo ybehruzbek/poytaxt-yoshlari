@@ -9,7 +9,7 @@ import { saytManzil, yangilash } from '@/lib/revalidate'
 /** “Köp beriladigan savollar” */
 export const Faqs: CollectionConfig = {
   slug: 'faqs',
-  labels: { singular: 'Savol', plural: 'Köp beriladigan savollar' },
+  labels: { singular: 'Savol', plural: 'Ko‘p beriladigan savollar' },
   orderable: true,
   admin: {
     group: G.boglanish,
@@ -17,7 +17,7 @@ export const Faqs: CollectionConfig = {
     defaultColumns: ['q', 'cat', 'home', 'azolik'],
     listSearchableFields: ['q'],
     description:
-      'Saytdagi “Köp beriladigan savollar” sahifasi. Javobda {TELEFONLAR}, {POÇTA}, {MANZIL}, {MÖLJAL}, {IŞ_VAQTI} yozilsa, “Aloqa maʼlumotlari”dagi joriy qiymat qöyiladi.',
+      'Saytdagi “Ko‘p beriladigan savollar” sahifasi. Javobda {TELEFONLAR}, {POCHTA}, {MANZIL}, {MO‘LJAL}, {ISH_VAQTI} yozilsa, “Aloqa ma’lumotlari”dagi joriy qiymat qo‘yiladi.',
     preview: (_d, { locale }) => saytManzil('/boglanish/savollar', locale),
     hidden: kontentYashirin,
   },
@@ -26,16 +26,16 @@ export const Faqs: CollectionConfig = {
   fields: [
     matn('q', 'Savol', { majburiy: true }),
     tanlov('cat', 'Mavzu', FAQ_CATS.map((c) => ({ label: c.t, value: c.k })), { majburiy: true }),
-    bandlar('a', 'Javob (xatboşilar)', { band: 'Xatboşi' }),
-    bandlar('li', 'Javob içidagi röyxat (ixtiyoriy)', { band: 'Band' }),
+    bandlar('a', 'Javob (xatboshilar)', { band: 'Xatboshi' }),
+    bandlar('li', 'Javob ichidagi ro‘yxat (ixtiyoriy)', { band: 'Band' }),
     {
       name: 'more',
       label: 'Batafsil sahifa (ixtiyoriy)',
       type: 'group',
-      fields: [qator(kod('href', 'Sahifa yöli', { kenglik: '50%', namuna: '/boglanish/azo-bolish' }), matn('label', 'Havola matni', { kenglik: '50%' }))],
+      fields: [qator(kod('href', 'Sahifa yo‘li', { kenglik: '50%', namuna: '/boglanish/azo-bolish' }), matn('label', 'Havola matni', { kenglik: '50%' }))],
     },
-    { name: 'home', label: 'Boş sahifada körsatiş', type: 'checkbox', admin: { position: 'sidebar' } },
-    { name: 'azolik', label: 'Ittifoq sahifasidagi aʼzolik bölimida körsatiş', type: 'checkbox', admin: { position: 'sidebar' } },
+    { name: 'home', label: 'Bosh sahifada ko‘rsatish', type: 'checkbox', admin: { position: 'sidebar' } },
+    { name: 'azolik', label: 'Ittifoq sahifasidagi a’zolik bo‘limida ko‘rsatish', type: 'checkbox', admin: { position: 'sidebar' } },
     manzilNomi('q'),
   ],
 }

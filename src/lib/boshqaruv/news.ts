@@ -10,7 +10,7 @@ import { getPayloadClient } from './auth'
 export const CATEGORIES = NEWS_CATEGORIES.map((c) => ({ value: c.value, t: c.label }))
 export const KINDS = [
   { value: 'yangilik', t: 'Yangilik' },
-  { value: 'elon', t: 'Eʼlon' },
+  { value: 'elon', t: 'E’lon' },
   { value: 'tadbir', t: 'Kelgusi tadbir' },
   { value: 'tabrik', t: 'Tabrik' },
 ] as const

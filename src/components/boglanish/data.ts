@@ -5,16 +5,16 @@
  */
 import { CONTACT, RECEPTION } from '@/components/hududiy/data'
 
-export const ORG = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
+export const ORG = 'O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi'
 
 export const ADDRESS = {
   /** rasmiy manzil */
-  full: 'Özbekiston Respublikasi, Toşkent şahri, Olmazor tumani, Universitet köçasi, 4-uy',
-  line: 'Toşkent şahri, Olmazor tumani, Universitet köçasi, 4-uy',
+  full: 'O‘zbekiston Respublikasi, Toshkent shahri, Olmazor tumani, Universitet ko‘chasi, 4-uy',
+  line: 'Toshkent shahri, Olmazor tumani, Universitet ko‘chasi, 4-uy',
   /** ikki qatorga bölib körsatiş uçun: şahar va tuman / köça va uy */
-  city: 'Toşkent şahri, Olmazor tumani',
-  street: 'Universitet köçasi, 4-uy',
-  landmark: 'Toşkent şahar Yoşlar markazi binosi',
+  city: 'Toshkent shahri, Olmazor tumani',
+  street: 'Universitet ko‘chasi, 4-uy',
+  landmark: 'Toshkent shahar Yoshlar markazi binosi',
   /** jamoat transporti: Yandex Xaritalar maʼlumotiga köra eng yaqin bekat — 760 m */
   metro: { station: '“Beruniy” metro bekati', walk: '760 metr, piyoda taxminan 10 daqiqa' },
 }
@@ -45,15 +45,15 @@ export const EMAIL = CONTACT.email
 /** Rasmiy poçta manzillari: Kengaş poçtasi va yoshkent.uz domenidagi poçta */
 export const EMAILS = [CONTACT.email, 'info@yoshkent.uz']
 export const HOURS = {
-  days: 'Duşanba — juma',
+  days: 'Dushanba — juma',
   time: '09:00 — 18:00',
-  off: 'Şanba, yakşanba — dam oliş kunlari',
+  off: 'Shanba, yakshanba — dam olish kunlari',
 }
 export const SOCIALS = CONTACT.socials
 
 /** Lavozim: “Kengaş raisi” özgarmaydi, bölim nomiga “boşliği” qöşiladi */
 const position = (dept: string) =>
-  dept === 'Kengaş raisi' ? dept : `${dept}${dept.endsWith('bölimi') ? '' : ' bölimi'} boşliği`
+  dept === 'Kengash raisi' ? dept : `${dept}${dept.endsWith('bo‘limi') ? '' : ' bo‘limi'} boshlig‘i`
 
 /** Fuqarolar qabuli: kun, rahbar, lavozim, xona (hududiy Kengaş jadvali) */
 export const RECEPTIONS = RECEPTION.map((r) => ({
@@ -69,18 +69,18 @@ export const RECEPTIONS = RECEPTION.map((r) => ({
  * 3- va 5-moddalar (murojaat turlari), 28-modda (körib çiqiş muddatlari). Manba: lex.uz
  */
 export const LAW = {
-  title: '“Jismoniy va yuridik şaxslarning murojaatlari töğrisida”gi Qonun',
+  title: '“Jismoniy va yuridik shaxslarning murojaatlari to‘g‘risida”gi Qonun',
   href: 'https://lex.uz/uz/docs/-3336169',
   terms: [
-    { v: '15 kun', t: 'ičida ariza va şikoyatlar kelib tuşgan kundan boşlab körib çiqiladi' },
-    { v: '1 oygaça', t: 'qöşimça tekşiriş yoki hujjatlar talab etilsa, şuningdek takliflar körib çiqiladi' },
+    { v: '15 kun', t: 'ičida ariza va shikoyatlar kelib tushgan kundan boshlab ko‘rib chiqiladi' },
+    { v: '1 oygacha', t: 'qo‘shimcha tekshirish yoki hujjatlar talab etilsa, shuningdek takliflar ko‘rib chiqiladi' },
   ],
   types: [
-    { t: 'Ariza', d: 'Huquq, erkinlik va qonuniy manfaatlarni amalga oşirişda kömak söraş.' },
-    { t: 'Taklif', d: 'Davlat va jamiyat faoliyatini takomillaştiriş böyiça tavsiyalar.' },
+    { t: 'Ariza', d: 'Huquq, erkinlik va qonuniy manfaatlarni amalga oshirishda ko‘mak so‘rash.' },
+    { t: 'Taklif', d: 'Davlat va jamiyat faoliyatini takomillashtirish bo‘yicha tavsiyalar.' },
     {
-      t: 'Şikoyat',
-      d: 'Buzilgan huquq va erkinliklarni tiklaş, qonuniy manfaatlarni himoya qiliş talabi.',
+      t: 'Shikoyat',
+      d: 'Buzilgan huquq va erkinliklarni tiklash, qonuniy manfaatlarni himoya qilish talabi.',
     },
   ],
 }

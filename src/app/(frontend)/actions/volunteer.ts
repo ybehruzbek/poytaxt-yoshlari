@@ -29,7 +29,7 @@ export async function submitVolunteer(fd: FormData): Promise<VolState> {
     return {
       ok: false,
       message:
-        'Yuboriş urinişlari soni belgilangan çegaradan oşdi. Iltimos, birozdan keyin qayta yuboring.',
+        'Yuborish urinishlari soni belgilangan chegaradan oshdi. Iltimos, birozdan keyin qayta yuboring.',
     }
 
   const name = str(fd.get('name'))
@@ -47,24 +47,24 @@ export async function submitVolunteer(fd: FormData): Promise<VolState> {
 
   const errors: VolState['errors'] = {}
   if (name.length < 5 || name.length > 120)
-    errors.name = 'Familiya, ism va otasining ismini töliq kiriting.'
+    errors.name = 'Familiya, ism va otasining ismini to‘liq kiriting.'
   if (!birthYear || age < 16 || age > 35)
     errors.birthYear =
-      'Volontyorlik faoliyatini 16 yoşga tölgan şaxslar amalga oşirişi mumkin (Qonunning 12-moddasi).'
+      'Volontyorlik faoliyatini 16 yoshga to‘lgan shaxslar amalga oshirishi mumkin (Qonunning 12-moddasi).'
   const digits = phone.replace(/\D/g, '')
   const phoneNorm = `+${digits}`
   if (digits.length < 9 || digits.length > 15)
-    errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
-  if (place.length < 3 || place.length > 200) errors.place = 'Öqiş yoki iş joyingizni körsating.'
-  if (!dirs.length) errors.dirs = 'Kamida bitta yönalişni tanlang.'
+    errors.phone = 'Telefon raqamini to‘g‘ri kiriting, masalan: +998 90 123 45 67.'
+  if (place.length < 3 || place.length > 200) errors.place = 'O‘qish yoki ish joyingizni ko‘rsating.'
+  if (!dirs.length) errors.dirs = 'Kamida bitta yo‘nalishni tanlang.'
   else if (age < 18 && dirs.some((d) => d.age === 18))
     errors.dirs =
-      'Favqulodda vaziyatlar yönalişida faqat 18 yoşdan katta volontyorlar iştirok etadi (Qonunning 12-moddasi).'
+      'Favqulodda vaziyatlar yo‘nalishida faqat 18 yoshdan katta volontyorlar ishtirok etadi (Qonunning 12-moddasi).'
   if (fd.get('agree') !== 'on')
-    errors.agree = 'Şaxsiy maʼlumotlarni qayta işlaşga roziligingizni tasdiqlang.'
+    errors.agree = 'Shaxsiy ma’lumotlarni qayta ishlashga roziligingizni tasdiqlang.'
 
   if (Object.keys(errors).length)
-    return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekşiring.' }
+    return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekshiring.' }
 
   try {
     const payload = await getPayload({ config })
@@ -92,6 +92,6 @@ export async function submitVolunteer(fd: FormData): Promise<VolState> {
     return { ok: true, no, message: 'Arizangiz qabul qilindi.' }
   } catch (err) {
     logError('volontyorlik', err)
-    return { ok: false, message: 'Arizani saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
+    return { ok: false, message: 'Arizani saqlab bo‘lmadi. Iltimos, keyinroq qayta urinib ko‘ring.' }
   }
 }

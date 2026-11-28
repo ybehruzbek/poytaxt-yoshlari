@@ -34,10 +34,10 @@ export function ListFilters(props: { q: string; turkum: string; tur: string; tar
     <>
       <label className={pending ? 'field-search is-busy' : 'field-search'}>
         <Icon name="search" size={18} />
-        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Sarlavha böyiça qidiriş" aria-label="Qidiriş" />
+        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Sarlavha bo‘yicha qidirish" aria-label="Qidirish" />
       </label>
       <select className="select" value={props.turkum} onChange={(e) => push({ turkum: e.target.value })} aria-label="Turkum">
-        <option value="">Barça turkumlar</option>
+        <option value="">Barcha turkumlar</option>
         {props.categories.map((c) => (
           <option key={c.value} value={c.value}>
             {c.t}
@@ -45,7 +45,7 @@ export function ListFilters(props: { q: string; turkum: string; tur: string; tar
         ))}
       </select>
       <select className="select" value={props.tur} onChange={(e) => push({ tur: e.target.value })} aria-label="Turi">
-        <option value="">Barça turlar</option>
+        <option value="">Barcha turlar</option>
         {props.kinds.map((c) => (
           <option key={c.value} value={c.value}>
             {c.t}

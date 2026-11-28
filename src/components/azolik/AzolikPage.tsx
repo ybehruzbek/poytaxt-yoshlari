@@ -23,21 +23,21 @@ export async function AzolikPage({ L, crumbs }: P) {
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Aʼzo böliş</h1>
+          <h1 className="h2 pg-title">A’zo bo‘lish</h1>
         </div>
       </header>
       <section className="sec az-sec">
         {/* kompyuterda: çapda şartlar va tartib, öngda şakl; tor ekranda: şartlar → şakl → tartib */}
         <div className="wrap az-grid">
           <div className="az-a">
-            <h2 className="h2">Kim aʼzo bölişi mumkin</h2>
+            <h2 className="h2">Kim a’zo bo‘lishi mumkin</h2>
             <Conditions L={L} CONDITIONS={A.CONDITIONS} />
           </div>
           <div className="az-f">
             <OnlineForm otts={await ottNames()} after={A.AFTER} ustavHref={L('/hujjatlar/normativ/ustav')} />
           </div>
           <div className="az-b">
-            <h2 className="h2">Arizani körib çiqiş tartibi</h2>
+            <h2 className="h2">Arizani ko‘rib chiqish tartibi</h2>
             <Steps L={L} STEPS={A.STEPS} />
           </div>
         </div>

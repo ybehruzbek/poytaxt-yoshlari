@@ -84,7 +84,7 @@ export function TextErrorReport() {
             <p className="te-l">Siz belgilagan matn:</p>
             <blockquote className="te-q">{sel?.text}</blockquote>
             <label className="te-l" htmlFor="te-c">
-              Töğri variant yoki izoh (ixtiyoriy)
+              To‘g‘ri variant yoki izoh (ixtiyoriy)
             </label>
             <textarea
               id="te-c"
@@ -102,7 +102,7 @@ export function TextErrorReport() {
         )}
         <div className="te-act">
           <button type="button" className="te-x" onClick={() => dlg.current?.close()}>
-            {state?.ok ? 'Yopiş' : 'Bekor qiliş'}
+            {state?.ok ? 'Yopish' : 'Bekor qilish'}
           </button>
           {!state?.ok && (
             <button
@@ -111,7 +111,7 @@ export function TextErrorReport() {
               disabled={pending}
               aria-busy={pending}
             >
-              Yuboriş
+              Yuborish
             </button>
           )}
         </div>

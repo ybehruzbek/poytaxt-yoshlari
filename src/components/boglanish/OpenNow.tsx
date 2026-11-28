@@ -8,15 +8,15 @@ function status(now = new Date()) {
   const d = t.getDay() // 0 — yakşanba
   const m = t.getHours() * 60 + t.getMinutes()
   const work = d >= 1 && d <= 5
-  if (work && m >= 9 * 60 && m < 18 * 60) return { open: true, text: 'Hozir oçiq · 18:00 gaça' }
+  if (work && m >= 9 * 60 && m < 18 * 60) return { open: true, text: 'Hozir ochiq · 18:00 gacha' }
   const nextMon = d === 5 && m >= 18 * 60 ? true : d === 6 || d === 0
   return {
     open: false,
     text: nextMon
-      ? 'Hozir yopiq · duşanba 09:00 da oçiladi'
+      ? 'Hozir yopiq · dushanba 09:00 da ochiladi'
       : m < 9 * 60
-        ? 'Hozir yopiq · bugun 09:00 da oçiladi'
-        : 'Hozir yopiq · ertaga 09:00 da oçiladi',
+        ? 'Hozir yopiq · bugun 09:00 da ochiladi'
+        : 'Hozir yopiq · ertaga 09:00 da ochiladi',
   }
 }
 

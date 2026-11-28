@@ -6,9 +6,9 @@ import { ShowMore } from './ShowMore'
 function Head() {
   return (
     <div className="sec-head">
-      <h2 className="h2">Yoşlar markazlari</h2>
+      <h2 className="h2">Yoshlar markazlari</h2>
       <p className="it-cen-lead">
-        <b>14</b> ta hududda Yoşlar markazi doimiy faoliyat yuritadi
+        <b>14</b> ta hududda Yoshlar markazi doimiy faoliyat yuritadi
       </p>
     </div>
   )
@@ -48,10 +48,10 @@ export function CentresB({ D }: { D: IttifoqData }) {
           </article>
           {REGIONAL.map((c, i) => (
             <figure key={c.region} className={i < FIRST ? 'icb-card' : 'icb-card icb-more'}>
-              <img src={c.img} alt={`${c.region} Yoşlar markazi binosi`} loading="lazy" decoding="async" />
+              <img src={c.img} alt={`${c.region} Yoshlar markazi binosi`} loading="lazy" decoding="async" />
               <figcaption>
                 <b>{c.region}</b>
-                <span>Yoşlar markazi</span>
+                <span>Yoshlar markazi</span>
               </figcaption>
             </figure>
           ))}

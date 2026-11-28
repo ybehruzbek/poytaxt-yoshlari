@@ -13,7 +13,7 @@ type SP = { holat?: string; q?: string; sahifa?: string; id?: string }
 type P = { params: Promise<{ tur: string }>; searchParams: Promise<SP> }
 
 export async function generateMetadata({ params }: P) {
-  return { title: kindByPath((await params).tur)?.t ?? 'Kiruvçi xabarlar' }
+  return { title: kindByPath((await params).tur)?.t ?? 'Kiruvchi xabarlar' }
 }
 
 /**
@@ -38,11 +38,11 @@ export default async function Kiruvchi({ params, searchParams }: P) {
     return `${base}${s ? `?${s}` : ''}`
   }
   const tone = (v: string) => kind.statuses.find((s) => s.v === v)
-  const tabs = [...kind.statuses.filter((s) => !s.done || list.counts[s.v] > 0), { v: 'all', t: 'Barçasi', tone: 'brown' as const }]
+  const tabs = [...kind.statuses.filter((s) => !s.done || list.counts[s.v] > 0), { v: 'all', t: 'Barchasi', tone: 'brown' as const }]
 
   return (
     <>
-      <Top title={kind.t} crumbs={[{ t: 'Kiruvçi xabarlar' }, { t: kind.t }]} />
+      <Top title={kind.t} crumbs={[{ t: 'Kiruvchi xabarlar' }, { t: kind.t }]} />
       <div className={item ? 'content inbox has-item' : 'content inbox'}>
         <section className="inbox__list card">
           <nav className="seg" aria-label="Holat">
@@ -57,10 +57,10 @@ export default async function Kiruvchi({ params, searchParams }: P) {
           {list.rows.length === 0 ? (
             <div className="empty-state">
               <Icon name="inbox" size={32} />
-              <b>{sp.q ? 'Qidiruv böyiça heç narsa topilmadi' : p.holat === 'yangi' ? 'Javob kutayotgan xabar yöq' : 'Bu holatda xabar yöq'}</b>
+              <b>{sp.q ? 'Qidiruv bo‘yicha hech narsa topilmadi' : p.holat === 'yangi' ? 'Javob kutayotgan xabar yo‘q' : 'Bu holatda xabar yo‘q'}</b>
               {p.holat === 'yangi' && !sp.q && list.counts.all > 0 && (
                 <Link className="btn btn-ghost" href={href({ holat: 'all', id: undefined })}>
-                  Barçasini körsatiş
+                  Barchasini ko‘rsatish
                 </Link>
               )}
             </div>
@@ -122,13 +122,13 @@ export default async function Kiruvchi({ params, searchParams }: P) {
           ) : sp.id ? (
             <div className="card empty-state">
               <Icon name="alert" size={32} />
-              <b>Xabar topilmadi yoki öçirilgan</b>
+              <b>Xabar topilmadi yoki o‘chirilgan</b>
             </div>
           ) : (
             <div className="card empty-state inbox__pick">
               <Icon name="inbox" size={32} />
               <b>Xabarni tanlang</b>
-              <span>Çapdagi röyxatdan xabarni bossangiz, u şu yerda oçiladi.</span>
+              <span>Chapdagi ro‘yxatdan xabarni bossangiz, u shu yerda ochiladi.</span>
             </div>
           )}
         </section>

@@ -17,10 +17,10 @@ export type RateResult = { ok: boolean; message?: string; stats?: RatingStats; m
 /** Bitta tomonidan bitta maqolaga bitta baho; qayta baholansa — yangilanadi. IP saqlanmaydi, faqat xeş */
 export async function rateNews(newsId: number, value: number): Promise<RateResult> {
   if (!Number.isInteger(newsId) || newsId < 1 || !Number.isInteger(value) || value < 1 || value > 5)
-    return { ok: false, message: 'Baho 1 dan 5 gaça bölişi kerak.' }
+    return { ok: false, message: 'Baho 1 dan 5 gacha bo‘lishi kerak.' }
 
   const ip = clientIp(await headers())
-  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Urinişlar soni belgilangan çegaradan oşdi. Iltimos, birozdan söng qayta urinib köring.' }
+  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Urinishlar soni belgilangan chegaradan oshdi. Iltimos, birozdan so‘ng qayta urinib ko‘ring.' }
 
   try {
     const payload = await getPayload({ config })
@@ -51,7 +51,7 @@ export async function rateNews(newsId: number, value: number): Promise<RateResul
     return { ok: true, stats: await ratingStats(newsId), mine: value }
   } catch (err) {
     logError('baho', err)
-    return { ok: false, message: 'Bahoni saqlab bölmadi. Keyinroq qayta urinib köring.' }
+    return { ok: false, message: 'Bahoni saqlab bo‘lmadi. Keyinroq qayta urinib ko‘ring.' }
   }
 }
 
@@ -60,9 +60,9 @@ export type ReactResult = { ok: boolean; message?: string; counts?: ReactionCoun
 /** Bitta tomonidan bitta reaksiya: boşqasini bossa — almaşadi, şuni qayta bossa — olib taşlanadi */
 export async function reactNews(newsId: number, kind: string): Promise<ReactResult> {
   if (!Number.isInteger(newsId) || newsId < 1 || !REACTIONS.includes(kind as ReactionKind))
-    return { ok: false, message: 'Notöğri reaksiya.' }
+    return { ok: false, message: 'Noto‘g‘ri reaksiya.' }
   const ip = clientIp(await headers())
-  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Urinişlar soni belgilangan çegaradan oşdi. Iltimos, birozdan söng qayta urinib köring.' }
+  if (rateLimited(ip, 'rating')) return { ok: false, message: 'Urinishlar soni belgilangan chegaradan oshdi. Iltimos, birozdan so‘ng qayta urinib ko‘ring.' }
   try {
     const payload = await getPayload({ config })
     const pub = await payload.find({
@@ -92,6 +92,6 @@ export async function reactNews(newsId: number, kind: string): Promise<ReactResu
     return { ok: true, counts: await reactionCounts(newsId), mine }
   } catch (err) {
     logError('reaksiya', err)
-    return { ok: false, message: 'Reaksiyani saqlab bölmadi.' }
+    return { ok: false, message: 'Reaksiyani saqlab bo‘lmadi.' }
   }
 }

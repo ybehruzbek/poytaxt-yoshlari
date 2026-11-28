@@ -50,11 +50,11 @@ function fromError(e: unknown): SaveResult {
     const fields: Record<string, string> = {}
     for (const er of e.data.errors) fields[er.path] = er.message
     const names = Object.keys(fields).map((k) => LABELS[k] ?? k)
-    return { ok: false, message: `Tekşiring: ${names.join(', ')}`, fields }
+    return { ok: false, message: `Tekshiring: ${names.join(', ')}`, fields }
   }
   const msg = e instanceof Error ? e.message : ''
-  if (/unique|duplicate|already/i.test(msg)) return { ok: false, message: 'Bunday sahifa manzili band. Boşqa manzil yozing.', fields: { slug: 'Band' } }
-  return { ok: false, message: 'Saqlab bölmadi. Birozdan keyin qayta urinib köring.' }
+  if (/unique|duplicate|already/i.test(msg)) return { ok: false, message: 'Bunday sahifa manzili band. Boshqa manzil yozing.', fields: { slug: 'Band' } }
+  return { ok: false, message: 'Saqlab bo‘lmadi. Birozdan keyin qayta urinib ko‘ring.' }
 }
 
 /**
@@ -62,9 +62,9 @@ function fromError(e: unknown): SaveResult {
  * Payload'ning ruxsatlari, imlo hook'lari va versiyalar tarixi işlaydi (user bilan, overrideAccess: false).
  */
 export async function saveNews(id: number | null, input: NewsInput, mode: 'draft' | 'publish'): Promise<SaveResult> {
-  if ((id !== null && !isId(id)) || !input || typeof input !== 'object') return { ok: false, message: 'Notöğri söröv.' }
+  if ((id !== null && !isId(id)) || !input || typeof input !== 'object') return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await getUser()
-  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const payload = await getPayloadClient()
 
   const data = {
@@ -102,9 +102,9 @@ export async function saveNews(id: number | null, input: NewsInput, mode: 'draft
 /** Saytdan oliş: eʼlon qilingan yangilik qoralamaga qaytadi */
 export async function unpublishNews(idsIn: number[]): Promise<{ ok: boolean; message: string }> {
   const ids = toIds(idsIn)
-  if (!ids.length) return { ok: false, message: 'Heç narsa tanlanmagan.' }
+  if (!ids.length) return { ok: false, message: 'Hech narsa tanlanmagan.' }
   const user = await getUser()
-  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const payload = await getPayloadClient()
   let n = 0
   for (const id of ids) {
@@ -121,9 +121,9 @@ export async function unpublishNews(idsIn: number[]): Promise<{ ok: boolean; mes
 /** Eʼlon qiliş (röyxatdan bir neçtasini birdan) */
 export async function publishNews(idsIn: number[]): Promise<{ ok: boolean; message: string }> {
   const ids = toIds(idsIn)
-  if (!ids.length) return { ok: false, message: 'Heç narsa tanlanmagan.' }
+  if (!ids.length) return { ok: false, message: 'Hech narsa tanlanmagan.' }
   const user = await getUser()
-  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const payload = await getPayloadClient()
   let n = 0
   for (const id of ids) {
@@ -134,15 +134,15 @@ export async function publishNews(idsIn: number[]): Promise<{ ok: boolean; messa
   }
   revalidatePath('/boshqaruv/yangiliklar')
   revalidatePath('/boshqaruv')
-  return { ok: n === ids.length, message: n === ids.length ? `${n} ta yangilik eʼlon qilindi` : `${n} / ${ids.length} ta eʼlon qilindi — qolganlarida majburiy maydon töldirilmagan` }
+  return { ok: n === ids.length, message: n === ids.length ? `${n} ta yangilik e’lon qilindi` : `${n} / ${ids.length} ta e’lon qilindi — qolganlarida majburiy maydon to‘ldirilmagan` }
 }
 
 /** Öçiriş — faqat administrator (Payload ruxsati ham şuni talab qiladi) */
 export async function deleteNews(idsIn: number[]): Promise<{ ok: boolean; message: string }> {
   const ids = toIds(idsIn)
-  if (!ids.length) return { ok: false, message: 'Heç narsa tanlanmagan.' }
+  if (!ids.length) return { ok: false, message: 'Hech narsa tanlanmagan.' }
   const user = await getUser()
-  if (!user || user.role !== 'admin') return { ok: false, message: 'Öçiriş faqat administratorga ruxsat etilgan.' }
+  if (!user || user.role !== 'admin') return { ok: false, message: 'O‘chirish faqat administratorga ruxsat etilgan.' }
   const payload = await getPayloadClient()
   let n = 0
   for (const id of ids) {
@@ -153,5 +153,5 @@ export async function deleteNews(idsIn: number[]): Promise<{ ok: boolean; messag
   }
   revalidatePath('/boshqaruv/yangiliklar')
   revalidatePath('/boshqaruv')
-  return { ok: n === ids.length, message: `${n} ta yangilik öçirildi` }
+  return { ok: n === ids.length, message: `${n} ta yangilik o‘chirildi` }
 }

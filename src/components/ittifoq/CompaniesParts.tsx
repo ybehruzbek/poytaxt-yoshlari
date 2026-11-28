@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element -- taqdimotdan olingan logotiplar */
 import type { Company } from './data'
 
-export const KINDS: Company['kind'][] = ['Media', 'Naşriyot', 'Xizmat']
+export const KINDS: Company['kind'][] = ['Media', 'Nashriyot', 'Xizmat']
 export const KIND_COLOR: Record<Company['kind'], string> = {
   Media: 'var(--blue)',
-  Naşriyot: 'var(--green)',
+  Nashriyot: 'var(--green)',
   Xizmat: 'var(--yellow)',
 }
 

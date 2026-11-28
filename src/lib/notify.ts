@@ -33,11 +33,11 @@ export function notifyOnCreate(opts: {
           `<tr><td style="padding:4px 16px 4px 0;color:#667085">${esc(k)}</td><td style="padding:4px 0">${esc(String(v))}</td></tr>`,
       ),
       '</table>',
-      `<p><a href="${link}">Boşqaruv panelida oçiş</a></p>`,
+      `<p><a href="${link}">Boshqaruv panelida ochish</a></p>`,
       '<p style="color:#667085;font-size:13px">Bu xat saytdan avtomatik yuborildi.</p>',
       '</div>',
     ].join('')
-    const text = [`${opts.subject(doc)}.`, ...rows.map(([k, v]) => `${k}: ${v}`), `Boşqaruv panelida oçiş: ${link}`].join('\n')
+    const text = [`${opts.subject(doc)}.`, ...rows.map(([k, v]) => `${k}: ${v}`), `Boshqaruv panelida ochish: ${link}`].join('\n')
     // Xat yuborilmasa ham ariza saqlangan bölsin: xato faqat logga yoziladi
     req.payload
       .sendEmail({ to, subject: opts.subject(doc), html, text })

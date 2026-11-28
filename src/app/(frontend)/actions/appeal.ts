@@ -22,10 +22,10 @@ const str = (fd: FormData, k: string) => String(fd.get(k) ?? '').trim()
 /** Saytdagi "Ariza, taklif yoki şikoyat" şaklini qabul qiladi */
 export async function submitAppeal(fd: FormData): Promise<AppealState> {
   // bot uchun yashirin maydon to'ldirilgan bo'lsa — jimgina "qabul qilindi" deymiz
-  if (str(fd, 'website')) return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
+  if (str(fd, 'website')) return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob ko‘rsatilgan telefon yoki elektron pochta orqali beriladi.' }
 
   const ip = clientIp(await headers())
-  if (rateLimited(ip)) return { ok: false, message: 'Yuboriş urinişlari soni belgilangan çegaradan oşdi. Iltimos, birozdan keyin qayta yuboring.' }
+  if (rateLimited(ip)) return { ok: false, message: 'Yuborish urinishlari soni belgilangan chegaradan oshdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const type = str(fd, 'type')
   const name = str(fd, 'name')
@@ -36,21 +36,21 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
 
   const errors: AppealState['errors'] = {}
   if (!APPEAL_TYPES.some((t) => t.value === type)) errors.type = 'Murojaat turini tanlang.'
-  if (name.length < 3 || name.length > 120) errors.name = 'Familiya, ism va otasining ismini töliq kiriting.'
+  if (name.length < 3 || name.length > 120) errors.name = 'Familiya, ism va otasining ismini to‘liq kiriting.'
   const digits = phone.replace(/\D/g, '')
-  if (phone.length > 32 || digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160) errors.email = 'Elektron poçta manzilini töğri kiriting.'
-  if (message.length < 10 || message.length > 4000) errors.message = 'Xabar kamida 10 ta belgidan iborat bölsin.'
+  if (phone.length > 32 || digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini to‘g‘ri kiriting, masalan: +998 90 123 45 67.'
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160) errors.email = 'Elektron pochta manzilini to‘g‘ri kiriting.'
+  if (message.length < 10 || message.length > 4000) errors.message = 'Xabar kamida 10 ta belgidan iborat bo‘lsin.'
 
   let upload: File | null = null
   if (file instanceof File && file.size > 0) {
-    if (file.size > APPEAL_FILE_MAX) errors.file = 'Fayl hajmi 10 MB dan oşmasin.'
+    if (file.size > APPEAL_FILE_MAX) errors.file = 'Fayl hajmi 10 MB dan oshmasin.'
     else if (!APPEAL_FILE_TYPES.includes(file.type) || !ALLOWED_EXT.test(file.name))
       errors.file = 'Faqat PDF, JPG, PNG, WEBP yoki Word (DOC, DOCX) fayl biriktiring.'
     else upload = file
   }
 
-  if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekşiring.' }
+  if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekshiring.' }
 
   let fileId: number | undefined
   try {
@@ -78,7 +78,7 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
       },
       overrideAccess: true,
     })
-    return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob körsatilgan telefon yoki elektron poçta orqali beriladi.' }
+    return { ok: true, message: 'Murojaatingiz qabul qilindi. Javob ko‘rsatilgan telefon yoki elektron pochta orqali beriladi.' }
   } catch (err) {
     logError('murojaat', err)
     // murojaat saqlanmasa, biriktirilgan maxfiy fayl egasiz qolmasin
@@ -86,6 +86,6 @@ export async function submitAppeal(fd: FormData): Promise<AppealState> {
       const payload = await getPayload({ config })
       await payload.delete({ collection: 'appeal-files', id: fileId, overrideAccess: true }).catch(() => {})
     }
-    return { ok: false, message: 'Murojaatni saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
+    return { ok: false, message: 'Murojaatni saqlab bo‘lmadi. Iltimos, keyinroq qayta urinib ko‘ring.' }
   }
 }

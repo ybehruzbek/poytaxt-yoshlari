@@ -208,7 +208,7 @@ export interface UserAuthOperations {
   };
 }
 /**
- * Saytdagi “Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar” sahifasi va har bir yetakçining sahifasi. Yetakçi saylanmagan bölsa, “Yoşlar yetakçisi” bölimini böş qoldiring — saytda “vakant” deb körsatiladi.
+ * Saytdagi “Oliy ta’lim tashkilotlaridagi boshlang‘ich tashkilotlar” sahifasi va har bir yetakchining sahifasi. Yetakchi saylanmagan bo‘lsa, “Yoshlar yetakchisi” bo‘limini bo‘sh qoldiring — saytda “vakant” deb ko‘rsatiladi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "otts".
@@ -219,7 +219,7 @@ export interface Ott {
   otm: string;
   type: 'davlat' | 'xorijiy' | 'nodavlat';
   /**
-   * Şaxsiy maʼlumotlar (pasport, manzil, tuğilgan sana, şaxsiy telefon) yozilmaydi.
+   * Shaxsiy ma’lumotlar (pasport, manzil, tug‘ilgan sana, shaxsiy telefon) yozilmaydi.
    */
   leader?: {
     name?: string | null;
@@ -250,7 +250,7 @@ export interface Ott {
   createdAt: string;
 }
 /**
- * Saytdagi barça rasmlar. Papkalar böyiça tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qöşilganda kiçik nusxalari özi yaratiladi.
+ * Saytdagi barcha rasmlar. Papkalar bo‘yicha tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qo‘shilganda kichik nusxalari o‘zi yaratiladi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -324,7 +324,7 @@ export interface FolderInterface {
   createdAt: string;
 }
 /**
- * Saytdagi “Hamkorlar” sahifasi va boş sahifadagi hamkorlar lentasi.
+ * Saytdagi “Hamkorlar” sahifasi va bosh sahifadagi hamkorlar lentasi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "partners".
@@ -359,7 +359,7 @@ export interface Partner {
   what: string;
   logo: number | Media;
   /**
-   * Odatda böş qoldiriladi.
+   * Odatda bo‘sh qoldiriladi.
    */
   logoH?: number | null;
   site?: string | null;
@@ -369,14 +369,14 @@ export interface Partner {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Toşkent şahar hududiy Kengaşi apparatining bölimlari (sahifadagi tuzilma va vazifalar).
+ * Toshkent shahar hududiy Kengashi apparatining bo‘limlari (sahifadagi tuzilma va vazifalar).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "departments".
@@ -398,14 +398,14 @@ export interface Department {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Hududiy Kengaş rahbariyati va xodimlari. Qabul kuni körsatilsa, xodim “Fuqarolarni qabul qiliş jadvali”da çiqadi.
+ * Hududiy Kengash rahbariyati va xodimlari. Qabul kuni ko‘rsatilsa, xodim “Fuqarolarni qabul qilish jadvali”da chiqadi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "staff".
@@ -421,7 +421,7 @@ export interface Staff {
   phone?: string | null;
   email?: string | null;
   qabul?: {
-    day?: ('Duşanba' | 'Seşanba' | 'Çorşanba' | 'Payşanba' | 'Juma' | 'Şanba') | null;
+    day?: ('Dushanba' | 'Seshanba' | 'Chorshanba' | 'Payshanba' | 'Juma' | 'Shanba') | null;
     time?: string | null;
     room?: string | null;
   };
@@ -443,7 +443,7 @@ export interface Staff {
   createdAt: string;
 }
 /**
- * Saytdagi “Faoliyat yönalişlari” sahifasi. Tartibni sudrab özgartiriş mumkin — saytda şu tartibda çiqadi.
+ * Saytdagi “Faoliyat yo‘nalishlari” sahifasi. Tartibni sudrab o‘zgartirish mumkin — saytda shu tartibda chiqadi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "directions".
@@ -453,7 +453,7 @@ export interface Direction {
   _order?: string | null;
   title: string;
   /**
-   * Saralaş tugmalari va kartalarda körinadi.
+   * Saralash tugmalari va kartalarda ko‘rinadi.
    */
   short: string;
   /**
@@ -461,11 +461,11 @@ export interface Direction {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   /**
-   * Kengaş şu yönaliş böyiça qanday işlarni amalga oşirişi — rasmiy uslubda.
+   * Kengash shu yo‘nalish bo‘yicha qanday ishlarni amalga oshirishi — rasmiy uslubda.
    */
   about: string;
   updatedAt: string;
@@ -485,7 +485,7 @@ export interface Project {
   holat: 'davom etmoqda' | 'har yili' | 'yakunlangan';
   period?: string | null;
   /**
-   * Röyxat kartasida va sahifa tepasida çiqadi (1–2 gap).
+   * Ro‘yxat kartasida va sahifa tepasida chiqadi (1–2 gap).
    */
   lead: string;
   description?: string | null;
@@ -513,7 +513,7 @@ export interface Project {
       }[]
     | null;
   /**
-   * Loyihaga oid qöşimça postlar raqamlari.
+   * Loyihaga oid qo‘shimcha postlar raqamlari.
    */
   posts?:
     | {
@@ -522,11 +522,11 @@ export interface Project {
       }[]
     | null;
   /**
-   * Röyxatda va sahifa tepasida çiqadi. Gorizontal rasm tavsiya etiladi.
+   * Ro‘yxatda va sahifa tepasida chiqadi. Gorizontal rasm tavsiya etiladi.
    */
   cover: number | Media;
   /**
-   * Sahifa pastidagi suratlar. Bir neçtasini birdaniga tanlaş mumkin.
+   * Sahifa pastidagi suratlar. Bir nechtasini birdaniga tanlash mumkin.
    */
   gallery?: (number | Media)[] | null;
   /**
@@ -534,7 +534,7 @@ export interface Project {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
@@ -542,7 +542,7 @@ export interface Project {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Saytdagi “Tadbirlar va kalendar” sahifasi (arxiv va yaqin tadbirlar). Yangi tadbir qöşilsa, röyxat boşida sanasi böyiça çiqadi.
+ * Saytdagi “Tadbirlar va kalendar” sahifasi (arxiv va yaqin tadbirlar). Yangi tadbir qo‘shilsa, ro‘yxat boshida sanasi bo‘yicha chiqadi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events".
@@ -557,18 +557,18 @@ export interface Event {
   summary: string;
   img: number | Media;
   /**
-   * Belgilansa, boş sahifadagi “Yaqin tadbirlar”da çiqadi.
+   * Belgilansa, bosh sahifadagi “Yaqin tadbirlar”da chiqadi.
    */
   upcoming?: boolean | null;
   /**
-   * “Poytaxt yoşlari” Telegram kanalidagi post raqami (havolaning oxiridagi son, masalan 6230). Saytda manba havolasi bölib çiqadi.
+   * “Poytaxt yoshlari” Telegram kanalidagi post raqami (havolaning oxiridagi son, masalan 6230). Saytda manba havolasi bo‘lib chiqadi.
    */
   post?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Saytdagi “Grantlar” sahifasi va boş sahifadagi “Imkoniyatlar” bloki.
+ * Saytdagi “Grantlar” sahifasi va bosh sahifadagi “Imkoniyatlar” bloki.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "grants".
@@ -581,18 +581,18 @@ export interface Grant {
   origin?: ('mahalliy' | 'xorijiy') | null;
   org: string;
   /**
-   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
    */
   amount: string;
   who: string;
   text: string;
   /**
-   * Aniq bölsa. Saytda “N kun qoldi” bölib çiqadi.
+   * Aniq bo‘lsa. Saytda “N kun qoldi” bo‘lib chiqadi.
    */
   deadline?: string | null;
   cycle?: string | null;
   /**
-   * Masalan: “Nizom loyihasi”. Kartada belgi bölib çiqadi.
+   * Masalan: “Nizom loyihasi”. Kartada belgi bo‘lib chiqadi.
    */
   note?: string | null;
   url: string;
@@ -603,7 +603,7 @@ export interface Grant {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
@@ -620,7 +620,7 @@ export interface Stipend {
   _order?: string | null;
   t: string;
   /**
-   * Stipendiya sahifaning qaysi blokida çiqişi.
+   * Stipendiya sahifaning qaysi blokida chiqishi.
    */
   turi: 'prezident' | 'nomli' | 'idoraviy' | 'xorij';
   icon?:
@@ -643,12 +643,12 @@ export interface Stipend {
     | null;
   flag?: ('uz' | 'gb' | 'us' | 'de' | 'hu' | 'tr' | 'kr' | 'jp' | 'eu' | 'cn') | null;
   /**
-   * Nomli stipendiyalar setkasida nom ostida çiqadi.
+   * Nomli stipendiyalar setkasida nom ostida chiqadi.
    */
   soha?: string | null;
   org: string;
   /**
-   * Davlat stipendiyalari uçun. Summa “Miqdorlar” sozlamasidan avtomatik hisoblanadi.
+   * Davlat stipendiyalari uchun. Summa “Miqdorlar” sozlamasidan avtomatik hisoblanadi.
    */
   rates?:
     | {
@@ -664,7 +664,7 @@ export interface Stipend {
   };
   who: string;
   /**
-   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
    */
   perk: string;
   cycle: string;
@@ -677,14 +677,14 @@ export interface Stipend {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Saytdagi “Tanlovlar” sahifasi: yoşlar uçun sohaviy tanlovlar.
+ * Saytdagi “Tanlovlar” sahifasi: yoshlar uchun sohaviy tanlovlar.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contests".
@@ -697,27 +697,27 @@ export interface Contest {
   org: string;
   badge?: {
     /**
-     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
      */
     l?: string | null;
     /**
-     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
      */
     v?: string | null;
   };
   who: string;
   /**
-   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
    */
   prize: string;
   text: string;
   /**
-   * Aniq bölsa. Saytda “N kun qoldi” bölib çiqadi.
+   * Aniq bo‘lsa. Saytda “N kun qoldi” bo‘lib chiqadi.
    */
   deadline?: string | null;
   cycle?: string | null;
   /**
-   * Ariza qabul qilinadigan davr: boşlaniş va tugaş sanalari.
+   * Ariza qabul qilinadigan davr: boshlanish va tugash sanalari.
    */
   window?: {
     from?: string | null;
@@ -731,14 +731,14 @@ export interface Contest {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Saytdagi “Yoşlar uçun davlat mukofotlari” sahifasi va Ittifoq sahifasidagi mukofotlar bloki.
+ * Saytdagi “Yoshlar uchun davlat mukofotlari” sahifasi va Ittifoq sahifasidagi mukofotlar bloki.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "awards".
@@ -762,7 +762,7 @@ export interface Award {
   fact2: string;
   when: string;
   /**
-   * Oy raqamlari 1–12. “Topşiriş” belgilansa, jadvalda alohida rangda çiqadi.
+   * Oy raqamlari 1–12. “Topshirish” belgilansa, jadvalda alohida rangda chiqadi.
    */
   timeline?:
     | {
@@ -782,14 +782,14 @@ export interface Award {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Saytdagi “Imtiyozlar” sahifasi: talabalar, öquvçilar va yoşlar uçun imtiyozlar.
+ * Saytdagi “Imtiyozlar” sahifasi: talabalar, o‘quvchilar va yoshlar uchun imtiyozlar.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "benefits".
@@ -818,17 +818,17 @@ export interface Benefit {
     | 'qalqon';
   badge?: {
     /**
-     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
      */
     l?: string | null;
     /**
-     * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+     * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
      */
     v?: string | null;
   };
   who: string;
   /**
-   * Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
+   * Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.
    */
   amount: string;
   how: string;
@@ -841,14 +841,14 @@ export interface Benefit {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Saytdagi “Volontyorlik” sahifasidagi yönalişlar, test va ariza şaklidagi tanlovlar.
+ * Saytdagi “Volontyorlik” sahifasidagi yo‘nalishlar, test va ariza shaklidagi tanlovlar.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "vol-directions".
@@ -872,7 +872,7 @@ export interface VolDirection {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
@@ -917,7 +917,7 @@ export interface News {
    */
   tags?: string[] | null;
   /**
-   * Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — boş sahifadagi “Yaqin tadbirlar”da, tabriklar — “Yangiliklar”dagi alohida “Tabriklar” bölimida
+   * E’lonlar — “E’lonlar” sahifasida, kelgusi tadbirlar — bosh sahifadagi “Yaqin tadbirlar”da, tabriklar — “Yangiliklar”dagi alohida “Tabriklar” bo‘limida
    */
   kind: 'yangilik' | 'elon' | 'tadbir' | 'tabrik';
   eventDate?: string | null;
@@ -968,7 +968,7 @@ export interface NewsReaction {
   createdAt: string;
 }
 /**
- * “Normativ-huquqiy hujjatlar” sahifasidagi bölimlar (masalan, “Yoşlarga oid davlat siyosati”).
+ * “Normativ-huquqiy hujjatlar” sahifasidagi bo‘limlar (masalan, “Yoshlarga oid davlat siyosati”).
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "act-groups".
@@ -983,7 +983,7 @@ export interface ActGroup {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
@@ -1008,7 +1008,7 @@ export interface Act {
   name?: string | null;
   href?: string | null;
   /**
-   * “Yoşlarga yaratilgan imkoniyatlar” guruhidagi saralaş uçun.
+   * “Yoshlarga yaratilgan imkoniyatlar” guruhidagi saralash uchun.
    */
   for?: ('barcha' | 'talaba' | 'iqtidor' | 'qiz' | 'oila' | 'himoya' | 'bandlik' | 'tadbirkor' | 'harbiy')[] | null;
   by?: string | null;
@@ -1019,7 +1019,7 @@ export interface Act {
   createdAt: string;
 }
 /**
- * Saytdagi “Kengaş hujjatlari” sahifasi: qarorlar, rejalar, hisobotlar. Fayl (PDF yoki Word) yuklanadi, fuqarolar uni yuklab oladi.
+ * Saytdagi “Kengash hujjatlari” sahifasi: qarorlar, rejalar, hisobotlar. Fayl (PDF yoki Word) yuklanadi, fuqarolar uni yuklab oladi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "kengash-docs".
@@ -1036,7 +1036,7 @@ export interface KengashDoc {
   createdAt: string;
 }
 /**
- * Saytdan yuklab olinadigan PDF, Word va Excel fayllar. Hujjat qöşişda fayl şu yerdan tanlanadi yoki yangisi yuklanadi.
+ * Saytdan yuklab olinadigan PDF, Word va Excel fayllar. Hujjat qo‘shishda fayl shu yerdan tanlanadi yoki yangisi yuklanadi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "files".
@@ -1073,7 +1073,7 @@ export interface Template {
   createdAt: string;
 }
 /**
- * Saytdagi “Press-relizlar” sahifasi: rasmiy axborotlar va OAV uçun anonslar.
+ * Saytdagi “Press-relizlar” sahifasi: rasmiy axborotlar va OAV uchun anonslar.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "press".
@@ -1109,7 +1109,7 @@ export interface Press {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
@@ -1117,7 +1117,7 @@ export interface Press {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Saytdagi “Fotogalereya” sahifasi. Suratlarni birdaniga bir neçtasini tanlab yuklaş mumkin; birinçi surat — albom muqovasi.
+ * Saytdagi “Fotogalereya” sahifasi. Suratlarni birdaniga bir nechtasini tanlab yuklash mumkin; birinchi surat — albom muqovasi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "albums".
@@ -1129,18 +1129,18 @@ export interface Album {
   type: 'uchrashuv' | 'yigilish' | 'forum' | 'taqdimot' | 'sayohat' | 'sport';
   place?: string | null;
   /**
-   * Tartibni sudrab özgartiriş mumkin. Birinçi uçta surat albom kartasida körinadi.
+   * Tartibni sudrab o‘zgartirish mumkin. Birinchi uchta surat albom kartasida ko‘rinadi.
    */
   photos: (number | Media)[];
   /**
-   * Telegram kanaldagi asl post (bölsa).
+   * Telegram kanaldagi asl post (bo‘lsa).
    */
   post?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Saytdagi “Videogalereya” sahifasi. YouTube kanaldagi yangi videolar özi çiqadi; bu yerda — arxiv, turkum va turini belgilaş uçun.
+ * Saytdagi “Videogalereya” sahifasi. YouTube kanaldagi yangi videolar o‘zi chiqadi; bu yerda — arxiv, turkum va turini belgilash uchun.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "videos".
@@ -1161,7 +1161,7 @@ export interface Video {
   createdAt: string;
 }
 /**
- * Saytdagi “OAVda Kengaş haqida” sahifasi: boşqa naşr va saytlardagi materiallarga havolalar.
+ * Saytdagi “OAVda Kengash haqida” sahifasi: boshqa nashr va saytlardagi materiallarga havolalar.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "oav".
@@ -1180,7 +1180,7 @@ export interface Oav {
   createdAt: string;
 }
 /**
- * Saytdagi “Köp beriladigan savollar” sahifasi. Javobda {TELEFONLAR}, {POÇTA}, {MANZIL}, {MÖLJAL}, {IŞ_VAQTI} yozilsa, “Aloqa maʼlumotlari”dagi joriy qiymat qöyiladi.
+ * Saytdagi “Ko‘p beriladigan savollar” sahifasi. Javobda {TELEFONLAR}, {POCHTA}, {MANZIL}, {MO‘LJAL}, {ISH_VAQTI} yozilsa, “Aloqa ma’lumotlari”dagi joriy qiymat qo‘yiladi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faqs".
@@ -1213,7 +1213,7 @@ export interface Faq {
    */
   generateSlug?: boolean | null;
   /**
-   * Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.
+   * Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.
    */
   slug: string;
   updatedAt: string;
@@ -2378,7 +2378,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Saytning boş sahifasidagi sarlavha va matnlar. Yangiliklar, tadbirlar, OTTlar va hamkorlar soni, savollar özi tegişli bölimlardan olinadi.
+ * Saytning bosh sahifasidagi sarlavha va matnlar. Yangiliklar, tadbirlar, OTTlar va hamkorlar soni, savollar o‘zi tegishli bo‘limlardan olinadi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "bosh-sahifa".
@@ -2386,14 +2386,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface BoshSahifa {
   id: number;
   /**
-   * Sarlavhada Kengaşning töliq nomi özgarmaydi.
+   * Sarlavhada Kengashning to‘liq nomi o‘zgarmaydi.
    */
   hero: {
     kicker: string;
     lead: string;
   };
   /**
-   * OTTdagi boşlanğiç taşkilotlar va hamkorlar soni röyxatlardan özi hisoblanadi.
+   * OTTdagi boshlang‘ich tashkilotlar va hamkorlar soni ro‘yxatlardan o‘zi hisoblanadi.
    */
   about: {
     title: string;
@@ -2404,7 +2404,7 @@ export interface BoshSahifa {
     partnersLabel?: string | null;
   };
   /**
-   * Faol dasturlar soni va eng yaqin muddat tegişli röyxatlardan özi hisoblanadi.
+   * Faol dasturlar soni va eng yaqin muddat tegishli ro‘yxatlardan o‘zi hisoblanadi.
    */
   opps: {
     title?: string | null;
@@ -2466,7 +2466,7 @@ export interface BoshSahifa {
   createdAt?: string | null;
 }
 /**
- * Saytdagi “Özbekiston yoşlar ittifoqi” sahifasi. Har bir tab sahifadagi bölimlarga mos.
+ * Saytdagi “O‘zbekiston yoshlar ittifoqi” sahifasi. Har bir tab sahifadagi bo‘limlarga mos.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ittifoq-sahifa".
@@ -2724,7 +2724,7 @@ export interface IttifoqSahifa {
   };
   companies?:
     | {
-        kind: 'Media' | 'Naşriyot' | 'Xizmat';
+        kind: 'Media' | 'Nashriyot' | 'Xizmat';
         t: string;
         share?: string | null;
         d?: string | null;
@@ -2749,7 +2749,7 @@ export interface IttifoqSahifa {
   createdAt?: string | null;
 }
 /**
- * Saytdagi “Markaziy Kengaş” sahifasi. Matnlar Ittifoq Ustavining V bobi asosida.
+ * Saytdagi “Markaziy Kengash” sahifasi. Matnlar Ittifoq Ustavining V bobi asosida.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "markaziy-kengash".
@@ -2781,7 +2781,7 @@ export interface MarkaziyKengash {
       }[]
     | null;
   /**
-   * Tartibi muhim: sahifada vakolatlar mavzu guruhlariga şu tartib böyiça ajratiladi (1–4, 5–7, 8–10).
+   * Tartibi muhim: sahifada vakolatlar mavzu guruhlariga shu tartib bo‘yicha ajratiladi (1–4, 5–7, 8–10).
    */
   powers?:
     | {
@@ -2908,7 +2908,7 @@ export interface Natijalar {
   createdAt?: string | null;
 }
 /**
- * Saytdagi “Volontyorlik” sahifasi matnlari. Yönalişlar — “Volontyorlik yönalişlari” bölimida, kelgan arizalar — “Murojaatlar → Volontyorlar”.
+ * Saytdagi “Volontyorlik” sahifasi matnlari. Yo‘nalishlar — “Volontyorlik yo‘nalishlari” bo‘limida, kelgan arizalar — “Murojaatlar → Volontyorlar”.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "volontyorlik-sahifa".
@@ -2916,7 +2916,7 @@ export interface Natijalar {
 export interface VolontyorlikSahifa {
   id: number;
   /**
-   * Raqam örnida {TADBIRLAR} yozilsa, saytdagi volontyorlik tadbirlari soni özi qöyiladi.
+   * Raqam o‘rnida {TADBIRLAR} yozilsa, saytdagi volontyorlik tadbirlari soni o‘zi qo‘yiladi.
    */
   stats?:
     | {
@@ -2956,7 +2956,7 @@ export interface VolontyorlikSahifa {
       }[]
     | null;
   /**
-   * Har bir javob tanlangan yönalişlarga bir ball beradi; eng köp ball olgan yönalişlar natijada körsatiladi.
+   * Har bir javob tanlangan yo‘nalishlarga bir ball beradi; eng ko‘p ball olgan yo‘nalishlar natijada ko‘rsatiladi.
    */
   quiz?:
     | {
@@ -2975,7 +2975,7 @@ export interface VolontyorlikSahifa {
   createdAt?: string | null;
 }
 /**
- * Manzil, telefonlar, poçta va iş vaqti. Özgartirilsa, “Boğlaniş” sahifalari, sayt pastki qismi va “Köp beriladigan savollar” javoblari özi yangilanadi.
+ * Manzil, telefonlar, pochta va ish vaqti. O‘zgartirilsa, “Bog‘lanish” sahifalari, sayt pastki qismi va “Ko‘p beriladigan savollar” javoblari o‘zi yangilanadi.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "aloqa".
@@ -3005,7 +3005,7 @@ export interface Aloqa {
       }[]
     | null;
   /**
-   * Birinçisi — asosiy poçta.
+   * Birinchisi — asosiy pochta.
    */
   emails?:
     | {
@@ -3019,7 +3019,7 @@ export interface Aloqa {
     off?: string | null;
   };
   /**
-   * Boğlaniş sahifasida körinadigan nomlar (havolalarning özi “Ijtimoiy tarmoqlar” sozlamasida).
+   * Bog‘lanish sahifasida ko‘rinadigan nomlar (havolalarning o‘zi “Ijtimoiy tarmoqlar” sozlamasida).
    */
   socials?:
     | {
@@ -3057,7 +3057,7 @@ export interface Aloqa {
   createdAt?: string | null;
 }
 /**
- * Saytdagi “Aʼzo böliş” sahifasi matnlari. Kelgan arizalar “Murojaatlar → Aʼzolik arizalari” bölimida.
+ * Saytdagi “A’zo bo‘lish” sahifasi matnlari. Kelgan arizalar “Murojaatlar → A’zolik arizalari” bo‘limida.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "azolik-sahifa".
@@ -3069,7 +3069,7 @@ export interface AzolikSahifa {
         k: string;
         t?: string | null;
         /**
-         * Ustav sahifasidagi şu bandga havola qöyiladi.
+         * Ustav sahifasidagi shu bandga havola qo‘yiladi.
          */
         band?: string | null;
         d: string;
@@ -3080,7 +3080,7 @@ export interface AzolikSahifa {
     | {
         t: string;
         /**
-         * Ustav sahifasidagi şu bandga havola qöyiladi.
+         * Ustav sahifasidagi shu bandga havola qo‘yiladi.
          */
         band?: string | null;
         d: string;
@@ -3097,7 +3097,7 @@ export interface AzolikSahifa {
   createdAt?: string | null;
 }
 /**
- * Saytdagi barça summalar şu qiymatlardan hisoblanadi. Yangi farmon yoki qaror çiqqanda faqat şu yerni yangilang.
+ * Saytdagi barcha summalar shu qiymatlardan hisoblanadi. Yangi farmon yoki qaror chiqqanda faqat shu yerni yangilang.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "miqdorlar".
@@ -3116,7 +3116,7 @@ export interface Miqdorlar {
     url?: string | null;
   };
   /**
-   * Taʼlim va ilm-fan vazirligi jadvalidagi summalar. Koeffitsientlar şulardan avtomatik hisoblanadi.
+   * Ta’lim va ilm-fan vazirligi jadvalidagi summalar. Koeffitsientlar shulardan avtomatik hisoblanadi.
    */
   stipSum: {
     prezident: number;
@@ -3138,19 +3138,19 @@ export interface Miqdorlar {
 export interface Social {
   id: number;
   /**
-   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
    */
   telegram?: string | null;
   /**
-   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
    */
   instagram?: string | null;
   /**
-   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
    */
   facebook?: string | null;
   /**
-   * Töliq havola (https://…). Böş qoldirilsa, bu tarmoq saytda körsatilmaydi.
+   * To‘liq havola (https://…). Bo‘sh qoldirilsa, bu tarmoq saytda ko‘rsatilmaydi.
    */
   youtube?: string | null;
   updatedAt?: string | null;

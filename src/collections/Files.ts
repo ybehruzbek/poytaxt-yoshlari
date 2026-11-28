@@ -17,14 +17,14 @@ export const Files: CollectionConfig = {
     group: G.sozlamalar,
     useAsTitle: 'title',
     defaultColumns: ['title', 'filename', 'filesize', 'updatedAt'],
-    description: 'Saytdan yuklab olinadigan PDF, Word va Excel fayllar. Hujjat qöşişda fayl şu yerdan tanlanadi yoki yangisi yuklanadi.',
+    description: 'Saytdan yuklab olinadigan PDF, Word va Excel fayllar. Hujjat qo‘shishda fayl shu yerdan tanlanadi yoki yangisi yuklanadi.',
     hidden: kontentYashirin,
   },
   access: kontent,
   fields: [
     {
       name: 'title',
-      label: 'Fayl nomi (saytda körinadi)',
+      label: 'Fayl nomi (saytda ko‘rinadi)',
       type: 'text',
       required: true,
       localized: true,

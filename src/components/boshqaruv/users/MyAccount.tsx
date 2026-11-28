@@ -27,7 +27,7 @@ export function MyAccount({ name: n0, email, role }: { name: string; email: stri
   return (
     <div className="acct">
       <section className="card">
-        <h2 className="acct__h">Şaxsiy maʼlumot</h2>
+        <h2 className="acct__h">Shaxsiy ma’lumot</h2>
         <div className="f">
           <label className="lbl" htmlFor="me-name">
             Ism-familiya
@@ -36,7 +36,7 @@ export function MyAccount({ name: n0, email, role }: { name: string; email: stri
         </div>
         <dl className="libd__meta">
           <div>
-            <dt>Elektron poçta (login)</dt>
+            <dt>Elektron pochta (login)</dt>
             <dd>{email}</dd>
           </div>
           <div>
@@ -58,14 +58,14 @@ export function MyAccount({ name: n0, email, role }: { name: string; email: stri
                 })
               }
             >
-              Saqlaş
+              Saqlash
             </button>
           </div>
         )}
       </section>
 
       <section className="card">
-        <h2 className="acct__h">Parolni almaştiriş</h2>
+        <h2 className="acct__h">Parolni almashtirish</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -93,7 +93,7 @@ export function MyAccount({ name: n0, email, role }: { name: string; email: stri
               Yangi parol
             </label>
             <input id="me-new" className="inp" type={show ? 'text' : 'password'} autoComplete="new-password" value={next} onChange={(e) => setNext(e.target.value)} required />
-            <p className="help">Kamida 10 belgi, harf ham, raqam ham bölsin.</p>
+            <p className="help">Kamida 10 belgi, harf ham, raqam ham bo‘lsin.</p>
           </div>
           <div className="f">
             <label className="lbl" htmlFor="me-again">
@@ -104,11 +104,11 @@ export function MyAccount({ name: n0, email, role }: { name: string; email: stri
           </div>
           <label className="switch-row">
             <input type="checkbox" className="switch" checked={show} onChange={(e) => setShow(e.target.checked)} />
-            <span>Parollarni körsatiş</span>
+            <span>Parollarni ko‘rsatish</span>
           </label>
           <div className="uedit__acts">
             <button type="submit" className="btn btn-primary" disabled={pending || mismatch || !cur || !next}>
-              Parolni almaştiriş
+              Parolni almashtirish
             </button>
           </div>
         </form>

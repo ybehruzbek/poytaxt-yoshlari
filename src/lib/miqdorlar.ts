@@ -22,7 +22,7 @@ export const DEFAULT_MIQDOR: Miqdorlar = {
     v: 609_548,
     from: '2026-yil 1-sentabr',
     url: 'https://gov.uz/oz/edu/sections/view/43494',
-    source: 'gov.uz — Taʼlim va ilm-fan vazirligi',
+    source: 'gov.uz — Ta’lim va ilm-fan vazirligi',
   },
   STIP_SUM: { prezident: 2_579_444, nomli: 1_719_629, alo: 731_458 },
   MB_STAVKA: { v: 14, from: '2026-yil 3-sentabr', url: 'https://gov.uz/oz/edu/news/view/214742' },
@@ -48,7 +48,7 @@ export type Rate = { base: 'bhm' | 'stip'; k: number }
 const NB = ' '
 
 /** 2579444 → “2 579 444 söm” (raqam guruhlari va “söm” qatorga bölinmaydi) */
-export const som = (n: number) => `${Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, NB)}${NB}söm`
+export const som = (n: number) => `${Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, NB)}${NB}so‘m`
 
 /** 4.2318 → “4,23”, 3 → “3” */
 export const fmtK = (k: number) => (Number.isInteger(k) ? String(k) : k.toFixed(2).replace(/0$/, '').replace('.', ','))
@@ -64,7 +64,7 @@ export const rateText = (r: Rate) => `${r.base === 'bhm' ? 'BHMning' : 'bazaviy 
 export const rateFull = (r: Rate, M: Miqdorlar = DEFAULT_MIQDOR) => `${som(rateSum(r, M))} (${rateText(r)})`
 
 /** “BHMning 400 barobarigaça (176 000 000 sömgaça)” — grant va mukofotlar uçun */
-export const bhmUpTo = (k: number, M: Miqdorlar = DEFAULT_MIQDOR) => `BHMning ${k}${NB}barobarigaça (${som(k * M.BHM.v)}gaça)`
+export const bhmUpTo = (k: number, M: Miqdorlar = DEFAULT_MIQDOR) => `BHMning ${k}${NB}barobarigacha (${som(k * M.BHM.v)}gacha)`
 
 /**
  * Admin panelda yozilgan matndagi belgilarni joriy summaga almaştiradi (BHM yoki stipendiya özgarsa, matn özi yangilanadi):
@@ -74,7 +74,7 @@ export const bhmUpTo = (k: number, M: Miqdorlar = DEFAULT_MIQDOR) => `BHMning ${
  *   {MB} — Markaziy bankning asosiy stavkasi (foiz).
  */
 export const SUMMA_IZOH =
-  'Summa avtomatik hisoblanişi uçun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 söm); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigaça (… sömgaça)”; {STIP×1,2} — bazaviy stipendiya böyiça; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.'
+  'Summa avtomatik hisoblanishi uchun belgi yozing: {BHM×3} — BHMning 3 barobari (1 320 000 so‘m); {BHM×3+} — summa va “(BHMning 3 barobari)”; {BHM≤400} — “BHMning 400 barobarigacha (… so‘mgacha)”; {STIP×1,2} — bazaviy stipendiya bo‘yicha; {NOMLI}, {PREZIDENT}, {ALO} — stipendiya summalari; {MB} — Markaziy bank stavkasi.'
 
 export function summalar(text: string, M: Miqdorlar = DEFAULT_MIQDOR): string {
   if (!text || !text.includes('{')) return text

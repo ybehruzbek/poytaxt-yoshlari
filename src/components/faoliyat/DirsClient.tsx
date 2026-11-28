@@ -25,7 +25,7 @@ export function DirsShowcase({ items, panels }: { items: Item[]; panels: ReactNo
   }
   return (
     <div className="vys">
-      <div className="vys-list" role="tablist" aria-label="Faoliyat yönalişlari" aria-orientation="vertical" onKeyDown={onKey}>
+      <div className="vys-list" role="tablist" aria-label="Faoliyat yo‘nalishlari" aria-orientation="vertical" onKeyDown={onKey}>
         {items.map((x, i) => (
           <button
             key={x.slug}

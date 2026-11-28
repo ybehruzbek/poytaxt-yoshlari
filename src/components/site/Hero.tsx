@@ -70,7 +70,7 @@ function CollageInsight() {
       <div className="c-play"></div>
       <Star />
       <div className="c-half"></div>
-      <div className="c-tag">Yoşlar ittifoqi</div>
+      <div className="c-tag">Yoshlar ittifoqi</div>
       <Bars />
       <Star2 />
       <div className="c-green"></div>
@@ -98,13 +98,13 @@ export async function Hero({ locale }: { locale: Locale }) {
                 <h1 className="h1 hero-slogan hero-name">
                   {/* kicker — qidiruv so‘zi joriy lotinda (Google “yoşlar”ni “yoshlar” deb tanimaydi; foydalanuvçi qarori 2026-11-28) */}
                   <span className="hero-kicker">{locale === 'uz' ? BREND : hero.kicker}</span>{' '}
-                  <span>Özbekiston yoşlar ittifoqi</span> <span>Toşkent şahar hududiy Kengaşi</span>
+                  <span>O‘zbekiston yoshlar ittifoqi</span> <span>Toshkent shahar hududiy Kengashi</span>
                 </h1>
                 <p className="lead">{hero.lead}</p>
               </div>
               <div className="hero-actions">
                 <Link href={`/${locale}/boglanish/azo-bolish`} className="btn btn-primary">
-                  Aʼzo böliş
+                  A’zo bo‘lish
                   <span className="ic">
                     <svg
                       viewBox="0 0 24 24"
@@ -119,7 +119,7 @@ export async function Hero({ locale }: { locale: Locale }) {
                   </span>
                 </Link>
                 <Link href={`/${locale}/boglanish/murojaat`} className="btn btn-ghost">
-                  Murojaat yuboriş
+                  Murojaat yuborish
                   <span className="ic">
                     <svg
                       viewBox="0 0 24 24"

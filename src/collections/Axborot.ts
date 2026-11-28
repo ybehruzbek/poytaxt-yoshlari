@@ -21,7 +21,7 @@ export const Albums: CollectionConfig = {
     group: G.axborot,
     useAsTitle: 'title',
     defaultColumns: ['photos', 'title', 'date', 'type', 'place'],
-    description: 'Saytdagi “Fotogalereya” sahifasi. Suratlarni birdaniga bir neçtasini tanlab yuklaş mumkin; birinçi surat — albom muqovasi.',
+    description: 'Saytdagi “Fotogalereya” sahifasi. Suratlarni birdaniga bir nechtasini tanlab yuklash mumkin; birinchi surat — albom muqovasi.',
     preview: (_d, { locale }) => saytManzil(`${AX}/fotogalereya`, locale),
     hidden: kontentYashirin,
   },
@@ -35,8 +35,8 @@ export const Albums: CollectionConfig = {
       tanlov('type', 'Turi', opts(ALBUM_TYPES), { majburiy: true, kenglik: '30%' }),
       matn('place', 'Joyi', { kenglik: '40%' }),
     ),
-    rasmlar('photos', 'Suratlar', { majburiy: true, izoh: 'Tartibni sudrab özgartiriş mumkin. Birinçi uçta surat albom kartasida körinadi.' }),
-    son('post', 'Kanal posti raqami', { yonda: true, izoh: 'Telegram kanaldagi asl post (bölsa).' }),
+    rasmlar('photos', 'Suratlar', { majburiy: true, izoh: 'Tartibni sudrab o‘zgartirish mumkin. Birinchi uchta surat albom kartasida ko‘rinadi.' }),
+    son('post', 'Kanal posti raqami', { yonda: true, izoh: 'Telegram kanaldagi asl post (bo‘lsa).' }),
   ],
 }
 
@@ -48,7 +48,7 @@ export const Videos: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'date', 'type', 'short'],
     description:
-      'Saytdagi “Videogalereya” sahifasi. YouTube kanaldagi yangi videolar özi çiqadi; bu yerda — arxiv, turkum va turini belgilaş uçun.',
+      'Saytdagi “Videogalereya” sahifasi. YouTube kanaldagi yangi videolar o‘zi chiqadi; bu yerda — arxiv, turkum va turini belgilash uchun.',
     preview: (_d, { locale }) => saytManzil(`${AX}/videogalereya`, locale),
     hidden: kontentYashirin,
   },
@@ -77,7 +77,7 @@ export const Press: CollectionConfig = {
     group: G.axborot,
     useAsTitle: 'title',
     defaultColumns: ['title', 'kind', 'date', '_status'],
-    description: 'Saytdagi “Press-relizlar” sahifasi: rasmiy axborotlar va OAV uçun anonslar.',
+    description: 'Saytdagi “Press-relizlar” sahifasi: rasmiy axborotlar va OAV uchun anonslar.',
     preview: (doc, { locale }) => saytManzil(`${AX}/press-relizlar/${doc.slug ?? ''}`, locale),
     hidden: kontentYashirin,
   },
@@ -87,9 +87,9 @@ export const Press: CollectionConfig = {
   hooks: yangilash([`${AX}/press-relizlar`], true),
   fields: [
     matn('title', 'Sarlavha', { majburiy: true }),
-    qator(tanlov('kind', 'Turi', opts(PRESS_KINDS), { majburiy: true, kenglik: '50%' }), { ...sana('date', 'Eʼlon qilingan sana', { majburiy: true }), admin: { width: '50%', date: kun } }),
-    uzunMatn('lead', 'Birinçi xatboşi (eng muhim fakt)', { majburiy: true, qator: 3 }),
-    bandlar('body', 'Matn (xatboşilar)', { band: 'Xatboşi' }),
+    qator(tanlov('kind', 'Turi', opts(PRESS_KINDS), { majburiy: true, kenglik: '50%' }), { ...sana('date', 'E’lon qilingan sana', { majburiy: true }), admin: { width: '50%', date: kun } }),
+    uzunMatn('lead', 'Birinchi xatboshi (eng muhim fakt)', { majburiy: true, qator: 3 }),
+    bandlar('body', 'Matn (xatboshilar)', { band: 'Xatboshi' }),
     {
       name: 'facts',
       label: 'Asosiy raqamlar',
@@ -99,7 +99,7 @@ export const Press: CollectionConfig = {
     },
     {
       name: 'event',
-      label: 'Anons uçun: tadbir vaqti va joyi',
+      label: 'Anons uchun: tadbir vaqti va joyi',
       type: 'group',
       admin: { condition: (d) => d?.kind === 'anons' },
       fields: [qator(matn('when', 'Sana', { kenglik: '35%', namuna: '18-oktabr' }), matn('time', 'Vaqt', { kenglik: '20%', namuna: '10:00' }), matn('place', 'Joyi', { kenglik: '45%' }))],
@@ -111,12 +111,12 @@ export const Press: CollectionConfig = {
 
 export const Oav: CollectionConfig = {
   slug: 'oav',
-  labels: { singular: 'OAV materiali', plural: 'OAVda Kengaş haqida' },
+  labels: { singular: 'OAV materiali', plural: 'OAVda Kengash haqida' },
   admin: {
     group: G.axborot,
     useAsTitle: 'title',
     defaultColumns: ['title', 'outlet', 'date'],
-    description: 'Saytdagi “OAVda Kengaş haqida” sahifasi: boşqa naşr va saytlardagi materiallarga havolalar.',
+    description: 'Saytdagi “OAVda Kengash haqida” sahifasi: boshqa nashr va saytlardagi materiallarga havolalar.',
     preview: (_d, { locale }) => saytManzil(`${AX}/oav`, locale),
     hidden: kontentYashirin,
   },
@@ -125,9 +125,9 @@ export const Oav: CollectionConfig = {
   hooks: yangilash([`${AX}/oav`]),
   fields: [
     matn('title', 'Material sarlavhasi', { majburiy: true }),
-    qator(matn('outlet', 'Naşr yoki sayt nomi', { majburiy: true, kenglik: '50%' }), kod('domain', 'Domen', { kenglik: '25%', namuna: 'gov.uz' }), { ...sana('date', 'Sana', { majburiy: true }), admin: { width: '25%', date: kun } }),
-    qator(tanlov('kind', 'Turi', opts(MEDIA_KINDS), { majburiy: true, kenglik: '50%' }), tanlov('lang', 'Tili', [{ label: 'Özbekça', value: 'uz' }, { label: 'Ruşça', value: 'ru' }], { majburiy: true, kenglik: '50%', sukut: 'uz' })),
+    qator(matn('outlet', 'Nashr yoki sayt nomi', { majburiy: true, kenglik: '50%' }), kod('domain', 'Domen', { kenglik: '25%', namuna: 'gov.uz' }), { ...sana('date', 'Sana', { majburiy: true }), admin: { width: '25%', date: kun } }),
+    qator(tanlov('kind', 'Turi', opts(MEDIA_KINDS), { majburiy: true, kenglik: '50%' }), tanlov('lang', 'Tili', [{ label: 'O‘zbekcha', value: 'uz' }, { label: 'Rushcha', value: 'ru' }], { majburiy: true, kenglik: '50%', sukut: 'uz' })),
     havola('url', 'Havola', { majburiy: true }),
-    uzunMatn('sum', 'Qisqaça mazmuni', { majburiy: true, qator: 3 }),
+    uzunMatn('sum', 'Qisqacha mazmuni', { majburiy: true, qator: 3 }),
   ],
 }

@@ -72,9 +72,9 @@ const ICONS: ReactNode[] = [
 
 /** Vakolatlarning mavzu guruhlari (indekslar POWERS tartibida) */
 const GROUPS = [
-  { t: 'Ittifoqqa rahbarlik qiliş va rahbar organlarni saylaş', items: [0, 1, 2, 9] },
-  { t: 'Faoliyatni rejalaştiriş, moliyalaştiriş va nazorat qiliş', items: [3, 5, 6] },
-  { t: 'Taşkiliy tuzilma va içki meʼyoriy hujjatlarni tasdiqlaş', items: [4, 7, 8] },
+  { t: 'Ittifoqqa rahbarlik qilish va rahbar organlarni saylash', items: [0, 1, 2, 9] },
+  { t: 'Faoliyatni rejalashtirish, moliyalashtirish va nazorat qilish', items: [3, 5, 6] },
+  { t: 'Tashkiliy tuzilma va ichki me’yoriy hujjatlarni tasdiqlash', items: [4, 7, 8] },
 ]
 const Ic = ({ i }: { i: number }) => (
   <span className="kv-ic" aria-hidden="true">

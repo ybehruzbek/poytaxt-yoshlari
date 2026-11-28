@@ -30,7 +30,7 @@ export function PageCrumbs({
   ]
   // qidiruv tizimlari uçun: manzili bor bandlar va oxirgi (joriy) sahifa
   const ld = breadcrumbLd([
-    { name: 'Boş sahifa', url: L('') },
+    { name: 'Bosh sahifa', url: L('') },
     ...items
       .map((it, i) => ({ name: it.label, url: it.href ? L(it.href) : undefined, last: i === items.length - 1 }))
       .filter((it) => it.url || it.last)
@@ -39,8 +39,8 @@ export function PageCrumbs({
   return (
     <div className="pg-crumbs">
       <JsonLd data={ld} />
-      <nav className="crumbs" aria-label="Yöl">
-        <Link href={L('')}>Boş sahifa</Link>
+      <nav className="crumbs" aria-label="Yo‘l">
+        <Link href={L('')}>Bosh sahifa</Link>
         {items.map((it, i) => {
           const last = i === items.length - 1
           return (

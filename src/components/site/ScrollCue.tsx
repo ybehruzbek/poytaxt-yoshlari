@@ -25,7 +25,7 @@ export function ScrollCue() {
   }
 
   return (
-    <button type="button" className="cue" ref={root} onClick={go} aria-label="Sahifa davomiga ötiş">
+    <button type="button" className="cue" ref={root} onClick={go} aria-label="Sahifa davomiga o‘tish">
       <span className="cue-mouse" aria-hidden="true">
         <i />
       </span>

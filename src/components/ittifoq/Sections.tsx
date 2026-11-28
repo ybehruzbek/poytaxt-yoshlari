@@ -18,7 +18,7 @@ function Awardees() {
       <div className="pv-col-grid">
         <img
           src={AWARDEES.center}
-          alt="“Yangi Özbekistonni yoşlar quradi”: davlat mukofotlari bilan taqdirlangan yoşlar Prezident bilan"
+          alt="“Yangi O‘zbekistonni yoshlar quradi”: davlat mukofotlari bilan taqdirlangan yoshlar Prezident bilan"
           className="center"
           loading="lazy"
           decoding="async"
@@ -28,8 +28,8 @@ function Awardees() {
         ))}
       </div>
       <figcaption>
-        “Mard öğlon” davlat mukofoti va “Kelajak bunyodkori” medali bilan taqdirlangan yoşlar ·
-        Surat: Özbekiston Respublikasi Prezidentining matbuot xizmati
+        “Mard o‘g‘lon” davlat mukofoti va “Kelajak bunyodkori” medali bilan taqdirlangan yoshlar ·
+        Surat: O‘zbekiston Respublikasi Prezidentining matbuot xizmati
       </figcaption>
     </figure>
   )
@@ -37,7 +37,7 @@ function Awardees() {
 
 const GROUPS = [
   { key: 'ittifoq' as const, t: 'Ittifoq beradigan imtiyozlar' },
-  { key: 'davlat' as const, t: 'Ittifoq taklifi bilan taʼsis etilgan davlat mukofotlari' },
+  { key: 'davlat' as const, t: 'Ittifoq taklifi bilan ta’sis etilgan davlat mukofotlari' },
 ]
 
 /**
@@ -84,10 +84,10 @@ export async function PrivilegesB({ awardsHref, locale = 'uz', D }: { awardsHref
 function AwardsPanel({ awardsHref, awards: AWARDS, M }: { awardsHref: string; awards: Award[]; M: Miqdorlar }) {
   return (
     <div className="sa-panel">
-      <h4>Yoşlar uçun davlat mukofotlari</h4>
+      <h4>Yoshlar uchun davlat mukofotlari</h4>
       <p>
-        Yoşlarga beriladigan davlat mukofotlarining nizomlari, nomzodlarga qöyiladigan talablar,
-        saralaş bosqiçlari va muddatlari alohida sahifada keltirilgan.
+        Yoshlarga beriladigan davlat mukofotlarining nizomlari, nomzodlarga qo‘yiladigan talablar,
+        saralash bosqichlari va muddatlari alohida sahifada keltirilgan.
       </p>
       <ul>
         {AWARDS.map((a) => (
@@ -158,8 +158,8 @@ export function IntlB({ D }: { D: IttifoqData }) {
           </div>
         </div>
         <div className="ix-b-card">
-          <span>Hamkor taşkilotlar</span>
-          <img src={INTL.partners} alt="Hamkor xalqaro taşkilotlar logotiplari" loading="lazy" decoding="async" />
+          <span>Hamkor tashkilotlar</span>
+          <img src={INTL.partners} alt="Hamkor xalqaro tashkilotlar logotiplari" loading="lazy" decoding="async" />
           <p>{INTL.assoc}</p>
         </div>
       </div>

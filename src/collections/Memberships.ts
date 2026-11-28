@@ -11,7 +11,7 @@ const staff: Access = ({ req: { user } }) => user?.role === 'admin' || user?.rol
  */
 export const Memberships: CollectionConfig = {
   slug: 'memberships',
-  labels: { singular: 'Aʼzolik arizasi', plural: 'Aʼzolik arizalari' },
+  labels: { singular: 'A’zolik arizasi', plural: 'A’zolik arizalari' },
   admin: {
     group: G.murojaatlar,
     hidden: murojaatYashirin,
@@ -34,8 +34,8 @@ export const Memberships: CollectionConfig = {
       defaultValue: 'yangi',
       options: [
         { label: 'Yangi', value: 'yangi' },
-        { label: 'Takroriy (30 kun ičida şu raqamdan)', value: 'takror' },
-        { label: 'Boşlanğiç taşkilotga yuborildi', value: 'yuborildi' },
+        { label: 'Takroriy (30 kun ičida shu raqamdan)', value: 'takror' },
+        { label: 'Boshlang‘ich tashkilotga yuborildi', value: 'yuborildi' },
         { label: 'Qabul qilindi', value: 'qabul' },
         { label: 'Rad etildi', value: 'rad' },
       ],
@@ -44,18 +44,18 @@ export const Memberships: CollectionConfig = {
       type: 'row',
       fields: [
         { name: 'name', label: 'Familiya, ism, otasining ismi', type: 'text', required: true },
-        { name: 'birthYear', label: 'Tuğilgan yili', type: 'number', required: true },
+        { name: 'birthYear', label: 'Tug‘ilgan yili', type: 'number', required: true },
       ],
     },
     {
       type: 'row',
       fields: [
         { name: 'phone', label: 'Telefon', type: 'text', required: true },
-        { name: 'email', label: 'Elektron poçta', type: 'email' },
+        { name: 'email', label: 'Elektron pochta', type: 'email' },
       ],
     },
-    { name: 'place', label: 'Öqiş yoki iş joyi', type: 'text', required: true },
-    { name: 'note', label: 'Içki izoh (faqat xodimlar uçun)', type: 'textarea' },
+    { name: 'place', label: 'O‘qish yoki ish joyi', type: 'text', required: true },
+    { name: 'note', label: 'Ichki izoh (faqat xodimlar uchun)', type: 'textarea' },
   ],
   timestamps: true,
 }

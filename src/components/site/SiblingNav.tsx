@@ -12,8 +12,8 @@ export function SiblingNav({ locale, path }: { locale: string; path: string }) {
   if (!group || items.length < 2) return null
   const cur = trail[0]?.href
   return (
-    <nav className="sib-nav" aria-label={`${group.label} bölimi`}>
-      <p className="sib-nav-h">{group.label} bölimida</p>
+    <nav className="sib-nav" aria-label={`${group.label} bo‘limi`}>
+      <p className="sib-nav-h">{group.label} bo‘limida</p>
       <div className="chips">
         {items.map((s) => (
           <Link key={s.href} href={`/${locale}${s.href}`} aria-current={s.href === path ? 'page' : s.href === cur ? 'true' : undefined}>

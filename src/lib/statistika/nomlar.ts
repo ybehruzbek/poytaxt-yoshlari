@@ -1,10 +1,10 @@
 /** Statistika qatorlarini odam öqiydigan nomlarga aylantiriş (qurilma, manba, davlat, sahifa) */
-import { toYangiAlifbo } from '@/lib/alifbo'
+import { toJoriyAlifbo } from '@/lib/alifbo'
 import { NAV } from '@/config/nav'
 import type { Qator } from './cloudflare'
 
-const QURILMA: Record<string, string> = { desktop: 'Kompyuter', mobile: 'Telefon', tablet: 'Planşet', smarttv: 'Televizor' }
-export const qurilmaNomi = (k: string) => QURILMA[k.toLowerCase()] ?? (k || 'Nomaʼlum')
+const QURILMA: Record<string, string> = { desktop: 'Kompyuter', mobile: 'Telefon', tablet: 'Planshet', smarttv: 'Televizor' }
+export const qurilmaNomi = (k: string) => QURILMA[k.toLowerCase()] ?? (k || 'Noma’lum')
 
 /** Kelgan sayt domeni → manba nomi (bir xil manbadagi domenlar bitta qatorga birlaşadi) */
 const MANBA: [RegExp, string][] = [
@@ -25,7 +25,7 @@ export function manbalar(list: Qator[], host: string): Qator[] {
     const h = q.k.toLowerCase().replace(/^www\./, '')
     // sayt içidagi ötişlar manba emas
     if (h === host || h.endsWith(`.${host}`)) continue
-    const name = !h ? 'Töğridan-töğri' : (MANBA.find(([re]) => re.test(h))?.[1] ?? h)
+    const name = !h ? 'To‘g‘ridan-to‘g‘ri' : (MANBA.find(([re]) => re.test(h))?.[1] ?? h)
     const x = m.get(name) ?? { k: name, tashrif: 0, koris: 0 }
     x.tashrif += q.tashrif
     x.koris += q.koris
@@ -37,17 +37,17 @@ export function manbalar(list: Qator[], host: string): Qator[] {
 
 let regions: Intl.DisplayNames | null = null
 export function davlatNomi(code: string) {
-  if (!code || code === 'XX' || code === 'T1') return 'Nomaʼlum'
+  if (!code || code === 'XX' || code === 'T1') return 'Noma’lum'
   try {
     regions ??= new Intl.DisplayNames(['uz-Latn', 'uz'], { type: 'region' })
-    return toYangiAlifbo(regions.of(code.toUpperCase()) ?? code)
+    return toJoriyAlifbo(regions.of(code.toUpperCase()) ?? code)
   } catch {
     return code
   }
 }
 
 /** Menyudagi sahifalar nomi: “/uz/biz-haqimizda/ittifoq” → “Özbekiston yoşlar ittifoqi” */
-const NAV_NOM = new Map<string, string>([['/uz', 'Boş sahifa']])
+const NAV_NOM = new Map<string, string>([['/uz', 'Bosh sahifa']])
 for (const g of NAV) {
   if (g.href) NAV_NOM.set(`/uz${g.href}`, g.label)
   for (const i of g.items ?? []) {

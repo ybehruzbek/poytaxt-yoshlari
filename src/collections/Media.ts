@@ -11,7 +11,7 @@ export const Media: CollectionConfig = {
   admin: {
     group: G.sozlamalar,
     hidden: kontentYashirin,
-    description: 'Saytdagi barça rasmlar. Papkalar böyiça tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qöşilganda kiçik nusxalari özi yaratiladi.',
+    description: 'Saytdagi barcha rasmlar. Papkalar bo‘yicha tartiblangan (Tadbirlar, Loyihalar, Hamkorlar…). Rasm qo‘shilganda kichik nusxalari o‘zi yaratiladi.',
   },
   folders: true,
   hooks: { afterRead: [relativeUrls] },

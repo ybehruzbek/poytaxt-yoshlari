@@ -84,10 +84,10 @@ type Opt = { id: string; t: string; short: string; r: Rate; extras: boolean }
 const opts = (STIP_K: ReturnType<typeof stipK>): Opt[] => [
   { id: 'prezident', t: 'Prezident davlat stipendiyasi', short: 'Prezident stipendiyasi', r: { base: 'stip', k: STIP_K.prezident }, extras: true },
   { id: 'nomli', t: 'Nomli davlat stipendiyalari', short: 'Nomli stipendiyalar', r: { base: 'stip', k: STIP_K.nomli }, extras: true },
-  { id: 'alo', t: '“Aʼlo” baholarga öqiydigan talabalar', short: '“Aʼlo” baholar', r: { base: 'stip', k: STIP_K.alo }, extras: true },
-  { id: 'baza', t: 'Bazaviy va qizlar uçun maxsus stipendiya', short: 'Bazaviy stipendiya', r: { base: 'stip', k: STIP_K.baza }, extras: true },
-  { id: 'vazir-b', t: 'Soğliqni saqlaş vaziri stipendiyasi — bakalavriat', short: 'Vazir stipendiyasi (bakalavriat)', r: { base: 'bhm', k: 3 }, extras: false },
-  { id: 'vazir-m', t: 'Soğliqni saqlaş vaziri stipendiyasi — magistratura', short: 'Vazir stipendiyasi (magistratura)', r: { base: 'bhm', k: 4 }, extras: false },
+  { id: 'alo', t: '“A’lo” baholarga o‘qiydigan talabalar', short: '“A’lo” baholar', r: { base: 'stip', k: STIP_K.alo }, extras: true },
+  { id: 'baza', t: 'Bazaviy va qizlar uchun maxsus stipendiya', short: 'Bazaviy stipendiya', r: { base: 'stip', k: STIP_K.baza }, extras: true },
+  { id: 'vazir-b', t: 'Sog‘liqni saqlash vaziri stipendiyasi — bakalavriat', short: 'Vazir stipendiyasi (bakalavriat)', r: { base: 'bhm', k: 3 }, extras: false },
+  { id: 'vazir-m', t: 'Sog‘liqni saqlash vaziri stipendiyasi — magistratura', short: 'Vazir stipendiyasi (magistratura)', r: { base: 'bhm', k: 4 }, extras: false },
 ]
 
 const baseLabel = (r: Rate, M: Miqdorlar) => (r.base === 'bhm' ? `BHM ${som(M.BHM.v)}` : `bazaviy stipendiya ${som(M.STIP_BAZA.v)}`)
@@ -106,9 +106,9 @@ function useCalc() {
   const extraAdd = o.extras ? Math.round((main * extra) / 100) : 0
   const parts = [
     { k: 'main', t: 'Asosiy miqdor', v: main, note: `${baseLabel(o.r, M)} × ${fmtK(o.r.k)}` },
-    { k: 'yetim', t: 'Yetim talaba uçun ustama', v: orphanAdd },
-    { k: 'nogiron', t: 'Nogironlik uçun ustama', v: disAdd },
-    { k: 'qoshimcha', t: `Qöşimça tölov (${extra} foiz)`, v: extraAdd },
+    { k: 'yetim', t: 'Yetim talaba uchun ustama', v: orphanAdd },
+    { k: 'nogiron', t: 'Nogironlik uchun ustama', v: disAdd },
+    { k: 'qoshimcha', t: `Qo‘shimcha to‘lov (${extra} foiz)`, v: extraAdd },
   ].filter((p) => p.v > 0)
   const total = parts.reduce((a, p) => a + p.v, 0)
   return { o, id, setId, disabled, setDisabled, orphan, setOrphan, extra, setExtra, parts, total }
@@ -147,7 +147,7 @@ function Extras({ c }: { c: Calc }) {
   if (!c.o.extras)
     return (
       <p className="sc-noext">
-        <Icon n="info" /> Vazir stipendiyasi qatʼiy miqdorda tölanadi, ustamalar qöllanmaydi.
+        <Icon n="info" /> Vazir stipendiyasi qat’iy miqdorda to‘lanadi, ustamalar qo‘llanmaydi.
       </p>
     )
   return (
@@ -164,14 +164,14 @@ function Extras({ c }: { c: Calc }) {
           <input type="checkbox" checked={c.orphan} onChange={(e) => c.setOrphan(e.target.checked)} />
           <Icon n="yetim" />
           <span>
-            Töliq davlat taʼminotidagi yetim talaba <b>+50 foiz</b>
+            To‘liq davlat ta’minotidagi yetim talaba <b>+50 foiz</b>
           </span>
         </label>
       )}
       <label className="sc-sl">
         <span className="sc-sl-h">
           <Icon n="qoshimcha" />
-          <span>Qöşimça tölov: iqtidor, jamoat işlaridagi faollik yoki ijtimoiy himoyaga muhtojlik</span>
+          <span>Qo‘shimcha to‘lov: iqtidor, jamoat ishlaridagi faollik yoki ijtimoiy himoyaga muhtojlik</span>
           <b>{c.extra} foiz</b>
         </span>
         <input
@@ -198,7 +198,7 @@ function Note() {
   return (
     <p className="sc-note">
       Hisob asosi: bazaviy stipendiya {som(STIP_BAZA.v)}, BHM {som(BHM.v)} ({STIP_BAZA.from}dan). Stipendiya normativ hujjatlar
-      asosida oliy taʼlim taşkiloti tomonidan hisoblanadi.{' '}
+      asosida oliy ta’lim tashkiloti tomonidan hisoblanadi.{' '}
       <a href={STIP_BAZA.url} target="_blank" rel="noopener noreferrer">
         Manba: {STIP_BAZA.source}
       </a>
@@ -252,12 +252,12 @@ function Calculator({ c }: { c: Calc }) {
         <div className="sc-a-x">
           <b>{fmtK(c.o.r.k)}×</b>
           <span>
-            {c.o.r.base === 'bhm' ? 'bazaviy hisoblaş miqdori (BHM)' : 'bazaviy stipendiya'}ga nisbatan neça barobar ekani; asosiy miqdor —{' '}
+            {c.o.r.base === 'bhm' ? 'bazaviy hisoblash miqdori (BHM)' : 'bazaviy stipendiya'}ga nisbatan necha barobar ekani; asosiy miqdor —{' '}
             {som(c.o.r.base === 'bhm' ? M.BHM.v : M.STIP_BAZA.v)}
           </span>
         </div>
         <div className="sc-a-cmp">
-          <small>Stipendiyalar miqdorini taqqoslaş</small>
+          <small>Stipendiyalar miqdorini taqqoslash</small>
           <ul>
             {OPTS.map((x) => {
               const v = x.id === c.id ? c.total : rateSum(x.r, M)

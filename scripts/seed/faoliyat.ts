@@ -29,7 +29,7 @@ for (const d of DIRECTIONS) {
   })
   dirId.set(d.slug, doc.id as number)
 }
-console.log('yönalişlar:', dirId.size)
+console.log('yo‘nalishlar:', dirId.size)
 
 // 2) Loyihalar
 if (want('projects')) {
@@ -104,7 +104,7 @@ if (want('elonlar')) {
   for (const a of ANNOUNCEMENTS) {
     const exists = await payload.count({ collection: 'news', where: { tgId: { equals: a.id } }, overrideAccess: true })
     if (exists.totalDocs) continue
-    const image = await media(payload, a.img, a.title, 'Eʼlonlar')
+    const image = await media(payload, a.img, a.title, 'E’lonlar')
     if (!image) continue
     try { await payload.create({
       collection: 'news',
@@ -123,10 +123,10 @@ if (want('elonlar')) {
         source: `https://t.me/poytaxtyoshlari_yi/${a.id}`,
         _status: 'published',
       } as never,
-    }) } catch (e) { console.log('  ! eʼlon', a.id, JSON.stringify((e as { data?: unknown }).data ?? String(e))); continue }
+    }) } catch (e) { console.log('  ! e’lon', a.id, JSON.stringify((e as { data?: unknown }).data ?? String(e))); continue }
     added++
   }
-  console.log('eʼlonlar qöşildi:', added)
+  console.log('e’lonlar qo‘shildi:', added)
 }
 
 process.exit(0)

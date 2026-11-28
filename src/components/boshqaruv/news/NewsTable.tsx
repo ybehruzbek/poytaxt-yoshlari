@@ -49,29 +49,29 @@ export function NewsTable({ rows, isAdmin }: { rows: Row[]; isAdmin: boolean }) 
           <span>{sel.length} ta tanlandi</span>
           {confirm ? (
             <>
-              <b>Öçirilsinmi? Qaytariş imkoni yöq.</b>
+              <b>O‘chirilsinmi? Qaytarish imkoni yo‘q.</b>
               <button type="button" className="btn btn-sm btn-red" disabled={pending} onClick={() => run(deleteNews)}>
-                Ha, öçiriş
+                Ha, o‘chirish
               </button>
               <button type="button" className="btn btn-sm btn-ghost-l" onClick={() => setConfirm(false)}>
-                Bekor qiliş
+                Bekor qilish
               </button>
             </>
           ) : (
             <>
               <button type="button" className="btn btn-sm btn-ghost-l" disabled={pending} onClick={() => run(publishNews)}>
-                Eʼlon qiliş
+                E’lon qilish
               </button>
               <button type="button" className="btn btn-sm btn-ghost-l" disabled={pending} onClick={() => run(unpublishNews)}>
-                Saytdan oliş
+                Saytdan olish
               </button>
               {isAdmin && (
                 <button type="button" className="btn btn-sm btn-ghost-l" disabled={pending} onClick={() => setConfirm(true)}>
                   <Icon name="trash" size={16} />
-                  Öçiriş
+                  O‘chirish
                 </button>
               )}
-              <button type="button" className="bulk__x" onClick={() => setSel([])} aria-label="Tanlovni bekor qiliş">
+              <button type="button" className="bulk__x" onClick={() => setSel([])} aria-label="Tanlovni bekor qilish">
                 <Icon name="x" size={18} />
               </button>
             </>
@@ -82,7 +82,7 @@ export function NewsTable({ rows, isAdmin }: { rows: Row[]; isAdmin: boolean }) 
       <div className={pending ? 'table is-busy' : 'table'} role="table" aria-label="Yangiliklar">
         <div className="trow thead" role="row">
           <span role="columnheader">
-            <input type="checkbox" className="chk" checked={all} onChange={() => setSel(all ? [] : rows.map((r) => r.id))} aria-label="Barçasini tanlaş" />
+            <input type="checkbox" className="chk" checked={all} onChange={() => setSel(all ? [] : rows.map((r) => r.id))} aria-label="Barchasini tanlash" />
           </span>
           <span role="columnheader" className="c-img">
             Rasm
@@ -101,7 +101,7 @@ export function NewsTable({ rows, isAdmin }: { rows: Row[]; isAdmin: boolean }) 
         {rows.map((r) => (
           <div key={r.id} className={sel.includes(r.id) ? 'trow is-sel' : 'trow'} role="row">
             <span role="cell">
-              <input type="checkbox" className="chk" checked={sel.includes(r.id)} onChange={() => toggle(r.id)} aria-label={`Tanlaş: ${r.title}`} />
+              <input type="checkbox" className="chk" checked={sel.includes(r.id)} onChange={() => toggle(r.id)} aria-label={`Tanlash: ${r.title}`} />
             </span>
             <Link href={`/boshqaruv/yangiliklar/${r.id}`} className="trow__link" role="cell" tabIndex={-1} aria-hidden="true">
               {r.thumb ? <img src={r.thumb} alt="" loading="lazy" /> : <span className="ph" />}
@@ -117,7 +117,7 @@ export function NewsTable({ rows, isAdmin }: { rows: Row[]; isAdmin: boolean }) 
               {r.date}
             </span>
             <span role="cell" className="c-st">
-              <span className={r.status === 'published' ? 'pill t-green' : 'pill t-yellow'}>{r.status === 'published' ? 'Eʼlon qilingan' : 'Qoralama'}</span>
+              <span className={r.status === 'published' ? 'pill t-green' : 'pill t-yellow'}>{r.status === 'published' ? 'E’lon qilingan' : 'Qoralama'}</span>
             </span>
           </div>
         ))}

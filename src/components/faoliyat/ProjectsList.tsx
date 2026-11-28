@@ -39,7 +39,7 @@ export function ProjectsList({
     )
   }, [projects, dir, st, q])
 
-  if (!projects.length) return <p className="fa-empty">Loyihalar maʼlumoti tayyorlanmoqda.</p>
+  if (!projects.length) return <p className="fa-empty">Loyihalar ma’lumoti tayyorlanmoqda.</p>
 
   return (
     <>
@@ -47,7 +47,7 @@ export function ProjectsList({
         <div className="chips fa-chips" role="group" aria-label="Holati">
           {(['all', 'davom etmoqda', 'har yili', 'yakunlangan'] as const).map((k) => (
             <button key={k} type="button" aria-pressed={st === k} onClick={() => setSt(k)}>
-              {k === 'all' ? 'Barçasi' : STATUS[k]}{' '}
+              {k === 'all' ? 'Barchasi' : STATUS[k]}{' '}
               <span>
                 {k === 'all' ? projects.length : projects.filter((p) => p.status === k).length}
               </span>
@@ -56,9 +56,9 @@ export function ProjectsList({
         </div>
         <div className="fa-tools-r">
           <label className="fa-select">
-            <span className="sr-only">Yönaliş</span>
+            <span className="sr-only">Yo‘nalish</span>
             <select value={dir} onChange={(e) => setDir(e.target.value as 'all' | DirSlug)}>
-              <option value="all">Barça yönalişlar</option>
+              <option value="all">Barcha yo‘nalishlar</option>
               {used.map((d) => (
                 <option key={d.slug} value={d.slug}>
                   {d.title}
@@ -102,7 +102,7 @@ export function ProjectsList({
         ))}
       </div>
 
-      {list.length === 0 && <p className="fa-empty">Qidiruv böyiça natija topilmadi.</p>}
+      {list.length === 0 && <p className="fa-empty">Qidiruv bo‘yicha natija topilmadi.</p>}
     </>
   )
 }

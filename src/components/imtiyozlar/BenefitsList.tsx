@@ -27,7 +27,7 @@ function Card({ b }: { b: Benefit }) {
       </div>
       <div className="gr-bd">
         {b.from ? (
-          <span className="gr-st gr-st-note">{b.from} kuçga kiradi</span>
+          <span className="gr-st gr-st-note">{b.from} kuchga kiradi</span>
         ) : (
           <span className="gr-st gr-st-open">Amalda</span>
         )}
@@ -37,7 +37,7 @@ function Card({ b }: { b: Benefit }) {
         </p>
         <dl>
           <div>
-            <dt>Kimlar uçun</dt>
+            <dt>Kimlar uchun</dt>
             <dd>{nbsp(b.who)}</dd>
           </div>
           <div>
@@ -45,7 +45,7 @@ function Card({ b }: { b: Benefit }) {
             <dd>{nbsp(b.amount)}</dd>
           </div>
           <div>
-            <dt>Rasmiylaştiriş tartibi</dt>
+            <dt>Rasmiylashtirish tartibi</dt>
             <dd>{nbsp(b.how)}</dd>
           </div>
         </dl>
@@ -74,10 +74,10 @@ export function BenefitsList({ benefits: BENEFITS }: { benefits: Benefit[] }) {
   }
   return (
     <>
-      <h2 className="sc-h im-h">Imtiyozlar röyxati</h2>
-      <div className="chips gr-chips" role="group" aria-label="Imtiyoz oluvçilar">
+      <h2 className="sc-h im-h">Imtiyozlar ro‘yxati</h2>
+      <div className="chips gr-chips" role="group" aria-label="Imtiyoz oluvchilar">
         <button type="button" aria-pressed={cat === 'all'} onClick={() => pick('all')}>
-          Barçasi <span>{BENEFITS.length}</span>
+          Barchasi <span>{BENEFITS.length}</span>
         </button>
         {BENEFIT_CATS.map((c) => (
           <button

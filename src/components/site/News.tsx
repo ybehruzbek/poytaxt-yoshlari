@@ -28,8 +28,8 @@ export async function News({ locale }: { locale: Locale }) {
     <section className="sec news-sec" id="yangiliklar" aria-labelledby="news-title">
       <div className="wrap">
         <div className="sec-head">
-          <h2 className="h2" id="news-title">{heads.news || 'Sönggi yangiliklar'}</h2>
-          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost">Barça yangiliklar
+          <h2 className="h2" id="news-title">{heads.news || 'So‘nggi yangiliklar'}</h2>
+          <Link href={`/${locale}/yangiliklar`} className="btn btn-ghost">Barcha yangiliklar
             <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
           </Link>
         </div>

@@ -38,7 +38,7 @@ export function Structure({ L, D }: { L: (h: string) => string; D: IttifoqData }
     <section className="sec st">
       <div className="wrap">
         <div className="sec-head st-head">
-          <h2 className="h2">Taşkiliy tuzilma</h2>
+          <h2 className="h2">Tashkiliy tuzilma</h2>
           <Link href={L('/hujjatlar/normativ/ustav')} className="more-btn">
             <More>
               Batafsil<span className="sr-only">: Ustav matni</span>
@@ -70,7 +70,7 @@ export function Structure({ L, D }: { L: (h: string) => string; D: IttifoqData }
 
         {/* ---------- 2. Taşkiliy tuzilma ---------- */}
         <h3 className="st-h">
-          <span>2</span> Taşkiliy tuzilma
+          <span>2</span> Tashkiliy tuzilma
         </h3>
         <div className="st-ladder">
           <ol className="st-levels">
@@ -83,9 +83,9 @@ export function Structure({ L, D }: { L: (h: string) => string; D: IttifoqData }
                   <Meta items={l.meta} />
                   {i === 0 && (
                     <p className="st-us">
-                      <b>Toşkent şahar hududiy Kengaşi</b> — poytaxt yoşlari, oliy taʼlim
-                      taşkilotlari hamda harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar
-                      bilan işlaydi.
+                      <b>Toshkent shahar hududiy Kengashi</b> — poytaxt yoshlari, oliy ta’lim
+                      tashkilotlari hamda harbiy qismlar va muassasalardagi boshlang‘ich tashkilotlar
+                      bilan ishlaydi.
                     </p>
                   )}
                 </div>
@@ -95,13 +95,13 @@ export function Structure({ L, D }: { L: (h: string) => string; D: IttifoqData }
           <aside className="st-chain" aria-label="Delegatlar saylov zanjiri">
             <b>Saylov zanjiri</b>
             <ol>
-              <li>Boşlanğiç taşkilot yiğilişi</li>
-              <li>Mahalliy kengaş konferensiyasi</li>
-              <li>Hududiy kengaş konferensiyasi</li>
+              <li>Boshlang‘ich tashkilot yig‘ilishi</li>
+              <li>Mahalliy kengash konferensiyasi</li>
+              <li>Hududiy kengash konferensiyasi</li>
               <li>Qurultoy</li>
             </ol>
             <p>
-              Har bir daraja yuqori darajadagi konferensiyaga yoki Qurultoyga delegatlarni özi
+              Har bir daraja yuqori darajadagi konferensiyaga yoki Qurultoyga delegatlarni o‘zi
               saylaydi.
             </p>
           </aside>

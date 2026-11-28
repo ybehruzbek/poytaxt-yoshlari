@@ -1,55 +1,57 @@
-# Imlo qoidasi — yagona va qatʼiy
+# Imlo qoidasi — yagona va qat’iy
 
-Saytdagi **barça özbekça yozuvlar** — sahifa matnlari, tugmalar, xabarlar, admin paneldagi nomlar, yangiliklar, rasm tavsiflari, meta-sarlavhalar — faqat **yangi alifboda** yoziladi.
+Saytdagi **barcha o‘zbekcha yozuvlar** — sahifa matnlari, tugmalar, xabarlar, admin paneldagi nomlar, yangiliklar, rasm tavsiflari, meta-sarlavhalar — **joriy lotin alifbosida** yoziladi va saqlanadi (foydalanuvchi qarori, 2026-11-28).
 
-Asos: ÖRQ-1184-son Qonun, 2026-yil 21-oktabr ([lex.uz](https://www.lex.uz/uz/doc-passport/8548754)). Alifbo — 28 harf va 1 tutuq belgisi.
+**Yangi alifbo** (O‘RQ-1184-son Qonun, 2026-yil 21-oktabr) — tashrif buyuruvchi tanlovi: til menyusidagi **Alifbo: Joriy / Yangi** tugmasi. “Yangi” tanlansa, sahifa brauzerda avtomatik o‘giriladi (`src/components/site/Alifbo.tsx`, `toYangiAlifbo`). Tanlov brauzerda eslab qolinadi. Kod va bazada yangi alifbo harflari saqlanmaydi.
 
 ## Harflar
 
-| Eski | Yangi | Misol |
+| Joriy (saqlanadi) | Yangi (tanlovda ko‘rsatiladi) | Misol |
 |---|---|---|
-| Oʻ oʻ | **Ö ö** | Özbekiston, böliş, köngilli |
-| Gʻ gʻ | **Ğ ğ** | boğlaniş, ğolib, töğri |
-| Sh sh | **Ş ş** | Toşkent, yoşlar, kengaş |
-| Ch ch | **Ç ç** | uçun, içki, birinçi |
+| O‘ o‘ | Ö ö | O‘zbekiston, bo‘lish |
+| G‘ g‘ | Ğ ğ | bog‘lanish, g‘olib |
+| Sh sh | Ş ş | Toshkent, yoshlar |
+| Ch ch | Ç ç | uchun, birinchi |
 
-- **ng** alohida harf emas, yozilişi özgarmaydi: Toşkentning, köngilli.
-- Bosh harflarda ham: YOŞKENT, ÖZBEKISTON.
+- o‘ va g‘ — faqat **‘** (U+2018) bilan: O‘zbekiston, g‘oya.
+- Bosh harflarda: O‘ZBEKISTON, YOSHKENT, TOSHKENT.
 
 ## Tutuq belgisi
 
-- Faqat **ʼ** (U+02BC, MODIFIER LETTER APOSTROPHE): taʼlim, eʼlon, maʼlumot, aʼzo, masʼul.
-- Oddiy apostrof `'`, qöştirnoq `’`, `‘` va `ʻ` tutuq örnida **işlatilmaydi**.
-- s va h alohida tovuş bölsa, orasidagi tutuq saqlanadi va Ş ga aylanmaydi: Isʼhoq.
+- Faqat **’** (U+2019): ta’lim, e’lon, ma’lumot, a’zo, mas’ul.
+- Oddiy apostrof `'`, `ʻ`, `ʼ` va `` ` `` ishlatilmaydi — `pnpm imlo:fix` va admin panel hook'i o‘zi to‘g‘rilaydi.
+- s va h alohida tovush bo‘lsa, orasidagi tutuq saqlanadi: Is’hoq.
 
-## Qöştirnoq — qatʼiy
+## Qo‘shtirnoq — qat’iy
 
-- Faqat **“…”** (U+201C oçiluvçi, U+201D yopiluvçi): “Yoşlar kuni”, “Mard öğlon” mukofoti.
-- Ruscha **«…»** va nemisça **„…“** **işlatilmaydi** — `pnpm imlo` ularni xato deb topadi, `pnpm imlo:fix` va admin panel hook'i özi almaştiradi.
+- Faqat **“…”** (U+201C ochiluvchi, U+201D yopiluvchi): “Yoshlar kuni”, “Mard o‘g‘lon” mukofoti.
+- Ruscha **«…»** va nemischa **„…“** **ishlatilmaydi**.
 
 ## Atamalar
 
-- Oliy taʼlim taşkiloti qisqartmasi — **OTT** (OTM emas): OTTlardagi yetakçilar, davlat OTT. `pnpm imlo` OTM ni ushlaydi va `imlo:fix` almaştiradi.
+- Oliy ta’lim tashkiloti qisqartmasi — **OTT** (OTM emas).
 
-## Özgarmaydiganlar
+## O‘zgarmaydiganlar
 
-- Havolalar, slug va domenlar ASCII bölib qoladi: `yoshkent.uz`, `/boglanish/murojaat`, `info@yoshkent.uz`.
-- Kod qiymatlari (enum, maydon nomlari, className) — özgarmaydi.
-- Xorijiy nomlar: English, ChatGPT, Chrome va h.k. (`src/lib/alifbo.ts` → `XORIJIY`).
-- Fuqarolar murojaatlari asl holida saqlanadi.
-- Kod içidagi izohlar (komentariyalar) bu qoidaga kirmaydi.
+- Havolalar, slug va domenlar ASCII bo‘lib qoladi: `yoshkent.uz`, `/boglanish/murojaat`, `info@yoshkent.uz`.
+- Kod qiymatlari (enum, maydon nomlari, className) — o‘zgarmaydi.
+- Xorijiy nomlar: English, ChatGPT, Tashkent va h.k. — yangi alifboga o‘girilmaydi (`src/lib/alifbo.ts` → `XORIJIY`). Yangi alifbo tanlovida noto‘g‘ri o‘girilgan inglizcha so‘z ko‘rilsa, shu ro‘yxatga qo‘shiladi.
+- Fuqarolar murojaatlari va arizalari asl holida saqlanadi.
+- Sahifaning ma’lum qismi yangi alifboga o‘girilmasligi kerak bo‘lsa — elementga `data-alifbo="off"`.
+- Logotip rasmlaridagi yozuv o‘girilmaydi (rasm).
 
-## Qanday taʼminlanadi
+## Qanday ta’minlanadi
 
 | Qayerda | Nima qiladi |
 |---|---|
-| `src/lib/alifbo.ts` | Qoidaning yagona manbai (`toYangiAlifbo`, `TUTUQ`) |
-| `pnpm imlo` | Kod içidagi barça körinadigan matnni tekşiradi; xato bölsa töxtaydi |
-| `pnpm imlo:fix` | Topilganlarini özi töğrilaydi |
-| `pnpm lint` | Avval `pnpm imlo` işlaydi — eski yozuv bilan lint ötmaydi |
-| Admin panel | Yangiliklar (sarlavha, qisqa va töliq matn) va rasm tavsifi saqlanganda avtomatik yangi alifboga ötadi (`src/lib/imlo-hook.ts`) |
-| `pnpm imlo:db` | Bazadagi eski yozuvlarni bir martada ötkazadi (qayta işga tuşiriş xavfsiz) |
+| `src/lib/alifbo.ts` | Qoidalar: `toJoriyAlifbo` (saqlash), `toYangiAlifbo` (tanlovda ko‘rsatish), `eskiLotin` |
+| `pnpm imlo` | Koddagi barcha matnni tekshiradi; yangi alifbo harfi yoki noto‘g‘ri apostrof bo‘lsa to‘xtaydi |
+| `pnpm imlo:fix` | Topilganlarini o‘zi to‘g‘rilaydi. Ataylab qoldirilgan qator — izohida `imlo-ok` |
+| `pnpm lint` | Avval `pnpm imlo` ishlaydi |
+| Admin panel | Matn saqlanganda avtomatik joriy alifboga keltiriladi (`src/lib/imlo-hook.ts`) |
+| Telegram sinxronlash | Kanal postlari joriy alifboga keltiriladi (`src/lib/tg/transform.ts`) |
+| `pnpm imlo:db` | Lokal bazani o‘tkazadi; serverda xuddi shuni `20261128_joriy_alifbo` migratsiyasi bajaradi (`src/lib/joriy-baza.ts`) |
 
-Yangi kolleksiya yoki maydon qöşilganda: özbekça matn maydoniga `hooks: { beforeChange: [imloMatn] }` (richText uçun `imloRichText`) qöşiladi.
+Yangi kolleksiya yoki maydon qo‘shilganda: o‘zbekcha matn maydoniga `hooks: { beforeChange: [imloMatn] }` (richText uchun `imloRichText`) qo‘shiladi.
 
-Commit xabarlari va hujjatlar ham yangi alifboda yoziladi.
+Commit xabarlari va hujjatlar ham joriy alifboda yoziladi.

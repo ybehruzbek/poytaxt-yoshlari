@@ -22,7 +22,7 @@ export function VideoWatch({ videos }: { videos: Video[] }) {
           {v.sec ? ` · ${dur(v.sec)}` : ''}
         </p>
       </div>
-      <ol className="ax-watch-list" aria-label="Videolar röyxati">
+      <ol className="ax-watch-list" aria-label="Videolar ro‘yxati">
         {videos.map((x) => (
           <li key={x.id}>
             <button type="button" aria-current={x.id === id ? true : undefined} onClick={() => setId(x.id)}>

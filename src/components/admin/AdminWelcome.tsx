@@ -28,7 +28,7 @@ export async function AdminWelcome({ payload, user }: Props) {
   const staff = user?.role === 'admin' || user?.role === 'operator'
   const all = [
     { n: appeals, t: 'Yangi murojaat', href: '/admin/collections/appeals' },
-    { n: members, t: 'Yangi aʼzolik arizasi', href: '/admin/collections/memberships' },
+    { n: members, t: 'Yangi a’zolik arizasi', href: '/admin/collections/memberships' },
     { n: volunteers, t: 'Yangi volontyorlik arizasi', href: '/admin/collections/volunteers' },
     { n: news, t: 'Yangilik saytda', href: '/admin/collections/news' },
   ]
@@ -37,21 +37,21 @@ export async function AdminWelcome({ payload, user }: Props) {
     <section className="adm-welcome">
       <div className="adm-welcome__head">
         <div>
-          <p className="adm-welcome__kicker">Boşqaruv paneli</p>
+          <p className="adm-welcome__kicker">Boshqaruv paneli</p>
           <h1 className="adm-welcome__title">
-            {user?.name ? `Xuş kelibsiz, ${user.name}` : 'Xuş kelibsiz'}
+            {user?.name ? `Xush kelibsiz, ${user.name}` : 'Xush kelibsiz'}
           </h1>
-          <p className="adm-welcome__org">Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi rasmiy veb-sayti</p>
+          <p className="adm-welcome__org">O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi rasmiy veb-sayti</p>
         </div>
         <div className="adm-welcome__actions">
           <Link className="adm-welcome__btn adm-welcome__btn--main" href="/admin/collections/news/create">
-            Yangilik qöşiş
+            Yangilik qo‘shish
           </Link>
           <Link className="adm-welcome__btn" href="/boshqaruv">
-            Yangi panelga ötiş
+            Yangi panelga o‘tish
           </Link>
           <a className="adm-welcome__btn" href="/uz" target="_blank" rel="noopener noreferrer">
-            Saytni oçiş
+            Saytni ochish
           </a>
         </div>
       </div>

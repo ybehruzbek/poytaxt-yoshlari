@@ -33,7 +33,7 @@ const titleOf = (x: unknown) =>
   x && typeof x === 'object' ? String((x as Any).title ?? (x as Any).name ?? (x as Any).t ?? (x as Any).short ?? (x as Any).otm ?? (x as Any).filename ?? `#${(x as Any).id}`) : ''
 
 function cell(f: SField | undefined, v: unknown, key: string): Cell {
-  if (key === '_status') return v === 'published' ? { v: 'Eʼlon qilingan', tone: 'green' } : { v: 'Qoralama', tone: 'yellow' }
+  if (key === '_status') return v === 'published' ? { v: 'E’lon qilingan', tone: 'green' } : { v: 'Qoralama', tone: 'yellow' }
   if (key === 'updatedAt' || key === 'createdAt') return { v: typeof v === 'string' ? qisqaVaqt(v) : '' }
   if (!f) return { v: v == null ? '' : String(v) }
   switch (f.type) {
@@ -64,7 +64,7 @@ export async function columnsOf(schema: DocSchema): Promise<Column[]> {
   const c = (payload.collections as unknown as Record<string, { config: SanitizedCollectionConfig } | undefined>)[schema.slug]?.config
   const names = ((c?.admin.defaultColumns as string[] | undefined) ?? []).filter((n) => n !== schema.useAsTitle).slice(0, 4)
   const m = flat(schema.fields)
-  return names.map((k) => ({ key: k, t: k === '_status' ? 'Holati' : k === 'updatedAt' ? 'Özgargan' : (m.get(k)?.label ?? k) }))
+  return names.map((k) => ({ key: k, t: k === '_status' ? 'Holati' : k === 'updatedAt' ? 'O‘zgargan' : (m.get(k)?.label ?? k) }))
 }
 
 export async function listDocs(schema: DocSchema, p: { q?: string; sahifa?: string }) {

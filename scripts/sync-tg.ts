@@ -22,13 +22,13 @@ if (env.TG_PURGE === '1' || env.TG_ONLY === 'purge') {
   const all = await payload.find({ collection: 'news', limit: 5000, depth: 0, pagination: false, select: { tgId: true }, overrideAccess: true })
   const ids = all.docs.filter((d) => !d.tgId).map((d) => d.id)
   for (const id of ids) await payload.delete({ collection: 'news', id, overrideAccess: true })
-  log(`Namuna yangiliklar öçirildi: ${ids.length} ta`)
+  log(`Namuna yangiliklar o‘chirildi: ${ids.length} ta`)
 }
 if (env.TG_ONLY === 'curated') log(`Tahrir qilingan maqolalar yangilandi: ${await applyCurated(payload, log)} ta`)
 else if (env.TG_ONLY === 'retext') await refreshText(payload, env.TG_SINCE ?? '2026-01-01', log)
 else if (env.TG_ONLY === 'reclassify') log(`Turi qayta aniqlandi: ${await reclassify(payload, env.TG_SINCE ?? '2026-01-01', log)} ta`)
 else if (env.TG_ONLY !== 'purge') {
   const r = await syncSince(payload, env.TG_SINCE ?? '2026-01-01', log)
-  log(`Import: ${r.created} ta yaratildi, ${r.skipped} ta ötkazildi, ${r.failed} ta xato`)
+  log(`Import: ${r.created} ta yaratildi, ${r.skipped} ta o‘tkazildi, ${r.failed} ta xato`)
 }
 process.exit(0)

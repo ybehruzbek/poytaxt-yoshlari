@@ -6,8 +6,8 @@ import { imloMatn, imloRichText } from '../lib/imlo-hook'
 import { slugifyUz } from '../lib/slugify'
 
 export const NEWS_CATEGORIES = [
-  { label: 'Kengaş faoliyati', value: 'kengash' },
-  { label: 'Boşlanğiç taşkilotlar', value: 'boshlangich' },
+  { label: 'Kengash faoliyati', value: 'kengash' },
+  { label: 'Boshlang‘ich tashkilotlar', value: 'boshlangich' },
   { label: 'Imkoniyatlar', value: 'imkoniyat' },
   { label: 'Tadbir', value: 'tadbir' },
 ] as const
@@ -76,14 +76,14 @@ export const News: CollectionConfig = {
     },
     {
       name: 'excerpt',
-      label: 'Qisqa matn (boş sahifa uçun)',
+      label: 'Qisqa matn (bosh sahifa uchun)',
       type: 'textarea',
       required: true,
       localized: true,
       maxLength: 320,
       hooks: { beforeChange: [imloMatn] },
     },
-    { name: 'content', label: 'Töliq matn', type: 'richText', localized: true, hooks: { beforeChange: [imloRichText] } },
+    { name: 'content', label: 'To‘liq matn', type: 'richText', localized: true, hooks: { beforeChange: [imloRichText] } },
     {
       name: 'gallery',
       label: 'Fotogalereya (ixtiyoriy)',
@@ -118,11 +118,11 @@ export const News: CollectionConfig = {
           index: true,
           options: [
             { label: 'Yangilik', value: 'yangilik' },
-            { label: 'Eʼlon (tanlov, röyxatdan ötiş, kurs)', value: 'elon' },
+            { label: 'E’lon (tanlov, ro‘yxatdan o‘tish, kurs)', value: 'elon' },
             { label: 'Kelgusi tadbir', value: 'tadbir' },
             { label: 'Tabrik', value: 'tabrik' },
           ],
-          admin: { description: 'Eʼlonlar — “Eʼlonlar” sahifasida, kelgusi tadbirlar — boş sahifadagi “Yaqin tadbirlar”da, tabriklar — “Yangiliklar”dagi alohida “Tabriklar” bölimida' },
+          admin: { description: 'E’lonlar — “E’lonlar” sahifasida, kelgusi tadbirlar — bosh sahifadagi “Yaqin tadbirlar”da, tabriklar — “Yangiliklar”dagi alohida “Tabriklar” bo‘limida' },
         },
         { name: 'eventDate', label: 'Tadbir sanasi', type: 'date', index: true, admin: { date: { pickerAppearance: 'dayAndTime' }, condition: (d) => d?.kind === 'tadbir' } },
         { name: 'eventPlace', label: 'Tadbir joyi', type: 'text', admin: { condition: (d) => d?.kind === 'tadbir' }, hooks: { beforeChange: [imloMatn] } },
@@ -141,7 +141,7 @@ export const News: CollectionConfig = {
       label: 'Manba havolasi (masalan, Telegram post)',
       type: 'text',
       validate: (v: unknown) =>
-        !v || (typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v)) || 'Havola https:// bilan boşlansin',
+        !v || (typeof v === 'string' && /^https:\/\/[^\s]+$/.test(v)) || 'Havola https:// bilan boshlansin',
     },
   ],
 }

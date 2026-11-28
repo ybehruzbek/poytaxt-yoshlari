@@ -10,6 +10,6 @@ export async function ThumbCell({ cellData, payload }: DefaultServerCellComponen
     m = (await payload.findByID({ collection: 'media', id: m, depth: 0, disableErrors: true })) as M | null
   }
   const src = m && typeof m === 'object' ? (m.sizes?.thumb?.url ?? m.url) : null
-  if (!src) return <span className="adm-thumb adm-thumb--none" aria-label="Rasm yöq" />
+  if (!src) return <span className="adm-thumb adm-thumb--none" aria-label="Rasm yo‘q" />
   return <img className="adm-thumb" src={src} alt={(typeof m === 'object' && m?.alt) || ''} loading="lazy" />
 }

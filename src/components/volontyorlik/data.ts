@@ -5,8 +5,8 @@
  * (components/faoliyat).
  */
 export const LAW = {
-  t: '“Volontyorlik faoliyati töğrisida”gi Özbekiston Respublikasi Qonuni',
-  no: 'ÖRQ–585, 2019-yil 2-dekabr',
+  t: '“Volontyorlik faoliyati to‘g‘risida”gi O‘zbekiston Respublikasi Qonuni',
+  no: 'O‘RQ–585, 2019-yil 2-dekabr',
   url: 'https://lex.uz/docs/4623999',
 }
 
@@ -27,11 +27,11 @@ export const DIRS: VolDir[] = [
     id: 'ijtimoiy',
     icon: 'qol',
     t: 'Ijtimoiy yordam',
-    text: 'Kam taʼminlangan va köp bolali oilalar, yolğiz keksalar hamda ijtimoiy himoyaga muhtoj şaxslarni qöllab-quvvatlaş.',
+    text: 'Kam ta’minlangan va ko‘p bolali oilalar, yolg‘iz keksalar hamda ijtimoiy himoyaga muhtoj shaxslarni qo‘llab-quvvatlash.',
     tasks: [
-      'Xayriya aksiyalarini taşkil etiş',
-      'Sovğa va oziq-ovqat tarqatiş',
-      'Bayram dasturlarini ötkaziş',
+      'Xayriya aksiyalarini tashkil etish',
+      'Sovg‘a va oziq-ovqat tarqatish',
+      'Bayram dasturlarini o‘tkazish',
     ],
     age: 16,
     example: '“Mehrli yurak” xayriya aksiyasi — Taskin bolalar hospisi',
@@ -39,34 +39,34 @@ export const DIRS: VolDir[] = [
   {
     id: 'gamxorlik',
     icon: 'yurak',
-    t: 'Bemorlar va nogironligi bölgan şaxslarga ğamxörlik',
-    text: 'Bemorlar, nogironligi bölgan şaxslar, maktab-internat tarbiyalanuvçilari va qariyalarga ğamxörlik qiliş.',
+    t: 'Bemorlar va nogironligi bo‘lgan shaxslarga g‘amxo‘rlik',
+    text: 'Bemorlar, nogironligi bo‘lgan shaxslar, maktab-internat tarbiyalanuvchilari va qariyalarga g‘amxo‘rlik qilish.',
     tasks: [
-      'Tibbiyot muassasalarida bolalar uçun dasturlar',
-      'Maktab-internatlarga taşrif',
-      'Kundalik yordam körsatiş',
+      'Tibbiyot muassasalarida bolalar uchun dasturlar',
+      'Maktab-internatlarga tashrif',
+      'Kundalik yordam ko‘rsatish',
     ],
     age: 16,
-    example: '“Yozni Kamalak bilan!” aksiyasi — Toşkent şahar Onkologiya markazi',
+    example: '“Yozni Kamalak bilan!” aksiyasi — Toshkent shahar Onkologiya markazi',
   },
   {
     id: 'ekologiya',
     icon: 'barg',
     t: 'Ekologiya va atrof-muhit',
-    text: 'Atrof-muhitni muhofaza qiliş, köçatlar ekiş, ommaviy haşar va obodonlaştiriş tadbirlarida iştirok etiş.',
-    tasks: ['Daraxt va köçat ekiş', 'Ommaviy haşarlar', 'Ekologik tarğibot'],
+    text: 'Atrof-muhitni muhofaza qilish, ko‘chatlar ekish, ommaviy hashar va obodonlashtirish tadbirlarida ishtirok etish.',
+    tasks: ['Daraxt va ko‘chat ekish', 'Ommaviy hasharlar', 'Ekologik targ‘ibot'],
     age: 16,
-    example: 'Taskin bolalar hospisi hududida ekologik boğ barpo etiş',
+    example: 'Taskin bolalar hospisi hududida ekologik bog‘ barpo etish',
   },
   {
     id: 'meros',
     icon: 'gumbaz',
     t: 'Madaniy meros',
-    text: 'Madaniy meros obyektlari, tarixiy-madaniy muhit va qadamjolarni saqlaş böyiça tadbirlar ötkaziş.',
+    text: 'Madaniy meros obyektlari, tarixiy-madaniy muhit va qadamjolarni saqlash bo‘yicha tadbirlar o‘tkazish.',
     tasks: [
-      'Tarixiy obidalarni obodonlaştiriş',
-      'Ekskursiyalarda kömaklaşiş',
-      'Tarğibot materiallari tayyorlaş',
+      'Tarixiy obidalarni obodonlashtirish',
+      'Ekskursiyalarda ko‘maklashish',
+      'Targ‘ibot materiallari tayyorlash',
     ],
     age: 16,
   },
@@ -74,11 +74,11 @@ export const DIRS: VolDir[] = [
     id: 'tadbirlar',
     icon: 'bayroq',
     t: 'Ommaviy tadbirlar va forumlar',
-    text: 'Milliy va xalqaro ahamiyatga molik sport, madaniy va jamoat tadbirlarini ötkazişga kömaklaşiş.',
+    text: 'Milliy va xalqaro ahamiyatga molik sport, madaniy va jamoat tadbirlarini o‘tkazishga ko‘maklashish.',
     tasks: [
-      'Iştirokçilarni kutib oliş va röyxatga oliş',
-      'Mehmonlarga yöl-yöriq körsatiş',
-      'Tadbir maydonida tartibni taʼminlaş',
+      'Ishtirokchilarni kutib olish va ro‘yxatga olish',
+      'Mehmonlarga yo‘l-yo‘riq ko‘rsatish',
+      'Tadbir maydonida tartibni ta’minlash',
     ],
     age: 16,
     example: 'Kibersport musobaqalari va “BMT modeli” konferensiyalari volontyorligi',
@@ -87,36 +87,36 @@ export const DIRS: VolDir[] = [
     id: 'favqulodda',
     icon: 'qalqon',
     t: 'Favqulodda vaziyatlarda yordam',
-    text: 'Favqulodda vaziyatlar oqibatlarining oldini oliş va ularni bartaraf etişda vakolatli organlarga kömaklaşiş.',
+    text: 'Favqulodda vaziyatlar oqibatlarining oldini olish va ularni bartaraf etishda vakolatli organlarga ko‘maklashish.',
     tasks: [
-      'Jabrlanganlarga yordam körsatiş',
-      'Insonparvarlik yordamini tarqatiş',
-      'Vakolatli organlar topşiriqlarini bajariş',
+      'Jabrlanganlarga yordam ko‘rsatish',
+      'Insonparvarlik yordamini tarqatish',
+      'Vakolatli organlar topshiriqlarini bajarish',
     ],
     age: 18,
   },
   {
     id: 'talim',
     icon: 'kitob',
-    t: 'Taʼlim va mentorlik',
-    text: 'Öquvçi va yoşlarga bilim berişda kömaklaşiş, mentorlik, öquv kurslari va treninglar ötkaziş.',
+    t: 'Ta’lim va mentorlik',
+    text: 'O‘quvchi va yoshlarga bilim berishda ko‘maklashish, mentorlik, o‘quv kurslari va treninglar o‘tkazish.',
     tasks: [
-      'Fanlardan qöşimça maşğulotlar',
-      'Kasbga yönaltiriş suhbatlari',
-      'Loyiha boşqaruvi böyiça treninglar',
+      'Fanlardan qo‘shimcha mashg‘ulotlar',
+      'Kasbga yo‘naltirish suhbatlari',
+      'Loyiha boshqaruvi bo‘yicha treninglar',
     ],
     age: 16,
-    example: '“Universe” volontyorlar maktabi — loyiha boşqaruvi böyiça darslar',
+    example: '“Universe” volontyorlar maktabi — loyiha boshqaruvi bo‘yicha darslar',
   },
   {
     id: 'raqamli',
     icon: 'ekran',
     t: 'Raqamli volontyorlik',
-    text: 'Masofadan turib media, dizayn, tarjima va axborot texnologiyalari sohasida ijtimoiy loyihalarga yordam beriş.',
+    text: 'Masofadan turib media, dizayn, tarjima va axborot texnologiyalari sohasida ijtimoiy loyihalarga yordam berish.',
     tasks: [
-      'Foto va video materiallar tayyorlaş',
-      'Ijtimoiy tarmoqlarda tarğibot',
-      'Matnlarni tarjima qiliş',
+      'Foto va video materiallar tayyorlash',
+      'Ijtimoiy tarmoqlarda targ‘ibot',
+      'Matnlarni tarjima qilish',
     ],
     age: 16,
   },
@@ -125,89 +125,89 @@ export const DIRS: VolDir[] = [
 /** Volontyor böliş tartibi */
 export const STEPS = [
   {
-    t: 'Ariza beriş',
-    d: 'Sahifadagi şakl orqali yönaliş va bandlik vaqtini körsatib ariza yuboriladi.',
+    t: 'Ariza berish',
+    d: 'Sahifadagi shakl orqali yo‘nalish va bandlik vaqtini ko‘rsatib ariza yuboriladi.',
   },
   {
     t: 'Suhbat',
-    d: 'Kengaş mutaxassisi bilan suhbatda qiziqiş va imkoniyatlarga mos yönaliş belgilanadi.',
+    d: 'Kengash mutaxassisi bilan suhbatda qiziqish va imkoniyatlarga mos yo‘nalish belgilanadi.',
   },
   {
-    t: 'Örgatuv',
-    d: 'Volontyorlik asoslari va jamoada işlaş böyiça seminar-treningda iştirok etiladi.',
+    t: 'O‘rgatuv',
+    d: 'Volontyorlik asoslari va jamoada ishlash bo‘yicha seminar-treningda ishtirok etiladi.',
   },
   {
-    t: 'Tadbirga biriktiriş',
-    d: 'Volontyor tadbir yoki loyihaga biriktiriladi. Oyiga 20 soatdan ortiq bandlikda yozma şartnoma tuziladi.',
+    t: 'Tadbirga biriktirish',
+    d: 'Volontyor tadbir yoki loyihaga biriktiriladi. Oyiga 20 soatdan ortiq bandlikda yozma shartnoma tuziladi.',
   },
   {
     t: 'Tavsiyanoma',
-    d: 'Faol volontyorlarga volontyorlik faoliyati töğrisida tavsiyanoma beriladi.',
+    d: 'Faol volontyorlarga volontyorlik faoliyati to‘g‘risida tavsiyanoma beriladi.',
   },
 ]
 
 /** Volontyorning huquqlari (Qonunning 12-moddasi) */
 export const RIGHTS = [
-  'Volontyorlik faoliyatida iştirok etişni erkin tanlaş va istalgan vaqtda tugatiş',
-  'Volontyorlik faoliyati taşkilotçisi töğrisida işonçli axborot oliş',
-  'Maxsus kiyim-boş oliş, yöl, yaşaş, ovqatlaniş va boşqa xarajatlar örnini qoplatiş',
-  'Volontyorlik faoliyati taşkilotçisidan tavsiyanoma oliş',
-  'Taşkilotçi mablağlari hisobidan hayot va soğliqni suğurta qildiriş',
+  'Volontyorlik faoliyatida ishtirok etishni erkin tanlash va istalgan vaqtda tugatish',
+  'Volontyorlik faoliyati tashkilotchisi to‘g‘risida ishonchli axborot olish',
+  'Maxsus kiyim-bosh olish, yo‘l, yashash, ovqatlanish va boshqa xarajatlar o‘rnini qoplatish',
+  'Volontyorlik faoliyati tashkilotchisidan tavsiyanoma olish',
+  'Tashkilotchi mablag‘lari hisobidan hayot va sog‘liqni sug‘urta qildirish',
 ]
 
 /** Volontyorning majburiyatlari (Qonunning 12-moddasi) */
 export const DUTIES = [
-  'Topşiriqlarni vijdonan bajariş',
-  'Fuqarolar va taşkilotlarning huquq va qonuniy manfaatlarini buzmaslik',
-  'Volontyorlik davomida maʼlum bölgan maxfiy maʼlumotlarni oşkor etmaslik',
-  'Berilgan moddiy resurslar va asbob-uskunalarni ehtiyot qiliş hamda qaytariş',
+  'Topshiriqlarni vijdonan bajarish',
+  'Fuqarolar va tashkilotlarning huquq va qonuniy manfaatlarini buzmaslik',
+  'Volontyorlik davomida ma’lum bo‘lgan maxfiy ma’lumotlarni oshkor etmaslik',
+  'Berilgan moddiy resurslar va asbob-uskunalarni ehtiyot qilish hamda qaytarish',
 ]
 
 /** Yönaliş tanlaş testi: har bir javob yönalişlarga ball beradi */
 export const QUIZ: { q: string; a: { t: string; dirs: string[] }[] }[] = [
   {
-    q: 'Qaysi iş sizga köproq yoqadi?',
+    q: 'Qaysi ish sizga ko‘proq yoqadi?',
     a: [
-      { t: 'Odamlarga bevosita yordam beriş', dirs: ['ijtimoiy', 'gamxorlik'] },
-      { t: 'Tabiat va şaharni asraş', dirs: ['ekologiya', 'meros'] },
-      { t: 'Katta tadbirlarda jamoada işlaş', dirs: ['tadbirlar', 'favqulodda'] },
-      { t: 'Bilim beriş va örgatiş', dirs: ['talim', 'raqamli'] },
+      { t: 'Odamlarga bevosita yordam berish', dirs: ['ijtimoiy', 'gamxorlik'] },
+      { t: 'Tabiat va shaharni asrash', dirs: ['ekologiya', 'meros'] },
+      { t: 'Katta tadbirlarda jamoada ishlash', dirs: ['tadbirlar', 'favqulodda'] },
+      { t: 'Bilim berish va o‘rgatish', dirs: ['talim', 'raqamli'] },
     ],
   },
   {
-    q: 'Haftasiga qança vaqt ajrata olasiz?',
+    q: 'Haftasiga qancha vaqt ajrata olasiz?',
     a: [
       { t: '2–4 soat', dirs: ['raqamli', 'ekologiya'] },
       { t: '5–10 soat', dirs: ['ijtimoiy', 'talim', 'meros'] },
-      { t: 'Faqat dam oliş kunlari', dirs: ['tadbirlar', 'ekologiya'] },
-      { t: 'Zarur bölganda istalgan vaqt', dirs: ['favqulodda', 'gamxorlik'] },
+      { t: 'Faqat dam olish kunlari', dirs: ['tadbirlar', 'ekologiya'] },
+      { t: 'Zarur bo‘lganda istalgan vaqt', dirs: ['favqulodda', 'gamxorlik'] },
     ],
   },
   {
-    q: 'Qaysi muhitda işlaş qulay?',
+    q: 'Qaysi muhitda ishlash qulay?',
     a: [
-      { t: 'Oçiq havoda', dirs: ['ekologiya', 'tadbirlar'] },
-      { t: 'Kiçik guruhda, xotirjam muhitda', dirs: ['gamxorlik', 'talim'] },
+      { t: 'Ochiq havoda', dirs: ['ekologiya', 'tadbirlar'] },
+      { t: 'Kichik guruhda, xotirjam muhitda', dirs: ['gamxorlik', 'talim'] },
       { t: 'Masofadan, kompyuter orqali', dirs: ['raqamli'] },
-      { t: 'Tezkor va masʼuliyatli vaziyatlarda', dirs: ['favqulodda', 'tadbirlar'] },
+      { t: 'Tezkor va mas’uliyatli vaziyatlarda', dirs: ['favqulodda', 'tadbirlar'] },
     ],
   },
   {
-    q: 'Qaysi könikmangiz kuçliroq?',
+    q: 'Qaysi ko‘nikmangiz kuchliroq?',
     a: [
       { t: 'Muloqot va hamdardlik', dirs: ['ijtimoiy', 'gamxorlik'] },
-      { t: 'Taşkilotçilik', dirs: ['tadbirlar', 'meros'] },
+      { t: 'Tashkilotchilik', dirs: ['tadbirlar', 'meros'] },
       { t: 'Media, dizayn yoki tillar', dirs: ['raqamli'] },
-      { t: 'Biror fanni çuqur biliş', dirs: ['talim'] },
+      { t: 'Biror fanni chuqur bilish', dirs: ['talim'] },
     ],
   },
   {
     q: 'Volontyorlikdan nimani kutasiz?',
     a: [
-      { t: 'Jamiyatga foyda keltiriş', dirs: ['ijtimoiy', 'favqulodda'] },
-      { t: 'Yangi tajriba va tanişlar', dirs: ['tadbirlar', 'meros'] },
-      { t: 'Kasbiy könikmalarni rivojlantiriş', dirs: ['talim', 'raqamli'] },
-      { t: 'Atrof-muhitni yaxşilaş', dirs: ['ekologiya'] },
+      { t: 'Jamiyatga foyda keltirish', dirs: ['ijtimoiy', 'favqulodda'] },
+      { t: 'Yangi tajriba va tanishlar', dirs: ['tadbirlar', 'meros'] },
+      { t: 'Kasbiy ko‘nikmalarni rivojlantirish', dirs: ['talim', 'raqamli'] },
+      { t: 'Atrof-muhitni yaxshilash', dirs: ['ekologiya'] },
     ],
   },
 ]
@@ -216,6 +216,6 @@ export const QUIZ: { q: string; a: { t: string; dirs: string[] }[] }[] = [
 export const TIMES = [
   'Haftasiga 2–4 soat',
   'Haftasiga 5–10 soat',
-  'Faqat dam oliş kunlari',
+  'Faqat dam olish kunlari',
   'Tadbirlar davrida',
 ]

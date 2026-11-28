@@ -2183,7 +2183,7 @@ select.inp {
   overflow: hidden;
 }
 .mp.is-drag::after {
-  content: 'Rasmni şu yerga taşlang';
+  content: 'Rasmni shu yerga tashlang';
   position: absolute;
   inset: 8px;
   z-index: 3;

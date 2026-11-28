@@ -21,7 +21,7 @@ export const MUQOBIL_NOMLAR = [
   'Yoshlar ittifoqi Toshkent',
   'Toshkent shahar yoshlar ittifoqi',
   'Yoshlar ittifoqi Toshkent shahar Kengashi',
-  'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
+  'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi', // imlo-ok: yangi alifbodagi shakli ham qidiruv uchun
 ]
 
 export const BOSH = {

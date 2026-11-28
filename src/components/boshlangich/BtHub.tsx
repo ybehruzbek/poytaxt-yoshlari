@@ -21,24 +21,24 @@ type Dir = {
 const dirsOf = (OTMS: Otm[], LED = OTMS.filter((o) => o.leader)): Dir[] => [
   {
     n: '01',
-    t: 'Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar',
-    d: 'Toşkent şahridagi davlat va nodavlat oliy taʼlim taşkilotlari hamda xorijiy oliy taʼlim taşkilotlarining filiallaridagi boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
+    t: 'Oliy ta’lim tashkilotlaridagi boshlang‘ich tashkilotlar',
+    d: 'Toshkent shahridagi davlat va nodavlat oliy ta’lim tashkilotlari hamda xorijiy oliy ta’lim tashkilotlarining filiallaridagi boshlang‘ich tashkilotlar va ularning yoshlar yetakchilari.',
     href: '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim',
-    go: 'Sahifaga ötiş',
+    go: 'Sahifaga o‘tish',
     stats: [
-      { v: String(OTMS.length), t: 'Oliy taʼlim taşkiloti' },
-      { v: String(LED.length), t: 'Yoşlar yetakçisi' },
-      { v: String(OTMS.length - LED.length), t: 'Yetakçi lavozimi vakant', accent: true },
+      { v: String(OTMS.length), t: 'Oliy ta’lim tashkiloti' },
+      { v: String(LED.length), t: 'Yoshlar yetakchisi' },
+      { v: String(OTMS.length - LED.length), t: 'Yetakchi lavozimi vakant', accent: true },
     ],
     faces: LED.map((o) => o.leader!.img),
   },
   {
     n: '02',
-    t: 'Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar',
-    d: 'Toşkent şahridagi harbiy qismlar va muassasalarda faoliyat yuritayotgan boşlanğiç taşkilotlar va ularning yoşlar yetakçilari.',
+    t: 'Harbiy qismlar va muassasalardagi boshlang‘ich tashkilotlar',
+    d: 'Toshkent shahridagi harbiy qismlar va muassasalarda faoliyat yuritayotgan boshlang‘ich tashkilotlar va ularning yoshlar yetakchilari.',
     href: '/biz-haqimizda/boshlangich-tashkilotlar/harbiy',
-    go: 'Sahifaga ötiş',
-    stats: [{ v: '—', t: 'Röyxat tayyorlanmoqda' }],
+    go: 'Sahifaga o‘tish',
+    stats: [{ v: '—', t: 'Ro‘yxat tayyorlanmoqda' }],
     faces: [],
   },
 ]
@@ -102,7 +102,7 @@ export async function BtHub({ L, crumbs, locale = 'uz' }: { L: (h: string) => st
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Boşlanğiç taşkilotlar</h1>
+          <h1 className="h2 pg-title">Boshlang‘ich tashkilotlar</h1>
         </div>
       </header>
       <section className="sec bt-sec">

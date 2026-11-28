@@ -21,7 +21,7 @@ export const sarlavha = (t: string) => `${t} | ${BREND}`
 /** Menyu sahifasining metamaʼlumoti: sarlavha, tavsif, yagona manzil va ulaşiş kartasi */
 export function sahifaMeta(path: string): Metadata {
   const m = SAHIFA[path]
-  if (!m) throw new Error(`seo-lotin.ts da “${path}” uçun matn yöq`)
+  if (!m) throw new Error(`seo-lotin.ts da “${path}” uchun matn yo‘q`)
   const title = sarlavha(m.t)
   return {
     title: { absolute: title },

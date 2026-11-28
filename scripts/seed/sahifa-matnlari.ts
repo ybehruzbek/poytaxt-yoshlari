@@ -19,7 +19,7 @@ console.log('azolik-sahifa: yangilandi')
 const dirs = await payload.find({ collection: 'vol-directions', limit: 100, depth: 0, pagination: false })
 const idOf = new Map(dirs.docs.map((d) => [(d as { slug?: string }).slug, d.id]))
 const miss = QUIZ.flatMap((q) => q.a.flatMap((a) => a.dirs)).filter((s) => !idOf.has(s))
-if (miss.length) throw new Error(`yönaliş topilmadi: ${[...new Set(miss)].join(', ')}`)
+if (miss.length) throw new Error(`yo‘nalish topilmadi: ${[...new Set(miss)].join(', ')}`)
 
 await payload.updateGlobal({
   slug: 'volontyorlik-sahifa',
@@ -27,9 +27,9 @@ await payload.updateGlobal({
   overrideAccess: true,
   data: {
     stats: [
-      { v: '{TADBIRLAR}', t: 'ta volontyorlik va xayriya tadbiri ötkazildi' },
+      { v: '{TADBIRLAR}', t: 'ta volontyorlik va xayriya tadbiri o‘tkazildi' },
       { v: '1 287', t: 'nafar nomzod “Universe” volontyorlar maktabiga ariza berdi' },
-      { v: '37', t: 'nafar volontyor 4 bosqiçli saralovdan ötib, maktabda tahsil oldi' },
+      { v: '37', t: 'nafar volontyor 4 bosqichli saralovdan o‘tib, maktabda tahsil oldi' },
     ],
     steps: VSTEPS,
     times: t(TIMES),

@@ -21,7 +21,7 @@ const ROWS = [1, 2].map((r) =>
 
 /** Logotipdagi rasmiy nom — rasm uçun alt matn */
 const LOGO_NAME: Record<string, string> = {
-  uz: 'Özbekiston yoşlar ittifoqi',
+  uz: 'O‘zbekiston yoshlar ittifoqi',
   ru: 'Союз молодежи Узбекистана',
   en: 'Uzbekistan Youth Union',
 }
@@ -68,13 +68,13 @@ export function Hero({ L, crumbs, D }: H & { D: IttifoqData }) {
       </div>
       <div className="wrap it-btns ith-btns">
         <Link href={L('/boglanish/azo-bolish')} className="btn btn-primary">
-          Aʼzo böliş{' '}
+          A’zo bo‘lish{' '}
           <span className="ic">
             <Arrow />
           </span>
         </Link>
         <Link href={L('/faoliyat/loyihalar')} className="btn btn-ghost">
-          Loyihalarni köriş
+          Loyihalarni ko‘rish
           <span className="ic">
             <Arrow />
           </span>

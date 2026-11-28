@@ -7,7 +7,7 @@ import { oyNomi } from '@/lib/boshqaruv/vaqt'
 import { davrStat, hozir, sozlangan, TZ, type Davr, type Hozir, type Qator, type Stat } from '@/lib/statistika/cloudflare'
 import { davlatNomi, manbalar, menyuNomi, qurilmaNomi, sahifalar, yangilikSlug } from '@/lib/statistika/nomlar'
 
-export const metadata = { title: { absolute: 'Statistika — Boşqaruv paneli' } }
+export const metadata = { title: { absolute: 'Statistika — Boshqaruv paneli' } }
 
 const DAVRLAR: { v: Davr; t: string }[] = [
   { v: 1, t: 'Bugun' },
@@ -26,14 +26,14 @@ const kunYorliq = (t: number) => `${tk(t).getUTCDate()}-${oyNomi(tk(t).getUTCMon
 const soatYorliq = (t: number) => `${String(tk(t).getUTCHours()).padStart(2, '0')}:00`
 
 function Farq({ a, b }: { a: number; b: number }) {
-  if (a === b) return <>keça şu vaqtgaça ham {fmt(b)}</>
+  if (a === b) return <>kecha shu vaqtgacha ham {fmt(b)}</>
   return (
     <>
       <em className={a < b ? 'down' : undefined}>
         {a > b ? '+' : '−'}
         {fmt(Math.abs(a - b))}
       </em>{' '}
-      keçaning şu vaqtiga nisbatan
+      kechaning shu vaqtiga nisbatan
     </>
   )
 }
@@ -58,7 +58,7 @@ function Grafik({ s }: { s: Stat }) {
               <b style={{ height: `${(p.tashrif / max) * 100}%` }} />
               <span className="st-tip" role="tooltip">
                 <strong>{s.qadam === 'soat' ? `${soatYorliq(p.t)}–${soatYorliq(p.t + 3600e3)}` : kunYorliq(p.t)}</strong>
-                {fmt(p.tashrif)} taşrif · {fmt(p.koris)} köriş
+                {fmt(p.tashrif)} tashrif · {fmt(p.koris)} ko‘rish
               </span>
             </div>
           ))}
@@ -82,10 +82,10 @@ function Royxat({ title, rows, by = 'koris', limit = 8, bosh }: { title: string;
     <section className="card">
       <div className="card__head">
         <h2>{title}</h2>
-        <span className="st-unit">{bosh ?? (by === 'koris' ? 'köriş' : 'taşrif')}</span>
+        <span className="st-unit">{bosh ?? (by === 'koris' ? 'ko‘rish' : 'tashrif')}</span>
       </div>
       {rows.length === 0 || total === 0 ? (
-        <p className="empty">Bu davrda maʼlumot yöq</p>
+        <p className="empty">Bu davrda ma’lumot yo‘q</p>
       ) : (
         <ul className="st-list">
           {rows.slice(0, limit).map((r) => (
@@ -151,9 +151,9 @@ function Ulanmagan() {
         </span>
         <b>Statistika hali ulanmagan</b>
         <p className="st-steps">
-          Saytga taşriflar Cloudflare Web Analytics orqali sanaladi. Ulaş uçun serverdagi ilova sozlamalariga{' '}
-          <code>CF_API_TOKEN</code> (Account Analytics: Read ruxsati bilan) va <code>CF_ACCOUNT_ID</code> qöşiladi, saytga
-          esa Cloudflare hisoblagiçi tokeni kiritiladi.
+          Saytga tashriflar Cloudflare Web Analytics orqali sanaladi. Ulash uchun serverdagi ilova sozlamalariga{' '}
+          <code>CF_API_TOKEN</code> (Account Analytics: Read ruxsati bilan) va <code>CF_ACCOUNT_ID</code> qo‘shiladi, saytga
+          esa Cloudflare hisoblagichi tokeni kiritiladi.
         </p>
       </div>
     </section>
@@ -166,10 +166,10 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
   const davr = (DAVRLAR.find((d) => String(d.v) === sp.davr)?.v ?? 7) as Davr
 
   const top = (
-    <Top title="Statistika" sub="Saytga taşriflar, qurilmalar va manbalar · Cloudflare Web Analytics">
+    <Top title="Statistika" sub="Saytga tashriflar, qurilmalar va manbalar · Cloudflare Web Analytics">
       <a className="btn btn-ghost" href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener noreferrer">
         <Icon name="ext" size={18} />
-        Cloudflareʼda oçiş
+        Cloudflare’da ochish
       </a>
     </Top>
   )
@@ -203,7 +203,7 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
               <span className="stat__ic ic-orange">
                 <Icon name="alert" size={24} />
               </span>
-              <b>Cloudflareʼdan maʼlumot olib bölmadi</b>
+              <b>Cloudflare’dan ma’lumot olib bo‘lmadi</b>
               <p className="st-steps">{xato}</p>
             </div>
           </section>
@@ -225,7 +225,7 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
             </span>
             <div>
               <b>{fmt(h.d5)}</b>
-              <span>Oxirgi 5 daqiqada oçilgan sahifalar</span>
+              <span>Oxirgi 5 daqiqada ochilgan sahifalar</span>
               <small>30 daqiqada: {fmt(h.d30)}</small>
             </div>
           </div>
@@ -235,7 +235,7 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
             </span>
             <div>
               <b>{fmt(h.bugun.tashrif)}</b>
-              <span>Bugungi taşriflar</span>
+              <span>Bugungi tashriflar</span>
               <small>
                 <Farq a={h.bugun.tashrif} b={h.keca.tashrif} />
               </small>
@@ -247,7 +247,7 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
             </span>
             <div>
               <b>{fmt(h.bugun.koris)}</b>
-              <span>Bugun körilgan sahifalar</span>
+              <span>Bugun ko‘rilgan sahifalar</span>
               <small>
                 <Farq a={h.bugun.koris} b={h.keca.koris} />
               </small>
@@ -259,18 +259,18 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
             </span>
             <div>
               <b>{fmt(s.jami.tashrif)}</b>
-              <span>{davr === 1 ? 'Bugungi jami taşriflar' : `Oxirgi ${davr} kundagi taşriflar`}</span>
-              <small>{fmt(s.jami.koris)} sahifa köriş</small>
+              <span>{davr === 1 ? 'Bugungi jami tashriflar' : `Oxirgi ${davr} kundagi tashriflar`}</span>
+              <small>{fmt(s.jami.koris)} sahifa ko‘rish</small>
             </div>
           </div>
         </div>
 
         <section className="card st-main">
           <div className="card__head st-head">
-            <h2>{s.qadam === 'soat' ? 'Bugun soatlar böyiça' : 'Kunlar böyiça'}</h2>
+            <h2>{s.qadam === 'soat' ? 'Bugun soatlar bo‘yicha' : 'Kunlar bo‘yicha'}</h2>
             <div className="st-legend" aria-hidden="true">
-              <span className="k">Sahifa körişlari</span>
-              <span className="t">Taşriflar</span>
+              <span className="k">Sahifa ko‘rishlari</span>
+              <span className="t">Tashriflar</span>
             </div>
             <nav className="seg" aria-label="Davr">
               {DAVRLAR.map((d) => (
@@ -282,27 +282,27 @@ export default async function StatistikaPage(props: { searchParams: Promise<{ da
           </div>
           <Grafik s={s} />
           {s.qisqardi && (
-            <p className="st-note">Cloudflare maʼlumotni çeklangan muddat saqlaydi: grafik {kunYorliq(s.from)}dan boşlanadi.</p>
+            <p className="st-note">Cloudflare ma’lumotni cheklangan muddat saqlaydi: grafik {kunYorliq(s.from)}dan boshlanadi.</p>
           )}
         </section>
 
         <div className="st-grid">
           <Royxat title="Ommabop sahifalar" rows={sahifa} limit={10} />
           <Royxat
-            title="Taşrif manbalari"
+            title="Tashrif manbalari"
             by="tashrif"
             rows={manbalar(s.manba, HOST).map((r) => ({ ...r, nom: r.k }))}
             limit={10}
           />
           <Royxat title="Qurilmalar" rows={s.qurilma.map((r) => ({ ...r, nom: qurilmaNomi(r.k) }))} />
           <Royxat title="Davlatlar" rows={s.davlat.map((r) => ({ ...r, nom: davlatNomi(r.k) }))} />
-          <Royxat title="Brauzerlar" rows={s.brauzer.map((r) => ({ ...r, nom: r.k || 'Nomaʼlum' }))} />
-          <Royxat title="Operatsion tizimlar" rows={s.tizim.map((r) => ({ ...r, nom: r.k || 'Nomaʼlum' }))} />
+          <Royxat title="Brauzerlar" rows={s.brauzer.map((r) => ({ ...r, nom: r.k || 'Noma’lum' }))} />
+          <Royxat title="Operatsion tizimlar" rows={s.tizim.map((r) => ({ ...r, nom: r.k || 'Noma’lum' }))} />
         </div>
 
         <p className="st-note">
-          Maʼlumot Cloudflare Web Analyticsʼdan olinadi va bir neça daqiqa keçikadi. “Taşrif” — saytga taşqaridan
-          kiriş, “köriş” — har bir oçilgan sahifa. Cookie işlatilmaydi, IP manzillar saqlanmaydi.
+          Ma’lumot Cloudflare Web Analytics’dan olinadi va bir necha daqiqa kechikadi. “Tashrif” — saytga tashqaridan
+          kirish, “ko‘rish” — har bir ochilgan sahifa. Cookie ishlatilmaydi, IP manzillar saqlanmaydi.
         </p>
       </div>
     </>

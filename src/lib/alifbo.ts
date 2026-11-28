@@ -1,5 +1,7 @@
 /**
- * YAGONA IMLO QOIDASI — saytdagi barcha o'zbekcha matn yangi alifboda yoziladi.
+ * YAGONA IMLO QOIDASI. 2026-11-28 dan: saytdagi barcha o'zbekcha matn JORIY lotin alifbosida saqlanadi
+ * (toJoriyAlifbo, pastda); yangi alifbo — tashrif buyuruvchi tanlovi, brauzerda toYangiAlifbo bilan hosil qilinadi.
+ * Quyidagi yangi alifbo qoidalari toYangiAlifbo uchun:
  *
  * Qonun: O‘RQ-1184, 2026-yil 21-oktabr ("Lotin yozuviga asoslangan o'zbek alifbosini joriy etish
  * to'g'risida"gi Qonunga o'zgartirish). Alifbo — 28 harf + 1 tutuq belgisi:
@@ -98,15 +100,13 @@ export function eskiImlo(text: string): boolean {
 }
 
 /**
- * Teskari ögiriş: yangi alifbo → joriy (eski) lotin yozuvi. FAQAT qidiruv tizimlariga körinadigan qatlam uçun
- * (sahifa <title>, meta tavsif, JSON-LD, ulaşiş kartasi): odamlar Google'da “yoshlar”, “o'zbekiston” deb qidiradi,
- * “yoşlar” deb emas. Sayt sahifasidagi matn yangi alifboda qoladi (foydalanuvçi qarori, 2026-11-24).
+ * Teskari o'girish: yangi alifbo → joriy lotin yozuvi (harflar; apostroflarni toJoriyAlifbo to'g'rilaydi).
  *   Ö ö → O‘ o‘   Ğ ğ → G‘ g‘   Ş ş → Sh sh   Ç ç → Ch ch   ʼ → ’
  */
 export function eskiLotin(text: string): string {
   return text
-    .replace(/Ş(?=[A-ZÖĞŞÇ])/g, 'SH')
-    .replace(/Ç(?=[A-ZÖĞŞÇ])/g, 'CH')
+    .replace(/Ş(?=\p{Lu})|(?<=\p{Lu})Ş/gu, 'SH')
+    .replace(/Ç(?=\p{Lu})|(?<=\p{Lu})Ç/gu, 'CH')
     .replace(/Ş/g, 'Sh')
     .replace(/ş/g, 'sh')
     .replace(/Ç/g, 'Ch')
@@ -116,4 +116,45 @@ export function eskiLotin(text: string): string {
     .replace(/Ğ/g, 'G‘')
     .replace(/ğ/g, 'g‘')
     .replace(/ʼ/g, '’')
+}
+
+
+/**
+ * Saytning asosiy yozuvi — JORIY lotin alifbosi (foydalanuvchi qarori, 2026-11-28). Kod va bazadagi barcha
+ * o'zbekcha matn shu yozuvda saqlanadi; yangi alifbo — tashrif buyuruvchi tanlasa brauzerda
+ * toYangiAlifbo() orqali hosil qilinadi (components/site/Alifbo.tsx).
+ *   o‘ g‘ — U+2018 (‘) bilan;  tutuq — ’ (U+2019): ta’lim, e’lon, san’at.
+ *   Yangi alifbo harflari (Ö Ğ Ş Ç, ʼ) joriy shaklga qaytariladi; ' ʻ ` ´ belgilari to'g'rilanadi.
+ */
+const JORIY_RULES: Array<[RegExp, string]> = [
+  [new RegExp('([OoGg])' + APOS, 'g'), '$1‘'],
+  // harf orasidagi qolgan apostroflar — tutuq (’)
+  [new RegExp(`(?<=\\p{L})(?<![OoGg])${APOS}(?=\\p{L})`, 'gu'), '’'],
+  [/„([^“”„]*)“/g, '\u201C$1\u201D'],
+  [/[«„]/g, '\u201C'],
+  [/»/g, '\u201D'],
+  [/\bOTM(?!S\b)/g, 'OTT'],
+  [/(?<![\p{L}\d])((?:18|19|20)\d{2}) (yil|y\.)/gu, '$1-$2'],
+  [
+    /(?<![\p{L}\d.,])(\d{1,2}) (yanvar|fevral|mart|aprel|may|iyun|iyul|avgust|sentabr|oktabr|noyabr|dekabr)(?=(?:da|dagi|ga|gacha|dan|ning|ida|idagi|idan|i)?(?!\p{L}))/gu,
+    '$1-$2',
+  ],
+]
+
+const joriy = (t: string) => JORIY_RULES.reduce((s, [re, to]) => s.replace(re, to), eskiLotin(t))
+
+/** Har qanday o'zbekcha lotin matnni (yangi alifboda yoki noto'g'ri apostrof bilan) joriy alifboga keltiradi. Qayta qo'llash xavfsiz. */
+export function toJoriyAlifbo(text: string): string {
+  let out = ''
+  let last = 0
+  for (const m of text.matchAll(HIMOYA)) {
+    out += joriy(text.slice(last, m.index)) + m[0]
+    last = m.index! + m[0].length
+  }
+  return out + joriy(text.slice(last))
+}
+
+/** Matnda yangi alifbo harfi yoki noto'g'ri apostrof qolganmi (joriy alifbo qoidasi bo'yicha) */
+export function joriyEmas(text: string): boolean {
+  return toJoriyAlifbo(text) !== text
 }

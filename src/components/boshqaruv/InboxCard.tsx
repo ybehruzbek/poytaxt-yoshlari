@@ -34,7 +34,7 @@ export function InboxCard({ tabs }: { tabs: InboxTab[] }) {
       <div className="card__head">
         <h2>Javob kutayotganlar</h2>
         <Link className="more" href={tab.href} prefetch={false}>
-          Barçasi
+          Barchasi
           <Icon name="chev" size={16} />
         </Link>
       </div>
@@ -47,7 +47,7 @@ export function InboxCard({ tabs }: { tabs: InboxTab[] }) {
         ))}
       </div>
       {tab.items.length === 0 ? (
-        <p className="empty">Javob kutayotgan xabar yöq</p>
+        <p className="empty">Javob kutayotgan xabar yo‘q</p>
       ) : (
         <ul className="list">
           {tab.items.map((it) => (

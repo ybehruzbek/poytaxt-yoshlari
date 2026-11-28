@@ -41,20 +41,20 @@ export type Leader = {
 export type Otm = { otm: string; type: OtmType; leader?: Leader }
 
 export const TYPE_LABEL: Record<OtmType, string> = {
-  davlat: 'Davlat oliy taʼlim taşkiloti',
-  xorijiy: 'Xorijiy oliy taʼlim taşkilotining filiali',
-  nodavlat: 'Nodavlat oliy taʼlim taşkiloti',
+  davlat: 'Davlat oliy ta’lim tashkiloti',
+  xorijiy: 'Xorijiy oliy ta’lim tashkilotining filiali',
+  nodavlat: 'Nodavlat oliy ta’lim tashkiloti',
 }
 
 /** Rasmiy röyxat tartibida: davlat, xorijiy, nodavlat */
 export const OTMS: Otm[] = [
   {
-    otm: 'Botir Zokirov nomidagi Milliy estrada sanʼati instituti',
+    otm: 'Botir Zokirov nomidagi Milliy estrada san’ati instituti',
     type: 'davlat',
     leader: {
       slug: 'xoltoyeva-shaxlo',
 
-      name: 'Xoltoyeva Şaxlo Şuxrat qizi',
+      name: 'Xoltoyeva Shaxlo Shuxrat qizi',
 
       img: '/img/yetakchilar/10.jpg',
 
@@ -79,13 +79,13 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'toxtayev-ulugbek',
 
-      name: 'Töxtayev Uluğbek Husniddin öğli',
+      name: 'To‘xtayev Ulug‘bek Husniddin o‘g‘li',
 
       img: '/img/yetakchilar/11.jpg',
 
-      role: 'Talabalar turar joyi tarbiyaçi-uslubçisi (Özbekiston Milliy universiteti 2-kurs magistranti)',
+      role: 'Talabalar turar joyi tarbiyachi-uslubchisi (O‘zbekiston Milliy universiteti 2-kurs magistranti)',
 
-      spec: 'Geologiya (faoliyat sohasi böyiça)',
+      spec: 'Geologiya (faoliyat sohasi bo‘yicha)',
       phone: '',
       email: '',
       telegram: '',
@@ -104,7 +104,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'nodirov-bexzod',
 
-      name: 'Nodirov Bexzod Baxodiroviç',
+      name: 'Nodirov Bexzod Baxodirovich',
 
       img: '/img/yetakchilar/27.jpg',
 
@@ -129,13 +129,13 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'risqiboyev-shahzodbek',
 
-      name: 'Risqiboyev Şahzodbek Olimbek öğli',
+      name: 'Risqiboyev Shahzodbek Olimbek o‘g‘li',
 
       img: '/img/yetakchilar/24.jpg',
 
-      role: 'Iqtidorli talabalarning ilmiy-tadqiqot faoliyatini taşkil etiş bölimi boşliği',
+      role: 'Iqtidorli talabalarning ilmiy-tadqiqot faoliyatini tashkil etish bo‘limi boshlig‘i',
 
-      spec: 'Tarixçi',
+      spec: 'Tarixchi',
       phone: '',
       email: '',
       telegram: '',
@@ -149,12 +149,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston davlat jahon tillari universiteti',
+    otm: 'O‘zbekiston davlat jahon tillari universiteti',
     type: 'davlat',
     leader: {
       slug: 'islomova-sevinch',
 
-      name: 'Islomova Sevinç Botirjon qizi',
+      name: 'Islomova Sevinch Botirjon qizi',
 
       img: '/img/yetakchilar/22.jpg',
 
@@ -174,7 +174,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston davlat konservatoriyasi',
+    otm: 'O‘zbekiston davlat konservatoriyasi',
     type: 'davlat',
     leader: {
       slug: 'turajanova-nilufar',
@@ -199,12 +199,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston davlat sanʼat va madaniyat instituti',
+    otm: 'O‘zbekiston davlat san’at va madaniyat instituti',
     type: 'davlat',
     leader: {
       slug: 'tursunpolatov-izzatullo',
 
-      name: 'Tursunpölatov Izzatullo Ibrohimjon öğli',
+      name: 'Tursunpo‘latov Izzatullo Ibrohimjon o‘g‘li',
 
       img: '/img/yetakchilar/13.jpg',
 
@@ -224,18 +224,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston davlat xoreografiya akademiyasi',
+    otm: 'O‘zbekiston davlat xoreografiya akademiyasi',
     type: 'davlat',
     leader: {
       slug: 'mirsoliyev-jamshidbek',
 
-      name: 'Mirsoliyev Jamşidbek Sohibjon öğli',
+      name: 'Mirsoliyev Jamshidbek Sohibjon o‘g‘li',
 
       img: '/img/yetakchilar/12.jpg',
 
       role: '1-kurs magistranti',
 
-      spec: 'Sanʼatşunoslik',
+      spec: 'San’atshunoslik',
       phone: '',
       email: '',
       telegram: '',
@@ -249,7 +249,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston jurnalistika va ommaviy kommunikatsiyalar universiteti',
+    otm: 'O‘zbekiston jurnalistika va ommaviy kommunikatsiyalar universiteti',
     type: 'davlat',
     leader: {
       slug: 'anvarova-muqaddasxon',
@@ -274,18 +274,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Nizomiy nomidagi Özbekiston milliy pedagogika universiteti',
+    otm: 'Nizomiy nomidagi O‘zbekiston milliy pedagogika universiteti',
     type: 'davlat',
     leader: {
       slug: 'abdulatipov-azamat',
 
-      name: 'Abdulatipov Azamat Abdulaziz öğli',
+      name: 'Abdulatipov Azamat Abdulaziz o‘g‘li',
 
       img: '/img/yetakchilar/28.jpg',
 
       role: '2-kurs talabasi',
 
-      spec: 'Milliy ğoya, maʼnaviyat asoslari va huquq taʼlimi',
+      spec: 'Milliy g‘oya, ma’naviyat asoslari va huquq ta’limi',
       phone: '',
       email: '',
       telegram: '',
@@ -299,18 +299,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Mirzo Uluğbek nomidagi Özbekiston Milliy universiteti',
+    otm: 'Mirzo Ulug‘bek nomidagi O‘zbekiston Milliy universiteti',
     type: 'davlat',
     leader: {
       slug: 'safarov-daler',
 
-      name: 'Safarov Daler Şuhrat öğli',
+      name: 'Safarov Daler Shuhrat o‘g‘li',
 
       img: '/img/yetakchilar/01.jpg',
 
       role: '2-kurs magistranti',
 
-      spec: 'Geologiya (faoliyat sohasi böyiça)',
+      spec: 'Geologiya (faoliyat sohasi bo‘yicha)',
       phone: '',
       email: '',
       telegram: '',
@@ -324,12 +324,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston xalqaro islomşunoslik akademiyasi',
+    otm: 'O‘zbekiston xalqaro islomshunoslik akademiyasi',
     type: 'davlat',
     leader: {
       slug: 'xakimov-abdufattoh',
 
-      name: 'Xakimov Abdufattoh Abdujalil öğli',
+      name: 'Xakimov Abdufattoh Abdujalil o‘g‘li',
 
       img: '/img/yetakchilar/25.jpg',
 
@@ -349,18 +349,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Samarqand davlat veterinariya meditsinasi, çorvaçilik va biotexnologiyalar universiteti Toşkent filiali',
+    otm: 'Samarqand davlat veterinariya meditsinasi, chorvachilik va biotexnologiyalar universiteti Toshkent filiali',
     type: 'davlat',
     leader: {
       slug: 'anarbayeva-gulsara',
 
-      name: 'Anarbayeva Gulsara Dilşod qizi',
+      name: 'Anarbayeva Gulsara Dilshod qizi',
 
       img: '/img/yetakchilar/18.jpg',
 
       role: '1-kurs magistranti',
 
-      spec: 'Qişloq xöjaligi hayvonlarining seleksiyasi va naslçilik',
+      spec: 'Qishloq xo‘jaligi hayvonlarining seleksiyasi va naslchilik',
       phone: '',
       email: '',
       telegram: '',
@@ -374,18 +374,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent arxitektura-quriliş universiteti',
+    otm: 'Toshkent arxitektura-qurilish universiteti',
     type: 'davlat',
     leader: {
       slug: 'mirzaxmedov-shoxruh',
 
-      name: 'Mirzaxmedov Şoxruh Anvaroviç',
+      name: 'Mirzaxmedov Shoxruh Anvarovich',
 
       img: '/img/yetakchilar/03.jpg',
 
-      role: 'Yoşlar masalalari va maʼnaviy-maʼrifiy işlar boşqarmasi yetakçi mutaxassisi',
+      role: 'Yoshlar masalalari va ma’naviy-ma’rifiy ishlar boshqarmasi yetakchi mutaxassisi',
 
-      spec: 'Uy-joy kommunal xöjaligini taşkil etiş va boşqariş',
+      spec: 'Uy-joy kommunal xo‘jaligini tashkil etish va boshqarish',
       phone: '',
       email: '',
       telegram: '',
@@ -399,16 +399,16 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Muhammad al-Xorazmiy nomidagi Toşkent axborot texnologiyalari universiteti',
+    otm: 'Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti',
     type: 'davlat',
     leader: {
       slug: 'qochqarov-urolboy',
 
-      name: 'Qöçqarov Urolboy Xolmurod öğli',
+      name: 'Qo‘chqarov Urolboy Xolmurod o‘g‘li',
 
       img: '/img/yetakchilar/14.jpg',
 
-      role: 'Maʼnaviyat va maʼrifat bölimi xodimi',
+      role: 'Ma’naviyat va ma’rifat bo‘limi xodimi',
 
       spec: 'Mobil aloqa tizimlari',
       phone: '',
@@ -424,18 +424,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent davlat iqtisodiyot universiteti',
+    otm: 'Toshkent davlat iqtisodiyot universiteti',
     type: 'davlat',
     leader: {
       slug: 'abduraxmanov-abdulaziz',
 
-      name: 'Abduraxmanov Abdulaziz Xujamurot öğli',
+      name: 'Abduraxmanov Abdulaziz Xujamurot o‘g‘li',
 
       img: '/img/yetakchilar/06.jpg',
 
       role: '2-kurs magistranti',
 
-      spec: 'Iqtisodiyot (tarmoqlar va sohalar böyiça)',
+      spec: 'Iqtisodiyot (tarmoqlar va sohalar bo‘yicha)',
       phone: '',
       email: '',
       telegram: '',
@@ -449,18 +449,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent davlat özbek tili va adabiyoti universiteti',
+    otm: 'Toshkent davlat o‘zbek tili va adabiyoti universiteti',
     type: 'davlat',
     leader: {
       slug: 'eshbayeva-sevinchbonu',
 
-      name: 'Eşbayeva Sevinçbonu Olim qizi',
+      name: 'Eshbayeva Sevinchbonu Olim qizi',
 
       img: '/img/yetakchilar/07.jpg',
 
       role: '4-kurs talabasi',
 
-      spec: 'Matnşunoslik va adabiy manbaşunoslik',
+      spec: 'Matnshunoslik va adabiy manbashunoslik',
       phone: '',
       email: '',
       telegram: '',
@@ -474,12 +474,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent davlat şarqşunoslik universiteti',
+    otm: 'Toshkent davlat sharqshunoslik universiteti',
     type: 'davlat',
     leader: {
       slug: 'sobitov-mirshod',
 
-      name: 'Sobitov Mirşod Isoqjon öğli',
+      name: 'Sobitov Mirshod Isoqjon o‘g‘li',
 
       img: '/img/yetakchilar/05.jpg',
 
@@ -499,12 +499,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Islom Karimov nomidagi Toşkent davlat texnika universiteti',
+    otm: 'Islom Karimov nomidagi Toshkent davlat texnika universiteti',
     type: 'davlat',
     leader: {
       slug: 'zokirjonov-muhammadzoir',
 
-      name: 'Zokirjonov Muhammadzoir Zoxidjon öğli',
+      name: 'Zokirjonov Muhammadzoir Zoxidjon o‘g‘li',
 
       img: '/img/yetakchilar/20.jpg',
 
@@ -524,12 +524,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent davlat tibbiyot universiteti',
+    otm: 'Toshkent davlat tibbiyot universiteti',
     type: 'davlat',
     leader: {
       slug: 'boboyev-jahongir',
 
-      name: 'Boboyev Jahongir Mirsodiq öğli',
+      name: 'Boboyev Jahongir Mirsodiq o‘g‘li',
 
       img: '/img/yetakchilar/15.jpg',
 
@@ -549,18 +549,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent davlat transport universiteti',
+    otm: 'Toshkent davlat transport universiteti',
     type: 'davlat',
     leader: {
       slug: 'eshmatov-alisher',
 
-      name: 'Eşmatov Alişer Şavkat öğli',
+      name: 'Eshmatov Alisher Shavkat o‘g‘li',
 
       img: '/img/yetakchilar/17.jpg',
 
       role: '1-kurs magistranti',
 
-      spec: 'Uçiş apparatlari dvigatellari va energetik qurilmalari',
+      spec: 'Uchish apparatlari dvigatellari va energetik qurilmalari',
       phone: '',
       email: '',
       telegram: '',
@@ -574,12 +574,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent davlat yuridik universiteti',
+    otm: 'Toshkent davlat yuridik universiteti',
     type: 'davlat',
     leader: {
       slug: 'sobirov-umarjon',
 
-      name: 'Sobirov Umarjon Umid öğli',
+      name: 'Sobirov Umarjon Umid o‘g‘li',
 
       img: '/img/yetakchilar/23.jpg',
 
@@ -599,12 +599,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent farmatsevtika instituti',
+    otm: 'Toshkent farmatsevtika instituti',
     type: 'davlat',
     leader: {
       slug: 'xusanxonov-azizxon',
 
-      name: 'Xusanxonov Azizxon Azimxon öğli',
+      name: 'Xusanxonov Azizxon Azimxon o‘g‘li',
 
       img: '/img/yetakchilar/19.jpg',
 
@@ -624,12 +624,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: '“Toşkent irrigatsiya va qişloq xöjaligini mexanizatsiyalaş muhandislari instituti” milliy tadqiqot universiteti',
+    otm: '“Toshkent irrigatsiya va qishloq xo‘jaligini mexanizatsiyalash muhandislari instituti” milliy tadqiqot universiteti',
     type: 'davlat',
     leader: {
       slug: 'tursunkulov-elbek',
 
-      name: 'Tursunkulov Elbek Oybek öğli',
+      name: 'Tursunkulov Elbek Oybek o‘g‘li',
 
       img: '/img/yetakchilar/02.jpg',
 
@@ -649,16 +649,16 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent kimyo-texnologiya instituti',
+    otm: 'Toshkent kimyo-texnologiya instituti',
     type: 'davlat',
     leader: {
       slug: 'boriyev-murodjon',
 
-      name: 'Böriyev Murodjon Ibragim öğli',
+      name: 'Bo‘riyev Murodjon Ibragim o‘g‘li',
 
       img: '/img/yetakchilar/08.jpg',
 
-      role: 'Yoşlar bilan işlaş, maʼnaviyat va maʼrifat bölimi uslubçisi',
+      role: 'Yoshlar bilan ishlash, ma’naviyat va ma’rifat bo‘limi uslubchisi',
 
       spec: 'Texnolog',
       phone: '',
@@ -674,12 +674,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent töqimaçilik va yengil sanoat instituti',
+    otm: 'Toshkent to‘qimachilik va yengil sanoat instituti',
     type: 'davlat',
     leader: {
       slug: 'xojamurodov-surxonbek',
 
-      name: 'Xöjamurodov Surxonbek Xusan öğli',
+      name: 'Xo‘jamurodov Surxonbek Xusan o‘g‘li',
 
       img: '/img/yetakchilar/16.jpg',
 
@@ -699,18 +699,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: '“Yangi Özbekiston” universiteti',
+    otm: '“Yangi O‘zbekiston” universiteti',
     type: 'davlat',
     leader: {
       slug: 'muminov-islomjon',
 
-      name: 'Muminov Islomjon Nozimjonoviç',
+      name: 'Muminov Islomjon Nozimjonovich',
 
       img: '/img/yetakchilar/30.jpg',
 
       role: '3-kurs talabasi',
 
-      spec: 'Iqtisodiyot va maʼlumotlar tahlili',
+      spec: 'Iqtisodiyot va ma’lumotlar tahlili',
       phone: '',
       email: '',
       telegram: '',
@@ -724,18 +724,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Yunus Rajabiy nomidagi özbek milliy musiqa sanʼati instituti',
+    otm: 'Yunus Rajabiy nomidagi o‘zbek milliy musiqa san’ati instituti',
     type: 'davlat',
     leader: {
       slug: 'shaymardonov-shahboz',
 
-      name: 'Şaymardonov Şahboz Iskandar öğli',
+      name: 'Shaymardonov Shahboz Iskandar o‘g‘li',
 
       img: '/img/yetakchilar/04.jpg',
 
-      role: 'Talabalar amaliyoti bölimi boş mutaxassisi',
+      role: 'Talabalar amaliyoti bo‘limi bosh mutaxassisi',
 
-      spec: 'Aktyorlik sanʼati (qöğirçoq teatri aktyorligi)',
+      spec: 'Aktyorlik san’ati (qo‘g‘irchoq teatri aktyorligi)',
       phone: '',
       email: '',
       telegram: '',
@@ -749,18 +749,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Özbekiston davlat sport akademiyasi',
+    otm: 'O‘zbekiston davlat sport akademiyasi',
     type: 'davlat',
     leader: {
       slug: 'sufyanov-daler',
 
-      name: 'Sufyanov Daler Ravşanoviç',
+      name: 'Sufyanov Daler Ravshanovich',
 
       img: '/img/yetakchilar/29.jpg',
 
       role: '3-kurs talabasi',
 
-      spec: 'Sport faoliyati (suziş)',
+      spec: 'Sport faoliyati (suzish)',
       phone: '',
       email: '',
       telegram: '',
@@ -774,18 +774,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Markaziy Osiyo atrof-muhit va iqlim özgarişini örganiş universiteti (Green University)',
+    otm: 'Markaziy Osiyo atrof-muhit va iqlim o‘zgarishini o‘rganish universiteti (Green University)',
     type: 'davlat',
     leader: {
       slug: 'sultonaliyev-xusanboy',
 
-      name: 'Sultonaliyev Xusanboy Sultonali öğli',
+      name: 'Sultonaliyev Xusanboy Sultonali o‘g‘li',
 
       img: '/img/yetakchilar/26.jpg',
 
       role: '3-kurs talabasi',
 
-      spec: 'Ekologiya va davlat boşqaruvi',
+      spec: 'Ekologiya va davlat boshqaruvi',
       phone: '',
       email: '',
       telegram: '',
@@ -798,21 +798,21 @@ export const OTMS: Otm[] = [
       achievements: [],
     },
   },
-  { otm: 'Özbekiston Respublikasi Huquqni muhofaza qiliş akademiyasi', type: 'davlat' },
-  { otm: 'Taşkent Tech universiteti', type: 'davlat' },
+  { otm: 'O‘zbekiston Respublikasi Huquqni muhofaza qilish akademiyasi', type: 'davlat' },
+  { otm: 'Tashkent Tech universiteti', type: 'davlat' },
   {
     otm: 'Soliq oliy maktabi',
     type: 'davlat',
     leader: {
       slug: 'olimbayev-muhammadaziz',
 
-      name: 'Olimbayev Muhammadaziz Ğulomjon öğli',
+      name: 'Olimbayev Muhammadaziz G‘ulomjon o‘g‘li',
 
       img: '/img/yetakchilar/31.jpg',
 
       role: '1-kurs talabasi',
 
-      spec: 'Soliqlar va soliqqa tortiş',
+      spec: 'Soliqlar va soliqqa tortish',
       phone: '',
       email: '',
       telegram: '',
@@ -827,18 +827,18 @@ export const OTMS: Otm[] = [
   },
   { otm: 'Xalqaro moda akademiyasi', type: 'davlat' },
   {
-    otm: 'D.I.Mendeleev nomidagi Rossiya kimyo-texnologiya universitetining Toşkent filiali',
+    otm: 'D.I.Mendeleev nomidagi Rossiya kimyo-texnologiya universitetining Toshkent filiali',
     type: 'xorijiy',
     leader: {
       slug: 'mamasoatov-asliddin',
 
-      name: 'Mamasoatov Asliddin Xasanoviç',
+      name: 'Mamasoatov Asliddin Xasanovich',
 
       img: '/img/yetakchilar/32.jpg',
 
-      role: 'Monitoring va içki nazorat sektori boş mutaxassisi',
+      role: 'Monitoring va ichki nazorat sektori bosh mutaxassisi',
 
-      spec: 'Taʼlim muassasalarini boşqariş',
+      spec: 'Ta’lim muassasalarini boshqarish',
       phone: '',
       email: '',
       telegram: '',
@@ -852,7 +852,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'G.V.Plexanov nomli Rossiya iqtisodiyot universitetining Toşkent filiali',
+    otm: 'G.V.Plexanov nomli Rossiya iqtisodiyot universitetining Toshkent filiali',
     type: 'xorijiy',
     leader: {
       slug: 'gordiyenko-anastasiya',
@@ -877,7 +877,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'I.M.Gubkin nomidagi Rossiya davlat neft va gaz universitetining Toşkent filiali',
+    otm: 'I.M.Gubkin nomidagi Rossiya davlat neft va gaz universitetining Toshkent filiali',
     type: 'xorijiy',
     leader: {
       slug: 'nuraliyeva-malika',
@@ -902,7 +902,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'MEI milliy tadqiqot universitetining Toşkent filiali',
+    otm: 'MEI milliy tadqiqot universitetining Toshkent filiali',
     type: 'xorijiy',
     leader: {
       slug: 'irisaliyeva-kamola',
@@ -927,12 +927,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'MMFI milliy tadqiqot yadro universitetining Toşkent filiali',
+    otm: 'MMFI milliy tadqiqot yadro universitetining Toshkent filiali',
     type: 'xorijiy',
     leader: {
       slug: 'raximov-doston',
 
-      name: 'Raximov Doston Doniyor öğli',
+      name: 'Raximov Doston Doniyor o‘g‘li',
 
       img: '/img/yetakchilar/36.jpg',
 
@@ -952,12 +952,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'M.V.Lomonosov nomidagi Moskva davlat universitetining Toşkent filiali',
+    otm: 'M.V.Lomonosov nomidagi Moskva davlat universitetining Toshkent filiali',
     type: 'xorijiy',
     leader: {
       slug: 'tilyayev-timofey',
 
-      name: 'Tilyayev Timofey Timuroviç',
+      name: 'Tilyayev Timofey Timurovich',
 
       img: '/img/yetakchilar/37.jpg',
 
@@ -977,22 +977,22 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'N.I.Pirogov nomidagi Rossiya milliy tadqiqot tibbiyot universitetining Toşkent filiali',
+    otm: 'N.I.Pirogov nomidagi Rossiya milliy tadqiqot tibbiyot universitetining Toshkent filiali',
     type: 'xorijiy',
   },
-  { otm: 'Toşkent şahridagi Italiyaning Piza universiteti filiali', type: 'xorijiy' },
+  { otm: 'Toshkent shahridagi Italiyaning Piza universiteti filiali', type: 'xorijiy' },
   {
-    otm: 'Rossiya Federatsiyasi Taşqi işlar vazirligining Moskva davlat xalqaro munosabatlar instituti (MGIMO) Toşkent filiali',
+    otm: 'Rossiya Federatsiyasi Tashqi ishlar vazirligining Moskva davlat xalqaro munosabatlar instituti (MGIMO) Toshkent filiali',
     type: 'xorijiy',
   },
-  { otm: 'Sankt-Peterburg davlat universitetining Toşkent filiali', type: 'xorijiy' },
+  { otm: 'Sankt-Peterburg davlat universitetining Toshkent filiali', type: 'xorijiy' },
   {
-    otm: 'Toşkent şahridagi Adju universiteti',
+    otm: 'Toshkent shahridagi Adju universiteti',
     type: 'xorijiy',
     leader: {
       slug: 'abduvoxidov-abduazim',
 
-      name: 'Abduvoxidov Abduazim Abdubori öğli',
+      name: 'Abduvoxidov Abduazim Abdubori o‘g‘li',
 
       img: '/img/yetakchilar/38.jpg',
 
@@ -1012,18 +1012,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi A.I.Gersen nomidagi Rossiya davlat pedagogika universiteti filiali',
+    otm: 'Toshkent shahridagi A.I.Gersen nomidagi Rossiya davlat pedagogika universiteti filiali',
     type: 'xorijiy',
     leader: {
       slug: 'dalibayeva-shaxzoda',
 
-      name: 'Dalibayeva Şaxzoda Oralboy qizi',
+      name: 'Dalibayeva Shaxzoda Oralboy qizi',
 
       img: '/img/yetakchilar/43.jpg',
 
-      role: 'Yoşlar bilan işlaş, maʼnaviyat va maʼrifat bölimi uslubçisi',
+      role: 'Yoshlar bilan ishlash, ma’naviyat va ma’rifat bo‘limi uslubchisi',
 
-      spec: 'Filologiya va tillarni öqitiş (rus tili)',
+      spec: 'Filologiya va tillarni o‘qitish (rus tili)',
       phone: '',
       email: '',
       telegram: '',
@@ -1037,12 +1037,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Amiti universiteti',
+    otm: 'Toshkent shahridagi Amiti universiteti',
     type: 'xorijiy',
     leader: {
       slug: 'abdisalomova-rano',
 
-      name: 'Abdisalomova Raʼno Komil qizi',
+      name: 'Abdisalomova Ra’no Komil qizi',
 
       img: '/img/yetakchilar/45.jpg',
 
@@ -1062,12 +1062,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Inha universiteti',
+    otm: 'Toshkent shahridagi Inha universiteti',
     type: 'xorijiy',
     leader: {
       slug: 'najmiddinov-xondamir',
 
-      name: 'Najmiddinov Xondamir Kamoliddinoviç',
+      name: 'Najmiddinov Xondamir Kamoliddinovich',
 
       img: '/img/yetakchilar/39.jpg',
 
@@ -1087,12 +1087,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Puçon universiteti',
+    otm: 'Toshkent shahridagi Puchon universiteti',
     type: 'xorijiy',
     leader: {
       slug: 'kustikov-ruslan',
 
-      name: 'Kustikov Ruslan Zabixillayeviç',
+      name: 'Kustikov Ruslan Zabixillayevich',
 
       img: '/img/yetakchilar/44.jpg',
 
@@ -1112,12 +1112,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi S.A.Gerasimov nomidagi Butunrossiya davlat kinematografiya instituti filiali',
+    otm: 'Toshkent shahridagi S.A.Gerasimov nomidagi Butunrossiya davlat kinematografiya instituti filiali',
     type: 'xorijiy',
     leader: {
       slug: 'mogoch-tamila',
 
-      name: 'Mogoç Tamila Sergeyevna',
+      name: 'Mogoch Tamila Sergeyevna',
 
       img: '/img/yetakchilar/46.jpg',
 
@@ -1137,18 +1137,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Singapur Menejmentni rivojlantiriş instituti',
+    otm: 'Toshkent shahridagi Singapur Menejmentni rivojlantirish instituti',
     type: 'xorijiy',
     leader: {
       slug: 'abdurasulov-javoxirxon',
 
-      name: 'Abdurasulov Javoxirxon Buzruk öğli',
+      name: 'Abdurasulov Javoxirxon Buzruk o‘g‘li',
 
       img: '/img/yetakchilar/41.jpg',
 
       role: '4-kurs talabasi',
 
-      spec: 'Bank işi va moliya',
+      spec: 'Bank ishi va moliya',
       phone: '',
       email: '',
       telegram: '',
@@ -1162,12 +1162,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Turin politexnika universiteti',
+    otm: 'Toshkent shahridagi Turin politexnika universiteti',
     type: 'xorijiy',
     leader: {
       slug: 'toxirjonov-baxrom',
 
-      name: 'Toxirjonov Baxrom Baxtiyorjonoviç',
+      name: 'Toxirjonov Baxrom Baxtiyorjonovich',
 
       img: '/img/yetakchilar/47.jpg',
 
@@ -1187,12 +1187,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Turkiyaning Iqtisodiyot va texnologiyalar universiteti filiali',
+    otm: 'Toshkent shahridagi Turkiyaning Iqtisodiyot va texnologiyalar universiteti filiali',
     type: 'xorijiy',
     leader: {
       slug: 'qaxramonov-ogabek',
 
-      name: 'Qaxramonov Oğabek Sanjar öğli',
+      name: 'Qaxramonov Og‘abek Sanjar o‘g‘li',
 
       img: '/img/yetakchilar/42.jpg',
 
@@ -1212,16 +1212,16 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent Xalqaro Vestminster universiteti',
+    otm: 'Toshkent Xalqaro Vestminster universiteti',
     type: 'xorijiy',
     leader: {
       slug: 'imomqulov-jabborbek',
 
-      name: 'Imomqulov Jabborbek Jalol öğli',
+      name: 'Imomqulov Jabborbek Jalol o‘g‘li',
 
       img: '/img/yetakchilar/40.jpg',
 
-      role: 'Yoşlar masalalari böyiça bölim boş mutaxassisi',
+      role: 'Yoshlar masalalari bo‘yicha bo‘lim bosh mutaxassisi',
 
       spec: 'Moliya',
       phone: '',
@@ -1237,12 +1237,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent şahridagi Vebster universitetining taʼlim dasturlarini amalga oşiriş Markazi',
+    otm: 'Toshkent shahridagi Vebster universitetining ta’lim dasturlarini amalga oshirish Markazi',
     type: 'xorijiy',
     leader: {
       slug: 'irisboyev-islombek',
 
-      name: 'Irisboyev Islombek Otabek öğli',
+      name: 'Irisboyev Islombek Otabek o‘g‘li',
 
       img: '/img/yetakchilar/48.jpg',
 
@@ -1261,13 +1261,13 @@ export const OTMS: Otm[] = [
       achievements: [],
     },
   },
-  { otm: 'Özbek-Fransuz universiteti', type: 'xorijiy' },
+  { otm: 'O‘zbek-Fransuz universiteti', type: 'xorijiy' },
   {
-    otm: 'N.E.Bauman nomidagi Moskva davlat texnika universitetining Toşkent şahridagi filiali',
+    otm: 'N.E.Bauman nomidagi Moskva davlat texnika universitetining Toshkent shahridagi filiali',
     type: 'xorijiy',
   },
   {
-    otm: 'Toşkent kimyo xalqaro universiteti',
+    otm: 'Toshkent kimyo xalqaro universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'raxmatova-aylin',
@@ -1297,7 +1297,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'qayumjonov-faridun',
 
-      name: 'Qayumjonov Faridun Oxunjonoviç',
+      name: 'Qayumjonov Faridun Oxunjonovich',
 
       img: '/img/yetakchilar/64.jpg',
 
@@ -1322,7 +1322,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'muhammadov-mustafo',
 
-      name: 'Muhammadov Mustafo Maʼrufoviç',
+      name: 'Muhammadov Mustafo Ma’rufovich',
 
       img: '/img/yetakchilar/83.jpg',
 
@@ -1342,12 +1342,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Taşkent International University',
+    otm: 'Tashkent International University',
     type: 'nodavlat',
     leader: {
       slug: 'kurbanaliyev-sardor',
 
-      name: 'Kurbanaliyev Sardor Alidjonoviç',
+      name: 'Kurbanaliyev Sardor Alidjonovich',
 
       img: '/img/yetakchilar/84.jpg',
 
@@ -1367,7 +1367,7 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Britiş Management University',
+    otm: 'British Management University',
     type: 'nodavlat',
     leader: {
       slug: 'ziyadullayeva-diyora',
@@ -1393,12 +1393,12 @@ export const OTMS: Otm[] = [
   },
   { otm: 'TEAM University', type: 'nodavlat' },
   {
-    otm: 'Taşkent International University of Education',
+    otm: 'Tashkent International University of Education',
     type: 'nodavlat',
     leader: {
       slug: 'halimov-humoyun',
 
-      name: 'Halimov Humoyun Şavkatjon öğli',
+      name: 'Halimov Humoyun Shavkatjon o‘g‘li',
 
       img: '/img/yetakchilar/65.jpg',
 
@@ -1423,7 +1423,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'ikromov-husan',
 
-      name: 'Ikromov Husan Ali öğli',
+      name: 'Ikromov Husan Ali o‘g‘li',
 
       img: '/img/yetakchilar/76.jpg',
 
@@ -1448,13 +1448,13 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'mehmonqoziyev-murodjon',
 
-      name: 'Mehmonqöziyev Murodjon Ahadjon öğli',
+      name: 'Mehmonqo‘ziyev Murodjon Ahadjon o‘g‘li',
 
       img: '/img/yetakchilar/50.jpg',
 
       role: '4-kurs talabasi',
 
-      spec: 'Filologiya va tillarni öqitiş (arab tili)',
+      spec: 'Filologiya va tillarni o‘qitish (arab tili)',
       phone: '',
       email: '',
       telegram: '',
@@ -1473,7 +1473,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'iskandarov-yusufbek',
 
-      name: 'Iskandarov Yusufbek Ravşanbekoviç',
+      name: 'Iskandarov Yusufbek Ravshanbekovich',
 
       img: '/img/yetakchilar/79.jpg',
 
@@ -1503,9 +1503,9 @@ export const OTMS: Otm[] = [
 
       img: '/img/yetakchilar/72.jpg',
 
-      role: 'Yoşlar masalalari va maʼnaviy-maʼrifiy işlar bölimi mutaxassisi',
+      role: 'Yoshlar masalalari va ma’naviy-ma’rifiy ishlar bo‘limi mutaxassisi',
 
-      spec: 'Boşlanğiç taʼlim öqituvçisi',
+      spec: 'Boshlang‘ich ta’lim o‘qituvchisi',
       phone: '',
       email: '',
       telegram: '',
@@ -1520,12 +1520,12 @@ export const OTMS: Otm[] = [
   },
   { otm: 'EMU University', type: 'nodavlat' },
   {
-    otm: 'Farmatsevtika taʼlim va tadqiqot instituti',
+    otm: 'Farmatsevtika ta’lim va tadqiqot instituti',
     type: 'nodavlat',
     leader: {
       slug: 'mahmudjonov-muhammad',
 
-      name: 'Mahmudjonov Muhammad Ali Şuhratjon öğli',
+      name: 'Mahmudjonov Muhammad Ali Shuhratjon o‘g‘li',
 
       img: '/img/yetakchilar/60.jpg',
 
@@ -1550,13 +1550,13 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'mamadaliyev-anvarjon',
 
-      name: 'Mamadaliyev Anvarjon Abduqahhor öğli',
+      name: 'Mamadaliyev Anvarjon Abduqahhor o‘g‘li',
 
       img: '/img/yetakchilar/53.jpg',
 
       role: '4-kurs talabasi',
 
-      spec: 'Filologiya va tillarni öqitiş (ingliz tili)',
+      spec: 'Filologiya va tillarni o‘qitish (ingliz tili)',
       phone: '',
       email: '',
       telegram: '',
@@ -1575,7 +1575,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'rasulov-javoxirbek',
 
-      name: 'Rasulov Javoxirbek Yaxyobek öğli',
+      name: 'Rasulov Javoxirbek Yaxyobek o‘g‘li',
 
       img: '/img/yetakchilar/66.jpg',
 
@@ -1595,12 +1595,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent amaliy fanlar universiteti',
+    otm: 'Toshkent amaliy fanlar universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'jamolov-asadbek',
 
-      name: 'Jamolov Asadbek Jörabek öğli',
+      name: 'Jamolov Asadbek Jo‘rabek o‘g‘li',
 
       img: '/img/yetakchilar/78.jpg',
 
@@ -1626,7 +1626,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'olimjonov-azizbek',
 
-      name: 'Olimjonov Azizbek Oybek öğli',
+      name: 'Olimjonov Azizbek Oybek o‘g‘li',
 
       img: '/img/yetakchilar/71.jpg',
 
@@ -1651,13 +1651,13 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'maxamadaminov-shohijahon',
 
-      name: 'Maxamadaminov Şohijahon Uluğbek öğli',
+      name: 'Maxamadaminov Shohijahon Ulug‘bek o‘g‘li',
 
       img: '/img/yetakchilar/81.jpg',
 
       role: '2-kurs talabasi',
 
-      spec: 'Dasturiy taʼminot işlab çiqiş va dasturlaş',
+      spec: 'Dasturiy ta’minot ishlab chiqish va dasturlash',
       phone: '',
       email: '',
       telegram: '',
@@ -1676,7 +1676,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'jalilov-abdulvosidxon',
 
-      name: 'Jalilov Abdulvosidxon Muhammad öğli',
+      name: 'Jalilov Abdulvosidxon Muhammad o‘g‘li',
 
       img: '/img/yetakchilar/55.jpg',
 
@@ -1701,7 +1701,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'meymonova-ruxshona',
 
-      name: 'Meymonova Ruxşona Xudoyberdiyevna',
+      name: 'Meymonova Ruxshona Xudoyberdiyevna',
 
       img: '/img/yetakchilar/73.jpg',
 
@@ -1726,7 +1726,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'saidanvarxojayeva-farzona',
 
-      name: 'Saidanvarxöjayeva Farzona Saydiabror qizi',
+      name: 'Saidanvarxo‘jayeva Farzona Saydiabror qizi',
 
       img: '/img/yetakchilar/49.jpg',
 
@@ -1751,7 +1751,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'xabibullayev-boburmirzo',
 
-      name: 'Xabibullayev Boburmirzo Baxtiyor öğli',
+      name: 'Xabibullayev Boburmirzo Baxtiyor o‘g‘li',
 
       img: '/img/yetakchilar/51.jpg',
 
@@ -1771,12 +1771,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent ijtimoiy innovatsiya universiteti',
+    otm: 'Toshkent ijtimoiy innovatsiya universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'ismoilov-abduvali',
 
-      name: 'Ismoilov Abduvali Xasanboy öğli',
+      name: 'Ismoilov Abduvali Xasanboy o‘g‘li',
 
       img: '/img/yetakchilar/62.jpg',
 
@@ -1801,7 +1801,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'usmonov-zuxriddin',
 
-      name: 'Usmonov Zuxriddin Jaxongiroviç',
+      name: 'Usmonov Zuxriddin Jaxongirovich',
 
       img: '/img/yetakchilar/56.jpg',
 
@@ -1821,12 +1821,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent menejment va iqtisodiyot instituti',
+    otm: 'Toshkent menejment va iqtisodiyot instituti',
     type: 'nodavlat',
     leader: {
       slug: 'sultonov-abdurahmon',
 
-      name: 'Sultonov Abdurahmon Abduqodiroviç',
+      name: 'Sultonov Abdurahmon Abduqodirovich',
 
       img: '/img/yetakchilar/59.jpg',
 
@@ -1851,7 +1851,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'qilichev-bunyod',
 
-      name: 'Qiliçev Bunyod Ziyodulla öğli',
+      name: 'Qilichev Bunyod Ziyodulla o‘g‘li',
 
       img: '/img/yetakchilar/69.jpg',
 
@@ -1896,18 +1896,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent Xalqaro moliyaviy boşqaruv va texnologiyalar universiteti',
+    otm: 'Toshkent Xalqaro moliyaviy boshqaruv va texnologiyalar universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'pulatov-shaxzodjon',
 
-      name: 'Pulatov Şaxzodjon Siyovuş öğli',
+      name: 'Pulatov Shaxzodjon Siyovush o‘g‘li',
 
       img: '/img/yetakchilar/54.jpg',
 
       role: '4-kurs talabasi',
 
-      spec: 'Bank işi va audit',
+      spec: 'Bank ishi va audit',
       phone: '',
       email: '',
       telegram: '',
@@ -1926,7 +1926,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'nusrattillayev-abdurahmon',
 
-      name: 'Nusrattillayev Abdurahmon Abduraufoviç',
+      name: 'Nusrattillayev Abdurahmon Abduraufovich',
 
       img: '/img/yetakchilar/74.jpg',
 
@@ -1946,12 +1946,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Renessans taʼlim universiteti',
+    otm: 'Renessans ta’lim universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'ashurov-akobir',
 
-      name: 'Aşurov Akobir Raxmat öğli',
+      name: 'Ashurov Akobir Raxmat o‘g‘li',
 
       img: '/img/yetakchilar/82.jpg',
 
@@ -1971,12 +1971,12 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Toşkent iqtisodiyot va texnologiyalar universiteti',
+    otm: 'Toshkent iqtisodiyot va texnologiyalar universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'maxammadjonov-oyatillo',
 
-      name: 'Maxammadjonov Oyatillo Dilşod öğli',
+      name: 'Maxammadjonov Oyatillo Dilshod o‘g‘li',
 
       img: '/img/yetakchilar/57.jpg',
 
@@ -2001,7 +2001,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'hamidov-abdullo',
 
-      name: 'Hamidov Abdullo Abduqodir öğli',
+      name: 'Hamidov Abdullo Abduqodir o‘g‘li',
 
       img: '/img/yetakchilar/80.jpg',
 
@@ -2021,18 +2021,18 @@ export const OTMS: Otm[] = [
     },
   },
   {
-    otm: 'Taşkent Metropolitan University',
+    otm: 'Tashkent Metropolitan University',
     type: 'nodavlat',
     leader: {
       slug: 'ashirbayev-avazbek',
 
-      name: 'Aşirbayev Avazbek Asanoviç',
+      name: 'Ashirbayev Avazbek Asanovich',
 
       img: '/img/yetakchilar/70.jpg',
 
       role: '2-kurs talabasi',
 
-      spec: 'Huquqşunoslik',
+      spec: 'Huquqshunoslik',
       phone: '',
       email: '',
       telegram: '',
@@ -2051,7 +2051,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'mamatov-sherxon',
 
-      name: 'Mamatov Şerxon Nurali öğli',
+      name: 'Mamatov Sherxon Nurali o‘g‘li',
 
       img: '/img/yetakchilar/58.jpg',
 
@@ -2076,7 +2076,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'nasirova-asilbegim',
 
-      name: 'Nasirova Asilbegim Juraʼtovna',
+      name: 'Nasirova Asilbegim Jura’tovna',
 
       img: '/img/yetakchilar/61.jpg',
 
@@ -2097,18 +2097,18 @@ export const OTMS: Otm[] = [
   },
   { otm: 'Turkiy davlatlar xalqaro universiteti', type: 'nodavlat' },
   {
-    otm: 'Toşkent gumanitar fanlar universiteti',
+    otm: 'Toshkent gumanitar fanlar universiteti',
     type: 'nodavlat',
     leader: {
       slug: 'nosirjonov-muxammadamin',
 
-      name: 'Nosirjonov Muxammadamin Sunnatjon öğli',
+      name: 'Nosirjonov Muxammadamin Sunnatjon o‘g‘li',
 
       img: '/img/yetakchilar/67.jpg',
 
       role: '3-kurs talabasi',
 
-      spec: 'Filologiya va tillarni öqitiş (arab tili)',
+      spec: 'Filologiya va tillarni o‘qitish (arab tili)',
       phone: '',
       email: '',
       telegram: '',
@@ -2133,7 +2133,7 @@ export const OTMS: Otm[] = [
 
       role: '3-kurs talabasi',
 
-      spec: 'Filologiya va tillarni öqitiş (ingliz tili)',
+      spec: 'Filologiya va tillarni o‘qitish (ingliz tili)',
       phone: '',
       email: '',
       telegram: '',
@@ -2153,7 +2153,7 @@ export const OTMS: Otm[] = [
     leader: {
       slug: 'baxodirov-shavkatjon',
 
-      name: 'Baxodirov Şavkatjon Toxirjon öğli',
+      name: 'Baxodirov Shavkatjon Toxirjon o‘g‘li',
 
       img: '/img/yetakchilar/77.jpg',
 

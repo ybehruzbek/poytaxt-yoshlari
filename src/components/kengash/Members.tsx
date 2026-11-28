@@ -166,7 +166,7 @@ export function Members({ MEMBERS }: { MEMBERS: typeof M }) {
       <div className="km-c-root">
         <Ic cls="km-c-root-ic">{POST_ICONS[0]}</Ic>
         <div>
-          <b>Markaziy Kengaş</b>
+          <b>Markaziy Kengash</b>
           <span>{MEMBERS.lead}</span>
           <ul className="km-c-facts">
             {MEMBERS.facts.map((f) => (
@@ -177,7 +177,7 @@ export function Members({ MEMBERS }: { MEMBERS: typeof M }) {
       </div>
       <div className="km-c-branches">
         <section>
-          <h3 className="km-c-tag">Lavozimi böyiça</h3>
+          <h3 className="km-c-tag">Lavozimi bo‘yicha</h3>
           <ol>
             {MEMBERS.byPost.map((x, i) => (
               <li key={x}>

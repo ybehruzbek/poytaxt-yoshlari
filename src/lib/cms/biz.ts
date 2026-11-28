@@ -113,8 +113,8 @@ export const getHududiy = cache(async (locale = 'uz'): Promise<Hududiy> => {
     tasks: ((d.tasks as { t?: string }[]) ?? []).map((x) => x.t ?? ''),
     staff: staff.filter((s) => !s.chair && depId(s) === d.id).map(person),
   }))
-  const deptShort = (s: Doc) => (s.chair ? 'Kengaş raisi' : (deps.find((d) => d.id === depId(s))?.short as string) ?? '')
-  const DAYS = ['Duşanba', 'Seşanba', 'Çorşanba', 'Payşanba', 'Juma', 'Şanba']
+  const deptShort = (s: Doc) => (s.chair ? 'Kengash raisi' : (deps.find((d) => d.id === depId(s))?.short as string) ?? '')
+  const DAYS = ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba']
   const RECEPTION: Reception[] = staff
     .filter((s) => q(s).day)
     .map((s) => ({ day: q(s).day!, time: q(s).time ?? '', room: q(s).room ?? '', name: str(s.name), dept: deptShort(s) }))

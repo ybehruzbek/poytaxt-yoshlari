@@ -23,7 +23,7 @@ export default async function YangilikTahrir({ params }: P) {
   const short = doc.title.length > 60 ? `${doc.title.slice(0, 60)}…` : doc.title
   return (
     <>
-      <Top title={short} crumbs={[{ t: 'Yangiliklar', href: '/boshqaruv/yangiliklar' }, { t: 'Tahrirlaş' }]} />
+      <Top title={short} crumbs={[{ t: 'Yangiliklar', href: '/boshqaruv/yangiliklar' }, { t: 'Tahrirlash' }]} />
       <div className="content">
         <NewsForm
           key={doc.id}

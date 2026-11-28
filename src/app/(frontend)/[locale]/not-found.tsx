@@ -14,7 +14,7 @@ export default function NotFound() {
       locale={locale}
       crumb="Sahifa topilmadi"
       title="Sahifa topilmadi"
-      text="Siz izlagan sahifa mavjud emas yoki boşqa manzilga köçirilgan."
+      text="Siz izlagan sahifa mavjud emas yoki boshqa manzilga ko‘chirilgan."
     >
       <Link href={`/${locale}/yangiliklar`} className="more-btn">
         <More>Yangiliklar</More>

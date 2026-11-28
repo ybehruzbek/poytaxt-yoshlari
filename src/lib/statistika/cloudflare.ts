@@ -88,7 +88,7 @@ function limits(): Promise<Limits> {
     type R = { viewer: { accounts: { settings: Record<string, Limits> }[] } }
     const d = await gql<R>(wrap(`settings { ${DATASET} { maxDuration notOlderThan } }`))
     const l = d.viewer.accounts[0]?.settings?.[DATASET]
-    if (!l) throw new Error('Cloudflare hisobida Web Analytics maʼlumoti topilmadi')
+    if (!l) throw new Error('Cloudflare hisobida Web Analytics ma’lumoti topilmadi')
     return l
   })
 }

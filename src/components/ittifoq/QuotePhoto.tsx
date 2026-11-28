@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- president.uz suratlari; CMS ulanganda next/image ga o'tadi */
 import type { IttifoqData } from '@/lib/cms/sahifalar'
 
-const CREDIT = 'Surat: Özbekiston Respublikasi Prezidentining matbuot xizmati'
+const CREDIT = 'Surat: O‘zbekiston Respublikasi Prezidentining matbuot xizmati'
 
 /** E — töq bölim: çapda iqtibos, öngda surat (Prezident surat öng tomonida) */
 export function QuoteE({ D }: { D: IttifoqData }) {
@@ -22,7 +22,7 @@ export function QuoteE({ D }: { D: IttifoqData }) {
         <figure>
           <img
             src={IMG.presYouth2}
-            alt="Prezident Şavkat Mirziyoyev talabalar bilan suhbatlaşmoqda"
+            alt="Prezident Shavkat Mirziyoyev talabalar bilan suhbatlashmoqda"
             loading="lazy"
             decoding="async"
           />

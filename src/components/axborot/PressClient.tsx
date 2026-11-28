@@ -31,20 +31,20 @@ export function PressTools({ docId, slug }: { docId: string; slug: string }) {
       await navigator.clipboard.writeText(text)
       setMsg(ok)
     } catch {
-      setMsg('Nusxalab bölmadi')
+      setMsg('Nusxalab bo‘lmadi')
     }
     setTimeout(() => setMsg(''), 2000)
   }
   return (
     <div className="pr-tools" role="toolbar" aria-label="Hujjat bilan amallar">
       <button type="button" onClick={() => printDoc(docId)}>
-        <Ic d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z" /> Çop etiş / PDF
+        <Ic d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z" /> Chop etish / PDF
       </button>
       <button
         type="button"
         onClick={() => copy(document.getElementById(docId)?.innerText ?? '', 'Matn nusxalandi')}
       >
-        <Ic d="M9 9h11v11H9zM5 15H4V4h11v1" /> Matnni nusxalaş
+        <Ic d="M9 9h11v11H9zM5 15H4V4h11v1" /> Matnni nusxalash
       </button>
       <button
         type="button"
@@ -87,7 +87,7 @@ export function PressDesk({ press: PRESS, contact }: { press: PressItem[]; conta
   }
   return (
     <div className="pr-desk">
-      <nav className="pr-desk-list" aria-label="Press-relizlar röyxati">
+      <nav className="pr-desk-list" aria-label="Press-relizlar ro‘yxati">
         {PRESS.map((x) => (
           <button key={x.slug} type="button" aria-current={x.slug === slug ? true : undefined} onClick={() => pick(x.slug)}>
             <span className={`pr-kind k-${x.kind}`}>{PRESS_KINDS[x.kind]}</span>

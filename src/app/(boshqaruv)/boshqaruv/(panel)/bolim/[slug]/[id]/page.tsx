@@ -12,7 +12,7 @@ type P = { params: Promise<{ slug: string; id: string }> }
 export async function generateMetadata({ params }: P) {
   const { slug, id } = await params
   const s = await collectionSchema(slug)
-  return { title: id === 'yangi' ? `Yangi: ${s?.singular ?? ''}` : (s?.singular ?? 'Tahrirlaş') }
+  return { title: id === 'yangi' ? `Yangi: ${s?.singular ?? ''}` : (s?.singular ?? 'Tahrirlash') }
 }
 
 export default async function BolimTahrir({ params }: P) {
@@ -34,7 +34,7 @@ export default async function BolimTahrir({ params }: P) {
 
   return (
     <>
-      <Top title={isNew ? `Yangi: ${schema.singular.toLocaleLowerCase('uz')}` : short || schema.singular} crumbs={[...(grp ? [{ t: grp }] : []), { t: schema.plural, href: base }, { t: isNew ? 'Yangi' : 'Tahrirlaş' }]} />
+      <Top title={isNew ? `Yangi: ${schema.singular.toLocaleLowerCase('uz')}` : short || schema.singular} crumbs={[...(grp ? [{ t: grp }] : []), { t: schema.plural, href: base }, { t: isNew ? 'Yangi' : 'Tahrirlash' }]} />
       <div className="content">
         <DocForm
           key={raw}

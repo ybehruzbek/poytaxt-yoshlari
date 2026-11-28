@@ -32,7 +32,7 @@ export default async function Kutubxona({ searchParams }: { searchParams: Promis
 
   return (
     <>
-      <Top title="Kutubxona" sub="Saytdagi barça rasmlar va yuklab olinadigan hujjatlar" crumbs={[{ t: 'Tizim' }, { t: 'Kutubxona' }]} />
+      <Top title="Kutubxona" sub="Saytdagi barcha rasmlar va yuklab olinadigan hujjatlar" crumbs={[{ t: 'Tizim' }, { t: 'Kutubxona' }]} />
       <div className={item ? 'content lib has-item' : 'content lib'}>
         <section className="lib__main">
           <div className="toolbar">
@@ -45,7 +45,7 @@ export default async function Kutubxona({ searchParams }: { searchParams: Promis
               </Link>
             </nav>
             <div className="filters">
-              <SearchBox q={sp.q ?? ''} placeholder={isFile ? 'Fayl nomi böyiça qidiriş' : 'Rasm tavsifi yoki fayl nomi böyiça qidiriş'} />
+              <SearchBox q={sp.q ?? ''} placeholder={isFile ? 'Fayl nomi bo‘yicha qidirish' : 'Rasm tavsifi yoki fayl nomi bo‘yicha qidirish'} />
               <span className="count-note">Jami: {list.totalDocs}</span>
             </div>
           </div>
@@ -53,7 +53,7 @@ export default async function Kutubxona({ searchParams }: { searchParams: Promis
           {list.items.length === 0 ? (
             <div className="card empty-state">
               <Icon name={isFile ? 'file' : 'image'} size={32} />
-              <b>{sp.q ? 'Qidiruv böyiça heç narsa topilmadi' : 'Hozirça fayl yöq'}</b>
+              <b>{sp.q ? 'Qidiruv bo‘yicha hech narsa topilmadi' : 'Hozircha fayl yo‘q'}</b>
             </div>
           ) : isFile ? (
             <ul className="lib__files">

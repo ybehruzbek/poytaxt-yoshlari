@@ -69,7 +69,7 @@ export function InboxDetail({ item, statuses, isAdmin, backHref }: { item: Inbox
       await navigator.clipboard.writeText(v)
       say('Nusxa olindi')
     } catch {
-      say('Nusxa olib bölmadi', true)
+      say('Nusxa olib bo‘lmadi', true)
     }
   }
 
@@ -78,7 +78,7 @@ export function InboxDetail({ item, statuses, isAdmin, backHref }: { item: Inbox
     <article className="card ix">
       <Link href={backHref} className="ix__back" scroll={false}>
         <Icon name="chev" size={16} className="flip" />
-        Röyxatga qaytiş
+        Ro‘yxatga qaytish
       </Link>
       <header className="ix__head">
         <div>
@@ -107,7 +107,7 @@ export function InboxDetail({ item, statuses, isAdmin, backHref }: { item: Inbox
               <dd>
                 {f.href ? <a href={f.href}>{f.v}</a> : f.v}
                 {f.copy && (
-                  <button type="button" className="ix__copy" onClick={() => copy(f.v)} title="Nusxa oliş" aria-label={`${f.t}: nusxa oliş`}>
+                  <button type="button" className="ix__copy" onClick={() => copy(f.v)} title="Nusxa olish" aria-label={`${f.t}: nusxa olish`}>
                     <Icon name="copy" size={14} />
                   </button>
                 )}
@@ -132,13 +132,13 @@ export function InboxDetail({ item, statuses, isAdmin, backHref }: { item: Inbox
           </p>
           {te.comment && (
             <>
-              <h3>Foydalanuvçi izohi</h3>
+              <h3>Foydalanuvchi izohi</h3>
               <p className="ix__body">{te.comment}</p>
             </>
           )}
           <a className="btn btn-ghost btn-sm" href={te.page} target="_blank" rel="noopener noreferrer">
             <Icon name="ext" size={16} />
-            Sahifani oçiş
+            Sahifani ochish
           </a>
         </div>
       )}
@@ -160,16 +160,16 @@ export function InboxDetail({ item, statuses, isAdmin, backHref }: { item: Inbox
       {item.note !== null && (
         <div className="ix__block">
           <h3>
-            Içki izoh <small>faqat xodimlar köradi</small>
+            Ichki izoh <small>faqat xodimlar ko‘radi</small>
           </h3>
-          <textarea className="inp" rows={3} value={note} maxLength={5000} placeholder="Masalan: 18-noyabr kuni telefon orqali boğlanildi" onChange={(e) => setNote(e.target.value)} />
+          <textarea className="inp" rows={3} value={note} maxLength={5000} placeholder="Masalan: 18-noyabr kuni telefon orqali bog‘lanildi" onChange={(e) => setNote(e.target.value)} />
           {note !== savedNote && (
             <div className="ix__note-acts">
               <button type="button" className="btn btn-ghost btn-sm" onClick={() => setNote(savedNote)}>
-                Bekor qiliş
+                Bekor qilish
               </button>
               <button type="button" className="btn btn-primary btn-sm" disabled={pending} onClick={saveNote}>
-                Izohni saqlaş
+                Izohni saqlash
               </button>
             </div>
           )}
@@ -180,18 +180,18 @@ export function InboxDetail({ item, statuses, isAdmin, backHref }: { item: Inbox
         <footer className="ix__foot">
           {confirmDel ? (
             <span className="pub-confirm">
-              Butunlay öçirilsinmi? Qaytariş imkoni yöq.
+              Butunlay o‘chirilsinmi? Qaytarish imkoni yo‘q.
               <button type="button" className="btn btn-sm btn-red" disabled={pending} onClick={remove}>
-                Ha, öçiriş
+                Ha, o‘chirish
               </button>
               <button type="button" className="btn btn-sm btn-ghost" onClick={() => setConfirmDel(false)}>
-                Yöq
+                Yo‘q
               </button>
             </span>
           ) : (
             <button type="button" className="ix__del" onClick={() => setConfirmDel(true)}>
               <Icon name="trash" size={16} />
-              Öçiriş
+              O‘chirish
             </button>
           )}
         </footer>

@@ -20,7 +20,7 @@ function Status({ s }: { s: Stipend }) {
   if (s.deadline && d !== null && d > 0)
     return (
       <span className="gr-st gr-st-open">
-        Ariza qabul qilinmoqda · {deadlineLabel(s.deadline)}gaça{d <= 30 ? ` · ${d} kun qoldi` : ''}
+        Ariza qabul qilinmoqda · {deadlineLabel(s.deadline)}gacha{d <= 30 ? ` · ${d} kun qoldi` : ''}
       </span>
     )
   if (s.cat === 'davlat') return <span className="gr-st">Har yili tayinlanadi</span>
@@ -152,16 +152,16 @@ const Ic = ({ n, cls = 'sx-ic' }: { n: string; cls?: string }) => (
 
 /** Nomli stipendiyalar: yönaliş va ikonka */
 const NAMED_META: Record<string, [string, string]> = {
-  'islom-karimov': ['yulduz', 'Barça yönalişlar'],
+  'islom-karimov': ['yulduz', 'Barcha yo‘nalishlar'],
   navoiy: ['kitob', 'Gumanitar fanlar'],
   bobur: ['globus', 'Tarix va geografiya'],
-  'imom-buxoriy': ['oy', 'Islomşunoslik'],
+  'imom-buxoriy': ['oy', 'Islomshunoslik'],
   beruniy: ['tishli', 'Texnika'],
   'ibn-sino': ['yurak', 'Tibbiyot'],
   avloniy: ['qalpoq', 'Pedagogika'],
   ulugbek: ['atom', 'Tabiiy fanlar'],
-  qaipbergenov: ['qalam', 'Qoraqalpoğiston OTTlari'],
-  yusupov: ['pero', 'Qoraqalpoğiston OTTlari'],
+  qaipbergenov: ['qalam', 'Qoraqalpog‘iston OTTlari'],
+  yusupov: ['pero', 'Qoraqalpog‘iston OTTlari'],
   'pahlavon-mahmud': ['medal', 'Jismoniy madaniyat va sport'],
 }
 const Btn = ({ s }: { s: Stipend }) => (
@@ -184,7 +184,7 @@ function ForeignCard({ s, big }: { s: Stipend; big?: boolean }) {
       <p>{nbsp(s.perk)}</p>
       <dl>
         <div>
-          <dt>Kimlar uçun</dt>
+          <dt>Kimlar uchun</dt>
           <dd>{nbsp(s.who)}</dd>
         </div>
         <div>
@@ -236,7 +236,7 @@ export function StipendsList({ stipends }: { stipends: Stipend[] }) {
       <article className="sx-hero">
         <div className="sx-hero-l">
           <Ic n="yulduz" cls="sx-ic sx-ic-big" />
-          <ul className="sx-cmp" aria-label="Oylik stipendiyalar miqdorini taqqoslaş">
+          <ul className="sx-cmp" aria-label="Oylik stipendiyalar miqdorini taqqoslash">
             {CMP.map((c) => (
               <li key={c.t} className={c.top ? 'top' : undefined}>
                 <span>{c.t}</span>
@@ -253,7 +253,7 @@ export function StipendsList({ stipends }: { stipends: Stipend[] }) {
           <h4>{nbsp(pres.t)}</h4>
           <dl>
             <div>
-              <dt>Kimlar uçun</dt>
+              <dt>Kimlar uchun</dt>
               <dd>{nbsp(pres.who)}</dd>
             </div>
             <div>
@@ -274,8 +274,8 @@ export function StipendsList({ stipends }: { stipends: Stipend[] }) {
           <div>
             <h4>Nomli davlat stipendiyalari</h4>
             <p>
-              Oxirgi ikki kurs talabalariga beriladi: barça fanlardan “aʼlo” baholar (köpi bilan 25
-              foizi “yaxşi”), ilmiy yoki ijodiy faollik. Sohiblari bitirgandan keyin bir yil
+              Oxirgi ikki kurs talabalariga beriladi: barcha fanlardan “a’lo” baholar (ko‘pi bilan 25
+              foizi “yaxshi”), ilmiy yoki ijodiy faollik. Sohiblari bitirgandan keyin bir yil
               davomida magistraturaga imtihonsiz qabul qilinadi.
             </p>
           </div>
@@ -311,7 +311,7 @@ export function StipendsList({ stipends }: { stipends: Stipend[] }) {
                 <h4>{nbsp(x.t)}</h4>
                 <p>{nbsp(x.perk)}</p>
                 <small>
-                  <b>Kimlar uçun:</b> {nbsp(x.who)}
+                  <b>Kimlar uchun:</b> {nbsp(x.who)}
                 </small>
               </div>
               <Btn s={x} />
@@ -319,7 +319,7 @@ export function StipendsList({ stipends }: { stipends: Stipend[] }) {
           )
         })}
       </div>
-      <h3 className="sx-h">Xorijda taʼlim</h3>
+      <h3 className="sx-h">Xorijda ta’lim</h3>
       {/* 3 ustunli setka: 0- va 5-kartalar ikki ustunli — har 5 tadan iborat guruh ikki qatorni töla egallaydi */}
       <MoreList className="sx-fgrid" id="xorijiy-stipendiyalar" noun="dastur" first={5} step={5}>
         {FOREIGN.map((x, i) => (

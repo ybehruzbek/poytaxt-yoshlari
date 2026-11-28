@@ -10,9 +10,9 @@ import { Icon } from '../Icon'
 import { makePassword } from './pw'
 
 const ROLES = [
-  { v: 'admin', t: 'Administrator', d: 'Hamma narsa, jumladan foydalanuvçilar va öçiriş' },
-  { v: 'muharrir', t: 'Muharrir', d: 'Yangiliklar, bölimlar va sahifa matnlari' },
-  { v: 'operator', t: 'Operator', d: 'Faqat kiruvçi murojaat va arizalar' },
+  { v: 'admin', t: 'Administrator', d: 'Hamma narsa, jumladan foydalanuvchilar va o‘chirish' },
+  { v: 'muharrir', t: 'Muharrir', d: 'Yangiliklar, bo‘limlar va sahifa matnlari' },
+  { v: 'operator', t: 'Operator', d: 'Faqat kiruvchi murojaat va arizalar' },
 ]
 const TONE: Record<string, string> = { admin: 't-brown', muharrir: 't-blue', operator: 't-green' }
 
@@ -34,7 +34,7 @@ function PasswordInput({ value, onChange, id }: { value: string; onChange: (v: s
     <div className="pw-row">
       <input id={id} className="inp" type="text" autoComplete="new-password" spellCheck={false} value={value} onChange={(e) => onChange(e.target.value)} placeholder="Kamida 10 belgi, harf va raqam" />
       <button type="button" className="btn btn-ghost btn-sm" onClick={() => onChange(makePassword())}>
-        Yasaş
+        Yasash
       </button>
     </div>
   )
@@ -79,13 +79,13 @@ export function UsersPanel({ users, meId }: { users: UserRow[]; meId: number }) 
         <span className="count-note">Jami: {users.length}</span>
         <button type="button" className="btn btn-primary" onClick={() => toggle('new')}>
           <Icon name="plus" size={18} />
-          Foydalanuvçi qöşiş
+          Foydalanuvchi qo‘shish
         </button>
       </div>
 
       {open === 'new' && (
         <section className="card uedit">
-          <h2>Yangi foydalanuvçi</h2>
+          <h2>Yangi foydalanuvchi</h2>
           <div className="f-row">
             <div className="f">
               <label className="lbl" htmlFor="u-name">
@@ -95,7 +95,7 @@ export function UsersPanel({ users, meId }: { users: UserRow[]; meId: number }) 
             </div>
             <div className="f">
               <label className="lbl" htmlFor="u-email">
-                Elektron poçta<span className="req">*</span>
+                Elektron pochta<span className="req">*</span>
               </label>
               <input id="u-email" className="inp" type="email" autoComplete="off" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} />
             </div>
@@ -106,17 +106,17 @@ export function UsersPanel({ users, meId }: { users: UserRow[]; meId: number }) 
           </div>
           <div className="f">
             <label className="lbl" htmlFor="u-pw">
-              Boşlanğiç parol<span className="req">*</span>
+              Boshlang‘ich parol<span className="req">*</span>
             </label>
             <PasswordInput id="u-pw" value={f.password} onChange={(password) => setF({ ...f, password })} />
-            <p className="help">Parolni xodimga şaxsan bering. Xodim birinçi kirgandan keyin uni “Hisobim” sahifasida almaştiradi.</p>
+            <p className="help">Parolni xodimga shaxsan bering. Xodim birinchi kirgandan keyin uni “Hisobim” sahifasida almashtiradi.</p>
           </div>
           <div className="uedit__acts">
             <button type="button" className="btn btn-ghost" onClick={() => setOpen(null)}>
-              Bekor qiliş
+              Bekor qilish
             </button>
             <button type="button" className="btn btn-primary" disabled={pending} onClick={() => run(() => createUser(f), true)}>
-              Qöşiş
+              Qo‘shish
             </button>
           </div>
         </section>
@@ -160,20 +160,20 @@ export function UsersPanel({ users, meId }: { users: UserRow[]; meId: number }) 
                 {(f.name !== u.name || f.role !== u.role) && (
                   <div className="uedit__acts">
                     <button type="button" className="btn btn-primary btn-sm" disabled={pending} onClick={() => run(() => updateUser(u.id, f))}>
-                      Saqlaş
+                      Saqlash
                     </button>
                   </div>
                 )}
                 <div className="f">
                   <label className="lbl" htmlFor={`p-${u.id}`}>
-                    Yangi parol beriş
+                    Yangi parol berish
                   </label>
                   <PasswordInput id={`p-${u.id}`} value={pw} onChange={setPw} />
-                  <p className="help">Xodim parolini unutganda. Yangi parol örnatilganda hisob bloklangan bölsa ham oçiladi.</p>
+                  <p className="help">Xodim parolini unutganda. Yangi parol o‘rnatilganda hisob bloklangan bo‘lsa ham ochiladi.</p>
                   {pw && (
                     <div className="uedit__acts">
                       <button type="button" className="btn btn-primary btn-sm" disabled={pending} onClick={() => run(() => setUserPassword(u.id, pw))}>
-                        Parolni örnatiş
+                        Parolni o‘rnatish
                       </button>
                     </div>
                   )}
@@ -181,24 +181,24 @@ export function UsersPanel({ users, meId }: { users: UserRow[]; meId: number }) 
                 <div className="uedit__foot">
                   {u.locked && (
                     <button type="button" className="btn btn-ghost btn-sm" disabled={pending} onClick={() => run(() => unlockUser(u.id))}>
-                      Bloklanişdan çiqariş
+                      Bloklanishdan chiqarish
                     </button>
                   )}
                   {u.id !== meId &&
                     (confirm ? (
                       <span className="pub-confirm">
-                        Hisob öçirilsinmi?
+                        Hisob o‘chirilsinmi?
                         <button type="button" className="btn btn-sm btn-red" disabled={pending} onClick={() => run(() => deleteUser(u.id), true)}>
-                          Ha, öçiriş
+                          Ha, o‘chirish
                         </button>
                         <button type="button" className="btn btn-sm btn-ghost" onClick={() => setConfirm(false)}>
-                          Yöq
+                          Yo‘q
                         </button>
                       </span>
                     ) : (
                       <button type="button" className="ix__del" onClick={() => setConfirm(true)}>
                         <Icon name="trash" size={16} />
-                        Hisobni öçiriş
+                        Hisobni o‘chirish
                       </button>
                     ))}
                 </div>

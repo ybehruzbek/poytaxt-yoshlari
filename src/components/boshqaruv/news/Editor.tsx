@@ -117,7 +117,7 @@ type Block = 'paragraph' | 'h2' | 'h3' | 'quote' | 'ul' | 'ol'
 const BLOCKS: { v: Block; t: string }[] = [
   { v: 'paragraph', t: 'Oddiy matn' },
   { v: 'h2', t: 'Katta sarlavha' },
-  { v: 'h3', t: 'Kiçik sarlavha' },
+  { v: 'h3', t: 'Kichik sarlavha' },
   { v: 'quote', t: 'Iqtibos' },
 ]
 
@@ -218,7 +218,7 @@ function Toolbar() {
     <div className="ed-bar">
       <div className="ed-blk">
         <button type="button" className="ed-blk__btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setBlockMenu((o) => !o)} aria-expanded={blockMenu}>
-          {BLOCKS.find((x) => x.v === block)?.t ?? (block === 'ul' ? 'Belgili röyxat' : 'Raqamli röyxat')}
+          {BLOCKS.find((x) => x.v === block)?.t ?? (block === 'ul' ? 'Belgili ro‘yxat' : 'Raqamli ro‘yxat')}
           <Icon name="down" size={14} />
         </button>
         {blockMenu && (
@@ -234,15 +234,15 @@ function Toolbar() {
       <span className="ed-sep" />
       <B on={fmt.bold} title="Qalin (⌘B)" icon="bold" onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')} />
       <B on={fmt.italic} title="Kursiv (⌘I)" icon="italic" onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic')} />
-      <B on={fmt.underline} title="Tagiga çiziş (⌘U)" icon="underline" onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')} />
-      <B on={fmt.link} title={fmt.link ? 'Havolani olib taşlaş' : 'Havola qöşiş'} icon="link" onClick={openLink} />
+      <B on={fmt.underline} title="Tagiga chizish (⌘U)" icon="underline" onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline')} />
+      <B on={fmt.link} title={fmt.link ? 'Havolani olib tashlash' : 'Havola qo‘shish'} icon="link" onClick={openLink} />
       <span className="ed-sep" />
-      <B on={block === 'ul'} title="Belgili röyxat" icon="list" onClick={() => setBlockType('ul')} />
-      <B on={block === 'ol'} title="Raqamli röyxat" icon="olist" onClick={() => setBlockType('ol')} />
+      <B on={block === 'ul'} title="Belgili ro‘yxat" icon="list" onClick={() => setBlockType('ul')} />
+      <B on={block === 'ol'} title="Raqamli ro‘yxat" icon="olist" onClick={() => setBlockType('ol')} />
       <B on={block === 'quote'} title="Iqtibos" icon="quote" onClick={() => setBlockType(block === 'quote' ? 'paragraph' : 'quote')} />
       <span className="ed-sep" />
-      <B title="Bekor qiliş (⌘Z)" icon="undo" disabled={!canUndo} onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)} />
-      <B title="Qaytariş (⇧⌘Z)" icon="redo" disabled={!canRedo} onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)} />
+      <B title="Bekor qilish (⌘Z)" icon="undo" disabled={!canUndo} onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)} />
+      <B title="Qaytarish (⇧⌘Z)" icon="redo" disabled={!canRedo} onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)} />
 
       {linkOpen && (
         <div className="ed-link">
@@ -261,9 +261,9 @@ function Toolbar() {
             aria-label="Havola manzili"
           />
           <button type="button" className="btn btn-primary btn-sm" onClick={applyLink}>
-            Qöşiş
+            Qo‘shish
           </button>
-          <button type="button" className="ed-link__x" onClick={() => setLinkOpen(false)} aria-label="Yopiş">
+          <button type="button" className="ed-link__x" onClick={() => setLinkOpen(false)} aria-label="Yopish">
             <Icon name="x" size={16} />
           </button>
         </div>
@@ -303,14 +303,14 @@ export function Editor({ value, onChange }: { value: RichJson; onChange: (v: Ric
         <Toolbar />
         <div className="ed-body">
           <RichTextPlugin
-            contentEditable={<ContentEditable className="ed-ce" aria-label="Töliq matn" />}
-            placeholder={<p className="ed-ph">Yangilik matnini şu yerga yozing yoki nusxalab qöying…</p>}
+            contentEditable={<ContentEditable className="ed-ce" aria-label="To‘liq matn" />}
+            placeholder={<p className="ed-ph">Yangilik matnini shu yerga yozing yoki nusxalab qo‘ying…</p>}
             ErrorBoundary={LexicalErrorBoundary}
           />
         </div>
         <div className="ed-foot">
-          <span>Matn saqlanganda yangi alifboga avtomatik ötkaziladi</span>
-          <span className="nb">{words} söz</span>
+          <span>Matn saqlanganda yangi alifboga avtomatik o‘tkaziladi</span>
+          <span className="nb">{words} so‘z</span>
         </div>
       </div>
       <HistoryPlugin />

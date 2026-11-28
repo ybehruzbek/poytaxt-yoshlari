@@ -90,7 +90,7 @@ function Directions({ onPick }: { onPick: (id: string) => void }) {
   const d = DIRS.find((x) => x.id === cur)!
   return (
     <div className="vl-dirs">
-      <div className="vl-tiles" role="tablist" aria-label="Volontyorlik yönalişlari">
+      <div className="vl-tiles" role="tablist" aria-label="Volontyorlik yo‘nalishlari">
         {DIRS.map((x) => (
           <button
             key={x.id}
@@ -110,7 +110,7 @@ function Directions({ onPick }: { onPick: (id: string) => void }) {
           <VolIcon n={d.icon} />
           <div>
             <h3>{d.t}</h3>
-            <span className="vl-age">{d.age} yoşdan</span>
+            <span className="vl-age">{d.age} yoshdan</span>
           </div>
         </div>
         <p>{d.text}</p>
@@ -122,11 +122,11 @@ function Directions({ onPick }: { onPick: (id: string) => void }) {
         </ul>
         {d.example && (
           <p className="vl-ex">
-            <b>Kengaş tajribasidan:</b> {d.example}
+            <b>Kengash tajribasidan:</b> {d.example}
           </p>
         )}
         <button type="button" className="more-btn" onClick={() => onPick(d.id)}>
-          <More>Ariza beriş</More>
+          <More>Ariza berish</More>
         </button>
       </div>
     </div>
@@ -172,7 +172,7 @@ function Quiz({ onPick }: { onPick: (id: string) => void }) {
       ) : (
         <div className="vl-quiz-res" aria-live="polite">
           <p className="vl-quiz-n">Natija</p>
-          <h3>Sizga mos yönalişlar</h3>
+          <h3>Sizga mos yo‘nalishlar</h3>
           <div className="vl-quiz-top">
             {top.map((d, i) => (
               <div key={d.id} className={i === 0 ? 'first' : undefined}>
@@ -184,10 +184,10 @@ function Quiz({ onPick }: { onPick: (id: string) => void }) {
           </div>
           <div className="vl-quiz-act">
             <button type="button" className="more-btn" onClick={() => onPick(top[0].id)}>
-              <More>Ariza beriş</More>
+              <More>Ariza berish</More>
             </button>
             <button type="button" className="vl-quiz-back" onClick={() => setAns([])}>
-              Testni qayta topşiriş
+              Testni qayta topshirish
             </button>
           </div>
         </div>
@@ -219,8 +219,8 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
           </p>
         )}
         <p>
-          Kengaş mutaxassisi körsatilgan telefon raqami orqali siz bilan boğlanib, suhbat vaqtini
-          kelişib oladi.
+          Kengash mutaxassisi ko‘rsatilgan telefon raqami orqali siz bilan bog‘lanib, suhbat vaqtini
+          kelishib oladi.
         </p>
       </div>
     )
@@ -252,7 +252,7 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
       <div className="az-row">
         <label className="az-field">
           <span>
-            Tuğilgan yili <i aria-hidden="true">*</i>
+            Tug‘ilgan yili <i aria-hidden="true">*</i>
           </span>
           <select
             name="birthYear"
@@ -289,7 +289,7 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
       </div>
       <label className="az-field">
         <span>
-          Öqiş yoki iş joyi <i aria-hidden="true">*</i>
+          O‘qish yoki ish joyi <i aria-hidden="true">*</i>
         </span>
         <input
           name="place"
@@ -301,7 +301,7 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
       </label>
       <fieldset className="vl-pick">
         <legend>
-          Yönalişlar <i aria-hidden="true">*</i>
+          Yo‘nalishlar <i aria-hidden="true">*</i>
         </legend>
         <div>
           {DIRS.map((d) => (
@@ -331,7 +331,7 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
         </select>
       </label>
       <label className="az-field">
-        <span>Tajriba va qiziqişlar</span>
+        <span>Tajriba va qiziqishlar</span>
         <textarea name="about" rows={3} maxLength={1000} />
       </label>
       <input
@@ -345,17 +345,17 @@ function VolForm({ picked, setPicked }: { picked: string[]; setPicked: (v: strin
       <label className="az-check">
         <input type="checkbox" name="agree" required />
         <span>
-          Şaxsiy maʼlumotlarim volontyorlik faoliyatini taşkil etiş maqsadida qayta işlanişiga
+          Shaxsiy ma’lumotlarim volontyorlik faoliyatini tashkil etish maqsadida qayta ishlanishiga
           roziman.{' '}
           <a href={LAW.url} target="_blank" rel="noopener noreferrer">
-            Volontyorlik faoliyati töğrisidagi Qonun
+            Volontyorlik faoliyati to‘g‘risidagi Qonun
           </a>
         </span>
       </label>
       {err('agree') && <small className="az-err">{err('agree')}</small>}
       {state && !state.ok && <p className="az-msg">{state.message}</p>}
       <button type="submit" className="btn btn-primary" disabled={pending}>
-        {pending ? 'Yuborilmoqda…' : 'Arizani yuboriş'}
+        {pending ? 'Yuborilmoqda…' : 'Arizani yuborish'}
         <span className="ic">
           <svg
             viewBox="0 0 24 24"
@@ -392,7 +392,7 @@ export function VolInteractive({ steps, dirs, page }: { steps: ReactNode; dirs: 
       <section className="sec">
         <div className="wrap">
           <div className="sec-head">
-            <h2 className="h2">Volontyorlik yönalişlari</h2>
+            <h2 className="h2">Volontyorlik yo‘nalishlari</h2>
           </div>
           <Directions onPick={pick} />
         </div>
@@ -400,7 +400,7 @@ export function VolInteractive({ steps, dirs, page }: { steps: ReactNode; dirs: 
       <section className="sec">
         <div className="wrap">
           <div className="sec-head">
-            <h2 className="h2">Sizga mos yönalişni aniqlang</h2>
+            <h2 className="h2">Sizga mos yo‘nalishni aniqlang</h2>
           </div>
           <Quiz onPick={pick} />
         </div>
@@ -409,11 +409,11 @@ export function VolInteractive({ steps, dirs, page }: { steps: ReactNode; dirs: 
       <section className="sec" ref={formRef} id="ariza">
         <div className="wrap vl-form-wrap">
           <div className="vl-form-side">
-            <h2 className="h2">Ariza beriş</h2>
+            <h2 className="h2">Ariza berish</h2>
             <p>
-              Ariza Kengaşda körib çiqiladi. Volontyorlik faoliyatini 16 yoşga tölgan şaxslar amalga
-              oşirişi mumkin; favqulodda vaziyatlar yönalişida faqat 18 yoşdan katta volontyorlar
-              iştirok etadi.
+              Ariza Kengashda ko‘rib chiqiladi. Volontyorlik faoliyatini 16 yoshga to‘lgan shaxslar amalga
+              oshirishi mumkin; favqulodda vaziyatlar yo‘nalishida faqat 18 yoshdan katta volontyorlar
+              ishtirok etadi.
             </p>
           </div>
           <VolForm picked={picked} setPicked={setPicked} />

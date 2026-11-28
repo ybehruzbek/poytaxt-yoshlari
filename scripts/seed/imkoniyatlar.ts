@@ -27,13 +27,13 @@ const NICE = [0.5, 1, 1.5, 2, 3, 4, 5, 8, 10, 20, 50, 100, 200, 400]
 function tok(t: string | undefined): string {
   if (!t) return t ?? ''
   let s = t
-  s = s.replace(new RegExp(`BHMning${S}([\\d,.]+)${S}barobarigaça${S}\\(([\\d\\s\\u00A0]+)${S}sömgaça\\)`, 'g'), (_, kk) => `{BHM≤${kk}}`)
-  s = s.replace(new RegExp(`([\\d][\\d\\s\\u00A0]*?)${S}söm${S}\\(BHMning${S}([\\d,]+)${S}barobari\\)`, 'g'), (_, _n, kk) => `{BHM×${kk}+}`)
-  s = s.replace(new RegExp(`([\\d][\\d\\s\\u00A0]*?)${S}söm${S}\\(bazaviy${S}stipendiyaning${S}([\\d,]+)${S}barobari\\)`, 'g'), (_, _n, kk) => `{STIP×${kk}+}`)
+  s = s.replace(new RegExp(`BHMning${S}([\\d,.]+)${S}barobarigacha${S}\\(([\\d\\s\\u00A0]+)${S}so‘mgacha\\)`, 'g'), (_, kk) => `{BHM≤${kk}}`)
+  s = s.replace(new RegExp(`([\\d][\\d\\s\\u00A0]*?)${S}so‘m${S}\\(BHMning${S}([\\d,]+)${S}barobari\\)`, 'g'), (_, _n, kk) => `{BHM×${kk}+}`)
+  s = s.replace(new RegExp(`([\\d][\\d\\s\\u00A0]*?)${S}so‘m${S}\\(bazaviy${S}stipendiyaning${S}([\\d,]+)${S}barobari\\)`, 'g'), (_, _n, kk) => `{STIP×${kk}+}`)
   for (const [key, v] of [['PREZIDENT', D.STIP_SUM.prezident], ['NOMLI', D.STIP_SUM.nomli], ['ALO', D.STIP_SUM.alo]] as const) {
-    s = s.replace(new RegExp(`${String(v).replace(/\B(?=(\d{3})+(?!\d))/g, `${S}`)}${S}söm`, 'g'), `{${key}}`)
+    s = s.replace(new RegExp(`${String(v).replace(/\B(?=(\d{3})+(?!\d))/g, `${S}`)}${S}so‘m`, 'g'), `{${key}}`)
   }
-  s = s.replace(new RegExp(`(\\d{1,3}(?:${S}\\d{3})+)${S}söm`, 'g'), (m, num) => {
+  s = s.replace(new RegExp(`(\\d{1,3}(?:${S}\\d{3})+)${S}so‘m`, 'g'), (m, num) => {
     const r = n(num) / D.BHM.v
     return NICE.includes(r) ? `{BHM×${k(String(r))}}` : m
   })
@@ -69,9 +69,9 @@ console.log('grantlar:', GRANTS.length)
 
 // 2) Stipendiyalar
 const NAMED: Record<string, [string, string]> = {
-  'islom-karimov': ['yulduz', 'Barça yönalişlar'], navoiy: ['kitob', 'Gumanitar fanlar'], bobur: ['globus', 'Tarix va geografiya'],
-  'imom-buxoriy': ['oy', 'Islomşunoslik'], beruniy: ['tishli', 'Texnika'], 'ibn-sino': ['yurak', 'Tibbiyot'], avloniy: ['qalpoq', 'Pedagogika'],
-  ulugbek: ['atom', 'Tabiiy fanlar'], qaipbergenov: ['qalam', 'Qoraqalpoğiston OTTlari'], yusupov: ['pero', 'Qoraqalpoğiston OTTlari'],
+  'islom-karimov': ['yulduz', 'Barcha yo‘nalishlar'], navoiy: ['kitob', 'Gumanitar fanlar'], bobur: ['globus', 'Tarix va geografiya'],
+  'imom-buxoriy': ['oy', 'Islomshunoslik'], beruniy: ['tishli', 'Texnika'], 'ibn-sino': ['yurak', 'Tibbiyot'], avloniy: ['qalpoq', 'Pedagogika'],
+  ulugbek: ['atom', 'Tabiiy fanlar'], qaipbergenov: ['qalam', 'Qoraqalpog‘iston OTTlari'], yusupov: ['pero', 'Qoraqalpog‘iston OTTlari'],
   'pahlavon-mahmud': ['medal', 'Jismoniy madaniyat va sport'],
 }
 const FLAG: Record<string, string> = {
@@ -132,6 +132,6 @@ for (const d of DIRS) {
     slug: d.id, generateSlug: false, t: d.t, icon: d.icon, age: String(d.age), text: d.text, tasks: d.tasks.map((t) => ({ t })), example: d.example,
   })
 }
-console.log('volontyorlik yönalişlari:', DIRS.length)
+console.log('volontyorlik yo‘nalishlari:', DIRS.length)
 
 process.exit(0)

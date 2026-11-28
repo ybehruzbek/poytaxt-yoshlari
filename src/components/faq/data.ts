@@ -10,9 +10,9 @@ import { ADDRESS, EMAIL, HOURS, LAW, PHONES } from '@/components/boglanish/data'
 export type FaqCat = 'azolik' | 'imtiyoz' | 'taskilot' | 'tadbir' | 'murojaat'
 
 export const FAQ_CATS: { k: FaqCat; t: string }[] = [
-  { k: 'azolik', t: 'Aʼzolik' },
+  { k: 'azolik', t: 'A’zolik' },
   { k: 'imtiyoz', t: 'Imtiyozlar' },
-  { k: 'taskilot', t: 'Boşlanğiç taşkilotlar' },
+  { k: 'taskilot', t: 'Boshlang‘ich tashkilotlar' },
   { k: 'tadbir', t: 'Tadbir va loyihalar' },
   { k: 'murojaat', t: 'Murojaat' },
 ]
@@ -36,61 +36,61 @@ export const FAQ: Faq[] = [
   {
     id: 'kim-azo-bolishi-mumkin',
     cat: 'azolik',
-    q: 'Ittifoqqa kim aʼzo bölişi mumkin?',
+    q: 'Ittifoqqa kim a’zo bo‘lishi mumkin?',
     a: [
-      'Ittifoq maqsadini qöllab-quvvatlaş istagini bildirgan, 14 yoşga tölgan va 30 yoşdan oşmagan Özbekiston Respublikasi fuqarolari hamda Özbekiston Respublikasida muntazam yaşab kelayotgan fuqaroligi bölmagan şaxslar aʼzo bölişi mumkin.',
+      'Ittifoq maqsadini qo‘llab-quvvatlash istagini bildirgan, 14 yoshga to‘lgan va 30 yoshdan oshmagan O‘zbekiston Respublikasi fuqarolari hamda O‘zbekiston Respublikasida muntazam yashab kelayotgan fuqaroligi bo‘lmagan shaxslar a’zo bo‘lishi mumkin.',
     ],
     more: { href: USTAV('4.2'), label: 'Ustavning 4.2-bandi' },
   },
   {
     id: 'qanday-azo-bolaman',
     cat: 'azolik',
-    q: 'Ittifoqqa aʼzo böliş tartibi qanday?',
-    a: ['Ariza öqiş yoki iş joyidagi Ittifoq boşlanğiç taşkilotiga taqdim etiladi.'],
+    q: 'Ittifoqqa a’zo bo‘lish tartibi qanday?',
+    a: ['Ariza o‘qish yoki ish joyidagi Ittifoq boshlang‘ich tashkilotiga taqdim etiladi.'],
     li: [
-      'Arizani boşlanğiç taşkilotning Umumiy yiğilişi yoki, Kengaş şakllantirilgan bölsa, boşlanğiç taşkilot Kengaşi körib çiqadi.',
-      'Qabul qiliş töğrisidagi qaror yakuniy hisoblanadi, yuqori organlar tasdiği talab qilinmaydi.',
-      'Boşlanğiç taşkilot aniqlanmagan hollarda ariza saytdagi “Aʼzo böliş” şakli orqali Kengaşga yuborilişi mumkin.',
+      'Arizani boshlang‘ich tashkilotning Umumiy yig‘ilishi yoki, Kengash shakllantirilgan bo‘lsa, boshlang‘ich tashkilot Kengashi ko‘rib chiqadi.',
+      'Qabul qilish to‘g‘risidagi qaror yakuniy hisoblanadi, yuqori organlar tasdig‘i talab qilinmaydi.',
+      'Boshlang‘ich tashkilot aniqlanmagan hollarda ariza saytdagi “A’zo bo‘lish” shakli orqali Kengashga yuborilishi mumkin.',
     ],
-    more: { href: '/biz-haqimizda/ittifoq#azo-bolish', label: 'Aʼzolik tartibi' },
+    more: { href: '/biz-haqimizda/ittifoq#azo-bolish', label: 'A’zolik tartibi' },
   },
   {
     id: 'azolik-badali',
     cat: 'azolik',
-    q: 'Aʼzolik badali undiriladimi?',
+    q: 'A’zolik badali undiriladimi?',
     a: [
-      'Ittifoq Ustavida aʼzolik badali közda tutilmagan. Ittifoq mulki ixtiyoriy mulkiy badallar va ehsonlar, tadbirkorlik faoliyatidan olingan daromadlar, grant, subsidiya va ijtimoiy buyurtma mablağlari, bosma naşrlardan tuşumlar hamda qonun hujjatlarida taqiqlanmagan boşqa tuşumlar hisobidan şakllanadi.',
+      'Ittifoq Ustavida a’zolik badali ko‘zda tutilmagan. Ittifoq mulki ixtiyoriy mulkiy badallar va ehsonlar, tadbirkorlik faoliyatidan olingan daromadlar, grant, subsidiya va ijtimoiy buyurtma mablag‘lari, bosma nashrlardan tushumlar hamda qonun hujjatlarida taqiqlanmagan boshqa tushumlar hisobidan shakllanadi.',
     ],
     more: { href: USTAV('7.2'), label: 'Ustavning 7.2-bandi' },
   },
   {
     id: '30-yoshdan-keyin',
     cat: 'azolik',
-    q: 'Aʼzo 30 yoşdan oşgaç uning aʼzoligi qanday hal etiladi?',
+    q: 'A’zo 30 yoshdan oshgach uning a’zoligi qanday hal etiladi?',
     a: [
-      'Aʼzoning yoşi 30 dan oşgaç uning aʼzoligi bekor qilinişi mumkin. Ittifoqning rahbar organlariga saylangan aʼzolarga bu yoş çeklovi qöllanilmaydi.',
+      'A’zoning yoshi 30 dan oshgach uning a’zoligi bekor qilinishi mumkin. Ittifoqning rahbar organlariga saylangan a’zolarga bu yosh cheklovi qo‘llanilmaydi.',
     ],
     more: { href: USTAV('4.6'), label: 'Ustavning 4.3 va 4.6-bandlari' },
   },
   {
     id: 'huquq-va-majburiyatlar',
     cat: 'azolik',
-    q: 'Ittifoq aʼzosi qanday huquqlarga ega?',
-    a: ['Ustavga köra aʼzo quyidagi huquqlarga ega:'],
+    q: 'Ittifoq a’zosi qanday huquqlarga ega?',
+    a: ['Ustavga ko‘ra a’zo quyidagi huquqlarga ega:'],
     li: [
-      'umumiy yiğilişlar, konferensiyalar va Qurultoyda öz fikrini erkin ifoda etiş;',
-      'saylanadigan rahbar organlar va nazorat-taftiş organlariga saylaş va saylaniş;',
-      'Ittifoq organlari faoliyati töğrisida maʼlumot oliş;',
-      'har qanday rahbar organga ariza va takliflar bilan murojaat etiş.',
+      'umumiy yig‘ilishlar, konferensiyalar va Qurultoyda o‘z fikrini erkin ifoda etish;',
+      'saylanadigan rahbar organlar va nazorat-taftish organlariga saylash va saylanish;',
+      'Ittifoq organlari faoliyati to‘g‘risida ma’lumot olish;',
+      'har qanday rahbar organga ariza va takliflar bilan murojaat etish.',
     ],
     more: { href: USTAV('4.10'), label: 'Ustavning 4.10-bandi' },
   },
   {
     id: 'yuridik-shaxslar',
     cat: 'azolik',
-    q: 'Yuridik şaxslar Ittifoqqa aʼzo bölişi mumkinmi?',
+    q: 'Yuridik shaxslar Ittifoqqa a’zo bo‘lishi mumkinmi?',
     a: [
-      'Mumkin. Yoşlar sohasidagi nodavlat notijorat taşkilotlari, korxona, muassasa va taşkilotlar, markazlar, klublar hamda taʼsis hujjatlari Ittifoqning Ustav maqsadlari, vazifalari va dasturiy hujjatlariga zid bölmagan boşqa yuridik şaxslar aʼzo bölişi mumkin. Ular Ittifoq Markaziy Kengaşi Ijroiya qömitasining qarori bilan aʼzolikka qabul qilinadi.',
+      'Mumkin. Yoshlar sohasidagi nodavlat notijorat tashkilotlari, korxona, muassasa va tashkilotlar, markazlar, klublar hamda ta’sis hujjatlari Ittifoqning Ustav maqsadlari, vazifalari va dasturiy hujjatlariga zid bo‘lmagan boshqa yuridik shaxslar a’zo bo‘lishi mumkin. Ular Ittifoq Markaziy Kengashi Ijroiya qo‘mitasining qarori bilan a’zolikka qabul qilinadi.',
     ],
     more: { href: USTAV('4.7'), label: 'Ustavning 4.7 va 4.8-bandlari' },
   },
@@ -99,31 +99,31 @@ export const FAQ: Faq[] = [
   {
     id: 'qanday-imtiyozlar-bor',
     cat: 'imtiyoz',
-    q: 'Ittifoq orqali qanday imtiyozlardan foydalaniş mumkin?',
+    q: 'Ittifoq orqali qanday imtiyozlardan foydalanish mumkin?',
     a: ['Ittifoq quyidagi imtiyozlarni beradi:'],
     li: [
-      '“Özbekiston belgisi” kökrak nişoni — Markaziy Kengaş qarori bilan;',
-      'oliy taʼlimning pedagogika yönalişlariga test sinovlarisiz, davlat granti asosida qabul uçun tavsiyanoma;',
-      'harbiy xizmatdan keyin kontrakt asosida öqiyotgan talabalar uçun kontrakt summasining 35 foizini tölab beriş;',
-      'sudda javob berayotgan yoşlar uçun Ittifoq kafilligi.',
+      '“O‘zbekiston belgisi” ko‘krak nishoni — Markaziy Kengash qarori bilan;',
+      'oliy ta’limning pedagogika yo‘nalishlariga test sinovlarisiz, davlat granti asosida qabul uchun tavsiyanoma;',
+      'harbiy xizmatdan keyin kontrakt asosida o‘qiyotgan talabalar uchun kontrakt summasining 35 foizini to‘lab berish;',
+      'sudda javob berayotgan yoshlar uchun Ittifoq kafilligi.',
     ],
     more: { href: '/biz-haqimizda/ittifoq#mukofotlar', label: 'Mukofot va imtiyozlar' },
   },
   {
     id: 'tavsiyanoma',
     cat: 'imtiyoz',
-    q: 'Oliy taʼlimga tavsiyanoma kimga beriladi?',
+    q: 'Oliy ta’limga tavsiyanoma kimga beriladi?',
     a: [
-      'Ittifoq tizimidagi sardorlar, yönaliş yetakçilari va tizimda ikki yil faoliyat yuritgan yoşlarga. Tavsiyanoma bilan doimiy yaşaş joyidagi oliy taʼlim taşkilotining pedagogika yönalişlariga test sinovlarisiz, davlat granti asosida qabul qilinadi. Har yili har bir hududdan 1 nafar yoş tavsiya etiladi.',
+      'Ittifoq tizimidagi sardorlar, yo‘nalish yetakchilari va tizimda ikki yil faoliyat yuritgan yoshlarga. Tavsiyanoma bilan doimiy yashash joyidagi oliy ta’lim tashkilotining pedagogika yo‘nalishlariga test sinovlarisiz, davlat granti asosida qabul qilinadi. Har yili har bir hududdan 1 nafar yosh tavsiya etiladi.',
     ],
     more: { href: '/biz-haqimizda/ittifoq#mukofotlar', label: 'Mukofot va imtiyozlar' },
   },
   {
     id: 'harbiydan-keyin-kontrakt',
     cat: 'imtiyoz',
-    q: 'Harbiy xizmatdan keyin kontrakt tölovi böyiça qanday yordam bor?',
+    q: 'Harbiy xizmatdan keyin kontrakt to‘lovi bo‘yicha qanday yordam bor?',
     a: [
-      'Muddatli harbiy xizmatni ötab, harbiy qism qömondonligining tavsiyanomasi bilan oliy taʼlim taşkilotiga tölov-kontrakt asosida qabul qilingan talabalarning kontrakt summasining 35 foizi Ittifoq tomonidan tölab beriladi.',
+      'Muddatli harbiy xizmatni o‘tab, harbiy qism qo‘mondonligining tavsiyanomasi bilan oliy ta’lim tashkilotiga to‘lov-kontrakt asosida qabul qilingan talabalarning kontrakt summasining 35 foizi Ittifoq tomonidan to‘lab beriladi.',
     ],
     more: { href: '/biz-haqimizda/ittifoq#mukofotlar', label: 'Mukofot va imtiyozlar' },
   },
@@ -132,38 +132,38 @@ export const FAQ: Faq[] = [
   {
     id: 'boshlangich-qanday-tuziladi',
     cat: 'taskilot',
-    q: 'Boşlanğiç taşkilot qanday tuziladi?',
+    q: 'Boshlang‘ich tashkilot qanday tuziladi?',
     a: [
-      'Boşlanğiç taşkilot iş, öqiş yoki xizmat joyida kamida beş nafar Ittifoq aʼzosi (xayrixoh yoşlar) bölganda ularning yiğilişi qarori bilan va Ustavda belgilangan Ittifoq kengaşining roziligi bilan tuziladi.',
+      'Boshlang‘ich tashkilot ish, o‘qish yoki xizmat joyida kamida besh nafar Ittifoq a’zosi (xayrixoh yoshlar) bo‘lganda ularning yig‘ilishi qarori bilan va Ustavda belgilangan Ittifoq kengashining roziligi bilan tuziladi.',
     ],
     more: { href: USTAV('6.2.2'), label: 'Ustavning 6.2.2-bandi' },
   },
   {
     id: 'ott-yetakchisi',
     cat: 'taskilot',
-    q: 'Oliy taʼlim taşkilotidagi yoşlar yetakçisi haqidagi maʼlumotni qayerdan oliş mumkin?',
+    q: 'Oliy ta’lim tashkilotidagi yoshlar yetakchisi haqidagi ma’lumotni qayerdan olish mumkin?',
     a: [
-      'Toşkent şahridagi oliy taʼlim taşkilotlari boşlanğiç taşkilotlarining yoşlar yetakçilari röyxati “OTT yoşlar yetakçilari” sahifasida berilgan. Unda OTT nomi yoki yetakçining ismi böyiça qidiriş mumkin.',
+      'Toshkent shahridagi oliy ta’lim tashkilotlari boshlang‘ich tashkilotlarining yoshlar yetakchilari ro‘yxati “OTT yoshlar yetakchilari” sahifasida berilgan. Unda OTT nomi yoki yetakchining ismi bo‘yicha qidirish mumkin.',
     ],
-    more: { href: '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim', label: 'OTT yoşlar yetakçilari' },
+    more: { href: '/biz-haqimizda/boshlangich-tashkilotlar/oliy-talim', label: 'OTT yoshlar yetakchilari' },
   },
 
   /* ---------------- Tadbir va loyihalar ---------------- */
   {
     id: 'tadbirda-qatnashish',
     cat: 'tadbir',
-    q: 'Tadbir va tanlovlarda iştirok etiş tartibi qanday?',
+    q: 'Tadbir va tanlovlarda ishtirok etish tartibi qanday?',
     a: [
-      'Tanlovlar, röyxatdan ötiş va çellenjlar “Eʼlonlar” sahifasida, rejalaştirilgan tadbirlar “Tadbirlar va kalendar” sahifasida eʼlon qilinadi. Har bir eʼlonda qatnaşiş şartlari körsatiladi.',
+      'Tanlovlar, ro‘yxatdan o‘tish va chellenjlar “E’lonlar” sahifasida, rejalashtirilgan tadbirlar “Tadbirlar va kalendar” sahifasida e’lon qilinadi. Har bir e’londa qatnashish shartlari ko‘rsatiladi.',
     ],
-    more: { href: '/faoliyat/elonlar', label: 'Eʼlonlar' },
+    more: { href: '/faoliyat/elonlar', label: 'E’lonlar' },
   },
   {
     id: 'loyiha-taklif',
     cat: 'tadbir',
-    q: 'Loyiha ğoyasini qanday taklif etiş mumkin?',
+    q: 'Loyiha g‘oyasini qanday taklif etish mumkin?',
     a: [
-      '“Elektron murojaat” sahifasida murojaat turi sifatida “Taklif” tanlanadi va ğoya bayon etiladi. Hujjat yoki taqdimot faylini (PDF, Word, rasm, 10 MB gaça) biriktiriş mumkin.',
+      '“Elektron murojaat” sahifasida murojaat turi sifatida “Taklif” tanlanadi va g‘oya bayon etiladi. Hujjat yoki taqdimot faylini (PDF, Word, rasm, 10 MB gacha) biriktirish mumkin.',
     ],
     more: { href: '/boglanish/murojaat', label: 'Elektron murojaat' },
   },
@@ -172,33 +172,33 @@ export const FAQ: Faq[] = [
   {
     id: 'qanday-murojaat',
     cat: 'murojaat',
-    q: 'Kengaşga qanday murojaat qiliş mumkin?',
+    q: 'Kengashga qanday murojaat qilish mumkin?',
     a: ['Murojaat quyidagi usullarda qabul qilinadi:'],
     li: [
-      'saytdagi “Elektron murojaat” şakli orqali;',
-      `elektron poçta orqali: ${EMAIL};`,
+      'saytdagi “Elektron murojaat” shakli orqali;',
+      `elektron pochta orqali: ${EMAIL};`,
       `telefon orqali: ${PHONES.map((p) => p.v).join(', ')};`,
-      'Kengaş raisi va bölim boşliqlarining fuqarolar qabulida (jadval “Aloqa maʼlumotlari” sahifasida).',
+      'Kengash raisi va bo‘lim boshliqlarining fuqarolar qabulida (jadval “Aloqa ma’lumotlari” sahifasida).',
     ],
     more: { href: '/boglanish/murojaat', label: 'Elektron murojaat' },
   },
   {
     id: 'murojaat-muddati',
     cat: 'murojaat',
-    q: 'Murojaatlar qanday muddatda körib çiqiladi?',
+    q: 'Murojaatlar qanday muddatda ko‘rib chiqiladi?',
     a: [
-      `${LAW.title}ning 28-moddasiga köra ariza va şikoyatlar kelib tuşgan kundan boşlab 15 kun ičida, qöşimça tekşiriş yoki hujjatlar talab etilsa, bir oygaça muddatda körib çiqiladi. Takliflar bir oygaça muddatda körib çiqiladi.`,
+      `${LAW.title}ning 28-moddasiga ko‘ra ariza va shikoyatlar kelib tushgan kundan boshlab 15 kun ičida, qo‘shimcha tekshirish yoki hujjatlar talab etilsa, bir oygacha muddatda ko‘rib chiqiladi. Takliflar bir oygacha muddatda ko‘rib chiqiladi.`,
     ],
     more: { href: '/boglanish/murojaat', label: 'Elektron murojaat' },
   },
   {
     id: 'qayerda-joylashgan',
     cat: 'murojaat',
-    q: 'Kengaş qayerda joylaşgan va qaçon işlaydi?',
+    q: 'Kengash qayerda joylashgan va qachon ishlaydi?',
     a: [
-      `${ADDRESS.line} (${ADDRESS.landmark}). Iş vaqti: ${HOURS.days.toLowerCase()}, ${HOURS.time}. ${HOURS.off}.`,
+      `${ADDRESS.line} (${ADDRESS.landmark}). Ish vaqti: ${HOURS.days.toLowerCase()}, ${HOURS.time}. ${HOURS.off}.`,
     ],
-    more: { href: '/boglanish/aloqa', label: 'Aloqa maʼlumotlari' },
+    more: { href: '/boglanish/aloqa', label: 'Aloqa ma’lumotlari' },
   },
 ]
 

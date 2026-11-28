@@ -12,7 +12,7 @@ export const VolontyorlikSahifa: GlobalConfig = {
   admin: {
     group: G.faoliyat,
     description:
-      'Saytdagi “Volontyorlik” sahifasi matnlari. Yönalişlar — “Volontyorlik yönalişlari” bölimida, kelgan arizalar — “Murojaatlar → Volontyorlar”.',
+      'Saytdagi “Volontyorlik” sahifasi matnlari. Yo‘nalishlar — “Volontyorlik yo‘nalishlari” bo‘limida, kelgan arizalar — “Murojaatlar → Volontyorlar”.',
     preview: (_d, { locale }) => saytManzil('/faoliyat/volontyorlik', locale),
   },
   access: sahifa,
@@ -30,17 +30,17 @@ export const VolontyorlikSahifa: GlobalConfig = {
               label: 'Sarlavha ostidagi raqamlar',
               type: 'array',
               labels: { singular: 'Raqam', plural: 'Raqamlar' },
-              admin: { description: 'Raqam örnida {TADBIRLAR} yozilsa, saytdagi volontyorlik tadbirlari soni özi qöyiladi.' },
+              admin: { description: 'Raqam o‘rnida {TADBIRLAR} yozilsa, saytdagi volontyorlik tadbirlari soni o‘zi qo‘yiladi.' },
               fields: [qator(matn('v', 'Raqam', { majburiy: true, tilli: false, kenglik: '25%', namuna: '1 287' }), matn('t', 'Izoh', { majburiy: true, kenglik: '75%' }))],
             },
             {
               name: 'steps',
-              label: 'Volontyor böliş tartibi',
+              label: 'Volontyor bo‘lish tartibi',
               type: 'array',
-              labels: { singular: 'Bosqiç', plural: 'Bosqiçlar' },
-              fields: [matn('t', 'Bosqiç nomi', { majburiy: true }), uzunMatn('d', 'Izoh', { majburiy: true, qator: 2 })],
+              labels: { singular: 'Bosqich', plural: 'Bosqichlar' },
+              fields: [matn('t', 'Bosqich nomi', { majburiy: true }), uzunMatn('d', 'Izoh', { majburiy: true, qator: 2 })],
             },
-            bandlar('times', 'Ariza şaklidagi bandlik vaqtlari', { band: 'Variant' }),
+            bandlar('times', 'Ariza shaklidagi bandlik vaqtlari', { band: 'Variant' }),
           ],
         },
         {
@@ -50,21 +50,21 @@ export const VolontyorlikSahifa: GlobalConfig = {
               name: 'law',
               label: 'Qonun',
               type: 'group',
-              fields: [matn('t', 'Qonun nomi', { majburiy: true }), qator(matn('no', 'Raqami va sanasi', { kenglik: '40%', namuna: 'ÖRQ–585, 2019-yil 2-dekabr' }), { ...havola('url', 'Rasmiy matni (lex.uz)'), admin: { width: '60%' } })],
+              fields: [matn('t', 'Qonun nomi', { majburiy: true }), qator(matn('no', 'Raqami va sanasi', { kenglik: '40%', namuna: 'O‘RQ–585, 2019-yil 2-dekabr' }), { ...havola('url', 'Rasmiy matni (lex.uz)'), admin: { width: '60%' } })],
             },
             bandlar('rights', 'Volontyor huquqlari', { band: 'Huquq' }),
             bandlar('duties', 'Volontyor majburiyatlari', { band: 'Majburiyat' }),
           ],
         },
         {
-          label: 'Yönaliş tanlaş testi',
+          label: 'Yo‘nalish tanlash testi',
           fields: [
             {
               name: 'quiz',
               label: 'Test savollari',
               type: 'array',
               labels: { singular: 'Savol', plural: 'Savollar' },
-              admin: { description: 'Har bir javob tanlangan yönalişlarga bir ball beradi; eng köp ball olgan yönalişlar natijada körsatiladi.' },
+              admin: { description: 'Har bir javob tanlangan yo‘nalishlarga bir ball beradi; eng ko‘p ball olgan yo‘nalishlar natijada ko‘rsatiladi.' },
               fields: [
                 matn('q', 'Savol', { majburiy: true }),
                 {
@@ -72,7 +72,7 @@ export const VolontyorlikSahifa: GlobalConfig = {
                   label: 'Javoblar',
                   type: 'array',
                   labels: { singular: 'Javob', plural: 'Javoblar' },
-                  fields: [qator(matn('t', 'Javob', { majburiy: true, kenglik: '50%' }), { name: 'dirs', label: 'Qaysi yönalişlarga mos', type: 'relationship', relationTo: 'vol-directions', hasMany: true, required: true, admin: { width: '50%' } })],
+                  fields: [qator(matn('t', 'Javob', { majburiy: true, kenglik: '50%' }), { name: 'dirs', label: 'Qaysi yo‘nalishlarga mos', type: 'relationship', relationTo: 'vol-directions', hasMany: true, required: true, admin: { width: '50%' } })],
                 },
               ],
             },

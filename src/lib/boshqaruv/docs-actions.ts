@@ -17,11 +17,11 @@ function fromError(e: unknown): DocSaveResult {
   if (e instanceof ValidationError) {
     const fields: Record<string, string> = {}
     for (const er of e.data.errors) fields[er.path] = er.message
-    return { ok: false, message: `${Object.keys(fields).length} ta maydonni tekşiring`, fields }
+    return { ok: false, message: `${Object.keys(fields).length} ta maydonni tekshiring`, fields }
   }
   const msg = e instanceof Error ? e.message : ''
-  if (/unique|duplicate|already/i.test(msg)) return { ok: false, message: 'Bunday qiymat allaqaçon bor (masalan, sahifa manzili). Boşqasini yozing.' }
-  return { ok: false, message: 'Saqlab bölmadi. Birozdan keyin qayta urinib köring.' }
+  if (/unique|duplicate|already/i.test(msg)) return { ok: false, message: 'Bunday qiymat allaqachon bor (masalan, sahifa manzili). Boshqasini yozing.' }
+  return { ok: false, message: 'Saqlab bo‘lmadi. Birozdan keyin qayta urinib ko‘ring.' }
 }
 
 /**
@@ -29,11 +29,11 @@ function fromError(e: unknown): DocSaveResult {
  * Qoralamali bölimlarda `draft` — saytga çiqmaydi, `publish` — çiqadi.
  */
 export async function saveDoc(slug: string, id: number | null, values: Record<string, unknown>, mode: 'draft' | 'publish'): Promise<DocSaveResult> {
-  if ((id !== null && !isId(id)) || !values || typeof values !== 'object') return { ok: false, message: 'Notöğri söröv.' }
+  if ((id !== null && !isId(id)) || !values || typeof values !== 'object') return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await getUser()
-  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const schema = await collectionSchema(slug)
-  if (!schema) return { ok: false, message: 'Bunday bölim yöq.' }
+  if (!schema) return { ok: false, message: 'Bunday bo‘lim yo‘q.' }
   const payload = await getPayloadClient()
   const data = { ...toSaveData(schema.fields, values), ...(schema.drafts ? { _status: mode === 'publish' ? 'published' : 'draft' } : {}) }
   const draft = schema.drafts && mode === 'draft'
@@ -49,11 +49,11 @@ export async function saveDoc(slug: string, id: number | null, values: Record<st
 }
 
 export async function saveGlobalDoc(slug: string, values: Record<string, unknown>, mode: 'draft' | 'publish'): Promise<DocSaveResult> {
-  if (!values || typeof values !== 'object') return { ok: false, message: 'Notöğri söröv.' }
+  if (!values || typeof values !== 'object') return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await getUser()
-  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const schema = await globalSchema(slug)
-  if (!schema) return { ok: false, message: 'Bunday sahifa yöq.' }
+  if (!schema) return { ok: false, message: 'Bunday sahifa yo‘q.' }
   const payload = await getPayloadClient()
   const data = { ...toSaveData(schema.fields, values), ...(schema.drafts ? { _status: mode === 'publish' ? 'published' : 'draft' } : {}) }
   try {
@@ -67,17 +67,17 @@ export async function saveGlobalDoc(slug: string, values: Record<string, unknown
 
 /** Öçiriş — faqat administrator */
 export async function deleteDoc(slug: string, id: number): Promise<{ ok: boolean; message: string }> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await getUser()
-  if (!user || user.role !== 'admin') return { ok: false, message: 'Öçiriş faqat administratorga ruxsat etilgan.' }
-  if (!(await collectionSchema(slug))) return { ok: false, message: 'Bunday bölim yöq.' }
+  if (!user || user.role !== 'admin') return { ok: false, message: 'O‘chirish faqat administratorga ruxsat etilgan.' }
+  if (!(await collectionSchema(slug))) return { ok: false, message: 'Bunday bo‘lim yo‘q.' }
   const payload = await getPayloadClient()
   try {
     await payload.delete({ collection: slug as never, id, user, overrideAccess: false })
     revalidatePath(`/boshqaruv/bolim/${slug}`, 'layout')
-    return { ok: true, message: 'Öçirildi' }
+    return { ok: true, message: 'O‘chirildi' }
   } catch (e) {
     const m = e instanceof Error ? e.message : ''
-    return { ok: false, message: /foreign|reference|constraint/i.test(m) ? 'Bu yozuvga boşqa bölimlar boğlangan — avval ulardan olib taşlang.' : 'Öçirib bölmadi.' }
+    return { ok: false, message: /foreign|reference|constraint/i.test(m) ? 'Bu yozuvga boshqa bo‘limlar bog‘langan — avval ulardan olib tashlang.' : 'O‘chirib bo‘lmadi.' }
   }
 }

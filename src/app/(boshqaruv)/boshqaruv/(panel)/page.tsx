@@ -9,13 +9,13 @@ import type { Media } from '@/payload-types'
 import { getPayloadClient, requireUser } from '@/lib/boshqaruv/auth'
 import { bugunBoshi, bugunSarlavha, kunOldin, oyChegaralari, oyNomi, qisqaVaqt, sanaVaqt } from '@/lib/boshqaruv/vaqt'
 
-export const metadata = { title: { absolute: 'Boşqaruv paneli' } }
+export const metadata = { title: { absolute: 'Boshqaruv paneli' } }
 
 const CAT = Object.fromEntries(NEWS_CATEGORIES.map((c) => [c.value, c.label])) as Record<string, string>
 const APPEAL_TYPE: Record<string, { t: string; c: string }> = {
   ariza: { t: 'Ariza', c: 't-orange' },
   taklif: { t: 'Taklif', c: 't-blue' },
-  shikoyat: { t: 'Şikoyat', c: 't-pink' },
+  shikoyat: { t: 'Shikoyat', c: 't-pink' },
 }
 
 const thumb = (img: unknown) => {
@@ -49,7 +49,7 @@ async function inbox(payload: Payload): Promise<{ tabs: InboxTab[]; today: numbe
       },
       {
         key: 'memberships',
-        t: 'Aʼzolik',
+        t: 'A’zolik',
         total: m.totalDocs,
         href: '/boshqaruv/kiruvchi/azolik',
         items: m.docs.map((d) => it({ id: d.id, name: d.name, text: d.place, when: qisqaVaqt(d.createdAt), href: `/boshqaruv/kiruvchi/azolik?id=${d.id}` })),
@@ -111,19 +111,19 @@ export default async function Dashboard() {
       <Top
         title={
           <>
-            Xuş kelibsiz, <span>{first}</span>
+            Xush kelibsiz, <span>{first}</span>
           </>
         }
-        sub={`${bugunSarlavha()} · ${pending > 0 ? `javob kutayotgan ${pending} ta xabar bor` : 'barça xabarlar körib çiqilgan'}`}
+        sub={`${bugunSarlavha()} · ${pending > 0 ? `javob kutayotgan ${pending} ta xabar bor` : 'barcha xabarlar ko‘rib chiqilgan'}`}
       >
         <a className="btn btn-ghost" href="/uz" target="_blank" rel="noopener noreferrer">
           <Icon name="ext" size={18} />
-          Saytni oçiş
+          Saytni ochish
         </a>
         {isContent && (
           <Link className="btn btn-primary" href="/boshqaruv/yangiliklar/yangi" prefetch={false}>
             <Icon name="plus" size={18} />
-            <span>Yangilik qöşiş</span>
+            <span>Yangilik qo‘shish</span>
           </Link>
         )}
       </Top>
@@ -139,7 +139,7 @@ export default async function Dashboard() {
                 <div>
                   <b>{ib.tabs[0].total}</b>
                   <span>Javob kutayotgan murojaatlar</span>
-                  <small>{ib.today > 0 ? <em>+{ib.today} bugun</em> : 'bugun yangi murojaat yöq'}</small>
+                  <small>{ib.today > 0 ? <em>+{ib.today} bugun</em> : 'bugun yangi murojaat yo‘q'}</small>
                 </div>
               </Link>
               <Link className="stat" href="/boshqaruv/kiruvchi/azolik" prefetch={false}>
@@ -148,9 +148,9 @@ export default async function Dashboard() {
                 </span>
                 <div>
                   <b>{ib.tabs[1].total + ib.tabs[2].total}</b>
-                  <span>Körib çiqilmagan arizalar</span>
+                  <span>Ko‘rib chiqilmagan arizalar</span>
                   <small>
-                    {ib.tabs[1].total} aʼzolik, {ib.tabs[2].total} volontyorlik
+                    {ib.tabs[1].total} a’zolik, {ib.tabs[2].total} volontyorlik
                   </small>
                 </div>
               </Link>
@@ -164,7 +164,7 @@ export default async function Dashboard() {
                 </span>
                 <div>
                   <b>{ct.thisMonth}</b>
-                  <span>{`${oyNomi(ct.oy)[0].toLocaleUpperCase('uz')}${oyNomi(ct.oy).slice(1)}da eʼlon qilingan yangiliklar`}</span>
+                  <span>{`${oyNomi(ct.oy)[0].toLocaleUpperCase('uz')}${oyNomi(ct.oy).slice(1)}da e’lon qilingan yangiliklar`}</span>
                   <small>
                     {diff === 0 ? (
                       `1–${ct.kun}-${oyNomi(ct.prevOy)} bilan teng`
@@ -188,7 +188,7 @@ export default async function Dashboard() {
                   <b>{ct.drafts}</b>
                   <span>Tugallanmagan qoralamalar</span>
                   <small>
-                    {ct.draftList[0] ? `eng eskisi ${kunOldin(ct.draftList[0].updatedAt)} kun oldin` : 'qoralama yöq'}
+                    {ct.draftList[0] ? `eng eskisi ${kunOldin(ct.draftList[0].updatedAt)} kun oldin` : 'qoralama yo‘q'}
                   </small>
                 </div>
               </Link>
@@ -213,7 +213,7 @@ export default async function Dashboard() {
                 <div>
                   <b>{ib.tabs[3].total}</b>
                   <span>Saytdagi matn xatolari</span>
-                  <small>foydalanuvçilar xabar bergan</small>
+                  <small>foydalanuvchilar xabar bergan</small>
                 </div>
               </Link>
             </>
@@ -228,7 +228,7 @@ export default async function Dashboard() {
                 <div className="card__head">
                   <h2>Oxirgi yangiliklar</h2>
                   <Link className="more" href="/boshqaruv/yangiliklar" prefetch={false}>
-                    Barçasi
+                    Barchasi
                     <Icon name="chev" size={16} />
                   </Link>
                 </div>
@@ -262,25 +262,25 @@ export default async function Dashboard() {
                     <span className="stat__ic ic-green">
                       <Icon name="news" size={18} />
                     </span>
-                    Yangilik qöşiş
+                    Yangilik qo‘shish
                   </Link>
                   <Link href="/admin/collections/events/create" prefetch={false}>
                     <span className="stat__ic ic-blue">
                       <Icon name="calendar" size={18} />
                     </span>
-                    Tadbir eʼlon qiliş
+                    Tadbir e’lon qilish
                   </Link>
                   <Link href="/admin/collections/grants/create" prefetch={false}>
                     <span className="stat__ic ic-yellow">
                       <Icon name="star" size={18} />
                     </span>
-                    Grant qöşiş
+                    Grant qo‘shish
                   </Link>
                   <Link href="/admin/collections/kengash-docs/create" prefetch={false}>
                     <span className="stat__ic ic-orange">
                       <Icon name="upload" size={18} />
                     </span>
-                    Hujjat yuklaş
+                    Hujjat yuklash
                   </Link>
                 </div>
               </section>
@@ -290,13 +290,13 @@ export default async function Dashboard() {
                   <h2>Qoralamalar</h2>
                   {ct.drafts > 0 && (
                     <Link className="more" href="/boshqaruv/yangiliklar?holat=draft" prefetch={false}>
-                      Barçasi
+                      Barchasi
                       <Icon name="chev" size={16} />
                     </Link>
                   )}
                 </div>
                 {ct.draftList.length === 0 ? (
-                  <p className="empty">Tugallanmagan qoralama yöq</p>
+                  <p className="empty">Tugallanmagan qoralama yo‘q</p>
                 ) : (
                   <ul className="list">
                     {ct.draftList.map((n) => (
@@ -316,14 +316,14 @@ export default async function Dashboard() {
 
               <section className="card">
                 <div className="card__head">
-                  <h2>Oxirgi özgarişlar</h2>
+                  <h2>Oxirgi o‘zgarishlar</h2>
                 </div>
                 <ul className="log">
                   {ct.changed.map((n) => (
                     <li key={n.id}>
                       <div>
                         <p>
-                          {n._status === 'draft' ? 'Qoralama saqlandi' : n.createdAt === n.updatedAt ? 'Yangilik eʼlon qilindi' : 'Yangilik tahrirlandi'}:{' '}
+                          {n._status === 'draft' ? 'Qoralama saqlandi' : n.createdAt === n.updatedAt ? 'Yangilik e’lon qilindi' : 'Yangilik tahrirlandi'}:{' '}
                           <b>{n.title}</b>
                         </p>
                         <small>{qisqaVaqt(n.updatedAt)}</small>

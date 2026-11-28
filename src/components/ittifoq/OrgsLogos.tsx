@@ -2,7 +2,7 @@
 import type { IttifoqData } from '@/lib/cms/sahifalar'
 import { ShowMore } from './ShowMore'
 
-const TITLE = 'Ittifoq taʼsisçiligidagi taşkilotlar'
+const TITLE = 'Ittifoq ta’sischiligidagi tashkilotlar'
 
 function Logo({ src, alt, className }: { src?: string; alt: string; className: string }) {
   return <span className={className}>{src && <img src={src} alt={alt} loading="lazy" />}</span>
@@ -19,11 +19,11 @@ export function OrgsD({ D }: { D: IttifoqData }) {
           <div className="og-facts">
             <div>
               <b>36</b>
-              <span>Ittifoq tizimidagi taşkilotlar</span>
+              <span>Ittifoq tizimidagi tashkilotlar</span>
             </div>
             <div>
               <b>19</b>
-              <span>nodavlat notijorat taşkilotlar</span>
+              <span>nodavlat notijorat tashkilotlar</span>
             </div>
             <div>
               <b>228</b>
@@ -37,13 +37,13 @@ export function OrgsD({ D }: { D: IttifoqData }) {
               <Logo src={o.logo} alt={`${o.t} logotipi`} className="og3-logo og3-logo-xl" />
               <div className="og3-c-bd">
                 <h3>{o.t}</h3>
-                <small>Nodavlat notijorat taşkiloti</small>
+                <small>Nodavlat notijorat tashkiloti</small>
                 <p>{o.d}</p>
               </div>
             </li>
           ))}
         </ul>
-        <ShowMore target="taskilotlar-royxat" noun="taşkilot" />
+        <ShowMore target="taskilotlar-royxat" noun="tashkilot" />
       </div>
     </section>
   )

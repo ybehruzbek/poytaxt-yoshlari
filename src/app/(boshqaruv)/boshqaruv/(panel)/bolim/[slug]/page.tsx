@@ -13,7 +13,7 @@ type SP = { q?: string; sahifa?: string }
 type P = { params: Promise<{ slug: string }>; searchParams: Promise<SP> }
 
 export async function generateMetadata({ params }: P) {
-  return { title: (await collectionSchema((await params).slug))?.plural ?? 'Bölim' }
+  return { title: (await collectionSchema((await params).slug))?.plural ?? 'Bo‘lim' }
 }
 
 /** Universal röyxat: sarlavha, Payload'dagi asosiy ustunlar, qidiruv va sahifalaş */
@@ -39,23 +39,23 @@ export default async function Bolim({ params, searchParams }: P) {
       <Top title={schema.plural} sub={schema.description} crumbs={[...(grp ? [{ t: grp }] : []), { t: schema.plural }]}>
         <Link className="btn btn-primary" href={`${base}/yangi`}>
           <Icon name="plus" size={18} />
-          <span>Qöşiş</span>
+          <span>Qo‘shish</span>
         </Link>
       </Top>
       <div className="content">
         <div className="toolbar">
           <div className="filters">
-            <SearchBox q={sp.q ?? ''} placeholder="Qidiriş" />
+            <SearchBox q={sp.q ?? ''} placeholder="Qidirish" />
             <span className="count-note">Jami: {r.totalDocs}</span>
           </div>
         </div>
         {r.rows.length === 0 ? (
           <div className="card empty-state">
             <Icon name="file" size={32} />
-            <b>{sp.q ? 'Qidiruv böyiça heç narsa topilmadi' : 'Hozirça yozuv yöq'}</b>
+            <b>{sp.q ? 'Qidiruv bo‘yicha hech narsa topilmadi' : 'Hozircha yozuv yo‘q'}</b>
             {!sp.q && (
               <Link className="btn btn-primary" href={`${base}/yangi`}>
-                Birinçisini qöşiş
+                Birinchisini qo‘shish
               </Link>
             )}
           </div>

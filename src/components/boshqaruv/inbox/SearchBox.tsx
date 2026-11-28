@@ -31,7 +31,7 @@ export function SearchBox({ q: initial, placeholder }: { q: string; placeholder:
   return (
     <label className={pending ? 'field-search is-busy' : 'field-search'}>
       <Icon name="search" size={18} />
-      <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={placeholder} aria-label="Qidiriş" />
+      <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={placeholder} aria-label="Qidirish" />
     </label>
   )
 }

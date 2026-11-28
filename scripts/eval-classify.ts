@@ -32,7 +32,7 @@ for (const p of posts) {
 }
 console.log('jami:', n)
 console.log('haqiqat -> natija:', JSON.stringify(conf))
-console.log('\nYANGILIK BÖLIB TUŞGAN (yangilik emas):', wrongNews.length)
+console.log('\nYANGILIK BO‘LIB TUSHGAN (yangilik emas):', wrongNews.length)
 for (const s of wrongNews.slice(0, Number(process.env.SHOW ?? 12))) console.log('  ', s)
-console.log('\nYANGILIK YÖQOLGAN:', lostNews.length)
+console.log('\nYANGILIK YO‘QOLGAN:', lostNews.length)
 for (const s of lostNews.slice(0, Number(process.env.SHOW ?? 12))) console.log('  ', s)

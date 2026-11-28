@@ -37,12 +37,12 @@ export function MoreToggle({
       {rest > 0 ? (
         <button type="button" className="more-btn" aria-controls={controls} aria-expanded={false} onClick={onMore}>
           <More>
-            Köproq körsatiş · yana {rest} ta {noun}
+            Ko‘proq ko‘rsatish · yana {rest} ta {noun}
           </More>
         </button>
       ) : (
         <button type="button" className="more-btn" aria-controls={controls} aria-expanded onClick={onLess}>
-          <More>Yiğiş</More>
+          <More>Yig‘ish</More>
         </button>
       )}
     </div>

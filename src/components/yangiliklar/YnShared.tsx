@@ -55,7 +55,7 @@ export function Rubrics({ items, cat, onPick }: { items: YnItem[]; cat: YnCat; o
   return (
     <div className="chips yn-rub" role="group" aria-label="Rubrikalar">
       <button type="button" aria-pressed={cat === 'all'} onClick={() => onPick('all')}>
-        Barçasi <span>{items.filter((it) => it.category !== 'tabrik').length}</span>
+        Barchasi <span>{items.filter((it) => it.category !== 'tabrik').length}</span>
       </button>
       {cats.map(([k, label]) => (
         <button key={k} type="button" aria-pressed={cat === k} onClick={() => onPick(k)}>

@@ -12,34 +12,34 @@ import { saytManzil, yangilash } from '@/lib/revalidate'
 
 const post = (label = 'Kanal posti raqami') =>
   son('post', label, {
-    izoh: '“Poytaxt yoşlari” Telegram kanalidagi post raqami (havolaning oxiridagi son, masalan 6230). Saytda manba havolasi bölib çiqadi.',
+    izoh: '“Poytaxt yoshlari” Telegram kanalidagi post raqami (havolaning oxiridagi son, masalan 6230). Saytda manba havolasi bo‘lib chiqadi.',
   })
 
 export const Directions: CollectionConfig = {
   slug: 'directions',
-  labels: { singular: 'Faoliyat yönaliş', plural: 'Faoliyat yönalişlari' },
+  labels: { singular: 'Faoliyat yo‘nalish', plural: 'Faoliyat yo‘nalishlari' },
   orderable: true,
   admin: {
     group: G.faoliyat,
     useAsTitle: 'short',
     defaultColumns: ['short', 'title', 'updatedAt'],
-    description: 'Saytdagi “Faoliyat yönalişlari” sahifasi. Tartibni sudrab özgartiriş mumkin — saytda şu tartibda çiqadi.',
+    description: 'Saytdagi “Faoliyat yo‘nalishlari” sahifasi. Tartibni sudrab o‘zgartirish mumkin — saytda shu tartibda chiqadi.',
     preview: (doc, { locale }) => saytManzil(`/faoliyat/yonalishlar/${doc.slug ?? ''}`, locale),
     hidden: kontentYashirin,
   },
   access: kontent,
   hooks: yangilash(['/faoliyat', '/'], true),
   fields: [
-    matn('title', 'Rasmiy nomi', { majburiy: true, namuna: 'Yoşlarning intellektual salohiyatini oşiriş' }),
-    matn('short', 'Qisqa nomi', { majburiy: true, izoh: 'Saralaş tugmalari va kartalarda körinadi.', namuna: 'Intellektual salohiyat' }),
+    matn('title', 'Rasmiy nomi', { majburiy: true, namuna: 'Yoshlarning intellektual salohiyatini oshirish' }),
+    matn('short', 'Qisqa nomi', { majburiy: true, izoh: 'Saralash tugmalari va kartalarda ko‘rinadi.', namuna: 'Intellektual salohiyat' }),
     manzilNomi('short'),
-    uzunMatn('about', 'Yönaliş haqida', { majburiy: true, qator: 6, izoh: 'Kengaş şu yönaliş böyiça qanday işlarni amalga oşirişi — rasmiy uslubda.' }),
+    uzunMatn('about', 'Yo‘nalish haqida', { majburiy: true, qator: 6, izoh: 'Kengash shu yo‘nalish bo‘yicha qanday ishlarni amalga oshirishi — rasmiy uslubda.' }),
   ],
 }
 
 export const PROJECT_STATUS = [
   { label: 'Davom etmoqda', value: 'davom etmoqda' },
-  { label: 'Har yili ötkaziladi', value: 'har yili' },
+  { label: 'Har yili o‘tkaziladi', value: 'har yili' },
   { label: 'Yakunlangan', value: 'yakunlangan' },
 ] as const
 
@@ -64,29 +64,29 @@ export const Projects: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'Asosiy maʼlumot',
+          label: 'Asosiy ma’lumot',
           fields: [
-            matn('title', 'Loyiha nomi', { majburiy: true, namuna: '“Zakovat” intellektual öyinlari' }),
+            matn('title', 'Loyiha nomi', { majburiy: true, namuna: '“Zakovat” intellektual o‘yinlari' }),
             qator(
-              { ...boglanma('dir', 'Yönaliş', 'directions', { majburiy: true }), admin: { width: '50%' } },
+              { ...boglanma('dir', 'Yo‘nalish', 'directions', { majburiy: true }), admin: { width: '50%' } },
               tanlov('holat', 'Loyiha holati', PROJECT_STATUS, { majburiy: true, kenglik: '25%', sukut: 'davom etmoqda' }),
               matn('period', 'Davri', { kenglik: '25%', namuna: '2023–2026', tilli: false }),
             ),
-            uzunMatn('lead', 'Qisqa tavsif', { majburiy: true, qator: 3, izoh: 'Röyxat kartasida va sahifa tepasida çiqadi (1–2 gap).' }),
+            uzunMatn('lead', 'Qisqa tavsif', { majburiy: true, qator: 3, izoh: 'Ro‘yxat kartasida va sahifa tepasida chiqadi (1–2 gap).' }),
             uzunMatn('description', 'Batafsil tavsif', { qator: 6 }),
-            matn('audience', 'Kimlar uçun', { namuna: 'Oliy taʼlim taşkilotlari talabalari' }),
+            matn('audience', 'Kimlar uchun', { namuna: 'Oliy ta’lim tashkilotlari talabalari' }),
             {
               name: 'national',
-              label: 'Respublika miqyosidagi loyiha (Markaziy Kengaş bilan)',
+              label: 'Respublika miqyosidagi loyiha (Markaziy Kengash bilan)',
               type: 'checkbox',
               defaultValue: false,
             },
           ],
         },
         {
-          label: 'Natijalar va bosqiçlar',
+          label: 'Natijalar va bosqichlar',
           fields: [
-            bandlar('partners', 'Hamkorlar', { band: 'Hamkor taşkilot' }),
+            bandlar('partners', 'Hamkorlar', { band: 'Hamkor tashkilot' }),
             {
               name: 'results',
               label: 'Natijalar (raqam va faktlar)',
@@ -96,23 +96,23 @@ export const Projects: CollectionConfig = {
             },
             {
               name: 'milestones',
-              label: 'Bosqiçlar (sana böyiça)',
+              label: 'Bosqichlar (sana bo‘yicha)',
               type: 'array',
-              labels: { singular: 'Bosqiç', plural: 'Bosqiçlar' },
+              labels: { singular: 'Bosqich', plural: 'Bosqichlar' },
               fields: [
                 qator(
                   { ...sana('date', 'Sana', { majburiy: true }), admin: { width: '25%', date: { pickerAppearance: 'dayOnly', displayFormat: 'd MMMM yyyy' } } },
-                  uzunMatn('text', 'Nima bölib ötdi', { majburiy: true, qator: 2, kenglik: '55%' }),
+                  uzunMatn('text', 'Nima bo‘lib o‘tdi', { majburiy: true, qator: 2, kenglik: '55%' }),
                   { ...post('Post'), admin: { width: '20%' } },
                 ),
               ],
             },
             {
               name: 'posts',
-              label: 'Kanaldagi boşqa postlar',
+              label: 'Kanaldagi boshqa postlar',
               type: 'array',
               labels: { singular: 'Post', plural: 'Postlar' },
-              admin: { description: 'Loyihaga oid qöşimça postlar raqamlari.', initCollapsed: true },
+              admin: { description: 'Loyihaga oid qo‘shimcha postlar raqamlari.', initCollapsed: true },
               fields: [son('n', 'Post raqami', { majburiy: true })],
             },
           ],
@@ -120,8 +120,8 @@ export const Projects: CollectionConfig = {
         {
           label: 'Rasmlar',
           fields: [
-            rasm('cover', 'Muqova rasmi', { majburiy: true, izoh: 'Röyxatda va sahifa tepasida çiqadi. Gorizontal rasm tavsiya etiladi.' }),
-            rasmlar('gallery', 'Fotogalereya', { izoh: 'Sahifa pastidagi suratlar. Bir neçtasini birdaniga tanlaş mumkin.' }),
+            rasm('cover', 'Muqova rasmi', { majburiy: true, izoh: 'Ro‘yxatda va sahifa tepasida chiqadi. Gorizontal rasm tavsiya etiladi.' }),
+            rasmlar('gallery', 'Fotogalereya', { izoh: 'Sahifa pastidagi suratlar. Bir nechtasini birdaniga tanlash mumkin.' }),
           ],
         },
       ],
@@ -138,7 +138,7 @@ export const Events: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['img', 'title', 'date', 'dir', 'type', 'upcoming'],
     listSearchableFields: ['title', 'place', 'summary'],
-    description: 'Saytdagi “Tadbirlar va kalendar” sahifasi (arxiv va yaqin tadbirlar). Yangi tadbir qöşilsa, röyxat boşida sanasi böyiça çiqadi.',
+    description: 'Saytdagi “Tadbirlar va kalendar” sahifasi (arxiv va yaqin tadbirlar). Yangi tadbir qo‘shilsa, ro‘yxat boshida sanasi bo‘yicha chiqadi.',
     preview: (_doc, { locale }) => saytManzil('/faoliyat/tadbirlar', locale),
     hidden: kontentYashirin,
   },
@@ -149,18 +149,18 @@ export const Events: CollectionConfig = {
     matn('title', 'Tadbir nomi', { majburiy: true }),
     qator(
       { ...sana('date', 'Sana', { majburiy: true }), admin: { width: '33%', date: { pickerAppearance: 'dayOnly', displayFormat: 'd MMMM yyyy' } } },
-      { ...boglanma('dir', 'Yönaliş', 'directions', { majburiy: true }), admin: { width: '34%' } },
-      matn('type', 'Turi', { kenglik: '33%', namuna: 'uçraşuv, seminar, festival…' }),
+      { ...boglanma('dir', 'Yo‘nalish', 'directions', { majburiy: true }), admin: { width: '34%' } },
+      matn('type', 'Turi', { kenglik: '33%', namuna: 'uchrashuv, seminar, festival…' }),
     ),
-    matn('place', 'Ötkazilgan joy', { namuna: 'Yoşlar ijod saroyi' }),
+    matn('place', 'O‘tkazilgan joy', { namuna: 'Yoshlar ijod saroyi' }),
     uzunMatn('summary', 'Qisqa mazmuni', { majburiy: true, qator: 3 }),
     rasm('img', 'Rasm', { majburiy: true }),
     {
       name: 'upcoming',
-      label: 'Yaqin tadbir (hali bölib ötmagan)',
+      label: 'Yaqin tadbir (hali bo‘lib o‘tmagan)',
       type: 'checkbox',
       defaultValue: false,
-      admin: { position: 'sidebar', description: 'Belgilansa, boş sahifadagi “Yaqin tadbirlar”da çiqadi.' },
+      admin: { position: 'sidebar', description: 'Belgilansa, bosh sahifadagi “Yaqin tadbirlar”da chiqadi.' },
     },
     { ...post(), admin: { ...post().admin, position: 'sidebar' } },
   ],

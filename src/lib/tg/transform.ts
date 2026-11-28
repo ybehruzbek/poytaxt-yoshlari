@@ -2,7 +2,7 @@
  * Telegram posti → sayt yangiligi: matn tozalanadi (emoji, kanal imzosi, heşteglar), yangi alifboga ögiriladi,
  * sarlavha, lid va xatboşilarga ajratiladi; heşteglar — teglarga, mazmuniga qarab turkum aniqlanadi.
  */
-import { toYangiAlifbo } from '@/lib/alifbo'
+import { toJoriyAlifbo } from '@/lib/alifbo'
 
 import type { TgPost } from './channel'
 
@@ -57,7 +57,7 @@ function tagFrom(h: string): string | null {
     .trim()
   const words = spaced.split(/\s+/)
   const t = words.map((w, i) => (i === 0 || /^\p{Lu}{2,}$/u.test(w) ? w : w.toLowerCase())).join(' ')
-  return toYangiAlifbo(t.charAt(0).toUpperCase() + t.slice(1))
+  return toJoriyAlifbo(t.charAt(0).toUpperCase() + t.slice(1))
 }
 
 const clip = (s: string, n: number) => {
@@ -70,7 +70,7 @@ const clip = (s: string, n: number) => {
 const sentences = (s: string) => s.match(/[^.!?…]+(?:[.!?…]+|$)/g)?.map((x) => x.trim()).filter(Boolean) ?? [s]
 
 const fix = (s: string) =>
-  toYangiAlifbo(
+  toJoriyAlifbo(
     s
       .replace(EMOJI, ' ')
       .replace(/"([^"\n]{1,200})"/g, '“$1”')
@@ -81,17 +81,17 @@ const fix = (s: string) =>
 
 function category(text: string, tags: string[]): NewsCategory {
   const t = (text + ' ' + tags.join(' ')).toLowerCase()
-  if (/(ariza(lar)? (qabul|topşir)|röyxatdan öt|qabul qilinadi|grant|stipendiya|bepul kurs|vakansiya|iştirok etiş uçun|ştirok etiş istagi|muddati|havola orqali)/.test(t))
+  if (/(ariza(lar)? (qabul|topshir)|ro‘yxatdan o‘t|qabul qilinadi|grant|stipendiya|bepul kurs|vakansiya|ishtirok etish uchun|shtirok etish istagi|muddati|havola orqali)/.test(t))
     return 'imkoniyat'
-  if (/(boşlanğiç taşkilot|universitet|instituti|akademiyasi|yoşlari\b|\bott\b|talabalar)/.test(t)) return 'boshlangich'
-  if (/(festival|musobaqa|konsert|sayohat|turnir|zakovat|viktorina|kvest|forum|marafon|bellaşuv)/.test(t)) return 'tadbir'
+  if (/(boshlang‘ich tashkilot|universitet|instituti|akademiyasi|yoshlari\b|\bott\b|talabalar)/.test(t)) return 'boshlangich'
+  if (/(festival|musobaqa|konsert|sayohat|turnir|zakovat|viktorina|kvest|forum|marafon|bellashuv)/.test(t)) return 'tadbir'
   return 'kengash'
 }
 
 const MONTHS = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
-const EVENT_WORDS = /(simpozium|forum|uçraşuv|festival|konsert|tadbir|seminar|trening|kvest|marafon|kecha|keça|şou|ko'rgazma|körgazma|ekskursiya|sayohat|bayram|turnir|musobaqa|kubogi)/
-const FUTURE = /(bölib ötadi|ötkaziladi|ötadi\b|taşrif buyurmoqda|taklif etamiz|taklif qilamiz|kutamiz|kutib qolamiz|iştirok eting|qatnaşing|kelasiz|boşlanadi|kutyapmiz)/
-const CALL = /(tanlov(i|iga|ga)? (start|eʼlon qilin|boşlan)|tanlov(da|ga)? (iştirok|qatnaş)|tanlov talablari|röyxatdan öt|ariza(lar)? (qabul|topşir|yubor)|qabul qilinadi|sinov testlari?|testlar(ni)? taqdim|bepul kurs|kursiga röyxat|grant(ga|iga)? (ariza|tanlov)|grant tanlovi|stipendiya(ga|siga)? (ariza|tanlov)|vakansiya|çellenj(ga|da)? (qatnaş|qöşiling))/
+const EVENT_WORDS = /(simpozium|forum|uchrashuv|festival|konsert|tadbir|seminar|trening|kvest|marafon|kecha|kecha|shou|ko‘rgazma|ko‘rgazma|ekskursiya|sayohat|bayram|turnir|musobaqa|kubogi)/
+const FUTURE = /(bo‘lib o‘tadi|o‘tkaziladi|o‘tadi\b|tashrif buyurmoqda|taklif etamiz|taklif qilamiz|kutamiz|kutib qolamiz|ishtirok eting|qatnashing|kelasiz|boshlanadi|kutyapmiz)/
+const CALL = /(tanlov(i|iga|ga)? (start|e’lon qilin|boshlan)|tanlov(da|ga)? (ishtirok|qatnash)|tanlov talablari|ro‘yxatdan o‘t|ariza(lar)? (qabul|topshir|yubor)|qabul qilinadi|sinov testlari?|testlar(ni)? taqdim|bepul kurs|kursiga ro‘yxat|grant(ga|iga)? (ariza|tanlov)|grant tanlovi|stipendiya(ga|siga)? (ariza|tanlov)|vakansiya|chellenj(ga|da)? (qatnash|qo‘shiling))/
 
 /**
  * Post turi: kelgusi tadbir (aniq sana posted sanasidan keyin, tadbir sözi va kelasi zamon), eʼlon (tanlov,
@@ -117,7 +117,7 @@ export function classify(text: string, postDate: string, cat: NewsCategory): Pic
       const found = text.match(/([\p{Lu}“][^.!?\n:]{2,80}?(?:saroyi|markazi|universiteti|instituti|akademiyasi|zali|oromgohi|parki|muzeyi|teatri|kutubxonasi|majmuasi|arenasi)(?:da|ida|dagi)?)/u)?.[1]
       const place = (labeled ?? found)
         ?.replace(/\s*\(https?:[^)]*\)/g, '')
-        .replace(/^toşkent şahridagi,?\s*/i, '')
+        .replace(/^toshkent shahridagi,?\s*/i, '')
         .replace(/(i)(?:da|dagi)$/, '$1')
         .replace(/(?:da|dagi)$/, '')
         .trim()
@@ -148,7 +148,7 @@ const REPORT = /(bolib otdi|otkazildi|tashkil etildi|taqdirlandi|saylandi|tayinl
 
 const SKIP_RULES: [RegExp, string][] = [
   // şaxsiy tuğilgan kun tabriklari — saytga olinmaydi (tarixiy siymolar yubileyi bundan mustasno)
-  [/(tavallud kun|tugilgan kun|tavallud ayyom|yoshga tolgan)(?![\s\S]*(yilligi|yubiley))/, 'tuğilgan kun'],
+  [/(tavallud kun|tugilgan kun|tavallud ayyom|yoshga tolgan)(?![\s\S]*(yilligi|yubiley))/, 'tug‘ilgan kun'],
   // “Yoşlar ovozi” gazetasi dayjestlari va haftalik dayjestlar
   [/(yoshlarovozigazetasi|yoshlar ovozi gazetasi|dayjest|haftaning muhim voqealari)/, 'dayjest'],
   // “Zakovat” onlayn viktorinasining savol-javob postlari
@@ -158,7 +158,7 @@ const SKIP_RULES: [RegExp, string][] = [
   // “bilasizmi”, “fakt” turidagi postlar
   [/(#fakt\b|#bilasizmi|^\W*bilasizmi\??|qiziqarli fakt)/, 'fakt'],
   // obunaçilarni jalb qiluvçi postlar: sörovnoma, izoh, obuna, ovoz beriş, savol-javob
-  [/(izohlarda|izohda yozing|sorovnoma boshlandi|instagram sahifamizda|obuna boling|ovoz bering|qollab-quvvatlaymiz!|taassurotlaringiz|qaysi [^.?!\n]{0,60}tahsil olasiz)/, 'jalb qiluvçi post'],
+  [/(izohlarda|izohda yozing|sorovnoma boshlandi|instagram sahifamizda|obuna boling|ovoz bering|qollab-quvvatlaymiz!|taassurotlaringiz|qaysi [^.?!\n]{0,60}tahsil olasiz)/, 'jalb qiluvchi post'],
 ]
 
 /** Xotira va bayram kunlari (tarixiy siymolar yubileyi, davlat bayramlari, kasb kunlari) */

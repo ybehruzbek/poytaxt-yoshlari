@@ -51,7 +51,7 @@ function Open({ x, cls }: { x: Act; cls: string }) {
     <span className={`more-btn ${cls}`}>
       <More>
         Batafsil
-        <span className="sr-only">{`: ${isPdf(x) ? 'PDF faylni oçiş' : 'Matnini oçiş'}`}</span>
+        <span className="sr-only">{`: ${isPdf(x) ? 'PDF faylni ochish' : 'Matnini ochish'}`}</span>
       </More>
     </span>
   )

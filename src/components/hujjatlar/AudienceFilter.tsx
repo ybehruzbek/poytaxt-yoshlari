@@ -19,10 +19,10 @@ export function AudienceFilter({ acts: all, locale }: { acts: Act[]; locale: str
   const list = on ? acts.filter((x) => x.for?.includes(on)) : acts
   return (
     <>
-      <div className="chips nd-aud" role="group" aria-label="Kimga tegişli">
-        <span className="nd-aud-l">Kimga tegişli:</span>
+      <div className="chips nd-aud" role="group" aria-label="Kimga tegishli">
+        <span className="nd-aud-l">Kimga tegishli:</span>
         <button type="button" aria-pressed={!on} onClick={() => setOn('')}>
-          Barçasi <b>{acts.length}</b>
+          Barchasi <b>{acts.length}</b>
         </button>
         {used.map((a) => (
           <button key={a.k} type="button" aria-pressed={on === a.k} onClick={() => setOn(a.k)}>

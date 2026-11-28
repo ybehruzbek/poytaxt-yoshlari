@@ -71,7 +71,7 @@ export function ScrollRail() {
         type="button"
         className="sr-a-b"
         onClick={st.top ? down : up}
-        aria-label={st.top ? 'Pastga' : 'Sahifa boşiga'}
+        aria-label={st.top ? 'Pastga' : 'Sahifa boshiga'}
       >
         <svg className="sr-a-ring" viewBox="0 0 60 60" aria-hidden="true">
           <circle cx="30" cy="30" r="27" />

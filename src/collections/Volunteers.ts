@@ -34,9 +34,9 @@ export const Volunteers: CollectionConfig = {
       defaultValue: 'yangi',
       options: [
         { label: 'Yangi', value: 'yangi' },
-        { label: 'Takroriy (30 kun içida şu raqamdan)', value: 'takror' },
+        { label: 'Takroriy (30 kun ichida shu raqamdan)', value: 'takror' },
         { label: 'Suhbatga taklif qilindi', value: 'suhbat' },
-        { label: 'Volontyorlar röyxatiga kiritildi', value: 'qabul' },
+        { label: 'Volontyorlar ro‘yxatiga kiritildi', value: 'qabul' },
         { label: 'Rad etildi', value: 'rad' },
       ],
     },
@@ -44,20 +44,20 @@ export const Volunteers: CollectionConfig = {
       type: 'row',
       fields: [
         { name: 'name', label: 'Familiya, ism, otasining ismi', type: 'text', required: true },
-        { name: 'birthYear', label: 'Tuğilgan yili', type: 'number', required: true },
+        { name: 'birthYear', label: 'Tug‘ilgan yili', type: 'number', required: true },
       ],
     },
     {
       type: 'row',
       fields: [
         { name: 'phone', label: 'Telefon', type: 'text', required: true },
-        { name: 'place', label: 'Öqiş yoki iş joyi', type: 'text', required: true },
+        { name: 'place', label: 'O‘qish yoki ish joyi', type: 'text', required: true },
       ],
     },
-    { name: 'dirs', label: 'Yönalişlar', type: 'text', required: true },
+    { name: 'dirs', label: 'Yo‘nalishlar', type: 'text', required: true },
     { name: 'time', label: 'Bandlik vaqti', type: 'text' },
-    { name: 'about', label: 'Tajriba va qiziqişlar', type: 'textarea' },
-    { name: 'note', label: 'Içki izoh (faqat xodimlar uçun)', type: 'textarea' },
+    { name: 'about', label: 'Tajriba va qiziqishlar', type: 'textarea' },
+    { name: 'note', label: 'Ichki izoh (faqat xodimlar uchun)', type: 'textarea' },
   ],
   timestamps: true,
 }

@@ -27,7 +27,7 @@ const EMBLEM: Record<string, { c1: string; c2: string; icon: ReactNode; label: s
   'ilgor-ijodkor': {
     c1: '#8E7CC3',
     c2: '#FFD25A',
-    label: 'ILĞOR IJODKOR',
+    label: 'ILG‘OR IJODKOR',
     icon: (
       <g fill="none" stroke="#3b2a5c" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
         <path d="M100 104c-9-7-22-7-34-3v40c12-4 25-4 34 3 9-7 22-7 34-3v-40c-12-4-25-4-34 3z" />
@@ -89,8 +89,8 @@ const MONTHS = ['Yan', 'Fev', 'Mar', 'Apr', 'May', 'Iyn', 'Iyl', 'Avg', 'Sen', '
 function YearLine({ awards }: { awards: Award[] }) {
   const rows = awards.filter((a) => a.timeline.length)
   return (
-    <div className="mk-year" aria-label="Mukofotlarni topşiriş jadvali">
-      <h2 className="mk-h">Mukofotlarni topşiriş jadvali</h2>
+    <div className="mk-year" aria-label="Mukofotlarni topshirish jadvali">
+      <h2 className="mk-h">Mukofotlarni topshirish jadvali</h2>
       <div className="mk-grid">
         <span />
         {MONTHS.map((m) => (
@@ -116,10 +116,10 @@ function YearLine({ awards }: { awards: Award[] }) {
       </div>
       <p className="mk-legend">
         <span>
-          <i className="mk-sw" /> Hujjatlar qabuli va saralaş bosqiçlari
+          <i className="mk-sw" /> Hujjatlar qabuli va saralash bosqichlari
         </span>
         <span>
-          <i className="mk-sw mk-sw-end" /> Mukofotlarni topşiriş
+          <i className="mk-sw mk-sw-end" /> Mukofotlarni topshirish
         </span>
       </p>
     </div>
@@ -158,7 +158,7 @@ function Card({ a, M }: { a: Award; M: Miqdorlar }) {
         </p>
         <dl>
           <div>
-            <dt>Kimlar uçun</dt>
+            <dt>Kimlar uchun</dt>
             <dd>{nbsp(a.who)}</dd>
           </div>
           <div>
@@ -200,7 +200,7 @@ export async function AwardsPage({ crumbs, locale = 'uz' }: { crumbs: ReactNode;
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Yoşlar uçun davlat mukofotlari</h1>
+          <h1 className="h2 pg-title">Yoshlar uchun davlat mukofotlari</h1>
         </div>
       </header>
       <section className="sec gr-sec">

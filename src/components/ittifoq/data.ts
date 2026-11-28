@@ -7,10 +7,10 @@
 /** Ittifoq haqida (motto — sahifa boşidagi şior) */
 export const WHO = {
   paras: [
-    'Özbekiston yoşlar ittifoqi — mamlakat yoşlarini birlaştiruvçi nodavlat notijorat taşkilot. U 2017-yil 30-iyunda taşkil etilgan. Şu kun har yili butun mamlakatda “Yoşlar kuni” sifatida nişonlanadi.',
-    'Ittifoqqa 14 yoşga tölgan va 30 yoşdan oşmagan Özbekiston Respublikasi fuqarolari hamda Özbekistonda muntazam yaşab kelayotgan fuqaroligi bölmagan şaxslar ixtiyoriy ravişda aʼzo bölişi mumkin. Ittifoq faoliyati ixtiyoriylik, qonuniylik, oşkoralik, aʼzolarning teng huquqliligi va özini özi boşqariş tamoyillariga asoslanadi.',
+    'O‘zbekiston yoshlar ittifoqi — mamlakat yoshlarini birlashtiruvchi nodavlat notijorat tashkilot. U 2017-yil 30-iyunda tashkil etilgan. Shu kun har yili butun mamlakatda “Yoshlar kuni” sifatida nishonlanadi.',
+    'Ittifoqqa 14 yoshga to‘lgan va 30 yoshdan oshmagan O‘zbekiston Respublikasi fuqarolari hamda O‘zbekistonda muntazam yashab kelayotgan fuqaroligi bo‘lmagan shaxslar ixtiyoriy ravishda a’zo bo‘lishi mumkin. Ittifoq faoliyati ixtiyoriylik, qonuniylik, oshkoralik, a’zolarning teng huquqliligi va o‘zini o‘zi boshqarish tamoyillariga asoslanadi.',
   ],
-  motto: 'Yoşlar — kelajak bunyodkori!',
+  motto: 'Yoshlar — kelajak bunyodkori!',
 }
 
 /** Maqsadimiz (katta sarlavha) */
@@ -19,7 +19,7 @@ export const WHO = {
  * Butun jumla bir xil rangda (bitta maqsad — qismlarga ajratilmaydi).
  */
 export const MISSION = {
-  text: 'Yoşlarning huquq va qonuniy manfaatlarini himoya qiliş, ularni mamlakatdagi islohotlarga faol jalb etiş, yigit-qizlarning maʼnaviy va kasbiy saviyasini yuksaltiriş hamda intellektual va ijodiy salohiyatini röyobga çiqarişga kömaklaşiş.',
+  text: 'Yoshlarning huquq va qonuniy manfaatlarini himoya qilish, ularni mamlakatdagi islohotlarga faol jalb etish, yigit-qizlarning ma’naviy va kasbiy saviyasini yuksaltirish hamda intellektual va ijodiy salohiyatini ro‘yobga chiqarishga ko‘maklashish.',
 }
 
 /** y — yil (katta raqam), d — kun va oy (bölsa), t — matn */
@@ -27,32 +27,32 @@ export type Milestone = { y: string; d?: string; t: string }
 
 /** Qisqa tarix */
 export const HISTORY: Milestone[] = [
-  { y: '2001', t: '“Kamolot” yoşlar ijtimoiy harakati taşkil etildi.' },
-  { y: '2017', d: '30-iyun', t: 'Toşkentdagi Simpoziumlar saroyida “Kamolot” yoşlar ijtimoiy harakatining IV qurultoyi bölib ötdi. Qurultoy delegatlari “Kamolot” negizida Özbekiston yoşlar ittifoqini tuziş taklifini qöllab-quvvatladi.' },
-  { y: '2017', d: '5-iyul', t: 'Özbekiston yoşlar ittifoqi faoliyatining ustuvor yönalişlari belgilandi, 30-iyun “Yoşlar kuni” deb eʼlon qilindi.' },
-  { y: 'Bugun', t: 'Ittifoqning Qoraqalpoğiston Respublikasi, barça viloyatlar va Toşkent şahrida hududiy kengaşlari, taʼlim muassasalari, korxonalar va harbiy qismlarda boşlanğiç taşkilotlari faoliyat yuritadi.' },
+  { y: '2001', t: '“Kamolot” yoshlar ijtimoiy harakati tashkil etildi.' },
+  { y: '2017', d: '30-iyun', t: 'Toshkentdagi Simpoziumlar saroyida “Kamolot” yoshlar ijtimoiy harakatining IV qurultoyi bo‘lib o‘tdi. Qurultoy delegatlari “Kamolot” negizida O‘zbekiston yoshlar ittifoqini tuzish taklifini qo‘llab-quvvatladi.' },
+  { y: '2017', d: '5-iyul', t: 'O‘zbekiston yoshlar ittifoqi faoliyatining ustuvor yo‘nalishlari belgilandi, 30-iyun “Yoshlar kuni” deb e’lon qilindi.' },
+  { y: 'Bugun', t: 'Ittifoqning Qoraqalpog‘iston Respublikasi, barcha viloyatlar va Toshkent shahrida hududiy kengashlari, ta’lim muassasalari, korxonalar va harbiy qismlarda boshlang‘ich tashkilotlari faoliyat yuritadi.' },
 ]
 
 export const QUOTE = {
-  text: 'Yoşlik — ğanimat, vaqt — ğanimat, fursat borida otni qamçilang! Davlatimiz, xalqimiz yaratib berayotgan imkoniyatlarning qadriga yeting! Dunyoga öz sözingizni ayting!',
-  author: 'Şavkat Mirziyoyev',
-  role: 'Özbekiston Respublikasi Prezidenti',
+  text: 'Yoshlik — g‘animat, vaqt — g‘animat, fursat borida otni qamchilang! Davlatimiz, xalqimiz yaratib berayotgan imkoniyatlarning qadriga yeting! Dunyoga o‘z so‘zingizni ayting!',
+  author: 'Shavkat Mirziyoyev',
+  role: 'O‘zbekiston Respublikasi Prezidenti',
 }
 
 export type Stat = { v: string; l: string }
 
 export const STATS: Stat[] = [
-  { v: '59 974', l: 'yoşlar yetakçilari va koordinatorlari' },
-  { v: '1 489', l: 'taʼlim muassasalari va korxonalardagi boşlanğiç taşkilotlar' },
-  { v: '14', l: 'hududda Yoşlar markazi doimiy faoliyat yuritadi' },
+  { v: '59 974', l: 'yoshlar yetakchilari va koordinatorlari' },
+  { v: '1 489', l: 'ta’lim muassasalari va korxonalardagi boshlang‘ich tashkilotlar' },
+  { v: '14', l: 'hududda Yoshlar markazi doimiy faoliyat yuritadi' },
   { v: '20+', l: 'mamlakat bilan xalqaro hamkorlik' },
 ]
 
 export const MORE_STATS: Stat[] = [
-  { v: '12 273', l: 'bir yilda ötkazilgan maʼnaviy-maʼrifiy, sport va boşqa tadbirlar' },
-  { v: '1,87 mln', l: 'yoş loyihalarga qamrab olindi' },
-  { v: '81 198', l: 'yoş harbiy xizmatçi kuç tuzilmalaridagi taşkilotlarda' },
-  { v: '36', l: 'taşkilot Ittifoq tizimida faoliyat yuritadi' },
+  { v: '12 273', l: 'bir yilda o‘tkazilgan ma’naviy-ma’rifiy, sport va boshqa tadbirlar' },
+  { v: '1,87 mln', l: 'yosh loyihalarga qamrab olindi' },
+  { v: '81 198', l: 'yosh harbiy xizmatchi kuch tuzilmalaridagi tashkilotlarda' },
+  { v: '36', l: 'tashkilot Ittifoq tizimida faoliyat yuritadi' },
 ]
 
 /**
@@ -80,18 +80,18 @@ export const AWARDEES = {
 export const PRIVILEGES: Privilege[] = [
   {
     group: 'ittifoq',
-    t: '“Özbekiston belgisi” kökrak nişoni',
-    text: 'Vatan şaʼnini yuksaltirişga munosib hissa qöşgan faol yoşlar Ittifoq Markaziy Kengaşining qarori bilan şu nişon bilan taqdirlanadi.',
-    fact: '1997-yilda taʼsis etilgan',
+    t: '“O‘zbekiston belgisi” ko‘krak nishoni',
+    text: 'Vatan sha’nini yuksaltirishga munosib hissa qo‘shgan faol yoshlar Ittifoq Markaziy Kengashining qarori bilan shu nishon bilan taqdirlanadi.',
+    fact: '1997-yilda ta’sis etilgan',
     num: '1997',
-    numL: 'taʼsis etilgan yil',
+    numL: 'ta’sis etilgan yil',
     img: '/img/ittifoq/nishon-ozbekiston-belgisi.webp',
     badge: true,
   },
   {
     group: 'ittifoq',
-    t: 'Oliy taʼlimga tavsiyanoma',
-    text: 'Ittifoq tizimidagi sardorlar, yönaliş yetakçilari va tizimda ikki yil faoliyat yuritgan yoşlar Ittifoq tavsiyanomasi bilan doimiy yaşaş joyidagi oliy taʼlim taşkilotining pedagogika yönalişlariga test sinovlarisiz, davlat granti asosida qabul qilinadi.',
+    t: 'Oliy ta’limga tavsiyanoma',
+    text: 'Ittifoq tizimidagi sardorlar, yo‘nalish yetakchilari va tizimda ikki yil faoliyat yuritgan yoshlar Ittifoq tavsiyanomasi bilan doimiy yashash joyidagi oliy ta’lim tashkilotining pedagogika yo‘nalishlariga test sinovlarisiz, davlat granti asosida qabul qilinadi.',
     fact: 'Har yili har bir hududdan 1 nafar',
     num: '1 nafar',
     numL: 'har yili har bir hududdan',
@@ -99,8 +99,8 @@ export const PRIVILEGES: Privilege[] = [
   },
   {
     group: 'ittifoq',
-    t: 'Harbiy xizmatni ötagan talabalarning kontrakt tölovi',
-    text: 'Muddatli harbiy xizmatni ötab, harbiy qism qömondonligining tavsiyanomasi bilan oliy taʼlim taşkilotiga tölov-kontrakt asosida qabul qilingan talabalarning kontrakt tölovi qisman Ittifoq tomonidan tölab beriladi.',
+    t: 'Harbiy xizmatni o‘tagan talabalarning kontrakt to‘lovi',
+    text: 'Muddatli harbiy xizmatni o‘tab, harbiy qism qo‘mondonligining tavsiyanomasi bilan oliy ta’lim tashkilotiga to‘lov-kontrakt asosida qabul qilingan talabalarning kontrakt to‘lovi qisman Ittifoq tomonidan to‘lab beriladi.',
     fact: 'Kontrakt summasining 35 foizi',
     num: '35%',
     numL: 'kontrakt summasidan',
@@ -109,7 +109,7 @@ export const PRIVILEGES: Privilege[] = [
   {
     group: 'ittifoq',
     t: 'Ittifoq kafilligi',
-    text: 'Jinoyat sodir etib, sudda javob berayotgan yoş Ittifoq kafilligi bilan ozodlikdan mahrum etilmasligi mumkin. Bunda Ittifoq bir yil davomida uning xulq-atvorini kuzatib boradi va jamiyat uçun foydali işlarga jalb etadi.',
+    text: 'Jinoyat sodir etib, sudda javob berayotgan yosh Ittifoq kafilligi bilan ozodlikdan mahrum etilmasligi mumkin. Bunda Ittifoq bir yil davomida uning xulq-atvorini kuzatib boradi va jamiyat uchun foydali ishlarga jalb etadi.',
     fact: 'Oliy sud bilan memorandum asosida',
     num: '1 yil',
     numL: 'xulq-atvor kuzatiladigan muddat',
@@ -117,10 +117,10 @@ export const PRIVILEGES: Privilege[] = [
   },
   {
     group: 'davlat',
-    t: '“Mard öğlon” davlat mukofoti',
+    t: '“Mard o‘g‘lon” davlat mukofoti',
     medal: '/img/ittifoq/medal-mard-oglon.webp',
-    text: 'Ittifoq Markaziy Kengaşining taklifi bilan 2017-yilda taʼsis etilgan. Mukofot fan, taʼlim, madaniyat, sport, harbiy xizmat va boşqa sohalarda yuksak natijalarga erişgan yigitlarga “Yoşlar kuni” arafasida topşiriladi.',
-    fact: 'Hozirgi vaqtda nomzodlar Yoşlar işlari agentligi tomonidan taqdim etiladi',
+    text: 'Ittifoq Markaziy Kengashining taklifi bilan 2017-yilda ta’sis etilgan. Mukofot fan, ta’lim, madaniyat, sport, harbiy xizmat va boshqa sohalarda yuksak natijalarga erishgan yigitlarga “Yoshlar kuni” arafasida topshiriladi.',
+    fact: 'Hozirgi vaqtda nomzodlar Yoshlar ishlari agentligi tomonidan taqdim etiladi',
     num: '2 nafar',
     numL: 'har yili har bir hududdan',
     img: '/img/ittifoq/yetakchilar.jpg',
@@ -129,24 +129,24 @@ export const PRIVILEGES: Privilege[] = [
     group: 'davlat',
     t: '“Kelajak bunyodkori” medali',
     medal: '/img/ittifoq/medal-kelajak-bunyodkori.webp',
-    text: 'Ittifoq taklifi bilan 2017-yilda taʼsis etilgan. Medal öqiş, mehnat va jamoat işlarida faollik körsatgan yoşlarga Prezident farmoni bilan beriladi.',
+    text: 'Ittifoq taklifi bilan 2017-yilda ta’sis etilgan. Medal o‘qish, mehnat va jamoat ishlarida faollik ko‘rsatgan yoshlarga Prezident farmoni bilan beriladi.',
     fact: '2017-yildan beri beriladi',
     num: '14–30',
-    numL: 'yoşdagi yoşlar taqdirlanadi',
+    numL: 'yoshdagi yoshlar taqdirlanadi',
     img: '/img/ittifoq/volontyorlar.jpg',
   },
 ]
 
 export const INTL = {
-  text: 'Ittifoq xalqaro taşkilotlar va xorijiy davlatlarning yoşlar taşkilotlari bilan hamkorlik qiladi. Hamkorlik şakllari:',
-  assoc: 'Ittifoq qoşida Özbekiston yoşlari umumjahon assotsiatsiyasi taşkil etilgan. Assotsiatsiya xorijda öqiyotgan va işlayotgan özbekistonlik yoşlarni qöllab-quvvatlaydi.',
+  text: 'Ittifoq xalqaro tashkilotlar va xorijiy davlatlarning yoshlar tashkilotlari bilan hamkorlik qiladi. Hamkorlik shakllari:',
+  assoc: 'Ittifoq qoshida O‘zbekiston yoshlari umumjahon assotsiatsiyasi tashkil etilgan. Assotsiatsiya xorijda o‘qiyotgan va ishlayotgan o‘zbekistonlik yoshlarni qo‘llab-quvvatlaydi.',
   facts: [
     { v: '20+', l: 'hamkor mamlakat' },
     { v: '25', l: 'davlatda assotsiatsiya vakillari' },
-    { v: '100 000', l: 'yoş xalqaro loyihalarda' },
+    { v: '100 000', l: 'yosh xalqaro loyihalarda' },
   ] as Stat[],
-  forms: ['Forumlar va sammitlar', 'Amaliyot va almaşinuv dasturlari', 'Uçraşuvlar va konferensiyalar'],
-  projects: ['Milliy dialog', 'Yoş diplomatlar', 'Turkiy dunyo yoşlar harakati', 'BMT modeli', 'Isteʼdodli yoşlar', 'Taʼlim Expo', 'TDT modeli', 'Xorijdagi vatandoşlar biznes marafoni'],
+  forms: ['Forumlar va sammitlar', 'Amaliyot va almashinuv dasturlari', 'Uchrashuvlar va konferensiyalar'],
+  projects: ['Milliy dialog', 'Yosh diplomatlar', 'Turkiy dunyo yoshlar harakati', 'BMT modeli', 'Iste’dodli yoshlar', 'Ta’lim Expo', 'TDT modeli', 'Xorijdagi vatandoshlar biznes marafoni'],
   partners: '/img/ittifoq/hamkorlar.png',
   flags: '/img/ittifoq/bayroqlar.png',
 }
@@ -170,19 +170,19 @@ export const IMG = {
 /* ---------------- Yoşlar markazlari ---------------- */
 
 export const PALACE = {
-  name: 'Yoşlar ijod saroyi',
-  org: 'Özbekiston yoşlar ittifoqi',
-  text: 'Toşkent şahridagi Yoşlar ijod saroyida xalqimizning sanʼat merosini namoyiş etuvçi körgazmalar, ijodiy tadbirlar va uçraşuvlar ötkaziladi.',
-  features: ['“Kitoblar olami” kitobxonlik maydoni', 'Podkast studiyasi', 'Kovorking va uçraşuv xonalari', 'Körgazmalar va ijodiy tadbirlar'],
+  name: 'Yoshlar ijod saroyi',
+  org: 'O‘zbekiston yoshlar ittifoqi',
+  text: 'Toshkent shahridagi Yoshlar ijod saroyida xalqimizning san’at merosini namoyish etuvchi ko‘rgazmalar, ijodiy tadbirlar va uchrashuvlar o‘tkaziladi.',
+  features: ['“Kitoblar olami” kitobxonlik maydoni', 'Podkast studiyasi', 'Kovorking va uchrashuv xonalari', 'Ko‘rgazmalar va ijodiy tadbirlar'],
   img: '/img/markazlar/ijod-saroyi.jpg',
   gallery: ['/img/markazlar/ijod-kitoblar-olami.jpg', '/img/markazlar/ijod-podkast.jpg', '/img/markazlar/ijod-davr-bizniki.jpg'],
 }
 
 /* Toşkent şahar markazi: matn NAMUNA — manzil, ish vaqti va rasmiy tavsif kelgaçi almaştiriladi */
 export const CITY_CENTRE = {
-  name: 'Toşkent şahar Yoşlar markazi',
-  text: 'Toşkent şahridagi Yoşlar markazida yoşlar uçun tadbirlar, tögaraklar va uçraşuvlar ötkaziladi.',
-  facts: ['Tadbir va uçraşuvlar zali', 'Tögaraklar va örganiş xonalari', 'Yoşlar taşabbuslarini qöllab-quvvatlaş'],
+  name: 'Toshkent shahar Yoshlar markazi',
+  text: 'Toshkent shahridagi Yoshlar markazida yoshlar uchun tadbirlar, to‘garaklar va uchrashuvlar o‘tkaziladi.',
+  facts: ['Tadbir va uchrashuvlar zali', 'To‘garaklar va o‘rganish xonalari', 'Yoshlar tashabbuslarini qo‘llab-quvvatlash'],
   img: '/img/markazlar/toshkent-shahar.jpg',
 }
 
@@ -190,19 +190,19 @@ export type Centre = { region: string; img: string }
 
 /** Toşkent şahri birinçi, keyin viloyatlar */
 export const CENTRES: Centre[] = [
-  { region: 'Toşkent şahri', img: '/img/markazlar/toshkent-shahar.jpg' },
-  { region: 'Toşkent viloyati', img: '/img/markazlar/toshkent-viloyati.jpg' },
-  { region: 'Qoraqalpoğiston Respublikasi', img: '/img/markazlar/qoraqalpogiston.jpg' },
+  { region: 'Toshkent shahri', img: '/img/markazlar/toshkent-shahar.jpg' },
+  { region: 'Toshkent viloyati', img: '/img/markazlar/toshkent-viloyati.jpg' },
+  { region: 'Qoraqalpog‘iston Respublikasi', img: '/img/markazlar/qoraqalpogiston.jpg' },
   { region: 'Andijon viloyati', img: '/img/markazlar/andijon.jpg' },
   { region: 'Buxoro viloyati', img: '/img/markazlar/buxoro.jpg' },
   { region: 'Jizzax viloyati', img: '/img/markazlar/jizzax.jpg' },
-  { region: 'Qaşqadaryo viloyati', img: '/img/markazlar/qashqadaryo.jpg' },
+  { region: 'Qashqadaryo viloyati', img: '/img/markazlar/qashqadaryo.jpg' },
   { region: 'Navoiy viloyati', img: '/img/markazlar/navoiy.jpg' },
   { region: 'Namangan viloyati', img: '/img/markazlar/namangan.jpg' },
   { region: 'Samarqand viloyati', img: '/img/markazlar/samarqand.jpg' },
   { region: 'Sirdaryo viloyati', img: '/img/markazlar/sirdaryo.jpg' },
   { region: 'Surxondaryo viloyati', img: '/img/markazlar/surxondaryo.jpg' },
-  { region: 'Farğona viloyati', img: '/img/markazlar/fargona.jpg' },
+  { region: 'Farg‘ona viloyati', img: '/img/markazlar/fargona.jpg' },
   { region: 'Xorazm viloyati', img: '/img/markazlar/xorazm.jpg' },
 ]
 
@@ -220,49 +220,49 @@ export const STRUCTURE = {
   /** 5.1–5.7: rahbar organlar */
   qurultoy: {
     t: 'Qurultoy',
-    d: 'Ittifoqning oliy rahbar organi. Ustavni tasdiqlaydi, Markaziy Kengaş va Markaziy nazorat-taftiş komissiyasini saylaydi, ularning hisobotlarini tinglaydi.',
-    meta: ['Hisobot Qurultoyi — yilda kamida bir marta', 'Vakolatli Qurultoy — 5 yilda kamida bir marta', 'Delegatlar hududiy kengaşlar konferensiyalarida saylanadi'],
+    d: 'Ittifoqning oliy rahbar organi. Ustavni tasdiqlaydi, Markaziy Kengash va Markaziy nazorat-taftish komissiyasini saylaydi, ularning hisobotlarini tinglaydi.',
+    meta: ['Hisobot Qurultoyi — yilda kamida bir marta', 'Vakolatli Qurultoy — 5 yilda kamida bir marta', 'Delegatlar hududiy kengashlar konferensiyalarida saylanadi'],
   } as Body,
   council: {
-    t: 'Markaziy Kengaş',
-    d: 'Qurultoylar oraliğida Ittifoqqa rahbarlik qiladi: Qurultoy qarorlari ijrosini taʼminlaydi, yillik iş reja va byudjetni tasdiqlaydi.',
-    meta: ['Kamida 61 kişi', '5 yil muddatga', 'Har hududdan kamida 2 nafar yoş vakil'],
+    t: 'Markaziy Kengash',
+    d: 'Qurultoylar oralig‘ida Ittifoqqa rahbarlik qiladi: Qurultoy qarorlari ijrosini ta’minlaydi, yillik ish reja va byudjetni tasdiqlaydi.',
+    meta: ['Kamida 61 kishi', '5 yil muddatga', 'Har hududdan kamida 2 nafar yosh vakil'],
   } as Body,
   chair: {
-    t: 'Markaziy Kengaş raisi',
-    d: 'Markaziy Kengaş, Ijroiya qömitasi va apparat faoliyatiga rahbarlik qiladi.',
+    t: 'Markaziy Kengash raisi',
+    d: 'Markaziy Kengash, Ijroiya qo‘mitasi va apparat faoliyatiga rahbarlik qiladi.',
     meta: ['Qurultoy 5 yilga saylaydi'],
   } as Body,
   exec: {
-    t: 'Ijroiya qömitasi',
-    d: 'Ittifoq faoliyatini taşkil etiş böyiça tezkor qarorlar qabul qiladi, hududiy kengaşlar faoliyatini muvofiqlaştiradi.',
-    meta: ['Markaziy Kengaş aʼzolaridan', 'Kamida 15 kişi', '5 yil muddatga'],
+    t: 'Ijroiya qo‘mitasi',
+    d: 'Ittifoq faoliyatini tashkil etish bo‘yicha tezkor qarorlar qabul qiladi, hududiy kengashlar faoliyatini muvofiqlashtiradi.',
+    meta: ['Markaziy Kengash a’zolaridan', 'Kamida 15 kishi', '5 yil muddatga'],
   } as Body,
   audit: {
-    t: 'Markaziy nazorat-taftiş komissiyasi',
-    d: 'Ittifoqning markaziy nazorat organi: byudjet ijrosi va moliyaviy-xöjalik faoliyatini tekşiradi.',
-    meta: ['Kamida 11 kişi', '5 yil muddatga', 'Qurultoyga hisobot beradi'],
+    t: 'Markaziy nazorat-taftish komissiyasi',
+    d: 'Ittifoqning markaziy nazorat organi: byudjet ijrosi va moliyaviy-xo‘jalik faoliyatini tekshiradi.',
+    meta: ['Kamida 11 kishi', '5 yil muddatga', 'Qurultoyga hisobot beradi'],
   } as Body,
   /** 6.1–6.3: taşkiliy tuzilma (yuqoridan pastga) */
   levels: [
     {
-      t: 'Hududiy kengaşlar',
-      d: 'Qoraqalpoğiston Respublikasi, viloyatlar va Toşkent şahrida işlaydi. Yuqori organi — Konferensiya, u Kengaş, rais va nazorat-taftiş komissiyasini saylaydi.',
-      meta: ['Konferensiya 2,5 yilda kamida bir marta', 'Kengaş kamida 21 kişi'],
+      t: 'Hududiy kengashlar',
+      d: 'Qoraqalpog‘iston Respublikasi, viloyatlar va Toshkent shahrida ishlaydi. Yuqori organi — Konferensiya, u Kengash, rais va nazorat-taftish komissiyasini saylaydi.',
+      meta: ['Konferensiya 2,5 yilda kamida bir marta', 'Kengash kamida 21 kishi'],
     },
     {
-      t: 'Mahalliy kengaşlar',
-      d: 'Maʼmuriy-hududiy bölinişga muvofiq tuziladi. Yuqori organi — Konferensiya; boşlanğiç taşkilotlar şu yerga delegat saylaydi.',
-      meta: ['Konferensiya 2,5 yilda kamida bir marta', 'Kengaş yiğilişi 6 oyda kamida bir marta'],
+      t: 'Mahalliy kengashlar',
+      d: 'Ma’muriy-hududiy bo‘linishga muvofiq tuziladi. Yuqori organi — Konferensiya; boshlang‘ich tashkilotlar shu yerga delegat saylaydi.',
+      meta: ['Konferensiya 2,5 yilda kamida bir marta', 'Kengash yig‘ilishi 6 oyda kamida bir marta'],
     },
     {
-      t: 'Boşlanğiç taşkilotlar',
-      d: 'Öqiş, iş va xizmat joylarida tuziladi. Yuqori organi — aʼzolarning Umumiy yoki Hisobot-saylov yiğilişi; taşkilotga aʼzolar saylagan yetakçi rahbarlik qiladi.',
-      meta: ['Kamida 5 nafar aʼzo', 'Yetakçi 2,5 yilga saylanadi', '100 dan ortiq aʼzoda — kamida 7 kişilik Kengaş'],
+      t: 'Boshlang‘ich tashkilotlar',
+      d: 'O‘qish, ish va xizmat joylarida tuziladi. Yuqori organi — a’zolarning Umumiy yoki Hisobot-saylov yig‘ilishi; tashkilotga a’zolar saylagan yetakchi rahbarlik qiladi.',
+      meta: ['Kamida 5 nafar a’zo', 'Yetakchi 2,5 yilga saylanadi', '100 dan ortiq a’zoda — kamida 7 kishilik Kengash'],
     },
   ] as Body[],
   /** 1-bob: faoliyat tamoyillari */
-  principles: ['Ixtiyoriylik', 'Qonuniylik', 'Oşkoralik', 'Aʼzolarning teng huquqliligi', 'Özini özi boşqariş'],
+  principles: ['Ixtiyoriylik', 'Qonuniylik', 'Oshkoralik', 'A’zolarning teng huquqliligi', 'O‘zini o‘zi boshqarish'],
 }
 
 /**
@@ -275,67 +275,67 @@ export const JOIN = {
     {
       band: '4.2',
       t: 'Belgilangan talablarga muvofiqlik',
-      d: '14 yoşga tölgan va 30 yoşdan oşmagan, Ittifoq maqsadini qöllab-quvvatlaş istagini bildirgan Özbekiston Respublikasi fuqarosi yoki Özbekistonda muntazam yaşab kelayotgan fuqaroligi bölmagan şaxs aʼzo bölişi mumkin.',
+      d: '14 yoshga to‘lgan va 30 yoshdan oshmagan, Ittifoq maqsadini qo‘llab-quvvatlash istagini bildirgan O‘zbekiston Respublikasi fuqarosi yoki O‘zbekistonda muntazam yashab kelayotgan fuqaroligi bo‘lmagan shaxs a’zo bo‘lishi mumkin.',
     },
     {
       band: '4.1',
-      t: 'Ariza taqdim etiş',
-      d: 'Aʼzolikka qabul qiliniş uçun öqiş yoki iş joyidagi Ittifoq boşlanğiç taşkilotiga tegişli mazmundagi ariza taqdim etiladi.',
+      t: 'Ariza taqdim etish',
+      d: 'A’zolikka qabul qilinish uchun o‘qish yoki ish joyidagi Ittifoq boshlang‘ich tashkilotiga tegishli mazmundagi ariza taqdim etiladi.',
     },
     {
       band: '4.4',
-      t: 'Boşlanğiç taşkilotda körib çiqiş',
-      d: 'Aʼzolikka qabul qiliş boşlanğiç taşkilotning Umumiy yiğilişi, Kengaş şakllantirilgan bölsa — boşlanğiç taşkilot Kengaşining yiğilişi tomonidan amalga oşiriladi.',
+      t: 'Boshlang‘ich tashkilotda ko‘rib chiqish',
+      d: 'A’zolikka qabul qilish boshlang‘ich tashkilotning Umumiy yig‘ilishi, Kengash shakllantirilgan bo‘lsa — boshlang‘ich tashkilot Kengashining yig‘ilishi tomonidan amalga oshiriladi.',
     },
     {
       band: '4.5',
       t: 'Qaror yakuniy hisoblanadi',
-      d: 'Boşlanğiç taşkilotning qabul qiliş töğrisidagi qarori yakuniy hisoblanadi va Ittifoqning yuqori organlari tomonidan tasdiqlaniş talab qilinmaydi.',
+      d: 'Boshlang‘ich tashkilotning qabul qilish to‘g‘risidagi qarori yakuniy hisoblanadi va Ittifoqning yuqori organlari tomonidan tasdiqlanish talab qilinmaydi.',
     },
   ],
   /** 4.10-band */
   rights: [
-    'Umumiy yiğilişlar, konferensiyalar, Qurultoy va rahbar organlar yiğilişlarida öz fikrini erkin ifoda etiş',
-    'Şaxsan yoki vakili orqali saylanadigan organlar qarorlarini işlab çiqişda iştirok etiş',
-    'Saylanadigan rahbar organlar va nazorat-taftiş organlariga saylaş va saylaniş',
-    'Ittifoq organlari faoliyati töğrisida maʼlumot oliş',
-    'Ittifoqning har qanday rahbar organiga ariza va takliflar bilan murojaat etiş',
+    'Umumiy yig‘ilishlar, konferensiyalar, Qurultoy va rahbar organlar yig‘ilishlarida o‘z fikrini erkin ifoda etish',
+    'Shaxsan yoki vakili orqali saylanadigan organlar qarorlarini ishlab chiqishda ishtirok etish',
+    'Saylanadigan rahbar organlar va nazorat-taftish organlariga saylash va saylanish',
+    'Ittifoq organlari faoliyati to‘g‘risida ma’lumot olish',
+    'Ittifoqning har qanday rahbar organiga ariza va takliflar bilan murojaat etish',
   ],
   /** 4.11-band */
   duties: [
-    'Ittifoqning Ustav maqsadlarini amalga oşirişda qatnaşiş',
-    'Yoşlar örtasida va jamiyatda Ittifoqning taʼsiri va nufuzini oşiriş',
-    'Rahbar organlar, boşlanğiç taşkilot umumiy yiğilişlari va Kengaşi qarorlarini bajariş',
-    'Boşlanğiç taşkilot faoliyati va Ittifoqning barça yönalişlarida faol iştirok etiş',
+    'Ittifoqning Ustav maqsadlarini amalga oshirishda qatnashish',
+    'Yoshlar o‘rtasida va jamiyatda Ittifoqning ta’siri va nufuzini oshirish',
+    'Rahbar organlar, boshlang‘ich tashkilot umumiy yig‘ilishlari va Kengashi qarorlarini bajarish',
+    'Boshlang‘ich tashkilot faoliyati va Ittifoqning barcha yo‘nalishlarida faol ishtirok etish',
   ],
   /** 4.7, 4.8-bandlar */
   legal: {
-    d: 'Yoşlar sohasidagi nodavlat notijorat taşkilotlari, korxona, muassasa va taşkilotlar, markazlar, klublar hamda taʼsis hujjatlari Ittifoq Ustaviga zid bölmagan boşqa yuridik şaxslar aʼzo bölişi mumkin.',
-    how: 'Qabul qiliş Ittifoq Markaziy Kengaşi Ijroiya qömitasining qarori asosida amalga oşiriladi.',
+    d: 'Yoshlar sohasidagi nodavlat notijorat tashkilotlari, korxona, muassasa va tashkilotlar, markazlar, klublar hamda ta’sis hujjatlari Ittifoq Ustaviga zid bo‘lmagan boshqa yuridik shaxslar a’zo bo‘lishi mumkin.',
+    how: 'Qabul qilish Ittifoq Markaziy Kengashi Ijroiya qo‘mitasining qarori asosida amalga oshiriladi.',
   },
   /** 4.3-band */
-  note: 'Ittifoqning rahbar organlariga saylangan aʼzolarga 30 yoşlik çeklov qöllanilmaydi.',
+  note: 'Ittifoqning rahbar organlariga saylangan a’zolarga 30 yoshlik cheklov qo‘llanilmaydi.',
   /** 4.6-band: jismoniy şaxslar aʼzoligining bekor qilinişi */
   ends: [
-    'aʼzoning arizasiga köra',
-    'aʼzoning yoşi 30 dan oşgaç (rahbar organlarga saylanganlar bundan mustasno)',
-    'Ustavga zid xatti-harakatlarga yöl qöyilganda',
-    'boşqa davlat fuqaroligi olinganda',
+    'a’zoning arizasiga ko‘ra',
+    'a’zoning yoshi 30 dan oshgach (rahbar organlarga saylanganlar bundan mustasno)',
+    'Ustavga zid xatti-harakatlarga yo‘l qo‘yilganda',
+    'boshqa davlat fuqaroligi olinganda',
     'sud tomonidan muomalaga layoqatsiz deb topilganda yoki vafot etganda',
     'Ittifoq faoliyati tugatilganda',
   ],
-  cta: { t: 'Ittifoqqa aʼzo böliş', d: 'Ariza öqiş yoki iş joyidagi Ittifoq boşlanğiç taşkilotiga taqdim etiladi. Arizani saytda onlayn yuboriş ham mumkin: Kengaş uni tegişli boşlanğiç taşkilotga yetkazadi.' },
+  cta: { t: 'Ittifoqqa a’zo bo‘lish', d: 'Ariza o‘qish yoki ish joyidagi Ittifoq boshlang‘ich tashkilotiga taqdim etiladi. Arizani saytda onlayn yuborish ham mumkin: Kengash uni tegishli boshlang‘ich tashkilotga yetkazadi.' },
 }
 
 /** Rasmiy maʼlumotlar */
 export const OFFICIAL = {
   rows: [
-    ['Töliq nomi', 'Özbekiston yoşlar ittifoqi'],
-    ['Ruşça', 'Союз молодежи Узбекистана'],
-    ['Inglizça', 'Uzbekistan Youth Union'],
-    ['Taşkiliy-huquqiy şakli', 'Nodavlat notijorat taşkilot (ittifoq)'],
-    ['Taşkil etilgan sana', '2017-yil 30-iyun'],
-    ['Markaziy Kengaş manzili', 'Toşkent şahri, Alişer Navoiy köçasi, 11-uy'],
+    ['To‘liq nomi', 'O‘zbekiston yoshlar ittifoqi'],
+    ['Rushcha', 'Союз молодежи Узбекистана'],
+    ['Inglizcha', 'Uzbekistan Youth Union'],
+    ['Tashkiliy-huquqiy shakli', 'Nodavlat notijorat tashkilot (ittifoq)'],
+    ['Tashkil etilgan sana', '2017-yil 30-iyun'],
+    ['Markaziy Kengash manzili', 'Toshkent shahri, Alisher Navoiy ko‘chasi, 11-uy'],
   ] as [string, string][],
 }
 
@@ -348,32 +348,32 @@ export const OFFICIAL = {
 export const PRIORITIES = {
   /** Har bir yönalişning qisqa nomi (items bilan bir xil tartibda) */
   titles: [
-    'Yoşlarga oid davlat siyosatini amalga oşirişda ijtimoiy şeriklik',
-    'Yoşlarning huquq va qonuniy manfaatlarini himoya qiliş',
-    'Demokratik islohotlarda yoşlar faolligini oşiriş',
-    'Yoşlarning kasb egallaşi va bandligiga kömaklaşiş',
-    'Kitobxonlikni rivojlantiriş va yoşlar madaniyatini yuksaltiriş',
-    'Soğlom turmuş tarzi va oila institutini mustahkamlaş',
-    'Yoşlarning böş vaqtini mazmunli taşkil etiş',
-    'Ijtimoiy himoyaga muhtoj yoşlarni qöllab-quvvatlaş',
-    'Yoşlar örtasida huquqbuzarliklar profilaktikasi',
-    'Yoş rahbar kadrlar zaxirasini şakllantiriş',
-    'Yoşlar siyosati sohasida xalqaro hamkorlikni rivojlantiriş',
-    'Yoşlar bilan işlaşda ğoyaviy-uslubiy yordam körsatiş',
+    'Yoshlarga oid davlat siyosatini amalga oshirishda ijtimoiy sheriklik',
+    'Yoshlarning huquq va qonuniy manfaatlarini himoya qilish',
+    'Demokratik islohotlarda yoshlar faolligini oshirish',
+    'Yoshlarning kasb egallashi va bandligiga ko‘maklashish',
+    'Kitobxonlikni rivojlantirish va yoshlar madaniyatini yuksaltirish',
+    'Sog‘lom turmush tarzi va oila institutini mustahkamlash',
+    'Yoshlarning bo‘sh vaqtini mazmunli tashkil etish',
+    'Ijtimoiy himoyaga muhtoj yoshlarni qo‘llab-quvvatlash',
+    'Yoshlar o‘rtasida huquqbuzarliklar profilaktikasi',
+    'Yosh rahbar kadrlar zaxirasini shakllantirish',
+    'Yoshlar siyosati sohasida xalqaro hamkorlikni rivojlantirish',
+    'Yoshlar bilan ishlashda g‘oyaviy-uslubiy yordam ko‘rsatish',
   ],
   items: [
-    'Yoşlarga oid davlat siyosatini amalga oşirişda davlat organlari, nodavlat notijorat taşkilotlari va fuqarolik jamiyati institutlari bilan samarali hamkorlikni taʼminlovçi, “Yoşlar — kelajak bunyodkori” şiori ostida professional işlaydigan tuzilmaga aylaniş.',
-    'Yoşlarning huquqlari, erkinliklari va qonuniy manfaatlarini himoya qiliş, ularni milliy va umuminsoniy qadriyatlarga hurmat, Vatanga muhabbat ruhida tarbiyalaş, turli mafkuraviy tahdidlardan asraş.',
-    'Demokratik islohotlarda yoşlar faolligini oşiriş, maʼnaviyati yuksak, mustaqil fikrlaydigan, el-yurt manfaati yölida bor kuçini safarbar qiladigan taşabbuskor yoşlar safini kengaytiriş.',
-    'Yoşlarning zamonaviy kasblarni egallaşi, bandligi, kiçik biznes va tadbirkorlikka jalb etilişi, intellektual va ijodiy salohiyatini röyobga çiqarişiga kömaklaşiş.',
-    'Ilmiy va badiiy kitoblarni, jumladan elektron asarlarni öqişga qiziqişni oşiriş; huquqiy, ekologik, tibbiy va axborot texnologiyalari madaniyatini yuksaltiriş orqali yot ğoyalarga qarşi immunitetni şakllantiriş.',
-    'Soğlom turmuş tarzi va oila muqaddasligi ğoyalarini tarğib qiliş, erta turmuş quriş va yoş oilalar ajralişining oldini oliş.',
-    'Yoşlarning böş vaqtini mazmunli taşkil etiş: sport va jismoniy tarbiya, ijodiy tögaraklar, xorijiy tillar va boşqa öquv kurslariga keng jalb etiş.',
-    'Yoş oilalarni, imkoniyati çeklangan va ijtimoiy himoyaga muhtoj yoşlarni maʼnaviy va moddiy qöllab-quvvatlaş, ular uçun munosib uy-joy va şaroit yaratiş.',
-    'Yoşlar örtasida huquqbuzarlik va jinoyatçilikning barvaqt oldini oliş va profilaktika işlarida faol iştirok etiş.',
-    'Bilimli, taşabbuskor, halol va fidoyi yoş rahbar kadrlarni tarbiyalaş, zaxirasini yaratiş va masʼul lavozimlarga tavsiya etiş.',
-    'Yoşlar siyosati sohasida xalqaro hamkorlikni rivojlantiriş, xorijda tahsil olayotgan va mehnat qilayotgan yoşlarning huquq va manfaatlarini himoya qiliş.',
-    'Davlat organlari, nodavlat notijorat taşkilotlari va fuqarolik jamiyati institutlariga yoşlar bilan işlaşda ğoyaviy-uslubiy yordam beriş.',
+    'Yoshlarga oid davlat siyosatini amalga oshirishda davlat organlari, nodavlat notijorat tashkilotlari va fuqarolik jamiyati institutlari bilan samarali hamkorlikni ta’minlovchi, “Yoshlar — kelajak bunyodkori” shiori ostida professional ishlaydigan tuzilmaga aylanish.',
+    'Yoshlarning huquqlari, erkinliklari va qonuniy manfaatlarini himoya qilish, ularni milliy va umuminsoniy qadriyatlarga hurmat, Vatanga muhabbat ruhida tarbiyalash, turli mafkuraviy tahdidlardan asrash.',
+    'Demokratik islohotlarda yoshlar faolligini oshirish, ma’naviyati yuksak, mustaqil fikrlaydigan, el-yurt manfaati yo‘lida bor kuchini safarbar qiladigan tashabbuskor yoshlar safini kengaytirish.',
+    'Yoshlarning zamonaviy kasblarni egallashi, bandligi, kichik biznes va tadbirkorlikka jalb etilishi, intellektual va ijodiy salohiyatini ro‘yobga chiqarishiga ko‘maklashish.',
+    'Ilmiy va badiiy kitoblarni, jumladan elektron asarlarni o‘qishga qiziqishni oshirish; huquqiy, ekologik, tibbiy va axborot texnologiyalari madaniyatini yuksaltirish orqali yot g‘oyalarga qarshi immunitetni shakllantirish.',
+    'Sog‘lom turmush tarzi va oila muqaddasligi g‘oyalarini targ‘ib qilish, erta turmush qurish va yosh oilalar ajralishining oldini olish.',
+    'Yoshlarning bo‘sh vaqtini mazmunli tashkil etish: sport va jismoniy tarbiya, ijodiy to‘garaklar, xorijiy tillar va boshqa o‘quv kurslariga keng jalb etish.',
+    'Yosh oilalarni, imkoniyati cheklangan va ijtimoiy himoyaga muhtoj yoshlarni ma’naviy va moddiy qo‘llab-quvvatlash, ular uchun munosib uy-joy va sharoit yaratish.',
+    'Yoshlar o‘rtasida huquqbuzarlik va jinoyatchilikning barvaqt oldini olish va profilaktika ishlarida faol ishtirok etish.',
+    'Bilimli, tashabbuskor, halol va fidoyi yosh rahbar kadrlarni tarbiyalash, zaxirasini yaratish va mas’ul lavozimlarga tavsiya etish.',
+    'Yoshlar siyosati sohasida xalqaro hamkorlikni rivojlantirish, xorijda tahsil olayotgan va mehnat qilayotgan yoshlarning huquq va manfaatlarini himoya qilish.',
+    'Davlat organlari, nodavlat notijorat tashkilotlari va fuqarolik jamiyati institutlariga yoshlar bilan ishlashda g‘oyaviy-uslubiy yordam berish.',
   ],
 }
 
@@ -383,65 +383,65 @@ export const PRIORITIES = {
 export type Org = { t: string; d: string; logo?: string; g: 'talim' | 'ijod' | 'ijtimoiy' | 'iqtisod' }
 
 export const ORG_GROUPS: { key: Org['g']; t: string }[] = [
-  { key: 'talim', t: 'Taʼlim va ilm-fan' },
+  { key: 'talim', t: 'Ta’lim va ilm-fan' },
   { key: 'ijod', t: 'Ijod va madaniyat' },
   { key: 'ijtimoiy', t: 'Ijtimoiy himoya va huquq' },
   { key: 'iqtisod', t: 'Tadbirkorlik va xalqaro aloqalar' },
 ]
 
 export const ORGS = {
-  lead: 'Ittifoq tizimida 36 ta taşkilot faoliyat yuritadi, jumladan 19 ta nodavlat notijorat taşkilot va 14 ta tijorat taşkiloti. Ularda 228 kişi işlaydi.',
+  lead: 'Ittifoq tizimida 36 ta tashkilot faoliyat yuritadi, jumladan 19 ta nodavlat notijorat tashkilot va 14 ta tijorat tashkiloti. Ularda 228 kishi ishlaydi.',
   ngos: [
-    { t: 'Yetakçilar akademiyasi', g: 'talim', d: 'Mahalla, taʼlim muassasalari, vazirlik va idoralardagi yoşlar yetakçilarini öqitiş hamda ularning faoliyati samaradorligini oşiriş bilan şuğullanadi.', logo: '/img/tashkilotlar/yetakchilar.png' },
-    { t: 'Özbekiston quvnoqlar va zukkolar assotsiatsiyasi', g: 'ijod', d: 'Yoşlarning intellektual salohiyatini rivojlantiradi, iqtidorli yoşlarni aniqlaş va ularning isteʼdodini röyobga çiqarişga kömaklaşadi.', logo: '/img/tashkilotlar/qvz.png' },
-    { t: 'Prezidentning 5 taşabbus loyiha ofisi', g: 'ijod', d: 'Yoşlarning musiqa, tasviriy sanʼat, adabiyot va teatrga qiziqişini oşiriş hamda kitobxonlikni tarğib qiliş işlarini muvofiqlaştiradi.', logo: '/img/tashkilotlar/tashabbus5.png' },
-    { t: 'Yoşlar tadbirkorligini qöllab-quvvatlaş markazi', g: 'iqtisod', d: 'Yoş tadbirkorlarni qöllab-quvvatlaydi, biznes ğoyalarini amalga oşirişda uslubiy va amaliy yordam körsatadi.', logo: '/img/tashkilotlar/tadbirkorlik.png' },
-    { t: 'Respublika yoş ijodkorlar kengaşi', g: 'ijod', d: 'Hududlardagi isteʼdodli yoş ijodkorlarni aniqlaş va ularning ijodiy faoliyatini qöllab-quvvatlaş bilan şuğullanadi.', logo: '/img/tashkilotlar/ijodkorlar.png' },
-    { t: 'Özbekiston volontyorlari assotsiatsiyasi', g: 'ijtimoiy', d: 'Volontyorlik faoliyatini taşkil etadi, fuqarolik taşabbuslarini rivojlantiradi hamda volontyorlarning huquq va manfaatlarini himoya qiladi.', logo: '/img/tashkilotlar/volontyorlar.png' },
-    { t: 'Özbekiston yoşlari umumjahon assotsiatsiyasi', g: 'iqtisod', d: 'Xorijda taʼlim olayotgan va mehnat faoliyatini amalga oşirayotgan özbekistonlik yoşlarga huquqiy va ijtimoiy kömak körsatadi.', logo: '/img/tashkilotlar/umumjahon.png' },
-    { t: 'Loyihalar boşqaruvi markazi', g: 'iqtisod', d: 'Maʼnaviy-maʼrifiy va ijtimoiy mavzulardagi axborot mahsulotlari: maqolalar, eşittirişlar, videoroliklar va filmlar tayyorlaydi.', logo: '/img/tashkilotlar/mpmg.png' },
-    { t: '“Yangi avlod forumi” bolalar ijodiyoti markazi', g: 'ijod', d: 'Maktabdan taşqari taʼlimni rivojlantiradi, bolalarning madaniyat va sanʼat sohasidagi qobiliyatlarini qöllab-quvvatlaydi.', logo: '/img/tashkilotlar/yangiavlod.png' },
-    { t: 'Respublika yoşlar markazi', g: 'ijtimoiy', d: 'Hududlarda yoşlarning savodxonligini oşiradi, kasb-hunar va ijodiy yönalişlardagi öquv tögaraklarini taşkil etadi.', logo: '/img/tashkilotlar/yoshlarmarkazi.png' },
-    { t: 'Ijtimoiy-huquqiy media markaz', g: 'ijtimoiy', d: 'Yoşlarning huquqiy ongi va madaniyatini yuksaltirişga qaratilgan media mahsulotlarni tayyorlaydi.', logo: '/img/tashkilotlar/mediamarkaz.png' },
-    { t: 'Özbekiston yoş fermerlari kengaşi', g: 'iqtisod', d: 'Yoşlar örtasida fermerlik faoliyatini tarğib qiladi, köp tarmoqli fermer xöjaliklarini rivojlantirişga kömaklaşadi.', logo: '/img/tashkilotlar/fermerlar.png' },
-    { t: 'Imkoniyati çeklangan yoşlar va bolalar markazi', g: 'ijtimoiy', d: 'Imkoniyati çeklangan yoşlar va bolalarga teng imkoniyatlar yaratadi, ularga huquqiy, psixologik va pedagogik yordam körsatadi.', logo: '/img/tashkilotlar/imkoniyat.png' },
-    { t: 'Yoşlar ijod saroyi', g: 'ijod', d: 'Sanʼat merosini namoyiş etuvçi körgazmalar, ijodiy tadbirlar va uçraşuvlar ötkaziladigan maskan.', logo: '/img/tashkilotlar/ijodsaroyi.png' },
-    { t: 'Yoş huquqşunoslar kengaşi', g: 'ijtimoiy', d: 'Sud-huquq islohotlarida yoşlarning iştirokini kengaytiradi, yoşlarning huquq va qonuniy manfaatlarini himoya qiladi.', logo: '/img/tashkilotlar/huquqshunoslar.png' },
-    { t: 'Respublika yoş olimlar kengaşi', g: 'talim', d: 'Ilmiy tadqiqot olib borayotgan yoş olimlar va iqtidorli yoşlarni moddiy va maʼnaviy jihatdan qöllab-quvvatlaydi.', logo: '/img/tashkilotlar/olimlar.png' },
-    { t: 'Yoş dizaynerlar kengaşi', g: 'ijod', d: 'Yoş dizaynerlarning işlanmalarini ommalaştiradi, ijodiy yoşlar jamoasini şakllantiradi.', logo: '/img/tashkilotlar/dizaynerlar.png' },
-    { t: 'Yoş kinoijodkorlar kengaşi', g: 'ijod', d: 'Isteʼdodli yoş kinoijodkorlarni aniqlaydi va ularning loyihalarini amalga oşirişga kömaklaşadi.', logo: '/img/tashkilotlar/kino.png' },
-    { t: 'Tibbiyot oliy öquv yurtlari talabalari assotsiatsiyasi', g: 'talim', d: 'Yoşlarning tibbiy savodxonligini oşiradi, soğliqni saqlaş sohasiga xorijiy grantlarni jalb etişga kömaklaşadi.', logo: '/img/tashkilotlar/tibbiyot.png' },
+    { t: 'Yetakchilar akademiyasi', g: 'talim', d: 'Mahalla, ta’lim muassasalari, vazirlik va idoralardagi yoshlar yetakchilarini o‘qitish hamda ularning faoliyati samaradorligini oshirish bilan shug‘ullanadi.', logo: '/img/tashkilotlar/yetakchilar.png' },
+    { t: 'O‘zbekiston quvnoqlar va zukkolar assotsiatsiyasi', g: 'ijod', d: 'Yoshlarning intellektual salohiyatini rivojlantiradi, iqtidorli yoshlarni aniqlash va ularning iste’dodini ro‘yobga chiqarishga ko‘maklashadi.', logo: '/img/tashkilotlar/qvz.png' },
+    { t: 'Prezidentning 5 tashabbus loyiha ofisi', g: 'ijod', d: 'Yoshlarning musiqa, tasviriy san’at, adabiyot va teatrga qiziqishini oshirish hamda kitobxonlikni targ‘ib qilish ishlarini muvofiqlashtiradi.', logo: '/img/tashkilotlar/tashabbus5.png' },
+    { t: 'Yoshlar tadbirkorligini qo‘llab-quvvatlash markazi', g: 'iqtisod', d: 'Yosh tadbirkorlarni qo‘llab-quvvatlaydi, biznes g‘oyalarini amalga oshirishda uslubiy va amaliy yordam ko‘rsatadi.', logo: '/img/tashkilotlar/tadbirkorlik.png' },
+    { t: 'Respublika yosh ijodkorlar kengashi', g: 'ijod', d: 'Hududlardagi iste’dodli yosh ijodkorlarni aniqlash va ularning ijodiy faoliyatini qo‘llab-quvvatlash bilan shug‘ullanadi.', logo: '/img/tashkilotlar/ijodkorlar.png' },
+    { t: 'O‘zbekiston volontyorlari assotsiatsiyasi', g: 'ijtimoiy', d: 'Volontyorlik faoliyatini tashkil etadi, fuqarolik tashabbuslarini rivojlantiradi hamda volontyorlarning huquq va manfaatlarini himoya qiladi.', logo: '/img/tashkilotlar/volontyorlar.png' },
+    { t: 'O‘zbekiston yoshlari umumjahon assotsiatsiyasi', g: 'iqtisod', d: 'Xorijda ta’lim olayotgan va mehnat faoliyatini amalga oshirayotgan o‘zbekistonlik yoshlarga huquqiy va ijtimoiy ko‘mak ko‘rsatadi.', logo: '/img/tashkilotlar/umumjahon.png' },
+    { t: 'Loyihalar boshqaruvi markazi', g: 'iqtisod', d: 'Ma’naviy-ma’rifiy va ijtimoiy mavzulardagi axborot mahsulotlari: maqolalar, eshittirishlar, videoroliklar va filmlar tayyorlaydi.', logo: '/img/tashkilotlar/mpmg.png' },
+    { t: '“Yangi avlod forumi” bolalar ijodiyoti markazi', g: 'ijod', d: 'Maktabdan tashqari ta’limni rivojlantiradi, bolalarning madaniyat va san’at sohasidagi qobiliyatlarini qo‘llab-quvvatlaydi.', logo: '/img/tashkilotlar/yangiavlod.png' },
+    { t: 'Respublika yoshlar markazi', g: 'ijtimoiy', d: 'Hududlarda yoshlarning savodxonligini oshiradi, kasb-hunar va ijodiy yo‘nalishlardagi o‘quv to‘garaklarini tashkil etadi.', logo: '/img/tashkilotlar/yoshlarmarkazi.png' },
+    { t: 'Ijtimoiy-huquqiy media markaz', g: 'ijtimoiy', d: 'Yoshlarning huquqiy ongi va madaniyatini yuksaltirishga qaratilgan media mahsulotlarni tayyorlaydi.', logo: '/img/tashkilotlar/mediamarkaz.png' },
+    { t: 'O‘zbekiston yosh fermerlari kengashi', g: 'iqtisod', d: 'Yoshlar o‘rtasida fermerlik faoliyatini targ‘ib qiladi, ko‘p tarmoqli fermer xo‘jaliklarini rivojlantirishga ko‘maklashadi.', logo: '/img/tashkilotlar/fermerlar.png' },
+    { t: 'Imkoniyati cheklangan yoshlar va bolalar markazi', g: 'ijtimoiy', d: 'Imkoniyati cheklangan yoshlar va bolalarga teng imkoniyatlar yaratadi, ularga huquqiy, psixologik va pedagogik yordam ko‘rsatadi.', logo: '/img/tashkilotlar/imkoniyat.png' },
+    { t: 'Yoshlar ijod saroyi', g: 'ijod', d: 'San’at merosini namoyish etuvchi ko‘rgazmalar, ijodiy tadbirlar va uchrashuvlar o‘tkaziladigan maskan.', logo: '/img/tashkilotlar/ijodsaroyi.png' },
+    { t: 'Yosh huquqshunoslar kengashi', g: 'ijtimoiy', d: 'Sud-huquq islohotlarida yoshlarning ishtirokini kengaytiradi, yoshlarning huquq va qonuniy manfaatlarini himoya qiladi.', logo: '/img/tashkilotlar/huquqshunoslar.png' },
+    { t: 'Respublika yosh olimlar kengashi', g: 'talim', d: 'Ilmiy tadqiqot olib borayotgan yosh olimlar va iqtidorli yoshlarni moddiy va ma’naviy jihatdan qo‘llab-quvvatlaydi.', logo: '/img/tashkilotlar/olimlar.png' },
+    { t: 'Yosh dizaynerlar kengashi', g: 'ijod', d: 'Yosh dizaynerlarning ishlanmalarini ommalashtiradi, ijodiy yoshlar jamoasini shakllantiradi.', logo: '/img/tashkilotlar/dizaynerlar.png' },
+    { t: 'Yosh kinoijodkorlar kengashi', g: 'ijod', d: 'Iste’dodli yosh kinoijodkorlarni aniqlaydi va ularning loyihalarini amalga oshirishga ko‘maklashadi.', logo: '/img/tashkilotlar/kino.png' },
+    { t: 'Tibbiyot oliy o‘quv yurtlari talabalari assotsiatsiyasi', g: 'talim', d: 'Yoshlarning tibbiy savodxonligini oshiradi, sog‘liqni saqlash sohasiga xorijiy grantlarni jalb etishga ko‘maklashadi.', logo: '/img/tashkilotlar/tibbiyot.png' },
   ] as Org[],
   companies: [
-    '“Yoşlar” teleradiokanali',
-    '“Ozod yurt tölqinlari” telekanali',
-    '“Yoşlar ovozi” radiosi',
-    '“Yoşlar ovozi” gazetasi',
-    '“Yoş kuç” jurnali',
-    'Yoşlar naşriyot uyi',
-    '“Kitob olami” kovorking va kitob dökonlari',
-    'Yoşlar turizm agentligi',
-    'Yoşlar oromgohi',
-    '“Şafran” toğ kurort majmuasi',
+    '“Yoshlar” teleradiokanali',
+    '“Ozod yurt to‘lqinlari” telekanali',
+    '“Yoshlar ovozi” radiosi',
+    '“Yoshlar ovozi” gazetasi',
+    '“Yosh kuch” jurnali',
+    'Yoshlar nashriyot uyi',
+    '“Kitob olami” kovorking va kitob do‘konlari',
+    'Yoshlar turizm agentligi',
+    'Yoshlar oromgohi',
+    '“Shafran” tog‘ kurort majmuasi',
     'Motivatsion kontent studiyasi',
   ],
 }
 
 /* ---------------- Media, naşriyot va xizmat taşkilotlari (taqdimotdan) ---------------- */
 
-export type Company = { t: string; d: string; share: string; logo: string; kind: 'Media' | 'Naşriyot' | 'Xizmat' }
+export type Company = { t: string; d: string; share: string; logo: string; kind: 'Media' | 'Nashriyot' | 'Xizmat' }
 
 /** Ittifoq uluşi bölgan, faoliyat yuritayotgan taşkilotlar. “Uluş” — Ittifoq Markaziy Kengaşining ustav fondidagi uluşi */
 export const COMPANIES: Company[] = [
-  { kind: 'Media', t: '“Yoşlar” teleradiokanali', d: 'Yoşlarga möljallangan teleradiodasturlar tayyorlaydi va efirga uzatadi.', share: '50%', logo: '/img/tashkilotlar/c-yoshlartv.png' },
-  { kind: 'Media', t: '“Ozod yurt tölqinlari” (My5)', d: 'Teledasturlar tayyorlaydi va ularni efirga uzatadi.', share: '61%', logo: '/img/tashkilotlar/c-ozodyurt.png' },
-  { kind: 'Media', t: '“Yoşlar ovozi” radiosi', d: 'Radioeşittirişlar tayyorlaydi va efirga uzatadi.', share: '49%', logo: '/img/tashkilotlar/c-ovoziradio.png' },
-  { kind: 'Media', t: 'Motivatsion kontent', d: 'Ijtimoiy tarmoqlar uçun yoşlarga möljallangan axborot mahsulotlarini tayyorlaydi.', share: '40%', logo: '/img/tashkilotlar/c-motivatsion.png' },
-  { kind: 'Naşriyot', t: '“Yoşlar ovozi” gazetasi', d: 'Gazeta naşr etadi va uni obunaçilarga yetkazadi.', share: '100%', logo: '/img/tashkilotlar/c-ovozigazeta.png' },
-  { kind: 'Naşriyot', t: '“Yoş kuç” jurnali', d: 'Jurnal naşr etadi.', share: '100%', logo: '/img/tashkilotlar/c-yoshkuch.png' },
-  { kind: 'Naşriyot', t: 'Yoşlar naşriyot uyi', d: 'Kitoblar va boşqa bosma mahsulotlarni naşr etadi.', share: '100%', logo: '/img/tashkilotlar/c-nashriyot.png' },
-  { kind: 'Xizmat', t: '“Kitob olami”', d: 'Kitob savdosini amalga oşiradi va kovorking xizmatlarini körsatadi.', share: '100%', logo: '/img/tashkilotlar/c-kitobolami.png' },
-  { kind: 'Xizmat', t: 'Yoşlar turizm agentligi', d: 'Turistik xizmatlar körsatadi, sayohatlar uçun joylarni oldindan band qiladi.', share: '100%', logo: '/img/tashkilotlar/c-turizm.png' },
-  { kind: 'Xizmat', t: 'Yoşlar oromgohi', d: 'Yoşlar uçun soğlomlaştiriş va dam oliş xizmatlarini körsatadi.', share: '100%', logo: '/img/tashkilotlar/c-oromgoh.png' },
-  { kind: 'Xizmat', t: '“Şafran” toğ kurort majmuasi', d: 'Toğ kurortida soğlomlaştiriş va dam oliş xizmatlarini körsatadi.', share: '100%', logo: '/img/tashkilotlar/c-shafran.png' },
+  { kind: 'Media', t: '“Yoshlar” teleradiokanali', d: 'Yoshlarga mo‘ljallangan teleradiodasturlar tayyorlaydi va efirga uzatadi.', share: '50%', logo: '/img/tashkilotlar/c-yoshlartv.png' },
+  { kind: 'Media', t: '“Ozod yurt to‘lqinlari” (My5)', d: 'Teledasturlar tayyorlaydi va ularni efirga uzatadi.', share: '61%', logo: '/img/tashkilotlar/c-ozodyurt.png' },
+  { kind: 'Media', t: '“Yoshlar ovozi” radiosi', d: 'Radioeshittirishlar tayyorlaydi va efirga uzatadi.', share: '49%', logo: '/img/tashkilotlar/c-ovoziradio.png' },
+  { kind: 'Media', t: 'Motivatsion kontent', d: 'Ijtimoiy tarmoqlar uchun yoshlarga mo‘ljallangan axborot mahsulotlarini tayyorlaydi.', share: '40%', logo: '/img/tashkilotlar/c-motivatsion.png' },
+  { kind: 'Nashriyot', t: '“Yoshlar ovozi” gazetasi', d: 'Gazeta nashr etadi va uni obunachilarga yetkazadi.', share: '100%', logo: '/img/tashkilotlar/c-ovozigazeta.png' },
+  { kind: 'Nashriyot', t: '“Yosh kuch” jurnali', d: 'Jurnal nashr etadi.', share: '100%', logo: '/img/tashkilotlar/c-yoshkuch.png' },
+  { kind: 'Nashriyot', t: 'Yoshlar nashriyot uyi', d: 'Kitoblar va boshqa bosma mahsulotlarni nashr etadi.', share: '100%', logo: '/img/tashkilotlar/c-nashriyot.png' },
+  { kind: 'Xizmat', t: '“Kitob olami”', d: 'Kitob savdosini amalga oshiradi va kovorking xizmatlarini ko‘rsatadi.', share: '100%', logo: '/img/tashkilotlar/c-kitobolami.png' },
+  { kind: 'Xizmat', t: 'Yoshlar turizm agentligi', d: 'Turistik xizmatlar ko‘rsatadi, sayohatlar uchun joylarni oldindan band qiladi.', share: '100%', logo: '/img/tashkilotlar/c-turizm.png' },
+  { kind: 'Xizmat', t: 'Yoshlar oromgohi', d: 'Yoshlar uchun sog‘lomlashtirish va dam olish xizmatlarini ko‘rsatadi.', share: '100%', logo: '/img/tashkilotlar/c-oromgoh.png' },
+  { kind: 'Xizmat', t: '“Shafran” tog‘ kurort majmuasi', d: 'Tog‘ kurortida sog‘lomlashtirish va dam olish xizmatlarini ko‘rsatadi.', share: '100%', logo: '/img/tashkilotlar/c-shafran.png' },
 ]

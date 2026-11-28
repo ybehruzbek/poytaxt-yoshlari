@@ -11,9 +11,9 @@ import { getSocials } from '@/lib/socials-server'
 import { Arrow, Svg } from './SocialPhones'
 import { WwwUzCounter } from './WwwUzCounter'
 
-const LOGO_ALT = 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi'
-const COPY = `© ${new Date().getFullYear()} Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi. Barça huquqlar himoyalangan.`
-const NOTE = 'Uşbu veb-saytdagi maʼlumotlardan foydalanilganda havola körsatilişi şart.'
+const LOGO_ALT = 'O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi'
+const COPY = `© ${new Date().getFullYear()} O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi. Barcha huquqlar himoyalangan.`
+const NOTE = 'Ushbu veb-saytdagi ma’lumotlardan foydalanilganda havola ko‘rsatilishi shart.'
 
 /* Aloqa: Kengaşning rasmiy telefonlari va poçtasi — “Aloqa maʼlumotlari” sahifasi bilan bir manbadan */
 
@@ -73,10 +73,10 @@ export async function Footer({ locale }: { locale: Locale }) {
               <img {...logo(locale)} alt={LOGO_ALT} loading="lazy" decoding="async" />
             </Link>
             <p>
-              Kengaşning <span>rasmiy veb-sayti</span>
+              Kengashning <span>rasmiy veb-sayti</span>
             </p>
             <Link href={L('/boglanish/murojaat')} className="btn btn-primary">
-              Murojaat yuboriş{' '}
+              Murojaat yuborish{' '}
               <span className="ic">
                 <Arrow />
               </span>

@@ -33,7 +33,7 @@ export function toYnItem(c: NewsCard, now: number): YnItem {
   const k = key(x)
   const day = `${x.d}-${MONTHS[x.m]}`
   const rel =
-    k === key(today) ? 'Bugun' : k === key(yest) ? 'Keça' : x.y === today.y ? day : `${x.y}-yil ${day}`
+    k === key(today) ? 'Bugun' : k === key(yest) ? 'Kecha' : x.y === today.y ? day : `${x.y}-yil ${day}`
   return {
     ...c,
     tone: CATEGORY_TONE[c.category],

@@ -11,11 +11,11 @@ const kindOf = (k: string) => (k === 'files' ? 'files' : k === 'media' ? 'media'
 
 /** Rasm tavsifi (alt) yoki hujjat nomi — saytda körinadi, imlo hook'i yangi alifboga ötkazadi */
 export async function renameLibItem(kind: string, id: number, textIn: string): Promise<R> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const text = str(textIn, 1000)
   const user = await getUser()
   const k = kindOf(kind)
-  if (!user || !k || (user.role !== 'admin' && user.role !== 'muharrir')) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !k || (user.role !== 'admin' && user.role !== 'muharrir')) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const t = text.trim()
   if (!t) return { ok: false, message: k === 'files' ? 'Fayl nomini yozing.' : 'Rasm tavsifini yozing.' }
   const payload = await getPayloadClient()
@@ -24,24 +24,24 @@ export async function renameLibItem(kind: string, id: number, textIn: string): P
     revalidatePath('/boshqaruv/kutubxona')
     return { ok: true, message: 'Saqlandi' }
   } catch {
-    return { ok: false, message: 'Saqlab bölmadi.' }
+    return { ok: false, message: 'Saqlab bo‘lmadi.' }
   }
 }
 
 /** Öçiriş — faqat administrator va faqat heç qayerda işlatilmagan fayl (aks holda sahifalardan jimgina yöqolardi) */
 export async function deleteLibItem(kind: string, id: number): Promise<R> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await getUser()
   const k = kindOf(kind)
-  if (!user || !k || user.role !== 'admin') return { ok: false, message: 'Öçiriş faqat administratorga ruxsat etilgan.' }
+  if (!user || !k || user.role !== 'admin') return { ok: false, message: 'O‘chirish faqat administratorga ruxsat etilgan.' }
   const used = await usageOf(k, id)
-  if (used.length) return { ok: false, message: `Öçirib bölmaydi: ${used.length} joyda işlatilgan.` }
+  if (used.length) return { ok: false, message: `O‘chirib bo‘lmaydi: ${used.length} joyda ishlatilgan.` }
   const payload = await getPayloadClient()
   try {
     await payload.delete({ collection: k, id, user, overrideAccess: false })
     revalidatePath('/boshqaruv/kutubxona')
-    return { ok: true, message: 'Öçirildi' }
+    return { ok: true, message: 'O‘chirildi' }
   } catch {
-    return { ok: false, message: 'Öçirib bölmadi.' }
+    return { ok: false, message: 'O‘chirib bo‘lmadi.' }
   }
 }

@@ -7,7 +7,7 @@ const head = Montserrat({ subsets: ['latin', 'latin-ext'], weight: ['500', '600'
 const body = Inter({ subsets: ['latin', 'latin-ext'], weight: ['400', '500', '600', '700'], variable: '--f-body', display: 'swap' })
 
 export const metadata: Metadata = {
-  title: { default: 'Boşqaruv paneli', template: '%s — Boşqaruv paneli' },
+  title: { default: 'Boshqaruv paneli', template: '%s — Boshqaruv paneli' },
   robots: { index: false, follow: false },
   icons: { icon: '/favicon.ico' },
 }

@@ -29,7 +29,7 @@ export function FaqPage({ crumbs, base, faqs: FAQ }: { crumbs: ReactNode; base: 
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Köp beriladigan savollar</h1>
+          <h1 className="h2 pg-title">Ko‘p beriladigan savollar</h1>
         </div>
       </header>
 
@@ -38,7 +38,7 @@ export function FaqPage({ crumbs, base, faqs: FAQ }: { crumbs: ReactNode; base: 
           <div className="faq-tools">
             <div className="chips faq-rub" role="group" aria-label="Mavzular">
               <button type="button" aria-pressed={cat === 'all'} onClick={() => setCat('all')}>
-                Barçasi <span>{FAQ.length}</span>
+                Barchasi <span>{FAQ.length}</span>
               </button>
               {FAQ_CATS.map((c) => (
                 <button
@@ -52,7 +52,7 @@ export function FaqPage({ crumbs, base, faqs: FAQ }: { crumbs: ReactNode; base: 
               ))}
             </div>
             <label className="faq-search">
-              <span className="sr-only">Savollardan qidiriş</span>
+              <span className="sr-only">Savollardan qidirish</span>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-4-4" />
@@ -61,15 +61,15 @@ export function FaqPage({ crumbs, base, faqs: FAQ }: { crumbs: ReactNode; base: 
                 type="search"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
-                placeholder="Savol yoki kalit söz"
+                placeholder="Savol yoki kalit so‘z"
               />
             </label>
           </div>
 
           {list.length === 0 && (
             <p className="faq-none" role="status">
-              Kiritilgan söz böyiça savol topilmadi. Savolingizni quyidagi murojaat şakli orqali
-              yuborişingiz mumkin.
+              Kiritilgan so‘z bo‘yicha savol topilmadi. Savolingizni quyidagi murojaat shakli orqali
+              yuborishingiz mumkin.
             </p>
           )}
 
@@ -90,15 +90,15 @@ export function FaqPage({ crumbs, base, faqs: FAQ }: { crumbs: ReactNode; base: 
 
           <aside className="faq-ask">
             <div>
-              <h2>Boşqa savollar böyiça murojaat</h2>
+              <h2>Boshqa savollar bo‘yicha murojaat</h2>
               <p>
-                Savolingizni murojaat şakli orqali yuborişingiz mumkin. Masʼul xodim uni körib
-                çiqqaç, siz bilan boğlanadi.
+                Savolingizni murojaat shakli orqali yuborishingiz mumkin. Mas’ul xodim uni ko‘rib
+                chiqqach, siz bilan bog‘lanadi.
               </p>
             </div>
             <Link href={`${base}/boglanish/murojaat`} className="more-btn">
               <More>
-                Batafsil<span className="sr-only">: Murojaat yuboriş</span>
+                Batafsil<span className="sr-only">: Murojaat yuborish</span>
               </More>
             </Link>
           </aside>

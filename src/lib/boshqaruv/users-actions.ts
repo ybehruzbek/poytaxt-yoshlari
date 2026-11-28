@@ -11,7 +11,7 @@ const ROLES: Role[] = ['admin', 'muharrir', 'operator']
 const MIN_PW = 10
 
 const pwProblem = (pw: string) =>
-  pw.length < MIN_PW ? `Parol kamida ${MIN_PW} belgi bölsin.` : !/[A-Za-zА-Яа-я]/.test(pw) || !/\d/.test(pw) ? 'Parolda harf ham, raqam ham bölsin.' : null
+  pw.length < MIN_PW ? `Parol kamida ${MIN_PW} belgi bo‘lsin.` : !/[A-Za-zА-Яа-я]/.test(pw) || !/\d/.test(pw) ? 'Parolda harf ham, raqam ham bo‘lsin.' : null
 
 async function admin() {
   const u = await getUser()
@@ -30,11 +30,11 @@ async function adminsLeft(exceptId: number) {
 export async function createUser(dIn: { name: string; email: string; role: string; password: string }): Promise<R> {
   const d = { name: str(dIn?.name, 200), email: str(dIn?.email, 200), role: str(dIn?.role, 20), password: str(dIn?.password, 200) }
   const user = await admin()
-  if (!user) return { ok: false, message: 'Faqat administrator foydalanuvçi qöşa oladi.' }
+  if (!user) return { ok: false, message: 'Faqat administrator foydalanuvchi qo‘sha oladi.' }
   const name = d.name.trim()
   const email = d.email.trim().toLowerCase()
   if (!name) return { ok: false, message: 'Ism-familiyani yozing.' }
-  if (!/^\S+@\S+\.\S+$/.test(email)) return { ok: false, message: 'Elektron poçta notöğri.' }
+  if (!/^\S+@\S+\.\S+$/.test(email)) return { ok: false, message: 'Elektron pochta noto‘g‘ri.' }
   if (!ROLES.includes(d.role as Role)) return { ok: false, message: 'Rolni tanlang.' }
   const p = pwProblem(d.password)
   if (p) return { ok: false, message: p }
@@ -42,73 +42,73 @@ export async function createUser(dIn: { name: string; email: string; role: strin
   try {
     const doc = await payload.create({ collection: 'users', data: { name, email, role: d.role as Role, password: d.password }, user, overrideAccess: false })
     refresh()
-    return { ok: true, message: 'Foydalanuvçi qöşildi', id: doc.id }
+    return { ok: true, message: 'Foydalanuvchi qo‘shildi', id: doc.id }
   } catch (e) {
     const m = e instanceof Error ? e.message : ''
-    return { ok: false, message: /unique|already|registered/i.test(m) ? 'Bu elektron poçta bilan hisob allaqaçon bor.' : 'Qöşib bölmadi.' }
+    return { ok: false, message: /unique|already|registered/i.test(m) ? 'Bu elektron pochta bilan hisob allaqachon bor.' : 'Qo‘shib bo‘lmadi.' }
   }
 }
 
 export async function updateUser(id: number, d: { name: string; role: string }): Promise<R> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await admin()
-  if (!user) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
-  if (!ROLES.includes(d?.role as Role) || !str(d?.name).trim()) return { ok: false, message: 'Ism va rolni tekşiring.' }
-  if (d.role !== 'admin' && (await adminsLeft(id)) === 0) return { ok: false, message: 'Bu yagona administrator — rolini özgartirib bölmaydi.' }
+  if (!user) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
+  if (!ROLES.includes(d?.role as Role) || !str(d?.name).trim()) return { ok: false, message: 'Ism va rolni tekshiring.' }
+  if (d.role !== 'admin' && (await adminsLeft(id)) === 0) return { ok: false, message: 'Bu yagona administrator — rolini o‘zgartirib bo‘lmaydi.' }
   const payload = await getPayloadClient()
   try {
     await payload.update({ collection: 'users', id, data: { name: d.name.trim(), role: d.role as Role }, user, overrideAccess: false })
     refresh()
     return { ok: true, message: 'Saqlandi' }
   } catch {
-    return { ok: false, message: 'Saqlab bölmadi.' }
+    return { ok: false, message: 'Saqlab bo‘lmadi.' }
   }
 }
 
 /** Administrator xodimga yangi parol beradi (xodim parolini unutganda) va bloklangan bölsa oçadi */
 export async function setUserPassword(id: number, password: string): Promise<R> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await admin()
-  if (!user) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const p = pwProblem(str(password, 200))
   if (p) return { ok: false, message: p }
   const payload = await getPayloadClient()
   try {
     await payload.update({ collection: 'users', id, data: { password, loginAttempts: 0, lockUntil: null } as never, user, overrideAccess: false })
     refresh()
-    return { ok: true, message: 'Yangi parol örnatildi' }
+    return { ok: true, message: 'Yangi parol o‘rnatildi' }
   } catch {
-    return { ok: false, message: 'Parolni özgartirib bölmadi.' }
+    return { ok: false, message: 'Parolni o‘zgartirib bo‘lmadi.' }
   }
 }
 
 export async function unlockUser(id: number): Promise<R> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await admin()
-  if (!user) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const payload = await getPayloadClient()
   try {
     await payload.update({ collection: 'users', id, data: { loginAttempts: 0, lockUntil: null } as never, overrideAccess: true })
     refresh()
-    return { ok: true, message: 'Hisob bloklanişdan çiqarildi' }
+    return { ok: true, message: 'Hisob bloklanishdan chiqarildi' }
   } catch {
-    return { ok: false, message: 'Bajarib bölmadi.' }
+    return { ok: false, message: 'Bajarib bo‘lmadi.' }
   }
 }
 
 export async function deleteUser(id: number): Promise<R> {
-  if (!isId(id)) return { ok: false, message: 'Notöğri söröv.' }
+  if (!isId(id)) return { ok: false, message: 'Noto‘g‘ri so‘ro‘v.' }
   const user = await admin()
-  if (!user) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
-  if (id === user.id) return { ok: false, message: 'Öz hisobingizni öçirib bölmaydi.' }
-  if ((await adminsLeft(id)) === 0) return { ok: false, message: 'Yagona administratorni öçirib bölmaydi.' }
+  if (!user) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
+  if (id === user.id) return { ok: false, message: 'O‘z hisobingizni o‘chirib bo‘lmaydi.' }
+  if ((await adminsLeft(id)) === 0) return { ok: false, message: 'Yagona administratorni o‘chirib bo‘lmaydi.' }
   const payload = await getPayloadClient()
   try {
     await payload.delete({ collection: 'users', id, user, overrideAccess: false })
     refresh()
-    return { ok: true, message: 'Öçirildi' }
+    return { ok: true, message: 'O‘chirildi' }
   } catch {
-    return { ok: false, message: 'Öçirib bölmadi.' }
+    return { ok: false, message: 'O‘chirib bo‘lmadi.' }
   }
 }
 
@@ -125,7 +125,7 @@ export async function updateMyName(nameIn: string): Promise<R> {
     revalidatePath('/boshqaruv', 'layout')
     return { ok: true, message: 'Saqlandi' }
   } catch {
-    return { ok: false, message: 'Saqlab bölmadi.' }
+    return { ok: false, message: 'Saqlab bo‘lmadi.' }
   }
 }
 
@@ -148,14 +148,14 @@ export async function changeMyPassword(curIn: string, nextIn: string): Promise<R
     sid = r.token ? (JSON.parse(Buffer.from(r.token.split('.')[1], 'base64url').toString()) as { sid?: string }).sid : undefined
   } catch (e) {
     const m = e instanceof Error ? e.message : ''
-    return { ok: false, message: /lock/i.test(m) ? 'Hisob köp marta notöğri parol kiritilgani uçun vaqtinça bloklandi.' : 'Joriy parol notöğri.' }
+    return { ok: false, message: /lock/i.test(m) ? 'Hisob ko‘p marta noto‘g‘ri parol kiritilgani uchun vaqtincha bloklandi.' : 'Joriy parol noto‘g‘ri.' }
   }
   try {
     const me = (await payload.findByID({ collection: 'users', id: user.id, depth: 0, overrideAccess: true })) as unknown as { sessions?: { id: string }[] }
     const sessions = (me.sessions ?? []).filter((s) => s.id !== sid)
     await payload.update({ collection: 'users', id: user.id, data: { password: next, sessions } as never, overrideAccess: true })
-    return { ok: true, message: 'Parol almaştirildi' }
+    return { ok: true, message: 'Parol almashtirildi' }
   } catch {
-    return { ok: false, message: 'Parolni almaştirib bölmadi.' }
+    return { ok: false, message: 'Parolni almashtirib bo‘lmadi.' }
   }
 }

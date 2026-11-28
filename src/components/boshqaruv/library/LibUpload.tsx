@@ -58,11 +58,11 @@ export function LibUpload({ kind }: { kind: 'media' | 'files' }) {
           `Yuklanmoqda… (${busy} ta qoldi)`
         ) : (
           <>
-            {isFile ? 'PDF, Word yoki Excel faylni' : 'Rasmlarni'} şu yerga sudrab taşlang yoki{' '}
+            {isFile ? 'PDF, Word yoki Excel faylni' : 'Rasmlarni'} shu yerga sudrab tashlang yoki{' '}
             <button type="button" onClick={() => ref.current?.click()}>
               kompyuterdan tanlang
             </button>{' '}
-            — har biri 10&nbsp;MB gaça
+            — har biri 10&nbsp;MB gacha
           </>
         )}
       </span>

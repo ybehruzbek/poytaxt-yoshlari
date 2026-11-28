@@ -45,7 +45,7 @@ export function EventsList({
       <div className="fa-tools">
         <div className="chips fa-chips" role="group" aria-label="Yil">
           <button type="button" aria-pressed={year === 'all'} onClick={() => setYear('all')}>
-            Barçasi <span>{events.length}</span>
+            Barchasi <span>{events.length}</span>
           </button>
           {years.map((y) => (
             <button key={y} type="button" aria-pressed={year === y} onClick={() => setYear(y)}>
@@ -55,9 +55,9 @@ export function EventsList({
         </div>
         <div className="fa-tools-r">
           <label className="fa-select">
-            <span className="sr-only">Yönaliş</span>
+            <span className="sr-only">Yo‘nalish</span>
             <select value={dir} onChange={(e) => setDir(e.target.value as 'all' | DirSlug)}>
-              <option value="all">Barça yönalişlar</option>
+              <option value="all">Barcha yo‘nalishlar</option>
               {usedDirs.map((d) => (
                 <option key={d.slug} value={d.slug}>
                   {d.title}
@@ -108,7 +108,7 @@ export function EventsList({
         ))}
       </div>
 
-      {list.length === 0 && <p className="fa-empty">Qidiruv böyiça natija topilmadi.</p>}
+      {list.length === 0 && <p className="fa-empty">Qidiruv bo‘yicha natija topilmadi.</p>}
       {list.length > 24 && (
         <MoreToggle
           rest={Math.max(list.length - limit, 0)}

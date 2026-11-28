@@ -124,7 +124,7 @@ function FotoStack({ albums: ALBUMS }: { albums: Album[] }) {
             </li>
           ))}
         </ul>
-        <p className="ax-empty">Tanlangan tur yoki söz böyiça albom topilmadi.</p>
+        <p className="ax-empty">Tanlangan tur yoki so‘z bo‘yicha albom topilmadi.</p>
         <ShowMore target="fb-grid" rest={ALBUMS.length - FIRST} />
       </div>
     </section>
@@ -217,9 +217,9 @@ export async function VideoPage({ crumbs }: { crumbs: ReactNode }) {
 function PressContact({ c: PRESS_CONTACT }: { c: PressContactT }) {
   return (
     <aside className="ax-pc dark">
-      <h2>OAV uçun aloqa</h2>
+      <h2>OAV uchun aloqa</h2>
       <p>
-        Akkreditatsiya, intervyu va rasmiy izoh uçun Kengaşning {PRESS_CONTACT.unit}ga murojaat
+        Akkreditatsiya, intervyu va rasmiy izoh uchun Kengashning {PRESS_CONTACT.unit}ga murojaat
         qiling.
       </p>
       <ul>
@@ -228,7 +228,7 @@ function PressContact({ c: PRESS_CONTACT }: { c: PressContactT }) {
           <a href={PRESS_CONTACT.phone.href}>{PRESS_CONTACT.phone.v}</a>
         </li>
         <li>
-          <span>Elektron poçta</span>
+          <span>Elektron pochta</span>
           <a href={PRESS_CONTACT.email.href}>{PRESS_CONTACT.email.v}</a>
         </li>
         <li>
@@ -245,13 +245,13 @@ function PressContact({ c: PRESS_CONTACT }: { c: PressContactT }) {
 function MediaKit() {
   return (
     <aside className="ax-kit">
-      <h2>Media-töplam</h2>
-      <p>Kengaş logotipi — naşrlarda foydalaniş uçun.</p>
+      <h2>Media-to‘plam</h2>
+      <p>Kengash logotipi — nashrlarda foydalanish uchun.</p>
       <a className="ax-kit-dl" href="/img/logo-uz.png" download>
         <img src="/img/logo-uz.webp" width={322} height={180} alt="" loading="lazy" decoding="async" />
         <span>
           <b>Logotip (PNG)</b>
-          <small>Yuklab oliş ↓</small>
+          <small>Yuklab olish ↓</small>
         </span>
       </a>
       <p className="ax-kit-name">{ORG}</p>
@@ -332,7 +332,7 @@ export async function PressItemPage({
             <MediaKit />
             <Link href={L('/axborot-xizmati/press-relizlar')} className="more-btn">
               <More>
-                Batafsil<span className="sr-only">: Barça press-relizlar</span>
+                Batafsil<span className="sr-only">: Barcha press-relizlar</span>
               </More>
             </Link>
           </div>
@@ -374,7 +374,7 @@ function Clip({ m, quote = false }: { m: MediaItem; quote?: boolean }) {
       {quote ? <p className="ax-clip-q">{m.sum}</p> : <p>{m.sum}</p>}
       <a href={m.url} target="_blank" rel="noopener noreferrer" className="more-btn ax-clip-a">
         <More>
-          Batafsil<span className="sr-only">: Naşrda öqiş (yangi oynada oçiladi)</span>
+          Batafsil<span className="sr-only">: Nashrda o‘qish (yangi oynada ochiladi)</span>
         </More>
       </a>
     </article>
@@ -390,7 +390,7 @@ function OavA({ MEDIA }: { MEDIA: MediaItem[] }) {
         <div className="ax-tools">
           <Pills
             target="oa-list"
-            label="Saralaş"
+            label="Saralash"
             items={[
               ...Object.entries(MEDIA_KINDS).map(([v, l]) => ({ v, l })),
               ...YEARS.slice(0, 4).map((y) => ({ v: `y${y}`, l: `${y}-yil` })),
@@ -414,7 +414,7 @@ export async function OavPage({ crumbs, locale = 'uz' }: { crumbs: ReactNode; lo
   const MEDIA = await getOav(locale)
   return (
     <div className="ax-page">
-      <Head crumbs={crumbs} title="OAVda Kengaş haqida" />
+      <Head crumbs={crumbs} title="OAVda Kengash haqida" />
       <OavA MEDIA={MEDIA} />
     </div>
   )

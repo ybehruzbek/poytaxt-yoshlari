@@ -65,15 +65,15 @@ export async function searchMedia(qIn: unknown, pageIn: unknown = 1, colIn: unkn
  */
 export async function uploadMedia(fd: FormData): Promise<{ ok: true; item: MediaItem } | { ok: false; message: string }> {
   const user = await getUser()
-  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uçun ruxsat yöq.' }
+  if (!user || !canEdit(user.role)) return { ok: false, message: 'Bu amal uchun ruxsat yo‘q.' }
   const col: LibCol = fd.get('col') === 'files' ? 'files' : 'media'
   const file = fd.get('file')
   if (!(file instanceof File) || file.size === 0) return { ok: false, message: 'Fayl tanlanmadi.' }
-  if (file.size > MAX) return { ok: false, message: 'Fayl juda katta (10 MB dan oşmasin).' }
+  if (file.size > MAX) return { ok: false, message: 'Fayl juda katta (10 MB dan oshmasin).' }
   if (col === 'media' && file.size > RASM_MAX)
-    return { ok: false, message: 'Rasm juda katta (2 MB dan oşmasin). Boşqa formatda (JPG yoki PNG) saqlab qayta yuklang.' }
+    return { ok: false, message: 'Rasm juda katta (2 MB dan oshmasin). Boshqa formatda (JPG yoki PNG) saqlab qayta yuklang.' }
   if (!TYPES[col].includes(file.type))
-    return { ok: false, message: col === 'files' ? 'Faqat PDF, Word yoki Excel fayl yuklaş mumkin.' : 'Faqat rasm yuklaş mumkin (JPG, PNG, WebP).' }
+    return { ok: false, message: col === 'files' ? 'Faqat PDF, Word yoki Excel fayl yuklash mumkin.' : 'Faqat rasm yuklash mumkin (JPG, PNG, WebP).' }
   const name = String(fd.get('alt') ?? '').trim() || file.name.replace(/\.[a-z0-9]+$/i, '').replace(/[-_]+/g, ' ')
   const payload = await getPayloadClient()
   const upload = { data: Buffer.from(await file.arrayBuffer()), mimetype: file.type, name: file.name, size: file.size }
@@ -85,6 +85,6 @@ export async function uploadMedia(fd: FormData): Promise<{ ok: true; item: Media
     const doc = await payload.create({ collection: 'media', data: { alt: name }, file: upload, locale: 'uz', user, overrideAccess: false })
     return { ok: true, item: toItem(doc) }
   } catch {
-    return { ok: false, message: 'Faylni yuklab bölmadi. Boşqa fayl bilan urinib köring.' }
+    return { ok: false, message: 'Faylni yuklab bo‘lmadi. Boshqa fayl bilan urinib ko‘ring.' }
   }
 }

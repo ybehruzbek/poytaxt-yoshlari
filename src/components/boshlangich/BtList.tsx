@@ -13,16 +13,16 @@ import { More } from '@/components/site/MoreBtn'
 /** F.I.Ş. uç qatorda: familiya / ism / ota ismi (öğli, qizi bilan birga) */
 function nameLines(n: string): [string, string, string] {
   const w = n.split(' ')
-  const tail = /^(öğli|qizi)$/.test(w[w.length - 1] ?? '') ? 2 : 1
+  const tail = /^(o‘g‘li|qizi)$/.test(w[w.length - 1] ?? '') ? 2 : 1
   const last = w.slice(-tail).join(' ')
   return [w[0], w.slice(1, -tail).join(' '), last]
 }
 
 const FILTERS: Array<{ k: 'all' | OtmType; t: string }> = [
-  { k: 'all', t: 'Barçasi' },
-  { k: 'davlat', t: 'Davlat oliy taʼlim taşkilotlari' },
-  { k: 'xorijiy', t: 'Xorijiy oliy taʼlim taşkilotlarining filiallari' },
-  { k: 'nodavlat', t: 'Nodavlat oliy taʼlim taşkilotlari' },
+  { k: 'all', t: 'Barchasi' },
+  { k: 'davlat', t: 'Davlat oliy ta’lim tashkilotlari' },
+  { k: 'xorijiy', t: 'Xorijiy oliy ta’lim tashkilotlarining filiallari' },
+  { k: 'nodavlat', t: 'Nodavlat oliy ta’lim tashkilotlari' },
 ]
 
 const low = (s: string) => s.toLocaleLowerCase('uz')
@@ -71,7 +71,7 @@ function Vac({ o }: { o: Otm }) {
         <span className="bt-type">{TYPE_LABEL[o.type]}</span>
         <h3 className="bt-vac-otm">{o.otm}</h3>
         <span className="bt-badge">Vakant</span>
-        <p className="bt-role">Yoşlar yetakçisi lavozimi böş</p>
+        <p className="bt-role">Yoshlar yetakchisi lavozimi bo‘sh</p>
       </div>
       <Ghost className="bt-ghost" />
     </article>
@@ -138,7 +138,7 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
   return (
     <div ref={root}>
       <div className="bt-tools">
-        <div className="chips bt-chips" role="group" aria-label="Oliy taʼlim taşkiloti turi">
+        <div className="chips bt-chips" role="group" aria-label="Oliy ta’lim tashkiloti turi">
           {FILTERS.map((f) => (
             <button
               key={f.k}
@@ -167,7 +167,7 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
               setQ(e.target.value)
               setShown(STEP)
             }}
-            placeholder="Qidiruv: oliy taʼlim taşkiloti nomi yoki yetakçi F.I.Ş."
+            placeholder="Qidiruv: oliy ta’lim tashkiloti nomi yoki yetakchi F.I.Sh."
           />
         </label>
       </div>
@@ -189,7 +189,7 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
       {!more && vac.length > 0 && (
         <>
           <h2 className="bt-vac-h">
-            Yetakçi lavozimi vakant bölgan oliy taʼlim taşkilotlari <span>{vac.length}</span>
+            Yetakchi lavozimi vakant bo‘lgan oliy ta’lim tashkilotlari <span>{vac.length}</span>
           </h2>
           <div className="bt-grid">
             {vac.map((o) => (
@@ -199,7 +199,7 @@ export function BtList({ otms, base }: { otms: Otm[]; base: string }) {
         </>
       )}
 
-      {list.length === 0 && <p className="bt-empty">Qidiruv böyiça natija topilmadi.</p>}
+      {list.length === 0 && <p className="bt-empty">Qidiruv bo‘yicha natija topilmadi.</p>}
     </div>
   )
 }

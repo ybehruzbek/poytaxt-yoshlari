@@ -83,7 +83,7 @@ export function DocForm({ schema, id: id0, init, status: st0, updatedAt, rel, is
       setDirty(false)
       setStatus(r.status)
       setSavedAt(r.updatedAt)
-      say(r.status === 'draft' ? 'Qoralama saqlandi' : 'Saqlandi va saytga çiqdi')
+      say(r.status === 'draft' ? 'Qoralama saqlandi' : 'Saqlandi va saytga chiqdi')
       if (schema.kind === 'collection' && !id && r.id) {
         setId(r.id)
         router.replace(`/boshqaruv/bolim/${schema.slug}/${r.id}`)
@@ -125,14 +125,14 @@ export function DocForm({ schema, id: id0, init, status: st0, updatedAt, rel, is
   return (
     <>
       <div className="edit-head">
-        {schema.drafts && <span className={status === 'published' ? 'pill t-green' : 'pill t-yellow'}>{status === 'published' ? 'Eʼlon qilingan' : 'Qoralama'}</span>}
+        {schema.drafts && <span className={status === 'published' ? 'pill t-green' : 'pill t-yellow'}>{status === 'published' ? 'E’lon qilingan' : 'Qoralama'}</span>}
         <span className="save-state">
           {saving ? (
             'Saqlanmoqda…'
           ) : dirty ? (
             <>
               <i className="is-dirty" />
-              Saqlanmagan özgarişlar bor
+              Saqlanmagan o‘zgarishlar bor
             </>
           ) : savedAt && mounted ? (
             <>
@@ -147,16 +147,16 @@ export function DocForm({ schema, id: id0, init, status: st0, updatedAt, rel, is
           {siteHref && (
             <a className="btn btn-ghost" href={siteHref} target="_blank" rel="noopener noreferrer">
               <Icon name="eye" size={18} />
-              Saytda köriş
+              Saytda ko‘rish
             </a>
           )}
           {schema.drafts && status !== 'published' && (
             <button type="button" className="btn btn-ghost" disabled={!!saving} onClick={() => save('draft')}>
-              {saving === 'draft' ? 'Saqlanmoqda…' : 'Qoralamani saqlaş'}
+              {saving === 'draft' ? 'Saqlanmoqda…' : 'Qoralamani saqlash'}
             </button>
           )}
           <button type="button" className="btn btn-primary" disabled={!!saving} onClick={() => save('publish')}>
-            {saving === 'publish' ? 'Saqlanmoqda…' : schema.drafts ? (status === 'published' ? 'Özgarişlarni eʼlon qiliş' : 'Eʼlon qiliş') : 'Saqlaş'}
+            {saving === 'publish' ? 'Saqlanmoqda…' : schema.drafts ? (status === 'published' ? 'O‘zgarishlarni e’lon qilish' : 'E’lon qilish') : 'Saqlash'}
           </button>
         </div>
       </div>
@@ -185,24 +185,24 @@ export function DocForm({ schema, id: id0, init, status: st0, updatedAt, rel, is
                 {oldHref && (
                   <a className="side-link" href={`${oldHref}${schema.drafts ? '/versions' : ''}`} target="_blank" rel="noopener noreferrer">
                     <Icon name="history" size={16} />
-                    {schema.drafts ? 'Versiyalar tarixi' : 'Eski panelda oçiş'}
+                    {schema.drafts ? 'Versiyalar tarixi' : 'Eski panelda ochish'}
                   </a>
                 )}
                 {isAdmin &&
                   (confirmDel ? (
                     <span className="pub-confirm">
-                      Öçirilsinmi? Qaytariş imkoni yöq.
+                      O‘chirilsinmi? Qaytarish imkoni yo‘q.
                       <button type="button" className="btn btn-sm btn-red" onClick={remove}>
-                        Ha, öçiriş
+                        Ha, o‘chirish
                       </button>
                       <button type="button" className="btn btn-sm btn-ghost" onClick={() => setConfirmDel(false)}>
-                        Yöq
+                        Yo‘q
                       </button>
                     </span>
                   ) : (
                     <button type="button" className="ix__del" onClick={() => setConfirmDel(true)}>
                       <Icon name="trash" size={16} />
-                      Öçiriş
+                      O‘chirish
                     </button>
                   ))}
               </section>
@@ -230,7 +230,7 @@ export function DocForm({ schema, id: id0, init, status: st0, updatedAt, rel, is
         </div>
       )}
       <p className="kbd-hint">
-        <kbd>⌘S</kbd> — saqlaş
+        <kbd>⌘S</kbd> — saqlash
       </p>
     </>
   )

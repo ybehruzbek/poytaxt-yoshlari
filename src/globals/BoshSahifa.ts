@@ -9,17 +9,17 @@ const opp = (name: string, label: string): Field => ({
   name,
   label,
   type: 'group',
-  fields: [matn('lead', 'Qisqa şior (kartada)', { majburiy: true }), uzunMatn('desc', 'Kengaytirilganda çiqadigan izoh', { majburiy: true, qator: 2 })],
+  fields: [matn('lead', 'Qisqa shior (kartada)', { majburiy: true }), uzunMatn('desc', 'Kengaytirilganda chiqadigan izoh', { majburiy: true, qator: 2 })],
 })
 
 /** Boş sahifa matnlari. Yangiliklar, tadbirlar, raqamlar va röyxatlar özi tegişli bölimlardan olinadi */
 export const BoshSahifa: GlobalConfig = {
   slug: 'bosh-sahifa',
-  label: 'Boş sahifa matnlari',
+  label: 'Bosh sahifa matnlari',
   admin: {
     group: G.bosh,
     description:
-      'Saytning boş sahifasidagi sarlavha va matnlar. Yangiliklar, tadbirlar, OTTlar va hamkorlar soni, savollar özi tegişli bölimlardan olinadi.',
+      'Saytning bosh sahifasidagi sarlavha va matnlar. Yangiliklar, tadbirlar, OTTlar va hamkorlar soni, savollar o‘zi tegishli bo‘limlardan olinadi.',
     preview: (_d, { locale }) => saytManzil('/', locale),
   },
   access: sahifa,
@@ -30,14 +30,14 @@ export const BoshSahifa: GlobalConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'Boş ekran',
+          label: 'Bosh ekran',
           fields: [
             {
               name: 'hero',
-              label: 'Boş ekran',
+              label: 'Bosh ekran',
               type: 'group',
-              admin: { description: 'Sarlavhada Kengaşning töliq nomi özgarmaydi.' },
-              fields: [matn('kicker', 'Nom ustidagi kiçik yozuv', { majburiy: true, namuna: 'Rasmiy veb-sayt' }), uzunMatn('lead', 'Sarlavha ostidagi matn', { majburiy: true, qator: 3 })],
+              admin: { description: 'Sarlavhada Kengashning to‘liq nomi o‘zgarmaydi.' },
+              fields: [matn('kicker', 'Nom ustidagi kichik yozuv', { majburiy: true, namuna: 'Rasmiy veb-sayt' }), uzunMatn('lead', 'Sarlavha ostidagi matn', { majburiy: true, qator: 3 })],
             },
           ],
         },
@@ -48,7 +48,7 @@ export const BoshSahifa: GlobalConfig = {
               name: 'about',
               label: 'Biz haqimizda va raqamlar',
               type: 'group',
-              admin: { description: 'OTTdagi boşlanğiç taşkilotlar va hamkorlar soni röyxatlardan özi hisoblanadi.' },
+              admin: { description: 'OTTdagi boshlang‘ich tashkilotlar va hamkorlar soni ro‘yxatlardan o‘zi hisoblanadi.' },
               fields: [
                 uzunMatn('title', 'Katta sarlavha', { majburiy: true, qator: 2 }),
                 uzunMatn('text', 'Qisqa matn', { majburiy: true, qator: 3 }),
@@ -63,11 +63,11 @@ export const BoshSahifa: GlobalConfig = {
           fields: [
             {
               name: 'opps',
-              label: '“Yoşlar uçun imkoniyatlar” kartalari',
+              label: '“Yoshlar uchun imkoniyatlar” kartalari',
               type: 'group',
-              admin: { description: 'Faol dasturlar soni va eng yaqin muddat tegişli röyxatlardan özi hisoblanadi.' },
+              admin: { description: 'Faol dasturlar soni va eng yaqin muddat tegishli ro‘yxatlardan o‘zi hisoblanadi.' },
               fields: [
-                qator(matn('title', 'Sarlavha', { kenglik: '60%', namuna: 'Yoşlar uçun' }), matn('accent', 'Ajratilgan söz', { kenglik: '40%', namuna: 'imkoniyatlar' })),
+                qator(matn('title', 'Sarlavha', { kenglik: '60%', namuna: 'Yoshlar uchun' }), matn('accent', 'Ajratilgan so‘z', { kenglik: '40%', namuna: 'imkoniyatlar' })),
                 opp('grant', 'Grantlar'),
                 opp('stip', 'Stipendiyalar'),
                 opp('vol', 'Volontyorlik'),
@@ -81,11 +81,11 @@ export const BoshSahifa: GlobalConfig = {
           fields: [
             {
               name: 'benefits',
-              label: '“Ittifoq yoşlarga nima beradi”',
+              label: '“Ittifoq yoshlarga nima beradi”',
               type: 'group',
               fields: [
                 matn('title', 'Sarlavha', { majburiy: true }),
-                uzunMatn('lead', 'Kiriş matni', { majburiy: true, qator: 3 }),
+                uzunMatn('lead', 'Kirish matni', { majburiy: true, qator: 3 }),
                 {
                   name: 'roles',
                   label: 'Faoliyat turlari (tablar)',
@@ -99,8 +99,8 @@ export const BoshSahifa: GlobalConfig = {
                         type: 'select',
                         required: true,
                         options: [
-                          { label: 'Yulduz (faol aʼzo)', value: 'faol' },
-                          { label: 'Inson (yetakçi)', value: 'yetakchi' },
+                          { label: 'Yulduz (faol a’zo)', value: 'faol' },
+                          { label: 'Inson (yetakchi)', value: 'yetakchi' },
                           { label: 'Yurak (volontyor)', value: 'volontyor' },
                           { label: 'Qalqon (himoya)', value: 'himoya' },
                         ],
@@ -110,7 +110,7 @@ export const BoshSahifa: GlobalConfig = {
                       matn('h', 'Sarlavha', { majburiy: true, kenglik: '45%' }),
                     ),
                     bandlar('items', 'Imkoniyatlar', { band: 'Imkoniyat' }),
-                    qator(kod('href', 'Batafsil sahifa yöli', { majburiy: true, kenglik: '50%', namuna: '/faoliyat/volontyorlik' }), matn('more', 'Havola matni (ekran öquvçilari uçun)', { kenglik: '50%' })),
+                    qator(kod('href', 'Batafsil sahifa yo‘li', { majburiy: true, kenglik: '50%', namuna: '/faoliyat/volontyorlik' }), matn('more', 'Havola matni (ekran o‘quvchilari uchun)', { kenglik: '50%' })),
                   ],
                 },
               ],
@@ -127,12 +127,12 @@ export const BoshSahifa: GlobalConfig = {
               fields: [
                 matn('title', 'Sarlavha', { majburiy: true }),
                 uzunMatn('text', 'Matn', { qator: 2 }),
-                { name: 'steps', label: 'Bosqiçlar', type: 'array', labels: { singular: 'Bosqiç', plural: 'Bosqiçlar' }, fields: [qator(matn('t', 'Nomi', { majburiy: true, kenglik: '30%' }), matn('d', 'Izoh', { majburiy: true, kenglik: '70%' }))] },
+                { name: 'steps', label: 'Bosqichlar', type: 'array', labels: { singular: 'Bosqich', plural: 'Bosqichlar' }, fields: [qator(matn('t', 'Nomi', { majburiy: true, kenglik: '30%' }), matn('d', 'Izoh', { majburiy: true, kenglik: '70%' }))] },
               ],
             },
             {
               name: 'heads',
-              label: 'Bölim sarlavhalari',
+              label: 'Bo‘lim sarlavhalari',
               type: 'group',
               fields: [qator(matn('news', 'Yangiliklar', { kenglik: '33%' }), matn('events', 'Tadbirlar', { kenglik: '33%' }), matn('faq', 'Savollar', { kenglik: '34%' }))],
             },

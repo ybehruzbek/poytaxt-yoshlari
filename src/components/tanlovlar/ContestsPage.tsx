@@ -18,9 +18,9 @@ export async function ContestsPage({ crumbs, locale = 'uz' }: { crumbs: ReactNod
         <div className="wrap">
           <ContestsList contests={contests} />
           <p className="gr-disc">
-            Sahifada Yoşlar işlari agentligi, vazirliklar va boşqa taşkilotlar tomonidan eʼlon qilinadigan, yoşlar iştirok eta oladigan
-            sohaviy tanlovlar va davlat mukofotlari keltirilgan. Maʼlumotlar rasmiy manbalar asosida 2026-yil 14-noyabr holatiga
-            töplangan. Ariza topşirişdan oldin şartlar va muddatlarni rasmiy manbada tekşiriş tavsiya etiladi.
+            Sahifada Yoshlar ishlari agentligi, vazirliklar va boshqa tashkilotlar tomonidan e’lon qilinadigan, yoshlar ishtirok eta oladigan
+            sohaviy tanlovlar va davlat mukofotlari keltirilgan. Ma’lumotlar rasmiy manbalar asosida 2026-yil 14-noyabr holatiga
+            to‘plangan. Ariza topshirishdan oldin shartlar va muddatlarni rasmiy manbada tekshirish tavsiya etiladi.
           </p>
         </div>
       </section>

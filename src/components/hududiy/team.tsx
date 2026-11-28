@@ -76,10 +76,10 @@ export const teamOf = ({ CHAIR, DEPTS, RECEPTION }: Hududiy): Team => [
     ],
   },
   {
-    title: 'Bölim boşliqlari',
+    title: 'Bo‘lim boshliqlari',
     people: DEPTS.flatMap((d) =>
       d.staff
-        .filter((x) => x.role.startsWith('Bölim boşliği'))
+        .filter((x) => x.role.startsWith('Bo‘lim boshlig‘i'))
         .map((x) => ({
           ...x,
           dept: d.t,
@@ -94,7 +94,7 @@ export const teamOf = ({ CHAIR, DEPTS, RECEPTION }: Hududiy): Team => [
     title: 'Mutaxassislar',
     people: DEPTS.flatMap((d) =>
       d.staff
-        .filter((x) => !x.role.startsWith('Bölim boşliği'))
+        .filter((x) => !x.role.startsWith('Bo‘lim boshlig‘i'))
         .map((x) => ({
           ...x,
           dept: d.t,

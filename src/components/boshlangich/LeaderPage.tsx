@@ -6,7 +6,7 @@ import { IC } from '@/components/hududiy/team'
 
 import { type Leader, type Otm, TYPE_LABEL } from './data'
 
-const EMPTY = 'Maʼlumot kiritilmoqda'
+const EMPTY = 'Ma’lumot kiritilmoqda'
 
 /** Aloqa kanallari — qiymat bölsa havola, böş bölsa “Maʼlumot kiritilmoqda” */
 const CHANNELS: Array<{
@@ -16,7 +16,7 @@ const CHANNELS: Array<{
   href: (v: string) => string
 }> = [
   { k: 'phone', t: 'Telefon', d: IC.phone, href: (v) => `tel:${v.replace(/[^+\d]/g, '')}` },
-  { k: 'email', t: 'Elektron poçta', d: IC.mail, href: (v) => `mailto:${v}` },
+  { k: 'email', t: 'Elektron pochta', d: IC.mail, href: (v) => `mailto:${v}` },
   { k: 'telegram', t: 'Telegram', d: IC.Telegram, href: (v) => v },
   { k: 'instagram', t: 'Instagram', d: IC.Instagram, href: (v) => v },
   { k: 'facebook', t: 'Facebook', d: IC.Facebook, href: (v) => v },
@@ -60,7 +60,7 @@ export function LeaderPage({ o, crumbs, list, prev, next }: P) {
             <div className="ld-main">
               <span className="ld-otm">{o.otm}</span>
               <span className="ld-type">
-                {TYPE_LABEL[o.type]} · boşlanğiç taşkilot yoşlar yetakçisi
+                {TYPE_LABEL[o.type]} · boshlang‘ich tashkilot yoshlar yetakchisi
               </span>
               <h1 className="ld-name">{L.name}</h1>
               <dl className="ld-facts">
@@ -105,10 +105,10 @@ export function LeaderPage({ o, crumbs, list, prev, next }: P) {
             </section>
 
             <section className="ld-box">
-              <h2>Boşlanğiç taşkilot haqida</h2>
+              <h2>Boshlang‘ich tashkilot haqida</h2>
               <dl className="ld-facts ld-facts--2">
-                <Field t="Yetakçi etib saylangan sana" v={L.elected} />
-                <Field t="Aʼzolar soni" v={L.members} />
+                <Field t="Yetakchi etib saylangan sana" v={L.elected} />
+                <Field t="A’zolar soni" v={L.members} />
                 <Field t="Qabul kunlari" v={L.reception} />
               </dl>
             </section>
@@ -132,7 +132,7 @@ export function LeaderPage({ o, crumbs, list, prev, next }: P) {
             </section>
           </div>
 
-          <nav className="ld-nav" aria-label="Boşqa yetakçilar">
+          <nav className="ld-nav" aria-label="Boshqa yetakchilar">
             {prev ? (
               <Link href={`${list}/${prev.leader!.slug}`} className="ld-step">
                 <span aria-hidden="true">←</span>
@@ -145,7 +145,7 @@ export function LeaderPage({ o, crumbs, list, prev, next }: P) {
               <span />
             )}
             <Link href={list} className="ld-back">
-              Barça yetakçilar
+              Barcha yetakchilar
             </Link>
             {next ? (
               <Link href={`${list}/${next.leader!.slug}`} className="ld-step ld-step--next">

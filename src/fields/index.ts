@@ -122,7 +122,7 @@ export const havola = (name: string, label: string, o: Base = {}): TextField => 
   validate: (v: string | null | undefined) => {
     if (!v) return o.majburiy ? 'Havolani kiriting.' : true
     // taşqi havola (https://…) yoki sayt içidagi sahifa (/hujjatlar/…)
-    return /^(https?:\/\/[^\s]+\.[^\s]+|\/[^\s]*)$/.test(v.trim()) || 'Töliq havola kiriting, masalan: https://lex.uz/docs/123'
+    return /^(https?:\/\/[^\s]+\.[^\s]+|\/[^\s]*)$/.test(v.trim()) || 'To‘liq havola kiriting, masalan: https://lex.uz/docs/123'
   },
 })
 
@@ -204,19 +204,19 @@ export const stavka = (name: string, label: string, o: Base = {}): GroupField =>
       fields: [
         tanlov(
           'base',
-          'Hisoblaş asosi',
+          'Hisoblash asosi',
           [
-            { label: 'BHM (bazaviy hisoblaş miqdori)', value: 'bhm' },
+            { label: 'BHM (bazaviy hisoblash miqdori)', value: 'bhm' },
             { label: 'Bazaviy stipendiya', value: 'stip' },
-            { label: 'Aniq summa (söm)', value: 'som' },
+            { label: 'Aniq summa (so‘m)', value: 'som' },
           ],
           { majburiy: o.majburiy, kenglik: '50%' },
         ),
         {
-          ...son('k', 'Neça barobar (yoki summa)', { majburiy: o.majburiy, kenglik: '50%' }),
+          ...son('k', 'Necha barobar (yoki summa)', { majburiy: o.majburiy, kenglik: '50%' }),
           admin: {
             width: '50%',
-            description: 'Masalan: 3 — BHMning 3 barobari; aniq summa tanlansa — sömdagi summa.',
+            description: 'Masalan: 3 — BHMning 3 barobari; aniq summa tanlansa — so‘mdagi summa.',
             step: 0.01,
           },
         } as NumberField,
@@ -240,7 +240,7 @@ export const manzilNomi = (from = 'title') =>
               label: 'Sahifa manzili',
               admin: {
                 ...f.admin,
-                description: 'Sarlavhadan avtomatik yasaladi. Özgartiriş uçun “Blokdan çiqariş” tugmasini bosing.',
+                description: 'Sarlavhadan avtomatik yasaladi. O‘zgartirish uchun “Blokdan chiqarish” tugmasini bosing.',
               },
             }
           : f,

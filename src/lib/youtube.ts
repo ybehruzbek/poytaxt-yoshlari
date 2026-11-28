@@ -1,6 +1,6 @@
 import type { Short, Video } from '@/components/axborot/data'
 import { getVideoArchive } from '@/lib/cms/axborot'
-import { toYangiAlifbo } from '@/lib/alifbo'
+import { toJoriyAlifbo } from '@/lib/alifbo'
 
 /**
  * Videogalereya — Kengaşning rasmiy YouTube kanali bilan sinxron.
@@ -31,7 +31,7 @@ const title = (s: string) => {
     open = !open
     return r
   })
-  return toYangiAlifbo(q.replace(/\s+/g, ' ').trim())
+  return toJoriyAlifbo(q.replace(/\s+/g, ' ').trim())
 }
 
 type Entry = { id: string; title: string; date: string; short: boolean }

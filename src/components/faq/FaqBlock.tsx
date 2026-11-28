@@ -25,14 +25,14 @@ export async function FaqBlock({
 }) {
   const loc = base.split('/')[1] || 'uz'
   const items = (await getFaqs(loc))[pick]
-  const head = title ?? ((await getBosh(loc)).heads.faq || 'Köp beriladigan savollar')
+  const head = title ?? ((await getBosh(loc)).heads.faq || 'Ko‘p beriladigan savollar')
   const body = (
     <div className="faq-block">
       <div className="faq-block-head">
         <h2 className="h2">{head}</h2>
         <Link href={`${base}/boglanish/savollar`} className="more-btn">
           <More>
-            Batafsil<span className="sr-only">: Barça savollar</span>
+            Batafsil<span className="sr-only">: Barcha savollar</span>
           </More>
         </Link>
       </div>

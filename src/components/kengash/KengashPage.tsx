@@ -34,7 +34,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
         <div className="wrap">
           <div className="it-who">
             <div>
-              <h2 className="h2">Kengaş haqida</h2>
+              <h2 className="h2">Kengash haqida</h2>
               <p className="it-motto">{ABOUT.lead}</p>
             </div>
             <div className="it-who-txt">
@@ -58,7 +58,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
       <section className="sec">
         <div className="wrap">
           <div className="sec-head">
-            <h2 className="h2">Ittifoqning boşqaruv tizimi</h2>
+            <h2 className="h2">Ittifoqning boshqaruv tizimi</h2>
           </div>
           {/* Markaziy Kengaş (2-örin) sariq tasmada ajratiladi */}
           <ol className="y1-oc">
@@ -88,7 +88,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
       <section className="sec">
         <div className="wrap">
           <div className="sec-head">
-            <h2 className="h2">Kengaş tarkibi</h2>
+            <h2 className="h2">Kengash tarkibi</h2>
           </div>
           <Members MEMBERS={MEMBERS} />
         </div>
@@ -116,7 +116,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
                   {p.born && <p className="kg-bio-born">{p.born}</p>}
                   {p.edu && (
                     <>
-                      <h4>Maʼlumoti</h4>
+                      <h4>Ma’lumoti</h4>
                       <ul className="kg-bio-edu">
                         {p.edu.map((x) => (
                           <li key={x}>{x}</li>
@@ -177,20 +177,20 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
                 rel="noopener noreferrer"
                 className="btn btn-primary"
               >
-                Xaritada köriş{' '}
+                Xaritada ko‘rish{' '}
                 <span className="ic">
                   <Arrow />
                 </span>
               </a>
               <Link href={L('/boglanish/murojaat')} className="btn btn-ghost it-ghost">
-                Murojaat yuboriş
+                Murojaat yuborish
                 <span className="ic">
                   <Arrow />
                 </span>
               </Link>
             </div>
           </div>
-          <img src={IMG.building} alt="Özbekiston yoşlar ittifoqi Markaziy Kengaşi binosi" loading="lazy" decoding="async" />
+          <img src={IMG.building} alt="O‘zbekiston yoshlar ittifoqi Markaziy Kengashi binosi" loading="lazy" decoding="async" />
         </div>
       </section>
     ),
@@ -201,7 +201,7 @@ export async function KengashPage({ L, crumbs, siblings }: P) {
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Markaziy Kengaş</h1>
+          <h1 className="h2 pg-title">Markaziy Kengash</h1>
         </div>
       </header>
 

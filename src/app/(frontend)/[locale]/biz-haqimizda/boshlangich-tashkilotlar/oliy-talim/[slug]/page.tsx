@@ -29,8 +29,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const o = (await leaders(locale)).find((x) => x.leader!.slug === slug)
   if (!o) return {}
   return ichkiMeta({
-    title: `${o.otm} — Yoşlar ittifoqi boşlanğiç taşkiloti, yoşlar yetakçisi ${o.leader!.name}`,
-    description: `${o.otm} Yoşlar ittifoqi boşlanğiç taşkiloti yoşlar yetakçisi ${o.leader!.name}: qabul kunlari, aloqa maʼlumotlari va faoliyati.`,
+    title: `${o.otm} — Yoshlar ittifoqi boshlang‘ich tashkiloti, yoshlar yetakchisi ${o.leader!.name}`,
+    description: `${o.otm} Yoshlar ittifoqi boshlang‘ich tashkiloti yoshlar yetakchisi ${o.leader!.name}: qabul kunlari, aloqa ma’lumotlari va faoliyati.`,
     path: `/uz${LIST}/${slug}`,
   })
 }

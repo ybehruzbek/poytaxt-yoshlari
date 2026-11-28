@@ -36,11 +36,11 @@ export async function HamkorlarPage({ crumbs, locale = 'uz' }: { crumbs: ReactNo
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Özbekiston yoşlar ittifoqining hamkorlari</h1>
+          <h1 className="h2 pg-title">O‘zbekiston yoshlar ittifoqining hamkorlari</h1>
           <ul className="pt-stats">
             <li>
               <b>{DOMESTIC.length}</b>
-              <a href="#ozbekistonda">Özbekistondagi hamkorlar</a>
+              <a href="#ozbekistonda">O‘zbekistondagi hamkorlar</a>
             </li>
             <li>
               <b>{FOREIGN.length}</b>
@@ -52,7 +52,7 @@ export async function HamkorlarPage({ crumbs, locale = 'uz' }: { crumbs: ReactNo
 
       <section className="sec pt-sec" id="ozbekistonda">
         <div className="wrap pt-groups">
-          <h2 className="pt-part">Özbekistondagi hamkorlar</h2>
+          <h2 className="pt-part">O‘zbekistondagi hamkorlar</h2>
           {home.map((g) => (
             <Block key={g.k} title={g.t} list={PARTNERS.filter((p) => p.group === g.k)} />
           ))}

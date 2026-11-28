@@ -38,9 +38,9 @@ export const getAloqa = cache(async (locale = 'uz') => {
   }
   const SOCIALS = ((g.socials as Doc[]) ?? []).map((s) => ({ net: s.net as 'Telegram' | 'Instagram' | 'Facebook', handle: str(s.handle), href: str(s.href) }))
   const { RECEPTION } = await getHududiy(locale)
-  const position = (dept: string) => (dept === 'Kengaş raisi' ? dept : `${dept}${dept.endsWith('bölimi') ? '' : ' bölimi'} boşliği`)
+  const position = (dept: string) => (dept === 'Kengash raisi' ? dept : `${dept}${dept.endsWith('bo‘limi') ? '' : ' bo‘limi'} boshlig‘i`)
   return {
-    ORG: 'Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi',
+    ORG: 'O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi',
     ADDRESS,
     MAPS: {
       yandexEmbed: `https://yandex.uz/map-widget/v1/?ll=${LON}%2C${LAT}&z=17&pt=${LON},${LAT},pm2rdl`,

@@ -100,7 +100,7 @@ export function DevSectionsPanel({ sections }: { sections: PanelSection[] }) {
               onClick={() => setOpen((o) => !o)}
               aria-expanded={open}
             >
-              Variantlar · {sections.length} bölim {open ? '×' : '▴'}
+              Variantlar · {sections.length} bo‘lim {open ? '×' : '▴'}
             </button>
             {open && (
               <ul>
@@ -110,7 +110,7 @@ export function DevSectionsPanel({ sections }: { sections: PanelSection[] }) {
                       type="button"
                       className="dev-panel-name"
                       onClick={() => jump(s.name)}
-                      title="Bölimga ötiş"
+                      title="Bo‘limga o‘tish"
                     >
                       {s.label}
                       {s.hints && <small>{s.hints[values[i].charCodeAt(0) - 97]}</small>}

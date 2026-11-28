@@ -1,10 +1,10 @@
 import type { FieldHook } from 'payload'
 
-import { toYangiAlifbo } from './alifbo'
+import { toJoriyAlifbo } from './alifbo'
 
 /**
- * Admin paneldan saqlanadigan o'zbekcha matn avtomatik yangi alifboga o'tkaziladi
- * (muharrir eski yozuvda yoki ' / ’ bilan yozsa ham bazaga to'g'ri imlo tushadi).
+ * Admin paneldan saqlanadigan o'zbekcha matn avtomatik joriy lotin alifbosiga keltiriladi
+ * (muharrir yangi alifboda yoki ' / ` bilan yozsa ham bazaga to'g'ri imlo tushadi: o‘ g‘ sh ch, tutuq ’).
  * Faqat "uz" tilidagi qiymat o'zgaradi; ruscha va inglizcha matnga tegilmaydi.
  * Fuqarolar murojaatlari (Appeals) ataylab o'zgartirilmaydi — ular asl holida saqlanadi.
  */
@@ -16,7 +16,7 @@ function walk(node: unknown): unknown {
   if (!node || typeof node !== 'object') return node
   const out: Record<string, unknown> = {}
   for (const [k, v] of Object.entries(node)) out[k] = v
-  if (out.type === 'text' && typeof out.text === 'string') out.text = toYangiAlifbo(out.text)
+  if (out.type === 'text' && typeof out.text === 'string') out.text = toJoriyAlifbo(out.text)
   if ('children' in out) out.children = walk(out.children)
   if ('root' in out) out.root = walk(out.root)
   return out
@@ -32,7 +32,7 @@ const each = (value: unknown, locale: string | undefined, fn: (v: unknown) => un
 
 /** text / textarea maydonlari uchun */
 export const imloMatn: FieldHook = ({ value, req }) =>
-  each(value, req.locale, (v) => (typeof v === 'string' ? toYangiAlifbo(v) : v))
+  each(value, req.locale, (v) => (typeof v === 'string' ? toJoriyAlifbo(v) : v))
 
 /** richText (Lexical) maydonlari uchun */
 export const imloRichText: FieldHook = ({ value, req }) => each(value, req.locale, (v) => (v ? walk(v) : v))

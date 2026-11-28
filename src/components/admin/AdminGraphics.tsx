@@ -5,7 +5,7 @@ export function AdminLogo() {
   return (
     <img
       src="/img/logo-uz.png"
-      alt="Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi"
+      alt="O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi"
       style={{ display: 'block', width: 220, height: 'auto' }}
     />
   )

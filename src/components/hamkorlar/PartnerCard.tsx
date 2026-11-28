@@ -22,7 +22,7 @@ export function PartnerCard({ p }: { p: Partner }) {
       {p.site && (
         <a href={p.site} target="_blank" rel="noopener noreferrer" className="more-btn pt-site">
           <More>
-            Batafsil<span className="sr-only">{`: ${p.domain}`} (yangi oynada oçiladi)</span>
+            Batafsil<span className="sr-only">{`: ${p.domain}`} (yangi oynada ochiladi)</span>
           </More>
         </a>
       )}

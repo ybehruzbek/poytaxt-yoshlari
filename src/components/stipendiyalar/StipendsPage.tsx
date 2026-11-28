@@ -20,8 +20,8 @@ export async function StipendsPage({ crumbs, locale = 'uz' }: { crumbs: ReactNod
           <StipendCalc />
           <StipendsList stipends={stipends} />
           <p className="gr-disc">
-            Sahifada Özbekiston Respublikasining davlat stipendiyalari hamda özbekistonlik yoşlar xorijda taʼlim olişi uçun
-            iştirok eta oladigan stipendiya dasturlari keltirilgan. Stipendiya miqdorlari amaldagi bazaviy hisoblaş miqdori va bazaviy stipendiya asosida avtomatik hisoblanadi. Ariza topşirişdan oldin şartlar va muddatlarni rasmiy manbada tekşiriş tavsiya etiladi.
+            Sahifada O‘zbekiston Respublikasining davlat stipendiyalari hamda o‘zbekistonlik yoshlar xorijda ta’lim olishi uchun
+            ishtirok eta oladigan stipendiya dasturlari keltirilgan. Stipendiya miqdorlari amaldagi bazaviy hisoblash miqdori va bazaviy stipendiya asosida avtomatik hisoblanadi. Ariza topshirishdan oldin shartlar va muddatlarni rasmiy manbada tekshirish tavsiya etiladi.
           </p>
         </div>
       </section>

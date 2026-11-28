@@ -71,7 +71,7 @@ export function Lightbox({ albums: ALBUMS }: { albums: Album[] }) {
               </p>
               <h2>{album.title}</h2>
             </div>
-            <button type="button" className="ax-lb-x" onClick={() => dlg.current?.close()} aria-label="Yopiş">
+            <button type="button" className="ax-lb-x" onClick={() => dlg.current?.close()} aria-label="Yopish">
               ×
             </button>
           </header>
@@ -120,7 +120,7 @@ export function Lightbox({ albums: ALBUMS }: { albums: Album[] }) {
               ))}
             </div>
             <a className="ax-lb-dl" href={photo(album, st.i)} download>
-              Yuklab oliş ↓
+              Yuklab olish ↓
             </a>
           </div>
         </div>
@@ -161,7 +161,7 @@ export function VideoModal() {
           </div>
           <div className="ax-vm-bar">
             <p>{st.title}</p>
-            <button type="button" className="ax-lb-x" onClick={() => dlg.current?.close()} aria-label="Yopiş">
+            <button type="button" className="ax-lb-x" onClick={() => dlg.current?.close()} aria-label="Yopish">
               ×
             </button>
           </div>
@@ -185,7 +185,7 @@ export function InlinePlayer({ id, title }: { id: string; title: string }) {
       {on ? (
         <iframe src={`${YT}${id}?autoplay=1&rel=0`} title={title} allow={ALLOW} allowFullScreen />
       ) : (
-        <button type="button" className="ax-ip-cover" onClick={() => setOn(true)} aria-label={`Köriş: ${title}`}>
+        <button type="button" className="ax-ip-cover" onClick={() => setOn(true)} aria-label={`Ko‘rish: ${title}`}>
           <img src={thumb(id)} alt="" loading="lazy" decoding="async" />
           <span className="ax-play" aria-hidden="true" />
         </button>
@@ -221,7 +221,7 @@ export function Pills({
   }, [cur, target])
   return (
     <div className="chips ax-pills" role="group" aria-label={label}>
-      {[{ v: 'all', l: 'Barçasi', n: undefined as number | undefined }, ...items].map((it) => (
+      {[{ v: 'all', l: 'Barchasi', n: undefined as number | undefined }, ...items].map((it) => (
         <button key={it.v} type="button" aria-pressed={cur === it.v} onClick={() => setCur(it.v)}>
           {it.l}
           {it.n !== undefined && <span className="ax-pill-n">{it.n}</span>}

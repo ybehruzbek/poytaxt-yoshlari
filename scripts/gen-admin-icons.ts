@@ -12,7 +12,7 @@ const svg = (inner: string, color = 'black') =>
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`,
   )}")`
 
-let css = '/* AVTOMATIK YASALGAN: scripts/gen-admin-icons.ts — qölda tahrirlamang */\n'
+let css = '/* AVTOMATIK YASALGAN: scripts/gen-admin-icons.ts — qo‘lda tahrirlamang */\n'
 for (const [k, inner] of Object.entries(ADMIN_ICONS)) {
   // --adm-ic — mask uçun (rang currentColor'dan), --adm-img — saytning jigarrang rangidagi tayyor rasm
   css += `#nav-${k},#nav-global-${k},#card-${k},#card-global-${k}{--adm-ic:${svg(inner)};--adm-img:${svg(inner, '#532822')}}\n`

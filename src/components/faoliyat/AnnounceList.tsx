@@ -12,11 +12,11 @@ const low = (s: string) => s.toLocaleLowerCase('uz')
 
 /** Eʼlon turi — sarlavha va matndagi kalit sözlardan aniqlanadi */
 const TURLAR = [
-  { id: 'challenge', label: 'Çellenjlar', re: /çellenj|challenge/i },
+  { id: 'challenge', label: 'Chellenjlar', re: /chellenj|challenge/i },
   {
     id: 'tanlov',
     label: 'Tanlovlar',
-    re: /tanlov|musobaqa|olimpiada|viktorina|quiz|turnir|bellaşuv|çempionat/i,
+    re: /tanlov|musobaqa|olimpiada|viktorina|quiz|turnir|bellashuv|chempionat/i,
   },
   {
     id: 'trening',
@@ -27,7 +27,7 @@ const TURLAR = [
   {
     id: 'grant',
     label: 'Stipendiya va grant',
-    re: /stipendiya|grant|subsidiya|imtiyoz|mukofot|çegirma/i,
+    re: /stipendiya|grant|subsidiya|imtiyoz|mukofot|chegirma/i,
   },
 ] as const
 
@@ -59,7 +59,7 @@ export function AnnounceList({ items }: { items: Announce[] }) {
       <div className="fa-tools">
         <div className="chips fa-chips" role="group" aria-label="Yil">
           <button type="button" aria-pressed={year === 'all'} onClick={() => setYear('all')}>
-            Barçasi <span>{items.length}</span>
+            Barchasi <span>{items.length}</span>
           </button>
           {years.map((y) => (
             <button key={y} type="button" aria-pressed={year === y} onClick={() => setYear(y)}>
@@ -78,13 +78,13 @@ export function AnnounceList({ items }: { items: Announce[] }) {
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Qidiruv: eʼlon mavzusi"
+              placeholder="Qidiruv: e’lon mavzusi"
             />
           </label>
         </div>
       </div>
 
-      <div className="chips fa-chips fa-chips-tur" role="group" aria-label="Eʼlon turi">
+      <div className="chips fa-chips fa-chips-tur" role="group" aria-label="E’lon turi">
         <button type="button" aria-pressed={tur === 'all'} onClick={() => setTur('all')}>
           Hammasi
         </button>
@@ -103,7 +103,7 @@ export function AnnounceList({ items }: { items: Announce[] }) {
         })}
       </div>
 
-      <p className="fa-count">{list.length} ta eʼlon</p>
+      <p className="fa-count">{list.length} ta e’lon</p>
 
       <div className="vc-board">
         {list.slice(0, limit).map((e) => (
@@ -127,11 +127,11 @@ export function AnnounceList({ items }: { items: Announce[] }) {
         ))}
       </div>
 
-      {list.length === 0 && <p className="fa-empty">Qidiruv böyiça natija topilmadi.</p>}
+      {list.length === 0 && <p className="fa-empty">Qidiruv bo‘yicha natija topilmadi.</p>}
       {list.length > 24 && (
         <MoreToggle
           rest={Math.max(list.length - limit, 0)}
-          noun="eʼlon"
+          noun="e’lon"
           onMore={() => setLimit((l) => l + 24)}
           onLess={() => setLimit(24)}
         />

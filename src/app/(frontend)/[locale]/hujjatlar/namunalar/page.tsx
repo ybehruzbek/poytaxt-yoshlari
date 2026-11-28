@@ -9,7 +9,7 @@ import { sahifaMeta } from '@/lib/seo'
 
 export const metadata = sahifaMeta('/hujjatlar/namunalar')
 
-const KINDS = { azolik: 'Aʼzolik', murojaat: 'Murojaat', boshlangich: 'Boşlanğiç taşkilot', boshqa: 'Namuna' }
+const KINDS = { azolik: 'A’zolik', murojaat: 'Murojaat', boshlangich: 'Boshlang‘ich tashkilot', boshqa: 'Namuna' }
 
 /** “Hujjat namunalari” sahifasi (admin panel → Hujjatlar → Hujjat namunalari) */
 export default async function TemplatesRoute(props: { params: Promise<{ locale: Locale }> }) {

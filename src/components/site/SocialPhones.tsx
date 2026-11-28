@@ -62,10 +62,10 @@ export const Arrow = () => (
  * dark — ekran töq (holat satri oq yoziladi).
  */
 const PHONES: Record<Net, { aria: string; dark: boolean }> = {
-  telegram: { aria: 'Kengaşning Telegram kanali', dark: true },
-  instagram: { aria: 'Kengaşning Instagram sahifasi', dark: true },
-  facebook: { aria: 'Kengaşning Facebook sahifasi', dark: false },
-  youtube: { aria: 'Kengaşning YouTube kanali', dark: true },
+  telegram: { aria: 'Kengashning Telegram kanali', dark: true },
+  instagram: { aria: 'Kengashning Instagram sahifasi', dark: true },
+  facebook: { aria: 'Kengashning Facebook sahifasi', dark: false },
+  youtube: { aria: 'Kengashning YouTube kanali', dark: true },
 }
 
 export async function SocialPhones() {
@@ -80,7 +80,7 @@ export async function SocialPhones() {
             Ijtimoiy <span>tarmoqlar</span>
           </h2>
           <p className="body4">
-            Kengaşning rasmiy sahifalari: yangiliklar, eʼlonlar va tadbirlar haqida xabarlar.
+            Kengashning rasmiy sahifalari: yangiliklar, e’lonlar va tadbirlar haqida xabarlar.
           </p>
         </div>
         <div className="sp-phones">
@@ -93,7 +93,7 @@ export async function SocialPhones() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`sp-phone sp-phone-${net}`}
-                aria-label={`${aria} (yangi oynada oçiladi)`}
+                aria-label={`${aria} (yangi oynada ochiladi)`}
               >
                 <span className={`ph ph-${dark ? 'dark' : 'light'}`} aria-hidden="true">
                   <span className="ph-island" />

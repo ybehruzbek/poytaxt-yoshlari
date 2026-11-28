@@ -1,5 +1,6 @@
 /**
- * Imlo tekshiruvi: saytdagi o'zbekcha matnlar yangi alifboda va to'g'ri tutuq belgisi (ʼ) bilan yozilganmi.
+ * Imlo tekshiruvi: saytdagi o'zbekcha matnlar JORIY lotin alifbosida (o‘ g‘ sh ch, tutuq ’) yozilganmi.
+ * Yangi alifbo (Ö Ğ Ş Ç) faqat tashrif buyuruvchi tanlaganda brauzerda hosil qilinadi (src/lib/alifbo.ts).
  *
  *   pnpm imlo          — tekshiradi, xato bo'lsa ro'yxat chiqaradi va 1 kodi bilan tugaydi
  *   pnpm imlo:fix      — topilganlarini o'zi to'g'rilaydi
@@ -12,16 +13,27 @@ import fs from 'node:fs'
 import path from 'node:path'
 import ts from 'typescript'
 
-import { toYangiAlifbo } from '../src/lib/alifbo'
+import { toJoriyAlifbo } from '../src/lib/alifbo'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const FIX = process.argv.includes('--fix')
+/** Yangi alifbo harflari faqat matnda uchraydi (kod qiymatlari ASCII) — shuning uchun ular bor har bir satr
+ * tekshiriladi; faqat bazadagi select qiymatlari (value), tip literallari va import yo'llari o'zgarmaydi */
+const YANGI_HARF = /[ÖöĞğŞşÇçʼ]/
+const isModuleOrValue = (n: ts.Node) => {
+  for (let p: ts.Node | undefined = n.parent; p; p = p.parent) {
+    if (ts.isImportDeclaration(p) || ts.isExportDeclaration(p) || ts.isLiteralTypeNode(p)) return true
+    if (ts.isPropertyAssignment(p)) return p.name !== n && ['value', 'slug'].includes(propName(p.name))
+    if (ts.isCallExpression(p) || ts.isVariableDeclaration(p) || ts.isReturnStatement(p) || ts.isJsxAttribute(p)) return false
+  }
+  return false
+}
 
 const SKIP_FILES = [
   'src/payload-types.ts',
   'src/lib/alifbo.ts',
-  // qidiruv tizimlari uçun matnlar ataylab joriy lotin yozuvida (foydalanuvçi qarori, 2026-11-24)
-  'src/config/seo-lotin.ts',
+  // bazani o'giruvchi kod: SQL va harf namunalari
+  'src/lib/joriy-baza.ts',
   'src/lib/slugify.ts',
   'src/lib/inline-scripts.ts',
   'src/app/(payload)',
@@ -106,8 +118,11 @@ for (const file of [...files(path.join(ROOT, 'src')), ...files(path.join(ROOT, '
     }
     if (start >= 0 && end > start) {
       const inner = src.slice(start, end)
-      const fixed = toYangiAlifbo(inner)
-      if (fixed !== inner && isDisplay(n, inner)) {
+      const fixed = toJoriyAlifbo(inner)
+      const lineText = src.slice(src.lastIndexOf('\n', start) + 1, src.indexOf('\n', end) === -1 ? undefined : src.indexOf('\n', end))
+      if (lineText.includes('imlo-ok')) {
+        // qatorda “imlo-ok” izohi — ataylab o'zgartirilmaydigan kod qiymati
+      } else if (fixed !== inner && (YANGI_HARF.test(inner) ? !isModuleOrValue(n) : isDisplay(n, inner))) {
         edits.push({ start, end, text: fixed })
         hits.push({ file: path.relative(ROOT, file), line: sf.getLineAndCharacterOfPosition(start).line + 1, from: inner.trim(), to: fixed.trim() })
       }
@@ -125,10 +140,10 @@ for (const file of [...files(path.join(ROOT, 'src')), ...files(path.join(ROOT, '
 
 for (const h of hits) console.log(`${h.file}:${h.line}\n  - ${h.from.slice(0, 160)}\n  + ${h.to.slice(0, 160)}`)
 if (FIX) {
-  console.log(`\n${hits.length} ta matn yangi alifboga ögirildi.`)
+  console.log(`\n${hits.length} ta matn joriy alifboga o‘girildi.`)
 } else if (hits.length) {
-  console.log(`\n${hits.length} ta matn eski yozuvda yoki tutuq belgisi notöğri. Töğrilaş: pnpm imlo:fix`)
+  console.log(`\n${hits.length} ta matnda yangi alifbo harfi yoki noto‘g‘ri apostrof bor. To‘g‘rilash: pnpm imlo:fix`)
   process.exit(1)
 } else {
-  console.log('Imlo: hammasi yangi alifboda ✓')
+  console.log('Imlo: hammasi joriy alifboda ✓')
 }

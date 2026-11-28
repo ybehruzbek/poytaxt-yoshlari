@@ -43,7 +43,7 @@ await payload.updateGlobal({
       gallery: (await Promise.all(I.PALACE.gallery.map((g, i) => img(g, `${I.PALACE.name} — ${i + 1}`)))).filter(Boolean),
     },
     cityCentre: { name: I.CITY_CENTRE.name, text: I.CITY_CENTRE.text, facts: t(I.CITY_CENTRE.facts), img: await img(I.CITY_CENTRE.img, I.CITY_CENTRE.name) },
-    centres: await Promise.all(I.CENTRES.map(async (c) => ({ region: c.region, img: await img(c.img, `${c.region} Yoşlar markazi`) }))),
+    centres: await Promise.all(I.CENTRES.map(async (c) => ({ region: c.region, img: await img(c.img, `${c.region} Yoshlar markazi`) }))),
     structure: {
       qurultoy: organ(I.STRUCTURE.qurultoy), council: organ(I.STRUCTURE.council), chair: organ(I.STRUCTURE.chair),
       exec: organ(I.STRUCTURE.exec), audit: organ(I.STRUCTURE.audit), levels: I.STRUCTURE.levels.map(organ), principles: t(I.STRUCTURE.principles),

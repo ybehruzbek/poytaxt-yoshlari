@@ -23,7 +23,7 @@ if (want('otts')) {
       type: o.type,
       leader: l
         ? {
-            name: l.name, img: await media(payload, l.img, l.name, 'Yoşlar yetakçilari'), role: l.role, spec: l.spec,
+            name: l.name, img: await media(payload, l.img, l.name, 'Yoshlar yetakchilari'), role: l.role, spec: l.spec,
             phone: l.phone, email: l.email, telegram: l.telegram || null, instagram: l.instagram || null, facebook: l.facebook || null,
             about: l.about, elected: l.elected, members: l.members, reception: l.reception,
             achievements: l.achievements.map((t) => ({ t })), slug: l.slug,
@@ -50,7 +50,7 @@ if (want('hududiy')) {
     return r ? { day: r.day, time: r.time, room: r.room } : {}
   }
   await upsert(payload, 'staff', { name: { equals: CHAIR.name } }, {
-    name: CHAIR.name, role: CHAIR.role, chair: true, img: await media(payload, CHAIR.img, CHAIR.name, 'Kengaş xodimlari'),
+    name: CHAIR.name, role: CHAIR.role, chair: true, img: await media(payload, CHAIR.img, CHAIR.name, 'Kengash xodimlari'),
     qabul: rec(CHAIR.name), duties: CHAIR.duties.map((t) => ({ t })), socials: CHAIR.socials,
   })
   for (const d of DEPTS) {
@@ -59,12 +59,12 @@ if (want('hududiy')) {
     })
     for (const p of d.staff) {
       await upsert(payload, 'staff', { name: { equals: p.name } }, {
-        name: p.name, role: p.role, chair: false, dept: dep.id, img: await media(payload, p.img, p.name, 'Kengaş xodimlari'),
+        name: p.name, role: p.role, chair: false, dept: dep.id, img: await media(payload, p.img, p.name, 'Kengash xodimlari'),
         phone: p.phone, email: p.email, qabul: rec(p.name), duties: (p.duties ?? []).map((t) => ({ t })), socials: p.socials ?? [],
       })
     }
   }
-  console.log('hududiy Kengaş: bölimlar', DEPTS.length, ', xodimlar', DEPTS.reduce((a, d) => a + d.staff.length, 1))
+  console.log('hududiy Kengash: bo‘limlar', DEPTS.length, ', xodimlar', DEPTS.reduce((a, d) => a + d.staff.length, 1))
 }
 
 process.exit(0)

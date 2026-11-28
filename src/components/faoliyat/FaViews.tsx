@@ -67,15 +67,15 @@ export function DirText({
         <p className="dir-projs">
           {active.length > 0 && (
             <>
-              Yönaliş doirasida {joinList(active.map(link))}
-              {' amalga oşirilmoqda.'}
+              Yo‘nalish doirasida {joinList(active.map(link))}
+              {' amalga oshirilmoqda.'}
             </>
           )}
           {active.length > 0 && done.length > 0 && ' '}
           {done.length > 0 && (
             <>
-              {active.length > 0 ? 'Şuningdek, ' : 'Yönaliş doirasida '}
-              {joinList(done.map(link))} amalga oşirildi.
+              {active.length > 0 ? 'Shuningdek, ' : 'Yo‘nalish doirasida '}
+              {joinList(done.map(link))} amalga oshirildi.
             </>
           )}
         </p>
@@ -117,7 +117,7 @@ export function DirC({
           <h2 className="fa-h2">Tadbirlar xronologiyasi</h2>
           {byYear.length === 0 && (
             <p className="fa-empty">
-              Bu yönaliş böyiça tadbirlar haqidagi maʼlumotlar hozirça joylaştirilmagan.
+              Bu yo‘nalish bo‘yicha tadbirlar haqidagi ma’lumotlar hozircha joylashtirilmagan.
             </p>
           )}
           <div className="vc-tl">
@@ -148,7 +148,7 @@ export function DirC({
           <h2 className="fa-h2">Loyihalar</h2>
           {projs.length === 0 && (
             <p className="fa-empty">
-              Bu yönaliş böyiça loyihalar haqidagi maʼlumotlar hozirça joylaştirilmagan.
+              Bu yo‘nalish bo‘yicha loyihalar haqidagi ma’lumotlar hozircha joylashtirilmagan.
             </p>
           )}
           {projs.map((p) => (
@@ -162,7 +162,7 @@ export function DirC({
       </div>
       <div className="wrap fa-back">
         <Link href={listHref} className="btn btn-outline">
-          Barça yönalişlar
+          Barcha yo‘nalishlar
         </Link>
       </div>
     </section>
@@ -193,7 +193,7 @@ export function ProjC({ f, p, listHref }: { f: Faoliyat; p: Project; listHref: s
             <p className="vc-who">
               {p.audience && (
                 <>
-                  <b>Kimlar uçun:</b> {p.audience}.{' '}
+                  <b>Kimlar uchun:</b> {p.audience}.{' '}
                 </>
               )}
               {p.partners.length > 0 && (
@@ -235,7 +235,7 @@ export function ProjC({ f, p, listHref }: { f: Faoliyat; p: Project; listHref: s
         )}
         <div className="fa-back">
           <Link href={listHref} className="btn btn-outline">
-            Barça loyihalar
+            Barcha loyihalar
           </Link>
         </div>
       </div>

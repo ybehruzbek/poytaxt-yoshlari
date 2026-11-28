@@ -92,8 +92,8 @@ function Reception({ A, cards }: { A: AloqaData; cards?: boolean }) {
         <div className="bg-sec-head">
           <h2 className="h2">Fuqarolar qabuli</h2>
           <p>
-            Kengaş raisi va bölim boşliqlari jadvalda körsatilgan kunlarda fuqarolarni şaxsan qabul
-            qiladi. Qabulga oldindan telefon orqali yoziliş tavsiya etiladi.
+            Kengash raisi va bo‘lim boshliqlari jadvalda ko‘rsatilgan kunlarda fuqarolarni shaxsan qabul
+            qiladi. Qabulga oldindan telefon orqali yozilish tavsiya etiladi.
           </p>
         </div>
         {cards ? (
@@ -135,7 +135,7 @@ function Reception({ A, cards }: { A: AloqaData; cards?: boolean }) {
 
 function MapFrame({
   src,
-  title = 'Xarita: Universitet köçasi, 4',
+  title = 'Xarita: Universitet ko‘chasi, 4',
 }: {
   src: string
   title?: string
@@ -169,7 +169,7 @@ function AloqaB({ A, L }: { A: AloqaData; L: (h: string) => string }) {
     },
     {
       d: PATH.mail,
-      k: 'Elektron poçta',
+      k: 'Elektron pochta',
       v: EMAILS.map((m) => (
         <a key={m} href={`mailto:${m}`}>
           <Mail to={m} />
@@ -199,7 +199,7 @@ function AloqaB({ A, L }: { A: AloqaData; L: (h: string) => string }) {
     },
     {
       d: PATH.clock,
-      k: 'Iş vaqti',
+      k: 'Ish vaqti',
       v: (
         <span>
           {HOURS.days}, {HOURS.time}
@@ -236,12 +236,12 @@ function AloqaB({ A, L }: { A: AloqaData; L: (h: string) => string }) {
         <div className="wrap">
           <div className="bg-cta">
             <div>
-              <h2 className="h2">Savol, taklif va şikoyatlar</h2>
-              <p>Elektron murojaat yuboring: u qonunda belgilangan muddatda körib çiqiladi.</p>
+              <h2 className="h2">Savol, taklif va shikoyatlar</h2>
+              <p>Elektron murojaat yuboring: u qonunda belgilangan muddatda ko‘rib chiqiladi.</p>
             </div>
             <Link href={L('/boglanish/murojaat')} className="more-btn">
               <More>
-                Batafsil<span className="sr-only">: Murojaat yuboriş</span>
+                Batafsil<span className="sr-only">: Murojaat yuborish</span>
               </More>
             </Link>
           </div>
@@ -255,7 +255,7 @@ export async function AloqaPage({ crumbs, L }: { crumbs: ReactNode; L: (h: strin
   const A = await getAloqa(L('').split('/')[1] || 'uz')
   return (
     <div className="bg">
-      <Head crumbs={crumbs} title="Aloqa maʼlumotlari" />
+      <Head crumbs={crumbs} title="Aloqa ma’lumotlari" />
       <AloqaB A={A} L={L} />
     </div>
   )
@@ -269,12 +269,12 @@ function MapLinks({ A }: { A: AloqaData }) {
     <div className="bg-maplinks">
       <a href={MAPS.yandex} target="_blank" rel="noopener noreferrer" className="more-btn">
         <More>
-          Batafsil<span className="sr-only">: Yandex Xaritalarda oçiş</span>
+          Batafsil<span className="sr-only">: Yandex Xaritalarda ochish</span>
         </More>
       </a>
       <a href={MAPS.google} target="_blank" rel="noopener noreferrer" className="more-btn">
         <More>
-          Batafsil<span className="sr-only">: Google Mapsʼda oçiş</span>
+          Batafsil<span className="sr-only">: Google Maps’da ochish</span>
         </More>
       </a>
     </div>
@@ -289,12 +289,12 @@ const STEPS = [
     d: 'Murojaat turi tanlanadi, masala bayon etiladi, zarur hollarda fayl biriktiriladi.',
   },
   {
-    t: 'Körib çiqiladi',
-    d: 'Murojaat masʼul bölimga yuboriladi va qonunda belgilangan muddatda körib çiqiladi.',
+    t: 'Ko‘rib chiqiladi',
+    d: 'Murojaat mas’ul bo‘limga yuboriladi va qonunda belgilangan muddatda ko‘rib chiqiladi.',
   },
   {
     t: 'Javob beriladi',
-    d: 'Javob siz körsatgan elektron poçta manziliga yuboriladi yoki telefon orqali maʼlum qilinadi.',
+    d: 'Javob siz ko‘rsatgan elektron pochta manziliga yuboriladi yoki telefon orqali ma’lum qilinadi.',
   },
 ]
 

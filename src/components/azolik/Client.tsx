@@ -17,7 +17,7 @@ function PlaceField({ otts, err }: { otts: string[]; err?: string }) {
     <>
       <label className="az-field">
         <span>
-          Öqiş yoki iş joyi <i aria-hidden="true">*</i>
+          O‘qish yoki ish joyi <i aria-hidden="true">*</i>
         </span>
         <select name="place" value={v} onChange={(e) => setV(e.target.value)} required aria-invalid={err ? true : undefined}>
           <option value="" disabled>
@@ -28,13 +28,13 @@ function PlaceField({ otts, err }: { otts: string[]; err?: string }) {
               {o}
             </option>
           ))}
-          <option value="boshqa">Boşqa taʼlim muassasasi yoki iş joyi</option>
+          <option value="boshqa">Boshqa ta’lim muassasasi yoki ish joyi</option>
         </select>
       </label>
       {v === 'boshqa' && (
         <label className="az-field">
           <span>
-            Taʼlim muassasasi yoki iş joyining nomi <i aria-hidden="true">*</i>
+            Ta’lim muassasasi yoki ish joyining nomi <i aria-hidden="true">*</i>
           </span>
           <input name="placeOther" required maxLength={200} />
         </label>
@@ -63,7 +63,7 @@ export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; 
             Ariza raqami: <b>{state.no}</b>
           </p>
         )}
-        <h3>Keyingi bosqiçlar</h3>
+        <h3>Keyingi bosqichlar</h3>
         <ol className="az-after">
           {AFTER.map((t) => (
             <li key={t}>{t}</li>
@@ -82,7 +82,7 @@ export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; 
         start(async () => setState(await safeCall(() => submitMembership(fd), { ok: false, message: NET_ERR })))
       }}
     >
-      <p className="az-form-title">Aʼzolikka ariza</p>
+      <p className="az-form-title">A’zolikka ariza</p>
       <label className="az-field">
         <span>
           Familiya, ism, otasining ismi <i aria-hidden="true">*</i>
@@ -93,7 +93,7 @@ export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; 
       <div className="az-row">
         <label className="az-field">
           <span>
-            Tuğilgan yili <i aria-hidden="true">*</i>
+            Tug‘ilgan yili <i aria-hidden="true">*</i>
           </span>
           <select name="birthYear" defaultValue="" required aria-invalid={err('birthYear') ? true : undefined}>
             <option value="" disabled>
@@ -116,7 +116,7 @@ export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; 
         </label>
       </div>
       <label className="az-field">
-        <span>Elektron poçta</span>
+        <span>Elektron pochta</span>
         <input name="email" type="email" autoComplete="email" aria-invalid={err('email') ? true : undefined} />
         {err('email') && <small className="az-err">{err('email')}</small>}
       </label>
@@ -128,13 +128,13 @@ export function OnlineForm({ otts, ustavHref, after: AFTER }: { otts: string[]; 
           <a href={ustavHref} target="_blank" rel="noopener noreferrer">
             Ittifoq Ustavi
           </a>{' '}
-          bilan tanişdim, uning maqsadlarini qöllab-quvvatlayman va aʼzolik majburiyatlarini bajarişni zimmamga olaman.
+          bilan tanishdim, uning maqsadlarini qo‘llab-quvvatlayman va a’zolik majburiyatlarini bajarishni zimmamga olaman.
         </span>
       </label>
       {err('agree') && <small className="az-err">{err('agree')}</small>}
       {state && !state.ok && <p className="az-msg">{state.message}</p>}
       <button type="submit" className="btn btn-primary" disabled={pending}>
-        {pending ? 'Yuborilmoqda…' : 'Arizani yuboriş'}
+        {pending ? 'Yuborilmoqda…' : 'Arizani yuborish'}
         <span className="ic">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6" />

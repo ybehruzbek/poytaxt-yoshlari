@@ -24,10 +24,10 @@ function Status({ s }: { s: Contest }) {
   if (s.deadline && d !== null && d > 0)
     return (
       <span className="gr-st gr-st-open">
-        Ariza qabul qilinmoqda · {deadlineLabel(s.deadline)}gaça{d <= 30 ? ` · ${d} kun qoldi` : ''}
+        Ariza qabul qilinmoqda · {deadlineLabel(s.deadline)}gacha{d <= 30 ? ` · ${d} kun qoldi` : ''}
       </span>
     )
-  if (isRunning(s)) return <span className="gr-st gr-st-open">Tanlov bosqiçlari davom etmoqda</span>
+  if (isRunning(s)) return <span className="gr-st gr-st-open">Tanlov bosqichlari davom etmoqda</span>
   return <span className="gr-st">Navbatdagi tanlov kutilmoqda</span>
 }
 
@@ -52,7 +52,7 @@ function Card({ s }: { s: Contest }) {
         <p className="gr-org">{s.org}</p>
         <dl>
           <div>
-            <dt>Kimlar uçun</dt>
+            <dt>Kimlar uchun</dt>
             <dd>{nbsp(s.who)}</dd>
           </div>
           <div>
@@ -60,7 +60,7 @@ function Card({ s }: { s: Contest }) {
             <dd>{nbsp(s.prize)}</dd>
           </div>
           <div>
-            <dt>Ötkaziliş tartibi</dt>
+            <dt>O‘tkazilish tartibi</dt>
             <dd>{nbsp(s.cycle)}</dd>
           </div>
         </dl>
@@ -102,7 +102,7 @@ export function ContestsList({ contests: CONTESTS }: { contests: Contest[] }) {
     <>
       <div className="chips gr-chips" role="group" aria-label="Tanlov sohasi">
         <button type="button" aria-pressed={cat === 'all'} onClick={() => pick('all')}>
-          Barçasi <span>{CONTESTS.length}</span>
+          Barchasi <span>{CONTESTS.length}</span>
         </button>
         {CONTEST_CATS.map((c) => (
           <button

@@ -36,13 +36,13 @@ export function LoginForm() {
       const m = j?.errors?.[0]?.message ?? ''
       setErr(
         /lock/i.test(m)
-          ? 'Hisob köp marta notöğri parol kiritilgani uçun vaqtinça bloklandi. 15 daqiqadan keyin qayta urinib köring.'
+          ? 'Hisob ko‘p marta noto‘g‘ri parol kiritilgani uchun vaqtincha bloklandi. 15 daqiqadan keyin qayta urinib ko‘ring.'
           : r.status === 401
-            ? 'Elektron poçta yoki parol notöğri.'
-            : 'Kiriş amalga oşmadi. Birozdan keyin qayta urinib köring.',
+            ? 'Elektron pochta yoki parol noto‘g‘ri.'
+            : 'Kirish amalga oshmadi. Birozdan keyin qayta urinib ko‘ring.',
       )
     } catch {
-      setErr('Server bilan aloqa yöq. Internetni tekşirib, qayta urinib köring.')
+      setErr('Server bilan aloqa yo‘q. Internetni tekshirib, qayta urinib ko‘ring.')
     } finally {
       setBusy(false)
     }
@@ -52,7 +52,7 @@ export function LoginForm() {
     <form onSubmit={submit} noValidate={false}>
       <div className="f">
         <label className="lbl" htmlFor="email">
-          Elektron poçta
+          Elektron pochta
         </label>
         <input className="inp" id="email" name="email" type="email" autoComplete="username" required autoFocus />
       </div>
@@ -62,7 +62,7 @@ export function LoginForm() {
         </label>
         <div className="inp-wrap">
           <input className="inp" id="password" name="password" type={show ? 'text' : 'password'} autoComplete="current-password" required />
-          <button className="inp-eye" type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Parolni yaşiriş' : 'Parolni körsatiş'}>
+          <button className="inp-eye" type="button" onClick={() => setShow((s) => !s)} aria-label={show ? 'Parolni yashirish' : 'Parolni ko‘rsatish'}>
             <Icon name={show ? 'eye-off' : 'eye'} size={18} />
           </button>
         </div>
@@ -73,7 +73,7 @@ export function LoginForm() {
         </p>
       )}
       <button className="btn btn-primary" type="submit" disabled={busy}>
-        {busy ? 'Tekşirilmoqda…' : 'Kiriş'}
+        {busy ? 'Tekshirilmoqda…' : 'Kirish'}
       </button>
     </form>
   )

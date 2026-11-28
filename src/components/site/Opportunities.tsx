@@ -32,7 +32,7 @@ function OppInfo({ t, lists, desc }: { t: OppType; lists: Lists; desc: string })
       <p>{desc}</p>
       <div className="opp-meta">
         <span>
-          <b>{list.length}</b> {t === 'vol' ? 'ta yönaliş' : 'ta dastur'}
+          <b>{list.length}</b> {t === 'vol' ? 'ta yo‘nalish' : 'ta dastur'}
         </span>
         <span>
           {next ? (

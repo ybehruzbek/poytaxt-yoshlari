@@ -21,7 +21,7 @@ const RULES: [RegExp, string][] = [
   // sayt matnlarida bu qoidani `pnpm imlo` taʼminlaydi — src/lib/alifbo.ts)
   [/(?<![\p{L}\d])((?:18|19|20)\d{2}) (yil|y\.)/gu, '$1-$2'],
   [
-    /(?<![\p{L}\d.,])(\d{1,2}) (yanvar|fevral|mart|aprel|may|iyun|iyul|avgust|sentabr|oktabr|noyabr|dekabr)(?=(?:da|dagi|ga|gaça|dan|ning|ida|idagi|idan|i)?(?!\p{L}))/gu,
+    /(?<![\p{L}\d.,])(\d{1,2}) (yanvar|fevral|mart|aprel|may|iyun|iyul|avgust|sentabr|oktabr|noyabr|dekabr)(?=(?:da|dagi|ga|gacha|gaça|dan|ning|ida|idagi|idan|i)?(?!\p{L}))/gu,
     '$1-$2',
   ],
   // raqam/katta harf + defis + harf yoki raqam: 15-dekabr, PF-6017, 2026-2027

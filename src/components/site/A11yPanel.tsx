@@ -108,7 +108,7 @@ const EYE = 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12zm10 3a3 3 0 1 0 0-6
 const MODES: { k: Mode; t: string; d: string }[] = [
   {
     k: 'normal',
-    t: 'Odatiy köriniş',
+    t: 'Odatiy ko‘rinish',
     d: 'M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4',
   },
   { k: 'gray', t: 'Oq-qora', d: 'M12 2a10 10 0 1 0 0 20V2z M12 2a10 10 0 0 1 0 20' },
@@ -252,7 +252,7 @@ export function A11yPanel() {
                   ref={close}
                   type="button"
                   className="a11y-x"
-                  aria-label="Yopiş"
+                  aria-label="Yopish"
                   onClick={() => setOpen(false)}
                 >
                   <Ic d="M6 6l12 12M18 6L6 18" />
@@ -303,13 +303,13 @@ export function A11yPanel() {
                     checked={s.noImg}
                     onChange={(e) => upd({ noImg: e.target.checked })}
                   />
-                  Rasmlarni yaşiriş
+                  Rasmlarni yashirish
                 </label>
               </section>
 
               <section className="a11y-sec">
                 <h3>
-                  Şrift ölçami <output>{Math.round((FONTS[s.font] ?? 1) * 100)}%</output>
+                  Shrift o‘lchami <output>{Math.round((FONTS[s.font] ?? 1) * 100)}%</output>
                 </h3>
                 <input
                   type="range"
@@ -317,14 +317,14 @@ export function A11yPanel() {
                   max={FONTS.length - 1}
                   step={1}
                   value={s.font}
-                  aria-label="Şrift ölçami"
+                  aria-label="Shrift o‘lchami"
                   onChange={(e) => upd({ font: Number(e.target.value) })}
                 />
               </section>
 
               <section className="a11y-sec">
                 <h3>
-                  Masştab <output>{Math.round((ZOOMS[s.zoom] ?? 1) * 100)}%</output>
+                  Masshtab <output>{Math.round((ZOOMS[s.zoom] ?? 1) * 100)}%</output>
                 </h3>
                 <input
                   type="range"
@@ -332,20 +332,20 @@ export function A11yPanel() {
                   max={ZOOMS.length - 1}
                   step={1}
                   value={s.zoom}
-                  aria-label="Masştab"
+                  aria-label="Masshtab"
                   onChange={(e) => upd({ zoom: Number(e.target.value) })}
                 />
               </section>
 
               <section className="a11y-sec">
-                <h3>Ovozli öqiş</h3>
+                <h3>Ovozli o‘qish</h3>
                 <label className="a11y-check">
                   <input
                     type="checkbox"
                     checked={s.tts}
                     onChange={(e) => upd({ tts: e.target.checked })}
                   />
-                  Belgilangan matnni ovoz çiqarib öqiş
+                  Belgilangan matnni ovoz chiqarib o‘qish
                 </label>
               </section>
 
@@ -356,10 +356,10 @@ export function A11yPanel() {
                   aria-pressed={s.read}
                   onClick={() => upd({ read: !s.read })}
                 >
-                  Öqiş rejimi
+                  O‘qish rejimi
                 </button>
                 <p className="a11y-hint">
-                  Animatsiya va bezaklar öçadi, matn qatorlari kengroq, havolalar tagiga çiziladi.
+                  Animatsiya va bezaklar o‘chadi, matn qatorlari kengroq, havolalar tagiga chiziladi.
                 </p>
               </section>
 
@@ -369,7 +369,7 @@ export function A11yPanel() {
                 disabled={!changed}
                 onClick={() => upd(DEF)}
               >
-                Boşlanğiç holatga qaytariş
+                Boshlang‘ich holatga qaytarish
               </button>
             </aside>
           </div>,

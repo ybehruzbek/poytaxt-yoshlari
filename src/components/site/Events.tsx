@@ -37,7 +37,7 @@ async function upcoming(locale: Locale): Promise<Ev[]> {
     return {
       title: c.title,
       type: 'Tadbir',
-      org: d.eventPlace || 'Toşkent şahri',
+      org: d.eventPlace || 'Toshkent shahri',
       start: d.eventDate as string,
       img: c.image,
       href: `/${locale}/yangiliklar/${c.slug}`,
@@ -46,7 +46,7 @@ async function upcoming(locale: Locale): Promise<Ev[]> {
 }
 
 const MON_FULL = ['yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun', 'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr']
-const WD = ['Yakşanba', 'Duşanba', 'Seşanba', 'Çorşanba', 'Payşanba', 'Juma', 'Şanba']
+const WD = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba']
 
 /** ISO → Toshkent vaqtidagi qismlar */
 function parts(iso: string) {
@@ -95,7 +95,7 @@ export async function Events({ locale }: { locale: Locale }) {
       <div className="wrap">
         <div className="sec-head">
           <h2 className="h2" id="ev-title">{heads.events || 'Yaqin tadbirlar'}</h2>
-          <Link href={href} className="btn btn-ghost">Barça tadbirlar
+          <Link href={href} className="btn btn-ghost">Barcha tadbirlar
             <span className="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
           </Link>
         </div>

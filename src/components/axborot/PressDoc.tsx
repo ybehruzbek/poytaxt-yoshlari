@@ -22,7 +22,7 @@ export function PressDoc({ p, id, level = 2, contact: PRESS_CONTACT }: { p: Pres
       </header>
 
       <p className="pr-dateline">
-        Toşkent, {fullDate(p.date)}
+        Toshkent, {fullDate(p.date)}
       </p>
       <Title className="pr-doc-title">{p.title}</Title>
 
@@ -69,11 +69,11 @@ export function PressDoc({ p, id, level = 2, contact: PRESS_CONTACT }: { p: Pres
 
       <footer className="pr-doc-foot">
         <section>
-          <h3>Kengaş haqida</h3>
+          <h3>Kengash haqida</h3>
           <p>{ABOUT}</p>
         </section>
         <section>
-          <h3>OAV uçun aloqa</h3>
+          <h3>OAV uchun aloqa</h3>
           <p>
             {PRESS_CONTACT.unit}
             <br />

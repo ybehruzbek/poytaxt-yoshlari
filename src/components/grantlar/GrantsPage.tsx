@@ -18,10 +18,10 @@ export async function GrantsPage({ crumbs, locale = 'uz' }: { crumbs: ReactNode;
         <div className="wrap">
           <GrantsList grants={grants} />
           <p className="gr-disc">
-            Sahifada faqat yoşlar, talabalar, öquvçilar va yoş olimlar iştirok eta oladigan grantlar
-            keltirilgan. Maʼlumotlar davlat organlarining rasmiy eʼlonlari asosida 2026-yil
-            14-noyabr holatiga töplangan. Ariza topşirişdan oldin şartlar va muddatlarni rasmiy
-            manbada tekşiriş tavsiya etiladi.
+            Sahifada faqat yoshlar, talabalar, o‘quvchilar va yosh olimlar ishtirok eta oladigan grantlar
+            keltirilgan. Ma’lumotlar davlat organlarining rasmiy e’lonlari asosida 2026-yil
+            14-noyabr holatiga to‘plangan. Ariza topshirishdan oldin shartlar va muddatlarni rasmiy
+            manbada tekshirish tavsiya etiladi.
           </p>
         </div>
       </section>

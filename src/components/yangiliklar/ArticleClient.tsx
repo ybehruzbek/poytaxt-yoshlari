@@ -86,11 +86,11 @@ export function Share({
   const open = (href: string) =>
     window.open(href, '_blank', 'noopener,noreferrer,width=640,height=560')
   return (
-    <div className={`ar-share${vertical ? ' v' : ''}`} role="group" aria-label="Ulaşiş">
+    <div className={`ar-share${vertical ? ' v' : ''}`} role="group" aria-label="Ulashish">
       {label && <span className="ar-share-l">{label}</span>}
       <button
         type="button"
-        aria-label="Telegramʼda ulaşiş"
+        aria-label="Telegram’da ulashish"
         onClick={() =>
           open(
             `https://t.me/share/url?url=${encodeURIComponent(full())}&text=${encodeURIComponent(title)}`,
@@ -101,7 +101,7 @@ export function Share({
       </button>
       <button
         type="button"
-        aria-label="Facebookʼda ulaşiş"
+        aria-label="Facebook’da ulashish"
         onClick={() =>
           open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(full())}`)
         }
@@ -110,7 +110,7 @@ export function Share({
       </button>
       <button
         type="button"
-        aria-label="Havolani nusxalaş"
+        aria-label="Havolani nusxalash"
         onClick={async () => {
           try {
             await navigator.clipboard.writeText(full())
@@ -185,7 +185,7 @@ export function RateStars({ newsId, initial }: { newsId: number; initial: Rating
       </div>
       <div className="ar-foot-cell">
         <span className="ar-foot-l" id={`rate-${newsId}`}>
-          Maqolaga baho beriş
+          Maqolaga baho berish
         </span>
         <div
           className="ar-stars"
@@ -298,7 +298,7 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
         )}
       </div>
       {n > 1 && (
-        <div className="ar-sl-thumbs" role="group" aria-label="Suratni tanlaş">
+        <div className="ar-sl-thumbs" role="group" aria-label="Suratni tanlash">
           {slides.map((s, k) => (
             <button
               key={s.url}
@@ -318,11 +318,11 @@ export function Slider({ slides, caption }: { slides: Slide[]; caption?: string 
 }
 
 const EMOJI: Array<[ReactionKind, string, string]> = [
-  ['like', '👍', 'Maʼqul'],
-  ['fire', '🔥', 'Aʼlo'],
-  ['dislike', '👎', 'Maʼqul emas'],
+  ['like', '👍', 'Ma’qul'],
+  ['fire', '🔥', 'A’lo'],
+  ['dislike', '👎', 'Ma’qul emas'],
   ['angry', '😡', 'Norozilik'],
-  ['laugh', '😁', 'Quvonç'],
+  ['laugh', '😁', 'Quvonch'],
 ]
 
 /**
@@ -408,7 +408,7 @@ export function Reactions({
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 17 17 7M9 7h8v8" />
           </svg>
-          Ulaşiş
+          Ulashish
         </button>
         {shareOpen && <Share url={url} title={title} />}
       </div>

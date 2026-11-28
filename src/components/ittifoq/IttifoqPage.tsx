@@ -63,10 +63,10 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
         <div className="wrap">
           <div className="it-mosaic">
             <img src={IMG.girls} alt="Kitob olami festivalida milliy liboslardagi qizlar" loading="lazy" decoding="async" />
-            <img src={IMG.seminar} alt="Boşlanğiç taşkilot yetakçilari seminari" loading="lazy" decoding="async" />
+            <img src={IMG.seminar} alt="Boshlang‘ich tashkilot yetakchilari seminari" loading="lazy" decoding="async" />
             <img src={IMG.volunteers} alt="Volontyorlar" loading="lazy" decoding="async" />
-            <img src={IMG.books} alt="Yoşlar ijod saroyida kitobxonlar" loading="lazy" decoding="async" />
-            <img src={IMG.leaders} alt="Yoşlar yetakçilari forumi iştirokçilari" loading="lazy" decoding="async" />
+            <img src={IMG.books} alt="Yoshlar ijod saroyida kitobxonlar" loading="lazy" decoding="async" />
+            <img src={IMG.leaders} alt="Yoshlar yetakchilari forumi ishtirokchilari" loading="lazy" decoding="async" />
           </div>
           <div className="it-more">
             {MORE_STATS.map((s) => (
@@ -101,7 +101,7 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
         <div className="wrap">
           <div className="it-pri-head">
             <h2 className="h2">
-              <span>Özbekiston yoşlar ittifoqining</span> <span>ustuvor yönalişlari</span>
+              <span>O‘zbekiston yoshlar ittifoqining</span> <span>ustuvor yo‘nalishlari</span>
             </h2>
           </div>
           <Priorities D={D} />
@@ -137,7 +137,7 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
       <section className="sec it-join-sec" id="azo-bolish">
         <div className="wrap">
           <div className="sec-head it-join-head">
-            <h2 className="h2">Aʼzolikka qabul qiliş tartibi</h2>
+            <h2 className="h2">A’zolikka qabul qilish tartibi</h2>
             <Link href={USTAV(L, '4.1')} className="more-btn">
               <More>
                 Batafsil<span className="sr-only">: Ustavning IV bobi</span>
@@ -166,7 +166,7 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
           <div className="it-join-grid">
             <div>
               <h3>
-                Aʼzoning huquqlari <span className="it-band">4.10-band</span>
+                A’zoning huquqlari <span className="it-band">4.10-band</span>
               </h3>
               <ul>
                 {JOIN.rights.map((x) => (
@@ -176,7 +176,7 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
             </div>
             <div>
               <h3>
-                Aʼzoning majburiyatlari <span className="it-band">4.11-band</span>
+                A’zoning majburiyatlari <span className="it-band">4.11-band</span>
               </h3>
               <ul className="it-duties">
                 {JOIN.duties.map((x) => (
@@ -186,14 +186,14 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
             </div>
             <div>
               <h3>
-                Yuridik şaxslar aʼzoligi <span className="it-band">4.7–4.8-bandlar</span>
+                Yuridik shaxslar a’zoligi <span className="it-band">4.7–4.8-bandlar</span>
               </h3>
               <p>{JOIN.legal.d}</p>
               <p className="it-join-how">{JOIN.legal.how}</p>
             </div>
             <div>
               <h3>
-                Aʼzolikni bekor qiliş asoslari <span className="it-band">4.6-band</span>
+                A’zolikni bekor qilish asoslari <span className="it-band">4.6-band</span>
               </h3>
               <ul className="it-ends">
                 {JOIN.ends.map((x) => (
@@ -209,7 +209,7 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
               <p>{JOIN.cta.d}</p>
             </div>
             <Link href={L('/boglanish/azo-bolish')} className="btn btn-primary">
-              Aʼzo böliş{' '}
+              A’zo bo‘lish{' '}
               <span className="ic">
                 <Arrow />
               </span>
@@ -219,7 +219,7 @@ export async function IttifoqPage({ L, crumbs, siblings }: P) {
             <FaqBlock
               pick="azolik"
               base={L('')}
-              title="Aʼzolik haqida savollar"
+              title="A’zolik haqida savollar"
               section={false}
             />
           </div>

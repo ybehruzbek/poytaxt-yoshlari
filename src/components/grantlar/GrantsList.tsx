@@ -26,12 +26,12 @@ function Status({ g }: { g: Grant }) {
   if (g.deadline && d !== null && d > 0)
     return (
       <span className="gr-st gr-st-open">
-        Qabul davom etmoqda · {deadlineLabel(g.deadline)}gaça{d <= 30 ? ` · ${d} kun qoldi` : ''}
+        Qabul davom etmoqda · {deadlineLabel(g.deadline)}gacha{d <= 30 ? ` · ${d} kun qoldi` : ''}
       </span>
     )
   if (/^Doimiy/.test(g.cycle)) return <span className="gr-st gr-st-open">Doimiy qabul</span>
-  if (/eʼlon qilingan$/.test(g.cycle))
-    return <span className="gr-st gr-st-open">Tanlov eʼlon qilingan</span>
+  if (/e’lon qilingan$/.test(g.cycle))
+    return <span className="gr-st gr-st-open">Tanlov e’lon qilingan</span>
   return <span className="gr-st">Navbatdagi tanlov kutilmoqda</span>
 }
 
@@ -59,11 +59,11 @@ function Card({ g }: { g: Grant }) {
             <dd>{nbsp(g.amount)}</dd>
           </div>
           <div>
-            <dt>Kimlar uçun</dt>
+            <dt>Kimlar uchun</dt>
             <dd>{nbsp(g.who)}</dd>
           </div>
           <div>
-            <dt>Ötkaziliş tartibi</dt>
+            <dt>O‘tkazilish tartibi</dt>
             <dd>{nbsp(g.cycle)}</dd>
           </div>
         </dl>
@@ -110,8 +110,8 @@ export function GrantsList({ grants: GRANTS }: { grants: Grant[] }) {
   }
   return (
     <>
-      <div className="gr-origin" role="group" aria-label="Grant beruvçi">
-        {[{ key: 'all' as const, t: 'Barça grantlar' }, ...GRANT_ORIGINS].map((o) => (
+      <div className="gr-origin" role="group" aria-label="Grant beruvchi">
+        {[{ key: 'all' as const, t: 'Barcha grantlar' }, ...GRANT_ORIGINS].map((o) => (
           <button
             key={o.key}
             type="button"
@@ -133,7 +133,7 @@ export function GrantsList({ grants: GRANTS }: { grants: Grant[] }) {
       </div>
       <div className="chips gr-chips" role="group" aria-label="Grant sohasi">
         <button type="button" aria-pressed={cat === 'all'} onClick={() => pick('all')}>
-          Barçasi <span>{byOrigin.length}</span>
+          Barchasi <span>{byOrigin.length}</span>
         </button>
         {GRANT_CATS.filter((c) => byOrigin.some((g) => g.cat === c.key)).map((c) => (
           <button

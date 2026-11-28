@@ -23,7 +23,7 @@ export async function VolPage({ crumbs, projectHref, locale = 'uz' }: { crumbs: 
     <section className="sec">
       <div className="wrap">
         <div className="sec-head">
-          <h2 className="h2">Volontyor böliş tartibi</h2>
+          <h2 className="h2">Volontyor bo‘lish tartibi</h2>
         </div>
         <ol className="vl-steps">
           {STEPS.map((s, i) => (
@@ -88,7 +88,7 @@ export async function VolPage({ crumbs, projectHref, locale = 'uz' }: { crumbs: 
       <section className="sec">
         <div className="wrap">
           <div className="sec-head vl-ev-head">
-            <h2 className="h2">Kengaş volontyorlari faoliyatidan</h2>
+            <h2 className="h2">Kengash volontyorlari faoliyatidan</h2>
             <a className="more-btn" href={projectHref}>
               <More />
             </a>

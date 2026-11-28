@@ -35,7 +35,7 @@ export const Natijalar: GlobalConfig = {
     },
     {
       name: 'years',
-      label: 'Yillar böyiça natijalar',
+      label: 'Yillar bo‘yicha natijalar',
       type: 'array',
       labels: { singular: 'Yil', plural: 'Yillar' },
       fields: [

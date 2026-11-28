@@ -49,7 +49,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: ' — Yoşlar ittifoqi admin',
+      titleSuffix: ' — Yoshlar ittifoqi admin',
       icons: [{ rel: 'icon', url: '/favicon.ico' }],
     },
     // sanalar özbekça: 14 noyabr 2026, 22:19
@@ -75,7 +75,7 @@ export default buildConfig({
   // Yangi alifbo (Ö Ğ Ş Ç) alohida til emas — o'zbekcha matndan avtomatik o'giriladi (src/lib/alifbo.ts).
   localization: {
     locales: [
-      { code: 'uz', label: 'Özbekça' },
+      { code: 'uz', label: 'O‘zbekcha' },
       { code: 'ru', label: 'Русский' },
       { code: 'en', label: 'English' },
     ],
@@ -142,7 +142,7 @@ export default buildConfig({
     ? {
         email: nodemailerAdapter({
           defaultFromAddress: process.env.SMTP_FROM || process.env.SMTP_USER || '',
-          defaultFromName: 'Toşkent şahar hududiy Kengaşi sayti',
+          defaultFromName: 'Toshkent shahar hududiy Kengashi sayti',
           transportOptions: {
             host: process.env.SMTP_HOST,
             port: Number(process.env.SMTP_PORT || 465),

@@ -13,7 +13,7 @@ function Head() {
   return (
     <div className="hk-jm-head">
       <div className="sec-head">
-        <h1 className="h2 pg-title">Toşkent şahar hududiy Kengaşi jamoasi</h1>
+        <h1 className="h2 pg-title">Toshkent shahar hududiy Kengashi jamoasi</h1>
       </div>
     </div>
   )
@@ -85,7 +85,7 @@ function Duties({ m, id }: { m: Member; id: string }) {
           className="z5-drawer-x"
           popoverTarget={id}
           popoverTargetAction="hide"
-          aria-label="Yopiş"
+          aria-label="Yopish"
         >
           ×
         </button>
@@ -97,7 +97,7 @@ function Duties({ m, id }: { m: Member; id: string }) {
             {m.dept && <small title={m.dept}>{m.dept}</small>}
           </div>
         </div>
-        <h4>{m.deptDuties ? 'Bölim vazifalari' : 'Funksional vazifalari'}</h4>
+        <h4>{m.deptDuties ? 'Bo‘lim vazifalari' : 'Funksional vazifalari'}</h4>
         <ul>
           {m.duties.map((x) => (
             <li key={x}>{x}</li>

@@ -44,7 +44,7 @@ export async function DirectionsPage({
     <div className="fa">
       <Head
         crumbs={crumbs}
-        title="Faoliyat yönalişlari"
+        title="Faoliyat yo‘nalishlari"
       />
       <DirsShow f={f} base={base} projBase={projBase} />
     </div>
@@ -135,7 +135,7 @@ export async function EventsPage({ crumbs, annHref, locale = 'uz' }: { crumbs: R
       />
       <section className="sec fa-sec">
         <div className="wrap">
-          <h2 className="fa-h2">Yaqinlaşayotgan tadbirlar</h2>
+          <h2 className="fa-h2">Yaqinlashayotgan tadbirlar</h2>
           {up.length ? (
             <div className="fa-up">
               {up.map((e) => {
@@ -167,12 +167,12 @@ export async function EventsPage({ crumbs, annHref, locale = 'uz' }: { crumbs: R
             </div>
           ) : (
             <p className="fa-empty">
-              Hozirça rejalaştirilgan tadbirlar eʼlon qilinmagan.
+              Hozircha rejalashtirilgan tadbirlar e’lon qilinmagan.
             </p>
           )}
           <p className="fa-note">
-            Tanlovlar va röyxatdan ötiş haqidagi xabarlar{' '}
-            <Link href={annHref}>“Eʼlonlar”</Link> sahifasida joylaştiriladi.
+            Tanlovlar va ro‘yxatdan o‘tish haqidagi xabarlar{' '}
+            <Link href={annHref}>“E’lonlar”</Link> sahifasida joylashtiriladi.
           </p>
           <h2 className="fa-h2">Tadbirlar arxivi</h2>
           <EventsList events={past} dirs={f.directions.map(({ slug, short }) => ({ slug, title: short }))} />
@@ -191,7 +191,7 @@ export function AnnouncePage({ crumbs, extra = [] }: { crumbs: ReactNode; extra?
     <div className="fa">
       <Head
         crumbs={crumbs}
-        title="Eʼlonlar"
+        title="E’lonlar"
       />
       <section className="sec fa-sec">
         <div className="wrap">

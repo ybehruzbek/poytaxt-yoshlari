@@ -40,8 +40,8 @@ export function dur(sec: number) {
 export type AlbumType = 'uchrashuv' | 'forum' | 'yigilish' | 'sayohat' | 'sport' | 'taqdimot'
 
 export const ALBUM_TYPES: Record<AlbumType, string> = {
-  uchrashuv: 'Uçraşuvlar',
-  yigilish: 'Yiğilişlar',
+  uchrashuv: 'Uchrashuvlar',
+  yigilish: 'Yig‘ilishlar',
   forum: 'Forumlar',
   taqdimot: 'Taqdimotlar',
   sayohat: 'Sayohatlar',
@@ -63,23 +63,23 @@ export type Album = {
 export const ALBUMS: Album[] = [
   {
     id: 7037,
-    title: '“Talabalar haftaligi”: “Qizlar akademiyasi” loyihasi vakillari bilan uçraşuv',
+    title: '“Talabalar haftaligi”: “Qizlar akademiyasi” loyihasi vakillari bilan uchrashuv',
     date: '2026-11-09',
     type: 'uchrashuv',
-    place: 'Özbekiston davlat jahon tillari universiteti',
+    place: 'O‘zbekiston davlat jahon tillari universiteti',
     n: 7,
   },
   {
     id: 7017,
-    title: 'Rektor boşlanğiç taşkilot vakillari va faol talabalar bilan uçraşdi',
+    title: 'Rektor boshlang‘ich tashkilot vakillari va faol talabalar bilan uchrashdi',
     date: '2026-11-05',
     type: 'uchrashuv',
-    place: 'Toşkent davlat şarqşunoslik universiteti',
+    place: 'Toshkent davlat sharqshunoslik universiteti',
     n: 10,
   },
   {
     id: 6988,
-    title: 'Bloger va bankir Xojimurod Tojiboyev bilan oçiq uçraşuv',
+    title: 'Bloger va bankir Xojimurod Tojiboyev bilan ochiq uchrashuv',
     date: '2026-10-29',
     type: 'uchrashuv',
     place: 'Fan va texnologiyalar universiteti',
@@ -87,71 +87,71 @@ export const ALBUMS: Album[] = [
   },
   {
     id: 6965,
-    title: '“Mutolaa”, “Ustoz AI” loyihalari va “Yaşil taşabbuslar” jamğarmasi taqdimoti',
+    title: '“Mutolaa”, “Ustoz AI” loyihalari va “Yashil tashabbuslar” jamg‘armasi taqdimoti',
     date: '2026-10-27',
     type: 'taqdimot',
-    place: 'Toşkent davlat yuridik universiteti',
+    place: 'Toshkent davlat yuridik universiteti',
     n: 7,
   },
   {
     id: 6973,
-    title: 'Institut Yoşlar kengaşi bilan uçraşuv',
+    title: 'Institut Yoshlar kengashi bilan uchrashuv',
     date: '2026-10-27',
     type: 'uchrashuv',
-    place: 'Toşkent kimyo-texnologiya instituti',
+    place: 'Toshkent kimyo-texnologiya instituti',
     n: 10,
   },
   {
     id: 6947,
-    title: 'Hisobot yiğilişi: Yoşlar kengaşi aʼzolariga işonç yorliqlari topşirildi',
+    title: 'Hisobot yig‘ilishi: Yoshlar kengashi a’zolariga ishonch yorliqlari topshirildi',
     date: '2026-10-23',
     type: 'yigilish',
-    place: 'Toşkent davlat iqtisodiyot universiteti',
+    place: 'Toshkent davlat iqtisodiyot universiteti',
     n: 7,
   },
   {
     id: 6930,
-    title: 'Toşkent davlat şarqşunoslik universiteti talabalarining Samarqandga sayohati',
+    title: 'Toshkent davlat sharqshunoslik universiteti talabalarining Samarqandga sayohati',
     date: '2026-10-20',
     type: 'sayohat',
-    place: 'Samarqand şahri',
+    place: 'Samarqand shahri',
     n: 10,
   },
   {
     id: 6916,
-    title: '“Talabalikdan liderlikkaça” mavzusida oçiq muloqot',
+    title: '“Talabalikdan liderlikkacha” mavzusida ochiq muloqot',
     date: '2026-10-16',
     type: 'uchrashuv',
-    place: 'Alişer Navoiy nomidagi Toşkent davlat özbek tili va adabiyoti universiteti',
+    place: 'Alisher Navoiy nomidagi Toshkent davlat o‘zbek tili va adabiyoti universiteti',
     n: 7,
   },
   {
     id: 6904,
-    title: 'Boşlanğiç taşkilotning ilk yiğilişi: yangi Yoşlar yetakçisi saylandi',
+    title: 'Boshlang‘ich tashkilotning ilk yig‘ilishi: yangi Yoshlar yetakchisi saylandi',
     date: '2026-10-15',
     type: 'yigilish',
-    place: 'Toşkent xalqaro ijtimoiy innovatsiyalar universiteti',
+    place: 'Toshkent xalqaro ijtimoiy innovatsiyalar universiteti',
     n: 10,
   },
   {
     id: 6890,
-    title: '“Oliy taʼlim yetakçilarining forumi”: poytaxtdan 70 dan ortiq yoşlar yetakçisi qatnaşdi',
+    title: '“Oliy ta’lim yetakchilarining forumi”: poytaxtdan 70 dan ortiq yoshlar yetakchisi qatnashdi',
     date: '2026-10-12',
     type: 'forum',
-    place: 'Yoşlar oromgohi, Toşkent viloyati',
+    place: 'Yoshlar oromgohi, Toshkent viloyati',
     n: 10,
   },
   {
     id: 6822,
-    title: 'OTT yoşlar yetakçilarining 2026/2027-öquv yilidagi birinçi umumiy yiğilişi',
+    title: 'OTT yoshlar yetakchilarining 2026/2027-o‘quv yilidagi birinchi umumiy yig‘ilishi',
     date: '2026-10-08',
     type: 'yigilish',
-    place: 'Toşkent arxitektura-quriliş universiteti',
+    place: 'Toshkent arxitektura-qurilish universiteti',
     n: 10,
   },
   {
     id: 6784,
-    title: 'Öqituvçi va murabbiylar kuniga bağişlangan döstlik sport musobaqalari',
+    title: 'O‘qituvchi va murabbiylar kuniga bag‘ishlangan do‘stlik sport musobaqalari',
     date: '2026-09-29',
     type: 'sport',
     place: 'Harbiy xavfsizlik va mudofaa universiteti',
@@ -168,7 +168,7 @@ export const cover = (a: Album) => photo(a, 1)
 export type VideoType = 'korsatuv' | 'reportaj' | 'tadbir'
 
 export const VIDEO_TYPES: Record<VideoType, string> = {
-  korsatuv: 'Körsatuv',
+  korsatuv: 'Ko‘rsatuv',
   reportaj: 'Reportaj',
   tadbir: 'Tadbir',
 }
@@ -187,7 +187,7 @@ export type Video = {
 export const VIDEOS: Video[] = [
   {
     id: 'hSJUcwB0qUM',
-    title: '“Oliy taʼlim yetakçilarining forumi”: maxsus reportaj',
+    title: '“Oliy ta’lim yetakchilarining forumi”: maxsus reportaj',
     date: '2026-10-18',
     sec: 268,
     type: 'reportaj',
@@ -195,7 +195,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: 'gp_Urm_QTBA',
-    title: '“Oliy taʼlim yetakçilarining forumi”',
+    title: '“Oliy ta’lim yetakchilarining forumi”',
     date: '2026-10-17',
     sec: 206,
     type: 'tadbir',
@@ -203,7 +203,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: 'Zpz_SUWGtOs',
-    title: '“Istiqlol farzandlari” körsatuvi. 4-qism',
+    title: '“Istiqlol farzandlari” ko‘rsatuvi. 4-qism',
     date: '2026-09-01',
     sec: 346,
     type: 'korsatuv',
@@ -211,7 +211,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: '2wc0U2rNVbE',
-    title: '“Istiqlol farzandlari” körsatuvi. 3-qism',
+    title: '“Istiqlol farzandlari” ko‘rsatuvi. 3-qism',
     date: '2026-08-31',
     sec: 175,
     type: 'korsatuv',
@@ -219,7 +219,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: '5wBoX2rZCDA',
-    title: '“Istiqlol farzandlari” körsatuvi. 2-qism',
+    title: '“Istiqlol farzandlari” ko‘rsatuvi. 2-qism',
     date: '2026-08-31',
     sec: 292,
     type: 'korsatuv',
@@ -227,7 +227,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: '7dulz8ihblQ',
-    title: '“Istiqlol farzandlari” körsatuvi. 1-qism',
+    title: '“Istiqlol farzandlari” ko‘rsatuvi. 1-qism',
     date: '2026-08-30',
     sec: 201,
     type: 'korsatuv',
@@ -235,7 +235,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: 'S8C46HiYSmc',
-    title: '“Istiqlol farzandlari” maxsus körsatuvi: tizer',
+    title: '“Istiqlol farzandlari” maxsus ko‘rsatuvi: tizer',
     date: '2026-08-30',
     sec: 70,
     type: 'korsatuv',
@@ -251,7 +251,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: 'mO0sJgCZnc8',
-    title: 'Inha universitetida yangi talabalar bilan uçraşuv',
+    title: 'Inha universitetida yangi talabalar bilan uchrashuv',
     date: '2026-08-30',
     sec: 177,
     type: 'tadbir',
@@ -259,7 +259,7 @@ export const VIDEOS: Video[] = [
   },
   {
     id: 'VNf6hA_IZ2I',
-    title: '“Yangi Özbekistonda yangi qadamlar”: Xalqaro talabalar turizm forumi',
+    title: '“Yangi O‘zbekistonda yangi qadamlar”: Xalqaro talabalar turizm forumi',
     date: '2026-08-30',
     sec: 40,
     type: 'tadbir',
@@ -268,22 +268,22 @@ export const VIDEOS: Video[] = [
 ]
 
 export const SERIES: { key: string; title: string; note: string }[] = [
-  { key: 'istiqlol', title: '“Istiqlol farzandlari”', note: 'Mustaqillik yillarida ulğaygan yoşlar haqida maxsus körsatuv' },
-  { key: 'forum', title: '“Oliy taʼlim yetakçilarining forumi”', note: 'Poytaxt OTT yoşlar yetakçilari respublika forumida' },
-  { key: 'tadbir', title: 'Tadbirlardan lavhalar', note: 'Uçraşuvlar, tanlovlar va forumlar' },
+  { key: 'istiqlol', title: '“Istiqlol farzandlari”', note: 'Mustaqillik yillarida ulg‘aygan yoshlar haqida maxsus ko‘rsatuv' },
+  { key: 'forum', title: '“Oliy ta’lim yetakchilarining forumi”', note: 'Poytaxt OTT yoshlar yetakchilari respublika forumida' },
+  { key: 'tadbir', title: 'Tadbirlardan lavhalar', note: 'Uchrashuvlar, tanlovlar va forumlar' },
 ]
 
 export type Short = { id: string; title: string }
 
 export const SHORTS: Short[] = [
-  { id: '07PwcXp8XWw', title: 'OTT boşlanğiç taşkilot yetakçilari yiğilişi' },
-  { id: '2fQp5UzUSrQ', title: 'Toşkent şahar Yoş öqituvçi va olimlar kengaşining birinçi taʼsis yiğilişi' },
-  { id: '7S2siUrmzuQ', title: '“Toşkent talabalar assotsiatsiyasi”ning ilk taʼsis yiğilişi' },
-  { id: 'eRFMEc8yZv0', title: 'Toşkent şahar bolalar taşkilotining birinçi konferensiyasi' },
-  { id: 'vfO43mtjgag', title: 'Özbekiston davlat jahon tillari universitetida “Işonç yorliği” topşirildi' },
-  { id: 'smseGi--tNw', title: 'Toşkent töqimaçilik va yengil sanoat institutida “Işonç yorliği” topşirildi' },
-  { id: 'V8C7Kf5KeNU', title: 'Harbiy tibbiyot akademiyasida “Saylov va yoşlar” davra suhbati' },
-  { id: 'eYDaG7HTpxM', title: '“Saylov va yoşlar” mavzusida davra suhbati' },
+  { id: '07PwcXp8XWw', title: 'OTT boshlang‘ich tashkilot yetakchilari yig‘ilishi' },
+  { id: '2fQp5UzUSrQ', title: 'Toshkent shahar Yosh o‘qituvchi va olimlar kengashining birinchi ta’sis yig‘ilishi' },
+  { id: '7S2siUrmzuQ', title: '“Toshkent talabalar assotsiatsiyasi”ning ilk ta’sis yig‘ilishi' },
+  { id: 'eRFMEc8yZv0', title: 'Toshkent shahar bolalar tashkilotining birinchi konferensiyasi' },
+  { id: 'vfO43mtjgag', title: 'O‘zbekiston davlat jahon tillari universitetida “Ishonch yorlig‘i” topshirildi' },
+  { id: 'smseGi--tNw', title: 'Toshkent to‘qimachilik va yengil sanoat institutida “Ishonch yorlig‘i” topshirildi' },
+  { id: 'V8C7Kf5KeNU', title: 'Harbiy tibbiyot akademiyasida “Saylov va yoshlar” davra suhbati' },
+  { id: 'eYDaG7HTpxM', title: '“Saylov va yoshlar” mavzusida davra suhbati' },
   { id: 'weelp6GIEnE', title: 'IIV akademiyasida “Mening tanlovim — Obod Vatanim”' },
 ]
 
@@ -299,7 +299,7 @@ export const shortThumb = (id: string) =>
 
 /** Jurnalistlar uçun aloqa: Kengaş Axborot xizmati */
 export const PRESS_CONTACT = {
-  unit: 'Axborot xizmati bölimi',
+  unit: 'Axborot xizmati bo‘limi',
   phone: { v: '+998 71 246-10-80', href: 'tel:+998712461080' },
   email: { v: 'info@yoshkent.uz', href: 'mailto:info@yoshkent.uz' },
   telegram: { v: '@poytaxtyoshlari_yi', href: 'https://t.me/poytaxtyoshlari_yi' },

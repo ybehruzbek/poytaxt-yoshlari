@@ -41,7 +41,7 @@ export function LibDetail({ kind, item, usage, isAdmin, backHref }: { kind: 'med
       await navigator.clipboard.writeText(new URL(item.url, window.location.origin).toString())
       say('Havola nusxalandi')
     } catch {
-      say('Nusxa olib bölmadi', true)
+      say('Nusxa olib bo‘lmadi', true)
     }
   }
 
@@ -49,13 +49,13 @@ export function LibDetail({ kind, item, usage, isAdmin, backHref }: { kind: 'med
     <article className="card libd">
       <Link href={backHref} className="ix__back" scroll={false}>
         <Icon name="chev" size={16} className="flip" />
-        Kutubxonaga qaytiş
+        Kutubxonaga qaytish
       </Link>
       {isFile ? (
         <a className="libd__doc" href={item.url} target="_blank" rel="noopener noreferrer">
           <Icon name="file" size={36} />
           <b>{item.name}</b>
-          <span>Oçiş</span>
+          <span>Ochish</span>
         </a>
       ) : (
         <a className="libd__img" href={item.url} target="_blank" rel="noopener noreferrer">
@@ -65,18 +65,18 @@ export function LibDetail({ kind, item, usage, isAdmin, backHref }: { kind: 'med
 
       <div className="f">
         <label className="lbl" htmlFor="lib-alt">
-          {isFile ? 'Fayl nomi (saytda körinadi)' : 'Rasm tavsifi'}
+          {isFile ? 'Fayl nomi (saytda ko‘rinadi)' : 'Rasm tavsifi'}
           <span className="req">*</span>
         </label>
         <textarea id="lib-alt" className="inp" rows={2} value={alt} onChange={(e) => setAlt(e.target.value)} />
-        {!isFile && <p className="help">Rasmni köra olmaydiganlar uçun ekran öquvçi şu matnni öqiydi. Rasmda nima tasvirlanganini qisqa yozing.</p>}
+        {!isFile && <p className="help">Rasmni ko‘ra olmaydiganlar uchun ekran o‘quvchi shu matnni o‘qiydi. Rasmda nima tasvirlanganini qisqa yozing.</p>}
         {alt.trim() !== saved && (
           <div className="ix__note-acts">
             <button type="button" className="btn btn-ghost btn-sm" onClick={() => setAlt(saved)}>
-              Bekor qiliş
+              Bekor qilish
             </button>
             <button type="button" className="btn btn-primary btn-sm" disabled={pending} onClick={save}>
-              Saqlaş
+              Saqlash
             </button>
           </div>
         )}
@@ -89,7 +89,7 @@ export function LibDetail({ kind, item, usage, isAdmin, backHref }: { kind: 'med
         </div>
         {item.dims && (
           <div>
-            <dt>Ölçami</dt>
+            <dt>O‘lchami</dt>
             <dd>{item.dims}</dd>
           </div>
         )}
@@ -104,12 +104,12 @@ export function LibDetail({ kind, item, usage, isAdmin, backHref }: { kind: 'med
       </dl>
       <button type="button" className="btn btn-ghost btn-sm libd__copy" onClick={copy}>
         <Icon name="copy" size={16} />
-        Havolani nusxalaş
+        Havolani nusxalash
       </button>
 
       <div className="ix__block">
         <h3>
-          Qayerda işlatilgan <small>{usage.length ? `${usage.length} joyda` : 'heç qayerda'}</small>
+          Qayerda ishlatilgan <small>{usage.length ? `${usage.length} joyda` : 'hech qayerda'}</small>
         </h3>
         {usage.length > 0 ? (
           <ul className="libd__use">
@@ -123,28 +123,28 @@ export function LibDetail({ kind, item, usage, isAdmin, backHref }: { kind: 'med
             ))}
           </ul>
         ) : (
-          <p className="help">Bu fayl saytning heç bir sahifasida işlatilmagan.</p>
+          <p className="help">Bu fayl saytning hech bir sahifasida ishlatilmagan.</p>
         )}
       </div>
 
       {isAdmin && (
         <footer className="ix__foot">
           {usage.length > 0 ? (
-            <p className="help">Işlatilgan faylni öçirib bölmaydi — avval yuqoridagi sahifalardan olib taşlang.</p>
+            <p className="help">Ishlatilgan faylni o‘chirib bo‘lmaydi — avval yuqoridagi sahifalardan olib tashlang.</p>
           ) : confirm ? (
             <span className="pub-confirm">
-              Butunlay öçirilsinmi?
+              Butunlay o‘chirilsinmi?
               <button type="button" className="btn btn-sm btn-red" disabled={pending} onClick={remove}>
-                Ha, öçiriş
+                Ha, o‘chirish
               </button>
               <button type="button" className="btn btn-sm btn-ghost" onClick={() => setConfirm(false)}>
-                Yöq
+                Yo‘q
               </button>
             </span>
           ) : (
             <button type="button" className="ix__del" onClick={() => setConfirm(true)}>
               <Icon name="trash" size={16} />
-              Öçiriş
+              O‘chirish
             </button>
           )}
         </footer>

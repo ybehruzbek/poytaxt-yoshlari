@@ -68,8 +68,8 @@ export default async function SectionPage(props: Props) {
       <section className="sec">
         <div className="wrap ph-body">
           <div className="ph-empty" role="status">
-            <p className="ph-empty-h">Bölim tayyorlanmoqda</p>
-            <p>Bölim maʼlumotlari keyinroq joylaştiriladi.</p>
+            <p className="ph-empty-h">Bo‘lim tayyorlanmoqda</p>
+            <p>Bo‘lim ma’lumotlari keyinroq joylashtiriladi.</p>
           </div>
           <SiblingNav locale={locale} path={path} />
         </div>

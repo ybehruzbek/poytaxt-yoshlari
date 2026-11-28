@@ -25,8 +25,8 @@ export function ErrorView({
       <header className="pg-head">
         <div className="wrap">
           <div className="pg-crumbs">
-            <nav className="crumbs" aria-label="Yöl">
-              <Link href={`/${locale}`}>Boş sahifa</Link>
+            <nav className="crumbs" aria-label="Yo‘l">
+              <Link href={`/${locale}`}>Bosh sahifa</Link>
               <span>/</span>
               <span aria-current="page">{crumb}</span>
             </nav>
@@ -40,7 +40,7 @@ export function ErrorView({
           <div className="err-acts">
             {children}
             <Link href={`/${locale}`} className="more-btn">
-              <More>Boş sahifaga qaytiş</More>
+              <More>Bosh sahifaga qaytish</More>
             </Link>
           </div>
         </div>

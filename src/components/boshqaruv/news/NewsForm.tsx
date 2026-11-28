@@ -95,8 +95,8 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
     if (!d.excerpt.trim()) e.excerpt = 'Qisqa matnni yozing'
     if (!d.image) e.image = 'Asosiy rasmni tanlang'
     if (!d.publishedAt) e.publishedAt = 'Sanani belgilang'
-    if (d.source && !/^https:\/\/\S+$/.test(d.source.trim())) e.source = 'Havola https:// bilan boşlansin'
-    if (!d.generateSlug && !/^[a-z0-9-]+$/.test(d.slug)) e.slug = 'Faqat lotin kiçik harflari, raqam va çiziqça'
+    if (d.source && !/^https:\/\/\S+$/.test(d.source.trim())) e.source = 'Havola https:// bilan boshlansin'
+    if (!d.generateSlug && !/^[a-z0-9-]+$/.test(d.slug)) e.slug = 'Faqat lotin kichik harflari, raqam va chiziqcha'
     setErrors(e)
     return Object.keys(e).length === 0
   }
@@ -105,12 +105,12 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
     async (mode: 'draft' | 'publish', auto = false) => {
       if (saving) return
       if (mode === 'publish' && !check()) {
-        say('Majburiy maydonlarni töldiring', true)
+        say('Majburiy maydonlarni to‘ldiring', true)
         return
       }
       if (mode === 'draft' && !dRef.current.title.trim()) {
         if (!auto) {
-          setErrors({ title: 'Qoralamani saqlaş uçun sarlavha kerak' })
+          setErrors({ title: 'Qoralamani saqlash uchun sarlavha kerak' })
           say('Avval sarlavhani yozing', true)
         }
         return
@@ -126,7 +126,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
       setDirty(false)
       setStatus(r.status)
       setSavedAt(r.updatedAt)
-      if (!auto) say(mode === 'publish' ? (status === 'published' ? 'Özgarişlar saytga çiqdi' : 'Yangilik eʼlon qilindi') : 'Qoralama saqlandi')
+      if (!auto) say(mode === 'publish' ? (status === 'published' ? 'O‘zgarishlar saytga chiqdi' : 'Yangilik e’lon qilindi') : 'Qoralama saqlandi')
       if (!id) {
         setId(r.id)
         router.replace(`/boshqaruv/yangiliklar/${r.id}`)
@@ -197,14 +197,14 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
   return (
     <>
       <div className="edit-head">
-        <span className={status === 'published' ? 'pill t-green' : 'pill t-yellow'}>{status === 'published' ? 'Eʼlon qilingan' : 'Qoralama'}</span>
+        <span className={status === 'published' ? 'pill t-green' : 'pill t-yellow'}>{status === 'published' ? 'E’lon qilingan' : 'Qoralama'}</span>
         <span className="save-state">
           {saving ? (
             'Saqlanmoqda…'
           ) : dirty ? (
             <>
               <i className="is-dirty" />
-              Saqlanmagan özgarişlar bor
+              Saqlanmagan o‘zgarishlar bor
             </>
           ) : savedAt && mounted ? (
             <>
@@ -219,16 +219,16 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
           {siteHref && (
             <a className="btn btn-ghost" href={siteHref} target="_blank" rel="noopener noreferrer">
               <Icon name="eye" size={18} />
-              Saytda köriş
+              Saytda ko‘rish
             </a>
           )}
           {status === 'draft' && (
             <button type="button" className="btn btn-ghost" disabled={!!saving} onClick={() => save('draft')}>
-              {saving === 'draft' ? 'Saqlanmoqda…' : 'Qoralamani saqlaş'}
+              {saving === 'draft' ? 'Saqlanmoqda…' : 'Qoralamani saqlash'}
             </button>
           )}
           <button type="button" className="btn btn-primary" disabled={!!saving} onClick={() => save('publish')}>
-            {saving === 'publish' ? 'Saqlanmoqda…' : status === 'published' ? 'Özgarişlarni eʼlon qiliş' : 'Eʼlon qiliş'}
+            {saving === 'publish' ? 'Saqlanmoqda…' : status === 'published' ? 'O‘zgarishlarni e’lon qilish' : 'E’lon qilish'}
           </button>
         </div>
       </div>
@@ -264,27 +264,27 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                 value={d.excerpt}
                 onChange={(e) => set('excerpt', e.target.value)}
               />
-              {err('excerpt') ?? <p className="help">Boş sahifadagi va yangiliklar röyxatidagi kartada körinadi.</p>}
+              {err('excerpt') ?? <p className="help">Bosh sahifadagi va yangiliklar ro‘yxatidagi kartada ko‘rinadi.</p>}
             </div>
             <div className="f">
-              <span className="lbl">Töliq matn</span>
+              <span className="lbl">To‘liq matn</span>
               {editorLocked ? (
                 <div className="note">
                   <Icon name="alert" size={18} />
                   <p>
-                    Bu matnda yangi muharrir hali qöllamaydigan blok bor.{' '}
+                    Bu matnda yangi muharrir hali qo‘llamaydigan blok bor.{' '}
                     {oldAdminHref ? (
                       <>
-                        Matnni hozirça{' '}
+                        Matnni hozircha{' '}
                         <a href={oldAdminHref} target="_blank" rel="noopener noreferrer">
                           eski panelda
                         </a>{' '}
                         tahrirlang
                       </>
                     ) : (
-                      'Matnni özgartiriş uçun administratorga murojaat qiling'
+                      'Matnni o‘zgartirish uchun administratorga murojaat qiling'
                     )}{' '}
-                    — qolgan maydonlarni şu yerda özgartiriş mumkin.
+                    — qolgan maydonlarni shu yerda o‘zgartirish mumkin.
                   </p>
                 </div>
               ) : (
@@ -317,7 +317,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                       )}
                       <button
                         type="button"
-                        title="Olib taşlaş"
+                        title="Olib tashlash"
                         onClick={() => {
                           const n = gallery.filter((x) => x.id !== g.id)
                           setGallery(n)
@@ -332,7 +332,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                 {gallery.length < 24 && (
                   <button type="button" className="gallery__add" onClick={() => setPicker('gallery')}>
                     <Icon name="plus" />
-                    Surat qöşiş
+                    Surat qo‘shish
                   </button>
                 )}
               </div>
@@ -342,7 +342,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
 
         <aside className="aside">
           <section className="card">
-            <h3>Eʼlon qiliş</h3>
+            <h3>E’lon qilish</h3>
             <div className="f">
               <label className="lbl" htmlFor="f-date">
                 Sana va vaqt <span className="req">*</span>
@@ -355,7 +355,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                 Muallif
               </label>
               <select id="f-author" className="inp select" value={d.author ?? ''} onChange={(e) => set('author', e.target.value ? Number(e.target.value) : null)}>
-                <option value="">Körsatilmagan</option>
+                <option value="">Ko‘rsatilmagan</option>
                 {authors.map((a) => (
                   <option key={a.id} value={a.id}>
                     {a.name}
@@ -381,24 +381,24 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
               <div className="pub-danger">
                 {status === 'published' && (
                   <button type="button" onClick={unpublish}>
-                    Saytdan oliş
+                    Saytdan olish
                   </button>
                 )}
                 {isAdmin &&
                   (confirmDel ? (
                     <span className="pub-confirm">
-                      Öçirilsinmi?
+                      O‘chirilsinmi?
                       <button type="button" className="is-red" onClick={remove}>
-                        Ha, öçiriş
+                        Ha, o‘chirish
                       </button>
                       <button type="button" onClick={() => setConfirmDel(false)}>
-                        Yöq
+                        Yo‘q
                       </button>
                     </span>
                   ) : (
                     <button type="button" className="is-red" onClick={() => setConfirmDel(true)}>
                       <Icon name="trash" size={16} />
-                      Öçiriş
+                      O‘chirish
                     </button>
                   ))}
               </div>
@@ -414,7 +414,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                 <img src={image.url} alt="" />
                 <div className="cover__acts">
                   <button type="button" onClick={() => setPicker('image')}>
-                    Almaştiriş
+                    Almashtirish
                   </button>
                   <button
                     type="button"
@@ -423,15 +423,15 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                       set('image', null)
                     }}
                   >
-                    Olib taşlaş
+                    Olib tashlash
                   </button>
                 </div>
               </div>
             ) : (
               <button type="button" className={errors.image ? 'cover-empty has-err' : 'cover-empty'} onClick={() => setPicker('image')}>
                 <Icon name="image" size={28} />
-                <b>Rasm tanlaş yoki yuklaş</b>
-                <span>JPG, PNG yoki WebP, 10&nbsp;MB gaça</span>
+                <b>Rasm tanlash yoki yuklash</b>
+                <span>JPG, PNG yoki WebP, 10&nbsp;MB gacha</span>
               </button>
             )}
             {err('image')}
@@ -460,12 +460,12 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
               </div>
               <p className="help">
                 {d.kind === 'elon'
-                  ? 'Saytdagi “Eʼlonlar” sahifasida körinadi.'
+                  ? 'Saytdagi “E’lonlar” sahifasida ko‘rinadi.'
                   : d.kind === 'tadbir'
-                    ? 'Boş sahifadagi “Yaqin tadbirlar” blokida körinadi.'
+                    ? 'Bosh sahifadagi “Yaqin tadbirlar” blokida ko‘rinadi.'
                     : d.kind === 'tabrik'
-                      ? '“Yangiliklar” sahifasidagi “Tabriklar” bölimida körinadi.'
-                      : 'Oddiy yangilik sifatida körinadi.'}
+                      ? '“Yangiliklar” sahifasidagi “Tabriklar” bo‘limida ko‘rinadi.'
+                      : 'Oddiy yangilik sifatida ko‘rinadi.'}
               </p>
             </div>
             {d.kind === 'tadbir' && (
@@ -492,7 +492,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
                 {d.tags.map((t) => (
                   <span key={t}>
                     {t}
-                    <button type="button" aria-label={`${t} tegini olib taşlaş`} onClick={() => set('tags', d.tags.filter((x) => x !== t))}>
+                    <button type="button" aria-label={`${t} tegini olib tashlash`} onClick={() => set('tags', d.tags.filter((x) => x !== t))}>
                       <Icon name="x" size={12} />
                     </button>
                   </span>
@@ -529,13 +529,13 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
               )}
               <button
                 type="button"
-                title={d.generateSlug ? 'Qöl bilan özgartiriş' : 'Sarlavhadan avtomatik yasaş'}
+                title={d.generateSlug ? 'Qo‘l bilan o‘zgartirish' : 'Sarlavhadan avtomatik yasash'}
                 onClick={() => set('generateSlug', !d.generateSlug)}
               >
                 <Icon name={d.generateSlug ? 'lock' : 'unlock'} size={16} />
               </button>
             </div>
-            {err('slug') ?? <p className="help">{d.generateSlug ? 'Saqlanganda sarlavhadan avtomatik yasaladi.' : 'Faqat lotin kiçik harflari, raqam va çiziqça.'}</p>}
+            {err('slug') ?? <p className="help">{d.generateSlug ? 'Saqlanganda sarlavhadan avtomatik yasaladi.' : 'Faqat lotin kichik harflari, raqam va chiziqcha.'}</p>}
             <div className="f">
               <label className="lbl" htmlFor="f-src">
                 Manba havolasi
@@ -550,7 +550,7 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
       {picker && (
         <MediaPicker
           multiple={picker === 'gallery'}
-          title={picker === 'image' ? 'Asosiy rasm' : 'Fotogalereyaga surat qöşiş'}
+          title={picker === 'image' ? 'Asosiy rasm' : 'Fotogalereyaga surat qo‘shish'}
           onClose={() => setPicker(null)}
           onPick={(items) => {
             if (picker === 'image') {
@@ -574,11 +574,11 @@ export function NewsForm({ init, categories, kinds, authors, versions, isAdmin, 
       )}
 
       <p className="kbd-hint">
-        <kbd>⌘S</kbd> — saqlaş
+        <kbd>⌘S</kbd> — saqlash
         {!id && (
           <>
             {' · '}
-            <Link href="/boshqaruv/yangiliklar">Röyxatga qaytiş</Link>
+            <Link href="/boshqaruv/yangiliklar">Ro‘yxatga qaytish</Link>
           </>
         )}
       </p>

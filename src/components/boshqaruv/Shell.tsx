@@ -29,7 +29,7 @@ function NavLink({ l, path, children }: { l: MenuLink; path: string; children: R
     <Link href={l.href} className={act ? 'nav__a is-act' : 'nav__a'} aria-current={act ? 'page' : undefined} prefetch={!l.eski}>
       {children}
       {l.eski && (
-        <span className="eski" title="Eski panelda oçiladi">
+        <span className="eski" title="Eski panelda ochiladi">
           <Icon name="ext" size={14} />
         </span>
       )}
@@ -87,10 +87,10 @@ export function Shell({ initialCollapsed, menu, pinned, counts, user, children }
         <div className="brand">
           <img src="/icon-192.png" alt="" />
           <div className="brand__t">
-            <b>Boşqaruv paneli</b>
-            <small>Toşkent şahar Kengaşi</small>
+            <b>Boshqaruv paneli</b>
+            <small>Toshkent shahar Kengashi</small>
           </div>
-          <button className="collapse" type="button" onClick={toggle} title={collapsed ? 'Menyuni yoyiş' : 'Menyuni yiğiş'}>
+          <button className="collapse" type="button" onClick={toggle} title={collapsed ? 'Menyuni yoyish' : 'Menyuni yig‘ish'}>
             <Icon name="layout" size={18} />
           </button>
         </div>
@@ -159,7 +159,7 @@ export function Shell({ initialCollapsed, menu, pinned, counts, user, children }
             <small>{user.role}</small>
           </Link>
           <form action={chiqish}>
-            <button type="submit" title="Çiqiş">
+            <button type="submit" title="Chiqish">
               <Icon name="logout" size={18} />
             </button>
           </form>
@@ -215,7 +215,7 @@ function SearchDialog({ menu, pinned, onClose }: { menu: MenuGroup[]; pinned: Pi
           <input
             ref={ref}
             value={q}
-            placeholder="Bölim nomini yozing…"
+            placeholder="Bo‘lim nomini yozing…"
             onChange={(e) => {
               setQ(e.target.value)
               setI(0)
@@ -236,7 +236,7 @@ function SearchDialog({ menu, pinned, onClose }: { menu: MenuGroup[]; pinned: Pi
           <kbd>Esc</kbd>
         </label>
         <ul className="dlg__list">
-          {list.length === 0 && <li className="empty">Heç narsa topilmadi</li>}
+          {list.length === 0 && <li className="empty">Hech narsa topilmadi</li>}
           {list.map((a, k) => (
             <li key={a.href}>
               <button type="button" className={k === i ? 'is-act' : undefined} onMouseEnter={() => setI(k)} onClick={() => go(a.href)}>
@@ -265,12 +265,12 @@ export function Top({
 }) {
   return (
     <header className="top">
-      <button className="burger" type="button" aria-label="Menyuni oçiş" onClick={() => window.dispatchEvent(new Event('bq:menu'))}>
+      <button className="burger" type="button" aria-label="Menyuni ochish" onClick={() => window.dispatchEvent(new Event('bq:menu'))}>
         <Icon name="menu" />
       </button>
       <div className="top__t">
         {crumbs && crumbs.length > 0 && (
-          <nav className="crumbs" aria-label="Yöl">
+          <nav className="crumbs" aria-label="Yo‘l">
             {crumbs.map((c, k) => (
               <span key={k} style={{ display: 'contents' }}>
                 {k > 0 && <Icon name="chev" size={14} />}

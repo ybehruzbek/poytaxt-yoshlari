@@ -16,18 +16,18 @@ export async function BoshlangichPage({ crumbs, base, locale = 'uz' }: { crumbs:
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Oliy taʼlim taşkilotlaridagi boşlanğiç taşkilotlar</h1>
+          <h1 className="h2 pg-title">Oliy ta’lim tashkilotlaridagi boshlang‘ich tashkilotlar</h1>
           <dl className="bt-stats">
             <div>
-              <dt>Oliy taʼlim taşkiloti</dt>
+              <dt>Oliy ta’lim tashkiloti</dt>
               <dd>{OTMS.length}</dd>
             </div>
             <div>
-              <dt>Yoşlar yetakçisi</dt>
+              <dt>Yoshlar yetakchisi</dt>
               <dd>{LED}</dd>
             </div>
             <div>
-              <dt>Yetakçi lavozimi vakant</dt>
+              <dt>Yetakchi lavozimi vakant</dt>
               <dd>{OTMS.length - LED}</dd>
             </div>
           </dl>

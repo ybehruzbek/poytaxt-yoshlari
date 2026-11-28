@@ -20,9 +20,9 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
         }}
       >
         <main style={{ maxWidth: 560, textAlign: 'center' }}>
-          <h1 style={{ fontSize: 32, margin: '0 0 12px' }}>Sahifani yuklab bölmadi</h1>
+          <h1 style={{ fontSize: 32, margin: '0 0 12px' }}>Sahifani yuklab bo‘lmadi</h1>
           <p style={{ fontSize: 18, lineHeight: 1.5, margin: '0 0 28px' }}>
-            Texnik nosozlik yuz berdi. Iltimos, birozdan söng qayta urinib köring.
+            Texnik nosozlik yuz berdi. Iltimos, birozdan so‘ng qayta urinib ko‘ring.
           </p>
           <button
             type="button"
@@ -39,12 +39,12 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
               marginRight: 12,
             }}
           >
-            Qayta urinib köriş
+            Qayta urinib ko‘rish
           </button>
           {/* oddiy havola ataylab: sayt karkasi buzilgan, sahifa töliq qayta yuklanişi kerak */}
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <a href="/uz" style={{ color: '#532822', fontWeight: 700 }}>
-            Boş sahifaga qaytiş
+            Bosh sahifaga qaytish
           </a>
         </main>
       </body>

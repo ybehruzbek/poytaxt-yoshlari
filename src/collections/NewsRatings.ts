@@ -15,7 +15,7 @@ export const NewsRatings: CollectionConfig = {
   fields: [
     { name: 'news', label: 'Yangilik', type: 'relationship', relationTo: 'news', required: true, index: true },
     { name: 'value', label: 'Baho', type: 'number', required: true, min: 1, max: 5 },
-    { name: 'voter', label: 'Baholovçi (xeş)', type: 'text', required: true, index: true },
+    { name: 'voter', label: 'Baholovchi (xesh)', type: 'text', required: true, index: true },
   ],
   timestamps: true,
 }

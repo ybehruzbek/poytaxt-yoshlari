@@ -16,11 +16,11 @@ export default function PageError({ error, reset }: { error: Error & { digest?: 
     <ErrorView
       locale={locale}
       crumb="Xatolik"
-      title="Sahifani yuklab bölmadi"
-      text="Texnik nosozlik yuz berdi. Iltimos, birozdan söng qayta urinib köring."
+      title="Sahifani yuklab bo‘lmadi"
+      text="Texnik nosozlik yuz berdi. Iltimos, birozdan so‘ng qayta urinib ko‘ring."
     >
       <button type="button" className="more-btn" onClick={() => reset()}>
-        <More>Qayta urinib köriş</More>
+        <More>Qayta urinib ko‘rish</More>
       </button>
     </ErrorView>
   )

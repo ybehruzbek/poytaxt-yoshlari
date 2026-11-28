@@ -92,18 +92,18 @@ export function MediaPicker({ multiple, title, col = 'media', onPick, onClose }:
       >
         <div className="mp__head">
           <h2>{title}</h2>
-          <button type="button" className="mp__x" onClick={onClose} aria-label="Yopiş">
+          <button type="button" className="mp__x" onClick={onClose} aria-label="Yopish">
             <Icon name="x" />
           </button>
         </div>
         <div className="mp__tools">
           <label className="field-search">
             <Icon name="search" size={18} />
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={isFile ? 'Fayl nomi böyiça qidiriş' : 'Rasm tavsifi böyiça qidiriş'} />
+            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={isFile ? 'Fayl nomi bo‘yicha qidirish' : 'Rasm tavsifi bo‘yicha qidirish'} />
           </label>
           <button type="button" className="btn btn-dark" onClick={() => fileRef.current?.click()}>
             <Icon name="upload" size={18} />
-            Kompyuterdan yuklaş
+            Kompyuterdan yuklash
           </button>
           <input
             ref={fileRef}
@@ -151,17 +151,17 @@ export function MediaPicker({ multiple, title, col = 'media', onPick, onClose }:
           {!loading && items.length === 0 && busy === 0 && <p className="empty">{isFile ? 'Fayl topilmadi' : 'Rasm topilmadi'}</p>}
           {hasMore && (
             <button type="button" className="btn btn-ghost mp__more" disabled={loading} onClick={() => load(q, page + 1)}>
-              {loading ? 'Yuklanmoqda…' : 'Yana körsatiş'}
+              {loading ? 'Yuklanmoqda…' : 'Yana ko‘rsatish'}
             </button>
           )}
         </div>
         <div className="mp__foot">
-          <span className="mp__hint">{isFile ? 'Faylni' : 'Rasmni'} şu oynaga sudrab taşlaş ham mumkin</span>
+          <span className="mp__hint">{isFile ? 'Faylni' : 'Rasmni'} shu oynaga sudrab tashlash ham mumkin</span>
           <button type="button" className="btn btn-ghost" onClick={onClose}>
-            Bekor qiliş
+            Bekor qilish
           </button>
           <button type="button" className="btn btn-primary" disabled={!picked.length || busy > 0} onClick={() => onPick(picked)}>
-            {multiple && picked.length > 1 ? `${picked.length} tasini qöşiş` : 'Tanlaş'}
+            {multiple && picked.length > 1 ? `${picked.length} tasini qo‘shish` : 'Tanlash'}
           </button>
         </div>
       </div>

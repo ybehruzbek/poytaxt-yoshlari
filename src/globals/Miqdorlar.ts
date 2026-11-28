@@ -16,7 +16,7 @@ export const Miqdorlar: GlobalConfig = {
   admin: {
     group: G.sozlamalar,
     description:
-      'Saytdagi barça summalar şu qiymatlardan hisoblanadi. Yangi farmon yoki qaror çiqqanda faqat şu yerni yangilang.',
+      'Saytdagi barcha summalar shu qiymatlardan hisoblanadi. Yangi farmon yoki qaror chiqqanda faqat shu yerni yangilang.',
   },
   access: sahifa,
   versions: { max: 30 },
@@ -24,12 +24,12 @@ export const Miqdorlar: GlobalConfig = {
   fields: [
     {
       name: 'bhm',
-      label: 'Bazaviy hisoblaş miqdori (BHM)',
+      label: 'Bazaviy hisoblash miqdori (BHM)',
       type: 'group',
       fields: [
         qator(
-          son('v', 'Summa (söm)', { majburiy: true, kenglik: '30%', min: 1 }),
-          matn('from', 'Qaçondan', { kenglik: '30%', namuna: '2026-yil 1-sentabr' }),
+          son('v', 'Summa (so‘m)', { majburiy: true, kenglik: '30%', min: 1 }),
+          matn('from', 'Qachondan', { kenglik: '30%', namuna: '2026-yil 1-sentabr' }),
           matn('act', 'Asos (hujjat)', { kenglik: '40%', namuna: 'Prezidentning … farmoni' }),
         ),
       ],
@@ -40,8 +40,8 @@ export const Miqdorlar: GlobalConfig = {
       type: 'group',
       fields: [
         qator(
-          son('v', 'Summa (söm)', { majburiy: true, kenglik: '30%', min: 1 }),
-          matn('from', 'Qaçondan', { kenglik: '30%' }),
+          son('v', 'Summa (so‘m)', { majburiy: true, kenglik: '30%', min: 1 }),
+          matn('from', 'Qachondan', { kenglik: '30%' }),
           matn('source', 'Manba nomi', { kenglik: '40%' }),
         ),
         havola('url', 'Manba havolasi'),
@@ -49,14 +49,14 @@ export const Miqdorlar: GlobalConfig = {
     },
     {
       name: 'stipSum',
-      label: 'Rasmiy stipendiya summalari (oyiga, söm)',
+      label: 'Rasmiy stipendiya summalari (oyiga, so‘m)',
       type: 'group',
-      admin: { description: 'Taʼlim va ilm-fan vazirligi jadvalidagi summalar. Koeffitsientlar şulardan avtomatik hisoblanadi.' },
+      admin: { description: 'Ta’lim va ilm-fan vazirligi jadvalidagi summalar. Koeffitsientlar shulardan avtomatik hisoblanadi.' },
       fields: [
         qator(
           son('prezident', 'Prezident stipendiyasi', { majburiy: true, kenglik: '33%' }),
           son('nomli', 'Nomli davlat stipendiyalari', { majburiy: true, kenglik: '33%' }),
-          son('alo', '“Aʼlo” baholarga öqiydiganlar', { majburiy: true, kenglik: '34%' }),
+          son('alo', '“A’lo” baholarga o‘qiydiganlar', { majburiy: true, kenglik: '34%' }),
         ),
       ],
     },
@@ -64,7 +64,7 @@ export const Miqdorlar: GlobalConfig = {
       name: 'mb',
       label: 'Markaziy bankning asosiy stavkasi',
       type: 'group',
-      fields: [qator(son('v', 'Stavka (yillik, %)', { majburiy: true, kenglik: '30%' }), matn('from', 'Qaçondan', { kenglik: '30%' })), havola('url', 'Manba havolasi')],
+      fields: [qator(son('v', 'Stavka (yillik, %)', { majburiy: true, kenglik: '30%' }), matn('from', 'Qachondan', { kenglik: '30%' })), havola('url', 'Manba havolasi')],
     },
   ],
 }

@@ -2,12 +2,12 @@ import { CoLogo } from './CompaniesParts'
 import type { IttifoqData } from '@/lib/cms/sahifalar'
 import { ShowMore } from './ShowMore'
 
-const TITLE = 'Media, naşriyot va xizmat taşkilotlari'
+const TITLE = 'Media, nashriyot va xizmat tashkilotlari'
 const LEAD =
-  'Ittifoq uluşi bölgan taşkilotlar yoşlar uçun teleradio, matbuot, naşriyot, turizm va dam oliş xizmatlarini taqdim etadi.'
+  'Ittifoq ulushi bo‘lgan tashkilotlar yoshlar uchun teleradio, matbuot, nashriyot, turizm va dam olish xizmatlarini taqdim etadi.'
 const KIND_TITLE = {
   Media: 'Teleradio va media',
-  Naşriyot: 'Matbuot va naşriyot',
+  Nashriyot: 'Matbuot va nashriyot',
   Xizmat: 'Turizm va xizmatlar',
 } as const
 
@@ -29,12 +29,12 @@ export function CompaniesA({ D }: { D: IttifoqData }) {
                 <h3>{c.t}</h3>
                 <small>{KIND_TITLE[c.kind]}</small>
                 <p>{c.d}</p>
-                <b>Ittifoq uluşi: {c.share}</b>
+                <b>Ittifoq ulushi: {c.share}</b>
               </div>
             </li>
           ))}
         </ul>
-        <ShowMore target="media-royxat" noun="taşkilot" />
+        <ShowMore target="media-royxat" noun="tashkilot" />
       </div>
     </section>
   )

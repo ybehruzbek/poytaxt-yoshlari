@@ -24,7 +24,7 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
   if (str(fd.get('website'))) return { ok: true, message: 'Arizangiz qabul qilindi.' }
   const ip = clientIp(await headers())
   if (rateLimited(ip, 'membership'))
-    return { ok: false, message: 'Yuboriş urinişlari soni belgilangan çegaradan oşdi. Iltimos, birozdan keyin qayta yuboring.' }
+    return { ok: false, message: 'Yuborish urinishlari soni belgilangan chegaradan oshdi. Iltimos, birozdan keyin qayta yuboring.' }
 
   const name = str(fd.get('name'))
   const phone = str(fd.get('phone'))
@@ -35,19 +35,19 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
   const age = new Date().getFullYear() - birthYear
 
   const errors: MemberState['errors'] = {}
-  if (name.length < 5 || name.length > 120) errors.name = 'Familiya, ism va otasining ismini töliq kiriting.'
+  if (name.length < 5 || name.length > 120) errors.name = 'Familiya, ism va otasining ismini to‘liq kiriting.'
   if (!birthYear || age < 14 || age > 30)
-    errors.birthYear = 'Ittifoqqa 14 yoşga tölgan va 30 yoşdan oşmagan şaxslar aʼzo bölişi mumkin (Ustavning 4.2-bandi).'
+    errors.birthYear = 'Ittifoqqa 14 yoshga to‘lgan va 30 yoshdan oshmagan shaxslar a’zo bo‘lishi mumkin (Ustavning 4.2-bandi).'
   const digits = phone.replace(/\D/g, '')
   // yagona şakl: +998901234567 (takror tekşiruvi va saqlaş uçun)
   const phoneNorm = `+${digits}`
-  if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini töğri kiriting, masalan: +998 90 123 45 67.'
+  if (digits.length < 9 || digits.length > 15) errors.phone = 'Telefon raqamini to‘g‘ri kiriting, masalan: +998 90 123 45 67.'
   if (email && (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 160))
-    errors.email = 'Elektron poçta manzilini töğri kiriting.'
-  if (place.length < 3 || place.length > 200) errors.place = 'Öqiş yoki iş joyingizni körsating.'
-  if (fd.get('agree') !== 'on') errors.agree = 'Ustav bilan tanişganingizni tasdiqlang.'
+    errors.email = 'Elektron pochta manzilini to‘g‘ri kiriting.'
+  if (place.length < 3 || place.length > 200) errors.place = 'O‘qish yoki ish joyingizni ko‘rsating.'
+  if (fd.get('agree') !== 'on') errors.agree = 'Ustav bilan tanishganingizni tasdiqlang.'
 
-  if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekşiring.' }
+  if (Object.keys(errors).length) return { ok: false, errors, message: 'Iltimos, belgilangan maydonlarni tekshiring.' }
 
   try {
     const payload = await getPayload({ config })
@@ -67,7 +67,7 @@ export async function submitMembership(fd: FormData): Promise<MemberState> {
     const no = `A-${new Date().getFullYear()}-${String(doc.id).padStart(5, '0')}`
     return { ok: true, no, message: 'Arizangiz qabul qilindi.' }
   } catch (err) {
-    logError('aʼzolik', err)
-    return { ok: false, message: 'Arizani saqlab bölmadi. Iltimos, keyinroq qayta urinib köring.' }
+    logError('a’zolik', err)
+    return { ok: false, message: 'Arizani saqlab bo‘lmadi. Iltimos, keyinroq qayta urinib ko‘ring.' }
   }
 }

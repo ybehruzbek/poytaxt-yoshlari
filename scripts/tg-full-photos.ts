@@ -16,7 +16,7 @@ const LIMIT = Number(process.env.LIMIT || 0)
 
 const payload = await getPayload({ config })
 if (!botEnabled()) {
-  console.error('Bot sozlanmagan: .env faylida bot tokeni va ombor çati ID si yozilmagan (src/lib/tg/bot.ts ga qarang).')
+  console.error('Bot sozlanmagan: .env faylida bot tokeni va ombor chati ID si yozilmagan (src/lib/tg/bot.ts ga qarang).')
   process.exit(1)
 }
 console.log('Bot:', await botCheck())
@@ -58,5 +58,5 @@ for (const d of LIMIT ? docs.slice(0, LIMIT) : docs) {
   done++
   console.log(`${d.filename}: ${d.width} → ${width} px`)
 }
-console.log(`Tayyor: ${done} ta yangilandi, ${same} tasida kattaroq nusxa yöq, ${miss} tasi olinmadi yoki mos kelmadi (video muqovasi, öçirilgan post).`)
+console.log(`Tayyor: ${done} ta yangilandi, ${same} tasida kattaroq nusxa yo‘q, ${miss} tasi olinmadi yoki mos kelmadi (video muqovasi, o‘chirilgan post).`)
 process.exit(0)

@@ -12,9 +12,9 @@ import { motionOff } from './RevealMotion'
  */
 type Who = 'girl' | 'boy' | 'both'
 const LINES: Array<{ who: Who; text: string; hold: number }> = [
-  { who: 'girl', text: 'Xuş kelibsiz!', hold: 2000 },
-  { who: 'boy', text: 'Salom, yoşlar!', hold: 2000 },
-  { who: 'both', text: 'Biz bilan bir jamoada bölişga tayyormisiz?', hold: 3600 },
+  { who: 'girl', text: 'Xush kelibsiz!', hold: 2000 },
+  { who: 'boy', text: 'Salom, yoshlar!', hold: 2000 },
+  { who: 'both', text: 'Biz bilan bir jamoada bo‘lishga tayyormisiz?', hold: 3600 },
 ]
 /** stiker yöqolgandan keyin keyingisi çiqquncha pauza */
 const GAP = 450

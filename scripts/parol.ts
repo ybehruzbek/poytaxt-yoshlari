@@ -41,7 +41,7 @@ if (topildi.totalDocs === 0) {
   process.exit(1)
 }
 if (!email && topildi.totalDocs > 1) {
-  console.error('Bir neçta admin bor — elektron poçtani körsating: pnpm parol -- xodim@yoshlar.uz')
+  console.error('Bir nechta admin bor — elektron pochtani ko‘rsating: pnpm parol -- xodim@yoshlar.uz')
   process.exit(1)
 }
 
@@ -50,7 +50,7 @@ console.log(`Hisob: ${user.email} (${user.role})`)
 
 const p1 = await yashirin('Yangi parol (kamida 10 belgi): ')
 if (p1.length < 10) {
-  console.error('Parol juda qisqa — kamida 10 belgi bölsin')
+  console.error('Parol juda qisqa — kamida 10 belgi bo‘lsin')
   process.exit(1)
 }
 const p2 = await yashirin('Yana bir bor: ')
@@ -65,5 +65,5 @@ await payload.update({
   data: { password: p1, loginAttempts: 0, lockUntil: null } as never,
   overrideAccess: true,
 })
-console.log('Parol yangilandi. Endi /admin sahifasidan şu parol bilan kiriş mumkin.')
+console.log('Parol yangilandi. Endi /admin sahifasidan shu parol bilan kirish mumkin.')
 process.exit(0)

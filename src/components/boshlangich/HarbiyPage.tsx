@@ -10,7 +10,7 @@ export function HarbiyPage({ crumbs }: { crumbs: ReactNode }) {
       <header className="pg-head">
         <div className="wrap">
           {crumbs}
-          <h1 className="h2 pg-title">Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar</h1>
+          <h1 className="h2 pg-title">Harbiy qismlar va muassasalardagi boshlang‘ich tashkilotlar</h1>
         </div>
       </header>
       <section className="sec bt-sec">
@@ -21,10 +21,10 @@ export function HarbiyPage({ crumbs }: { crumbs: ReactNode }) {
               <path d="M8 150c0-34 23-58 52-58s52 24 52 58z" />
             </svg>
             <div>
-              <h2>Röyxat tayyorlanmoqda</h2>
+              <h2>Ro‘yxat tayyorlanmoqda</h2>
               <p>
-                Harbiy qismlar va muassasalardagi boşlanğiç taşkilotlar hamda ularning yoşlar
-                yetakçilari röyxati tayyorlangaç şu sahifada eʼlon qilinadi.
+                Harbiy qismlar va muassasalardagi boshlang‘ich tashkilotlar hamda ularning yoshlar
+                yetakchilari ro‘yxati tayyorlangach shu sahifada e’lon qilinadi.
               </p>
             </div>
           </div>

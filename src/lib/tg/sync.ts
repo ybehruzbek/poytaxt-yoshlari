@@ -96,12 +96,12 @@ async function fallbackImage(payload: Payload): Promise<number> {
   const ex = await payload.find({ collection: 'media', where: { filename: { like: 'poytaxt-yoshlari-muqova' } }, limit: 1, overrideAccess: true })
   if (ex.docs[0]) return ex.docs[0].id as number
   const svg = Buffer.from(
-    `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><rect width="1600" height="1000" fill="#532822"/><circle cx="1380" cy="180" r="260" fill="#FFD25A"/><circle cx="200" cy="900" r="220" fill="#89C0FF"/><text x="120" y="520" font-family="Arial, sans-serif" font-size="96" font-weight="700" fill="#FFF4E9">Poytaxt yoşlari</text><text x="120" y="610" font-family="Arial, sans-serif" font-size="44" fill="#FFF4E9" opacity="0.8">Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi</text></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000"><rect width="1600" height="1000" fill="#532822"/><circle cx="1380" cy="180" r="260" fill="#FFD25A"/><circle cx="200" cy="900" r="220" fill="#89C0FF"/><text x="120" y="520" font-family="Arial, sans-serif" font-size="96" font-weight="700" fill="#FFF4E9">Poytaxt yoshlari</text><text x="120" y="610" font-family="Arial, sans-serif" font-size="44" fill="#FFF4E9" opacity="0.8">O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi</text></svg>`,
   )
   const data = await sharp(svg).webp({ quality: 85 }).toBuffer()
   const doc = await payload.create({
     collection: 'media',
-    data: { alt: '“Poytaxt yoşlari” — Özbekiston yoşlar ittifoqi Toşkent şahar hududiy Kengaşi' },
+    data: { alt: '“Poytaxt yoshlari” — O‘zbekiston yoshlar ittifoqi Toshkent shahar hududiy Kengashi' },
     file: { data, mimetype: 'image/webp', name: 'poytaxt-yoshlari-muqova.webp', size: data.length },
     overrideAccess: true,
   })
@@ -194,7 +194,7 @@ export async function applyCurated(payload: Payload, log: (s: string) => void = 
     if (!doc) continue
     if (d.kind === 'skip') {
       await payload.delete({ collection: 'news', id: doc.id, overrideAccess: true })
-      log(`- ${id} saytga mos emas — olib taşlandi`)
+      log(`- ${id} saytga mos emas — olib tashlandi`)
       continue
     }
     await payload.update({
@@ -227,14 +227,14 @@ export async function reclassify(payload: Payload, since: string, log: (s: strin
     const key = `${doc.title}\n${doc.excerpt}`
     if (seen.has(key)) {
       await payload.delete({ collection: 'news', id: doc.id, overrideAccess: true })
-      log(`- takror öçirildi: ${post.id}`)
+      log(`- takror o‘chirildi: ${post.id}`)
       continue
     }
     seen.add(key)
     const cur = curated[String(post.id)]
     if (cur?.kind === 'skip' || (!post.photos.length && post.videoThumbs.length && !cur?.video)) {
       await payload.delete({ collection: 'news', id: doc.id, overrideAccess: true })
-      log(`- ${post.id} olib taşlandi (video yoki saytga mos emas)`)
+      log(`- ${post.id} olib tashlandi (video yoki saytga mos emas)`)
       continue
     }
     const k = cur?.kind ? { kind: cur.kind, eventDate: cur.eventDate, eventPlace: cur.eventPlace } : classifyPost(post)
@@ -276,7 +276,7 @@ export async function refreshText(payload: Payload, since: string, log: (s: stri
 /** Bir martalik import: `since` sanasidan boşlab barça postlar */
 export async function syncSince(payload: Payload, since: string, log?: (s: string) => void) {
   const posts = await fetchSince(since)
-  log?.(`Kanaldan ${posts.length} ta post öqildi`)
+  log?.(`Kanaldan ${posts.length} ta post o‘qildi`)
   return importPosts(payload, posts, log)
 }
 

@@ -16,8 +16,8 @@ export type NewsCard = {
 }
 
 const CATEGORY_LABEL: Record<News['category'], string> = {
-  kengash: 'Kengaş faoliyati',
-  boshlangich: 'Boşlanğiç taşkilotlar',
+  kengash: 'Kengash faoliyati',
+  boshlangich: 'Boshlang‘ich tashkilotlar',
   imkoniyat: 'Imkoniyatlar',
   tadbir: 'Tadbir',
 }

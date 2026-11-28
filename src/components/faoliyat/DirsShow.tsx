@@ -49,7 +49,7 @@ function Sum({ all }: { all: ReturnType<typeof dirsData> }) {
   return (
     <div className="vy-sum">
       <span>
-        <b>{all.length}</b> yönaliş
+        <b>{all.length}</b> yo‘nalish
       </span>
       <span>
         <b>{all.reduce((a, x) => a + x.nE, 0)}</b> tadbir

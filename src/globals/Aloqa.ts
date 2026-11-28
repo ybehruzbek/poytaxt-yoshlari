@@ -11,11 +11,11 @@ import { saytManzil, yangilashGlobal } from '@/lib/revalidate'
  */
 export const Aloqa: GlobalConfig = {
   slug: 'aloqa',
-  label: 'Aloqa maʼlumotlari',
+  label: 'Aloqa ma’lumotlari',
   admin: {
     group: G.boglanish,
     description:
-      'Manzil, telefonlar, poçta va iş vaqti. Özgartirilsa, “Boğlaniş” sahifalari, sayt pastki qismi va “Köp beriladigan savollar” javoblari özi yangilanadi.',
+      'Manzil, telefonlar, pochta va ish vaqti. O‘zgartirilsa, “Bog‘lanish” sahifalari, sayt pastki qismi va “Ko‘p beriladigan savollar” javoblari o‘zi yangilanadi.',
     preview: (_d, { locale }) => saytManzil('/boglanish/aloqa', locale),
   },
   access: sahifa,
@@ -33,10 +33,10 @@ export const Aloqa: GlobalConfig = {
               label: 'Manzil',
               type: 'group',
               fields: [
-                matn('full', 'Rasmiy töliq manzil', { majburiy: true }),
+                matn('full', 'Rasmiy to‘liq manzil', { majburiy: true }),
                 matn('line', 'Qisqa manzil', { majburiy: true }),
-                qator(matn('city', 'Şahar va tuman', { kenglik: '50%' }), matn('street', 'Köça va uy', { kenglik: '50%' })),
-                matn('landmark', 'Möljal', { namuna: 'Toşkent şahar Yoşlar markazi binosi' }),
+                qator(matn('city', 'Shahar va tuman', { kenglik: '50%' }), matn('street', 'Ko‘cha va uy', { kenglik: '50%' })),
+                matn('landmark', 'Mo‘ljal', { namuna: 'Toshkent shahar Yoshlar markazi binosi' }),
                 qator(matn('metro', 'Eng yaqin metro bekati', { kenglik: '50%' }), matn('walk', 'Piyoda masofa', { kenglik: '50%' })),
               ],
             },
@@ -50,22 +50,22 @@ export const Aloqa: GlobalConfig = {
           ],
         },
         {
-          label: 'Telefon, poçta, iş vaqti',
+          label: 'Telefon, pochta, ish vaqti',
           fields: [
             { name: 'phones', label: 'Telefonlar', type: 'array', labels: { singular: 'Telefon', plural: 'Telefonlar' }, fields: [kod('v', 'Raqam', { majburiy: true, namuna: '+998 71 246-10-70' })] },
-            { name: 'emails', label: 'Elektron poçtalar', type: 'array', labels: { singular: 'Poçta', plural: 'Poçtalar' }, admin: { description: 'Birinçisi — asosiy poçta.' }, fields: [kod('v', 'Manzil', { majburiy: true })] },
+            { name: 'emails', label: 'Elektron pochtalar', type: 'array', labels: { singular: 'Pochta', plural: 'Pochtalar' }, admin: { description: 'Birinchisi — asosiy pochta.' }, fields: [kod('v', 'Manzil', { majburiy: true })] },
             {
               name: 'hours',
-              label: 'Iş vaqti',
+              label: 'Ish vaqti',
               type: 'group',
-              fields: [qator(matn('days', 'Iş kunlari', { kenglik: '35%', namuna: 'Duşanba — juma' }), kod('time', 'Vaqti', { kenglik: '25%', namuna: '09:00 — 18:00' }), matn('off', 'Dam oliş kunlari', { kenglik: '40%' }))],
+              fields: [qator(matn('days', 'Ish kunlari', { kenglik: '35%', namuna: 'Dushanba — juma' }), kod('time', 'Vaqti', { kenglik: '25%', namuna: '09:00 — 18:00' }), matn('off', 'Dam olish kunlari', { kenglik: '40%' }))],
             },
             {
               name: 'socials',
               label: 'Ijtimoiy tarmoqlardagi nomlar',
               type: 'array',
               labels: { singular: 'Tarmoq', plural: 'Tarmoqlar' },
-              admin: { description: 'Boğlaniş sahifasida körinadigan nomlar (havolalarning özi “Ijtimoiy tarmoqlar” sozlamasida).' },
+              admin: { description: 'Bog‘lanish sahifasida ko‘rinadigan nomlar (havolalarning o‘zi “Ijtimoiy tarmoqlar” sozlamasida).' },
               fields: [qator({ name: 'net', label: 'Tarmoq', type: 'select', required: true, options: ['Telegram', 'Instagram', 'Facebook'].map((v) => ({ label: v, value: v })), admin: { width: '25%' } }, kod('handle', 'Nomi', { kenglik: '30%' }), { ...havola('href', 'Havola', { majburiy: true }), admin: { width: '45%', placeholder: 'https://' } })],
             },
           ],
@@ -75,9 +75,9 @@ export const Aloqa: GlobalConfig = {
           fields: [
             {
               name: 'press',
-              label: 'Jurnalistlar uçun aloqa',
+              label: 'Jurnalistlar uchun aloqa',
               type: 'group',
-              fields: [matn('unit', 'Bölim', { namuna: 'Axborot xizmati bölimi' }), qator(kod('phone', 'Telefon', { kenglik: '33%' }), kod('email', 'Poçta', { kenglik: '33%' }), kod('telegram', 'Telegram', { kenglik: '34%', namuna: '@poytaxtyoshlari_yi' }))],
+              fields: [matn('unit', 'Bo‘lim', { namuna: 'Axborot xizmati bo‘limi' }), qator(kod('phone', 'Telefon', { kenglik: '33%' }), kod('email', 'Pochta', { kenglik: '33%' }), kod('telegram', 'Telegram', { kenglik: '34%', namuna: '@poytaxtyoshlari_yi' }))],
             },
           ],
         },
@@ -86,12 +86,12 @@ export const Aloqa: GlobalConfig = {
           fields: [
             {
               name: 'law',
-              label: 'Murojaatlar töğrisidagi qonun',
+              label: 'Murojaatlar to‘g‘risidagi qonun',
               type: 'group',
               fields: [
                 matn('title', 'Qonun nomi', { majburiy: true }),
                 havola('href', 'Rasmiy matni (lex.uz)'),
-                { name: 'terms', label: 'Körib çiqiş muddatlari', type: 'array', labels: { singular: 'Muddat', plural: 'Muddatlar' }, fields: [qator(matn('v', 'Muddat', { majburiy: true, kenglik: '25%' }), uzunMatn('t', 'Izoh', { majburiy: true, qator: 2, kenglik: '75%' }))] },
+                { name: 'terms', label: 'Ko‘rib chiqish muddatlari', type: 'array', labels: { singular: 'Muddat', plural: 'Muddatlar' }, fields: [qator(matn('v', 'Muddat', { majburiy: true, kenglik: '25%' }), uzunMatn('t', 'Izoh', { majburiy: true, qator: 2, kenglik: '75%' }))] },
                 { name: 'types', label: 'Murojaat turlari', type: 'array', labels: { singular: 'Tur', plural: 'Turlar' }, fields: [qator(matn('t', 'Turi', { majburiy: true, kenglik: '25%' }), uzunMatn('d', 'Tavsif', { majburiy: true, qator: 2, kenglik: '75%' }))] },
               ],
             },

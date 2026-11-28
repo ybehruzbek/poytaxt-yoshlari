@@ -149,7 +149,7 @@ function Money({
           onChange={(e) => onChange(digits(e.target.value))}
           placeholder="0"
         />
-        <b>söm</b>
+        <b>so‘m</b>
       </span>
     </label>
   )
@@ -226,18 +226,18 @@ function Ijara(): [ReactNode, Result] {
   return [
     <>
       <Choice
-        label="Öqiş joyi"
+        label="O‘qish joyi"
         value={city}
         set={setCity}
         opts={[
-          { v: 't', t: 'Toşkent şahri' },
-          { v: 'h', t: 'Boşqa hududlar' },
+          { v: 't', t: 'Toshkent shahri' },
+          { v: 'h', t: 'Boshqa hududlar' },
         ]}
       />
-      <Months value={m} set={setM} max={10} label="Ijarada yaşaladigan oylar soni" />
+      <Months value={m} set={setM} max={10} label="Ijarada yashaladigan oylar soni" />
     </>,
     {
-      label: `${m} oy uçun jami`,
+      label: `${m} oy uchun jami`,
       total: month * m,
       rows: [{ t: 'Har oy', note: `BHM ${som(BHM.v)} × ${String(k).replace('.', ',')}`, v: month }],
     },
@@ -263,9 +263,9 @@ function Kontrakt(): [ReactNode, Result] {
   const n = 84
   const pay = rest === 0 ? 0 : r === 0 ? rest / n : (rest * r) / (1 - Math.pow(1 + r, -n))
   const notes: Record<typeof kind, string> = {
-    yoq: 'Imtiyoz qöllanmaydi',
+    yoq: 'Imtiyoz qo‘llanmaydi',
     pedagog: 'Kontraktning 30 foizi',
-    reyestr: `Kontraktning 50 foizi, ${som(50 * BHM.v)}dan oşmagan holda`,
+    reyestr: `Kontraktning 50 foizi, ${som(50 * BHM.v)}dan oshmagan holda`,
     magistr: 'Kontraktning 100 foizi',
   }
   return [
@@ -276,14 +276,14 @@ function Kontrakt(): [ReactNode, Result] {
         value={kind}
         set={setKind}
         opts={[
-          { v: 'reyestr', t: 'Ijtimoiy reyestr — 50 foizgaça' },
+          { v: 'reyestr', t: 'Ijtimoiy reyestr — 50 foizgacha' },
           { v: 'pedagog', t: 'Pedagog farzandi — 30 foiz' },
           { v: 'magistr', t: 'Magistraturadagi xotin-qizlar — 100 foiz' },
           { v: 'yoq', t: 'Imtiyozsiz' },
         ]}
       />
       <Choice
-        label="Qolgan qism uçun taʼlim krediti"
+        label="Qolgan qism uchun ta’lim krediti"
         value={sex}
         set={setSex}
         opts={[
@@ -299,12 +299,12 @@ function Kontrakt(): [ReactNode, Result] {
         { t: 'Kontrakt summasi', v: sum },
         { t: 'Imtiyoz', note: notes[kind], v: cover, minus: true },
         {
-          t: 'Talaba tölaydigan qism',
-          note: 'taʼlim krediti hisobidan moliyalaştirilişi mumkin',
+          t: 'Talaba to‘laydigan qism',
+          note: 'ta’lim krediti hisobidan moliyalashtirilishi mumkin',
           v: rest,
         },
       ],
-      extra: rest ? { t: 'Kreditni qaytariş: 7 yil davomida oyiga', v: som(pay) } : undefined,
+      extra: rest ? { t: 'Kreditni qaytarish: 7 yil davomida oyiga', v: som(pay) } : undefined,
     },
   ]
 }
@@ -321,21 +321,21 @@ function YoshOila(): [ReactNode, Result] {
     <>
       <Money label="Oylik ijara haqi" value={rent} onChange={setRent} />
       <Choice
-        label="Yaşaş joyi"
+        label="Yashash joyi"
         value={city}
         set={setCity}
         opts={[
-          { v: 'm', t: 'Toşkent, Nukus, viloyat markazi' },
-          { v: 't', t: 'Tuman va boşqa şaharlar' },
+          { v: 'm', t: 'Toshkent, Nukus, viloyat markazi' },
+          { v: 't', t: 'Tuman va boshqa shaharlar' },
         ]}
       />
       <Months value={m} set={setM} max={12} />
     </>,
     {
-      label: `${m} oy uçun jami`,
+      label: `${m} oy uchun jami`,
       total: month * m,
       rows: [
-        { t: 'Har oy', note: `ijara haqining 50 foizi, ${som(cap)}dan oşmagan holda`, v: month },
+        { t: 'Har oy', note: `ijara haqining 50 foizi, ${som(cap)}dan oshmagan holda`, v: month },
       ],
     },
   ]
@@ -350,11 +350,11 @@ function IkkiOlti(): [ReactNode, Result] {
   return [
     <>
       <Choice
-        label="Kurs joylaşgan hudud"
+        label="Kurs joylashgan hudud"
         value={loc}
         set={setLoc}
         opts={[
-          { v: 't', t: 'Toşkent şahri' },
+          { v: 't', t: 'Toshkent shahri' },
           { v: 'v', t: 'Nukus va viloyat markazlari' },
           { v: 'd', t: 'Tumanlar' },
         ]}
@@ -362,11 +362,11 @@ function IkkiOlti(): [ReactNode, Result] {
       <Months value={m} set={setM} max={6} label="Davlat qoplaydigan oylar" />
     </>,
     {
-      label: `${m} oy uçun jami`,
+      label: `${m} oy uchun jami`,
       total: k * BHM.v * m,
       rows: [
-        { t: 'Dastlabki 2 oy', note: 'kurs tölovini yoş özi amalga oşiradi', v: 0 },
-        { t: 'Keyingi har oy', note: `BHM × ${String(k).replace('.', ',')}gaça`, v: k * BHM.v },
+        { t: 'Dastlabki 2 oy', note: 'kurs to‘lovini yosh o‘zi amalga oshiradi', v: 0 },
+        { t: 'Keyingi har oy', note: `BHM × ${String(k).replace('.', ',')}gacha`, v: k * BHM.v },
       ],
     },
   ]
@@ -384,14 +384,14 @@ function Kurslar(): [ReactNode, Result] {
     <>
       <Money label="Kursning oylik narxi (til, IT, kasb)" value={fee} onChange={setFee} />
       <Months value={m} set={setM} max={6} />
-      <Money label="Haydovçilik kursi narxi" value={drive} onChange={setDrive} />
+      <Money label="Haydovchilik kursi narxi" value={drive} onChange={setDrive} />
     </>,
     {
       label: 'Jami qoplanadi',
       total: month * m + d,
       rows: [
-        { t: `Kurslar, ${m} oy`, note: `oyiga ${som(4 * BHM.v)}gaça`, v: month * m },
-        { t: 'Haydovçilik kursi', note: `bir marta ${som(8 * BHM.v)}gaça`, v: d },
+        { t: `Kurslar, ${m} oy`, note: `oyiga ${som(4 * BHM.v)}gacha`, v: month * m },
+        { t: 'Haydovchilik kursi', note: `bir marta ${som(8 * BHM.v)}gacha`, v: d },
       ],
     },
   ]
@@ -399,10 +399,10 @@ function Kurslar(): [ReactNode, Result] {
 
 const TABS = [
   { id: 'ijara', t: 'Talabalar ijarasi', icon: 'uy', fn: Ijara },
-  { id: 'kontrakt', t: 'Kontrakt va taʼlim krediti', icon: 'kontrakt', fn: Kontrakt },
-  { id: 'yosh-oila', t: 'Yoş oila ijarasi', icon: 'yotoq', fn: YoshOila },
+  { id: 'kontrakt', t: 'Kontrakt va ta’lim krediti', icon: 'kontrakt', fn: Kontrakt },
+  { id: 'yosh-oila', t: 'Yosh oila ijarasi', icon: 'yotoq', fn: YoshOila },
   { id: 'ikki-olti', t: '“2+6” til kurslari', icon: 'til', fn: IkkiOlti },
-  { id: 'kurslar', t: 'Kurslar va haydovçilik', icon: 'avto', fn: Kurslar },
+  { id: 'kurslar', t: 'Kurslar va haydovchilik', icon: 'avto', fn: Kurslar },
 ] as const
 
 function Panel({ fn }: { fn: () => [ReactNode, Result] }) {
@@ -438,8 +438,8 @@ function Panel({ fn }: { fn: () => [ReactNode, Result] }) {
         )}
         <p className="sc-note">
           Hisob asosi: BHM {som(BHM.v)} ({BHM.from}dan), Markaziy bankning asosiy stavkasi — yillik{' '}
-          {MB_STAVKA.v} foiz. Miqdorlar normativ hujjatlarda belgilangan eng yuqori çegaralar
-          asosida hisoblangan; aniq summa ariza körib çiqilganidan söng belgilanadi.
+          {MB_STAVKA.v} foiz. Miqdorlar normativ hujjatlarda belgilangan eng yuqori chegaralar
+          asosida hisoblangan; aniq summa ariza ko‘rib chiqilganidan so‘ng belgilanadi.
         </p>
       </div>
     </div>

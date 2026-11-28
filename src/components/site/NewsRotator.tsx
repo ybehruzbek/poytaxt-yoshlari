@@ -121,7 +121,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
               <More />
             </Link>
             {n > 1 && (
-              <div className="na-ctrl" role="group" aria-label="Yangiliklarni almaştiriş">
+              <div className="na-ctrl" role="group" aria-label="Yangiliklarni almashtirish">
                 <button type="button" onClick={() => go(-1)} aria-label="Oldingi yangilik">
                   <svg
                     viewBox="0 0 24 24"
@@ -138,7 +138,7 @@ export function NewsRotator({ locale, initial }: { locale: Locale; initial: News
                 <button
                   type="button"
                   onClick={() => setPlaying((p) => !p)}
-                  aria-label={playing ? 'Töxtatiş' : 'Davom ettiriş'}
+                  aria-label={playing ? 'To‘xtatish' : 'Davom ettirish'}
                   aria-pressed={!playing}
                 >
                   {playing ? (

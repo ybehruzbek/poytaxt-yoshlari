@@ -59,7 +59,7 @@ function Meta({ a }: { a: ArticleData }) {
       <span className={`chip ${a.tone}`}>{a.catLabel}</span>
       <time dateTime={a.dateISO}>{a.date}</time>
       <span aria-hidden="true">·</span>
-      <span>{a.readMin} daqiqada öqiladi</span>
+      <span>{a.readMin} daqiqada o‘qiladi</span>
     </div>
   )
 }
@@ -87,12 +87,12 @@ function Source({ a }: { a: ArticleData }) {
         {TG_ICON}
       </span>
       <span>
-        Asl xabar <b>“Poytaxt yoşlari”</b> Telegram kanalida
+        Asl xabar <b>“Poytaxt yoshlari”</b> Telegram kanalida
       </span>
       <svg className="ar-tg-go" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M7 17 17 7M9 7h8v8" />
       </svg>
-      <span className="sr-only"> (yangi oynada oçiladi)</span>
+      <span className="sr-only"> (yangi oynada ochiladi)</span>
     </a>
   )
 }
@@ -153,12 +153,12 @@ function ArticleFoot({ a }: { a: ArticleData }) {
 function Related({ items, listHref }: { items: MiniNews[]; listHref: string }) {
   if (!items.length) return null
   return (
-    <section className="ar-rel" aria-label="Öxşaş yangiliklar">
+    <section className="ar-rel" aria-label="O‘xshash yangiliklar">
       <div className="ar-rel-head">
         <h2 className="ar-h">Mavzuga oid yangiliklar</h2>
         <Link href={listHref} className="more-btn">
           <More>
-            Batafsil<span className="sr-only">: Barça yangiliklar</span>
+            Batafsil<span className="sr-only">: Barcha yangiliklar</span>
           </More>
         </Link>
       </div>
@@ -188,7 +188,7 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
       <section className="sec ar-sec ar-b-sec">
         <div className="wrap">
           {crumbs}
-          <BackBtn href={listHref} label="Yangiliklarga qaytiş" />
+          <BackBtn href={listHref} label="Yangiliklarga qaytish" />
           <div className="ar-b-grid">
             <div className="ar-b-main">
               <Meta a={a} />
@@ -200,7 +200,7 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
               />
               <div className="ar-b-body">
                 <aside className="ar-b-share">
-                  <Share url={a.url} title={a.title} label="Ulaşiş" vertical />
+                  <Share url={a.url} title={a.title} label="Ulashish" vertical />
                 </aside>
                 <div>
                   <Body a={a} />
@@ -212,8 +212,8 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
                 </div>
               </div>
             </div>
-            <aside className="ar-b-side" aria-label="Sönggi yangiliklar">
-              <h2 className="ar-h">Sönggi yangiliklar</h2>
+            <aside className="ar-b-side" aria-label="So‘nggi yangiliklar">
+              <h2 className="ar-h">So‘nggi yangiliklar</h2>
               <ol>
                 {latest.map((n) => (
                   <li key={n.href}>
@@ -226,7 +226,7 @@ function ArticleB({ a, crumbs, related, latest, listHref }: P) {
               </ol>
               <Link href={listHref} className="more-btn">
                 <More>
-                  Batafsil<span className="sr-only">: Barça yangiliklar</span>
+                  Batafsil<span className="sr-only">: Barcha yangiliklar</span>
                 </More>
               </Link>
             </aside>
